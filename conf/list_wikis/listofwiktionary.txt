@@ -1,0 +1,2238 @@
+{| border="1" cellpadding="2" cellspacing="0" style="background: #f9f9f9; border: 1px solid #aaaaaa; border-collapse: collapse; white-space: nowrap; text-align: left" class="sortable"
+|-
+! &#8470;
+! Language
+! Language (local)
+! Wiki
+! Good
+! Total
+! Edits
+! Admins
+! Users
+! Active Users
+! Images
+! Updated
+|- style="text-align: right;"
+| 1
+| [[w:English language|English]]
+| [[w:English language|English]]
+| [//en.wiktionary.org/wiki/ en]
+| [//en.wiktionary.org/wiki/Special:Statistics?action=raw '''3777286 ''']
+| 4056649
+| [//en.wiktionary.org/wiki/Special:Recentchanges 32207619 ]
+| [//en.wiktionary.org/wiki/Special:Listadmins 103 ]
+| [//en.wiktionary.org/wiki/Special:Listusers 1800100 ]
+| [//en.wiktionary.org/wiki/Special:ActiveUsers 956 ]
+| [//en.wiktionary.org/wiki/Special:Imagelist 23 ]
+| style="font-size: 70%;" | 2014-06-29 02:00:01
+|- style="text-align: right;"
+| 2
+| [[w:Malagasy language|Malagasy]]
+| [[w:Malagasy language|Malagasy]]
+| [//mg.wiktionary.org/wiki/ mg]
+| [//mg.wiktionary.org/wiki/Special:Statistics?action=raw '''3233157 ''']
+| 3254767
+| [//mg.wiktionary.org/wiki/Special:Recentchanges 15819406 ]
+| [//mg.wiktionary.org/wiki/Special:Listadmins 2 ]
+| [//mg.wiktionary.org/wiki/Special:Listusers 3164 ]
+| [//mg.wiktionary.org/wiki/Special:ActiveUsers 14 ]
+| [//mg.wiktionary.org/wiki/Special:Imagelist 3 ]
+| style="font-size: 70%;" | 2014-06-29 02:00:13
+|- style="text-align: right;"
+| 3
+| [[w:French language|French]]
+| [[w:French language|Fran&#231;ais]]
+| [//fr.wiktionary.org/wiki/ fr]
+| [//fr.wiktionary.org/wiki/Special:Statistics?action=raw '''2540994 ''']
+| 2753068
+| [//fr.wiktionary.org/wiki/Special:Recentchanges 18519440 ]
+| [//fr.wiktionary.org/wiki/Special:Listadmins 29 ]
+| [//fr.wiktionary.org/wiki/Special:Listusers 122811 ]
+| [//fr.wiktionary.org/wiki/Special:ActiveUsers 343 ]
+| [//fr.wiktionary.org/wiki/Special:Imagelist 57 ]
+| style="font-size: 70%;" | 2014-06-29 02:00:01
+|- style="text-align: right;"
+| 4
+| [[w:Serbo-Croatian language|Serbo-Croatian]]
+| [[w:Serbo-Croatian language|Srpskohrvatski / &#1057;&#1088;&#1087;&#1089;&#1082;&#1086;&#1093;&#1088;&#1074;&#1072;&#1090;&#1089;&#1082;&#1080;]]
+| [//sh.wiktionary.org/wiki/ sh]
+| [//sh.wiktionary.org/wiki/Special:Statistics?action=raw '''849257 ''']
+| 850535
+| [//sh.wiktionary.org/wiki/Special:Recentchanges 1323328 ]
+| [//sh.wiktionary.org/wiki/Special:Listadmins 5 ]
+| [//sh.wiktionary.org/wiki/Special:Listusers 1692 ]
+| [//sh.wiktionary.org/wiki/Special:ActiveUsers 7 ]
+| [//sh.wiktionary.org/wiki/Special:Imagelist 3 ]
+| style="font-size: 70%;" | 2014-06-29 02:00:30
+|- style="text-align: right;"
+| 5
+| [[w:Chinese language|Chinese]]
+| [[w:Chinese language|&#20013;&#25991;]]
+| [//zh.wiktionary.org/wiki/ zh]
+| [//zh.wiktionary.org/wiki/Special:Statistics?action=raw '''830217 ''']
+| 1328624
+| [//zh.wiktionary.org/wiki/Special:Recentchanges 4031340 ]
+| [//zh.wiktionary.org/wiki/Special:Listadmins 8 ]
+| [//zh.wiktionary.org/wiki/Special:Listusers 36748 ]
+| [//zh.wiktionary.org/wiki/Special:ActiveUsers 49 ]
+| [//zh.wiktionary.org/wiki/Special:Imagelist 201 ]
+| style="font-size: 70%;" | 2014-06-29 02:00:02
+|- style="text-align: right;"
+| 6
+| [[w:Spanish language|Spanish]]
+| [[w:Spanish language|Espa&#241;ol]]
+| [//es.wiktionary.org/wiki/ es]
+| [//es.wiktionary.org/wiki/Special:Statistics?action=raw '''805443 ''']
+| 843334
+| [//es.wiktionary.org/wiki/Special:Recentchanges 2056708 ]
+| [//es.wiktionary.org/wiki/Special:Listadmins 8 ]
+| [//es.wiktionary.org/wiki/Special:Listusers 57593 ]
+| [//es.wiktionary.org/wiki/Special:ActiveUsers 74 ]
+| [//es.wiktionary.org/wiki/Special:Imagelist 10 ]
+| style="font-size: 70%;" | 2014-06-29 02:00:04
+|- style="text-align: right;"
+| 7
+| [[w:Lithuanian language|Lithuanian]]
+| [[w:Lithuanian language|Lietuvi&#371;]]
+| [//lt.wiktionary.org/wiki/ lt]
+| [//lt.wiktionary.org/wiki/Special:Statistics?action=raw '''612112 ''']
+| 683211
+| [//lt.wiktionary.org/wiki/Special:Recentchanges 1544714 ]
+| [//lt.wiktionary.org/wiki/Special:Listadmins 4 ]
+| [//lt.wiktionary.org/wiki/Special:Listusers 5202 ]
+| [//lt.wiktionary.org/wiki/Special:ActiveUsers 11 ]
+| [//lt.wiktionary.org/wiki/Special:Imagelist 27 ]
+| style="font-size: 70%;" | 2014-06-29 02:00:11
+|- style="text-align: right;"
+| 8
+| [[w:Russian language|Russian]]
+| [[w:Russian language|&#1056;&#1091;&#1089;&#1089;&#1082;&#1080;&#1081;]]
+| [//ru.wiktionary.org/wiki/ ru]
+| [//ru.wiktionary.org/wiki/Special:Statistics?action=raw '''529467 ''']
+| 865944
+| [//ru.wiktionary.org/wiki/Special:Recentchanges 4298750 ]
+| [//ru.wiktionary.org/wiki/Special:Listadmins 9 ]
+| [//ru.wiktionary.org/wiki/Special:Listusers 122716 ]
+| [//ru.wiktionary.org/wiki/Special:ActiveUsers 143 ]
+| [//ru.wiktionary.org/wiki/Special:Imagelist 326 ]
+| style="font-size: 70%;" | 2014-06-29 02:00:05
+|- style="text-align: right;"
+| 9
+| [[w:Greek language|Greek]]
+| [[w:Greek language|&#917;&#955;&#955;&#951;&#957;&#953;&#954;&#940;]]
+| [//el.wiktionary.org/wiki/ el]
+| [//el.wiktionary.org/wiki/Special:Statistics?action=raw '''432257 ''']
+| 451561
+| [//el.wiktionary.org/wiki/Special:Recentchanges 3632670 ]
+| [//el.wiktionary.org/wiki/Special:Listadmins 7 ]
+| [//el.wiktionary.org/wiki/Special:Listusers 15446 ]
+| [//el.wiktionary.org/wiki/Special:ActiveUsers 40 ]
+| [//el.wiktionary.org/wiki/Special:Imagelist 70 ]
+| style="font-size: 70%;" | 2014-06-29 02:00:04
+|- style="text-align: right;"
+| 10
+| [[w:Polish language|Polish]]
+| [[w:Polish language|Polski]]
+| [//pl.wiktionary.org/wiki/ pl]
+| [//pl.wiktionary.org/wiki/Special:Statistics?action=raw '''417604 ''']
+| 441874
+| [//pl.wiktionary.org/wiki/Special:Recentchanges 4490115 ]
+| [//pl.wiktionary.org/wiki/Special:Listadmins 27 ]
+| [//pl.wiktionary.org/wiki/Special:Listusers 38922 ]
+| [//pl.wiktionary.org/wiki/Special:ActiveUsers 96 ]
+| [//pl.wiktionary.org/wiki/Special:Imagelist 25 ]
+| style="font-size: 70%;" | 2014-06-29 02:00:01
+|- style="text-align: right;"
+| 11
+| [[w:Dutch language|Dutch]]
+| [[w:Dutch language|Nederlands]]
+| [//nl.wiktionary.org/wiki/ nl]
+| [//nl.wiktionary.org/wiki/Special:Statistics?action=raw '''407824 ''']
+| 438819
+| [//nl.wiktionary.org/wiki/Special:Recentchanges 2112971 ]
+| [//nl.wiktionary.org/wiki/Special:Listadmins 8 ]
+| [//nl.wiktionary.org/wiki/Special:Listusers 17829 ]
+| [//nl.wiktionary.org/wiki/Special:ActiveUsers 61 ]
+| [//nl.wiktionary.org/wiki/Special:Imagelist 12 ]
+| style="font-size: 70%;" | 2014-06-29 02:00:02
+|- style="text-align: right;"
+| 12
+| [[w:Swedish language|Swedish]]
+| [[w:Swedish language|Svenska]]
+| [//sv.wiktionary.org/wiki/ sv]
+| [//sv.wiktionary.org/wiki/Special:Statistics?action=raw '''397273 ''']
+| 419809
+| [//sv.wiktionary.org/wiki/Special:Recentchanges 1830984 ]
+| [//sv.wiktionary.org/wiki/Special:Listadmins 19 ]
+| [//sv.wiktionary.org/wiki/Special:Listusers 18131 ]
+| [//sv.wiktionary.org/wiki/Special:ActiveUsers 56 ]
+| [//sv.wiktionary.org/wiki/Special:Imagelist 1 ]
+| style="font-size: 70%;" | 2014-06-29 02:00:03
+|- style="text-align: right;"
+| 13
+| [[w:Korean language|Korean]]
+| [[w:Korean language|&#54620;&#44397;&#50612;]]
+| [//ko.wiktionary.org/wiki/ ko]
+| [//ko.wiktionary.org/wiki/Special:Statistics?action=raw '''388695 ''']
+| 404547
+| [//ko.wiktionary.org/wiki/Special:Recentchanges 1661182 ]
+| [//ko.wiktionary.org/wiki/Special:Listadmins 1 ]
+| [//ko.wiktionary.org/wiki/Special:Listusers 8853 ]
+| [//ko.wiktionary.org/wiki/Special:ActiveUsers 23 ]
+| [//ko.wiktionary.org/wiki/Special:Imagelist 25 ]
+| style="font-size: 70%;" | 2014-06-29 02:00:05
+|- style="text-align: right;"
+| 14
+| [[w:Italian language|Italian]]
+| [[w:Italian language|Italiano]]
+| [//it.wiktionary.org/wiki/ it]
+| [//it.wiktionary.org/wiki/Special:Statistics?action=raw '''377320 ''']
+| 404323
+| [//it.wiktionary.org/wiki/Special:Recentchanges 1899450 ]
+| [//it.wiktionary.org/wiki/Special:Listadmins 9 ]
+| [//it.wiktionary.org/wiki/Special:Listusers 37953 ]
+| [//it.wiktionary.org/wiki/Special:ActiveUsers 57 ]
+| [//it.wiktionary.org/wiki/Special:Imagelist 32 ]
+| style="font-size: 70%;" | 2014-06-29 02:00:01
+|- style="text-align: right;"
+| 15
+| [[w:German language|German]]
+| [[w:German language|Deutsch]]
+| [//de.wiktionary.org/wiki/ de]
+| [//de.wiktionary.org/wiki/Special:Statistics?action=raw '''370644 ''']
+| 406231
+| [//de.wiktionary.org/wiki/Special:Recentchanges 3879520 ]
+| [//de.wiktionary.org/wiki/Special:Listadmins 16 ]
+| [//de.wiktionary.org/wiki/Special:Listusers 89490 ]
+| [//de.wiktionary.org/wiki/Special:ActiveUsers 198 ]
+| [//de.wiktionary.org/wiki/Special:Imagelist 76 ]
+| style="font-size: 70%;" | 2014-06-29 02:00:02
+|- style="text-align: right;"
+| 16
+| [[w:Kurdish language|Kurdish]]
+| [[w:Kurdish language|Kurd&#238; / &#1603;&#1608;&#1585;&#1583;&#1740;]]
+| [//ku.wiktionary.org/wiki/ ku]
+| [//ku.wiktionary.org/wiki/Special:Statistics?action=raw '''345857 ''']
+| 351833
+| [//ku.wiktionary.org/wiki/Special:Recentchanges 1107329 ]
+| [//ku.wiktionary.org/wiki/Special:Listadmins 3 ]
+| [//ku.wiktionary.org/wiki/Special:Listusers 3334 ]
+| [//ku.wiktionary.org/wiki/Special:ActiveUsers 25 ]
+| [//ku.wiktionary.org/wiki/Special:Imagelist 18 ]
+| style="font-size: 70%;" | 2014-06-29 02:00:03
+|- style="text-align: right;"
+| 17
+| [[w:Turkish language|Turkish]]
+| [[w:Turkish language|T&#252;rk&#231;e]]
+| [//tr.wiktionary.org/wiki/ tr]
+| [//tr.wiktionary.org/wiki/Special:Statistics?action=raw '''316987 ''']
+| 350026
+| [//tr.wiktionary.org/wiki/Special:Recentchanges 1407674 ]
+| [//tr.wiktionary.org/wiki/Special:Listadmins 3 ]
+| [//tr.wiktionary.org/wiki/Special:Listusers 25606 ]
+| [//tr.wiktionary.org/wiki/Special:ActiveUsers 30 ]
+| [//tr.wiktionary.org/wiki/Special:Imagelist 3 ]
+| style="font-size: 70%;" | 2014-06-29 02:00:06
+|- style="text-align: right;"
+| 18
+| [[w:Tamil language|Tamil]]
+| [[w:Tamil language|&#2980;&#2990;&#3007;&#2996;&#3021;]]
+| [//ta.wiktionary.org/wiki/ ta]
+| [//ta.wiktionary.org/wiki/Special:Statistics?action=raw '''286601 ''']
+| 297034
+| [//ta.wiktionary.org/wiki/Special:Recentchanges 1258178 ]
+| [//ta.wiktionary.org/wiki/Special:Listadmins 12 ]
+| [//ta.wiktionary.org/wiki/Special:Listusers 6863 ]
+| [//ta.wiktionary.org/wiki/Special:ActiveUsers 32 ]
+| [//ta.wiktionary.org/wiki/Special:Imagelist 263 ]
+| style="font-size: 70%;" | 2014-06-29 02:00:06
+|- style="text-align: right;"
+| 19
+| [[w:Hungarian language|Hungarian]]
+| [[w:Hungarian language|Magyar]]
+| [//hu.wiktionary.org/wiki/ hu]
+| [//hu.wiktionary.org/wiki/Special:Statistics?action=raw '''273273 ''']
+| 322831
+| [//hu.wiktionary.org/wiki/Special:Recentchanges 1720624 ]
+| [//hu.wiktionary.org/wiki/Special:Listadmins 4 ]
+| [//hu.wiktionary.org/wiki/Special:Listusers 12311 ]
+| [//hu.wiktionary.org/wiki/Special:ActiveUsers 26 ]
+| [//hu.wiktionary.org/wiki/Special:Imagelist 1 ]
+| style="font-size: 70%;" | 2014-06-29 02:00:03
+|- style="text-align: right;"
+| 20
+| [[w:Finnish language|Finnish]]
+| [[w:Finnish language|Suomi]]
+| [//fi.wiktionary.org/wiki/ fi]
+| [//fi.wiktionary.org/wiki/Special:Statistics?action=raw '''258866 ''']
+| 358845
+| [//fi.wiktionary.org/wiki/Special:Recentchanges 2341054 ]
+| [//fi.wiktionary.org/wiki/Special:Listadmins 10 ]
+| [//fi.wiktionary.org/wiki/Special:Listusers 12239 ]
+| [//fi.wiktionary.org/wiki/Special:ActiveUsers 40 ]
+| [//fi.wiktionary.org/wiki/Special:Imagelist 16 ]
+| style="font-size: 70%;" | 2014-06-29 02:00:02
+|- style="text-align: right;"
+| 21
+| [[w:Kannada language|Kannada]]
+| [[w:Kannada language|&#3221;&#3240;&#3277;&#3240;&#3233;]]
+| [//kn.wiktionary.org/wiki/ kn]
+| [//kn.wiktionary.org/wiki/Special:Statistics?action=raw '''249503 ''']
+| 252544
+| [//kn.wiktionary.org/wiki/Special:Recentchanges 522058 ]
+| [//kn.wiktionary.org/wiki/Special:Listadmins 0 ]
+| [//kn.wiktionary.org/wiki/Special:Listusers 2407 ]
+| [//kn.wiktionary.org/wiki/Special:ActiveUsers 6 ]
+| [//kn.wiktionary.org/wiki/Special:Imagelist 0 ]
+| style="font-size: 70%;" | 2014-06-29 02:00:12
+|- style="text-align: right;"
+| 22
+| [[w:Ido language|Ido]]
+| [[w:Ido language|Ido]]
+| [//io.wiktionary.org/wiki/ io]
+| [//io.wiktionary.org/wiki/Special:Statistics?action=raw '''243220 ''']
+| 273657
+| [//io.wiktionary.org/wiki/Special:Recentchanges 1937677 ]
+| [//io.wiktionary.org/wiki/Special:Listadmins 1 ]
+| [//io.wiktionary.org/wiki/Special:Listusers 4162 ]
+| [//io.wiktionary.org/wiki/Special:ActiveUsers 14 ]
+| [//io.wiktionary.org/wiki/Special:Imagelist 4 ]
+| style="font-size: 70%;" | 2014-06-29 02:00:02
+|- style="text-align: right;"
+| 23
+| [[w:Vietnamese language|Vietnamese]]
+| [[w:Vietnamese language|Ti&#7871;ng Vi&#7879;t]]
+| [//vi.wiktionary.org/wiki/ vi]
+| [//vi.wiktionary.org/wiki/Special:Statistics?action=raw '''230701 ''']
+| 242818
+| [//vi.wiktionary.org/wiki/Special:Recentchanges 1545199 ]
+| [//vi.wiktionary.org/wiki/Special:Listadmins 6 ]
+| [//vi.wiktionary.org/wiki/Special:Listusers 21053 ]
+| [//vi.wiktionary.org/wiki/Special:ActiveUsers 24 ]
+| [//vi.wiktionary.org/wiki/Special:Imagelist 5 ]
+| style="font-size: 70%;" | 2014-06-29 02:00:07
+|- style="text-align: right;"
+| 24
+| [[w:Portuguese language|Portuguese]]
+| [[w:Portuguese language|Portugu&#234;s]]
+| [//pt.wiktionary.org/wiki/ pt]
+| [//pt.wiktionary.org/wiki/Special:Statistics?action=raw '''197089 ''']
+| 288333
+| [//pt.wiktionary.org/wiki/Special:Recentchanges 1913383 ]
+| [//pt.wiktionary.org/wiki/Special:Listadmins 8 ]
+| [//pt.wiktionary.org/wiki/Special:Listusers 45097 ]
+| [//pt.wiktionary.org/wiki/Special:ActiveUsers 59 ]
+| [//pt.wiktionary.org/wiki/Special:Imagelist 1 ]
+| style="font-size: 70%;" | 2014-06-29 02:00:03
+|- style="text-align: right;"
+| 25
+| [[w:Cherokee language|Cherokee]]
+| [[w:Cherokee language|&#5091;&#5043;&#5033;]]
+| [//chr.wiktionary.org/wiki/ chr]
+| [//chr.wiktionary.org/wiki/Special:Statistics?action=raw '''194426 ''']
+| 195428
+| [//chr.wiktionary.org/wiki/Special:Recentchanges 275616 ]
+| [//chr.wiktionary.org/wiki/Special:Listadmins 0 ]
+| [//chr.wiktionary.org/wiki/Special:Listusers 2137 ]
+| [//chr.wiktionary.org/wiki/Special:ActiveUsers 4 ]
+| [//chr.wiktionary.org/wiki/Special:Imagelist 2 ]
+| style="font-size: 70%;" | 2014-06-29 02:00:27
+|- style="text-align: right;"
+| 26
+| [[w:Norwegian (Bokm&#229;l) language|Norwegian (Bokm&#229;l)]]
+| [[w:Norwegian (Bokm&#229;l) language|Norsk (Bokm&#229;l)]]
+| [//no.wiktionary.org/wiki/ no]
+| [//no.wiktionary.org/wiki/Special:Statistics?action=raw '''130554 ''']
+| 140902
+| [//no.wiktionary.org/wiki/Special:Recentchanges 675244 ]
+| [//no.wiktionary.org/wiki/Special:Listadmins 11 ]
+| [//no.wiktionary.org/wiki/Special:Listusers 6200 ]
+| [//no.wiktionary.org/wiki/Special:ActiveUsers 17 ]
+| [//no.wiktionary.org/wiki/Special:Imagelist 10 ]
+| style="font-size: 70%;" | 2014-06-29 02:00:04
+|- style="text-align: right;"
+| 27
+| [[w:Malayalam language|Malayalam]]
+| [[w:Malayalam language|&#3374;&#3378;&#3375;&#3390;&#3379;&#3330;]]
+| [//ml.wiktionary.org/wiki/ ml]
+| [//ml.wiktionary.org/wiki/Special:Statistics?action=raw '''129419 ''']
+| 136506
+| [//ml.wiktionary.org/wiki/Special:Recentchanges 616444 ]
+| [//ml.wiktionary.org/wiki/Special:Listadmins 5 ]
+| [//ml.wiktionary.org/wiki/Special:Listusers 3555 ]
+| [//ml.wiktionary.org/wiki/Special:ActiveUsers 11 ]
+| [//ml.wiktionary.org/wiki/Special:Imagelist 4 ]
+| style="font-size: 70%;" | 2014-06-29 02:00:08
+|- style="text-align: right;"
+| 28
+| [[w:Indonesian language|Indonesian]]
+| [[w:Indonesian language|Bahasa Indonesia]]
+| [//id.wiktionary.org/wiki/ id]
+| [//id.wiktionary.org/wiki/Special:Statistics?action=raw '''122833 ''']
+| 195147
+| [//id.wiktionary.org/wiki/Special:Recentchanges 709008 ]
+| [//id.wiktionary.org/wiki/Special:Listadmins 5 ]
+| [//id.wiktionary.org/wiki/Special:Listusers 10329 ]
+| [//id.wiktionary.org/wiki/Special:ActiveUsers 18 ]
+| [//id.wiktionary.org/wiki/Special:Imagelist 3 ]
+| style="font-size: 70%;" | 2014-06-29 02:00:09
+|- style="text-align: right;"
+| 29
+| [[w:Burmese language|Burmese]]
+| [[w:Burmese language|&#4121;&#4156;&#4116;&#4154;&#4121;&#4140;&#4120;&#4140;&#4126;&#4140;]]
+| [//my.wiktionary.org/wiki/ my]
+| [//my.wiktionary.org/wiki/Special:Statistics?action=raw '''122809 ''']
+| 124828
+| [//my.wiktionary.org/wiki/Special:Recentchanges 554860 ]
+| [//my.wiktionary.org/wiki/Special:Listadmins 0 ]
+| [//my.wiktionary.org/wiki/Special:Listusers 2913 ]
+| [//my.wiktionary.org/wiki/Special:ActiveUsers 9 ]
+| [//my.wiktionary.org/wiki/Special:Imagelist 2 ]
+| style="font-size: 70%;" | 2014-06-29 02:00:23
+|- style="text-align: right;"
+| 30
+| [[w:Japanese language|Japanese]]
+| [[w:Japanese language|&#26085;&#26412;&#35486;]]
+| [//ja.wiktionary.org/wiki/ ja]
+| [//ja.wiktionary.org/wiki/Special:Statistics?action=raw '''115609 ''']
+| 135298
+| [//ja.wiktionary.org/wiki/Special:Recentchanges 727844 ]
+| [//ja.wiktionary.org/wiki/Special:Listadmins 8 ]
+| [//ja.wiktionary.org/wiki/Special:Listusers 29800 ]
+| [//ja.wiktionary.org/wiki/Special:ActiveUsers 35 ]
+| [//ja.wiktionary.org/wiki/Special:Imagelist 43 ]
+| style="font-size: 70%;" | 2014-06-29 02:00:04
+|- style="text-align: right;"
+| 31
+| [[w:Limburgish language|Limburgish]]
+| [[w:Limburgish language|Limburgs]]
+| [//li.wiktionary.org/wiki/ li]
+| [//li.wiktionary.org/wiki/Special:Statistics?action=raw '''114277 ''']
+| 120212
+| [//li.wiktionary.org/wiki/Special:Recentchanges 456515 ]
+| [//li.wiktionary.org/wiki/Special:Listadmins 3 ]
+| [//li.wiktionary.org/wiki/Special:Listusers 2336 ]
+| [//li.wiktionary.org/wiki/Special:ActiveUsers 7 ]
+| [//li.wiktionary.org/wiki/Special:Imagelist 13 ]
+| style="font-size: 70%;" | 2014-06-29 02:00:29
+|- style="text-align: right;"
+| 32
+| [[w:Romanian language|Romanian]]
+| [[w:Romanian language|Rom&#226;n&#259;]]
+| [//ro.wiktionary.org/wiki/ ro]
+| [//ro.wiktionary.org/wiki/Special:Statistics?action=raw '''113271 ''']
+| 131856
+| [//ro.wiktionary.org/wiki/Special:Recentchanges 559918 ]
+| [//ro.wiktionary.org/wiki/Special:Listadmins 7 ]
+| [//ro.wiktionary.org/wiki/Special:Listusers 9143 ]
+| [//ro.wiktionary.org/wiki/Special:ActiveUsers 14 ]
+| [//ro.wiktionary.org/wiki/Special:Imagelist 12 ]
+| style="font-size: 70%;" | 2014-06-29 02:00:09
+|- style="text-align: right;"
+| 33
+| [[w:Estonian language|Estonian]]
+| [[w:Estonian language|Eesti]]
+| [//et.wiktionary.org/wiki/ et]
+| [//et.wiktionary.org/wiki/Special:Statistics?action=raw '''102658 ''']
+| 119513
+| [//et.wiktionary.org/wiki/Special:Recentchanges 700546 ]
+| [//et.wiktionary.org/wiki/Special:Listadmins 6 ]
+| [//et.wiktionary.org/wiki/Special:Listusers 4118 ]
+| [//et.wiktionary.org/wiki/Special:ActiveUsers 11 ]
+| [//et.wiktionary.org/wiki/Special:Imagelist 2 ]
+| style="font-size: 70%;" | 2014-06-29 02:00:03
+|- style="text-align: right;"
+| 34
+| [[w:Telugu language|Telugu]]
+| [[w:Telugu language|&#3108;&#3142;&#3122;&#3137;&#3095;&#3137;]]
+| [//te.wiktionary.org/wiki/ te]
+| [//te.wiktionary.org/wiki/Special:Statistics?action=raw '''91220 ''']
+| 106911
+| [//te.wiktionary.org/wiki/Special:Recentchanges 500272 ]
+| [//te.wiktionary.org/wiki/Special:Listadmins 5 ]
+| [//te.wiktionary.org/wiki/Special:Listusers 2612 ]
+| [//te.wiktionary.org/wiki/Special:ActiveUsers 9 ]
+| [//te.wiktionary.org/wiki/Special:Imagelist 971 ]
+| style="font-size: 70%;" | 2014-06-29 02:00:14
+|- style="text-align: right;"
+| 35
+| [[w:Javanese language|Javanese]]
+| [[w:Javanese language|Basa Jawa]]
+| [//jv.wiktionary.org/wiki/ jv]
+| [//jv.wiktionary.org/wiki/Special:Statistics?action=raw '''60852 ''']
+| 61917
+| [//jv.wiktionary.org/wiki/Special:Recentchanges 81422 ]
+| [//jv.wiktionary.org/wiki/Special:Listadmins 0 ]
+| [//jv.wiktionary.org/wiki/Special:Listusers 1271 ]
+| [//jv.wiktionary.org/wiki/Special:ActiveUsers 2 ]
+| [//jv.wiktionary.org/wiki/Special:Imagelist 1 ]
+| style="font-size: 70%;" | 2014-06-29 02:00:17
+|- style="text-align: right;"
+| 36
+| [[w:Persian language|Persian]]
+| [[w:Persian language|&#1601;&#1575;&#1585;&#1587;&#1740;]]
+| [//fa.wiktionary.org/wiki/ fa]
+| [//fa.wiktionary.org/wiki/Special:Statistics?action=raw '''58421 ''']
+| 109925
+| [//fa.wiktionary.org/wiki/Special:Recentchanges 854418 ]
+| [//fa.wiktionary.org/wiki/Special:Listadmins 3 ]
+| [//fa.wiktionary.org/wiki/Special:Listusers 9563 ]
+| [//fa.wiktionary.org/wiki/Special:ActiveUsers 12 ]
+| [//fa.wiktionary.org/wiki/Special:Imagelist 9 ]
+| style="font-size: 70%;" | 2014-06-29 02:00:05
+|- style="text-align: right;"
+| 37
+| [[w:Catalan language|Catalan]]
+| [[w:Catalan language|Catal&#224;]]
+| [//ca.wiktionary.org/wiki/ ca]
+| [//ca.wiktionary.org/wiki/Special:Statistics?action=raw '''57930 ''']
+| 65611
+| [//ca.wiktionary.org/wiki/Special:Recentchanges 357622 ]
+| [//ca.wiktionary.org/wiki/Special:Listadmins 3 ]
+| [//ca.wiktionary.org/wiki/Special:Listusers 5768 ]
+| [//ca.wiktionary.org/wiki/Special:ActiveUsers 31 ]
+| [//ca.wiktionary.org/wiki/Special:Imagelist 4 ]
+| style="font-size: 70%;" | 2014-06-29 02:00:09
+|- style="text-align: right;"
+| 38
+| [[w:Czech language|Czech]]
+| [[w:Czech language|&#268;e&#353;tina]]
+| [//cs.wiktionary.org/wiki/ cs]
+| [//cs.wiktionary.org/wiki/Special:Statistics?action=raw '''57052 ''']
+| 75258
+| [//cs.wiktionary.org/wiki/Special:Recentchanges 554495 ]
+| [//cs.wiktionary.org/wiki/Special:Listadmins 6 ]
+| [//cs.wiktionary.org/wiki/Special:Listusers 13994 ]
+| [//cs.wiktionary.org/wiki/Special:ActiveUsers 41 ]
+| [//cs.wiktionary.org/wiki/Special:Imagelist 1 ]
+| style="font-size: 70%;" | 2014-06-29 02:00:07
+|- style="text-align: right;"
+| 39
+| [[w:Arabic language|Arabic]]
+| [[w:Arabic language|&#1575;&#1604;&#1593;&#1585;&#1576;&#1610;&#1577;]]
+| [//ar.wiktionary.org/wiki/ ar]
+| [//ar.wiktionary.org/wiki/Special:Statistics?action=raw '''47934 ''']
+| 66459
+| [//ar.wiktionary.org/wiki/Special:Recentchanges 586727 ]
+| [//ar.wiktionary.org/wiki/Special:Listadmins 1 ]
+| [//ar.wiktionary.org/wiki/Special:Listusers 12274 ]
+| [//ar.wiktionary.org/wiki/Special:ActiveUsers 21 ]
+| [//ar.wiktionary.org/wiki/Special:Imagelist 18 ]
+| style="font-size: 70%;" | 2014-06-29 02:00:08
+|- style="text-align: right;"
+| 40
+| [[w:Basque language|Basque]]
+| [[w:Basque language|Euskara]]
+| [//eu.wiktionary.org/wiki/ eu]
+| [//eu.wiktionary.org/wiki/Special:Statistics?action=raw '''47106 ''']
+| 54182
+| [//eu.wiktionary.org/wiki/Special:Recentchanges 219020 ]
+| [//eu.wiktionary.org/wiki/Special:Listadmins 3 ]
+| [//eu.wiktionary.org/wiki/Special:Listusers 2210 ]
+| [//eu.wiktionary.org/wiki/Special:ActiveUsers 7 ]
+| [//eu.wiktionary.org/wiki/Special:Imagelist 3 ]
+| style="font-size: 70%;" | 2014-06-29 02:00:11
+|- style="text-align: right;"
+| 41
+| [[w:Galician language|Galician]]
+| [[w:Galician language|Galego]]
+| [//gl.wiktionary.org/wiki/ gl]
+| [//gl.wiktionary.org/wiki/Special:Statistics?action=raw '''40529 ''']
+| 49993
+| [//gl.wiktionary.org/wiki/Special:Recentchanges 510790 ]
+| [//gl.wiktionary.org/wiki/Special:Listadmins 3 ]
+| [//gl.wiktionary.org/wiki/Special:Listusers 3038 ]
+| [//gl.wiktionary.org/wiki/Special:ActiveUsers 8 ]
+| [//gl.wiktionary.org/wiki/Special:Imagelist 74 ]
+| style="font-size: 70%;" | 2014-06-29 02:00:03
+|- style="text-align: right;"
+| 42
+| [[w:Lao language|Lao]]
+| [[w:Lao language|&#3749;&#3762;&#3751;]]
+| [//lo.wiktionary.org/wiki/ lo]
+| [//lo.wiktionary.org/wiki/Special:Statistics?action=raw '''37619 ''']
+| 62241
+| [//lo.wiktionary.org/wiki/Special:Recentchanges 339273 ]
+| [//lo.wiktionary.org/wiki/Special:Listadmins 0 ]
+| [//lo.wiktionary.org/wiki/Special:Listusers 2004 ]
+| [//lo.wiktionary.org/wiki/Special:ActiveUsers 4 ]
+| [//lo.wiktionary.org/wiki/Special:Imagelist 2 ]
+| style="font-size: 70%;" | 2014-06-29 02:00:29
+|- style="text-align: right;"
+| 43
+| [[w:Ukrainian language|Ukrainian]]
+| [[w:Ukrainian language|&#1059;&#1082;&#1088;&#1072;&#1111;&#1085;&#1089;&#1100;&#1082;&#1072;]]
+| [//uk.wiktionary.org/wiki/ uk]
+| [//uk.wiktionary.org/wiki/Special:Statistics?action=raw '''35442 ''']
+| 44181
+| [//uk.wiktionary.org/wiki/Special:Recentchanges 199268 ]
+| [//uk.wiktionary.org/wiki/Special:Listadmins 4 ]
+| [//uk.wiktionary.org/wiki/Special:Listusers 9727 ]
+| [//uk.wiktionary.org/wiki/Special:ActiveUsers 16 ]
+| [//uk.wiktionary.org/wiki/Special:Imagelist 11 ]
+| style="font-size: 70%;" | 2014-06-29 02:00:08
+|- style="text-align: right;"
+| 44
+| [[w:Armenian language|Armenian]]
+| [[w:Armenian language|&#1344;&#1377;&#1397;&#1381;&#1408;&#1381;&#1398;]]
+| [//hy.wiktionary.org/wiki/ hy]
+| [//hy.wiktionary.org/wiki/Special:Statistics?action=raw '''33666 ''']
+| 36622
+| [//hy.wiktionary.org/wiki/Special:Recentchanges 179925 ]
+| [//hy.wiktionary.org/wiki/Special:Listadmins 3 ]
+| [//hy.wiktionary.org/wiki/Special:Listusers 2187 ]
+| [//hy.wiktionary.org/wiki/Special:ActiveUsers 6 ]
+| [//hy.wiktionary.org/wiki/Special:Imagelist 16 ]
+| style="font-size: 70%;" | 2014-06-29 02:00:13
+|- style="text-align: right;"
+| 45
+| [[w:Breton language|Breton]]
+| [[w:Breton language|Brezhoneg]]
+| [//br.wiktionary.org/wiki/ br]
+| [//br.wiktionary.org/wiki/Special:Statistics?action=raw '''32897 ''']
+| 40531
+| [//br.wiktionary.org/wiki/Special:Recentchanges 177255 ]
+| [//br.wiktionary.org/wiki/Special:Listadmins 1 ]
+| [//br.wiktionary.org/wiki/Special:Listusers 2191 ]
+| [//br.wiktionary.org/wiki/Special:ActiveUsers 6 ]
+| [//br.wiktionary.org/wiki/Special:Imagelist 42 ]
+| style="font-size: 70%;" | 2014-06-29 02:00:18
+|- style="text-align: right;"
+| 46
+| [[w:Fijian language|Fijian]]
+| [[w:Fijian language|Na Vosa Vakaviti]]
+| [//fj.wiktionary.org/wiki/ fj]
+| [//fj.wiktionary.org/wiki/Special:Statistics?action=raw '''31222 ''']
+| 31990
+| [//fj.wiktionary.org/wiki/Special:Recentchanges 124351 ]
+| [//fj.wiktionary.org/wiki/Special:Listadmins 0 ]
+| [//fj.wiktionary.org/wiki/Special:Listusers 1565 ]
+| [//fj.wiktionary.org/wiki/Special:ActiveUsers 2 ]
+| [//fj.wiktionary.org/wiki/Special:Imagelist 0 ]
+| style="font-size: 70%;" | 2014-06-29 02:00:16
+|- style="text-align: right;"
+| 47
+| [[w:Esperanto language|Esperanto]]
+| [[w:Esperanto language|Esperanto]]
+| [//eo.wiktionary.org/wiki/ eo]
+| [//eo.wiktionary.org/wiki/Special:Statistics?action=raw '''28372 ''']
+| 41311
+| [//eo.wiktionary.org/wiki/Special:Recentchanges 221948 ]
+| [//eo.wiktionary.org/wiki/Special:Listadmins 4 ]
+| [//eo.wiktionary.org/wiki/Special:Listusers 3422 ]
+| [//eo.wiktionary.org/wiki/Special:ActiveUsers 10 ]
+| [//eo.wiktionary.org/wiki/Special:Imagelist 27 ]
+| style="font-size: 70%;" | 2014-06-29 02:00:09
+|- style="text-align: right;"
+| 48
+| [[w:Bulgarian language|Bulgarian]]
+| [[w:Bulgarian language|&#1041;&#1098;&#1083;&#1075;&#1072;&#1088;&#1089;&#1082;&#1080;]]
+| [//bg.wiktionary.org/wiki/ bg]
+| [//bg.wiktionary.org/wiki/Special:Statistics?action=raw '''27145 ''']
+| 898112
+| [//bg.wiktionary.org/wiki/Special:Recentchanges 1048161 ]
+| [//bg.wiktionary.org/wiki/Special:Listadmins 1 ]
+| [//bg.wiktionary.org/wiki/Special:Listusers 9761 ]
+| [//bg.wiktionary.org/wiki/Special:ActiveUsers 17 ]
+| [//bg.wiktionary.org/wiki/Special:Imagelist 22 ]
+| style="font-size: 70%;" | 2014-06-29 02:00:02
+|- style="text-align: right;"
+| 49
+| [[w:Thai language|Thai]]
+| [[w:Thai language|&#3652;&#3607;&#3618;]]
+| [//th.wiktionary.org/wiki/ th]
+| [//th.wiktionary.org/wiki/Special:Statistics?action=raw '''26538 ''']
+| 35599
+| [//th.wiktionary.org/wiki/Special:Recentchanges 185830 ]
+| [//th.wiktionary.org/wiki/Special:Listadmins 2 ]
+| [//th.wiktionary.org/wiki/Special:Listusers 3983 ]
+| [//th.wiktionary.org/wiki/Special:ActiveUsers 7 ]
+| [//th.wiktionary.org/wiki/Special:Imagelist 35 ]
+| style="font-size: 70%;" | 2014-06-29 02:00:10
+|- style="text-align: right;"
+| 50
+| [[w:Croatian language|Croatian]]
+| [[w:Croatian language|Hrvatski]]
+| [//hr.wiktionary.org/wiki/ hr]
+| [//hr.wiktionary.org/wiki/Special:Statistics?action=raw '''25724 ''']
+| 33428
+| [//hr.wiktionary.org/wiki/Special:Recentchanges 164840 ]
+| [//hr.wiktionary.org/wiki/Special:Listadmins 7 ]
+| [//hr.wiktionary.org/wiki/Special:Listusers 3604 ]
+| [//hr.wiktionary.org/wiki/Special:ActiveUsers 8 ]
+| [//hr.wiktionary.org/wiki/Special:Imagelist 5 ]
+| style="font-size: 70%;" | 2014-06-29 02:00:07
+|- style="text-align: right;"
+| 51
+| [[w:Pashto language|Pashto]]
+| [[w:Pashto language|&#1662;&#1690;&#1578;&#1608;]]
+| [//ps.wiktionary.org/wiki/ ps]
+| [//ps.wiktionary.org/wiki/Special:Statistics?action=raw '''25025 ''']
+| 27990
+| [//ps.wiktionary.org/wiki/Special:Recentchanges 71041 ]
+| [//ps.wiktionary.org/wiki/Special:Listadmins 1 ]
+| [//ps.wiktionary.org/wiki/Special:Listusers 1206 ]
+| [//ps.wiktionary.org/wiki/Special:ActiveUsers 3 ]
+| [//ps.wiktionary.org/wiki/Special:Imagelist 2 ]
+| style="font-size: 70%;" | 2014-06-29 02:00:19
+|- style="text-align: right;"
+| 52
+| [[w:Occitan language|Occitan]]
+| [[w:Occitan language|Occitan]]
+| [//oc.wiktionary.org/wiki/ oc]
+| [//oc.wiktionary.org/wiki/Special:Statistics?action=raw '''23993 ''']
+| 27986
+| [//oc.wiktionary.org/wiki/Special:Recentchanges 199603 ]
+| [//oc.wiktionary.org/wiki/Special:Listadmins 3 ]
+| [//oc.wiktionary.org/wiki/Special:Listusers 2069 ]
+| [//oc.wiktionary.org/wiki/Special:ActiveUsers 11 ]
+| [//oc.wiktionary.org/wiki/Special:Imagelist 3 ]
+| style="font-size: 70%;" | 2014-06-29 02:00:11
+|- style="text-align: right;"
+| 53
+| [[w:Uzbek language|Uzbek]]
+| [[w:Uzbek language|O&#8216;zbek]]
+| [//uz.wiktionary.org/wiki/ uz]
+| [//uz.wiktionary.org/wiki/Special:Statistics?action=raw '''23592 ''']
+| 27132
+| [//uz.wiktionary.org/wiki/Special:Recentchanges 71130 ]
+| [//uz.wiktionary.org/wiki/Special:Listadmins 0 ]
+| [//uz.wiktionary.org/wiki/Special:Listusers 1270 ]
+| [//uz.wiktionary.org/wiki/Special:ActiveUsers 4 ]
+| [//uz.wiktionary.org/wiki/Special:Imagelist 0 ]
+| style="font-size: 70%;" | 2014-06-29 02:00:16
+|- style="text-align: right;"
+| 54
+| [[w:Icelandic language|Icelandic]]
+| [[w:Icelandic language|&#205;slenska]]
+| [//is.wiktionary.org/wiki/ is]
+| [//is.wiktionary.org/wiki/Special:Statistics?action=raw '''23313 ''']
+| 26679
+| [//is.wiktionary.org/wiki/Special:Recentchanges 204500 ]
+| [//is.wiktionary.org/wiki/Special:Listadmins 8 ]
+| [//is.wiktionary.org/wiki/Special:Listusers 3579 ]
+| [//is.wiktionary.org/wiki/Special:ActiveUsers 8 ]
+| [//is.wiktionary.org/wiki/Special:Imagelist 4 ]
+| style="font-size: 70%;" | 2014-06-29 02:00:06
+|- style="text-align: right;"
+| 55
+| [[w:Azerbaijani language|Azerbaijani]]
+| [[w:Azerbaijani language|Az&#601;rbaycanca]]
+| [//az.wiktionary.org/wiki/ az]
+| [//az.wiktionary.org/wiki/Special:Statistics?action=raw '''23083 ''']
+| 28092
+| [//az.wiktionary.org/wiki/Special:Recentchanges 133437 ]
+| [//az.wiktionary.org/wiki/Special:Listadmins 1 ]
+| [//az.wiktionary.org/wiki/Special:Listusers 2738 ]
+| [//az.wiktionary.org/wiki/Special:ActiveUsers 11 ]
+| [//az.wiktionary.org/wiki/Special:Imagelist 6 ]
+| style="font-size: 70%;" | 2014-06-29 02:00:21
+|- style="text-align: right;"
+| 56
+| [[w:Volap&#252;k language|Volap&#252;k]]
+| [[w:Volap&#252;k language|Volap&#252;k]]
+| [//vo.wiktionary.org/wiki/ vo]
+| [//vo.wiktionary.org/wiki/Special:Statistics?action=raw '''22606 ''']
+| 25162
+| [//vo.wiktionary.org/wiki/Special:Recentchanges 168039 ]
+| [//vo.wiktionary.org/wiki/Special:Listadmins 3 ]
+| [//vo.wiktionary.org/wiki/Special:Listusers 1646 ]
+| [//vo.wiktionary.org/wiki/Special:ActiveUsers 4 ]
+| [//vo.wiktionary.org/wiki/Special:Imagelist 1 ]
+| style="font-size: 70%;" | 2014-06-29 02:00:11
+|- style="text-align: right;"
+| 57
+| [[w:Simple English language|Simple English]]
+| [[w:Simple English language|Simple English]]
+| [//simple.wiktionary.org/wiki/ simple]
+| [//simple.wiktionary.org/wiki/Special:Statistics?action=raw '''21879 ''']
+| 28513
+| [//simple.wiktionary.org/wiki/Special:Recentchanges 294877 ]
+| [//simple.wiktionary.org/wiki/Special:Listadmins 7 ]
+| [//simple.wiktionary.org/wiki/Special:Listusers 12315 ]
+| [//simple.wiktionary.org/wiki/Special:ActiveUsers 24 ]
+| [//simple.wiktionary.org/wiki/Special:Imagelist 4 ]
+| style="font-size: 70%;" | 2014-06-29 02:00:10
+|- style="text-align: right;"
+| 58
+| [[w:Welsh language|Welsh]]
+| [[w:Welsh language|Cymraeg]]
+| [//cy.wiktionary.org/wiki/ cy]
+| [//cy.wiktionary.org/wiki/Special:Statistics?action=raw '''21762 ''']
+| 25341
+| [//cy.wiktionary.org/wiki/Special:Recentchanges 101376 ]
+| [//cy.wiktionary.org/wiki/Special:Listadmins 2 ]
+| [//cy.wiktionary.org/wiki/Special:Listusers 2195 ]
+| [//cy.wiktionary.org/wiki/Special:ActiveUsers 8 ]
+| [//cy.wiktionary.org/wiki/Special:Imagelist 7 ]
+| style="font-size: 70%;" | 2014-06-29 02:00:10
+|- style="text-align: right;"
+| 59
+| [[w:Min Nan language|Min Nan]]
+| [[w:Min Nan language|B&#226;n-l&#226;m-g&#250;]]
+| [//zh-min-nan.wiktionary.org/wiki/ zh-min-nan]
+| [//zh-min-nan.wiktionary.org/wiki/Special:Statistics?action=raw '''21227 ''']
+| 23861
+| [//zh-min-nan.wiktionary.org/wiki/Special:Recentchanges 108985 ]
+| [//zh-min-nan.wiktionary.org/wiki/Special:Listadmins 2 ]
+| [//zh-min-nan.wiktionary.org/wiki/Special:Listusers 1961 ]
+| [//zh-min-nan.wiktionary.org/wiki/Special:ActiveUsers 8 ]
+| [//zh-min-nan.wiktionary.org/wiki/Special:Imagelist 1 ]
+| style="font-size: 70%;" | 2014-06-29 02:00:26
+|- style="text-align: right;"
+| 60
+| [[w:Danish language|Danish]]
+| [[w:Danish language|Dansk]]
+| [//da.wiktionary.org/wiki/ da]
+| [//da.wiktionary.org/wiki/Special:Statistics?action=raw '''17557 ''']
+| 26476
+| [//da.wiktionary.org/wiki/Special:Recentchanges 130896 ]
+| [//da.wiktionary.org/wiki/Special:Listadmins 5 ]
+| [//da.wiktionary.org/wiki/Special:Listusers 5085 ]
+| [//da.wiktionary.org/wiki/Special:ActiveUsers 23 ]
+| [//da.wiktionary.org/wiki/Special:Imagelist 0 ]
+| style="font-size: 70%;" | 2014-06-29 02:00:05
+|- style="text-align: right;"
+| 61
+| [[w:Sicilian language|Sicilian]]
+| [[w:Sicilian language|Sicilianu]]
+| [//scn.wiktionary.org/wiki/ scn]
+| [//scn.wiktionary.org/wiki/Special:Statistics?action=raw '''17129 ''']
+| 23865
+| [//scn.wiktionary.org/wiki/Special:Recentchanges 128292 ]
+| [//scn.wiktionary.org/wiki/Special:Listadmins 6 ]
+| [//scn.wiktionary.org/wiki/Special:Listusers 2354 ]
+| [//scn.wiktionary.org/wiki/Special:ActiveUsers 3 ]
+| [//scn.wiktionary.org/wiki/Special:Imagelist 24 ]
+| style="font-size: 70%;" | 2014-06-29 02:00:04
+|- style="text-align: right;"
+| 62
+| [[w:Serbian language|Serbian]]
+| [[w:Serbian language|&#1057;&#1088;&#1087;&#1089;&#1082;&#1080; / Srpski]]
+| [//sr.wiktionary.org/wiki/ sr]
+| [//sr.wiktionary.org/wiki/Special:Statistics?action=raw '''17004 ''']
+| 21393
+| [//sr.wiktionary.org/wiki/Special:Recentchanges 100945 ]
+| [//sr.wiktionary.org/wiki/Special:Listadmins 6 ]
+| [//sr.wiktionary.org/wiki/Special:Listusers 3722 ]
+| [//sr.wiktionary.org/wiki/Special:ActiveUsers 16 ]
+| [//sr.wiktionary.org/wiki/Special:Imagelist 11 ]
+| style="font-size: 70%;" | 2014-06-29 02:00:09
+|- style="text-align: right;"
+| 63
+| [[w:Asturian language|Asturian]]
+| [[w:Asturian language|Asturianu]]
+| [//ast.wiktionary.org/wiki/ ast]
+| [//ast.wiktionary.org/wiki/Special:Statistics?action=raw '''16021 ''']
+| 20754
+| [//ast.wiktionary.org/wiki/Special:Recentchanges 131828 ]
+| [//ast.wiktionary.org/wiki/Special:Listadmins 1 ]
+| [//ast.wiktionary.org/wiki/Special:Listusers 2029 ]
+| [//ast.wiktionary.org/wiki/Special:ActiveUsers 5 ]
+| [//ast.wiktionary.org/wiki/Special:Imagelist 1 ]
+| style="font-size: 70%;" | 2014-06-29 02:00:12
+|- style="text-align: right;"
+| 64
+| [[w:Afrikaans language|Afrikaans]]
+| [[w:Afrikaans language|Afrikaans]]
+| [//af.wiktionary.org/wiki/ af]
+| [//af.wiktionary.org/wiki/Special:Statistics?action=raw '''15792 ''']
+| 22185
+| [//af.wiktionary.org/wiki/Special:Recentchanges 114213 ]
+| [//af.wiktionary.org/wiki/Special:Listadmins 1 ]
+| [//af.wiktionary.org/wiki/Special:Listusers 2915 ]
+| [//af.wiktionary.org/wiki/Special:ActiveUsers 8 ]
+| [//af.wiktionary.org/wiki/Special:Imagelist 969 ]
+| style="font-size: 70%;" | 2014-06-29 02:00:07
+|- style="text-align: right;"
+| 65
+| [[w:Hebrew language|Hebrew]]
+| [[w:Hebrew language|&#1506;&#1489;&#1512;&#1497;&#1514;]]
+| [//he.wiktionary.org/wiki/ he]
+| [//he.wiktionary.org/wiki/Special:Statistics?action=raw '''15042 ''']
+| 29885
+| [//he.wiktionary.org/wiki/Special:Recentchanges 184853 ]
+| [//he.wiktionary.org/wiki/Special:Listadmins 2 ]
+| [//he.wiktionary.org/wiki/Special:Listusers 11987 ]
+| [//he.wiktionary.org/wiki/Special:ActiveUsers 25 ]
+| [//he.wiktionary.org/wiki/Special:Imagelist 232 ]
+| style="font-size: 70%;" | 2014-06-29 02:00:05
+|- style="text-align: right;"
+| 66
+| [[w:Swahili language|Swahili]]
+| [[w:Swahili language|Kiswahili]]
+| [//sw.wiktionary.org/wiki/ sw]
+| [//sw.wiktionary.org/wiki/Special:Statistics?action=raw '''13885 ''']
+| 16882
+| [//sw.wiktionary.org/wiki/Special:Recentchanges 101194 ]
+| [//sw.wiktionary.org/wiki/Special:Listadmins 1 ]
+| [//sw.wiktionary.org/wiki/Special:Listusers 1855 ]
+| [//sw.wiktionary.org/wiki/Special:ActiveUsers 5 ]
+| [//sw.wiktionary.org/wiki/Special:Imagelist 0 ]
+| style="font-size: 70%;" | 2014-06-29 02:00:12
+|- style="text-align: right;"
+| 67
+| [[w:Oriya language|Oriya]]
+| [[w:Oriya language|&#2835;&#2908;&#2879;&#2822;]]
+| [//or.wiktionary.org/wiki/ or]
+| [//or.wiktionary.org/wiki/Special:Statistics?action=raw '''13650 ''']
+| 14662
+| [//or.wiktionary.org/wiki/Special:Recentchanges 53905 ]
+| [//or.wiktionary.org/wiki/Special:Listadmins 1 ]
+| [//or.wiktionary.org/wiki/Special:Listusers 970 ]
+| [//or.wiktionary.org/wiki/Special:ActiveUsers 2 ]
+| [//or.wiktionary.org/wiki/Special:Imagelist 1 ]
+| style="font-size: 70%;" | 2014-06-29 02:00:23
+|- style="text-align: right;"
+| 68
+| [[w:Hindi language|Hindi]]
+| [[w:Hindi language|&#2361;&#2367;&#2344;&#2381;&#2342;&#2368;]]
+| [//hi.wiktionary.org/wiki/ hi]
+| [//hi.wiktionary.org/wiki/Special:Statistics?action=raw '''13521 ''']
+| 122068
+| [//hi.wiktionary.org/wiki/Special:Recentchanges 173150 ]
+| [//hi.wiktionary.org/wiki/Special:Listadmins 3 ]
+| [//hi.wiktionary.org/wiki/Special:Listusers 4853 ]
+| [//hi.wiktionary.org/wiki/Special:ActiveUsers 5 ]
+| [//hi.wiktionary.org/wiki/Special:Imagelist 19 ]
+| style="font-size: 70%;" | 2014-06-29 02:00:06
+|- style="text-align: right;"
+| 69
+| [[w:West Frisian language|West Frisian]]
+| [[w:West Frisian language|Frysk]]
+| [//fy.wiktionary.org/wiki/ fy]
+| [//fy.wiktionary.org/wiki/Special:Statistics?action=raw '''13330 ''']
+| 17507
+| [//fy.wiktionary.org/wiki/Special:Recentchanges 100850 ]
+| [//fy.wiktionary.org/wiki/Special:Listadmins 0 ]
+| [//fy.wiktionary.org/wiki/Special:Listusers 1795 ]
+| [//fy.wiktionary.org/wiki/Special:ActiveUsers 2 ]
+| [//fy.wiktionary.org/wiki/Special:Imagelist 13 ]
+| style="font-size: 70%;" | 2014-06-29 02:00:14
+|- style="text-align: right;"
+| 70
+| [[w:Tagalog language|Tagalog]]
+| [[w:Tagalog language|Tagalog]]
+| [//tl.wiktionary.org/wiki/ tl]
+| [//tl.wiktionary.org/wiki/Special:Statistics?action=raw '''12765 ''']
+| 23506
+| [//tl.wiktionary.org/wiki/Special:Recentchanges 105716 ]
+| [//tl.wiktionary.org/wiki/Special:Listadmins 1 ]
+| [//tl.wiktionary.org/wiki/Special:Listusers 2008 ]
+| [//tl.wiktionary.org/wiki/Special:ActiveUsers 2 ]
+| [//tl.wiktionary.org/wiki/Special:Imagelist 17 ]
+| style="font-size: 70%;" | 2014-06-29 02:00:18
+|- style="text-align: right;"
+| 71
+| [[w:Walloon language|Walloon]]
+| [[w:Walloon language|Walon]]
+| [//wa.wiktionary.org/wiki/ wa]
+| [//wa.wiktionary.org/wiki/Special:Statistics?action=raw '''12313 ''']
+| 40045
+| [//wa.wiktionary.org/wiki/Special:Recentchanges 130730 ]
+| [//wa.wiktionary.org/wiki/Special:Listadmins 1 ]
+| [//wa.wiktionary.org/wiki/Special:Listusers 1541 ]
+| [//wa.wiktionary.org/wiki/Special:ActiveUsers 11 ]
+| [//wa.wiktionary.org/wiki/Special:Imagelist 26 ]
+| style="font-size: 70%;" | 2014-06-29 02:00:28
+|- style="text-align: right;"
+| 72
+| [[w:Norwegian (Nynorsk) language|Norwegian (Nynorsk)]]
+| [[w:Norwegian (Nynorsk) language|Nynorsk]]
+| [//nn.wiktionary.org/wiki/ nn]
+| [//nn.wiktionary.org/wiki/Special:Statistics?action=raw '''11771 ''']
+| 13422
+| [//nn.wiktionary.org/wiki/Special:Recentchanges 45011 ]
+| [//nn.wiktionary.org/wiki/Special:Listadmins 3 ]
+| [//nn.wiktionary.org/wiki/Special:Listusers 1644 ]
+| [//nn.wiktionary.org/wiki/Special:ActiveUsers 3 ]
+| [//nn.wiktionary.org/wiki/Special:Imagelist 4 ]
+| style="font-size: 70%;" | 2014-06-29 02:00:15
+|- style="text-align: right;"
+| 73
+| [[w:Urdu language|Urdu]]
+| [[w:Urdu language|&#1575;&#1585;&#1583;&#1608;]]
+| [//ur.wiktionary.org/wiki/ ur]
+| [//ur.wiktionary.org/wiki/Special:Statistics?action=raw '''10295 ''']
+| 16194
+| [//ur.wiktionary.org/wiki/Special:Recentchanges 28769 ]
+| [//ur.wiktionary.org/wiki/Special:Listadmins 1 ]
+| [//ur.wiktionary.org/wiki/Special:Listusers 1896 ]
+| [//ur.wiktionary.org/wiki/Special:ActiveUsers 3 ]
+| [//ur.wiktionary.org/wiki/Special:Imagelist 2 ]
+| style="font-size: 70%;" | 2014-06-29 02:00:13
+|- style="text-align: right;"
+| 74
+| [[w:Latin language|Latin]]
+| [[w:Latin language|Latina]]
+| [//la.wiktionary.org/wiki/ la]
+| [//la.wiktionary.org/wiki/Special:Statistics?action=raw '''8368 ''']
+| 18670
+| [//la.wiktionary.org/wiki/Special:Recentchanges 110823 ]
+| [//la.wiktionary.org/wiki/Special:Listadmins 2 ]
+| [//la.wiktionary.org/wiki/Special:Listusers 5738 ]
+| [//la.wiktionary.org/wiki/Special:ActiveUsers 12 ]
+| [//la.wiktionary.org/wiki/Special:Imagelist 71 ]
+| style="font-size: 70%;" | 2014-06-29 02:00:05
+|- style="text-align: right;"
+| 75
+| [[w:Albanian language|Albanian]]
+| [[w:Albanian language|Shqip]]
+| [//sq.wiktionary.org/wiki/ sq]
+| [//sq.wiktionary.org/wiki/Special:Statistics?action=raw '''7435 ''']
+| 10723
+| [//sq.wiktionary.org/wiki/Special:Recentchanges 44919 ]
+| [//sq.wiktionary.org/wiki/Special:Listadmins 3 ]
+| [//sq.wiktionary.org/wiki/Special:Listusers 2431 ]
+| [//sq.wiktionary.org/wiki/Special:ActiveUsers 2 ]
+| [//sq.wiktionary.org/wiki/Special:Imagelist 3 ]
+| style="font-size: 70%;" | 2014-06-29 02:00:13
+|- style="text-align: right;"
+| 76
+| [[w:Georgian language|Georgian]]
+| [[w:Georgian language|&#4325;&#4304;&#4320;&#4311;&#4323;&#4314;&#4312;]]
+| [//ka.wiktionary.org/wiki/ ka]
+| [//ka.wiktionary.org/wiki/Special:Statistics?action=raw '''7363 ''']
+| 10620
+| [//ka.wiktionary.org/wiki/Special:Recentchanges 63543 ]
+| [//ka.wiktionary.org/wiki/Special:Listadmins 2 ]
+| [//ka.wiktionary.org/wiki/Special:Listusers 2441 ]
+| [//ka.wiktionary.org/wiki/Special:ActiveUsers 5 ]
+| [//ka.wiktionary.org/wiki/Special:Imagelist 12 ]
+| style="font-size: 70%;" | 2014-06-29 02:00:12
+|- style="text-align: right;"
+| 77
+| [[w:Samoan language|Samoan]]
+| [[w:Samoan language|Gagana Samoa]]
+| [//sm.wiktionary.org/wiki/ sm]
+| [//sm.wiktionary.org/wiki/Special:Statistics?action=raw '''7141 ''']
+| 8337
+| [//sm.wiktionary.org/wiki/Special:Recentchanges 36185 ]
+| [//sm.wiktionary.org/wiki/Special:Listadmins 0 ]
+| [//sm.wiktionary.org/wiki/Special:Listusers 1241 ]
+| [//sm.wiktionary.org/wiki/Special:ActiveUsers 1 ]
+| [//sm.wiktionary.org/wiki/Special:Imagelist 0 ]
+| style="font-size: 70%;" | 2014-06-29 02:00:17
+|- style="text-align: right;"
+| 78
+| [[w:Slovenian language|Slovenian]]
+| [[w:Slovenian language|Sloven&#353;&#269;ina]]
+| [//sl.wiktionary.org/wiki/ sl]
+| [//sl.wiktionary.org/wiki/Special:Statistics?action=raw '''7128 ''']
+| 16063
+| [//sl.wiktionary.org/wiki/Special:Recentchanges 97491 ]
+| [//sl.wiktionary.org/wiki/Special:Listadmins 3 ]
+| [//sl.wiktionary.org/wiki/Special:Listusers 3423 ]
+| [//sl.wiktionary.org/wiki/Special:ActiveUsers 3 ]
+| [//sl.wiktionary.org/wiki/Special:Imagelist 0 ]
+| style="font-size: 70%;" | 2014-06-29 02:00:04
+|- style="text-align: right;"
+| 79
+| [[w:Nahuatl language|Nahuatl]]
+| [[w:Nahuatl language|Nahuatl]]
+| [//nah.wiktionary.org/wiki/ nah]
+| [//nah.wiktionary.org/wiki/Special:Statistics?action=raw '''7088 ''']
+| 9095
+| [//nah.wiktionary.org/wiki/Special:Recentchanges 42616 ]
+| [//nah.wiktionary.org/wiki/Special:Listadmins 3 ]
+| [//nah.wiktionary.org/wiki/Special:Listusers 1336 ]
+| [//nah.wiktionary.org/wiki/Special:ActiveUsers 1 ]
+| [//nah.wiktionary.org/wiki/Special:Imagelist 1 ]
+| style="font-size: 70%;" | 2014-06-29 02:00:17
+|- style="text-align: right;"
+| 80
+| [[w:Tatar language|Tatar]]
+| [[w:Tatar language|Tatar&#231;a / &#1058;&#1072;&#1090;&#1072;&#1088;&#1095;&#1072;]]
+| [//tt.wiktionary.org/wiki/ tt]
+| [//tt.wiktionary.org/wiki/Special:Statistics?action=raw '''6586 ''']
+| 8984
+| [//tt.wiktionary.org/wiki/Special:Recentchanges 26615 ]
+| [//tt.wiktionary.org/wiki/Special:Listadmins 0 ]
+| [//tt.wiktionary.org/wiki/Special:Listusers 1457 ]
+| [//tt.wiktionary.org/wiki/Special:ActiveUsers 2 ]
+| [//tt.wiktionary.org/wiki/Special:Imagelist 1 ]
+| style="font-size: 70%;" | 2014-06-29 02:00:18
+|- style="text-align: right;"
+| 81
+| [[w:Luxembourgish language|Luxembourgish]]
+| [[w:Luxembourgish language|L&#235;tzebuergesch]]
+| [//lb.wiktionary.org/wiki/ lb]
+| [//lb.wiktionary.org/wiki/Special:Statistics?action=raw '''6415 ''']
+| 10873
+| [//lb.wiktionary.org/wiki/Special:Recentchanges 57530 ]
+| [//lb.wiktionary.org/wiki/Special:Listadmins 2 ]
+| [//lb.wiktionary.org/wiki/Special:Listusers 1545 ]
+| [//lb.wiktionary.org/wiki/Special:ActiveUsers 7 ]
+| [//lb.wiktionary.org/wiki/Special:Imagelist 178 ]
+| style="font-size: 70%;" | 2014-06-29 02:00:15
+|- style="text-align: right;"
+| 82
+| [[w:Latvian language|Latvian]]
+| [[w:Latvian language|Latvie&#353;u]]
+| [//lv.wiktionary.org/wiki/ lv]
+| [//lv.wiktionary.org/wiki/Special:Statistics?action=raw '''6382 ''']
+| 8756
+| [//lv.wiktionary.org/wiki/Special:Recentchanges 46638 ]
+| [//lv.wiktionary.org/wiki/Special:Listadmins 1 ]
+| [//lv.wiktionary.org/wiki/Special:Listusers 1782 ]
+| [//lv.wiktionary.org/wiki/Special:ActiveUsers 5 ]
+| [//lv.wiktionary.org/wiki/Special:Imagelist 9 ]
+| style="font-size: 70%;" | 2014-06-29 02:00:13
+|- style="text-align: right;"
+| 83
+| [[w:Bosnian language|Bosnian]]
+| [[w:Bosnian language|Bosanski]]
+| [//bs.wiktionary.org/wiki/ bs]
+| [//bs.wiktionary.org/wiki/Special:Statistics?action=raw '''6353 ''']
+| 10153
+| [//bs.wiktionary.org/wiki/Special:Recentchanges 36121 ]
+| [//bs.wiktionary.org/wiki/Special:Listadmins 4 ]
+| [//bs.wiktionary.org/wiki/Special:Listusers 1715 ]
+| [//bs.wiktionary.org/wiki/Special:ActiveUsers 3 ]
+| [//bs.wiktionary.org/wiki/Special:Imagelist 0 ]
+| style="font-size: 70%;" | 2014-06-29 02:00:10
+|- style="text-align: right;"
+| 84
+| [[w:Slovak language|Slovak]]
+| [[w:Slovak language|Sloven&#269;ina]]
+| [//sk.wiktionary.org/wiki/ sk]
+| [//sk.wiktionary.org/wiki/Special:Statistics?action=raw '''4527 ''']
+| 6939
+| [//sk.wiktionary.org/wiki/Special:Recentchanges 43606 ]
+| [//sk.wiktionary.org/wiki/Special:Listadmins 3 ]
+| [//sk.wiktionary.org/wiki/Special:Listusers 2705 ]
+| [//sk.wiktionary.org/wiki/Special:ActiveUsers 3 ]
+| [//sk.wiktionary.org/wiki/Special:Imagelist 1 ]
+| style="font-size: 70%;" | 2014-06-29 02:00:07
+|- style="text-align: right;"
+| 85
+| [[w:Turkmen language|Turkmen]]
+| [[w:Turkmen language|&#1578;&#1585;&#1603;&#1605;&#1606; / &#1058;&#1091;&#1088;&#1082;&#1084;&#1077;&#1085;]]
+| [//tk.wiktionary.org/wiki/ tk]
+| [//tk.wiktionary.org/wiki/Special:Statistics?action=raw '''4492 ''']
+| 5483
+| [//tk.wiktionary.org/wiki/Special:Recentchanges 20631 ]
+| [//tk.wiktionary.org/wiki/Special:Listadmins 1 ]
+| [//tk.wiktionary.org/wiki/Special:Listusers 1319 ]
+| [//tk.wiktionary.org/wiki/Special:ActiveUsers 1 ]
+| [//tk.wiktionary.org/wiki/Special:Imagelist 0 ]
+| style="font-size: 70%;" | 2014-06-29 02:00:28
+|- style="text-align: right;"
+| 86
+| [[w:Low Saxon language|Low Saxon]]
+| [[w:Low Saxon language|Plattd&#252;&#252;tsch]]
+| [//nds.wiktionary.org/wiki/ nds]
+| [//nds.wiktionary.org/wiki/Special:Statistics?action=raw '''4344 ''']
+| 22004
+| [//nds.wiktionary.org/wiki/Special:Recentchanges 66452 ]
+| [//nds.wiktionary.org/wiki/Special:Listadmins 4 ]
+| [//nds.wiktionary.org/wiki/Special:Listusers 1636 ]
+| [//nds.wiktionary.org/wiki/Special:ActiveUsers 8 ]
+| [//nds.wiktionary.org/wiki/Special:Imagelist 16 ]
+| style="font-size: 70%;" | 2014-06-29 02:00:09
+|- style="text-align: right;"
+| 87
+| [[w:Upper Sorbian language|Upper Sorbian]]
+| [[w:Upper Sorbian language|Obersorbisch]]
+| [//hsb.wiktionary.org/wiki/ hsb]
+| [//hsb.wiktionary.org/wiki/Special:Statistics?action=raw '''4122 ''']
+| 5414
+| [//hsb.wiktionary.org/wiki/Special:Recentchanges 12618 ]
+| [//hsb.wiktionary.org/wiki/Special:Listadmins 1 ]
+| [//hsb.wiktionary.org/wiki/Special:Listusers 1401 ]
+| [//hsb.wiktionary.org/wiki/Special:ActiveUsers 2 ]
+| [//hsb.wiktionary.org/wiki/Special:Imagelist 0 ]
+| style="font-size: 70%;" | 2014-06-29 02:00:31
+|- style="text-align: right;"
+| 88
+| [[w:Kazakh language|Kazakh]]
+| [[w:Kazakh language|&#1179;&#1072;&#1079;&#1072;&#1179;&#1096;&#1072;]]
+| [//kk.wiktionary.org/wiki/ kk]
+| [//kk.wiktionary.org/wiki/Special:Statistics?action=raw '''3819 ''']
+| 6260
+| [//kk.wiktionary.org/wiki/Special:Recentchanges 74472 ]
+| [//kk.wiktionary.org/wiki/Special:Listadmins 1 ]
+| [//kk.wiktionary.org/wiki/Special:Listusers 1748 ]
+| [//kk.wiktionary.org/wiki/Special:ActiveUsers 2 ]
+| [//kk.wiktionary.org/wiki/Special:Imagelist 8 ]
+| style="font-size: 70%;" | 2014-06-29 02:00:08
+|- style="text-align: right;"
+| 89
+| [[w:Kirghiz language|Kirghiz]]
+| [[w:Kirghiz language|K&#305;rg&#305;zca]]
+| [//ky.wiktionary.org/wiki/ ky]
+| [//ky.wiktionary.org/wiki/Special:Statistics?action=raw '''3320 ''']
+| 6734
+| [//ky.wiktionary.org/wiki/Special:Recentchanges 41030 ]
+| [//ky.wiktionary.org/wiki/Special:Listadmins 0 ]
+| [//ky.wiktionary.org/wiki/Special:Listusers 1385 ]
+| [//ky.wiktionary.org/wiki/Special:ActiveUsers 2 ]
+| [//ky.wiktionary.org/wiki/Special:Imagelist 1 ]
+| style="font-size: 70%;" | 2014-06-29 02:00:18
+|- style="text-align: right;"
+| 90
+| [[w:Belarusian language|Belarusian]]
+| [[w:Belarusian language|&#1041;&#1077;&#1083;&#1072;&#1088;&#1091;&#1089;&#1082;&#1072;&#1103;]]
+| [//be.wiktionary.org/wiki/ be]
+| [//be.wiktionary.org/wiki/Special:Statistics?action=raw '''3210 ''']
+| 6167
+| [//be.wiktionary.org/wiki/Special:Recentchanges 32912 ]
+| [//be.wiktionary.org/wiki/Special:Listadmins 1 ]
+| [//be.wiktionary.org/wiki/Special:Listusers 1840 ]
+| [//be.wiktionary.org/wiki/Special:ActiveUsers 6 ]
+| [//be.wiktionary.org/wiki/Special:Imagelist 0 ]
+| style="font-size: 70%;" | 2014-06-29 02:00:16
+|- style="text-align: right;"
+| 91
+| [[w:Macedonian language|Macedonian]]
+| [[w:Macedonian language|&#1052;&#1072;&#1082;&#1077;&#1076;&#1086;&#1085;&#1089;&#1082;&#1080;]]
+| [//mk.wiktionary.org/wiki/ mk]
+| [//mk.wiktionary.org/wiki/Special:Statistics?action=raw '''3094 ''']
+| 5558
+| [//mk.wiktionary.org/wiki/Special:Recentchanges 20492 ]
+| [//mk.wiktionary.org/wiki/Special:Listadmins 2 ]
+| [//mk.wiktionary.org/wiki/Special:Listusers 1546 ]
+| [//mk.wiktionary.org/wiki/Special:ActiveUsers 2 ]
+| [//mk.wiktionary.org/wiki/Special:Imagelist 0 ]
+| style="font-size: 70%;" | 2014-06-29 02:00:18
+|- style="text-align: right;"
+| 92
+| [[w:Cambodian language|Cambodian]]
+| [[w:Cambodian language|&#6039;&#6070;&#6047;&#6070;&#6017;&#6098;&#6040;&#6082;&#6042;]]
+| [//km.wiktionary.org/wiki/ km]
+| [//km.wiktionary.org/wiki/Special:Statistics?action=raw '''3018 ''']
+| 23918
+| [//km.wiktionary.org/wiki/Special:Recentchanges 46380 ]
+| [//km.wiktionary.org/wiki/Special:Listadmins 0 ]
+| [//km.wiktionary.org/wiki/Special:Listusers 1576 ]
+| [//km.wiktionary.org/wiki/Special:ActiveUsers 4 ]
+| [//km.wiktionary.org/wiki/Special:Imagelist 111 ]
+| style="font-size: 70%;" | 2014-06-29 02:00:16
+|- style="text-align: right;"
+| 93
+| [[w:Malay language|Malay]]
+| [[w:Malay language|Bahasa Melayu]]
+| [//ms.wiktionary.org/wiki/ ms]
+| [//ms.wiktionary.org/wiki/Special:Statistics?action=raw '''2702 ''']
+| 7466
+| [//ms.wiktionary.org/wiki/Special:Recentchanges 90256 ]
+| [//ms.wiktionary.org/wiki/Special:Listadmins 2 ]
+| [//ms.wiktionary.org/wiki/Special:Listusers 2511 ]
+| [//ms.wiktionary.org/wiki/Special:ActiveUsers 5 ]
+| [//ms.wiktionary.org/wiki/Special:Imagelist 3 ]
+| style="font-size: 70%;" | 2014-06-29 02:00:15
+|- style="text-align: right;"
+| 94
+| [[w:Irish language|Irish]]
+| [[w:Irish language|Gaeilge]]
+| [//ga.wiktionary.org/wiki/ ga]
+| [//ga.wiktionary.org/wiki/Special:Statistics?action=raw '''2513 ''']
+| 5526
+| [//ga.wiktionary.org/wiki/Special:Recentchanges 43560 ]
+| [//ga.wiktionary.org/wiki/Special:Listadmins 2 ]
+| [//ga.wiktionary.org/wiki/Special:Listusers 3588 ]
+| [//ga.wiktionary.org/wiki/Special:ActiveUsers 2 ]
+| [//ga.wiktionary.org/wiki/Special:Imagelist 32 ]
+| style="font-size: 70%;" | 2014-06-29 02:00:11
+|- style="text-align: right;"
+| 95
+| [[w:Wolof language|Wolof]]
+| [[w:Wolof language|Wollof]]
+| [//wo.wiktionary.org/wiki/ wo]
+| [//wo.wiktionary.org/wiki/Special:Statistics?action=raw '''2310 ''']
+| 3829
+| [//wo.wiktionary.org/wiki/Special:Recentchanges 19399 ]
+| [//wo.wiktionary.org/wiki/Special:Listadmins 1 ]
+| [//wo.wiktionary.org/wiki/Special:Listusers 1227 ]
+| [//wo.wiktionary.org/wiki/Special:ActiveUsers 2 ]
+| [//wo.wiktionary.org/wiki/Special:Imagelist 5 ]
+| style="font-size: 70%;" | 2014-06-29 02:00:25
+|- style="text-align: right;"
+| 96
+| [[w:Sanskrit language|Sanskrit]]
+| [[w:Sanskrit language|&#2360;&#2306;&#2360;&#2381;&#2325;&#2371;&#2340;&#2350;&#2381;]]
+| [//sa.wiktionary.org/wiki/ sa]
+| [//sa.wiktionary.org/wiki/Special:Statistics?action=raw '''2231 ''']
+| 3476
+| [//sa.wiktionary.org/wiki/Special:Recentchanges 19123 ]
+| [//sa.wiktionary.org/wiki/Special:Listadmins 0 ]
+| [//sa.wiktionary.org/wiki/Special:Listusers 1780 ]
+| [//sa.wiktionary.org/wiki/Special:ActiveUsers 2 ]
+| [//sa.wiktionary.org/wiki/Special:Imagelist 4 ]
+| style="font-size: 70%;" | 2014-06-29 02:00:17
+|- style="text-align: right;"
+| 97
+| [[w:Anglo-Saxon language|Anglo-Saxon]]
+| [[w:Anglo-Saxon language|Englisc]]
+| [//ang.wiktionary.org/wiki/ ang]
+| [//ang.wiktionary.org/wiki/Special:Statistics?action=raw '''2192 ''']
+| 4444
+| [//ang.wiktionary.org/wiki/Special:Recentchanges 41332 ]
+| [//ang.wiktionary.org/wiki/Special:Listadmins 1 ]
+| [//ang.wiktionary.org/wiki/Special:Listusers 2910 ]
+| [//ang.wiktionary.org/wiki/Special:ActiveUsers 4 ]
+| [//ang.wiktionary.org/wiki/Special:Imagelist 2 ]
+| style="font-size: 70%;" | 2014-06-29 02:00:06
+|- style="text-align: right;"
+| 98
+| [[w:Corsican language|Corsican]]
+| [[w:Corsican language|Corsu]]
+| [//co.wiktionary.org/wiki/ co]
+| [//co.wiktionary.org/wiki/Special:Statistics?action=raw '''2122 ''']
+| 4676
+| [//co.wiktionary.org/wiki/Special:Recentchanges 32605 ]
+| [//co.wiktionary.org/wiki/Special:Listadmins 1 ]
+| [//co.wiktionary.org/wiki/Special:Listusers 1708 ]
+| [//co.wiktionary.org/wiki/Special:ActiveUsers 2 ]
+| [//co.wiktionary.org/wiki/Special:Imagelist 17 ]
+| style="font-size: 70%;" | 2014-06-29 02:00:06
+|- style="text-align: right;"
+| 99
+| [[w:Tajik language|Tajik]]
+| [[w:Tajik language|&#1058;&#1086;&#1207;&#1080;&#1082;&#1251;]]
+| [//tg.wiktionary.org/wiki/ tg]
+| [//tg.wiktionary.org/wiki/Special:Statistics?action=raw '''2010 ''']
+| 3276
+| [//tg.wiktionary.org/wiki/Special:Recentchanges 15538 ]
+| [//tg.wiktionary.org/wiki/Special:Listadmins 1 ]
+| [//tg.wiktionary.org/wiki/Special:Listusers 1134 ]
+| [//tg.wiktionary.org/wiki/Special:ActiveUsers 3 ]
+| [//tg.wiktionary.org/wiki/Special:Imagelist 0 ]
+| style="font-size: 70%;" | 2014-06-29 02:00:12
+|- style="text-align: right;"
+| 100
+| [[w:Mongolian language|Mongolian]]
+| [[w:Mongolian language|&#1052;&#1086;&#1085;&#1075;&#1086;&#1083;]]
+| [//mn.wiktionary.org/wiki/ mn]
+| [//mn.wiktionary.org/wiki/Special:Statistics?action=raw '''1884 ''']
+| 7508
+| [//mn.wiktionary.org/wiki/Special:Recentchanges 25548 ]
+| [//mn.wiktionary.org/wiki/Special:Listadmins 0 ]
+| [//mn.wiktionary.org/wiki/Special:Listusers 1475 ]
+| [//mn.wiktionary.org/wiki/Special:ActiveUsers 27 ]
+| [//mn.wiktionary.org/wiki/Special:Imagelist 106 ]
+| style="font-size: 70%;" | 2014-06-29 02:00:19
+|- style="text-align: right;"
+| 101
+| [[w:Guarani language|Guarani]]
+| [[w:Guarani language|Ava&#241;e'&#7869;]]
+| [//gn.wiktionary.org/wiki/ gn]
+| [//gn.wiktionary.org/wiki/Special:Statistics?action=raw '''1720 ''']
+| 2500
+| [//gn.wiktionary.org/wiki/Special:Recentchanges 12337 ]
+| [//gn.wiktionary.org/wiki/Special:Listadmins 0 ]
+| [//gn.wiktionary.org/wiki/Special:Listusers 1290 ]
+| [//gn.wiktionary.org/wiki/Special:ActiveUsers 2 ]
+| [//gn.wiktionary.org/wiki/Special:Imagelist 1 ]
+| style="font-size: 70%;" | 2014-06-29 02:00:16
+|- style="text-align: right;"
+| 102
+| [[w:Marathi language|Marathi]]
+| [[w:Marathi language|&#2350;&#2352;&#2366;&#2336;&#2368;]]
+| [//mr.wiktionary.org/wiki/ mr]
+| [//mr.wiktionary.org/wiki/Special:Statistics?action=raw '''1672 ''']
+| 4743
+| [//mr.wiktionary.org/wiki/Special:Recentchanges 12182 ]
+| [//mr.wiktionary.org/wiki/Special:Listadmins 2 ]
+| [//mr.wiktionary.org/wiki/Special:Listusers 1771 ]
+| [//mr.wiktionary.org/wiki/Special:ActiveUsers 3 ]
+| [//mr.wiktionary.org/wiki/Special:Imagelist 4 ]
+| style="font-size: 70%;" | 2014-06-29 02:00:23
+|- style="text-align: right;"
+| 103
+| [[w:Uyghur language|Uyghur]]
+| [[w:Uyghur language|&#1574;&#1735;&#1610;&#1594;&#1735;&#1585; &#1578;&#1609;&#1604;&#1609;]]
+| [//ug.wiktionary.org/wiki/ ug]
+| [//ug.wiktionary.org/wiki/Special:Statistics?action=raw '''1633 ''']
+| 3683
+| [//ug.wiktionary.org/wiki/Special:Recentchanges 24283 ]
+| [//ug.wiktionary.org/wiki/Special:Listadmins 1 ]
+| [//ug.wiktionary.org/wiki/Special:Listusers 1214 ]
+| [//ug.wiktionary.org/wiki/Special:ActiveUsers 1 ]
+| [//ug.wiktionary.org/wiki/Special:Imagelist 3 ]
+| style="font-size: 70%;" | 2014-06-29 02:00:28
+|- style="text-align: right;"
+| 104
+| [[w:Kashubian language|Kashubian]]
+| [[w:Kashubian language|Kasz&#235;bsczi]]
+| [//csb.wiktionary.org/wiki/ csb]
+| [//csb.wiktionary.org/wiki/Special:Statistics?action=raw '''1523 ''']
+| 3443
+| [//csb.wiktionary.org/wiki/Special:Recentchanges 24308 ]
+| [//csb.wiktionary.org/wiki/Special:Listadmins 1 ]
+| [//csb.wiktionary.org/wiki/Special:Listusers 1454 ]
+| [//csb.wiktionary.org/wiki/Special:ActiveUsers 4 ]
+| [//csb.wiktionary.org/wiki/Special:Imagelist 0 ]
+| style="font-size: 70%;" | 2014-06-29 02:00:21
+|- style="text-align: right;"
+| 105
+| [[w:Southern Sotho language|Southern Sotho]]
+| [[w:Southern Sotho language|seSotho]]
+| [//st.wiktionary.org/wiki/ st]
+| [//st.wiktionary.org/wiki/Special:Statistics?action=raw '''1343 ''']
+| 3142
+| [//st.wiktionary.org/wiki/Special:Recentchanges 7733 ]
+| [//st.wiktionary.org/wiki/Special:Listadmins 0 ]
+| [//st.wiktionary.org/wiki/Special:Listusers 1804 ]
+| [//st.wiktionary.org/wiki/Special:ActiveUsers 4 ]
+| [//st.wiktionary.org/wiki/Special:Imagelist 2 ]
+| style="font-size: 70%;" | 2014-06-29 02:00:24
+|- style="text-align: right;"
+| 106
+| [[w:Somali language|Somali]]
+| [[w:Somali language|Soomaaliga]]
+| [//so.wiktionary.org/wiki/ so]
+| [//so.wiktionary.org/wiki/Special:Statistics?action=raw '''1211 ''']
+| 2325
+| [//so.wiktionary.org/wiki/Special:Recentchanges 11001 ]
+| [//so.wiktionary.org/wiki/Special:Listadmins 0 ]
+| [//so.wiktionary.org/wiki/Special:Listusers 1274 ]
+| [//so.wiktionary.org/wiki/Special:ActiveUsers 2 ]
+| [//so.wiktionary.org/wiki/Special:Imagelist 0 ]
+| style="font-size: 70%;" | 2014-06-29 02:00:30
+|- style="text-align: right;"
+| 107
+| [[w:Interlingua language|Interlingua]]
+| [[w:Interlingua language|Interlingua]]
+| [//ia.wiktionary.org/wiki/ ia]
+| [//ia.wiktionary.org/wiki/Special:Statistics?action=raw '''1205 ''']
+| 7627
+| [//ia.wiktionary.org/wiki/Special:Recentchanges 26041 ]
+| [//ia.wiktionary.org/wiki/Special:Listadmins 0 ]
+| [//ia.wiktionary.org/wiki/Special:Listusers 1797 ]
+| [//ia.wiktionary.org/wiki/Special:ActiveUsers 4 ]
+| [//ia.wiktionary.org/wiki/Special:Imagelist 5 ]
+| style="font-size: 70%;" | 2014-06-29 02:00:08
+|- style="text-align: right;"
+| 108
+| [[w:Sindhi language|Sindhi]]
+| [[w:Sindhi language|&#1587;&#1606;&#1676;&#1610;&#1548;&#32;&#1587;&#1606;&#1583;&#1726;&#1740;&#32;&#1548;&#32;&#2360;&#2367;&#2344;&#2381;&#2343;]]
+| [//sd.wiktionary.org/wiki/ sd]
+| [//sd.wiktionary.org/wiki/Special:Statistics?action=raw '''1145 ''']
+| 3198
+| [//sd.wiktionary.org/wiki/Special:Recentchanges 18096 ]
+| [//sd.wiktionary.org/wiki/Special:Listadmins 1 ]
+| [//sd.wiktionary.org/wiki/Special:Listusers 1119 ]
+| [//sd.wiktionary.org/wiki/Special:ActiveUsers 2 ]
+| [//sd.wiktionary.org/wiki/Special:Imagelist 43 ]
+| style="font-size: 70%;" | 2014-06-29 02:00:23
+|- style="text-align: right;"
+| 109
+| [[w:Sinhalese language|Sinhalese]]
+| [[w:Sinhalese language|&#3523;&#3538;&#3458;&#3524;&#3517;]]
+| [//si.wiktionary.org/wiki/ si]
+| [//si.wiktionary.org/wiki/Special:Statistics?action=raw '''1068 ''']
+| 2677
+| [//si.wiktionary.org/wiki/Special:Recentchanges 13439 ]
+| [//si.wiktionary.org/wiki/Special:Listadmins 0 ]
+| [//si.wiktionary.org/wiki/Special:Listusers 1326 ]
+| [//si.wiktionary.org/wiki/Special:ActiveUsers 2 ]
+| [//si.wiktionary.org/wiki/Special:Imagelist 10 ]
+| style="font-size: 70%;" | 2014-06-29 02:00:30
+|- style="text-align: right;"
+| 110
+| [[w:Greenlandic language|Greenlandic]]
+| [[w:Greenlandic language|Kalaallisut]]
+| [//kl.wiktionary.org/wiki/ kl]
+| [//kl.wiktionary.org/wiki/Special:Statistics?action=raw '''846 ''']
+| 2440
+| [//kl.wiktionary.org/wiki/Special:Recentchanges 18302 ]
+| [//kl.wiktionary.org/wiki/Special:Listadmins 0 ]
+| [//kl.wiktionary.org/wiki/Special:Listusers 1352 ]
+| [//kl.wiktionary.org/wiki/Special:ActiveUsers 1 ]
+| [//kl.wiktionary.org/wiki/Special:Imagelist 2 ]
+| style="font-size: 70%;" | 2014-06-29 02:00:22
+|- style="text-align: right;"
+| 111
+| [[w:Venetian language|Venetian]]
+| [[w:Venetian language|V&#232;neto]]
+| [//vec.wiktionary.org/wiki/ vec]
+| [//vec.wiktionary.org/wiki/Special:Statistics?action=raw '''838 ''']
+| 1359
+| [//vec.wiktionary.org/wiki/Special:Recentchanges 8397 ]
+| [//vec.wiktionary.org/wiki/Special:Listadmins 0 ]
+| [//vec.wiktionary.org/wiki/Special:Listusers 485 ]
+| [//vec.wiktionary.org/wiki/Special:ActiveUsers 4 ]
+| [//vec.wiktionary.org/wiki/Special:Imagelist 1 ]
+| style="font-size: 70%;" | 2014-06-29 02:00:31
+|- style="text-align: right;"
+| 112
+| [[w:Aragonese language|Aragonese]]
+| [[w:Aragonese language|Aragon&#233;s]]
+| [//an.wiktionary.org/wiki/ an]
+| [//an.wiktionary.org/wiki/Special:Statistics?action=raw '''733 ''']
+| 4444
+| [//an.wiktionary.org/wiki/Special:Recentchanges 15324 ]
+| [//an.wiktionary.org/wiki/Special:Listadmins 2 ]
+| [//an.wiktionary.org/wiki/Special:Listusers 1589 ]
+| [//an.wiktionary.org/wiki/Special:ActiveUsers 5 ]
+| [//an.wiktionary.org/wiki/Special:Imagelist 2 ]
+| style="font-size: 70%;" | 2014-06-29 02:00:14
+|- style="text-align: right;"
+| 113
+| [[w:Lojban language|Lojban]]
+| [[w:Lojban language|Lojban]]
+| [//jbo.wiktionary.org/wiki/ jbo]
+| [//jbo.wiktionary.org/wiki/Special:Statistics?action=raw '''728 ''']
+| 1512
+| [//jbo.wiktionary.org/wiki/Special:Recentchanges 8652 ]
+| [//jbo.wiktionary.org/wiki/Special:Listadmins 0 ]
+| [//jbo.wiktionary.org/wiki/Special:Listusers 1187 ]
+| [//jbo.wiktionary.org/wiki/Special:ActiveUsers 1 ]
+| [//jbo.wiktionary.org/wiki/Special:Imagelist 0 ]
+| style="font-size: 70%;" | 2014-06-29 02:00:28
+|- style="text-align: right;"
+| 114
+| [[w:Lingala language|Lingala]]
+| [[w:Lingala language|Lingala]]
+| [//ln.wiktionary.org/wiki/ ln]
+| [//ln.wiktionary.org/wiki/Special:Statistics?action=raw '''672 ''']
+| 1343
+| [//ln.wiktionary.org/wiki/Special:Recentchanges 8019 ]
+| [//ln.wiktionary.org/wiki/Special:Listadmins 0 ]
+| [//ln.wiktionary.org/wiki/Special:Listusers 1166 ]
+| [//ln.wiktionary.org/wiki/Special:ActiveUsers 0 ]
+| [//ln.wiktionary.org/wiki/Special:Imagelist 0 ]
+| style="font-size: 70%;" | 2014-06-29 02:00:22
+|- style="text-align: right;"
+| 115
+| [[w:Faroese language|Faroese]]
+| [[w:Faroese language|F&#248;royskt]]
+| [//fo.wiktionary.org/wiki/ fo]
+| [//fo.wiktionary.org/wiki/Special:Statistics?action=raw '''652 ''']
+| 1660
+| [//fo.wiktionary.org/wiki/Special:Recentchanges 15074 ]
+| [//fo.wiktionary.org/wiki/Special:Listadmins 1 ]
+| [//fo.wiktionary.org/wiki/Special:Listusers 1397 ]
+| [//fo.wiktionary.org/wiki/Special:ActiveUsers 2 ]
+| [//fo.wiktionary.org/wiki/Special:Imagelist 0 ]
+| style="font-size: 70%;" | 2014-06-29 02:00:13
+|- style="text-align: right;"
+| 116
+| [[w:Zulu language|Zulu]]
+| [[w:Zulu language|isiZulu]]
+| [//zu.wiktionary.org/wiki/ zu]
+| [//zu.wiktionary.org/wiki/Special:Statistics?action=raw '''586 ''']
+| 1472
+| [//zu.wiktionary.org/wiki/Special:Recentchanges 10234 ]
+| [//zu.wiktionary.org/wiki/Special:Listadmins 0 ]
+| [//zu.wiktionary.org/wiki/Special:Listusers 1416 ]
+| [//zu.wiktionary.org/wiki/Special:ActiveUsers 1 ]
+| [//zu.wiktionary.org/wiki/Special:Imagelist 0 ]
+| style="font-size: 70%;" | 2014-06-29 02:00:25
+|- style="text-align: right;"
+| 117
+| [[w:Manx language|Manx]]
+| [[w:Manx language|Gaelg]]
+| [//gv.wiktionary.org/wiki/ gv]
+| [//gv.wiktionary.org/wiki/Special:Statistics?action=raw '''420 ''']
+| 1391
+| [//gv.wiktionary.org/wiki/Special:Recentchanges 10153 ]
+| [//gv.wiktionary.org/wiki/Special:Listadmins 0 ]
+| [//gv.wiktionary.org/wiki/Special:Listusers 1179 ]
+| [//gv.wiktionary.org/wiki/Special:ActiveUsers 2 ]
+| [//gv.wiktionary.org/wiki/Special:Imagelist 1 ]
+| style="font-size: 70%;" | 2014-06-29 02:00:22
+|- style="text-align: right;"
+| 118
+| [[w:Cornish language|Cornish]]
+| [[w:Cornish language|Kernewek/Karnuack]]
+| [//kw.wiktionary.org/wiki/ kw]
+| [//kw.wiktionary.org/wiki/Special:Statistics?action=raw '''419 ''']
+| 1110
+| [//kw.wiktionary.org/wiki/Special:Recentchanges 9962 ]
+| [//kw.wiktionary.org/wiki/Special:Listadmins 0 ]
+| [//kw.wiktionary.org/wiki/Special:Listusers 1140 ]
+| [//kw.wiktionary.org/wiki/Special:ActiveUsers 2 ]
+| [//kw.wiktionary.org/wiki/Special:Imagelist 0 ]
+| style="font-size: 70%;" | 2014-06-29 02:00:19
+|- style="text-align: right;"
+| 119
+| [[w:Gujarati language|Gujarati]]
+| [[w:Gujarati language|&#2711;&#2753;&#2716;&#2736;&#2750;&#2724;&#2752;]]
+| [//gu.wiktionary.org/wiki/ gu]
+| [//gu.wiktionary.org/wiki/Special:Statistics?action=raw '''417 ''']
+| 3920
+| [//gu.wiktionary.org/wiki/Special:Recentchanges 18392 ]
+| [//gu.wiktionary.org/wiki/Special:Listadmins 0 ]
+| [//gu.wiktionary.org/wiki/Special:Listusers 1685 ]
+| [//gu.wiktionary.org/wiki/Special:ActiveUsers 4 ]
+| [//gu.wiktionary.org/wiki/Special:Imagelist 9 ]
+| style="font-size: 70%;" | 2014-06-29 02:00:08
+|- style="text-align: right;"
+| 120
+| [[w:Rwandi language|Rwandi]]
+| [[w:Rwandi language|Kinyarwanda]]
+| [//rw.wiktionary.org/wiki/ rw]
+| [//rw.wiktionary.org/wiki/Special:Statistics?action=raw '''366 ''']
+| 1196
+| [//rw.wiktionary.org/wiki/Special:Recentchanges 10501 ]
+| [//rw.wiktionary.org/wiki/Special:Listadmins 0 ]
+| [//rw.wiktionary.org/wiki/Special:Listusers 1323 ]
+| [//rw.wiktionary.org/wiki/Special:ActiveUsers 3 ]
+| [//rw.wiktionary.org/wiki/Special:Imagelist 0 ]
+| style="font-size: 70%;" | 2014-06-29 02:00:19
+|- style="text-align: right;"
+| 121
+| [[w:Bengali language|Bengali]]
+| [[w:Bengali language|&#2476;&#2494;&#2434;&#2482;&#2494;]]
+| [//bn.wiktionary.org/wiki/ bn]
+| [//bn.wiktionary.org/wiki/Special:Statistics?action=raw '''359 ''']
+| 3382
+| [//bn.wiktionary.org/wiki/Special:Recentchanges 17797 ]
+| [//bn.wiktionary.org/wiki/Special:Listadmins 1 ]
+| [//bn.wiktionary.org/wiki/Special:Listusers 2698 ]
+| [//bn.wiktionary.org/wiki/Special:ActiveUsers 4 ]
+| [//bn.wiktionary.org/wiki/Special:Imagelist 3 ]
+| style="font-size: 70%;" | 2014-06-29 02:00:17
+|- style="text-align: right;"
+| 122
+| [[w:Quechua language|Quechua]]
+| [[w:Quechua language|Runa Simi]]
+| [//qu.wiktionary.org/wiki/ qu]
+| [//qu.wiktionary.org/wiki/Special:Statistics?action=raw '''291 ''']
+| 1559
+| [//qu.wiktionary.org/wiki/Special:Recentchanges 11586 ]
+| [//qu.wiktionary.org/wiki/Special:Listadmins 2 ]
+| [//qu.wiktionary.org/wiki/Special:Listusers 1143 ]
+| [//qu.wiktionary.org/wiki/Special:ActiveUsers 2 ]
+| [//qu.wiktionary.org/wiki/Special:Imagelist 2 ]
+| style="font-size: 70%;" | 2014-06-29 02:00:17
+|- style="text-align: right;"
+| 123
+| [[w:Swati language|Swati]]
+| [[w:Swati language|SiSwati]]
+| [//ss.wiktionary.org/wiki/ ss]
+| [//ss.wiktionary.org/wiki/Special:Statistics?action=raw '''290 ''']
+| 1332
+| [//ss.wiktionary.org/wiki/Special:Recentchanges 8098 ]
+| [//ss.wiktionary.org/wiki/Special:Listadmins 2 ]
+| [//ss.wiktionary.org/wiki/Special:Listusers 1152 ]
+| [//ss.wiktionary.org/wiki/Special:ActiveUsers 1 ]
+| [//ss.wiktionary.org/wiki/Special:Imagelist 0 ]
+| style="font-size: 70%;" | 2014-06-29 02:00:24
+|- style="text-align: right;"
+| 124
+| [[w:Interlingue language|Interlingue]]
+| [[w:Interlingue language|Interlingue]]
+| [//ie.wiktionary.org/wiki/ ie]
+| [//ie.wiktionary.org/wiki/Special:Statistics?action=raw '''285 ''']
+| 2304
+| [//ie.wiktionary.org/wiki/Special:Recentchanges 4708 ]
+| [//ie.wiktionary.org/wiki/Special:Listadmins 0 ]
+| [//ie.wiktionary.org/wiki/Special:Listusers 1256 ]
+| [//ie.wiktionary.org/wiki/Special:ActiveUsers 2 ]
+| [//ie.wiktionary.org/wiki/Special:Imagelist 0 ]
+| style="font-size: 70%;" | 2014-06-29 02:00:10
+|- style="text-align: right;"
+| 125
+| [[w:Maltese language|Maltese]]
+| [[w:Maltese language|bil-Malti]]
+| [//mt.wiktionary.org/wiki/ mt]
+| [//mt.wiktionary.org/wiki/Special:Statistics?action=raw '''275 ''']
+| 1188
+| [//mt.wiktionary.org/wiki/Special:Recentchanges 8541 ]
+| [//mt.wiktionary.org/wiki/Special:Listadmins 1 ]
+| [//mt.wiktionary.org/wiki/Special:Listusers 1172 ]
+| [//mt.wiktionary.org/wiki/Special:ActiveUsers 1 ]
+| [//mt.wiktionary.org/wiki/Special:Imagelist 2 ]
+| style="font-size: 70%;" | 2014-06-29 02:00:17
+|- style="text-align: right;"
+| 126
+| [[w:Oromo language|Oromo]]
+| [[w:Oromo language|Oromoo]]
+| [//om.wiktionary.org/wiki/ om]
+| [//om.wiktionary.org/wiki/Special:Statistics?action=raw '''269 ''']
+| 932
+| [//om.wiktionary.org/wiki/Special:Recentchanges 9736 ]
+| [//om.wiktionary.org/wiki/Special:Listadmins 0 ]
+| [//om.wiktionary.org/wiki/Special:Listusers 1181 ]
+| [//om.wiktionary.org/wiki/Special:ActiveUsers 1 ]
+| [//om.wiktionary.org/wiki/Special:Imagelist 0 ]
+| style="font-size: 70%;" | 2014-06-29 02:00:29
+|- style="text-align: right;"
+| 127
+| [[w:Panjabi language|Panjabi]]
+| [[w:Panjabi language|&#2602;&#2672;&#2588;&#2622;&#2604;&#2624;]]
+| [//pa.wiktionary.org/wiki/ pa]
+| [//pa.wiktionary.org/wiki/Special:Statistics?action=raw '''261 ''']
+| 1283
+| [//pa.wiktionary.org/wiki/Special:Recentchanges 9502 ]
+| [//pa.wiktionary.org/wiki/Special:Listadmins 0 ]
+| [//pa.wiktionary.org/wiki/Special:Listusers 1178 ]
+| [//pa.wiktionary.org/wiki/Special:ActiveUsers 2 ]
+| [//pa.wiktionary.org/wiki/Special:Imagelist 0 ]
+| style="font-size: 70%;" | 2014-06-29 02:00:19
+|- style="text-align: right;"
+| 128
+| [[w:Aromanian language|Aromanian]]
+| [[w:Aromanian language|Arm&#227;neashce]]
+| [//roa-rup.wiktionary.org/wiki/ roa-rup]
+| [//roa-rup.wiktionary.org/wiki/Special:Statistics?action=raw '''252 ''']
+| 922
+| [//roa-rup.wiktionary.org/wiki/Special:Recentchanges 9577 ]
+| [//roa-rup.wiktionary.org/wiki/Special:Listadmins 0 ]
+| [//roa-rup.wiktionary.org/wiki/Special:Listusers 1230 ]
+| [//roa-rup.wiktionary.org/wiki/Special:ActiveUsers 2 ]
+| [//roa-rup.wiktionary.org/wiki/Special:Imagelist 0 ]
+| style="font-size: 70%;" | 2014-06-29 02:00:30
+|- style="text-align: right;"
+| 129
+| [[w:Inuktitut language|Inuktitut]]
+| [[w:Inuktitut language|&#5123;&#5316;&#5251;&#5198;&#5200;&#5222;]]
+| [//iu.wiktionary.org/wiki/ iu]
+| [//iu.wiktionary.org/wiki/Special:Statistics?action=raw '''251 ''']
+| 961
+| [//iu.wiktionary.org/wiki/Special:Recentchanges 8855 ]
+| [//iu.wiktionary.org/wiki/Special:Listadmins 0 ]
+| [//iu.wiktionary.org/wiki/Special:Listusers 1271 ]
+| [//iu.wiktionary.org/wiki/Special:ActiveUsers 1 ]
+| [//iu.wiktionary.org/wiki/Special:Imagelist 0 ]
+| style="font-size: 70%;" | 2014-06-29 02:00:22
+|- style="text-align: right;"
+| 130
+| [[w:Nauruan language|Nauruan]]
+| [[w:Nauruan language|dorerin Naoero]]
+| [//na.wiktionary.org/wiki/ na]
+| [//na.wiktionary.org/wiki/Special:Statistics?action=raw '''225 ''']
+| 1084
+| [//na.wiktionary.org/wiki/Special:Recentchanges 7998 ]
+| [//na.wiktionary.org/wiki/Special:Listadmins 1 ]
+| [//na.wiktionary.org/wiki/Special:Listusers 1274 ]
+| [//na.wiktionary.org/wiki/Special:ActiveUsers 2 ]
+| [//na.wiktionary.org/wiki/Special:Imagelist 0 ]
+| style="font-size: 70%;" | 2014-06-29 02:00:14
+|- style="text-align: right;"
+| 131
+| [[w:Sundanese language|Sundanese]]
+| [[w:Sundanese language|Basa Sunda]]
+| [//su.wiktionary.org/wiki/ su]
+| [//su.wiktionary.org/wiki/Special:Statistics?action=raw '''212 ''']
+| 1286
+| [//su.wiktionary.org/wiki/Special:Recentchanges 8794 ]
+| [//su.wiktionary.org/wiki/Special:Listadmins 0 ]
+| [//su.wiktionary.org/wiki/Special:Listusers 1124 ]
+| [//su.wiktionary.org/wiki/Special:ActiveUsers 1 ]
+| [//su.wiktionary.org/wiki/Special:Imagelist 0 ]
+| style="font-size: 70%;" | 2014-06-29 02:00:14
+|- style="text-align: right;"
+| 132
+| [[w:Amharic language|Amharic]]
+| [[w:Amharic language|&#4768;&#4635;&#4653;&#4763;]]
+| [//am.wiktionary.org/wiki/ am]
+| [//am.wiktionary.org/wiki/Special:Statistics?action=raw '''204 ''']
+| 2239
+| [//am.wiktionary.org/wiki/Special:Recentchanges 9974 ]
+| [//am.wiktionary.org/wiki/Special:Listadmins 0 ]
+| [//am.wiktionary.org/wiki/Special:Listusers 1651 ]
+| [//am.wiktionary.org/wiki/Special:ActiveUsers 2 ]
+| [//am.wiktionary.org/wiki/Special:Imagelist 0 ]
+| style="font-size: 70%;" | 2014-06-29 02:00:20
+|- style="text-align: right;"
+| 133
+| [[w:Maori language|Maori]]
+| [[w:Maori language|M&#257;ori]]
+| [//mi.wiktionary.org/wiki/ mi]
+| [//mi.wiktionary.org/wiki/Special:Statistics?action=raw '''189 ''']
+| 1002
+| [//mi.wiktionary.org/wiki/Special:Recentchanges 7994 ]
+| [//mi.wiktionary.org/wiki/Special:Listadmins 2 ]
+| [//mi.wiktionary.org/wiki/Special:Listusers 1346 ]
+| [//mi.wiktionary.org/wiki/Special:ActiveUsers 1 ]
+| [//mi.wiktionary.org/wiki/Special:Imagelist 0 ]
+| style="font-size: 70%;" | 2014-06-29 02:00:15
+|- style="text-align: right;"
+| 134
+| [[w:Zhuang language|Zhuang]]
+| [[w:Zhuang language|Cuengh]]
+| [//za.wiktionary.org/wiki/ za]
+| [//za.wiktionary.org/wiki/Special:Statistics?action=raw '''179 ''']
+| 649
+| [//za.wiktionary.org/wiki/Special:Recentchanges 12818 ]
+| [//za.wiktionary.org/wiki/Special:Listadmins 0 ]
+| [//za.wiktionary.org/wiki/Special:Listusers 814 ]
+| [//za.wiktionary.org/wiki/Special:ActiveUsers 0 ]
+| [//za.wiktionary.org/wiki/Special:Imagelist 0 ]
+| style="font-size: 70%;" | 2014-06-29 02:00:28
+|- style="text-align: right;"
+| 135
+| [[w:Nepali language|Nepali]]
+| [[w:Nepali language|&#2344;&#2375;&#2346;&#2366;&#2354;&#2368;]]
+| [//ne.wiktionary.org/wiki/ ne]
+| [//ne.wiktionary.org/wiki/Special:Statistics?action=raw '''175 ''']
+| 6343
+| [//ne.wiktionary.org/wiki/Special:Recentchanges 17683 ]
+| [//ne.wiktionary.org/wiki/Special:Listadmins 1 ]
+| [//ne.wiktionary.org/wiki/Special:Listusers 1487 ]
+| [//ne.wiktionary.org/wiki/Special:ActiveUsers 11 ]
+| [//ne.wiktionary.org/wiki/Special:Imagelist 27 ]
+| style="font-size: 70%;" | 2014-06-29 02:00:14
+|- style="text-align: right;"
+| 136
+| [[w:Scottish Gaelic language|Scottish Gaelic]]
+| [[w:Scottish Gaelic language|G&#224;idhlig]]
+| [//gd.wiktionary.org/wiki/ gd]
+| [//gd.wiktionary.org/wiki/Special:Statistics?action=raw '''174 ''']
+| 1148
+| [//gd.wiktionary.org/wiki/Special:Recentchanges 8801 ]
+| [//gd.wiktionary.org/wiki/Special:Listadmins 0 ]
+| [//gd.wiktionary.org/wiki/Special:Listusers 1341 ]
+| [//gd.wiktionary.org/wiki/Special:ActiveUsers 1 ]
+| [//gd.wiktionary.org/wiki/Special:Imagelist 0 ]
+| style="font-size: 70%;" | 2014-06-29 02:00:21
+|- style="text-align: right;"
+| 137
+| [[w:Tok Pisin language|Tok Pisin]]
+| [[w:Tok Pisin language|Tok Pisin]]
+| [//tpi.wiktionary.org/wiki/ tpi]
+| [//tpi.wiktionary.org/wiki/Special:Statistics?action=raw '''148 ''']
+| 933
+| [//tpi.wiktionary.org/wiki/Special:Recentchanges 8930 ]
+| [//tpi.wiktionary.org/wiki/Special:Listadmins 0 ]
+| [//tpi.wiktionary.org/wiki/Special:Listusers 1228 ]
+| [//tpi.wiktionary.org/wiki/Special:ActiveUsers 1 ]
+| [//tpi.wiktionary.org/wiki/Special:Imagelist 0 ]
+| style="font-size: 70%;" | 2014-06-29 02:00:15
+|- style="text-align: right;"
+| 138
+| [[w:Inupiak language|Inupiak]]
+| [[w:Inupiak language|I&#241;upiak]]
+| [//ik.wiktionary.org/wiki/ ik]
+| [//ik.wiktionary.org/wiki/Special:Statistics?action=raw '''143 ''']
+| 701
+| [//ik.wiktionary.org/wiki/Special:Recentchanges 6999 ]
+| [//ik.wiktionary.org/wiki/Special:Listadmins 0 ]
+| [//ik.wiktionary.org/wiki/Special:Listusers 1032 ]
+| [//ik.wiktionary.org/wiki/Special:ActiveUsers 0 ]
+| [//ik.wiktionary.org/wiki/Special:Imagelist 0 ]
+| style="font-size: 70%;" | 2014-06-29 02:00:28
+|- style="text-align: right;"
+| 139
+| [[w:Yiddish language|Yiddish]]
+| [[w:Yiddish language|&#1497;&#1497;&#1460;&#1491;&#1497;&#1513;]]
+| [//yi.wiktionary.org/wiki/ yi]
+| [//yi.wiktionary.org/wiki/Special:Statistics?action=raw '''128 ''']
+| 2643
+| [//yi.wiktionary.org/wiki/Special:Recentchanges 14431 ]
+| [//yi.wiktionary.org/wiki/Special:Listadmins 6 ]
+| [//yi.wiktionary.org/wiki/Special:Listusers 5203 ]
+| [//yi.wiktionary.org/wiki/Special:ActiveUsers 2 ]
+| [//yi.wiktionary.org/wiki/Special:Imagelist 24 ]
+| style="font-size: 70%;" | 2014-06-29 02:00:10
+|- style="text-align: right;"
+| 140
+| [[w:Tigrinya language|Tigrinya]]
+| [[w:Tigrinya language|&#4725;&#4877;&#4653;&#4763;]]
+| [//ti.wiktionary.org/wiki/ ti]
+| [//ti.wiktionary.org/wiki/Special:Statistics?action=raw '''111 ''']
+| 1195
+| [//ti.wiktionary.org/wiki/Special:Recentchanges 7902 ]
+| [//ti.wiktionary.org/wiki/Special:Listadmins 0 ]
+| [//ti.wiktionary.org/wiki/Special:Listusers 1126 ]
+| [//ti.wiktionary.org/wiki/Special:ActiveUsers 1 ]
+| [//ti.wiktionary.org/wiki/Special:Imagelist 0 ]
+| style="font-size: 70%;" | 2014-06-29 02:00:31
+|- style="text-align: right;"
+| 141
+| [[w:Sango language|Sango]]
+| [[w:Sango language|S&#228;ng&#246;]]
+| [//sg.wiktionary.org/wiki/ sg]
+| [//sg.wiktionary.org/wiki/Special:Statistics?action=raw '''108 ''']
+| 824
+| [//sg.wiktionary.org/wiki/Special:Recentchanges 6984 ]
+| [//sg.wiktionary.org/wiki/Special:Listadmins 0 ]
+| [//sg.wiktionary.org/wiki/Special:Listusers 1076 ]
+| [//sg.wiktionary.org/wiki/Special:ActiveUsers 1 ]
+| [//sg.wiktionary.org/wiki/Special:Imagelist 1 ]
+| style="font-size: 70%;" | 2014-06-29 02:00:30
+|- style="text-align: right;"
+| 142
+| [[w:Setswana language|Setswana]]
+| [[w:Setswana language|Setswana]]
+| [//tn.wiktionary.org/wiki/ tn]
+| [//tn.wiktionary.org/wiki/Special:Statistics?action=raw '''104 ''']
+| 776
+| [//tn.wiktionary.org/wiki/Special:Recentchanges 6778 ]
+| [//tn.wiktionary.org/wiki/Special:Listadmins 1 ]
+| [//tn.wiktionary.org/wiki/Special:Listusers 1065 ]
+| [//tn.wiktionary.org/wiki/Special:ActiveUsers 2 ]
+| [//tn.wiktionary.org/wiki/Special:Imagelist 0 ]
+| style="font-size: 70%;" | 2014-06-29 02:00:24
+|- style="text-align: right;"
+| 143
+| [[w:Divehi language|Divehi]]
+| [[w:Divehi language|&#1931;&#1960;&#1928;&#1964;&#1920;&#1960;&#1924;&#1958;&#1936;&#1968;]]
+| [//dv.wiktionary.org/wiki/ dv]
+| [//dv.wiktionary.org/wiki/Special:Statistics?action=raw '''101 ''']
+| 1065
+| [//dv.wiktionary.org/wiki/Special:Recentchanges 6703 ]
+| [//dv.wiktionary.org/wiki/Special:Listadmins 1 ]
+| [//dv.wiktionary.org/wiki/Special:Listusers 1235 ]
+| [//dv.wiktionary.org/wiki/Special:ActiveUsers 1 ]
+| [//dv.wiktionary.org/wiki/Special:Imagelist 2 ]
+| style="font-size: 70%;" | 2014-06-29 02:00:25
+|- style="text-align: right;"
+| 144
+| [[w:Tsonga language|Tsonga]]
+| [[w:Tsonga language|Xitsonga]]
+| [//ts.wiktionary.org/wiki/ ts]
+| [//ts.wiktionary.org/wiki/Special:Statistics?action=raw '''92 ''']
+| 991
+| [//ts.wiktionary.org/wiki/Special:Recentchanges 7077 ]
+| [//ts.wiktionary.org/wiki/Special:Listadmins 0 ]
+| [//ts.wiktionary.org/wiki/Special:Listusers 1108 ]
+| [//ts.wiktionary.org/wiki/Special:ActiveUsers 2 ]
+| [//ts.wiktionary.org/wiki/Special:Imagelist 0 ]
+| style="font-size: 70%;" | 2014-06-29 02:00:24
+|- style="text-align: right;"
+| 145
+| [[w:Hausa language|Hausa]]
+| [[w:Hausa language|&#1607;&#1614;&#1608;&#1615;&#1587;&#1614;]]
+| [//ha.wiktionary.org/wiki/ ha]
+| [//ha.wiktionary.org/wiki/Special:Statistics?action=raw '''55 ''']
+| 692
+| [//ha.wiktionary.org/wiki/Special:Recentchanges 6491 ]
+| [//ha.wiktionary.org/wiki/Special:Listadmins 0 ]
+| [//ha.wiktionary.org/wiki/Special:Listusers 1126 ]
+| [//ha.wiktionary.org/wiki/Special:ActiveUsers 0 ]
+| [//ha.wiktionary.org/wiki/Special:Imagelist 0 ]
+| style="font-size: 70%;" | 2014-06-29 02:00:22
+|- style="text-align: right;"
+| 146
+| [[w:Kashmiri language|Kashmiri]]
+| [[w:Kashmiri language|&#2325;&#2358;&#2381;&#2350;&#2368;&#2352;&#2368; - (&#1603;&#1588;&#1605;&#1610;&#1585;&#1610;]]
+| [//ks.wiktionary.org/wiki/ ks]
+| [//ks.wiktionary.org/wiki/Special:Statistics?action=raw '''48 ''']
+| 773
+| [//ks.wiktionary.org/wiki/Special:Recentchanges 6325 ]
+| [//ks.wiktionary.org/wiki/Special:Listadmins 0 ]
+| [//ks.wiktionary.org/wiki/Special:Listusers 1153 ]
+| [//ks.wiktionary.org/wiki/Special:ActiveUsers 0 ]
+| [//ks.wiktionary.org/wiki/Special:Imagelist 0 ]
+| style="font-size: 70%;" | 2014-06-29 02:00:15
+|- style="text-align: right;"
+| 147
+| [[w:Aymara language|Aymara]]
+| [[w:Aymara language|Aymar]]
+| [//ay.wiktionary.org/wiki/ ay]
+| [//ay.wiktionary.org/wiki/Special:Statistics?action=raw '''26 ''']
+| 888
+| [//ay.wiktionary.org/wiki/Special:Recentchanges 9497 ]
+| [//ay.wiktionary.org/wiki/Special:Listadmins 0 ]
+| [//ay.wiktionary.org/wiki/Special:Listusers 1367 ]
+| [//ay.wiktionary.org/wiki/Special:ActiveUsers 4 ]
+| [//ay.wiktionary.org/wiki/Special:Imagelist 0 ]
+| style="font-size: 70%;" | 2014-06-29 02:00:12
+|- style="text-align: right;"
+| 148
+| [[w:Assamese language|Assamese]]
+| [[w:Assamese language|&#2437;&#2488;&#2478;&#2496;&#2527;&#2494;]]
+| [//as.wiktionary.org/wiki/ as]
+| [//as.wiktionary.org/wiki/Special:Statistics?action=raw '''16 ''']
+| 238
+| [//as.wiktionary.org/wiki/Special:Recentchanges 4950 ]
+| [//as.wiktionary.org/wiki/Special:Listadmins 0 ]
+| [//as.wiktionary.org/wiki/Special:Listusers 481 ]
+| [//as.wiktionary.org/wiki/Special:ActiveUsers 0 ]
+| [//as.wiktionary.org/wiki/Special:Imagelist 0 ]
+| style="font-size: 70%;" | 2014-06-29 02:00:20
+|- style="text-align: right;"
+| 149
+| [[w:Moldovan language|Moldovan]]
+| [[w:Moldovan language|Moldoveana]]
+| [//mo.wiktionary.org/wiki/ mo]
+| [//mo.wiktionary.org/wiki/Special:Statistics?action=raw '''5 ''']
+| 215
+| [//mo.wiktionary.org/wiki/Special:Recentchanges 4945 ]
+| [//mo.wiktionary.org/wiki/Special:Listadmins 0 ]
+| [//mo.wiktionary.org/wiki/Special:Listusers 397 ]
+| [//mo.wiktionary.org/wiki/Special:ActiveUsers 0 ]
+| [//mo.wiktionary.org/wiki/Special:Imagelist 0 ]
+| style="font-size: 70%;" | 2014-06-29 02:00:22
+|- style="text-align: right;"
+| 150
+| [[w:Afar language|Afar]]
+| [[w:Afar language|Afar]]
+| [//aa.wiktionary.org/wiki/ aa]
+| [//aa.wiktionary.org/wiki/Special:Statistics?action=raw '''1 ''']
+| 69
+| [//aa.wiktionary.org/wiki/Special:Recentchanges 6734 ]
+| [//aa.wiktionary.org/wiki/Special:Listadmins 0 ]
+| [//aa.wiktionary.org/wiki/Special:Listusers 483 ]
+| [//aa.wiktionary.org/wiki/Special:ActiveUsers 0 ]
+| [//aa.wiktionary.org/wiki/Special:Imagelist 0 ]
+| style="font-size: 70%;" | 2014-06-29 02:00:20
+|- style="text-align: right;"
+| 151
+| [[w:Pali language|Pali]]
+| [[w:Pali language|&#2346;&#2366;&#2367;&#2356;]]
+| [//pi.wiktionary.org/wiki/ pi]
+| [//pi.wiktionary.org/wiki/Special:Statistics?action=raw '''1 ''']
+| 34
+| [//pi.wiktionary.org/wiki/Special:Recentchanges 3311 ]
+| [//pi.wiktionary.org/wiki/Special:Listadmins 0 ]
+| [//pi.wiktionary.org/wiki/Special:Listusers 381 ]
+| [//pi.wiktionary.org/wiki/Special:ActiveUsers 0 ]
+| [//pi.wiktionary.org/wiki/Special:Imagelist 0 ]
+| style="font-size: 70%;" | 2014-06-29 02:00:29
+|- style="text-align: right;"
+| 152
+| [[w:Alemannic language|Alemannic]]
+| [[w:Alemannic language|Alemannisch]]
+| [//als.wiktionary.org/wiki/ als]
+| [//als.wiktionary.org/wiki/Special:Statistics?action=raw '''0 ''']
+| 1221
+| [//als.wiktionary.org/wiki/Special:Recentchanges 15235 ]
+| [//als.wiktionary.org/wiki/Special:Listadmins 0 ]
+| [//als.wiktionary.org/wiki/Special:Listusers 664 ]
+| [//als.wiktionary.org/wiki/Special:ActiveUsers 0 ]
+| [//als.wiktionary.org/wiki/Special:Imagelist 0 ]
+| style="font-size: 70%;" | 2014-06-29 02:00:18
+|- style="text-align: right;"
+| 153
+| [[w:Abkhazian language|Abkhazian]]
+| [[w:Abkhazian language|&#1040;&#1191;&#1089;&#1091;&#1072;]]
+| [//ab.wiktionary.org/wiki/ ab]
+| [//ab.wiktionary.org/wiki/Special:Statistics?action=raw '''0 ''']
+| 226
+| [//ab.wiktionary.org/wiki/Special:Recentchanges 8939 ]
+| [//ab.wiktionary.org/wiki/Special:Listadmins 0 ]
+| [//ab.wiktionary.org/wiki/Special:Listusers 509 ]
+| [//ab.wiktionary.org/wiki/Special:ActiveUsers 0 ]
+| [//ab.wiktionary.org/wiki/Special:Imagelist 0 ]
+| style="font-size: 70%;" | 2014-06-29 02:00:20
+|- style="text-align: right;"
+| 154
+| [[w:Dzongkha language|Dzongkha]]
+| [[w:Dzongkha language|&#3911;&#3964;&#3908;&#3851;&#3905;]]
+| [//dz.wiktionary.org/wiki/ dz]
+| [//dz.wiktionary.org/wiki/Special:Statistics?action=raw '''0 ''']
+| 208
+| [//dz.wiktionary.org/wiki/Special:Recentchanges 4831 ]
+| [//dz.wiktionary.org/wiki/Special:Listadmins 0 ]
+| [//dz.wiktionary.org/wiki/Special:Listusers 400 ]
+| [//dz.wiktionary.org/wiki/Special:ActiveUsers 0 ]
+| [//dz.wiktionary.org/wiki/Special:Imagelist 0 ]
+| style="font-size: 70%;" | 2014-06-29 02:00:21
+|- style="text-align: right;"
+| 155
+| [[w:Bihari language|Bihari]]
+| [[w:Bihari language|&#2349;&#2379;&#2332;&#2346;&#2369;&#2352;&#2368;]]
+| [//bh.wiktionary.org/wiki/ bh]
+| [//bh.wiktionary.org/wiki/Special:Statistics?action=raw '''0 ''']
+| 208
+| [//bh.wiktionary.org/wiki/Special:Recentchanges 4827 ]
+| [//bh.wiktionary.org/wiki/Special:Listadmins 0 ]
+| [//bh.wiktionary.org/wiki/Special:Listusers 439 ]
+| [//bh.wiktionary.org/wiki/Special:ActiveUsers 0 ]
+| [//bh.wiktionary.org/wiki/Special:Imagelist 0 ]
+| style="font-size: 70%;" | 2014-06-29 02:00:26
+|- style="text-align: right;"
+| 156
+| [[w:Shona language|Shona]]
+| [[w:Shona language|chiShona]]
+| [//sn.wiktionary.org/wiki/ sn]
+| [//sn.wiktionary.org/wiki/Special:Statistics?action=raw '''0 ''']
+| 205
+| [//sn.wiktionary.org/wiki/Special:Recentchanges 4905 ]
+| [//sn.wiktionary.org/wiki/Special:Listadmins 0 ]
+| [//sn.wiktionary.org/wiki/Special:Listusers 330 ]
+| [//sn.wiktionary.org/wiki/Special:ActiveUsers 0 ]
+| [//sn.wiktionary.org/wiki/Special:Imagelist 0 ]
+| style="font-size: 70%;" | 2014-06-29 02:00:24
+|- style="text-align: right;"
+| 157
+| [[w:Twi language|Twi]]
+| [[w:Twi language|Twi]]
+| [//tw.wiktionary.org/wiki/ tw]
+| [//tw.wiktionary.org/wiki/Special:Statistics?action=raw '''0 ''']
+| 202
+| [//tw.wiktionary.org/wiki/Special:Recentchanges 4807 ]
+| [//tw.wiktionary.org/wiki/Special:Listadmins 0 ]
+| [//tw.wiktionary.org/wiki/Special:Listusers 420 ]
+| [//tw.wiktionary.org/wiki/Special:ActiveUsers 0 ]
+| [//tw.wiktionary.org/wiki/Special:Imagelist 0 ]
+| style="font-size: 70%;" | 2014-06-29 02:00:25
+|- style="text-align: right;"
+| 158
+| [[w:Tongan language|Tongan]]
+| [[w:Tongan language|faka Tonga]]
+| [//to.wiktionary.org/wiki/ to]
+| [//to.wiktionary.org/wiki/Special:Statistics?action=raw '''0 ''']
+| 199
+| [//to.wiktionary.org/wiki/Special:Recentchanges 4858 ]
+| [//to.wiktionary.org/wiki/Special:Listadmins 0 ]
+| [//to.wiktionary.org/wiki/Special:Listusers 371 ]
+| [//to.wiktionary.org/wiki/Special:ActiveUsers 0 ]
+| [//to.wiktionary.org/wiki/Special:Imagelist 0 ]
+| style="font-size: 70%;" | 2014-06-29 02:00:31
+|- style="text-align: right;"
+| 159
+| [[w:Bislama language|Bislama]]
+| [[w:Bislama language|Bislama]]
+| [//bi.wiktionary.org/wiki/ bi]
+| [//bi.wiktionary.org/wiki/Special:Statistics?action=raw '''0 ''']
+| 194
+| [//bi.wiktionary.org/wiki/Special:Recentchanges 4765 ]
+| [//bi.wiktionary.org/wiki/Special:Listadmins 0 ]
+| [//bi.wiktionary.org/wiki/Special:Listusers 409 ]
+| [//bi.wiktionary.org/wiki/Special:ActiveUsers 0 ]
+| [//bi.wiktionary.org/wiki/Special:Imagelist 0 ]
+| style="font-size: 70%;" | 2014-06-29 02:00:27
+|- style="text-align: right;"
+| 160
+| [[w:Yoruba language|Yoruba]]
+| [[w:Yoruba language|Yor&#249;b&#225;]]
+| [//yo.wiktionary.org/wiki/ yo]
+| [//yo.wiktionary.org/wiki/Special:Statistics?action=raw '''0 ''']
+| 186
+| [//yo.wiktionary.org/wiki/Special:Recentchanges 4923 ]
+| [//yo.wiktionary.org/wiki/Special:Listadmins 0 ]
+| [//yo.wiktionary.org/wiki/Special:Listusers 361 ]
+| [//yo.wiktionary.org/wiki/Special:ActiveUsers 0 ]
+| [//yo.wiktionary.org/wiki/Special:Imagelist 0 ]
+| style="font-size: 70%;" | 2014-06-29 02:00:25
+|- style="text-align: right;"
+| 161
+| [[w:Tibetan language|Tibetan]]
+| [[w:Tibetan language|Bod skad]]
+| [//bo.wiktionary.org/wiki/ bo]
+| [//bo.wiktionary.org/wiki/Special:Statistics?action=raw '''0 ''']
+| 152
+| [//bo.wiktionary.org/wiki/Special:Recentchanges 4745 ]
+| [//bo.wiktionary.org/wiki/Special:Listadmins 0 ]
+| [//bo.wiktionary.org/wiki/Special:Listusers 392 ]
+| [//bo.wiktionary.org/wiki/Special:ActiveUsers 0 ]
+| [//bo.wiktionary.org/wiki/Special:Imagelist 0 ]
+| style="font-size: 70%;" | 2014-06-29 02:00:21
+|- style="text-align: right;"
+| 162
+| [[w:Raeto Romance language|Raeto Romance]]
+| [[w:Raeto Romance language|Rumantsch]]
+| [//rm.wiktionary.org/wiki/ rm]
+| [//rm.wiktionary.org/wiki/Special:Statistics?action=raw '''0 ''']
+| 102
+| [//rm.wiktionary.org/wiki/Special:Recentchanges 4775 ]
+| [//rm.wiktionary.org/wiki/Special:Listadmins 0 ]
+| [//rm.wiktionary.org/wiki/Special:Listusers 384 ]
+| [//rm.wiktionary.org/wiki/Special:ActiveUsers 0 ]
+| [//rm.wiktionary.org/wiki/Special:Imagelist 0 ]
+| style="font-size: 70%;" | 2014-06-29 02:00:23
+|- style="text-align: right;"
+| 163
+| [[w:Xhosan language|Xhosan]]
+| [[w:Xhosan language|isiXhosa]]
+| [//xh.wiktionary.org/wiki/ xh]
+| [//xh.wiktionary.org/wiki/Special:Statistics?action=raw '''0 ''']
+| 72
+| [//xh.wiktionary.org/wiki/Special:Recentchanges 5211 ]
+| [//xh.wiktionary.org/wiki/Special:Listadmins 0 ]
+| [//xh.wiktionary.org/wiki/Special:Listusers 404 ]
+| [//xh.wiktionary.org/wiki/Special:ActiveUsers 0 ]
+| [//xh.wiktionary.org/wiki/Special:Imagelist 0 ]
+| style="font-size: 70%;" | 2014-06-29 02:00:25
+|- style="text-align: right;"
+| 164
+| [[w:Sardinian language|Sardinian]]
+| [[w:Sardinian language|Sardu]]
+| [//sc.wiktionary.org/wiki/ sc]
+| [//sc.wiktionary.org/wiki/Special:Statistics?action=raw '''0 ''']
+| 62
+| [//sc.wiktionary.org/wiki/Special:Recentchanges 5983 ]
+| [//sc.wiktionary.org/wiki/Special:Listadmins 0 ]
+| [//sc.wiktionary.org/wiki/Special:Listusers 413 ]
+| [//sc.wiktionary.org/wiki/Special:ActiveUsers 0 ]
+| [//sc.wiktionary.org/wiki/Special:Imagelist 0 ]
+| style="font-size: 70%;" | 2014-06-29 02:00:20
+|- style="text-align: right;"
+| 165
+| [[w:Akan language|Akan]]
+| [[w:Akan language|Akana]]
+| [//ak.wiktionary.org/wiki/ ak]
+| [//ak.wiktionary.org/wiki/Special:Statistics?action=raw '''0 ''']
+| 55
+| [//ak.wiktionary.org/wiki/Special:Recentchanges 4344 ]
+| [//ak.wiktionary.org/wiki/Special:Listadmins 0 ]
+| [//ak.wiktionary.org/wiki/Special:Listusers 605 ]
+| [//ak.wiktionary.org/wiki/Special:ActiveUsers 0 ]
+| [//ak.wiktionary.org/wiki/Special:Imagelist 0 ]
+| style="font-size: 70%;" | 2014-06-29 02:00:26
+|- style="text-align: right;"
+| 166
+| [[w:Kirundi language|Kirundi]]
+| [[w:Kirundi language|Kirundi]]
+| [//rn.wiktionary.org/wiki/ rn]
+| [//rn.wiktionary.org/wiki/Special:Statistics?action=raw '''0 ''']
+| 54
+| [//rn.wiktionary.org/wiki/Special:Recentchanges 4695 ]
+| [//rn.wiktionary.org/wiki/Special:Listadmins 0 ]
+| [//rn.wiktionary.org/wiki/Special:Listusers 420 ]
+| [//rn.wiktionary.org/wiki/Special:ActiveUsers 0 ]
+| [//rn.wiktionary.org/wiki/Special:Imagelist 0 ]
+| style="font-size: 70%;" | 2014-06-29 02:00:30
+|- style="text-align: right;"
+| 167
+| [[w:Avar language|Avar]]
+| [[w:Avar language|&#1040;&#1074;&#1072;&#1088;]]
+| [//av.wiktionary.org/wiki/ av]
+| [//av.wiktionary.org/wiki/Special:Statistics?action=raw '''0 ''']
+| 52
+| [//av.wiktionary.org/wiki/Special:Recentchanges 4835 ]
+| [//av.wiktionary.org/wiki/Special:Listadmins 0 ]
+| [//av.wiktionary.org/wiki/Special:Listusers 444 ]
+| [//av.wiktionary.org/wiki/Special:ActiveUsers 0 ]
+| [//av.wiktionary.org/wiki/Special:Imagelist 0 ]
+| style="font-size: 70%;" | 2014-06-29 02:00:26
+|- style="text-align: right;"
+| 168
+| [[w:Bambara language|Bambara]]
+| [[w:Bambara language|Bamanankan]]
+| [//bm.wiktionary.org/wiki/ bm]
+| [//bm.wiktionary.org/wiki/Special:Statistics?action=raw '''0 ''']
+| 48
+| [//bm.wiktionary.org/wiki/Special:Recentchanges 4062 ]
+| [//bm.wiktionary.org/wiki/Special:Listadmins 0 ]
+| [//bm.wiktionary.org/wiki/Special:Listusers 383 ]
+| [//bm.wiktionary.org/wiki/Special:ActiveUsers 0 ]
+| [//bm.wiktionary.org/wiki/Special:Imagelist 0 ]
+| style="font-size: 70%;" | 2014-06-29 02:00:27
+|- style="text-align: right;"
+| 169
+| [[w:Chamorro language|Chamorro]]
+| [[w:Chamorro language|Chamoru]]
+| [//ch.wiktionary.org/wiki/ ch]
+| [//ch.wiktionary.org/wiki/Special:Statistics?action=raw '''0 ''']
+| 48
+| [//ch.wiktionary.org/wiki/Special:Recentchanges 3454 ]
+| [//ch.wiktionary.org/wiki/Special:Listadmins 0 ]
+| [//ch.wiktionary.org/wiki/Special:Listusers 428 ]
+| [//ch.wiktionary.org/wiki/Special:ActiveUsers 0 ]
+| [//ch.wiktionary.org/wiki/Special:Imagelist 0 ]
+| style="font-size: 70%;" | 2014-06-29 02:00:27
+|- style="text-align: right;"
+| 170
+| [[w:Cree language|Cree]]
+| [[w:Cree language|Nehiyaw]]
+| [//cr.wiktionary.org/wiki/ cr]
+| [//cr.wiktionary.org/wiki/Special:Statistics?action=raw '''0 ''']
+| 43
+| [//cr.wiktionary.org/wiki/Special:Recentchanges 3286 ]
+| [//cr.wiktionary.org/wiki/Special:Listadmins 0 ]
+| [//cr.wiktionary.org/wiki/Special:Listusers 403 ]
+| [//cr.wiktionary.org/wiki/Special:ActiveUsers 0 ]
+| [//cr.wiktionary.org/wiki/Special:Imagelist 0 ]
+| style="font-size: 70%;" | 2014-06-29 02:00:27
+|- style="text-align: right;"
+| 171
+| [[w:Marshallese language|Marshallese]]
+| [[w:Marshallese language|Ebon]]
+| [//mh.wiktionary.org/wiki/ mh]
+| [//mh.wiktionary.org/wiki/Special:Statistics?action=raw '''0 ''']
+| 41
+| [//mh.wiktionary.org/wiki/Special:Recentchanges 3357 ]
+| [//mh.wiktionary.org/wiki/Special:Listadmins 0 ]
+| [//mh.wiktionary.org/wiki/Special:Listusers 346 ]
+| [//mh.wiktionary.org/wiki/Special:ActiveUsers 0 ]
+| [//mh.wiktionary.org/wiki/Special:Imagelist 0 ]
+| style="font-size: 70%;" | 2014-06-29 02:00:29
+|}
