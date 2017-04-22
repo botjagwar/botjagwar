@@ -1,11 +1,9 @@
-#coding: utf8
+# coding: utf8
 
 from modules import BJDBmodule
 from modules.output import Output
 from modules import entryprocessor
 from exceptions import NoWordException
-
-
 import pywikibot as pwbot
 import re
 
@@ -305,7 +303,8 @@ class Translation(TranslationsHandler):
             processor_class = self.entryprocessors[language]
         else:
             try:
-                self.entryprocessors[language] = entryprocessor.WiktionaryProcessorFactory.new_wiktionary_processor(language)
+                self.entryprocessors[language] = entryprocessor.WiktionaryProcessorFactory.new_wiktionary_processor(
+                    language)
                 processor_class = self.entryprocessors[language]
             except NotImplementedError:
                 return 0
@@ -363,7 +362,8 @@ class Translation(TranslationsHandler):
 
                     generate_redirections(self, infos)
                     append_in(infos, translations_in_mg)
-                    if verbose: print translations_in_mg
+                    if verbose:
+                        print translations_in_mg
                     save_translation_from_bridge_language(self, infos)
                     ret += 1
 
@@ -372,7 +372,8 @@ class Translation(TranslationsHandler):
             else:
                 # (self.title, pos, self.lang2code(l), defin.strip())
                 if entry[2] in self.langblacklist:
-                    if verbose: print "Fiteny voalisi-mainty:", entry[2]
+                    if verbose:
+                        print "Fiteny voalisi-mainty:", entry[2]
                     continue
                 title = Page.title()
                 try:
@@ -409,8 +410,6 @@ class Translation(TranslationsHandler):
 
         # Malagasy language pages
         # self.update_malagasy_word(translations_in_mg)
-
-
         if verbose:
             print " Vita."
         return ret
@@ -418,22 +417,22 @@ class Translation(TranslationsHandler):
     def update_malagasy_word(self, translations_in_mg):
         # Malagasy language pages
         def update_malagasy_word(word, translations):
-            mg_entryPage = pwbot.Page(pwbot.Site('mg', 'wiktionary'), word)
+            mg_entry_page = pwbot.Page(pwbot.Site('mg', 'wiktionary'), word)
             try:
-                self.setcontent(mg_entryPage.get())
+                self.setcontent(mg_entry_page.get())
                 content = self.add(translations)
-                mg_entryPage.put_async(content, "+dikanteny")
+                mg_entry_page.put_async(content, "+dikanteny")
             except pwbot.IsRedirectPage:
-                redirtarget = mg_entryPage.getRedirectTarget()
+                redirtarget = mg_entry_page.getRedirectTarget()
                 if verbose:
                     pwbot.output("Pejy fihodinana '%s', manakatra ny tanjony: '%s'" %
-                                 (mg_entryPage.title(), redirtarget.title()))
-                redirtarget = mg_entryPage.getRedirectTarget()
+                                 (mg_entry_page.title(), redirtarget.title()))
+                redirtarget = mg_entry_page.getRedirectTarget()
                 update_malagasy_word(redirtarget.title(), translations)
 
             except pwbot.NoPage:
                 if verbose:
-                    pwbot.output("Tsy misy ilay pejy '%s'" % mg_entryPage.title())
+                    pwbot.output("Tsy misy ilay pejy '%s'" % mg_entry_page.title())
                 return
             except Exception as e:
                 if verbose:

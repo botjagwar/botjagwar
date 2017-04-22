@@ -328,6 +328,7 @@ Saint}} {{gloss|title given to a saint::1
 god's or spirit's child.::1
 monogamy::1
 archon::1
+fish::1
 more different etc.::1
 sulphuric acid::1
 binder::1
@@ -530,7 +531,6 @@ complicated::1
 byte::1
 one of several bacterial diseases including typhus::1
 workmanship::1
-black-eared wheatear or black-throated wheatear::1
 wrong::1
 initiate::1
 ''Third person singular future of'' '''aramak'''::1
@@ -810,7 +810,7 @@ sit down::1
 nonsensical talk; rubbish; poppycock; rigmarole::1
 past::1
 temple -::1
-fast food::1
+pass::1
 stick up for; to defend::1
 investment::1
 birdwatching::1
@@ -1041,6 +1041,7 @@ connection::1
 amoeba::1
 V engine::1
 lash::1
+illiterate::1
 Breton::1
 Plural form of pregelatinizzato::1
 bell::1
@@ -1301,6 +1302,7 @@ approbatur::1
 varied::1
 mushroom of the Agaricus genus::1
 robot::1
+vaccination::1
 royal assassin::1
 the mind::1
 opinion::1
@@ -1875,6 +1877,7 @@ hand::1
 fuse::1
 smoke out::1
 second-person singular  present tense of tornare::1
+fibula::1
 humble::1
 guenon::1
 client::1
@@ -2200,6 +2203,7 @@ nasally::1
 duodenum::1
 problem child::1
 egg::1
+reform::1
 steady::1
 mock privet::1
 Suffixe des substantifs::1
@@ -2316,6 +2320,7 @@ performing arts::1
 livestock::1
 neon::1
 maternity::1
+''Third person singular present continuous of'' '''adamak'''::1
 of the::1
 Italianized::1
 verse::1
@@ -2815,7 +2820,6 @@ wave::1
 wavy::1
 girl; unmarried woman; maiden::1
 yourselves::1
-woodpigeon; ring dove::1
 : than the.::1
 galiote::1
 compassionate::1
@@ -3828,7 +3832,7 @@ Feminine plural form of telegenico::1
 angst::1
 oysters::1
 Feminine plural form of esistenzialista::1
-scowl::1
+inebriation::1
 voodoo::1
 I wait for::1
 WC::1
@@ -3990,7 +3994,7 @@ Mettre en rang::1
 harness::1
 ramson::1
 Feminine plural form of telemetrico::1
-acquiescer::1
+be a rival; to compete::1
 ; resembling an insect in its pupal stage of development.::1
 go in::1
 spicy::1
@@ -4200,7 +4204,7 @@ monger::1
 Feminine plural form of polifito::1
 all the more; even more::1
 protruding.::1
-lectern; rostrum; pulpit::1
+tax office::1
 left-hander::1
 refute::1
 drug ; to fool someone into taking drugs::1
@@ -4473,7 +4477,6 @@ speciality::1
 wandering over the sea::1
 chi::1
 readable::1
-plastic art::1
 {{gloss|the state or office of an abbot::1
 phallus::1
 charcoal::1
@@ -4650,7 +4653,7 @@ liberalization::1
 emptily.::1
 digestive tract::1
 Feminine plural form of polianionico::1
-reform::1
+''Definite singular'' of do#Norwegian::1
 The state of being swollen.::1
 hammock::1
 boundary::1
@@ -4976,7 +4979,7 @@ sarcasm::1
 : a gunshot to the head; . <!-- The below quotations need translation. -->::1
 corpus::1
 arm; the body part::1
-illiterate::1
+lectern; rostrum; pulpit::1
 baby face::1
 betony::1
 colitis::1
@@ -4991,7 +4994,7 @@ bridge::1
 spiny dogfish::1
 by no means::1
 close; to shut::1
-pass::1
+fast food::1
 minimalist}} {{gloss|characterised by extreme simplicity::1
 electromagnetism::1
 meristem::1
@@ -5115,7 +5118,6 @@ dry land::1
 daisy: a wild flowering plant with a yellow head and white petals::1
 is precisely; is none other than::1
 rodent::1
-pharmacien::1
 The Appendix:Latin script|Latin letter I .::1
 Hegelian::1
 with passion::1
@@ -5252,7 +5254,7 @@ pore::1
 Feminine plural form of scientifico::1
 centrifugal::1
 step over::1
-Plural form of aggraziato::1
+irritated::1
 stately::1
 axial::1
 tsarisme::1
@@ -5303,7 +5305,7 @@ Cossack village::1
 bigot::1
 timide::1
 Saulteaux (personne)::1
-mismanagement::1
+meager::1
 sodium chloride::1
 fourth::1
 tailleur#fr::1
@@ -5351,12 +5353,13 @@ bamboo sword .::1
 telepathy::1
 Plural form of struggente::1
 dispatcher::1
+capteur#fr-nom|Capteur, senseur::1
 shock; to astonish::1
 yup::1
 yus::1
 The third letter of the Appendix:Latin script.::1
 as; in the capacity or character of::1
-vaccination::1
+turn::1
 yum::1
 assizes::1
 turf::1
@@ -5751,7 +5754,7 @@ bazooka::1
 Plural form of scipito::1
 choose the best candidate::1
 far away::1
-lamina::1
+Variant of dzatse::1
 belonging to a troop or squadron::1
 guest::1
 right fielder::1
@@ -6023,6 +6026,7 @@ dandy::1
 confirmation::1
 ladle::1
 city center::1
+I break out .::1
 Common misspelling of appropriati::1
 Common misspelling of appropriato::1
 nanostructuring::1
@@ -6481,7 +6485,6 @@ more able::1
 preferably::1
 association football::1
 worldview::1
-turn::1
 complaining::1
 keep.::1
 damage::1
@@ -6551,7 +6554,6 @@ serving two purposes::1
 substantiation::1
 rattan vine::1
 sandfly::1
-brokenly::1
 note#etymology 2)::1
 odd; not divisible by 2::1
 Christmas present::1
@@ -6770,7 +6772,7 @@ incorrection::1
 Someone who is often anxious or prone to stress::1
 smoke ''''::1
 Eurasian pygmy owl::1
-storeroom::1
+despair::1
 moa}} {{gloss|large::1
 The tenth letter of the Russian Cyrillic alphabet. Its name is .::1
 rebut::1
@@ -7520,7 +7522,6 @@ cargaison#fr, charge, bagage::1
 mote::1
 eristic::1
 laze about::1
-meager::1
 vanish::1
 dream; vision::1
 funny::1
@@ -7561,7 +7562,7 @@ wheat germ::1
 Ainu::1
 The letter H or h.::1
 sight::1
-battalion::1
+become stuck::1
 indigent::1
 momentary::1
 court hearing::1
@@ -7683,6 +7684,7 @@ utter hatred::1
 I attack again::1
 resurrection::1
 Suffix for collectivity::1
+scowl::1
 pirogue::1
 standing::1
 {{gloss|substance inside bones::1
@@ -7768,7 +7770,6 @@ czar::1
 ban::1
 machismo::1
 surely::1
-become stuck::1
 become light blue::1
 clock; watch; timepiece; timekeeper::1
 stimulate::1
@@ -8241,7 +8242,7 @@ voice::1
 the throne::1
 opt::1
 Norwegian girl or woman::1
-capteur#fr-nom|Capteur, senseur::1
+black-eared wheatear or black-throated wheatear::1
 coalman::1
 comparative::1
 winds that arise in a bay::1
@@ -8265,6 +8266,7 @@ kinship::1
 be angry/mad .::1
 emergency; urgent::1
 save; to cut down::1
+Used to nominalize a verb or adjective::1
 repost::1
 human affairs::1
 featherlike::1
@@ -8353,7 +8355,6 @@ physical::1
 be honoured::1
 The first-person singular form of the negation verb. The English translations include ''do not''/''don't'').::1
 I smooth::1
-Feminine plural form of vezzoso::1
 decorate; to adorn::1
 enter; to go in ''or'' come in.::1
 Gaulish::1
@@ -9221,7 +9222,7 @@ nut ''''::1
 collectively referring to all the problems concerning a certain issue in a certain field::1
 silver: A lustrous::1
 mores::1
-calorimeter::1
+olive::1
 living being::1
 call by telephone::1
 crab apple::1
@@ -9509,7 +9510,7 @@ fate::1
 graphemics::1
 The letter '''H''' in the NATO phonetic alphabet.::1
 historic::1
-Used to nominalize a verb or adjective::1
+dissolve into::1
 volcanic ash::1
 renegade::1
 candy::1
@@ -9665,7 +9666,7 @@ churchyard::1
 : small onion::1
 make popular::1
 expose::1
-baluster::1
+surrealistic::1
 Nordic::1
 Plural form of radiologico::1
 I glue::1
@@ -10071,7 +10072,7 @@ load ''''::1
 Referring to dialectal use of articles with ''s'' as opposed to the usual ones with ''l''. These articles descend from Latin  which served as the base for articles in most Romance languages.::1
 ooh::1
 savior::1
-olive::1
+calorimeter::1
 I; me; myself; oneself; himself; herself::1
 effort::1
 Forcer, contraindre, renforcer::1
@@ -10833,7 +10834,7 @@ move something/someone to another place/spot.::1
 do something; to act; to function; to perform.::1
 reverberate::1
 surgeon::1
-moderate::1
+fluide::1
 respectful::1
 knight::1
 anachronistic::1
@@ -10991,6 +10992,7 @@ Feminine plural form of sciistico::1
 necklace::1
 contrabassoon::1
 handbag::1
+exaggerated::1
 I surround::1
 absurd::1
 at the::1
@@ -11068,7 +11070,6 @@ The thirteenth letter of the Appendix:Roman script#Navajo alphabet::1
 climate::1
 axle::1
 hit something repeatedly::1
-tax office::1
 atmospheric::1
 Templar::1
 structuralist::1
@@ -11413,6 +11414,7 @@ random::1
 Plural form of vinoso::1
 the number one::1
 Any member of the genus ''Fragaria''.::1
+the hand on the right side of the body::1
 theory of relativity::1
 way; path::1
 easterly::1
@@ -11691,6 +11693,7 @@ Hungarian::1
 lemma::1
 An anchovy; any member of the family Engraulidae.::1
 third-person plural past historic of accogliere::1
+Torah scroll::1
 ''third-person singular indicative future of creare''::1
 micron::1
 riot::1
@@ -11774,6 +11777,7 @@ satanic::1
 micro-::1
 provide protection::1
 male domestic servant::1
+battalion::1
 office; building or room::1
 male doctor::1
 granule::1
@@ -11876,7 +11880,7 @@ color::1
 robotics::1
 sampling::1
 pole::1
-medication::1
+digression::1
 colon::1
 horehound::1
 polo::1
@@ -11948,7 +11952,7 @@ full}} {{gloss|containing the maximum possible amount::1
 data warehouse::1
 electoral term::1
 test::1
-celerity::1
+''par mutation spirante'' (baiser)::1
 anticommunism::1
 boxer}} {{gloss|breed of dog::1
 Plural form of poetabile::1
@@ -12464,7 +12468,6 @@ rugose::1
 sparkling wine::1
 Suffisant, convenable::1
 physiognomy::1
-fluide::1
 Feminine plural form of natatorio::1
 an ; a musical theatre play::1
 Having company with a pleasant::1
@@ -12508,7 +12511,6 @@ doodle::1
 mulberry leaf::1
 Someone who is so specialized in his/her profession or trade that it limits their thinking; literally overspecialized idiot.::1
 few::1
-fireproof::1
 feu::1
 brother; buddy::1
 timing::1
@@ -12570,7 +12572,7 @@ An Arabist.::1
 strangeness::1
 The cardinality of a set.::1
 nostalgia::1
-an infielder::1
+permanent::1
 zooiatrie::1
 orange::1
 any normal-shaped knife::1
@@ -12696,7 +12698,7 @@ narrower::1
 Feminine plural form of sismico::1
 large and centuries-old forest.::1
 paladin}} {{gloss|heroic champion::1
-pleural cavity::1
+table::1
 storyteller::1
 tutor::1
 literal::1
@@ -13209,7 +13211,6 @@ The depth between the water line and the bottom of a vessel's hull::1
 present participle of accogliere::1
 wetness::1
 textbook::1
-controversy; debate; dispute::1
 ''::1
 mostly::1
 ash tree::1
@@ -13976,6 +13977,7 @@ vox pop::1
 lead astray::1
 beauty contest; beauty pageant::1
 language immersion::1
+lamina::1
 Ottoman::1
 Third-person singular present indicative of verb '''.::1
 user}} {{gloss|one who uses something::1
@@ -14726,7 +14728,7 @@ male-assigned::1
 type of leek::1
 of poor quality; bad; inferior::1
 open-mouthed::1
-litter-bearer::1
+celerity::1
 board::1
 Feminine plural form of poliammidico::1
 both ... and::1
@@ -14805,7 +14807,7 @@ slope::1
 invincible::1
 flirtatious::1
 emit::1
-digression::1
+medication::1
 Cold War::1
 first-person singular present tense of salare::1
 fast or light breed of horse; courier's horse; hunter.::1
@@ -14910,7 +14912,7 @@ fuming::1
 '''' to press::1
 hematoma::1
 freezer::1
-despair::1
+storeroom::1
 beau::1
 stock broker::1
 go south::1
@@ -15026,7 +15028,7 @@ solide,costaud, {{commerce::1
 : him::1
 I comply with; I conform to::1
 national: of a nation::1
-dramaturge::1
+controversy; debate; dispute::1
 immediately; presently::1
 tente, pavillon::1
 typically::1
@@ -15195,7 +15197,6 @@ arabe::1
 the source::1
 carriage house::1
 readership; a group of readers::1
-''Definite singular'' of do#Norwegian::1
 discontinuance of a practice or a habit::1
 paranoiac::1
 female Indonesian::1
@@ -15466,7 +15467,7 @@ secrete::1
 passively::1
 Turkish::1
 technological.::1
-the hand on the right side of the body::1
+religiousness::1
 vessel::1
 Feminine plural form of scilinguato::1
 lunokhod::1
@@ -15633,7 +15634,7 @@ fine fellow::1
 Feminine plural form of radiometabolico::1
 + ''suffix'' -han::1
 sound of the wind::1
-broad bean::1
+butt end::1
 slow::1
 picket::1
 Feminine plural form of neghittoso::1
@@ -15991,7 +15992,7 @@ drop or small amount of::1
 paternal aunt::1
 Feminine plural form of veterotestamentario::1
 sudden drop::1
-ear::1
+fireproof::1
 eat::1
 artemisia::1
 denominate::1
@@ -16305,6 +16306,7 @@ diaphragm::1
 put to the test::1
 set about::1
 unenterprising::1
+mismanagement::1
 mouse::1
 Plural form of rovinoso::1
 abscess::1
@@ -16326,6 +16328,7 @@ opportunity::1
 kid::1
 butter::1
 automobile; motor car; sedan::1
+Plural form of aggraziato::1
 colleague; fellow worker::1
 virile::1
 protocol::1
@@ -16703,7 +16706,7 @@ leave home to get an education; {{cx|modern::1
 diamonds::1
 ''first-person singular indicative present of illuminare''::1
 accident; incident; trouble::1
-slingshot::1
+brokenly::1
 not many::1
 supermarket::1
 sweet cherry::1
@@ -16749,6 +16752,7 @@ foundling::1
 chloroform::1
 perciform::1
 sullen::1
+ass}}::1
 climbing::1
 weave::1
 musclenerveuse::1
@@ -16813,7 +16817,7 @@ franchising::1
 blessed::1
 site of a demolished building::1
 Plural form of ridicolo::1
-dreaming::1
+strip::1
 tumbleweed::1
 anise::1
 madden::1
@@ -16902,10 +16906,9 @@ component::1
 Shinto priest::1
 Plural form of pirogeno::1
 gigahertz::1
-table::1
 many-cornered::1
 bible::1
-shine; be sunny.::1
+enmity::1
 Plural form of immune::1
 Infinitive form meaning to strike one's kayak in order to be heard.::1
 rendreplus grand::1
@@ -16956,7 +16959,7 @@ thou.::1
 Name of the Spanish letter '''ll'''.::1
 turmeric::1
 ''First person singular present simple of'' '''yorulmak'''::1
-winged::1
+there is nowhere to::1
 {{gloss|meeting with a lover or potential lover|lang=da::1
 I serve.::1
 hail storm::1
@@ -16984,7 +16987,7 @@ The crustacean species hermit crab::1
 breakdown::1
 before one's eyes::1
 fairing::1
-fish::1
+hare::1
 hard::1
 I strew in front of::1
 hermaphroditism::1
@@ -17010,7 +17013,7 @@ From </ref>::1
 soft feather::1
 come on::1
 sovereign prince::1
-butt end::1
+broad bean::1
 Plural form of pregiabile::1
 barge; a keel or keelboat.::1
 barbarian::1
@@ -17506,7 +17509,7 @@ swallow::1
 Any concept or precept of theology::1
 aquarium::1
 Plural form of sanguinario::1
-''Third person singular present continuous of'' '''adamak'''::1
+I roll to or upon something.::1
 ohm::1
 abortive::1
 Plural form of rosicchiato::1
@@ -17693,6 +17696,7 @@ endorse::1
 socio-economic::1
 lack of sleep; inadequate sleep::1
 pay with::1
+pleural cavity::1
 undulation::1
 forum::1
 the sho::1
@@ -17751,7 +17755,6 @@ tourist::1
 the number one thousand four hundred and seventy-one::1
 tourism::1
 exaucer::1
-hornbeam::1
 garden fork::1
 Feminine plural form of tonotopico::1
 press  "to press"::1
@@ -17940,7 +17943,6 @@ gerund of abusare::1
 bastard::1
 The twelfth part of something; twelfth.::1
 tassel::1
-irritated::1
 The land around or within the boundary.::1
 invalid or disabled person::1
 Plural form of ramifero::1
@@ -18065,6 +18067,7 @@ supposed to::1
 masturbate::1
 cook::1
 cool::1
+moderate::1
 separated  further::1
 third-person singular imperfect subjunctive of accusare::1
 encroach::1
@@ -18149,7 +18152,7 @@ Petit autel::1
 rondo::1
 Roman numeral for six.::1
 '''-unto''' One who would do the action of the root::1
-stop burning; to extinguish; to put out; to go out; to die out::1
+puzzle::1
 lonely::1
 underneath::1
 Plural form of rammemorabile::1
@@ -18374,7 +18377,7 @@ flyblown::1
 yes; in disagreement with the last speaker.::1
 snort::1
 natural reserve::1
-Feminine plural form of semisolido::1
+row ''''::1
 schools; usually as a branch of municipal government::1
 West::1
 advance directly upon::1
@@ -19033,6 +19036,7 @@ stove::1
 Plural form of scismatico::1
 se figer, se coaguler, coaguler::1
 Feminine plural form of strapazzoso::1
+ear::1
 coattail::1
 from the::1
 Plural form of prussico::1
@@ -19673,6 +19677,7 @@ insurgency::1
 course::1
 reddish}}::1
 developing country::1
+slingshot::1
 deity::1
 Feminine plural form of scheletogeno::1
 relegate::1
@@ -19681,7 +19686,7 @@ accordion::1
 The sea cucumber .::1
 hashish::1
 coincidental::1
-recreate::1
+Plural form of subcellulare::1
 most or very level::1
 pastille::1
 caravaner::1
@@ -20113,6 +20118,7 @@ recessed balcony::1
 stoned::1
 reticent::1
 designation::1
+stop burning; to extinguish; to put out; to go out; to die out::1
 Buddhism::1
 small heap::1
 lequel(entre deux choix)::1
@@ -20340,13 +20346,13 @@ teach or impart knowledge.::1
 idealistic::1
 Feminine plural form of sovrascritto::1
 with whom?::1
-exaggerated::1
+dramaturge::1
 any bearberry::1
 dragon boat::1
 repair::1
 garbage::1
 Plural form of stramaledetto::1
-Plural form of subcellulare::1
+recreate::1
 stew on a fire::1
 appropriate::1
 joint; the joints::1
@@ -20458,7 +20464,6 @@ Plural form of proteinogenico::1
 peripety::1
 I am unable::1
 stuffily::1
-inebriation::1
 friendship; relationship::1
 third-person singular past historic of accogliere::1
 certificate::1
@@ -20651,7 +20656,7 @@ courtyard::1
 paroxysmal attack::1
 vieille fille::1
 tire/tyre::1
-shape in or on a mold::1
+striped ground squirrel::1
 ramp::1
 innocently::1
 puff::1
@@ -20728,7 +20733,7 @@ Red Army man::1
 journalist; reporter::1
 strong request::1
 get rid of::1
-I break out .::1
+championship::1
 elitist::1
 Amigonian::1
 be vigilant::1
@@ -21018,7 +21023,6 @@ Feminine plural form of scissionistico::1
 sabot::1
 ; a vine grown for its fruit::1
 Plural form of spatico::1
-I orate::1
 abstractedness::1
 ill::1
 shrink in the wash::1
@@ -21149,7 +21153,7 @@ spray can::1
 my. Creates the first-person singular possessive form denoting singular possession.::1
 pluperfect tense::1
 most or very wicked etc.::1
-insaisissable::1
+take care::1
 perpetuity::1
 emotional::1
 infant; newborn; baby::1
@@ -21174,7 +21178,6 @@ shrine::1
 snowboot::1
 shrink::1
 heyday::1
-Variant of dzatse::1
 turboshaft::1
 Czech ''''::1
 where; at which place::1
@@ -21232,7 +21235,6 @@ trivial::1
 menthol::1
 rollup::1
 cloth or cord used to tie back the sleeves of a robe::1
-energy::1
 destruction; ruin::1
 whiteness::1
 demeure::1
@@ -21400,6 +21402,7 @@ Plural form of semiserio::1
 intelligent; smart::1
 alcoholism::1
 Plural form of rossazzurro::1
+an infielder::1
 hairgrip::1
 disabled::1
 Plural form of ricetrasmittente::1
@@ -21444,7 +21447,7 @@ banana tree::1
 crumb::1
 female Abaza::1
 Feminine plural form of strinato::1
-striped ground squirrel::1
+shape in or on a mold::1
 care.::1
 subjectivize::1
 oligopoly::1
@@ -21603,7 +21606,6 @@ most or very desired or missed::1
 conjunctivitis::1
 silicic acid::1
 God::1
-<!-- hoof -->::1
 The tree ''Citrus maxima''.::1
 antifascist::1
 trunk::1
@@ -21704,7 +21706,7 @@ Feminine plural form of ulcerogeno::1
 senior class::1
 : a honeybee::1
 desiccate::1
-ass}}::1
+past participle of potare::1
 working class::1
 revolutionary::1
 curtsey::1
@@ -22767,7 +22769,6 @@ miscegenation}} {{gloss|the mixing or blending of race::1
 excel::1
 picador::1
 Plural form of sensibilissimo::1
-eternity::1
 sling::1
 Plural form of rifacibile::1
 going directly::1
@@ -22794,7 +22795,6 @@ cornel::1
 amaze::1
 finally::1
 gourmand::1
-lake::1
 coupole::1
 nationalize::1
 cupbearer::1
@@ -22853,7 +22853,7 @@ cis-::1
 creamy::1
 beautiful young man::1
 pert::1
-fibula::1
+I orate::1
 cremate::1
 obelisk::1
 bottom-dwelling spiny fish::1
@@ -22913,7 +22913,7 @@ fermented fish paste::1
 mishmash}} {{gloss|a collection of random things::1
 unpredictability::1
 than.::1
-dissolve into::1
+pharmacien::1
 Feminine plural form of sciocchino::1
 Plural form of inopportuno::1
 as before::1
@@ -22936,7 +22936,7 @@ dead body; a cadaver::1
 body of thought::1
 bootlegger::1
 sauna stove::1
-surrealistic::1
+baluster::1
 : year::1
 tigre::1
 Feminine plural form of trabecolato::1
@@ -23279,7 +23279,6 @@ national holiday::1
 taut::1
 burocracy::1
 bivouac::1
-abode::1
 shark::1
 Used to form ablative of nouns.::1
 hamburger::1
@@ -23326,7 +23325,7 @@ elf owl::1
 kind of lock::1
 sphincter::1
 easily::1
-''par mutation spirante'' (baiser)::1
+litter-bearer::1
 pregnant::1
 porte::1
 little angel ''or'' angel::1
@@ -23585,6 +23584,7 @@ sterilize::1
 faeces::1
 irreplaceable::1
 priggish::1
+Feminine plural form of semisolido::1
 accidental::1
 lend::1
 favourite::1
@@ -23728,7 +23728,7 @@ Feminine plural form of rossiniano::1
 {{gloss|act of mixing::1
 Anura::1
 pleurisy::1
-strip::1
+dreaming::1
 public transport; public transit; public transportation::1
 calibrate::1
 Egyptian vulture::1
@@ -23763,7 +23763,7 @@ the other way around::1
 surrounding; putting or placing around::1
 ellipsis ''''::1
 ''Third person singular future simple of'' '''yaratmak'''::1
-be a rival; to compete::1
+acquiescer::1
 gear::1
 xylophone::1
 contribute::1
@@ -23862,7 +23862,7 @@ I divide into single members or joints.::1
 mafia::1
 go without saying::1
 bumblebee::1
-permanent::1
+Feminine plural form of vezzoso::1
 be in the lead::1
 bellows::1
 something}} {{gloss|unspecified object::1
@@ -23913,7 +23913,7 @@ Azeri::1
 even more::1
 absorption::1
 be late::1
-religiousness::1
+lake::1
 Taliban::1
 turn out ''''::1
 punctual::1
@@ -24304,7 +24304,7 @@ redaction::1
 smartness::1
 cracker::1
 inviolable::1
-enmity::1
+shine; be sunny.::1
 thousandth::1
 penultimate::1
 subjugate::1
@@ -24374,7 +24374,7 @@ I attend::1
 reserve funds::1
 curry::1
 washbag::1
-puzzle::1
+hornbeam::1
 high road::1
 language blend of Catalan and Spanish::1
 fuselage::1
@@ -24404,7 +24404,7 @@ luscious::1
 One of the three parts of an academic year; term.::1
 tie::1
 depot::1
-row ''''::1
+eternity::1
 I build::1
 nuance::1
 phoenix::1
@@ -24643,7 +24643,7 @@ Feminine plural form of podistico::1
 featherbed::1
 blue-eyed::1
 shimmer::1
-there is nowhere to::1
+winged::1
 fickle::1
 {{lb|zh|of a skill|or::1
 airplane flight::1
@@ -24666,7 +24666,7 @@ bluntness::1
 Plural form of sciabile::1
 Plural form of sinistrato::1
 mortgage::1
-take care::1
+insaisissable::1
 review::1
 Plural form of singulare::1
 frelater::1
@@ -24808,7 +24808,7 @@ cotton clothes::1
 reindeer::1
 summit.::1
 expatriate::1
-hare::1
+energy::1
 Plural form of radioelettrico::1
 cabinet::1
 caraway::1
@@ -24835,7 +24835,7 @@ trash::1
 stalwart::1
 Plural form of rossocrociato::1
 spend.::1
-championship::1
+woodpigeon; ring dove::1
 separate::1
 lexicographer::1
 bank robbery::1
@@ -25006,7 +25006,7 @@ in a consolatory manner::1
 fancy::1
 least::1
 weather vane::1
-past participle of potare::1
+plastic art::1
 script::1
 floating wreck::1
 Plural form of stucchevole::1
@@ -25282,7 +25282,7 @@ renforcements::1
 note.::1
 touch with one's glans::1
 sniper::1
-I roll to or upon something.::1
+abode::1
 field of vision::1
 ague::1
 alder::1
@@ -25373,7 +25373,7 @@ the present situation::1
 In a manner that can be expected; predictably.::1
 Plural form of raddensabile::1
 interrupted::1
-Torah scroll::1
+<!-- hoof -->::1
 not very good::1
 Plural form of immunitario::1
 body armor::1

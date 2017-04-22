@@ -38,7 +38,7 @@ class PageObject(object):
                 break
             except wikipedia.exceptions.PageNotSaved:
                 self.content = u""
-                if tries<5:
+                if tries < 5:
                     time.sleep(10)
                     tries += 1
                     continue
@@ -63,7 +63,7 @@ class PageFinder(object):
             i += 1
             if not i%1000: 
                 print str(i) + (len(str(i)) + 1)*chr(8),
-            if entry.ns!=0: continue 
+            if entry.ns != 0: continue
             self.pageobjects[entry.title] = PageObject(entry.title, entry.text)
                          
     
@@ -159,7 +159,7 @@ class Translation_finder_in_dump(BaseDumpProcessor):
             entries = p.getall()
             
             for entry in entries:
-                if entry[2] in self.langblacklist: #check in language blacklist
+                if entry[2] in self.langblacklist:  # check in language blacklist
                     continue          
                 try:
                     frentry = entry[3].split("#")[0]
@@ -185,7 +185,7 @@ class Translation_finder_in_dump(BaseDumpProcessor):
                 
         for e in newentries:
             try:
-                if (self.processor.exists(newentries[e]['lang'], newentries[e]['entry']) 
+                if (self.processor.exists(newentries[e]['lang'], newentries[e]['entry'])
                     or not (type(newentries[e]) is dict)):
                     continue
             except Exception:
