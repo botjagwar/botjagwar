@@ -1,13 +1,12 @@
 # -*- coding: utf-8  -*-
-import re, os, time
+import re
+import time
 import pywikibot as wikipedia
 import pywikibot.xmlreader as Xmlreader
-
 import DLscript
 from modules import output
 from modules import entryprocessor
 from modules.translation.core import Translation
-
 
 
 class NoWordException(Exception):
@@ -211,7 +210,6 @@ class Translation_finder_in_dump(BaseDumpProcessor):
                 continue
 
     def run(self, in_file, language, count):
-        setThrottle(1)
         # in_file = raw_input("rakitra? >")#'enwiktionary-20131202-pages-meta-current.xml.bz2'
         # language = raw_input("fitenin'ny wiki nangalana ilay dump >")
         # count = int(raw_input('laharana hanombohana >'))
@@ -223,11 +221,15 @@ class Translation_finder_in_dump(BaseDumpProcessor):
 def main():
     # o = PageFinder("data/enwiktionary-20131202-pages-meta-current.xml.bz2")
     # wikipedia.output(o.find(u"puffy"))
-    # DLscript.DownloadURL(u"http://dumps.wikimedia.org/frwiktionary/latest/frwiktionary-latest-pages-meta-current.xml.bz2", u"data/frwiktionary-latest-pages-meta-current.xml.bz2", True)
-    # DLscript.DownloadURL(u"http://dumps.wikimedia.org/enwiktionary/latest/enwiktionary-latest-pages-meta-current.xml.bz2", u"data/enwiktionary-latest-pages-meta-current.xml.bz2", True)
+    DLscript.DownloadURL(
+        u"http://dumps.wikimedia.org/frwiktionary/latest/frwiktionary-latest-pages-meta-current.xml.bz2",
+        u"data/frwiktionary-latest-pages-meta-current.xml.bz2", True)
+    DLscript.DownloadURL(
+        u"http://dumps.wikimedia.org/enwiktionary/latest/enwiktionary-latest-pages-meta-current.xml.bz2",
+        u"data/enwiktionary-latest-pages-meta-current.xml.bz2", True)
     bot = Translation_finder_in_dump()
-    # bot.run(u"frwikttest.xml", u"fr", 0)
-    # bot.run(u"frwiktionary-latest-pages-meta-current.xml.bz2", u"fr", 0)
+    bot.run(u"frwikttest.xml", u"fr", 0)
+    bot.run(u"frwiktionary-latest-pages-meta-current.xml.bz2", u"fr", 0)
     bot.run(u"enwiktionary-latest-pages-meta-current.xml.bz2", u"en", 0)
 
 
