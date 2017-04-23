@@ -8,7 +8,7 @@ python: init
 	sudo apt-get install -y python-pip
 
 install-deps: python
-	pip install -r requirements.txt
+	LC_ALL="en_US.UTF-8" pip install -r requirements.txt
 
 database: install-deps
 	echo $(DB_PASSWD)
