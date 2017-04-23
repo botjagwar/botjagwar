@@ -2,7 +2,7 @@ import MySQLdb as db
 import pywikibot as wikipedia
 import sys, time
 
-default_passwd = 'washakie'
+default_passwd = 'password'
 verbose = False
 
 class Database(object):

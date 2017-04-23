@@ -1,0 +1,15 @@
+== Installation ==
+
+Launch the command 'make all'. That will install required dependencies among which Python, Pywikibot, Python MySQL
+and MySQL server. It will also install the database schema and fill it with enough data to work.
+
+== Configuration ==
+
+Once you're done with 'make all', do the manual configuration by setting up the pywikibot.
+See https://www.mediawiki.org/wiki/Manual:Pywikibot/user-config.py for further details on how to configure Pywikibot.
+
+Also change the default SQL password in MySQL database and in BJDBModule.py to the one you've chosen.
+
+== Copyright ==
+
+© Rado A. (Terakasorotany) MIT Licence.

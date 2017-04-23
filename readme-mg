@@ -1,0 +1,14 @@
+== Fametrahana ==
+
+Soraty ny baiko 'make all'. Io baiko io dia hametraka ny filàna rehetra izay ahitana an'i Python, Pywikibt, Python MySQL
+ary lohamilina MySQL. Izy io koa dia hametraka ny firafitry ny banky angona ary hameno ilay banky angona amin'ny angona
+ilainy amin'ny fandehanany.
+
+== Fametrahan-tsafidy ==
+
+Rehefa vita ny 'make all' dia ovay amin-tanana ny safidy amin'ny alalan'ny paika fampandefasana an'i Pywikibot.
+Jereo https://www.mediawiki.org/wiki/Manual:Pywikibot/user-config.py (teny anglisy) ho an'ny antsipirihany.
+Miaraka amin'izany koa dia ovay ny tenimiafin'ny banky angona MySQL ao amin'ny rindranakajy 'mysql' ary BJDBModule.py.
+
+== Zom-pamorona ==
+© Rado A. (Terakasorotany) Fahazoan-dalana MIT.
