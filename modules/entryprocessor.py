@@ -3,7 +3,6 @@ import pywikibot as wikipedia
 
 data_file = 'conf/entryprocessor/'
 
-
 def ProcessWikt(language):
     return eval("process_%swikt()" % language)
 
