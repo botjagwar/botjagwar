@@ -1,9 +1,11 @@
 DB_PASSWD := password
 
-init:
+prepare:
 	sudo apt-get update
+	apt-get install -y wget
+	apt-get install -y unzip
 
-python: init
+python: prepare
 	sudo apt-get install -y python2.7
 	sudo apt-get install -y python-pip
 
@@ -23,7 +25,7 @@ schema: database
 test: database
 	python test.py
 
-data: database
+data: schema database
 	mysql -u root --password=$(DB_PASSWD) -D data_botjagwar < data/data_botjagwar.sql
 
 lemp-stack: database
@@ -36,4 +38,4 @@ clear:
 	sudo apt-get autoremove -y nginx php-fpm php-mysql
 	sudo apt-get autoremove -y python-pip python2.7 python-mysqldb
 
-all: python install-deps database schema lemp-stack
+all: python install-deps data lemp-stack
