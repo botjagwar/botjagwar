@@ -7,8 +7,6 @@ from exceptions import NoWordException
 import pywikibot as pwbot
 import re
 
-verbose = 0
-
 
 class TranslationsHandler(object):
     def __init__(self):
@@ -33,7 +31,7 @@ class TranslationsHandler(object):
         trstr = '{{}} :'
         tran = self.content.replace('{{}} :', '')
         if len(trads) > 200:
-            if verbose: print 'hadisoana ?'
+            print 'hadisoana ?'
             return tran
         for i in trads:
             trstr = trstr.replace("{{}} :", "# %s : [[%s]]\n{{}} :" % i)
@@ -228,8 +226,7 @@ class Translation(TranslationsHandler):
                 if mg_Page.exists():
                     pagecontent = mg_Page.get()
                     if pagecontent.find('{{=%s=}}' % infos['lang']) != -1:
-                        if verbose:
-                            print "Efa misy ilay teny iditra."
+                        print "Efa misy ilay teny iditra."
                         self.output.db(infos)
                         return
                     else:
@@ -241,16 +238,15 @@ class Translation(TranslationsHandler):
                 return
 
             except pwbot.exceptions.InvalidTitle:
-                if verbose: print "lohateny tsy mety ho lohatenim-pejy"
+                print "lohateny tsy mety ho lohatenim-pejy"
                 return
 
             except Exception as e:
-                if verbose: print e
+                print e
                 return
 
-            if verbose:
-                pwbot.output("\n \03{red}%(entry)s\03{default} : %(lang)s " % infos)
-                pwbot.output("\03{white}%s\03{default}" % wikipage)
+            pwbot.output("\n \03{red}%(entry)s\03{default} : %(lang)s " % infos)
+            pwbot.output("\03{white}%s\03{default}" % wikipage)
             mg_Page.put_async(wikipage, summary)
             self.output.db(infos)
 
@@ -261,7 +257,7 @@ class Translation(TranslationsHandler):
             if mg_page.exists():
                 pagecontent = mg_page.get()
                 if pagecontent.find('{{=%s=}}' % infos['lang']) != -1:
-                    if verbose: print "Efa misy ilay teny iditra, fa mbola tsy fantatry ny banky angona izany."
+                    print "Efa misy ilay teny iditra, fa mbola tsy fantatry ny banky angona izany."
                     self.output.db(infos)
                     return
                 else:
@@ -298,7 +294,7 @@ class Translation(TranslationsHandler):
 
         # BEGINNING
         ret = 0
-        if verbose: print "Praosesera:", language.upper()
+        print "Praosesera:", language.upper()
         if language in self.entryprocessors:
             processor_class = self.entryprocessors[language]
         else:
@@ -309,15 +305,13 @@ class Translation(TranslationsHandler):
             except NotImplementedError:
                 return 0
 
-        if verbose: pwbot.output("\n >>> \03{lightgreen}%s\03{default} <<< " % Page.title())
+        pwbot.output("\n >>> \03{lightgreen}%s\03{default} <<< " % Page.title())
 
         if Page.title().find(':') != -1:
-            if verbose:
-                print "Nahitana ':' tao anaty anaram-pejy"
+            print "Nahitana ':' tao anaty anaram-pejy"
             return ret
         if Page.namespace() != 0:
-            if verbose:
-                print "Tsy amin'ny anaran-tsehatra fotony"
+            print "Tsy amin'ny anaran-tsehatra fotony"
             return ret
         processor_class.process(Page)
 
@@ -339,12 +333,12 @@ class Translation(TranslationsHandler):
                 for translation in translations:
                     # translation = tuple(codelangue, entree)
                     if translation[2] in self.langblacklist:  # check in language blacklist
-                        if verbose: print "Fiteny voalisi-mainty: ", translation[2]
+                        print "Fiteny voalisi-mainty: ", translation[2]
                         continue
                     try:
                         mg_translation = self.translate_word(Page.title(), language)
                     except NoWordException:
-                        if verbose: pwbot.output(
+                        pwbot.output(
                             "Tsy nahitana dikantenin'i '%s' ho an'ny teny '%s' tao amin'ny banky angona" % (
                                 Page.title(), language))
                         break
@@ -362,8 +356,7 @@ class Translation(TranslationsHandler):
 
                     generate_redirections(self, infos)
                     append_in(infos, translations_in_mg)
-                    if verbose:
-                        print translations_in_mg
+                    print translations_in_mg
                     save_translation_from_bridge_language(self, infos)
                     ret += 1
 
@@ -372,14 +365,13 @@ class Translation(TranslationsHandler):
             else:
                 # (self.title, pos, self.lang2code(l), defin.strip())
                 if entry[2] in self.langblacklist:
-                    if verbose:
-                        print "Fiteny voalisi-mainty:", entry[2]
+                    print "Fiteny voalisi-mainty:", entry[2]
                     continue
                 title = Page.title()
                 try:
                     mg_translation = self.translate_word(entry[3], language)
                 except NoWordException:
-                    if verbose: pwbot.output(
+                    pwbot.output(
                         "\03{yellow}Tsy nahitana dikantenin'i '%s' ho an'ny teny '%s' tao amin'ny banky angona\03{default}" % (
                             entry[3], language))
                     continue
@@ -392,17 +384,15 @@ class Translation(TranslationsHandler):
                     'olang': language,
                     'origin': entry[3]}
 
-                if verbose: pwbot.output(
+                pwbot.output(
                     "\03{red}%(entry)s\03{default}: dikanteny vaovao amin'ny teny '%(lang)s' " % infos)
                 if self.word_db.exists(infos['entry'], infos['lang']):
-                    if verbose:
-                        print "Efa fantatra tamin'ny alalan'ny banky angona ny fisian'ilay teny"
+                    print "Efa fantatra tamin'ny alalan'ny banky angona ny fisian'ilay teny"
                     continue
 
                 generate_redirections(self, infos)
                 append_in(infos, translations_in_mg)
-                if verbose:
-                    print translations_in_mg
+                print translations_in_mg
                 save_translation_from_bridge_language(self, infos)
                 save_translation_from_page(self, infos)
 
@@ -410,8 +400,7 @@ class Translation(TranslationsHandler):
 
         # Malagasy language pages
         # self.update_malagasy_word(translations_in_mg)
-        if verbose:
-            print " Vita."
+        print " Vita."
         return ret
 
     def update_malagasy_word(self, translations_in_mg):
@@ -424,23 +413,19 @@ class Translation(TranslationsHandler):
                 mg_entry_page.put_async(content, "+dikanteny")
             except pwbot.IsRedirectPage:
                 redirtarget = mg_entry_page.getRedirectTarget()
-                if verbose:
-                    pwbot.output("Pejy fihodinana '%s', manakatra ny tanjony: '%s'" %
-                                 (mg_entry_page.title(), redirtarget.title()))
+                pwbot.output("Pejy fihodinana '%s', manakatra ny tanjony: '%s'" %
+                             (mg_entry_page.title(), redirtarget.title()))
                 redirtarget = mg_entry_page.getRedirectTarget()
                 update_malagasy_word(redirtarget.title(), translations)
 
             except pwbot.NoPage:
-                if verbose:
-                    pwbot.output("Tsy misy ilay pejy '%s'" % mg_entry_page.title())
+                pwbot.output("Tsy misy ilay pejy '%s'" % mg_entry_page.title())
                 return
             except Exception as e:
-                if verbose:
-                    pwbot.output("Nisy hadisoana.")
+                pwbot.output("Nisy hadisoana.")
                 return
 
-        if verbose:
-            print "Manavao ny pejy malagasy...", "dikanteny %d" % len(translations_in_mg)
+        print "Manavao ny pejy malagasy...", "dikanteny %d" % len(translations_in_mg)
         for translation_in_mg in translations_in_mg:
             translation_in_mg = translation_in_mg.strip()
             for char in '[]':
@@ -448,8 +433,8 @@ class Translation(TranslationsHandler):
 
             translation_in_mg = unicode(translation_in_mg)
             update_malagasy_word(translation_in_mg, translations_in_mg[translation_in_mg])
-        if verbose:
-            print "tafapetraka ny dikanteny"
+
+        print "tafapetraka ny dikanteny"
 
     def exists(self, lang, ent):
         try:

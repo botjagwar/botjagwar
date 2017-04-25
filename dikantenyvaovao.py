@@ -287,7 +287,6 @@ class Bot(object):
                 return
             self.put_deletion_notice(page)
 
-        rc_bot.translations.process_interwiki(lang, page)
         self._update_statistics(rc_bot)
 
 
