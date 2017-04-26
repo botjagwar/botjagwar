@@ -1,3 +1,8 @@
 .idea
+.directory
 *.pyc
- 
+*.ctrl
+dikantenyvaovao.exceptions
+../conf/dikantenyvaovao/dikantenyvaovao_ilaina.txt
+../conf/dikantenyvaovao/dikantenyvaovao_dikanteny_isakora.txt
+translate_batch.txt

@@ -2,6 +2,7 @@
 
 from modules import BJDBmodule
 from modules.output import Output
+from modules.autoformatter import Autoformat
 from modules import entryprocessor
 from exceptions import NoWordException
 import pywikibot as pwbot
@@ -211,7 +212,7 @@ class Translation(TranslationsHandler):
         else:
             return tr
 
-    # TODO : refactor
+    # TODO : refactor: does too many things
     def process_wiktionary_page(self, language, Page):
         # fanampiana : Page:Page
         def save_translation_from_bridge_language(self, infos):
@@ -262,8 +263,9 @@ class Translation(TranslationsHandler):
                     return
                 else:
                     wikipage += pagecontent
-                    summary = u"+" + summary
-                    # wikipage = autocleanup.alphasort(wikipage)
+                    wikipage, edit_summary = Autoformat(wikipage).wikitext()
+                    summary = u"+" + summary + u", %s" % edit_summary
+
 
             pwbot.output(u"\03{default}>>> \03{lightgreen}%(entry)s\03{default}" % infos
                          + u"<<<\n\03{lightblue}%s\03{default}" % wikipage)
