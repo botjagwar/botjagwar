@@ -1,26 +1,24 @@
-﻿import re, time
+﻿import inspect
+import re
+import sys
+
 import pywikibot as wikipedia
 
 data_file = 'conf/entryprocessor/'
 
-def ProcessWikt(language):
-    return eval("process_%swikt()" % language)
-
 
 class WiktionaryProcessorFactory:
-    @staticmethod
-    def new_wiktionary_processor(language):
-        processors = {
-            'en': process_enwikt,
-            'fr': process_frwikt,
-            'vo': process_vowikt,
-            'zh': process_zhwikt,
-            'de': process_dewikt,
-            'pl': process_plwikt}
-        if language in processors:
-            return processors[language]()
-        else:
-            raise NotImplementedError("Tsy nahitana praosesera")
+    def __init__(self):
+        ct_module = sys.modules[__name__]
+        classes = inspect.getmembers(ct_module, inspect.isclass)
+        self.processors = [x for x in classes if x[0].startswith('process_')]
+
+    def create(self, language):
+        for class_name, processor_class in self.processors:
+            if class_name == "process_%swikt" % language:
+                return processor_class
+
+        raise NotImplementedError("Tsy nahitana praosesera")
 
 
 class Dump_pagegenerator():
@@ -531,9 +529,11 @@ def stripwikitext(w):
 
 
 if __name__ == '__main__':
-    while 1:
+    f = WiktionaryProcessorFactory()
+    f.create('fr')
+    """while 1:
         try:
             test(raw_input())
         except SyntaxError:
             wikipedia.stopme()
-            break
+            break"""

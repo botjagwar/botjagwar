@@ -301,8 +301,7 @@ class Translation(TranslationsHandler):
             processor_class = self.entryprocessors[language]
         else:
             try:
-                self.entryprocessors[language] = entryprocessor.WiktionaryProcessorFactory.new_wiktionary_processor(
-                    language)
+                self.entryprocessors[language] = entryprocessor.WiktionaryProcessorFactory().create(language)
                 processor_class = self.entryprocessors[language]
             except NotImplementedError:
                 return 0
