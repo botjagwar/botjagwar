@@ -1,34 +1,36 @@
-﻿import inspect
+# coding: utf8
+
+import inspect
 import re
 import sys
 
-import pywikibot as wikipedia
+import pywikibot
 
 data_file = 'conf/entryprocessor/'
 
 
-class WiktionaryProcessorFactory:
+class WiktionaryProcessorFactory(object):
     def __init__(self):
         ct_module = sys.modules[__name__]
         classes = inspect.getmembers(ct_module, inspect.isclass)
-        self.processors = [x for x in classes if x[0].startswith('process_')]
+        self.processors = [x for x in classes if x[0].startswith('ProcessWiktionary')]
 
     def create(self, language):
         for class_name, processor_class in self.processors:
-            if class_name == "process_%swikt" % language:
+            if class_name == "ProcessWiktionary%s" % language.upper():
                 return processor_class
 
         raise NotImplementedError("Tsy nahitana praosesera")
 
 
-class Dump_pagegenerator():
+class DumpPagegenerator(object):
     def __init__(self, dumpfile, language):
         self.dumpfile = None
         self.list_translations = []
         self.newentries = []
         self.language = language
         self.alltranslations = {}
-        self.file = wikipedia.xmlreader.XmlDump(dumpfile)
+        self.file = pywikibot.xmlreader.XmlDump(dumpfile)
         self.langblacklist = ['fr', 'en', 'sh', 'de', 'zh']
 
     def load(self, dumptype, filename, language):
@@ -40,7 +42,7 @@ class Dump_pagegenerator():
 
     def load_dump(self, filename, language='en'):
         self.language = language
-        self.file = wikipedia.xmlreader.XmlDump(filename)
+        self.file = pywikibot.xmlreader.XmlDump(filename)
 
     def load_titlefile(self, filename, language='en'):
         self.language = language
@@ -48,9 +50,9 @@ class Dump_pagegenerator():
 
     def get_processed_pages(self):
         if self.language == 'en':
-            wiktprocessor = process_enwikt()
+            wiktprocessor = ProcessWiktionaryEN()
         elif self.language == 'fr':
-            wiktprocessor = process_frwikt()
+            wiktprocessor = ProcessWiktionaryFR()
 
         print "getting entry translation"
         for fileentry in self.file.parse():
@@ -63,7 +65,7 @@ class Dump_pagegenerator():
             yield wiktprocessor.getall()
 
 
-class wiktprocessor(object):
+class WiktProcessor(object):
     """Mother class of all Wiktionary page processors"""
 
     def __init__(self, test=False, verbose=False):
@@ -93,7 +95,7 @@ class wiktprocessor(object):
         raise NotImplementedError
 
 
-class process_vowikt(wiktprocessor):
+class ProcessWiktionaryVO(WiktProcessor):
     def get_WW_definition(self):
         return self._get_param_in_temp(u"Samafomot:VpVöd", 'WW')
 
@@ -120,29 +122,29 @@ class process_vowikt(wiktprocessor):
         else:
             postran = POS
 
-        return (postran, 'vo', definition)
+        return postran, 'vo', definition
 
     def retrieve_translations(self, page_c):
         pass
 
 
-class process_ruwikt(wiktprocessor):
+class ProcessWiktionaryRU(WiktProcessor):
     pass
 
 
-class process_zhwikt(wiktprocessor):
+class ProcessWiktionaryZH(WiktProcessor):
     pass
 
 
-class process_dewikt(wiktprocessor):
+class ProcessWiktionaryDE(WiktProcessor):
     pass
 
 
-class process_plwikt(wiktprocessor):
+class ProcessWiktionaryPL(WiktProcessor):
     def __init__(self, test=False, verbose=False):
-        super(process_plwikt, self).__init__(test=False, verbose=False)
+        super(ProcessWiktionaryPL, self).__init__(test=False, verbose=False)
         try:
-            f = file(data_file + 'plwikt_langdata.dct', 'r').read()
+            f = file(data_file + 'WiktionaryPL_langdata.dct', 'r').read()
             self.langdata = eval(f)
         except IOError:
             self.langdata = {}
@@ -180,7 +182,7 @@ class process_plwikt(wiktprocessor):
         return self.langdata[langname]
 
 
-class process_mgwikt(wiktprocessor):
+class ProcessWiktionaryMG(WiktProcessor):
     def __init__(self, test=False, verbose=False):
         self.content = None
 
@@ -230,12 +232,12 @@ class process_mgwikt(wiktprocessor):
                      lang[1].strip(),  # lang
                      definition)
                 items.append(i)
-                # wikipedia.output(u" %s --> %s : %s"%i)
+                # pywikibot.output(u" %s --> %s : %s"%i)
         # print "Nahitana dikanteny ", len(items) ", len(items)
         return items
 
 
-class process_frwikt(wiktprocessor):
+class ProcessWiktionaryFR(WiktProcessor):
     def __init__(self, test=False, verbose=False):
         self.verbose = verbose
         self.text_set = False
@@ -290,7 +292,7 @@ class process_frwikt(wiktprocessor):
 
     def getall(self, keepNativeEntries=False):
         """languges sections in a given page formatting: [(POS, lang, definition), ...]"""
-        assert type(self.Page) is wikipedia.Page
+        assert type(self.Page) is pywikibot.Page
         items = []
 
         if self.content is None:
@@ -343,12 +345,12 @@ class process_frwikt(wiktprocessor):
                      lang[1].strip(),  # lang
                      definition)
                 items.append(i)
-                # wikipedia.output(u" %s --> %s : %s"%i)
+                # pywikibot.output(u" %s --> %s : %s"%i)
         # print "Nahitana dikanteny ", len(items)
         return items
 
 
-class process_enwikt(wiktprocessor):
+class ProcessWiktionaryEN(WiktProcessor):
     def __init__(self, test=False, verbose=False):
         self.verbose = verbose
         self.text_set = False
@@ -493,7 +495,7 @@ class process_enwikt(wiktprocessor):
                      pos,
                      self.lang2code(l),
                      defin.strip())  # (
-                if self.verbose: wikipedia.output('%s --> teny  "%s" ; famaritana: %s' % i)
+                if self.verbose: pywikibot.output('%s --> teny  "%s" ; famaritana: %s' % i)
                 items.append(i)
             except KeyError:
                 continue
@@ -511,13 +513,6 @@ def lang2code(l):
     return d[l]
 
 
-def test(imput=False):
-    f = process_frwikt()
-    p = wikipedia.Page(wikipedia.Site('fr', 'wiktionary'), imput)
-    f.process(p)
-    print f.getall()
-
-
 def stripwikitext(w):
     w = re.sub('[ ]?\[\[(.*)\|(.*)\]\][ ]?', '\\1', w)
     w = w.replace('.', '')
@@ -528,12 +523,17 @@ def stripwikitext(w):
     return w.strip()
 
 
+def test():
+    words = ['bitim', 'word', 'joie', 'happinness']
+    langs = ['fr', 'en']
+    for lang in langs:
+        wiki = WiktionaryProcessorFactory().create(lang)
+        for word in words:
+            page = pywikibot.Page(pywikibot.Site(lang, 'wiktionary'), word)
+            wiki.process(page)
+            print wiki.getall()
+
+    print 'check'
+
 if __name__ == '__main__':
-    f = WiktionaryProcessorFactory()
-    f.create('fr')
-    """while 1:
-        try:
-            test(raw_input())
-        except SyntaxError:
-            wikipedia.stopme()
-            break"""
+    test()
