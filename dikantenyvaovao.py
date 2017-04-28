@@ -22,6 +22,7 @@ verbose = False
 nwikimax = 15
 databases = []
 data_file = 'conf/dikantenyvaovao/'
+userdata_file = 'user_data/dikantenyvaovao/'
 
 
 def doexit(*args, **kwargs):
@@ -141,7 +142,7 @@ class LiveRecentChangesBot(ircbot.SingleServerIRCBot):
         self.channels_list = []
         self.chronometer = 0.0
         self.change_langs(lang)
-        self.errfile = file(data_file + 'dikantenyvaovao.exceptions', 'a')
+        self.errfile = file(userdata_file + 'dikantenyvaovao.exceptions', 'a')
         self.iso2languagename = {}
         self.joined = []
         self.langs = []
@@ -299,7 +300,7 @@ def striplinks(link):
 
 args = sys.argv
 if __name__ == '__main__':
-    Missing_translations = MissingTranslations(data_file)
+    Missing_translations = MissingTranslations(userdata_file)
     argsdict = {
         'irc': irc_retrieve,
         'debug': testTranslate,

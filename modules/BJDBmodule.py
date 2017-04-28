@@ -1,8 +1,27 @@
 import MySQLdb as db
+import datetime
 import pywikibot as wikipedia
 import sys, time
 
+# Read password
 default_passwd = 'password'
+
+
+def read_password():
+    global default_passwd
+    passwd_path = "conf/BJDBModule/database_password"
+    try:
+        f = file(passwd_path, 'r')
+        default_passwd = f.read()
+    except IOError:
+        print "Ovay ny rakitra %s ary soloy ho tenimiafinao azafady" % passwd_path
+        print "Please hange password in %s with your own password" % passwd_path
+        f = file(passwd_path, 'w')
+        f.write(default_passwd)
+        f.close()
+        exit(1)
+
+read_password()
 verbose = False
 
 
@@ -307,8 +326,6 @@ class SynonymsDatabase(object):
     def __init__(self):
         pass
 
-
-import datetime
 
 """ TESTS FUNCTIONS"""
 wdb = WordDatabase()
