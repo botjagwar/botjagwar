@@ -4,6 +4,8 @@ prepare:
 	sudo apt-get update
 	apt-get install -y wget
 	apt-get install -y unzip
+	mkdir -p conf/BJDBModule/
+	echo $(DB_PASSWD) > conf/BJDBModule/database_password
 
 python: prepare
 	sudo apt-get install -y python2.7
