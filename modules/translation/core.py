@@ -1,12 +1,12 @@
 # coding: utf8
-
+import re
+import pywikibot as pwbot
+from modules import entryprocessor
 from modules import BJDBmodule
+from modules.exceptions import NoWordException
 from modules.output import Output
 from modules.autoformatter import Autoformat
-from modules import entryprocessor
-from exceptions import NoWordException
-import pywikibot as pwbot
-import re
+
 
 
 class TranslationsHandler(object):
@@ -123,7 +123,6 @@ class Translation(TranslationsHandler):
         self.iso2languagename = {}
         self.errlogfile = file(self.data_file + 'dikantenyvaovao.exceptions', 'a')
         self.langblacklist = ['fr', 'en', 'sh', 'ar', 'de', 'zh']
-        self.entryprocessors = {}
         self.translationslist = []
 
     def _codetoname(self, languageISO):
@@ -297,14 +296,8 @@ class Translation(TranslationsHandler):
         # BEGINNING
         ret = 0
         print "Praosesera:", language.upper()
-        if language in self.entryprocessors:
-            processor_class = self.entryprocessors[language]
-        else:
-            try:
-                self.entryprocessors[language] = entryprocessor.WiktionaryProcessorFactory().create(language)
-                processor_class = self.entryprocessors[language]
-            except NotImplementedError:
-                return 0
+        wiktionary_processor_class = entryprocessor.WiktionaryProcessorFactory().create(language)
+        wiktionary_processor = wiktionary_processor_class()
 
         pwbot.output("\n >>> \03{lightgreen}%s\03{default} <<< " % Page.title())
 
@@ -314,10 +307,10 @@ class Translation(TranslationsHandler):
         if Page.namespace() != 0:
             print "Tsy amin'ny anaran-tsehatra fotony"
             return ret
-        processor_class.process(Page)
+        wiktionary_processor.process(Page)
 
         try:
-            entries = processor_class.getall()
+            entries = wiktionary_processor.getall()
         except Exception as e:
             return 0
 
@@ -327,7 +320,7 @@ class Translation(TranslationsHandler):
             if entry[2] == language:  # if entry in the content language
                 # (self.title, pos, self.lang2code(l), defin.strip())
                 try:
-                    translations = processor_class.retrieve_translations()
+                    translations = wiktionary_processor.retrieve_translations()
                 except Exception:
                     continue
                 translations_in_mg = {}  # dictionary {string : list of translation tuple (see below)}

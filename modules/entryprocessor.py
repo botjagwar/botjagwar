@@ -3,24 +3,28 @@
 import inspect
 import re
 import sys
+import warnings
 
 import pywikibot
 
 data_file = 'conf/entryprocessor/'
+verbose = True
 
 
 class WiktionaryProcessorFactory(object):
     def __init__(self):
         ct_module = sys.modules[__name__]
         classes = inspect.getmembers(ct_module, inspect.isclass)
-        self.processors = [x for x in classes if x[0].startswith('ProcessWiktionary')]
+        self.processors = [x for x in classes if x[0].endswith('WiktionaryProcessor')]
 
     def create(self, language):
-        for class_name, processor_class in self.processors:
-            if class_name == "ProcessWiktionary%s" % language.upper():
-                return processor_class
+        language_class_name = "%sWiktionaryProcessor" % language.upper()
+        for current_class_name, processor_class in self.processors:
 
-        raise NotImplementedError("Tsy nahitana praosesera")
+            if current_class_name == language_class_name:
+                return processor_class
+        warnings.warn("Tsy nahitana praosesera: '%s'" % language_class_name, Warning)
+        return WiktionaryProcessor
 
 
 class DumpPagegenerator(object):
@@ -50,23 +54,27 @@ class DumpPagegenerator(object):
 
     def get_processed_pages(self):
         if self.language == 'en':
-            wiktprocessor = ProcessWiktionaryEN()
+            WiktionaryProcessor = ENWiktionaryProcessor()
         elif self.language == 'fr':
-            wiktprocessor = ProcessWiktionaryFR()
+            WiktionaryProcessor = FRWiktionaryProcessor()
 
         print "getting entry translation"
         for fileentry in self.file.parse():
-            wiktprocessor.process(fileentry.text, fileentry.title)
-            yield wiktprocessor.retrieve_translations()
+            WiktionaryProcessor.process(fileentry.text, fileentry.title)
+            yield WiktionaryProcessor.retrieve_translations()
 
         print "getting entry page"
         for fileentry in self.file.parse():
-            wiktprocessor.process(fileentry.text, fileentry.title)
-            yield wiktprocessor.getall()
+            WiktionaryProcessor.process(fileentry.text, fileentry.title)
+            yield WiktionaryProcessor.getall()
 
 
-class WiktProcessor(object):
-    """Mother class of all Wiktionary page processors"""
+class WiktionaryProcessorException(Exception):
+    pass
+
+
+class WiktionaryProcessor(object):
+    """Generic class of all Wiktionary page processors"""
 
     def __init__(self, test=False, verbose=False):
         self.content = None
@@ -87,15 +95,13 @@ class WiktProcessor(object):
         self.text_set = True
 
     def retrieve_translations(self, page_c):
-        print "Not implemented"
-        raise NotImplementedError
+        raise NotImplementedError()
 
     def getall(self, keepNativeEntries=False):
-        print  "Not implemented"
-        raise NotImplementedError
+        raise NotImplementedError()
 
 
-class ProcessWiktionaryVO(WiktProcessor):
+class VOWiktionaryProcessor(WiktionaryProcessor):
     def get_WW_definition(self):
         return self._get_param_in_temp(u"Samafomot:VpVöd", 'WW')
 
@@ -128,21 +134,33 @@ class ProcessWiktionaryVO(WiktProcessor):
         pass
 
 
-class ProcessWiktionaryRU(WiktProcessor):
+class RUWiktionaryProcessor(WiktionaryProcessor):
     pass
 
 
-class ProcessWiktionaryZH(WiktProcessor):
+class ZHWiktionaryProcessor(WiktionaryProcessor):
     pass
 
 
-class ProcessWiktionaryDE(WiktProcessor):
+class DEWiktionaryProcessor(WiktionaryProcessor):
     pass
 
 
-class ProcessWiktionaryPL(WiktProcessor):
+class ESWiktionaryProcessor(WiktionaryProcessor):
+    pass
+
+
+class SVWiktionaryProcessor(WiktionaryProcessor):
+    pass
+
+
+class NLWiktionaryProcessor(WiktionaryProcessor):
+    pass
+
+
+class PLWiktionaryProcessor(WiktionaryProcessor):
     def __init__(self, test=False, verbose=False):
-        super(ProcessWiktionaryPL, self).__init__(test=False, verbose=False)
+        super(PLWiktionaryProcessor, self).__init__(test=False, verbose=False)
         try:
             f = file(data_file + 'WiktionaryPL_langdata.dct', 'r').read()
             self.langdata = eval(f)
@@ -182,7 +200,7 @@ class ProcessWiktionaryPL(WiktProcessor):
         return self.langdata[langname]
 
 
-class ProcessWiktionaryMG(WiktProcessor):
+class MGWiktionaryProcessor(WiktionaryProcessor):
     def __init__(self, test=False, verbose=False):
         self.content = None
 
@@ -237,7 +255,7 @@ class ProcessWiktionaryMG(WiktProcessor):
         return items
 
 
-class ProcessWiktionaryFR(WiktProcessor):
+class FRWiktionaryProcessor(WiktionaryProcessor):
     def __init__(self, test=False, verbose=False):
         self.verbose = verbose
         self.text_set = False
@@ -350,7 +368,7 @@ class ProcessWiktionaryFR(WiktProcessor):
         return items
 
 
-class ProcessWiktionaryEN(WiktProcessor):
+class ENWiktionaryProcessor(WiktionaryProcessor):
     def __init__(self, test=False, verbose=False):
         self.verbose = verbose
         self.text_set = False

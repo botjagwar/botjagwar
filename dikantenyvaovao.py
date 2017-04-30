@@ -11,6 +11,7 @@ import traceback
 import pywikibot as pwbot
 
 from modules import BJDBmodule, ircbot
+from modules.exceptions import NoWordException
 from modules.translation.core import Translation, TranslationsHandler
 from modules.translation.analysis import (analyse_edit_hours, analyse_translations,
                                           MissingTranslations, Translations_per_day_hour)
@@ -106,8 +107,7 @@ def add_translations(last_x_hours=1):
         try:
             page_c = orig = mg_page.get()
             print "original length:", len(page_c)
-        except Exception:
-            page_c = u""
+        except Exception as e:
             continue
 
         ftranslationlist = set(mg_words[mgword])
