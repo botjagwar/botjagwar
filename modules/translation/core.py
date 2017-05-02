@@ -8,7 +8,6 @@ from modules.output import Output
 from modules.autoformatter import Autoformat
 
 
-
 class TranslationsHandler(object):
     def __init__(self):
         """Mitantana ny dikantenin'ny teny hafa amin'ny teny malagasy"""
@@ -16,33 +15,37 @@ class TranslationsHandler(object):
         self.loaded_flag = False
         self.databases = []
 
-    def setcontent(self, content):
-        """Tsy maintsy antsoina ity lefa ity alohan'ny miantso ny lefa hafa
-           (manipy AssertionError ireo lefa ireo raha tsy manao izany)"""
-        self.content = content
-        self.loaded_flag = True
+    def _add(self, langcode, translation):
+        """ Tao fanampiana dikanteny. Mamerina ny votoatim-pejy misy ny dikanteny."""
+        try:
+            langcode = unicode(langcode)
+        except UnicodeError:
+            return self.content
 
-    def sort(self):
-        """Fampirimana ny dikanteny azo amin'ny alalan'ny REGEX araka ny laharan'ny Abidy"""
-        assert self.loaded_flag is True
+        try:
+            translation = unicode(translation, 'utf8')
+        except UnicodeDecodeError:
+            translation = unicode(translation, 'latin1')
+        except TypeError:
+            pass
 
-        if self.content.find('{{}} :') == -1: return self.content
-        trads = re.findall("# (.*) : \[\[(.*)\]\]", self.content)
-        trads.sort()
-        trstr = '{{}} :'
-        tran = self.content.replace('{{}} :', '')
-        if len(trads) > 200:
-            print 'hadisoana ?'
-            return tran
-        for i in trads:
-            trstr = trstr.replace("{{}} :", "# %s : [[%s]]\n{{}} :" % i)
-            tran = self.content.replace('\n\n', '\n')
-        trstr = trstr.strip('\n')
-        trstr = re.sub("(\\n)+", "\n", trstr)
-        tran = self.content.replace("{{-dika-}}", "{{-dika-}}\n%s" % trstr)
-
-        self.loaded_flag = False
-        return self.content.strip('\n')
+        if self.content.find("{{-dika-}}") != -1:
+            if self.content.find("{{%s}} :" % (langcode)) != -1:
+                if self.content.find(u"{{dikan-teny|%s|%s}}" % (translation, langcode)) != -1:
+                    self.content = re.sub("[ ]?\{\{dikan\-teny\|%s\|%s\}\}[\,]?" % (translation, langcode), u"",
+                                          self.content)
+                    self.content = self.content.replace("# {{%s}} :" % (langcode),
+                                                        u"# {{%s}} : {{dikan-teny|%s|%s}}," % (
+                                                            langcode, translation, langcode))
+                else:
+                    self.content = self.content.replace("# {{%s}} :" % (langcode),
+                                                        u"# {{%s}} : {{dikan-teny|%s|%s}}," % (
+                                                            langcode, translation, langcode))
+            else:
+                self.content = self.content.replace("{{-dika-}}",
+                                                    u"{{-dika-}}\n# {{%s}} : {{dikan-teny|%s|%s}}" % (
+                                                        langcode, translation, langcode))
+        return self.content
 
     def add(self, translations, sort=True):
         """ Afaka mampiditra ny dikanteny eo ambany"""
@@ -75,38 +78,33 @@ class TranslationsHandler(object):
         self.loaded_flag = False
         return translations
 
-    def _add(self, langcode, translation):
-        """ Tao fanampiana dikanteny. Mamerina ny votoatim-pejy misy ny dikanteny."""
-        try:
-            langcode = unicode(langcode)
-        except UnicodeError:
-            return self.content
+    def setcontent(self, content):
+        """Tsy maintsy antsoina ity lefa ity alohan'ny miantso ny lefa hafa
+           (manipy AssertionError ireo lefa ireo raha tsy manao izany)"""
+        self.content = content
+        self.loaded_flag = True
 
-        try:
-            translation = unicode(translation, 'utf8')
-        except UnicodeDecodeError:
-            translation = unicode(translation, 'latin1')
-        except TypeError:
-            pass
+    def sort(self):
+        """Fampirimana ny dikanteny azo amin'ny alalan'ny REGEX araka ny laharan'ny Abidy"""
+        assert self.loaded_flag is True
 
-        if self.content.find("{{-dika-}}") != -1:
-            if self.content.find("{{%s}} :" % (langcode)) != -1:
-                if self.content.find(u"{{dikan-teny|%s|%s}}" % (translation, langcode)) != -1:
-                    self.content = re.sub("[ ]?\{\{dikan\-teny\|%s\|%s\}\}[\,]?" % (translation, langcode), u"",
-                                          self.content)
-                    self.content = self.content.replace("# {{%s}} :" % (langcode),
-                                                        u"# {{%s}} : {{dikan-teny|%s|%s}}," % (
-                                                            langcode, translation, langcode))
-                else:
-                    self.content = self.content.replace("# {{%s}} :" % (langcode),
-                                                        u"# {{%s}} : {{dikan-teny|%s|%s}}," % (
-                                                            langcode, translation, langcode))
-            else:
-                self.content = self.content.replace("{{-dika-}}",
-                                                    u"{{-dika-}}\n# {{%s}} : {{dikan-teny|%s|%s}}" % (
-                                                        langcode, translation, langcode))
+        if self.content.find('{{}} :') == -1: return self.content
+        trads = re.findall("# (.*) : \[\[(.*)\]\]", self.content)
+        trads.sort()
+        trstr = '{{}} :'
+        tran = self.content.replace('{{}} :', '')
+        if len(trads) > 200:
+            print 'hadisoana ?'
+            return tran
+        for i in trads:
+            trstr = trstr.replace("{{}} :", "# %s : [[%s]]\n{{}} :" % i)
+            tran = self.content.replace('\n\n', '\n')
+        trstr = trstr.strip('\n')
+        trstr = re.sub("(\\n)+", "\n", trstr)
+        tran = self.content.replace("{{-dika-}}", "{{-dika-}}\n%s" % trstr)
 
-        return self.content
+        self.loaded_flag = False
+        return self.content.strip('\n')
 
 
 class Translation(TranslationsHandler):
@@ -125,6 +123,16 @@ class Translation(TranslationsHandler):
         self.langblacklist = ['fr', 'en', 'sh', 'ar', 'de', 'zh']
         self.translationslist = []
 
+    @staticmethod
+    def _append_in(infos, translations_in_mg):  # TRANSLATION HANDLING SUBFUNCTION
+        for mgtranslation in infos['definition'].split(","):
+            mgtranslation = mgtranslation.strip()
+            if translations_in_mg.has_key(mgtranslation):
+                translations_in_mg[mgtranslation].append((infos["lang"], infos["entry"]))
+            else:
+                translations_in_mg[mgtranslation] = []
+                translations_in_mg[mgtranslation].append((infos["lang"], infos["entry"]))
+
     def _codetoname(self, languageISO):
         if self.iso2languagename == {}:
             # initialise variable
@@ -134,6 +142,117 @@ class Translation(TranslationsHandler):
                 self.iso2languagename[line[0]] = line[1]
         else:
             return self.iso2languagename
+
+    @staticmethod
+    def _generate_redirections(infos):
+        redirtarget = infos['entry']
+        if infos['lang'] in ['ru', 'uk', 'bg', 'be']:
+            for char in u"́̀":
+                if redirtarget.find(char) != -1:
+                    redirtarget = redirtarget.replace(char, u"")
+            if redirtarget.find(u"æ") != -1:
+                redirtarget = redirtarget.replace(u"æ", u"ӕ")
+            if infos['entry'] != redirtarget:
+                pwbot.Page(pwbot.Site('mg', 'wiktionary'),
+                           infos['entry']).put_async(u"#FIHODINANA [[%s]]" % redirtarget, "fihodinana")
+                infos['entry'] = redirtarget
+
+    def _save_translation_from_bridge_language(self, infos):
+        summary = "Dikan-teny avy amin'ny dikan-teny avy amin'i %(olang)s.wiktionary" % infos
+        wikipage = self.output.wikipage(infos)
+        try:
+            mg_Page = pwbot.Page(pwbot.Site('mg', 'wiktionary'), infos['entry'])
+        except UnicodeDecodeError:
+            mg_Page = pwbot.Page(pwbot.Site('mg', 'wiktionary'), infos['entry'].decode('utf8'))
+
+        try:
+            if mg_Page.exists():
+                pagecontent = mg_Page.get()
+                if pagecontent.find('{{=%s=}}' % infos['lang']) != -1:
+                    print "Efa misy ilay teny iditra."
+                    self.output.db(infos)
+                    return
+                else:
+                    wikipage += pagecontent
+                    summary = u"+" + summary
+        except pwbot.exceptions.IsRedirectPage:
+            infos['entry'] = mg_Page.getRedirectTarget().title()
+            self._save_translation_from_bridge_language(self, infos)
+            return
+
+        except pwbot.exceptions.InvalidTitle:
+            print "lohateny tsy mety ho lohatenim-pejy"
+            return
+
+        except Exception as e:
+            print e
+            return
+
+        pwbot.output("\n \03{red}%(entry)s\03{default} : %(lang)s " % infos)
+        pwbot.output("\03{white}%s\03{default}" % wikipage)
+        mg_Page.put_async(wikipage, summary)
+        self.output.db(infos)
+
+    def _save_translation_from_page(self, infos):
+        summary = "Dikan-teny avy amin'ny pejy avy amin'i %(olang)s.wiktionary" % infos
+        wikipage = self.output.wikipage(infos)
+        mg_page = pwbot.Page(pwbot.Site('mg', 'wiktionary'), infos["entry"])
+        if mg_page.exists():
+            pagecontent = mg_page.get()
+            if pagecontent.find('{{=%s=}}' % infos['lang']) != -1:
+                print "Efa misy ilay teny iditra, fa mbola tsy fantatry ny banky angona izany."
+                self.output.db(infos)
+                return
+            else:
+                wikipage += pagecontent
+                wikipage, edit_summary = Autoformat(wikipage).wikitext()
+                summary = u"+" + summary + u", %s" % edit_summary
+
+        pwbot.output(u"\03{default}>>> \03{lightgreen}%(entry)s\03{default}" % infos
+                     + u"<<<\n\03{lightblue}%s\03{default}" % wikipage)
+        mg_page.put_async(wikipage, summary)
+        self.output.db(infos)
+
+    def exists(self, lang, ent):
+        try:
+            ent = ent.decode('utf8')
+        except UnicodeEncodeError:
+            pass
+
+        try:
+            lang = unicode(lang, 'latin1')
+        except TypeError:
+            pass
+
+        if self.translationslist.count((lang, ent)) >= 1:
+            return True
+        else:
+            # pwbot.output(u"mitady an'i teny \"%s\" ao amin'ny banky angona..."%ent)
+            if ent == 'en':
+                return self.word_db.exists(ent, lang)
+            self.translationslist.append((lang, ent))
+            # print type(lang), type(ent)
+            return self.word_db.exists(ent, lang)
+
+    def get_allwords(self):
+        alldata = self.sql_db.load()
+        ret = {}
+        for data in alldata:
+            if data[5] in ret:
+                ret[data[5]].append(unicode(data[1], 'latin1'))
+            else:
+                ret[data[5]] = [unicode(data[1], 'latin1')]
+        return ret
+
+    def get_alltranslations(self, language='en'):
+        alldata = self.sql_db.read({'fiteny': language})
+        ret = {}
+        for data in alldata:
+            if ret.has_key(data[1]):
+                ret[data[1]] = unicode(data[3], 'latin1')
+            else:
+                ret[data[1]] = unicode(data[3], 'latin1')
+        return ret
 
     @staticmethod
     def process_interwiki(lang, Page):
@@ -184,114 +303,9 @@ class Translation(TranslationsHandler):
                 pwbot.showDiff(opage_c, mgpage_c)
                 mgpage.put_async(mgpage_c, summary)
 
-    def get_allwords(self):
-        alldata = self.sql_db.load()
-        ret = {}
-        for data in alldata:
-            if data[5] in ret:
-                ret[data[5]].append(unicode(data[1], 'latin1'))
-            else:
-                ret[data[5]] = [unicode(data[1], 'latin1')]
-        return ret
-
-    def get_alltranslations(self, language='en'):
-        alldata = self.sql_db.read({'fiteny': language})
-        ret = {}
-        for data in alldata:
-            if ret.has_key(data[1]):
-                ret[data[1]] = unicode(data[3], 'latin1')
-            else:
-                ret[data[1]] = unicode(data[3], 'latin1')
-        return ret
-
-    def translate_word(self, word, language='fr'):
-        tr = self.word_db.translate(word, language)
-        if not tr:
-            raise NoWordException()
-        else:
-            return tr
-
-    # TODO : refactor: does too many things
     def process_wiktionary_page(self, language, Page):
         # fanampiana : Page:Page
-        def save_translation_from_bridge_language(self, infos):
-            summary = "Dikan-teny avy amin'ny dikan-teny avy amin'i %(olang)s.wiktionary" % infos
-            wikipage = self.output.wikipage(infos)
-            try:
-                mg_Page = pwbot.Page(pwbot.Site('mg', 'wiktionary'), infos['entry'])
-            except UnicodeDecodeError:
-                mg_Page = pwbot.Page(pwbot.Site('mg', 'wiktionary'), infos['entry'].decode('utf8'))
 
-            try:
-                if mg_Page.exists():
-                    pagecontent = mg_Page.get()
-                    if pagecontent.find('{{=%s=}}' % infos['lang']) != -1:
-                        print "Efa misy ilay teny iditra."
-                        self.output.db(infos)
-                        return
-                    else:
-                        wikipage += pagecontent
-                        summary = u"+" + summary
-            except pwbot.exceptions.IsRedirectPage:
-                infos['entry'] = mg_Page.getRedirectTarget().title()
-                save_translation_from_bridge_language(self, infos)
-                return
-
-            except pwbot.exceptions.InvalidTitle:
-                print "lohateny tsy mety ho lohatenim-pejy"
-                return
-
-            except Exception as e:
-                print e
-                return
-
-            pwbot.output("\n \03{red}%(entry)s\03{default} : %(lang)s " % infos)
-            pwbot.output("\03{white}%s\03{default}" % wikipage)
-            mg_Page.put_async(wikipage, summary)
-            self.output.db(infos)
-
-        def save_translation_from_page(self, infos):
-            summary = "Dikan-teny avy amin'ny pejy avy amin'i %(olang)s.wiktionary" % infos
-            wikipage = self.output.wikipage(infos)
-            mg_page = pwbot.Page(pwbot.Site('mg', 'wiktionary'), infos["entry"])
-            if mg_page.exists():
-                pagecontent = mg_page.get()
-                if pagecontent.find('{{=%s=}}' % infos['lang']) != -1:
-                    print "Efa misy ilay teny iditra, fa mbola tsy fantatry ny banky angona izany."
-                    self.output.db(infos)
-                    return
-                else:
-                    wikipage += pagecontent
-                    wikipage, edit_summary = Autoformat(wikipage).wikitext()
-                    summary = u"+" + summary + u", %s" % edit_summary
-
-
-            pwbot.output(u"\03{default}>>> \03{lightgreen}%(entry)s\03{default}" % infos
-                         + u"<<<\n\03{lightblue}%s\03{default}" % wikipage)
-            mg_page.put_async(wikipage, summary)
-            self.output.db(infos)
-
-        def generate_redirections(self, infos):
-            redirtarget = infos['entry']
-            if infos['lang'] in ['ru', 'uk', 'bg', 'be']:
-                for char in u"́̀":
-                    if redirtarget.find(char) != -1:
-                        redirtarget = redirtarget.replace(char, u"")
-                if redirtarget.find(u"æ") != -1:
-                    redirtarget = redirtarget.replace(u"æ", u"ӕ")
-                if infos['entry'] != redirtarget:
-                    pwbot.Page(pwbot.Site('mg', 'wiktionary'),
-                               infos['entry']).put_async(u"#FIHODINANA [[%s]]" % redirtarget, "fihodinana")
-                    infos['entry'] = redirtarget
-
-        def append_in(infos, translations_in_mg):  # TRANSLATION HANDLING SUBFUNCTION
-            for mgtranslation in infos['definition'].split(","):
-                mgtranslation = mgtranslation.strip()
-                if translations_in_mg.has_key(mgtranslation):
-                    translations_in_mg[mgtranslation].append((infos["lang"], infos["entry"]))
-                else:
-                    translations_in_mg[mgtranslation] = []
-                    translations_in_mg[mgtranslation].append((infos["lang"], infos["entry"]))
 
         # BEGINNING
         ret = 0
@@ -348,10 +362,10 @@ class Translation(TranslationsHandler):
                         # print "Efa fantatra tamin'ny alalan'ny banky angona ny fisian'ilay teny"
                         continue
 
-                    generate_redirections(self, infos)
-                    append_in(infos, translations_in_mg)
+                    self._generate_redirections(self, infos)
+                    self._append_in(infos, translations_in_mg)
                     print translations_in_mg
-                    save_translation_from_bridge_language(self, infos)
+                    self._save_translation_from_bridge_language(self, infos)
                     ret += 1
 
                     # Malagasy language pages
@@ -384,11 +398,11 @@ class Translation(TranslationsHandler):
                     print "Efa fantatra tamin'ny alalan'ny banky angona ny fisian'ilay teny"
                     continue
 
-                generate_redirections(self, infos)
-                append_in(infos, translations_in_mg)
+                self._generate_redirections(self, infos)
+                self._append_in(infos, translations_in_mg)
                 print translations_in_mg
-                save_translation_from_bridge_language(self, infos)
-                save_translation_from_page(self, infos)
+                self._save_translation_from_bridge_language(self, infos)
+                self._save_translation_from_page(self, infos)
 
                 ret += 1
 
@@ -396,6 +410,13 @@ class Translation(TranslationsHandler):
         # self.update_malagasy_word(translations_in_mg)
         print " Vita."
         return ret
+
+    def translate_word(self, word, language='fr'):
+        tr = self.word_db.translate(word, language)
+        if not tr:
+            raise NoWordException()
+        else:
+            return tr
 
     def update_malagasy_word(self, translations_in_mg):
         # Malagasy language pages
@@ -430,23 +451,3 @@ class Translation(TranslationsHandler):
 
         print "tafapetraka ny dikanteny"
 
-    def exists(self, lang, ent):
-        try:
-            ent = ent.decode('utf8')
-        except UnicodeEncodeError:
-            pass
-
-        try:
-            lang = unicode(lang, 'latin1')
-        except TypeError:
-            pass
-
-        if self.translationslist.count((lang, ent)) >= 1:
-            return True
-        else:
-            # pwbot.output(u"mitady an'i teny \"%s\" ao amin'ny banky angona..."%ent)
-            if ent == 'en':
-                return self.word_db.exists(ent, lang)
-            self.translationslist.append((lang, ent))
-            # print type(lang), type(ent)
-            return self.word_db.exists(ent, lang)

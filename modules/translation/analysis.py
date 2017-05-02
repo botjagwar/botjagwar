@@ -2,7 +2,7 @@
 
 import pywikibot as pwbot
 
-mt_data_file = 'conf/dikantenyvaovao/'
+mt_data_file = 'user_data/dikantenyvaovao/'
 
 def analyse_translations(arg2):
     arg2 = int(arg2)
