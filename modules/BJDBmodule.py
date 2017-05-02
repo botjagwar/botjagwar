@@ -6,7 +6,6 @@ import sys, time
 # Read password
 default_passwd = 'password'
 
-
 def read_password():
     global default_passwd
     passwd_path = "conf/BJDBModule/database_password"
