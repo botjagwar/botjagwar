@@ -1,11 +1,13 @@
-DB_PASSWD := password
+DB_PASSWD := $(shell bash -c 'read -s -p "Please enter your (future) database password: " pwd; echo $$pwd')
 
-prepare:
+setpass:
+	mkdir -p conf/BJDBModule/
+	python set_database_password.py -pass:$(DB_PASSWD)
+
+prepare: setpass
 	sudo apt-get update
 	apt-get install -y wget
 	apt-get install -y unzip
-	mkdir -p conf/BJDBModule/
-	echo $(DB_PASSWD) > conf/BJDBModule/database_password
 
 python: prepare
 	sudo apt-get install -y python2.7

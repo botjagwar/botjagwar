@@ -6,13 +6,17 @@ import sys
 default_path = "conf/BJDBModule/database_password"
 args = sys.argv
 set_new_password = False
+new_password = None
 
 
 def parse_args():
     global set_new_password
+    global new_password
     for arg in args:
         if arg == '-n':
             set_new_password = True
+        if arg.startswith('-pass:'):
+            new_password = arg[6:]
 
 
 class PasswordManager(object):
@@ -74,9 +78,15 @@ class PasswordManager(object):
         if not valid:
             print "Tsy nahitana tenimiafina / Password file not found."
         self.read_db_password_file()
+
+        if new_password is not None:
+            print "Mametraka tenimiafina vaovao / Setting new password."
+            self.password = new_password
+            self.write_db_password_file(new_password)
         # prompt for new password
-        if self.password is None or set_new_password:
+        elif self.password is None or set_new_password:
             self.password = getpass.getpass(prompt="Tenimiafina vaovao / New password:")
+
         # store it encrypted
         self.write_db_password_file()
 
