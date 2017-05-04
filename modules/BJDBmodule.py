@@ -5,10 +5,22 @@ from set_database_password import PasswordManager
 import sys, time
 
 
+verbose = True
+
+
 class Database(object):
-    def __init__(self, host='localhost', login='root', table='teny'):
+    def __init__(self,
+                 host='localhost',
+                 login='root',
+                 passwd=None,
+                 dbname=None,
+                 table='teny'):
         self.pw_manager = PasswordManager()
-        self.db_passwd = self.pw_manager.get_password()
+        if passwd is None:
+            self.db_passwd = self.pw_manager.get_password()
+        else:
+            self.db_passwd = passwd
+
         self.infos = {
             'host': host,
             'login': login,
@@ -20,7 +32,10 @@ class Database(object):
         self.tablename = 'teny'
         self.connect = db.connect(host, login, self.db_passwd)
         self.cursor = self.connect.cursor()
-        self.infos['DB'] = u"data_botjagwar"
+        if dbname is None:
+            dbname = u"data_botjagwar"
+        self.infos['DB'] = dbname
+
         self.querycount = 0
         self.autocommit = True
 

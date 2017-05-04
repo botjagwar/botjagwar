@@ -401,8 +401,8 @@ class Translation(TranslationsHandler):
                 self._generate_redirections(infos)
                 self._append_in(infos, translations_in_mg)
                 print translations_in_mg
-                self._save_translation_from_bridge_language(self, infos)
-                self._save_translation_from_page(self, infos)
+                self._save_translation_from_bridge_language(infos)
+                self._save_translation_from_page(infos)
 
                 ret += 1
 
