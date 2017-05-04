@@ -1,8 +1,18 @@
 import base64
 import getpass
+import sys
 
 # TODO: FINISH
 default_path = "conf/BJDBModule/database_password"
+args = sys.argv
+set_new_password = False
+
+
+def parse_args():
+    global set_new_password
+    for arg in args:
+        if arg == '-n':
+            set_new_password = True
 
 
 class PasswordManager(object):
@@ -22,6 +32,7 @@ class PasswordManager(object):
 
     def set_new_db_password(self, new_passwd):
         self.password = new_passwd
+        self.write_db_password_file(new_passwd)
 
     def read_db_password_file(self):
         f = file(self.password_path, 'r')
@@ -32,6 +43,11 @@ class PasswordManager(object):
             print "Tsy nahavaky tenimiafina / Password reading failed."
         finally:
             f.close()
+
+    def get_password(self):
+        if self.password is None:
+            self.read_db_password_file()
+        return self.password
 
     @staticmethod
     def _decrypt(string):
@@ -50,16 +66,21 @@ class PasswordManager(object):
             else:
                 f.write(self._encrypt(self.password))
         except IOError as e:
+            print e
             print "Tsy nahomby ny fanoatana rakitra tenimiafina vaovao / Failed to write new password to file"
 
     def run(self):
         valid = self.check_database_password()
         if not valid:
             print "Tsy nahitana tenimiafina / Password file not found."
+        self.read_db_password_file()
         # prompt for new password
+        if self.password is None or set_new_password:
+            self.password = getpass.getpass(prompt="Tenimiafina vaovao / New password:")
         # store it encrypted
-        #
+        self.write_db_password_file()
 
 if __name__ == '__main__':
+    parse_args()
     pw_manager = PasswordManager()
     pw_manager.run()

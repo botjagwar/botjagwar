@@ -398,7 +398,7 @@ class Translation(TranslationsHandler):
                     print "Efa fantatra tamin'ny alalan'ny banky angona ny fisian'ilay teny"
                     continue
 
-                self._generate_redirections(self, infos)
+                self._generate_redirections(infos)
                 self._append_in(infos, translations_in_mg)
                 print translations_in_mg
                 self._save_translation_from_bridge_language(self, infos)

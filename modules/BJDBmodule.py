@@ -1,40 +1,24 @@
 import MySQLdb as db
 import datetime
 import pywikibot as wikipedia
+from set_database_password import PasswordManager
 import sys, time
-
-# Read password
-default_passwd = 'password'
-
-def read_password():
-    global default_passwd
-    passwd_path = "conf/BJDBModule/database_password"
-    try:
-        f = file(passwd_path, 'r')
-        default_passwd = f.read()
-    except IOError:
-        print "Ovay ny rakitra %s ary soloy ho tenimiafinao azafady" % passwd_path
-        print "Please hange password in %s with your own password" % passwd_path
-        f = file(passwd_path, 'w')
-        f.write(default_passwd)
-        f.close()
-        exit(1)
-
-read_password()
-verbose = False
 
 
 class Database(object):
-    def __init__(self, host='localhost', login='root', passwd=default_passwd, dbname=u"data_botjagwar", table='teny'):
+    def __init__(self, host='localhost', login='root', table='teny'):
+        self.pw_manager = PasswordManager()
+        self.db_passwd = self.pw_manager.get_password()
         self.infos = {
             'host': host,
             'login': login,
-            'passwd': passwd,
+            'passwd': self.db_passwd,
             'table': table
         }
-        # TODO: configuration file to read
+        self.pw_manager = PasswordManager()
+        # TODO: configuration file to read - OK for DB password
         self.tablename = 'teny'
-        self.connect = db.connect(host, login, passwd)
+        self.connect = db.connect(host, login, self.db_passwd)
         self.cursor = self.connect.cursor()
         self.infos['DB'] = u"data_botjagwar"
         self.querycount = 0
@@ -204,12 +188,16 @@ class Database(object):
 class WordDatabase(object):
     def __init__(self, params={}, Loaded_DB=None):
         """"params-> dict {key:value,...}; Loaded_DB-> DB object"""
+        self.pw_manager = PasswordManager()
+        self.db_passwd = self.pw_manager.get_password()
+
         if not params:
             # Currently hard-coded parameters, parameters read-in-file in the future.
             self.params = {
                 'host': 'localhost',
                 'login': 'root',
-                'passwd': default_passwd}
+                'passwd': self.db_passwd
+            }
         else:
             self.params = params
         self.famaritana_fiteny = 'mg'
