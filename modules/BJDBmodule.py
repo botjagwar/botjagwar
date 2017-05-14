@@ -332,7 +332,10 @@ class WordDatabase(object):
 
         tstring = u""
         for translation in translations:
-            tstring += u"[[%s]], " % translation[0]
+            try:
+                tstring += u"[[%s]], " % translation[0]
+            except UnicodeDecodeError:
+                tstring += u"[[%s]], " % translation[0].decode("latin1")
 
         tstring = tstring.strip(u", ")
         return tstring
