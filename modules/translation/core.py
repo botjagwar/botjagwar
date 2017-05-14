@@ -7,6 +7,7 @@ from modules.exceptions import NoWordException
 from modules.output import Output
 from modules.autoformatter import Autoformat
 
+default_data_file = 'conf/dikantenyvaovao/'
 
 class TranslationsHandler(object):
     def __init__(self):
@@ -108,15 +109,14 @@ class TranslationsHandler(object):
 
 
 class Translation(TranslationsHandler):
-    def __init__(self, data_file):
+    def __init__(self, data_file=False):
         """Mandika teny ary pejy @ teny malagasy"""
         super(self.__class__, self).__init__()
+        self.data_file = data_file or default_data_file
         self.sql_db = BJDBmodule.Database()
         self.word_db = BJDBmodule.WordDatabase()
-
         self.databases.append(self.word_db)
         self.databases.append(self.sql_db)
-        self.data_file = data_file
         self.output = Output()
         self.iso2languagename = {}
         self.errlogfile = file(self.data_file + 'dikantenyvaovao.exceptions', 'a')
@@ -362,10 +362,10 @@ class Translation(TranslationsHandler):
                         # print "Efa fantatra tamin'ny alalan'ny banky angona ny fisian'ilay teny"
                         continue
 
-                    self._generate_redirections(self, infos)
+                    self._generate_redirections(infos)
                     self._append_in(infos, translations_in_mg)
                     print translations_in_mg
-                    self._save_translation_from_bridge_language(self, infos)
+                    self._save_translation_from_bridge_language(infos)
                     ret += 1
 
                     # Malagasy language pages
