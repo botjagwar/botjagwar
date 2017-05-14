@@ -167,6 +167,7 @@ class Database(object):
 
     def update(self, conditionsdict, newvaluesdict):
         "Update SQL line with new values following conditions in conditionsdict"
+        raise NotImplementedError()
 
     def delete(self, conditionsdict=False):
         "Delete data from the DB"
@@ -298,27 +299,40 @@ class WordDatabase(object):
                 word = word.decode('utf8')
             except UnicodeEncodeError:
                 word = word.decode('latin1')
+
+        # Find definition in special dictionary
         qresult = self.DB.raw_query(u"select mg from data_botjagwar.%s_mg where %s='%s'"
                                     % (language, language, word.replace(u"'", u"\\'")))
         translations = []
         for translation in qresult:
+            translation = translation
             translations.append(translation)
-        if not translations:  # No translation has been found in the special disctionary? Look up in the general one!
+
+        # No translation found in pecial dictionary? Look up in the general one!
+        if not translations:
             qresult2 = self.DB.raw_query(u"select famaritana from data_botjagwar.teny where fiteny='%s' and teny='%s'"
                                          % (language, word.replace(u"'", u"\\'")))
             for translation in qresult2:
                 translation = translation[0]
-                for char in (u'[]'):
-                    translation = translation.replace(char, '')
-                for t in translation.split(','):  # Translation in this dictionary are comma-separated...
+                # Remove unneeded characters
+                for char in u'[]':
+                    # Try decoding using different encoding if UnicodeErrors occur
+                    for encoding in ['utf8', 'latin-1']:
+                        try:
+                            translation = translation.replace(char, u'')
+                            break
+                        except UnicodeError:
+                            translation = translation.decode(encoding)
+                    # Make string unicode when all's over
+                    translation = unicode(translation)
+
+                # Pack up translations for delivery
+                for t in translation.split(u','):  # Translation in this dictionary are comma-separated...
                     translations.append((t.strip(),))
 
         tstring = u""
         for translation in translations:
-            try:
-                tstring += u"[[%s]], " % translation[0].decode("utf8")
-            except UnicodeDecodeError:
-                tstring += u"[[%s]], " % translation[0].decode("latin1")
+            tstring += u"[[%s]], " % translation[0]
 
         tstring = tstring.strip(u", ")
         return tstring
