@@ -1,4 +1,4 @@
-DB_PASSWD := $(shell bash -c 'read -s -p "Please enter your (future) database password: " pwd; echo $$pwd')
+DB_PASSWD := $(shell bash -c 'read -s -p "Atsofohy ny (ho) tenimiafin'ny banky angonao / Please enter your (future) database password: " pwd; echo $$pwd')
 
 setpass:
 	mkdir -p conf/BJDBModule/
