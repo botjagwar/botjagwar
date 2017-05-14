@@ -3,7 +3,9 @@ import re
 import pywikibot as pwbot
 from core import Translation
 
-def testTranslate(val):
+data_file = "conf/dikantenyvaovao/"
+
+def testTranslate(**args):
     test = Translation()
     verbose = True
     listpagestring = parseErrlog()

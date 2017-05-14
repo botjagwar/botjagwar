@@ -2,7 +2,6 @@ import base64
 import getpass
 import sys
 
-# TODO: FINISH
 default_path = "conf/BJDBModule/database_password"
 args = sys.argv
 set_new_password = False
@@ -28,6 +27,7 @@ class PasswordManager(object):
         if password_path is not None:
             self.password_path = password_path
         else:
+            # print "Mampiasa lalana tsotra / Using default. ", default_path
             self.password_path = default_path
 
     def check_database_password(self,):
@@ -61,12 +61,12 @@ class PasswordManager(object):
     def _encrypt(string):
         return base64.encodestring(string)
 
-    def write_db_password_file(self, new_password=None):
+    def write_db_password_file(self, new_pass=None):
         """if new_password is None, self.password will be used."""
         f = file(self.password_path, 'w')
         try:
-            if new_password is not None:
-                f.write(self._encrypt(new_password))
+            if new_pass is not None:
+                f.write(self._encrypt(new_pass))
             else:
                 f.write(self._encrypt(self.password))
         except IOError as e:
