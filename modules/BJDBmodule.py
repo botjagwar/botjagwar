@@ -184,11 +184,7 @@ class Database(object):
             except UnicodeEncodeError:
                 self.cursor.execute(sql.encode('utf8'))
                 return self.cursor
-            except Exception as e:
-                error = e
-                if verbose: print sql
-                print e, 'Manandrana afaka 5 segondra...'
-                time.sleep(5)
+
         if error:
             raise e
 
@@ -291,7 +287,7 @@ class WordDatabase(object):
         # if verbose: print "ct. encding : %s (all other failed)"%encoding
         return False
 
-    def translate(self, word, language='fr'):
+    def raw_translate(self, word, language='fr'):
         """gives the translation of the given word in the given language.
            Returns [translation, ...]. All strings are Unicode objects."""
         if type(word) is not unicode:
@@ -300,13 +296,14 @@ class WordDatabase(object):
             except UnicodeEncodeError:
                 word = word.decode('latin1')
 
-        # Find definition in special dictionary
-        qresult = self.DB.raw_query(u"select mg from data_botjagwar.%s_mg where %s='%s'"
-                                    % (language, language, word.replace(u"'", u"\\'")))
         translations = []
-        for translation in qresult:
-            translation = translation
-            translations.append(translation)
+        # Find definition in special dictionary
+        if language in [u'fr', u'en']:
+            qresult = self.DB.raw_query(u"select mg from data_botjagwar.%s_mg where %s='%s'"
+                                        % (language, language, word.replace(u"'", u"\\'")))
+            for translation in qresult:
+                translation = translation
+                translations.append(translation)
 
         # No translation found in pecial dictionary? Look up in the general one!
         if not translations:
@@ -330,6 +327,12 @@ class WordDatabase(object):
                 for t in translation.split(u','):  # Translation in this dictionary are comma-separated...
                     translations.append((t.strip(),))
 
+        return translations
+
+    def translate(self, word, language='fr'):
+        translations = self.raw_translate(word, language)
+
+        # Post-process to directly have Wikibolana's definitions formatting
         tstring = u""
         for translation in translations:
             try:
