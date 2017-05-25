@@ -210,7 +210,7 @@ def main():
 
     ct_time = time.localtime()
     if not retstr:
-        save_state(u"ct_state", new)
+        save_state(new, u"ct_state")
         return
 
     ct_date = u"%d %s %d" % (ct_time[2], months[ct_time[1]], ct_time[0])
@@ -219,7 +219,7 @@ def main():
     if page.exists():
         content = page.get()
         if content.find(ct_date) != -1:
-            save_state(u"ct_state", new)
+            save_state(new, u"ct_state")
             return
         content = news + content
         page.put(content, u"+Vaovao androany" + ct_date)
