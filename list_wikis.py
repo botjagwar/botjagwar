@@ -5,8 +5,10 @@ from urllib import FancyURLopener
 
 data_file = 'conf/list_wikis/'
 
+
 class MyOpener(FancyURLopener):
     version = 'Botjagwar/v1.1'
+
 
 class Wikilister(object):
     def __init__(self, test=False):
@@ -22,8 +24,7 @@ class Wikilister(object):
         print wikiregex
         for lang in wikiregex:
             yield lang
-    
-    
+
     def run(self, wiki, site):
         datas = []
         i=0
@@ -179,8 +180,8 @@ def main():
         t = list(time.gmtime())
         cond = (not (t[3]+timeshift)%6) and (t[4]==0)
         if cond:
-            bot.run('Wikibolana','wiktionary')
-            bot.run('Wikipedia','wikipedia')
+            bot.run('Wikibolana', 'wiktionary')
+            bot.run('Wikipedia', 'wikipedia')
             time.sleep(120)
         else:
             print "Fanavaozana isaky ny adin'ny 6"
