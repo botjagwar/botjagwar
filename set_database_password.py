@@ -39,14 +39,12 @@ class PasswordManager(object):
         self.write_db_password_file(new_passwd)
 
     def read_db_password_file(self):
-        f = file(self.password_path, 'r')
         try:
+            f = file(self.password_path, 'r')
             self.password = f.read()
             self.password = self._decrypt(self.password)
         except IOError:
             print "Tsy nahavaky tenimiafina / Password reading failed."
-        finally:
-            f.close()
 
     def get_password(self):
         if self.password is None:
