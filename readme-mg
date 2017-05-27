@@ -9,7 +9,7 @@ ilainy amin'ny fandehanany.
 Rehefa vita ny 'make all' dia ovay amin-tanana ny safidy amin'ny alalan'ny paika fampandefasana an'i Pywikibot.
 Jereo https://www.mediawiki.org/wiki/Manual:Pywikibot/user-config.py (teny anglisy) ho an'ny antsipirihany.
 
-Rehefa manao 'make' ianao dia ho angatahana ny tenimiafin'ny banky angona. Iny tenimiafina iny
+Rehefa manao 'make' dia manisia environment variable DB_PASSWD. Iny tenimiafina iny
 dia ho ampiasaina amin'ny fifandraisana amin'ny banky angona.
 Tsy maintsy atao tanana ny fanovana tenimiafina amin'i MySQL;
 amin'i botjagwar kosa anefa dia azo ovaina amin'ny alalan'ny 'make setpass' ilay izy.

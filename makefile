@@ -1,11 +1,11 @@
-DB_PASSWD := $(shell bash -c 'read -s -p "Atsofohy ny (ho) tenimiafin'ny banky angonao / Please enter your (future) database password: " pwd; echo $$pwd')
-
 setpass:
 	mkdir -p conf/BJDBModule/
 	python set_database_password.py -pass:$(DB_PASSWD)
 
 prepare: setpass
+	apt install sudo
 	sudo apt-get update
+	apt-get install libssl-dev
 	apt-get install -y wget
 	apt-get install -y unzip
 

@@ -8,7 +8,7 @@ and MySQL server. It will also install the database schema and fill it with enou
 Once you're done with 'make all', do the manual configuration by setting up the pywikibot.
 See https://www.mediawiki.org/wiki/Manual:Pywikibot/user-config.py for further details on how to configure Pywikibot.
 
-On 'make', you'll be prompted your database password. That password will be used by botjagwar to
+On 'make', first set an environment variable DB_PASSWD containing your password. That password will be used by botjagwar to
 connect to the database. Changing the database password will have to be done manually for the MySQL.
 Changing it for botjagwar can be done using 'make setpass'
 
