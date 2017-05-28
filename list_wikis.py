@@ -1,6 +1,6 @@
 # -*- coding: utf-8  -*-
 import re, urllib, time
-import pywikibot as wikipedia
+import pywikibot
 from urllib import FancyURLopener
 
 data_file = 'conf/list_wikis/'
@@ -36,7 +36,7 @@ class Wikilister(object):
                     urlstr = 'https://%s.%s.org/w/api.php?action=query&meta=siteinfo&format=json&siprop=statistics&continue'%(lang, site)
                     statpage = urllib.urlopen(urlstr).read()
                     print statpage
-                    wikipedia.output(urlstr)
+                    pywikibot.output(urlstr)
                     break
                 except Exception as e:
                     print e.message
@@ -165,14 +165,14 @@ class Wikilister(object):
         while 1:
             if self.test==True: break
             try:
-                wikipedia.Page(wikipedia.getSite('mg','wiktionary'),'Mpikambana:Bot-Jagwar/Lisitry ny %s/tabilao'%wiki).put(content, u'Rôbô : fanavaozana ny statistika')
+                pywikibot.Page(pywikibot.Site('mg','wiktionary'),'Mpikambana:Bot-Jagwar/Lisitry ny %s/tabilao'%wiki).put(content, u'Rôbô : fanavaozana ny statistika')
                 break
             except Exception:
                 print 'Hadisoana nitranga tampametrahana ilay pejy'
 
 def main():
-    wikipedia.stopme()
-    (wikipedia.config).put_throttle = int(1)
+    pywikibot.stopme()
+    (pywikibot.config).put_throttle = int(1)
     timeshift=3
     bot = Wikilister()
 
@@ -181,7 +181,7 @@ def main():
         cond = (not (t[3]+timeshift)%6) and (t[4]==0)
         if cond:
             bot.run('Wikibolana', 'wiktionary')
-            bot.run('Wikipedia', 'wikipedia')
+            bot.run('pywikibot', 'pywikibot')
             time.sleep(120)
         else:
             print "Fanavaozana isaky ny adin'ny 6"
@@ -191,5 +191,5 @@ def main():
 if __name__ == '__main__':
     wikilisting = Wikilister()
     wikilisting.run('Wikibolana','wiktionary')
-    wikilisting.run('Wikipedia','wikipedia')
-    wikipedia.stopme()
+    wikilisting.run('pywikibot','pywikibot')
+    pywikibot.stopme()
