@@ -3,11 +3,11 @@ setpass:
 	python set_database_password.py -pass:$(DB_PASSWD)
 
 prepare: setpass
-	apt install sudo
+	sudo apt-get install sudo
 	sudo apt-get update
-	apt-get install libssl-dev
-	apt-get install -y wget
-	apt-get install -y unzip
+	sudo apt-get install libssl-dev
+	sudo apt-get install -y wget
+	sudo apt-get install -y unzip
 
 python: prepare
 	sudo apt-get install -y python2.7
