@@ -1,2 +1,2 @@
- pywikibot >= 2.0
- requests-oauthlib >= 0.8.0
+pywikibot >= 2.0
+requests-oauthlib >= 0.8.0
