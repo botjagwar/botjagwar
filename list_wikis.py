@@ -190,6 +190,7 @@ def main():
 
 if __name__ == '__main__':
     wikilisting = Wikilister()
-    wikilisting.run('Wikibolana','wiktionary')
-    wikilisting.run('pywikibot','pywikibot')
+    wikilisting.run('Wikibolana', 'wiktionary')
+    wikilisting.run('Wikipedia', 'wikipedia')
+    wikilisting.run('Wikiboky', 'wikibooks')
     pywikibot.stopme()
