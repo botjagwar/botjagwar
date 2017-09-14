@@ -212,6 +212,14 @@ class Bot(object):
         return message
 
     @staticmethod
+    def _update_unknowns(self, unknowns):
+        f = file(userdata_file + "word_hits", 'a')
+        for u in unknowns:
+            u = u.decode('utf8')
+            f.write(u + u'\n')
+        f.close()
+
+    @staticmethod
     def _get_message_type(message):
         if "Log/delete" in message:
             return "delete"
@@ -278,9 +286,11 @@ class Bot(object):
             if page is None:
                 return
             rc_bot.stats['edits'] += 1.
-            rc_bot.stats['newentries'] += rc_bot.translations.process_wiktionary_page(lang, page)
+            unknowns, newentries = rc_bot.translations.process_wiktionary_page(lang, page)
+            rc_bot.stats['newentries'] += newentries
             rc_bot.stats['rend'] = 100. * rc_bot.stats['errors'] / rc_bot.stats['edits']
             rc_bot.stats['rendpejy'] = 100. * float(rc_bot.stats['newentries']) / rc_bot.stats['edits']
+            self._update_unknowns(unknowns)
 
         elif message_type == 'delete':
             page = self._get_page(message, 'mg')
