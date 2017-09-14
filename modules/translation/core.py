@@ -304,8 +304,8 @@ class Translation(TranslationsHandler):
                 mgpage.put_async(mgpage_c, summary)
 
     def process_wiktionary_page(self, language, Page):
+        unknowns = []
         # fanampiana : Page:Page
-
 
         # BEGINNING
         ret = 0
@@ -317,16 +317,16 @@ class Translation(TranslationsHandler):
 
         if Page.title().find(':') != -1:
             print "Nahitana ':' tao anaty anaram-pejy"
-            return ret
+            return unknowns, ret
         if Page.namespace() != 0:
             print "Tsy amin'ny anaran-tsehatra fotony"
-            return ret
+            return unknowns, ret
         wiktionary_processor.process(Page)
 
         try:
             entries = wiktionary_processor.getall()
         except Exception as e:
-            return 0
+            return unknowns, ret
 
         translations_in_mg = {}  # dictionary {string : list of translation tuple (see below)}
         for entry in entries:
@@ -346,9 +346,12 @@ class Translation(TranslationsHandler):
                     try:
                         mg_translation = self.translate_word(Page.title(), language)
                     except NoWordException:
+                        title = Page.title()
                         pwbot.output(
                             "Tsy nahitana dikantenin'i '%s' ho an'ny teny '%s' tao amin'ny banky angona" % (
-                                Page.title(), language))
+                                title, language))
+                        if title in unknowns:
+                            unknowns.append(title)
                         break
                     infos = {
                         'entry': translation[0],
@@ -382,6 +385,8 @@ class Translation(TranslationsHandler):
                     pwbot.output(
                         "\03{yellow}Tsy nahitana dikantenin'i '%s' ho an'ny teny '%s' tao amin'ny banky angona\03{default}" % (
                             entry[3], language))
+                    if title in unknowns:
+                        unknowns.append(title)
                     continue
 
                 infos = {
@@ -409,7 +414,7 @@ class Translation(TranslationsHandler):
         # Malagasy language pages
         # self.update_malagasy_word(translations_in_mg)
         print " Vita."
-        return ret
+        return unknowns, ret
 
     def translate_word(self, word, language='fr'):
         tr = self.word_db.translate(word, language)
