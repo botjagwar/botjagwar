@@ -378,13 +378,19 @@ class Translation(TranslationsHandler):
                 if entry[2] in self.langblacklist:
                     print "Fiteny voalisi-mainty:", entry[2]
                     continue
+
+                pwbot.output("\03{red}%(entry)s\03{default}: dikanteny vaovao amin'ny teny '%s' " % entry[2])
+                if self.word_db.exists(title, entry[2]):
+                    print "Efa fantatra tamin'ny alalan'ny banky angona ny fisian'ilay teny"
+                    continue
+
                 title = Page.title()
                 try:
                     mg_translation = self.translate_word(entry[3], language)
                 except NoWordException:
                     pwbot.output(
-                        "\03{yellow}Tsy nahitana dikantenin'i '%s' ho an'ny teny '%s' tao amin'ny banky angona\03{default}" % (
-                            entry[3], language))
+                        "\03{yellow}Tsy nahitana dikantenin'i '%s' ho an'ny teny '%s' tao amin'ny banky angona\03{default}" % \
+                        (entry[3], language))
                     if title in unknowns:
                         unknowns.append(title)
                     continue
@@ -397,17 +403,11 @@ class Translation(TranslationsHandler):
                     'olang': language,
                     'origin': entry[3]}
 
-                pwbot.output(
-                    "\03{red}%(entry)s\03{default}: dikanteny vaovao amin'ny teny '%(lang)s' " % infos)
-                if self.word_db.exists(infos['entry'], infos['lang']):
-                    print "Efa fantatra tamin'ny alalan'ny banky angona ny fisian'ilay teny"
-                    continue
-
                 self._generate_redirections(infos)
                 self._append_in(infos, translations_in_mg)
-                print translations_in_mg
                 self._save_translation_from_bridge_language(infos)
                 self._save_translation_from_page(infos)
+                print translations_in_mg
 
                 ret += 1
 
