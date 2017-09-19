@@ -9,6 +9,7 @@ from modules.autoformatter import Autoformat
 
 default_data_file = 'conf/dikantenyvaovao/'
 
+
 class TranslationsHandler(object):
     def __init__(self):
         """Mitantana ny dikantenin'ny teny hafa amin'ny teny malagasy"""
@@ -329,13 +330,12 @@ class Translation(TranslationsHandler):
             return unknowns, ret
 
         translations_in_mg = {}  # dictionary {string : list of translation tuple (see below)}
-        for entry in entries:
-            # entry = (self.title, pos, self.lang2code(l), defin.strip())
-            if entry[2] == language:  # if entry in the content language
-                # (self.title, pos, self.lang2code(l), defin.strip())
+        for word, pos, language_code, definition in entries:
+            if language_code == language:  # if entry in the content language
                 try:
                     translations = wiktionary_processor.retrieve_translations()
-                except Exception:
+                except Exception as e:
+                    print e
                     continue
                 translations_in_mg = {}  # dictionary {string : list of translation tuple (see below)}
                 for translation in translations:
@@ -350,7 +350,7 @@ class Translation(TranslationsHandler):
                         pwbot.output(
                             "Tsy nahitana dikantenin'i '%s' ho an'ny teny '%s' tao amin'ny banky angona" % (
                                 title, language))
-                        if title in unknowns:
+                        if title not in unknowns:
                             unknowns.append(title)
                         break
                     infos = {
@@ -374,34 +374,34 @@ class Translation(TranslationsHandler):
                     # Malagasy language pages
 
             else:
-                # (self.title, pos, self.lang2code(l), defin.strip())
-                if entry[2] in self.langblacklist:
-                    print "Fiteny voalisi-mainty:", entry[2]
+                if language_code in self.langblacklist:
+                    print "Fiteny voalisi-mainty:", language_code
                     continue
 
-                pwbot.output("\03{red}%(entry)s\03{default}: dikanteny vaovao amin'ny teny '%s' " % entry[2])
-                if self.word_db.exists(title, entry[2]):
+                pwbot.output("\03{red}%s\03{default}: dikanteny vaovao amin'ny teny '%s' " % (
+                    word, language_code))
+                if self.word_db.exists(word, language_code):
                     print "Efa fantatra tamin'ny alalan'ny banky angona ny fisian'ilay teny"
                     continue
 
                 title = Page.title()
                 try:
-                    mg_translation = self.translate_word(entry[3], language)
+                    mg_translation = self.translate_word(definition, language)
                 except NoWordException:
                     pwbot.output(
                         "\03{yellow}Tsy nahitana dikantenin'i '%s' ho an'ny teny '%s' tao amin'ny banky angona\03{default}" % \
-                        (entry[3], language))
-                    if title in unknowns:
+                        (definition, language))
+                    if title not in unknowns:
                         unknowns.append(title)
                     continue
 
                 infos = {
                     'entry': title,
-                    'POS': entry[1],
+                    'POS': pos,
                     'definition': mg_translation,
-                    'lang': entry[2],
+                    'lang': language_code,
                     'olang': language,
-                    'origin': entry[3]}
+                    'origin': definition}
 
                 self._generate_redirections(infos)
                 self._append_in(infos, translations_in_mg)
@@ -455,4 +455,3 @@ class Translation(TranslationsHandler):
             update_malagasy_word(translation_in_mg, translations_in_mg[translation_in_mg])
 
         print "tafapetraka ny dikanteny"
-

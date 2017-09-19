@@ -43,12 +43,14 @@ class PasswordManager(object):
             f = file(self.password_path, 'r')
             self.password = f.read()
             self.password = self._decrypt(self.password)
-        except IOError:
+        except IOError as e:
+            print e
             print "Tsy nahavaky tenimiafina / Password reading failed."
 
     def get_password(self):
         if self.password is None:
             self.read_db_password_file()
+        assert self.password is not None
         return self.password
 
     @staticmethod

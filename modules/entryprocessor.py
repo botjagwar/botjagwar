@@ -18,7 +18,7 @@ class WiktionaryProcessorFactory(object):
         self.processors = [x for x in classes if x[0].endswith('WiktionaryProcessor')]
 
     def create(self, language):
-        assert type(language) is str
+        assert type(language) in [str, unicode]
         language_class_name = "%sWiktionaryProcessor" % language.upper()
         for current_class_name, processor_class in self.processors:
 

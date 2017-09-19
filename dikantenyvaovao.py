@@ -212,7 +212,7 @@ class Bot(object):
         return message
 
     @staticmethod
-    def _update_unknowns(self, unknowns):
+    def _update_unknowns(unknowns):
         f = file(userdata_file + "word_hits", 'a')
         for u in unknowns:
             u = u.decode('utf8')
