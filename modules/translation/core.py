@@ -351,7 +351,7 @@ class Translation(TranslationsHandler):
                             "Tsy nahitana dikantenin'i '%s' ho an'ny teny '%s' tao amin'ny banky angona" % (
                                 title, language))
                         if title not in unknowns:
-                            unknowns.append(title)
+                            unknowns.append((title, language))
                         break
                     infos = {
                         'entry': translation[0],
@@ -392,7 +392,7 @@ class Translation(TranslationsHandler):
                         "\03{yellow}Tsy nahitana dikantenin'i '%s' ho an'ny teny '%s' tao amin'ny banky angona\03{default}" % \
                         (definition, language))
                     if title not in unknowns:
-                        unknowns.append(definition)
+                        unknowns.append((definition, language))
                     continue
 
                 infos = {
