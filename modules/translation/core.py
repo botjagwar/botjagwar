@@ -178,7 +178,7 @@ class Translation(TranslationsHandler):
                     summary = u"+" + summary
         except pwbot.exceptions.IsRedirectPage:
             infos['entry'] = mg_Page.getRedirectTarget().title()
-            self._save_translation_from_bridge_language(self, infos)
+            self._save_translation_from_bridge_language(infos)
             return
 
         except pwbot.exceptions.InvalidTitle:
@@ -392,7 +392,7 @@ class Translation(TranslationsHandler):
                         "\03{yellow}Tsy nahitana dikantenin'i '%s' ho an'ny teny '%s' tao amin'ny banky angona\03{default}" % \
                         (definition, language))
                     if title not in unknowns:
-                        unknowns.append(title)
+                        unknowns.append(definition)
                     continue
 
                 infos = {

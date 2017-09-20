@@ -215,8 +215,9 @@ class Bot(object):
     def _update_unknowns(unknowns):
         f = file(userdata_file + "word_hits", 'a')
         for u in unknowns:
-            u = u.decode('utf8')
-            f.write(u + u'\n')
+            u += '\n'
+            print type(u)
+            f.write(u.encode('utf8'))
         f.close()
 
     @staticmethod
