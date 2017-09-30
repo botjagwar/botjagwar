@@ -71,7 +71,7 @@ class UnknownLanguageManager:
         f.close()
         for i in range(10):
             try:
-                wikipage.save(page_content)
+                wikipage.put(page_content)
                 break
             except (pywikibot.PageNotSaved, pywikibot.OtherPageSaveError) as e:
                 print e
