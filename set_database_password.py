@@ -22,6 +22,7 @@ class PasswordManager(object):
     """
     Provide secure location to store password
     """
+
     def __init__(self, password_path=None):
         self.password = None
         if password_path is not None:
@@ -30,7 +31,7 @@ class PasswordManager(object):
             # print "Mampiasa lalana tsotra / Using default. ", default_path
             self.password_path = default_path
 
-    def check_database_password(self,):
+    def check_database_password(self, ):
         if self.password is None:
             return False
 
@@ -89,6 +90,7 @@ class PasswordManager(object):
 
         # store it encrypted
         self.write_db_password_file()
+
 
 if __name__ == '__main__':
     parse_args()
