@@ -69,6 +69,7 @@ class UnknownlanguageUpdaterBot:
         parsed_lines = self.parse_wikipage()
         for language_code, language_name in parsed_lines:
             templates_to_be_created = [
+                u"Endrika:=%s=" % language_code,
                 u"Endrika:%s" % language_code,
                 u"Endrika:%s/type" % language_code]
             for template in templates_to_be_created:
