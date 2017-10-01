@@ -175,5 +175,5 @@ def get_sil_language_name(language_code):
 if __name__ == '__main__':
     bot = UnknownlanguageUpdaterBot()
     bot.start()
-    # bot = UnknownLanguageManagerBot()
-    # bot.start()
+    bot = UnknownLanguageManagerBot()
+    bot.start()
