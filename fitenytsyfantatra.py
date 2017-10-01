@@ -6,6 +6,7 @@ from lxml import etree
 from modules.BJDBmodule import WordDatabase
 
 WORKING_WIKI = pywikibot.Site("mg", "wiktionary")
+username = u"%s" % pywikibot.config.usernames['wiktionary']['mg']
 
 TABLE_PATTERN = u"""
 {| class=\"wikitable sortable\"
@@ -60,7 +61,6 @@ class UnknownLanguageManager:
         self.update_wiki_page()
 
     def update_wiki_page(self):
-        username = u"%s" % pywikibot.config.usernames['wiktionary']['mg']
         rows = u""
         for code, name, n_words in self.lang_list:
             rows += ROW_PATTERN % (code, code, name, n_words)
@@ -71,7 +71,7 @@ class UnknownLanguageManager:
         f.close()
         for i in range(10):
             try:
-                wikipage.save(page_content)
+                wikipage.put(page_content)
                 break
             except (pywikibot.PageNotSaved, pywikibot.OtherPageSaveError) as e:
                 print e
