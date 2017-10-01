@@ -37,20 +37,16 @@ class UnknownlanguageUpdaterBot:
         self.new_language_page = pywikibot.Page(WORKING_WIKI, self.title)
 
     def get_new_languages_wikipage(self):
-        print "get_new_languages_wikipage"
         return self.new_language_page.get()
 
     def purge_new_languages_wikipage(self):
-        print "purge_new_languages_wikipage"
         try:
             self.new_language_page.put(u"", u"fandiovana")
         except Exception as e:
             print(e)
 
     def parse_wikipage(self):
-        print "parse_wikipage"
         text = self.get_new_languages_wikipage()
-        print text
         language_names = []
         for line in text.split(u"\n"):
             try:
@@ -65,13 +61,12 @@ class UnknownlanguageUpdaterBot:
         return language_names
 
     def put(self, title, content):
-        print "put"
         page = pywikibot.Page(WORKING_WIKI, title)
         page.put(content, u"fiteny vaovao")
 
     def start(self):
+        print ("UnknownlanguageUpdaterBot")
         parsed_lines = self.parse_wikipage()
-        print parsed_lines
         for language_code, language_name in parsed_lines:
             templates_to_be_created = [
                 u"Endrika:%s" % language_code,
@@ -114,6 +109,7 @@ class UnknownLanguageManagerBot:
             yield language_code, number_of_words
 
     def start(self):
+        print ("UnknownLanguageManagerBot")
         for language_code, number_of_words in self.get_languages_from_30days_ago():
             language_exists = language_code_exists(language_code)
             if language_exists == 0:
