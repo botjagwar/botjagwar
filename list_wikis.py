@@ -4,7 +4,7 @@ import pywikibot
 from urllib import FancyURLopener
 
 data_file = 'conf/list_wikis/'
-current_user = pywikibot.config.usernames['mg']['wiktionary']
+current_user = pywikibot.config.usernames['wiktionary']['mg']
 
 
 class MyOpener(FancyURLopener):
@@ -35,7 +35,7 @@ class Wikilister(object):
             while ierr < 10:
                 try:
                     urlstr = 'https://%s.%s.org/w/api.php?action=query&meta=siteinfo&format=json&siprop=statistics&continue' % (
-                    lang, site)
+                        lang, site)
                     statpage = urllib.urlopen(urlstr).read()
                     print statpage
                     pywikibot.output(urlstr)
@@ -81,7 +81,7 @@ class Wikilister(object):
             datas.append(e)
             i += 1
             print '%(language)s > lahatsoratra:%(articles)d; pejy:%(pages)d; fanovana:%(edits)d; mpikambana:%(users)d; mavitrika:%(activeusers)d; mpandrindra:%(admins)d; sary:%(images)d; halalina:%(depth)s ' % (
-            e[1])
+                e[1])
 
         datas.sort(reverse=True)
         self.wikitext(datas, wiki)
@@ -194,7 +194,7 @@ def main():
         else:
             print "Fanavaozana isaky ny adin'ny 6"
             print "Miandry ny fotoana tokony hamaozana ny pejy (ora %2d:%2d) (GMT+%d)" % (
-            (t[3] + timeshift), t[4], (timeshift))
+                (t[3] + timeshift), t[4], (timeshift))
             time.sleep(30)
 
 
