@@ -31,7 +31,71 @@ class MyOpener(FancyURLopener):
     version = 'Botjagwar/v1.1'
 
 
-class UnknownLanguageManager:
+class UnknownlanguageUpdaterBot:
+    def __init__(self):
+        self.title = u"Mpikambana:%s/Kaodim-piteny fantatra" % username
+        self.new_language_page = pywikibot.Page(WORKING_WIKI, self.title)
+
+    def get_new_languages_wikipage(self):
+        print "get_new_languages_wikipage"
+        return self.new_language_page.get()
+
+    def purge_new_languages_wikipage(self):
+        print "purge_new_languages_wikipage"
+        try:
+            self.new_language_page.put(u"", u"fandiovana")
+        except Exception as e:
+            print(e)
+
+    def parse_wikipage(self):
+        print "parse_wikipage"
+        text = self.get_new_languages_wikipage()
+        print text
+        language_names = []
+        for line in text.split(u"\n"):
+            try:
+                code, name = line.split(u",")
+                code, name = code.strip(), name.strip()
+                if len(code) > 3:
+                    continue
+                language_names.append((code, name))
+            except ValueError:
+                print (u"Rariteny tsy voaaraka amin'ny andalana")
+
+        return language_names
+
+    def put(self, title, content):
+        print "put"
+        page = pywikibot.Page(WORKING_WIKI, title)
+        page.put(content, u"fiteny vaovao")
+
+    def start(self):
+        parsed_lines = self.parse_wikipage()
+        print parsed_lines
+        for language_code, language_name in parsed_lines:
+            templates_to_be_created = [
+                u"Endrika:%s" % language_code,
+                u"Endrika:%s/type" % language_code]
+            for template in templates_to_be_created:
+                self.put(template, language_name)
+
+            categories = [
+                u"Anarana iombonana",
+                u"Mpamaritra anarana",
+                u"Matoanteny",
+                u"Tambinteny",
+                u"Mpampiankin-teny"]
+            self.put(u"Sokajy:%s" % language_name, u"[[sokajy:fiteny]]")
+            for category in categories:
+                page_content = u"[[sokajy:%s]]\n[[sokajy:%s|%s]]" % (
+                    language_name, category, language_name[0])
+                title = u"Sokajy:%s amin'ny teny %s" % (category, language_name)
+                self.put(title, page_content)
+
+        self.purge_new_languages_wikipage()
+
+
+class UnknownLanguageManagerBot:
     def __init__(self):
         database = WordDatabase()
         self.db_conn = database.DB
@@ -109,5 +173,7 @@ def get_sil_language_name(language_code):
 
 
 if __name__ == '__main__':
-    bot = UnknownLanguageManager()
+    bot = UnknownlanguageUpdaterBot()
     bot.start()
+    # bot = UnknownLanguageManagerBot()
+    # bot.start()
