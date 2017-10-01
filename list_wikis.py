@@ -6,6 +6,7 @@ from urllib import FancyURLopener
 data_file = 'conf/list_wikis/'
 current_user = pywikibot.config.usernames['mg']['wiktionary']
 
+
 class MyOpener(FancyURLopener):
     version = 'Botjagwar/v1.1'
 
@@ -166,10 +167,11 @@ class Wikilister(object):
 |}"""
 
         while 1:
-            if self.test == True: break
+            if self.test:
+                break
             try:
                 page = pywikibot.Page(pywikibot.Site('mg', 'wiktionary'),
-                                      'Mpikambana:%s/Lisitry ny %s/tabilao' % (current_user, wiki)
+                                      'Mpikambana:%s/Lisitry ny %s/tabilao' % (current_user, wiki))
                 page.put(content, u'Rôbô : fanavaozana ny statistika')
                 break
             except Exception:
