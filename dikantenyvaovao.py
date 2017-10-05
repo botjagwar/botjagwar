@@ -15,7 +15,6 @@ from modules.exceptions import NoWordException
 from modules.translation.core import Translation, TranslationsHandler
 from modules.translation.analysis import (analyse_edit_hours, analyse_translations,
                                           MissingTranslations, Translations_per_day_hour)
-from modules.translation.test import testTranslate
 import list_wikis
 
 # GLOBAL VARS
@@ -314,7 +313,6 @@ if __name__ == '__main__':
     Missing_translations = MissingTranslations(userdata_file)
     argsdict = {
         'irc': irc_retrieve,
-        'debug': testTranslate,
         'analyse': analyse_translations,
         'edittimes': analyse_edit_hours,
         'addtranslations': add_translations
