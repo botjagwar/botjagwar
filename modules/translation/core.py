@@ -96,7 +96,7 @@ class TranslationsHandler(object):
         trstr = '{{}} :'
         tran = self.content.replace('{{}} :', '')
         if len(trads) > 200:
-            print 'hadisoana ?'
+            print('hadisoana ?')
             return tran
         for i in trads:
             trstr = trstr.replace("{{}} :", "# %s : [[%s]]\n{{}} :" % i)
@@ -170,7 +170,7 @@ class Translation(TranslationsHandler):
             if mg_Page.exists():
                 pagecontent = mg_Page.get()
                 if pagecontent.find('{{=%s=}}' % infos['lang']) != -1:
-                    print "Efa misy ilay teny iditra."
+                    print("Efa misy ilay teny iditra.")
                     self.output.db(infos)
                     return
                 else:
@@ -182,11 +182,11 @@ class Translation(TranslationsHandler):
             return
 
         except pwbot.exceptions.InvalidTitle:
-            print "lohateny tsy mety ho lohatenim-pejy"
+            print("lohateny tsy mety ho lohatenim-pejy")
             return
 
         except Exception as e:
-            print e
+            print(e)
             return
 
         pwbot.output("\n \03{red}%(entry)s\03{default} : %(lang)s " % infos)
@@ -201,7 +201,7 @@ class Translation(TranslationsHandler):
         if mg_page.exists():
             pagecontent = mg_page.get()
             if pagecontent.find('{{=%s=}}' % infos['lang']) != -1:
-                print "Efa misy ilay teny iditra, fa mbola tsy fantatry ny banky angona izany."
+                print("Efa misy ilay teny iditra, fa mbola tsy fantatry ny banky angona izany.")
                 self.output.db(infos)
                 return
             else:
@@ -232,7 +232,7 @@ class Translation(TranslationsHandler):
             if ent == 'en':
                 return self.word_db.exists(ent, lang)
             self.translationslist.append((lang, ent))
-            # print type(lang), type(ent)
+            # print(type(lang), type(ent))
             return self.word_db.exists(ent, lang)
 
     def get_allwords(self):
@@ -310,17 +310,17 @@ class Translation(TranslationsHandler):
 
         # BEGINNING
         ret = 0
-        print "Praosesera:", language.upper()
+        print("Praosesera:", language.upper())
         wiktionary_processor_class = entryprocessor.WiktionaryProcessorFactory().create(language)
         wiktionary_processor = wiktionary_processor_class()
 
         pwbot.output("\n >>> \03{lightgreen}%s\03{default} <<< " % Page.title())
 
         if Page.title().find(':') != -1:
-            print "Nahitana ':' tao anaty anaram-pejy"
+            print("Nahitana ':' tao anaty anaram-pejy")
             return unknowns, ret
         if Page.namespace() != 0:
-            print "Tsy amin'ny anaran-tsehatra fotony"
+            print("Tsy amin'ny anaran-tsehatra fotony")
             return unknowns, ret
         wiktionary_processor.process(Page)
 
@@ -335,13 +335,13 @@ class Translation(TranslationsHandler):
                 try:
                     translations = wiktionary_processor.retrieve_translations()
                 except Exception as e:
-                    print e
+                    print(e)
                     continue
                 translations_in_mg = {}  # dictionary {string : list of translation tuple (see below)}
                 for translation in translations:
                     # translation = tuple(codelangue, entree)
                     if translation[2] in self.langblacklist:  # check in language blacklist
-                        print "Fiteny voalisi-mainty: ", translation[2]
+                        print("Fiteny voalisi-mainty: ", translation[2])
                         continue
                     try:
                         mg_translation = self.translate_word(Page.title(), language)
@@ -362,12 +362,12 @@ class Translation(TranslationsHandler):
                         'origin': Page.title()}
 
                     if self.word_db.exists(infos['entry'], infos['lang']):
-                        # print "Efa fantatra tamin'ny alalan'ny banky angona ny fisian'ilay teny"
+                        # print("Efa fantatra tamin'ny alalan'ny banky angona ny fisian'ilay teny")
                         continue
 
                     self._generate_redirections(infos)
                     self._append_in(infos, translations_in_mg)
-                    print translations_in_mg
+                    print(translations_in_mg)
                     self._save_translation_from_bridge_language(infos)
                     ret += 1
 
@@ -375,13 +375,13 @@ class Translation(TranslationsHandler):
 
             else:
                 if language_code in self.langblacklist:
-                    print "Fiteny voalisi-mainty:", language_code
+                    print("Fiteny voalisi-mainty:", language_code)
                     continue
 
                 pwbot.output("\03{red}%s\03{default}: dikanteny vaovao amin'ny teny '%s' " % (
                     word, language_code))
                 if self.word_db.exists(word, language_code):
-                    print "Efa fantatra tamin'ny alalan'ny banky angona ny fisian'ilay teny"
+                    print("Efa fantatra tamin'ny alalan'ny banky angona ny fisian'ilay teny")
                     continue
 
                 title = Page.title()
@@ -407,13 +407,13 @@ class Translation(TranslationsHandler):
                 self._append_in(infos, translations_in_mg)
                 self._save_translation_from_bridge_language(infos)
                 self._save_translation_from_page(infos)
-                print translations_in_mg
+                print(translations_in_mg)
 
                 ret += 1
 
         # Malagasy language pages
         # self.update_malagasy_word(translations_in_mg)
-        print " Vita."
+        print(" Vita.")
         return unknowns, ret
 
     def translate_word(self, word, language='fr'):
@@ -445,7 +445,7 @@ class Translation(TranslationsHandler):
                 pwbot.output("Nisy hadisoana.")
                 return
 
-        print "Manavao ny pejy malagasy...", "dikanteny %d" % len(translations_in_mg)
+        print("Manavao ny pejy malagasy...", "dikanteny %d" % len(translations_in_mg))
         for translation_in_mg in translations_in_mg:
             translation_in_mg = translation_in_mg.strip()
             for char in '[]':
@@ -454,4 +454,4 @@ class Translation(TranslationsHandler):
             translation_in_mg = unicode(translation_in_mg)
             update_malagasy_word(translation_in_mg, translations_in_mg[translation_in_mg])
 
-        print "tafapetraka ny dikanteny"
+        print("tafapetraka ny dikanteny")
