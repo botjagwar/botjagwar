@@ -311,7 +311,7 @@ class Translation(TranslationsHandler):
         # BEGINNING
         ret = 0
         print("Praosesera:", language.upper())
-        wiktionary_processor_class = entryprocessor.WiktionaryProcessorFactory().create(language)
+        wiktionary_processor_class = entryprocessor.WiktionaryProcessorFactory.create(language)
         wiktionary_processor = wiktionary_processor_class()
 
         pwbot.output("\n >>> \03{lightgreen}%s\03{default} <<< " % Page.title())

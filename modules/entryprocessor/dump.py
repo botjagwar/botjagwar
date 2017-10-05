@@ -31,7 +31,7 @@ class DumpPagegenerator(object):
         self.file = file(filename, 'r').readlines()
 
     def get_processed_pages(self):
-        wiktionary_processor = WiktionaryProcessorFactory().create(self.language)
+        wiktionary_processor = WiktionaryProcessorFactory.create(self.language)
 
         print("getting entry translation")
         for fileentry in self.file.parse():
