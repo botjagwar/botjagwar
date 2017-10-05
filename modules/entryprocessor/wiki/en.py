@@ -2,8 +2,8 @@
 
 import re
 import pywikibot
-from modules.entryprocessor import WiktionaryProcessor
-from modules.entryprocessor import data_file
+from base import WiktionaryProcessor
+from base import data_file
 
 
 class ENWiktionaryProcessor(WiktionaryProcessor):

@@ -1,8 +1,8 @@
 # coding: utf8
 
 import re
-from modules.entryprocessor import WiktionaryProcessor
-from modules.entryprocessor import stripwikitext, data_file
+from base import WiktionaryProcessor
+from base import data_file
 
 class PLWiktionaryProcessor(WiktionaryProcessor):
     def __init__(self, test=False, verbose=False):

@@ -1,8 +1,8 @@
 # coding: utf8
 
 import re
-from modules.entryprocessor import WiktionaryProcessor
-from modules.entryprocessor import stripwikitext
+from base import WiktionaryProcessor
+from base import stripwikitext
 
 
 class MGWiktionaryProcessor(WiktionaryProcessor):

@@ -1,4 +1,8 @@
 # coding: utf8
+import re
+
+
+data_file = 'conf/entryprocessor/'
 
 
 class WiktionaryProcessor(object):
@@ -27,3 +31,22 @@ class WiktionaryProcessor(object):
 
     def getall(self, keepNativeEntries=False):
         raise NotImplementedError()
+
+
+def stripwikitext(w):
+    w = re.sub('[ ]?\[\[(.*)\|(.*)\]\][ ]?', '\\1', w)
+    w = w.replace('.', '')
+    w = re.sub('[ ]?\{\{(.*)\}\}[ ]?', '', w)
+    for c in '[]':
+        w = w.replace(c, '')
+
+    return w.strip()
+
+
+def lang2code(l):
+    dictfile = file(data_file + 'languagecodes.dct', 'r')
+    f = dictfile.read()
+    d = eval(f)
+    dictfile.close()
+
+    return d[l]
