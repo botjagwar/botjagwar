@@ -1,7 +1,12 @@
 # Installation
 
-Launch the command 'make all'. That will install required dependencies among which Python, Pywikibot, Python MySQL
+For the installation only, DB_PASSWD needs to be set. This is your MySQL database password. This has to be set
+each time you launch the `make` command, or else you lose your previous password.
+Something is being worked on to fix that thing.
+
+Launch the command 'DB_PASSWD=xxxxx make all'. That will install required dependencies among which Python, Pywikibot, Python MySQL
 and MySQL server. It will also install the database schema and fill it with enough data to work.
+DB_passwd is your database password.
 
 # Configuration
 

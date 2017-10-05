@@ -1,5 +1,9 @@
 == Fametrahana ==
 
+Ho an'ny fametrahana dia ilaina faritana ny DB_PASSWD izay tenimiafin'ny banky angona. Izy io dia tsy maintsy
+voafaritra isaky ny fandefasana baiko 'make'. Raha tsy ataonao izany dia ho voafafa izay tenimiafina efa nosoratana.
+Ho vahàna izany olana izany amin'ny fotoana ho avy.
+
 Soraty ny baiko 'make all'. Io baiko io dia hametraka ny filàna rehetra izay ahitana an'i Python, Pywikibt, Python MySQL
 ary lohamilina MySQL. Izy io koa dia hametraka ny firafitry ny banky angona ary hameno ilay banky angona amin'ny angona
 ilainy amin'ny fandehanany.
