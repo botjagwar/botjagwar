@@ -63,10 +63,10 @@ class Database(object):
     def insert(self, valuesdict):
         """Insert in database values in valuesdict"""
         if hasattr(valuesdict, 'append'):
-            if verbose: print "mampiditra am-paran'ny lisitra..."
+            if verbose: print("mampiditra am-paran'ny lisitra...")
             self._insert_many(valuesdict)
         elif hasattr(valuesdict, 'has_key'):
-            if verbose: print 'mampiditra tsirairay...'
+            if verbose: print('mampiditra tsirairay...')
             self._insert_one(valuesdict)
 
     def _do_insert(self, valuesdict):
@@ -93,7 +93,7 @@ class Database(object):
         if not self.querycount % 1000:
             qcstr = str(self.querycount)
             qcstr = qcstr + chr(8) * (len(qcstr) + 1)
-            if verbose: print qcstr,
+            if verbose: print(qcstr,)
 
     def _insert_one(self, valuesdict):
         self._do_insert(valuesdict)
@@ -149,14 +149,13 @@ class Database(object):
                 if verbose:
                     wikipedia.output("HADISOANA: %s" % e.message)
                     wikipedia.output(u'\03{red}%s\03{default}' % sqlreq)
-                if verbose: print e.message
+                if verbose: print(e.message)
                 return tuple()
         except Exception as e:
             if verbose: wikipedia.output(u'\03{red}%s\03{default}' % sqlreq)
             raise e  # Unhandled Exception
         finally:
             return rep
-            return tuple()
 
     def read(self, conditionsdict=False, select='*'):
         """Read data from the current DB"""
@@ -243,7 +242,7 @@ class WordDatabase(object):
         t1 = datetime.datetime.now()
         dt = t1 - t0
         d = dt.seconds * 1000 + dt.microseconds / 1000
-        if verbose: print '<i>Tanteraka ny fanampiana. Fototana : %s ms\n' % (d)
+        if verbose: print('<i>Tanteraka ny fanampiana. Fototana : %s ms\n' % (d))
 
     def _to_unicode(self, string):
         try:
@@ -254,7 +253,7 @@ class WordDatabase(object):
             return string
 
     def do_commit(self):
-        if verbose: print "manavao ny DB..."
+        if verbose: print("manavao ny DB...")
         self.DB.connect.commit()
 
     def exists(self, entry, lang='', POS=''):
@@ -278,13 +277,13 @@ class WordDatabase(object):
             if lang: conditions['fiteny'] = lang
             rep = self.DB.read(conditions, ' teny ')  # execution of SQL
             if rep:
-                # if verbose: print "ct. encding : %s"%encoding
+                # if verbose: print("ct. encding : %s"%encoding)
                 return True
             else:
                 entry = orig_entry
                 continue
 
-        # if verbose: print "ct. encding : %s (all other failed)"%encoding
+        # if verbose: print("ct. encding : %s (all other failed)"%encoding)
         return False
 
     def raw_translate(self, word, language='fr'):
@@ -358,14 +357,14 @@ def exists(tinput):
     e = tinput
     e.encode('cp1252')
 
-    if verbose: print 'teny %d' % len(tinput)
+    if verbose: print('teny %d' % len(tinput))
 
-    if verbose: print wdb.exists(tinput)
+    if verbose: print(wdb.exists(tinput))
     t1 = datetime.datetime.now()
     dt = t1 - t0
     d = dt.seconds * 1000 + dt.microseconds / 1000
-    if verbose: print 'chrono : %s ms' % (d)
-    if verbose: print 'resp : ', tinput
+    if verbose: print('chrono : %s ms' % (d))
+    if verbose: print('resp : ', tinput)
 
 
 def Gettranslation():
@@ -373,12 +372,12 @@ def Gettranslation():
     ret = []
     for item in r:
         ret.append((item[3], item[5], item[2]))
-    if verbose: print ret
+    if verbose: print(ret)
 
 
 def readDB():
     db = Database('localhost', 'root', '')
-    if verbose: print db.read()
+    if verbose: print(db.read())
 
 
 def upload_batch(splitter="-->"):
@@ -410,47 +409,40 @@ def upload_batch(splitter="-->"):
 def loopaddition(**kwargs):
     while 1:
         try:
-            print "Enter your entries with the following format : word / language ISO code / definition/translation / POS:"
+            print("Enter your entries with the following format : word / language ISO code / definition/translation / POS:")
             line = raw_input().decode(sys.stdout.encoding)
             line = line.encode('utf8')
             line = line.split('/')
             # entry, definition, pos, language
 
             if not wdb.exists(line[0].strip(), line[1].strip()):
-                if verbose: print "not detected or non-existent"
+                if verbose: print("not detected or non-existent")
                 wdb.append(line[0].strip(),
                            line[2].strip(),
                            line[3].strip(),
                            line[1].strip())
             else:
-                if verbose: print "Already exists in DB"
+                if verbose: print("Already exists in DB")
         except IndexError:
-            if verbose: print "Sorry. Try again."
+            if verbose: print("Sorry. Try again.")
         except KeyboardInterrupt:
-            if verbose: print "Bye!"
+            if verbose: print("Bye!")
             break
 
 
 if __name__ == '__main__':
     import sys
 
-    # Test()
-    # ===========================================================================
-    # while 1:
-    #     e = raw_input(":>")
-    #     e = unicode(e, 'cp850')
-    #     exists(e)
-    # ===========================================================================
     argsdict = {
         'loop-addition': loopaddition,
         'upload-batch': upload_batch,
     }
-    print 'BJDBMODULE', sys.argv
+    print('BJDBMODULE', sys.argv)
     verbose = True
     if len(sys.argv) > 1:
         try:
             argsdict[sys.argv[1]]()
         except KeyError:
-            print "Ireo avy ireo argiomenta azo ampiasaina:"
+            print("Ireo avy ireo argiomenta azo ampiasaina:")
             for k in argsdict.keys():
-                print k
+                print(k)
