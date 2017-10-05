@@ -15,8 +15,14 @@ class TestDikantenyVaovaoBot(object):
         # mock page.put
         pass
 
+
 class TestDikantenyVaovaoProcessWiktionaryPage(object):
-    pass
+    def test_process_wiktionary_page_english(self):
+        pass
+
+    def test_process_wiktionary_page_french(self):
+        pass
+
 
 class TestTranslation(object):
     def test_code_to_name(self):
@@ -28,9 +34,4 @@ class TestTranslation(object):
     def test_translation_from_bridge_language(self):
         pass
 
-    def test_process_wiktionary_page_english(self):
-        pass
-
-    def test_process_wiktionary_page_french(self):
-        pass
 
