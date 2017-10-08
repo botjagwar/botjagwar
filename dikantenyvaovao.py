@@ -21,8 +21,8 @@ import list_wikis
 verbose = False
 nwikimax = 15
 databases = []
-data_file = 'conf/dikantenyvaovao/'
-userdata_file = 'user_data/dikantenyvaovao/'
+data_file = os.getcwd() + '/conf/dikantenyvaovao/'
+userdata_file = os.getcwd() + '/user_data/dikantenyvaovao/'
 
 
 def doexit(*args, **kwargs):
