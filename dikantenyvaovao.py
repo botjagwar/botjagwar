@@ -141,7 +141,10 @@ class LiveRecentChangesBot(ircbot.SingleServerIRCBot):
         self.channels_list = []
         self.chronometer = 0.0
         self.change_langs(lang)
-        self.errfile = file(userdata_file + 'dikantenyvaovao.exceptions', 'a')
+        try:
+            self.errfile = file(userdata_file + 'dikantenyvaovao.exceptions', 'a')
+        except Exception:
+            self.errfile = file(userdata_file + 'dikantenyvaovao.exceptions', 'w')
         self.iso2languagename = {}
         self.joined = []
         self.langs = []
