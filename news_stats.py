@@ -168,18 +168,20 @@ def main():
     ct_date = u"%d %s %d" % (ct_time[2], months[ct_time[1]], ct_time[0])
     page = pywikibot.Page(pywikibot.Site("mg", "wikipedia"), u"Wikipedia:Vaovao Wikimedia/%d" % ct_time[0])
     news = u"\n; %s\n%s" % (ct_date, retstr)
+    newsfile = open(u"/tmp/%s" % ct_date, "w")
     if page.exists():
         content = page.get()
         if content.find(ct_date) != -1:
             return
         content = news + content
         page.put(content, u"+Vaovao androany" + ct_date)
-        file(u"/tmp/%s" % ct_date, "w").write(content)
+        newsfile.write(content.encode('utf8'))
     else:
         page.put(news, u"Vaovao androany" + ct_date)
-        file(u"/tmp/%s" % ct_date, "w").write(news)
+        newsfile.write(news.encode('utf8'))
 
     save_state(new, u"ct_state")
+    newsfile.close()
 
 
 if __name__ == '__main__':
