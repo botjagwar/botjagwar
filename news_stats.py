@@ -146,53 +146,6 @@ def render_announce(milestone):
             item_type, link, milestone[0], milestone[1], milestone[3])
 
 
-def test():
-    old = [
-        ('mg', 'wiktionary', {u'articles': 100, u'jobs': 0, u'users': 431, u'admins': 0, u'edits': 3486, u'activeusers': 0, u'images': 0, u'queued-massmessages': 0, u'pages': 67}),
-        ('az', 'wiktionary', {u'articles': 202, u'jobs': 0, u'users': 400, u'admins': 0, u'edits': 3486, u'activeusers': 0, u'images': 0, u'queued-massmessages': 0, u'pages': 67}),
-        ('dv', 'wiktionary',{u'articles': 100, u'jobs': 0, u'users': 431, u'admins': 0, u'edits': 3486, u'activeusers': 0, u'images': 0, u'queued-massmessages': 0, u'pages': 67}),
-        ('kz', 'wiktionary', {u'articles': 212, u'jobs': 0, u'users': 400, u'admins': 0, u'edits': 3486, u'activeusers': 0, u'images': 0, u'queued-massmessages': 0, u'pages': 67}),
-        ('dj', 'wiktionary', {u'articles': 122, u'jobs': 0, u'users': 431, u'admins': 0, u'edits': 3486, u'activeusers': 0, u'images': 0, u'queued-massmessages': 0, u'pages': 67}),
-        ('pa', 'wiktionary', {u'articles': 202, u'jobs': 0, u'users': 400, u'admins': 0, u'edits': 3486, u'activeusers': 0, u'images': 0, u'queued-massmessages': 0, u'pages': 67}),
-        ('de', 'wiktionary',{u'articles': 100, u'jobs': 0, u'users': 431, u'admins': 0, u'edits': 3486, u'activeusers': 0, u'images': 0, u'queued-massmessages': 0, u'pages': 67}),
-        ('ke', 'wiktionary', {u'articles': 202, u'jobs': 0, u'users': 400, u'admins': 0, u'edits': 3486, u'activeusers': 0, u'images': 0, u'queued-massmessages': 0, u'pages': 67}),
-        ('es', 'wiktionary', {u'articles': 1, u'jobs': 0, u'users': 431, u'admins': 0, u'edits': 3486, u'activeusers': 0, u'images': 0, u'queued-massmessages': 0, u'pages': 67}),
-        ('ml', 'wiktionary', {u'articles': 100, u'jobs': 0, u'users': 431, u'admins': 0, u'edits': 3486, u'activeusers': 0, u'images': 0, u'queued-massmessages': 0, u'pages': 67}),
-        ('kn', 'wiktionary', {u'articles': 202, u'jobs': 0, u'users': 400, u'admins': 0, u'edits': 3486, u'activeusers': 0, u'images': 0, u'queued-massmessages': 0, u'pages': 67}),
-        ('dk', 'wiktionary',{u'articles': 100, u'jobs': 0, u'users': 431, u'admins': 0, u'edits': 3486, u'activeusers': 0, u'images': 0, u'queued-massmessages': 0, u'pages': 67}),
-        ('kl', 'wiktionary', {u'articles': 202, u'jobs': 0, u'users': 400, u'admins': 0, u'edits': 3486, u'activeusers': 0, u'images': 0, u'queued-massmessages': 0, u'pages': 67}),
-        ('se', 'wiktionary', {u'articles': 1, u'jobs': 0, u'users': 431, u'admins': 0, u'edits': 3486, u'activeusers': 0, u'images': 0, u'queued-massmessages': 0, u'pages': 67}),
-        ('sv', 'wiktionary', {u'articles': 202, u'jobs': 0, u'users': 400, u'admins': 0, u'edits': 3486, u'activeusers': 0, u'images': 0, u'queued-massmessages': 0, u'pages': 67}),
-        ('fi', 'wiktionary',{u'articles': 100, u'jobs': 0, u'users': 431, u'admins': 0, u'edits': 3486, u'activeusers': 0, u'images': 0, u'queued-massmessages': 0, u'pages': 67}),
-        ('uz', 'wiktionary', {u'articles': 202, u'jobs': 0, u'users': 400, u'admins': 0, u'edits': 3486, u'activeusers': 0, u'images': 0, u'queued-massmessages': 0, u'pages': 67}),
-        ('uk', 'wiktionary', {u'articles': 1, u'jobs': 0, u'users': 431, u'admins': 0, u'edits': 3486, u'activeusers': 0, u'images': 0, u'queued-massmessages': 0, u'pages': 67})
-    ]
-
-    new = [
-        ('mg', 'wiktionary', {u'articles': 100, u'jobs': 0, u'users': 431, u'admins': 0, u'edits': 3486, u'activeusers': 0, u'images': 0, u'queued-massmessages': 0, u'pages': 67}),
-        ('az', 'wiktionary', {u'articles': 202, u'jobs': 0, u'users': 400, u'admins': 0, u'edits': 30486, u'activeusers': 0, u'images': 0, u'queued-massmessages': 0, u'pages': 67}),
-        ('dv', 'wiktionary',{u'articles': 300, u'jobs': 0, u'users': 431, u'admins': 0, u'edits': 3486, u'activeusers': 0, u'images': 0, u'queued-massmessages': 0, u'pages': 67}),
-        ('kz', 'wiktionary', {u'articles': 412, u'jobs': 0, u'users': 10400, u'admins': 0, u'edits': 3486, u'activeusers': 0, u'images': 0, u'queued-massmessages': 0, u'pages': 67}),
-        ('dj', 'wiktionary', {u'articles': 522, u'jobs': 0, u'users': 431, u'admins': 0, u'edits': 30486, u'activeusers': 0, u'images': 0, u'queued-massmessages': 0, u'pages': 67}),
-        ('pa', 'wiktionary', {u'articles': 602, u'jobs': 0, u'users': 400, u'admins': 0, u'edits': 3486, u'activeusers': 0, u'images': 0, u'queued-massmessages': 0, u'pages': 67}),
-        ('de', 'wiktionary',{u'articles': 10, u'jobs': 0, u'users': 431, u'admins': 0, u'edits': 3486, u'activeusers': 0, u'images': 0, u'queued-massmessages': 0, u'pages': 67}),
-        ('ke', 'wiktionary', {u'articles': 702, u'jobs': 0, u'users': 400, u'admins': 0, u'edits': 3486, u'activeusers': 0, u'images': 0, u'queued-massmessages': 0, u'pages': 67}),
-        ('es', 'wiktionary', {u'articles': 820, u'jobs': 0, u'users': 431, u'admins': 0, u'edits': 30486, u'activeusers': 0, u'images': 0, u'queued-massmessages': 0, u'pages': 67}),
-        ('ml', 'wiktionary', {u'articles': 900, u'jobs': 0, u'users': 1431, u'admins': 0, u'edits': 3486, u'activeusers': 0, u'images': 0, u'queued-massmessages': 0, u'pages': 67}),
-        ('kn', 'wiktionary', {u'articles': 1202, u'jobs': 0, u'users': 400, u'admins': 0, u'edits': 3486, u'activeusers': 0, u'images': 0, u'queued-massmessages': 0, u'pages': 67}),
-        ('dk', 'wiktionary',{u'articles': 1200, u'jobs': 0, u'users': 431, u'admins': 0, u'edits': 3486, u'activeusers': 0, u'images': 0, u'queued-massmessages': 0, u'pages': 67}),
-        ('kl', 'wiktionary', {u'articles': 1502, u'jobs': 0, u'users': 2400, u'admins': 0, u'edits': 3486, u'activeusers': 0, u'images': 0, u'queued-massmessages': 0, u'pages': 67}),
-        ('se', 'wiktionary', {u'articles': 2000, u'jobs': 0, u'users': 431, u'admins': 0, u'edits': 3486, u'activeusers': 0, u'images': 0, u'queued-massmessages': 0, u'pages': 67}),
-        ('sv', 'wiktionary', {u'articles': 3002, u'jobs': 0, u'users': 4400, u'admins': 0, u'edits': 3486, u'activeusers': 0, u'images': 0, u'queued-massmessages': 0, u'pages': 67}),
-        ('fi', 'wiktionary',{u'articles': 4000, u'jobs': 0, u'users': 431, u'admins': 0, u'edits': 3486, u'activeusers': 0, u'images': 0, u'queued-massmessages': 0, u'pages': 67}),
-        ('uz', 'wiktionary', {u'articles': 5002, u'jobs': 0, u'users': 5400, u'admins': 0, u'edits': 3486, u'activeusers': 0, u'images': 0, u'queued-massmessages': 0, u'pages': 67}),
-        ('uk', 'wiktionary', {u'articles': 6000, u'jobs': 0, u'users': 431, u'admins': 0, u'edits': 3486, u'activeusers': 0, u'images': 0, u'queued-massmessages': 0, u'pages': 67})
-    ]
-    ms = get_milestones(old, new)
-    for m in ms:
-        print render_announce(m)
-
-
 def main():
     months = [u"", u"Janoary", u"Febroary", u"Martsa", u"Aprily", u"Mey", u"Jiona",
               u"Jolay", u"Aogositra", u"Septambra", u"Oktobra", u"Novambra", u"Desambra"]
@@ -225,9 +178,9 @@ def main():
     else:
         page.put(news, u"Vaovao androany" + ct_date)
         file(u"/tmp/%s" % ct_date, "w").write(news)
-        save_state(new, u"ct_state")
+
+    save_state(new, u"ct_state")
 
 
 if __name__ == '__main__':
-    test()
-    #print main()
+    main()
