@@ -64,7 +64,7 @@ def save_state(state):
 
 def translate_json_keyword(json_keyword):
     words = {
-        "articles": 'lahatsoratra',
+        "articles": 'pejim-botoatiny',
         "pages": 'pejy rehetra',
         'users': 'mpikambana',
         'edits': 'fiovana',
@@ -72,6 +72,7 @@ def translate_json_keyword(json_keyword):
     try:
         return words[json_keyword]
     except KeyError:
+        print (u"Unknown keyword: %s" % json_keyword)
         return False
 
 
@@ -146,7 +147,7 @@ def render_announce(milestone):
     item_type = translate_json_keyword(milestone[-1])
 
     if not item_type:
-        raise ValueError("Can't render that announcement")
+        raise ValueError(u"Can't render that announcement.")
 
     if milestone[2] == "over":
         return u"* Ny isan'ny %s ao amin'i [[%s|%s.%s]] dia mihoatra ny {{formatnum:%s}}." % (
