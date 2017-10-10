@@ -168,11 +168,12 @@ def main():
             c = render_announce(m)
             if c:
                 retstr += render_announce(m) + u"\n"
-        except ValueError:
-            pass
+        except ValueError as e:
+            print(e)
 
     ct_time = time.localtime()
     if not retstr:
+        print ("tsy misy vaovao ho ampitaina.")
         return
 
     ct_date = u"%d %s %d" % (ct_time[2], months[ct_time[1]], ct_time[0])
@@ -182,6 +183,7 @@ def main():
     if page.exists():
         content = page.get()
         if content.find(ct_date) != -1:
+            print ("tsy nahitana daty ankehitriny")
             return
         content = news + content
         page.put(content, u"+Vaovao androany" + ct_date)
