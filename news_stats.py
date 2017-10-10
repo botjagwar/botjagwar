@@ -1,10 +1,14 @@
 # coding: utf8
 
-import math, json, time, urllib, pickle
+import os
+import math
+import json
+import time
+import urllib
+import pickle
 
 from urllib import FancyURLopener
 from list_wikis import Wikilister
-
 import pywikibot
 
 
@@ -12,14 +16,19 @@ class MyOpener(FancyURLopener):
     version = 'Botjagwar/v1.1'
 
 
-udata = u"user_data/milestones"
-cdata = u"conf/list_wikis/langs"
+udata = os.getcwd() + u"/user_data/milestones"
+cdata = os.getcwd() + u"/conf/list_wikis/langs"
 
 
-def get_saved_state(name):
+def get_saved_state():
+
     try:
-        return pickle.load(file(udata + u"/%s" % name, 'r'))
+        f = open(udata + u"/news_stats", 'r')
+        r = pickle.load(f)
+        f.close()
+        return r
     except IOError as e:
+        print(e)
         return []
 
 
@@ -35,21 +44,22 @@ def get_new_state():
                 stat_json = u""
                 try:
                     stat_json = json.loads(stat_page)
-                    #print stat_json
                     p = stat_json['query']['statistics']
                     wiki_state = (lang, site, p)
-                    print wiki_state
+                    print(wiki_state)
                     new_state.append(wiki_state)
                     break
                 except Exception as e:
-                    print stat_json
+                    print(stat_json)
                     time.sleep(5)
                     raise e
     return new_state
 
 
-def save_state(state, state_name):
-    pickle.dump(state, file(udata + u"/%s" % state_name, 'w'))
+def save_state(state):
+    f = open(udata + u"/news_stats", 'w')
+    pickle.dump(state, f)
+    f.close()
 
 
 def translate_json_keyword(json_keyword):
@@ -71,7 +81,7 @@ def get_milestones(old_state, new_state):
             for column in state_2[2].keys():
                 old_figure = state_1[2][column]
                 new_figure = state_2[2][column]
-                #print old_figure, new_figure
+                # print(old_figure, new_figure)
 
                 s1_pow10 = int(math.log(max(1, old_figure), 10))
                 s2_pow10 = int(math.log(max(1, new_figure), 10))
@@ -149,7 +159,7 @@ def render_announce(milestone):
 def main():
     months = [u"", u"Janoary", u"Febroary", u"Martsa", u"Aprily", u"Mey", u"Jiona",
               u"Jolay", u"Aogositra", u"Septambra", u"Oktobra", u"Novambra", u"Desambra"]
-    old = get_saved_state(u"ct_state")
+    old = get_saved_state()
     new = get_new_state()
     ms = get_milestones(old, new)
     retstr = u""
@@ -180,7 +190,7 @@ def main():
         page.put(news, u"Vaovao androany" + ct_date)
         newsfile.write(news.encode('utf8'))
 
-    save_state(new, u"ct_state")
+    save_state(new)
     newsfile.close()
 
 
