@@ -1,5 +1,6 @@
 import inspect
 import sys
+import os
 import warnings
 
 from wiki.base import WiktionaryProcessor
@@ -15,7 +16,7 @@ from wiki.vo import VOWiktionaryProcessor
 from wiki.zh import ZHWiktionaryProcessor
 
 
-data_file = 'conf/entryprocessor/'
+data_file = os.getcwd() + '/conf/entryprocessor/'
 verbose = True
 
 

@@ -1,5 +1,6 @@
 # coding: utf8
 import re
+import os
 import pywikibot as pwbot
 from modules import entryprocessor
 from modules import BJDBmodule
@@ -7,7 +8,7 @@ from modules.exceptions import NoWordException
 from modules.output import Output
 from modules.autoformatter import Autoformat
 
-default_data_file = 'conf/dikantenyvaovao/'
+default_data_file = os.getcwd() + '/conf/dikantenyvaovao/'
 
 
 class TranslationsHandler(object):

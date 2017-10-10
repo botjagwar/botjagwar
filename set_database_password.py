@@ -1,8 +1,9 @@
 import base64
 import getpass
 import sys
+import os
 
-default_path = "conf/BJDBModule/database_password"
+default_path = os.getcwd() + "/conf/BJDBModule/database_password"
 args = sys.argv
 set_new_password = False
 new_password = None
