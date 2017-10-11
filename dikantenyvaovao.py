@@ -11,7 +11,6 @@ import traceback
 import pywikibot as pwbot
 
 from modules import BJDBmodule, ircbot
-from modules.exceptions import NoWordException
 from modules.translation.core import Translation, TranslationsHandler
 from modules.translation.analysis import (analyse_edit_hours, analyse_translations,
                                           MissingTranslations, Translations_per_day_hour)
@@ -84,7 +83,7 @@ def add_translations(last_x_hours=1):
     count = 0
     for word in allwords:
         count += 1
-        if not count % 10000: print count
+        if not count % 10000: print (count)
         for mgtranslation in word[3].split(','):
             mgtranslation = mgtranslation.strip()
             for char in '[]':
@@ -94,18 +93,18 @@ def add_translations(last_x_hours=1):
             except KeyError:
                 mg_words[mgtranslation] = []
                 mg_words[mgtranslation].append((word[5], word[1]))
-    print count
+    print (count)
     count = 0
-    print "lanjan'ny diksionera : ", len(mg_words)
+    print ("lanjan'ny diksionera : ", len(mg_words))
 
     for mgword in mg_words:
-        # print mg_words[mgword]
+        # print (mg_words[mgword])
 
         mg_page = pwbot.Page(pwbot.Site('mg', "wiktionary"), mgword.decode('latin1'))
 
         try:
             page_c = orig = mg_page.get()
-            print "original length:", len(page_c)
+            print ("original length:", len(page_c))
         except Exception as e:
             continue
 
@@ -115,7 +114,7 @@ def add_translations(last_x_hours=1):
         page_c = translation_handler.add(ftranslationlist)
 
         pwbot.output(">>> %s <<<" % mg_page.title())
-        print "output length:", len(page_c)
+        print ("output length:", len(page_c))
         page_c = page_c.replace("\n]", "")
         pwbot.showDiff(orig, page_c)
         while 1:
@@ -124,7 +123,7 @@ def add_translations(last_x_hours=1):
                 mg_page.put_async(page_c, "+dikanteny")
                 break
             except pwbot.exceptions.PageNotSaved:
-                print "Tsy nahatahiry ilay pejy... manandrana"
+                print ("Tsy nahatahiry ilay pejy... manandrana")
                 time.sleep(10)
 
         count += 1
@@ -142,9 +141,9 @@ class LiveRecentChangesBot(ircbot.SingleServerIRCBot):
         self.chronometer = 0.0
         self.change_langs(lang)
         try:
-            self.errfile = file(userdata_file + 'dikantenyvaovao.exceptions', 'a')
+            self.errfile = open(userdata_file + 'dikantenyvaovao.exceptions', 'a')
         except Exception:
-            self.errfile = file(userdata_file + 'dikantenyvaovao.exceptions', 'w')
+            self.errfile = open(userdata_file + 'dikantenyvaovao.exceptions', 'w')
         self.iso2languagename = {}
         self.joined = []
         self.langs = []
@@ -161,7 +160,7 @@ class LiveRecentChangesBot(ircbot.SingleServerIRCBot):
 
     def connect_in_languages(self):
         """mametaka fitohizana amin'ny tsanely irc an'i Wikimedia"""
-        print "\n---------------------\n       PARAMETATRA : "
+        print ("\n---------------------\n       PARAMETATRA : ")
         lister = list_wikis.Wikilister()
         self.langs = lister.getLangs("wiktionary")
         i = 0
@@ -173,29 +172,29 @@ class LiveRecentChangesBot(ircbot.SingleServerIRCBot):
                 continue
             language = language.strip()
             channel = "#%s.wiktionary" % language
-            print "kaodim-piteny:", language, ", tsanely:", channel, " anarana:", self.username
+            print ("kaodim-piteny:", language, ", tsanely:", channel, " anarana:", self.username)
 
             irc_bot = ircbot.SingleServerIRCBot.__init__(
                 self, [("irc.wikimedia.org", 6667)], self.username, "Bot-Jagwar [IRCbot v2].")
             self.joined.append(language)
             self.channels_list.append(irc_bot)
-        print "Vita ny fampitohizana"
+        print ("Vita ny fampitohizana")
 
     def on_welcome(self, serv, ev):
         for language in self.joined:
-            # print "Mangataka tonga soa avy amin'i #"+language+".wiktionary"
+            # print ("Mangataka tonga soa avy amin'i #"+language+".wiktionary")
             serv.join("#" + language + ".wiktionary")
 
     def on_kick(self, serv, ev):
         for language in self.joined:
-            print "Voadaka. Mangataka tonga soa avy amin'i #" + language + ".wiktionary"
+            print ("Voadaka. Mangataka tonga soa avy amin'i #" + language + ".wiktionary")
             serv.join("#" + language + ".wiktionary")
 
     def on_pubmsg(self, serv, ev):
         try:
             self.bot_instance.handle(ev, self)
         except Exception as e:
-            print traceback.format_exc()
+            print (traceback.format_exc())
             self.stats['errors'] += 1
             errstr = u"\n%s" % e.message
             self.errfile.write(errstr.encode('utf8'))
@@ -215,10 +214,10 @@ class Bot(object):
 
     @staticmethod
     def _update_unknowns(unknowns):
-        f = file(userdata_file + "word_hits", 'a')
+        f = open(userdata_file + "word_hits", 'a')
         for word, lang in unknowns:
             word += ' [%s]\n' % lang
-            print type(word)
+            print (type(word))
             f.write(word.encode('utf8'))
         f.close()
 
@@ -255,10 +254,9 @@ class Bot(object):
         if not rc_bot.stats["edits"] % 5:
             cttime = time.gmtime()
             rc_bot.chronometer = time.time() - rc_bot.chronometer
-            print "%d/%02d/%02d %02d:%02d:%02d > " % cttime[:6], \
-                "Fanovana: %(edits)d; pejy voaforona: %(newentries)d; hadisoana: %(errors)d" % rc_bot.stats \
-                + " taha: fanovana %.1f/min" % (
-                    60. * (5 / rc_bot.chronometer))
+            print ("%d/%02d/%02d %02d:%02d:%02d > " % cttime[:6], \
+                   "Fanovana: %(edits)d; pejy voaforona: %(newentries)d; hadisoana: %(errors)d" % rc_bot.stats \
+                   + " taha: fanovana %.1f/min" % (60. * (5 / rc_bot.chronometer)))
             rc_bot.chronometer = time.time()
 
     @staticmethod
