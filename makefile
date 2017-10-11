@@ -25,6 +25,12 @@ dbconf:
 cronconf:
 	DB_PASSWD=$(DB_PASSWD) sudo bash -x deploy/configure-cron.sh
 
+botscripts:
+    cp scripts/dikantenyvaovao-start.sh $(HOME)
+    cp scripts/fitenytsyfantatra.sh $(HOME)
+    cp scripts/list-wikis.sh $(HOME)
+    cp scripts/vaovaowikimedia.sh $(HOME)
+
 schema: database
 	sudo service mysql start
 	mysql -u root --password=$(DB_PASSWD) < data/schema.sql
@@ -35,6 +41,7 @@ test: database
 data: schema database
 	sudo service mysql start
 	mysql -u root --password=$(DB_PASSWD) -D data_botjagwar < data/data_botjagwar.sql
+	sudo bash -x scripts/deploy.sh
 
 clear:
 	sudo apt-get remove -y mysql-server
