@@ -31,6 +31,9 @@ botscripts:
     cp scripts/list-wikis.sh $(HOME)
     cp scripts/vaovaowikimedia.sh $(HOME)
 
+monitoring:
+    bash -x scripts/deploy-nginx.sh
+
 schema: database
 	sudo service mysql start
 	mysql -u root --password=$(DB_PASSWD) < data/schema.sql
@@ -49,4 +52,4 @@ clear:
 	sudo apt-get autoremove -y nginx php-fpm php-mysql
 	sudo apt-get autoremove -y python-pip python2.7 python-mysqldb
 
-all: python install-deps data
+all: python install-deps data botscripts
