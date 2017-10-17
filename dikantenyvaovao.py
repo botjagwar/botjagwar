@@ -11,6 +11,7 @@ import traceback
 import pywikibot as pwbot
 
 from modules import BJDBmodule, ircbot
+from modules.decorator import threaded
 from modules.translation.core import Translation, TranslationsHandler
 from modules.translation.analysis import (analyse_edit_hours, analyse_translations,
                                           MissingTranslations, Translations_per_day_hour)
@@ -24,19 +25,8 @@ data_file = os.getcwd() + '/conf/dikantenyvaovao/'
 userdata_file = os.getcwd() + '/user_data/dikantenyvaovao/'
 
 
-def doexit(*args, **kwargs):
-    time.sleep(1500000)
-    if len(databases) > 0:
-        for db in databases:
-            db.close()
-    os.kill(os.getpid(), signal.SIGTERM)
-
-
 def irc_retrieve(channel=''):
     set_throttle(1)
-    x = threading.Thread(target=doexit)
-    x.daemon = True
-    x.start()
 
     missing_translations = MissingTranslations(data_file)
     if not len(channel):
@@ -58,7 +48,7 @@ def irc_retrieve(channel=''):
 def set_throttle(i):
     from pywikibot import throttle
     t = throttle.Throttle(pwbot.Site('mg', 'wiktionary'), mindelay=0, maxdelay=1)
-    pwbot.config2.put_throttle = 1
+    pwbot.config.put_throttle = 1
     t.setDelays(i)
 
 
@@ -148,8 +138,8 @@ class LiveRecentChangesBot(ircbot.SingleServerIRCBot):
         self.joined = []
         self.langs = []
         self.stats = {'edits': 0.0, 'newentries': 0.0, 'errors': 0.0}
-        self.translations = Translation(data_file)
         self.tran_per_hour = Translations_per_day_hour(data_file)
+        self.edits = 0
         self.username = user
         self.bot_instance = Bot()
 
@@ -192,7 +182,14 @@ class LiveRecentChangesBot(ircbot.SingleServerIRCBot):
 
     def on_pubmsg(self, serv, ev):
         try:
-            self.bot_instance.handle(ev, self)
+            ct_time = time.time()
+            self.bot_instance.handle(ev)
+            self.edits += 1
+            if not self.edits % 5:
+                throughput = 60. * 5. / (float(ct_time) - self.chronometer)
+                self.chronometer = ct_time
+                print ("Fiovana faha-%d (fiovana %.2f / min)" % (self.edits, throughput))
+
         except Exception as e:
             print (traceback.format_exc())
             self.stats['errors'] += 1
@@ -277,7 +274,9 @@ class Bot(object):
             page_c += u"\n[[sokajy:Pejy voafafa tany an-kafa]]"
             page.put(page_c, "+filazana")
 
-    def handle(self, ev, rc_bot):
+    @threaded
+    def handle(self, ev):
+        translations = Translation(data_file)
         message = self._prepare_message(ev)
         lang = self._get_origin_wiki(message)
         message_type = self._get_message_type(message)
@@ -286,11 +285,7 @@ class Bot(object):
             page = self._get_page(message, lang)
             if page is None:
                 return
-            rc_bot.stats['edits'] += 1.
-            unknowns, newentries = rc_bot.translations.process_wiktionary_page(lang, page)
-            rc_bot.stats['newentries'] += newentries
-            rc_bot.stats['rend'] = 100. * rc_bot.stats['errors'] / rc_bot.stats['edits']
-            rc_bot.stats['rendpejy'] = 100. * float(rc_bot.stats['newentries']) / rc_bot.stats['edits']
+            unknowns, newentries = translations.process_wiktionary_page(lang, page)
             self._update_unknowns(unknowns)
 
         elif message_type == 'delete':
@@ -298,8 +293,6 @@ class Bot(object):
             if page is None:
                 return
             self.put_deletion_notice(page)
-
-        self._update_statistics(rc_bot)
 
 
 def striplinks(link):
@@ -312,6 +305,7 @@ def striplinks(link):
 args = sys.argv
 if __name__ == '__main__':
     Missing_translations = MissingTranslations(userdata_file)
+
     argsdict = {
         'irc': irc_retrieve,
         'analyse': analyse_translations,
@@ -319,8 +313,6 @@ if __name__ == '__main__':
         'addtranslations': add_translations
     }
     try:
-        # verbose=True
-        # print args[1] + " --- " + args[2]
-        argsdict[args[1]](args[2])
+        irc_retrieve()
     finally:
         pwbot.stopme()
