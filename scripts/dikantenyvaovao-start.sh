@@ -2,7 +2,7 @@
 
 set -e
 
-cd $(HOME)/botjagwar
+cd $HOME/botjagwar
 
 if ! ps aux | grep python | grep dikantenyvaovao
 then

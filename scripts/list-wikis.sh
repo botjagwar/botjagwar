@@ -2,6 +2,6 @@
 
 set -e
 
-cd $(HOME)/botjagwar
+cd $HOME/botjagwar
 
 python list_wikis.py
