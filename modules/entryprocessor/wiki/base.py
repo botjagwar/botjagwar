@@ -1,8 +1,8 @@
 # coding: utf8
 import re
+import os
 
-
-data_file = 'conf/entryprocessor/'
+data_file = os.getcwd() +'/conf/entryprocessor/'
 
 
 class WiktionaryProcessor(object):

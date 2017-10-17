@@ -1,12 +1,14 @@
-## <Fanalana ny tag HTML>
-
+# coding: utf8
 
 from HTMLParser import HTMLParser
 
 
 class MLStripper(HTMLParser):
-
+    """
+    Fanalana tag HTML amin'ny lahatsoratra iray.
+    """
     def __init__(self):
+        HTMLParser.__init__()
         self.reset()
         self.fed = []
 
@@ -21,5 +23,3 @@ def strip_tags(html):
     s = MLStripper()
     s.feed(html)
     return s.get_data()
-
-## </Fanalana ny tag HTML>

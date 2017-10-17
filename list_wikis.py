@@ -1,9 +1,12 @@
 # -*- coding: utf-8  -*-
-import re, urllib, time
+import re
+import urllib
+import time
+import os
 import pywikibot
 from urllib import FancyURLopener
 
-data_file = 'conf/list_wikis/'
+data_file = os.getcwd() + '/conf/list_wikis/'
 current_user = pywikibot.config.usernames['wiktionary']['mg']
 
 
@@ -16,13 +19,13 @@ class Wikilister(object):
         self.test = test
 
     def getLangs(self, site):
-        dump = file(data_file + 'listof%s.txt' % site, 'r').read()
-        print data_file + 'listof%s.txt' % site
+        dump = open(data_file + 'listof%s.txt' % site, 'r').read()
+        print (data_file + 'listof%s.txt' % site)
 
         wikiregex = re.findall('([a-z|\-]+).%s.org/wiki/Special:Recentchanges' % site, dump)
         if len(wikiregex) == 0:
             wikiregex = re.findall('\{\{fullurl:([a-z|\-]+):Special', dump)
-        print wikiregex
+        print (wikiregex)
         for lang in wikiregex:
             yield lang
 
@@ -37,23 +40,23 @@ class Wikilister(object):
                     urlstr = 'https://%s.%s.org/w/api.php?action=query&meta=siteinfo&format=json&siprop=statistics&continue' % (
                         lang, site)
                     statpage = urllib.urlopen(urlstr).read()
-                    print statpage
+                    print (statpage)
                     pywikibot.output(urlstr)
                     break
                 except Exception as e:
-                    print e.message
+                    print (e.message)
                     time.sleep(5)
 
                 except IOError as e:
-                    print e.message
-                    print "Hadisoana mitranga amin'i %s" % lang
+                    print (e.message)
+                    print ("Hadisoana mitranga amin'i %s" % lang)
                     time.sleep(5)
                     ierr += 1
             del ierr
             try:
                 stats = eval(statpage)
             except Exception:
-                print 'Nitrangana hadisoana: %s' % statpage
+                print ('Nitrangana hadisoana: %s' % statpage)
                 continue
             m = stats['query']['statistics']
             e = (int(m['articles']),
@@ -80,8 +83,7 @@ class Wikilister(object):
 
             datas.append(e)
             i += 1
-            print '%(language)s > lahatsoratra:%(articles)d; pejy:%(pages)d; fanovana:%(edits)d; mpikambana:%(users)d; mavitrika:%(activeusers)d; mpandrindra:%(admins)d; sary:%(images)d; halalina:%(depth)s ' % (
-                e[1])
+            print ('%(language)s > lahatsoratra:%(articles)d; pejy:%(pages)d; fanovana:%(edits)d; mpikambana:%(users)d; mavitrika:%(activeusers)d; mpandrindra:%(admins)d; sary:%(images)d; halalina:%(depth)s ' % (e[1]))
 
         datas.sort(reverse=True)
         self.wikitext(datas, wiki)
@@ -175,16 +177,14 @@ class Wikilister(object):
                 page.put(content, u'Rôbô : fanavaozana ny statistika')
                 break
             except Exception:
-                print 'Hadisoana nitranga tampametrahana ilay pejy'
+                print ('Hadisoana nitranga tampametrahana ilay pejy')
 
 
 def main():
-    pywikibot.stopme()
-    (pywikibot.config).put_throttle = int(1)
     timeshift = 3
     bot = Wikilister()
 
-    while (1):
+    while True:
         t = list(time.gmtime())
         cond = (not (t[3] + timeshift) % 6) and (t[4] == 0)
         if cond:
@@ -192,9 +192,8 @@ def main():
             bot.run('pywikibot', 'pywikibot')
             time.sleep(120)
         else:
-            print "Fanavaozana isaky ny adin'ny 6"
-            print "Miandry ny fotoana tokony hamaozana ny pejy (ora %2d:%2d) (GMT+%d)" % (
-                (t[3] + timeshift), t[4], (timeshift))
+            print ("Fanavaozana isaky ny adin'ny 6")
+            print ("Miandry ny fotoana tokony hamaozana ny pejy (ora %2d:%2d) (GMT+%d)" % ((t[3] + timeshift), t[4], (timeshift)))
             time.sleep(30)
 
 

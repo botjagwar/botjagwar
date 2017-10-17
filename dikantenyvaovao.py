@@ -11,7 +11,7 @@ import traceback
 import pywikibot as pwbot
 
 from modules import BJDBmodule, ircbot
-from modules.exceptions import NoWordException
+from modules.decorator import threaded
 from modules.translation.core import Translation, TranslationsHandler
 from modules.translation.analysis import (analyse_edit_hours, analyse_translations,
                                           MissingTranslations, Translations_per_day_hour)
@@ -21,23 +21,12 @@ import list_wikis
 verbose = False
 nwikimax = 15
 databases = []
-data_file = 'conf/dikantenyvaovao/'
-userdata_file = 'user_data/dikantenyvaovao/'
-
-
-def doexit(*args, **kwargs):
-    time.sleep(1500000)
-    if len(databases) > 0:
-        for db in databases:
-            db.close()
-    os.kill(os.getpid(), signal.SIGTERM)
+data_file = os.getcwd() + '/conf/dikantenyvaovao/'
+userdata_file = os.getcwd() + '/user_data/dikantenyvaovao/'
 
 
 def irc_retrieve(channel=''):
     set_throttle(1)
-    x = threading.Thread(target=doexit)
-    x.daemon = True
-    x.start()
 
     missing_translations = MissingTranslations(data_file)
     if not len(channel):
@@ -59,7 +48,7 @@ def irc_retrieve(channel=''):
 def set_throttle(i):
     from pywikibot import throttle
     t = throttle.Throttle(pwbot.Site('mg', 'wiktionary'), mindelay=0, maxdelay=1)
-    pwbot.config2.put_throttle = 1
+    pwbot.config.put_throttle = 1
     t.setDelays(i)
 
 
@@ -84,7 +73,7 @@ def add_translations(last_x_hours=1):
     count = 0
     for word in allwords:
         count += 1
-        if not count % 10000: print count
+        if not count % 10000: print (count)
         for mgtranslation in word[3].split(','):
             mgtranslation = mgtranslation.strip()
             for char in '[]':
@@ -94,18 +83,18 @@ def add_translations(last_x_hours=1):
             except KeyError:
                 mg_words[mgtranslation] = []
                 mg_words[mgtranslation].append((word[5], word[1]))
-    print count
+    print (count)
     count = 0
-    print "lanjan'ny diksionera : ", len(mg_words)
+    print ("lanjan'ny diksionera : ", len(mg_words))
 
     for mgword in mg_words:
-        # print mg_words[mgword]
+        # print (mg_words[mgword])
 
         mg_page = pwbot.Page(pwbot.Site('mg', "wiktionary"), mgword.decode('latin1'))
 
         try:
             page_c = orig = mg_page.get()
-            print "original length:", len(page_c)
+            print ("original length:", len(page_c))
         except Exception as e:
             continue
 
@@ -115,7 +104,7 @@ def add_translations(last_x_hours=1):
         page_c = translation_handler.add(ftranslationlist)
 
         pwbot.output(">>> %s <<<" % mg_page.title())
-        print "output length:", len(page_c)
+        print ("output length:", len(page_c))
         page_c = page_c.replace("\n]", "")
         pwbot.showDiff(orig, page_c)
         while 1:
@@ -124,7 +113,7 @@ def add_translations(last_x_hours=1):
                 mg_page.put_async(page_c, "+dikanteny")
                 break
             except pwbot.exceptions.PageNotSaved:
-                print "Tsy nahatahiry ilay pejy... manandrana"
+                print ("Tsy nahatahiry ilay pejy... manandrana")
                 time.sleep(10)
 
         count += 1
@@ -141,13 +130,16 @@ class LiveRecentChangesBot(ircbot.SingleServerIRCBot):
         self.channels_list = []
         self.chronometer = 0.0
         self.change_langs(lang)
-        self.errfile = file(userdata_file + 'dikantenyvaovao.exceptions', 'a')
+        try:
+            self.errfile = open(userdata_file + 'dikantenyvaovao.exceptions', 'a')
+        except Exception:
+            self.errfile = open(userdata_file + 'dikantenyvaovao.exceptions', 'w')
         self.iso2languagename = {}
         self.joined = []
         self.langs = []
         self.stats = {'edits': 0.0, 'newentries': 0.0, 'errors': 0.0}
-        self.translations = Translation(data_file)
         self.tran_per_hour = Translations_per_day_hour(data_file)
+        self.edits = 0
         self.username = user
         self.bot_instance = Bot()
 
@@ -158,7 +150,7 @@ class LiveRecentChangesBot(ircbot.SingleServerIRCBot):
 
     def connect_in_languages(self):
         """mametaka fitohizana amin'ny tsanely irc an'i Wikimedia"""
-        print "\n---------------------\n       PARAMETATRA : "
+        print ("\n---------------------\n       PARAMETATRA : ")
         lister = list_wikis.Wikilister()
         self.langs = lister.getLangs("wiktionary")
         i = 0
@@ -170,29 +162,36 @@ class LiveRecentChangesBot(ircbot.SingleServerIRCBot):
                 continue
             language = language.strip()
             channel = "#%s.wiktionary" % language
-            print "kaodim-piteny:", language, ", tsanely:", channel, " anarana:", self.username
+            print ("kaodim-piteny:", language, ", tsanely:", channel, " anarana:", self.username)
 
             irc_bot = ircbot.SingleServerIRCBot.__init__(
                 self, [("irc.wikimedia.org", 6667)], self.username, "Bot-Jagwar [IRCbot v2].")
             self.joined.append(language)
             self.channels_list.append(irc_bot)
-        print "Vita ny fampitohizana"
+        print ("Vita ny fampitohizana")
 
     def on_welcome(self, serv, ev):
         for language in self.joined:
-            # print "Mangataka tonga soa avy amin'i #"+language+".wiktionary"
+            # print ("Mangataka tonga soa avy amin'i #"+language+".wiktionary")
             serv.join("#" + language + ".wiktionary")
 
     def on_kick(self, serv, ev):
         for language in self.joined:
-            print "Voadaka. Mangataka tonga soa avy amin'i #" + language + ".wiktionary"
+            print ("Voadaka. Mangataka tonga soa avy amin'i #" + language + ".wiktionary")
             serv.join("#" + language + ".wiktionary")
 
     def on_pubmsg(self, serv, ev):
         try:
-            self.bot_instance.handle(ev, self)
+            ct_time = time.time()
+            self.bot_instance.handle(ev)
+            self.edits += 1
+            if not self.edits % 5:
+                throughput = 60. * 5. / (float(ct_time) - self.chronometer)
+                self.chronometer = ct_time
+                print ("Fiovana faha-%d (fiovana %.2f / min)" % (self.edits, throughput))
+
         except Exception as e:
-            print traceback.format_exc()
+            print (traceback.format_exc())
             self.stats['errors'] += 1
             errstr = u"\n%s" % e.message
             self.errfile.write(errstr.encode('utf8'))
@@ -212,10 +211,10 @@ class Bot(object):
 
     @staticmethod
     def _update_unknowns(unknowns):
-        f = file(userdata_file + "word_hits", 'a')
+        f = open(userdata_file + "word_hits", 'a')
         for word, lang in unknowns:
             word += ' [%s]\n' % lang
-            print type(word)
+            print (type(word))
             f.write(word.encode('utf8'))
         f.close()
 
@@ -252,10 +251,9 @@ class Bot(object):
         if not rc_bot.stats["edits"] % 5:
             cttime = time.gmtime()
             rc_bot.chronometer = time.time() - rc_bot.chronometer
-            print "%d/%02d/%02d %02d:%02d:%02d > " % cttime[:6], \
-                "Fanovana: %(edits)d; pejy voaforona: %(newentries)d; hadisoana: %(errors)d" % rc_bot.stats \
-                + " taha: fanovana %.1f/min" % (
-                    60. * (5 / rc_bot.chronometer))
+            print ("%d/%02d/%02d %02d:%02d:%02d > " % cttime[:6], \
+                   "Fanovana: %(edits)d; pejy voaforona: %(newentries)d; hadisoana: %(errors)d" % rc_bot.stats \
+                   + " taha: fanovana %.1f/min" % (60. * (5 / rc_bot.chronometer)))
             rc_bot.chronometer = time.time()
 
     @staticmethod
@@ -276,7 +274,9 @@ class Bot(object):
             page_c += u"\n[[sokajy:Pejy voafafa tany an-kafa]]"
             page.put(page_c, "+filazana")
 
-    def handle(self, ev, rc_bot):
+    @threaded
+    def handle(self, ev):
+        translations = Translation(data_file)
         message = self._prepare_message(ev)
         lang = self._get_origin_wiki(message)
         message_type = self._get_message_type(message)
@@ -285,11 +285,7 @@ class Bot(object):
             page = self._get_page(message, lang)
             if page is None:
                 return
-            rc_bot.stats['edits'] += 1.
-            unknowns, newentries = rc_bot.translations.process_wiktionary_page(lang, page)
-            rc_bot.stats['newentries'] += newentries
-            rc_bot.stats['rend'] = 100. * rc_bot.stats['errors'] / rc_bot.stats['edits']
-            rc_bot.stats['rendpejy'] = 100. * float(rc_bot.stats['newentries']) / rc_bot.stats['edits']
+            unknowns, newentries = translations.process_wiktionary_page(lang, page)
             self._update_unknowns(unknowns)
 
         elif message_type == 'delete':
@@ -297,8 +293,6 @@ class Bot(object):
             if page is None:
                 return
             self.put_deletion_notice(page)
-
-        self._update_statistics(rc_bot)
 
 
 def striplinks(link):
@@ -311,6 +305,7 @@ def striplinks(link):
 args = sys.argv
 if __name__ == '__main__':
     Missing_translations = MissingTranslations(userdata_file)
+
     argsdict = {
         'irc': irc_retrieve,
         'analyse': analyse_translations,
@@ -318,8 +313,6 @@ if __name__ == '__main__':
         'addtranslations': add_translations
     }
     try:
-        # verbose=True
-        # print args[1] + " --- " + args[2]
-        argsdict[args[1]](args[2])
+        irc_retrieve()
     finally:
         pwbot.stopme()

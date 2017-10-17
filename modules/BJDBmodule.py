@@ -2,7 +2,6 @@ import MySQLdb as db
 import datetime
 import pywikibot as wikipedia
 from set_database_password import PasswordManager
-import sys, time
 
 
 verbose = True
@@ -43,7 +42,6 @@ class Database(object):
 
     def __del__(self):
         self.cursor.close()
-        del self
 
     def close(self):
         self.cursor.close()
@@ -63,10 +61,12 @@ class Database(object):
     def insert(self, valuesdict):
         """Insert in database values in valuesdict"""
         if hasattr(valuesdict, 'append'):
-            if verbose: print("mampiditra am-paran'ny lisitra...")
+            if verbose:
+                print("mampiditra am-paran'ny lisitra...")
             self._insert_many(valuesdict)
         elif hasattr(valuesdict, 'has_key'):
-            if verbose: print('mampiditra tsirairay...')
+            if verbose:
+                print('mampiditra tsirairay...')
             self._insert_one(valuesdict)
 
     def _do_insert(self, valuesdict):
@@ -86,7 +86,8 @@ class Database(object):
             sqlreq = sqlreq.encode('utf8')
             self.cursor.execute(sqlreq)
         except Exception as e:
-            if verbose: wikipedia.output(sqlreq)
+            if verbose:
+                wikipedia.output(sqlreq)
             raise e
 
         self.querycount += 1
@@ -106,11 +107,11 @@ class Database(object):
         if self.autocommit:
             self.connect.commit()
 
-    def _action(self, conditionsdict=False, initstring=unicode(), operand=u'='):
+    def _action(self, conditionsdict={}, initstring=unicode(), operand=u'='):
         """action for SELECT or DELETE statements, specified by initstring"""
 
         sqlreq = initstring
-        if conditionsdict is False:
+        if not conditionsdict:
             sqlreq += u"from `%(DB)s`.`%(table)s` WHERE `fiteny`='mg'" % self.infos
         elif conditionsdict == {'fiteny': 'REHETRA'}:
             sqlreq += u"from `%(DB)s`.`%(table)s` WHERE 1"
@@ -217,6 +218,9 @@ class WordDatabase(object):
             self.DB = Loaded_DB
         else:
             self.DB = Database(self.params['host'], self.params['login'], self.params['passwd'])
+
+    def __del__(self):
+        self.close()
 
     def close(self):
         if self.DB:
@@ -343,16 +347,8 @@ class WordDatabase(object):
         return tstring
 
 
-class SynonymsDatabase(object):
-    def __init__(self):
-        pass
-
-
-""" TESTS FUNCTIONS"""
-wdb = WordDatabase()
-
-
 def exists(tinput):
+    wdb = WordDatabase()
     t0 = datetime.datetime.now()
     e = tinput
     e.encode('cp1252')
@@ -363,11 +359,14 @@ def exists(tinput):
     t1 = datetime.datetime.now()
     dt = t1 - t0
     d = dt.seconds * 1000 + dt.microseconds / 1000
-    if verbose: print('chrono : %s ms' % (d))
-    if verbose: print('resp : ', tinput)
+    if verbose:
+        print('chrono : %s ms' % (d))
+    if verbose:
+        print('resp : ', tinput)
 
 
-def Gettranslation():
+def get_translation():
+    wdb = WordDatabase()
     r = wdb.translate(u"May", "en")
     ret = []
     for item in r:
@@ -375,14 +374,16 @@ def Gettranslation():
     if verbose: print(ret)
 
 
-def readDB():
+def read_db():
     db = Database('localhost', 'root', '')
-    if verbose: print(db.read())
+    if verbose:
+        print(db.read())
 
 
-def upload_batch(splitter="-->"):
+def upload_batch():
     import entryprocessor
-    EP = entryprocessor.process_enwikt()
+    wdb = WordDatabase()
+    EP = entryprocessor.WiktionaryProcessorFactory.create('en')
     for line in file("data/Eng-mlg.txt", "r").readlines():
         entries = line.split()
         if len(entries) < 2: continue
@@ -407,10 +408,12 @@ def upload_batch(splitter="-->"):
 
 
 def loopaddition(**kwargs):
+    wdb = WordDatabase()
     while 1:
         try:
             print("Enter your entries with the following format : word / language ISO code / definition/translation / POS:")
-            line = raw_input().decode(sys.stdout.encoding)
+            line = raw_input()
+            line = line.decode(sys.stdout.encoding)
             line = line.encode('utf8')
             line = line.split('/')
             # entry, definition, pos, language
