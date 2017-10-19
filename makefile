@@ -54,7 +54,7 @@ test: database
 
 clear:
 	sudo apt-get remove -y mysql-server
-	sudo apt-get purge -y mysql*
+	sudo apt-get purge -y mysql-server
 	sudo apt-get autoremove -y nginx php-fpm php-mysql
 	sudo apt-get autoremove -y python-pip python2.7 python-mysqldb
 
