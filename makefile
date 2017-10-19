@@ -23,6 +23,7 @@ botscripts:
 	cp scripts/fitenytsyfantatra.sh $(HOME)
 	cp scripts/list-wikis.sh $(HOME)
 	cp scripts/vaovaowikimedia.sh $(HOME)
+	mkdir -p user_data/dikantenyvaovao
 
 cronconf: botscripts
 	DB_PASSWD=$(DB_PASSWD) sudo bash -x deploy/configure-cron.sh
