@@ -26,13 +26,13 @@ cronconf:
 	DB_PASSWD=$(DB_PASSWD) sudo bash -x deploy/configure-cron.sh
 
 botscripts:
-    cp scripts/dikantenyvaovao-start.sh $(HOME)
-    cp scripts/fitenytsyfantatra.sh $(HOME)
-    cp scripts/list-wikis.sh $(HOME)
-    cp scripts/vaovaowikimedia.sh $(HOME)
+	cp scripts/dikantenyvaovao-start.sh $(HOME)
+	cp scripts/fitenytsyfantatra.sh $(HOME)
+	cp scripts/list-wikis.sh $(HOME)
+	cp scripts/vaovaowikimedia.sh $(HOME)
 
 monitoring:
-    bash -x scripts/deploy-nginx.sh
+	bash -x scripts/deploy-nginx.sh
 
 schema: database
 	sudo service mysql start
