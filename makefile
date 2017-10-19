@@ -45,7 +45,6 @@ schema: database
 data: schema database
 	sudo service mysql start
 	mysql -u root --password=$(DB_PASSWD) -D data_botjagwar < data/data_botjagwar.sql
-	sudo bash -x scripts/deploy.sh
 
 test: database
 	python test.py
