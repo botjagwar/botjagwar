@@ -4,8 +4,7 @@ import re
 import sys
 import os
 import random
-import threading
-import signal
+
 import traceback
 
 import pywikibot as pwbot
@@ -13,8 +12,7 @@ import pywikibot as pwbot
 from modules import BJDBmodule, ircbot
 from modules.decorator import threaded
 from modules.translation.core import Translation, TranslationsHandler
-from modules.translation.analysis import (analyse_edit_hours, analyse_translations,
-                                          MissingTranslations, Translations_per_day_hour)
+from modules.translation.analysis import MissingTranslations, Translations_per_day_hour
 import list_wikis
 
 # GLOBAL VARS
@@ -199,7 +197,7 @@ class LiveRecentChangesBot(ircbot.SingleServerIRCBot):
 
 class Bot(object):
     def __init__(self):
-        pass
+        self.translations = Translation(data_file)
 
     @staticmethod
     def _prepare_message(ev):
@@ -257,15 +255,7 @@ class Bot(object):
             rc_bot.chronometer = time.time()
 
     @staticmethod
-    def _update_translation_count(rc_bot):
-        tran_hour = time.gmtime()[3]
-        if rc_bot.tran_per_hour.translations_per_hour.has_key(tran_hour):
-            rc_bot.tran_per_hour.translations_per_hour[tran_hour] += 1
-        else:
-            rc_bot.tran_per_hour.translations_per_hour[tran_hour] = 1
-        rc_bot.tran_per_hour.update()
-
-    @staticmethod
+    @threaded
     def put_deletion_notice(page):
         if not page.exists() or page.isRedirectPage():
             return
@@ -274,9 +264,7 @@ class Bot(object):
             page_c += u"\n[[sokajy:Pejy voafafa tany an-kafa]]"
             page.put(page_c, "+filazana")
 
-    @threaded
     def handle(self, ev):
-        translations = Translation(data_file)
         message = self._prepare_message(ev)
         lang = self._get_origin_wiki(message)
         message_type = self._get_message_type(message)
@@ -285,7 +273,7 @@ class Bot(object):
             page = self._get_page(message, lang)
             if page is None:
                 return
-            unknowns, newentries = translations.process_wiktionary_page(lang, page)
+            unknowns, newentries = self.translations.process_wiktionary_page(lang, page)
             self._update_unknowns(unknowns)
 
         elif message_type == 'delete':
@@ -305,13 +293,6 @@ def striplinks(link):
 args = sys.argv
 if __name__ == '__main__':
     Missing_translations = MissingTranslations(userdata_file)
-
-    argsdict = {
-        'irc': irc_retrieve,
-        'analyse': analyse_translations,
-        'edittimes': analyse_edit_hours,
-        'addtranslations': add_translations
-    }
     try:
         irc_retrieve()
     finally:
