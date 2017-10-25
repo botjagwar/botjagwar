@@ -4,20 +4,15 @@ import re
 import sys
 import os
 import random
-
 import traceback
-
 import pywikibot as pwbot
-
-from modules import BJDBmodule, ircbot
+from modules import ircbot
 from modules.decorator import threaded
-from modules.translation.core import Translation, TranslationsHandler
-from modules.translation.analysis import MissingTranslations, Translations_per_day_hour
-import list_wikis
+from modules.translation.core import Translation
 
 # GLOBAL VARS
 verbose = False
-nwikimax = 15
+nwikimax = 5
 databases = []
 data_file = os.getcwd() + '/conf/dikantenyvaovao/'
 userdata_file = os.getcwd() + '/user_data/dikantenyvaovao/'
@@ -25,19 +20,11 @@ userdata_file = os.getcwd() + '/user_data/dikantenyvaovao/'
 
 def irc_retrieve(channel=''):
     set_throttle(1)
-
-    missing_translations = MissingTranslations(data_file)
-    if not len(channel):
-        channel = 'en'
     bot = LiveRecentChangesBot(channel)
     while 1:
         try:
             bot.start()
-        except KeyError:
-            time.sleep(10)
-            continue
         except KeyboardInterrupt:
-            missing_translations.update()
             bot.die()
             return
 
@@ -48,73 +35,6 @@ def set_throttle(i):
     t = throttle.Throttle(pwbot.Site('mg', 'wiktionary'), mindelay=0, maxdelay=1)
     pwbot.config.put_throttle = 1
     t.setDelays(i)
-
-
-def add_translations(last_x_hours=1):
-    """Add translations to the destination language entry
-    @last_x_hours all translations added in the last hour
-    """
-    last_x_hours = int(last_x_hours)
-    currt_time = time.time()
-    x_hours_ago = time.gmtime(currt_time - last_x_hours * 3600)
-
-    database = BJDBmodule.WordDatabase()
-    databases.append(database)
-    translation_handler = TranslationsHandler()
-
-    # maka ny dikanteny hita hatry ny ora voalaza
-    q = "select * from `%(DB)s`.`%(table)s` where " % database.DB.infos
-    q += "`daty` >= '%04d-%02d-%02d %02d:%02d:%02d'" % tuple(x_hours_ago)[:6]
-
-    allwords = database.DB.raw_query(q)
-    mg_words = {}
-    count = 0
-    for word in allwords:
-        count += 1
-        if not count % 10000: print (count)
-        for mgtranslation in word[3].split(','):
-            mgtranslation = mgtranslation.strip()
-            for char in '[]':
-                mgtranslation = mgtranslation.replace(char, '')
-            try:
-                mg_words[mgtranslation].append((word[5], word[1]))
-            except KeyError:
-                mg_words[mgtranslation] = []
-                mg_words[mgtranslation].append((word[5], word[1]))
-    print (count)
-    count = 0
-    print ("lanjan'ny diksionera : ", len(mg_words))
-
-    for mgword in mg_words:
-        # print (mg_words[mgword])
-
-        mg_page = pwbot.Page(pwbot.Site('mg', "wiktionary"), mgword.decode('latin1'))
-
-        try:
-            page_c = orig = mg_page.get()
-            print ("original length:", len(page_c))
-        except Exception as e:
-            continue
-
-        ftranslationlist = set(mg_words[mgword])
-        ftranslationlist = list(ftranslationlist)
-        translation_handler.setcontent(page_c)
-        page_c = translation_handler.add(ftranslationlist)
-
-        pwbot.output(">>> %s <<<" % mg_page.title())
-        print ("output length:", len(page_c))
-        page_c = page_c.replace("\n]", "")
-        pwbot.showDiff(orig, page_c)
-        while 1:
-            try:
-                # pwbot.output(page_c)
-                mg_page.put_async(page_c, "+dikanteny")
-                break
-            except pwbot.exceptions.PageNotSaved:
-                print ("Tsy nahatahiry ilay pejy... manandrana")
-                time.sleep(10)
-
-        count += 1
 
 
 class LiveRecentChangesBot(ircbot.SingleServerIRCBot):
@@ -130,13 +50,12 @@ class LiveRecentChangesBot(ircbot.SingleServerIRCBot):
         self.change_langs(lang)
         try:
             self.errfile = open(userdata_file + 'dikantenyvaovao.exceptions', 'a')
-        except Exception:
+        except IOError:
             self.errfile = open(userdata_file + 'dikantenyvaovao.exceptions', 'w')
         self.iso2languagename = {}
         self.joined = []
         self.langs = []
         self.stats = {'edits': 0.0, 'newentries': 0.0, 'errors': 0.0}
-        self.tran_per_hour = Translations_per_day_hour(data_file)
         self.edits = 0
         self.username = user
         self.bot_instance = Bot()
@@ -149,8 +68,7 @@ class LiveRecentChangesBot(ircbot.SingleServerIRCBot):
     def connect_in_languages(self):
         """mametaka fitohizana amin'ny tsanely irc an'i Wikimedia"""
         print ("\n---------------------\n       PARAMETATRA : ")
-        lister = list_wikis.Wikilister()
-        self.langs = lister.getLangs("wiktionary")
+        self.langs = ['en', 'fr']
         i = 0
         for language in self.langs:
             if i > nwikimax:
@@ -292,7 +210,6 @@ def striplinks(link):
 
 args = sys.argv
 if __name__ == '__main__':
-    Missing_translations = MissingTranslations(userdata_file)
     try:
         irc_retrieve()
     finally:

@@ -155,21 +155,22 @@ class Translation(TranslationsHandler):
             if redirtarget.find(u"æ") != -1:
                 redirtarget = redirtarget.replace(u"æ", u"ӕ")
             if infos['entry'] != redirtarget:
-                pwbot.Page(pwbot.Site('mg', 'wiktionary'),
-                           infos['entry']).put_async(u"#FIHODINANA [[%s]]" % redirtarget, "fihodinana")
+                page = pwbot.Page(pwbot.Site('mg', 'wiktionary'), infos['entry'])
+                if not page.exists():
+                    page.put_async(u"#FIHODINANA [[%s]]" % redirtarget, "fihodinana")
                 infos['entry'] = redirtarget
 
     def _save_translation_from_bridge_language(self, infos):
         summary = "Dikan-teny avy amin'ny dikan-teny avy amin'i %(olang)s.wiktionary" % infos
         wikipage = self.output.wikipage(infos)
         try:
-            mg_Page = pwbot.Page(pwbot.Site('mg', 'wiktionary'), infos['entry'])
+            mg_page = pwbot.Page(pwbot.Site('mg', 'wiktionary'), infos['entry'])
         except UnicodeDecodeError:
-            mg_Page = pwbot.Page(pwbot.Site('mg', 'wiktionary'), infos['entry'].decode('utf8'))
+            mg_page = pwbot.Page(pwbot.Site('mg', 'wiktionary'), infos['entry'].decode('utf8'))
 
         try:
-            if mg_Page.exists():
-                pagecontent = mg_Page.get()
+            if mg_page.exists():
+                pagecontent = mg_page.get()
                 if pagecontent.find('{{=%s=}}' % infos['lang']) != -1:
                     print("Efa misy ilay teny iditra.")
                     self.output.db(infos)
@@ -178,7 +179,7 @@ class Translation(TranslationsHandler):
                     wikipage += pagecontent
                     summary = u"+" + summary
         except pwbot.exceptions.IsRedirectPage:
-            infos['entry'] = mg_Page.getRedirectTarget().title()
+            infos['entry'] = mg_page.getRedirectTarget().title()
             self._save_translation_from_bridge_language(infos)
             return
 
@@ -192,7 +193,7 @@ class Translation(TranslationsHandler):
 
         pwbot.output("\n \03{red}%(entry)s\03{default} : %(lang)s " % infos)
         pwbot.output("\03{white}%s\03{default}" % wikipage)
-        mg_Page.put_async(wikipage, summary)
+        mg_page.put_async(wikipage, summary)
         self.output.db(infos)
 
     def _save_translation_from_page(self, infos):
