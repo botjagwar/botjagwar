@@ -338,10 +338,11 @@ class WordDatabase(object):
         # Post-process to directly have Wikibolana's definitions formatting
         tstring = u""
         for translation in translations:
+            s = translation[0].strip()
             try:
-                tstring += u"[[%s]], " % translation[0]
+                tstring += u"[[%s]], " % s
             except UnicodeDecodeError:
-                tstring += u"[[%s]], " % translation[0].decode("latin1")
+                tstring += u"[[%s]], " % s.decode("latin1")
 
         tstring = tstring.strip(u", ")
         return tstring
