@@ -175,18 +175,14 @@ class Database(object):
 
     def raw_query_noFetch(self, sql):
         "Raw SQL query (returns cursor) does not fetch, does not commit."
-        error = None
         for i in range(4):
             try:
                 self.cursor.execute(sql)
                 return self.cursor
-                break
             except UnicodeEncodeError:
                 self.cursor.execute(sql.encode('utf8'))
                 return self.cursor
 
-        if error:
-            raise e
 
     def raw_query(self, sql, returnFetched=True, commitAfterQuery=True):
         "Raw SQL query (returns fetched result)"
@@ -233,6 +229,17 @@ class WordDatabase(object):
         self.famaritana_fiteny = ISOcode
 
     def append(self, entry, definition, pos, language):
+        """
+        Inserts an entry in `teny` table
+        Args:
+            entry: word to be put 
+            definition: translation of the word
+            pos: part of speech
+            language: language code
+
+        Returns:
+
+        """
         t0 = datetime.datetime.now()
         entry = self._to_unicode(entry)
         definition = self._to_unicode(definition)

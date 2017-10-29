@@ -6,10 +6,12 @@ import pywikibot as pwbot
 
 mt_data_file = os.getcwd() + '/user_data/dikantenyvaovao/'
 
+
 def analyse_translations(arg2):
     arg2 = int(arg2)
     missing_tran = MissingTranslations(mt_data_file)
     missing_tran.analyse(arg2)
+
 
 def analyse_edit_hours(arg2):
     tran_per_hour = Translations_per_day_hour(mt_data_file)

@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
-import os, re
+import os
+import re
 
 import HTMLParser, BeautifulSoup
 
@@ -45,8 +46,8 @@ class NewWordFinder(object):
             if type(word) != unicode:
                 word = unicode(word)
 
-            if occurrences_dict.has_key(word):
-                if occurrences_dict[word].has_key("count"):
+            if word in occurrences_dict:
+                if "count" in occurrences_dict[word]:
                     occurrences_dict[word]["count"] += 1
                     occurrences_dict[word]["phrase"] = phrase
                 else:
@@ -74,15 +75,18 @@ class NewWordFinder(object):
                 if word.find("'") != -1:
                     word = word.split("'")[0] + "'"
                 # marika eo anoloan'ny teny
-                if '$#,@%' in word: continue
-                if word[-1] == ',': word = word[:-1]
+                if '$#,@%' in word:
+                    continue
+                if word[-1] == ',':
+                    word = word[:-1]
                 word = word.replace("in'", "i")
                 # for char in 'aeo':
                 #    if word[-3:] == char+"n'" : word=word[:-3]+char+"na"
 
                 word = word.replace(',', '')
 
-                if len(word) < 4: continue
+                if len(word) < 4:
+                    continue
                 f = 0
                 # soratra hafa mety hitranga ary hialana
 
@@ -113,7 +117,7 @@ class NewWordFinder(object):
                     domain,
                 )
 
-                if (urls.has_key(domain)):
+                if domain in urls:
                     urls[domain] += 1
                 else:
                     urls[domain] = 1
@@ -165,7 +169,7 @@ def strip_tags(html):
         return txt
 
 
-## </Fanalana ny tag HTML>
+# </Fanalana ny tag HTML>
 
 def HTMLEntitiesToUnicode(text):
     """Converts HTML entities to unicode.  For example '&amp;' becomes '&'."""

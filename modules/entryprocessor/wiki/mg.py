@@ -12,7 +12,8 @@ class MGWiktionaryProcessor(WiktionaryProcessor):
     def retrieve_translations(self, page_c):  # Needs updating
         """Fampirimana ny dikanteny azo amin'ny alalan'ny REGEX araka ny laharan'ny Abidy"""
         ret = []
-        if page_c.find('{{}} :') == -1: return ret
+        if page_c.find('{{}} :') == -1:
+            return ret
         trads = re.findall("# (.*) : \[\[(.*)\]\]", page_c)
         trads.sort()
         tran = re.sub("# (.*) : \[\[(.*)\]\]", '', page_c)
