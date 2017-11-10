@@ -150,10 +150,11 @@ class Database(object):
                 if verbose:
                     wikipedia.output("HADISOANA: %s" % e.message)
                     wikipedia.output(u'\03{red}%s\03{default}' % sqlreq)
-                if verbose: print(e.message)
+                    print(e.message)
                 return tuple()
         except Exception as e:
-            if verbose: wikipedia.output(u'\03{red}%s\03{default}' % sqlreq)
+            if verbose:
+                wikipedia.output(u'HADISOANA ANATY: \03{red}%s\03{default}' % sqlreq)
             raise e  # Unhandled Exception
         finally:
             return rep
@@ -163,7 +164,7 @@ class Database(object):
         return self._action(conditionsdict, "select %s " % select, 'like')
 
     def read_all(self):
-        return self.raw_query(u"select * from `%(DB)s`.`%(table)s` where 1" % self.infos)
+        return self.raw_query(u"select * from `%(DB)s`.`%(table)s`" % self.infos)
 
     def update(self, conditionsdict, newvaluesdict):
         "Update SQL line with new values following conditions in conditionsdict"
