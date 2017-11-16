@@ -60,7 +60,8 @@ class UnknownlanguageUpdaterBot:
 
         return language_names
 
-    def put(self, title, content):
+    @staticmethod
+    def put(title, content):
         page = pywikibot.Page(WORKING_WIKI, title)
         page.put(content, u"fiteny vaovao")
 
@@ -69,11 +70,12 @@ class UnknownlanguageUpdaterBot:
         parsed_lines = self.parse_wikipage()
         for language_code, language_name in parsed_lines:
             templates_to_be_created = [
-                u"Endrika:=%s=" % language_code,
                 u"Endrika:%s" % language_code,
                 u"Endrika:%s/type" % language_code]
             for template in templates_to_be_created:
                 self.put(template, language_name)
+
+            self.put(u"Endrika:=%s=" % language_code, language_name.title())
 
             categories = [
                 u"Anarana iombonana",
@@ -95,23 +97,28 @@ class UnknownLanguageManagerBot:
     def __init__(self):
         database = WordDatabase()
         self.db_conn = database.DB
-        self.cursor = self.db_conn.cursor
+        self.cursor = self.db_conn.connect.cursor()
         self.lang_list = []
 
-    def get_languages_from_30days_ago(self):
+    def get_languages_from_x_days_ago(self, x=30):
+        """
+        Retrieves languages codes of languages that have been added since x days ago.
+        :param x:
+        :return:
+        """
         query = u"""select distinct(fiteny) as fiteny, count(teny) as isa 
                 from data_botjagwar.`teny` 
                 where teny.daty 
-                    between DATE_SUB(NOW(), INTERVAL 30 day) and NOW()
+                    between DATE_SUB(NOW(), INTERVAL %d day) and NOW()
                 group by fiteny
-                order by fiteny asc;"""
+                order by fiteny asc;""" % x
         self.cursor.execute(query)
         for language_code, number_of_words in self.cursor.fetchall():
             yield language_code, number_of_words
 
     def start(self):
         print ("UnknownLanguageManagerBot")
-        for language_code, number_of_words in self.get_languages_from_30days_ago():
+        for language_code, number_of_words in self.get_languages_from_x_days_ago():
             language_exists = language_code_exists(language_code)
             if language_exists == 0:
                 if len(language_code) == 3:
@@ -135,12 +142,17 @@ class UnknownLanguageManagerBot:
                 wikipage.put(page_content)
                 break
             except (pywikibot.PageNotSaved, pywikibot.OtherPageSaveError) as e:
-                print e
-                print u"Hadisoana, manandrana indray afaka 10 segondra"
+                print (e)
+                print (u"Hadisoana, manandrana indray afaka 10 segondra")
                 time.sleep(10)
 
 
 def language_code_exists(language_code):
+    """
+    Checks whether language code already exists on working wiki
+    :param language_code:
+    :return:
+    """
     page_titles_to_check = [u"Endrika:%s" % language_code,
                             u"Endrika:=%s=" % language_code]
     existence = 0
@@ -153,11 +165,21 @@ def language_code_exists(language_code):
 
 
 def get_language_name(language_code):
+    """
+    Checks language code length and gets English language name
+    :param language_code:
+    :return:
+    """
     if len(language_code) == 3:
         return get_sil_language_name(language_code)
 
 
 def get_sil_language_name(language_code):
+    """
+    gets a page on SIL website to get the language name from the language code
+    :param language_code:
+    :return:
+    """
     if len(language_code) == 2:
         return u""
     page_xpath = u'//table/tr[2]/td[2]'
@@ -170,7 +192,7 @@ def get_sil_language_name(language_code):
 
 
 if __name__ == '__main__':
-    bot = UnknownlanguageUpdaterBot()
-    bot.start()
-    bot = UnknownLanguageManagerBot()
-    bot.start()
+    language_updater = UnknownlanguageUpdaterBot()
+    language_updater.start()
+    unknownl_language_manager = UnknownLanguageManagerBot()
+    unknownl_language_manager.start()

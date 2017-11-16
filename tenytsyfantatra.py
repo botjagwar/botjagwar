@@ -18,7 +18,7 @@ class UnknownWordManagerError(Exception):
 class UnknownWordManagerBot(object):
     def __init__(self):
         self.unknown_words_file = open(mt_data_file + "word_hits", "r")
-        self.standard_line_regex = re.compile("(.*)[ ]\[([a-zA-Z]+)\]")
+        self.standard_line_regex = re.compile(r"(.*)[ ]\[([a-zA-Z]+)\]")
         self.word_db = WordDatabase()
         self.aggregated_unknown_words = {}
         self.language = {
@@ -42,9 +42,9 @@ class UnknownWordManagerBot(object):
         """
         self.word_db.close()
         self.unknown_words_file.close()
-        for language, database in self.dictionary_tables:
+        for _, database in self.dictionary_tables:
             del database
-        for language, database in self.translation_views:
+        for _, database in self.translation_views:
             del database
 
     def get_unknown_words_from_file(self):
