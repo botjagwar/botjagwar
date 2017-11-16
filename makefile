@@ -57,5 +57,4 @@ clear:
 	sudo apt-get autoremove -y nginx php-fpm php-mysql
 	sudo apt-get autoremove -y python-pip python2.7 python-mysqldb
 
-
 all: install-python-deps data dbconf cronconf monitoring
