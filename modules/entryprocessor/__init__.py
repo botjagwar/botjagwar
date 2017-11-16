@@ -39,4 +39,5 @@ class WiktionaryProcessorFactory(object):
         warnings.warn("Tsy nahitana praosesera: '%s'" % language_class_name, Warning)
         return WiktionaryProcessor
 
+
 __all__ = ["WiktionaryProcessorFactory"]
