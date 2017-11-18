@@ -33,23 +33,13 @@ monitoring:
 
 
 database:
-	DB_PASSWD=$(DB_PASSWD) sudo bash -x deploy/setup-database.sh
+	sudo bash -x deploy/setup-database.sh
 
 dbconf: database
-	DB_PASSWD=$(DB_PASSWD) sudo bash -x deploy/configure-db.sh
-
-schema: database
-	sudo service mysql start
-	mysql -u root --password=$(DB_PASSWD) < data/schema.sql
-
-data: schema database
-	sudo service mysql start
-	mysql -u root --password=$(DB_PASSWD) -D data_botjagwar < data/data_botjagwar.sql
+	sudo bash -x deploy/configure-db.sh
 
 test: database
 	python test.py
-
-
 
 clear:
 	sudo apt-get remove -y mysql-server
@@ -57,4 +47,4 @@ clear:
 	sudo apt-get autoremove -y nginx php-fpm php-mysql
 	sudo apt-get autoremove -y python-pip python2.7 python-mysqldb
 
-all: install-python-deps data dbconf cronconf monitoring
+all: install-python-deps database dbconf cronconf monitoring
