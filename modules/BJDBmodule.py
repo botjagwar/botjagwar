@@ -3,7 +3,6 @@ import datetime
 import pywikibot as wikipedia
 from set_database_password import PasswordManager
 
-
 verbose = True
 
 

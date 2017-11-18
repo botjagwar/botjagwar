@@ -31,7 +31,10 @@ class MyOpener(FancyURLopener):
     version = 'Botjagwar/v1.1'
 
 
-class UnknownlanguageUpdaterBot:
+class UnknownlanguageUpdaterBot(object):
+    """
+    Reads kaodim-piteny tsy fantara subpage and create the categories & templates for new languages
+    """
     def __init__(self):
         self.title = u"Mpikambana:%s/Kaodim-piteny fantatra" % username
         self.new_language_page = pywikibot.Page(WORKING_WIKI, self.title)
@@ -40,12 +43,20 @@ class UnknownlanguageUpdaterBot:
         return self.new_language_page.get()
 
     def purge_new_languages_wikipage(self):
+        """
+        Empties the wikipage containing language definitions for future use
+        :return:
+        """
         try:
             self.new_language_page.put(u"", u"fandiovana")
         except Exception as e:
             print(e)
 
     def parse_wikipage(self):
+        """
+
+        :return:
+        """
         text = self.get_new_languages_wikipage()
         language_names = []
         for line in text.split(u"\n"):
@@ -62,10 +73,20 @@ class UnknownlanguageUpdaterBot:
 
     @staticmethod
     def put(title, content):
+        """
+
+        :param title:
+        :param content:
+        :return:
+        """
         page = pywikibot.Page(WORKING_WIKI, title)
         page.put(content, u"fiteny vaovao")
 
     def start(self):
+        """
+
+        :return:
+        """
         print ("UnknownlanguageUpdaterBot")
         parsed_lines = self.parse_wikipage()
         for language_code, language_name in parsed_lines:
@@ -93,7 +114,10 @@ class UnknownlanguageUpdaterBot:
         self.purge_new_languages_wikipage()
 
 
-class UnknownLanguageManagerBot:
+class UnknownLanguageManagerBot(object):
+    """
+    Bot script
+    """
     def __init__(self):
         database = WordDatabase()
         self.db_conn = database.DB
@@ -117,6 +141,10 @@ class UnknownLanguageManagerBot:
             yield language_code, number_of_words
 
     def start(self):
+        """
+        Gets non-existing languages and add them to the wiki page.
+        :return:
+        """
         print ("UnknownLanguageManagerBot")
         for language_code, number_of_words in self.get_languages_from_x_days_ago():
             language_exists = language_code_exists(language_code)
@@ -129,6 +157,10 @@ class UnknownLanguageManagerBot:
         self.update_wiki_page()
 
     def update_wiki_page(self):
+        """
+        Updates `Lisitry ny kaodim-piteny tsy voafaritra` subpage.
+        :return:
+        """
         rows = u""
         for code, name, n_words in self.lang_list:
             rows += ROW_PATTERN % (code, code, name, n_words)

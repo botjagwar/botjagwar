@@ -9,7 +9,6 @@ import pywikibot as pwbot
 from modules import ircbot
 from modules.decorator import threaded
 from modules.translation.core import Translation
-
 # GLOBAL VARS
 verbose = False
 nwikimax = 5
