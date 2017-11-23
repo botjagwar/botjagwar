@@ -1,10 +1,10 @@
 setpass:
 	mkdir -p conf/BJDBModule/
-	python set_database_password.py -pass:$(DB_PASSWD)
+	python set_database_password.py -pass:${DB_PASSWD}
 
 prepare:
-	apt-get update
-	apt-get install -y sudo
+	sudo apt-get update
+	sudo apt-get install -y sudo
 	sudo apt-get install -y libssl-dev
 	sudo apt-get install -y wget
 	sudo apt-get install -y unzip
@@ -19,10 +19,7 @@ install-python-deps: python
 
 
 botscripts:
-	cp scripts/dikantenyvaovao-start.sh $(HOME)
-	cp scripts/fitenytsyfantatra.sh $(HOME)
-	cp scripts/list-wikis.sh $(HOME)
-	cp scripts/vaovaowikimedia.sh $(HOME)
+	cp scripts/*.sh $(HOME)
 	mkdir -p user_data/dikantenyvaovao
 
 cronconf: botscripts
@@ -33,10 +30,10 @@ monitoring:
 
 
 database:
-	sudo bash -x deploy/setup-database.sh
+	bash -x deploy/setup-database.sh
 
 dbconf: database
-	sudo bash -x deploy/configure-db.sh
+	bash -x deploy/configure-db.sh
 
 test: database
 	python test.py
@@ -47,4 +44,4 @@ clear:
 	sudo apt-get autoremove -y nginx php-fpm php-mysql
 	sudo apt-get autoremove -y python-pip python2.7 python-mysqldb
 
-all: install-python-deps database dbconf cronconf monitoring
+all: setpass install-python-deps database dbconf cronconf monitoring
