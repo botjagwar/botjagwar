@@ -1,5 +1,5 @@
 setpass:
-	mkdir -p conf/BJDBModule/
+	mkdir -p conf/BJDBModule
 	python set_database_password.py -pass:${DB_PASSWD}
 
 prepare:
@@ -14,9 +14,8 @@ python: prepare
 	sudo apt-get install -y python-pip
 
 install-python-deps: python
+	sudo apt-get install -y python-lxml
 	LC_ALL="en_US.UTF-8" sudo pip install -r requirements.txt
-
-
 
 botscripts:
 	cp scripts/*.sh $(HOME)
@@ -27,10 +26,6 @@ cronconf: botscripts
 
 monitoring:
 	bash -x scripts/deploy-nginx.sh
-
-
-database:
-	bash -x deploy/setup-database.sh
 
 dbconf: database
 	bash -x deploy/configure-db.sh
@@ -44,4 +39,4 @@ clear:
 	sudo apt-get autoremove -y nginx php-fpm php-mysql
 	sudo apt-get autoremove -y python-pip python2.7 python-mysqldb
 
-all: setpass install-python-deps database dbconf cronconf monitoring
+all: setpass install-python-deps dbconf cronconf monitoring
