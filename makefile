@@ -27,9 +27,6 @@ botscripts:
 cronconf: botscripts
 	DB_PASSWD=$(DB_PASSWD) sudo bash -x deploy/configure-cron.sh
 
-monitoring:
-	bash -x scripts/deploy-nginx.sh
-
 test: database
 	python test.py
 
@@ -39,4 +36,4 @@ clear:
 	sudo apt-get autoremove -y nginx php-fpm php-mysql
 	sudo apt-get autoremove -y python-pip python2.7 python-mysqldb
 
-all: setpass install-python-deps python-requirements cronconf monitoring
+all: setpass install-python-deps python-requirements cronconf
