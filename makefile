@@ -13,9 +13,12 @@ python: prepare
 	sudo apt-get install -y python2.7
 	sudo apt-get install -y python-pip
 
+python-requirements: python
+	LC_ALL="en_US.UTF-8" sudo pip install -r requirements.txt
+
 install-python-deps: python
 	sudo apt-get install -y python-lxml
-	LC_ALL="en_US.UTF-8" sudo pip install -r requirements.txt
+
 
 botscripts:
 	cp scripts/*.sh $(HOME)
@@ -39,4 +42,4 @@ clear:
 	sudo apt-get autoremove -y nginx php-fpm php-mysql
 	sudo apt-get autoremove -y python-pip python2.7 python-mysqldb
 
-all: setpass install-python-deps dbconf cronconf monitoring
+all: setpass install-python-deps python-requirements dbconf cronconf monitoring
