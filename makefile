@@ -30,9 +30,6 @@ cronconf: botscripts
 monitoring:
 	bash -x scripts/deploy-nginx.sh
 
-dbconf: database
-	bash -x deploy/configure-db.sh
-
 test: database
 	python test.py
 
@@ -42,4 +39,4 @@ clear:
 	sudo apt-get autoremove -y nginx php-fpm php-mysql
 	sudo apt-get autoremove -y python-pip python2.7 python-mysqldb
 
-all: setpass install-python-deps python-requirements dbconf cronconf monitoring
+all: setpass install-python-deps python-requirements cronconf monitoring
