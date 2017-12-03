@@ -11,5 +11,5 @@ fi
 
 if ! ps aux | grep python | grep ircbot
 then
-	python ircbot.py & echo $! >>/tmp/ircbot.pid
+	python ircbot.py & echo $! > /tmp/ircbot.pid
 fi
