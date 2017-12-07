@@ -135,16 +135,6 @@ class Translation(TranslationsHandler):
                 translations_in_mg[mgtranslation] = []
                 translations_in_mg[mgtranslation].append((infos["lang"], infos["entry"]))
 
-    def _codetoname(self, languageISO):
-        if self.iso2languagename == {}:
-            # initialise variable
-            langfile = open(self.data_file + "iso2name.txt", 'r')
-            for line in langfile.readlines():
-                line = line.split(':')
-                self.iso2languagename[line[0]] = line[1]
-        else:
-            return self.iso2languagename
-
     @staticmethod
     def _generate_redirections(infos):
         redirtarget = infos['entry']
@@ -310,7 +300,6 @@ class Translation(TranslationsHandler):
 
                     self._generate_redirections(infos)
                     self._append_in(infos, translations_in_mg)
-                    print(translations_in_mg)
                     self._save_translation_from_bridge_language(infos)
                     ret += 1
 
@@ -350,7 +339,6 @@ class Translation(TranslationsHandler):
                 self._append_in(infos, translations_in_mg)
                 self._save_translation_from_bridge_language(infos)
                 self._save_translation_from_page(infos)
-                print(translations_in_mg)
 
                 ret += 1
 
