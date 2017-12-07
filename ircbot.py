@@ -109,8 +109,8 @@ def _get_pagename(message):
     item = re.search("\[\[(.*)\]\]", message).groups()[0]
     item = unicode(item[3:-3])
     if len(item) > 70:
+        print (item)
         raise Exception("Title is too longs")
-
     return item
 
 

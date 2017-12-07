@@ -217,25 +217,15 @@ class Translation(TranslationsHandler):
         self.output.db(infos)
 
     def exists(self, lang, ent):
-        try:
-            ent = ent.decode('utf8')
-        except UnicodeEncodeError:
-            pass
-
-        try:
-            lang = unicode(lang, 'latin1')
-        except TypeError:
-            pass
+        ent = ent.decode('utf8')
+        lang = lang.decode('latin1')
 
         if self.translationslist.count((lang, ent)) >= 1:
             return True
         else:
             # pwbot.output(u"mitady an'i teny \"%s\" ao amin'ny banky angona..."%ent)
-            if ent == 'en':
-                return self.word_db.exists(ent, lang)
-            self.translationslist.append((lang, ent))
-            # print(type(lang), type(ent))
             return self.word_db.exists(ent, lang)
+
 
     def get_allwords(self):
         alldata = self.sql_db.load()
@@ -256,55 +246,6 @@ class Translation(TranslationsHandler):
             else:
                 ret[data[1]] = unicode(data[3], 'latin1')
         return ret
-
-    @staticmethod
-    def process_interwiki(lang, Page):
-        summary = "Interwiki mivantana [v1]: "
-        langlinks = []
-
-        if Page.isRedirectPage():
-            return
-        if Page.exists():
-            langlinks = re.findall("\[\[([a-z]{2,3}):(.*)\]\]", Page.get())
-        mgpage = pwbot.Page(pwbot.Site('mg', 'wiktionary'), Page.title())
-
-        if mgpage.exists():
-            opage_c = mgpage.get()
-            mgpage_c = mgpage.get()
-            mgpagelanglinks = re.findall("\[\[([a-z]{2,3}):(.*)\]\]", mgpage_c)
-            mgpage_c = re.sub("\n\[\[([a-z]{2,3}):(.*)\]\]", "", mgpage_c)
-            mgpage_c = re.sub("\[\[([a-z]{2,3}):(.*)\]\]", "", mgpage_c)
-            mgpage_c = re.sub("\n\[\[mg:(.*)\]\]", "", mgpage_c)
-
-            if mgpage_c.find(u"\n[[%s:%s]]" % (lang, Page.title())) == -1 and lang != 'mg':
-                summary += u"%s, " % lang
-                # mgpage_c += u"\n[[%s:%s]]"%((lang, Page.title()))
-
-            if len(langlinks) - 1 < len(mgpagelanglinks):
-                return
-
-            langlinks.append((lang, Page.title()))
-
-            langlinks.sort()
-            mgpagelanglinks.sort()
-            tobeadded = list(mgpagelanglinks)
-
-            for langlink in langlinks:
-                if langlink not in mgpagelanglinks:
-                    if langlink[0] == 'mg':  # rohy anaty tenin'ny wiki iasana (diso)
-                        continue
-                    tobeadded.append(langlink)
-                    summary += u"%s, " % langlink[0]
-
-            tobeadded.sort()
-            for langlink in tobeadded:
-                iw = u"\n[[%s:%s]]" % langlink
-                mgpage_c += iw
-
-            summary = summary.strip(u", ")
-            if opage_c != mgpage_c:
-                pwbot.showDiff(opage_c, mgpage_c)
-                mgpage.put_async(mgpage_c, summary)
 
     def process_wiktionary_page(self, language, Page):
         unknowns = []
