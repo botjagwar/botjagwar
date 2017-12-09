@@ -1,13 +1,14 @@
 # -*- coding: utf8 -*-
 import time
-import re
 import sys
 import os
 import json
 import pywikibot as pwbot
 from flask import Flask
+from modules import service_ports
 from modules.decorator import threaded
 from modules.translation.core import Translation
+
 
 # GLOBAL VARS
 verbose = False
@@ -25,6 +26,7 @@ def set_throttle(i):
     pwbot.config.put_throttle = 1
     t.setDelays(i)
 
+
 def _update_unknowns(unknowns):
     f = open(userdata_file + "word_hits", 'a')
     for word, lang in unknowns:
@@ -32,6 +34,7 @@ def _update_unknowns(unknowns):
         print (type(word))
         f.write(word.encode('utf8'))
     f.close()
+
 
 def _get_page(name, lang):
     page = pwbot.Page(pwbot.Site(lang, 'wiktionary'), name)
@@ -86,6 +89,6 @@ args = sys.argv
 if __name__ == '__main__':
     try:
         set_throttle(1)
-        app.run(host="0.0.0.0", port=8000)
+        app.run(host="0.0.0.0", port=service_ports.get_service_port(__file__))
     finally:
         pwbot.stopme()

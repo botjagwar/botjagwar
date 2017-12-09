@@ -25,8 +25,6 @@ class Database(object):
             'passwd': self.db_passwd,
             'table': table
         }
-        self.pw_manager = PasswordManager()
-        # TODO: configuration file to read - OK for DB password
         self.tablename = 'teny'
         self.connect = db.connect(host, login, self.db_passwd)
         self.cursor = self.connect.cursor()
@@ -108,28 +106,20 @@ class Database(object):
 
     def _action(self, conditionsdict={}, initstring=unicode(), operand=u'='):
         """action for SELECT or DELETE statements, specified by initstring"""
-
         sqlreq = initstring
         if not conditionsdict:
             sqlreq += u"from `%(DB)s`.`%(table)s` WHERE `fiteny`='mg'" % self.infos
         elif conditionsdict == {'fiteny': 'REHETRA'}:
-            sqlreq += u"from `%(DB)s`.`%(table)s` WHERE 1"
+            sqlreq += u"from `%(DB)s`.`%(table)s`"
         else:
             sqlreq += u"from `%(DB)s`.`%(table)s` WHERE " % self.infos
-            for i in conditionsdict:
-                # if verbose: wikipedia.output(sqlreq)
+            for key, value in conditionsdict.items():
                 try:
-                    val_i = conditionsdict[i]
-                    val_i = val_i.replace("'", "\\'")
-                except UnicodeEncodeError:
-                    val_i = conditionsdict[i]
-                    val_i = val_i.decode('utf8')
-                    val_i = val_i.replace("'", "\\'")
-
-                try:
-                    sqlreq += u"`%s` %s '%s' AND " % (unicode(i), operand, val_i)
+                    sqlreq += u"`%s` %s '%s' AND " % (
+                        unicode(key), operand, db.escape_string(value))
                 except UnicodeDecodeError:
-                    sqlreq += u"`%s` %s '%s' AND " % (unicode(i), operand, val_i.decode('utf8'))
+                    sqlreq += u"`%s` %s '%s' AND " % (
+                        unicode(key), operand, db.escape_string(value.decode('utf8')))
 
             sqlreq = sqlreq.strip('AND ')
 
@@ -158,7 +148,7 @@ class Database(object):
         finally:
             return rep
 
-    def read(self, conditionsdict=False, select='*'):
+    def read(self, conditionsdict={}, select='*'):
         """Read data from the current DB"""
         return self._action(conditionsdict, "select %s " % select, 'like')
 
@@ -240,7 +230,6 @@ class WordDatabase(object):
         Returns:
 
         """
-        t0 = datetime.datetime.now()
         entry = self._to_unicode(entry)
         definition = self._to_unicode(definition)
 
@@ -250,21 +239,17 @@ class WordDatabase(object):
             'karazany': unicode(pos),
             'fiteny': unicode(language)}
         self.DB.insert(paramsdict)
-        t1 = datetime.datetime.now()
-        dt = t1 - t0
-        d = dt.seconds * 1000 + dt.microseconds / 1000
-        if verbose: print('<i>Tanteraka ny fanampiana. Fototana : %s ms\n' % (d))
 
     def _to_unicode(self, string):
-        try:
-            string = unicode(string, 'latin1')
-        except TypeError:
-            string = unicode(string)
-        finally:
-            return string
+        if type(string) is not unicode:
+            try:
+                string = unicode(string, 'latin1')
+            except TypeError:
+                string = unicode(string)
+            finally:
+                return string
 
     def do_commit(self):
-        if verbose: print("manavao ny DB...")
         self.DB.connect.commit()
 
     def exists(self, entry, lang='', POS=''):
@@ -294,7 +279,6 @@ class WordDatabase(object):
                 entry = orig_entry
                 continue
 
-        # if verbose: print("ct. encding : %s (all other failed)"%encoding)
         return False
 
     def raw_translate(self, word, language='fr'):
@@ -353,107 +337,3 @@ class WordDatabase(object):
 
         tstring = tstring.strip(u", ")
         return tstring
-
-
-def exists(tinput):
-    wdb = WordDatabase()
-    t0 = datetime.datetime.now()
-    e = tinput
-    e.encode('cp1252')
-
-    if verbose: print('teny %d' % len(tinput))
-
-    if verbose: print(wdb.exists(tinput))
-    t1 = datetime.datetime.now()
-    dt = t1 - t0
-    d = dt.seconds * 1000 + dt.microseconds / 1000
-    if verbose:
-        print('chrono : %s ms' % (d))
-    if verbose:
-        print('resp : ', tinput)
-
-
-def get_translation():
-    wdb = WordDatabase()
-    r = wdb.translate(u"May", "en")
-    ret = []
-    for item in r:
-        ret.append((item[3], item[5], item[2]))
-    if verbose: print(ret)
-
-
-def read_db():
-    db = Database('localhost', 'root', '')
-    if verbose:
-        print(db.read())
-
-
-def upload_batch():
-    import entryprocessor
-    wdb = WordDatabase()
-    EP = entryprocessor.WiktionaryProcessorFactory.create('en')
-    for line in file("data/Eng-mlg.txt", "r").readlines():
-        entries = line.split()
-        if len(entries) < 2: continue
-        eng = entries[0].strip()
-        mlg = entries[1].strip()
-        Page = wikipedia.Page(wikipedia.getSite("en", "wiktionary"), eng)
-        EP.process(Page)
-        if not Page.exists():
-            continue
-        detected_entries = EP.getall()
-        POS = ""
-        for entry in detected_entries:
-            if entry[2] != 'en':
-                continue
-            else:
-                POS = entry[1]
-                if not wdb.exists(Page.title(), 'en'):
-                    if verbose: wikipedia.output(u"'%s' is not detected or non-existent" % Page.title())
-                    wdb.append(Page.title(), mlg, POS, 'en')
-                else:
-                    if verbose: wikipedia.output(u"'%s' already exists in DB" % Page.title())
-
-
-def loopaddition(**kwargs):
-    wdb = WordDatabase()
-    while 1:
-        try:
-            print("Enter your entries with the following format : word / language ISO code / definition/translation / POS:")
-            line = raw_input()
-            line = line.decode(sys.stdout.encoding)
-            line = line.encode('utf8')
-            line = line.split('/')
-            # entry, definition, pos, language
-
-            if not wdb.exists(line[0].strip(), line[1].strip()):
-                if verbose: print("not detected or non-existent")
-                wdb.append(line[0].strip(),
-                           line[2].strip(),
-                           line[3].strip(),
-                           line[1].strip())
-            else:
-                if verbose: print("Already exists in DB")
-        except IndexError:
-            if verbose: print("Sorry. Try again.")
-        except KeyboardInterrupt:
-            if verbose: print("Bye!")
-            break
-
-
-if __name__ == '__main__':
-    import sys
-
-    argsdict = {
-        'loop-addition': loopaddition,
-        'upload-batch': upload_batch,
-    }
-    print('BJDBMODULE', sys.argv)
-    verbose = True
-    if len(sys.argv) > 1:
-        try:
-            argsdict[sys.argv[1]]()
-        except KeyError:
-            print("Ireo avy ireo argiomenta azo ampiasaina:")
-            for k in argsdict.keys():
-                print(k)
