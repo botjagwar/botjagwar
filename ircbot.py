@@ -18,6 +18,9 @@ def irc_retrieve(channel=''):
             bot.die()
             return
 
+class IrcBotException(Exception):
+    pass
+
 class LiveRecentChangesBot(ircbot.SingleServerIRCBot):
     """IRC client used to track edits on targetted wikis.
     @lang string containing languages of editions to track.
@@ -110,7 +113,7 @@ def _get_pagename(message):
     item = unicode(item[3:-3])
     if len(item) > 70:
         print (item)
-        raise Exception("Title is too longs")
+        raise IrcBotException("Title is too long")
     return item
 
 

@@ -89,6 +89,6 @@ args = sys.argv
 if __name__ == '__main__':
     try:
         set_throttle(1)
-        app.run(host="0.0.0.0", port=service_ports.get_service_port(__file__))
+        app.run(host="0.0.0.0", port=service_ports.get_service_port('dikantenyvaovao'))
     finally:
         pwbot.stopme()
