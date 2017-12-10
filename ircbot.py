@@ -111,7 +111,7 @@ def _get_pagename(message):
     message = message[:message.find('http')]
     item = re.search("\[\[(.*)\]\]", message).groups()[0]
     item = unicode(item[3:-3])
-    if len(item) > 70:
+    if len(item) > 200:
         print (item)
         raise IrcBotException("Title is too long")
     return item

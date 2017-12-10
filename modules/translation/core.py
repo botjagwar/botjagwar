@@ -162,7 +162,7 @@ class Translation(TranslationsHandler):
             if mg_page.exists():
                 pagecontent = mg_page.get()
                 if pagecontent.find('{{=%s=}}' % infos['lang']) != -1:
-                    print("Efa misy ilay teny iditra.")
+                    print(u"Efa misy ilay teny iditra '%(entry)s' " % infos)
                     self.output.db(infos)
                     return
                 else:
@@ -174,7 +174,7 @@ class Translation(TranslationsHandler):
             return
 
         except pwbot.exceptions.InvalidTitle:
-            print("lohateny tsy mety ho lohatenim-pejy")
+            print(u"lohateny tsy mety ho lohatenim-pejy '%(entry)s' " % infos)
             return
 
         except Exception as e:
@@ -238,6 +238,7 @@ class Translation(TranslationsHandler):
         return ret
 
     def process_wiktionary_page(self, language, Page):
+        assert type(language) is unicode
         unknowns = []
         # fanampiana : Page:Page
 
@@ -264,6 +265,8 @@ class Translation(TranslationsHandler):
 
         translations_in_mg = {}  # dictionary {string : list of translation tuple (see below)}
         for word, pos, language_code, definition in entries:
+            if word is None or definition is None:
+                continue
             if language_code == language:  # if entry in the content language
                 try:
                     translations = wiktionary_processor.retrieve_translations()

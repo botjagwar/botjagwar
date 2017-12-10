@@ -72,6 +72,8 @@ def handle(pagename, lang):
         _update_unknowns(data['unknowns'])
         response = app.response_class(response=json.dumps(data), status=200, mimetype='application/json')
     except Exception as e:
+        import traceback
+        traceback.print_exc()
         data['error'] = e.message
         response = app.response_class(response=json.dumps(data), status=500, mimetype='application/json')
     finally:

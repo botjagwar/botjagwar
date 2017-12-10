@@ -9,10 +9,10 @@ class Output(object):
 
     def db(self, info):
         "updates database"
-        if self.word_db.exists(info['entry'], info['lang']):
+        if self.word_db.exists(info[u'entry'], info[u'lang']):
             return False
         else:
-            self.word_db.append(info['entry'], info['definition'], info['POS'], info['lang'])
+            self.word_db.append(info[u'entry'], info[u'definition'], info[u'POS'], info[u'lang'])
             if verbose:
                 print ("voavao ny banky angona")
             return True

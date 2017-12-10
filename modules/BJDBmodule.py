@@ -1,18 +1,17 @@
 import MySQLdb as db
-import datetime
-import pywikibot as wikipedia
+import pywikibot
 from set_database_password import PasswordManager
 
 verbose = True
 
+class DatabaseException(Exception):
+    pass
 
 class Database(object):
-    def __init__(self,
-                 host='localhost',
-                 login='root',
-                 passwd=None,
-                 dbname=None,
-                 table='teny'):
+    def __init__(self, host=u'localhost', login=u'root', passwd=None, dbname=None, table=u'teny'):
+        assert type(host) is unicode
+        assert type(host) is unicode
+
         self.pw_manager = PasswordManager()
         if passwd is None:
             self.db_passwd = self.pw_manager.get_password()
@@ -20,17 +19,17 @@ class Database(object):
             self.db_passwd = passwd
 
         self.infos = {
-            'host': host,
-            'login': login,
-            'passwd': self.db_passwd,
-            'table': table
+            u'host': host,
+            u'login': login,
+            u'passwd': self.db_passwd,
+            u'table': table
         }
-        self.tablename = 'teny'
+        self.tablename = u'teny'
         self.connect = db.connect(host, login, self.db_passwd)
         self.cursor = self.connect.cursor()
         if dbname is None:
             dbname = u"data_botjagwar"
-        self.infos['DB'] = dbname
+        self.infos[u'DB'] = dbname
 
         self.querycount = 0
         self.autocommit = True
@@ -48,43 +47,43 @@ class Database(object):
         return self.raw_query(sqlreq)
 
     def set_dbname(self, dbname):
+        assert type(dbname) is unicode
         """Set the current database we're working on"""
-        self.infos['DB'] = dbname
+        self.infos[u'DB'] = dbname
 
     def set_table(self, table):
+        assert type(table) is unicode
         """Set the current table we're working on"""
-        self.infos['table'] = table
+        self.infos[u'table'] = table
 
-    def insert(self, valuesdict):
-        """Insert in database values in valuesdict"""
-        if hasattr(valuesdict, 'append'):
-            if verbose:
-                print("mampiditra am-paran'ny lisitra...")
-            self._insert_many(valuesdict)
-        elif hasattr(valuesdict, 'has_key'):
-            if verbose:
-                print('mampiditra tsirairay...')
-            self._insert_one(valuesdict)
+    def insert(self, values_dict):
+        """Insert in database values in values_dict"""
+        if isinstance(values_dict, list):
+            self._insert_many(values_dict)
+        elif isinstance(values_dict, dict):
+            self._insert_one(values_dict)
 
-    def _do_insert(self, valuesdict):
-        sqlreq = u"insert into `%(DB)s`.`%(table)s` (" % self.infos
-        for i in valuesdict:
-            sqlreq += u"`%s`," % self.connect.escape_string(i)
-        sqlreq = sqlreq.strip(',')
-        sqlreq += u") values ("
-        for i in valuesdict:
-            valuesdict[i] = valuesdict[i].replace("'", "\\'")
-            sqlreq += u"'%s'," % valuesdict[i]
-        sqlreq = sqlreq.strip(',')
-        sqlreq += u")"
+    def _do_insert(self, values_dict):
+        sql = u"insert into `%(DB)s`.`%(table)s` (" % self.infos
+        for i in values_dict:
+            sql += u"`%s`," % self.connect.escape_string(i)
+        sql = sql.strip(u',')
+        sql += u") values ("
+        for key, value in values_dict.items():
+            if value is None:
+                value = u'NULL'
+            value = db.escape_string(value)
+            sql += u"'%s'," % value
+        sql = sql.strip(u',')
+        sql += u")"
         try:
-            self.cursor.execute(sqlreq)
+            self.cursor.execute(sql)
         except UnicodeError:
-            sqlreq = sqlreq.encode('utf8')
-            self.cursor.execute(sqlreq)
+            sql = sql.encode('utf8')
+            self.cursor.execute(sql)
         except Exception as e:
             if verbose:
-                wikipedia.output(sqlreq)
+                pywikibot.output(sql)
             raise e
 
         self.querycount += 1
@@ -93,75 +92,70 @@ class Database(object):
             qcstr = qcstr + chr(8) * (len(qcstr) + 1)
             if verbose: print(qcstr,)
 
-    def _insert_one(self, valuesdict):
-        self._do_insert(valuesdict)
+    def _insert_one(self, values_dict):
+        self._do_insert(values_dict)
         if self.autocommit:
             self.connect.commit()
 
-    def _insert_many(self, list_valuesdict):
-        for valuesdict in list_valuesdict:
-            self._do_insert(valuesdict)
+    def _insert_many(self, list_values_dict):
+        for values_dict in list_values_dict:
+            self._do_insert(values_dict)
         if self.autocommit:
             self.connect.commit()
 
-    def _action(self, conditionsdict={}, initstring=unicode(), operand=u'='):
+    def _action(self, conditions={}, initstring=unicode(), operand=u'='):
         """action for SELECT or DELETE statements, specified by initstring"""
-        sqlreq = initstring
-        if not conditionsdict:
-            sqlreq += u"from `%(DB)s`.`%(table)s` WHERE `fiteny`='mg'" % self.infos
-        elif conditionsdict == {'fiteny': 'REHETRA'}:
-            sqlreq += u"from `%(DB)s`.`%(table)s`"
+        sql = initstring
+        if not conditions:
+            sql += u"from `%(DB)s`.`%(table)s` WHERE `fiteny`='mg'" % self.infos
+        elif conditions == {u'fiteny': u'REHETRA'}:
+            sql += u"from `%(DB)s`.`%(table)s`"
         else:
-            sqlreq += u"from `%(DB)s`.`%(table)s` WHERE " % self.infos
-            for key, value in conditionsdict.items():
-                try:
-                    sqlreq += u"`%s` %s '%s' AND " % (
-                        unicode(key), operand, db.escape_string(value))
-                except UnicodeDecodeError:
-                    sqlreq += u"`%s` %s '%s' AND " % (
-                        unicode(key), operand, db.escape_string(value.decode('utf8')))
+            sql += u"from `%(DB)s`.`%(table)s` WHERE " % self.infos
+            for key, value in conditions.items():
+                value = value.encode('utf8')     # Yay!
+                value = db.escape_string(value)  # Python 2
+                value = value.decode('utf8')     # for the win!
+                sql += u"`%s` %s '%s' AND " % (key, operand, value)
 
-            sqlreq = sqlreq.strip('AND ')
+            sql = sql.strip(u'AND ')
 
-        # if verbose: wikipedia.output(u'\03{lightyellow}%s\03{default}'%sqlreq )
-        sqlreq = unicode(sqlreq)
         rep = ()
         try:
-            self.cursor.execute(sqlreq)
+            self.cursor.execute(sql)
             rep = self.cursor.fetchall()
         except UnicodeEncodeError as e:
-            sqlreq = sqlreq.encode('utf8')
-            # rep = self.cursor.fetchall()
+            sql = sql.encode('utf8')
             try:
-                self.cursor.execute(sqlreq)
+                self.cursor.execute(sql)
                 rep = self.cursor.fetchall()
             except Exception as e:
                 if verbose:
-                    wikipedia.output("HADISOANA: %s" % e.message)
-                    wikipedia.output(u'\03{red}%s\03{default}' % sqlreq)
+                    pywikibot.output("HADISOANA: %s" % e.message)
+                    pywikibot.output(u'\03{red}%s\03{default}' % sql)
                     print(e.message)
                 return tuple()
         except Exception as e:
             if verbose:
-                wikipedia.output(u'HADISOANA ANATY: \03{red}%s\03{default}' % sqlreq)
+                pywikibot.output(u'HADISOANA ANATY: \03{red}%s\03{default}' % sql)
             raise e  # Unhandled Exception
         finally:
             return rep
 
-    def read(self, conditionsdict={}, select='*'):
+    def read(self, conditions={}, select=u'*'):
         """Read data from the current DB"""
-        return self._action(conditionsdict, "select %s " % select, 'like')
+        return self._action(conditions, u"select %s " % select, u'like')
 
     def read_all(self):
         return self.raw_query(u"select * from `%(DB)s`.`%(table)s`" % self.infos)
 
-    def update(self, conditionsdict, newvaluesdict):
-        "Update SQL line with new values following conditions in conditionsdict"
+    def update(self, conditions, newvalues_dict):
+        "Update SQL line with new values following conditions in conditions"
         raise NotImplementedError()
 
-    def delete(self, conditionsdict=False):
+    def delete(self, conditions=False):
         "Delete data from the DB"
-        return self._action(conditionsdict, "delete ")
+        return self._action(conditions, u"delete ")
 
     def raw_query_noFetch(self, sql):
         "Raw SQL query (returns cursor) does not fetch, does not commit."
@@ -174,12 +168,12 @@ class Database(object):
                 return self.cursor
 
 
-    def raw_query(self, sql, returnFetched=True, commitAfterQuery=True):
+    def raw_query(self, sql, return_fetched_results=True, commit_after_query=True):
         "Raw SQL query (returns fetched result)"
         q = self.raw_query_noFetch(sql)
-        if commitAfterQuery:
+        if commit_after_query:
             self.connect.commit()
-        if returnFetched:
+        if return_fetched_results:
             return q.fetchall()
 
 
@@ -192,9 +186,9 @@ class WordDatabase(object):
         if not params:
             # Currently hard-coded parameters, parameters read-in-file in the future.
             self.params = {
-                'host': 'localhost',
-                'login': 'root',
-                'passwd': self.db_passwd
+                u'host': u'localhost',
+                u'login': u'root',
+                u'passwd': self.db_passwd
             }
         else:
             self.params = params
@@ -234,10 +228,10 @@ class WordDatabase(object):
         definition = self._to_unicode(definition)
 
         paramsdict = {
-            'teny': entry,
-            'famaritana': definition,
-            'karazany': unicode(pos),
-            'fiteny': unicode(language)}
+            u'teny': entry,
+            u'famaritana': definition,
+            u'karazany': unicode(pos),
+            u'fiteny': unicode(language)}
         self.DB.insert(paramsdict)
 
     def _to_unicode(self, string):
@@ -257,8 +251,8 @@ class WordDatabase(object):
         # TODO: harmonise encoding to ease detection in DB
         # t0 = datetime.datetime.now()
         orig_entry = entry
-        listencodings = ['latin1', 'cp850', 'cp1252', 'utf8']
-        for encoding in listencodings:
+        encodings_list = ['latin1', 'cp850', 'cp1252', 'utf8']
+        for encoding in encodings_list:
             try:
                 entry = entry.decode(encoding)
             except UnicodeError:
@@ -266,12 +260,12 @@ class WordDatabase(object):
                 # entry = unicode(entry)
 
             # OLD VERSION USING DB ACCESS
-            conditions = {'teny': entry,
-                          'famaritana_fiteny': self.famaritana_fiteny}  # see explanation in "set_contentlanguage(ISOcode)"
+            conditions = {u'teny': entry,
+                          u'famaritana_fiteny': self.famaritana_fiteny}  # see explanation in "set_contentlanguage(ISOcode)"
 
-            if POS: conditions['karazany'] = POS
-            if lang: conditions['fiteny'] = lang
-            rep = self.DB.read(conditions, ' teny ')  # execution of SQL
+            if POS: conditions[u'karazany'] = POS
+            if lang: conditions[u'fiteny'] = lang
+            rep = self.DB.read(conditions, u' teny ')  # execution of SQL
             if rep:
                 # if verbose: print("ct. encding : %s"%encoding)
                 return True
@@ -293,17 +287,17 @@ class WordDatabase(object):
         translations = []
         # Find definition in special dictionary
         if language in [u'fr', u'en']:
-            qresult = self.DB.raw_query(u"select mg from data_botjagwar.%s_mg where %s='%s'"
+            sql_query_result = self.DB.raw_query(u"select mg from data_botjagwar.%s_mg where %s='%s'"
                                         % (language, language, word.replace(u"'", u"\\'")))
-            for translation in qresult:
+            for translation in sql_query_result:
                 translation = translation
                 translations.append(translation)
 
         # No translation found in pecial dictionary? Look up in the general one!
         if not translations:
-            qresult2 = self.DB.raw_query(u"select famaritana from data_botjagwar.teny where fiteny='%s' and teny='%s'"
+            sql_query_result2 = self.DB.raw_query(u"select famaritana from data_botjagwar.teny where fiteny='%s' and teny='%s'"
                                          % (language, word.replace(u"'", u"\\'")))
-            for translation in qresult2:
+            for translation in sql_query_result2:
                 translation = translation[0]
                 # Remove unneeded characters
                 for char in u'[]':

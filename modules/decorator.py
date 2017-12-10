@@ -1,6 +1,6 @@
 import datetime
 import threading
-
+import time
 
 def threaded(f):
     def wrapper(*args, **kwargs):
@@ -19,7 +19,7 @@ def time_this(f):
         t1 = datetime.datetime.now()
         dt = t1 - t0
         d = dt.seconds * 1000 + dt.microseconds / 1000
-        print ("function took %2.2f seconds to execute" % d)
+        print ("function took %2.2f seconds to execute" % (d/1000.))
         return ret
 
     return wrapper

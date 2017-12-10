@@ -3,23 +3,14 @@ from modules.entryprocessor.test import (
     TestDEWiktionary,
     TestENWiktionary)
 
+from unittest.case import TestCase
+
 from news_stats import get_milestones
 
 
-class TestDikantenyVaovaoBot(object):
-    def test_get_origin_wiki(self):
-        pass
 
-    def test_update_statistics(self):
-        pass
+class TestDikantenyVaovaoProcessWiktionaryPage(TestCase):
 
-    def test_process_wiktionary_page(self):
-        # mock page.get
-        # mock page.put
-        pass
-
-
-class TestDikantenyVaovaoProcessWiktionaryPage(object):
     def test_process_wiktionary_page_english(self):
         pass
 
