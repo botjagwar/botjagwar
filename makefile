@@ -27,7 +27,7 @@ botscripts:
 cronconf: botscripts
 	DB_PASSWD=$(DB_PASSWD) sudo bash -x deploy/configure-cron.sh
 
-test: database
+test:
 	python test.py
 
 clear:

@@ -1,32 +1,63 @@
+# coding: utf8
+
 from modules.entryprocessor.test import (
     TestFRWiktionary,
     TestDEWiktionary,
     TestENWiktionary)
 
 from unittest.case import TestCase
+from mock import mock, patch
 
 from news_stats import get_milestones
+from modules.translation.core import Translation
+from pywikibot import Page, Site
 
+LIST = [
+    u"streek",
+    u"kid",
+    u"gaon",
+    u"schizzo",
+    u"精液",
+    u"bijetoro",
+    u"instar",
+    u"deg",
+    u"rice",
+    u"proud",
+    u"pee",
+    u"pass",
+    u"loan",
+    u"eschew",
+    u"peddle",
+    u"frown",
+    u"bobos",
+    u"大越",
+]
+
+
+class PageMock(Page):
+    def put(self, newtext, summary=u'', watchArticle=None, minorEdit=True,
+            botflag=None, force=False, asynchronous=False, callback=None, **kwargs):
+        return True
+
+    def save(self, summary=None, watch=None, minor=True, botflag=None,
+             force=False, asynchronous=False, callback=None,
+             apply_cosmetic_changes=None, quiet=False, **kwargs):
+        return True
 
 
 class TestDikantenyVaovaoProcessWiktionaryPage(TestCase):
 
     def test_process_wiktionary_page_english(self):
-        pass
+        for pagename in LIST:
+            translation = Translation()
+            page = PageMock(Site('en', 'wiktionary'), pagename)
+            translation.process_wiktionary_page(u'en', page)
 
     def test_process_wiktionary_page_french(self):
-        pass
-
-
-class TestTranslation(object):
-    def test_code_to_name(self):
-        pass
-
-    def test_generate_redirections(self):
-        pass
-
-    def test_translation_from_bridge_language(self):
-        pass
+        for pagename in LIST:
+            translation = Translation()
+            page = PageMock(Site('fr', 'wiktionary'), pagename)
+            translation.process_wiktionary_page(u'fr', page)
 
 
 class TestNewsStats(object):

@@ -5,6 +5,7 @@ import os
 import json
 import pywikibot as pwbot
 from flask import Flask
+import traceback
 from modules import service_ports
 from modules.decorator import threaded
 from modules.translation.core import Translation
@@ -68,13 +69,13 @@ def handle(pagename, lang):
         return
     data = {}
     try:
-        data['unknowns'], data['new_entries'] = translations.process_wiktionary_page(lang, page)
-        _update_unknowns(data['unknowns'])
+        data[u'unknowns'], data[u'new_entries'] = translations.process_wiktionary_page(lang, page)
+        _update_unknowns(data[u'unknowns'])
         response = app.response_class(response=json.dumps(data), status=200, mimetype='application/json')
     except Exception as e:
-        import traceback
         traceback.print_exc()
-        data['error'] = e.message
+        data[u'traceback'] = traceback.format_exc()
+        data[u'message'] = e.message
         response = app.response_class(response=json.dumps(data), status=500, mimetype='application/json')
     finally:
         return response
@@ -82,7 +83,7 @@ def handle(pagename, lang):
 
 def striplinks(link):
     l = link
-    for c in ['[', ']']:
+    for c in [u'[', u']']:
         l = l.replace(c, '')
     return l
 
