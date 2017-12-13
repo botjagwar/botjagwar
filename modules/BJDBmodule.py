@@ -1,7 +1,6 @@
 import MySQLdb as db
 import pywikibot
 from set_database_password import PasswordManager
-
 verbose = True
 
 class DatabaseException(Exception):
@@ -141,6 +140,7 @@ class Database(object):
             raise e  # Unhandled Exception
         finally:
             return rep
+
 
     def read(self, conditions={}, select=u'*'):
         """Read data from the current DB"""

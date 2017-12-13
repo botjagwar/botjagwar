@@ -10,16 +10,18 @@ def threaded(f):
     return wrapper
 
 
-def time_this(f):
-    def wrapper(*args, **kwargs):
-        t0 = datetime.datetime.now()
+def time_this(identifier='function'):
+    def _time_this(f):
+        def wrapper(*args, **kwargs):
+            t0 = datetime.datetime.now()
 
-        ret = f(*args, **kwargs)
+            ret = f(*args, **kwargs)
 
-        t1 = datetime.datetime.now()
-        dt = t1 - t0
-        d = dt.seconds * 1000 + dt.microseconds / 1000
-        print ("function took %2.2f seconds to execute" % (d/1000.))
-        return ret
+            t1 = datetime.datetime.now()
+            dt = t1 - t0
+            d = dt.seconds * 1000 + dt.microseconds / 1000
+            print ("%s took %2.2f seconds to execute" % (identifier, d/1000.))
+            return ret
 
-    return wrapper
+        return wrapper
+    return _time_this
