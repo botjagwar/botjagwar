@@ -28,7 +28,7 @@ class UnknownLanguageManagerError(Exception):
 
 
 class MyOpener(FancyURLopener):
-    version = 'Botjagwar/v0.0.1'
+    version = 'Botjagwar/v0.0.2'
 
 
 class UnknownlanguageUpdaterBot(object):
