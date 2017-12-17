@@ -125,6 +125,7 @@ def handle_translate_word(lang):
     word = data[u"word"]
     translation = data[u"translation"]
     part_of_speech = data[u"POS"]
+    dry_run = data[u"dryrun"]
 
     translation_db = WordDatabase()
     translation_write_db = Database(table=u"%s_malagasy" % languages[lang])
@@ -140,7 +141,7 @@ def handle_translate_word(lang):
                 }
                 added.append(sql_data)
                 print sql_data
-                translation_write_db.insert(sql_data, dry_run=True)
+                translation_write_db.insert(sql_data, dry_run=dry_run)
         except (DataError, IntegrityError) as e:
             response = app.response_class(
                 response=json.dumps({u'message': e.message}),

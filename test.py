@@ -2,16 +2,18 @@
 
 import json
 import requests
+from time import sleep
 from models import BaseEntry
 from modules.translation.core import Translation
 from news_stats import get_milestones
+from subprocess import Popen
 from test_utils.mocks import PageMock, SiteMock
 from unittest.case import TestCase
+from modules.decorator import threaded
 
 LIST = [
     u"gaon", u"kid", u"精液", u"instar", u"bobos", u"大越",
 ]
-
 
 class TestDikantenyVaovaoProcessWiktionaryPage(TestCase):
 
@@ -28,12 +30,17 @@ class TestDikantenyVaovaoProcessWiktionaryPage(TestCase):
             translation.process_wiktionary_page(u'fr', page)
 
 
-class _TestDikantenyVaovaoServices(TestCase):
+class TestDikantenyVaovaoServices(TestCase):
     def setUp(self):
-        pass
+        self.launch_service()
+        sleep(5)
 
     def tearDown(self):
-        pass
+        self.p2.kill()
+
+    @threaded
+    def launch_service(self):
+        self.p2 = Popen(["python", "dikantenyvaovao.py", "&"])
 
     def check_response_status(self, url, data):
         resp = requests.put(url, json=data)
@@ -62,6 +69,8 @@ class _TestDikantenyVaovaoServices(TestCase):
         }
         url = "http://localhost:8000/translate/fr"
         self.check_response_status(url, data)
+
+
 
 
 class TestModels(TestCase):
