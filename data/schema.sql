@@ -66,11 +66,10 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost`
         `anglisy`.`anglisy` AS `en`,
         `anglisy_malagasy`.`mg` AS `mg`
     from
-        `anglisy_malagasy`,
-        `anglisy`
+        `anglisy_malagasy`, `anglisy`
     where
-        `anglisy_malagasy`.`en_wID` = `anglisy`.`en_wID`;
-
+        `anglisy_malagasy`.en_wID = `anglisy`.`en_wID`;
+        
 -- Structure for view `fr_mg`
 
 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost`
@@ -79,32 +78,32 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost`
         `frantsay`.`frantsay` AS `fr`,
         `frantsay_malagasy`.`mg` AS `mg`
     from
-        (`frantsay` join `frantsay_malagasy`)
+        `frantsay_malagasy`, `frantsay`
     where
-        (`frantsay`.`fr_wID` = `frantsay_malagasy`.`fr_wID`);
+        `frantsay_malagasy`.fr_wID = `frantsay`.`fr_wID`;
+        
 
 -- Indexes for dumped tables
 
 -- Indexes for table `anglisy`
 ALTER TABLE `anglisy`
   ADD PRIMARY KEY (`en_wID`),
-  ADD KEY `anglisy` (`anglisy`);
+  ADD FULLTEXT( `anglisy`);
 
 -- Indexes for table `anglisy_malagasy`
 ALTER TABLE `anglisy_malagasy`
   ADD UNIQUE KEY `en_wID_3` (`en_wID`,`mg`),
-  ADD KEY `en_wID` (`en_wID`),
-  ADD KEY `en_wID_2` (`en_wID`,`mg`);
+  ADD KEY `en_wID` (`en_wID`);
 
 -- Indexes for table `frantsay`
 ALTER TABLE `frantsay`
   ADD PRIMARY KEY (`fr_wID`),
-  ADD KEY `pos_ID` (`pos_ID`,`frantsay`);
+  ADD FULLTEXT( `frantsay`);
 
 -- Indexes for table `frantsay_malagasy`
 ALTER TABLE `frantsay_malagasy`
   ADD KEY `fr_wID` (`fr_wID`),
-  ADD KEY `fr_wID_2` (`fr_wID`,`mg`);
+  ADD UNIQUE KEY `fr_wID_2` (`fr_wID`,`mg`);
 
 -- Indexes for table `teny`
 ALTER TABLE `teny`
