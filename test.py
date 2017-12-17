@@ -15,15 +15,15 @@ LIST = [
 ]
 
 
-class _TestDikantenyVaovaoProcessWiktionaryPage(TestCase):
+class TestDikantenyVaovaoProcessWiktionaryPage(TestCase):
 
-    def _test_process_wiktionary_page_english(self):
+    def test_process_wiktionary_page_english(self):
         for pagename in LIST:
             translation = Translation()
             page = PageMock(SiteMock('en', 'wiktionary'), pagename)
             translation.process_wiktionary_page(u'en', page)
 
-    def _test_process_wiktionary_page_french(self):
+    def test_process_wiktionary_page_french(self):
         for pagename in LIST:
             translation = Translation()
             page = PageMock(SiteMock('fr', 'wiktionary'), pagename)
