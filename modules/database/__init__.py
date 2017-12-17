@@ -53,8 +53,10 @@ class Database(object):
         """Set the current table we're working on"""
         self.infos[u'table'] = table
 
-    def insert(self, values_dict):
+    def insert(self, values_dict, dry_run=False):
         """Insert in database values in values_dict"""
+        if dry_run:
+            return
         if isinstance(values_dict, list):
             self._insert_many(values_dict)
         elif isinstance(values_dict, dict):
