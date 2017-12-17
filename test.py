@@ -2,7 +2,6 @@
 
 import json
 import requests
-import subprocess, signal, os
 from models import BaseEntry
 from modules.translation.core import Translation
 from news_stats import get_milestones
@@ -10,8 +9,7 @@ from test_utils.mocks import PageMock, SiteMock
 from unittest.case import TestCase
 
 LIST = [
-    u"gaon", u"kid", u"schizzo", u"精液", u"bijetoro", u"instar", u"deg", u"rice", u"proud",
-    u"streek", u"pee", u"pass", u"loan", u"eschew", u"peddle", u"frown", u"bobos", u"大越",
+    u"gaon", u"kid", u"精液", u"instar", u"bobos", u"大越",
 ]
 
 
@@ -81,7 +79,7 @@ class TestModels(TestCase):
     def test_instantiate_child_class_additional_properties(self):
         class QingChuan(BaseEntry):
             _additional = True
-            types = {
+            properties_types = {
                 "test1": int,
                 "test2": int
             }
@@ -99,7 +97,7 @@ class TestModels(TestCase):
 
         class GuoHang(BaseEntry):
             _additional = False
-            types = {
+            properties_types = {
                 "test1": int,
                 "test2": int
             }

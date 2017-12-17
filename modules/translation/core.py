@@ -8,6 +8,7 @@ from modules.database.word import WordDatabase
 from modules.exceptions import NoWordException
 from modules.output import Output
 from modules.autoformatter import Autoformat
+from models.word import Entry
 
 default_data_file = os.getcwd() + '/conf/dikantenyvaovao/'
 
@@ -127,71 +128,71 @@ class Translation(TranslationsHandler):
 
     @staticmethod
     def _append_in(infos, translations_in_mg):  # TRANSLATION HANDLING SUBFUNCTION
-        for mgtranslation in infos[u'definition'].split(","):
-            mgtranslation = mgtranslation.strip()
-            if translations_in_mg.has_key(mgtranslation):
-                translations_in_mg[mgtranslation].append((infos[u"lang"], infos[u"entry"]))
+        for malagasy_translation in infos.entry_definition.split(","):
+            malagasy_translation = malagasy_translation.strip()
+            if translations_in_mg.has_key(malagasy_translation):
+                translations_in_mg[malagasy_translation].append((infos.language, infos.entry))
             else:
-                translations_in_mg[mgtranslation] = []
-                translations_in_mg[mgtranslation].append((infos[u"lang"], infos[u"entry"]))
+                translations_in_mg[malagasy_translation] = []
+                translations_in_mg[malagasy_translation].append((infos.language, infos.entry))
 
     @staticmethod
     def _generate_redirections(infos):
-        redirtarget = infos[u'entry']
-        if infos[u'lang'] in ['ru', 'uk', 'bg', 'be']:
+        redirection_target = infos.entry
+        if infos.language in ['ru', 'uk', 'bg', 'be']:
             for char in u"́̀":
-                if redirtarget.find(char) != -1:
-                    redirtarget = redirtarget.replace(char, u"")
-            if redirtarget.find(u"æ") != -1:
-                redirtarget = redirtarget.replace(u"æ", u"ӕ")
-            if infos['entry'] != redirtarget:
-                page = pwbot.Page(pwbot.Site('mg', 'wiktionary'), infos[u'entry'])
+                if redirection_target.find(char) != -1:
+                    redirection_target = redirection_target.replace(char, u"")
+            if redirection_target.find(u"æ") != -1:
+                redirection_target = redirection_target.replace(u"æ", u"ӕ")
+            if infos.entry != redirection_target:
+                page = pwbot.Page(pwbot.Site('mg', 'wiktionary'), infos.entry)
                 if not page.exists():
-                    page.put_async(u"#FIHODINANA [[%s]]" % redirtarget, u"fihodinana")
-                infos['entry'] = redirtarget
+                    page.put_async(u"#FIHODINANA [[%s]]" % redirection_target, u"fihodinana")
+                infos.entry = redirection_target
 
     def _save_translation_from_bridge_language(self, infos):
-        summary = u"Dikan-teny avy amin'ny dikan-teny avy amin'i %(olang)s.wiktionary" % infos
+        summary = u"Dikan-teny avy amin'ny dikan-teny avy amin'i %s.wiktionary" % infos.origin_wiktionary_edition
         wikipage = self.output.wikipage(infos)
         try:
-            mg_page = pwbot.Page(pwbot.Site('mg', 'wiktionary'), infos[u'entry'])
+            mg_page = pwbot.Page(pwbot.Site('mg', 'wiktionary'), infos.entry)
         except UnicodeDecodeError:
-            mg_page = pwbot.Page(pwbot.Site('mg', 'wiktionary'), infos[u'entry'].decode('utf8'))
+            mg_page = pwbot.Page(pwbot.Site('mg', 'wiktionary'), infos.entry.decode('utf8'))
 
         try:
             if mg_page.exists():
                 pagecontent = mg_page.get()
-                if pagecontent.find(u'{{=%s=}}' % infos[u'lang']) != -1:
-                    print(u"Efa misy ilay teny iditra '%(entry)s' " % infos)
+                if pagecontent.find(u'{{=%s=}}' % infos.language) != -1:
+                    print(u"Efa misy ilay teny iditra '%(entry)s' " % infos.properties)
                     self.output.db(infos)
                     return
                 else:
                     wikipage += pagecontent
                     summary = u"+" + summary
         except pwbot.exceptions.IsRedirectPage:
-            infos[u'entry'] = mg_page.getRedirectTarget().title()
+            infos.entry = mg_page.getRedirectTarget().title()
             self._save_translation_from_bridge_language(infos)
             return
 
         except pwbot.exceptions.InvalidTitle:
-            print(u"lohateny tsy mety ho lohatenim-pejy '%(entry)s' " % infos)
+            print(u"lohateny tsy mety ho lohatenim-pejy '%s' " % infos.entry)
             return
 
         except Exception as e:
             return
 
-        pwbot.output(u"\n \03{red}%(entry)s\03{default} : %(lang)s " % infos)
+        pwbot.output(u"\n \03{red}%(entry)s\03{default} : %(language)s " % infos.properties)
         pwbot.output(u"\03{white}%s\03{default}" % wikipage)
         mg_page.put_async(wikipage, summary)
         self.output.db(infos)
 
     def _save_translation_from_page(self, infos):
-        summary = u"Dikan-teny avy amin'ny pejy avy amin'i %(olang)s.wiktionary" % infos
+        summary = u"Dikan-teny avy amin'ny pejy avy amin'i %s.wiktionary" % infos.language
         wikipage = self.output.wikipage(infos)
-        mg_page = pwbot.Page(pwbot.Site('mg', 'wiktionary'), infos["entry"])
+        mg_page = pwbot.Page(pwbot.Site('mg', 'wiktionary'), infos.entry)
         if mg_page.exists():
             pagecontent = mg_page.get()
-            if pagecontent.find(u'{{=%s=}}' % infos[u'lang']) != -1:
+            if pagecontent.find(u'{{=%s=}}' % infos.language) != -1:
                 print(u"Efa misy ilay teny iditra, fa mbola tsy fantatry ny banky angona izany.")
                 self.output.db(infos)
                 return
@@ -200,7 +201,7 @@ class Translation(TranslationsHandler):
                 wikipage, edit_summary = Autoformat(wikipage).wikitext()
                 summary = u"+" + summary + u", %s" % edit_summary
 
-        pwbot.output(u"\03{default}>>> \03{lightgreen}%(entry)s\03{default}" % infos
+        pwbot.output(u"\03{default}>>> \03{lightgreen}%(entry)s\03{default}" % infos.properties
                      + u"<<<\n\03{lightblue}%s\03{default}" % wikipage)
         mg_page.put_async(wikipage, summary)
         self.output.db(infos)
@@ -214,7 +215,6 @@ class Translation(TranslationsHandler):
         else:
             # pwbot.output(u"mitady an'i teny \"%s\" ao amin'ny banky angona..."%ent)
             return self.word_db.exists(ent, lang)
-
 
     def get_allwords(self):
         alldata = self.sql_db.load()
@@ -262,6 +262,7 @@ class Translation(TranslationsHandler):
 
         translations_in_mg = {}  # dictionary {string : list of translation tuple (see below)}
         for word, pos, language_code, definition in entries:
+            definition = definition.decode('utf8')
             if word is None or definition is None:
                 continue
             if language_code == language:  # if entry in the content language
@@ -285,15 +286,15 @@ class Translation(TranslationsHandler):
                         if title not in unknowns:
                             unknowns.append((title, language))
                         break
-                    infos = {
-                        u'entry': translation[0],
-                        u'POS': translation[1],
-                        u'definition': mg_translation,
-                        u'lang': translation[2],
-                        u'olang': language,
-                        u'origin': Page.title()}
 
-                    if self.word_db.exists(infos[u'entry'], infos[u'lang']):
+                    infos = Entry(
+                        entry=translation[0],
+                        part_of_speech=translation[1],
+                        entry_definition=mg_translation,
+                        language=translation[2],
+                        origin_wiktionary_edition=language,
+                        origin_wiktionary_page_name=Page.title())
+                    if self.word_db.exists(infos.entry, infos.language):
                         continue
 
                     self._generate_redirections(infos)
@@ -325,13 +326,13 @@ class Translation(TranslationsHandler):
                         unknowns.append((definition, language))
                     continue
 
-                infos = {
-                    u'entry': title,
-                    u'POS': pos,
-                    u'definition': mg_translation,
-                    u'lang': language_code,
-                    u'olang': language,
-                    u'origin': definition}
+                infos = Entry(
+                    entry=title,
+                    part_of_speech=pos,
+                    entry_definition=mg_translation,
+                    language=language_code,
+                    origin_wiktionary_edition=language,
+                    origin_wiktionary_page_name=definition)
 
                 self._generate_redirections(infos)
                 self._append_in(infos, translations_in_mg)

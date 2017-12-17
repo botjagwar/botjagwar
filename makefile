@@ -28,7 +28,8 @@ cronconf: botscripts
 	DB_PASSWD=$(DB_PASSWD) sudo bash -x deploy/configure-cron.sh
 
 test:
-	python test.py
+	sudo apt-get install python-nose
+	nosetests test.py
 
 clear:
 	sudo apt-get remove -y mysql-server
