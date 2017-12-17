@@ -3,7 +3,8 @@ import re
 import os
 import pywikibot as pwbot
 from modules import entryprocessor
-from modules import BJDBmodule
+from modules.database import Database
+from modules.database.word import WordDatabase
 from modules.exceptions import NoWordException
 from modules.output import Output
 from modules.autoformatter import Autoformat
@@ -114,8 +115,8 @@ class Translation(TranslationsHandler):
         """Mandika teny ary pejy @ teny malagasy"""
         super(self.__class__, self).__init__()
         self.data_file = data_file or default_data_file
-        self.sql_db = BJDBmodule.Database()
-        self.word_db = BJDBmodule.WordDatabase()
+        self.sql_db = Database()
+        self.word_db = WordDatabase()
         self.databases.append(self.word_db)
         self.databases.append(self.sql_db)
         self.output = Output()

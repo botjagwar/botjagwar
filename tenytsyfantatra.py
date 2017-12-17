@@ -2,8 +2,8 @@
 import pywikibot
 import os
 import re, time
-from modules.BJDBmodule import Database
-from modules.BJDBmodule import WordDatabase
+from modules.database import Database
+from modules.database.word import WordDatabase
 from modules.decorator import time_this
 from _mysql_exceptions import DataError, IntegrityError
 
