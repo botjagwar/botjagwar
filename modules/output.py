@@ -1,18 +1,18 @@
-import BJDBmodule
 verbose = False
 
+from modules.database.word import WordDatabase
 
 class Output(object):
     def __init__(self, output_batchfile="translate_batch.txt"):
         self.output_batchfile = file(output_batchfile, 'a')
-        self.word_db = BJDBmodule.WordDatabase()
+        self.word_db = WordDatabase()
 
     def db(self, info):
         "updates database"
-        if self.word_db.exists(info['entry'], info['lang']):
+        if self.word_db.exists(info[u'entry'], info[u'lang']):
             return False
         else:
-            self.word_db.append(info['entry'], info['definition'], info['POS'], info['lang'])
+            self.word_db.append(info[u'entry'], info[u'definition'], info[u'POS'], info[u'lang'])
             if verbose:
                 print ("voavao ny banky angona")
             return True

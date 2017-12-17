@@ -1,42 +1,120 @@
-from modules.entryprocessor.test import (
-    TestFRWiktionary,
-    TestDEWiktionary,
-    TestENWiktionary)
+# coding: utf8
 
+import json
+import requests
+import subprocess, signal, os
+from models import BaseEntry
+from modules.translation.core import Translation
 from news_stats import get_milestones
+from test_utils.mocks import PageMock, SiteMock
+from unittest.case import TestCase
+
+LIST = [
+    u"gaon", u"kid", u"schizzo", u"精液", u"bijetoro", u"instar", u"deg", u"rice", u"proud",
+    u"streek", u"pee", u"pass", u"loan", u"eschew", u"peddle", u"frown", u"bobos", u"大越",
+]
 
 
-class TestDikantenyVaovaoBot(object):
-    def test_get_origin_wiki(self):
+class _TestDikantenyVaovaoProcessWiktionaryPage(TestCase):
+
+    def _test_process_wiktionary_page_english(self):
+        for pagename in LIST:
+            translation = Translation()
+            page = PageMock(SiteMock('en', 'wiktionary'), pagename)
+            translation.process_wiktionary_page(u'en', page)
+
+    def _test_process_wiktionary_page_french(self):
+        for pagename in LIST:
+            translation = Translation()
+            page = PageMock(SiteMock('fr', 'wiktionary'), pagename)
+            translation.process_wiktionary_page(u'fr', page)
+
+
+class TestDikantenyVaovaoServices(TestCase):
+    def setUp(self):
         pass
 
-    def test_update_statistics(self):
+    def tearDown(self):
         pass
 
-    def test_process_wiktionary_page(self):
-        # mock page.get
-        # mock page.put
-        pass
+    def check_response_status(self, url, data):
+        resp = requests.put(url, json=data)
+        print (resp.text)
+        resp_data = json.loads(resp.text) if resp.text else {}
+        self.assertEquals(resp.status_code, 200)
+        for _, added_entries in resp_data.items():
+            self.assertTrue(isinstance(added_entries , list))
+
+    def test_translate_english_word(self):
+        data = {
+            u"dryrun": True,
+            u"word": u"rice",
+            u"translation": u"vary",
+            u"POS": u"ana",
+        }
+        url = "http://localhost:8000/translate/en"
+        self.check_response_status(url, data)
+
+    def test_translate_french_word(self):
+        data = {
+            u"dryrun": True,
+            u"word": u"riz",
+            u"translation": u"vary",
+            u"POS": u"ana",
+        }
+        url = "http://localhost:8000/translate/fr"
+        self.check_response_status(url, data)
 
 
-class TestDikantenyVaovaoProcessWiktionaryPage(object):
-    def test_process_wiktionary_page_english(self):
-        pass
+class TestModels(TestCase):
 
-    def test_process_wiktionary_page_french(self):
-        pass
+    def test_instantiate_base(self):
+        test = BaseEntry(
+            test1=10,
+            test2=20,
+            test3=300
+        )
+        self.assertEquals(test.test1, 10)
+        self.assertEquals(test.test2, 20)
+        self.assertEquals(test.test3, 300)
 
+    def test_instantiate_child_class_additional_properties(self):
+        class QingChuan(BaseEntry):
+            _additional = True
+            types = {
+                "test1": int,
+                "test2": int
+            }
 
-class TestTranslation(object):
-    def test_code_to_name(self):
-        pass
+        test = QingChuan(
+            test1=1,
+            test2=2,
+            test3=u"klew"  # additional!
+        )
+        self.assertEquals(test.test1, 1)
+        self.assertEquals(test.test2, 2)
+        self.assertEquals(test.test3, u"klew")
 
-    def test_generate_redirections(self):
-        pass
+    def test_instantiate_child_class_no_additional_properties(self):
 
-    def test_translation_from_bridge_language(self):
-        pass
+        class GuoHang(BaseEntry):
+            _additional = False
+            types = {
+                "test1": int,
+                "test2": int
+            }
 
+        def do_checks():
+            test = GuoHang(
+                test1=1,
+                test2=2,
+                test3=u"klew"  # additional!
+            )
+            self.assertEquals(test.test1, 1)
+            self.assertEquals(test.test2, 2)
+            self.assertEquals(test.test3, u"klew")
+
+        self.assertRaises(AttributeError, do_checks)
 
 class TestNewsStats(object):
     def test_milestone_detection(self):

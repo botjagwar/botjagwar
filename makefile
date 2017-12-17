@@ -13,9 +13,12 @@ python: prepare
 	sudo apt-get install -y python2.7
 	sudo apt-get install -y python-pip
 
+python-requirements: python
+	LC_ALL="en_US.UTF-8" sudo pip install -r requirements.txt
+
 install-python-deps: python
 	sudo apt-get install -y python-lxml
-	LC_ALL="en_US.UTF-8" sudo pip install -r requirements.txt
+
 
 botscripts:
 	cp scripts/*.sh $(HOME)
@@ -24,13 +27,7 @@ botscripts:
 cronconf: botscripts
 	DB_PASSWD=$(DB_PASSWD) sudo bash -x deploy/configure-cron.sh
 
-monitoring:
-	bash -x scripts/deploy-nginx.sh
-
-dbconf: database
-	bash -x deploy/configure-db.sh
-
-test: database
+test:
 	python test.py
 
 clear:
@@ -39,4 +36,4 @@ clear:
 	sudo apt-get autoremove -y nginx php-fpm php-mysql
 	sudo apt-get autoremove -y python-pip python2.7 python-mysqldb
 
-all: setpass install-python-deps dbconf cronconf monitoring
+all: setpass install-python-deps python-requirements cronconf

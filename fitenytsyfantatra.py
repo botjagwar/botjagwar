@@ -3,7 +3,7 @@ import time
 import pywikibot
 from urllib import FancyURLopener, urlopen
 from lxml import etree
-from modules.BJDBmodule import WordDatabase
+from modules.database.word import WordDatabase
 
 WORKING_WIKI = pywikibot.Site("mg", "wiktionary")
 username = u"%s" % pywikibot.config.usernames['wiktionary']['mg']
@@ -28,7 +28,7 @@ class UnknownLanguageManagerError(Exception):
 
 
 class MyOpener(FancyURLopener):
-    version = 'Botjagwar/v1.1'
+    version = 'Botjagwar/v0.0.2'
 
 
 class UnknownlanguageUpdaterBot(object):
