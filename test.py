@@ -30,7 +30,7 @@ class TestDikantenyVaovaoProcessWiktionaryPage(TestCase):
             translation.process_wiktionary_page(u'fr', page)
 
 
-class TestDikantenyVaovaoServices(TestCase):
+class _TestDikantenyVaovaoServices(TestCase):
     def setUp(self):
         pass
 
