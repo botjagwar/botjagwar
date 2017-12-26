@@ -26,7 +26,7 @@ class WiktionaryProcessorFactory(object):
 
     @staticmethod
     def create(language):
-        assert type(language) in [str, unicode]
+        assert type(language) in [str, unicode], type(language)
         ct_module = sys.modules[__name__]
         classes = inspect.getmembers(ct_module, inspect.isclass)
         processors = [x for x in classes if x[0].endswith('WiktionaryProcessor')]

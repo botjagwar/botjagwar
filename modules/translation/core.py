@@ -236,6 +236,86 @@ class Translation(TranslationsHandler):
                 ret[data[1]] = unicode(data[3], 'latin1')
         return ret
 
+    def process_entry_in_native_language(self, wiki_page, language, unknowns):
+        wiktionary_processor_class = entryprocessor.WiktionaryProcessorFactory.create(language)
+        wiktionary_processor = wiktionary_processor_class()
+        ret = 0
+        try:
+            translations = wiktionary_processor.retrieve_translations()
+        except Exception as e:
+            return ret
+        translations_in_mg = {}  # dictionary {string : list of translation tuple (see below)}
+        for entry, pos, entry_language in translations:
+            # translation = tuple(codelangue, entree)
+            if entry_language in self.langblacklist:  # check in language blacklist
+                print(u"Fiteny voalisi-mainty: ", entry_language)
+                continue
+            title = wiki_page.title()
+            try:
+                mg_translation = self.translate_word(title, language)
+            except NoWordException:
+                pwbot.output(
+                    u"Tsy nahitana dikantenin'i '%s' ho an'ny teny '%s' tao amin'ny banky angona" % (
+                        title, language))
+                if title not in unknowns:
+                    unknowns.append((title, language))
+                break
+
+            infos = Entry(
+                entry=entry,
+                part_of_speech=pos,
+                entry_definition=mg_translation,
+                language=entry_language,
+                origin_wiktionary_edition=language,
+                origin_wiktionary_page_name=title)
+            if self.word_db.exists(infos.entry, infos.language):
+                continue
+
+            self._generate_redirections(infos)
+            self._append_in(infos, translations_in_mg)
+            self._save_translation_from_bridge_language(infos)
+            ret += 1
+
+        return ret
+
+    def process_entry_in_foreign_language(
+            self, wiki_page, word, language_code, language, pos, definition, translations_in_mg, unknowns):
+        if language_code in self.langblacklist:
+            print(u"Fiteny voalisi-mainty:", language_code)
+            return 0
+
+        pwbot.output(u"\03{red}%s\03{default}: dikanteny vaovao amin'ny teny '%s' " % (
+            word, language_code))
+        if self.word_db.exists(word, language_code):
+            print(u"Efa fantatra tamin'ny alalan'ny banky angona ny fisian'ilay teny")
+            return 0
+
+        title = wiki_page.title()
+        try:
+            mg_translation = self.translate_word(definition, language)
+        except NoWordException:
+            pwbot.output(
+                u"\03{yellow}Tsy nahitana dikantenin'i '%s' ho an'ny teny '%s' tao amin'ny banky angona\03{default}" % \
+                (definition, language))
+            if title not in unknowns:
+                unknowns.append((definition, language))
+            return 0
+
+        infos = Entry(
+            entry=title,
+            part_of_speech=pos,
+            entry_definition=mg_translation,
+            language=language_code,
+            origin_wiktionary_edition=language,
+            origin_wiktionary_page_name=definition)
+
+        self._generate_redirections(infos)
+        self._save_translation_from_bridge_language(infos)
+        self._append_in(infos, translations_in_mg)
+        self._save_translation_from_page(infos)
+
+        return 1
+
     def process_wiktionary_page(self, language, Page):
         assert type(language) is unicode
         unknowns = []
@@ -265,81 +345,12 @@ class Translation(TranslationsHandler):
             definition = definition.decode('utf8')
             if word is None or definition is None:
                 continue
+
             if language_code == language:  # if entry in the content language
-                try:
-                    translations = wiktionary_processor.retrieve_translations()
-                except Exception as e:
-                    continue
-                translations_in_mg = {}  # dictionary {string : list of translation tuple (see below)}
-                for translation in translations:
-                    # translation = tuple(codelangue, entree)
-                    if translation[2] in self.langblacklist:  # check in language blacklist
-                        print(u"Fiteny voalisi-mainty: ", translation[2])
-                        continue
-                    try:
-                        mg_translation = self.translate_word(Page.title(), language)
-                    except NoWordException:
-                        title = Page.title()
-                        pwbot.output(
-                            u"Tsy nahitana dikantenin'i '%s' ho an'ny teny '%s' tao amin'ny banky angona" % (
-                                title, language))
-                        if title not in unknowns:
-                            unknowns.append((title, language))
-                        break
-
-                    infos = Entry(
-                        entry=translation[0],
-                        part_of_speech=translation[1],
-                        entry_definition=mg_translation,
-                        language=translation[2],
-                        origin_wiktionary_edition=language,
-                        origin_wiktionary_page_name=Page.title())
-                    if self.word_db.exists(infos.entry, infos.language):
-                        continue
-
-                    self._generate_redirections(infos)
-                    self._append_in(infos, translations_in_mg)
-                    self._save_translation_from_bridge_language(infos)
-                    ret += 1
-
-                    # Malagasy language pages
-
+                ret += self.process_entry_in_native_language(Page, language, unknowns)
             else:
-                if language_code in self.langblacklist:
-                    print(u"Fiteny voalisi-mainty:", language_code)
-                    continue
-
-                pwbot.output(u"\03{red}%s\03{default}: dikanteny vaovao amin'ny teny '%s' " % (
-                    word, language_code))
-                if self.word_db.exists(word, language_code):
-                    print(u"Efa fantatra tamin'ny alalan'ny banky angona ny fisian'ilay teny")
-                    continue
-
-                title = Page.title()
-                try:
-                    mg_translation = self.translate_word(definition, language)
-                except NoWordException:
-                    pwbot.output(
-                        u"\03{yellow}Tsy nahitana dikantenin'i '%s' ho an'ny teny '%s' tao amin'ny banky angona\03{default}" % \
-                        (definition, language))
-                    if title not in unknowns:
-                        unknowns.append((definition, language))
-                    continue
-
-                infos = Entry(
-                    entry=title,
-                    part_of_speech=pos,
-                    entry_definition=mg_translation,
-                    language=language_code,
-                    origin_wiktionary_edition=language,
-                    origin_wiktionary_page_name=definition)
-
-                self._generate_redirections(infos)
-                self._append_in(infos, translations_in_mg)
-                self._save_translation_from_bridge_language(infos)
-                self._save_translation_from_page(infos)
-
-                ret += 1
+                ret += self.process_entry_in_foreign_language(
+                    Page, word, language_code, language, pos, definition, translations_in_mg, unknowns)
 
         # Malagasy language pages
         # self.update_malagasy_word(translations_in_mg)
