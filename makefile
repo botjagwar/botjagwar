@@ -29,7 +29,9 @@ cronconf: botscripts
 
 test:
 	sudo apt-get install python-nose
-	nosetests -s -v test.py
+	nosetests -s -v .
+
+.PHONY: test
 
 clear:
 	sudo apt-get remove -y mysql-server
