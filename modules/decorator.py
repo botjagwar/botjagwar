@@ -2,6 +2,7 @@ import datetime
 import threading
 import time
 
+
 def threaded(f):
     def wrapper(*args, **kwargs):
         thread = threading.Thread(target=f, args=args, kwargs=kwargs)
@@ -25,3 +26,20 @@ def time_this(identifier='function'):
 
         return wrapper
     return _time_this
+
+
+def retry_on_fail(exceptions, retries=5, time_between_retries=1):
+    def _retry_on_fail(f):
+        def wrapper(*args, **kwargs):
+            m_retries = 0
+            try:
+                return f(*args, **kwargs)
+            except exceptions as e:
+                if m_retries <= retries:
+                    m_retries += 1
+                    time.sleep(time_between_retries)
+                else:
+                    raise e
+
+        return wrapper
+    return _retry_on_fail
