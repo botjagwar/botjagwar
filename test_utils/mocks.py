@@ -3,8 +3,8 @@ from xml.dom import minidom
 from modules.decorator import time_this
 SiteMock = pywikibot.Site
 
+
 class PageMock(pywikibot.Page):
-    @time_this('pagemock init')
     def __init__(self, *args, **kwargs):
         super(PageMock, self).__init__(*args, **kwargs)
         self.filename = "test_data/test_pages_%s.xml" % self.site.lang
@@ -14,7 +14,6 @@ class PageMock(pywikibot.Page):
     def put(self, **kwargs):
         print (u'Saving page [[%s]]' % self.title())
 
-    @time_this('pagemock get')
     def get(self):
         for page in self.pages:
             xml_title = page.getElementsByTagName('title')[0].childNodes[0].nodeValue
@@ -23,6 +22,7 @@ class PageMock(pywikibot.Page):
 
         print u'No page found in "%s"' % self.filename
         return u''
+
 
 p = PageMock(SiteMock('en','wiktionary'), u'gaon')
 e = p.get()

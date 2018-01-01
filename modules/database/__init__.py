@@ -89,7 +89,6 @@ class Database(object):
         if not self.querycount % 1000:
             qcstr = str(self.querycount)
             qcstr = qcstr + chr(8) * (len(qcstr) + 1)
-            if verbose: print(qcstr,)
 
     def _insert_one(self, values_dict):
         self._do_insert(values_dict)
@@ -132,7 +131,6 @@ class Database(object):
                 if verbose:
                     pywikibot.output("HADISOANA: %s" % e.message)
                     pywikibot.output(u'\03{red}%s\03{default}' % sql)
-                    print(e.message)
                 return tuple()
         except Exception as e:
             if verbose:

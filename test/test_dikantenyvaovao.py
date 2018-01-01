@@ -47,7 +47,6 @@ class TestDikantenyVaovaoServices(TestCase):
 
     def check_response_status(self, url, data):
         resp = requests.put(url, json=data)
-        print (resp.text)
         resp_data = json.loads(resp.text) if resp.text else {}
         self.assertEquals(resp.status_code, 200)
         for _, added_entries in resp_data.items():

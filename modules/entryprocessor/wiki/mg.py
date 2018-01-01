@@ -21,8 +21,6 @@ class MGWiktionaryProcessor(WiktionaryProcessor):
         trstr = '{{}} :'
         tran = tran.replace('{{}} :', '')
         if len(trads) > 200:
-            if self.verbose:
-                print('hadisoana ?')
             return tran
         for i in trads:
             trstr = trstr.replace("{{}} :", "# %s : [[%s]]\n{{}} :" % i)

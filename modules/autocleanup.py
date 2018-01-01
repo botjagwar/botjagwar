@@ -49,7 +49,6 @@ class IRC_RC_Bot(ircbot.SingleServerIRCBot):
             self.stats['errors']+=1
             errstr = u'Hadisoana : ' + ex.message + u'\n'
             file('autocleanup.exceptions','a').write(errstr)
-            print 'Hadisoana'
 
 def IRCcleanup():
     while 1:
@@ -99,13 +98,10 @@ def cleanup(Page, put=True):
 
     if c==orig: return 0
     else:
-        print 'ELANELANA : %d'%(len(c)-len(orig))
         wikipedia.showDiff(orig,c)
         if put:
             Page.put(c, summary)
         return 1
-    
-    print "Vita."
     
 
 def alphasort(c):

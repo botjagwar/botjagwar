@@ -88,7 +88,6 @@ class FRWiktionaryProcessor(WiktionaryProcessor):
                 definition = definition.split('\n# ')[1]
                 definition = re.sub("\[\[(.*)#(.*)\|?[.*]?\]?\]?", "\\1", definition)
             except IndexError:
-                print(" Hadisoana : Tsy nahitana famaritana")
                 ct_content = ct_content[d_ptr:]
                 continue
 

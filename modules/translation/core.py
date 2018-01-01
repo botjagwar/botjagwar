@@ -138,7 +138,6 @@ class Translation(TranslationsHandler):
             if mg_page.exists():
                 pagecontent = mg_page.get()
                 if pagecontent.find(u'{{=%s=}}' % infos.language) != -1:
-                    print(u"Efa misy ilay teny iditra '%(entry)s' " % infos.properties)
                     self.output.db(infos)
                     return
                 else:
@@ -150,7 +149,6 @@ class Translation(TranslationsHandler):
             return
 
         except pwbot.exceptions.InvalidTitle:
-            print(u"lohateny tsy mety ho lohatenim-pejy '%s' " % infos.entry)
             return
 
         except Exception as e:
@@ -168,7 +166,6 @@ class Translation(TranslationsHandler):
         if mg_page.exists():
             pagecontent = mg_page.get()
             if pagecontent.find(u'{{=%s=}}' % infos.language) != -1:
-                print(u"Efa misy ilay teny iditra, fa mbola tsy fantatry ny banky angona izany.")
                 self.output.db(infos)
                 return
             else:
@@ -223,15 +220,11 @@ class Translation(TranslationsHandler):
         for entry, pos, entry_language in translations:
             # translation = tuple(codelangue, entree)
             if entry_language in self.langblacklist:  # check in language blacklist
-                print(u"Fiteny voalisi-mainty: ", entry_language)
                 continue
             title = wiki_page.title()
             try:
                 mg_translation = self.translate_word(title, language)
             except NoWordException:
-                pwbot.output(
-                    u"Tsy nahitana dikantenin'i '%s' ho an'ny teny '%s' tao amin'ny banky angona" % (
-                        title, language))
                 if title not in unknowns:
                     unknowns.append((title, language))
                 break
@@ -256,22 +249,15 @@ class Translation(TranslationsHandler):
     def process_entry_in_foreign_language(
             self, wiki_page, word, language_code, language, pos, definition, translations_in_mg, unknowns):
         if language_code in self.langblacklist:
-            print(u"Fiteny voalisi-mainty:", language_code)
             return 0
 
-        pwbot.output(u"\03{red}%s\03{default}: dikanteny vaovao amin'ny teny '%s' " % (
-            word, language_code))
         if self.word_db.exists(word, language_code):
-            print(u"Efa fantatra tamin'ny alalan'ny banky angona ny fisian'ilay teny")
             return 0
 
         title = wiki_page.title()
         try:
             mg_translation = self.translate_word(definition, language)
         except NoWordException:
-            pwbot.output(
-                u"\03{yellow}Tsy nahitana dikantenin'i '%s' ho an'ny teny '%s' tao amin'ny banky angona\03{default}" % \
-                (definition, language))
             if title not in unknowns:
                 unknowns.append((definition, language))
             return 0
@@ -298,11 +284,8 @@ class Translation(TranslationsHandler):
 
         # BEGINNING
         ret = 0
-        print(u"Praosesera:", language.upper())
         wiktionary_processor_class = entryprocessor.WiktionaryProcessorFactory.create(language)
         wiktionary_processor = wiktionary_processor_class()
-
-        pwbot.output(u"\n >>> \03{lightgreen}%s\03{default} <<< " % Page.title())
 
         if Page.title().find(':') != -1:
             return unknowns, ret
@@ -348,19 +331,13 @@ class Translation(TranslationsHandler):
                 mg_entry_page.put_async(content, u"+dikanteny")
             except pwbot.IsRedirectPage:
                 redirtarget = mg_entry_page.getRedirectTarget()
-                pwbot.output(u"Pejy fihodinana '%s', manakatra ny tanjony: '%s'" %
-                             (mg_entry_page.title(), redirtarget.title()))
-                redirtarget = mg_entry_page.getRedirectTarget()
                 update_malagasy_word(redirtarget.title(), translations)
 
             except pwbot.NoPage:
-                pwbot.output(u"Tsy misy ilay pejy '%s'" % mg_entry_page.title())
                 return
             except Exception as e:
-                pwbot.output(u"Nisy hadisoana.")
                 return
 
-        print(u"Manavao ny pejy malagasy...", u"dikanteny %d" % len(translations_in_mg))
         for translation_in_mg in translations_in_mg:
             translation_in_mg = translation_in_mg.strip()
             for char in '[]':
@@ -368,8 +345,6 @@ class Translation(TranslationsHandler):
 
             translation_in_mg = unicode(translation_in_mg)
             update_malagasy_word(translation_in_mg, translations_in_mg[translation_in_mg])
-
-        print(u"tafapetraka ny dikanteny")
 
 
 def _append_in(infos, translations_in_mg):  # TRANSLATION HANDLING SUBFUNCTION
