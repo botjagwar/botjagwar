@@ -1,3 +1,26 @@
+
+class Property(object):
+    def __init__(self, value, _type=object):
+        if isinstance(value, _type):
+            self.value = value
+
+    def serialize(self):
+        return unicode(self.value)
+
+
+class List(Property):
+    def __init__(self, values):
+        self.values = values
+
+    def serialize(self):
+        ret = []
+        for value in self.values:
+            if isinstance(value, Property):
+                ret.append(value.serialize())
+            else:
+                ret.append(value)
+
+
 class BaseEntry(object):
     _additional = True
     properties_types = {}
@@ -15,6 +38,16 @@ class BaseEntry(object):
                 self.__class__.__name__,
                 item
             ))
+
+    def to_dict(self):
+        ret = {}
+        for pname, pvalue in self.properties.items():
+            # print 'CLASS:', self.__class__.__name__, '::', pname, '>', pvalue
+            if isinstance(pvalue, Property):
+                ret[pname] = pvalue.serialize()
+            else:
+                ret[pname] = pvalue
+        return ret
 
     def add_attribute(self, name, value):
         """

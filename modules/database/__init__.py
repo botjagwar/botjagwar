@@ -142,7 +142,7 @@ class Database(object):
 
     def read(self, conditions={}, select=u'*'):
         """Read data from the current DB"""
-        return self._action(conditions, u"select %s " % select, u'like')
+        return self._action(conditions, u"select %s " % select, u'=')
 
     def read_all(self):
         return self.raw_query(u"select * from `%(DB)s`.`%(table)s`" % self.infos)

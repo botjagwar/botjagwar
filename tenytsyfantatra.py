@@ -93,7 +93,7 @@ class UnknownWordManagerBot(object):
             except ValueError:  # too many values to unpack
                 pass
 
-    @time_this('aggregator')
+    @time_this(u'aggregator')
     def get_unknown_words_from_file(self):
         """
         Reads word_hits file. Copares it to the translation table in database
@@ -102,27 +102,44 @@ class UnknownWordManagerBot(object):
         """
         counter = 0
         t = time.time()
+        pre_aggregate = {}
+        print u'PREAGGREGATE DATA'
         for line in self.unknown_words_file.readlines():
             counter += 1
-            if (counter % 100) == 0:
+            if (counter % 1000) == 0:
                 dt = time.time() - t
-                print counter, "lines treated; ", len(self.aggregated_unknown_words), \
-                    "aggregated.", "(%f wps)" % (100./dt)
+                print counter, u"lines treated; ", len(pre_aggregate), \
+                    u"aggregated.", u"(%f wps)" % (100./dt)
                 t = time.time()
 
             line = line.decode('utf8')
             elements = self.standard_line_regex.search(line).groups()
             translation, language_code = elements
 
-            if (translation, language_code) in self.aggregated_unknown_words:
-                self.aggregated_unknown_words[(translation, language_code)] += 1
+            if (translation, language_code) in pre_aggregate:
+                pre_aggregate[(translation, language_code)] += 1
             else:
-                word_exists = self.dictionary_tables[language_code].read({
-                    self.language[language_code]: translation},
-                    select=self.language[language_code])
-                if word_exists:
-                    if (translation, language_code) not in self.aggregated_unknown_words:
-                        self.aggregated_unknown_words[(translation, language_code)] = 1
+                pre_aggregate[(translation, language_code)] = 1
+
+        counter = 0
+        print u'QUERYING DATABASE ON PREAGGREGATED DATA'
+        # Lightning fast search (100x speedup compared to database select!)
+        words = {
+            'en': set([unicode(w, 'latin1') for _, _, w in self.dictionary_tables['en'].read_all()]),
+            'fr': set([unicode(w, 'latin1') for _, _, w in self.dictionary_tables['fr'].read_all()])
+        }
+        for word_and_language, hits in pre_aggregate.items():
+            counter += 1
+            if (counter % 100) == 0:
+                dt = time.time() - t
+                print counter, u"lines treated; ", len(self.aggregated_unknown_words), \
+                    u"aggregated.", u"(%f wps)" % (100. / dt)
+                t = time.time()
+            translation, language_code = word_and_language
+
+            if translation in words[language_code]:
+                if (translation, language_code) not in self.aggregated_unknown_words:
+                    self.aggregated_unknown_words[(translation, language_code)] = hits
 
         return self.aggregated_unknown_words
 
@@ -162,7 +179,7 @@ class UnknownWordManagerBot(object):
                 try:
                     word, language = self.standard_line_regex.search(std_line).groups()
                 except AttributeError:
-                    print ("Left part of '=' could not match expected standard line format. Skipping.")
+                    print (u"Left part of '=' could not match expected standard line format. Skipping.")
                 else:
                     # update database using translation;
                     response = self.dictionary_tables[language].read({
@@ -177,20 +194,7 @@ class UnknownWordManagerBot(object):
                     if (word, language) in self.aggregated_unknown_words:
                         del self.aggregated_unknown_words[(word, language)]
 
-
-class UnknownWordUpdaterBot(object):
-    def __init__(self):
-        self.title = u"Mpikambana:%s/Teny tsy fantatra" % username
-        self.unknown_words_page = pywikibot.Page(
-            WORKING_WIKI, self.title)
-
-    def __del__(self):
-        pass
-
-    def get_translations_from_wiki(self):
-        pass
-
-
+@time_this(u"AGGREGATED WORDS")
 def aggregate_words():
     """
     Parses the list of unknown words and writes a file containing a sorted list of all pivot words
@@ -199,7 +203,35 @@ def aggregate_words():
     """
     bot = UnknownWordManagerBot()
     unknowns = bot.get_unknown_words_from_file()
-    f = open(mt_data_file + 'unknown_words', "w")
+    save_aggregated_in_file(unknowns)
+    save_aggregated_on_wiki(unknowns)
+
+
+def save_aggregated_on_wiki(unknowns):
+    elems = unknowns.items()
+    sorted_by_hits = [(hits, entry) for entry, hits in elems]
+    sorted_by_hits.sort()
+    sorted_by_hits = sorted_by_hits[::-1]
+    sorted_by_hits = sorted_by_hits[:10000]
+
+    # Generating wikitext
+    wikitext = u""
+    for hits, entry in sorted_by_hits:
+        word, language = entry
+        wikitext += u"[[%s]] (%s, %d), \n" % (word, language, hits)
+
+    # keeping a local copy
+    f = open(u'/tmp/lisitry ny teny tsy fantatra', 'w')
+    f.write(wikitext.encode('utf8'))
+    f.close()
+
+    # Saving page on-wiki
+    page = pywikibot.Page(WORKING_WIKI, u'Mpikambana:%s/Lisitry ny teny tsy fantatra' % username)
+    page.put(wikitext, u'Teny tsy fantatra vaovao')
+
+
+def save_aggregated_in_file(unknowns):
+    f = open(mt_data_file + u'unknown_words', "w")
     elems = unknowns.keys()
     elems.sort()
     for e in elems:
@@ -216,4 +248,5 @@ def insert_words():
 
 
 if __name__ == '__main__':
-    insert_words()
+    aggregate_words()
+    #insert_words()
