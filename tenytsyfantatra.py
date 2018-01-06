@@ -194,6 +194,7 @@ class UnknownWordManagerBot(object):
                     if (word, language) in self.aggregated_unknown_words:
                         del self.aggregated_unknown_words[(word, language)]
 
+
 @time_this(u"AGGREGATED WORDS")
 def aggregate_words():
     """
