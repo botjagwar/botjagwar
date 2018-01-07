@@ -300,7 +300,6 @@ class Translation(TranslationsHandler):
 
         translations_in_mg = {}  # dictionary {string : list of translation tuple (see below)}
         for word, pos, language_code, definition in entries:
-            definition = definition.decode('utf8')
             if word is None or definition is None:
                 continue
 
