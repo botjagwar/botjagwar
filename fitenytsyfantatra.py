@@ -211,11 +211,12 @@ def translate_language_name(language_name):
     if len(language_name.split()) > 1 or len(language_name.split(u'-')) > 1:
         raise ValueError("Can't properly translate this one")
     language_name += u'$'
+
+    letter_replacements = [(u"o", u"ô"), (u"u", u"o")]
+
     phonology_replacements = {
-        u"u": u"o",
-        u"o": u"ô",
         u'i$': u'y$',
-        u'y': 'i',
+        u'y': u'i',
     }
 
     cluster_replacements = {
@@ -238,6 +239,9 @@ def translate_language_name(language_name):
         u'cy':u'si',
         u"x": u"ks",
     }
+
+    for c, r in letter_replacements:
+        language_name = language_name.replace(c, r)
 
     for c, r in cluster_replacements.items():
         language_name = language_name.replace(c, r)
