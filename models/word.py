@@ -1,5 +1,5 @@
 from models import BaseEntry
-from pywikibot  import Page
+
 
 class Entry(BaseEntry):
     _additional = False

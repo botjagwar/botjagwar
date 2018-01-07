@@ -9,12 +9,12 @@ class Property(object):
 
 
 class List(Property):
-    def __init__(self, values):
-        self.values = values
+    def __init__(self, value=list()):
+        Property.__init__(self, value, _type=list)
 
     def serialize(self):
         ret = []
-        for value in self.values:
+        for value in self.value:
             if isinstance(value, Property):
                 ret.append(value.serialize())
             else:
@@ -36,8 +36,10 @@ class BaseEntry(object):
         else:
             raise AttributeError("%s object has no attribute '%s'"  % (
                 self.__class__.__name__,
-                item
-            ))
+                item))
+
+    def __dir__(self):
+        return self.properties.keys()
 
     def to_dict(self):
         ret = {}

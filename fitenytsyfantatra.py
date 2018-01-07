@@ -82,7 +82,6 @@ class UnknownlanguageUpdaterBot(object):
         parsed_lines = self.parse_wikipage()
         for language_code, language_name in parsed_lines:
             self.create_category_set(language_code, language_name)
-
         self.purge_new_languages_wikipage()
 
 
@@ -135,7 +134,7 @@ class UnknownLanguageManagerBot(object):
         """
         print ("UnknownLanguageManagerBot")
         self.attempt_translations()
-        #self.update_wiki_page()
+        self.update_wiki_page()
 
     def update_wiki_page(self):
         """

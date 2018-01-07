@@ -1,4 +1,4 @@
-from models import BaseEntry
+from models import BaseEntry, List
 from unittest.case import TestCase
 
 
@@ -52,21 +52,16 @@ class TestModels(TestCase):
 
         self.assertRaises(AttributeError, do_checks)
 
-    # def test_serialise_nested_object(self):
-    #     class GuoHang(BaseEntry):
-    #         _additional = False
-    #         properties_types = {
-    #             "test1": int,
-    #             "test2": int
-    #         }
-    #
-    #     class YunHang(BaseEntry):
-    #         _additional = False
-    #         properties_types = {
-    #             "test1": int,
-    #             "test2": int,
-    #             'test3obj': GuoHang
-    #         }
-    #
-    #     test = YunHang(test1=1, test2=2, test3obj=GuoHang(test1=1, test2=2))
-    #     print test.to_dict()
+    def test_serialise_with_list(self):
+
+        class YunHang(BaseEntry):
+            _additional = False
+            properties_types = {
+                "test1": int,
+                "test2": int,
+                'test3obj': List
+            }
+
+        test = YunHang(test1=1, test2=2, test3obj=List(['qw', 'dlk']))
+        print test.to_dict()
+        print dir(test)
