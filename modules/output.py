@@ -1,6 +1,7 @@
 verbose = False
 
 from modules.database.word import WordDatabase
+from _mysql_exceptions import DataError
 
 class Output(object):
     def __init__(self, output_batchfile="translate_batch.txt"):
@@ -12,10 +13,13 @@ class Output(object):
         if self.word_db.exists(info.entry, info.language):
             return False
         else:
-            self.word_db.append(info.entry, info.entry_definition, info.part_of_speech, info.language)
-            if verbose:
-                print ("voavao ny banky angona")
-            return True
+            try:
+                self.word_db.append(info.entry, info.entry_definition, info.part_of_speech, info.language)
+                if verbose:
+                    print ("voavao ny banky angona")
+                return True
+            except DataError:
+                return False
     
     def batchfile(self, info):
         "return batch format (see doc)"

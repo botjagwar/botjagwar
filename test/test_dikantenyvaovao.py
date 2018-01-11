@@ -11,10 +11,19 @@ from modules.decorator import threaded, retry_on_fail
 
 
 LIST = [
-    u"gaon", u"kid", u"精液", u"instar",
-    u"bobos", u"大越", u'streak',
-    u'weg', u'riz', u'eau',
-    u'route',
+    u'eau',
+    u'air',
+    u'èstre',
+    u'газета',
+    u'газет',
+    u'geloof',
+    u'belief',
+    u'peel',
+    u'合宿',
+    u'heel',
+    u'百萬',
+    u'peigne',
+    u'pagne',
 ]
 
 
