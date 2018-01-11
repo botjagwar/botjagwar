@@ -50,7 +50,7 @@ def _get_page(name, lang):
     page = pwbot.Page(pwbot.Site(lang, 'wiktionary'), name)
     return page
 
-
+@threaded
 def _update_statistics(rc_bot):
     if not rc_bot.stats["edits"] % 5:
         cttime = time.gmtime()
@@ -84,7 +84,6 @@ def put_deletion_notice(page):
         page_c += u"\n[[sokajy:Pejy voafafa tany an-kafa]]"
         page.put(page_c, "+filazana")
 
-
 @app.route("/wiktionary_page/<lang>", methods=['POST'])
 def handle_wiktionary_page(lang):
     """
@@ -94,6 +93,7 @@ def handle_wiktionary_page(lang):
     :return: 200 if everything worked with the list of database lookups including translations,
     500 if an error occurred
     """
+
     data = json.loads(request.get_data())
     pagename = data[u'title']
     page = _get_page(pagename, lang)
