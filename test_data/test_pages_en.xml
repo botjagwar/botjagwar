@@ -1,0 +1,2664 @@
+<mediawiki xmlns="http://www.mediawiki.org/xml/export-0.10/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mediawiki.org/xml/export-0.10/ http://www.mediawiki.org/xml/export-0.10.xsd" version="0.10" xml:lang="en">
+  <siteinfo>
+    <sitename>Wiktionary</sitename>
+    <dbname>enwiktionary</dbname>
+    <base>https://en.wiktionary.org/wiki/Wiktionary:Main_Page</base>
+    <generator>MediaWiki 1.31.0-wmf.15</generator>
+    <case>case-sensitive</case>
+    <namespaces>
+      <namespace key="-2" case="case-sensitive">Media</namespace>
+      <namespace key="-1" case="first-letter">Special</namespace>
+      <namespace key="0" case="case-sensitive" />
+      <namespace key="1" case="case-sensitive">Talk</namespace>
+      <namespace key="2" case="first-letter">User</namespace>
+      <namespace key="3" case="first-letter">User talk</namespace>
+      <namespace key="4" case="case-sensitive">Wiktionary</namespace>
+      <namespace key="5" case="case-sensitive">Wiktionary talk</namespace>
+      <namespace key="6" case="case-sensitive">File</namespace>
+      <namespace key="7" case="case-sensitive">File talk</namespace>
+      <namespace key="8" case="first-letter">MediaWiki</namespace>
+      <namespace key="9" case="first-letter">MediaWiki talk</namespace>
+      <namespace key="10" case="case-sensitive">Template</namespace>
+      <namespace key="11" case="case-sensitive">Template talk</namespace>
+      <namespace key="12" case="case-sensitive">Help</namespace>
+      <namespace key="13" case="case-sensitive">Help talk</namespace>
+      <namespace key="14" case="case-sensitive">Category</namespace>
+      <namespace key="15" case="case-sensitive">Category talk</namespace>
+      <namespace key="90" case="case-sensitive">Thread</namespace>
+      <namespace key="91" case="case-sensitive">Thread talk</namespace>
+      <namespace key="92" case="case-sensitive">Summary</namespace>
+      <namespace key="93" case="case-sensitive">Summary talk</namespace>
+      <namespace key="100" case="case-sensitive">Appendix</namespace>
+      <namespace key="101" case="case-sensitive">Appendix talk</namespace>
+      <namespace key="102" case="case-sensitive">Concordance</namespace>
+      <namespace key="103" case="case-sensitive">Concordance talk</namespace>
+      <namespace key="104" case="case-sensitive">Index</namespace>
+      <namespace key="105" case="case-sensitive">Index talk</namespace>
+      <namespace key="106" case="case-sensitive">Rhymes</namespace>
+      <namespace key="107" case="case-sensitive">Rhymes talk</namespace>
+      <namespace key="108" case="case-sensitive">Transwiki</namespace>
+      <namespace key="109" case="case-sensitive">Transwiki talk</namespace>
+      <namespace key="110" case="case-sensitive">Thesaurus</namespace>
+      <namespace key="111" case="case-sensitive">Thesaurus talk</namespace>
+      <namespace key="114" case="case-sensitive">Citations</namespace>
+      <namespace key="115" case="case-sensitive">Citations talk</namespace>
+      <namespace key="116" case="case-sensitive">Sign gloss</namespace>
+      <namespace key="117" case="case-sensitive">Sign gloss talk</namespace>
+      <namespace key="118" case="case-sensitive">Reconstruction</namespace>
+      <namespace key="119" case="case-sensitive">Reconstruction talk</namespace>
+      <namespace key="828" case="case-sensitive">Module</namespace>
+      <namespace key="829" case="case-sensitive">Module talk</namespace>
+      <namespace key="2300" case="case-sensitive">Gadget</namespace>
+      <namespace key="2301" case="case-sensitive">Gadget talk</namespace>
+      <namespace key="2302" case="case-sensitive">Gadget definition</namespace>
+      <namespace key="2303" case="case-sensitive">Gadget definition talk</namespace>
+      <namespace key="2600" case="first-letter">Topic</namespace>
+    </namespaces>
+  </siteinfo>
+  <page>
+    <title>eau</title>
+    <ns>0</ns>
+    <id>39644</id>
+    <revision>
+      <id>47948798</id>
+      <parentid>47702015</parentid>
+      <timestamp>2017-11-03T12:56:57Z</timestamp>
+      <contributor>
+        <username>Simplificationalizer</username>
+        <id>3217536</id>
+      </contributor>
+      <comment>+rhyme [[Rhymes:English/əʊ|-əʊ]]</comment>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text xml:space="preserve" bytes="4186">{{also|Eau|EAU|ÉAU|-eau}}
+==English==
+
+===Etymology===
+From {{etyl|enm|en}} {{m|enm|ea}}, {{m|enm|eo}} (with spelling influenced by French {{m|fr|eau}}), from {{etyl|ang|en}} {{m|ang|ēa||running water, water, stream, river}}, from {{etyl|gem-pro|en}} {{m|gem-pro|*ahwō||waters, river}}, from {{etyl|ine-pro|en}} {{m|ine-pro|*h₂ekʷeh₂||water, flowing water}}. Compare {{m|en|ea}}, {{m|en|yeo}}.
+
+===Pronunciation===
+* {{rhymes|əʊ|lang=en}}
+
+===Noun===
+{{en-noun}}
+
+# {{lb|en|Lincolnshire|_|toponymy}} A [[brook]] or [[stream]].
+
+===Anagrams===
+* {{anagrams|en|U.A.E.|UAE|UEA|Uea}}
+
+----
+
+==Bariai==
+
+===Etymology===
+From Proto-Ngero *''i-om'' (compare {{etyl|mmt|-}} ''yu''), although the precise form of this word, like {{etyl|kvc|-}} and {{etyl|khl|-}} ''[[veao]]'', is unexplained.&lt;ref&gt;{{R:poz-oce:Ross 1988}}, page 164: PNg *''i-om'' &gt; Malai ''yom'', Gitua ''yum'', Malalamai ''yu'' (the forms Kove ''veao'' and Bariai ''eau'' are unexplained).&lt;/ref&gt;
+
+===Pronunciation===
+* {{IPA|/ˈeɑu/|[ˈe̯ɑu̯]|lang=bch}}
+
+===Noun===
+{{head|bch|noun}}
+
+# [[water]]
+
+====Derived terms====
+* {{l|bch|eau-eai||in the water}} {{IPAchar|/eɑu.eɑi/|[ˈe̯ɑu̯.i̯ɑi̯]|lang=bch}}
+
+===References===
+* Steve Gallagher, ‎Peirce Baehr, ''Bariai Grammar Sketch'' (2005)
+&lt;references/&gt;
+
+----
+
+==French==
+
+===Etymology===
+From {{inh|fr|frm|[[eau]], [[eaue]]}}, from {{inh|fr|fro|ewe}}, {{m|fro|euwe}}, {{m|fro|egua||water}}, from {{inh|fr|la|aqua||water}}, from {{inh|fr|itc-pro|*akʷā}}, from {{inh|fr|ine-pro|*h₂ekʷeh₂||water, flowing water}}. Cognate with {{cog|ang|ēa||flowing water, stream, river}}. More at {{m|en|ea}}.
+
+===Pronunciation===
+* {{fr-IPA}}
+* {{audio|Fr-eau.ogg|audio (&quot;de l'eau&quot;)|lang=fr}}
+* {{rhymes|o|lang=fr}}
+* {{homophones|au|aux|aulx|eaux|haut|hauts|ho|o|ô|oh|os|lang=fr}}
+
+===Noun===
+{{fr-noun|f|eaux}}
+
+# [[water|Water]], a [[liquid]] that is [[transparent]], [[colorless]], [[odorless]]{{,}} and [[tasteless]] in its pure form, the primary constituent of [[lake]]s, [[river]]s, [[sea]]s{{,}} and [[ocean]]s.
+#: ''Il buvait un verre d’'''eau''' fraîche.''
+#:: He drank a cool glass of water.
+#: ''L’'''eau''' de mer et l’'''eau''' de rivière n’ont pas la même teneur en sel et n’abritent donc pas les mêmes poissons. ''
+#:: Sea water and river water do not have the same salt content and thus do not harbor the same fish.
+# In particular, [[rain]].
+#: ''Si le vent dure, nous aurons de l’'''eau'''.''
+#:: If the wind persists, we will have rain.
+# {{lb|fr|chemistry}} The chemical compound with empirical formula H&lt;sub&gt;2&lt;/sub&gt;O existing in the form of [[ice]], [[liquid water]] or [[steam]].
+#: ''L’'''eau''' se durcit par le froid et se vaporise par la chaleur.''
+#:: Water hardens with cold and vaporises with heat.
+# Natural liquid quantities or expanses.
+#: ''Le soir, ils se baignaient dans les '''eaux''' du lac Titicaca.''
+#:: In the evening, they bathed in the waters of Lake Titicaca.
+# Fluids such as sweat, formed and found in the body of man or animal.
+#: ''Les vésicatoires font des ampoules pleines d’'''eau'''.''
+#: ''L’'''eau''' m'en vint à la bouche.''
+#:: That made my mouth water.
+#: ''Il s’est échauffé à courir, il est tout en '''eau'''.''
+#:: He warmed up to run. He's all sweaty.
+
+====Derived terms====
+* {{l|fr|château d'eau|château d’eau}}
+* {{l|fr|chat échaudé craint l'eau froide}}
+* {{l|fr|eau de Javel|g=f}}
+* {{l|fr|eau du robinet}}
+* {{l|fr|eau de Cologne}}
+* {{l|fr|eau lourde}}
+
+===Further reading===
+* {{R:TLFi}}
+
+[[Category:French nouns with irregular gender]]
+
+----
+
+==Middle French==
+
+===Etymology===
+From {{inh|frm|fro|euwe}}, {{m|fro|ewe}}, {{m|fro|egua}}, from {{inh|frm|la|aqua}}.
+
+===Noun===
+{{frm-noun|f|pl2=eaux}}
+
+# [[water]]
+
+====Descendants====
+* French: {{l|fr|eau}}
+
+----
+
+==Romansch==
+
+===Alternative forms===
+* {{qualifier|Rumantsch Grischun}} {{l|rm|jau}}
+* {{qualifier|Sursilvan}} {{l|rm|jeu}}
+* {{qualifier|Sutsilvan}} {{l|rm|jou}}
+* {{qualifier|Surmiran}} {{l|rm|ia}}
+* {{qualifier|Vallader}} {{l|rm|eu}}
+
+===Etymology===
+From {{inh|rm|VL.|*eo}}, from {{inh|rm|la|ego}}, from {{inh|rm|ine-pro|*éǵh₂}}.
+
+===Pronoun===
+{{head|rm|pronoun}}
+
+# {{lb|rm|Puter}} [[I]]</text>
+      <sha1>h1626f4klaeqw7oa9icmf80tg3u6y2s</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>air</title>
+    <ns>0</ns>
+    <id>4347</id>
+    <revision>
+      <id>48352180</id>
+      <parentid>48281472</parentid>
+      <timestamp>2018-01-01T10:29:37Z</timestamp>
+      <contributor>
+        <username>GinGlaep</username>
+        <id>3362007</id>
+      </contributor>
+      <comment>/* Translations */</comment>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text xml:space="preserve" bytes="34068">{{also|áir|-air|'air|air.|àir.}}
+==English==
+{{wikipedia|Air (disambiguation)}}
+
+===Etymology===
+{{PIE root|en|h₂weh₁}}
+From {{inh|en|enm|air|air, eir|gas, atmosphere}}, from {{der|en|xno|[[aeir]], [[eyer]]}}, {{der|en|fro|[[aire]], [[eir]]}}, from {{der|en|la|āēr}}, from {{der|en|grc|ἀήρ||wind, atmosphere}}. Displaced native {{cog|enm|luft|luft, lift|air}} (from {{cog|ang|lyft||air, atmosphere}}), {{cog|enm|loft||air, upper region}} (from {{cog|non|lopt||air, sky, loft}}). More at [[lift]], [[loft]].
+
+===Pronunciation===
+* {{a|RP}} {{IPA|/ˈɛə/|/ˈɛː/|lang=en}}
+* {{audio|En-uk-air.ogg|Audio (UK)|lang=en}}
+* {{a|GenAm}} {{enPR|âr}}, {{IPA|/ˈɛəɹ/|/ˈɛɹ/|lang=en}}
+* {{audio|en-us-air.ogg|Audio (US)|lang=en}}
+* {{rhymes|ɛə(ɹ)|lang=en}}
+* {{homophones|lang=en|Ayr|ere|heir}}, [[are]] {{q|unit of measurement}}; [[err]] {{qualifier|one pronunciation}}
+
+===Noun===
+{{en-noun|~}}
+
+# {{lb|en|uncountable|meteorology}} The [[substance]] [[constituting]] [[earth]]'s [[atmosphere]], ''[[particularly]]:''
+#: {{ux|en|I'm going outside to get some '''air'''.}}
+## {{lb|en|historical|philosophy|alchemy}} [[understood]] as [[one]] of the [[four]] [[element]]s of the [[ancient]] [[Greek]]s and [[Roman]]s.
+## {{lb|en|historical|medical}} [[understood]] as a [[particular]] [[local]] [[substance]] with [[suppose]]d [[effect]]s on [[human]] [[health]].
+##* '''1991''' May 12, [[w:List of Jeeves and Wooster episodes|&quot;Kidnapped!&quot;]] [[w:Jeeves and Wooster|''Jeeves and Wooster'']], Series 2, Episode 5:
+##*: ''Jeeves:'' Foreign travel often liberates emotions best kept in check, sir. The '''air''' of North America is notoriously stimulating in this regard, as witness the regrettable behavior of its inhabitants in 1776.&lt;br&gt;''B. Wooster:'' Hm? What happened in 1776, Jeeves?&lt;br&gt;''Jeeves:'' I prefer not to dwell on it, if it's convenient to you, sir.
+##: {{ux|en|There was a tension in the '''air''' which made me suspect an approaching storm.}}
+## {{lb|en|physics}} [[understood]] as a [[gaseous]] [[mixture]] of [[nitrogen]], [[oxygen]], and [[various]] [[trace]] [[gas]]es.
+# {{lb|en|usually|with the}} The [[apparently]] [[open]] [[space]] [[above]] the [[ground]] which [[this]] [[substance]] [[fill]]s, {{lb|en|historical}} [[formerly]] [[thought]] to be [[limit]]ed by the [[firmament]] but {{lb|en|meteorology}} [[now]] [[consider]]ed [[surround]]ed by the [[near]] [[vacuum]] of [[outer space]].
+#: {{ux|en|The flock of birds took to the '''air'''.}}
+# A [[breeze]]; a gentle [[wind]].
+# A [[feeling]] or [[sense]].
+#: {{ux|en|to give it an '''air''' of artistry and [[sophistication]]}}
+#* '''November 2 2014''', Daniel Taylor, &quot;[http://www.theguardian.com/football/2014/nov/02/manchester-city-manchester-united-premier-league-match-report Sergio Agüero strike wins derby for Manchester City against 10-man United],&quot; ''guardian.co.uk''
+#*: Smalling’s quick one-two of yellow cards towards the end of the first half had left an '''air''' of inevitability about what would follow and, if anything, it was probably a surprise that City restricted themselves to Sergio Agüero’s goal bearing in mind another of United’s defenders, Marcos Rojo, was taken off on a stretcher early in the second half with a dislocated shoulder.
+#* '''1900''', {{w|Charles W. Chesnutt}}, ''{{w|The House Behind the Cedars}}'', Chapter I,
+#*: The girl stooped to pluck a rose, and as she bent over it, her profile was clearly outlined. She held the flower to her face with a long-drawn inhalation, then went up the steps, crossed the piazza, opened the door without knocking, and entered the house with the '''air''' of one thoroughly at home.
+# A sense of [[poise]], [[graciousness]], or [[quality]].
+#* '''1815''', {{w|Jane Austen}}, ''{{w|Emma}}'', [[s:Emma/Volume 1/Chapter 4|Volume I, Chapter 4]]:
+#*: &quot;He is very plain, undoubtedly--remarkably plain:--but that is nothing compared with his entire want of gentility. I had no right to expect much, and I did not expect much; but I had no idea that he could be so very clownish, so totally without '''air'''. I had imagined him, I confess, a degree or two nearer gentility.&quot;
+# {{lb|en|usually plural}} [[pretentious|Pretension]]; [[snobby|snobbishness]]; [[pretence]] that one is better than others.
+#: {{ux|en|putting on '''airs'''}}
+#* {{quote-book|year=1922|author={{w|Ben Travers}}|title={{w|A Cuckoo in the Nest}}
+|chapter=1|url=http://openlibrary.org/works/OL1521052W
+|passage=He read the letter aloud. Sophia listened with the studied '''air''' of one for whom, even in these days, a title possessed some surreptitious allurement.}}
+# {{lb|en|music}} A song, especially a solo; an [[aria]].
+#* '''1813''', {{w|Jane Austen}}, ''{{w|Pride and Prejudice}}'', [[s:Pride and Prejudice/Chapter 18|Chapter 18]]:
+#*: &quot;If I,&quot; said Mr. Collins, &quot;were so fortunate as to be able to sing, I should have great pleasure, I am sure, in obliging the company with an '''air'''; for I consider music as a very innocent diversion, and perfectly compatible with the profession of a clergyman{{...}}&quot;
+# {{lb|en|informal}} [[nothing|Nothing]]; absence of anything.
+# An [[air conditioner]] or the processed air it produces. Can be a mass noun or a count noun depending on context; similar to ''hair''.
+#: {{ux|en|Could you turn on the '''air'''?}}
+#: {{ux|en|Hey, did you mean to leave the '''airs''' on all week while you were on vacation?}}
+# {{lb|en|obsolete|chemistry}} Any specific [[gas]].
+# {{lb|en|snowboarding|skateboarding|motor sports}} A jump in which one becomes airborne.
+
+====Synonyms====
+* {{l|en|atmosphere}}
+* {{l|en|aura}}
+* {{l|en|lift}}
+* {{l|en|nimbus}}
+* {{l|en|gas}}
+
+====Derived terms====
+{{der3|lang=en|airbag
+|air base
+|air bed
+|airborne
+|air bounce
+|airbrake
+|airbrush
+|air bubble
+|airbus
+|air cargo
+|air carrier
+|air chamber
+|Air Chief Marshal
+|air cleaner
+|Air Commodore
+|air compressor
+|air-conditioned
+|air-conditioner
+|air-conditioning
+|air-cooled
+|air corridor
+|aircraft
+|aircrew
+|air cushion
+|air display
+|airdrome
+|airdrop
+|air duct
+|airfield
+|air flow
+|airflow
+|air force
+|airframe
+|air freight
+|air freshener
+|air guitar
+|airgun
+|air hole
+|air hose
+|air hostess
+|airing cupboard
+|air intake
+|air lane
+|airless
+|air letter
+|airlift
+|airline
+|airliner
+|airlock
+|airmail
+|airman
+|Air Marshal
+|[[air mass]], [[airmass]]
+|air mattress
+|air navigation
+|air out
+|airplane
+|air pocket
+|airport
+|air pressure
+|air pump
+|air purifier
+|air quotes
+|air raid
+|air rifle
+|airscrew
+|air-sea rescue
+|air shaft
+|airshed
+|airship
+|air show
+|airsick
+|airsickness
+|air sign
+|airspace
+|Airspeak
+|airspeed
+|airstream
+|airstrike
+|airstrip
+|airsuit
+|air support
+|airtaxi
+|air terminal
+|air ticket
+|airtight
+|air time
+|air-to-air
+|air-to-ground
+|air-to-surface
+|air traffic
+|air vent
+|Air Vice Marshal
+|airwaves
+|airway
+|airwoman
+|airworthiness
+|airworthy
+|airy
+|alkaline air
+|breath of fresh air
+|build castles in the air
+|castle in the air
+|catch air
+|clear the air
+|dead air
+|dephlogisticated air
+|fire air
+|fixed air
+|fluoro acid air
+|fresh air
+|[[get some air]] / [[take some air]]
+|give oneself airs
+|hepatic air
+|hot air
+|inflammable air
+|in the air
+|into thin air
+|mephitic air
+|mid-air
+|nitrous air
+|on air
+|on the air
+|phlogisticated air
+|pure air
+|put on airs
+|suck the air out of
+|too many balls in the air
+|turn the air blue
+|up in the air
+|vital air
+|vitriolic acid air
+}}
+
+{{lookfrom|air}}
+
+====Related terms====
+* {{l|en|aerate}}
+* {{l|en|aero-}}
+* {{l|en|aria}}
+
+====Translations====
+{{trans-top|historical: one of the basic elements}}
+* Arabic: {{t|ar|هَوَاء}}
+*: Egyptian Arabic: {{t|arz|هوا|m|tr=hawa|sc=Arab}}
+* Bashkir: {{t|ba|һауа|sc=Cyrl}}
+* Bulgarian: {{t+|bg|въ̀здух|m}}
+* Chinese:
+*: Mandarin: {{t+|cmn|空气|tr=kōngqì}}
+*: Min Dong: {{t|cdo|空气|tr=kung kei|sc=Hani}}
+* Czech: {{t+|cs|vzduch|m}}
+* Dutch: {{t-simple|nl|lucht|langname=Dutch|interwiki=1}}
+* Esperanto: {{t-simple|eo|aero|langname=Esperanto|interwiki=1}}
+* Finnish: {{t-simple|fi|ilma|langname=Finnish|interwiki=1}}
+* French: {{t+|fr|air|m}}
+* Galician: {{t+|gl|aire|m}}
+* German: {{t+|de|Luft|f}}
+* Greek: {{t+|el|αέρας|m}}
+*: Ancient: {{t|grc|ἀήρ|m}}
+* Hebrew: {{t+|he|אוויר|m|tr=avír|alt=אוויר \ אֲוִיר}}
+* Hindi: {{t+|hi|हवा|f}}
+* Icelandic: {{t+|is|loft|n}}
+* Ido: {{t-simple|io|aero|langname=Ido|interwiki=1}}
+* Italian: {{t+|it|aria|f}}
+* Japanese: {{t+|ja|空気|tr=くうき, kūki}}, {{t+|ja|天空|tr=てんくう, tenkū|sc=Jpan}}
+* Kyrgyz: {{t+|ky|аба}}
+* Latgalian: {{t-simple|ltg|gaiss|langname=Latgalian}}
+* Latin: {{t+|la|aer|m}}
+{{trans-mid}}
+* Latvian: {{t|lv|gaiss|m}}
+* Lithuanian: {{t+|lt|oras|m}}
+* Macedonian: {{t|mk|во́здух|m}}
+* Malay: {{t-simple|ms|udara|langname=Malay}}, {{t-simple|ms|hawa|langname=Malay}}
+* Maori: {{t|mi|hau takiwā}}
+* Navajo: {{t|nv|níłchʼi}}
+* Norman: {{t|nrf|air|m}}
+* Oriya: {{t+|or|ବାୟୁ|sc=Orya}}
+* Persian: {{t+|fa|باد|tr=bād}}, {{t+|fa|وای|tr=vāy}}, {{t|fa|وایو|tr=vāyō}}, {{t+|fa|هوا|sc=fa-Arab|tr=havā}}
+* Polish: {{t+|pl|powietrze|n}}
+* Portuguese: {{t-simple|pt|ar|langname=Portuguese|interwiki=1}}
+* Romanian: {{t-simple|ro|aer|langname=Romanian|interwiki=1}}, {{t-simple|ro|văzduh|langname=Romanian|interwiki=1}}
+* Russian: {{t+|ru|во́здух|m}}
+* Samoan: {{t|sm|'ea}}
+* Scottish Gaelic: {{t|gd|adhar|m}}, {{t|gd|àile|m}}, {{t|gd|gaoth|f}}
+* Slovene: {{t+|sl|zrak|m}}
+* Spanish: {{t+|es|aire|m}}
+* Svan: {{t|sva|ჰაჲერ}}
+* Swahili: {{t-simple|sw|hewa|langname=Swahili|interwiki=1}}
+* Swedish: {{t+|sv|luft|c}}
+* Telugu: {{t+|te|గాలి}}
+* Turkish: {{t-simple|tr|hava|langname=Turkish|interwiki=1}}, {{t-simple|tr|tenek|langname=Turkish|interwiki=1}}
+* Urdu: {{t|ur|ہوا|f|tr=havā}}
+* West Frisian: {{t-simple|fy|lucht|langname=West Frisian}}
+* Zazaki: {{t-simple|zza|ayam|langname=Zazaki}}, {{t|zza|hewa}}
+{{trans-bottom}}
+
+{{trans-top|mixture of gases making up the atmosphere of the Earth}}
+* Abaza: {{t|abq|хӏауа}}
+* Abenaki: {{t-simple|abe|awan|langname=Abenaki}}
+* Abkhaz: {{t|ab|аҳаир|sc=Cyrl}}
+* Adyghe: {{t|ady|жьы}}
+* Afrikaans: {{t-simple|af|lug|langname=Afrikaans}}
+* Albanian: {{t+|sq|ajër|m}}
+* Amharic: {{t|am|አየር|m}}
+* Arabic: {{t|ar|هَوَاء|m}}
+*: Egyptian Arabic: {{t|arz|هوا|m|tr=hawa|sc=Arab}}
+*: Moroccan Arabic: {{t|ary|هْوا|m|tr=hwa}}
+* Aramaic:
+*: Syriac: {{t|syc|ܐܐܪ|tr=’ā’ar|c}}
+* Armenian: {{t+|hy|օդ}}
+* Aromanian: {{t|rup|aerã|f}}, {{t|rup|air|n}}
+* Assamese: {{t|as|বায়ু|tr=bāyu|sc=Beng}}
+* Asturian: {{t|ast|aire|m}}
+* Avar: {{t|av|гьава|sc=Cyrl}}
+* Azeri: {{t-simple|az|hava|langname=Azeri|interwiki=1}}
+* Bashkir: {{t|ba|һауа|sc=Cyrl}}
+* Basque: {{t-simple|eu|aire|langname=Basque|interwiki=1}}
+* Belarusian: {{t|be|паве́тра|n}}
+* Bengali: {{t|bn|বায়ু|sc=Beng}}
+* Breton: {{t+|br|aer|f}}
+* Bulgarian: {{t+|bg|въ̀здух|m}}
+* Burmese: {{t+|my|လေ|sc=Mymr}}
+* Buryat: {{t|bua|агаар}}
+* Catalan: {{t+|ca|aire|m}}
+* Central Atlas Tamazight: {{t|tzm|ⴰⴹⵓ|sc=Tfng}}
+* Chamicuro: {{t-simple|ccc|timili|langname=Chamicuro}}
+* Chechen: {{t|ce|хӏаваъ}}
+* Cherokee: {{t|chr|ᎤᏃᎴ}}
+* Chinese:
+*: Cantonese: {{t|yue|空氣|sc=Hani}}, {{t|yue|空气|tr=hung1 hei3|sc=Hani}}
+*: Mandarin: {{t+|cmn|空氣|sc=Hani}}, {{t+|cmn|空气|tr=kōngqì|sc=Hani}}
+*: Min Nan: {{t+|nan|空氣|sc=Hani}}, {{t|nan|空气|tr=khong-khì|sc=Hani}}
+* Chuvash: {{t|cv|сывлӑш|sc=Cyrl}}
+* Coptic: {{qualifier|Bohairic}} {{t|cop|ⲁⲏⲣ|m}}, {{t|cop|ⲛⲓϥⲓ|m}}; {{qualifier|Sahidic}} {{t|cop|ⲁⲏⲣ|m}}, {{t|cop|ⲛⲓϥⲉ|m}}
+* Corsican: {{t-simple|co|aria|langname=Corsican|interwiki=1}}
+* Crimean Tatar: {{t-simple|crh|ava|langname=Crimean Tatar}}
+* Czech: {{t+|cs|vzduch|m}}
+* Dalmatian: {{t-simple|dlm|aria|langname=Dalmatian}}
+* Danish: {{t+|da|luft|c}}
+* Dargwa: {{t|dar|гьава}}
+* Dhivehi: {{t+|dv|ވައި|sc=Thaa}}
+* Dutch: {{t+|nl|lucht|f}}
+* Eastern Mari: {{t|chm|юж}}
+* Egyptian: {{t-egy|ṯꜣw|m|h=TA-w-P5}}, {{t-egy|nf|m|h=n:f-P5}}
+* Erzya: {{t|myv|кошт}}
+* Eshtehardi: {{t-simple|esh|havä|langname=Eshtehardi}}
+* Esperanto: {{t-simple|eo|aero|langname=Esperanto|interwiki=1}}
+* Estonian: {{t-simple|et|õhk|langname=Estonian|interwiki=1}}
+* Even: {{t|eve|воздух}}, {{t|eve|нулун}}, {{t|eve|эдэн}}
+* Faroese: {{t|fo|luft|f}}
+* Finnish: {{t-simple|fi|ilma|langname=Finnish|interwiki=1}}
+* French: {{t+|fr|air|m}}
+* Friulian: {{t|fur|aiar|m}}, {{t|fur|ajar|m}}
+* Gagauz: {{t-simple|gag|hava|langname=Gagauz}}
+* Galician: {{t+|gl|aire|m}}, {{t+|gl|ar|m}}
+* Georgian: {{t+|ka|ჰაერი|sc=Geor}}
+* German: {{t+|de|Luft|f}}
+* Greek: {{t+|el|αέρας|m}}
+*: Ancient: {{t|grc|ἀήρ|m}} {{gloss|lower air}}, {{t|grc|αἰθήρ|m}} {{gloss|upper air}}
+* Greenlandic: {{t-needed|kl}}
+* Guaraní: {{t-simple|gn|yvytu|langname=Guaraní}}
+* Gujarati: {{t+|gu|વાયુ|sc=Gujr}}
+* Hausa: {{t-simple|ha|iska|langname=Hausa}}
+* Hawaiian: {{t-simple|haw|ea|langname=Hawaiian}}
+* Hebrew: {{t+|he|אוויר|m|tr=avír|alt=אוויר \ אֲוִיר}}
+* Hindi: {{t+|hi|हवा|f}}, {{t+|hi|वायु|f}}
+* Hungarian: {{t-simple|hu|levegő|langname=Hungarian|interwiki=1}}
+* Icelandic: {{t+|is|loft|n}}
+* Ido: {{t-simple|io|aero|langname=Ido|interwiki=1}}
+* Igbo: {{t-simple|ig|ekuku|langname=Igbo}}
+* Indonesian: {{t-simple|id|udara|langname=Indonesian|interwiki=1}}
+* Ingush: {{t|inh|фо}}
+* Interlingua: {{t-simple|ia|aere|langname=Interlingua}}
+* Irish: {{t+|ga|aer|m}}
+* Italian: {{t+|it|aria|f}}
+* Japanese: {{t+|ja|空気|tr=くうき, kūki}}, {{t+|ja|エア|tr=ea}}, {{t+|ja|天空|tr=てんくう, tenkū|sc=Jpan}}
+* Judeo-Tat: {{t|jdt|гьово}}
+* Kabardian: {{t|kbd|хьэуа}}
+* Kalmyk: {{t|xal|аһар}}
+* Kannada: {{t+|kn|ಗಾಳಿ|sc=Knda}}, {{t+|kn|ವಾಯು|sc=Knda}}
+* Karachay-Balkar: {{t|krc|хауа|sc=Cyrl}}
+* Karakalpak: {{t-simple|kaa|xawa|langname=Karakalpak}}
+* Karelian: {{t-simple|krl|ilma|langname=Karelian}}
+* Kashubian: {{t|csb|lëft|m}}
+* Kazakh: {{t+|kk|ауа|sc=Cyrl}}
+* Khakas: {{t|kjh|кии|sc=Cyrl}}
+* Khmer: {{t+|km|អាកាស|tr=aakaah|sc=Khmr}}
+* Korean: {{t+|ko|공기}} ({{t+|ko|空氣}})
+* Kumyk: {{t|kum|гьава}}
+* Kurdish: {{t-simple|ku|hewa|langname=Kurdish|interwiki=1}}
+*: Sorani: {{t+|ku|هه‌وا|sc=ku-Arab}}
+* Kyrgyz: {{t+|ky|аба|sc=Cyrl}}
+* Lak: {{t|lbe|гьава}}
+* Lao: {{t|lo|ອາກາດ|sc=Laoo}}
+* Latgalian: {{t-simple|ltg|gaiss|langname=Latgalian}}
+* Latin: {{t+|la|aer|m}}
+{{trans-mid}}
+* Latvian: {{t|lv|gaiss|m}}
+* Lezgi: {{t|lez|гьава|sc=Cyrl}}
+* Lithuanian: {{t+|lt|oras|m}}
+* Lü: {{t-needed|khb}}
+* Macedonian: {{t|mk|воздух|m}}
+* Malagasy: {{t-simple|mg|rivotra|langname=Malagasy|interwiki=1}}
+* Malay: {{t-simple|ms|udara|langname=Malay}}, {{t-simple|ms|hawa|langname=Malay}}
+* Malayalam: {{t+|ml|വായു|sc=Mlym}}
+* Maltese: {{t|mt|arja|f}}
+* Maori: {{t-simple|mi|hau|langname=Maori}}
+* Marathi: {{t|mr|हवा|sc=Deva}}
+* Middle Persian: {{t-simple|pal|havä|langname=Middle Persian}}
+* Mohawk: {{t-simple|moh|ówera|langname=Mohawk}}
+* Moksha: {{t|mdf|кожф}}
+* Mongolian: {{t+|mn|агаар|sc=Cyrl}}
+* Nahuatl: {{t-simple|nah|ejekatl|langname=Nahuatl|interwiki=1}}
+* Navajo: {{t|nv|níłchʼi}}
+* Nepali: {{t+|ne|हावा|tr=hāvā|sc=Deva}}
+* Norman: {{t|nrf|air|m}}
+* Northern Sami: {{t|se|áibmu}}
+* Norwegian:
+*: Bokmål: {{t+|nb|luft|m|f}}
+*: Nynorsk: {{t|nn|luft|f}}
+* Occitan: {{t+|oc|aire|m}}, {{t-simple|oc|ària|langname=Occitan|interwiki=1}}
+* Old East Slavic: {{t|orv|аѥръ}}
+* Old English: {{t|ang|lyft|f}}
+* Oriya: {{t+|or|ବାୟୁ|tr=bāẏu|sc=Orya}}
+* Ossetian: {{t|os|уӕлдӕф|sc=Cyrl}}
+* Ottoman Turkish: {{t|ota|هوا|tr=havâ|sc=ota-Arab}}, {{t|ota|جو|tr=cevv|sc=ota-Arab}}
+* Parthian: {{t-simple|xpr|havä|langname=Parthian}}
+* Pashto: {{t+|ps|هوا|tr=hawā|sc=ps-Arab}}
+* Persian: {{t+|fa|هوا|tr=havâ|sc=fa-Arab}}
+* Polish: {{t+|pl|powietrze|n}}
+* Portuguese: {{t+|pt|ar|m}}
+* Punjabi: {{t|pa|ਹਵਾ|tr=havā|sc=Guru}}, {{t|pa|ਵਾਯੂ|tr=vāyū|sc=Guru}}
+* Quechua: {{t-simple|qu|wayra|langname=Quechua|interwiki=1}}
+* Romanian: {{t+|ro|aer|n}}, {{t-simple|ro|văzduh|langname=Romanian|interwiki=1}}, {{t-simple|ro|eter|langname=Romanian|interwiki=1}}, {{t-simple|ro|atmosferă|langname=Romanian|interwiki=1}}
+* Romansch: {{t-simple|rm|ajer|langname=Romansch}}, {{t-simple|rm|aria|langname=Romansch}}, {{t-simple|rm|leer|langname=Romansch}}
+* Russian: {{t+|ru|во́здух|m}}, {{t+|ru|пове́трие|n}} {{qualifier|obsolete}}
+* Rusyn: {{t|rue|воздух|m}}
+* Samoan: {{t|sm|'ea}}
+* Sanskrit: {{t+|sa|वायु}}, {{t+|sa|वात}}
+* Sardinian: {{t-simple|sc|aera|langname=Sardinian}}, {{t-simple|sc|àeri|langname=Sardinian}}, {{t-simple|sc|àghera|langname=Sardinian}}, {{t-simple|sc|àiri|langname=Sardinian}}, {{t-simple|sc|ari|langname=Sardinian}}, {{t-simple|sc|ària|langname=Sardinian}}
+* Scottish Gaelic: {{t|gd|adhar|m}}, {{t|gd|àidhear|m}}, {{t|gd|àile|m}}, {{t|gd|gaoth|f}}, {{t|gd|iarmailt|f}}
+* Serbo-Croatian:
+*: Cyrillic: {{t|sh|ваздух}}, {{t|sh|зрак|m}}
+*: Roman: {{t+|sh|vazduh|m}}, {{t+|sh|zrak|m}}
+* Shor: {{t|cjs|чел}}
+* Sicilian: {{t+|scn|aria|f}}, {{t+|scn|ariu|m}}
+* Silesian: {{t|szl|luft|m}}, {{t|szl|powjytře|n}}
+* Sindhi: {{t|sd|ھوا|tr=havā|sc=sd-Arab}}
+* Sinhalese: {{t+|si|වාතය|sc=Sinh}}
+* Slovak: {{t|sk|vzduch|m}}, {{t|sk|povetrie|n}}
+* Slovene: {{t+|sl|zrak|m}}
+* Somali: {{t-simple|so|hawo|langname=Somali}}
+* Sorbian:
+*: Lower Sorbian: {{t|dsb|pówětš|m}}
+*: Upper Sorbian: {{t|hsb|powětr|m}}
+* Southern Altai: {{t|alt|кей}}
+* Spanish: {{t+|es|aire|m}}
+* Svan: {{t|sva|ჰაჲერ}}
+* Swahili: {{t-simple|sw|hewa|langname=Swahili|interwiki=1}}
+* Swedish: {{t+|sv|luft|c}}, {{t+|sv|atmosfär|c}}
+* Tabasaran: {{t|tab|гьава}}
+* Tagalog: {{t-simple|tl|hangin|langname=Tagalog|interwiki=1}}, {{t-simple|tl|simoy|langname=Tagalog}}
+* Tajik: {{t+|tg|ҳаво|sc=Cyrl}}
+* Tamil: {{t+|ta|வாயு|sc=Taml}}, {{t+|ta|காற்று|sc=Taml}}
+* Tat: {{t|ttt|гьово}}
+* Tatar: {{t+|tt|һава|sc=Cyrl}}
+* Telugu: {{t+|te|గాలి|sc=Telu}}, {{t+|te|వాయువు|sc=Telu}}
+* Thai: {{t+|th|อากาศ}}
+* Tibetan: {{t|bo|རླུང|sc=Tibt}}
+* Tigrinya: {{t|ti|ኣየር|sc=Ethi}}
+* Tundra Nenets: {{t|yrk|инд’}}
+* Tupinambá: {{t-simple|tpn|ybytu|langname=Tupinambá}}
+* Turkish: {{t-simple|tr|hava|langname=Turkish|interwiki=1}}
+* Turkmen: {{t-simple|tk|howa|langname=Turkmen}}, {{t-simple|tk|asman|langname=Turkmen|interwiki=1}}
+* Tuvan: {{t|tyv|агаар}}
+* Udmurt: {{t|udm|воздух}}, {{t|udm|омыр}}
+* Ukrainian: {{t+|uk|пові́тря|n}}
+* Urdu: {{t|ur|ہوا|f|tr=havā}}, {{t|ur|وایو|f|tr=vāyu}}
+* Ute: {{qualifier|Chemehuevi}} {{t|ute|nɨ'gar|alt=nɨ'gar(ɨ)}}
+* Uyghur: {{t|ug|ھاۋا|sc=ug-Arab}}
+* Uzbek: {{t-simple|uz|havo|langname=Uzbek|interwiki=1}}
+* Venetian: {{t+|vec|aria|f}}, {{t|vec|aiere|m}}, {{t|vec|agere|m}}
+* Veps: {{t|vep|il’m}}
+* Vietnamese: {{t+|vi|không khí}} ({{t|vi|空氣}})
+* Volapük: {{t-simple|vo|lut|langname=Volapük|interwiki=1}}
+* Walloon: {{t+|wa|air|f}}
+* Welsh: {{t+|cy|awyr|c}}
+* West Frisian: {{t-simple|fy|loft|langname=West Frisian}}, {{t-simple|fy|lucht|langname=West Frisian}}
+* Wolof: {{t-simple|wo|péex|langname=Wolof}}
+* Xhosa: {{t-simple|xh|umoya|langname=Xhosa}}
+* Yakut: {{t|sah|салгын|sc=Cyrl}}
+* Yiddish: {{t|yi|לופֿט|f}}
+* Yoruba: {{t-simple|yo|òfúrufú|langname=Yoruba}}
+* Zazaki: {{t-simple|zza|ayam|langname=Zazaki}}
+* Zhuang: {{t-simple|za|hoengheiq|langname=Zhuang}}, {{t-simple|za|hoeng|langname=Zhuang}}, {{t-simple|za|heiq|langname=Zhuang}}
+* Zulu: {{t+|zu|umoya|c3}}
+{{trans-bottom}}
+
+{{trans-top|the apparently open space above the ground}}
+* Finnish: {{t-simple|fi|ilma|langname=Finnish|interwiki=1}}
+* Polish: {{t+|pl|powietrze|n}}
+* Russian: {{t+|ru|во́здух|m}}
+{{trans-mid}}
+* Tagalog: {{t-simple|tl|ere|langname=Tagalog}}
+* Zazaki: {{t|zza|erdhewa}}
+{{trans-bottom}}
+
+{{trans-top|feeling or sense}}
+* Finnish: {{t-simple|fi|vaikutelma|langname=Finnish|interwiki=1}}, {{t-simple|fi|ilme|langname=Finnish|interwiki=1}}
+* Polish: {{t+|pl|aura|f}}, {{t|pl|otoczka|f}}, {{t|pl|posmak|m-in}}
+{{trans-mid}}
+* Russian: {{t+|ru|чу́вство|n}}, {{t+|ru|ощуще́ние|n}}
+{{trans-bottom}}
+
+{{trans-top|sense of poise, graciousness, quality}}
+* Dutch: {{t-simple|nl|air|langname=Dutch|interwiki=1}}
+* Finnish: {{t-simple|fi|tyyli|langname=Finnish|interwiki=1}}
+{{trans-mid}}
+* Russian: {{t+|ru|вид|m}} {{qualifier|look}}
+* Zazaki: {{t|zza|tebiat}}
+{{trans-bottom}}
+
+{{trans-top|pretension, snobbishness}}
+* Dutch: {{t-simple|nl|air|langname=Dutch|interwiki=1}}
+* Finnish: {{t-simple|fi|koppavuus|langname=Finnish|interwiki=1}}, {{t-simple|fi|ylimielisyys|langname=Finnish|interwiki=1}}
+* Polish: {{t+|pl|poza|f}}
+{{trans-mid}}
+* Russian: {{t+|ru|ва́жничанье|n}}, {{t+|ru|сноби́зм|m}}
+* Zazaki: {{t|zza|hewa eşten}}
+{{trans-bottom}}
+
+{{trans-top|music: a song, an aria}}
+* Arabic: {{t|ar|نَغَم|m}}
+* Bulgarian: {{t+|bg|а́рия|f}}
+* Chinese:
+*: Mandarin: {{t+|cmn|詠嘆調|sc=Hani}}, {{t+|cmn|咏叹调|tr=yǒngtàndiào|sc=Hani}}, {{t+|cmn|唱段|tr=chàngduàn|sc=Hani}}, {{qualifier|North China, Yuan dynasty}} {{t+|cmn|北曲|tr=běiqǔ|sc=Hani}}
+* Czech: {{t|cs|popěvek|m}}
+* Danish: {{t+|da|arie|c}}
+* Finnish: {{t-simple|fi|aaria|langname=Finnish|interwiki=1}}
+* French: {{t+|fr|aria|f}}
+* German: {{t+|de|Arie|f}}
+* Greek: {{t+|el|μελωδία|f}}, {{t+|el|σκοπός}}
+* Hungarian: {{t-simple|hu|ária|langname=Hungarian|interwiki=1}}
+* Italian: {{t+|it|aria|f}}
+* Japanese: {{t|ja|アリア|tr=aria}}, {{t|ja|詠唱|tr=えいしょう, eishō}}
+* Kyrgyz: {{t+|ky|ария}}
+{{trans-mid}}
+* Latin: {{t+|la|aer|m}}
+* Lithuanian: {{t|lt|arija|f}}
+* Macedonian: {{t|mk|на́пев|m}}, {{t|mk|а́рија|f}}
+* Piedmontese: {{t|pms|ária|f}}
+* Polish: {{t+|pl|aria|f}}
+* Portuguese: {{t+|pt|ária|f}}
+* Romanian: {{t+|ro|arie|f}}
+* Russian: {{t+|ru|а́рия|f}}, {{t+|ru|напе́в|m}}
+* Scottish Gaelic: {{t|gd|ceòlan|m}}, {{t|gd|fonn|m}}, {{t|gd|sèis|m}}
+* Spanish: {{t+|es|aria|f}}
+* Swahili: {{t-simple|sw|hawa|langname=Swahili|interwiki=1}}
+* Swedish: {{t+|sv|aria|c}}
+* Turkish: {{t-simple|tr|arya|langname=Turkish|interwiki=1}}
+* Zazaki: {{t-simple|zza|aria|langname=Zazaki}}
+{{trans-bottom}}
+
+{{trans-top|informal: absence of anything}}
+* Dutch: {{t+|nl|leegte|f}}, {{t+|nl|leemte|f}}
+* Finnish: {{t-simple|fi|ilma|langname=Finnish|interwiki=1}}
+{{trans-mid}}
+* Macedonian: {{t|mk|во́здух|m}}
+* Russian: {{t+|ru|во́здух|m}}
+{{trans-bottom}}
+
+{{trans-top|air conditioner or the processed air it produces}}
+* Finnish: {{t-simple|fi|ilmastointi|langname=Finnish|interwiki=1}}
+{{trans-mid}}
+* Zazaki: {{t-simple|zza|qlim|langname=Zazaki}}
+{{trans-bottom}}
+
+{{trans-top|obsolete: any specific gas}}
+* Zazaki: {{t|zza|mıj}}
+{{trans-mid}}
+{{trans-bottom}}
+
+{{trans-top|snowboarding, skateboarding: jump in which one becomes airborne}}
+{{trans-mid}}
+{{trans-bottom}}
+
+===Verb===
+{{en-verb}}
+
+# To bring (something) into contact with the air, so as to [[freshen]] or [[dry]] it.
+# To let fresh air into a room or a building, to [[ventilate]].
+#: ''It's getting quite [[stuffy]] in this room: let's open the windows and '''air''' it.''
+# To [[discuss]] varying viewpoints on a given topic.
+#* '''1917''', ''National Geographic'', [[s:National Geographic Magazine/Volume 31/March 1917/Russia's Democrats|v.31, March 1917]]:
+#*: Thus, in spite of all opposition, the rural and urban assemblies retained the germ of local government, and in spite of the dual control, as the result of which much of their influence was nullified, they did have a certain value in '''airing''' abuses and suggesting improvements.
+# To [[broadcast]], as with a television show.
+
+====Derived terms====
+* {{l|en|air out}}
+* {{l|en|aired}}
+* {{l|en|aired-out}}
+
+====Translations====
+{{trans-top|to bring into contact with the air}}
+* Breton: {{t|br|aerañ}}
+* Bulgarian: {{t|bg|проветрявам|sc=Cyrl}}
+* Czech: {{t+|cs|větrat}}
+* Dutch: {{t+|nl|luchten}}
+* Esperanto: {{t|eo|aerumi}}
+* Finnish: {{t+|fi|tuulettaa}} {{gloss|freshen}}, {{t+|fi|kuivattaa}} ({{t+|fi|ilma|alt=ilmassa}}) {{gloss|dry}}
+* French: {{t+|fr|aérer}}
+* German: {{t+|de|lüften}}
+* Hebrew: {{t|he|אוורר|tr=ivrér}}
+* Icelandic: {{t|is|lofta}}
+* Interlingua: {{t|ia|aerar}}
+* Italian: {{t+|it|aerare}}
+* Japanese: {{t+|ja|干す|tr=hosu}}
+* Macedonian: {{t|mk|проветрува|sc=Cyrl}}
+{{trans-mid}}
+* Norman: {{t|nrf|airer}}
+* Persian: {{t+|fa|هوا|alt=هَوا دادن|tr=hævā dādan|sc=fa-Arab}}
+* Polish: {{t+|pl|wietrzyć}}, {{t|pl|napowietrzać}}
+* Portuguese: {{t+|pt|arejar}}
+* Romanian: {{t+|ro|aera}}, {{t+|ro|aerisi}}
+* Russian: {{t|ru|прове́тривать|impf}}, {{t+|ru|прове́трить|pf}}
+* Serbo-Croatian:
+*: Cyrillic: {{t|sh|зрачити}}, {{t|sh|израчити}}, {{t|sh|изветрити}}, {{t|sh|луфтирати}}
+*: Roman: {{t+|sh|zračiti}}, {{t+|sh|izračiti}}, {{t+|sh|izvetriti}}, {{t+|sh|luftirati}}
+* Slovene: {{t|sl|zračiti}}, {{t|sl|prezračiti}}
+* Spanish: {{t|es|aerar}}, {{t+|es|airear}}
+* Swahili: {{t+|sw|hawa}}
+* Swedish: {{t+|sv|lufta}}
+* Zazaki: {{t|zza|ayam kerden}}
+{{trans-bottom}}
+
+{{trans-top|to ventilate}}
+* Bulgarian: {{t|bg|проветрявам|sc=Cyrl}}
+* Czech: {{t+|cs|větrat}}
+* Dutch: {{t|nl|verluchten}}, {{t+|nl|luchten}}, {{t+|nl|ventileren}}
+* Esperanto: {{t|eo|aerumi}}
+* Finnish: {{t+|fi|tuulettaa}}
+* French: {{t+|fr|éventer}}, {{t+|fr|ventiler}}
+* Hungarian: {{t+|hu|szellőztet}}
+* Italian: {{t|it|ventilare}}
+* Lithuanian: {{t|lt|vėdinti}}
+{{trans-mid}}
+* Macedonian: {{t|mk|проветрува}}
+* Portuguese: {{t+|pt|ventilar}}
+* Romanian: {{t+|ro|ventila}}, {{t+|ro|zvânta}}
+* Russian: {{t|ru|прове́тривать|impf}}, {{t+|ru|прове́трить|pf}}
+* Sicilian: {{t+|scn|sbintari}}, {{t+|scn|svintari}}
+* Swahili: {{t+|sw|hawa}}
+* Swedish: {{t+|sv|vädra}}
+* Zazaki: {{t|zza|hewa}}
+{{trans-bottom}}
+
+{{trans-top|to discuss varying viewpoints}}
+* Finnish: {{t+|fi|tuulettaa}}, {{t+|fi|ilmaista}}, {{t|fi|päästää ilmoille}}
+{{trans-mid}}
+{{trans-bottom}}
+
+{{trans-top|to broadcast}}
+* Bulgarian: {{t|bg|предавам по радиото|sc=Cyrl}}
+* Dutch: {{t+|nl|uitzenden}}
+* Finnish: {{t+|fi|lähettää}}
+* French: {{t|fr|mettre à l'antenne}}
+* German: {{t+|de|ausstrahlen}}
+* Hebrew: {{t|he|שידר|tr=shidér}}
+* Indonesian: {{t+|id|menyiarkan}}
+* Italian: {{t|it|mandare in onda}}
+* Lithuanian: {{t|lt|transliuoti}}
+{{trans-mid}}
+* Macedonian: {{t|mk|емитува|sc=Cyrl}}
+* Polish: {{t+|pl|emitować|impf}}
+* Portuguese: {{t+|pt|transmitir}}
+* Romanian: {{t+|ro|transmite}}
+* Serbo-Croatian: {{t+|sh|emitirati}}
+* Slovene: {{t+|sl|oddajati}}
+* Spanish: {{t+|es|retransmitir}}
+* Thai: {{t+|th|ออกอากาศ}}
+* Zazaki: {{t|zza|vılaynen}}
+{{trans-bottom}}
+
+{{topics|en|Atmosphere}}
+
+===Anagrams===
+* {{anagrams|en|ARI|Ari|IAR|IRA|Ira|RIA|Rai|rai|raï|ria}}
+
+[[Category:English 2-syllable words]]
+[[Category:English basic words]]
+
+----
+
+==Cornish==
+
+===Alternative forms===
+* {{l|kw|ayr}}
+
+===Pronunciation===
+* {{IPA|[eːɹ]|lang=kw}}
+
+===Noun===
+{{kw-noun|m}}
+
+# {{l|en|air}}
+
+{{topics|kw|Atmosphere}}
+
+----
+
+==Dutch==
+
+===Etymology===
+{{PIE root|nl|h₂weh₁}}
+{{rfe|lang=nl}}
+
+===Pronunciation===
+* {{IPA|/ɛːr/|lang=nl}}
+* {{audio|Nl-air.ogg|audio|lang=nl}}
+
+===Noun===
+{{nl-noun|m|-s|airtje}}
+
+# {{l|en|air}} (''[[pretension]]'')
+
+----
+
+==French==
+
+===Etymology===
+From {{inh|fr|la|āēr}}.
+
+===Pronunciation===
+* {{fr-IPA}}
+* {{audio|Fr-air.ogg|audio|lang=fr}}
+
+===Noun===
+{{fr-noun|m}}
+
+# {{l|en|air}} {{gloss|gases of the atmosphere}}
+# [[tune]], [[aria]]
+# [[appearance]]
+# {{l|en|air}} {{gloss|pretension}}
+
+====Related terms====
+* {{l|fr|avoir l'air||to seem}}
+
+===Further reading===
+* {{R:TLFi}}
+
+{{topics|fr|Atmosphere}}
+
+===Anagrams===
+* {{l|fr|ira}}
+* {{l|fr|rai}}
+
+----
+
+==Gothic==
+
+===Romanization===
+{{got-rom}}
+
+# {{got-romanization of|𐌰𐌹𐍂}}
+
+----
+
+==Indonesian==
+{{wikipedia|lang=id}}
+[[Image:Stilles Mineralwasser.jpg|thumb|air]]
+
+===Etymology===
+From {{inh|id|ms|air}}, from {{inh|id|poz-mly-pro|*air}}, from {{der|id|poz-mcm-pro|*air}}, from {{der|id|poz-msa-pro|*wair}}, from {{der|id|poz-sus-pro|*wair}}, from {{der|id|poz-pro|*wahiʀ}}.
+
+===Pronunciation===
+* {{IPA|/a.ʔɪr/|lang=id}}
+
+===Noun===
+{{id-noun}}
+
+# [[water]] {{gloss|clear liquid H₂O}}
+# [[water]] {{gloss|mineral water}}
+# [[water]] {{gloss|one of the four elements in alchemy}}
+# [[water]] {{gloss|one of the five basic elements in some other theories}}
+
+====Derived terms====
+* {{l|id|air bah}}
+* {{l|id|air mata}}
+* {{l|id|pengairan}}
+
+[[Category:id:Water]]
+
+----
+
+==Irish==
+
+===Etymology 1===
+From {{inh|ga|sga|airid||ploughs, tills}}.
+
+====Pronunciation====
+* {{IPA|/aɾʲ/|lang=ga}}
+
+====Verb====
+{{ga-verb|pres=~eann|fut=~fidh|vn=ar|pp=~the}}
+
+# {{lb|ga|literary|ambitransitive}} {{l|en|plough}}
+
+=====Conjugation=====
+{{ga-conj-1a|a|i|r|slender|vn=ar|pp=airthe}}
+
+====Noun====
+{{head|ga|noun form|g=m}}
+
+# {{inflection of|ar||gen|s|lang=ga}}
+
+===Etymology 2===
+
+====Pronunciation====
+* {{IPA|/ɛɾʲ/|/əɾʲ/|qual1=stressed|qual2=unstressed|lang=ga}}
+
+====Pronoun====
+{{ga-prpr|airsean}}
+
+# {{inflection of|ar||3|s|m|lang=ga}} {{gloss|on him, on it {{g|m}}}}
+
+===Mutation===
+{{ga-mut}}
+
+===References===
+* {{R:ga:ODonaill}}
+* {{R:DIL|2090|head=3 airid}}
+
+{{topics|ga|Agriculture}}
+
+----
+
+==Kein==
+
+===Pronunciation===
+* {{IPA|/ɑiɾ/|lang=bmh}}
+
+===Noun===
+{{head|bmh|noun}}
+
+# [[woman]]
+
+===Further reading===
+* ''[http://www-01.sil.org/pacific/png/pubs/928474542235/Bemal.pdf Bemal Organized Phonology Data]''
+
+----
+
+==Ludian==
+
+===Etymology===
+From {{inh|lud|fiu-fin-pro|*airo}}.
+
+===Noun===
+{{head|lud|noun}}
+
+# [[oar]]
+
+----
+
+==Malay==
+{{wikipedia|lang=ms}}
+{{was fwotd|2013|October|26|lang=ms}}
+
+===Alternative forms===
+* {{l|ms|اءير|ا&lt;sup&gt;ء&lt;/sup&gt;ير|sc=Arab}}
+
+===Etymology===
+From {{inh|ms|poz-mly-pro|*air}}, from {{der|ms|poz-mcm-pro|*air}}, from {{der|ms|poz-msa-pro|*wair}}, from {{der|ms|poz-sus-pro|*wair}}, from {{der|ms|poz-pro|*wahiʀ}}.
+
+===Pronunciation===
+* {{a|Johor-Selangor}} {{IPA|/ae(r)/|lang=ms}}
+* {{a|Riau-Lingga}} {{IPA|/aɪ(r)/|lang=ms}}
+* {{rhymes|ae(r)|e(r)|lang=ms}}
+
+===Noun===
+{{ms-noun|j=اءير|pl=-}}
+
+# [[water]] {{gloss|liquid H&lt;sub&gt;2&lt;/sub&gt;O}}
+#* '''2012''', ''Faridah Abdul Rashid'', Research on the Early Malay Doctors : 1900-1957 : Malaya and Singapore [http://books.google.co.nz/books?id=kZZXloR9wAMC&amp;]
+#*: ''loji rawatan '''air'''''
+#*:: '''water''' treatment plant
+
+====Derived terms====
+* {{l|ms|air bah}} / {{l|ms|اءير به|ا&lt;sup&gt;ء&lt;/sup&gt;ير به|sc=Arab}}
+* {{l|ms|air mata}} / {{l|ms|اءير مات|ا&lt;sup&gt;ء&lt;/sup&gt;ير مات|sc=Arab}}
+
+====Descendants====
+* Indonesian: {{l|id|air}}
+
+===References===
+* Blust's Austronesian Comparative Dictionary
+
+[[Category:ms:Water]]
+
+----
+
+==Norman==
+
+===Etymology===
+From {{inh|nrf|la|āēr}}.
+
+===Noun===
+{{nrf-noun|m}}
+
+# {{l|en|air}} (mixture of gases that make up the earth's atmosphere)
+
+====Related terms====
+* {{l|nrf|atmosphère}}, {{l|nrf|atmosphéthe}}
+
+{{topics|nrf|Atmosphere}}
+
+----
+
+==Old French==
+
+===Alternative forms===
+* {{l|fro|aer}}
+* {{l|fro|aïr}} {{qualifier|diaereses are used by some scholars}}
+* {{l|fro|ar}}
+* {{l|fro|eir}}
+
+===Etymology===
+From {{inh|fro|la|āēr}}.
+
+===Noun===
+{{fro-noun|m}}
+
+# {{l|en|air}} (mixture of gases that make up the earth's atmosphere)
+
+----
+
+==Pohnpeian==
+
+===Pronunciation===
+* {{IPA|/ɐjir/|lang=pon}}
+
+===Verb===
+{{head|pon|verb}}
+
+# {{lb|pon|transitive}} to [[strip off]], as when stripping insulation off a wire
+# {{lb|pon|transitive}} to [[wipe off]] a [[ropelike]] object by [[drawing]] it through one's [[hand]] or [[fingers]]
+#: {{ux|pon|'''Air''' mahs keleuen.|Please wipe the sap off the hibiscus bast.}}
+
+----
+
+==Scottish Gaelic==
+
+===Etymology===
+From {{der|gd|sga|for}} (compare Irish {{m|ga|ar}}), from {{der|gd|cel-pro|*uɸor}} (compare Welsh {{m|cy|ar}}), from {{der|gd|ine-pro|*upér}} (compare Latin {{m|la|super}}, Ancient Greek {{m|grc|ὑπέρ}}, Old English {{m|ang|ofer}}).
+
+===Pronunciation===
+* {{IPA|/ɛrʲ/|lang=gd}}
+
+===Preposition===
+{{head|gd|preposition}}
+
+# [[on]], [[upon]]
+#: {{ux|gd|'''air''' bàrr a' bhalla|t=on top of the wall|inline=1}}
+# [[of]], [[concerning]]
+#: {{ux|gd|iomradh '''air''' do ghliocas|t=a report of thy wisdom|inline=1}}
+# [[for]], [[on account of]]
+#: {{ux|gd|'''air''' an aobhar sin|t=for that reason|inline=1}}
+# [[by]]
+#: {{ux|gd|'''air''' ainm|t=by name|inline=1}}
+
+====Usage notes====
+* '''Air''' combines with personal pronouns to form prepositional pronouns. See ''Derived forms'' below. Specifically for ''air'' the third-person singular masculine pronoun is identical to the uninflected preposition, hence ''air'' = ''on'' or ''on him''.
+* The word '''air''' and its derivates are also used in many idioms:
+*: {{ux|gd|Dè an t-ainm a tha ort?|What's your name? (What name is '''on you'''?)|inline=1}}
+*: {{ux|gd|Tha an t-acras orm.|t=I'm hungry. (The hunger is '''on me'''.)|inline=1}}
+
+====Derived terms====
+{{der3|lang=gd|{{l|gd|air dheireadh||behind; late}}
+|{{l|gd|air fhichead||twenty-...}}
+|{{l|gd|air sgàth||for the sake of}}
+|{{l|gd|airson||for}}}}
+
+* The following prepositional pronouns:
+{{gd-prep-infl
+|1sg=orm
+|2sg=ort
+|3sgm=air
+|3sgf=oirre
+|1pl=oirnn
+|2pl=oirbh
+|3pl=orra
+}}
+
+===Pronoun===
+{{head|gd|prepositional pronoun|g=m}}
+
+# {{inflection of|air||3|s|m|lang=gd}} {{gloss|[[on]] [[him]], on [[it]] {{g|m}}}}
+
+====See also====
+* {{l|gd|prepositional pronoun}}
+
+===References===
+* {{R:Dwelly}}
+* ''A Pronouncing and Etymological Dictionary of the Gaelic Language'' (John Grant, Edinburgh, 1925, Complied by Malcolm MacLennan)
+
+----
+
+==Veps==
+
+===Etymology===
+From {{inh|vep|fiu-fin-pro|*airo}}.
+
+===Noun===
+{{head|vep|pronoun}}
+
+# [[oar]]
+
+----
+
+==Welsh==
+
+===Pronunciation===
+* {{IPA|/ai̯r/|lang=cy}}
+
+===Noun===
+{{head|cy|mutated noun}}
+
+# {{soft mutation of|gair|lang=cy}}
+
+===Mutation===
+{{cy-mut-auto|gair}}</text>
+      <sha1>g3ry1ykuqivipyddewbxdkm7210mlx2</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>газета</title>
+    <ns>0</ns>
+    <id>237843</id>
+    <revision>
+      <id>48037323</id>
+      <parentid>47312109</parentid>
+      <timestamp>2017-11-12T13:18:25Z</timestamp>
+      <contributor>
+        <username>MewBot</username>
+        <id>345682</id>
+      </contributor>
+      <minor/>
+      <comment>Removed notext=1</comment>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text xml:space="preserve" bytes="878">==Russian==
+{{wikipedia|lang=ru}}
+
+===Etymology===
+Borrowed from {{bor|ru|fr|gazette}}.
+
+===Pronunciation===
+* {{audio|Ru-газета.ogg|audio|lang=ru}}
+* {{ru-IPA|газе́та}}
+
+===Noun===
+{{ru-noun+|газе́та}}
+
+# [[newspaper]]
+
+====Declension====
+{{ru-noun-table|газе́та}}
+
+====Derived terms====
+* {{l|ru|газе́тный}}
+* {{l|ru|газе́тчик}}
+
+----
+
+==Ukrainian==
+
+===Pronunciation===
+* {{uk-IPA|газе́та}}
+* {{audio|Uk-газета.ogg|Audio|lang=uk}}
+
+===Noun===
+{{uk-noun|газе́та|f-in|газе́ти|газе́ти}}
+
+# {{l|en|newspaper}}
+
+====Declension====
+{{uk-decl-noun|газе́та|газе́ти|газе́ти|газе́т|газе́ті|газе́там|газе́ту|газе́ти|газе́тою|газе́тами|газе́ті|газе́тах|газе́то|газе́ти}}
+
+===References===
+* {{R:uk:SUM-11}}</text>
+      <sha1>t8tdzgck99fme0fe06vjvvtvv5r97h4</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>газет</title>
+    <ns>0</ns>
+    <id>5213776</id>
+    <revision>
+      <id>44390519</id>
+      <parentid>41104390</parentid>
+      <timestamp>2017-05-25T02:19:10Z</timestamp>
+      <contributor>
+        <username>TheDaveBot</username>
+        <id>20393</id>
+      </contributor>
+      <minor/>
+      <comment>Removing interwiki links ([[Wiktionary:Grease_pit/2017/April#Getting_rid_of_interwikis|discussion]]).</comment>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text xml:space="preserve" bytes="158">==Russian==
+
+===Pronunciation===
+* {{ru-IPA|газе́т}}
+
+===Noun===
+{{ru-noun form|газе́т|f-in-p}}
+
+# {{inflection of|lang=ru|газе́та||gen|p}}</text>
+      <sha1>h6s52diau1zhe1xt9vh20er038yk32j</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>geloof</title>
+    <ns>0</ns>
+    <id>235238</id>
+    <revision>
+      <id>47818247</id>
+      <parentid>47705275</parentid>
+      <timestamp>2017-10-20T03:00:51Z</timestamp>
+      <contributor>
+        <username>Anglish4699</username>
+        <id>3285337</id>
+      </contributor>
+      <comment>/* Etymology */ PG source</comment>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text xml:space="preserve" bytes="1065">==Dutch==
+
+===Alternative forms===
+* {{l|nl|gelove}} {{qual|archaic}}
+
+===Etymology===
+From earlier {{m|nl|gelove}}, from {{inh|nl|dum|gelove}}, from {{inh|nl|odt|gilovo}}, from {{inh|nl|gem-pro|*galaubô}}.
+
+===Pronunciation===
+* {{rhymes|oːf|lang=nl}}
+* {{audio|Nl-geloof.ogg|audio|lang=nl}}
+
+===Noun===
+{{nl-noun|n|-ven|geloofje}}
+
+# [[belief]], [[conviction]].
+# {{lb|nl|religion}} [[faith]], [[religion]].
+
+====Usage notes====
+The genitive form of the word is ''des geloofs''. Of its alternative form ''gelove'' it is ''des geloven'' or ''des geloves''. In Dutch, the genitive is not commonly used outside of fixed expressions and literary language, but can be frequently encountered in early modern Dutch texts.
+
+====Synonyms====
+* {{sense|belief|conviction}} {{l|nl|overtuiging}}
+* {{sense|religion}} {{l|nl|godsdienst}}, {{l|nl|religie}}
+
+====Derived terms====
+* {{l|nl|bijgeloof}} {{g2|n}}
+* {{l|nl|geloofsbelijdenis}}
+* {{l|nl|gelovig}}
+
+===Verb===
+{{nl-verb-form}}
+
+# {{nl-verb form of|p=1|n=sg|t=pres|m=ind|geloven}}
+# {{nl-verb form of|m=imp|geloven}}</text>
+      <sha1>au9drud6all7udkce5s62gnjb2hkzhu</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>belief</title>
+    <ns>0</ns>
+    <id>7337</id>
+    <revision>
+      <id>48337639</id>
+      <parentid>48162381</parentid>
+      <timestamp>2017-12-29T02:55:00Z</timestamp>
+      <contributor>
+        <username>Linguist97</username>
+        <id>3339014</id>
+      </contributor>
+      <comment>t+qu:[[iñi]] ([[WT:EDIT|Assisted]])</comment>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text xml:space="preserve" bytes="11200">==English==
+
+===Etymology===
+From {{etyl|enm|en}}, from {{etyl|ang|en}} {{m|ang|lēafa}}, from {{etyl|gem-pro|en}} {{m|gem-pro|*laubô}}.
+
+===Pronunciation===
+* {{IPA|/bɪˈliːf/|/bəˈliːf/|lang=en}}
+* {{audio|en-us-belief.ogg|Audio (US)|lang=en}}
+* {{rhymes|iːf|lang=en}}
+* {{hyphenation|be|lief|lang=en}}
+
+===Noun===
+{{en-noun|~}}
+
+# [[mental|Mental]] [[acceptance]] of a [[claim]] as true.
+#: {{ux|en|It's my '''belief''' that the thief is somebody known to us.}}
+#* {{quote-magazine|date=2013-12-06|author={{w|George Monbiot}}
+|volume=189|issue=26|page=48|magazine={{w|The Guardian Weekly}}
+|title=[http://www.theguardian.com/commentisfree/2013/nov/27/al-gore-veganism-eating-words-sceptical-meat-eating Why I'm eating my words on veganism – again]
+|passage=The '''belief''' that there is no conflict between [livestock] farming and arable production also seems to be unfounded: by preventing the growth of trees and other deep vegetation in the hills and by compacting the soil, grazing animals cause a cycle of flash floods and drought, sporadically drowning good land downstream and reducing the supply of irrigation water.}}
+# [[Faith]] or [[trust]] in the reality of something; often based upon one's own reasoning, trust in a claim, desire of actuality, and/or evidence considered.
+#: {{ux|en|My '''belief''' is that there is a bear in the woods. Bill said he saw one.}}
+#: {{ux|en|Based on this data, it is our '''belief''' that X does not occur.}}
+# {{lb|en|countable}} Something [[believe]]d.
+#: {{ux|en|The ancient people have a '''belief''' in many deities.}}
+#* {{ux|en|Women always take the '''beliefs''' of those around them. Better a man who loves her to have the strongest influence over her '''beliefs''' and actions than her catty girlfriends who despise her for being more attractive. ― Blair Naso}}
+# {{lb|en|uncountable}} The quality or state of [[believe|believing]].
+#: {{ux|en|My '''belief''' that it will rain tomorrow is strong.}}
+# {{lb|en|uncountable}} [[religious|Religious]] [[faith]].
+#: {{ux|en|She often said it was her '''belief''' that carried her through the hard times.}}
+# {{lb|en|in the plural}} One's religious or [[moral]] [[convictions]].
+#: {{ux|en|I don't want to do a no-fault divorce on my husband and steal from him under color of law. It's against my '''beliefs'''.}}
+
+====Derived terms====
+* {{l|en|beliefful}}
+* {{l|en|beyond belief}}
+* {{l|en|disbelief}}
+* {{l|en|forebelief}}
+* {{l|en|self-belief}}
+* {{l|en|unbelief}}
+
+====Related terms====
+* {{l|en|believe}}
+
+====Translations====
+{{trans-top|mental acceptance of a claim as truth}}
+* Armenian: {{t+|hy|հավատ}}, {{t+|hy|վստահություն}}
+* Asturian: {{t|ast|creyencia|f}}, {{t|ast|creencia|f}}
+* Belarusian: {{t|be|ве́ра|f|sc=Cyrl}}
+* Bulgarian: {{t+|bg|вя́ра|f}}, {{t+|bg|дове́рие|n}}
+* Catalan: {{t+|ca|creença|f}}
+* Chinese:
+*: Mandarin: {{t+|cmn|相信|tr=xiāngxìn|sc=Hani}}, {{t+|cmn|信心|tr=xìnxīn|sc=Hani}}
+* Czech: {{t+|cs|víra|f}}
+* Danish: {{t+|da|tro|c}}
+* Dutch: {{t+|nl|geloof|n}}
+* Estonian: {{t|et|usk}}
+* Faroese: {{t|fo|trúgv|f}}
+* Finnish: {{t+|fi|usko}}
+* French: {{t+|fr|croyance|f}}
+* Friulian: {{t|fur|crodince|f}}
+* Galician: {{t+|gl|crenza|f}}
+* Georgian: {{t|ka|რწმენა|sc=Geor}}, {{t|ka|დაჯერება|sc=Geor}}
+* German: {{t+|de|Glauben|m}}
+* Greek: {{t+|el|πίστη|f}}, {{t+|el|πιστεύω|n}}
+* Hungarian: {{t+|hu|hit}}
+* Indonesian: {{t+|id|kepercayaan}}
+* Italian: {{t+|it|credito|m}}, {{t+|it|credenza|f}}, {{t+|it|convinzione|f}}
+* Japanese: {{t+|ja|確信|tr=[[かくしん]], kakushin}}
+* Kurdish: {{t+|ku|bawer|sc=ku-Arab}}
+*: Sorani: {{t+|ku|باوه‌ر}}, {{t|ku|بروا}}
+{{trans-mid}}
+* Kyrgyz: {{t+|ky|ишеним}}, {{t+|ky|ишенүү}}, {{t+|ky|ишенич}}, {{t+|ky|көз караш}}, {{t+|ky|диний ишеним}}
+* Latin: {{t|la|fides|f}}
+* Latvian: {{t+|lv|ticība|f}}
+* Macedonian: {{t|mk|вера|f|tr=véra|sc=Cyrl}}
+* Navajo: {{t|nv|oodlą́}}
+* Norman: {{t|nrf|crianche|f}}
+* Persian: {{t+|fa|باور|tr=bâvar|sc=fa-Arab}}
+* Polish: {{t+|pl|przekonanie|n}}, {{t+|pl|wiara|f}}
+* Portuguese: {{t+|pt|crença|f}}
+* Romanian: {{t+|ro|credință}}
+* Russian: {{t+|ru|ве́ра|f}}, {{t+|ru|дове́рие|n}} {{qualifier|trust}}, {{t+|ru|убежде́ние|n}} {{qualifier|conviction}}
+* Scottish Gaelic: {{t|gd|beachd|m}}, {{t|gd|barail|f}}
+* Serbo-Croatian:
+*: Cyrillic: {{t|sh|веровање|n}}, {{t|sh|вјеровање|n}}, {{t|sh|вера|f}}, {{t|sh|вјера|f}}
+*: Roman: {{t+|sh|verovanje|n}}, {{t+|sh|vjerovanje|n}}, {{t+|sh|vera|f}}, {{t+|sh|vjera|f}}
+* Slovak: {{t|sk|viera|f}}
+* Slovene: {{t+|sl|vera|f}}
+* Spanish: {{t+|es|creencia|f}}
+* Swedish: {{t+|sv|tro|c}}
+* Tagalog: {{t|tl|paniwala}}
+* Ukrainian: {{t|uk|ві́ра|f|sc=Cyrl}}
+* Walloon: {{t+|wa|creyance|f}}
+* Zazaki: {{t|zza|bawer}}
+{{trans-bottom}}
+
+{{trans-top|something believed}}
+* Asturian: {{t|ast|creyencia|f}}, {{t|ast|creencia|f}}
+* Catalan: {{t+|ca|creença|f}}
+* Chinese:
+*: Mandarin: {{t+|cmn|信念|tr=xìnniàn|sc=Hani}}
+* Czech: {{t+|cs|víra|f}}
+* Dutch: {{t+|nl|geloof|f}}
+* Esperanto: {{t|eo|kredo}}
+* Estonian: {{t|et|usk}}, {{t|et|uskumus}}
+* Finnish: {{t+|fi|usko}}
+* Galician: {{t+|gl|crenza|f}}
+* Georgian: {{t|ka|მრწამსი|sc=Geor}}, {{t|ka|შეხედულება|sc=Geor}}
+* German: {{t+|de|Glaube|m}}
+* Greek: {{t+|el|δοξασία|f}}, {{t+|el|δόγμα|n}}, {{t+|el|πίστη|f}}
+{{trans-mid}}
+* Hungarian: {{t+|hu|hit}}, {{t+|hu|hiedelem}}
+* Interlingua: {{t|ia|credentia}}
+* Italian: {{t+|it|credenza|f}}, {{t+|it|opinione|f}}
+* Persian: {{t+|fa|باور|tr=bâvar|sc=fa-Arab}}
+* Polish: {{t+|pl|wiara|f}}, {{t+|pl|przekonanie|n}} {{qualifier|conviction}}
+* Portuguese: {{t+|pt|crença|f}}
+* Russian: {{t+|ru|ве́ра|f}}, {{t+|ru|убежде́ние|n}} {{qualifier|conviction}}
+* Serbo-Croatian:
+*: Cyrillic: {{t|sh|вера|f}}, {{t|sh|вјера|f}}
+*: Roman: {{t+|sh|vera|f}}, {{t+|sh|vjera|f}}
+* Swedish: {{t+|sv|tro|c}}
+* Telugu: {{t+|te|నమ్మకము}}, {{t+|te|విశ్వాసము}}
+{{trans-bottom}}
+
+{{trans-top|the quality or state of believing}}
+* Bulgarian: {{t+|bg|вяра}}
+* Catalan: {{t+|ca|creença|f}}
+* Czech: {{t+|cs|víra|f}}
+* Dutch: {{t+|nl|geloof|f}}
+* Estonian: {{t|et|usk}}, {{t|et|lootus}}
+* Finnish: {{t+|fi|usko}}, {{t+|fi|luottamus}}
+* French: {{t+|fr|conviction|f}}
+* German: {{t+|de|Glaube|m}}
+* Greek: {{t+|el|δοξασία|f}}, {{t+|el|δόγμα|n}}
+* Italian: {{t+|it|convinzione|f}}
+{{trans-mid}}
+* Persian: {{t+|fa|باور|tr=bâvar|sc=fa-Arab}}
+* Polish: {{t+|pl|wiara|f}}
+* Portuguese: {{t+|pt|crença|f}}
+* Romanian: {{t+|ro|convingere|f}}, {{t+|ro|convicțiune|f}}
+* Scottish Gaelic: {{t|gd|beachd|m}}, {{t|gd|barail|f}}
+* Serbo-Croatian:
+*: Cyrillic: {{t|sh|веровање|n}}, {{t|sh|вјеровање|n}}
+*: Roman: {{t+|sh|verovanje|n}}, {{t+|sh|vjerovanje|n}}
+* Swedish: {{t+|sv|tro|c}}
+* Telugu: {{t+|te|నమ్మకము}}, {{t+|te|విశ్వాసము}}
+{{trans-bottom}}
+
+{{trans-top|religious faith}}
+* Arabic: {{t+|ar|عقيدَة}}
+* Bulgarian: {{t+|bg|вя́ра}}
+* Catalan: {{t+|ca|creença|f}}
+* Chinese:
+*: Mandarin: {{t+|cmn|信仰|tr=xìnyǎng|sc=Hani}}, {{t+|cmn|信教|tr=xìnjiào|sc=Hani}}
+* Czech: {{t+|cs|víra|f}}
+* Dalmatian: {{t|dlm|faid|f}}
+* Dutch: {{t+|nl|geloof|f}}
+* Estonian: {{t|et|usk}}
+* Faroese: {{t|fo|trúgv|f}}
+* Finnish: {{t+|fi|usko}}
+* French: {{t+|fr|foi|f}}, {{t+|fr|croyance|f}}
+* Georgian: {{t|ka|მრწამსი|sc=Geor}}, {{t|ka|რჯული|sc=Geor}}
+* German: {{t+|de|Glauben|m}}
+* Greek: {{t+|el|πίστη|f}}
+* Indonesian: {{t+|id|keyakinan}}
+* Italian: {{t+|it|fede}}, {{t+|it|credo}}, {{t+|it|credenza}}
+{{trans-mid}}
+* Japanese: {{t+|ja|信仰|tr=しんこう, shinkō}}
+* Khmer: {{t+|km|ជំនឿ|tr=chom neur|sc=Khmr}}
+* Kurdish:
+*: Sorani: {{t+|ku|بڕوا}}, {{t+|ku|باوه‌ر}}
+* Navajo: {{t|nv|oodlą́ʼ}} {{qualifier|sheʼoodlą́ʼ, my belief}}
+* Norman: {{t|nrf|crianche|f}}
+* Polish: {{t+|pl|wiara|f}}, {{t+|pl|wierzenie|n}}
+* Portuguese: {{t+|pt|crença|f}}
+* Quechua: {{t|qu|iñi}}
+* Romanian: {{t+|ro|credință}}
+* Russian: {{t+|ru|ве́ра|f}}, {{t+|ru|ве́рование|n}}
+* Scottish Gaelic: {{t|gd|creideamh|m}}
+* Serbo-Croatian:
+*: Cyrillic: {{t|sh|вера|f}}, {{t|sh|вјера|f}}
+*: Roman: {{t+|sh|vera|f}}, {{t+|sh|vjera|f}}
+* Swedish: {{t+|sv|tro|c}}
+* Telugu: {{t|te|మతవిశ్వాశం|sc=Telu}}
+* Zulu: {{t+|zu|ukholo}}
+{{trans-bottom}}
+
+{{trans-top|religious or moral convictions}}
+* Arabic: {{t+|ar|إيمان}}
+* Bulgarian: {{t+|bg|вяра}}, {{t+|bg|убеждение}}
+* Czech: {{t|cs|přesvědčení|n}}, {{t+|cs|víra|f}}
+* Dutch: {{t+|nl|geloof|f}}
+* Estonian: {{t|et|veendumus}}
+* Finnish: {{t+|fi|vakaumus}}
+* German: {{t+|de|Glauben|m}}
+* Greek: {{t+|el|πιστεύω|n}}
+* Hungarian: {{t+|hu|hit}}, {{t+|hu|meggyőződés}}
+* Italian: {{t+|it|convinzioni|p|f}}
+{{trans-mid}}
+* Kurdish:
+*: Sorani: {{t+|ku|بڕوا}}{{t+|ku|باوه‌ر}}
+* Polish: {{t+|pl|wiara|f}}, {{t+|pl|wierzenie|n}}
+* Portuguese: {{t+|pt|crença|f}}
+* Romanian: {{t+|ro|credință}}
+* Scottish Gaelic: {{t|gd|creideamh|m}}
+* Serbo-Croatian:
+*: Cyrillic: {{t|sh|вера|f}}, {{t|sh|вјера|f}}
+*: Roman: {{t+|sh|vera|f}}, {{t+|sh|vjera|f}}
+* Swedish: {{t+|sv|tro|c}}
+{{trans-bottom}}
+
+{{trans-top|a wishing of case or circumstance to be true}}
+* Estonian: {{t|et|usk}}
+* Finnish: {{t+|fi|usko}}
+* Italian: {{t+|it|fiducia|f}}
+* Polish: {{t+|pl|wiara|f}}
+{{trans-mid}}
+* Serbo-Croatian:
+*: Cyrillic: {{t|sh|уверење|n|sc=Cyrl}}, {{t|sh|увјерење|n}}
+*: Roman: {{t+|sh|uverenje|n}}, {{t+|sh|uvjerenje|n}}
+{{trans-bottom}}
+
+{{checktrans-top}}
+* Breton: {{t+check|br|kredenn|f}}
+* Cebuano: {{t-check|ceb|pagtuo}}
+* French: {{t+check|fr|croyance|f}}
+* Guaraní: {{t-check|gn|jerovia}}
+* Indonesian: {{t+check|id|yakin|alt=keyakinan}} &lt;!-- was &quot;[[yakin|keyakinan]]&quot; - assumed inflected form or vocalised spelling; please verify if linking is acceptable. see [[User:Kephir/gadgets/xte#Translation_fixing]] --&gt;, {{t+check|id|percaya|alt=kepercayaan}} &lt;!-- was &quot;[[percaya|kepercayaan]]&quot; - assumed inflected form or vocalised spelling; please verify if linking is acceptable. see [[User:Kephir/gadgets/xte#Translation_fixing]] --&gt;
+* Interlingua: {{t-check|ia|credentia}}
+* Maltese: {{t-check|mt|twemmien}}
+{{trans-mid}}
+* Romanian: {{t+check|ro|credință|f}}
+* Spanish: {{t+check|es|creencia}}
+* Swahili: {{t+check|sw|imani}}
+* Tamil: {{t+check|ta|நம்பிக்கை|sc=Taml}}, {{t+check|ta|நம்பகம்|sc=Taml}}
+* Tupinambá: {{t-check|tpn|îerobîara}}
+* Turkish: {{t+check|tr|inanç}}
+{{trans-bottom}}
+
+===Anagrams===
+* {{anagrams|en|befile|belfie}}
+
+[[Category:English words following the I before E except after C rule]]
+
+----
+
+==Dutch==
+
+===Pronunciation===
+* {{audio|Nl-belief.ogg|Audio|lang=nl}}
+
+===Verb===
+{{nl-verb-form}}
+
+# {{nl-verb form of|m=imp|believen}}
+
+----
+
+==German==
+
+===Pronunciation===
+* {{IPA|[bəˈliːf]|lang=de}}
+* {{hyphenation|be|lief|lang=de}}
+
+===Verb===
+{{head|de|verb form}}
+
+# {{inflection of|belaufen||1|s|pret|lang=de}}
+# {{inflection of|belaufen||3|s|pret|lang=de}}</text>
+      <sha1>87smx7dngy1w4wseuit793q0q4ezkmc</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>peel</title>
+    <ns>0</ns>
+    <id>62362</id>
+    <revision>
+      <id>48341952</id>
+      <parentid>48325646</parentid>
+      <timestamp>2017-12-30T01:22:06Z</timestamp>
+      <contributor>
+        <username>NadandoBot</username>
+        <id>394541</id>
+      </contributor>
+      <minor/>
+      <comment>Order and balance translation tables.</comment>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text xml:space="preserve" bytes="11380">{{also|Peel}}
+==English==
+{{was wotd|2016|January|13}}
+{{wikipedia|dab=peel}}
+
+===Pronunciation===
+* {{IPA|/piːl/|[piːɫ]|[piː.ɫ̩]|lang=en}}
+* {{rhymes|iːl|lang=en}}
+* {{homophones|lang=en|peal}}
+
+===Etymology 1===
+From {{inh|en|enm|pelen}} itself from {{inh|en|ang|pilian}} and {{der|en|fro|peler}}, {{m|fro|pellier}}, both from {{der|en|la|pilo|pilō, pilāre|to remove hair from, depilate}}, from {{m|la|pilus||hair}}.
+
+====Verb====
+{{en-verb}}
+
+# {{lb|en|transitive}} To remove the skin or outer covering of.
+#: ''I sat by my sister's bed, '''peeling''' oranges for her.''
+#* Shakespeare:
+#*: The skillful shepherd '''peeled''' me certain wands.
+# {{lb|en|transitive}} To remove something from the outer or top layer of.
+#: ''I '''peeled''' (the skin from) a banana and ate it hungrily.''
+#: ''We '''peeled''' the old wallpaper off in strips where it was hanging loose.''
+# {{lb|en|intransitive}} To become detached, come away, especially in flakes or strips; to shed skin in such a way.
+#: ''I had been out in the sun too long, and my nose was starting to '''peel'''.''
+# {{lb|en|intransitive}} To remove one's clothing.
+#: ''The children '''peeled''' by the side of the lake and jumped in.''
+# {{lb|en|intransitive}} To [[move]], [[separate]] (off or away).
+#: ''The scrum-half '''peeled''' off and made for the touchlines.''
+
+=====Synonyms=====
+* {{sense|remove outer covering}} {{l|en|skin}}, {{l|en|strip}}
+* {{sense|remove clothing}} {{l|en|disrobe}}, {{l|en|strip}}
+
+=====Derived terms=====
+{{der-top}}
+* {{l|en|keep one's eyes peeled}} (i.e., with eyelids open)
+* {{l|en|peeler}}
+{{der-mid}}
+* {{l|en|peel off}}
+* {{l|en|peel out}}
+{{der-bottom}}
+
+=====Translations=====
+{{trans-top|to remove skin}}
+* Arabic: {{t+|ar|قَشَرَ}}
+* Chinese:
+*: Mandarin: {{t+|cmn|削皮|tr=xiāopí|sc=Hani}}, {{t+|cmn|剝皮|sc=Hani}}, {{t+|cmn|剥皮|tr=bāopí|sc=Hani}}
+* Czech: {{t+|cs|loupat}}
+* Danish: {{t|da|skrælle}}
+* Dutch: {{t+|nl|schillen}}
+* Estonian: {{t|et|koorima}}
+* Ewe: {{t|ee|fo}}
+* Finnish: {{t+|fi|kuoria}}
+* French: {{qualifier|peach,onion}} {{t+|fr|peler}}, {{qualifier|vegetable,fruit}} {{t+|fr|éplucher}}, {{qualifier|crustacean}} {{t+|fr|décortiquer}}
+* Georgian: {{t-needed|ka}}
+* German: {{t+|de|schälen}}
+* Greek: {{t+|el|ξεφλουδίζω}}, {{t+|el|αποφλοιώνω}}
+* Hungarian: {{t+|hu|hámoz}}
+* Irish: {{t|ga|snamh}}
+* Italian: {{t+|it|pelare}}, {{t+|it|sbucciare}}
+* Japanese: {{t+|ja|むく|tr=かわをむく, kawa o muku|alt=皮を剥く|sc=Jpan}}
+* Korean: {{t+|ko|깎다}}, {{t+|ko|까다}}, {{t+|ko|벗기다}}
+* Kurdish:
+*: Sorani: {{t+|ku|پاک کردن|sc=ku-Arab}}
+{{trans-mid}}
+* Latgalian: {{t|ltg|skust}}, {{t|ltg|laupeit}}
+* Latin: {{t|la|glubere}}
+* Latvian: {{t|lv|mizot}}
+* Maori: {{t|mi|pīhore}}, {{t|mi|tīhore}}
+* Ngazidja Comorian: {{t|zdj|wadja|alt=uwadja}}
+* Norman: {{t|nrf|p'ler}}
+* Norwegian: {{t|no|skrelle}}
+* Occitan: {{t+|oc|pelar}}
+* Portuguese: {{t+|pt|descascar}}
+* Russian: {{t+|ru|очища́ть|impf}}, {{t+|ru|очи́стить|pf}} {{qualifier|кожуру́, шелуху́}}
+* Scottish Gaelic: {{t|gd|rùisg}}
+* Spanish: {{t+|es|pelar}}
+* Swahili: {{t+|sw|menya|alt=kumenya}}
+* Swedish: {{t+|sv|skala}}
+* Thai: {{t+|th|ปอก}}
+* Vietnamese: {{t+|vi|gọt}}
+* Walloon: {{t+|wa|peler}}
+{{trans-bottom}}
+
+{{trans-top|to remove the outer layer}}
+* Arabic:
+*: Moroccan Arabic: {{t|ary|قشر|tr=qəššər|alt=قشّر}}
+* Dutch: {{t+|nl|schillen}}
+* Finnish: {{t+|fi|kuoria}}
+{{trans-mid}}
+* Maori: {{t|mi|tīhore}}, {{t|mi|pīokaoka}}
+* Swedish: {{t+|sv|skala}}
+* Thai: {{t+|th|ปอก}}
+* Walloon: {{t+|wa|peler}}, {{t+|wa|schaver}}
+{{trans-bottom}}
+
+{{trans-top|to come away, especially in flakes or strips}}
+* Finnish: {{t+|fi|kuoriutua}}
+{{trans-mid}}
+{{trans-bottom}}
+
+{{trans-top|to remove one's clothing}}
+* Finnish: {{t+|fi|riisuutua}}
+{{trans-mid}}
+{{trans-bottom}}
+
+{{checktrans-top}}
+* Romanian: {{t-check|ro|a coji}}
+{{trans-mid}}
+{{trans-bottom}}
+
+====Noun====
+{{en-noun|~|peels}}
+
+# {{lb|en|usually|uncountable}} The [[skin]] or outer layer of a fruit, vegetable, etc.
+# {{lb|en|countable|rugby}} The action of peeling away from a formation.
+# {{lb|en|countable}} A [[cosmetic]] preparation designed to remove dead skin or to [[exfoliate]].
+
+=====Synonyms=====
+* {{sense|skin of a fruit}} {{l|en|rind}}, {{l|en|zest}}
+
+=====Derived terms=====
+* {{l|en|orange peel}}
+* {{l|en|peel strength}}
+
+=====Translations=====
+{{trans-top|skin of a fruit}}
+* Arabic: {{t|ar|قِشْرَة|f}}
+* Chinese:
+*: Mandarin: {{t+|cmn|果皮|tr=guǒpí|sc=Hani}}, {{t+|cmn|皮|tr=pí|sc=Hani}}
+* Danish: {{t|da|skræl}}
+* Dutch: {{t+|nl|schil|f}}
+* Ewe: {{t|ee|fo}}
+* Finnish: {{t+|fi|kuori}}
+* French: {{qualifier|peach,onion}} {{t+|fr|pelure|f}}, {{qualifier|vegetable,fruit}} {{t+|fr|épluchure|f}}
+* Georgian: {{t-needed|ka}}
+* German: {{t+|de|Schale|f}}
+* Greek: {{t+|el|φλοιός|m}}, {{t+|el|φλούδα|f}}
+* Hebrew: {{t+|he|קליפה|f|tr=klipá|sc=Hebr}}
+* Hungarian: {{t+|hu|héj}}
+* Icelandic: {{t|is|hýði}}
+{{trans-mid}}
+* Italian: {{t+|it|buccia|f}}
+* Japanese: {{t+|ja|皮|tr=[[かわ]], kawa|sc=Jpan}}, {{t|ja|果皮|tr=かひ, kahi|sc=Jpan}}
+* Mongolian: {{t+|mn|хальс|sc=Cyrl}}
+* Norman: {{t|nrf|p'liche|f}}
+* Korean: {{t+|ko|껍질}}
+* Latgalian: {{t|ltg|skrejš}}
+* Latvian: {{t+|lv|miza}}
+* Norwegian: {{t+|no|skall|n}}
+* Occitan: {{t|oc|pelanha|f}}, {{t|oc|pelalha|f}}, {{t|oc|pelofa|f}}, {{t+|oc|pelhòfa|f}}
+* Portuguese: {{t+|pt|casca|f}}
+* Russian: {{t+|ru|кожура́}}, {{t+|ru|ко́рка|f}}, {{qualifier|husk}} {{t+|ru|шелуха́|f}}, {{t+|ru|ко́жица|f}}, {{t+|ru|шку́рка|f}}
+* Spanish: {{t+|es|cáscara|f}}
+* Swahili: {{t+|sw|ganda}}
+* Swedish: {{t+|sv|skal|n}}
+* Telugu: {{t+|te|తొక్క}}
+* Zulu: {{t+|zu|ikhasi|c5|c6}}
+{{trans-bottom}}
+
+{{trans-top|(Rugby football) The action of peeling away from a formation}}
+* Swahili: {{t+|sw|ganda}}
+{{trans-mid}}
+{{trans-bottom}}
+
+{{trans-top|cosmetic preparation}}
+* Finnish: {{t|fi|kuorintavoide}}
+{{trans-mid}}
+* Swahili: {{t+|sw|ganda}}
+{{trans-bottom}}
+
+{{checktrans-top}}
+&lt;!--please remove this template once the word has been categorized--&gt;
+* Romanian: {{t-check|ro|coajă}}
+{{checktrans-bottom}}
+
+===Etymology 2===
+{{etyl|xno|en}} and {{etyl|fro|en}} {{m|fro|pel}} (compare modern French {{m|fr|pieu}}), from {{etyl|la|en}} {{m|la|palus||stake}}.
+
+====Noun====
+{{en-noun}}
+
+# {{lb|en|obsolete}} A [[stake]].
+# {{lb|en|obsolete}} A fence made of stakes; a [[stockade]].
+# {{lb|en|archaic}} A small [[tower]], [[fort]], or [[castle]]; a [[keep]].
+
+=====Derived terms=====
+* {{l|en|peel-house}}, {{l|en|peelhouse}}
+* {{l|en|peel-tower}}
+
+===Etymology 3===
+From {{etyl|fro|en}} {{m|fro|pele}} (compare modern {{m|fr|pelle}}), from {{etyl|la|en}} {{m|la|pala}}, from the base of {{m|la|plangere||fix, plant}}.
+
+====Noun====
+{{en-noun}}
+
+# A [[shovel]] or similar instrument, now especially a [[pole]] with a flat disc at the end used for removing [[pizza]] or [[loaves]] of [[bread]] from a baker's oven.
+# A T-shaped implement used by [[printer]]s and [[bookbinder]]s for hanging wet sheets of [[paper]] on lines or poles to dry.
+# {{lb|en|archaic|US}} The [[blade]] of an [[oar]].
+
+=====Translations=====
+{{trans-top|spadelike implement for removing loaves from an oven}}
+* Dutch: {{t|nl|zwaalde|f}}, {{t+|nl|ovenpaal|m}}
+* Finnish: {{t+|fi|leipälapio}}
+* German: {{t|de|Brotschieber|m}}
+* Greek: {{t+|el|φτυάρι|n}}
+* Polish: {{t+|pl|łopata|f}}, {{t|pl|lofer|m}}
+{{trans-mid}}
+* Sorbian:
+*: Lower Sorbian: {{t|dsb|łopatka|f}}
+* Spanish: {{t+|es|pala|f}}
+* Westrobothnian: {{t|gmq-bot|spilu|f}}
+{{trans-bottom}}
+
+===Etymology 4===
+Origin unknown.
+
+====Noun====
+{{en-noun}}
+
+# {{lb|en|Scotland|and|curling}} An [[equal]] or [[match]]; a [[draw]].
+# {{lb|en|curling}} A [[takeout]] which removes a [[stone]] from play as well as the delivered stone.
+
+===Etymology 5===
+Named from Walter H. Peel, a noted 19th-century croquet player.
+
+====Verb====
+{{en-verb}}
+
+# {{lb|en|croquet}} To send through a [[hoop]] (of a ball other than one's own).
+
+===Etymology 6===
+Misspelling of [[peal]].
+
+====Verb====
+{{en-verb}}
+
+# {{misspelling of|peal|nodot=1|lang=en}}: to [[sound]] [[loudly]].
+#* '''1825''' June 25, &quot;My Village Bells&quot;, in ''The Circulator of Useful Knowledge, Literature, Amusement, and General Information'' number XXVI, available in, 1825, ''The Circulator of Useful Amusement, Literature, Science, and General Information'', page 401,
+#*: Oh&amp;nbsp;! still for me let merry bells '''peel''' out their holy chime;
+#* '''1901''' January 1, &quot;Twentieth Century's Triumphant Entry&quot;, ''[[w:The New York Times|The New York Times]]'', page 1,&lt;!--confirmed on microfilm--&gt;
+#*: The lights flashed, the crowds sang,... bells '''peeled''', bombs thundered,... and the new Century&lt;!--sic capital C--&gt; made its triumphant entry.
+#* '''2006''', Miles Richardson, ''Being-In-Christ and Putting Death in Its Place'', [[w:Louisiana State University Press|Louisiana State University Press]], {{ISBN|0807132047}}, pages 230–231,
+#*: As the tiny Virgin... approaches one of the barrio churches, bells '''peel''' vigorously, a brass band launches into a fast-paced tune, and large rockets zoom...&amp;nbsp;.
+
+===Etymology 7===
+{{etyl|fro|en}} {{m|fro|piller||pillage}}.
+
+====Verb====
+{{en-verb}}
+
+# {{lb|en|archaic|transitive}} To [[plunder]]; to [[pillage]], [[rob]].
+#* Milton:
+#*: But govern ill the nations under yoke, / '''Peeling''' their provinces.
+#* {{quote-book|author=James Howell|authorlink=James Howell|chapter=England’s Tears, for the Present Wars, which for the Nature of the Quarrel, the Quality of the Strength, the Diversity of Battels, Skirmishes, Encounters, and Sieges, (Happened in so Short a Compasse of Time) Cannot be Parallel’d in Any Precedent Age|title=[[w:Dodona's Grove|ΔΕΝΔΡΟΛΟΓΊΑ [DENDROLOGIA]: Dodona’s Grove, or The Vocall Forrest. The Third Edition More Exact and Perfect than the Former; with the Addition of Two Other Tracts: viz. Englands Tears for the Present Wars. And The Pre-eminence of Parlements]]|edition=3rd|location=Cambridge|publisher=Printed by R. D. for {{w|Humphrey Moseley}}, and are to be sold at his shop at the Prince's Arms in [[w:St Paul's Cathedral|S. Pauls Church-yard]]|year=1645|page=189|pageurl=https://books.google.com.sg/books?id=JAU-AQAAMAAJpg=RA1-PA189|oclc=931321630|passage=''O conſider my caſe, moſt blisfull Queen,'' {{...}} ''Diſpell thoſe Clouds which hover 'twixt my King and his higheſt Counſell,'' {{...}} ''that my great Law-making Court be forced to turn no more to polemicall Committees,'' {{...}} ''but that they may come again to the old Parliamentary Rode,'' To the path of their Predeceſſours, to conſult of means how to ſweep away thoſe Cobwebs that hang in the Courts of Juſtice, and to make the Laws run in their right Channell; to retrench exceſſive fees, and finde remedies for the future, that the poor Client be not ſo '''peeled''' by his Lawyer, and made to ſuffer by ſuch monſtrous delays, that one may go from one Tropick to the other, and croſſe the Equinoctiall twenty times, before his ſute be done; {{...}}}}
+
+===See also===
+* {{l|en|peel out}}
+
+===Anagrams===
+* {{anagrams|en|LEEP|Leep|Lepe|Pele}}
+
+[[Category:English eponyms]]
+[[Category:English terms with multiple etymologies]]
+
+----
+
+==Wolof==
+
+===Noun===
+{{head|wo|noun}}
+
+# [[shovel]]</text>
+      <sha1>e9ppam6qnsq5hocechgpf4eulpshu4n</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>heel</title>
+    <ns>0</ns>
+    <id>6243</id>
+    <revision>
+      <id>48393949</id>
+      <parentid>47657369</parentid>
+      <timestamp>2018-01-10T01:07:25Z</timestamp>
+      <contributor>
+        <username>Word dewd544</username>
+        <id>533603</id>
+      </contributor>
+      <minor/>
+      <comment>/* Translations */</comment>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text xml:space="preserve" bytes="19925">{{also|Heel|hééł}}
+==English==
+{{wikipedia|dab=heel (disambiguation)|heel}}
+{{wikipedia|Heel|Heel (part of the foot)}}
+
+===Pronunciation===
+* {{IPA|/hiːl/|lang=en}}
+* {{audio|en-us-heel.ogg|Audio (US)|lang=en}}
+* {{rhymes|iːl|lang=en}}
+* {{homophones|lang=en|heal|he'll|hill}} {{qualifier|in some dialects}}
+
+===Etymology 1===
+From {{inh|en|enm|hele}}, {{m|enm|heel}}, from {{inh|en|ang|hēla}}, from {{inh|en|gem-pro|*hanhilaz}} (compare North Frisian {{m|frr|hael}}, Dutch {{m|nl|hiel}}, {{cog|da|-}} and {{cog|no|hæl}} Swedish {{m|sv|häl}}), diminutive of {{der|en|gem-pro|*hanhaz||hock}}, equivalent to {{suffix|en|hock|le|nocat=1}}. More at {{l|en|hock}}.
+
+====Noun====
+{{en-noun}}
+[[File:Girls_heel.jpg|thumb|right|A girl's heel]]
+[[File:Jud-teisho.svg|thumb|'''heel''' of the hand]]
+[[Image:Caraway_bread.jpg|thumb|right|Heel of a loaf of rye bread]]
+
+# {{lb|en|anatomy}} The rear part of the [[foot]], where it joins the [[leg]].
+#* {{rfdate|and other bibliographic particulars}} {{w|John Denham (poet)|John Denham}}
+#*: He [the stag] calls to mind his strength and then his speed, / His winged '''heels''' and then his armed head.
+# The part of a [[shoe]]'s [[sole]] which supports the foot's heel.
+# The rear part of a [[sock]] or similar covering for the foot.
+# The part of the [[palm]] of a hand closest to the [[wrist]].
+#: {{ux|en|He drove the '''heel''' of his hand into the man's nose.}}
+# {{lb|en|usually plural}} A woman's [[high-heeled]] shoe.
+#* '''2008''', Kwame Shauku, ''Wonderful Williams and the Magnificent Seven'' (page 257)
+#*: She'd been wearing '''heels''', and fell backward off her right '''heel''' and twisted or broke her ankle.
+#* '''2011''', Candace Irvine, ''A Dangerous Engagement''
+#*: Opting to improve her odds of making it up the stairs and into the privacy of her room, she kicked off her left '''heel''', and then her right before leaning down to scoop them up.
+#* '''2015''', Alex Blackmore, ''Killing Eva''
+#*: Flat shoes. As she pushed off her left '''heel''' and pressed the sole of her foot to the cold floor she looked forward to them.
+# {{lb|en|firearms}} The back, upper part of the [[stock]].
+# The last or lowest part of anything.
+#: {{ux|en|the '''heel''' of a mast}}
+#: {{ux|en|the '''heel''' of a vessel}}
+#* {{rfdate|and other bibliographic particulars}} {{w|Anthony Trollope}}
+#*: the '''heel''' of a hunt
+# {{lb|en|US|Ireland}} A [[crust]] end-piece of a [[loaf]] of [[bread]].
+#* {{rfdate|and other bibliographic particulars}} Sir {{w|Walter Scott}}
+#*: the '''heel''' of the white loaf
+# {{lb|en|US}} The [[base]] of a [[bun]] sliced in half lengthwise.
+#* '''1996''', Ester Reiter, ''Making Fast Food: From the Frying Pan Into the Fryer'' (page 100)
+#*: The bottom half, or the bun '''heel''' is placed in the carton, and the pickle slices spread evenly over the meat or cheese.
+# A [[contemptible]], [[inconsiderate]] or [[thoughtless]] person.
+# {{lb|en|slang|professional wrestling}} A [[headline|headlining]] wrestler regarded as a &quot;bad guy,&quot; whose ring persona embodies villainous or reprehensible traits and demonstrates characteristics of a [[braggart]] and a [[bully]].
+#* '''1992''', Bruce Lincoln, ''Discourse and the Construction of Society'' (page 158)
+#*: Freedman began his analysis by noting two important facts about professional wrestling: First, that '''heels''' triumph considerably more often than do babyfaces{{...}}
+# {{lb|en|card games}} The [[card]]s set aside for later use in a [[patience]] or [[solitaire]] game.
+# Anything resembling a human heel in shape; a [[protuberance]]; a [[knob]].
+# {{lb|en|architecture}} The lower end of a [[timber]] in a [[frame]], as a [[post]] or [[rafter]].
+# {{lb|en|specifically|US}} The [[obtuse]] angle of the lower end of a rafter set sloping.
+# {{lb|en|architecture|workman slang}} A [[cyma reversa]].
+#: {{rfquotek|Gwilt}}
+# {{lb|en|carpentry}} The short side of an angled cut.
+# {{lb|en|golf}} The part of a [[club]] [[head]]'s [[face]] nearest the [[shaft]].
+# In a [[carding machine]], the part of a [[flat]] nearest the [[cylinder]].
+
+=====Synonyms=====
+* {{sense|end of bread}} {{l|en|ender}}, {{l|en|outsider}} {{qualifier|Scotland}}
+
+=====Antonyms=====
+* {{sense|headlining wrestler}} {{l|en|babyface}}
+* {{sense|angled cut in carpentry}} {{l|en|toe}}
+
+=====Derived terms=====
+{{rel-top3|Terms derived from ''heel'' (noun, etymology 1)}}
+* {{l|en|Achilles heel}}
+* {{l|en|bring someone to heel}}
+* {{l|en|cool one's heels}}
+* {{l|en|dig in one's heels}}
+* {{l|en|down at heel}}
+* {{l|en|head over heels}}
+* {{l|en|heelside}}
+{{rel-mid3}}
+* {{l|en|heel-and-toe}}
+* {{l|en|high heels}}
+* {{l|en|hot on somebody's heels}}
+* {{l|en|kick one's heels}}
+* {{l|en|kick up one's heels}}
+* {{l|en|kitten heel}}
+* {{l|en|Tar Heel}}
+{{rel-mid3}}
+* {{l|en|stiletto heel}}
+* {{l|en|spike heel}}
+* {{l|en|take to one's heels}}
+* {{l|en|turn on one's heel}}
+* {{l|en|well-heeled}}
+{{rel-bottom}}
+
+=====Translations=====
+{{trans-top|anatomy: part of the foot}}
+* Afrikaans: {{t|af|hiel}}
+* Albanian: {{t+|sq|thembër|f}}, {{t+|sq|thundër|f}}
+* Arabic: {{t|ar|عَقِب|m}}, {{t|ar|كَعْب|m}}
+*: Egyptian Arabic: {{t|arz|كعب|m|tr=kaʿb|sc=Arab}}
+* Armenian: {{t+|hy|կրունկ}}, {{t+|hy|գարշապար}}
+*: Old Armenian: {{t|xcl|կրուկն}}, {{t|xcl|կրուկ}}
+* Aromanian: {{t|rup|cãlcãnju|n}}, {{t|rup|cãlcãnju|n}}, {{t|rup|cãlcãnj|n}}
+* Asturian: {{t+|ast|calcañu|m}}
+* Azeri: {{t+|az|daban}}
+* Bashkir: {{t|ba|үксә|sc=Cyrl}}
+* Basque: {{t|eu|orpo}}
+* Bau Bidayuh: {{t|sne|tiga}}
+* Belarusian: {{t|be|пя́тка|f}}
+* Bengali: {{t|bn|এড়ি|tr=eŗi|sc=Beng}}
+* Bulgarian: {{t+|bg|пета́|f}}
+* Burmese: {{t+|my|ခြေဖနောင့်}}
+* Catalan: {{t+|ca|taló|m}}
+* Central Melanau: {{t|mel|tug}}
+* Chinese:
+*: Mandarin: {{t+|cmn|腳跟|sc=Hani}}, {{t+|cmn|脚跟|tr=jiǎogēn|sc=Hani}}, {{t+|cmn|後跟|sc=Hani}}, {{t+|cmn|后跟|tr=hòugēn|sc=Hani}}
+* Coptic: {{t|cop|ⲑⲓⲃⲥ|m}}, {{t|cop|ϧⲁ|m}}
+* Cornish: {{t|kw|gwewen|f}}, {{t|kw|seudhel|m}}
+* Czech: {{t+|cs|pata|f}}
+* Danish: {{t+|da|hæl|c}}
+* Dutch: {{t+|nl|hak|c}}, {{t+|nl|hiel|c}}
+* Estonian: {{t|et|kand}}, {{t|et|konts}}
+* Ewe: {{t|ee|afɔkpodzi}}
+* Faroese: {{t|fo|hælur|m}}
+* Finnish: {{t+|fi|kanta}}, {{t+|fi|kantapää}}
+* French: {{t+|fr|talon|m}}
+* Friulian: {{t|fur|calcagn|m}}
+* Galician: {{t+|gl|talón|m}}
+* Gamilaraay: {{t|kld|dhanga}}
+* Georgian: {{t|ka|ქუსლი}}
+* German: {{t+|de|Ferse|f}}
+* Greek: {{t+|el|φτέρνα|f}}
+*: Ancient Greek: {{t|grc|πτέρνη|f}}, {{t|grc|πτέρνα|f}}
+* Guaraní: {{t|gn|pyta}}
+* Haitian Creole: {{t|ht|talon}}
+* Hebrew: {{t+|he|עָקֵב|sc=Hebr}}
+* Hindi: {{t+|hi|एड़ी|f|tr=eṛī|sc=Deva}}, {{t+|hi|एड़|f|tr=eṛ|sc=Deva}}
+* Hungarian: {{t+|hu|sarok}}
+* Icelandic: {{t+|is|hæll|m}}
+* Ido: {{t+|io|talono}}
+* Indonesian: {{t+|id|tumit}}, {{t+|id|tumit}} {{t+|id|kaki}}
+* Interlingua: {{t|ia|calce}}, {{t|ia|talon}}
+* Iranun: {{t|ill|palu}}
+* Irish: {{t|ga|sáil|f}}
+* Italian: {{t+|it|tallone|m}}, {{t+|it|calcagno|m}}
+* Japanese: {{t+|ja|踵|tr=かかと, kakato}}, {{t|ja|ヒール|tr=hīru}}
+* Javanese: {{t+|jv|tungkak}}
+* Kazakh: {{t|kk|өкше|sc=Cyrl}}, {{t+|kk|табан|sc=Cyrl}}, {{t|kk|тақа|sc=Cyrl}}
+* Khmer: {{t|km|ចង្កោយ|tr=cɑŋkaoy|sc=Khmr}}
+* Kimaragang: {{t|kqr|tontod}}
+* Korean: {{t|ko|발뒤꿈}}, {{t+|ko|발뒤꿈치}}
+* Kyrgyz: {{t+|ky|согончок|sc=Cyrl}}
+* Lao: {{t|lo|ສົ້ນ|tr=sȍn|sc=Laoo}}
+* Latgalian: {{t|ltg|papīds}}
+* Latin: {{t|la|calx|f}}
+* Latvian: {{t|lv|papēdis|m}}
+* Lithuanian: {{t+|lt|kulnas|m}}
+* Lotud: {{t|dtr|gontod}}, {{t|dtr|atad}}
+* Low German: {{t|nds|Hack|f}}
+* Luxembourgish: {{t|lb|Feescht|f}}
+{{trans-mid}}
+* Macedonian: {{t|mk|пе́тица|f}}, {{t+|mk|пе́та|f}}
+* Malay: {{t|ms|tumit}}
+* Manx: {{t|gv|saayl}}
+* Mizo: {{t|lus|keartui}}
+* Mongolian: {{t+|mn|өсгий|sc=Cyrl}}
+* Navajo: {{t|nv|akétal}}
+* Norman: {{t|nrf|talon|m}}
+* North Frisian:
+*: Föhr: {{t|frr|haiel|m}}
+* Northern Altai: {{t|atv|эјэк|tr=eĉek}} ,{{t|atv|эшэк|tr=eśek}}
+* Norwegian:
+*: Bokmål: {{t+|nb|hæl|m}}
+*: Nynorsk: {{t|nn|hæl|m}}
+* Old Church Slavonic: {{t|cu|пѧта|f}}
+* Ottoman Turkish: {{t|ota|طوپق|tr=topuk|sc=ota-Arab}}, {{t|ota|عقب|tr=akab|sc=ota-Arab}}, {{t|ota|اوكچه|tr=ökçe|sc=ota-Arab}}
+* Pashto: {{t+|ps|پونده|f|tr=punda|sc=ps-Arab}}
+* Persian: {{t+|fa|پاشنه|tr=pâšne}}
+* Polish: {{t+|pl|pięta|f}}
+* Portuguese: {{t+|pt|calcanhar|m}}
+* Romanian: {{t+|ro|călcâi}}
+* Romansch: {{t|rm|chaltgogn|m}}, {{t|rm|calcogn|m}}, {{t|rm|chalchagn|m}}, {{t|rm|caltgogn|m}}, {{t|rm|chalcogn|m}}
+* Rungus: {{t|drg|totod}}
+* Russian: {{t+|ru|пя́тка|f}}, {{t+|ru|пята́|f}} {{qualifier|rare, poetic}}
+* Sabah Bisaya: {{t|bsy|tunob}}
+* Sardinian: {{t|sc|calcanzu|m}}, {{t|sc|carcàngiu}}, {{t|sc|calcanzu|m}}, {{t|sc|cracàngiu|m}}, {{t|sc|cracanzu|m}}
+* Scottish Gaelic: {{t|gd|sàil|f}}
+* Sebop: {{t|sib|tumit}}
+* Serbo-Croatian:
+*: Cyrillic: {{t|sh|пета|f|sc=Cyrl}}
+*: Roman: {{t+|sh|peta|f}}
+* Sicilian: {{t+|scn|caccagnu|m}}, {{t+|scn|carcagnu|m}}, {{t+|scn|calcagnu|m}}
+* Sinhalese: {{t|si|අඩිය|sc=Sinh}}
+* Slovak: {{t|sk|päta|f}}
+* Slovene: {{t+|sl|peta|f}}
+* Sorbian:
+*: Lower Sorbian: {{t|dsb|pěta|f}}
+*: Upper Sorbian: {{t|hsb|pjata|f}}
+* Southern Altai: {{t|alt|ӧкчӧ|tr=ökcö}}
+* Spanish: {{t+|es|talón|m}}
+* Swahili: {{t+|sw|kisigino}}
+* Swedish: {{t+|sv|häl|c}}
+* Tagal Murut: {{t|mvv|tundov}}
+* Tagalog: {{t|tl|sakong}}
+* Tajik: {{t|tg|пошна|sc=Cyrl}}
+* Tambunan Dusun: {{t|kzt|gontod}}
+* Tamil: {{t+|ta|குதிக்கால்|sc=Taml}}
+* Tatar: {{t+|tt|үкчә|sc=Cyrl}}
+* Telugu: {{t+|te|మడమ}}
+* Thai: {{t+|th|ส้น}}, {{t|th|ส้นเท้า}}
+* Timugon Murut: {{t|tih|tunob}}
+* Tupinambá: {{t|tpn|pytá}}
+* Turkish: {{t+|tr|topuk}}
+* Turkmen: {{t|tk|ökje}}, {{t|tk|topuk}}
+* Ukrainian: {{t|uk|п'я́тка|f}}, {{t|uk|п'ята́|f}}
+* Urdu: {{t|ur|ایڑی|f|tr=eṛī|sc=ur-Arab}}, {{t|ur|ایڑ|f|tr=eṛ|sc=ur-Arab}}
+* Uzbek: {{t+|uz|tovon}}
+* Venetian: {{t|vec|calcagno|m}}
+* Vietnamese: {{t+|vi|gót}}, {{t+|vi|gót chân}}
+* Vilamovian: {{t|wym|faoś|f}}
+* Volapük: {{t+|vo|hil}}
+* Welsh: {{t+|cy|sawdl|m|f}}
+* West Coast Bajau: {{t|bdr|buli' betis}}
+* Yiddish: {{t|yi|פּיאַטע|sc=Hebr}}
+* Zulu: {{t+|zu|isithende}}
+{{trans-bottom}}
+
+{{trans-top|part of shoe}}
+* Arabic: {{t|ar|كَعْب|m}}
+* Armenian: {{t+|hy|կրունկ}}
+* Bashkir: {{t|ba|үксә|sc=Cyrl}}
+* Belarusian: {{t|be|абцас|m}}
+* Burmese: {{t|my|ရှူးဖိနပ်တို့၏ခွာ|tr=hru:hpi.nap-tui.e*hkwa}}
+* Catalan: {{t+|ca|taló|m}}
+* Chinese:
+*: Mandarin: {{t+|cmn|跟|tr=gēn|sc=Hani}}
+* Cornish: {{t|kw|gwewen|f}}, {{t|kw|seudhel|m}}
+* Czech: {{t|cs|podpatek|m}}
+* Danish: {{t+|da|hæl|c}}
+* Dutch: {{t+|nl|hak|m}}
+* Faroese: {{t|fo|hælur|m}}
+* Finnish: {{t+|fi|kanta}}, {{t+|fi|korko}}
+* French: {{t+|fr|talon|m}}
+* German: {{t+|de|Absatz|m}}, {{t|de|Schuhabsatz|m}}
+* Greek: {{t+|el|τακούνι|n}}
+* Icelandic: {{t+|is|hæll|m}}
+* Italian: {{t+|it|tacco|m}}
+* Japanese: {{t+|ja|踵|tr=かかと, kakato}}, {{t|ja|ヒール|tr=hīru}}
+* Kalmyk: {{t|xal|давхрг|sc=Cyrl}}
+* Karakalpak: {{t|kaa|o'kshe}}
+* Kazakh: {{t|kk|өкше|sc=Cyrl}}
+* Khmer: {{t|km|កែងស្បែកជើង|sc=Khmr|tr=kaeng sbaek cəəng}}
+* Korean: {{t+|ko|굽}}
+* Lao: {{t|lo|ສົ້ນ|tr=sȍn|sc=Laoo}}
+{{trans-mid}}
+* Luxembourgish: {{t+|lb|Tallong|m}}, {{t+|lb|Tallek|m}}
+* Macedonian: {{t|mk|потпетица|f}}
+* Maltese: {{t|mt|takkuna|f}}
+* Mizo: {{t|lus|keartui}}
+* Navajo: {{t|nv|kétal}}
+* Norman: {{t|nrf|talon|m}}
+* Norwegian:
+*: Bokmål: {{t+|nb|hæl|m}}
+*: Nynorsk: {{t|nn|hæl|m}}
+* Persian: {{t|fa|پاشنه کفش|tr=pâšne ye kafš}}
+* Polish: {{t+|pl|obcas|m}}
+* Portuguese: {{t|pt|tacão|m}}, {{t+|pt|salto|m}}
+* Russian: {{t+|ru|каблу́к|m}}
+* Scottish Gaelic: {{t|gd|sàil|f}}
+* Serbo-Croatian:
+*: Cyrillic: {{t|sh|пета|f|sc=Cyrl}}, {{t|sh|потпетица|f|sc=Cyrl}}
+*: Roman: {{t+|sh|peta|f}}, {{t+|sh|potpetica|f}}
+* Spanish: {{t+|es|tacón|m}}, {{t+|es|taco|m}} {{qualifier|Argentina|Bolivia|Chile|Ecuador|Paraguay|Peru|Uruguay}}
+* Swahili: {{t+|sw|kisigino}}
+* Tagalog: {{t|tl|sakong ng medyas}}
+* Ukrainian: {{t+|uk|каблу́к|m}}
+* Venetian: {{t|vec|taco|m}}
+* Vietnamese: {{t+|vi|gót}}, {{t+|vi|gót giày}}
+* Volapük: {{t+|vo|hilot}}, {{t|vo|jukahilot}}
+* Welsh: {{t+|cy|sawdl|m|f}}
+{{trans-bottom}}
+
+{{trans-top|rear part of a sock}}
+* Bulgarian: {{t+|bg|пета|f}}
+* Finnish: {{t+|fi|kantapää}}
+{{trans-mid}}
+* German: {{t+|de|Ferse}}
+{{trans-bottom}}
+
+{{trans-top|firearms: back upper part of the stock}}
+* Italian: {{t|it|poggiaguancia|m}}
+{{trans-mid}}
+* Swahili: {{t+|sw|kisigino}}
+{{trans-bottom}}
+
+{{trans-top|last or lowest part of anything}}
+* Bulgarian: {{t+|bg|пета|f}}
+* Finnish: {{t+|fi|kanta}}, {{t+|fi|perä}}, {{t+|fi|pohja}}
+{{trans-mid}}
+* Spanish: {{t+|es|pie|m}}
+{{trans-bottom}}
+
+{{trans-top|end-piece of a loaf of bread}}
+* Bulgarian: {{t|bg|крайче|n}}, {{t|bg|краешник|m}}
+* Catalan: {{t|ca|crostó|m}}
+* Czech: {{t|cs|patka|f}}
+* Dutch: {{t+|nl|korst|m}}
+* Faroese: {{t|fo|skálkur|m}}
+* Finnish: {{t+|fi|kantapala}}, {{t+|fi|kanta}}, {{t+|fi|kannikka}}
+* French: {{t+|fr|croûton|m}}, {{t+|fr|quignon|m}}
+* German: {{t|de|Kanten|m}} {{q|regional}}, {{t-check|de|Knapp|m}}, {{t|de|Knust|m}} {{q|Northern Germany}}, {{t-check|de|Ranft|m}}, {{t|de|Scherzl|n}} {{q|Austria|Bavaria}}, ''technical terms in bakery trade:'' {{t-check|de|Anschnitt|m}}, {{t+check|de|Abschnitt|m}} &lt;!-- for more synonyms (~40) see [[w:de:Kanten]] --&gt;
+* Italian: {{t|it|cantuccio|m}} (di pane)
+* Latvian: {{t+|lv|dona|f}}
+{{trans-mid}}
+* Low German: {{t|nds|Knuust}}, {{t|nds|Kanten}}
+* Macedonian: {{t|mk|крајче|n}}
+* Mongolian: {{t|mn|талхны зах|sc=Cyrl}}
+* Norwegian: {{t|no|skalk|m}}
+* Polish: {{t+|pl|piętka|f}}
+* Portuguese: {{t+|pt|tampa|f}}
+* Russian: {{t+|ru|горбу́шка|f}}
+* Spanish: {{t+|es|cuscurro|m}}, {{t|es|mendrugo|m}}
+* Swahili: {{t+|sw|kisigino}}
+* Upper Sorbian: {{t|hsb|krjeńčka|f}}, {{t|hsb|chlěbušk|m}}
+{{trans-bottom}}
+
+{{trans-top|base of a bun}}
+* Finnish: {{t+|fi|alapuoli}}
+{{trans-mid}}
+{{trans-bottom}}
+
+{{trans-top|contemptible, inconsiderate or thoughtless person}}
+* Finnish: {{t|fi|törppö}}
+{{trans-mid}}
+* German: {{t+|de|Schurke}}, {{t+|de|Schuft}}
+{{trans-bottom}}
+
+{{trans-top|professional wrestling: headlining wrestler regarded as a &quot;bad guy&quot;}}
+{{trans-mid}}
+{{trans-bottom}}
+
+{{trans-top|card games: cards set aside for later use}}
+* Finnish: {{t+|fi|pakka}}
+{{trans-mid}}
+{{trans-bottom}}
+
+{{trans-top|anything regarded as like a human heel in shape}}
+* Finnish: {{t+|fi|kanta}}
+{{trans-mid}}
+{{trans-bottom}}
+
+{{trans-top|architecture: lower end of a timber in a frame}}
+* Bulgarian: {{t+|bg|пета|f}}
+{{trans-mid}}
+{{trans-bottom}}
+
+{{trans-see|architecture: cyma reversa|cyma reversa}}
+
+{{trans-top|carpentry: short side of an angled cut}}
+{{trans-mid}}
+{{trans-bottom}}
+
+{{trans-top|golf: part of the face of the club head nearest the shaft}}
+* Finnish: {{t+|fi|kanta}}
+{{trans-mid}}
+{{trans-bottom}}
+
+{{trans-top|in a carding machine, the part of a flat nearest the cylinder}}
+{{trans-mid}}
+{{trans-bottom}}
+
+{{trans-top|woman's high-heeled shoe}}
+* Finnish: {{t|fi|[[korkeakorkoinen]] [[kenkä]]}}, {{t+|fi|korkkari}}
+{{trans-mid}}
+{{trans-bottom}}
+
+{{checktrans-top}}
+* French: {{t+check|fr|talon|m}} &lt;!-- Was: nautical: bottom of the sternpost - no such sense --&gt;
+{{trans-mid}}
+* Italian: {{t+check|it|calcagnolo|m}} &lt;!-- Was: nautical: bottom of the sternpost - no such sense --&gt;
+{{trans-bottom}}
+
+====Verb====
+{{en-verb}}
+
+# To [[follow]] at somebody's heels; to [[chase]] closely.
+#: {{ux|en|She called to her dog to '''heel'''.}}
+# To add a heel to, or increase the size of the heel of (a shoe or boot).
+# To [[kick]] with the heel.
+# {{lb|en|transitive}} To perform by the use of the heels, as in dancing, running, etc.
+#* William Shakespeare, ''Troilus and Cressida'' (act 4, scene 4, lines 85-86)
+#*: I cannot sing, / Nor '''heel''' the high lavolt.
+# {{lb|en|transitive}} To [[arm]] with a [[gaff]], as a [[cock]] for [[fight]]ing.
+# {{lb|en|golf|transitive}} To hit (the ball) with the heel of the club.
+# {{lb|en|American football|transitive}} To make (a fair catch) standing with one foot forward, the heel on the ground and the toe up.
+
+=====Translations=====
+{{trans-top|To follow at somebody's heels}}
+* Bulgarian: {{t|bg|вървя по петите}}
+* Catalan: {{t+|ca|estalonar}}
+* Dutch: {{t|nl|op de hielen zitten}}
+* Finnish: {{t|fi|kintereillä|alt=olla kintereillä}}, {{t|fi|kannoilla|alt=olla kannoilla}}
+* French: {{t+|fr|talonner}}
+* German: ({{t+|de|jemandem}}) {{t|de|auf den Fersen sein}} {{qualifier|with dative}}
+{{trans-mid}}
+* Hungarian: {{t|hu|a sarkában van}} (valakinek)
+* Macedonian: {{t|mk|оди зад петици|tr=ódi zad pétici}}
+* Mizo: {{t|lus|zui}}, {{t|lus|hnung zui}}, {{t|lus|ûm}}, {{t|lus|ûmzui}}
+* Spanish: {{t|es|seguir de cerca}}, {{t|es|poner talón o tacón a}}
+* Swahili: {{t+|sw|kisigino}}
+{{trans-bottom}}
+
+===Etymology 2===
+Alteration of earlier {{m|en|heeld}}, from {{etyl|enm|en}} {{m|enm|heelden}}, from {{etyl|ang|en}} {{m|ang|hyldan}}, {{m|ang|hieldan||to incline}}, cognate with Old Norse {{m|non|hella||to pour out}} (from Danish {{m|da|hælde||lean, pour}}). More at {{l|en|hield}}.
+
+====Verb====
+{{en-verb}}
+
+# {{lb|en|intransitive|especially of ships}} To [[incline]] to one side; to [[tilt]].
+
+=====Translations=====
+{{trans-top|incline}}
+* Bulgarian: {{t|bg|накренявам}}
+* Dutch: {{qualifier|nautical}} {{t+|nl|hellen}}
+* Finnish: {{t+|fi|kallistua}}
+* German: {{qualifier|nautical}} {{t+|de|krängen}}
+{{trans-mid}}
+* Norwegian:
+*: Bokmål: {{t+|no|krenge}}
+*: Nynorsk: {{t|nn|krengja}}
+* Swedish: {{t+|sv|kränga}} {{qualifier|nautical}}
+{{trans-bottom}}
+
+====Noun====
+{{en-noun}}
+
+# The act of inclining or canting from a vertical position; a [[cant]].
+#: {{ux|en|The ship gave a '''heel''' to port.}}
+
+=====Synonyms=====
+* {{l|en|heeling}}
+
+===Anagrams===
+* {{anagrams|en|Ehle|hele}}
+
+[[Category:English terms with multiple etymologies]]
+[[Category:en:Footwear]]
+
+----
+
+==Dutch==
+
+===Pronunciation===
+* {{rhymes|eːl|lang=nl}}
+* {{IPA|/ɦeːl/|lang=nl}}
+* {{audio|Nl-heel.ogg|audio|lang=nl}}
+
+===Etymology 1===
+From {{inh|nl|dum|hêel}}, from {{inh|nl|odt|hēl}}, from {{inh|nl|gem-pro|*hailaz}}.
+
+====Adjective====
+{{nl-adj|heler}}
+
+# [[complete]], [[full]], [[whole]]
+
+=====Inflection=====
+{{nl-decl-adj|hele}}
+
+=====Synonyms=====
+* {{l|nl|gans}}
+* {{l|nl|volledig}}
+
+=====Derived terms=====
+* {{l|nl|geheel}}
+* {{l|nl|helen}}
+
+=====Related terms=====
+* {{l|nl|heil}}
+
+====Adverb====
+{{nl-adv}}
+
+# [[very]]
+
+=====Usage notes=====
+Although an adverb, {{m|nl||heel}} may be inflected as well ({{m|nl|hele}}) to match the following adjective. For example, both of these sentences are correct:
+* {{ux|nl|Dat is een '''heel''' grote boom.|That is a '''very''' large tree.}}
+* {{ux|nl|Dat is een '''hele''' grote boom.|That is a '''very''' large tree.}}
+The latter form may be regarded as informal and less appropriate for formal writing.
+
+===Etymology 2===
+{{nonlemma}}
+
+====Verb====
+{{nl-verb-form}}
+
+# {{nl-verb form of|p=1|n=sg|t=pres|m=ind|helen}}
+# {{nl-verb form of|m=imp|helen}}
+
+===Anagrams===
+* [[hele#Dutch|hele]]
+
+----
+
+==Luxembourgish==
+
+===Verb===
+{{head|lb|verb form}}
+
+# {{inflection of|heelen||2|s|imp|lang=lb}}
+
+----
+
+==Middle Dutch==
+
+===Etymology===
+From {{inh|dum|odt|hēl}}, from {{inh|dum|gem-pro|*hailaz}}.
+
+===Adjective===
+{{dum-adj|head=hêel}}
+
+# [[whole]], [[full]]
+# [[undamaged]], [[unbroken]]
+# [[healthy]], [[healed]]
+# [[honest]], [[sincere]], [[pure]]
+
+====Inflection====
+{{rfinfl|dum|adjective}}
+
+====Descendants====
+* Dutch: {{l|nl|heel}}
+
+===Further reading===
+* {{R:VMNW|ID12431|II}}
+* {{R:MNW|16090|II}}</text>
+      <sha1>5qshansfvkruxr1pqjklpz1qkz30d5g</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>百萬</title>
+    <ns>0</ns>
+    <id>1080106</id>
+    <revision>
+      <id>47929414</id>
+      <parentid>47929121</parentid>
+      <timestamp>2017-10-30T14:23:46Z</timestamp>
+      <contributor>
+        <username>Lo Ximiendo</username>
+        <id>418533</id>
+      </contributor>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text xml:space="preserve" bytes="472">{{also|百万}}
+==Chinese==
+{{zh-forms|s=百万}}
+
+===Pronunciation===
+{{zh-pron
+|m=bǎiwàn
+|c=baak3 maan6
+|h=pfs=pak-van
+|mn=pah-bān
+|w=4paq ve
+|cat=n,pref
+}}
+
+===Noun===
+{{zh-noun}}
+
+# [[million]]
+#: {{zh-x|一 百萬|a million}}
+# {{lb|zh|literary}} a [[vast]] [[amount]]
+
+====Derived terms====
+{{zh-der|百萬富翁}}
+
+====Descendants====
+{{CJKV|||백만}}
+
+===Prefix===
+{{zh-pref}}
+
+# {{lb|zh|Taiwan}} [[mega-]]
+
+====Synonyms====
+* {{q|mainland China}} {{zh-l|兆}}</text>
+      <sha1>9buw0tchhk0jps73iu7xrjit8qfd556</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>peigne</title>
+    <ns>0</ns>
+    <id>674692</id>
+    <revision>
+      <id>47974182</id>
+      <parentid>45701751</parentid>
+      <timestamp>2017-11-08T04:36:32Z</timestamp>
+      <contributor>
+        <ip>86.130.177.172</ip>
+      </contributor>
+      <comment>/* Pronunciation */</comment>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text xml:space="preserve" bytes="928">{{also|peigné}}
+
+==French==
+
+===Etymology===
+From {{inh|fr|fro|peigne}}, from {{inh|fr|la|pecten|pecten, pectinem}}.
+
+===Pronunciation===
+* {{fr-IPA}}
+* {{audio|Fr-peigne.ogg|audio|lang=fr}}
+
+===Noun===
+{{fr-noun|m}}
+
+# [[comb]] {{gloss|toothed implement}}
+
+====Derived terms====
+* {{l|fr|passer au peigne fin}}
+
+===Verb===
+{{fr-verb-form}}
+
+# {{inflection of|peigner||1|s|pres|indc|lang=fr}}
+# {{inflection of|peigner||3|s|pres|indc|lang=fr}}
+# {{inflection of|peigner||1|s|pres|subj|lang=fr}}
+# {{inflection of|peigner||3|s|pres|subj|lang=fr}}
+# {{inflection of|peigner||2|s|impr|lang=fr}}
+# {{inflection of|peindre||1|s|pres|subj|lang=fr}}
+# {{inflection of|peindre||3|s|pres|subj|lang=fr}}
+
+===Further reading===
+* {{R:TLFi}}
+
+----
+
+==Old French==
+
+===Etymology===
+From {{inh|fro|la|pecten|pecten, pectinem}}.
+
+===Noun===
+{{fro-noun|m}}
+
+# [[comb]] {{gloss|toothed implement}}
+
+====Descendants====
+* French: {{l|fr|peigne}}</text>
+      <sha1>105fhvdtp7sdtfmdh76xg1z6k2mz3q8</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>pagne</title>
+    <ns>0</ns>
+    <id>1512781</id>
+    <revision>
+      <id>48072028</id>
+      <parentid>47606449</parentid>
+      <timestamp>2017-11-12T18:25:36Z</timestamp>
+      <contributor>
+        <username>MewBot</username>
+        <id>345682</id>
+      </contributor>
+      <minor/>
+      <comment>Removed notext=1</comment>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text xml:space="preserve" bytes="2971">==English==
+[[File:Tissus au pagne.JPG|thumb|Pagnes]]
+[[File:Pagne KITA 01.jpg|thumb|Men and women wearing pagnes]]
+
+===Etymology===
+Borrowed from {{bor|en|fr|pagne}}.
+
+===Noun===
+{{en-noun}}
+
+# A length of wax-print [[fabric]] made in [[West Africa]], worn as a single wrap or made into other [[clothing]], and serving as a form of [[currency]].
+#* {{quote-book|year=1997 |title=A Modern Economic History of Africa: The nineteenth century|author=Paul Tiyambe Zeleza |page=286 |ISBN=996646025X |passage=In Senegal the local cloth currency, '''pagne''', made of tama, or strips, was increasingly supplemented by French imported indigo-dyed cloth from India called guinee . The guinee was used as currency in lower Senegal. In upper Senegal it became a larger unit equivalent to a number of '''pagnes'''. The exchange rate between guinee, '''pagnes''', and francs became more complicated from the 1830s as a result of excessive imports of guinees and francs. }}
+#* {{quote-book|year=1998 |title=Possession, Ecstasy, and Law in Ewe Voodoo|author=Judy Rosenthal |page=204 |ISBN=0813918057 |passage=If a woman wears her sister's '''pagne''' [cloth] to go and have sexual intercourse with a man, she has committed afodegbe. This happened to the wife of a sofo recently. She took her sister's '''pagne''', went and stayed with her husband, and then took the '''pagne''' back to her sister. As her sister's husband [the husband of the woman who took the '''pagne'''] is a sofo, the vodu caught her sister [the woman whose '''pagne''' was taken] right away. She was ill. }}
+#* {{quote-book|year=2011 |title=Monique and the Mango Rains|author=Kris Holloway |page= |ISBN=1851688897 |passage=When young girls are first learning how to wear a '''pagne''', sometimes we sew straps onto the corners so the '''pagne''' can be tied and doesn't fall down if they don't wrap it right. }}
+#* {{quote-book|year=2016 |title=Patterns in Circulation: Cloth, Gender, and Materiality in West Africa|author=Nina Sylvanus |page= 2 |ISBN=022639736X |passage='''Pagne''' is part of the transfer of wealth from a prospective groom to his intended wife prior to marriage or the inheritance a woman leaves for her daughters. }}
+
+----
+
+==French==
+
+===Pronunciation===
+* {{fr-IPA}}
+* {{rhymes|aɲ|lang=fr}}
+
+===Etymology 1===
+Borrowed from {{bor|fr|es|paño}}, from {{etyl|la|fr}} {{m|la|pannus}}. {{doublet|lang=fr|pan}}.
+
+====Noun====
+{{fr-noun|m}}
+
+# [[loincloth]]
+#* '''2001''', Hervé Beaumont, ''Égypte. Le guide des civilisations égyptiennes, des pharaons à l'islam;'', Editions Marcus, 213.
+#*: Statue en calcaire de Ranofrê portant la perruque et un '''pagne''' court, provenant du mastaba de Ti à Saqqara.
+#*: Limestone statue of Ranofre wearing the wig and a short '''loincloth''', originating from the mastaba of Ti at Saqqara.
+# [[grass skirt]]
+
+===Etymology 2===
+From {{cog|fr|panier}}.
+
+====Noun====
+{{fr-noun|m}}
+
+# [[bed]]
+
+===Further reading===
+* {{R:TLFi}}
+
+[[Category:fr:Clothing]]</text>
+      <sha1>4xbe2erdmyzsf669xa1kztbus8bw9or</sha1>
+    </revision>
+  </page>
+</mediawiki>

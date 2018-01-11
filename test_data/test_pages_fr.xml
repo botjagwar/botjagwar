@@ -1,0 +1,2708 @@
+<mediawiki xmlns="http://www.mediawiki.org/xml/export-0.10/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mediawiki.org/xml/export-0.10/ http://www.mediawiki.org/xml/export-0.10.xsd" version="0.10" xml:lang="fr">
+  <siteinfo>
+    <sitename>Wiktionnaire</sitename>
+    <dbname>frwiktionary</dbname>
+    <base>https://fr.wiktionary.org/wiki/Wiktionnaire:Page_d%E2%80%99accueil</base>
+    <generator>MediaWiki 1.31.0-wmf.15</generator>
+    <case>case-sensitive</case>
+    <namespaces>
+      <namespace key="-2" case="case-sensitive">Média</namespace>
+      <namespace key="-1" case="first-letter">Spécial</namespace>
+      <namespace key="0" case="case-sensitive" />
+      <namespace key="1" case="case-sensitive">Discussion</namespace>
+      <namespace key="2" case="first-letter">Utilisateur</namespace>
+      <namespace key="3" case="first-letter">Discussion utilisateur</namespace>
+      <namespace key="4" case="case-sensitive">Wiktionnaire</namespace>
+      <namespace key="5" case="case-sensitive">Discussion Wiktionnaire</namespace>
+      <namespace key="6" case="case-sensitive">Fichier</namespace>
+      <namespace key="7" case="case-sensitive">Discussion fichier</namespace>
+      <namespace key="8" case="first-letter">MediaWiki</namespace>
+      <namespace key="9" case="first-letter">Discussion MediaWiki</namespace>
+      <namespace key="10" case="case-sensitive">Modèle</namespace>
+      <namespace key="11" case="case-sensitive">Discussion modèle</namespace>
+      <namespace key="12" case="case-sensitive">Aide</namespace>
+      <namespace key="13" case="case-sensitive">Discussion aide</namespace>
+      <namespace key="14" case="case-sensitive">Catégorie</namespace>
+      <namespace key="15" case="case-sensitive">Discussion catégorie</namespace>
+      <namespace key="100" case="case-sensitive">Annexe</namespace>
+      <namespace key="101" case="case-sensitive">Discussion Annexe</namespace>
+      <namespace key="102" case="case-sensitive">Transwiki</namespace>
+      <namespace key="103" case="case-sensitive">Discussion Transwiki</namespace>
+      <namespace key="104" case="case-sensitive">Portail</namespace>
+      <namespace key="105" case="case-sensitive">Discussion Portail</namespace>
+      <namespace key="106" case="case-sensitive">Thésaurus</namespace>
+      <namespace key="107" case="case-sensitive">Discussion Thésaurus</namespace>
+      <namespace key="108" case="case-sensitive">Projet</namespace>
+      <namespace key="109" case="case-sensitive">Discussion Projet</namespace>
+      <namespace key="828" case="case-sensitive">Module</namespace>
+      <namespace key="829" case="case-sensitive">Discussion module</namespace>
+      <namespace key="1198" case="case-sensitive">Translations</namespace>
+      <namespace key="1199" case="case-sensitive">Translations talk</namespace>
+      <namespace key="2300" case="case-sensitive">Gadget</namespace>
+      <namespace key="2301" case="case-sensitive">Discussion gadget</namespace>
+      <namespace key="2302" case="case-sensitive">Définition de gadget</namespace>
+      <namespace key="2303" case="case-sensitive">Discussion définition de gadget</namespace>
+      <namespace key="2600" case="first-letter">Sujet</namespace>
+    </namespaces>
+  </siteinfo>
+  <page>
+    <title>eau</title>
+    <ns>0</ns>
+    <id>645</id>
+    <revision>
+      <id>24493389</id>
+      <parentid>24493388</parentid>
+      <timestamp>2018-01-10T13:55:04Z</timestamp>
+      <contributor>
+        <username>Treehill</username>
+        <id>19089</id>
+      </contributor>
+      <comment>/* {{S|traductions}} */</comment>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text xml:space="preserve" bytes="43783">{{voir/eau}}
+== {{langue|fr}} ==
+=== {{S|étymologie}} ===
+: Du {{étyl|la|fr|mot=aqua}}, devenu au {{siècle2|XI}} siècle ''[[egua]]'' et ''[[ewe]]'', au {{siècle2|XII}} siècle ''[[aive]]'', ''[[aigue]]'', ''[[eve]]'', puis ''[[eaue]]'' ({{siècle2|XIII}} siècle) dont l’''e'' final a disparu au {{siècle2|XVI}} siècle. En français, ''[[aqua]]'' se retrouve en [[composition]], comme [[préfixe]] : ''[[aqu-]]'', ''[[aqui-]]''.
+:: {{cf|Aa}} pour l’évolution similaire du mot ''aqua'' en allemand.
+: Le mot latin provient de l’[[{{indo-européen commun}}]] {{recons|h₂ekweh₂}}, issu de {{recons|h₂ekw-}} (« [[boire]] ») ; l’{{indo-européen commun}} {{recons|wd-r}} (« eau ») est la racine de l’anglais ''[[water]]'', de ''[[voda]]'', ''[[woda]]'' ou ''[[вода]]'' dans les langues [[slave]]s et du [[grec ancien]] [[ὕδωρ]] ''húdôr'' qui se préfixe en ὕδρο- ''húdro-'' (''[[hydro-]]''). On retrouve ce préfixe dans nombre de mots savants en français qui concernent l’eau.
+
+=== {{S|nom|fr}} ===
+{{fr-rég-x|o}}
+[[Image:Stilles Mineralwasser.jpg|thumb|'''Eau''' versée dans un verre. (1)]]
+[[Image:POL rain 00001.JPG|thumb|'''Eau''' qui tombe dru. (2)]]
+[[Image:Icebergs at cape york 2.JPG|thumb|'''Eau''' sous forme liquide et solide. (3)]]
+[[Image:Lago Nahuel Huapi.jpg|thumb|Les '''eaux''' du Nahuel Huapi. (4)]]
+[[Image:Cole Thomas Catskill Mountain House The Four Elements 1843-44.jpg|thumb|L’'''eau''' est un des éléments du tableau ''Les Quatre Éléments'' de Thomas Cole. (13)]]
+'''eau''' {{pron|o|fr}} {{f}}
+# [[liquide|Liquide]] [[transparent]], [[incolore]], [[inodore]] et [[insipide]] à l’[[état]] [[pur]], qui [[est]] le [[principal]] [[constituant]] des [[lac]]s, [[rivière]]s, [[mer]]s et [[océan]]s.
+#* ''En vain, j’avais cherché un ru, dont l’'''eau''' fraîche chante sous les feuilles, ou bien une source, comme il s’en trouve pourtant beaucoup dans le pays […]'' {{source|{{w|Octave Mirbeau}}, ''[[s:Le Père Nicolas|Le Père Nicolas]]'', dans ''Lettres de ma chaumière'', 1885}}
+#* ''À Mogador, nouvelle relâche, mais la barque envoyée à terre pour rapporter de l’'''eau''' fraîche faillit être capturée par les Arabes.'' {{source|{{Citation/H. G. Wells/La Guerre dans les airs/1921|419}}}}
+#* ''Ses soupçons se portèrent sur l’'''eau''', véhicule naturel des germes contagieux.'' {{source|{{w|Louis Pergaud}}, ''[[s:Un petit logement|Un petit logement]]'', dans ''{{w|Les Rustiques, nouvelles villageoises}}'', 1921}}
+#* ''Un nouveau réservoir d’'''eau''' claire de 200 litres conservera l’'''eau''', mieux que des barils de chêne.'' {{source|{{w|Alain Gerbault}}, ''À la poursuite du soleil'' ; tome 1 : ''De New-York à Tahiti'', 1929}}
+#* ''Elle se redressa, longea le bassin qui se dressait au milieu du jardin, prit de l’'''eau''' dans ses mains et la porta à ses yeux pour cacher les traces de ses larmes.'' {{source|{{w|Out-el-Kouloub}}, ''Zaheira'', dans « Trois contes de l’Amour et de la Mort », 1940}}
+#* '''''Eau''', tu n'as ni goût, ni couleur, ni arôme, on ne peut pas te définir, on te goûte, sans te connaître. Tu n'es pas nécessaire à la vie : tu es la vie.'' {{source|{{w|Antoine de Saint-Exupéry}}, ''{{w|Terre des hommes}}'' (1939), VII, 7.}}
+# {{particulier}} [[pluie|Pluie]].
+#* ''Maintenant il pleut… J’entends l’'''eau''' qui ruisselle des gouttières, et qui fouette les vitres de ma chambre…'' {{source|{{w|Octave Mirbeau}}, ''Lettres de ma chaumière'', ''La Tête coupée'', 1886}}
+#* ''Si le vent dure, nous aurons de l’'''eau'''.
+#* ''Avec toute cette '''eau''', la sécheresse n’est plus à craindre.''
+# {{chimie|fr}} ''(nom [[UICPA]])'' [[substance|Substance]] [[pur]]e de [[formule]] [[brute]] {{fchim|H|2|O}} [[existant]] surtout sous forme de [[glace]], d’'''eau''' [[liquide]] ou de [[vapeur]].
+#* ''L’acide tellurique cristallise en gros prismes hexagonaux qui contiennent trois équivalents d’'''eau'''.'' {{source|J. Pelouze &amp; Edmond Fremy, ''Traité de chimie générale'', vol. 1, 1854, p. 438}}
+#* ''Le jaune d’œuf contient des lipides, des protéines, des glucides, des minéraux, des vitamines et de l’'''eau'''. L’'''eau''' constitue 48 % de la masse totale du jaune. {{source|''Reproduction des animaux d'élevage'', Educagri, 2005, p.348}}
+#* ''L’'''eau''' se durcit par le froid et se vaporise par la chaleur.''
+# {{par ext|fr}} {{au pluriel}} [[quantité|Quantités]] ou [[étendue]]s liquides [[naturel]]les.
+#* ''Voici le Madon, affluent de la Moselle, dont les '''eaux''' limoneuses invitent peu à la baignade, malgré la grande chaleur.'' {{source|Gustave Fraipont, ''Les Vosges'', 1923}}
+# {{au pluriel}} [[zone|Zone]] [[maritime]] [[considérée]] comme un [[territoire]] [[appartenant]] à [[tel ou tel]] [[pays]] que [[baigne]] cette [[mer]].
+#* ''Deux mots encore sur la marine marocaine, cette marine si redoutée, autrefois, quand les corsaires barbaresques infestaient les '''eaux''' européennes, étendant leurs déprédations à tout le littoral méditerranéen et jusqu'aux côtes de l'Angleterre.'' {{source|{{w|Frédéric {{smcp|Weisgerber}}}}, ''Trois mois de campagne au Maroc : étude géographique de la région parcourue'', Paris : Ernest Leroux, 1904, p. 88}}
+# {{marine|fr}} {{au pluriel}} [[sillage|Sillage]], [[houaiche]].
+#* ''Le bateau s’enfonce dans l’obscurité. Le projecteur fixé au-dessus du chalut éclaire les '''eaux''' vertes et écumantes qu’accompagne le cortège des mouettes.'' {{source|Jacky Durand, ''La nuit où le hareng sort'', dans {{w|Libération (journal)}} du 29 novembre 2010, pp. 30–31}}
+# [[fluide|Fluides]], [[sérosité]]s qui se trouvent ou qui se forment dans le [[corps]] de l’[[homme]] ou de l’[[animal]].
+#* ''Les vésicatoires font des ampoules pleines d’'''eau'''.''
+## [[salive|Salive]], dans l’expression :
+##* ''L’'''eau''' vient à la bouche.''
+## {{reproduction|fr}} {{au pluriel}} [[liquide amniotique|Liquide amniotique]] qui est [[exhalé]] par l’[[amnios]] et qui [[environne]] le [[fœtus]] pendant toute la durée de la [[gestation]].
+##* ''Elle vient de perdre ses '''eaux''', et ne va donc pas tarder à accoucher.''
+## [[sueur|Sueur]].
+##* ''Il s’est échauffé à courir, il est tout en '''eau'''.''
+# {{au pluriel}} {{médecine|fr}} [[sources|Sources]] qui, [[passer|en passant]] dans l’[[intérieur]] de la [[terre]] [[au travers de]]s [[minéraux]], [[contracter|ont contracté]] quelque [[vertu]] [[médicinale]], et dont on fait [[usage]], soit en s’y baignant, soit en les prenant comme [[boisson]]. {{par ext|fr}} [[lieu|Lieu]] où l’on va prendre ces eaux.
+#* ''Quelques mois après sa mort, en 1833, la marquise fut obligée de mener Moïna aux '''eaux''' des Pyrénées.'' {{source|{{Citation/Honoré de Balzac/La Femme de trente ans/1855}}}}
+#* ''Arrêtons-nous devant les célèbres bains de Tiflis, dont les '''eaux''' thermales peuvent atteindre soixante degrés centigrades.'' {{source|{{Citation/Jules Verne/Claudius Bombarnac/1892|1}}}}
+# [[liquide|Liquide]] [[artificiel]] [[extrait]] d’une substance par [[distillation]], [[décoction]], ou [[expression]], ou [[composé]] de [[différent]]es substances.
+#* ''La noix verte du cocotier donne une '''eau''' rafraîchissante […]'' {{source|{{w|Alain Gerbault}}, ''À la poursuite du soleil'', tome 1 : ''De New-York à Tahiti'', 1929}}
+#* '''''Eau''' gazeuse, de lavande, de mélisse, de senteur, de fleur d’oranger, seconde, régale, sédative.''
+# {{figuré|fr}} [[flux|Flux]] ; [[flot]] ; [[courant]].
+#* ''[…]  toutefois comme il ne voulait pas abandonner dans les '''eaux''' de la tribulation le jeune paroissien de son confrère, il lui donna quelques salutaires encouragements.'' {{source|{{w|Louis Pergaud}}, ''[[s:L’Argument décisif|L’Argument décisif]]'', dans ''{{w|Les Rustiques, nouvelles villageoises}}'', 1921}}
+# Couleur [[vert]] pâle et doux. {{couleur|#B0F2B6}}
+#* ''Les tonalités claires et douces vont du jaune miel, au rose pêche, en passant par le bleu ciel et le vert d’'''eau'''.''
+#* ''C’est une étoffe couleur d’'''eau'''.''
+# [[lustre|Lustre]], [[brillant]] qu’ont les [[perle]]s, les [[diamant]]s et quelques autres [[pierreries]].
+#* ''Ces diamants sont de la première '''eau'''.''
+#* ''C'était un collier composé d'un double rang de perles magnifiques par leur '''eau''', leur orient et leur grosseur.'' {{source|{{Citation/Michel Zévaco/Le Capitan/1907}}}}
+#* ''Magnifique ! répondit Athos ; je ne croyais pas qu’il existât deux saphirs d’une si belle '''eau'''.'' {{source|{{w|Alexandre Dumas}}, ''{{w|Les Trois Mousquetaires}}'', 1844}}
+# Eau seconde : un mélange d'eau-forte avec une quantité d'eau assez grande appelé blanchiment par les orfèvres. Le blanchiment est utilisé pour rétablir la pureté de la couleur de l'argent qui a été exposé au feu ou noirci par le contact des charbons. {{source|{{w|M. Julia de Fontenelle}}, ''[[s:Le blanchiment]]'', dans ''{{w|&quot;Manuel complet du bijoutier, du joailler, de l'orfèvre, du graveur sur métaux et du changeur}}'', 1832}}
+# Un des quatre [[élément]]s (Eau, Air, Terre, Feu) constitutifs de l’[[Univers]] selon {{w|Aristote}}.
+# Un des cinq éléments du [[cosmos]] selon la pensée [[chinois]]e : métal, bois, eau, feu, terre.
+# Un des cinq éléments du cosmos selon la pensée {{w|Wicca}} : eau, air, terre, feu, esprit.
+
+==== {{S|synonymes}} ====
+{{(|Liquide}}
+* [[agoua]] {{archaïsme|nocat=1}} {{argot|nocat=1}}
+* [[flotte]] {{familier|nocat=1}}
+* [[Château La Pompe]] {{plaisanterie|nocat=1}}
+{{)}}
+{{(|Étendues liquides naturelles}}
+* [[flotte]] {{familier|nocat=1}}
+* [[baille]] {{argot|nocat=1}}
+* [[onde]] {{poétique|nocat=1}}
+{{)}}
+{{(|Composé chimique}}
+* {{lien|acide hydroxyque}} {{rare|nocat=1}} {{humour|nocat=1}}
+* {{lien|acide oxhydrique}} {{rare|nocat=1}} {{humour|nocat=1}}
+* {{lien|hydroxyde d’hydrogène}} {{rare|nocat=1}} {{humour|nocat=1}}
+* {{lien|hydroxyde d’oxonium}} {{rare|nocat=1}} {{humour|nocat=1}}
+* {{lien|monoxyde de dihydrogène}} {{rare|nocat=1}} {{humour|nocat=1}}
+* {{lien|oxyde d’hydrogène}} {{rare|nocat=1}}
+{{)}}
+
+==== {{S|dérivés}} ====
+{{(}}
+* [[à fleur d’eau]]
+* [[à grande eau]]
+* [[à l’eau de rose]]
+* [[abeille d’eau]]
+* [[adoucisseur d’eau]]
+* [[aller à la bonne eau]]
+* [[aller à vau-l’eau]]
+* [[aller aux eaux]]
+* [[apporter de l’eau à son moulin]]
+* [[araignée d’eau]]
+* [[arrivée d’eau]]
+* [[aspic d’eau]]
+* [[aspirateur eau et poussière]]
+* [[au fil de l’eau]]
+* [[avion bombardier d’eau]]
+* [[avoine d’eau]]
+* [[avoir de l’eau dans la cave]]
+* [[azolla fougère d’eau]]
+* [[ballon d’eau chaude]]
+* [[banane d’eau]]
+* [[bar à eau]], [[bar à eaux]]
+* [[basses eaux]]
+* [[battre l’eau]]
+* [[battre l’eau avec un bâton]]
+* [[battre l’eau dans un mortier]]
+* [[bélier à eau]]
+* [[benoîte d’eau]] / [[benoite d’eau]]
+* [[blanc d’eau]]
+* [[bloc-eau]]
+* [[boîte à eau]] / [[boite à eau]]
+* [[bombe à eau]]
+* [[Bonneuil-les-Eaux]]
+* [[bouillon d’eau]]
+* [[brède liseron d’eau]]
+* [[buffle d’eau]]
+* [[buveur d’eau]]
+* [[canon à eau]]
+* [[Capesterre-Belle-Eau]]
+* [[carafe d’eau]]
+* [[carré d’eau]]
+* [[carrosse d’eau]]
+* [[centimètre d’eau]]
+* [[cerf d’eau]]
+* [[cerf d’eau chinois]]
+* [[cerf d’eau de Chine]]
+* [[Challes-les-Eaux]]
+* [[chambre d’eau]]
+* [[chanvre d’eau]]
+* [[chardonneret d’eau]]
+* [[chasse d’eau]]
+* [[châtaigne d’eau]]
+* [[châtaigne d’eau chinoise]]
+* [[château d’eau]]
+* [[chauffe-eau]]
+* [[chef d’eau]]
+* [[chenille d’eau]]
+* [[Chèvre d’Eau]]
+* [[chien d’eau]]
+* [[chien d’eau américain]]
+* [[chien d’eau espagnol]]
+* [[chien d’eau frison]]
+* [[chien d’eau portugais]]
+* [[chute d’eau]]
+* [[clair comme de l’eau de roche]]
+* [[cloporte d’eau douce]]
+* [[cluster d’eau]]
+* [[coche d’eau]]
+* [[cochon d’eau]]
+* [[colonne d’eau]]
+* [[compteur à eau]]
+* [[compteur d’eau]]
+* [[couleur d’eau]]
+* [[couleuvre d’eau]]
+* [[coup d’épée dans l’eau]]
+* [[cours d’eau]]
+* [[crevette d’eau douce]]
+* [[crevette géante d’eau douce]]
+* [[criquet d’eau]]
+* [[crochet goutte d’eau]]
+* [[cruche à eau]]
+* [[cuve à eau]]
+* [[daim d’eau]]
+* [[dame des eaux]]
+* [[dans ces eaux-là]]
+* [[dans les mêmes eaux]]
+* [[dauphin d’eau douce]]
+* [[découvrir que l’eau mouille]]
+* [[dégâts des eaux]]
+* [[de la plus belle eau]]
+* [[de l’eau à boire]]
+* [[dragon d’eau]]
+* [[dragon vert d’eau]]
+* [[droit d’eau]]
+* [[eau alumineuse]]
+* [[eau anglaise]]
+* [[eau ardente]]
+* [[eau baptismale]]
+* [[eau battue]]
+* [[eau bénite]]
+* [[eau bénite de cave]]
+* [[eau bénite de cour]]
+* [[eau blanche]]
+* [[Eau Blanche]]
+* [[eau boriquée]]
+* [[Eau Bourde]]
+* [[eau capillaire]]
+* [[eau céleste]]
+* [[eau chargée]]
+* [[eau chaude]]
+* [[eau céleste]]
+* [[eau clairette]]
+* [[eau cordiale]]
+* [[eau cosmétique]]
+* [[eau courante]]
+* [[eau croupie]]
+* [[eau d’abricots]]
+* [[eau d’alun]]
+* [[eau d’ammoniaque]]
+* [[eau d’ange]]
+* [[eau d’angélique]]
+* [[eau d’anis]]
+* [[eau d’arquebusade]]
+* [[eau de betterave]]
+* [[eau de blanc d’œuf]]
+* [[eau de blanchiment]]
+* [[eau de boisson]]
+* [[eau de boule]]
+* [[eau de bouleau]]
+* [[eau de cannelle]], [[eau de canelle]]
+* [[eau de cerfeuil]]
+* [[eau de cerise]], [[eau de cerises]]
+* [[eau de cète]]
+* [[eau de chaux]]
+* [[eau de chicorée]]
+* [[eau de chlore]]
+* [[eau de citron]]
+* [[eau de clou de girofle]]
+* [[eau de coco]]
+* [[eau de Cologne]]
+* [[eau de coquelicot]]
+* [[eau de coriandre]]
+* [[eau de départ]]
+* [[eau de fenouil]]
+* [[eau de feu]]
+* [[eau de fleur d’orange]]
+* [[eau de fleur d’oranger]]
+* [[eau de fonte]]
+* [[eau de forage]]
+* [[eau de fraise]]
+* [[eau de framboise]]
+* [[eau de frangipane]]
+* [[eau de genevre]]
+* [[eau de goudron]]
+* [[eau de Goulard]]
+* [[eau de groseille]]
+* [[eau de Hongrie]]
+* [[eau de Javel]]
+* [[eau de la reine de Hongrie]]
+* [[eau de lavande]]
+* [[eau de légumes]]
+* [[eau de lessive]]
+* [[eau de mélisse]]
+* [[eau de mer]]
+* [[eau de mer salée]] (urine)
+* [[eau de miel]]
+* [[eau de naffe]]
+* [[eau de naphe]]
+* [[eau de Noël]]
+* [[eau de noyau]]
+* [[eau de Pâques]]
+* [[eau de parfum]]
+* [[eau de pesches]]
+* [[eau de pimprenelle]]
+* [[eau de plantain]]
+* [[eau de pluie]]
+* [[eau de poires musquées]]
+* [[eau de potasse]]
+* [[eau de poulet]]
+* [[eau de process]]
+* [[eau de rabel]]
+* [[eau de réglisse]]
+* [[eau de repassage]]
+* [[eau de rétention]]
+* [[eau de riz]]
+* [[eau de riz brûlé]]
+* [[eau de roche]]
+* [[eau de rose]]
+* [[eau de roussie]]
+* [[eau de sainte Geneviève]]
+* [[eau de Saturne]]
+* [[eau de saule]]
+* [[eau de savon]]
+* [[eau de Seltz]]
+* [[eau de senteur]]
+* [[eau de séparation]]
+* [[eau de soude]]
+* [[eau de soufre]]
+* [[eau de source]]
+* [[eau de suie]]
+* [[eau de tabac]]
+* [[eau de table]]
+* [[eau de toilette]]
+* [[eau de tremble]]
+* [[eau de vaches]]
+* [[eau de vaisselle]]
+* [[eau de veau]]
+* [[eau-de-vie]], [[eau de vie]]
+* [[eau de Villée]]
+* [[eau de violette]]
+* [[eau d’église]]
+* [[eau déminéralisée]]
+* [[eau d’érable]]
+* [[eau des Carmes]]
+* [[eau des deux champions]]
+* [[eau des équinoxes]]
+* [[eau des Hunzas]]
+* [[eau des microcosmes]]
+* [[eau des philosophes]]
+* [[eau des sases]]
+* [[Eau d’Heure]]
+* [[eau distillée]]
+* [[eau divine]]
+* [[eau dorée]]
+* [[eau d’or]]
+* [[eau d’orange]]
+* [[eau d’orge]]
+* [[eau dormante]]
+* [[eau douce]]
+* [[eau du robinet]]
+* [[eau dure]]
+* [[eau écarlate]]
+* [[eau ferrée]]
+* [[eau ferrugineuse]]
+* [[eau florale]]
+* [[eau-forte]]
+* [[eau-fortier]]
+* [[eau fossile]]
+* [[Eau Froide]]
+* [[Eau Gallée]]
+* [[eau gazeuse]]
+* [[eau glycolée]]
+* [[eau gommée]]
+* [[eaux colorées]]
+* [[eaux grasses]]
+* [[eau hydrogénée]]
+* [[eau hyperlourde]]
+* [[eau impériale]]
+* [[eau industrielle]]
+* [[eau iodée]]
+* [[eau légère]]
+* [[eau libre]]
+* [[eau liée]]
+* [[eau lourde]]
+* [[eau marine]]
+* [[eau mère]]
+* [[eau minérale]]
+* [[eau micellaire]]
+* [[eau mondifiée]]
+* [[eau morte]]
+* [[eau mouillante]]
+* [[eau mouillée]]
+* [[eau naturelle]]
+* [[Eau Noire]]
+* [[eau osmosée]]
+* [[eau oxygénée]]
+* [[eau panée]]
+* [[eau pétillante]]
+* [[eau phagidénique]]
+* [[eau philosophique]]
+* [[eau phlegmatique]]
+* [[eau plate]]
+* [[eau polluée]]
+* [[eau potable]]
+* [[eau pure]]
+* [[eau régale]]
+* [[eau repassée]]
+* [[eau rose]]
+* [[Eau Rouge]]
+* [[eau salée]]
+* [[eau sanitaire]]
+* [[eau saumâtre]]
+* [[eau seconde]]
+* [[eau sédative]]
+* [[eau semi-lourde]]
+* [[eau simple]]
+* [[eau somache]]
+* [[eau stagnante]]
+* [[eau stygienne]]
+* [[eau styptique]]
+* [[eau thermale]]
+* [[eau thiriacale]]
+* [[eau tonique]]
+* [[eau tritiée]]
+* [[eau trouble]]
+* [[eau végétale]]
+* [[eau-versant]]
+* [[eau vinaigrée]]
+* [[eau vive]]
+* [[eau vulnéraire]]
+* [[Eaubonne]]
+* [[eaux alexitères]]
+* [[eaux arthritiques]]
+* [[Eaux-Bonnes]]
+* [[eaux cardiaques]]
+* [[eaux céphaliques]]
+* [[eaux cordiales]]
+* [[Eaux et Forêts]]
+* [[eaux glacées]]
+* [[eaux grasses]]
+* [[eaux hépatiques]]
+* [[eaux hystériques]]
+* [[eaux-mères]]
+* [[eaux internationales]]
+* [[eaux néphrétiques]]
+* [[eaux ophtalmiques]]
+* [[eaux pluviales]]
+* [[eaux résiduaires]]
+* [[eaux spécifiques]]
+* [[eaux splenitiques]]
+* [[eaux stomachiques]]
+* [[eaux temporaires]]
+* [[eaux territoriales]]
+* [[eaux usées]]
+* [[eaux-vannes]]
+* [[écuelle d’eau]]
+* [[écuelle d’eau américaine]]
+* [[écuelle d’eau du Brésil]]
+* [[en eau]]
+* [[en eau de boudin]]
+* [[en feuille d’eau]]
+* [[épée d’eau]]
+* [[épée d’eau à large feuille]]
+* [[épée d’eau cordiforme]]
+* [[épée d’eau de Grisebach]]
+* [[épée d’eau naine]]
+* [[éponge d’eau douce]]
+* [[épreuve de l’eau bouillante]]
+* [[épreuve de l’eau froide]]
+* [[escalier d’eau]]
+* [[esprit de l’eau]]
+* [[esprit des eaux]]
+* [[être à l’eau]]
+* [[être au pain et à l’eau]]
+* [[être clair comme de l’eau de roche]]
+* [[être comme un poisson dans l’eau]]
+* [[être le bec dans l’eau]], à l’eau
+* [[extincteur à eau]]
+* [[faire eau]]
+* [[faire de l’eau]]
+* [[faire de l’eau claire]]
+* [[faire venir l’eau au moulin]]
+* [[faisan d’eau]]
+* [[faux rat d’eau]]
+* [[feuille d’eau]]
+* [[fil d’eau]]
+* [[filet d’eau]]
+* [[filtre à eau]]
+* [[fine à l’eau]]
+* [[flambe d’eau]]
+* [[flaque d’eau]]
+* [[flèche d’eau]]
+* [[fleur d’eau d’algues bleu-vert]]
+* [[fondre en eau]]
+* [[fontaine à eau]]
+* [[Forges-les-Eaux]]
+* [[fougère d’eau]]
+* [[fougère d’eau à poils rudes]]
+* [[fougère d’eau à quatre feuilles]]
+* [[fougère d’eau alpine]]
+* [[fougère d’eau de Nouvelle-Zélande]]
+* [[front d’eau]]
+* [[fuite d’eau]]
+* [[fusée à eau]]
+* [[gallinule poule d’eau]]
+* [[gare d’eau]]
+* [[gens de de-là l’eau]]
+* [[gibier d’eau]]
+* [[glace à l’eau]]
+* [[glissade d’eau]]
+* [[glissoire d’eau]]
+* [[goutte d’eau]]
+* [[goutte d’eau dans la mer]]
+* [[grandes eaux]]
+* [[gros de l’eau]]
+* [[guêpe d’eau]]
+* [[guib d’eau]]
+* [[guide-eau]]
+* [[heureux comme un poisson dans l’eau]]
+* [[hautes eaux]]
+* [[hauteur d’eau]]
+* [[herbe d’eau]]
+* [[hibiscus d’eau]]
+* [[horloge à eau]]
+* [[hysope d’eau]]
+* [[hysope d’eau d’Afrique]]
+* [[igname d’eau]]
+* [[iris d’eau]]
+* [[jacinthe d’eau]]
+* [[jardin d’eau]]
+* [[jet d’eau]]
+* [[jet d’eau marin]]
+* [[jonc d’eau]]
+* donner, faire venir, avoir [[l’eau à la bouche]]
+* [[la goutte d’eau qui fait déborder le vase]]
+* [[lac du Coq d’Eau]]
+* [[lâcher de l’eau]]
+* [[laisser courir l’eau]]
+* [[laitue d’eau]]
+* [[lame d’eau]]
+* [[Le Revest-les-Eaux]]
+* [[lentille-d’eau]] ou [[lentille d’eau]]
+* [[lentille d’eau à nombreuses racines]]
+* [[lentille d’eau bossue]]
+* [[lentille d’eau sans racines]]
+* [[lézard d’eau]]
+* [[liane d’eau]]
+* [[lièvre d’eau]]
+* [[ligne d’eau]]
+* [[ligne de partage des eaux]]
+* [[limace d’eau]]
+* [[lis d’eau]]
+* [[liseron d’eau]]
+* [[lit à eau]]
+* [[literie à eau]]
+* [[lys d’eau]]
+* [[lys d’eau de Thaïlande]]
+* [[lys d’eau rhéophyte]]
+* [[macaron d’eau]]
+* [[main d’eau]]
+* [[Marcols-les-Eaux]]
+* [[marin d’eau douce]]
+* [[masse d’eau]]
+* [[matelas à eau]]
+* [[mauvaises eaux]]
+* [[médecin d’eau douce]]
+* [[melon d’eau]]
+* [[menthe à l’eau]]
+* [[menthe d’eau]]
+* [[merle d’eau]]
+* [[mettre de l’eau dans son vin]]
+* [[miroir d’eau]]
+* [[mise en eau]]
+* [[mite d’eau]]
+* [[mocassin d’eau]]
+* [[morte eau]]
+* [[morte-eau]]
+* [[Morteau]]
+* [[moteur à eau]]
+* [[moto d’eau]]
+* [[mouche d’eau]]
+* [[moucheron d’eau douce]]
+* [[moulin à eau]]
+* [[mouron d’eau]]
+* [[nage en eau libre]]
+* [[nager entre deux eaux]]
+* [[natation en eau libre]]
+* [[ne pas gagner l’eau qu’on boit]]
+* [[niveau à eau]]
+* [[noyé-d’eau]]
+* [[noyer son vin d’eau]]
+* [[oiseau d’eau]]
+* [[orchidée d’eau]]
+* [[pare-eau]]
+* [[passage d’eau]]
+* [[patience d’eau]]
+* [[patineur d’eau]]
+* [[pêcher en eau trouble]]
+* [[peinture à l’eau]]
+* [[pente d’eau]]
+* [[perdre les eaux]]
+* [[perroquet d’eau]]
+* [[petite lentille d’eau]]
+* [[pièce d’eau]]
+* [[pierre à eau]]
+* [[pile à eau]]
+* [[pipe à eau]]
+* [[piste d’eau]]
+* [[pistolet à eau]]
+* [[plantain d’eau]]
+* [[plantain d’eau à feuilles de graminées]]
+* [[plantain d’eau à feuilles lancéolées]]
+* [[plantain d’eau commun]]
+* [[plongée d’eau]]
+* [[poche à eau]]
+* [[point d’eau]]
+* [[poire à eau]]
+* [[poisson d’eau douce]]
+* [[poisson-papillon d’eau douce]]
+* [[poivre d’eau]]
+* [[pomme d’eau]]
+* [[pommier d’eau]]
+* [[pompe à eau]]
+* [[porter de l’eau à la mer]]
+* [[porter de l’eau à la rivière]]
+* [[porteur d’eau]]
+* [[pot à eau]]
+* [[pou d’eau]]
+* [[poudrerie d’eau]]
+* [[Pougues-les-Eaux]]
+* [[poule d’eau]]
+* [[poule d’eau noire]]
+* [[première eau]]
+* [[prendre l’eau]]
+* [[prendre les eaux]]
+* [[prise d’eau]]
+* [[puce d’eau]]
+* [[puceron d’eau]]
+* [[puits à eau]]
+* [[punaise d’eau]]
+* [[rabat-eau]]
+* [[radiateur à eau]]
+* [[râle d’eau]]
+* [[rat d’eau]]
+* [[rat d’eau australien]]
+* [[rat d’eau de Gojan]]
+* [[réacteur à eau bouillante]]
+* [[réacteur à eau sous pression]]
+* [[relever l’eau]]
+* [[remontée d’eau]]
+* [[remonter sur l’eau]]
+* [[renard d’eau]]
+* [[revenir sur l’eau]]
+* [[rideau d’eau]]
+* [[Riel-les-Eaux]]
+* [[rompre l’eau]]
+* [[roue à eau]]
+* [[route d’eau]]
+* [[rubanier d’eau]]
+* [[sac à eau]]
+* [[Saint-Alban-les-Eaux]]
+* [[Saint-Amand-les-Eaux]]
+* [[Saint-André-des-Eaux]]
+* [[Saint-Martin-les-Eaux]]
+* [[salade d’eau]]
+* [[salle d’eau]]
+* [[saphir d’eau]]
+* [[sapin d’eau]]
+* [[sarigue d’eau]]
+* [[sauce d’eau]]
+* [[saumon d’eau douce]]
+* [[scooter d’eau]]
+* [[scorpion d’eau]]
+* [[se jeter à l’eau]]
+* [[se noyer dans un plat d’eau]]
+* [[se noyer dans un verre d’eau]]
+* [[se ressembler comme deux gouttes d’eau]]
+* [[serpent d’eau]]
+* [[serpent maître des eaux]]
+* [[servitude d’eau]]
+* [[signe d’eau]]
+* [[ski d’eau]]
+* [[souris d’eau]]
+* [[souris d’eau éthiopienne]]
+* [[stade d’eau vive]]
+* [[suer sang et eau]]
+* [[supplice de l’eau]]
+* [[tapis d’eau]]
+* [[tâter l’eau]]
+* [[tempête dans un verre d’eau]]
+* [[tenir l’eau]]
+* [[tenir le bec dans l’eau]]
+* [[thermomètre à eau]]
+* [[tirant d’eau]]
+* [[tirant d’eau critique]]
+* [[tirer de l’eau]]
+* [[tomber à l’eau]]
+* [[tomber de l’eau]]
+* [[tonne à eau]]
+* [[tortue d’eau]]
+* [[train d’eau]]
+* [[trèfle d’eau]]
+* [[trompe à eau]]
+* [[troubler l’eau]]
+* [[tulipe d’eau]]
+* [[vache à eau]]
+* [[vapeur d’eau]]
+* [[vélo d’eau]]
+* [[ver d’eau]]
+* [[véronique mouron d’eau]]
+* [[véronique faux mouron d’eau]]
+* [[verre à eau]]
+* [[verre d’eau]] (= [[glace amorphe]])
+* [[Verseau]]
+* [[vert d’eau]]
+* [[vif de l’eau]]
+* [[ville d’eau]], [[ville d’eaux]]
+* [[vis à eau]]
+* [[vive eau]]
+* [[vive-eau]]
+* [[vivre d’amour et d’eau fraîche]]
+* [[voie d’eau]]
+* [[voiture d’eau]]
+{{)}}
+
+==== {{S|apparentés}} ====
+* [[éveux]]
+* [[évier]]
+
+==== {{S|vocabulaire}} ====
+* {{voir thésaurus|fr|bière (boisson)}}
+
+{{(}}
+* [[aqu-]]
+* [[aqua-]]
+* [[aqui-]]
+* [[hydr-]]
+* [[hydro-]]
+{{)}}
+* {{voir thésaurus|fr|automobile|boisson}}
+
+==== {{S|phrases}} ====
+{{(}}
+* [[c’est le feu et l’eau]]
+* [[chat échaudé craint l’eau froide]]
+* [[de l’eau est passée sous les ponts]]
+* [[gare l’eau]]
+* [[il coulera de l’eau sous les ponts]]
+* [[il n’est pire eau que l’eau qui dort]]
+* [[il n’y a pas de l’eau à boire]]
+* [[il n’y a pire eau que l’eau qui dort]]
+* [[l’eau va toujours à la rivière]]
+* [[tant va la cruche à l’eau qu’à la fin elle se casse]]
+{{)}}
+
+==== {{S|hyperonymes}} ====
+: ''Liquide'' (1) :
+* [[liquide]]
+: ''Substance pure'' (3) :
+* [[élément]]
+* [[oxyde]]
+
+==== {{S|hyponymes}} ====
+{{(|liquide}}
+* [[eau de forage]]
+* [[eau de mer]]
+* [[eau de pluie]]
+* [[eau douce]]
+* [[eau salée]]
+* [[eau minérale]]
+* [[eau gazeuse]]
+* [[eau plate]]
+* [[eau vive]]
+{{)}}
+{{(|liqueur artificielle}}
+* [[eau de boule]]
+* [[eau de Cologne]]
+* [[eau de feu]]
+* [[eau de goudron]]
+* [[eau de Javel]]
+* [[eau de rose]]
+* [[eau de toilette]]
+* [[eau-de-vie]]
+* [[eau hyperlourde]]
+* [[eau lourde]]
+* [[eau mère]]
+* [[eau oxygénée]]
+* [[eau semi-lourde]]
+{{)}}
+
+==== {{S|holonymes}} ====
+{{(|substance pure}}
+* [[hydrogène]]
+* [[oxygène]]
+{{)}}
+
+==== {{S|méronymes}} ====
+: ''Substance pure'' (3) :
+* [[solution aqueuse]]
+
+==== {{S|traductions}} ====
+{{trad-début|Liquide transparent}}
+* {{T|aiw}} : {{trad--|aiw|noqá}}
+* {{T|aas}} : {{trad--|aas|maʼa}}, {{trad--|aas|tugukél}}
+* {{T|kbt}} : {{trad--|kbt|vei}}, {{trad--|kbt|βei}}
+* {{T|abm}} : {{trad--|abm|àláp}}
+* {{T|mij}} : {{trad--|mij|anja}}, {{trad--|mij|anjɛ}}
+* {{T|aau}} : {{trad--|aau|hu}}
+* {{T|abq}} : {{trad--|abq|дзы}}
+* {{T|abp}} : {{trad--|abp|lanom}}
+* {{T|abi}} : {{trad--|abi|mídí}}
+* {{T|abu}} : {{trad--|abu|nshüe}}
+* {{T|abl}} : {{trad--|abl|wai}}
+* {{T|aal}} : {{trad--|aal|ʔâm}}
+* {{T|aa}} : {{trad--|aa|le}}
+* {{T|af}} : {{trad+|af|water}}
+* {{T|awv}} : {{trad--|awv|æː}}
+* {{T|awy}} : {{trad--|awy|ɔ̃ː}}, {{trad--|awy|ˈoho}}, {{trad--|awy|ˈoɣo}}, {{trad--|awy|oˈɣo}}
+* {{T|aws}} : {{trad--|aws|ˈoɣo}}
+* {{T|aht}} : {{trad--|aht|tuu}}
+* {{T|tsr}} : {{trad--|tsr|wai}}
+* {{T|akk}} : {{trad--|akk|𒀀}}
+* {{T|akz}} : {{trad--|akz|oki}}
+* {{T|sq}} : {{trad-|sq|uji}}
+* {{T|gsw}} : {{trad--|gsw|Wasser}}
+* {{T|gsw-fr}} : {{trad--|gsw-fr|Wàsser}}
+* {{T|ale}} : {{trad--|ale|taangax̂}}
+* {{T|alr}} : {{trad--|alr|мимыл}}
+* {{T|de}} : {{trad+|de|Wasser}} {{n}}
+* {{T|alt}} : {{trad--|alt|суу}}
+* {{T|ems}} : {{trad--|ems|taangaq}}
+* {{T|nyi}} : {{trad--|nyi|boŋ¹}}, {{trad--|nyi|bón¹}}
+* {{T|am}} : {{trad-|am|ውሃ}}
+* {{T|fro}} : {{trad--|fro|ewe}}, {{trad--|fro|euwe}}, {{trad--|fro|egua}}, {{trad--|fro|iaue}}, {{trad--|fro|yaue}}, {{trad--|fro|eaue}}, {{trad--|fro|eve}}, {{trad--|fro|aigue}}, {{trad--|fro|aige}}
+* {{T|onw}} : {{trad--|onw|ⲁⲥⲥⲉ|R=asse}}
+* {{T|aty}} : {{trad--|aty|inwai}}
+* {{T|anc}} : {{trad--|anc|am}}
+* {{T|angevin}} : {{Saint-Paul-du-Bois|nocat=1}} {{trad--|angevin|aive}} / {{trad--|angevin|ève}}, {{trad--|angevin|eive}}
+* {{T|en}} : {{trad+|en|water}}
+* {{T|ang}} : {{trad+|ang|wæter}}
+* {{T|aud}} : {{trad--|aud|vai}}
+* {{T|apx}} : {{trad--|apx|ɛr}}
+* {{T|ar}} : {{trad+|ar|ماء|R=māʾ}}
+* {{T|afb}} : {{trad--|afb|ماي}}
+* {{T|acm}} : {{trad--|acm|ماي}}
+* {{T|an}} : {{trad+|an|augua}}
+* {{T|arc}} : {{trad--|arc|ܡܝܐ}}
+* {{T|awt}} : {{trad--|awt|i}}
+* {{T|alu}} : {{trad--|alu|wai}}
+* {{T|hy}} : {{trad+|hy|ջուր|R=ǰur}}
+* {{T|aia}} : {{trad--|aia|wai}}
+* {{T|rup}} : {{trad--|rup|apã}}
+* {{T|arx}} : {{trad--|arx|i}}
+* {{T|ast}} : {{trad+|ast|agua}}
+* {{T|atj}} : {{trad--|atj|nipi}}
+* {{T|auu}} : {{trad--|auu|uwo}}
+* {{T|awx}} : {{trad--|awx|yaɡʌ}}
+* {{T|yiu}} : {{trad--|yiu|ʑɪ21ʥə21}}
+* {{T|ay}} : {{trad+|ay|uma}}
+* {{T|az}} : {{trad+|az|su}}
+* {{T|bcr}} : {{trad--|bcr|to}}
+* {{T|ba}} : {{trad--|ba|һыу}}
+* {{T|bca}} : {{trad--|bca|xuix}}
+* {{T|bft}} : {{trad--|bft|ཆུ}}
+* {{T|bm}} : {{trad--|bm|ji}}
+* {{T|bax}} : {{trad--|bax|ŋkyə̀}}
+* {{T|bmg}} : {{trad--|bmg|mai}}
+* {{T|bch}} : {{trad--|bch|eau}}
+* {{T|nds}} : {{trad+|nds|water}}
+* {{T|nds-nl}} : {{trad--|nds-nl|woater}}
+* {{T|eu}} : {{trad+|eu|ur}}
+* {{T|bar}} : {{trad--|bar|Wossa}}
+* {{T|beq}} : {{trad--|beq|maampa}}
+* {{T|bn}} : {{trad+|bn|পানি}}
+* {{T|bi}} : {{trad--|bi|wota}}
+* {{T|bid}} : {{trad--|bid|ama}}
+* {{T|be}} : {{trad+|be|вада|R=vada}}
+* {{T|be-tarask}} : {{trad--|be-tarask|вада}}
+* {{T|my}} : {{trad+|my|ရေ}}
+* {{T|bs}} : {{trad-|bs|voda}}
+* {{T|br}} : {{trad+|br|dour}}
+* {{T|bg}} : {{trad+|bg|вода|R=voda}} {{f}} (1)
+* {{T|bsk}} : {{trad--|bsk|t͡sʰɪl}}
+* {{T|cad}} : {{trad--|cad|koko}}
+* {{T|rmq}} : {{trad--|rmq|pañí}}
+* {{T|ca}} : {{trad+|ca|aigua}}
+* {{T|ceb}} : {{trad--|ceb|túbig}}
+* {{T|ch}} : {{trad--|ch|aqua}}
+* {{T|shy}} : {{trad--|shy|aman}}
+* {{T|chr}} : {{trad+|chr|ᎠᎹ|R=ama}}
+* {{T|cic}} : {{trad--|cic|okaʼ}}
+* {{T|zh}} : {{trad+|zh|水|R=shuǐ}}
+* {{T|ciw}} : {{trad--|ciw|nibi}}
+* {{T|cjs}} : {{trad--|cjs|суғ}}
+* {{T|si}} : {{trad+|si|වතුර|R=vatura}}
+* {{T|cop}} : {{trad--|cop|ϩⲩⲇⲱⲣ}}
+* {{T|ko}} : {{trad+|ko|물|tr=mul}}
+* {{T|kw}} : {{trad-|kw|dowr}}
+* {{T|co}} : {{trad+|co|acqua}}
+* {{T|cr}} : {{trad--|cr|ᓃᐲᔾ|R=niipiiy}}
+* {{T|hr}} : {{trad+|hr|voda}}
+* {{T|dnt}} : {{trad--|dnt|i}}
+* {{T|da}} : {{trad+|da|vand}}
+* {{T|ing}} : {{trad--|ing|te}}
+* {{T|tfn}} : {{trad--|tfn|minłni}}
+* {{T|diq}} : {{trad--|diq|ab}}
+* {{T|dua}} : {{trad--|dua|madíbá}}
+* {{T|mvp}} : {{trad--|mvp|wai}}
+* {{T|dz}} : {{trad--|dz|ཆུ}}
+* {{T|bja}} : {{trad--|bja|mayá}}
+* {{T|ebg}} : {{trad--|ebg|ḿ-mɔ́ŋ}}
+* {{T|efa}} : {{trad--|efa|ḿ-mɔ́ŋ}}
+* {{T|erk}} : {{trad--|erk|nai}}
+* {{T|efi}} : {{trad--|efi|ḿ-mɔ́ŋ}}
+* {{T|ego}} : {{trad--|ego|ami}}
+* {{T|egy}} : {{trad--|egy|𓈗𓏤}}
+* {{T|etu}} : {{trad--|etu|à-áb}}, {{trad--|etu|à-yɛ́b}}
+* {{T|eka}} : {{trad--|eka|ɑlʌp}}, {{trad--|eka|ɑ́lə́p}}, {{trad--|eka|ɑ́lʌ̀p}}
+* {{T|ekg}} : {{trad--|ekg|uwo}}
+* {{T|eke}} : {{trad--|eke|ḿ-mɔ́ŋ}}
+* {{T|eko}} : {{trad--|eko|mɑːzi}}
+* {{T|elm}} : {{trad--|elm|m̀mṹ}}
+* {{T|elo}} : {{trad--|elo|beceʼ}}, {{trad--|elo|biciʼ}}
+* {{T|afo}} : {{trad--|afo|embi}}
+* {{T|mrf}} : {{trad--|mrf|wətəl}}
+* {{T|cto}} : {{trad--|cto|bánia}}
+* {{T|cmi}} : {{trad--|cmi|banía}}
+* {{T|emp}} : {{trad--|emp|báido}}
+* {{T|tdc}} : {{trad--|tdc|banía}}
+* {{T|eme}} : {{trad--|eme|ʔɨ}}
+* {{T|egl}} : {{trad--|egl|âcua}}
+* {{T|eml}} : {{trad--|eml|aqua}}
+* {{T|enr}} : {{trad--|enr|endə}}
+* {{T|end}} : {{trad--|end|ae}}
+* {{T|enh}} : {{trad--|enh|би}}
+* {{T|enf}} : {{trad--|enf|би}}
+* {{T|eno}} : {{trad--|eno|bɘ}}
+* {{T|enn}} : {{trad--|enn|ạmịnị}}
+* {{T|enw}} : {{trad--|enw|ḿ-mɔ́ŋ}}
+* {{T|es}} : {{trad+|es|agua}} {{f}}
+* {{T|eo}} : {{trad+|eo|akvo}}
+* {{T|et}} : {{trad+|et|vesi}}
+* {{T|ee}} : {{trad--|ee|tsi}}
+* {{T|ewo}} : {{trad--|ewo|məndím}}
+* {{T|fo}} : {{trad+|fo|vatn}}
+* {{T|fj}} : {{trad+|fj|wai}}
+* {{T|fi}} : {{trad+|fi|vesi}}
+* {{T|vls}} : {{trad--|vls|woater}}
+* {{T|fc}} : {{trad--|fc|âve|f}}
+* {{T|frc}} : {{trad--|frc|eau}}
+* {{T|ksh}} : {{trad--|ksh|Wasser}}
+* {{T|frp}} : {{trad--|frp|égoua}}, {{trad--|frp|éva}}
+* {{T|fur}} : {{trad--|fur|aghe}}
+* {{T|fut}} : {{trad--|fut|vai}}
+* {{T|fud}} : {{trad--|fud|vai}}
+* {{T|gd}} : {{trad+|gd|uisge}}
+* {{T|ga}} : {{trad+|ga|uisce}}
+* {{T|gl}} : {{trad+|gl|auga}}
+* {{T|gallo}} : {{trad--|gallo|aèv}} {{f}}
+* {{T|cy}} : {{trad+|cy|dŵr}}
+* {{T|gaul}} : {{trad--|gaul|Annexe:gaulois/*dubron|n|dif=dubron}}, {{trad--|gaul|dubra|p}}
+* {{T|gwd}} : {{trad--|gwd|ande}}
+* {{T|ka}} : {{trad-|ka|წყალი|R=cqali}}
+* {{T|gil}} : {{trad--|gil|ran}}
+* {{T|got}} : {{trad--|got|𐍅𐌰𐍄𐍉|R=watō}} {{n}}
+* {{T|el}} : {{trad+|el|νερό|R=neró}} {{n}}
+* {{T|grc}} : {{trad--|grc|ὕδωρ|R=hýdôr}} {{n}}
+* {{T|gnc}} : {{trad--|gnc|ade}}
+* {{T|gn}} : {{trad+|gn|y}}
+* {{T|gez}} : {{trad--|gez|ማይ}}
+* {{T|gu}} : {{trad+|gu|પાણી|R=pāṇī}}
+* {{T|hac}} : {{trad--|hac|ئاۋی|R=āʋī}}
+* {{T|gwi}} : {{trad--|gwi|chuu}}
+* {{T|haq}} : {{trad--|haq|ruwa}}
+* {{T|ht}} : {{trad--|ht|dlo}}
+* {{T|hur}} : {{trad--|hur|qaʔ}}, {{trad--|hur|qaˑ}}, {{trad--|hur|qó꞉}}
+* {{T|haw}} : {{trad--|haw|wai}}
+* {{T|he}} : {{trad+|he|מים|R=mayim}}
+* {{T|hi}} : {{trad+|hi|पानी|R=pānī}}
+* {{T|ho}} : {{trad--|ho|ranu}}
+* {{T|mik-hit}} : {{trad--|mik-hit|oki}}
+* {{T|hu}} : {{trad-|hu|viz}}
+* {{T|sah}} : {{trad--|sah|уу}}
+* {{T|io}} : {{trad+|io|aquo}}
+* {{T|iki}} : {{trad--|iki|ḿ-mɔ́ŋ}}
+* {{T|ilo}} : {{trad--|ilo|danum}}
+* {{T|ilv}} : {{trad--|ilv|ḿ-mɔ́ŋ}}
+* {{T|id}} : {{trad+|id|air}}
+* {{T|ia}} : {{trad+|ia|aqua}}
+* {{T|iu}} : {{trad+|iu|ᐃᒪᖅ|R=[[imaq]]}} ; {{trad+|iu|ᐃᒥᖅ|R=[[imiq]]}}
+* {{T|is}} : {{trad+|is|vatn}}
+* {{T|ist}} : {{trad--|ist|àqua}}
+* {{T|it}} : {{trad+|it|acqua}} {{f}}
+* {{T|ja}} : {{trad+|ja|水|R=mizu}}
+* {{T|jv}} : {{trad-|jv|banyu}}
+* {{T|dyo}} : {{trad--|dyo|mumel}}
+* {{T|tmr}} : {{trad--|tmr|מיא}}
+* {{T|lad}} : {{trad--|lad|agua}}
+* {{T|kbp}} : {{trad--|kbp|lɩm}}
+* {{T|kn}} : {{trad+|kn|ನೀರು|R=nīru}}
+* {{T|pam}} : {{trad--|pam|danúm}}
+* {{T|kdr}} : {{trad--|kdr|suv}}
+* {{T|krc}} : {{trad--|krc|суу}}
+* {{T|ks}} : {{trad-|ks|آب|tr=āb}}
+* {{T|kk}} : {{trad+|kk|су|tr=suw}}, {{trad-|kk|سۋ}}
+* {{T|kg}} : {{trad--|kg|maza}}
+* {{T|rw}} : {{trad-|rw|zi}} (amazi)
+* {{T|ky}} : {{trad+|ky|суу}}
+* {{T|kla}} : {{trad--|kla|ʔambo}}
+* {{T|tlh}} : {{trad--|tlh|bIQ}}
+* {{T|cku}} : {{trad--|cku|oki}}
+* {{T|kmw}} : {{trad--|kmw|ibo}}
+* {{T|kpy}} : {{trad--|kpy|мимыл}}
+* {{T|avk}} : {{trad--|avk|lava}}
+* {{T|kum}} : {{trad--|kum|сув}}
+* {{T|khq}} : {{trad--|khq|hari}}
+* {{T|koy}} : {{trad--|koy|too}}
+* {{T|bbu}} : {{trad--|bbu|mul}}
+* {{T|ku}} : {{trad+|ku|av}}
+* {{T|sdh}} : {{trad--|sdh|ئاو|R=āw}}
+* {{T|kmr}} : {{trad--|kmr|av}}
+* {{T|lbu}} : {{trad--|lbu|pô}}
+* {{T|lki}} : {{trad--|lki|ئاو|R=āw}}
+* {{T|nrz}} : {{trad--|nrz|vei}}, {{trad--|nrz|βei}}
+* {{T|slp}} : {{trad--|slp|wai}}
+* {{T|la}} : {{trad+|la|aqua|f}}
+* {{T|llu}} : {{trad--|llu|wai}}
+* {{T|lv}} : {{trad+|lv|ūdens}}
+* {{T|li}} : {{trad+|li|water}}
+* {{T|ln}} : {{trad+|ln|mái}}
+* {{T|lt}} : {{trad+|lt|vanduo}}
+* {{T|jbo}} : {{trad+|jbo|djacu}}
+* {{T|lmo}} : {{trad--|lmo|agua}}
+* {{T|loz}} : {{trad--|loz|mezi}}
+* {{T|lua}} : {{trad--|lua|mâyi}}
+* {{T|lb}} : {{trad+|lb|Waasser}}
+* {{T|mk}} : {{trad-|mk|вода|R=voda}}
+* {{T|swb}} : {{trad--|swb|maji}}
+* {{T|ms}} : {{trad+|ms|air}}
+* {{T|ml}} : {{trad+|ml|വെള്ളം|R=veḷḷam}}, {{trad+|ml|ജലം|R=jalam}}
+* {{T|mg}} : {{trad+|mg|rano}}
+* {{T|mt}} : {{trad+|mt|ilma}}
+* {{T|mqj}} : {{trad--|mqj|wai}}
+* {{T|mqx}} : {{trad--|mqx|wai}}
+* {{T|mrv}} : {{trad--|mrv|vai}}
+* {{T|mom}} : {{trad--|mom|nimbú}}
+* {{T|gv}} : {{trad-|gv|ushtey}}
+* {{T|mi}} : {{trad+|mi|wai}}
+* {{T|arn}} : {{trad--|arn|co}}
+* {{T|mr}} : {{trad-|mr|पाणी|R=pāṇī}} {{n}}
+* {{T|chm}} : {{trad--|chm|вӱд}}
+* {{T|mrq}} : {{trad--|mrq|vai}}
+* {{T|mqm}} : {{trad--|mqm|vai}}
+* {{T|mh}} : {{trad--|mh|dān}}
+* {{T|mls}} : {{trad--|mls|sa}}
+* {{T|mcw}} : {{trad--|mcw|ami}}
+* {{T|yua}} : {{trad--|yua|ha’}}
+* {{T|mzn}} : {{trad--|mzn|ab}}
+* {{T|mdw}} : {{trad--|mdw|máa}}
+* {{T|crg}} : {{trad--|crg|lo}}
+* {{T|mia}} : {{trad--|mia|nipi}}
+* {{T|cdo}} : {{trad--|cdo|cūi}}
+* {{T|nan}} : {{trad+|nan|chúi}}
+* {{T|lmw}} : {{trad--|lmw|kiik}}
+* {{T|mnd}} : {{trad--|mnd|i}}
+* {{T|mn}} : {{trad+|mn|ус}}
+* {{T|meu}} : {{trad--|meu|ranu}}
+* {{T|frm}} : {{trad--|frm|eau}}, {{trad--|frm|eaue}}
+* {{T|nah}} : {{trad+|nah|ātl}}
+* {{T|nhn}} : {{trad--|nhn|atl}}
+* {{T|ngu}} : {{trad--|ngu|atl}}
+* {{T|nhy}} : {{trad--|nhy|atl}}
+* {{T|nlv}} : {{trad--|nlv|atl}}
+* {{T|nch}} : {{trad--|nch|atl}}
+* {{T|nhm}} : {{trad--|nhm|atl}}
+* {{T|nhv}} : {{trad--|nhv|atl}}
+* {{T|nxa}} : {{trad--|nxa|wai}}
+* {{T|na}} : {{trad+|na|ebok}}
+* {{T|nv}} : {{trad--|nv|tó}}
+* {{T|nmz}} : {{trad--|nmz|nyaalm}}
+* {{T|nl}} : {{trad+|nl|water}} {{n}}
+* {{T|nej}} : {{trad--|nej|wai}}
+* {{T|yrk}} : {{trad--|yrk|иˮ}}
+* {{T|ne}} : {{trad+|ne|पानी|R=pānī}}
+* {{T|nha}} : {{trad--|nha|apa}}
+* {{T|nia}} : {{trad--|nia|idanö}}
+* {{T|num}} : {{trad--|num|vai}}
+* {{T|niu}} : {{trad--|niu|vai}}
+* {{T|nqo}} : {{trad--|nqo|ߖߌ}}
+* {{T|nog}} : {{trad--|nog|сув}}
+* {{T|fra-nor}} : {{trad--|fra-nor|iâo}}
+* {{T|no}} : {{trad+|no|vann}}
+* {{T|nn}} : {{trad-|no|vatn}}
+* {{T|nkr}} : {{trad--|nkr|vai}}
+* {{T|ny}} : {{trad--|ny|madzi}}
+* {{T|oc}} : {{trad+|oc|aiga}} {{f}}
+* {{T|orx}} : {{trad--|orx|ḿ-mɔ́ŋ}}
+* {{T|ora}} : {{trad--|ora|wai}}
+* {{T|om}} : {{trad+|om|bishaan}}
+* {{T|os}} : {{trad--|os|дон|R=don}}
+* {{T|lot}} : {{trad--|lot|aari}}
+* {{T|ug}} : {{trad+|ug|سۇ|R=su}}
+* {{T|ur}} : {{trad+|ur|آب|R=āb}}
+* {{T|uz}} : {{trad+|uz|suv}}
+* {{T|pi}} : {{trad--|pi|āpa}}
+* {{T|pap}} : {{trad--|pap|awa}}
+* {{T|pa}} : {{trad+|pa|ਪਾਣੀ|R=pāṇī}}
+* {{T|pdc}} : {{trad--|pdc|wasser}}
+* {{T|wet}} : {{trad--|wet|ɛr}}
+* {{T|fa}} : {{trad+|fa|آب|R=āb}}
+* {{T|ff}} : {{trad--|ff|ndiyam}}
+* {{T|pcd}} : {{trad--|pcd|iau}}
+* {{T|gpe}} : {{trad--|gpe|wɔta}}
+* {{T|pms}} : {{trad--|pms|eva}}
+* {{T|myp}} : {{trad--|myp|pii}}
+* {{T|poitevin-saintongeais}} : {{trad--|poitevin-saintongeais|ève}}, {{trad--|poitevin-saintongeais|aève}}
+* {{T|pl}} : {{trad+|pl|woda}} {{f}}
+* {{T|crx}} : {{trad--|crx|too}}
+* {{T|pt}} : {{trad+|pt|água}} {{f}}
+* {{T|qu}} : {{trad+|qu|yaku}}
+* {{T|lml}} : {{trad--|lml|wai}}, {{trad--|lml|wai}}
+* {{T|rap}} : {{trad--|rap|vai}}
+* {{T|rar}} : {{trad--|rar|vai}}
+* {{T|rm}} : {{trad--|rm|aua}}, {{trad--|rm|ova}}
+* {{T|rom}} : {{trad--|rom|pani}}
+* {{T|ro}} : {{trad+|ro|apă}}
+* {{T|ru}} : {{trad+|ru|вода|R=voda}} {{f}}
+* {{T|ssb}} : {{trad--|ssb|boheʼ}}
+* {{T|slm}} : {{trad--|slm|boheʼ}}
+* {{T|xsb}} : {{trad--|xsb|lanom}}
+* {{T|sbl}} : {{trad--|sbl|lanom}}
+* {{T|se}} : {{trad--|se|čáhci}}
+* {{T|sm}} : {{trad+|sm|vai}}
+* {{T|sad}} : {{trad--|sad|tsʼa}}
+* {{T|sa}} : {{trad+|sa|जल|R=jala}} {{n}}, {{trad+|sa|उदक|R=udaka}} {{n}}
+* {{T|sc}} : {{trad--|sc|abba}}
+* {{T|ojw}} : {{trad--|ojw|nipi}}
+* {{T|sdg}} : {{trad--|sdg|i}}
+* {{T|szw}} : {{trad--|szw|mɔɛ}}
+* {{T|sr}} : {{trad+|sr|вода|R=voda}}
+* {{T|sei}} : {{trad--|sei|hax}}
+* {{T|xsr}} : {{trad--|xsr|ཆུ|tr=chu}}
+* {{T|zdj}} : {{trad--|zdj|madji}}
+* {{T|sn}} : {{trad--|sn|mvura}}
+* {{T|scn}} : {{trad+|scn|acqua}}
+* {{T|szl}} : {{trad--|szl|woda}}
+* {{T|wul}} : {{trad--|wul|i}}
+* {{T|srq}} : {{trad--|srq|i}}
+* {{T|sk}} : {{trad+|sk|voda}}
+* {{T|sl}} : {{trad+|sl|voda}}
+* {{T|so}} : {{trad+|so|biyo}}
+* {{T|ses}} : {{trad--|ses|haari}}
+* {{T|snk}} : {{trad--|snk|ji|dif=jí}}
+* {{T|ckb}} : {{trad--|ckb|ئاو|R=āw}}
+* {{T|st}} : {{trad+|st|metsi}}
+* {{T|su}} : {{trad+|su|cai}}
+* {{T|sus}} : {{trad--|sus|ye}}
+* {{T|srn}} : {{trad--|srn|wátra}}
+* {{T|sv}} : {{trad+|sv|vatten}}
+* {{T|sue}} : {{trad--|sue|βei}}
+* {{T|sw}} : {{trad+|sw|maji}}
+* {{T|tg}} : {{trad+|tg|об}}
+* {{T|tl}} : {{trad+|tl|tubig}}
+* {{T|ty}} : {{trad--|ty|vai}}
+* {{T|ta}} : {{trad+|ta|நீர்|R=nīr}}, {{trad-|ta|தண்ணீர|R=taṇṇīr}}
+* {{T|tgp}} : {{trad--|tgp|wai}}
+* {{T|crh}} : {{trad--|crh|suv}}
+* {{T|tt}} : {{trad+|tt|su}}
+* {{T|trr}} : {{trad--|trr|vei}}
+* {{T|cs}} : {{trad+|cs|voda}}
+* {{T|ce}} : {{trad--|ce|хи|R=xi}}
+* {{T|ckt}} : {{trad--|ckt|мимыл}}
+* {{T|cv}} : {{trad--|cv|шыв}}
+* {{T|te}} : {{trad+|te|నీరు|R=nīru}}
+* {{T|tem}} : {{trad--|tem|ʌmʌnt}}
+* {{T|twu}} : {{trad--|twu|ʻoe}}
+* {{T|th}} : {{trad+|th|น้ำ}}
+* {{T|bo}} : {{trad--|bo|ཆུ|tr=chu}}
+* {{T|ti}} : {{trad-|ti|mai}}, {{trad+|ti|ማይ}}
+* {{T|tkp}} : {{trad--|tkp|vai}}
+* {{T|kim}} : {{trad--|kim|суғ}}
+* {{T|tpi}} : {{trad+|tpi|wara}}
+* {{T|tkl}} : {{trad--|tkl|vai}}
+* {{T|tokipona}} : {{trad--|tokipona|telo}}
+* {{T|to}} : {{trad--|to|vai}}
+* {{T|don}} : {{trad--|don|vei}}, {{trad--|don|βei}}
+* {{T|tyv}} : {{trad--|tyv|суг}}
+* {{T|trs}} : {{trad--|trs|nne³⁴}}
+* {{T|tsj}} : {{trad--|tsj|ri}}
+* {{T|tsolyáni}} : {{trad--|tsolyáni|húkh}}
+* {{T|ts}} : {{trad-|ts|metsi}}
+* {{T|tn}} : {{trad+|tn|metsi}}
+* {{T|tum}} : {{trad--|tum|maji}}
+* {{T|tpw}} : {{trad--|tpw|’y}}
+* {{T|tr}} : {{trad+|tr|su}}
+* {{T|tk}} : {{trad+|tk|suw}}
+* {{T|tvl}} : {{trad--|tvl|vai}}
+* {{T|tzo}} : {{trad--|tzo|vo’}}
+* {{T|uda}} : {{trad--|uda|ḿ-mɔ́ŋ}}
+* {{T|uk}} : {{trad+|uk|вода|R=voda}} {{f}}
+* {{T|ukq}} : {{trad--|ukq|ḿ-mɔ́ŋ}}
+* {{T|uri}} : {{trad--|uri|hu}}
+* {{T|piv}} : {{trad--|piv|vai}}
+* {{T|vec}} : {{trad+|vec|aqua}}
+* {{T|vi}} : {{trad+|vi|nước}}
+* {{T|rmy}} : {{trad--|rmy|panì}}
+* {{T|vo}} : {{trad+|vo|vat}}
+* {{T|wmh}} : {{trad--|wmh|wai}}
+* {{T|wls}} : {{trad--|wls|vai}}
+* {{T|wa}} : {{trad+|wa|aiwe}}
+* {{T|wno}} : {{trad--|wno|i}}
+* {{T|war}} : {{trad--|war|tubig}}
+* {{T|wrp}} : {{trad--|wrp|wai}}
+* {{T|wod}} : {{trad--|wod|uwo}}
+* {{T|wo}} : {{trad-|wo|ndoh}}
+* {{T|noa}} : {{trad--|noa|dʊ}}
+* {{T|wya}} : {{trad--|wya|tsaˀdúhstiˀ}}
+* {{T|yka}} : {{trad--|yka|boheʼ}}
+* {{T|yey}} : {{trad--|yey|ami}}
+* {{T|yi}} : {{trad-|yi|וואסער}}
+* {{T|yo}} : {{trad--|yo|omi}}
+* {{T|yuq}} : {{trad--|yuq|i}}
+* {{T|dje}} : {{trad--|dje|hari}}
+* {{T|zay}} : {{trad--|zay|watsee}}
+* {{T|za}} : {{trad--|za|raemx}}
+* {{T|zyg}} : {{trad--|zyg|ham⁴}}
+* {{T|zgb}} : {{trad--|zgb|raemx}}
+* {{T|zyn}} : {{trad--|zyn|ham⁴}}
+* {{T|zzj}} : {{trad--|zzj|ham⁴}}
+* {{T|zia}} : {{trad--|zia|βei}}
+* {{T|zu}} : {{trad+|zu|amanzi}}
+* {{T|zun}} : {{trad--|zun|kˀaweˀ}}
+{{trad-fin}}
+
+Liquide amniotique : {{cf|liquide amniotique}}
+
+=== {{S|prononciation}} ===
+* {{écouter|France &lt;!-- précisez svp la ville ou la région --&gt;|dø l‿o|titre=de l’eau|audio=Fr-eau.ogg|lang=fr}}
+
+==== {{S|homophones|fr}} ====
+{{(}}
+* [[au]], [[aux]]
+* [[aulx]] {{cf|ail}}
+* [[haut]], [[hauts]]
+* [[o]]
+* [[ô]]
+* [[oh]]
+* [[os]] {{p}}
+{{)}}
+
+=== {{S|voir aussi}} ===
+* {{WP}}
+* [https://sites.google.com/site/vocabulairealecole/familles-de-mots/famille-du-mot-eau famille du mot eau]
+* {{Annexe|Boissons en français}}
+
+=== {{S|références}} ===
+* {{Import:DAF8}}
+
+{{Très bonne entrée|français}}
+
+[[Catégorie:Boissons en français]]
+[[Catégorie:Couleurs en français]]
+[[Catégorie:Mots sans consonne en français]]
+
+== {{langue|bch}} ==
+=== {{S|étymologie}} ===
+: {{ébauche-étym|bch}}
+
+=== {{S|nom|bch}} ===
+'''eau''' {{pron||bch}}
+# [[#fr|Eau]].
+
+=== {{S|verbe|bch}} ===
+'''eau''' {{pron||bch}}
+# [[hisser#fr|Hisser]], [[soulever]].
+
+=== {{S|références}} ===
+* GALLAGHER, Steve, compiler. 2008. ''[//www.sil.org/pacific/png/pubs/50214/Bariai_Dict.pdf Bariai dictionary West New Britain province, Papua New Guinea]''. Ukarumpa, EHP, Papua New Guinea: Summer Institute of Linguistics. xvii, 289 pages, pages 40 et 41
+
+== {{langue|frc}} ==
+=== {{S|étymologie}} ===
+: {{ébauche-étym|frc}}
+
+=== {{S|nom|frc}} ===
+'''eau''' {{pron||frc}} {{f}}
+# [[#fr|Eau]].
+
+== {{langue|rm}} ==
+=== {{S|étymologie}} ===
+: {{ébauche-étym|rm}}
+
+=== {{S|pronom personnel|rm}} ===
+'''eau''' {{pron||rm}}
+# [[je#fr|Je]].
+
+===== {{S|note}} =====
+: {{note dialecte|puter|rm}}
+
+== {{langue|srq}} ==
+=== {{S|étymologie}} ===
+: {{ébauche-étym|srq}}
+
+=== {{S|verbe|srq}} ===
+'''eau''' {{pron|e.a.u|srq}} ''(statif)''
+# ''Flexion à la troisième personne du verbe statif'' [[au#srq|au]].
+==== {{S|synonymes}} ====
+* [[kiche]]
+
+==== {{S|antonymes}} ====
+* [[aki]]
+
+=== {{S|références}} ===
+* {{R:Siriono|34}}
+* Anne {{smcp|Priest}}, Perry N. {{smcp|Priest}}, ''[//www.sil.org/acpub/repository/19157.pdf Diccionario sirionó y castellano]'', 1985, page 9.</text>
+      <sha1>d8va3y5adyrcr7le4nylseezois19cp</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>air</title>
+    <ns>0</ns>
+    <id>9194</id>
+    <revision>
+      <id>24452332</id>
+      <parentid>24452112</parentid>
+      <timestamp>2017-12-24T08:35:37Z</timestamp>
+      <contributor>
+        <username>TAKASUGI Shinji</username>
+        <id>6122</id>
+      </contributor>
+      <minor/>
+      <comment>/* {{langue|fr}} */</comment>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text xml:space="preserve" bytes="23243">{{voir|Aïr|áir}}
+== {{langue|conv}} ==
+=== {{S|symbole|conv}} ===
+'''air'''
+# {{linguistique|conv}} Code {{w|ISO 639-3}} de l’[[{{air}}]].
+
+=== {{S|références}} ===
+* {{R:SIL|air}}
+
+== {{langue|fr}} ==
+=== {{S|étymologie}} ===
+: ''([[#fr-nom-1|Nom 1]])'' {{date|1119}} Du {{étyl|la|fr|mot=aer}}, de même sens.
+: ''([[#fr-nom-2|Nom 2]])'' {{date|1580}} Par extension du sens « [[atmosphère]], [[ambiance]] ».
+: ''([[#fr-nom-3|Nom 3]])'' {{date|1578}} De l’{{étyl|it|fr|mot=aria}}, extension du sens « [[manière]] ».
+
+=== {{S|nom|fr|num=1}} ===
+{{fr-rég|ɛʁ}}
+[[Fichier:Arcimboldo Air (copy).jpg|thumb|right|''L'Air'' de {{w|Giuseppe Arcimboldo}}.]]
+'''air''' {{pron|ɛʁ|fr}} {{m}}
+# [[mélange|Mélange]] [[gazeux]] [[constituer|constituant]] l’[[atmosphère]].
+#* ''Des ostioles uniquement respiratoires, ou, suivant l'expression consacrée, des ''stigmates'' placés symétriquement le long des côtés du corps, inhalent l’'''air''' atmosphérique et le transmettent dans des canaux, […].'' {{source|''Lettre de M. Léon Dufour, correspondant de l'Académie, sur le mouvement observé par M. Behn dans les pattes des hydrocorises'', dans ''Comptes rendus hebdomadaires des séances de l'Académie des sciences'', vol.1, 1835, p.335}}
+#* ''Par la fenêtre entr’ouverte, l’'''air''' entrait, gonflant comme une voile les rideaux de mousseline, et j’apercevais un pan de ciel bleu, […].'' {{source|{{Citation/Octave Mirbeau/La Chambre close/1920}}}}
+#* ''Il procédait à de profondes aspirations puis rejetait l''''air''' en produisant une espèce de sifflement particulier […].'' {{source|{{w|Alain Gerbault}}, ''À la poursuite du soleil''; tome 1 : ''De New-York à Tahiti'', 1929}}
+#* ''Bien protégé derrière le pare-brise, le déplacement d''''air''' provoqué par la rotation de l'hélice m'effleurait à peine les joues.'' {{source|{{w|Dieudonné Costes}} &amp; {{w|Maurice Bellonte}}, ''Paris-New-York'', 1930}}
+#* ''Une plus grande teneur de l’'''air''' en gaz carbonique permettrait d'ailleurs d'expliquer la luxuriance de la végétation sans faire intervenir un climat équatorial.'' {{source|{{w|Henri Gaussen}}, ''Géographie des Plantes'', Armand Colin, 1933, p.51}}
+# {{term|Souvent au pluriel}} [[zone|Zone]] [[située]] [[au-dessus]] du [[sol]].
+#* ''On ne parlait que de s’élancer dans les '''airs''' et tout le monde affirmait : « C’est forcé qu’on y vienne ! » mais on n’y venait pas sans anicroches.'' {{source|{{Citation/H. G. Wells/La Guerre dans les airs/1921|17}}}}
+# [[température|Température]] et [[qualité]] de ce que l'on respire.
+#* ''Dans l’'''air''' rafraîchi où une impalpable brume se condensait en rosée, les bêtes levèrent leur mufle humide […].'' {{source|{{w|Louis Pergaud}}, ''[[s:Un satyre|Un satyre]]'', dans ''{{w|Les Rustiques, nouvelles villageoises}}'', 1921}}
+#* ''Des porches cintrés s'exhale parfois une odeur enivrante; […], et l'on surprend souvent dans l''''air''', le puissant arôme des distillations qui s'opèrent.'' {{source|{{Citation/Ludovic Naudeau/La France se regarde/1931}}}}
+#* ''Mais loin de son Plateau, Arsène André étouffait. L''''air''' résineux lui manquait, les brouillards de la Meuse lui enflammaient la gorge.'' {{source|{{Citation/Jean Rogissart/Passantes d’Octobre/1958|71}}}}
+#* ''L’'''air''' du dedans empeste le gas-oil brûlé et le vieux poisson.'' {{source|Jacky Durand, ''La nuit où le hareng sort'', dans {{w|Libération (journal)}} du 29 novembre 2010, p.30-31}}
+# [[vent|Vent]].
+#* ''Il n’y a pas un brin d’'''air'''.''
+# {{vieilli|fr}} {{par ext|fr}} Tout [[gaz]] [[invisible]].
+#* ''L’« '''air''' inflammable » désignait autrefois l’hydrogène.''
+# {{aéronautique|fr}} [[partie|Partie]] de l’atmosphère où l’[[homme]] se [[mouvoir|meut]] [[à l’aide d’]][[appareil]]s [[construire|construits]] et [[aménagés]] pour le [[vol]].
+#* ''La conquête de l’'''air'''.''
+# {{Acadie|fr}} [[élan|Élan]].
+#* ''T’es aussi bien de prendre de l’'''air''' si tu veux monter c’te côte-là.'' 
+
+==== {{S|dérivés}} ====
+{{(}}
+* [[à l’air]]
+* [[à l’air libre]] ''(dehors, en un lieu exposé à l’action de l’air)''
+* [[air-air]]
+* [[air-mer]]
+* [[air natal]] ''(air du pays où l’on est né)''
+* [[air-sol]]
+* [[air vif]]
+* [[airer]]
+* [[armée de l'air]]
+* [[avoir l’air]] ''(sembler)''
+* [[brasser de l’air]] ''(se démener sans résultat tangible)''
+* [[changer d’air]]
+* [[coup d’air]] ''(fluxion ou douleur qui vient de ce qu’on s’est exposé à un courant d’air)''
+* [[coupe-air]]
+* [[courant d’air]]
+* [[coussin d’air]] ''(couche d'air qui soutient)''
+* [[demi-air]]
+* [[en l’air]] ''(en hauteur)''
+* [[en plein air]] ''(dehors)''
+* [[être dans l’air]]
+* [[fendre l’air]] ''(se déplacer très rapidement)''
+* [[grand air]]
+* [[jouer la fille de l'air]] ''(fuir, s'éclipser)''
+* [[libre comme l’air]] ''(qui n’a aucune sujétion, qui peut disposer de tous ses moments)''
+* [[marron d’air]]
+* [[mer-air]]
+* [[monte-en-l’air]]
+* [[ne pas manquer d’air]] ''(être audacieux, effronté, avoir de l’aplomb, être gonflé)''
+* [[plein air]]
+* [[plus léger que l’air]]
+* [[plus lourd que l’air]]
+* [[pomper l’air]] ''(être agaçant)''
+* [[prendre l’air]] ''(sortir)''
+* [[se donner de l’air]] ''(se dérober, prendre la fuite)''
+* [[sol-air]]
+* [[trou d'air]]
+* [[vivre de l’air du temps]] ''(n’avoir rien pour vivre)''
+* [[airpocalypse]]
+{{)}}
+
+==== {{S|apparentés}} ====
+{{(|}}
+* [[aérable]]
+* [[aérage]]
+* [[aérant]]
+* [[aérateur]]
+* [[aération]]
+* [[aérer]]
+* [[aéricole]]
+* [[aéride]]
+* [[aérien]]
+* [[aériennement]]
+* [[aérifère]]
+* [[aérification]]
+* [[aérifier]]
+* [[aériforme]]
+* [[aériser]]
+* [[aérium]]
+* [[aérivore]]
+* [[aérobic]]
+* [[aérobie]]
+* [[aérobiose]]
+* [[aérobique]]
+* [[aérobus]]
+* [[aérochimique]]
+* [[aérochir]]
+* [[aéroclub]]
+* [[aérocôlie]]
+* [[aérocondenseur]]
+* [[aérocyste]]
+* [[aérodrome]]
+* [[aérodynamique]]
+* [[aérodynamisme]]
+* [[aérodyne]]
+* [[aérogare]]
+* [[aérogire]]
+* [[aéroglisseur]]
+* [[aérogramme]]
+* [[aérographe]]
+* [[aérographie]]
+* [[aérographique]]
+* [[aérolithe]]
+* [[aérologie]]
+* [[aérologique]]
+* [[aérologue]]
+* [[aéromancie]]
+* [[aéromancien]]
+* [[aéromaritime]]
+* [[aéromètre]]
+* [[aérométrie]]
+* [[aérométrique]]
+* [[aéromodélisme]]
+* [[aéromodéliste]]
+* [[aéromoteur]]
+* [[aéronaute]]
+* [[aéronautique]]
+* [[aéronautisme]]
+* [[aéronaval]]
+* [[aéronavigation]]
+* [[aéronef]]
+* [[aéronévrose]]
+* [[aérophage]]
+* [[aérophagie]]
+* [[aérophare]]
+* [[aérophobe]]
+* [[aérophobie]]
+* [[aérophone]]
+* [[aéroplage]]
+* [[aéroplane]]
+* [[aéropompe]]
+* [[aéroport]]
+* [[aéroporté]]
+* [[aéroportuaire]]
+* [[aéropostal]]
+* [[aéroscaphe]]
+* [[aéroscope]]
+* [[aéroscopie]]
+* [[aéroscopique]]
+* [[aérosol]]
+* [[aérosphère]]
+* [[aérostat]]
+* [[aérostatier]]
+* [[aérostation]]
+* [[aérostatique]]
+* [[aérostier]]
+* [[aérotechnique]]
+* [[aérothérapie]]
+* [[aérotherme]]
+* [[aérothermique]]
+* [[aérothermomètre]]
+* [[aérothermothérapie]]
+* [[aéroventilateur]]
+* [[Airbnb]]
+* [[anaérobie]]
+* [[anaérobiose]]
+* [[anaérobique]]
+* [[antiaérien]]
+* [[désaération]]
+* [[désaérer]]
+* [[hydro-aérique]]
+* [[porte-aéronef]]
+* [[subaérien]]
+{{)}}
+
+==== {{S|traductions}} ====
+{{trad-début|Gaz de l'atmosphère|1}}
+* {{T|af}} : {{trad+|af|gesig}}, {{trad-|af|aansien}}, {{trad-|af|aanblik}}, {{trad-|af|aansig}}, {{trad-|af|air}}, {{trad-|af|aspek}}
+* {{T|sq}} : {{trad+|sq|dukje}}
+* {{T|de}} : {{trad+|de|Luft}}, {{trad+|de|Anschein}}, {{trad+|de|Ansehen}}, {{trad+|de|Augenschein}}, {{trad+|de|Aussehen}}, {{trad+|de|Schein}}, {{trad+|de|Äußere}}, {{trad+|de|Gesicht}}, {{trad+|de|Miene}}, {{trad+|de|Anblick}}, {{trad+|de|Aspekt}}, {{trad+|de|Erscheinung}}
+* {{T|en}} : {{trad+|en|air}}
+* {{T|ang}} : {{trad-|ang|ansien}}
+* {{T|ar}} : {{trad-|ar|هواء|R=hawa}}
+* {{T|hy}} : {{trad+|hy|օդ|tr=ōd}}
+* {{T|az}} : {{trad+|az|hava}}
+* {{T|ba}} : {{trad--|ba|һауа}}
+* {{T|eu}} : {{trad+|eu|aire}}
+* {{T|be}} : {{trad-|be|паветра|tr=pavjétra}}
+* {{T|br}} : {{trad+|br|aer}}
+* {{T|bg}} : {{trad+|bg|въздух|tr=vàzduh}}
+* {{T|ca}} : {{trad+|ca|aire}}
+* {{T|zh}} : {{trad+|zh|气|R=qì|tradi=氣}}, {{trad+|zh|空气|R=kōngqì|tradi=空氣}}
+* {{T|ko}} : {{trad+|ko|공기|tr=gonggi}}
+* {{T|kw}} : {{trad-|kw|ayr}}
+* {{T|hr}} : {{trad+|hr|zrak}}
+* {{T|da}} : {{trad+|da|syn}}, {{trad+|da|luft}}
+* {{T|es}} : {{trad+|es|aire}}
+* {{T|eo}} : {{trad+|eo|aero}}, {{trad-|eo|ŝajno}}, {{trad-|eo|mieno}}, {{trad-|eo|aspekto}}
+* {{T|et}} : {{trad+|et|õhk}}
+* {{T|fo}} : {{trad-|fo|yvirbragd}}
+* {{T|fi}} : {{trad+|fi|ilma}}
+* {{T|fy}} : {{trad-|fy|hâlding}}, {{trad-|fy|aspekt}}, {{trad-|fy|gesicht}}, {{trad-|fy|oansjen}}
+* {{T|gd}} : {{trad-|gd|coltas}}
+* {{T|ga}} : {{trad+|ga|aer}}
+* {{T|gag}} : {{trad--|gag|soluk}}, {{trad--|gag|hava}}
+* {{T|cy}} : {{trad+|cy|awyr}}, {{trad+|cy|aer}}
+* {{T|ka}} : {{trad-|ka|საჰაერო|tr=sahaero}}
+* {{T|el}} : {{trad+|el|αέρας}}
+* {{T|grc}} : {{trad--|grc|ἀήρ|tr=aér}}, {{trad--|grc|αἰθήρ|tr=aithér}}
+* {{T|he}} : {{trad+|he|אויר|m|tr=avír}}
+* {{T|hi}} : {{trad+|hi|हवा|tr=havā}}, {{trad+|hi|वायु|tr=vāyu}}
+* {{T|hu}} : {{trad+|hu|látszat}}, {{trad+|hu|kifejezés}}, {{trad+|hu|nézet}}, {{trad+|hu|kinézet}}
+* {{T|sah}} : {{trad--|sah|салгын}}
+* {{T|io}} : {{trad+|io|aero}}
+* {{T|id}} : {{trad+|id|udara}}, {{trad+|id|antariksa}}
+* {{T|ia}} : {{trad-|ia|aere}}
+* {{T|is}} : {{trad+|is|loft}}
+* {{T|it}} : {{trad+|it|aria}}, {{trad+|it|apparenza}}, {{trad+|it|aspetto}}
+* {{T|ja}} : {{trad+|ja|空気|tr=kūki}}, {{trad+|ja|エア|tr=ea}}
+* {{T|krc}} : {{trad--|krc|хауа}}
+* {{T|kk}} : {{trad-|kk|ауа|tr=awa}}
+* {{T|kjh}} : {{trad--|kjh|кии}}
+* {{T|ky}} : {{trad+|ky|аба}}
+* {{T|kum}} : {{trad--|kum|гьава}}
+* {{T|ku}} : {{trad+|ku|hewa}}
+* {{T|la}} : {{trad+|la|aer}}, {{trad-|la|aspectamen}}, {{trad+|la|facies}}
+* {{T|lv}} : {{trad+|lv|gaiss}}
+* {{T|lt}} : {{trad+|lt|oras}}
+* {{T|mk}} : {{trad-|mk|ваздух|tr=vazduh}}
+* {{T|ms}} : {{trad-|ms|udara}}
+* {{T|mg}} : {{trad+|mg|rivotra}}
+* {{T|mt}} : {{trad-|mt|arja}}
+* {{T|nl}} : {{trad+|nl|lucht}}
+* {{T|nog}} : {{trad--|nog|ава}}
+* {{T|no}} : {{trad+|no|luft}}
+* {{T|oc}} : {{trad+|oc|aire}}
+* {{T|os}} : {{trad--|os|уӕлдӕф|tr=wældæf}}
+* {{T|ps}} : {{trad+|ps|هوا|tr=hawā}}
+* {{T|pap}} : {{trad--|pap|aparensia}}, {{trad--|pap|aspekto}}
+* {{T|fa}} : {{trad+|fa|هوا|tr=havâ}}
+* {{T|pcd}} : {{trad--|pcd|air}}
+* {{T|pl}} : {{trad+|pl|mina}}, {{trad+|pl|powietrze}}
+* {{T|pt}} : {{trad+|pt|ar}}, {{trad+|pt|aparência}}, {{trad-|pt|exterioridade}}, {{trad+|pt|cara}}, {{trad+|pt|expressão}}, {{trad+|pt|fisionomia}}, {{trad+|pt|aspecto}}, {{trad+|pt|semblante}}
+* {{T|ro}} : {{trad+|ro|aer}}
+* {{T|ru}} : {{trad+|ru|вид}}
+* {{T|se}} : {{trad--|se|áibmu}}
+* {{T|sr}} : {{trad+|sr|ваздух|tr=vazduh}}
+* {{T|sk}} : {{trad-|sk|vzduch}}
+* {{T|sl}} : {{trad+|sl|zrak}}
+* {{T|sv}} : {{trad+|sv|anseende}}, {{trad+|sv|anblick}}, {{trad+|sv|vy}}, {{trad+|sv|luft}}
+* {{T|sw}} : {{trad+|sw|hewa}}
+* {{T|ta}} : {{trad+|ta|காற்று|tr=kāṟṟu}}
+* {{T|crh}} : {{trad--|crh|ava}}
+* {{T|tt}} : {{trad+|tt|һава}}
+* {{T|cs}} : {{trad+|cs|vzduch}}
+* {{T|ce}} : {{trad--|ce|хӏаваъ|tr=hawa'}}
+* {{T|cv}} : {{trad--|cv|сывлăш}}
+* {{T|th}} : {{trad+|th|อากาศ|tr=aagàat}}
+* {{T|tr}} : {{trad+|tr|hava}}
+* {{T|tk}} : {{trad-|tk|howa}}
+* {{T|uk}} : {{trad+|uk|повітря|R=povítrja}} {{n}}
+* {{T|vi}} : {{trad+|vi|không khí}}
+{{trad-fin}}
+{{trad-début|Au-dessus du sol|2}}
+* {{T|en}} : {{trad+|en|air}}
+* {{T|nl}} : {{trad+|nl|plateau}}
+{{trad-fin}}
+{{trad-début|Ce que l'on respire|3}}
+* {{T|en}} : {{trad+|en|air}}
+* {{T|zh}} : {{trad+|zh|气|R=qì|tradi=氣}}, {{trad+|zh|空气|R=kōngqì|tradi=空氣}}
+* {{T|se}} : {{trad--|se|áibmu}}
+{{trad-fin}}
+{{trad-début|Vent|4}}
+* {{T|en}} : {{trad+|en|air}}
+* {{T|zh}} : {{trad+|zh|风|R=fēng|tradi=風}}
+* {{T|ta}} : {{trad+|ta|காற்று|tr=kāṟṟu}}, {{trad+|ta|வாயு|tr=vāyu}}
+{{trad-fin}}
+{{trad-début|Tout gaz|5}}
+* {{T|en}} : {{trad+|en|air}}
+* {{T|zh}} : {{trad+|zh|气体|tr=qìtǐ|tradi=氣體}}
+{{trad-fin}}
+{{trad-début|Pour le vol|6}}
+* {{T|en}} : {{trad+|en|air}}
+{{trad-fin}}
+
+==== {{S|hyponymes}} ====
+* [[diazote]]
+* [[dioxygène]]
+
+=== {{S|nom|fr|num=2}} ===
+{{fr-rég|ɛʁ}}
+'''air''' {{pron|ɛʁ|fr}} {{m}}
+# [[apparence|Apparence]] ; [[comportement]]. — {{note}} Ne s’emploie que dans certaines [[constructions]] dans lesquelles ce mot est suivi d'un qualificatif.
+#* ''Les étranges figures dont tout Mangarévien bigarrait sa peau, jointes à sa longue barbe et sa chevelure flottante, lui donnaient un '''air''' martial et terrible, […].'' {{source|Caret, ''Archipel de Mangaréva (Iles Gambier)'', dans ''Revue de l'Orient'', 1844}}
+#* ''[…] Catherine, Lioubotchka et Volodia me regardèrent exactement du même '''air''' dont nous regardions la chaîne des forçats, qui passait tous les lundis sous nos fenêtres.'' {{source|Léon Tolstoï, ''Souvenirs'', 1851-1857, traduction de Ardève Barine, éd.1922}}
+#* ''Il m’a salué à sa manière, en portant deux doigts à sa tête et en souriant d'un '''air''' bonasse.'' {{source|{{w|Émile Thirion}}, ''La Politique au village'', p. 133, Fischbacher, 1896}}
+#* ''Il est grand, de jolie tournure ; l’'''air''' d’un gentleman.'' {{source|{{w|Octave Mirbeau}}, ''L’assassin de la rue Montaigne '',}}
+#* ''Ce fut pour ces raisons sans doute qu’il accueillit d’un '''air''' enjoué et d’une âme égale l’annonce câlinement faite par la Julie d’une paternité future […].'' {{source|{{w|Louis Pergaud}}, ''[[s:La Vengeance du père Jourgeot|La Vengeance du père Jourgeot]]'', dans ''{{w|Les Rustiques, nouvelles villageoises}}'', 1921}}
+#* ''Ses '''airs''' penchés, sa ravissante et luxueuse pochette de soie, son bracelet montre en or, le fard étalé sur ses joues le tenaient quitte de manifester son opinion.'' {{source|{{Citation/Francis Carco/L’Homme de minuit/1938}}}}
+#* ''Durant notre veillée mortuaire, ma mère se levait quelquefois, soulevait le suaire et sa longue figure durcissait encore son '''air''' revêche.'' {{source|{{Citation/Jean Rogissart/Hurtebise aux griottes/1954|29}}}}
+#* ''Elle aurait pu être une héroïne durassienne déambulant, l’'''air''' mélancolique, dans la touffeur d'un penthouse tropical.'' {{source|{{w|Gérard Lefort}} &amp; Didier Péron, ''Marie France Pisier, belle rebelle'', dans {{w|Libération (journal)}} du 25 avril 2011, p.25}}
+
+==== {{S|expressions}} ====
+* [[air de famille]] : Une certaine ressemblance.
+* [[air des mauvais jours]]
+* [[air pénétré]]
+* [[avoir l’air]]
+* [[prendre l’air]]
+* [[sous son air]] : avec son apparence.
+*: '''''Sous son air''' de sainte-nitouche, c’est une vraie garce.''
+* [[se donner l'air]]
+
+==== {{S|traductions}} ====
+{{trad-début|Apparence|1}}
+* {{T|en}} : {{trad+|en|air}}, {{trad+|en|appearance}}, {{trad+|en|look}}, {{trad+|en|semblance}}, {{trad+|en|expression}}, {{trad+|en|mien}}, {{trad+|en|aspect}}, {{trad+|en|countenance}}
+* {{T|az}} : {{trad+|az|görkəm}}
+* {{T|fi}} : {{trad+|fi|ilme}}, {{trad+|fi|näköinen}}
+* {{T|kk}} : {{trad-|kk|ажар|tr=ajar}}, {{trad-|kk|түр|tr=tür}}, {{trad+|kk|пішін|tr=pişin}}, {{trad+|kk|кескін|tr=keskin}}, {{trad-|kk|келбет|tr=kelbet}}, {{trad-|kk|әлпет|tr=älpet}}, {{trad-|kk|ұсқын|tr=usqın}}, {{trad-|kk|сұр|tr=sur}}, {{trad-|kk|сүдін|tr=südin}}, {{trad-|kk|кейіп|tr=keyip}}
+* {{T|ki}} : {{trad--|ki|rora}}
+* {{T|nl}} : {{trad+|nl|aanzien}}, {{trad+|nl|schijn}}, {{trad+|nl|air}}, {{trad+|nl|gelaatsuitdrukking}}, {{trad+|nl|gezicht}}, {{trad+|nl|uiterlijk}}, {{trad+|nl|uitzicht}}, {{trad+|nl|aanblik}}, {{trad+|nl|verschijning}}, {{trad+|nl|voorkomen}}
+* {{T|se}} : {{trad--|se|geahčastat}}
+{{trad-fin}}
+
+=== {{S|nom|fr|num=3}} ===
+{{fr-rég|ɛʁ}}
+'''air''' {{pron|ɛʁ|fr}} {{m}}
+# {{musique|fr}} [[mélodie|Mélodie]] chantée ou jouée [[à l’aide d’]]un [[instrument]].
+#* ''Au piano, chantant un '''air''' de Bellini, était assise une jeune et très-belle femme, qui, à mon arrivée, s'interrompit et me reçut avec une gracieuse courtoisie.'' {{source|{{w|Edgar Poe}}, ''Le système du docteur Goudron et du professeur Plume'', dans ''Histoires grotesques et sérieuses'', traduction de {{w|Charles Baudelaire}}}}
+#* ''Nous croisons une charrette qui porte huit paysans entassés; ils chantent en parties un '''air''' noble et grave comme un choral.'' {{source|{{w|Hippolyte Taine}}, ''Voyage en Italie'', vol.2, 1866}}
+#* ''Dans la rue, un son de cor a éclaté, un '''air''' de chasse… Apparemment, quelque piqueur de grande maison, debout près d’un comptoir de cabaret, les joues gonflées, la bouche impérieusement serrée, l’air féroce, émerveille et fait taire l’assistance.'' {{source|{{Citation/Henri Barbusse/L’Enfer/1925}}}}
+#* ''Les musiciens tirèrent de leurs instruments un '''air''' brutal et voluptueux qui, aussitôt, pénétra l'assistance d'une fiévreuse pâmoison.'' {{source|{{Citation/Francis Carco/Images cachées/1928}}}}
+
+==== {{S|dérivés}} ====
+* [[air à boire]] (3)
+* [[jouer le même air]] : {{familier|nocat=1}} [[rabâcher]]
+
+==== {{S|traductions}} ====
+{{trad-début}}
+* {{T|de}} : {{trad+|de|Lied}} {{n}}, {{trad+|de|Melodie}} {{f}}, {{trad+|de|Arie}} {{f}}
+* {{T|en}} : {{trad+|en|air}}
+* {{T|bg}} : {{trad+|bg|ария}}
+* {{T|ca}} : {{trad+|ca|aire}}
+* {{T|es}} : {{trad+|es|aire}}
+* {{T|ka}} : {{trad-|ka|არია|R=aria}}
+* {{T|ku}} : {{trad+|ku|awaz}}
+* {{T|pt}} : {{trad+|pt|ária|f}}
+* {{T|ru}} : {{trad+|ru|ария}}
+* {{T|se}} : {{trad--|se|lávlu}}
+{{trad-fin}}
+
+=== {{S|prononciation}} ===
+* {{pron|ɛʁ|fr}}
+* {{écouter|France (Paris)|ɛ̃.n‿ɛʁ|audio=Fr-air.ogg|titre=un air|lang=fr}}
+* {{Canada|nocat=1}} {{pron|aɛ̯ʁ|fr}}
+
+==== {{S|homophones|fr}} ====
+* [[aire]], [[aires]] {{cf|aire|airer}}
+* [[-aire]] (suffixe)
+* [[ère]], [[ères]] (nom)
+* [[erre]], [[errent]], [[erres]] {{cf|erre|errer}}
+* [[ers]] (nom)
+* [[haire]] (nom)
+* [[hère]] (nom)
+* [[r]] (nom)
+
+=== {{S|anagrammes}} ===
+* [[ira]] {{cf|aller}}
+* [[rai]]
+* [[ria]]
+
+=== {{S|voir aussi}} ===
+* {{WP}}
+
+=== {{S|références}} ===
+* {{Import:DAF8}}
+
+== {{langue|af}} ==
+=== {{S|étymologie}} ===
+: {{ébauche-étym|af}}
+
+=== {{S|nom|af}} ===
+'''air'''
+# [[air#fr|Air]], [[allure]], [[apparence]], [[aspect]], [[spectacle]].
+
+==== {{S|synonymes}} ====
+* [[aanblik]]
+* [[aansien]]
+* [[aansig]]
+* [[aspek]]
+
+== {{langue|pro}} ==
+{{ébauche|pro}}
+
+=== {{S|étymologie}} ===
+: {{ébauche-étym|pro}}
+
+=== {{S|nom|pro}} ===
+'''air''' {{m}}
+# Colère, haine.
+
+=== {{S|verbe|pro}} ===
+'''air'''
+# Haïr, refuser dédaigneusement.
+
+==== {{S|variantes}} ====
+* [[ahir]]
+
+=== {{S|anagrammes}} ===
+* {{lien|ira|pro}}
+* {{lien|rai|pro}}
+
+
+=== {{S|références}} ===
+* {{R:Raynouard}}
+
+== {{langue|en}} ==
+=== {{S|étymologie}} ===
+: En {{étyl|enm|en}}, emprunté de l’{{étyl|fro|en|air}}, du {{étyl|la|fro|aer}}, emprunté du {{étyl|grc|en|ἀήρ|aếr}}. Le verbe vient du nom commun.
+
+=== {{S|nom|en}} ===
+{{en-nom-rég|ˈɛɹ|ˈɛə}}
+'''air''' {{pron|ˈɛɹ|en}} {{US|nocat=1}}, {{pron|ˈɛə|en}} {{UK|nocat=1}}
+# {{indén|en}} [[air#fr|Air]] (substance).
+# Air de musique, mélodie.
+# [[allure|Allure]], style.
+#* ''An '''air''' of mystery''.
+
+==== {{S|dérivés}} ====
+* {{lien|air conditioner|en}} ''(climatiseur)''
+* {{lien|air conditioning|en}} ''(climatisation)''
+* {{lien|air force|en}} ''(force aérienne)''
+* {{lien|airlock|en}} ''(sas)''
+* {{lien|on the air|en}}, {{lien|on air|en}} ''(à l’antenne)''
+* {{lien|on air|en}} ''(émission, enregistrement en cours, « attention, direct ! »)''
+
+=== {{S|verbe|en}} ===
+{{en-conj-rég|inf.pron=ˈɛɹ|inf.pron2=ˈɛə|ppr.psuf2=.ɹɪŋ}}
+'''air''' {{pron|ˈɛɹ|en}} {{US|nocat=1}}, {{pron|ˈɛə|en}} {{UK|nocat=1}}
+# [[aérer|Aérer]].
+# {{figuré|en}} [[exprimer|Exprimer]], émettre différentes opinions.
+#* ''They decided to '''air''' their differences.''
+# [[émettre|Émettre]], diffuser (une émission).
+
+==== {{S|synonymes}} ====
+''Émettre'' :
+* {{lien|broadcast|en}}
+
+==== {{S|dérivés}} ====
+* {{lien|air out|en}} ''(aérer)''
+
+=== {{S|prononciation}} ===
+* {{écouter|Royaume-Uni|æː|audio=En-uk-air.ogg|lang=en}}
+* {{écouter|États-Unis (Californie)|ɛɹ|audio=En-us-air.ogg|lang=en}}
+
+==== {{S|homophones|en}} ====
+* {{lien|heir|en}}
+
+=== {{S|anagrammes}} ===
+* {{lien|ria|en}}
+
+=== {{S|voir aussi}} ===
+* {{WP|lang=en}}
+* {{WP|Air|air}}
+
+== {{langue|gd}} ==
+=== {{S|étymologie}} ===
+: {{ébauche-étym|gd}}
+
+=== {{S|préposition|gd}} ===
+'''air'''
+# [[sur|Sur]], [[à]], [[contre]].
+
+== {{langue|id}} ==
+=== {{S|étymologie}} ===
+: {{ébauche-étym|id}}
+
+=== {{S|nom|id}} ===
+'''air''' {{pron||id}}
+# [[eau|Eau]].
+#* {{ébauche-exe|id}}
+# [[onde|Onde]].
+#* {{ébauche-exe|id}}
+
+==== {{S|dérivés}} ====
+{{(}}
+* [[air aki]]
+* [[air asin]]
+* [[air bersih]]
+* [[air keruh]]
+* [[air leding]]
+* [[air lidah]]
+* [[air liur]]
+* [[air mani]]
+
+* [[air matang]]
+* [[air minum]]
+* [[air pasang]]
+* [[air putih]]
+* [[air susu ibu]]
+* [[air tajin]]
+* [[air tanah]]
+* [[air tawar]]
+
+* [[cair]]
+* [[cairan]]
+* [[mengairi]]
+* [[pengairan]]
+* [[perairan]]
+{{)}}
+
+== {{langue|ms}} ==
+=== {{S|étymologie}} ===
+: Du proto-malais {{recons|air}}{{réf|1}}.
+
+=== {{S|nom|ms}} ===
+'''air'''
+# [[eau|Eau]], [[onde]].
+
+=== {{S|références}} ===
+* {{RÉF|1}} : Graham Thurgood, ''From Ancient Cham to Modern Dialects. Two Thousand Years of Language Contact and Change'', Oceanic Linguistics Special publications n°28, Honolulu, University of Hawai'i Press, 1999 {{ISBN|0-8248-2131-9}}, [http://books.google.fr/books?id=MBGYb84A7SAC&amp;printsec=frontcover&amp;dq=From+Ancient+Cham+to+Modern+Dialects.+Two+Thousand+Years+of+Language+Contact+and+Change&amp;hl=fr&amp;sa=X&amp;ei=Nm78T72iK8i90QX62b3_Bg&amp;ved=0CDEQ6AEwAA#v=onepage&amp;q=water&amp;f=false page 282]
+
+== {{langue|abs}} ==
+=== {{S|étymologie}} ===
+: {{ébauche-étym|abs}}
+
+=== {{S|nom|abs}} ===
+'''air'''
+# [[eau|Eau]], [[onde]].
+
+== {{langue|pmy}} ==
+=== {{S|étymologie}} ===
+: {{ébauche-étym|pmy}}
+
+=== {{S|nom|pmy}} ===
+'''air'''
+# [[eau|Eau]].
+
+=== {{S|références}} ===
+* Angela Kluge, ''[http://www.lotpublications.nl/Documents/361_fulltext.pdf A grammar of Papuan Malay]'', page 529, 2014
+
+== {{langue|nl}} ==
+=== {{S|étymologie}} ===
+: {{ébauche-étym|nl}}
+
+=== {{S|nom|nl}} ===
+'''air''' {{pron|ɛr|nl}}
+# [[air#fr|Air]], [[mine]].
+# [[air#fr|Air]], [[allure]], [[apparence]], [[aspect]], [[spectacle]].
+
+==== {{S|synonymes}} ====
+* [[aanblik]]
+* [[aanzien]]
+* [[gelaatsuitdrukking]]
+* [[gezicht]]
+* [[schijn]]
+* [[uiterlijk]]
+* [[uitzicht]]
+* [[verschijning]]
+* [[voorkomen]]
+
+=== {{S|prononciation}} ===
+* {{écouter|Pays-Bas|ɛr|audio=Nl-air.ogg|lang=nl}}
+* {{écouter||ɛr|lang=nl|audio=Nl--air.ogg}}
+
+
+[[Catégorie:Radicaux en indonésien]]
+
+== {{langue|pcd}} ==
+{{ébauche|pcd}}
+=== {{S|étymologie}} ===
+: {{ébauche-étym|pcd}}
+
+=== {{S|nom|pcd}} ===
+'''air''' {{pron||pcd}} {{f}}
+# [[air#fr|Air]]
+#* Ène '''air'''.
+#*: Un '''air'''.
+
+=== {{S|anagrammes}} ===
+* {{lien|ari|pcd}}</text>
+      <sha1>ph9bz89jqx1ns9zjfa91rs2zce5liv8</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>èstre</title>
+    <ns>0</ns>
+    <id>2429182</id>
+    <revision>
+      <id>23797137</id>
+      <parentid>19932480</parentid>
+      <timestamp>2017-05-22T13:16:24Z</timestamp>
+      <contributor>
+        <username>Baltic Bot</username>
+        <id>127589</id>
+      </contributor>
+      <minor/>
+      <comment>Retrait des liens interlangues qui sont maintenant gérés automatiquement par [[mw:Extension:Cognate]].</comment>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text xml:space="preserve" bytes="382">{{voir|estre}}
+
+== {{langue|oc}} ==
+=== {{S|étymologie}} ===
+: {{ébauche-étym|oc}}
+
+=== {{S|verbe|oc}} ===
+'''èstre''' {{pron||oc}} {{oc-norme classique}}
+# [[être|Être]].
+
+==== {{S|variantes}} ====
+* [[èsser#oc|èsser]]
+
+==== {{S|variantes dialectales}} ====
+* [[èster#oc|èster]] {{oc aranais|nocat=1}}
+
+=== {{S|références}} ===
+* {{R:Cantalausa}}
+
+{{clé de tri|estre}}</text>
+      <sha1>2smncewhdm4wd84wsmhie250f4xk3nv</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>газета</title>
+    <ns>0</ns>
+    <id>80708</id>
+    <revision>
+      <id>22430484</id>
+      <parentid>21929541</parentid>
+      <timestamp>2017-04-24T20:59:50Z</timestamp>
+      <contributor>
+        <username>Baltic Bot</username>
+        <id>127589</id>
+      </contributor>
+      <comment>Retrait des liens interlangues qui sont maintenant gérés automatiquement par [[mw:Extension:Cognate]].</comment>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text xml:space="preserve" bytes="694">== {{langue|bg}} ==
+=== {{S|étymologie}} ===
+: {{ébauche-étym|bg}}
+
+=== {{S|nom|bg}} ===
+{{bg-nom41|газет}}
+'''газета''' {{pron||bg}} {{f}}
+# [[gazette|Gazette]], journal.
+
+== {{langue|ky}} ==
+=== {{S|étymologie}} ===
+: Du {{étyl|ru|ky|mot=газета}}.
+
+=== {{S|nom|ky}} ===
+'''газета'''
+# [[journal|Journal]].
+
+== {{langue|ru}} ==
+=== {{S|étymologie}} ===
+: {{ébauche-étym|ru}}
+
+=== {{S|nom|ru}} ===
+
+'''газета''' {{pron||ru}} {{f}}
+# [[journal|Journal]], [[quotidien]].
+# [[gazette|Gazette]], [[journal]].
+
+=== {{S|prononciation}} ===
+{{ébauche-pron|ru}}
+* {{écouter|lang=ru|Russie &lt;!-- précisez svp la ville ou la région --&gt;||audio=Ru-газета.ogg}}</text>
+      <sha1>9kmqbk5ozb69cismvtd4hc7oc9roemp</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>газет</title>
+    <ns>0</ns>
+    <id>2909338</id>
+    <revision>
+      <id>23838766</id>
+      <parentid>21642770</parentid>
+      <timestamp>2017-05-24T01:35:29Z</timestamp>
+      <contributor>
+        <username>Baltic Bot</username>
+        <id>127589</id>
+      </contributor>
+      <minor/>
+      <comment>Retrait des liens interlangues qui sont maintenant gérés automatiquement par [[mw:Extension:Cognate]].</comment>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text xml:space="preserve" bytes="564">== {{langue|krc}} ==
+{{ébauche|krc}}
+=== {{S|étymologie}} ===
+: {{ébauche-étym|krc}}
+
+=== {{S|nom|krc}} ===
+'''газет''' {{pron||krc}}
+# {{journalisme|krc}} [[journal#fr|Journal]].
+
+== {{langue|kk}} ==
+{{ébauche|kk}}
+=== {{S|étymologie}} ===
+: {{ébauche-étym|kk}}
+
+=== {{S|nom|kk}} ===
+'''газет''' (gazet) {{pron||kk}}
+# {{journalisme|kk}} [[journal#fr|Journal]].
+
+== {{langue|tt}} ==
+{{ébauche|tt}}
+=== {{S|étymologie}} ===
+: {{ébauche-étym|tt}}
+
+=== {{S|nom|tt}} ===
+'''газет''' {{pron||tt}}
+# {{journalisme|tt}} [[journal#fr|Journal]].</text>
+      <sha1>pir51540wql1024hvj980k1g3nu8fnh</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>geloof</title>
+    <ns>0</ns>
+    <id>199407</id>
+    <revision>
+      <id>24152499</id>
+      <parentid>23441620</parentid>
+      <timestamp>2017-09-04T20:04:13Z</timestamp>
+      <contributor>
+        <username>Lmaltier</username>
+        <id>724</id>
+      </contributor>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text xml:space="preserve" bytes="2422">== {{langue|nl}} ==
+=== {{S|étymologie}} ===
+: Déverbal de ''[[geloven]]''.
+
+=== {{S|nom|nl}} ===
+'''geloof''' {{pron|ɣəˈlof|nl}} {{n}} {{indén|nl}}
+# [[confiance|Confiance]], [[foi]], [[créance]].
+#* ''Geen '''geloof''' aan iemands beweringen hechten.''
+#*: Ne pas ajouter foi aux affirmations de quelqu’un.
+# {{religion|nl}} [[foi|Foi]], [[croyance]], [[conviction]].
+#* ''Het '''geloof''' in God.''
+#*: La croyance en Dieu.
+#* ''Een vaag '''geloof''' in het hiernamaals.''
+#*: Une vague croyance en l’au-delà.
+#* '''''Geloof''', hoop en liefde.''
+#*: La foi, l’espérance et la charité.
+#* ''Zijn '''geloof''' afzweren.''
+#*: Renier sa foi.
+# [[religion|Religion]], [[foi]], [[confession]], [[culte]].
+#* ''Van '''geloof''' veranderen.''
+#*: Changer de religion.
+#* ''Zijn '''geloof''' verliezen.''
+#*: Perdre la foi.
+
+==== {{S|synonymes}} ====
+; confiance
+* [[fiducie]]
+* [[vertrouwen]]
+; foi
+* [[lichtgelovigheid]]
+* [[goedgelovigheid]]
+; religion
+* [[godsdienst]]
+* [[religie]]
+
+==== {{S|antonymes}} ====
+* [[ongeloof]]
+
+==== {{S|dérivés}} ====
+{{(}}
+* [[bijgeloof]]
+* [[gelofelijk]]
+* [[gelofte]]
+* [[geloofbaar]]
+* [[geloofsafval]]
+* [[geloofsartikel]]
+* [[geloofsbegrip]]
+* [[geloofsbelijdenis]]
+* [[geloofsbeproeving]]
+* [[geloofsbrief]]
+* [[geloofsdoop]]
+* [[geloofsdwang]]
+* [[geloofsformulier]]
+* [[geloofsgeheim]]
+* [[geloofsgemeenschap]]
+* [[geloofsgenoot]]
+* [[geloofsgeschil]]
+* [[geloofsgetuige]]
+* [[geloofsgetuigenis]]
+* [[geloofsgoed]]
+* [[geloofshaat]]
+* [[geloofshalve]]
+* [[geloofsheld]]
+* [[geloofsijver]]
+* [[geloofsleer]]
+* [[geloofsleven]]
+* [[geloofsonderricht]]
+* [[geloofsonderzoek]]
+* [[geloofsopvoeding]]
+* [[geloofsovertuiging]]
+* [[geloofspraktijk]]
+* [[geloofspunt]]
+* [[geloofsschild]]
+* [[geloofstwist]]
+* [[geloofsverdediging]]
+* [[geloofsverkondiger]]
+* [[geloofsverkondiging]]
+* [[geloofsvervolging]]
+* [[geloofsverwant]]
+* [[geloofsverzaking]]
+* [[geloofsvorm]]
+* [[geloofsvrede]]
+* [[geloofsvrijheid]]
+* [[geloofwaardig]]
+* [[geloofswaarheid]]
+* [[geloofszaak]]
+* [[geloofszending]]
+* [[gelovig]]
+* [[kerkgeloof]]
+* [[natuurgeloof]]
+* [[ongeloof]]
+* [[ongelooflijk]]
+* [[volksgeloof]]
+* [[vooruitgangsgeloof]]
+* [[waangeloof]]
+* [[wangeloof]]
+{{)}}
+
+=== {{S|verbe|nl|flexion}} ===
+'''geloof''' {{pron||nl}}
+# ''Première personne du singulier du présent de'' [[geloven]].
+
+=== {{S|prononciation}} ===
+* {{écouter|lang=nl|Pays-Bas|ɣə'lof|audio=Nl-geloof.ogg}}</text>
+      <sha1>3agnqaypm3dycf41vhd48mwnzb3lr5b</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>belief</title>
+    <ns>0</ns>
+    <id>116391</id>
+    <revision>
+      <id>23049803</id>
+      <parentid>21257588</parentid>
+      <timestamp>2017-05-06T14:08:55Z</timestamp>
+      <contributor>
+        <username>Baltic Bot</username>
+        <id>127589</id>
+      </contributor>
+      <minor/>
+      <comment>Retrait des liens interlangues qui sont maintenant gérés automatiquement par [[mw:Extension:Cognate]].</comment>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text xml:space="preserve" bytes="555">== {{langue|en}} ==
+=== {{S|étymologie}} ===
+: De l’{{étyl|ang|en}}.
+
+=== {{S|nom|en}} ===
+{{en-nom-rég|bəˈliːf|s=s}}
+'''belief''' {{pron|bəˈliːf|en}}
+# [[croyance|Croyance]].
+
+==== {{S|apparentés}} ====
+* {{lien|believe|en}}
+* {{lien|believable|en}}
+* {{lien|believability|en}}
+* {{lien|believableness|en}}
+* {{lien|unbelievable|en}}
+
+==== {{S|paronymes}} ====
+* [[relief]]
+
+=== {{S|prononciation}} ===
+* {{pron|bəˈliːf|en}}
+* {{écouter|lang=en|États-Unis &lt;!-- précisez svp la ville ou la région --&gt;|bəˈliːf|audio=En-us-belief.ogg}}</text>
+      <sha1>swd099tgtjcr3fyeli8vxk5gbua79fi</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>peel</title>
+    <ns>0</ns>
+    <id>121096</id>
+    <revision>
+      <id>23118774</id>
+      <parentid>22404528</parentid>
+      <timestamp>2017-05-07T15:09:32Z</timestamp>
+      <contributor>
+        <username>Baltic Bot</username>
+        <id>127589</id>
+      </contributor>
+      <minor/>
+      <comment>Retrait des liens interlangues qui sont maintenant gérés automatiquement par [[mw:Extension:Cognate]].</comment>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text xml:space="preserve" bytes="798">{{voir|Peel}}
+
+== {{langue|en}} ==
+=== {{S|étymologie}} ===
+: {{ébauche-étym|en}}
+
+=== {{S|nom|en}} ===
+{{en-nom-rég|ˈpil|ˈpiːl}}
+'''peel''' {{pron|ˈpil|en}} {{US|nocat=1}}, {{pron|ˈpiːl|en}} {{UK|nocat=1}}
+# [[écorce|Écorce]], [[pelure|pelure]], [[peau]] (d’un fruit, d’un légume).
+
+==== {{S|dérivés}} ====
+* {{lien|banana peel|en}}
+* {{lien|fruit peel|en}}
+
+=== {{S|verbe|en}} ===
+{{en-conj-rég|inf.pron=ˈpil|inf.pron2=ˈpiːl|ppr.pron=ˈpi.lɪŋ|ppr.pron2=ˈpiː.lɪŋ}}
+'''peel''' {{pron|ˈpil|en}} {{US|nocat=1}}, {{pron|ˈpiːl|en}} {{UK|nocat=1}} {{t|en}}
+# [[éplucher|Éplucher]], [[dépouiller]].
+
+==== {{S|dérivés}} ====
+* {{lien|peeler|en}}
+* {{lien|peeling|en}}
+* {{lien|peel off|en}}
+
+=== {{S|prononciation}} ===
+==== {{S|homophones|en}} ====
+* {{lien|peal|en}}</text>
+      <sha1>tnn5549o1bbt3eahs28b52feyg3y61v</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>合宿</title>
+    <ns>0</ns>
+    <id>982505</id>
+    <revision>
+      <id>22425217</id>
+      <parentid>21894973</parentid>
+      <timestamp>2017-04-24T18:34:31Z</timestamp>
+      <contributor>
+        <username>RobokoBot</username>
+        <id>141377</id>
+      </contributor>
+      <minor/>
+      <comment>Retrait des liens interlangues qui sont maintenant gérés automatiquement par [[:mw:Extension:Cognate]].</comment>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text xml:space="preserve" bytes="718">== {{langue|ja}} ==
+=== {{S|étymologie}} ===
+{{tableau han|ja}}
+: {{ébauche-étym|ja}}
+
+=== {{S|nom|ja|num=1}} ===
+{{ja-ka|がっしゅく|gasshuku}}
+{{ja-mot|合宿|gasshuku}} {{pron|ɡaɕ.ɕɯ.kɯ|ja}} 
+# [[gasshuku|Gasshuku]], [[séminaire]].
+{{ja-exmpl|部活の'''合宿'''でメールできませんでした。|À cause du séminaire du club je n’ai pas pu envoyer de courriel.|Bukatsu no gasshuku de mēru dekimasen deshita.}}
+
+=== {{S|nom|ja|num=2}} ===
+{{ja-ka|あいやど|aiyado}}
+{{ja-mot|合宿|aiyado}} {{pron|a.i.ja.do|ja}} 
+# ''Variante orthographique de'' [[相宿]].
+
+=== {{S|voir aussi}} ===
+* {{WP|lang=ja}}
+
+{{clé de tri|かつしゆく}}
+[[Catégorie:Lexique en japonais de l’éducation]]</text>
+      <sha1>7hntlgjjpjmwwwzny982bq0k5viuaqa</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>heel</title>
+    <ns>0</ns>
+    <id>28253</id>
+    <revision>
+      <id>24126025</id>
+      <parentid>22767703</parentid>
+      <timestamp>2017-08-18T15:10:31Z</timestamp>
+      <contributor>
+        <username>Lmaltier</username>
+        <id>724</id>
+      </contributor>
+      <comment>/* {{langue|nl}} */</comment>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text xml:space="preserve" bytes="2261">{{voir|hééł}}
+
+== {{langue|fr}} ==
+=== {{S|étymologie}} ===
+: De l’{{étyl|en|fr|heel}}.
+
+=== {{S|nom|fr}} ===
+{{fr-rég|hil}}
+'''heel''' {{pron|hil|fr}} {{m}}
+# {{anglicisme|fr}} {{catch|fr}} Catcheur jouant le rôle d’un méchant.
+
+==== {{S|antonymes}} ====
+* [[face]]
+* [[tweener]]
+
+==== {{S|traductions}} ====
+{{trad-début}}
+* {{T|en}} : {{trad+|en|heel}}
+* {{T|ja}} : {{trad-|ja|ヒール|tr=hīru}}, {{trad-|ja|悪役|tr=akuyaku}}
+{{trad-fin}}
+
+[[Catégorie:ee prononcés /i/ en français]]
+
+== {{langue|en}} ==
+=== {{S|étymologie}} ===
+: {{ébauche-étym|en}}
+
+=== {{S|nom|en}} ===
+{{en-nom-rég|ˈhil|ˈhiːl}}
+'''heel''' {{pron|ˈhil|en}} {{US|nocat=1}}, {{pron|ˈhiːl|en}} {{UK|nocat=1}}
+# [[talon|Talon]].
+# {{catch|en}} [[#fr|Heel]]. Catcheur jouant le rôle d’un méchant.
+
+==== {{S|antonymes}} ====
+''Catcheur'' :
+* {{lien|babyface|en}}
+* {{lien|face|en}}
+
+==== {{S|dérivés}} ====
+* {{lien|heelside|en}}
+* {{lien|high heels|en}}
+
+=== {{S|verbe|en}} ===
+{{en-conj-rég|inf.pron=ˈhil|ppr.pron=ˈhi.lɪŋ}}
+'''heel''' {{pron|ˈhil|en}} {{US|nocat=1}}, {{pron|ˈhiːl|en}} {{UK|nocat=1}}
+# [[talonner|Talonner]].
+
+=== {{S|prononciation}} ===
+* {{écouter|lang=en|États-Unis &lt;!-- précisez svp la ville ou la région --&gt;|hil|audio=En-us-heel.ogg}}
+
+==== {{S|homophones|en}} ====
+* {{lien|heal|en}}
+
+== {{langue|khamnigan}} ==
+=== {{S|étymologie}} ===
+: {{ébauche-étym|khamnigan}}
+
+=== {{S|nom|khamnigan}} ===
+'''heel''' {{phon||khamnigan}}
+# {{zoologie|khamnigan}} [[queue#fr|Queue]].
+
+===== {{S|note}} =====
+{{note-linguistique}}
+
+=== {{S|références}} ===
+* {{R:janhunen}}
+
+== {{langue|nl}} ==
+=== {{S|étymologie}} ===
+: {{ébauche-étym|nl}}
+
+=== {{S|adjectif|nl}} ===
+'''heel''' {{pron|ɦeːl|nl}}
+# [[entier|Entier]] ''(en parlant d’un nombre)''.
+
+==== {{S|synonymes}} ====
+* [[compleet]]
+* [[geheel]]
+* [[volledig]]
+
+=== {{S|adverbe|nl}} ===
+'''heel''' {{pron|ɦeːl|nl}}
+# [[très|Très]].
+:*'''''Heel''' goed.'' : Très bien.
+
+==== {{S|synonymes}} ====
+* [[erg#nl|arg]]
+
+=== {{S|verbe|nl|flexion}} ===
+'''heel''' {{pron||nl}}
+# ''Première personne du singulier du présent de'' [[helen]].
+
+=== {{S|prononciation}} ===
+* {{écouter|lang=nl|Pays-Bas|ɦeːl|audio=Nl-heel.ogg}}
+
+=== {{S|anagrammes}} ===
+* {{lien|hele|nl}}</text>
+      <sha1>50awhe4fpgsvd5bbp1p0skc34op6ou0</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>百萬</title>
+    <ns>0</ns>
+    <id>3335387</id>
+    <revision>
+      <id>22592066</id>
+      <parentid>21675944</parentid>
+      <timestamp>2017-04-27T23:08:52Z</timestamp>
+      <contributor>
+        <username>RobokoBot</username>
+        <id>141377</id>
+      </contributor>
+      <minor/>
+      <comment>Retrait des liens interlangues qui sont maintenant gérés automatiquement par [[:mw:Extension:Cognate]].</comment>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text xml:space="preserve" bytes="930">== {{langue|zh}} ==
+=== {{S|étymologie}} ===
+: Composé de {{lien|百|zh|tr=bǎi|sens=cent}} et de {{lien|萬|zh|tr=wàn|sens=dix-mille}}.
+
+=== {{S|nom|zh}} ===
+{{zh-formes|百万|百萬}}
+'''百萬''' ''bǎiwàn''
+# {{term|dans un mot composé}} [[million|Million]], 10{{e|6}}. {{usage}} Le mot pour '''un''' million est 一百萬. En chinois, les grands numéraux sont basés sur des puissances de dix-mille, non pas de mille.
+
+=== {{S|préfixe|zh}} ===
+'''百萬''' ''bǎiwàn-''
+# {{Taïwan|zh}} {{métrol|zh}} [[méga-|Méga-]].
+
+==== {{S|synonymes}} ====
+* {{lien|兆|zh|préf}} {{Chine|nocat=1}}
+
+==== {{S|vocabulaire}} ====
+{{préfixes SI/zh/TW}}
+
+=== {{S|voir aussi}} ===
+* {{WP|lang=zh}}
+[[Catégorie:Cardinaux en chinois]]
+
+== {{langue|ko}} ==
+=== {{S|étymologie}} ===
+: Du {{étyl|lzh|ko}}.
+
+=== {{S|nom|ko}} ===
+{{ko-nom|백만|hanja=百萬}}
+'''百萬'''
+# {{variante hanja de|백만|sens=[[million]], 10{{e|6}}}}.</text>
+      <sha1>dgswnzfvhmv1wl1lvzk60zeyp4bia3n</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>peigne</title>
+    <ns>0</ns>
+    <id>170735</id>
+    <revision>
+      <id>24393846</id>
+      <parentid>24138588</parentid>
+      <timestamp>2017-11-26T22:55:50Z</timestamp>
+      <contributor>
+        <username>Latrissium</username>
+        <id>57926</id>
+      </contributor>
+      <minor/>
+      <comment>Corr balises</comment>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text xml:space="preserve" bytes="6785">{{voir|peigné}}
+== {{langue|fr}} ==
+=== {{S|étymologie}} ===
+: De l’{{étyl|fro|fr|piegne}}, ''{{lien|pigne|fro}}'', ''{{lien|paigne|fro}}'', du {{étyl|la|fr|mot=pecten|sens=peigne}}.
+
+=== {{S|nom|fr}} ===
+{{fr-rég|pɛɲ}}
+[[image:Comb.png|thumb|Un '''peigne''' bleu en plastique, très commun, utilisé pour se coiffer.]]
+'''peigne''' {{pron|pɛɲ|fr}} {{m}}
+# {{coiffure|fr}} [[instrument|Instrument]] de [[buis]], de [[corne]], d’[[ivoire]], de [[plastique]], etc., qui [[tailler|est taillé]] [[en forme de]] [[dent]]s et qui [[sert]] à [[démêler]] et à [[arranger]] les [[cheveu]]x et la [[barbe]].
+#* ''Elle se poudra rapidement, passa un '''peigne''' dans ses cheveux, donna un coup d’œil prompt dans l'armoire à glace.'' {{source|{{Citation/Victor Méric/Les Compagnons de l’Escopette/1930|10-11}}}}
+#* ''Les petites dents, les grosses dents d’un '''peigne'''.''
+# Le même [[ustensile]] pour [[peigner]] les [[animaux]].
+#* ''Des '''peignes''' pour les chevaux.''
+# {{par ext|fr}} Ce même objet [[courbe]] à [[long]]ues [[dent]]s, dont les [[femme]]s se [[servent]] pour [[retenir]] [[leur]]s [[cheveu]]x ou [[seulement]] pour [[orner]] [[leur]] [[coiffure]].
+#* ''Les jeunes filles relèvent leurs cheveux à la mode la plus nouvelle, […]; elles ont un fichu de soie, des pendeloques, un '''peigne''' doré.'' {{source|{{w|Hippolyte Taine}}, ''Voyage en Italie'', vol.2, 1866}}
+#* ''Un '''peigne''' de diamants, de corail.''
+# [[instrument|Instrument]] de [[fer]] dont se [[servaient]] les [[cardeur]]s et les [[tisserand]]s pour [[apprêter]] la [[laine]], le [[chanvre]], le [[lin]], [[etc.]]
+#* '''''Peigne''' de cardeur, de tisserand.''
+#* {{figuré|fr}} ''[…] ; et, après que l’on s’est râpé le dos sur le '''peigne''' à carder d’invraisemblables lits, il faut encore, dès l’aube, commencer de folles ascensions, à pied ou à dos de mulets, […].'' {{source|{{w|Joris-Karl Huysmans}}, ''[[s:La Cathédrale/I|La Cathédrale]]'', Plon-Nourrit, 1915}}
+# {{analogie|fr}} {{arts|fr}} [[appareil|Appareil]] pour peigner les [[fibre]]s des [[tissu]]s [[naturel]]s.
+#* ''Le '''peigne''' circulaire ou '''peigne''' hérisson se compose d'un cylindre en laiton b de largeur suffisante pour contenir la nappe à travailler.'' {{source|D. de Prat, ''Nouveau manuel complet de filature; 1{{ère}} partie: Fibres animales &amp; minérales'', Encyclopédie Roret, 1914}}
+# [[genre|Genre]] de [[mollusque]]s [[acéphale]] à [[coquille]] [[bivalve]], dont [[certaines]] [[espèce]]s, comme la [[coquille Saint-Jacques]], sont [[comestible]]s.
+
+==== {{S|expressions}} ====
+{{(}}
+* [[donner un coup de peigne]] ''maltraiter)''
+* [[murex peigne de Vénus]]
+* [[passer au peigne fin]]
+* [[peigne de Vénus]]
+* [[peignures]]
+* [[sale comme un peigne]] ''(extrêmement sale)''
+* [[scandix peigne de Vénus]]
+* [[se donner un coup de peigne]] ''(se passer rapidement le peigne dans les cheveux)''
+{{)}}
+
+==== {{S|apparentés}} ====
+* [[pectiniforme]]
+
+==== {{S|traductions}} ====
+{{trad-début|Instrument qui sert à démêler et à arranger les cheveux et la barbe|1}}
+* {{T|sq}} : {{trad+|sq|krihem}}
+* {{T|de}} : {{trad+|de|Kamm}} {{m}}
+* {{T|en}} : {{trad+|en|comb}}
+* {{T|ang}} : {{trad-|ang|camb}}
+* {{T|ba}} : {{trad--|ba|тараҡ}}
+* {{T|bid}} : {{trad--|bid|cereepa}}
+* {{T|ca}} : {{trad+|ca|pinta}}
+* {{T|cya}} : {{trad--|cya|yko²³}}
+* {{T|ctz}} : {{trad--|ctz|kiko³}}
+* {{T|czn}} : {{trad--|czn|kyeku}}
+* {{T|cjs}} : {{trad--|cjs|тарақ}}
+* {{T|co}} : {{trad-|co|sbiglia|f}}, {{trad-|co|pèttine|m}}
+* {{T|da}} : {{trad+|da|kam}}
+* {{T|es}} : {{trad+|es|peine}}
+* {{T|eo}} : {{trad-|eo|kombilo}}
+* {{T|gd}} : {{trad-|gd|cìr}}
+* {{T|el}} : {{trad+|el|κτένι}}, {{trad+|el|χτένα}}
+* {{T|hu}} : {{trad+|hu|fésű}}
+* {{T|hke}} : {{trad--|hke|kisánuro}}
+* {{T|sah}} : {{trad--|sah|тараах}}
+* {{T|io}} : {{trad+|io|pektilo}}
+* {{T|is}} : {{trad+|is|kambur}}
+* {{T|it}} : {{trad+|it|pettine|m}}
+* {{T|kk}} : {{trad-|kk|тарақ|tr=taraq}}
+* {{T|ky}} : {{trad+|ky|тарак}}
+* {{T|kum}} : {{trad--|kum|таракъ}}
+* {{T|ku}} : {{trad+|ku|şe}} {{m}}, {{trad+|ku|şan}} {{m}}, {{trad+|ku|şeh}} {{m}}
+* {{T|ms}} : {{trad-|ms|sisir}}
+* {{T|yua}} : {{trad--|yua|xaache’}}
+* {{T|mvf}} : {{trad--|mvf|ᠰᠠᠮ|R=sam}}
+* {{T|umu}} : {{trad--|umu|chiixíikan}}
+* {{T|nl}} : {{trad+|nl|kam}}
+* {{T|fra-nor}} : {{trad--|fra-nor|pîne}}
+* {{T|no}} : {{trad+|no|kam}}
+* {{T|oc}} : {{trad+|oc|penche}}
+* {{T|pap}} : {{trad--|pap|peña}}
+* {{T|fa}} : {{trad+|fa|شانه}}
+* {{T|plodarisch}} : {{trad--|plodarisch|kòmpe|m}}
+* {{T|pl}} : {{trad+|pl|grzebień}}
+* {{T|pt}} : {{trad+|pt|pente}}
+* {{T|ro}} : {{trad+|ro|pieptene}}
+* {{T|ru}} : {{trad+|ru|гребень|R=grében’}}, {{trad+|ru|гребёнка|f}}
+* {{T|se}} : {{trad--|se|čohkun}}, {{trad--|se|gálggan}}
+* {{T|ses}} : {{trad--|ses|sarayta}}
+* {{T|srn}} : {{trad--|srn|kankan}}
+* {{T|tl}} : {{trad-|tl|sukláy}}
+* {{T|tt}} : {{trad+|tt|тарак}}
+* {{T|cs}} : {{trad+|cs|hřeben}}
+* {{T|cv}} : {{trad--|cv|тура}}
+* {{T|kim}} : {{trad--|kim|дырғаӄ}}
+* {{T|tr}} : {{trad+|tr|tarak}}
+* {{T|zad}} : {{trad--|zad|biyaj}}
+* {{T|zpq}} : {{trad--|zpq|beyjo}}
+{{trad-fin}}
+
+{{trad-début|Ustensile pour peigner les animaux}}
+* {{T|de}} : {{trad-|de|Striegel}} {{m}}
+{{trad-fin}}
+{{trad-début|Ce même objet courbe à longues dents, dont les femmes se servent pour leurs cheveux.}}
+* {{T|de}} : {{trad-|de|Haarspange}} {{f}}, {{trad-|de|Haarklammer}} {{f}}
+* {{T|en}} : {{trad+|en|comb}}
+{{trad-fin}}
+
+=== {{S|verbe|fr|flexion|num=1}} ===
+{{fr-verbe-flexion|peigner|imp.p.2s=oui|ind.p.1s=oui|ind.p.3s=oui|sub.p.1s=oui|sub.p.3s=oui}}
+'''peigne''' {{pron|pɛɲ|fr}}
+# ''Première personne du singulier du présent de l’indicatif de'' [[peigner#fr-verb|peigner]].
+# ''Troisième personne du singulier du présent de l’indicatif de'' [[peigner#fr-verb|peigner]].
+# ''Première personne du singulier du présent du subjonctif de'' [[peigner#fr-verb|peigner]].
+# ''Troisième personne du singulier du présent du subjonctif de'' [[peigner#fr-verb|peigner]].
+# ''Deuxième personne du singulier du présent de l’impératif de'' [[peigner#fr-verb|peigner]].
+
+=== {{S|verbe|fr|flexion|num=2}} ===
+{{fr-verbe-flexion|peindre|sub.p.1s=oui|sub.p.3s=oui|grp=3}}
+'''peigne''' {{pron|pɛɲ|fr}}
+# ''Première personne du singulier du présent du subjonctif de'' [[peindre#fr-verb|peindre]].
+# ''Troisième personne du singulier du présent du subjonctif de'' [[peindre#fr-verb|peindre]].
+
+=== {{S|prononciation}} ===
+* {{écouter|lang=fr|France &lt;!-- précisez svp la ville ou la région --&gt;|pɛɲ|audio=Fr-peigne.ogg}}
+
+=== {{S|voir aussi}} ===
+* {{WP|Peigne de coiffure}}
+
+=== {{S|références}} ===
+* {{R:TLFi}}
+* {{R:DAF8}}
+
+[[Catégorie:Mollusques en français]]</text>
+      <sha1>0mjc3doeskpn8fem2pevgcki5n1yjyt</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>pagne</title>
+    <ns>0</ns>
+    <id>169974</id>
+    <revision>
+      <id>24422539</id>
+      <parentid>24343706</parentid>
+      <timestamp>2017-12-09T11:22:56Z</timestamp>
+      <contributor>
+        <username>HenrikKbh</username>
+        <id>50088</id>
+      </contributor>
+      <comment>Traductions : +danois : [[lændeklæde]] (assisté)</comment>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text xml:space="preserve" bytes="2131">== {{langue|fr}} ==
+=== {{S|étymologie}} ===
+:{{date|1637}} {{term|nom 1}} De l’{{étyl|es|fr|mot=paño}}, issu du latin ''[[pannus#la|pannus]]'' qui donne ''[[pan#fr|pan]]'' en français.
+:{{date|1872}} {{term|nom 2}} Apocope de ''{{lien|panier|fr}}'' {{cf|couffin|lang=fr}} pour un autre exemple d’évolution sémantique de « [[corbeille]] » vers « lit ».
+
+=== {{S|nom|fr|num=1}} ===
+{{fr-rég|paɲ}}
+'''pagne''' {{pron|paɲ|fr}} {{m}}
+# {{term|Costumes}} [[morceau|Morceau]] de [[tissu]] ou de [[matière]] [[végétal]]e [[tresser|tressée]] avec lequel une [[personne]] se [[couvrir|couvre]] les [[hanche]]s jusqu'aux [[genou]]x.
+#* ''Au prestigieux aspect du '''pagne''' virginal de quelque jeune fille d’Otaïti, sa brûlante imagination lui peignait la vie simple de la nature.'' {{source|{{Citation/Honoré de Balzac/La Peau de chagrin/1855}}}}
+#* ''Son corps, drapé dans une vaste natte de « phormium » garnie de peaux de chiens, était ceint d’un '''pagne''' ensanglanté dans les derniers combats.'' {{source|{{w|Jules Verne}}, ''{{w|Les Enfants du capitaine Grant}}'', 1846}}
+
+==== {{S|traductions}} ====
+{{trad-début}}
+* {{T|de}} : {{trad+|de|Lendenschurz}}
+* {{T|en}} : {{trad+|en|loincloth}}
+* {{T|bm}} : {{trad--|bm|fini}}, {{trad--|bm|taafe}}
+* {{T|bkz}} : {{trad--|bkz|feʼe}}
+* {{T|dak}} : {{trad--|dak|čhehnáke}}
+* {{T|da}} : {{trad-|da|lændeklæde|n}}
+* {{T|eo}} : {{trad-|eo|zontuko}}
+* {{T|id}} : {{trad+|id|cawat}}
+* {{T|kzi}} : {{trad--|kzi|ebpar}}
+* {{T|lkt}} : {{trad--|lkt|čhegnáke}}
+* {{T|swb}} : {{trad--|swb|saluva}} ''(pour les femmes)''
+* {{T|mzq}} : {{trad--|mzq|weʼe}}
+* {{T|zdj}} : {{trad--|zdj|ikoi}} ''(pour les hommes)''
+* {{T|ses}} : {{trad--|ses|taafa}}
+* {{T|sw}} : {{trad+|sw|shuka}}
+* {{T|tet}} : {{trad--|tet|kafoli}}
+{{trad-fin}}
+
+=== {{S|nom|fr|num=2}} ===
+{{fr-rég|paɲ}}
+'''pagne''' {{pron|paɲ|fr}} {{m}}
+#[[lit#fr|Lit]].
+
+==== {{S|dérivés}} ====
+* {{lien|pagnot|fr}}
+* {{lien|pagnoter|fr}}
+
+=== {{S|voir aussi}} ===
+* [[Annexe:Vêtements en français]]
+* {{WP}}
+
+=== {{S|références}} ===
+* {{Import:DAF8}}
+
+[[Catégorie:Vêtements en français]]</text>
+      <sha1>cfvw0xiib8726l5fl7kn59clluyr8d9</sha1>
+    </revision>
+  </page>
+</mediawiki>
