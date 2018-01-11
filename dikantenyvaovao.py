@@ -85,16 +85,17 @@ def put_deletion_notice(page):
         page.put(page_c, "+filazana")
 
 
-@app.route("/wiktionary_page/<lang>/<pagename>")
-def handle_wiktionary_page(pagename, lang):
+@app.route("/wiktionary_page/<lang>", methods=['POST'])
+def handle_wiktionary_page(lang):
     """
     Handle a Wiktionary page, attempts to translate the wiktionary page's content and
     uploads it to the Malagasy Wiktionary.
-    :param pagename: page name. Must consist of unicode-compatible characters with no slash, and not too long.
     :param lang: Wiktionary edition to look up on.
     :return: 200 if everything worked with the list of database lookups including translations,
     500 if an error occurred
     """
+    data = json.loads(request.get_data())
+    pagename = data[u'title']
     page = _get_page(pagename, lang)
     if page is None:
         return

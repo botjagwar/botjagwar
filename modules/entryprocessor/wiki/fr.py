@@ -109,7 +109,7 @@ class FRWiktionaryProcessor(WiktionaryProcessor):
 
                 i = (self.Page.title(),
                      pos,  # POS
-                     lang[1].strip(),  # lang
+                     str(lang[1].strip()),  # lang
                      definition)
                 items.append(i)
                 # pywikibot.output(u" %s --> %s : %s"%i)
