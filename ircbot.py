@@ -88,7 +88,7 @@ class LiveRecentChangesBot(ircbot.SingleServerIRCBot):
             pagename = _get_pagename(msg)
             url = self.service_address + "/wiktionary_page/%s" % (wikilanguage)
             data = {u'title': pagename}
-            requests.post(url, data=data)
+            requests.post(url, json=data)
             self.edits += 1
             if not self.edits % 5:
                 throughput = 60. * 5. / (float(ct_time) - self.chronometer)
