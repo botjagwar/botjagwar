@@ -21,7 +21,7 @@ class List(Property):
                 ret.append(value)
 
 
-class BaseEntry(object):
+class TypeCheckedObject(object):
     _additional = True
     properties_types = {}
     properties = {}
@@ -29,6 +29,13 @@ class BaseEntry(object):
     def __init__(self, **properties):
         for attribute, value in properties.items():
             self.add_attribute(attribute, value)
+
+    def __eq__(self, other):
+        for pname, pvalue in self.properties.items():
+            if getattr(other, pname) != getattr(self, pname):
+                return False
+
+        return True
 
     def __getattr__(self, item):
         if item in self.properties:
@@ -78,3 +85,7 @@ class BaseEntry(object):
                     name, self.__class__.__name__))
             else:
                 self.properties[name] = value
+
+
+class Entry(TypeCheckedObject):
+    pass

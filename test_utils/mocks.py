@@ -12,7 +12,13 @@ class PageMock(pywikibot.Page):
         self.pages = self.parsed.getElementsByTagName('page')
 
     def put(self, **kwargs):
-        print (u'Saving page [[%s]]' % self.title())
+        print (u'Saving page [[%s]] through put' % self.title())
+
+    def save(self, summary=None, watch=None, minor=True, botflag=None,
+             force=False, asynchronous=False, callback=None,
+             apply_cosmetic_changes=None, quiet=False, **kwargs):
+        print (u'Saving page [[%s]] through save' % self.title())
+
 
     def get(self):
         for page in self.pages:

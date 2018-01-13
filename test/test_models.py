@@ -1,11 +1,11 @@
-from models import BaseEntry, List
+from models import TypeCheckedObject, List
 from unittest.case import TestCase
 
 
 class TestModels(TestCase):
 
     def test_instantiate_base(self):
-        test = BaseEntry(
+        test = TypeCheckedObject(
             test1=10,
             test2=20,
             test3=300
@@ -15,7 +15,7 @@ class TestModels(TestCase):
         self.assertEquals(test.test3, 300)
 
     def test_instantiate_child_class_additional_properties(self):
-        class QingChuan(BaseEntry):
+        class QingChuan(TypeCheckedObject):
             _additional = True
             properties_types = {
                 "test1": int,
@@ -33,7 +33,7 @@ class TestModels(TestCase):
 
     def test_instantiate_child_class_no_additional_properties(self):
 
-        class GuoHang(BaseEntry):
+        class GuoHang(TypeCheckedObject):
             _additional = False
             properties_types = {
                 "test1": int,
@@ -54,7 +54,7 @@ class TestModels(TestCase):
 
     def test_serialise_with_list(self):
 
-        class YunHang(BaseEntry):
+        class YunHang(TypeCheckedObject):
             _additional = False
             properties_types = {
                 "test1": int,
