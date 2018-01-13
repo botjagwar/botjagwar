@@ -2,6 +2,8 @@
 import re
 import os
 
+import pywikibot
+
 data_file = os.getcwd() +'/conf/entryprocessor/'
 
 
@@ -15,6 +17,7 @@ class WiktionaryProcessor(object):
         self.text_set = False
 
     def process(self, page):
+        assert isinstance(page, pywikibot.Page)
         self.Page = page
         if not self.text_set:
             try:
@@ -26,7 +29,7 @@ class WiktionaryProcessor(object):
         self.content = text
         self.text_set = True
 
-    def retrieve_translations(self, page_c):
+    def retrieve_translations(self):
         raise NotImplementedError()
 
     def getall(self, keepNativeEntries=False):
