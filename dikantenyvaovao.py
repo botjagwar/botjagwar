@@ -7,11 +7,17 @@ import pywikibot as pwbot
 from flask import Flask, request
 import traceback
 
+import MySQLdb as db
+
 from modules import service_ports
+from modules import entryprocessor
 from modules.database import Database
 from modules.database.word import WordDatabase
 from modules.decorator import threaded
 from modules.translation.core import Translation
+
+from pywikibot import Site, Page
+
 
 from _mysql_exceptions import DataError, IntegrityError
 
@@ -84,6 +90,7 @@ def put_deletion_notice(page):
         page_c += u"\n[[sokajy:Pejy voafafa tany an-kafa]]"
         page.put(page_c, "+filazana")
 
+
 @app.route("/wiktionary_page/<lang>", methods=['POST'])
 def handle_wiktionary_page(lang):
     """
@@ -114,6 +121,37 @@ def handle_wiktionary_page(lang):
     return response
 
 
+@app.route("/wiktionary_page/<language>/<pagename>", methods=['GET'])
+def get_wiktionary_processed_page(language, pagename):
+    wiktionary_processor_class = entryprocessor.WiktionaryProcessorFactory.create(language)
+    wiktionary_processor = wiktionary_processor_class()
+    ret = []
+
+    page = Page(Site(language, 'wiktionary'), pagename)
+    wiktionary_processor.process(page)
+
+    for entry in wiktionary_processor.getall():
+        word, pos, language, translation = entry
+        translation_list = []
+        section = dict(
+            word=word,
+            language=language,
+            part_of_speech=pos,
+            translation=translation)
+        for translation in wiktionary_processor.retrieve_translations():
+            translation_word, translation_pos, translation_language, translation = translation
+            translation_section = dict(
+                word=translation_word,
+                language=translation_language,
+                part_of_speech=translation_pos,
+                translation=translation)
+            translation_list.append(translation_section)
+        section['translations'] = translation_list
+        ret.append(section)
+
+    return app.response_class(response=json.dumps(ret), status=200, mimetype='application/json')
+
+
 @app.route("/translate/<lang>", methods=["PUT"])
 def handle_translate_word(lang):
     """
@@ -130,8 +168,12 @@ def handle_translate_word(lang):
 
     translation_db = WordDatabase()
     translation_write_db = Database(table=u"%s_malagasy" % languages[lang])
-    if translation_db.exists(word, lang, part_of_speech):
-        raise Exception('exists already')
+
+    if (translation_db.exists_in_specialised_dictionary(word, lang, part_of_speech)
+        or translation_db.exists(word, lang, part_of_speech)):
+        response = app.response_class(
+            response=json.dumps({u'message': u'Word already exists and has been translated'}),
+            status=520, mimetype='application/json')
     else:
         try:
             added = []
@@ -148,11 +190,28 @@ def handle_translate_word(lang):
                 response=json.dumps({u'message': e.message}),
                 status=500, mimetype='application/json')
         else:
-            response = app.response_class(
-                response=json.dumps({u'added': added}),
-                status=200, mimetype='application/json')
+            if not added:
+                response = app.response_class(
+                    response=json.dumps({u'message': u'No addition performed'}),
+                    status=324, mimetype='application/json')
+            else:
+                response = app.response_class(
+                    response=json.dumps({u'added': added}),
+                    status=200, mimetype='application/json')
 
     return response
+
+
+@app.route('/dictionary/<origin>/<target>', methods=['GET'])
+def handle_get_specialised_dictionary(origin, target):
+    translations_db = WordDatabase()
+    result = translations_db.DB.raw_query(
+        u"select * from data_botjagwar.%s_%s"
+        % (db.escape_string(origin), db.escape_string(target)))
+    print result
+    return app.response_class(
+        response=json.dumps(result),
+        status=200, mimetype='application/json')
 
 
 def striplinks(link):
