@@ -1,5 +1,6 @@
 from modules.database import Database
 from set_database_password import PasswordManager
+import MySQLdb as db
 verbose = True
 
 
@@ -72,6 +73,29 @@ class WordDatabase(object):
     def do_commit(self):
         self.DB.connect.commit()
 
+    def exists_in_specialised_dictionary(self, entry, language, POS):
+        sql = u"select mg from data_botjagwar.%s_mg where %s='%s'" % (language, language, entry)
+        print sql
+        result = self.DB.raw_query(sql)
+
+        if result:
+            return True
+        else:
+            return False
+
+    def _check_existence(self, entry_col_name, entry, lang_col_name, lang, POS):
+        # OLD VERSION USING DB ACCESS
+        conditions = {entry_col_name: entry,
+                      lang_col_name: self.famaritana_fiteny}  # see explanation in "set_contentlanguage(ISOcode)"
+
+        if POS: conditions[u'karazany'] = POS
+        if lang: conditions[u'fiteny'] = lang
+        rep = self.DB.read(conditions, u'teny')  # execution of SQL
+        if rep:
+            return True
+        else:
+            return False
+
     def exists(self, entry, lang='', POS=''):
         """Checks if entry exists in database"""
         # TODO: harmonise encoding to ease detection in DB
@@ -84,24 +108,9 @@ class WordDatabase(object):
             except UnicodeError:
                 pass
                 # entry = unicode(entry)
+        return self._check_existence(u'teny', entry, u'fiteny', lang, POS)
 
-            # OLD VERSION USING DB ACCESS
-            conditions = {u'teny': entry,
-                          u'famaritana_fiteny': self.famaritana_fiteny}  # see explanation in "set_contentlanguage(ISOcode)"
-
-            if POS: conditions[u'karazany'] = POS
-            if lang: conditions[u'fiteny'] = lang
-            rep = self.DB.read(conditions, u' teny ')  # execution of SQL
-            if rep:
-                # if verbose: print("ct. encding : %s"%encoding)
-                return True
-            else:
-                entry = orig_entry
-                continue
-
-        return False
-
-    def raw_translate(self, word, language='fr'):
+    def raw_translate(self, word, pos, language='fr'):
         """gives the translation of the given word in the given language.
            Returns [translation, ...]. All strings are Unicode objects."""
         if type(word) is not unicode:
@@ -113,16 +122,18 @@ class WordDatabase(object):
         translations = []
         # Find definition in special dictionary
         if language in [u'fr', u'en']:
-            sql_query_result = self.DB.raw_query(u"select mg from data_botjagwar.%s_mg where %s='%s'"
-                                        % (language, language, word.replace(u"'", u"\\'")))
+            sql_query_result = self.DB.raw_query(
+                u"select mg from data_botjagwar.%s_mg where %s='%s'"
+                % (language, language, db.escape_string(word)))
             for translation in sql_query_result:
                 translation = translation
                 translations.append(translation)
 
         # No translation found in pecial dictionary? Look up in the general one!
         if not translations:
-            sql_query_result2 = self.DB.raw_query(u"select famaritana from data_botjagwar.teny where fiteny='%s' and teny='%s'"
-                                         % (language, word.replace(u"'", u"\\'")))
+            sql_query_result2 = self.DB.raw_query(
+                u"select famaritana from data_botjagwar.teny where fiteny='%s' and teny='%s'"
+                % (language, db.escape_string(word)))
             for translation in sql_query_result2:
                 translation = translation[0]
                 # Remove unneeded characters
@@ -143,8 +154,8 @@ class WordDatabase(object):
 
         return translations
 
-    def translate(self, word, language='fr'):
-        translations = self.raw_translate(word, language)
+    def translate(self, word, pos='ana', language='fr'):
+        translations = self.raw_translate(word, pos, language)
 
         # Post-process to directly have Wikibolana's definitions formatting
         tstring = u""

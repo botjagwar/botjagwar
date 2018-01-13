@@ -22,7 +22,7 @@ class Database(object):
             u'table': table
         }
         self.tablename = u'teny'
-        self.connect = db.connect(host, login, self.db_passwd)
+        self.connect = db.connect(host, login, self.db_passwd, charset='utf8')
         self.cursor = self.connect.cursor()
         if dbname is None:
             dbname = u"data_botjagwar"
