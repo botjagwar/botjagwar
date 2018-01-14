@@ -74,6 +74,10 @@ class WordDatabase(object):
         self.DB.connect.commit()
 
     def exists_in_specialised_dictionary(self, entry, language, POS):
+        entry = db.escape_string(entry.encode('utf8'))
+        language = db.escape_string(language.encode('utf8'))
+        language = language.decode('utf8')
+        entry = entry.decode('utf8')
         sql = u"select mg from data_botjagwar.%s_mg where %s='%s'" % (language, language, entry)
         print sql
         result = self.DB.raw_query(sql)

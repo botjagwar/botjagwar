@@ -19,7 +19,7 @@ class Database(object):
             u'host': host,
             u'login': login,
             u'passwd': self.db_passwd,
-            u'table': table
+            u'table': db.escape_string(table)
         }
         self.tablename = u'teny'
         self.connect = db.connect(host, login, self.db_passwd, charset='utf8')
@@ -65,13 +65,16 @@ class Database(object):
     def _do_insert(self, values_dict):
         sql = u"insert into `%(DB)s`.`%(table)s` (" % self.infos
         for i in values_dict:
-            sql += u"`%s`," % self.connect.escape_string(i)
+            i = db.escape_string(i.encode('utf8'))
+            i = i.decode('utf8')
+            sql += u"`%s`," % i
         sql = sql.strip(u',')
         sql += u") values ("
         for key, value in values_dict.items():
             if value is None:
                 value = u'NULL'
-            value = db.escape_string(value)
+            value = db.escape_string(value.encode('utf8'))
+            value = value.decode('utf8')
             sql += u"'%s'," % value
         sql = sql.strip(u',')
         sql += u")"

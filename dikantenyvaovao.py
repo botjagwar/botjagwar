@@ -19,7 +19,7 @@ from modules.translation.core import Translation
 from pywikibot import Site, Page
 
 
-from _mysql_exceptions import DataError, IntegrityError
+from _mysql_exceptions import DataError, IntegrityError, ProgrammingError
 
 
 # GLOBAL VARS
@@ -77,8 +77,11 @@ def _get_word_id(word, lang_code):
     word_db = Database(table=u"%s" % languages[lang_code])
     results = word_db.read({
         languages[lang_code] : word
-    }, select="%s_wID" % lang_code)
-    return results
+    }, select=u"%s_wID" % lang_code)
+    if results:
+        return results
+    else:
+        return ()
 
 
 @threaded
@@ -178,14 +181,16 @@ def handle_translate_word(lang):
         try:
             added = []
             for id_ in _get_word_id(word, lang):
+                translation = db.escape_string(translation.encode('utf8'))
+                translation = translation.decode('utf8')
                 sql_data = {
-                    u"%s_wID" % lang: str(id_),
+                    u"%s_wID" % lang: unicode(id_[0]),
                     u"mg": translation
                 }
                 added.append(sql_data)
                 print sql_data
                 translation_write_db.insert(sql_data, dry_run=dry_run)
-        except (DataError, IntegrityError) as e:
+        except (DataError, IntegrityError, ProgrammingError) as e:
             response = app.response_class(
                 response=json.dumps({u'message': e.message}),
                 status=500, mimetype='application/json')
@@ -208,7 +213,6 @@ def handle_get_specialised_dictionary(origin, target):
     result = translations_db.DB.raw_query(
         u"select * from data_botjagwar.%s_%s"
         % (db.escape_string(origin), db.escape_string(target)))
-    print result
     return app.response_class(
         response=json.dumps(result),
         status=200, mimetype='application/json')
