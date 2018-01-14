@@ -29,8 +29,5 @@ def get_list():
                  resp = requests.put('http://localhost:8000/translate/fr', data=json.dumps(data))
                  if not count % 100:
                      print '#' + count + ' dong dong'
-                 try:
 
-                 except Exception as e:
-                     pass
 get_list()
