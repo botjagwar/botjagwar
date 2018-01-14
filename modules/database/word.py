@@ -117,6 +117,8 @@ class WordDatabase(object):
     def raw_translate(self, word, pos, language='fr'):
         """gives the translation of the given word in the given language.
            Returns [translation, ...]. All strings are Unicode objects."""
+        word = word.encode('utf8')
+        db.escape_string(word)
         if type(word) is not unicode:
             try:
                 word = word.decode('utf8')
@@ -128,7 +130,7 @@ class WordDatabase(object):
         if language in [u'fr', u'en']:
             sql_query_result = self.DB.raw_query(
                 u"select mg from data_botjagwar.%s_mg where %s='%s'"
-                % (language, language, db.escape_string(word)))
+                % (language, language, word))
             for translation in sql_query_result:
                 translation = translation
                 translations.append(translation)
@@ -137,7 +139,7 @@ class WordDatabase(object):
         if not translations:
             sql_query_result2 = self.DB.raw_query(
                 u"select famaritana from data_botjagwar.teny where fiteny='%s' and teny='%s'"
-                % (language, db.escape_string(word)))
+                % (language, word))
             for translation in sql_query_result2:
                 translation = translation[0]
                 # Remove unneeded characters
