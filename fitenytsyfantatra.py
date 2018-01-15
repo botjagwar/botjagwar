@@ -81,7 +81,7 @@ class UnknownlanguageUpdaterBot(object):
         print ("UnknownlanguageUpdaterBot")
         parsed_lines = self.parse_wikipage()
         for language_code, language_name in parsed_lines:
-            self.create_category_set(language_code, language_name)
+            create_category_set(language_code, language_name)
         self.purge_new_languages_wikipage()
 
 
@@ -115,7 +115,7 @@ class UnknownLanguageManagerBot(object):
         """
         :return:
         """
-        for language_code, number_of_words in self.get_languages_from_x_days_ago():
+        for language_code, number_of_words in self.get_languages_from_x_days_ago(120):
             language_exists = language_code_exists(language_code)
             if language_exists == 0:
                 if len(language_code) == 3:
