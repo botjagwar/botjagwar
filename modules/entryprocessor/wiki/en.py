@@ -104,12 +104,14 @@ class ENWiktionaryProcessor(WiktionaryProcessor):
                 ptext = '\n={3}[ ]?(%s)[ ]?={3}\n' % regex_ptext
             posregex = re.findall(ptext, c)
 
+            c = re.sub('\{\{l\|en\|(.*)\}\}', '\\1', c)
             c = re.sub('\[\[(.*)#English\|(.*)\]\]', '\\1', c)
             c = re.sub('\[\[(.*)\|(.*)\]\]', '\\1', c)
 
             # definition
             try:
                 defin = c.split('\n#')[1]
+
                 if defin.find('\n') != -1:
                     defin = defin[:defin.find('\n')]
             except IndexError:

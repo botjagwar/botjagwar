@@ -55,7 +55,6 @@ class UnknownlanguageUpdaterBot(object):
 
     def parse_wikipage(self):
         """
-
         :return:
         """
         text = self.get_new_languages_wikipage()
@@ -72,10 +71,8 @@ class UnknownlanguageUpdaterBot(object):
 
         return language_names
 
-
     def start(self):
         """
-
         :return:
         """
         print ("UnknownlanguageUpdaterBot")
@@ -219,7 +216,7 @@ def translate_language_name(language_name):
     }
 
     cluster_replacements = {
-        u'ian$':u'ianina$',
+        u'ian$': u'ianina$',
         u'ese$': u'ey$',
         u"cl": u"kl",
         u"sc": u"sk",
@@ -235,7 +232,7 @@ def translate_language_name(language_name):
         u'cu': u'ko',
         u'ce': u'se',
         u'ci': u'si',
-        u'cy':u'si',
+        u'cy': u'si',
         u"x": u"ks",
     }
 
