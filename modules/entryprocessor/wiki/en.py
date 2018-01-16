@@ -121,7 +121,7 @@ class ENWiktionaryProcessor(WiktionaryProcessor):
             for regex in self.regexesrep:
                 defin = re.sub(regex, self.regexesrep[regex], defin).strip()
 
-            for char in '[]':
+            for char in '{[]}':
                 defin = defin.replace(char, '')
 
             defins = defin.split(',')
