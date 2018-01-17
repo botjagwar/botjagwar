@@ -75,10 +75,10 @@ class Database(object):
             if value is not None:
                 value = db.escape_string(value.encode('utf8'))
                 value = value.decode('utf8')
-                sql += u"'%s'," % value
+                sql += u"'%s', " % value
             else:
                 sql += u"NULL,"
-            sql = sql.strip(u',')
+        sql = sql.strip(u', ')
         sql += u")"
         try:
             self.cursor.execute(sql)
