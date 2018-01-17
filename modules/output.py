@@ -14,7 +14,7 @@ class Output(object):
             return False
         else:
             try:
-                self.word_db.append(info.entry, info.entry_definition, info.part_of_speech, info.language)
+                self.word_db.save_entry(info)
                 if verbose:
                     print ("voavao ny banky angona")
                 return True

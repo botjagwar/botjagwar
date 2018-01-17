@@ -39,6 +39,15 @@ class WordDatabase(object):
             entry or when checking if the entry is translated in DB"""
         self.famaritana_fiteny = ISOcode
 
+    def save_entry(self, entry):
+        paramsdict = {
+            u'teny': entry.entry,
+            u'famaritana': entry.entry_definition,
+            u'karazany': entry.part_of_speech,
+            u'fiteny': entry.language
+        }
+        self.DB.insert(paramsdict)
+
     def append(self, entry, definition, pos, language):
         """
         Inserts an entry in `teny` table

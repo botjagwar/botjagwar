@@ -63,6 +63,7 @@ class Database(object):
             self._insert_one(values_dict)
 
     def _do_insert(self, values_dict):
+        print values_dict
         sql = u"insert into `%(DB)s`.`%(table)s` (" % self.infos
         for i in values_dict:
             i = db.escape_string(i.encode('utf8'))
@@ -71,12 +72,13 @@ class Database(object):
         sql = sql.strip(u',')
         sql += u") values ("
         for key, value in values_dict.items():
-            if value is None:
-                value = u'NULL'
-            value = db.escape_string(value.encode('utf8'))
-            value = value.decode('utf8')
-            sql += u"'%s'," % value
-        sql = sql.strip(u',')
+            if value is not None:
+                value = db.escape_string(value.encode('utf8'))
+                value = value.decode('utf8')
+                sql += u"'%s'," % value
+            else:
+                sql += u"NULL,"
+            sql = sql.strip(u',')
         sql += u")"
         try:
             self.cursor.execute(sql)
@@ -122,6 +124,7 @@ class Database(object):
             sql = sql.strip(u'AND ')
 
         rep = ()
+        print sql
         try:
             self.cursor.execute(sql)
             rep = self.cursor.fetchall()
