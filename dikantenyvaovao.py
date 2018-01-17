@@ -134,11 +134,11 @@ def get_wiktionary_processed_page(language, pagename):
     wiktionary_processor.process(page)
 
     for entry in wiktionary_processor.getall():
-        word, pos, language, translation = entry
+        word, pos, language_code, translation = entry
         translation_list = []
         section = dict(
             word=word,
-            language=language,
+            language=language_code,
             part_of_speech=pos,
             translation=translation)
         for translation in wiktionary_processor.retrieve_translations():
@@ -149,7 +149,9 @@ def get_wiktionary_processed_page(language, pagename):
                 part_of_speech=translation_pos,
                 translation=translation)
             translation_list.append(translation_section)
-        section['translations'] = translation_list
+
+        if language_code == language:
+            section['translations'] = translation_list
         ret.append(section)
 
     return app.response_class(response=json.dumps(ret), status=200, mimetype='application/json')
