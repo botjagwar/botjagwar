@@ -1,7 +1,6 @@
 import urllib
 import re
 import htmlprocessor as hp
-import BeautifulSoup
 
 
 class HTMLcorpusretriever(object):

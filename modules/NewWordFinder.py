@@ -3,7 +3,7 @@
 import os
 import re
 
-import HTMLParser, BeautifulSoup
+import HTMLParser
 
 
 class MLStripper(HTMLParser.HTMLParser):
@@ -173,8 +173,6 @@ def strip_tags(html):
 
 def HTMLEntitiesToUnicode(text):
     """Converts HTML entities to unicode.  For example '&amp;' becomes '&'."""
-    text = unicode(
-        BeautifulSoup.BeautifulStoneSoup(text, convertEntities=BeautifulSoup.BeautifulStoneSoup.ALL_ENTITIES))
     return text
 
 
