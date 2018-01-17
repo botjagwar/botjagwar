@@ -111,7 +111,7 @@ def handle_wiktionary_page(lang):
         return
     data = {}
     try:
-        data[u'unknowns'], data[u'new_entries'] = translations.process_wiktionary_page(lang, page)
+        data[u'unknowns'], data[u'new_entries'] = translations.process_wiktionary_wiki_page(page)
         _update_unknowns(data[u'unknowns'])
     except Exception as e:
         traceback.print_exc()
