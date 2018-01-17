@@ -15,6 +15,7 @@ from wiki.sv import SVWiktionaryProcessor
 from wiki.vo import VOWiktionaryProcessor
 from wiki.zh import ZHWiktionaryProcessor
 
+import wiki
 
 data_file = os.getcwd() + '/conf/entryprocessor/'
 verbose = True
