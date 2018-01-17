@@ -12,19 +12,19 @@ class FRWiktionaryProcessor(WiktionaryProcessor):
         self.text_set = False
         self.content = None
         self.postran = {
-            u'verbe': 'mat',
-            u'adjectif': 'mpam',
-            u'nom': 'ana',
-            u'adverbe': 'tamb',
-            u'pronom': 'solo-ana',
-            u'préfixe': 'tovona',
-            u'suffixe': 'tovana'
+            u'verbe': u'mat',
+            u'adjectif': u'mpam',
+            u'nom': u'ana',
+            u'adverbe': u'tamb',
+            u'pronom': u'solo-ana',
+            u'préfixe': u'tovona',
+            u'suffixe': u'tovana'
         }
 
     def retrieve_translations(self):
         retcontent = []
         regex = '\{\{trad[\+\-]+?\|([A-Za-z]{2,3})\|(.*?)\}\}'
-        pos = 'ana'
+        pos = u'ana'
         defin = u""
         for allentrys in self.getall():  # (self.title, pos, self.lang2code(l), defin.strip())
             if allentrys[2] == 'fr':

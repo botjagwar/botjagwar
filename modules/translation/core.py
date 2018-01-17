@@ -231,7 +231,7 @@ class Translation(TranslationsHandler):
 
             infos = Entry(
                 entry=entry,
-                part_of_speech=pos,
+                part_of_speech=unicode(pos),
                 entry_definition=mg_translation,
                 language=entry_language,
                 origin_wiktionary_edition=language,
@@ -264,7 +264,7 @@ class Translation(TranslationsHandler):
 
         infos = Entry(
             entry=title,
-            part_of_speech=pos,
+            part_of_speech=unicode(pos),
             entry_definition=mg_translation,
             language=language_code,
             origin_wiktionary_edition=language,

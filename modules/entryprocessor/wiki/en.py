@@ -47,7 +47,7 @@ class ENWiktionaryProcessor(WiktionaryProcessor):
         """Maka ny dikanteny ao amin'ny pejy iray"""
         retcontent = []
         regex = '\{\{t[\+\-]+?\|([A-Za-z]{2,3})\|(.*?)\}\}'
-        pos = 'ana'
+        pos = u'ana'
         defin = u""
         for allentrys in self.getall():  # (self.title, pos, self.lang2code(l), defin.strip())
             if allentrys[2] == 'en':
@@ -96,7 +96,7 @@ class ENWiktionaryProcessor(WiktionaryProcessor):
             c = c[c.find('==%s==' % l):]
 
             # pos
-            pos = ''
+            pos = u''
             ptext = regex_ptext = ''
             for p in self.postran:
                 regex_ptext += '%s|' % p
@@ -144,10 +144,10 @@ class ENWiktionaryProcessor(WiktionaryProcessor):
                 if self.verbose: print("Tsy nahitana dikan'ny karazan-teny %s" % pos)
                 continue
             if defin.startswith('to ') or defin.startswith('To '):
-                pos = 'mat'
+                pos = u'mat'
                 defin = defin[2:]
             elif defin.startswith('a ') or defin.startswith('A '):
-                pos = 'ana'
+                pos = u'ana'
                 defin = defin[1:]
             if len(defin.strip()) < 1: continue
             try:
