@@ -20,11 +20,14 @@ class ENWiktionaryProcessor(WiktionaryProcessor):
             'Prefix': 'tovona',
             'Suffix': 'tovana'
         }
-        self.regexesrep = {
-            r"\[\[(.*)#(.*)\|?[.*]?\]?\]?": "\\1",
-            r"\{\{(.*)\}\}": "",
-            r"\{\{l\|en\|([a-z]+)\}\}": "\\1",
-            r"\((.*)\)": ""}
+        self.regexesrep = [
+            (r'\{\{l\|en\|(.*)\}\}', '\\1'),
+            (r'\{\{vern\|(.*)\}\}', '\\1'),
+            (r"\[\[(.*)#(.*)\|?[.*]?\]?\]?", "\\1"),
+            (r"\{\{(.*)\}\}", ""),
+            (r'\[\[(.*)\|(.*)\]\]', '\\1'),
+            (r"\((.*)\)", "")]
+
         self.verbose = verbose
 
         self.code = {}
@@ -104,9 +107,8 @@ class ENWiktionaryProcessor(WiktionaryProcessor):
                 ptext = '\n={3}[ ]?(%s)[ ]?={3}\n' % regex_ptext
             posregex = re.findall(ptext, c)
 
-            c = re.sub('\{\{l\|en\|(.*)\}\}', '\\1', c)
-            c = re.sub('\[\[(.*)#English\|(.*)\]\]', '\\1', c)
-            c = re.sub('\[\[(.*)\|(.*)\]\]', '\\1', c)
+            for regex, replacement in self.regexesrep:
+                c = re.sub(regex, replacement, c)
 
             # definition
             try:
@@ -118,8 +120,8 @@ class ENWiktionaryProcessor(WiktionaryProcessor):
                 if self.verbose: print("Hadisoana indexerror.")
                 continue
 
-            for regex in self.regexesrep:
-                defin = re.sub(regex, self.regexesrep[regex], defin).strip()
+            for regex, replacement in self.regexesrep:
+                defin = re.sub(regex, replacement, defin).strip()
 
             for char in '{[]}':
                 defin = defin.replace(char, '')
