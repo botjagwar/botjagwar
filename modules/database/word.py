@@ -169,7 +169,7 @@ class WordDatabase(object):
 
         return translations
 
-    def translate(self, word, pos='ana', language='fr'):
+    def translate(self, word, language, pos=u'ana'):
         translations = self.raw_translate(word, pos, language)
 
         # Post-process to directly have Wikibolana's definitions formatting

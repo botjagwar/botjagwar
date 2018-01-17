@@ -313,7 +313,7 @@ class Translation(TranslationsHandler):
         # self.update_malagasy_word(translations_in_mg)
         return unknowns, ret
 
-    def translate_word(self, word, language='fr'):
+    def translate_word(self, word, language):
         tr = self.word_db.translate(word, language)
         if not tr:
             raise NoWordException()
