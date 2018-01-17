@@ -154,6 +154,8 @@ class Translation(TranslationsHandler):
         except Exception as e:
             return
 
+        pwbot.output(u"\n \03{red}%(entry)s\03{default} : %(language)s " % infos.properties)
+        pwbot.output(u"\03{white}%s\03{default}" % wikipage)
         mg_page.put_async(wikipage, summary)
         self.output.db(infos)
 
@@ -171,6 +173,8 @@ class Translation(TranslationsHandler):
                 wikipage, edit_summary = Autoformat(wikipage).wikitext()
                 summary = u"+" + summary + u", %s" % edit_summary
 
+        pwbot.output(u"\03{default}>>> \03{lightgreen}%(entry)s\03{default}" % infos.properties
+                     + u"<<<\n\03{lightblue}%s\03{default}" % wikipage)
         mg_page.put_async(wikipage, summary)
         self.output.db(infos)
 
@@ -212,7 +216,6 @@ class Translation(TranslationsHandler):
             translations = wiktionary_processor.retrieve_translations()
         except Exception as e:
             return ret
-
         translations_in_mg = {}  # dictionary {string : list of translation tuple (see below)}
         for entry, pos, entry_language in translations:
             # translation = tuple(codelangue, entree)
@@ -226,9 +229,6 @@ class Translation(TranslationsHandler):
                     unknowns.append((title, language))
                 break
 
-            if self.word_db.exists(entry, infos.language):
-                continue
-
             infos = Entry(
                 entry=entry,
                 part_of_speech=pos,
@@ -236,6 +236,8 @@ class Translation(TranslationsHandler):
                 language=entry_language,
                 origin_wiktionary_edition=language,
                 origin_wiktionary_page_name=title)
+            if self.word_db.exists(infos.entry, infos.language):
+                continue
 
             _generate_redirections(infos)
             _append_in(infos, translations_in_mg)
@@ -275,21 +277,21 @@ class Translation(TranslationsHandler):
 
         return 1
 
-    def process_wiktionary_wiki_page(self, wiki_page):
-        language = wiki_page.site.language()
+    def process_wiktionary_wiki_page(self, language, Page):
+        assert type(language) is unicode
         unknowns = []
-        # fanampiana : wiki_page:wiki_page
+        # fanampiana : Page:Page
 
         # BEGINNING
         ret = 0
         wiktionary_processor_class = entryprocessor.WiktionaryProcessorFactory.create(language)
         wiktionary_processor = wiktionary_processor_class()
 
-        if wiki_page.title().find(':') != -1:
+        if Page.title().find(u':') != -1:
             return unknowns, ret
-        if wiki_page.namespace() != 0:
+        if Page.namespace() != 0:
             return unknowns, ret
-        wiktionary_processor.process(wiki_page)
+        wiktionary_processor.process(Page)
 
         try:
             entries = wiktionary_processor.getall()
@@ -302,12 +304,12 @@ class Translation(TranslationsHandler):
                 continue
 
             if language_code == language:  # if entry in the content language
-                ret += self.process_entry_in_native_language(wiki_page, language, unknowns)
+                ret += self.process_entry_in_native_language(Page, language, unknowns)
             else:
                 ret += self.process_entry_in_foreign_language(
-                    wiki_page, word, language_code, language, pos, definition, translations_in_mg, unknowns)
+                    Page, word, language_code, language, pos, definition, translations_in_mg, unknowns)
 
-        # Malagasy language wiki_pages
+        # Malagasy language pages
         # self.update_malagasy_word(translations_in_mg)
         return unknowns, ret
 

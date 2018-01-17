@@ -5,7 +5,6 @@ import pywikibot as wikipedia
 import pywikibot.xmlreader as Xmlreader
 import DLscript
 from modules import output
-from modules import entryprocessor
 from modules.translation.core import Translation
 
 
@@ -89,7 +88,7 @@ class BaseDumpProcessor(object):
     def load_titlefile(self, filename, language='en'):
         self.language = language
         self.file = file(filename, 'r').readlines()
-        self.wprocessor = self.processor.process_wiktionary_page
+        self.wprocessor = self.processor.process_wiktionary_wiki_page
 
     def process_titlelist(self, wantedcount=0):
         page_generated = 0
@@ -114,7 +113,7 @@ class Translation_finder_in_dump(BaseDumpProcessor):
         self.allwords = self.processor.get_allwords()
         self.alltranslations = {}
         self.langblacklist = ['fr', 'en', 'sh', 'de', 'zh']
-        self.wprocessor = self.processor.process_wiktionary_page
+        self.wprocessor = self.processor.process_wiktionary_wiki_page
 
         print len(self.allwords)
 
