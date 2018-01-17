@@ -28,18 +28,17 @@ LIST = [
 
 
 class TestDikantenyVaovaoProcessWiktionaryPage(TestCase):
-
     def test_process_wiktionary_page_english(self):
         for pagename in LIST:
             translation = Translation()
             page = PageMock(SiteMock('en', 'wiktionary'), pagename)
-            translation.process_wiktionary_page(u'en', page)
+            translation.process_wiktionary_wiki_page(page)
 
     def test_process_wiktionary_page_french(self):
         for pagename in LIST:
             translation = Translation()
             page = PageMock(SiteMock('fr', 'wiktionary'), pagename)
-            translation.process_wiktionary_page(u'fr', page)
+            translation.process_wiktionary_wiki_page(page)
 
 
 class TestDikantenyVaovaoServices(TestCase):
@@ -59,7 +58,7 @@ class TestDikantenyVaovaoServices(TestCase):
         resp_data = json.loads(resp.text) if resp.text else {}
         self.assertEquals(resp.status_code, 200)
         for _, added_entries in resp_data.items():
-            self.assertTrue(isinstance(added_entries , list))
+            self.assertTrue(isinstance(added_entries, list))
 
     @retry_on_fail(Exception, retries=10, time_between_retries=.5)
     def test_translate_english_word(self):
