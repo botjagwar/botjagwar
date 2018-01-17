@@ -278,7 +278,7 @@ class Translation(TranslationsHandler):
         return 1
 
     def process_wiktionary_wiki_page(self, wiki_page):
-        language = wiki_page.site.language
+        language = wiki_page.site.language()
         unknowns = []
         # fanampiana : wiki_page:wiki_page
 
