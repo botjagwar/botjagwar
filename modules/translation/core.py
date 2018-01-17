@@ -277,21 +277,21 @@ class Translation(TranslationsHandler):
 
         return 1
 
-    def process_wiktionary_wiki_page(self, language, Page):
-        assert type(language) is unicode
+    def process_wiktionary_wiki_page(self, wiki_page):
+        language = wiki_page.site.language
         unknowns = []
-        # fanampiana : Page:Page
+        # fanampiana : wiki_page:wiki_page
 
         # BEGINNING
         ret = 0
         wiktionary_processor_class = entryprocessor.WiktionaryProcessorFactory.create(language)
         wiktionary_processor = wiktionary_processor_class()
 
-        if Page.title().find(u':') != -1:
+        if wiki_page.title().find(u':') != -1:
             return unknowns, ret
-        if Page.namespace() != 0:
+        if wiki_page.namespace() != 0:
             return unknowns, ret
-        wiktionary_processor.process(Page)
+        wiktionary_processor.process(wiki_page)
 
         try:
             entries = wiktionary_processor.getall()
@@ -304,10 +304,10 @@ class Translation(TranslationsHandler):
                 continue
 
             if language_code == language:  # if entry in the content language
-                ret += self.process_entry_in_native_language(Page, language, unknowns)
+                ret += self.process_entry_in_native_language(wiki_page, language, unknowns)
             else:
                 ret += self.process_entry_in_foreign_language(
-                    Page, word, language_code, language, pos, definition, translations_in_mg, unknowns)
+                    wiki_page, word, language_code, language, pos, definition, translations_in_mg, unknowns)
 
         # Malagasy language pages
         # self.update_malagasy_word(translations_in_mg)
