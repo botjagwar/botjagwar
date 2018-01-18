@@ -191,7 +191,6 @@ def handle_translate_word(lang):
                     u"mg": translation
                 }
                 added.append(sql_data)
-                print sql_data
                 translation_write_db.insert(sql_data, dry_run=dry_run)
         except (DataError, IntegrityError, ProgrammingError) as e:
             response = app.response_class(

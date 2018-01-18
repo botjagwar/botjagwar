@@ -32,7 +32,7 @@ class TestFactory(TestCase):
         wiktionary_processor.process(page)
         entries = wiktionary_processor.retrieve_translations()
         for entry in entries:
-            self.assertEquals(entry, 4)
+            self.assertEquals(len(entry), 4)
             self.assertTrue(2 <= len(entry[2]) <= 7)
 
         self.assertEquals(entries[1], (u'Glaube', 'ana', u'de', u'mental as true.'))

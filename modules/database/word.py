@@ -88,7 +88,6 @@ class WordDatabase(object):
         language = language.decode('utf8')
         entry = entry.decode('utf8')
         sql = u"select mg from data_botjagwar.%s_mg where %s='%s'" % (language, language, entry)
-        print sql
         result = self.DB.raw_query(sql)
 
         if result:

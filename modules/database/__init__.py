@@ -124,7 +124,6 @@ class Database(object):
             sql = sql.strip(u'AND ')
 
         rep = ()
-        print sql
         try:
             self.cursor.execute(sql)
             rep = self.cursor.fetchall()
