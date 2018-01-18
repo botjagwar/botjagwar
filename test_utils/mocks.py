@@ -26,7 +26,7 @@ class PageMock(pywikibot.Page):
             if xml_title == self.title():
                 return page.getElementsByTagName('text')[0].childNodes[0].nodeValue
 
-        print u'No page found in "%s"' % self.filename
+        print u'No page %s found in "%s"' % (self.title(), self.filename)
         return u''
 
 

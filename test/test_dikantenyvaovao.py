@@ -2,11 +2,12 @@
 
 import json
 import requests
-from time import sleep
-from modules.translation.core import Translation
 from subprocess import Popen
+from time import sleep
 from test_utils.mocks import PageMock, SiteMock
 from unittest.case import TestCase
+
+from modules.translation.core import Translation
 from modules.decorator import threaded, retry_on_fail
 
 
@@ -39,7 +40,6 @@ class TestDikantenyVaovaoProcessWiktionaryPage(TestCase):
             translation = Translation()
             page = PageMock(SiteMock('fr', 'wiktionary'), pagename)
             translation.process_wiktionary_wiki_page(page)
-
 
 class TestDikantenyVaovaoServices(TestCase):
     def setUp(self):
