@@ -3,8 +3,11 @@ verbose = False
 from modules.database.word import WordDatabase
 from _mysql_exceptions import DataError
 
+USER_DATA = u'user_data/dikantenyvaovao'
+
+
 class Output(object):
-    def __init__(self, output_batchfile="translate_batch.txt"):
+    def __init__(self, output_batchfile=USER_DATA + u"/translate_batch.txt"):
         self.output_batchfile = file(output_batchfile, 'a')
         self.word_db = WordDatabase()
 
