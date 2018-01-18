@@ -8,7 +8,6 @@ from wiki.base import data_file
 class DumpPagegenerator(object):
     def __init__(self, dumpfile, language):
         self.dumpfile = None
-        self.list_translations = []
         self.newentries = []
         self.language = language
         self.alltranslations = {}

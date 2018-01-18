@@ -56,6 +56,7 @@ def _get_page(name, lang):
     page = pwbot.Page(pwbot.Site(lang, 'wiktionary'), name)
     return page
 
+
 @threaded
 def _update_statistics(rc_bot):
     if not rc_bot.stats["edits"] % 5:
@@ -218,13 +219,6 @@ def handle_get_specialised_dictionary(origin, target):
     return app.response_class(
         response=json.dumps(result),
         status=200, mimetype='application/json')
-
-
-def striplinks(link):
-    l = link
-    for c in [u'[', u']']:
-        l = l.replace(c, '')
-    return l
 
 
 args = sys.argv

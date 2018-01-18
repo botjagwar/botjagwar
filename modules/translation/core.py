@@ -35,15 +35,15 @@ class TranslationsHandler(object):
             pass
 
         if self.content.find(u"{{-dika-}}") != -1:
-            if self.content.find(u"{{%s}} :" % (langcode)) != -1:
+            if self.content.find(u"{{%s}} :" % langcode) != -1:
                 if self.content.find(u"{{dikan-teny|%s|%s}}" % (translation, langcode)) != -1:
-                    self.content = re.sub(r"[ ]?\{\{dikan\-teny\|%s\|%s\}\}[\,]?" % (translation, langcode), u"",
+                    self.content = re.sub(r"[ ]?\{\{dikan\-teny\|%s\|%s\}\}[,]?" % (translation, langcode), u"",
                                           self.content)
-                    self.content = self.content.replace(u"# {{%s}} :" % (langcode),
+                    self.content = self.content.replace(u"# {{%s}} :" % langcode,
                                                         u"# {{%s}} : {{dikan-teny|%s|%s}}," % (
                                                             langcode, translation, langcode))
                 else:
-                    self.content = self.content.replace(u"# {{%s}} :" % (langcode),
+                    self.content = self.content.replace(u"# {{%s}} :" % langcode,
                                                         u"# {{%s}} : {{dikan-teny|%s|%s}}," % (
                                                             langcode, translation, langcode))
             else:
@@ -121,7 +121,6 @@ class Translation(TranslationsHandler):
         self.databases.append(self.word_db)
         self.databases.append(self.sql_db)
         self.output = Output()
-        self.iso2languagename = {}
         self.errlogfile = file(self.data_file + 'dikantenyvaovao.exceptions', 'a')
         self.langblacklist = ['fr', 'en', 'sh', 'ar', 'de', 'zh']
         self.translationslist = []
@@ -154,8 +153,6 @@ class Translation(TranslationsHandler):
         except Exception as e:
             return
 
-        pwbot.output(u"\n \03{red}%(entry)s\03{default} : %(language)s " % infos.properties)
-        pwbot.output(u"\03{white}%s\03{default}" % wikipage)
         mg_page.put_async(wikipage, summary)
         self.output.db(infos)
 
@@ -173,8 +170,6 @@ class Translation(TranslationsHandler):
                 wikipage, edit_summary = Autoformat(wikipage).wikitext()
                 summary = u"+" + summary + u", %s" % edit_summary
 
-        pwbot.output(u"\03{default}>>> \03{lightgreen}%(entry)s\03{default}" % infos.properties
-                     + u"<<<\n\03{lightblue}%s\03{default}" % wikipage)
         mg_page.put_async(wikipage, summary)
         self.output.db(infos)
 
@@ -188,15 +183,6 @@ class Translation(TranslationsHandler):
             # pwbot.output(u"mitady an'i teny \"%s\" ao amin'ny banky angona..."%ent)
             return self.word_db.exists(ent, lang)
 
-    def get_allwords(self):
-        alldata = self.sql_db.load()
-        ret = {}
-        for data in alldata:
-            if data[5] in ret:
-                ret[data[5]].append(unicode(data[1], 'latin1'))
-            else:
-                ret[data[5]] = [unicode(data[1], 'latin1')]
-        return ret
 
     def get_alltranslations(self, language=u'en'):
         alldata = self.sql_db.read({u'fiteny': language})

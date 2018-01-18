@@ -37,7 +37,6 @@ class LiveRecentChangesBot(ircbot.SingleServerIRCBot):
             self.errfile = open(userdata_file + 'dikantenyvaovao.exceptions', 'a')
         except IOError:
             self.errfile = open(userdata_file + 'dikantenyvaovao.exceptions', 'w')
-        self.iso2languagename = {}
         self.joined = []
         self.langs = []
         self.stats = {'edits': 0.0, 'newentries': 0.0, 'errors': 0.0}

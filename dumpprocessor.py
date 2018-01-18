@@ -105,17 +105,12 @@ class BaseDumpProcessor(object):
 class Translation_finder_in_dump(BaseDumpProcessor):
     def __init__(self, language='en'):
         self.dumpfile = None
-        self.list_translations = []
-        self.newentries = []
         self.processor = Translation()
         self.language = language
         self.output = output.Output()
-        self.allwords = self.processor.get_allwords()
         self.alltranslations = {}
         self.langblacklist = ['fr', 'en', 'sh', 'de', 'zh']
         self.wprocessor = self.processor.process_wiktionary_wiki_page
-
-        print len(self.allwords)
 
     def get_alltranslations(self, language='en'):
         alldata = self.sql_db.read({'fiteny': language})
