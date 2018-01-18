@@ -181,7 +181,10 @@ class Translation(TranslationsHandler):
             return True
         else:
             # pwbot.output(u"mitady an'i teny \"%s\" ao amin'ny banky angona..."%ent)
-            return self.word_db.exists(ent, lang)
+            if self.word_db.exists(ent, lang):
+                self.translationslist.append((lang, ent))
+                return True
+            return False
 
 
     def get_alltranslations(self, language=u'en'):
