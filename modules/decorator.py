@@ -3,9 +3,8 @@ import threading
 import time
 
 
-def threaded(f, daemon=False):
+def threaded(f):
     import Queue
-
     def wrapped_f(q, *args, **kwargs):
         '''this function calls the decorated function and puts the
         result in a queue'''
@@ -20,7 +19,7 @@ def threaded(f, daemon=False):
         q = Queue.Queue()
 
         t = threading.Thread(target=wrapped_f, args=(q,)+args, kwargs=kwargs)
-        t.daemon = daemon
+        t.daemon = False
         t.start()
         t.result_queue = q
         return t
