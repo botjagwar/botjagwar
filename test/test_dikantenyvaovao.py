@@ -41,6 +41,7 @@ class TestDikantenyVaovaoProcessWiktionaryPage(TestCase):
             page = PageMock(SiteMock('fr', 'wiktionary'), pagename)
             translation.process_wiktionary_wiki_page(page)
 
+
 class TestDikantenyVaovaoServices(TestCase):
     def setUp(self):
         self.launch_service()

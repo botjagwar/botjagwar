@@ -63,5 +63,7 @@ class TestModels(TestCase):
             }
 
         test = YunHang(test1=1, test2=2, test3obj=List(['qw', 'dlk']))
-        print test.to_dict()
-        print dir(test)
+
+        self.assertTrue(isinstance(test.test1, int))
+        self.assertTrue(isinstance(test.test2, int))
+        self.assertTrue(isinstance(test.test3obj, List))
