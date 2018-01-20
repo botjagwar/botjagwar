@@ -43,7 +43,6 @@ class SingleServerIRCBot(SimpleIRCClient):
     have operator or voice modes.  The "database" is kept in the
     self.channels attribute, which is an IRCDict of Channels.
     """
-
     def __init__(self, server_list, nickname, realname, reconnection_interval=60):
         """Constructor for SingleServerIRCBot objects.
 
@@ -68,7 +67,7 @@ class SingleServerIRCBot(SimpleIRCClient):
         self.channels = IRCDict()
         self.server_list = server_list
         if not reconnection_interval or reconnection_interval < 0:
-            reconnection_interval = 2 ** 31
+            reconnection_interval = 2**31
         self.reconnection_interval = reconnection_interval
 
         self._nickname = nickname
@@ -78,7 +77,6 @@ class SingleServerIRCBot(SimpleIRCClient):
             self.connection.add_global_handler(i,
                                                getattr(self, "_on_" + i),
                                                -10)
-
     def _connected_checker(self):
         """[Internal]"""
         if not self.connection.is_connected():
@@ -264,65 +262,49 @@ class IRCDict:
         self.canon_keys = {}  # Canonical keys
         if dict is not None:
             self.update(dict)
-
     def __repr__(self):
         return repr(self.data)
-
     def __cmp__(self, dict):
         if isinstance(dict, IRCDict):
             return cmp(self.data, dict.data)
         else:
             return cmp(self.data, dict)
-
     def __len__(self):
         return len(self.data)
-
     def __getitem__(self, key):
         return self.data[self.canon_keys[irc_lower(key)]]
-
     def __setitem__(self, key, item):
         if key in self:
             del self[key]
         self.data[key] = item
         self.canon_keys[irc_lower(key)] = key
-
     def __delitem__(self, key):
         ck = irc_lower(key)
         del self.data[self.canon_keys[ck]]
         del self.canon_keys[ck]
-
     def __iter__(self):
         return iter(self.data)
-
     def __contains__(self, key):
         return self.has_key(key)
-
     def clear(self):
         self.data.clear()
         self.canon_keys.clear()
-
     def copy(self):
         if self.__class__ is UserDict:
             return UserDict(self.data)
         import copy
         return copy.copy(self)
-
     def keys(self):
         return self.data.keys()
-
     def items(self):
         return self.data.items()
-
     def values(self):
         return self.data.values()
-
     def has_key(self, key):
         return irc_lower(key) in self.canon_keys
-
     def update(self, dict):
         for k, v in dict.items():
             self.data[k] = v
-
     def get(self, key, failobj=None):
         return self.data.get(key, failobj)
 
@@ -443,7 +425,7 @@ class Channel:
 
     def limit(self):
         if self.has_limit():
-            return self.modes[l]
+            return self.modes['l']
         else:
             return None
 
