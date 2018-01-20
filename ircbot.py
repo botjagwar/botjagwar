@@ -9,34 +9,34 @@ from modules import ircbot
 userdata_file = os.getcwd() + '/user_data/dikantenyvaovao/'
 nwikimax = 5
 
-def irc_retrieve(channel=''):
-    bot = LiveRecentChangesBot(channel)
-    while 1:
+
+def irc_retrieve():
+    wiktionary_bot = WiktionaryRecentChangesBot()
+    while True:
         try:
-            bot.start()
+            wiktionary_bot.start()
         except KeyboardInterrupt:
-            bot.die()
-            return
+            wiktionary_bot.die()
+            break
+
 
 class IrcBotException(Exception):
     pass
 
-class LiveRecentChangesBot(ircbot.SingleServerIRCBot):
+
+class WiktionaryRecentChangesBot(ircbot.SingleServerIRCBot):
     """IRC client used to track edits on targetted wikis.
     @lang string containing languages of editions to track.
     For example : fr,en,de will track fr.wiktionary, en.wiktionary and de.wiktionary
     @user the username which will be use by the IRC client
     """
 
-    def __init__(self, lang, user="botjagwar-w%x" % random.randint(1, 0xffff)):
+    def __init__(self, nick_prefix="botjagwar"):
+        nick_suffix = '-%s' % base36encode(random.randint(36**3, 36**4 - 1))
+        user = nick_prefix + nick_suffix
         self.channels_list = []
         self.chronometer = 0.0
-        self.change_langs(lang)
         self.service_address = "http://localhost:8000"
-        try:
-            self.errfile = open(userdata_file + 'dikantenyvaovao.exceptions', 'a')
-        except IOError:
-            self.errfile = open(userdata_file + 'dikantenyvaovao.exceptions', 'w')
         self.joined = []
         self.langs = []
         self.stats = {'edits': 0.0, 'newentries': 0.0, 'errors': 0.0}
@@ -45,39 +45,32 @@ class LiveRecentChangesBot(ircbot.SingleServerIRCBot):
 
         self.connect_in_languages()
 
-    def change_langs(self, langstring):
-        self.langs = re.split("\,[ ]?", langstring)
 
     def connect_in_languages(self):
         """mametaka fitohizana amin'ny tsanely irc an'i Wikimedia"""
-        print ("\n---------------------\n       PARAMETATRA : ")
+        print ("\n---------------------\nPARAMETATRA : ")
         self.langs = ['en', 'fr']
-        i = 0
-        for language in self.langs:
-            if i > nwikimax:
-                break
-            i += 1
-            if language == 'mg':
-                continue
-            language = language.strip()
-            channel = "#%s.wiktionary" % language
-            print ("kaodim-piteny:", language, ", tsanely:", channel, " anarana:", self.username)
+        self.sitename = 'wiktionary'
+        self.channels = ["#%s.%s" % (language.strip(), self.sitename) for language in self.langs]
+        print 'channeler', self.channels
 
-            irc_bot = ircbot.SingleServerIRCBot.__init__(
+        for channel in self.channels:
+            ircbot.SingleServerIRCBot.__init__(
                 self, [("irc.wikimedia.org", 6667)], self.username, "Bot-Jagwar [IRCbot v2].")
-            self.joined.append(language)
-            self.channels_list.append(irc_bot)
+            self.joined.append(channel)
+            print ("kaodim-piteny:", "tsanely:", channel, " anarana:", self.username)
+
         print ("Vita ny fampitohizana")
 
+    def do_join(self, serv, ev):
+        for channel in self.joined:
+            serv.join(channel)
+
     def on_welcome(self, serv, ev):
-        for language in self.joined:
-            # print ("Mangataka tonga soa avy amin'i #"+language+".wiktionary")
-            serv.join("#" + language + ".wiktionary")
+        self.do_join(serv, ev)
 
     def on_kick(self, serv, ev):
-        for language in self.joined:
-            print ("Voadaka. Mangataka tonga soa avy amin'i #" + language + ".wiktionary")
-            serv.join("#" + language + ".wiktionary")
+        self.do_join(serv, ev)
 
     def on_pubmsg(self, serv, ev):
         try:
@@ -97,8 +90,7 @@ class LiveRecentChangesBot(ircbot.SingleServerIRCBot):
         except Exception as e:
             print (traceback.format_exc())
             self.stats['errors'] += 1
-            errstr = u"\n%s" % e.message
-            self.errfile.write(errstr.encode('utf8'))
+
 
 def _get_origin_wiki(message):
     try:
@@ -107,6 +99,7 @@ def _get_origin_wiki(message):
     except AttributeError:
         lang = 'fr'  # fiteny defaulta
         return lang
+
 
 def _get_pagename(message):
     message = message[:message.find('http')]
@@ -131,6 +124,29 @@ def _prepare_message(ev):
     except UnicodeDecodeError:
         message = ev.arguments()[0].decode('latin1')
     return message
+
+
+def base36encode(number, alphabet='0123456789abcdefghjiklmnopqrstuvwxyz'):
+    """Converts an integer to a base36 string."""
+    if not isinstance(number, (int, long)):
+        raise TypeError('number must be an integer')
+
+    base36 = ''
+    sign = ''
+
+    if number < 0:
+        sign = '-'
+        number = -number
+
+    if 0 <= number < len(alphabet):
+        return sign + alphabet[number]
+
+    while number != 0:
+        number, i = divmod(number, len(alphabet))
+        base36 = alphabet[i] + base36
+
+    return sign + base36
+
 
 if __name__ == '__main__':
     try:
