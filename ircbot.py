@@ -61,20 +61,20 @@ class WiktionaryRecentChangesBot(ircbot.SingleServerIRCBot):
 
         print ("Connection complete")
 
-    def do_join(self, serv, ev):
+    def do_join(self, server, events):
         for channel in self.joined:
-            serv.join(channel)
+            server.join(channel)
 
-    def on_welcome(self, serv, ev):
-        self.do_join(serv, ev)
+    def on_welcome(self, server, events):
+        self.do_join(server, events)
 
-    def on_kick(self, serv, ev):
-        self.do_join(serv, ev)
+    def on_kick(self, server, events):
+        self.do_join(server, events)
 
-    def on_pubmsg(self, serv, ev):
+    def on_pubmsg(self, server, events):
         try:
             ct_time = time.time()
-            msg = _prepare_message(ev)
+            msg = _prepare_message(events)
             wikilanguage = _get_origin_wiki(msg)
             pagename = _get_pagename(msg)
             url = self.service_address + "/wiktionary_page/%s" % (wikilanguage)
@@ -96,7 +96,7 @@ class WiktionaryRecentChangesBot(ircbot.SingleServerIRCBot):
 
 def _get_origin_wiki(message):
     try:
-        lang = re.search('//([a-z|\-]+).wiktionary', message).groups()[0]
+        lang = re.search(r'//([a-z|\-]+).wiktionary', message).groups()[0]
         return lang
     except AttributeError:
         lang = 'fr'  # fiteny defaulta
@@ -105,7 +105,7 @@ def _get_origin_wiki(message):
 
 def _get_pagename(message):
     message = message[:message.find('http')]
-    item = re.search("\[\[(.*)\]\]", message).groups()[0]
+    item = re.search(r"\[\[(.*)\]\]", message).groups()[0]
     item = unicode(item[3:-3])
     if len(item) > 200:
         print (item)
@@ -120,11 +120,11 @@ def _get_message_type(message):
         return "edit"
 
 
-def _prepare_message(ev):
+def _prepare_message(events):
     try:
-        message = ev.arguments()[0].decode('utf8')
+        message = events.arguments()[0].decode('utf8')
     except UnicodeDecodeError:
-        message = ev.arguments()[0].decode('latin1')
+        message = events.arguments()[0].decode('latin1')
     return message
 
 
