@@ -48,19 +48,18 @@ class WiktionaryRecentChangesBot(ircbot.SingleServerIRCBot):
 
     def connect_in_languages(self):
         """mametaka fitohizana amin'ny tsanely irc an'i Wikimedia"""
-        print ("\n---------------------\nPARAMETATRA : ")
+        print ("\n---------------------\nIRC BOT PAREMETERS : ")
         self.langs = ['en', 'fr']
         self.sitename = 'wiktionary'
         self.channels = ["#%s.%s" % (language.strip(), self.sitename) for language in self.langs]
-        print 'channeler', self.channels
 
         for channel in self.channels:
             ircbot.SingleServerIRCBot.__init__(
                 self, [("irc.wikimedia.org", 6667)], self.username, "Bot-Jagwar [IRCbot v2].")
             self.joined.append(channel)
-            print ("kaodim-piteny:", "tsanely:", channel, " anarana:", self.username)
+            print ("Channel:", channel, " Nickname:", self.username)
 
-        print ("Vita ny fampitohizana")
+        print ("Connection complete")
 
     def do_join(self, serv, ev):
         for channel in self.joined:
@@ -85,10 +84,13 @@ class WiktionaryRecentChangesBot(ircbot.SingleServerIRCBot):
             if not self.edits % 5:
                 throughput = 60. * 5. / (float(ct_time) - self.chronometer)
                 self.chronometer = ct_time
-                print ("Fiovana faha-%d (fiovana %.2f / min)" % (self.edits, throughput))
-
+                print ("Edit #%d (%.2f edits/min)" % (self.edits, throughput))
+        except requests.ConnectionError as e:
+            print (traceback.format_exc())
+            print 'NOTE: Launch dikantenyvaovao.py in a separate process to have the backend.'
         except Exception as e:
             print (traceback.format_exc())
+
             self.stats['errors'] += 1
 
 
