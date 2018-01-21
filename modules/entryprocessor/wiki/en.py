@@ -86,7 +86,7 @@ class ENWiktionaryProcessor(WiktionaryProcessor):
         print(etim)
         return etim
 
-    def getall(self):
+    def getall(self, definitions_as_is=False):
         items = []
         c = self.content
         c = re.sub('Etymology', '', c)  # famafana ny etimilojia
@@ -107,8 +107,9 @@ class ENWiktionaryProcessor(WiktionaryProcessor):
                 ptext = '\n={3}[ ]?(%s)[ ]?={3}\n' % regex_ptext
             posregex = re.findall(ptext, c)
 
-            for regex, replacement in self.regexesrep:
-                c = re.sub(regex, replacement, c)
+            if not definitions_as_is:
+                for regex, replacement in self.regexesrep:
+                    c = re.sub(regex, replacement, c)
 
             # definition
             try:
@@ -120,10 +121,14 @@ class ENWiktionaryProcessor(WiktionaryProcessor):
                 if self.verbose: print("Hadisoana indexerror.")
                 continue
 
-            for regex, replacement in self.regexesrep:
-                defin = re.sub(regex, replacement, defin).strip()
+            if not definitions_as_is:
+                for regex, replacement in self.regexesrep:
+                    defin = re.sub(regex, replacement, defin).strip()
 
-            for char in '{[]}':
+                for char in '{}':
+                    defin = defin.replace(char, '')
+
+            for char in '[]':
                 defin = defin.replace(char, '')
 
             defins = defin.split(',')

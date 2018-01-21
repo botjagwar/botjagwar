@@ -31,7 +31,10 @@ class Output(object):
         
     def wikipage(self, info):
         "returns wikipage string"
-        additional_note = u"{{dikantenin'ny dikanteny|%(origin_wiktionary_page_name)s|%(origin_wiktionary_edition)s}}\n" % info.properties
+        additional_note = u""
+        if u'origin_wiktionary_page_name' in info.properties and u'origin_wiktionary_edition' in info.properties:
+            additional_note = u"{{dikantenin'ny dikanteny|%(origin_wiktionary_page_name)s|%(origin_wiktionary_edition)s}}\n" % info.properties
+
         s = u"""
 =={{=%(language)s=}}==
 {{-%(part_of_speech)s-|%(language)s}}

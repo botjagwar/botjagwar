@@ -34,7 +34,6 @@ languages = {
     u'fr': u'frantsay'
 }
 
-
 # Throttle Config
 def set_throttle(i):
     from pywikibot import throttle
