@@ -1,3 +1,5 @@
+# coding: utf8
+
 import re
 
 import pywikibot
@@ -21,6 +23,18 @@ NUMBER = {
 }
 SITENAME = 'wiktionary'
 SITELANG = 'mg'
+
+last_entry = 0
+
+def get_count():
+    with open('user_data/lv-counter', 'r') as f:
+        counter = int(f.read())
+        return counter
+
+
+def save_count():
+    with open('user_data/lv-counter', 'w') as f:
+        f.write(str(last_entry))
 
 
 def get_lemma(template_expr):
@@ -52,16 +66,24 @@ def template_expression_to_malagasy_definition(template_expr):
 
 
 def parse_latvian_word_forms():
+    global last_entry
+    last_entry = get_count()
     en_page_processor_class = WiktionaryProcessorFactory.create('en')
     en_page_processor = en_page_processor_class()
     page_output = Output()
     latvian_nouns = pywikibot.Category(pywikibot.Site('en', SITENAME), u'Latvian noun forms')
+    counter = 0
     for lv_word_page in latvian_nouns.articles():
+        counter += 1
+        if last_entry > counter:
+            continue
         en_page_processor.process(lv_word_page)
         entries = en_page_processor.getall(definitions_as_is=True)
         entries = [entry for entry in entries if entry[2] == u'lv']
         print entries
         for word, pos, language_code, definition in entries:
+            last_entry += 1
+
             mg_page = pywikibot.Page(pywikibot.Site(SITELANG, SITENAME), word)
 
             try:
@@ -86,14 +108,21 @@ def parse_latvian_word_forms():
                 new_entry = page_output.wikipage(mg_entry)
                 page_content = mg_page.get()
                 if page_content.find(u'{{=lv=}}') != -1:
-                    page_content = re.sub(r'==[ ]?{{=lv=}}[ ]?==', new_entry, page_content)
+                    if page_content.find(u'{{-e-ana-|lv}}') != -1:
+                        continue  # section already exists: No need to go further
+                    else:
+                        page_content = re.sub(r'==[ ]?{{=lv=}}[ ]?==', new_entry, page_content)
                 else:
                     page_content = new_entry + u'\n' + page_content
             else:
                 page_content = page_output.wikipage(mg_entry)
 
-            mg_page.put(page_content)
+            mg_page.put(page_content, u'Teny letôna vaovao')
 
 
 if __name__ == '__main__':
-    parse_latvian_word_forms()
+    try:
+        parse_latvian_word_forms()
+    except Exception:
+        print 'Error occurred'
+        save_count()
