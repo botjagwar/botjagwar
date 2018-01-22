@@ -50,6 +50,8 @@ def get_lemma(template_expr):
         t_name, lemma, _, case_name, number_ = parts[:5]
     elif t_name == u'plural of':
         lemma = parts[1]
+    else:
+        return ValueError
 
     return lemma
 
