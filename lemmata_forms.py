@@ -1,11 +1,9 @@
 # coding: utf8
 
 import re
-
+import sys
 import pywikibot
-
 from models.word import Entry
-
 from modules.entryprocessor import WiktionaryProcessorFactory
 from modules.output import Output
 
@@ -15,7 +13,8 @@ CASES = {
     'acc': u'endrika teny fameno',
     'loc': u'endrika teny famaritan-toerana',
     'dat': u'mpanamarika ny tolorana',
-    'gen': u'mpanamarika ny an\'ny tompo'
+    'gen': u'mpanamarika ny an\'ny tompo',
+    'ins': u'mpanamarika fomba fanaovana'
 }
 NUMBER = {
     's': u'singiolary',
@@ -23,24 +22,27 @@ NUMBER = {
 }
 SITENAME = 'wiktionary'
 SITELANG = 'mg'
-
 last_entry = 0
+language_code = sys.argv[1]
+category_name = sys.argv[2].decode('utf8')
+
 
 def get_count():
-    with open('user_data/de-counter', 'r') as f:
-        counter = int(f.read())
-        return counter
-
+    try:
+        with open('user_data/%s-counter' % language_code, 'r') as f:
+            counter = int(f.read())
+            return counter
+    except IOError:
+        return 0
 
 def save_count():
-    with open('user_data/de-counter', 'w') as f:
+    with open('user_data/%s-counter' % language_code, 'w') as f:
         f.write(str(last_entry))
 
 
 def get_lemma(template_expr):
     for char in u'{}':
         template_expr = template_expr.replace(char, u'')
-    print template_expr, len(template_expr)
     parts = template_expr.split(u'|')
     #if len(parts) != 4:
     #    raise ValueError()
@@ -65,10 +67,12 @@ def template_expression_to_malagasy_definition(template_expr):
     for char in u'{}':
         template_expr = template_expr.replace(char, u'')
     parts = template_expr.split(u'|')
-    print parts
 
     t_name = parts[0]
     if t_name == u'inflection of':
+        for tparam in parts:
+            if tparam.find(u'=') != -1:
+                parts.remove(tparam)
         t_name, lemma, _, case_name, number_ = parts[:5]
         ret = u'%s %s ny teny [[%s]]' % (CASES[case_name], NUMBER[number_], lemma)
     elif t_name == u'plural of':
@@ -76,41 +80,43 @@ def template_expression_to_malagasy_definition(template_expr):
         ret = u'ploralin\'ny teny [[%s]]' % lemma
     else:
         raise ValueError('Unrecognised template')
+    print ret
     return ret
 
 
-def parse_german_word_forms():
-    global last_entry
-    language_code = 'de'
+def parse_word_forms():
+    global language_code
+    global category_name
     last_entry = get_count()
     en_page_processor_class = WiktionaryProcessorFactory.create('en')
     en_page_processor = en_page_processor_class()
     page_output = Output()
-    nouns = pywikibot.Category(pywikibot.Site('en', SITENAME), u'German noun forms')
+    nouns = pywikibot.Category(pywikibot.Site('en', SITENAME), category_name)
     counter = 0
     for word_page in nouns.articles():
+        print word_page.title()
         counter += 1
         if last_entry > counter:
+            print u'moving on'
             continue
         en_page_processor.process(word_page)
         entries = en_page_processor.getall(definitions_as_is=True)
         entries = [entry for entry in entries if entry[2] == unicode(language_code)]
         for word, pos, language_code, definition in entries:
             last_entry += 1
-
             mg_page = pywikibot.Page(pywikibot.Site(SITELANG, SITENAME), word)
 
             try:
                 malagasy_definition = template_expression_to_malagasy_definition(definition)
                 lemma = get_lemma(definition)
-            except ValueError as e:
+            except (KeyError, ValueError) as e:
                 print e.message
                 continue
 
             # Do not create page if lemma does not exist
             mg_lemma_page = pywikibot.Page(pywikibot.Site(SITELANG, SITENAME), lemma)
             if not mg_lemma_page.exists():
-                print 'No lemma :/'
+                print u'No lemma :/'
                 continue
 
             mg_entry = Entry(
@@ -133,9 +139,12 @@ def parse_german_word_forms():
             else:
                 page_content = page_output.wikipage(mg_entry)
 
-            mg_page.put(page_content, u'Teny alemàna vaovao')
+            print page_content
+            mg_page.put(page_content, u'Teny vaovao')
 
 
 if __name__ == '__main__':
-    parse_german_word_forms()
-    save_count()
+    try:
+        parse_word_forms()
+    finally:
+        save_count()
