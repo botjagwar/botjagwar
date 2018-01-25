@@ -3,9 +3,15 @@
 import re
 import sys
 import pywikibot
+
 from models.word import Entry
+
 from modules.entryprocessor import WiktionaryProcessorFactory
+from modules.parsers.functions import parse_inflection_of, parse_one_parameter_template
+from modules.parsers.inflection_template import EnWiktionaryInflectionTemplateParser
 from modules.output import Output
+
+import traceback
 
 
 CASES = {
@@ -14,17 +20,42 @@ CASES = {
     'loc': u'endrika teny famaritan-toerana',
     'dat': u'mpanamarika ny tolorana',
     'gen': u'mpanamarika ny an\'ny tompo',
-    'ins': u'mpanamarika fomba fanaovana'
+    'ins': u'mpanamarika fomba fanaovana',
+    '': u''
 }
 NUMBER = {
     's': u'singiolary',
     'p': u'ploraly',
+    '': u''
 }
 SITENAME = 'wiktionary'
 SITELANG = 'mg'
 last_entry = 0
 language_code = sys.argv[1]
 category_name = sys.argv[2].decode('utf8')
+template = sys.argv[3].decode('utf8') if len(sys.argv) >= 4 else u'e-ana'
+
+templates_parser = EnWiktionaryInflectionTemplateParser()
+templates_parser.add_parser(u'feminine singular of', parse_one_parameter_template(u'feminine singular of'))
+templates_parser.add_parser(u'feminine plural of', parse_one_parameter_template(u'feminine plural of'))
+templates_parser.add_parser(u'feminine of', parse_one_parameter_template(u'feminine of'))
+templates_parser.add_parser(u'inflection of', parse_inflection_of)
+templates_parser.add_parser(u'inflected form of', parse_one_parameter_template(u'inflected form of'))
+templates_parser.add_parser(u'masculine plural of', parse_one_parameter_template(u'masculine plural of'))
+templates_parser.add_parser(u'plural of', parse_one_parameter_template(u'plural of'))
+
+
+def template_expression_to_malagasy_definition(template_expr):
+    """
+    :param template_expr: template instance string with all its parameters
+    :return: A malagasy language definition in unicode
+    """
+    elements = templates_parser.get_elements(template_expr)
+    t_name, lemma, case_name, number_ = elements
+
+    ret = u'%s %s ny teny [[%s]]' % (CASES[case_name], NUMBER[number_], lemma)
+    print elements
+    return ret
 
 
 def get_count():
@@ -35,58 +66,16 @@ def get_count():
     except IOError:
         return 0
 
+
 def save_count():
     with open('user_data/%s-counter' % language_code, 'w') as f:
         f.write(str(last_entry))
 
 
-def get_lemma(template_expr):
-    for char in u'{}':
-        template_expr = template_expr.replace(char, u'')
-    parts = template_expr.split(u'|')
-    #if len(parts) != 4:
-    #    raise ValueError()
-
-    t_name = parts[0]
-    if t_name == u'inflection of':
-        t_name, lemma, _, case_name, number_ = parts[:5]
-    elif t_name == u'plural of':
-        lemma = parts[1]
-    else:
-        return ValueError
-
-    return lemma
-
-
-def template_expression_to_malagasy_definition(template_expr):
-    """
-    As written here: https://en.wiktionary.org/w/index.php?title=Template:lv-inflection_of&action=edit
-    :param template_expr: template instance string with all its parameters
-    :return: A malagasy language definition in unicode
-    """
-    for char in u'{}':
-        template_expr = template_expr.replace(char, u'')
-    parts = template_expr.split(u'|')
-
-    t_name = parts[0]
-    if t_name == u'inflection of':
-        for tparam in parts:
-            if tparam.find(u'=') != -1:
-                parts.remove(tparam)
-        t_name, lemma, _, case_name, number_ = parts[:5]
-        ret = u'%s %s ny teny [[%s]]' % (CASES[case_name], NUMBER[number_], lemma)
-    elif t_name == u'plural of':
-        lemma = parts[1]
-        ret = u'ploralin\'ny teny [[%s]]' % lemma
-    else:
-        raise ValueError('Unrecognised template')
-    print ret
-    return ret
-
-
 def parse_word_forms():
     global language_code
     global category_name
+    global last_entry
     last_entry = get_count()
     en_page_processor_class = WiktionaryProcessorFactory.create('en')
     en_page_processor = en_page_processor_class()
@@ -94,7 +83,7 @@ def parse_word_forms():
     nouns = pywikibot.Category(pywikibot.Site('en', SITENAME), category_name)
     counter = 0
     for word_page in nouns.articles():
-        print word_page.title()
+        pywikibot.output(u'▒▒▒ \03{green}%-25s\03{default} ▒▒▒▒▒▒▒▒▒▒▒▒▒▒' % word_page.title())
         counter += 1
         if last_entry > counter:
             print u'moving on'
@@ -108,9 +97,9 @@ def parse_word_forms():
 
             try:
                 malagasy_definition = template_expression_to_malagasy_definition(definition)
-                lemma = get_lemma(definition)
-            except (KeyError, ValueError) as e:
-                print e.message
+                lemma = templates_parser.get_lemma(definition)
+            except (AttributeError, ValueError) as e:
+                print traceback.format_exc()
                 continue
 
             # Do not create page if lemma does not exist
@@ -121,7 +110,7 @@ def parse_word_forms():
 
             mg_entry = Entry(
                 entry=word,
-                part_of_speech=u'e-ana',
+                part_of_speech=template,
                 entry_definition=malagasy_definition,
                 language=language_code,
             )
@@ -129,7 +118,7 @@ def parse_word_forms():
                 new_entry = page_output.wikipage(mg_entry)
                 page_content = mg_page.get()
                 if page_content.find(u'{{=%s=}}' % language_code) != -1:
-                    if page_content.find(u'{{-e-ana-|%s}}' % language_code) != -1:
+                    if page_content.find(u'{{-%s-|%s}}' % (template, language_code)) != -1:
                         print u'section already exists: No need to go further'
                         continue
                     else:
@@ -139,8 +128,8 @@ def parse_word_forms():
             else:
                 page_content = page_output.wikipage(mg_entry)
 
-            print page_content
-            mg_page.put(page_content, u'Teny vaovao')
+            print 'kontent', page_content
+            #mg_page.put(page_content, u'Teny vaovao')
 
 
 if __name__ == '__main__':
