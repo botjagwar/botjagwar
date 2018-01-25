@@ -131,7 +131,7 @@ def parse_word_forms():
                 page_content = page_output.wikipage(mg_entry)
 
             pywikibot.output(u'\03{blue}%s\03{default}' % page_content)
-            #mg_page.put(page_content, u'Teny vaovao')
+            mg_page.put(page_content, u'Teny vaovao')
 
 
 if __name__ == '__main__':
