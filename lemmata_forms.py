@@ -52,8 +52,10 @@ def template_expression_to_malagasy_definition(template_expr):
     """
     elements = templates_parser.get_elements(template_expr)
     t_name, lemma, case_name, number_ = elements
+    case = CASES[case_name] if case_name in CASES else u''
+    num = NUMBER[number_] if number_ in NUMBER else u''
+    ret = u'%s %s ny teny [[%s]]' % (case, num, lemma)
 
-    ret = u'%s %s ny teny [[%s]]' % (CASES[case_name], NUMBER[number_], lemma)
     print elements
     return ret
 
@@ -83,7 +85,7 @@ def parse_word_forms():
     nouns = pywikibot.Category(pywikibot.Site('en', SITENAME), category_name)
     counter = 0
     for word_page in nouns.articles():
-        pywikibot.output(u'▒▒▒ \03{green}%-25s\03{default} ▒▒▒▒▒▒▒▒▒▒▒▒▒▒' % word_page.title())
+        pywikibot.output(u'▒▒▒▒▒▒▒▒▒▒▒▒▒▒ \03{green}%-25s\03{default} ▒▒▒▒▒▒▒▒▒▒▒▒▒▒' % word_page.title())
         counter += 1
         if last_entry > counter:
             print u'moving on'
@@ -128,7 +130,7 @@ def parse_word_forms():
             else:
                 page_content = page_output.wikipage(mg_entry)
 
-            print 'kontent', page_content
+            pywikibot.output(u'\03{blue}%s\03{default}' % page_content)
             #mg_page.put(page_content, u'Teny vaovao')
 
 
