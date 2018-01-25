@@ -21,12 +21,10 @@ CASES = {
     'dat': u'mpanamarika ny tolorana',
     'gen': u'mpanamarika ny an\'ny tompo',
     'ins': u'mpanamarika fomba fanaovana',
-    '': u''
 }
 NUMBER = {
     's': u'singiolary',
     'p': u'ploraly',
-    '': u''
 }
 SITENAME = 'wiktionary'
 SITELANG = 'mg'
