@@ -1,5 +1,5 @@
 
-def parse_one_parameter_template(template_name=u'plural of'):
+def parse_one_parameter_template(template_name=u'plural of', case_name=u'', number=u''):
     """
     Very generic code that can parse anything like {{plural of|xxyyzz}}, which is very common on en.wiktionary
     Use with caution, though.
@@ -12,7 +12,7 @@ def parse_one_parameter_template(template_name=u'plural of'):
         parts = template_expression.split(u'|')
         lemma = parts[1]
         if parts[0] == template_name:
-            return template_name, lemma, u'', u''
+            return template_name, lemma, case_name, number
         else:
             raise ValueError(u"Unrecognised template: expected '%s' but got '%s'" % (parts[0], template_name))
 

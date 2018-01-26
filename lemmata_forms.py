@@ -2,6 +2,7 @@
 
 import re
 import sys
+import os
 import pywikibot
 
 from models.word import Entry
@@ -34,13 +35,13 @@ category_name = sys.argv[2].decode('utf8')
 template = sys.argv[3].decode('utf8') if len(sys.argv) >= 4 else u'e-ana'
 
 templates_parser = EnWiktionaryInflectionTemplateParser()
-templates_parser.add_parser(u'feminine singular of', parse_one_parameter_template(u'feminine singular of'))
-templates_parser.add_parser(u'feminine plural of', parse_one_parameter_template(u'feminine plural of'))
+templates_parser.add_parser(u'feminine singular of', parse_one_parameter_template(u'feminine singular of', number=u's'))
+templates_parser.add_parser(u'feminine plural of', parse_one_parameter_template(u'feminine plural of', number=u'p'))
 templates_parser.add_parser(u'feminine of', parse_one_parameter_template(u'feminine of'))
 templates_parser.add_parser(u'inflection of', parse_inflection_of)
 templates_parser.add_parser(u'inflected form of', parse_one_parameter_template(u'inflected form of'))
-templates_parser.add_parser(u'masculine plural of', parse_one_parameter_template(u'masculine plural of'))
-templates_parser.add_parser(u'plural of', parse_one_parameter_template(u'plural of'))
+templates_parser.add_parser(u'masculine plural of', parse_one_parameter_template(u'masculine plural of', number=u'p'))
+templates_parser.add_parser(u'plural of', parse_one_parameter_template(u'plural of', number=u'p'))
 
 
 def template_expression_to_malagasy_definition(template_expr):
@@ -114,13 +115,22 @@ def parse_word_forms():
                 entry_definition=malagasy_definition,
                 language=language_code,
             )
-            if mg_page.exists():
+            if not os.path.isfile('/tmp/%s' % language_code):  # overwrite existing content!
+                overwrite = False
+            else:
+                overwrite = True
+                print u'PAGE OVERWRITING IS ACTIVE. DELETE /tmp/%s TO DISABLE IT MID-SCRIPT.' % language_code
+
+            if mg_page.exists() and not overwrite:
                 new_entry = page_output.wikipage(mg_entry)
                 page_content = mg_page.get()
                 if page_content.find(u'{{=%s=}}' % language_code) != -1:
                     if page_content.find(u'{{-%s-|%s}}' % (template, language_code)) != -1:
-                        print u'section already exists: No need to go further'
-                        continue
+                        if not os.path.isfile('/tmp/%s' % language_code):  # overwrite existing content!
+                            print u'section already exists : No need to go further'
+                            continue
+                        else:
+                            print u'PAGE OVERWRITING IS ACTIVE. DELETE /tmp/%s TO DISABLE IT MID-SCRIPT.' % language_code
                     else:
                         page_content = re.sub(r'==[ ]?{{=%s=}}[ ]?==' % language_code, new_entry, page_content)
                 else:
