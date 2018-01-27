@@ -1,5 +1,8 @@
 # coding: utf8
-
+"""
+See this comment about usage
+https://github.com/radomd92/botjagwar/issues/6#issuecomment-361023958
+"""
 import re
 import sys
 import os
