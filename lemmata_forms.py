@@ -8,12 +8,14 @@ import pywikibot
 from models.word import Entry
 
 from modules.entryprocessor import WiktionaryProcessorFactory
-from modules.parsers.functions import parse_inflection_of, parse_one_parameter_template
+from modules.parsers.functions import parse_inflection_of
+from modules.parsers.functions import parse_lv_inflection_of
+from modules.parsers.functions import parse_one_parameter_template
 from modules.parsers.inflection_template import EnWiktionaryInflectionTemplateParser
+
 from modules.output import Output
 
 import traceback
-
 
 CASES = {
     'nom': u'endriky ny lazaina',
@@ -26,6 +28,11 @@ CASES = {
 NUMBER = {
     's': u'singiolary',
     'p': u'ploraly',
+}
+GENDER = {
+    'm': u'andehilahy',
+    'f': u'ambehivavy',
+    'n': u'tsy miandany'
 }
 SITENAME = 'wiktionary'
 SITELANG = 'mg'
@@ -40,22 +47,26 @@ templates_parser.add_parser(u'feminine plural of', parse_one_parameter_template(
 templates_parser.add_parser(u'feminine of', parse_one_parameter_template(u'feminine of'))
 templates_parser.add_parser(u'inflection of', parse_inflection_of)
 templates_parser.add_parser(u'inflected form of', parse_one_parameter_template(u'inflected form of'))
+templates_parser.add_parser(u'lv-inflection of', parse_lv_inflection_of)
 templates_parser.add_parser(u'masculine plural of', parse_one_parameter_template(u'masculine plural of', number=u'p'))
 templates_parser.add_parser(u'plural of', parse_one_parameter_template(u'plural of', number=u'p'))
-
 
 def template_expression_to_malagasy_definition(template_expr):
     """
     :param template_expr: template instance string with all its parameters
     :return: A malagasy language definition in unicode
     """
-    elements = templates_parser.get_elements(template_expr)
-    t_name, lemma, case_name, number_ = elements
-    case = CASES[case_name] if case_name in CASES else u''
-    num = NUMBER[number_] if number_ in NUMBER else u''
-    ret = u'%s %s ny teny [[%s]]' % (case, num, lemma)
+    word_form = templates_parser.get_elements(template_expr)
 
-    print elements
+    explanation = u''
+    if word_form.case in CASES:
+        explanation += CASES[word_form.case] + u' '
+    if word_form.gender in GENDER:
+        explanation += GENDER[word_form.gender] + u' '
+    if word_form.number in NUMBER:
+        explanation += NUMBER[word_form.number] + u' '
+
+    ret = u'%s ny teny [[%s]]' % (explanation, word_form.lemma)
     return ret
 
 
@@ -115,6 +126,7 @@ def parse_word_forms():
                 entry_definition=malagasy_definition,
                 language=language_code,
             )
+
             if not os.path.isfile('/tmp/%s' % language_code):  # overwrite existing content!
                 overwrite = False
             else:
@@ -126,11 +138,8 @@ def parse_word_forms():
                 page_content = mg_page.get()
                 if page_content.find(u'{{=%s=}}' % language_code) != -1:
                     if page_content.find(u'{{-%s-|%s}}' % (template, language_code)) != -1:
-                        if not os.path.isfile('/tmp/%s' % language_code):  # overwrite existing content!
-                            print u'section already exists : No need to go further'
-                            continue
-                        else:
-                            print u'PAGE OVERWRITING IS ACTIVE. DELETE /tmp/%s TO DISABLE IT MID-SCRIPT.' % language_code
+                        print u'section already exists : No need to go further'
+                        continue
                     else:
                         page_content = re.sub(r'==[ ]?{{=%s=}}[ ]?==' % language_code, new_entry, page_content)
                 else:

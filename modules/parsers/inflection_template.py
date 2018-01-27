@@ -1,5 +1,21 @@
 # coding: utf8
 
+class WordForm(object):
+    gender = None
+    number = None
+    case = None
+    lemma = None
+
+    def __init__(self, lemma, case, number, gender):
+        self.gender = gender
+        self.case = case
+        self.lemma = lemma
+        self.number = number
+
+    def to_definition(self):
+        pass
+
+
 class EnWiktionaryInflectionTemplateParser(object):
     def __init__(self):
         self.process_function = {}
@@ -14,11 +30,10 @@ class EnWiktionaryInflectionTemplateParser(object):
         parts = template_expression.split(u'|')
         if parts[0] in self.process_function.keys():
             ret = self.process_function[parts[0]](template_expression)
-            assert len(ret) == 4, u'Unexpected return values'
         else:
             raise AttributeError(u'No parser defined for "%s": %s' % (parts[0], orig_template_expression))
 
         return ret
 
     def get_lemma(self, template_expression):
-        return self.get_elements(template_expression)[1]
+        return self.get_elements(template_expression).lemma
