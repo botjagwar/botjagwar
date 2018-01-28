@@ -92,9 +92,13 @@ def parse_word_forms():
     global category_name
     global last_entry
     last_entry = get_count()
+
+    # Initialise processor class
     en_page_processor_class = WiktionaryProcessorFactory.create('en')
     en_page_processor = en_page_processor_class()
     page_output = Output()
+
+    # Get list of articles from category
     nouns = pywikibot.Category(pywikibot.Site('en', SITENAME), category_name)
     counter = 0
     for word_page in nouns.articles():
@@ -110,6 +114,7 @@ def parse_word_forms():
             last_entry += 1
             mg_page = pywikibot.Page(pywikibot.Site(SITELANG, SITENAME), word)
 
+            # Translate template's content into malagasy
             try:
                 malagasy_definition = template_expression_to_malagasy_definition(definition)
                 lemma = templates_parser.get_lemma(definition)
@@ -130,12 +135,14 @@ def parse_word_forms():
                 language=language_code,
             )
 
+            # Check ability to overwrite page
             if not os.path.isfile('/tmp/%s' % language_code):  # overwrite existing content!
                 overwrite = False
             else:
                 overwrite = True
                 print u'PAGE OVERWRITING IS ACTIVE. DELETE /tmp/%s TO DISABLE IT MID-SCRIPT.' % language_code
 
+            # Create or update the generated page
             if mg_page.exists() and not overwrite:
                 new_entry = page_output.wikipage(mg_entry)
                 page_content = mg_page.get()
@@ -143,11 +150,11 @@ def parse_word_forms():
                     if page_content.find(u'{{-%s-|%s}}' % (template, language_code)) != -1:
                         print u'section already exists : No need to go further'
                         continue
-                    else:
+                    else:  # Add part of speech subsection
                         page_content = re.sub(r'==[ ]?{{=%s=}}[ ]?==' % language_code, new_entry, page_content)
-                else:
+                else:  # Add language section
                     page_content = new_entry + u'\n' + page_content
-            else:
+            else:  # Create a new page.
                 page_content = page_output.wikipage(mg_entry)
 
             pywikibot.output(u'\03{blue}%s\03{default}' % page_content)
