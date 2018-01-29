@@ -1,6 +1,6 @@
 verbose = False
 
-from modules.database.word import WordDatabase
+from modules.broken_database.word import WordDatabase
 from _mysql_exceptions import DataError
 
 USER_DATA = 'user_data/dikantenyvaovao'

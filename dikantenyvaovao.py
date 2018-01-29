@@ -7,19 +7,17 @@ import pywikibot as pwbot
 from flask import Flask, request
 import traceback
 
-import MySQLdb as db
 
 from modules import service_ports
 from modules import entryprocessor
-from modules.database import Database
-from modules.database.word import WordDatabase
+from modules.broken_database import Database
+from modules.broken_database.word import WordDatabase
 from modules.decorator import threaded
 from modules.translation.core import Translation
 
 from pywikibot import Site, Page
 
-
-from _mysql_exceptions import DataError, IntegrityError, ProgrammingError
+from sqlite3 import DataError, IntegrityError, ProgrammingError
 
 
 # GLOBAL VARS

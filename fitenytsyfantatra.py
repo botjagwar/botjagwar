@@ -3,7 +3,7 @@ import time
 import pywikibot
 from urllib.request import FancyURLopener, urlopen
 from lxml import etree
-from modules.database.word import WordDatabase
+from modules.broken_database.word import WordDatabase
 from modules.decorator import time_this
 
 WORKING_WIKI = pywikibot.Site("mg", "wiktionary")

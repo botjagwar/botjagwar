@@ -3,8 +3,8 @@ import re
 import os
 import pywikibot as pwbot
 from modules import entryprocessor
-from modules.database import Database
-from modules.database.word import WordDatabase
+from modules.broken_database import Database
+from modules.broken_database.word import WordDatabase
 from modules.exceptions import NoWordException
 from modules.output import Output
 from modules.autoformatter import Autoformat

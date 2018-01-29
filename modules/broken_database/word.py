@@ -1,4 +1,4 @@
-from modules.database import Database
+from modules.broken_database import Database
 from set_database_password import PasswordManager
 import MySQLdb as db
 verbose = True
