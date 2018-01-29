@@ -1,6 +1,6 @@
 # coding: utf8
 
-from inflection_template import EnWiktionaryInflectionTemplateParser
+from .inflection_template import EnWiktionaryInflectionTemplateParser
 
 from modules.parsers.functions import parse_inflection_of
 from modules.parsers.functions import parse_lv_inflection_of
@@ -9,32 +9,32 @@ from modules.parsers.inflection_template import EnWiktionaryInflectionTemplatePa
 
 
 CASES = {
-    'nom': u'endriky ny lazaina',
-    'acc': u'endrika teny fameno',
-    'loc': u'endrika teny famaritan-toerana',
-    'dat': u'mpanamarika ny tolorana',
-    'gen': u'mpanamarika ny an\'ny tompo',
-    'ins': u'mpanamarika fomba fanaovana',
+    'nom': 'endriky ny lazaina',
+    'acc': 'endrika teny fameno',
+    'loc': 'endrika teny famaritan-toerana',
+    'dat': 'mpanamarika ny tolorana',
+    'gen': 'mpanamarika ny an\'ny tompo',
+    'ins': 'mpanamarika fomba fanaovana',
 }
 NUMBER = {
-    's': u'singiolary',
-    'p': u'ploraly',
+    's': 'singiolary',
+    'p': 'ploraly',
 }
 GENDER = {
-    'm': u'andehilahy',
-    'f': u'ambehivavy',
-    'n': u'tsy miandany'
+    'm': 'andehilahy',
+    'f': 'ambehivavy',
+    'n': 'tsy miandany'
 }
 
 templates_parser = EnWiktionaryInflectionTemplateParser()
-templates_parser.add_parser(u'feminine singular of', parse_one_parameter_template(u'feminine singular of', number=u's'))
-templates_parser.add_parser(u'feminine plural of', parse_one_parameter_template(u'feminine plural of', number=u'p'))
-templates_parser.add_parser(u'feminine of', parse_one_parameter_template(u'feminine of'))
-templates_parser.add_parser(u'inflection of', parse_inflection_of)
-templates_parser.add_parser(u'inflected form of', parse_one_parameter_template(u'inflected form of'))
-templates_parser.add_parser(u'lv-inflection of', parse_lv_inflection_of)
-templates_parser.add_parser(u'masculine plural of', parse_one_parameter_template(u'masculine plural of', number=u'p'))
-templates_parser.add_parser(u'plural of', parse_one_parameter_template(u'plural of', number=u'p'))
+templates_parser.add_parser('feminine singular of', parse_one_parameter_template('feminine singular of', number='s'))
+templates_parser.add_parser('feminine plural of', parse_one_parameter_template('feminine plural of', number='p'))
+templates_parser.add_parser('feminine of', parse_one_parameter_template('feminine of'))
+templates_parser.add_parser('inflection of', parse_inflection_of)
+templates_parser.add_parser('inflected form of', parse_one_parameter_template('inflected form of'))
+templates_parser.add_parser('lv-inflection of', parse_lv_inflection_of)
+templates_parser.add_parser('masculine plural of', parse_one_parameter_template('masculine plural of', number='p'))
+templates_parser.add_parser('plural of', parse_one_parameter_template('plural of', number='p'))
 
 
 def template_expression_to_malagasy_definition(template_expr):
@@ -44,15 +44,15 @@ def template_expression_to_malagasy_definition(template_expr):
     """
     word_form = templates_parser.get_elements(template_expr)
 
-    explanation = u''
+    explanation = ''
     if word_form.case in CASES:
-        explanation += CASES[word_form.case] + u' '
+        explanation += CASES[word_form.case] + ' '
     if word_form.gender in GENDER:
-        explanation += GENDER[word_form.gender] + u' '
+        explanation += GENDER[word_form.gender] + ' '
     if word_form.number in NUMBER:
-        explanation += NUMBER[word_form.number] + u' '
+        explanation += NUMBER[word_form.number] + ' '
 
-    ret = u'%s ny teny [[%s]]' % (explanation, word_form.lemma)
+    ret = '%s ny teny [[%s]]' % (explanation, word_form.lemma)
     return ret
 
 

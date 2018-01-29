@@ -27,10 +27,10 @@ write simpler bots.
 import sys
 from UserDict import UserDict
 
-from irclib import SimpleIRCClient
-from irclib import nm_to_n, irc_lower, all_events
-from irclib import parse_channel_modes, is_channel
-from irclib import ServerConnectionError
+from .irclib import SimpleIRCClient
+from .irclib import nm_to_n, irc_lower, all_events
+from .irclib import parse_channel_modes, is_channel
+from .irclib import ServerConnectionError
 
 
 class SingleServerIRCBot(SimpleIRCClient):
@@ -161,7 +161,7 @@ class SingleServerIRCBot(SimpleIRCClient):
         """[Internal]"""
         before = nm_to_n(e.source())
         after = e.target()
-        for ch in self.channels.values():
+        for ch in list(self.channels.values()):
             if ch.has_user(before):
                 ch.change_nick(before, after)
 
@@ -178,7 +178,7 @@ class SingleServerIRCBot(SimpleIRCClient):
     def _on_quit(self, c, e):
         """[Internal]"""
         nick = nm_to_n(e.source())
-        for ch in self.channels.values():
+        for ch in list(self.channels.values()):
             if ch.has_user(nick):
                 ch.remove_user(nick)
 
@@ -285,7 +285,7 @@ class IRCDict:
     def __iter__(self):
         return iter(self.data)
     def __contains__(self, key):
-        return self.has_key(key)
+        return key in self
     def clear(self):
         self.data.clear()
         self.canon_keys.clear()
@@ -295,15 +295,15 @@ class IRCDict:
         import copy
         return copy.copy(self)
     def keys(self):
-        return self.data.keys()
+        return list(self.data.keys())
     def items(self):
-        return self.data.items()
+        return list(self.data.items())
     def values(self):
-        return self.data.values()
+        return list(self.data.values())
     def has_key(self, key):
         return irc_lower(key) in self.canon_keys
     def update(self, dict):
-        for k, v in dict.items():
+        for k, v in list(dict.items()):
             self.data[k] = v
     def get(self, key, failobj=None):
         return self.data.get(key, failobj)
@@ -323,16 +323,16 @@ class Channel:
 
     def users(self):
         """Returns an unsorted list of the channel's users."""
-        return self.userdict.keys()
+        return list(self.userdict.keys())
 
     def opers(self):
         """Returns an unsorted list of the channel's operators."""
-        return self.operdict.keys()
+        return list(self.operdict.keys())
 
     def voiced(self):
         """Returns an unsorted list of the persons that have voice
         mode set in the channel."""
-        return self.voiceddict.keys()
+        return list(self.voiceddict.keys())
 
     def has_user(self, nick):
         """Check whether the channel has a user."""

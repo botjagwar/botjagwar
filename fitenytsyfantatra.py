@@ -1,15 +1,15 @@
 # coding: utf8
 import time
 import pywikibot
-from urllib import FancyURLopener, urlopen
+from urllib.request import FancyURLopener, urlopen
 from lxml import etree
 from modules.database.word import WordDatabase
 from modules.decorator import time_this
 
 WORKING_WIKI = pywikibot.Site("mg", "wiktionary")
-username = u"%s" % pywikibot.config.usernames['wiktionary']['mg']
+username = "%s" % pywikibot.config.usernames['wiktionary']['mg']
 
-TABLE_PATTERN = u"""
+TABLE_PATTERN = """
 {| class=\"wikitable sortable\"
 ! Kaodim-piteny
 ! Anarana anglisy
@@ -19,7 +19,7 @@ TABLE_PATTERN = u"""
 |}
 """
 
-ROW_PATTERN = u"""
+ROW_PATTERN = """
 | <tt>[[Endrika:%s|%s]]</tt> || ''%s'' || {{formatnum:%d}}
 |-"""
 
@@ -37,7 +37,7 @@ class UnknownlanguageUpdaterBot(object):
     Reads kaodim-piteny tsy fantara subpage and create the categories & templates for new languages
     """
     def __init__(self):
-        self.title = u"Mpikambana:%s/Kaodim-piteny fantatra" % username
+        self.title = "Mpikambana:%s/Kaodim-piteny fantatra" % username
         self.new_language_page = pywikibot.Page(WORKING_WIKI, self.title)
 
     def get_new_languages_wikipage(self):
@@ -49,7 +49,7 @@ class UnknownlanguageUpdaterBot(object):
         :return:
         """
         try:
-            self.new_language_page.put(u"", u"fandiovana")
+            self.new_language_page.put("", "fandiovana")
         except Exception as e:
             print(e)
 
@@ -59,15 +59,15 @@ class UnknownlanguageUpdaterBot(object):
         """
         text = self.get_new_languages_wikipage()
         language_names = []
-        for line in text.split(u"\n"):
+        for line in text.split("\n"):
             try:
-                code, name = line.split(u",")
+                code, name = line.split(",")
                 code, name = code.strip(), name.strip()
                 if len(code) > 3:
                     continue
                 language_names.append((code, name))
             except ValueError:
-                print (u"Rariteny tsy voaaraka amin'ny andalana")
+                print ("Rariteny tsy voaaraka amin'ny andalana")
 
         return language_names
 
@@ -98,7 +98,7 @@ class UnknownLanguageManagerBot(object):
         :param x:
         :return:
         """
-        query = u"""select distinct(fiteny) as fiteny, count(teny) as isa 
+        query = """select distinct(fiteny) as fiteny, count(teny) as isa 
                 from data_botjagwar.`teny` 
                 where teny.daty 
                     between DATE_SUB(NOW(), INTERVAL %d day) and NOW()
@@ -121,7 +121,7 @@ class UnknownLanguageManagerBot(object):
                         new_language_name = translate_language_name(language_name)
                         create_category_set(language_code, new_language_name)
                     except ValueError:
-                        print 'Not translatable ', language_name
+                        print(('Not translatable ', language_name))
                         self.lang_list.append((language_code, language_name, number_of_words))
 
     def start(self):
@@ -138,11 +138,11 @@ class UnknownLanguageManagerBot(object):
         Updates `Lisitry ny kaodim-piteny tsy voafaritra` subpage.
         :return:
         """
-        rows = u""
+        rows = ""
         for code, name, n_words in self.lang_list:
             rows += ROW_PATTERN % (code, code, name, n_words)
         page_content = TABLE_PATTERN % rows
-        wikipage = pywikibot.Page(WORKING_WIKI, u"Mpikambana:%s/Lisitry ny kaodim-piteny tsy voafaritra" % username)
+        wikipage = pywikibot.Page(WORKING_WIKI, "Mpikambana:%s/Lisitry ny kaodim-piteny tsy voafaritra" % username)
         f = open("/tmp/wikipage_save", 'w')
         f.write(page_content.encode('utf8'))
         f.close()
@@ -152,7 +152,7 @@ class UnknownLanguageManagerBot(object):
                 break
             except (pywikibot.PageNotSaved, pywikibot.OtherPageSaveError) as e:
                 print (e)
-                print (u"Hadisoana, manandrana indray afaka 10 segondra")
+                print ("Hadisoana, manandrana indray afaka 10 segondra")
                 time.sleep(10)
 
 
@@ -163,8 +163,8 @@ def language_code_exists(language_code):
     :param language_code:
     :return:
     """
-    page_titles_to_check = [u"Endrika:%s" % language_code,
-                            u"Endrika:=%s=" % language_code]
+    page_titles_to_check = ["Endrika:%s" % language_code,
+                            "Endrika:=%s=" % language_code]
     existence = 0
     for page_title in page_titles_to_check:
         wikipage = pywikibot.Page(WORKING_WIKI, page_title)
@@ -192,9 +192,9 @@ def get_sil_language_name(language_code):
     :return:
     """
     if len(language_code) == 2:
-        return u""
-    page_xpath = u'//table/tr[2]/td[2]'
-    url = u"http://www-01.sil.org/iso639-3/documentation.asp?id=%s" % language_code
+        return ""
+    page_xpath = '//table/tr[2]/td[2]'
+    url = "http://www-01.sil.org/iso639-3/documentation.asp?id=%s" % language_code
     text = urlopen(url).read()
     text = text.decode("utf8")
     tree = etree.HTML(text)
@@ -204,70 +204,70 @@ def get_sil_language_name(language_code):
 
 def translate_language_name(language_name):
     language_name = language_name.lower()
-    if len(language_name.split()) > 1 or len(language_name.split(u'-')) > 1:
+    if len(language_name.split()) > 1 or len(language_name.split('-')) > 1:
         raise ValueError("Can't properly translate this one")
-    language_name += u'$'
+    language_name += '$'
 
-    letter_replacements = [(u"o", u"ô"), (u"u", u"o")]
+    letter_replacements = [("o", "ô"), ("u", "o")]
 
     phonology_replacements = {
-        u'i$': u'y$',
-        u'y': u'i',
+        'i$': 'y$',
+        'y': 'i',
     }
 
     cluster_replacements = {
-        u'ian$': u'ianina$',
-        u'ese$': u'ey$',
-        u"cl": u"kl",
-        u"sc": u"sk",
-        u'gue':u'ge',
-        u'gui': u'gi',
-        u"que": u"ke",
-        u"qui": u"ki",
-        u'oo': u'o',
-        u'ee': u'i',
-        u"ch": u"ts",
-        u'ca': u'ka',
-        u'co': u'kô',
-        u'cu': u'ko',
-        u'ce': u'se',
-        u'ci': u'si',
-        u'cy': u'si',
-        u"x": u"ks",
+        'ian$': 'ianina$',
+        'ese$': 'ey$',
+        "cl": "kl",
+        "sc": "sk",
+        'gue':'ge',
+        'gui': 'gi',
+        "que": "ke",
+        "qui": "ki",
+        'oo': 'o',
+        'ee': 'i',
+        "ch": "ts",
+        'ca': 'ka',
+        'co': 'kô',
+        'cu': 'ko',
+        'ce': 'se',
+        'ci': 'si',
+        'cy': 'si',
+        "x": "ks",
     }
 
     for c, r in letter_replacements:
         language_name = language_name.replace(c, r)
 
-    for c, r in cluster_replacements.items():
+    for c, r in list(cluster_replacements.items()):
         language_name = language_name.replace(c, r)
 
-    for c, r in phonology_replacements.items():
+    for c, r in list(phonology_replacements.items()):
         language_name = language_name.replace(c, r)
 
-    return language_name.strip(u'$')
+    return language_name.strip('$')
 
 
 def create_category_set(language_code, language_name):
     templates_to_be_created = [
-        u"Endrika:%s" % language_code,
-        u"Endrika:%s/type" % language_code]
+        "Endrika:%s" % language_code,
+        "Endrika:%s/type" % language_code]
     for template in templates_to_be_created:
         put(template, language_name)
 
-    put(u"Endrika:=%s=" % language_code, language_name.title())
+    put("Endrika:=%s=" % language_code, language_name.title())
 
     categories = [
-        u"Anarana iombonana",
-        u"Mpamaritra anarana",
-        u"Matoanteny",
-        u"Tambinteny",
-        u"Mpampiankin-teny"]
-    put(u"Sokajy:%s" % language_name, u"[[sokajy:fiteny]]")
+        "Anarana iombonana",
+        "Mpamaritra anarana",
+        "Matoanteny",
+        "Tambinteny",
+        "Mpampiankin-teny"]
+    put("Sokajy:%s" % language_name, "[[sokajy:fiteny]]")
     for category in categories:
-        page_content = u"[[sokajy:%s]]\n[[sokajy:%s|%s]]" % (
+        page_content = "[[sokajy:%s]]\n[[sokajy:%s|%s]]" % (
             language_name, category, language_name[0])
-        title = u"Sokajy:%s amin'ny teny %s" % (category, language_name)
+        title = "Sokajy:%s amin'ny teny %s" % (category, language_name)
         put(title, page_content)
 
 
@@ -279,7 +279,7 @@ def put(title, content):
     :return:
     """
     page = pywikibot.Page(WORKING_WIKI, title)
-    page.put(content, u"fiteny vaovao")
+    page.put(content, "fiteny vaovao")
 
 
 if __name__ == '__main__':

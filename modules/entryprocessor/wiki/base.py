@@ -23,7 +23,7 @@ class WiktionaryProcessor(object):
             try:
                 self.content = page.get()
             except Exception:
-                self.content = u""
+                self.content = ""
 
     def set_text(self, text):
         self.content = text

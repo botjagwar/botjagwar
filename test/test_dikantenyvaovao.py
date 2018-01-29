@@ -12,19 +12,19 @@ from modules.decorator import threaded, retry_on_fail
 
 
 LIST = [
-    u'eau',
-    u'air',
-    u'èstre',
-    u'газета',
-    u'газет',
-    u'geloof',
-    u'belief',
-    u'peel',
-    u'合宿',
-    u'heel',
-    u'百萬',
-    u'peigne',
-    u'pagne',
+    'eau',
+    'air',
+    'èstre',
+    'газета',
+    'газет',
+    'geloof',
+    'belief',
+    'peel',
+    '合宿',
+    'heel',
+    '百萬',
+    'peigne',
+    'pagne',
 ]
 
 
@@ -57,17 +57,17 @@ class TestDikantenyVaovaoServices(TestCase):
     def check_response_status(self, url, data):
         resp = requests.put(url, json=data)
         resp_data = json.loads(resp.text) if resp.text else {}
-        self.assertEquals(resp.status_code, 200)
-        for _, added_entries in resp_data.items():
+        self.assertEqual(resp.status_code, 200)
+        for _, added_entries in list(resp_data.items()):
             self.assertTrue(isinstance(added_entries, list))
 
     @retry_on_fail(Exception, retries=10, time_between_retries=.5)
     def test_translate_english_word(self):
         data = {
-            u"dryrun": True,
-            u"word": u"rice",
-            u"translation": u"vary",
-            u"POS": u"ana",
+            "dryrun": True,
+            "word": "rice",
+            "translation": "vary",
+            "POS": "ana",
         }
         url = "http://localhost:8000/translate/en"
         self.check_response_status(url, data)
@@ -75,10 +75,10 @@ class TestDikantenyVaovaoServices(TestCase):
     @retry_on_fail(Exception, retries=10, time_between_retries=.5)
     def test_translate_french_word(self):
         data = {
-            u"dryrun": True,
-            u"word": u"riz",
-            u"translation": u"vary",
-            u"POS": u"ana",
+            "dryrun": True,
+            "word": "riz",
+            "translation": "vary",
+            "POS": "ana",
         }
         url = "http://localhost:8000/translate/fr"
         self.check_response_status(url, data)

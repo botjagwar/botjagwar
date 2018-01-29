@@ -13,9 +13,9 @@ class WordDatabase(object):
         if not params:
             # Currently hard-coded parameters, parameters read-in-file in the future.
             self.params = {
-                u'host': u'localhost',
-                u'login': u'root',
-                u'passwd': self.db_passwd
+                'host': 'localhost',
+                'login': 'root',
+                'passwd': self.db_passwd
             }
         else:
             self.params = params
@@ -41,10 +41,10 @@ class WordDatabase(object):
 
     def save_entry(self, entry):
         paramsdict = {
-            u'teny': entry.entry,
-            u'famaritana': entry.entry_definition,
-            u'karazany': entry.part_of_speech,
-            u'fiteny': entry.language
+            'teny': entry.entry,
+            'famaritana': entry.entry_definition,
+            'karazany': entry.part_of_speech,
+            'fiteny': entry.language
         }
         self.DB.insert(paramsdict)
 
@@ -64,18 +64,18 @@ class WordDatabase(object):
         definition = self._to_unicode(definition)
 
         paramsdict = {
-            u'teny': entry,
-            u'famaritana': definition,
-            u'karazany': unicode(pos),
-            u'fiteny': unicode(language)}
+            'teny': entry,
+            'famaritana': definition,
+            'karazany': str(pos),
+            'fiteny': str(language)}
         self.DB.insert(paramsdict)
 
     def _to_unicode(self, string):
-        if type(string) is not unicode:
+        if type(string) is not str:
             try:
-                string = unicode(string, 'latin1')
+                string = str(string, 'latin1')
             except TypeError:
-                string = unicode(string)
+                string = str(string)
             finally:
                 return string
 
@@ -87,7 +87,7 @@ class WordDatabase(object):
         language = db.escape_string(language.encode('utf8'))
         language = language.decode('utf8')
         entry = entry.decode('utf8')
-        sql = u"select mg from data_botjagwar.%s_mg where %s='%s'" % (language, language, entry)
+        sql = "select mg from data_botjagwar.%s_mg where %s='%s'" % (language, language, entry)
         result = self.DB.raw_query(sql)
 
         if result:
@@ -100,9 +100,9 @@ class WordDatabase(object):
         conditions = {entry_col_name: entry,
                       lang_col_name: self.famaritana_fiteny}  # see explanation in "set_contentlanguage(ISOcode)"
 
-        if POS: conditions[u'karazany'] = POS
-        if lang: conditions[u'fiteny'] = lang
-        rep = self.DB.read(conditions, u'teny')  # execution of SQL
+        if POS: conditions['karazany'] = POS
+        if lang: conditions['fiteny'] = lang
+        rep = self.DB.read(conditions, 'teny')  # execution of SQL
         if rep:
             return True
         else:
@@ -120,14 +120,14 @@ class WordDatabase(object):
             except UnicodeError:
                 pass
                 # entry = unicode(entry)
-        return self._check_existence(u'teny', entry, u'fiteny', lang, POS)
+        return self._check_existence('teny', entry, 'fiteny', lang, POS)
 
     def raw_translate(self, word, pos, language='fr'):
         """gives the translation of the given word in the given language.
            Returns [translation, ...]. All strings are Unicode objects."""
         word = word.encode('utf8')
         db.escape_string(word)
-        if type(word) is not unicode:
+        if type(word) is not str:
             try:
                 word = word.decode('utf8')
             except UnicodeEncodeError:
@@ -135,9 +135,9 @@ class WordDatabase(object):
 
         translations = []
         # Find definition in special dictionary
-        if language in [u'fr', u'en']:
+        if language in ['fr', 'en']:
             sql_query_result = self.DB.raw_query(
-                u"select mg from data_botjagwar.%s_mg where %s='%s'"
+                "select mg from data_botjagwar.%s_mg where %s='%s'"
                 % (language, language, word))
             for translation in sql_query_result:
                 translation = translation
@@ -146,39 +146,39 @@ class WordDatabase(object):
         # No translation found in pecial dictionary? Look up in the general one!
         if not translations:
             sql_query_result2 = self.DB.raw_query(
-                u"select famaritana from data_botjagwar.teny where fiteny='%s' and teny='%s'"
+                "select famaritana from data_botjagwar.teny where fiteny='%s' and teny='%s'"
                 % (language, word))
             for translation in sql_query_result2:
                 translation = translation[0]
                 # Remove unneeded characters
-                for char in u'[]':
+                for char in '[]':
                     # Try decoding using different encoding if UnicodeErrors occur
                     for encoding in ['utf8', 'latin-1']:
                         try:
-                            translation = translation.replace(char, u'')
+                            translation = translation.replace(char, '')
                             break
                         except UnicodeError:
                             translation = translation.decode(encoding)
                     # Make string unicode when all's over
-                    translation = unicode(translation)
+                    translation = str(translation)
 
                 # Pack up translations for delivery
-                for t in translation.split(u','):  # Translation in this dictionary are comma-separated...
+                for t in translation.split(','):  # Translation in this dictionary are comma-separated...
                     translations.append((t.strip(),))
 
         return translations
 
-    def translate(self, word, language, pos=u'ana'):
+    def translate(self, word, language, pos='ana'):
         translations = self.raw_translate(word, pos, language)
 
         # Post-process to directly have Wikibolana's definitions formatting
-        tstring = u""
+        tstring = ""
         for translation in translations:
             s = translation[0].strip()
             try:
-                tstring += u"[[%s]], " % s
+                tstring += "[[%s]], " % s
             except UnicodeDecodeError:
-                tstring += u"[[%s]], " % s.decode("latin1")
+                tstring += "[[%s]], " % s.decode("latin1")
 
-        tstring = tstring.strip(u", ")
+        tstring = tstring.strip(", ")
         return tstring

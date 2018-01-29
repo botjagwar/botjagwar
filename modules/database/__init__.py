@@ -5,9 +5,9 @@ from set_database_password import PasswordManager
 verbose = True
 
 class Database(object):
-    def __init__(self, host=u'localhost', login=u'root', passwd=None, dbname=None, table=u'teny'):
-        assert type(host) is unicode
-        assert type(host) is unicode
+    def __init__(self, host='localhost', login='root', passwd=None, dbname=None, table='teny'):
+        assert type(host) is str
+        assert type(host) is str
 
         self.pw_manager = PasswordManager()
         if passwd is None:
@@ -16,17 +16,17 @@ class Database(object):
             self.db_passwd = passwd
 
         self.infos = {
-            u'host': host,
-            u'login': login,
-            u'passwd': self.db_passwd,
-            u'table': db.escape_string(table)
+            'host': host,
+            'login': login,
+            'passwd': self.db_passwd,
+            'table': db.escape_string(table)
         }
-        self.tablename = u'teny'
+        self.tablename = 'teny'
         self.connect = db.connect(host, login, self.db_passwd, charset='utf8')
         self.cursor = self.connect.cursor()
         if dbname is None:
-            dbname = u"data_botjagwar"
-        self.infos[u'DB'] = dbname
+            dbname = "data_botjagwar"
+        self.infos['DB'] = dbname
 
         self.querycount = 0
         self.autocommit = True
@@ -40,18 +40,18 @@ class Database(object):
         self.cursor.close()
 
     def load(self):
-        sqlreq = u"select * from `%(DB)s`.`%(table)s` WHERE 1" % self.infos
+        sqlreq = "select * from `%(DB)s`.`%(table)s` WHERE 1" % self.infos
         return self.raw_query(sqlreq)
 
     def set_dbname(self, dbname):
-        assert type(dbname) is unicode
+        assert type(dbname) is str
         """Set the current database we're working on"""
-        self.infos[u'DB'] = dbname
+        self.infos['DB'] = dbname
 
     def set_table(self, table):
-        assert type(table) is unicode
+        assert type(table) is str
         """Set the current table we're working on"""
-        self.infos[u'table'] = table
+        self.infos['table'] = table
 
     def insert(self, values_dict, dry_run=False):
         """Insert in database values in values_dict"""
@@ -63,23 +63,23 @@ class Database(object):
             self._insert_one(values_dict)
 
     def _do_insert(self, values_dict):
-        print values_dict
-        sql = u"insert into `%(DB)s`.`%(table)s` (" % self.infos
+        print(values_dict)
+        sql = "insert into `%(DB)s`.`%(table)s` (" % self.infos
         for i in values_dict:
             i = db.escape_string(i.encode('utf8'))
             i = i.decode('utf8')
-            sql += u"`%s`," % i
-        sql = sql.strip(u',')
-        sql += u") values ("
-        for key, value in values_dict.items():
+            sql += "`%s`," % i
+        sql = sql.strip(',')
+        sql += ") values ("
+        for key, value in list(values_dict.items()):
             if value is not None:
                 value = db.escape_string(value.encode('utf8'))
                 value = value.decode('utf8')
-                sql += u"'%s', " % value
+                sql += "'%s', " % value
             else:
-                sql += u"NULL,"
-        sql = sql.strip(u', ')
-        sql += u")"
+                sql += "NULL,"
+        sql = sql.strip(', ')
+        sql += ")"
         try:
             self.cursor.execute(sql)
         except UnicodeError:
@@ -106,22 +106,22 @@ class Database(object):
         if self.autocommit:
             self.connect.commit()
 
-    def _action(self, conditions={}, initstring=unicode(), operand=u'='):
+    def _action(self, conditions={}, initstring=str(), operand='='):
         """action for SELECT or DELETE statements, specified by initstring"""
         sql = initstring
         if not conditions:
-            sql += u"from `%(DB)s`.`%(table)s` WHERE `fiteny`='mg'" % self.infos
-        elif conditions == {u'fiteny': u'REHETRA'}:
-            sql += u"from `%(DB)s`.`%(table)s`"
+            sql += "from `%(DB)s`.`%(table)s` WHERE `fiteny`='mg'" % self.infos
+        elif conditions == {'fiteny': 'REHETRA'}:
+            sql += "from `%(DB)s`.`%(table)s`"
         else:
-            sql += u"from `%(DB)s`.`%(table)s` WHERE " % self.infos
-            for key, value in conditions.items():
+            sql += "from `%(DB)s`.`%(table)s` WHERE " % self.infos
+            for key, value in list(conditions.items()):
                 value = value.encode('utf8')     # Yay!
                 value = db.escape_string(value)  # Python 2
                 value = value.decode('utf8')     # for the win!
-                sql += u"`%s` %s '%s' AND " % (key, operand, value)
+                sql += "`%s` %s '%s' AND " % (key, operand, value)
 
-            sql = sql.strip(u'AND ')
+            sql = sql.strip('AND ')
 
         rep = ()
         try:
@@ -135,22 +135,22 @@ class Database(object):
             except Exception as e:
                 if verbose:
                     pywikibot.output("HADISOANA: %s" % e.message)
-                    pywikibot.output(u'\03{red}%s\03{default}' % sql)
+                    pywikibot.output('\03{red}%s\03{default}' % sql)
                 return tuple()
         except Exception as e:
             if verbose:
-                pywikibot.output(u'HADISOANA ANATY: \03{red}%s\03{default}' % sql)
+                pywikibot.output('HADISOANA ANATY: \03{red}%s\03{default}' % sql)
             raise e  # Unhandled Exception
         finally:
             return rep
 
 
-    def read(self, conditions={}, select=u'*'):
+    def read(self, conditions={}, select='*'):
         """Read data from the current DB"""
-        return self._action(conditions, u"select %s " % select, u'=')
+        return self._action(conditions, "select %s " % select, '=')
 
     def read_all(self):
-        return self.raw_query(u"select * from `%(DB)s`.`%(table)s`" % self.infos)
+        return self.raw_query("select * from `%(DB)s`.`%(table)s`" % self.infos)
 
     def update(self, conditions, newvalues_dict):
         "Update SQL line with new values following conditions in conditions"
@@ -158,7 +158,7 @@ class Database(object):
 
     def delete(self, conditions=False):
         "Delete data from the DB"
-        return self._action(conditions, u"delete ")
+        return self._action(conditions, "delete ")
 
     def raw_query_noFetch(self, sql):
         "Raw SQL query (returns cursor) does not fetch, does not commit."

@@ -46,8 +46,8 @@ class PasswordManager(object):
             self.password = f.read()
             self.password = self._decrypt(self.password)
         except IOError as e:
-            print e
-            print "Tsy nahavaky tenimiafina / Password reading failed."
+            print(e)
+            print("Tsy nahavaky tenimiafina / Password reading failed.")
 
     def get_password(self):
         if self.password is None:
@@ -72,17 +72,17 @@ class PasswordManager(object):
             else:
                 f.write(self._encrypt(self.password))
         except IOError as e:
-            print e
-            print "Tsy nahomby ny fanoatana rakitra tenimiafina vaovao / Failed to write new password to file"
+            print(e)
+            print("Tsy nahomby ny fanoatana rakitra tenimiafina vaovao / Failed to write new password to file")
 
     def run(self):
         valid = self.check_database_password()
         if not valid:
-            print "Tsy nahitana tenimiafina / Password file not found."
+            print("Tsy nahitana tenimiafina / Password file not found.")
         self.read_db_password_file()
 
         if new_password is not None:
-            print "Mametraka tenimiafina vaovao / Setting new password."
+            print("Mametraka tenimiafina vaovao / Setting new password.")
             self.password = new_password
             self.write_db_password_file(new_password)
         # prompt for new password

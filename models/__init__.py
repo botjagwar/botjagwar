@@ -5,7 +5,7 @@ class Property(object):
             self.value = value
 
     def serialize(self):
-        return unicode(self.value)
+        return str(self.value)
 
 
 class List(Property):
@@ -27,11 +27,11 @@ class TypeCheckedObject(object):
     properties = {}
 
     def __init__(self, **properties):
-        for attribute, value in properties.items():
+        for attribute, value in list(properties.items()):
             self.add_attribute(attribute, value)
 
     def __eq__(self, other):
-        for pname, pvalue in self.properties.items():
+        for pname, pvalue in list(self.properties.items()):
             if getattr(other, pname) != getattr(self, pname):
                 return False
 
@@ -46,11 +46,11 @@ class TypeCheckedObject(object):
                 item))
 
     def __dir__(self):
-        return self.properties.keys()
+        return list(self.properties.keys())
 
     def to_dict(self):
         ret = {}
-        for pname, pvalue in self.properties.items():
+        for pname, pvalue in list(self.properties.items()):
             # print 'CLASS:', self.__class__.__name__, '::', pname, '>', pvalue
             if isinstance(pvalue, Property):
                 ret[pname] = pvalue.serialize()

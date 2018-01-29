@@ -61,7 +61,7 @@ class Translations_per_day_hour(object):
         translation_needed_file = open(self.data_file + 'dikantenyvaovao_dikanteny_isakora.txt', 'w')
         for translation in self.translations_per_hour:
             try:
-                filestr = u"%s::%d\n" % (translation, self.translations_per_hour[translation])
+                filestr = "%s::%d\n" % (translation, self.translations_per_hour[translation])
                 translation_needed_file.write(filestr.encode('utf8'))
             except UnicodeError:
                 continue
@@ -113,7 +113,7 @@ class MissingTranslations(object):
         translation_needed_file = open(self.data_file + 'dikantenyvaovao_ilaina.txt', 'w')
         for translation in self.missing_translations:
             try:
-                filestr = u"%s::%d\n" % (translation, self.missing_translations[translation])
+                filestr = "%s::%d\n" % (translation, self.missing_translations[translation])
                 translation_needed_file.write(filestr.encode('utf8'))
             except UnicodeError:
                 continue

@@ -2,8 +2,8 @@
 
 import re
 import pywikibot
-from base import WiktionaryProcessor
-from base import data_file
+from .base import WiktionaryProcessor
+from .base import data_file
 
 
 class ENWiktionaryProcessor(WiktionaryProcessor):
@@ -47,8 +47,8 @@ class ENWiktionaryProcessor(WiktionaryProcessor):
         """Maka ny dikanteny ao amin'ny pejy iray"""
         retcontent = []
         regex = '\{\{t[\+\-]+?\|([A-Za-z]{2,3})\|(.*?)\}\}'
-        pos = u'ana'
-        defin = u""
+        pos = 'ana'
+        defin = ""
         for allentrys in self.getall():  # (self.title, pos, self.lang2code(l), defin.strip())
             if allentrys[2] == 'en':
                 pos = allentrys[1]
@@ -59,9 +59,9 @@ class ENWiktionaryProcessor(WiktionaryProcessor):
             langcode = entry[0]
             entree = entry[1]
             try:
-                entree = unicode(entry[1])
+                entree = str(entry[1])
             except UnicodeDecodeError:
-                entree = unicode(entry[1], 'latin1')
+                entree = str(entry[1], 'latin1')
 
             for x in "();:.,":
                 if entry[1].find(x) != -1:
@@ -96,7 +96,7 @@ class ENWiktionaryProcessor(WiktionaryProcessor):
             c = c[c.find('==%s==' % l):]
 
             # pos
-            pos = u''
+            pos = ''
             ptext = regex_ptext = ''
             for p in self.postran:
                 regex_ptext += '%s|' % p
@@ -146,13 +146,13 @@ class ENWiktionaryProcessor(WiktionaryProcessor):
             try:
                 pos = self.postran[pos]
             except KeyError:
-                if self.verbose: print("Tsy nahitana dikan'ny karazan-teny %s" % pos)
+                if self.verbose: print(("Tsy nahitana dikan'ny karazan-teny %s" % pos))
                 continue
             if defin.startswith('to ') or defin.startswith('To '):
-                pos = u'mat'
+                pos = 'mat'
                 defin = defin[2:]
             elif defin.startswith('a ') or defin.startswith('A '):
-                pos = u'ana'
+                pos = 'ana'
                 defin = defin[1:]
             if len(defin.strip()) < 1: continue
             try:

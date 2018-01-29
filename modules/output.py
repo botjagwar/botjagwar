@@ -3,11 +3,11 @@ verbose = False
 from modules.database.word import WordDatabase
 from _mysql_exceptions import DataError
 
-USER_DATA = u'user_data/dikantenyvaovao'
+USER_DATA = 'user_data/dikantenyvaovao'
 
 
 class Output(object):
-    def __init__(self, output_batchfile=USER_DATA + u"/translate_batch.txt"):
+    def __init__(self, output_batchfile=USER_DATA + "/translate_batch.txt"):
         self.output_batchfile = file(output_batchfile, 'a')
         self.word_db = WordDatabase()
 
@@ -26,16 +26,16 @@ class Output(object):
     
     def batchfile(self, info):
         "return batch format (see doc)"
-        string = u"%(entry)s -> %(entry_definition)s -> %(part_of_speech)s -> %(language)s\n" % info.properties
+        string = "%(entry)s -> %(entry_definition)s -> %(part_of_speech)s -> %(language)s\n" % info.properties
         return string
         
     def wikipage(self, info):
         "returns wikipage string"
-        additional_note = u""
-        if u'origin_wiktionary_page_name' in info.properties and u'origin_wiktionary_edition' in info.properties:
-            additional_note = u"{{dikantenin'ny dikanteny|%(origin_wiktionary_page_name)s|%(origin_wiktionary_edition)s}}\n" % info.properties
+        additional_note = ""
+        if 'origin_wiktionary_page_name' in info.properties and 'origin_wiktionary_edition' in info.properties:
+            additional_note = "{{dikantenin'ny dikanteny|%(origin_wiktionary_page_name)s|%(origin_wiktionary_edition)s}}\n" % info.properties
 
-        s = u"""
+        s = """
 =={{=%(language)s=}}==
 {{-%(part_of_speech)s-|%(language)s}}
 '''{{subst:BASEPAGENAME}}''' {{fanononana X-SAMPA||%(language)s}} {{fanononana||%(language)s}}

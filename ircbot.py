@@ -57,7 +57,7 @@ class WiktionaryRecentChangesBot(ircbot.SingleServerIRCBot):
             ircbot.SingleServerIRCBot.__init__(
                 self, [("irc.wikimedia.org", 6667)], self.username, "Bot-Jagwar [IRCbot v2].")
             self.joined.append(channel)
-            print ("Channel:", channel, " Nickname:", self.username)
+            print(("Channel:", channel, " Nickname:", self.username))
 
         print ("Connection complete")
 
@@ -78,18 +78,18 @@ class WiktionaryRecentChangesBot(ircbot.SingleServerIRCBot):
             wikilanguage = _get_origin_wiki(msg)
             pagename = _get_pagename(msg)
             url = self.service_address + "/wiktionary_page/%s" % (wikilanguage)
-            data = {u'title': pagename}
+            data = {'title': pagename}
             requests.post(url, json=data)
             self.edits += 1
             if not self.edits % 5:
                 throughput = 60. * 5. / (float(ct_time) - self.chronometer)
                 self.chronometer = ct_time
-                print ("Edit #%d (%.2f edits/min)" % (self.edits, throughput))
+                print(("Edit #%d (%.2f edits/min)" % (self.edits, throughput)))
         except requests.ConnectionError as e:
-            print (traceback.format_exc())
-            print 'NOTE: Launch dikantenyvaovao.py in a separate process to have the backend.'
+            print((traceback.format_exc()))
+            print('NOTE: Launch dikantenyvaovao.py in a separate process to have the backend.')
         except Exception as e:
-            print (traceback.format_exc())
+            print((traceback.format_exc()))
 
             self.stats['errors'] += 1
 
@@ -106,7 +106,7 @@ def _get_origin_wiki(message):
 def _get_pagename(message):
     message = message[:message.find('http')]
     item = re.search(r"\[\[(.*)\]\]", message).groups()[0]
-    item = unicode(item[3:-3])
+    item = str(item[3:-3])
     if len(item) > 200:
         print (item)
         raise IrcBotException("Title is too long")
@@ -130,7 +130,7 @@ def _prepare_message(events):
 
 def base36encode(number, alphabet='0123456789abcdefghjiklmnopqrstuvwxyz'):
     """Converts an integer to a base36 string."""
-    if not isinstance(number, (int, long)):
+    if not isinstance(number, int):
         raise TypeError('number must be an integer')
 
     base36 = ''
@@ -154,4 +154,4 @@ if __name__ == '__main__':
     try:
         irc_retrieve()
     finally:
-        print "bye"
+        print("bye")

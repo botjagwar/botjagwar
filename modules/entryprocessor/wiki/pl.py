@@ -1,8 +1,8 @@
 # coding: utf8
 
 import re
-from base import WiktionaryProcessor
-from base import data_file
+from .base import WiktionaryProcessor
+from .base import data_file
 
 class PLWiktionaryProcessor(WiktionaryProcessor):
     def __init__(self, test=False, verbose=False):
@@ -27,15 +27,15 @@ class PLWiktionaryProcessor(WiktionaryProcessor):
     def _get_translation_lines(self, page_c):
         ret = []
         # getting borders of translation section
-        tr_start = page_c.find(u"== polski ({{język polski}}) ==") + len(u"== polski ({{język polski}}) ==")
+        tr_start = page_c.find("== polski ({{język polski}}) ==") + len("== polski ({{język polski}}) ==")
         tr_end = 0
 
-        if page_c.find(u"{{tłumaczenia}}", tr_start) != -1:
-            tr_start = page_c.find(u"{{tłumaczenia}}", tr_start)
+        if page_c.find("{{tłumaczenia}}", tr_start) != -1:
+            tr_start = page_c.find("{{tłumaczenia}}", tr_start)
         else:
             return ret
-        if page_c.find(u"{{źródła}}", tr_start) != -1:
-            tr_end = page_c.find(u"{{źródła}}", tr_start)
+        if page_c.find("{{źródła}}", tr_start) != -1:
+            tr_end = page_c.find("{{źródła}}", tr_start)
         tr_section = page_c[tr_start:tr_end]
         # retrieving translations using regexes
         regex = re.compile('\*(.*)')

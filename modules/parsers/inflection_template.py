@@ -25,13 +25,13 @@ class EnWiktionaryInflectionTemplateParser(object):
 
     def get_elements(self, template_expression):
         orig_template_expression = template_expression
-        for c in u'{}':
-            template_expression = template_expression.replace(c, u'')
-        parts = template_expression.split(u'|')
-        if parts[0] in self.process_function.keys():
+        for c in '{}':
+            template_expression = template_expression.replace(c, '')
+        parts = template_expression.split('|')
+        if parts[0] in list(self.process_function.keys()):
             ret = self.process_function[parts[0]](template_expression)
         else:
-            raise AttributeError(u'No parser defined for "%s": %s' % (parts[0], orig_template_expression))
+            raise AttributeError('No parser defined for "%s": %s' % (parts[0], orig_template_expression))
 
         return ret
 

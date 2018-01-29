@@ -4,7 +4,7 @@ import time
 
 
 def threaded(f):
-    import Queue
+    import queue
     def wrapped_f(q, *args, **kwargs):
         '''this function calls the decorated function and puts the
         result in a queue'''
@@ -16,7 +16,7 @@ def threaded(f):
         wrapped_f in a new thread and returns the thread object with
         the result queue attached'''
 
-        q = Queue.Queue()
+        q = queue.Queue()
 
         t = threading.Thread(target=wrapped_f, args=(q,)+args, kwargs=kwargs)
         t.daemon = False
@@ -37,7 +37,7 @@ def time_this(identifier='function'):
             t1 = datetime.datetime.now()
             dt = t1 - t0
             d = dt.seconds * 1000 + dt.microseconds / 1000
-            print ("%s took %2.2f seconds to execute" % (identifier, d/1000.))
+            print(("%s took %2.2f seconds to execute" % (identifier, d/1000.)))
             return ret
 
         return wrapper
