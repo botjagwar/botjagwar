@@ -12,6 +12,7 @@ prepare:
 python: prepare
 	sudo apt-get install -y python3.6-dev
 	sudo apt-get install -y python3-pip
+	sudo pip3 install sqlalchemy
 
 python-requirements: python
 	LC_ALL="en_US.UTF-8" sudo pip install -r requirements.txt

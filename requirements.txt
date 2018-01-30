@@ -2,3 +2,4 @@ pywikibot >= 2.0
 requests-oauthlib >= 0.8.0
 flask >= 0.11
 requests >= 2.18.4
+aiohttp >= 2.3.9
