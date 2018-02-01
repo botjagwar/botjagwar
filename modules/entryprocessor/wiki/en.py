@@ -31,7 +31,7 @@ class ENWiktionaryProcessor(WiktionaryProcessor):
         self.verbose = verbose
 
         self.code = {}
-        dictfile = file(data_file + 'languagecodes.dct', 'r')
+        dictfile = open(data_file + 'languagecodes.dct', 'r')
         f = dictfile.read()
         try:
             self.code = eval(f)

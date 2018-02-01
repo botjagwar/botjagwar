@@ -1,5 +1,4 @@
 from models import TypeCheckedObject
-from modules.broken_database import Database
 
 class Word(TypeCheckedObject):
     _additional = False

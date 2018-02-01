@@ -8,7 +8,7 @@ class PageMock(pywikibot.Page):
     def __init__(self, *args, **kwargs):
         super(PageMock, self).__init__(*args, **kwargs)
         self.filename = "test_data/test_pages_%s.xml" % self.site.lang
-        self.parsed = minidom.parse(file(self.filename, 'r'))
+        self.parsed = minidom.parse(open(self.filename, 'r'))
         self.pages = self.parsed.getElementsByTagName('page')
 
     def put(self, **kwargs):
@@ -26,7 +26,7 @@ class PageMock(pywikibot.Page):
             if xml_title == self.title():
                 return page.getElementsByTagName('text')[0].childNodes[0].nodeValue
 
-        print('No page %s found in "%s"' % (self.title(), self.filename))
+        print(('No page %s found in "%s"' % (self.title(), self.filename)))
         return ''
 
 

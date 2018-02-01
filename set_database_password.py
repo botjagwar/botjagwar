@@ -42,7 +42,7 @@ class PasswordManager(object):
 
     def read_db_password_file(self):
         try:
-            f = file(self.password_path, 'r')
+            f = open(self.password_path, 'r')
             self.password = f.read()
             self.password = self._decrypt(self.password)
         except IOError as e:
@@ -65,7 +65,7 @@ class PasswordManager(object):
 
     def write_db_password_file(self, new_pass=None):
         """if new_password is None, self.password will be used."""
-        f = file(self.password_path, 'w')
+        f = open(self.password_path, 'w')
         try:
             if new_pass is not None:
                 f.write(self._encrypt(new_pass))

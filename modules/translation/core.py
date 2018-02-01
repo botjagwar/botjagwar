@@ -3,8 +3,6 @@ import re
 import os
 import pywikibot as pwbot
 from modules import entryprocessor
-from modules.broken_database import Database
-from modules.broken_database.word import WordDatabase
 from modules.exceptions import NoWordException
 from modules.output import Output
 from modules.autoformatter import Autoformat
@@ -121,7 +119,7 @@ class Translation(TranslationsHandler):
         self.databases.append(self.word_db)
         self.databases.append(self.sql_db)
         self.output = Output()
-        self.errlogfile = file(self.data_file + 'dikantenyvaovao.exceptions', 'a')
+        self.errlogfile = open(self.data_file + 'dikantenyvaovao.exceptions', 'a')
         self.langblacklist = ['fr', 'en', 'sh', 'ar', 'de', 'zh']
         self.translationslist = []
 

@@ -28,7 +28,7 @@ LIST = [
 ]
 
 
-class TestDikantenyVaovaoProcessWiktionaryPage(TestCase):
+class TestEntryTranslatorProcessWiktionaryPage(TestCase):
     def test_process_wiktionary_page_english(self):
         for pagename in LIST:
             translation = Translation()
@@ -42,7 +42,7 @@ class TestDikantenyVaovaoProcessWiktionaryPage(TestCase):
             translation.process_wiktionary_wiki_page(page)
 
 
-class TestDikantenyVaovaoServices(TestCase):
+class TestEntryTranslatorServices(TestCase):
     def setUp(self):
         self.launch_service()
         sleep(2.5)
@@ -52,7 +52,7 @@ class TestDikantenyVaovaoServices(TestCase):
 
     @threaded
     def launch_service(self):
-        self.p2 = Popen(["python", "dikantenyvaovao.py", "&"])
+        self.p2 = Popen(["python", "entry_translator.py", "&"])
 
     def check_response_status(self, url, data):
         resp = requests.put(url, json=data)

@@ -10,8 +10,6 @@ import traceback
 
 from modules import service_ports
 from modules import entryprocessor
-from modules.broken_database import Database
-from modules.broken_database.word import WordDatabase
 from modules.decorator import threaded
 from modules.translation.core import Translation
 

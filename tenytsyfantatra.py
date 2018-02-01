@@ -2,10 +2,7 @@
 import pywikibot
 import os
 import re, time
-from modules.broken_database import Database
-from modules.broken_database.word import WordDatabase
 from modules.decorator import time_this
-from _mysql_exceptions import DataError, IntegrityError
 
 WORKING_WIKI = pywikibot.getSite('mg', 'wiktionary')
 username = "%s" % pywikibot.config.usernames['wiktionary']['mg']

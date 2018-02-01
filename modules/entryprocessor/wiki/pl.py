@@ -8,7 +8,7 @@ class PLWiktionaryProcessor(WiktionaryProcessor):
     def __init__(self, test=False, verbose=False):
         super(PLWiktionaryProcessor, self).__init__(test=False, verbose=False)
         try:
-            f = file(data_file + 'WiktionaryPL_langdata.dct', 'r').read()
+            f = open(data_file + 'WiktionaryPL_langdata.dct', 'r').read()
             self.langdata = eval(f)
         except IOError:
             self.langdata = {}

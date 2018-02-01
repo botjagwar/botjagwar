@@ -26,7 +26,10 @@ class Word(Base):
 
     def serialise(self):
         word_data = {
+            'id': self.id,
             'word': self.word,
+            'language': self.language,
+            'part_of_speech': self.part_of_speech,
             'definitions': [definition.serialise() for definition in self.definitions],
         }
         print (self.definitions)
