@@ -29,8 +29,8 @@ cronconf: botscripts
 	DB_PASSWD=$(DB_PASSWD) sudo bash -x deploy/configure-cron.sh
 
 test:
-	sudo apt-get install python3-nose
-	nosetests3 --py3where=/usr/bin -s -v .
+	sudo apt-get install python3-nose python3-rednose
+	nosetests3 -v --rednose test/
 
 .PHONY: test
 
