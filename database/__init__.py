@@ -35,6 +35,23 @@ class Word(Base):
         print (self.definitions)
         return word_data
 
+    def set_definition(self, definitions):
+        """
+        Replace the existing definition set by the one given in argument
+        :param definition:
+        :return:
+        """
+        assert isinstance(definitions, list)
+        self.definitions = definitions
+
+    def add_definition(self, definition):
+        if definition not in self.definitions:
+            self.definitions.append(definition)
+
+    def remove_definition(self, definition):
+        if definition not in self.definitions:
+            self.definitions.remove(definition)
+
 
 class Definition(Base):
     __tablename__ = 'definitions'
