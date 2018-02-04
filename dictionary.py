@@ -96,13 +96,6 @@ async def add_entry(request):
     else:
         raise db_http.InvalidJsonReceivedException()
 
-    # Search if word already exists.
-    word = session.query(Word).filter_by(
-        word=data['word'],
-        language=request.match_info['language'],
-        part_of_speech=data['part_of_speech']).all()
-    # return HTTP_WORD_ALREADY_EXISTS if it does
-    # that because we'd not be adding otherwise.
     if word_exists(
             session, data['word'],
             request.match_info['language'],

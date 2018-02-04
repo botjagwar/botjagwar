@@ -56,7 +56,7 @@ class TestDictionaryRestService(TestCase):
                     'definition': 'tarameguni',
                     'definition_language': 'mg'
                 }],
-                'word': 'tsdlfkro',
+                'word': 'tejaos',
                 'part_of_speech': 'ana',
             })
         )
@@ -124,7 +124,19 @@ class TestDictionaryRestService(TestCase):
         )
         self.assertEquals(resp.status_code, 200)
 
-    def test_get_after_put(self):
+    def test_read_after_write_get_after_post(self):
+        self.add_entry()
+
+        resp = requests.get(URL_HEAD + '/entry/ka/tejaos')
+        data = resp.json()
+        self.assertEquals(resp.status_code, 200)
+        for datum in data:
+            self.assertEquals(datum['word'], 'tejaos')
+            self.assertEquals(datum['language'], 'ka')
+            self.assertEquals(datum['part_of_speech'], 'ana')
+            self.assertEquals(len(datum['definitions']), 1)
+
+    def test_read_after_write_get_after_put(self):
         self.test_edit_entry()
 
         resp = requests.get(URL_HEAD + '/entry/jm/tehanu')
