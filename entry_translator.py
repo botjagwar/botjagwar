@@ -4,7 +4,7 @@ import sys
 import time
 import json
 import pywikibot as pwbot
-from flask import Flask, request
+from flask import request
 import traceback
 
 
@@ -15,7 +15,8 @@ from modules.translation.core import Translation
 
 from pywikibot import Site, Page
 
-from sqlite3 import DataError, IntegrityError, ProgrammingError
+from aiohttp import web, ClientSession
+from aiohttp.web import Response
 
 
 # GLOBAL VARS
@@ -23,12 +24,9 @@ verbose = False
 databases = []
 data_file = os.getcwd() + '/conf/dikantenyvaovao/'
 userdata_file = os.getcwd() + '/user_data/dikantenyvaovao/'
-app = Flask(__name__)
-translations = Translation(data_file)
-languages = {
-    'en': 'anglisy',
-    'fr': 'frantsay'
-}
+translations = Translation()
+routes = web.RouteTableDef()
+
 
 # Throttle Config
 def set_throttle(i):
@@ -63,23 +61,6 @@ def _update_statistics(rc_bot):
         rc_bot.chronometer = time.time()
 
 
-def _get_word_id(word, lang_code):
-    """
-    Gets the word ID
-    :param word: word
-    :param language: ISO language code of the language the word belongs to
-    :return: the word ID
-    """
-    word_db = Database(table="%s" % languages[lang_code])
-    results = word_db.read({
-        languages[lang_code] : word
-    }, select="%s_wID" % lang_code)
-    if results:
-        return results
-    else:
-        return ()
-
-
 @threaded
 def put_deletion_notice(page):
     if not page.exists() or page.isRedirectPage():
@@ -90,7 +71,7 @@ def put_deletion_notice(page):
         page.put(page_c, "+filazana")
 
 
-@app.route("/wiktionary_page/<lang>", methods=['POST'])
+@routes.post("/wiktionary_page/{lang}")
 def handle_wiktionary_page(lang):
     """
     Handle a Wiktionary page, attempts to translate the wiktionary page's content and
@@ -113,15 +94,15 @@ def handle_wiktionary_page(lang):
         traceback.print_exc()
         data['traceback'] = traceback.format_exc()
         data['message'] = e.message
-        response = app.response_class(response=json.dumps(data), status=500, mimetype='application/json')
+        response = Response(text=json.dumps(data), status=500)
     else:
-        response = app.response_class(response=json.dumps(data), status=200, mimetype='application/json')
+        response = Response(text=json.dumps(data), status=200)
 
     return response
 
 
-@app.route("/wiktionary_page/<language>/<pagename>", methods=['GET'])
-def get_wiktionary_processed_page(language, pagename):
+@routes.get("/wiktionary_page/{language}/{pagename}", methods=['GET'])
+async def get_wiktionary_processed_page(language, pagename):
     wiktionary_processor_class = entryprocessor.WiktionaryProcessorFactory.create(language)
     wiktionary_processor = wiktionary_processor_class()
     ret = []
@@ -150,10 +131,10 @@ def get_wiktionary_processed_page(language, pagename):
             section['translations'] = translation_list
         ret.append(section)
 
-    return app.response_class(response=json.dumps(ret), status=200, mimetype='application/json')
+    return Response(text=json.dumps(ret), status=200)
 
 
-@app.route("/translate/<lang>", methods=["PUT"])
+@routes.put("/translate/{lang}")
 def handle_translate_word(lang):
     """
     POST Service to translate a given word to a native language
@@ -166,6 +147,7 @@ def handle_translate_word(lang):
     translation = data["translation"]
     part_of_speech = data["POS"]
     dry_run = data["dryrun"]
+
 
     translation_db = WordDatabase()
     translation_write_db = Database(table="%s_malagasy" % languages[lang])
@@ -187,38 +169,33 @@ def handle_translate_word(lang):
                 }
                 added.append(sql_data)
                 translation_write_db.insert(sql_data, dry_run=dry_run)
-        except (DataError, IntegrityError, ProgrammingError) as e:
-            response = app.response_class(
-                response=json.dumps({'message': e.message}),
-                status=500, mimetype='application/json')
+        except Exception as e:
+            response = Response(
+                text=json.dumps({'message': e.message}),
+                status=500)
         else:
             if not added:
-                response = app.response_class(
-                    response=json.dumps({'message': 'No addition performed'}),
-                    status=324, mimetype='application/json')
+                response = Response(
+                    text=json.dumps({'message': 'No addition performed'}),
+                    status=324)
             else:
-                response = app.response_class(
-                    response=json.dumps({'added': added}),
-                    status=200, mimetype='application/json')
+                response = Response(
+                    text=json.dumps({'added': added}),
+                    status=200)
 
     return response
 
 
-@app.route('/dictionary/<origin>/<target>', methods=['GET'])
+@routes.get('/dictionary/{origin}/{target}')
 def handle_get_specialised_dictionary(origin, target):
-    translations_db = WordDatabase()
-    result = translations_db.DB.raw_query(
-        "select * from data_botjagwar.%s_%s"
-        % (db.escape_string(origin), db.escape_string(target)))
-    return app.response_class(
-        response=json.dumps(result),
-        status=200, mimetype='application/json')
-
+    pass
 
 args = sys.argv
 if __name__ == '__main__':
     try:
         set_throttle(1)
-        app.run(host="0.0.0.0", port=service_ports.get_service_port('dikantenyvaovao'))
+        app = web.Application()
+        app.router.add_routes(routes)
+        web.run_app(app, port=8000)
     finally:
         pwbot.stopme()

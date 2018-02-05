@@ -1,5 +1,4 @@
 # coding: utf8
-import re
 import os
 import pywikibot as pwbot
 from modules import entryprocessor
@@ -11,126 +10,18 @@ from models.word import Entry
 default_data_file = os.getcwd() + '/conf/dikantenyvaovao/'
 
 
-class TranslationsHandler(object):
-    def __init__(self):
-        """Mitantana ny dikantenin'ny teny hafa amin'ny teny malagasy"""
-        self.content = ""
-        self.loaded_flag = False
-        self.databases = []
-
-    def _add(self, langcode, translation):
-        """ Tao fanampiana dikanteny. Mamerina ny votoatim-pejy misy ny dikanteny."""
-        try:
-            langcode = str(langcode)
-        except UnicodeError:
-            return self.content
-
-        try:
-            translation = str(translation, 'utf8')
-        except UnicodeDecodeError:
-            translation = str(translation, 'latin1')
-        except TypeError:
-            pass
-
-        if self.content.find("{{-dika-}}") != -1:
-            if self.content.find("{{%s}} :" % langcode) != -1:
-                if self.content.find("{{dikan-teny|%s|%s}}" % (translation, langcode)) != -1:
-                    self.content = re.sub(r"[ ]?\{\{dikan\-teny\|%s\|%s\}\}[,]?" % (translation, langcode), "",
-                                          self.content)
-                    self.content = self.content.replace("# {{%s}} :" % langcode,
-                                                        "# {{%s}} : {{dikan-teny|%s|%s}}," % (
-                                                            langcode, translation, langcode))
-                else:
-                    self.content = self.content.replace("# {{%s}} :" % langcode,
-                                                        "# {{%s}} : {{dikan-teny|%s|%s}}," % (
-                                                            langcode, translation, langcode))
-            else:
-                self.content = self.content.replace("{{-dika-}}",
-                                                    "{{-dika-}}\n# {{%s}} : {{dikan-teny|%s|%s}}" % (
-                                                        langcode, translation, langcode))
-        return self.content
-
-    def add(self, translations, sort=True):
-        """ Afaka mampiditra ny dikanteny eo ambany"""
-        assert self.loaded_flag is True
-
-        translations = list(set(translations))
-        if sort:
-            translations.sort()
-        for foreign_translations_tuple in translations[::-1]:
-            self.content = self._add(foreign_translations_tuple[0], foreign_translations_tuple[1])
-
-        self.loaded_flag = False
-        return self.content
-
-    def delete(self):
-        """ Mamerina ny votoatim-pejy tsy misy ny dikanteny."""
-        # c1 = self.content.find("{{-dika-}}")
-        assert self.loaded_flag is True
-        self.content = re.sub(r"# \{\{[a-z]+\}\} : (.*)[\n]?", "", self.content)
-
-        self.loaded_flag = False
-        return self.content  # tuple (entry, lang)
-
-    def get(self):
-        """ Maka ny dikanteny rehetran'ny votoatim-pejy."""
-        assert self.loaded_flag is True
-        translations = re.findall(r"\{\{dikan\-teny|(.*)|([a-z]+)\}\}", self.content)
-        translations.sort()
-
-        self.loaded_flag = False
-        return translations
-
-    def setcontent(self, content):
-        """Tsy maintsy antsoina ity lefa ity alohan'ny miantso ny lefa hafa
-           (manipy AssertionError ireo lefa ireo raha tsy manao izany)"""
-        self.content = content
-        self.loaded_flag = True
-
-    def sort(self):
-        """Fampirimana ny dikanteny azo amin'ny alalan'ny REGEX araka ny laharan'ny Abidy"""
-        assert self.loaded_flag is True
-
-        if self.content.find('{{}} :') == -1: return self.content
-        trads = re.findall("# (.*) : \[\[(.*)\]\]", self.content)
-        trads.sort()
-        trstr = '{{}} :'
-        tran = self.content.replace('{{}} :', '')
-        if len(trads) > 200:
-            return tran
-        for i in trads:
-            trstr = trstr.replace("{{}} :", "# %s : [[%s]]\n{{}} :" % i)
-            tran = self.content.replace('\n\n', '\n')
-        trstr = trstr.strip('\n')
-        trstr = re.sub("(\\n)+", "\n", trstr)
-        tran = self.content.replace("{{-dika-}}", "{{-dika-}}\n%s" % trstr)
-
-        self.loaded_flag = False
-        return self.content.strip('\n')
-
-
-class Translation(TranslationsHandler):
+class Translation:
     def __init__(self, data_file=False):
         """Mandika teny ary pejy @ teny malagasy"""
         super(self.__class__, self).__init__()
         self.data_file = data_file or default_data_file
-        self.sql_db = Database()
-        self.word_db = WordDatabase()
-        self.databases.append(self.word_db)
-        self.databases.append(self.sql_db)
         self.output = Output()
-        self.errlogfile = open(self.data_file + 'dikantenyvaovao.exceptions', 'a')
-        self.langblacklist = ['fr', 'en', 'sh', 'ar', 'de', 'zh']
-        self.translationslist = []
+        self.language_blacklist = ['fr', 'en', 'sh', 'ar', 'de', 'zh']
 
     def _save_translation_from_bridge_language(self, infos):
         summary = "Dikan-teny avy amin'ny dikan-teny avy amin'i %s.wiktionary" % infos.origin_wiktionary_edition
         wikipage = self.output.wikipage(infos)
-        try:
-            mg_page = pwbot.Page(pwbot.Site('mg', 'wiktionary'), infos.entry)
-        except UnicodeDecodeError:
-            mg_page = pwbot.Page(pwbot.Site('mg', 'wiktionary'), infos.entry.decode('utf8'))
-
+        mg_page = pwbot.Page(pwbot.Site('mg', 'wiktionary'), infos.entry)
         try:
             if mg_page.exists():
                 pagecontent = mg_page.get()
@@ -171,30 +62,6 @@ class Translation(TranslationsHandler):
         mg_page.put_async(wikipage, summary)
         self.output.db(infos)
 
-    def exists(self, lang, ent):
-        ent = ent.decode('utf8')
-        lang = lang.decode('latin1')
-
-        if self.translationslist.count((lang, ent)) >= 1:
-            return True
-        else:
-            # pwbot.output(u"mitady an'i teny \"%s\" ao amin'ny banky angona..."%ent)
-            if self.word_db.exists(ent, lang):
-                self.translationslist.append((lang, ent))
-                return True
-            return False
-
-
-    def get_alltranslations(self, language='en'):
-        alldata = self.sql_db.read({'fiteny': language})
-        ret = {}
-        for data in alldata:
-            if data[1] in ret:
-                ret[data[1]] = str(data[3], 'latin1')
-            else:
-                ret[data[1]] = str(data[3], 'latin1')
-        return ret
-
     def process_entry_in_native_language(self, wiki_page, language, unknowns):
         wiktionary_processor_class = entryprocessor.WiktionaryProcessorFactory.create(language)
         wiktionary_processor = wiktionary_processor_class()
@@ -206,7 +73,7 @@ class Translation(TranslationsHandler):
         translations_in_mg = {}  # dictionary {string : list of translation tuple (see below)}
         for entry, pos, entry_language in translations:
             # translation = tuple(codelangue, entree)
-            if entry_language in self.langblacklist:  # check in language blacklist
+            if entry_language in self.language_blacklist:  # check in language blacklist
                 continue
             title = wiki_page.title()
             try:
@@ -235,7 +102,7 @@ class Translation(TranslationsHandler):
 
     def process_entry_in_foreign_language(
             self, wiki_page, word, language_code, language, pos, definition, translations_in_mg, unknowns):
-        if language_code in self.langblacklist:
+        if language_code in self.language_blacklist:
             return 0
 
         if self.word_db.exists(word, language_code):
@@ -306,31 +173,6 @@ class Translation(TranslationsHandler):
             raise NoWordException()
         else:
             return tr
-
-    def update_malagasy_word(self, translations_in_mg):
-        # Malagasy language pages
-        def update_malagasy_word(word, translations):
-            mg_entry_page = pwbot.Page(pwbot.Site('mg', 'wiktionary'), word)
-            try:
-                self.setcontent(mg_entry_page.get())
-                content = self.add(translations)
-                mg_entry_page.put_async(content, "+dikanteny")
-            except pwbot.IsRedirectPage:
-                redirtarget = mg_entry_page.getRedirectTarget()
-                update_malagasy_word(redirtarget.title(), translations)
-
-            except pwbot.NoPage:
-                return
-            except Exception as e:
-                return
-
-        for translation_in_mg in translations_in_mg:
-            translation_in_mg = translation_in_mg.strip()
-            for char in '[]':
-                translation_in_mg = translation_in_mg.replace(char, '')
-
-            translation_in_mg = str(translation_in_mg)
-            update_malagasy_word(translation_in_mg, translations_in_mg[translation_in_mg])
 
 
 def _append_in(infos, translations_in_mg):  # TRANSLATION HANDLING SUBFUNCTION
