@@ -38,6 +38,14 @@ def word_exists(session, word, language, part_of_speech):
         return True
 
 
+def get_word(session, word, language, part_of_speech):
+    word = session.query(Word).filter_by(
+        word=word,
+        language=language,
+        part_of_speech=part_of_speech).all()
+    return word[0]
+
+
 def create_definition_if_not_exists(session, definition, definition_language):
     definitions = session.query(Definition).filter_by(
         definition=definition,
@@ -52,6 +60,7 @@ def create_definition_if_not_exists(session, definition, definition_language):
     else:
         definition = definitions[0]
     return definition
+
 
 @routes.get('/entry/{language}/{word}')
 async def get_entry(request):
@@ -73,7 +82,7 @@ async def get_entry(request):
         return Response(text=json.dumps(jsons), status=200)
 
 
-@routes.post('/entry/{language}/add')
+@routes.post('/entry/{language}/create')
 async def add_entry(request):
     """
     Adds an antry to the dictionary.
@@ -160,24 +169,7 @@ async def edit_entry(request):
     return Response(status=200, text=json.dumps(word.serialise()))
 
 
-@routes.put('/entry/{language}/{word}/append')
-async def append_definition(request):
-    """
-    Adds a new definition to the entry.
-    :param request:
-    :return:
-        HTTP 200 with the new entry JSON.
-    """
-    data = await request.json()
-    session = SessionClass()
-    # ... code ...
-    session.commit()
-    session.flush()
-
-    return Response(text='totoo', status=501)
-
-
-@routes.delete('/entry/{language}/{word}/delete')
+@routes.delete('/entry/{word_id}/delete')
 async def delete_entry(request):
     """
     Delete the entry from the database. The definitions however
@@ -186,22 +178,58 @@ async def delete_entry(request):
     :param request:
     :return:
     """
-    # TODO
-    return Response(text='delete matching definition', status=501)
+    # Search if word already exists.
+    session = SessionClass()
+    session.query(Word).filter(
+        Word.id == request.match_info['word_id']).delete()
+
+    session.commit()
+    session.flush()
+    return Response(status=204)
 
 
-@routes.delete('/entry/{language}/{word}/delete')
+@routes.get('/definition/{definition_id}')
+async def get_definition(request):
+    session = SessionClass()
+    definitions = [m.serialise() for m in session.query(Definition).filter(
+        Definition.id == request.match_info['definition_id']).all()]
+    if definitions:
+        return Response(
+            text=json.dumps(definitions),
+            status=200)
+    else:
+        return Response(status=404)
+
+
+@routes.post('/definition/search')
+async def search_definition(request):
+    session = SessionClass()
+    jsondata = await request.json()
+    data = json.loads(jsondata)
+    definitions = [m.serialise() for m in session.query(
+        Definition).filter(Definition.definition.like(data['definition'])).all()]
+
+    return Response(
+        text=json.dumps(definitions),
+        status=200)
+
+
+@routes.delete('/definition/{definition_id}/delete')
 async def delete_definition(request):
     """
     Delete the definition.
     :param request:
     :return:
         HTTP 204 if the definition has been successfully deleted
-        HTTP 404 if definition is not foud
     """
-    # TODO
-    return Response(text='delete matching definition', status=501)
+    # Search if definition already exists.
+    session = SessionClass()
+    session.query(Definition).filter(
+        Definition.id == request.match_info['definition_id']).delete()
 
+    session.commit()
+    session.flush()
+    return Response(status=204)
 
 if __name__ == '__main__':
     app = web.Application()

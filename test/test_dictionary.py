@@ -48,9 +48,9 @@ class TestDictionaryRestService(TestCase):
         self.p2.kill()
         os.system('rm %s' % DB_PATH)
 
-    def add_entry(self):
+    def create_entry(self):
         resp = requests.post(
-            URL_HEAD + '/entry/ka/add',
+            URL_HEAD + '/entry/ka/create',
             json=json.dumps({
                 'definitions': [{
                     'definition': 'tarameguni',
@@ -77,12 +77,12 @@ class TestDictionaryRestService(TestCase):
         resp = requests.get(URL_HEAD + '/entry/jm/teklkhanu')
         self.assertEquals(resp.status_code, 404)
 
-    def test_add_entry(self):
-        self.add_entry()
+    def test_create_entry(self):
+        self.create_entry()
 
-    def test_add_existing_entry(self):
+    def test_create_existing_entry(self):
         resp = requests.post(
-            URL_HEAD + '/entry/jm/add',
+            URL_HEAD + '/entry/jm/create',
             json=json.dumps({
                 'definitions': [{
                     'definition': 'nanganasla',
@@ -96,9 +96,9 @@ class TestDictionaryRestService(TestCase):
             resp.status_code,
             db_http.WordAlreadyExistsException.status_code)
 
-    def test_add_entry_invalid_json(self):
+    def test_create_entry_invalid_json(self):
         resp = requests.post(
-            URL_HEAD + '/entry/jm/add',
+            URL_HEAD + '/entry/jm/create',
             json=json.dumps({
                 'word': 'tehanu',
                 'part_of_speech': 'ana',
@@ -125,7 +125,7 @@ class TestDictionaryRestService(TestCase):
         self.assertEquals(resp.status_code, 200)
 
     def test_read_after_write_get_after_post(self):
-        self.add_entry()
+        self.create_entry()
 
         resp = requests.get(URL_HEAD + '/entry/ka/tejaos')
         data = resp.json()
@@ -148,11 +148,54 @@ class TestDictionaryRestService(TestCase):
             self.assertEquals(datum['part_of_speech'], 'aojs')
             self.assertEquals(len(datum['definitions']), 1)
 
-    def _test_append_definition(self):
-        # TODO
-        resp = requests.put(URL_HEAD + '/entry/jm/tehanu/append' % ())
+    def test_delete_entry(self):
+        resp = requests.get(URL_HEAD + '/entry/jm/tehanu')
+        self.assertEquals(resp.status_code, 200)
 
-    def _test_delete_definition(self):
-        # TODO
-        resp = requests.delete(URL_HEAD + '/entry/jm/tehanu' % ())
+        data = resp.json()[0]
+        del_url = URL_HEAD + '/entry/%d/delete' % data['id']
+        resp = requests.delete(del_url)
+        self.assertEquals(resp.status_code, 204)
 
+    def test_read_after_write_get_after_delete(self):
+        self.test_delete_entry()
+        resp = requests.get(URL_HEAD + '/entry/jm/tehanu')
+        self.assertEquals(resp.status_code, 404)
+
+    def test_get_definition(self):
+        resp = requests.get(URL_HEAD + '/definition/1')
+        self.assertEquals(resp.status_code, 200)
+
+    def test_search_definition(self):
+        search_params = {
+            'definition': 'rikizimai'
+        }
+        resp = requests.post(
+            URL_HEAD + '/definition/search',
+            json=json.dumps(search_params)
+        )
+        j = resp.json()
+        self.assertEquals(len(j), 1)
+        self.assertEquals(resp.status_code, 200)
+
+    def test_search_definition_wildcard(self):
+        search_params = {
+            'definition': 'rik%'
+        }
+        resp = requests.post(
+            URL_HEAD + '/definition/search',
+            json=json.dumps(search_params)
+        )
+        j = resp.json()
+        print(j)
+        self.assertEquals(len(j), 1)
+        self.assertEquals(resp.status_code, 200)
+
+    def test_delete_definition(self):
+        resp = requests.get(URL_HEAD + '/entry/jm/tehanu')
+        self.assertEquals(resp.status_code, 200)
+
+        data = resp.json()[0]
+        del_url = URL_HEAD + '/entry/%d/delete' % data['id']
+        resp = requests.delete(del_url)
+        self.assertEquals(resp.status_code, 204)

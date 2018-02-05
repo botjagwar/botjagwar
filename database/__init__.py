@@ -32,7 +32,6 @@ class Word(Base):
             'part_of_speech': self.part_of_speech,
             'definitions': [definition.serialise() for definition in self.definitions],
         }
-        print (self.definitions)
         return word_data
 
     def set_definition(self, definitions):
@@ -65,6 +64,7 @@ class Definition(Base):
 
     def serialise(self):
         definition_data = {
+            'id': self.id,
             'definition': self.definition,
             'language': self.definition_language
         }
