@@ -199,3 +199,15 @@ class TestDictionaryRestService(TestCase):
         del_url = URL_HEAD + '/entry/%d/delete' % data['id']
         resp = requests.delete(del_url)
         self.assertEquals(resp.status_code, 204)
+
+    def test_get_translation(self):
+        resp = requests.get(URL_HEAD + '/translations/jm/de/tehanu')
+        j = resp.json()
+        self.assertEquals(len(j), 1)
+        self.assertEquals(resp.status_code, 200)
+
+    def test_get_all_translations(self):
+        resp = requests.get(URL_HEAD + '/translations/jm/tehanu')
+        j = resp.json()
+        self.assertEquals(len(j), 1)
+        self.assertEquals(resp.status_code, 200)

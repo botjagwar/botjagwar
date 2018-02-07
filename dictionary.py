@@ -201,6 +201,43 @@ async def get_definition(request):
         return Response(status=404)
 
 
+@routes.get('/translations/{origin}/{target}/{word}')
+async def get_translation(request):
+    session = SessionClass()
+    origin, target = request.match_info['origin'], request.match_info['target']
+
+    words = [w.serialise() for w in session.query(
+        Word).filter(Word.language == origin).all()]
+    translations = []
+    for word in words:
+        definitions = word['definitions']
+        for definition in definitions:
+            if definition['language'] == target:
+                translations.append(definition)
+
+    return Response(
+        text=json.dumps(translations),
+        status=200)
+
+
+@routes.get('/translations/{origin}/{word}')
+async def get_translation(request):
+    session = SessionClass()
+    origin = request.match_info['origin']
+
+    words = [w.serialise() for w in session.query(
+        Word).filter(Word.language == origin).all()]
+    translations = []
+    for word in words:
+        definitions = word['definitions']
+        for definition in definitions:
+            translations.append(definition)
+
+    return Response(
+        text=json.dumps(translations),
+        status=200)
+
+
 @routes.post('/definition/search')
 async def search_definition(request):
     session = SessionClass()

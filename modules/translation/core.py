@@ -1,6 +1,10 @@
 # coding: utf8
 import os
 import pywikibot as pwbot
+
+from aiohttp import ClientSession
+import json
+
 from modules import entryprocessor
 from modules.exceptions import NoWordException
 from modules.output import Output
@@ -8,6 +12,7 @@ from modules.autoformatter import Autoformat
 from models.word import Entry
 
 default_data_file = os.getcwd() + '/conf/dikantenyvaovao/'
+URL_HEAD = 'http://localhost:8001'
 
 
 class Translation:
@@ -17,6 +22,7 @@ class Translation:
         self.data_file = data_file or default_data_file
         self.output = Output()
         self.language_blacklist = ['fr', 'en', 'sh', 'ar', 'de', 'zh']
+        self.client_session = ClientSession()
 
     def _save_translation_from_bridge_language(self, infos):
         summary = "Dikan-teny avy amin'ny dikan-teny avy amin'i %s.wiktionary" % infos.origin_wiktionary_edition
@@ -90,7 +96,10 @@ class Translation:
                 language=entry_language,
                 origin_wiktionary_edition=language,
                 origin_wiktionary_page_name=title)
-            if self.word_db.exists(infos.entry, infos.language):
+
+            resp = self.client_session.get(URL_HEAD + '/word/%s/%s' % (infos.language, infos.entry))
+            exists = json.loads(resp.text)
+            if len(exists) > 0:
                 continue
 
             _generate_redirections(infos)
@@ -105,7 +114,9 @@ class Translation:
         if language_code in self.language_blacklist:
             return 0
 
-        if self.word_db.exists(word, language_code):
+        resp = self.client_session.get(URL_HEAD + '/word/%s/%s' % (language, word))
+        exists = json.loads(resp.text)
+        if len(exists) > 0:
             return 0
 
         title = wiki_page.title()
@@ -168,6 +179,11 @@ class Translation:
         return unknowns, ret
 
     def translate_word(self, word, language):
+        resp = self.client_session.get(
+            URL_HEAD + '/word/%s/%s' % (language, word))
+
+        exists = json.loads(resp.text)
+
         tr = self.word_db.translate(word, language)
         if not tr:
             raise NoWordException()

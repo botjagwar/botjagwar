@@ -34,6 +34,15 @@ class Word(Base):
         }
         return word_data
 
+    def serialise_without_definition(self):
+        word_data = {
+            'id': self.id,
+            'word': self.word,
+            'language': self.language,
+            'part_of_speech': self.part_of_speech,
+        }
+        return word_data
+
     def set_definition(self, definitions):
         """
         Replace the existing definition set by the one given in argument
@@ -67,5 +76,14 @@ class Definition(Base):
             'id': self.id,
             'definition': self.definition,
             'language': self.definition_language
+        }
+        return definition_data
+
+    def serialise_with_words(self):
+        definition_data = {
+            'id': self.id,
+            'definition': self.definition,
+            'language': self.definition_language,
+            'words': [w.serialise_without_definition() for w in self.words]
         }
         return definition_data
