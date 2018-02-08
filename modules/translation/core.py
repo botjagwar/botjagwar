@@ -2,8 +2,11 @@
 import os
 import pywikibot as pwbot
 
+import asyncio
 from aiohttp import ClientSession
 import json
+
+from database.http import WordDoesNotExistException
 
 from modules import entryprocessor
 from modules.exceptions import NoWordException
@@ -23,23 +26,24 @@ class Translation:
         self.output = Output()
         self.language_blacklist = ['fr', 'en', 'sh', 'ar', 'de', 'zh']
         self.client_session = ClientSession()
+        self.loop = asyncio.get_event_loop()
 
-    def _save_translation_from_bridge_language(self, infos):
+    async def _save_translation_from_bridge_language(self, infos):
         summary = "Dikan-teny avy amin'ny dikan-teny avy amin'i %s.wiktionary" % infos.origin_wiktionary_edition
         wikipage = self.output.wikipage(infos)
         mg_page = pwbot.Page(pwbot.Site('mg', 'wiktionary'), infos.entry)
         try:
             if mg_page.exists():
-                pagecontent = mg_page.get()
-                if pagecontent.find('{{=%s=}}' % infos.language) != -1:
-                    self.output.db(infos)
+                page_content = mg_page.get()
+                if page_content.find('{{=%s=}}' % infos.language) != -1:
+                    await self.output.db(infos)
                     return
                 else:
-                    wikipage += pagecontent
+                    wikipage += page_content
                     summary = "+" + summary
         except pwbot.exceptions.IsRedirectPage:
             infos.entry = mg_page.getRedirectTarget().title()
-            self._save_translation_from_bridge_language(infos)
+            await self._save_translation_from_bridge_language(infos)
             return
 
         except pwbot.exceptions.InvalidTitle:
@@ -49,26 +53,26 @@ class Translation:
             return
 
         mg_page.put_async(wikipage, summary)
-        self.output.db(infos)
+        await self.output.db(infos)
 
-    def _save_translation_from_page(self, infos):
+    async def _save_translation_from_page(self, infos):
         summary = "Dikan-teny avy amin'ny pejy avy amin'i %s.wiktionary" % infos.language
         wikipage = self.output.wikipage(infos)
         mg_page = pwbot.Page(pwbot.Site('mg', 'wiktionary'), infos.entry)
         if mg_page.exists():
-            pagecontent = mg_page.get()
-            if pagecontent.find('{{=%s=}}' % infos.language) != -1:
-                self.output.db(infos)
+            page_content = mg_page.get()
+            if page_content.find('{{=%s=}}' % infos.language) != -1:
+                await self.output.db(infos)
                 return
             else:
-                wikipage += pagecontent
+                wikipage += page_content
                 wikipage, edit_summary = Autoformat(wikipage).wikitext()
                 summary = "+" + summary + ", %s" % edit_summary
 
         mg_page.put_async(wikipage, summary)
-        self.output.db(infos)
+        await self.output.db(infos)
 
-    def process_entry_in_native_language(self, wiki_page, language, unknowns):
+    async def process_entry_in_native_language(self, wiki_page, language, unknowns):
         wiktionary_processor_class = entryprocessor.WiktionaryProcessorFactory.create(language)
         wiktionary_processor = wiktionary_processor_class()
         ret = 0
@@ -83,7 +87,7 @@ class Translation:
                 continue
             title = wiki_page.title()
             try:
-                mg_translation = self.translate_word(title, language)
+                mg_translation = await self.translate_word(title, language)
             except NoWordException:
                 if title not in unknowns:
                     unknowns.append((title, language))
@@ -97,31 +101,29 @@ class Translation:
                 origin_wiktionary_edition=language,
                 origin_wiktionary_page_name=title)
 
-            resp = self.client_session.get(URL_HEAD + '/word/%s/%s' % (infos.language, infos.entry))
-            exists = json.loads(resp.text)
-            if len(exists) > 0:
+            resp = await self.client_session.get(URL_HEAD + '/word/%s/%s' % (infos.language, infos.entry))
+            if resp.status != WordDoesNotExistException.status_code:
                 continue
 
             _generate_redirections(infos)
             _append_in(infos, translations_in_mg)
-            self._save_translation_from_bridge_language(infos)
+            await self._save_translation_from_bridge_language(infos)
             ret += 1
 
         return ret
 
-    def process_entry_in_foreign_language(
+    async def process_entry_in_foreign_language(
             self, wiki_page, word, language_code, language, pos, definition, translations_in_mg, unknowns):
         if language_code in self.language_blacklist:
             return 0
 
-        resp = self.client_session.get(URL_HEAD + '/word/%s/%s' % (language, word))
-        exists = json.loads(resp.text)
-        if len(exists) > 0:
+        resp = await self.client_session.get(URL_HEAD + '/word/%s/%s' % (language, word))
+        if resp.status != WordDoesNotExistException.status_code:
             return 0
 
         title = wiki_page.title()
         try:
-            mg_translation = self.translate_word(definition, language)
+            mg_translation = await self.translate_word(definition, language)
         except NoWordException:
             if title not in unknowns:
                 unknowns.append((definition, language))
@@ -137,12 +139,12 @@ class Translation:
 
         _generate_redirections(infos)
         _append_in(infos, translations_in_mg)
-        self._save_translation_from_bridge_language(infos)
+        await self._save_translation_from_bridge_language(infos)
         self._save_translation_from_page(infos)
 
         return 1
 
-    def process_wiktionary_wiki_page(self, wiki_page):
+    async def process_wiktionary_wiki_page(self, wiki_page):
         language = wiki_page.site.language()
         unknowns = []
         # fanampiana : wiki_page:wiki_page
@@ -169,26 +171,35 @@ class Translation:
                 continue
 
             if language_code == language:  # if entry in the content language
-                ret += self.process_entry_in_native_language(wiki_page, language, unknowns)
+                ret += await self.process_entry_in_native_language(
+                        wiki_page, language, unknowns)
             else:
-                ret += self.process_entry_in_foreign_language(
-                    wiki_page, word, language_code, language, pos, definition, translations_in_mg, unknowns)
+                ret += await self.process_entry_in_foreign_language(
+                        wiki_page, word, language_code,
+                        language, pos, definition,
+                        translations_in_mg, unknowns)
 
         # Malagasy language pages
         # self.update_malagasy_word(translations_in_mg)
         return unknowns, ret
 
-    def translate_word(self, word, language):
-        resp = self.client_session.get(
-            URL_HEAD + '/word/%s/%s' % (language, word))
-
-        exists = json.loads(resp.text)
-
-        tr = self.word_db.translate(word, language)
-        if not tr:
+    async def translate_word(self, word, language):
+        url = URL_HEAD + '/translations/%s/mg/%s' % (language, word)
+        print (url)
+        resp = await self.client_session.get(url)
+        if resp.status == WordDoesNotExistException.status_code:
+            raise NoWordException()
+        jtext = await resp.text()
+        translations_json = json.loads(jtext)
+        translations = []
+        if len(translations_json) < 1:
             raise NoWordException()
         else:
-            return tr
+            for t in translations_json:
+                translations.append(t['definition'])
+
+            translations_string = ', '.join(translations)
+            return translations_string
 
 
 def _append_in(infos, translations_in_mg):  # TRANSLATION HANDLING SUBFUNCTION

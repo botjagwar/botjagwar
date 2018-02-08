@@ -29,6 +29,17 @@ LIST = [
 
 
 class TestEntryTranslatorProcessWiktionaryPage(TestCase):
+    def setUp(self):
+        self.launch_service()
+        sleep(2.5)
+
+    def tearDown(self):
+        self.p2.kill()
+
+    @threaded
+    def launch_service(self):
+        self.p2 = Popen(["python3.6", "dictionary.py", "--db-file", '/tmp/test.db'])
+
     def test_process_wiktionary_page_english(self):
         for pagename in LIST:
             translation = Translation()
@@ -52,7 +63,7 @@ class TestEntryTranslatorServices(TestCase):
 
     @threaded
     def launch_service(self):
-        self.p2 = Popen(["python", "entry_translator.py", "&"])
+        self.p2 = Popen(["python3.6", "entry_translator.py", "&"])
 
     def check_response_status(self, url, data):
         resp = requests.put(url, json=data)

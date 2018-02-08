@@ -26,6 +26,7 @@ class Word(Base):
 
     def serialise(self):
         word_data = {
+            'type': self.__class__.__name__,
             'id': self.id,
             'word': self.word,
             'language': self.language,
@@ -36,6 +37,7 @@ class Word(Base):
 
     def serialise_without_definition(self):
         word_data = {
+            'type': self.__class__.__name__,
             'id': self.id,
             'word': self.word,
             'language': self.language,
@@ -73,6 +75,7 @@ class Definition(Base):
 
     def serialise(self):
         definition_data = {
+            'type': self.__class__.__name__,
             'id': self.id,
             'definition': self.definition,
             'language': self.definition_language
@@ -81,6 +84,7 @@ class Definition(Base):
 
     def serialise_with_words(self):
         definition_data = {
+            'type': self.__class__.__name__,
             'id': self.id,
             'definition': self.definition,
             'language': self.definition_language,

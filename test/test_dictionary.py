@@ -41,26 +41,27 @@ class TestDictionaryRestService(TestCase):
     @threaded
     def launch_service(self):
         self.p2 = Popen(["python3.6", "dictionary.py",
-                         '--db-file', '/tmp/test.db',
+                         '--db-file', DB_PATH,
                          ])
 
     def tearDown(self):
         self.p2.kill()
         os.system('rm %s' % DB_PATH)
 
-    def create_entry(self):
+    def create_entry(self, word, language, pos, definition, def_language):
         resp = requests.post(
-            URL_HEAD + '/entry/ka/create',
+            URL_HEAD + '/entry/%s/create' % language,
             json=json.dumps({
                 'definitions': [{
-                    'definition': 'tarameguni',
-                    'definition_language': 'mg'
+                    'definition': definition,
+                    'definition_language': def_language
                 }],
-                'word': 'tejaos',
-                'part_of_speech': 'ana',
+                'word': word,
+                'part_of_speech': pos,
             })
         )
         self.assertEquals(resp.status_code, 200)
+        j = resp.json()
         # check in database if definition has been added
 
     def test_get_entry(self):
@@ -78,7 +79,7 @@ class TestDictionaryRestService(TestCase):
         self.assertEquals(resp.status_code, 404)
 
     def test_create_entry(self):
-        self.create_entry()
+        self.create_entry('nakaina', 'jm', 'ana', 'tarameguni', 'de')
 
     def test_create_existing_entry(self):
         resp = requests.post(
@@ -125,13 +126,13 @@ class TestDictionaryRestService(TestCase):
         self.assertEquals(resp.status_code, 200)
 
     def test_read_after_write_get_after_post(self):
-        self.create_entry()
+        self.create_entry('nanaika', 'ka', 'ana', 'tarameguni', 'de')
 
-        resp = requests.get(URL_HEAD + '/entry/ka/tejaos')
+        resp = requests.get(URL_HEAD + '/entry/ka/nanaika')
         data = resp.json()
         self.assertEquals(resp.status_code, 200)
         for datum in data:
-            self.assertEquals(datum['word'], 'tejaos')
+            self.assertEquals(datum['word'], 'nanaika')
             self.assertEquals(datum['language'], 'ka')
             self.assertEquals(datum['part_of_speech'], 'ana')
             self.assertEquals(len(datum['definitions']), 1)
@@ -201,12 +202,20 @@ class TestDictionaryRestService(TestCase):
         self.assertEquals(resp.status_code, 204)
 
     def test_get_translation(self):
-        resp = requests.get(URL_HEAD + '/translations/jm/de/tehanu')
+        self.create_entry('toki', 'tpo', 'ana', 'Sprach', 'de')
+        self.create_entry('pona', 'tpo', 'ana', 'gut', 'de')
+        self.create_entry('alks', 'tpo', 'ana', 'pals', 'fr')
+
+        resp = requests.get(URL_HEAD + '/translations/tpo/de/toki')
         j = resp.json()
+        print(j)
         self.assertEquals(len(j), 1)
         self.assertEquals(resp.status_code, 200)
 
     def test_get_all_translations(self):
+        self.create_entry('toki', 'tpo', 'ana', 'Sprach', 'de')
+        self.create_entry('pona', 'tpo', 'ana', 'gut', 'de')
+
         resp = requests.get(URL_HEAD + '/translations/jm/tehanu')
         j = resp.json()
         self.assertEquals(len(j), 1)

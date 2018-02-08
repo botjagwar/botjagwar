@@ -23,7 +23,7 @@ class FRWiktionaryProcessor(WiktionaryProcessor):
 
     def retrieve_translations(self):
         retcontent = []
-        regex = '\{\{trad[\+\-]+?\|([A-Za-z]{2,3})\|(.*?)\}\}'
+        regex = r'\{\{trad[\+\-]+?\|([A-Za-z]{2,3})\|(.*?)\}\}'
         pos = 'ana'
         defin = ""
         for allentrys in self.getall():  # (self.title, pos, self.lang2code(l), defin.strip())
@@ -36,10 +36,7 @@ class FRWiktionaryProcessor(WiktionaryProcessor):
 
         for entry in re.findall(regex, self.content):
             langcode = entry[0]
-            try:
-                entree = str(entry[1])
-            except UnicodeDecodeError:
-                entree = str(entry[1], 'latin1')
+            entree = str(entry[1])
 
             for x in "();:.,":
                 if entry[1].find(x) != -1:

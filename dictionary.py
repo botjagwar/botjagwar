@@ -11,7 +11,7 @@ from database import Base, Definition, Word
 import database.http as db_http
 
 parser = argparse.ArgumentParser(description='Dictionary service')
-parser.add_argument('--db-file', dest='STORAGE')
+parser.add_argument('--db-file', dest='STORAGE', required=False)
 args = parser.parse_args()
 
 if args.STORAGE:
@@ -24,7 +24,7 @@ else:
 ENGINE = create_engine('sqlite:///%s' % STORAGE)
 routes = web.RouteTableDef()
 Base.metadata.create_all(ENGINE)
-SessionClass = sessionmaker(bind=ENGINE)
+SessionClass = sessionmaker(bind=ENGINE, autoflush=True)
 
 
 def word_exists(session, word, language, part_of_speech):
@@ -79,7 +79,7 @@ async def get_entry(request):
     if not jsons:
         raise db_http.WordDoesNotExistException()
     else:
-        return Response(text=json.dumps(jsons), status=200)
+        return Response(text=json.dumps(jsons), status=200, content_type='application/json')
 
 
 @routes.post('/entry/{language}/create')
@@ -90,8 +90,7 @@ async def add_entry(request):
     :return:
         HTTP 200 if entry is OK
     """
-    jsondata = await request.json()
-    data = json.loads(jsondata)
+    data = await request.json()
     session = SessionClass()
 
     # Search if definition already exists.
@@ -125,7 +124,7 @@ async def add_entry(request):
 
     # Return HTTP response
     forged_word = word.serialise()
-    return Response(status=200, text=json.dumps(forged_word))
+    return Response(status=200, text=json.dumps(forged_word), content_type='application/json')
 
 
 @routes.put('/entry/{word_id}/edit')
@@ -166,7 +165,7 @@ async def edit_entry(request):
 
     session.commit()
     session.flush()
-    return Response(status=200, text=json.dumps(word.serialise()))
+    return Response(status=200, text=json.dumps(word.serialise()), content_type='application/json')
 
 
 @routes.delete('/entry/{word_id}/delete')
@@ -185,7 +184,7 @@ async def delete_entry(request):
 
     session.commit()
     session.flush()
-    return Response(status=204)
+    return Response(status=204, content_type='application/json')
 
 
 @routes.get('/definition/{definition_id}')
@@ -198,7 +197,7 @@ async def get_definition(request):
             text=json.dumps(definitions),
             status=200)
     else:
-        return Response(status=404)
+        return Response(status=404, content_type='application/json')
 
 
 @routes.get('/translations/{origin}/{target}/{word}')
@@ -206,8 +205,10 @@ async def get_translation(request):
     session = SessionClass()
     origin, target = request.match_info['origin'], request.match_info['target']
 
-    words = [w.serialise() for w in session.query(
-        Word).filter(Word.language == origin).all()]
+    words = [w.serialise() for w in session.query(Word)
+        .filter(Word.language == origin)
+        .filter(Word.word == request.match_info['word'])
+        .all()]
     translations = []
     for word in words:
         definitions = word['definitions']
@@ -216,8 +217,7 @@ async def get_translation(request):
                 translations.append(definition)
 
     return Response(
-        text=json.dumps(translations),
-        status=200)
+        text=json.dumps(translations), status=200, content_type='application/json')
 
 
 @routes.get('/translations/{origin}/{word}')
@@ -225,8 +225,10 @@ async def get_translation(request):
     session = SessionClass()
     origin = request.match_info['origin']
 
-    words = [w.serialise() for w in session.query(
-        Word).filter(Word.language == origin).all()]
+    words = [w.serialise() for w in session.query(Word)
+        .filter(Word.language == origin)
+        .filter(Word.word == request.match_info['word'])
+        .all()]
     translations = []
     for word in words:
         definitions = word['definitions']
@@ -234,8 +236,7 @@ async def get_translation(request):
             translations.append(definition)
 
     return Response(
-        text=json.dumps(translations),
-        status=200)
+        text=json.dumps(translations), status=200, content_type='application/json')
 
 
 @routes.post('/definition/search')
@@ -247,8 +248,7 @@ async def search_definition(request):
         Definition).filter(Definition.definition.like(data['definition'])).all()]
 
     return Response(
-        text=json.dumps(definitions),
-        status=200)
+        text=json.dumps(definitions), status=200, content_type='application/json')
 
 
 @routes.delete('/definition/{definition_id}/delete')
