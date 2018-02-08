@@ -37,9 +37,9 @@ class Output(object):
             resp = await self.client_session.get(
                 URL_HEAD + '/entry/%s/%s' % (info.language, info.entry)
             )
-            entry_json = [w for w in json.loads(resp.text)
+            entry_json = [w for w in json.loads(await resp.text())
                           if w['part_of_speech'] == info.part_of_speech][0]
-            entry_json.entry = entry
+            entry_json['entry'] = entry
             resp = await self.client_session.post(
                 URL_HEAD + '/entry/%s/edit' % entry_json['id'],
                 data=json.dumps(entry_json)

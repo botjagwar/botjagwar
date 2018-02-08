@@ -4,3 +4,4 @@ pywikibot >= 3.0
 requests-oauthlib >= 0.8.0
 requests >= 2.18.4
 sqlalchemy >= 1.0.11
+irc == 3.6.1

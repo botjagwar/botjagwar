@@ -140,7 +140,7 @@ class Translation:
         _generate_redirections(infos)
         _append_in(infos, translations_in_mg)
         await self._save_translation_from_bridge_language(infos)
-        self._save_translation_from_page(infos)
+        await self._save_translation_from_page(infos)
 
         return 1
 
@@ -148,6 +148,7 @@ class Translation:
         language = wiki_page.site.language()
         unknowns = []
         # fanampiana : wiki_page:wiki_page
+
 
         # BEGINNING
         ret = 0
@@ -163,6 +164,7 @@ class Translation:
         try:
             entries = wiktionary_processor.getall()
         except Exception as e:
+            tracker.print_diff()
             return unknowns, ret
 
         translations_in_mg = {}  # dictionary {string : list of translation tuple (see below)}
@@ -181,6 +183,7 @@ class Translation:
 
         # Malagasy language pages
         # self.update_malagasy_word(translations_in_mg)
+
         return unknowns, ret
 
     async def translate_word(self, word, language):
@@ -188,6 +191,7 @@ class Translation:
         print (url)
         resp = await self.client_session.get(url)
         if resp.status == WordDoesNotExistException.status_code:
+
             raise NoWordException()
         jtext = await resp.text()
         translations_json = json.loads(jtext)

@@ -4,7 +4,7 @@ import time
 import os
 import traceback
 import requests
-from modules import ircbot
+import irc.bot
 
 userdata_file = os.getcwd() + '/user_data/dikantenyvaovao/'
 nwikimax = 5
@@ -24,7 +24,7 @@ class IrcBotException(Exception):
     pass
 
 
-class WiktionaryRecentChangesBot(ircbot.SingleServerIRCBot):
+class WiktionaryRecentChangesBot(irc.bot.SingleServerIRCBot):
     """IRC client used to track edits on targetted wikis.
     @lang string containing languages of editions to track.
     For example : fr,en,de will track fr.wiktionary, en.wiktionary and de.wiktionary
@@ -54,7 +54,7 @@ class WiktionaryRecentChangesBot(ircbot.SingleServerIRCBot):
         self.channels = ["#%s.%s" % (language.strip(), self.sitename) for language in self.langs]
 
         for channel in self.channels:
-            ircbot.SingleServerIRCBot.__init__(
+            irc.bot.SingleServerIRCBot.__init__(
                 self, [("irc.wikimedia.org", 6667)], self.username, "Bot-Jagwar [IRCbot v2].")
             self.joined.append(channel)
             print(("Channel:", channel, " Nickname:", self.username))
@@ -121,11 +121,7 @@ def _get_message_type(message):
 
 
 def _prepare_message(events):
-    try:
-        message = events.arguments()[0].decode('utf8')
-    except UnicodeDecodeError:
-        message = events.arguments()[0].decode('latin1')
-    return message
+    return events.arguments()[0]
 
 
 def base36encode(number, alphabet='0123456789abcdefghjiklmnopqrstuvwxyz'):

@@ -95,7 +95,6 @@ async def handle_wiktionary_page(request):
         response = Response(text=json.dumps(data), status=500, content_type='application/json')
     else:
         response = Response(text=json.dumps(data), status=200, content_type='application/json')
-
     return response
 
 
