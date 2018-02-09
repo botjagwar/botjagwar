@@ -1,19 +1,16 @@
-# Prerequisites
+-------------
+Prerequisites
+-------------
 
-You'll need a working MySQL server and client with a root account and a password.
-Once you have that, edit the bash script setup-database.sh and launch the script.
+You'll need a working Python 3.6 interpreter to run the python scripts of this project.
 
-# Installation
+-------------
+Installation
+-------------
 
-For the installation only, DB_PASSWD needs to be set. This is your MySQL database password. This has to be set
-each time you launch the `make` command, or else you lose your previous password.
-Something is being worked on to fix that thing.
-
-Launch the command 'DB_PASSWD=xxxxx make all'. That will install required dependencies among which Python, Pywikibot, Python MySQL
-MySQL API. It will also install the database schema and fill it with enough data to work.
-DB_PASSWD is your environment variable containing your database password.
-
-# Configuration
+-------------
+Configuration
+-------------
 
 Once you're done with 'make all', do the manual configuration by setting up the pywikibot.
 See https://www.mediawiki.org/wiki/Manual:Pywikibot/user-config.py for further details on how to configure Pywikibot.
@@ -22,6 +19,8 @@ On 'make', first set an environment variable DB_PASSWD containing your password.
 connect to the database. Changing the database password will have to be done manually for the MySQL.
 Changing it for botjagwar can be done using 'make setpass'
 
-# Copyright
+-------------
+Copyright
+-------------
 
-© Rado A. (Terakasorotany) MIT Licence.
+© Rado A. (Terakasorotany) -- MIT Licence.

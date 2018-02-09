@@ -2,12 +2,18 @@ import random
 import re
 import time
 import os
-import traceback
-import requests
-import irc.bot
 
-userdata_file = os.getcwd() + '/user_data/dikantenyvaovao/'
+import irc.bot
+import requests
+from subprocess import Popen
+import traceback
+
+from modules.decorator import threaded
+
+userdata_file = os.getcwd() + '/user_data/entry_translator/'
 nwikimax = 5
+spawned_backend_process = None
+dictionary_service = None
 
 
 def irc_retrieve():
@@ -87,7 +93,8 @@ class WiktionaryRecentChangesBot(irc.bot.SingleServerIRCBot):
                 print(("Edit #%d (%.2f edits/min)" % (self.edits, throughput)))
         except requests.ConnectionError as e:
             print((traceback.format_exc()))
-            print('NOTE: Launch dikantenyvaovao.py in a separate process to have the backend.')
+            print('NOTE: Spawning "entry_processor.py" backend process.')
+            spawn_backend()
         except Exception as e:
             print((traceback.format_exc()))
 
@@ -146,8 +153,20 @@ def base36encode(number, alphabet='0123456789abcdefghjiklmnopqrstuvwxyz'):
     return sign + base36
 
 
+@threaded
+def spawn_backend():
+    spawned_backend_process = Popen(['python3.6', 'entry_translator.py'])
+    dictionary_service = Popen(['python3.6', 'dictionary.py'])
+    spawned_backend_process.communicate()
+    dictionary_service.communicate()
+
+
 if __name__ == '__main__':
     try:
         irc_retrieve()
     finally:
+        if spawned_backend_process is not None:
+            spawned_backend_process.terminate()
+        if dictionary_service is not None:
+            dictionary_service.terminate()
         print("bye")

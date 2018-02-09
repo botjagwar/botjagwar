@@ -268,6 +268,12 @@ async def delete_definition(request):
     session.flush()
     return Response(status=204)
 
+
+@routes.post('/ping')
+async def pong(request):
+    Response(status=200)
+
+
 if __name__ == '__main__':
     app = web.Application()
     app.router.add_routes(routes)

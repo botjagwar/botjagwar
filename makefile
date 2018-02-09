@@ -1,6 +1,3 @@
-setpass:
-	mkdir -p conf/BJDBModule
-	python set_database_password.py -pass:${DB_PASSWD}
 
 prepare:
 	sudo apt-get update
@@ -15,11 +12,10 @@ python: prepare
 	sudo pip3 install sqlalchemy
 
 python-requirements: python
-	LC_ALL="en_US.UTF-8" sudo pip install -r requirements.txt
+	LC_ALL="en_US.UTF-8" sudo pip3 install -r requirements.txt
 
 install-python-deps: python
 	sudo apt-get install -y python3-lxml
-
 
 botscripts:
 	cp scripts/*.sh $(HOME)
@@ -35,4 +31,4 @@ test:
 .PHONY: test
 
 
-all: setpass install-python-deps python-requirements cronconf
+all: install-python-deps python-requirements cronconf

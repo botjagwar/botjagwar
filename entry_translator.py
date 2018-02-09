@@ -20,8 +20,8 @@ from aiohttp.web import Response
 # GLOBAL VARS
 verbose = False
 databases = []
-data_file = os.getcwd() + '/conf/dikantenyvaovao/'
-userdata_file = os.getcwd() + '/user_data/dikantenyvaovao/'
+data_file = os.getcwd() + '/conf/entry_translator/'
+userdata_file = os.getcwd() + '/user_data/entry_translator/'
 translations = Translation()
 routes = web.RouteTableDef()
 

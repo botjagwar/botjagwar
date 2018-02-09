@@ -4,6 +4,7 @@ import pywikibot as pwbot
 
 import asyncio
 from aiohttp import ClientSession
+from aiohttp.client_exceptions import ClientConnectorError
 import json
 
 from database.http import WordDoesNotExistException
@@ -14,7 +15,9 @@ from modules.output import Output
 from modules.autoformatter import Autoformat
 from models.word import Entry
 
-default_data_file = os.getcwd() + '/conf/dikantenyvaovao/'
+from subprocess import Popen
+
+default_data_file = os.getcwd() + '/conf/entry_translator/'
 URL_HEAD = 'http://localhost:8001'
 
 
@@ -164,7 +167,6 @@ class Translation:
         try:
             entries = wiktionary_processor.getall()
         except Exception as e:
-            tracker.print_diff()
             return unknowns, ret
 
         translations_in_mg = {}  # dictionary {string : list of translation tuple (see below)}

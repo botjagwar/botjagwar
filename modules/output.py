@@ -8,7 +8,7 @@ from database.http import (
 verbose = False
 
 
-USER_DATA = 'user_data/dikantenyvaovao'
+USER_DATA = 'user_data/entry_translator'
 URL_HEAD = 'http://localhost:8001'
 
 

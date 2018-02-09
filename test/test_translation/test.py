@@ -1,6 +1,6 @@
 # coding: utf8
 import os
-data_file = os.getcwd() + "/conf/dikantenyvaovao/"
+data_file = os.getcwd() + "/conf/entry_translator/"
 
 
 class TestTranslation(object):

@@ -6,7 +6,7 @@ from modules.decorator import time_this
 
 WORKING_WIKI = pywikibot.getSite('mg', 'wiktionary')
 username = "%s" % pywikibot.config.usernames['wiktionary']['mg']
-mt_data_file = os.getcwd() + '/user_data/dikantenyvaovao/'
+mt_data_file = os.getcwd() + '/user_data/entry_translator/'
 
 
 class UnknownWordManagerError(Exception):
