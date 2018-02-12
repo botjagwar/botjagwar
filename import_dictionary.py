@@ -25,7 +25,7 @@ service_process = None
 def launch_service():
     print('launch_service()')
     global service_process
-    service_process = Popen(["python3.6", "dictionary.py"])
+    service_process = Popen(["python3.6", "dictionary_service.py"])
     print('end launch_service()')
 
 

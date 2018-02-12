@@ -38,7 +38,7 @@ class TestEntryTranslatorProcessWiktionaryPage(TestCase):
 
     @threaded
     def launch_service(self):
-        self.p2 = Popen(["python3.6", "dictionary.py", "--db-file", '/tmp/test.db'])
+        self.p2 = Popen(["python3.6", "dictionary_service.py", "--db-file", '/tmp/test.db'])
 
     def test_process_wiktionary_page_english(self):
         for pagename in LIST:

@@ -40,7 +40,7 @@ class TestDictionaryRestService(TestCase):
 
     @threaded
     def launch_service(self):
-        self.p2 = Popen(["python3.6", "dictionary.py",
+        self.p2 = Popen(["python3.6", "dictionary_service.py",
                          '--db-file', DB_PATH,
                          ])
 
