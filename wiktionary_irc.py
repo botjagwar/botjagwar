@@ -65,6 +65,13 @@ class WiktionaryRecentChangesBot(irc.bot.SingleServerIRCBot):
             self.joined.append(channel)
             print(("Channel:", channel, " Nickname:", self.username))
 
+        try:
+            requests.put(self.service_address + '/configure', json={'autocommit': True})
+        except requests.exceptions.ConnectionError:
+            spawn_backend()
+            time.sleep(2)
+            requests.put(self.service_address + '/configure', json={'autocommit': True})
+
         print ("Connection complete")
 
     def do_join(self, server, events):
@@ -94,7 +101,6 @@ class WiktionaryRecentChangesBot(irc.bot.SingleServerIRCBot):
         except requests.ConnectionError as e:
             print((traceback.format_exc()))
             print('NOTE: Spawning "entry_processor.py" backend process.')
-            spawn_backend()
         except Exception as e:
             print((traceback.format_exc()))
 

@@ -6,7 +6,6 @@ async def pong(request):
 
 
 async def do_commit(request):
-    request.app['session_instance'].commit()
     request.app['session_instance'].flush()
     return Response(status=200)
 

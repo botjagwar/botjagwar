@@ -67,9 +67,7 @@ async def add_entry(request):
     :return:
         HTTP 200 if entry is OK
     """
-    json_text_data = await request.json()
-    data = json.loads(json_text_data)
-
+    data = await request.json()
     session = request.app['session_instance']
 
     # Search if definition already exists.
