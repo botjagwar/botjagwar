@@ -63,7 +63,7 @@ class Output(object):
 =={{=%(language)s=}}==
 {{-%(part_of_speech)s-|%(language)s}}
 '''{{subst:BASEPAGENAME}}''' {{fanononana X-SAMPA||%(language)s}} {{fanononana||%(language)s}}"""%info.properties
-        s += "\n# %s" % ', '.join(info.entry_definition)
+        s += "\n# %s" % ', '.join(['[[%s]]' % (d) for d in info.entry_definition])
         s = s + additional_note % info.properties
         try:
             return s
