@@ -2,7 +2,7 @@
 import sys, os
 
 
-from base import WiktionaryProcessor
+from .base import WiktionaryProcessor
 
 class DEWiktionaryProcessor(WiktionaryProcessor):
     pass

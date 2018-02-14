@@ -2,8 +2,8 @@
 
 import re
 import pywikibot
-from base import WiktionaryProcessor
-from base import stripwikitext
+from .base import WiktionaryProcessor
+from .base import stripwikitext
 
 
 class FRWiktionaryProcessor(WiktionaryProcessor):
@@ -12,34 +12,31 @@ class FRWiktionaryProcessor(WiktionaryProcessor):
         self.text_set = False
         self.content = None
         self.postran = {
-            u'verbe': u'mat',
-            u'adjectif': u'mpam',
-            u'nom': u'ana',
-            u'adverbe': u'tamb',
-            u'pronom': u'solo-ana',
-            u'préfixe': u'tovona',
-            u'suffixe': u'tovana'
+            'verbe': 'mat',
+            'adjectif': 'mpam',
+            'nom': 'ana',
+            'adverbe': 'tamb',
+            'pronom': 'solo-ana',
+            'préfixe': 'tovona',
+            'suffixe': 'tovana'
         }
 
     def retrieve_translations(self):
         retcontent = []
-        regex = '\{\{trad[\+\-]+?\|([A-Za-z]{2,3})\|(.*?)\}\}'
-        pos = u'ana'
-        defin = u""
+        regex = r'\{\{trad[\+\-]+?\|([A-Za-z]{2,3})\|(.*?)\}\}'
+        pos = 'ana'
+        defin = ""
         for allentrys in self.getall():  # (self.title, pos, self.lang2code(l), defin.strip())
             if allentrys[2] == 'fr':
                 pos = allentrys[1]
-                if self.postran.has_key(pos):
+                if pos in self.postran:
                     pos = self.postran[pos]
                 defin = allentrys[3]
                 break
 
         for entry in re.findall(regex, self.content):
             langcode = entry[0]
-            try:
-                entree = unicode(entry[1])
-            except UnicodeDecodeError:
-                entree = unicode(entry[1], 'latin1')
+            entree = str(entry[1])
 
             for x in "();:.,":
                 if entry[1].find(x) != -1:
@@ -47,7 +44,7 @@ class FRWiktionaryProcessor(WiktionaryProcessor):
             if entry[1].find('|') != -1:
                 entree = entree.split("|")[0]
 
-            if self.postran.has_key(pos):
+            if pos in self.postran:
                 pos = self.postran[allentrys[1]]
             e = (entree, pos, langcode, defin.strip())  # (
             retcontent.append(e)
@@ -104,7 +101,7 @@ class FRWiktionaryProcessor(WiktionaryProcessor):
                 pass
             else:
                 pos = frpos = lang[0].strip()  # POS
-                if self.postran.has_key(frpos):
+                if frpos in self.postran:
                     pos = self.postran[frpos]
 
                 i = (self.Page.title(),

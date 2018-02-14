@@ -23,7 +23,7 @@ class WiktionaryProcessor(object):
             try:
                 self.content = page.get()
             except Exception:
-                self.content = u""
+                self.content = ""
 
     def set_text(self, text):
         self.content = text
@@ -47,7 +47,7 @@ def stripwikitext(w):
 
 
 def lang2code(l):
-    dictfile = file(data_file + 'languagecodes.dct', 'r')
+    dictfile = open(data_file + 'languagecodes.dct', 'r')
     f = dictfile.read()
     d = eval(f)
     dictfile.close()

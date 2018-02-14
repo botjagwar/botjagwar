@@ -1,10 +1,10 @@
 # -*- coding: utf-8  -*-
 import re
-import urllib
+import urllib.request, urllib.parse, urllib.error
 import time
 import os
 import pywikibot
-from urllib import FancyURLopener
+from urllib.request import FancyURLopener
 
 data_file = os.getcwd() + '/conf/list_wikis/'
 current_user = pywikibot.config.usernames['wiktionary']['mg']
@@ -20,7 +20,7 @@ class Wikilister(object):
 
     def getLangs(self, site):
         dump = open(data_file + 'listof%s.txt' % site, 'r').read()
-        print (data_file + 'listof%s.txt' % site)
+        print((data_file + 'listof%s.txt' % site))
 
         wikiregex = re.findall('([a-z|\-]+).%s.org/wiki/Special:Recentchanges' % site, dump)
         if len(wikiregex) == 0:
@@ -39,24 +39,24 @@ class Wikilister(object):
                 try:
                     urlstr = 'https://%s.%s.org/w/api.php?action=query&meta=siteinfo&format=json&siprop=statistics&continue' % (
                         lang, site)
-                    statpage = urllib.urlopen(urlstr).read()
+                    statpage = urllib.request.urlopen(urlstr).read()
                     print (statpage)
                     pywikibot.output(urlstr)
                     break
                 except Exception as e:
-                    print (e.message)
+                    print((e.message))
                     time.sleep(5)
 
                 except IOError as e:
-                    print (e.message)
-                    print ("Hadisoana mitranga amin'i %s" % lang)
+                    print((e.message))
+                    print(("Hadisoana mitranga amin'i %s" % lang))
                     time.sleep(5)
                     ierr += 1
             del ierr
             try:
                 stats = eval(statpage)
             except Exception:
-                print ('Nitrangana hadisoana: %s' % statpage)
+                print(('Nitrangana hadisoana: %s' % statpage))
                 continue
             m = stats['query']['statistics']
             e = (int(m['articles']),
@@ -83,7 +83,7 @@ class Wikilister(object):
 
             datas.append(e)
             i += 1
-            print ('%(language)s > lahatsoratra:%(articles)d; pejy:%(pages)d; fanovana:%(edits)d; mpikambana:%(users)d; mavitrika:%(activeusers)d; mpandrindra:%(admins)d; sary:%(images)d; halalina:%(depth)s ' % (e[1]))
+            print(('%(language)s > lahatsoratra:%(articles)d; pejy:%(pages)d; fanovana:%(edits)d; mpikambana:%(users)d; mavitrika:%(activeusers)d; mpandrindra:%(admins)d; sary:%(images)d; halalina:%(depth)s ' % (e[1])))
 
         datas.sort(reverse=True)
         self.wikitext(datas, wiki)
@@ -98,7 +98,7 @@ class Wikilister(object):
             'users': 0,
             'files': 0,
         }
-        content = (u"""
+        content = ("""
 <small><center>Lisitra nohavaozina ny {{subst:CURRENTDAY}} {{subst:CURRENTMONTHNAME}} {{subst:CURRENTYEAR}}, tamin'ny {{subst:#time: H:i}} UTC</center></small>
 {|class="wikitable sortable" border="1" cellpadding="2" cellspacing="0" style="width:100%; background: #f9f9f9; border: 1px solid #aaaaaa; border-collapse: collapse; white-space: nowrap; text-align: center"
 |-
@@ -127,9 +127,9 @@ class Wikilister(object):
         for wd in e:
             i += 1
             isanjato = float(float(100 * wd[1]['articles']) / total['pages'])
-            content += (u"""
+            content += ("""
 |- style="text-align: right;"
-| """ + str(i) + u"""
+| """ + str(i) + """
 | [[:w:Fiteny {{%(language)s}}|{{%(language)s}}]]
 | [//%(language)s.%(wiki)s.org/wiki/ %(language)s]
 | [//%(language)s.%(wiki)s.org/w/api.php?action=query&meta=siteinfo&format=xml&siprop=statistics '''{{formatnum:%(articles)d}}''']
@@ -139,13 +139,13 @@ class Wikilister(object):
 | [//%(language)s.%(wiki)s.org/wiki/Special:Listusers {{formatnum:%(users)d}}]
 | [//%(language)s.%(wiki)s.org/wiki/Special:ActiveUsers {{formatnum:%(activeusers)d}}]
 | [//%(language)s.%(wiki)s.org/wiki/Special:Imagelist {{formatnum:%(images)d}}]
-| {{formatnum:""" % wd[1] + u"""%2.2f""" % isanjato + u"""}}
+| {{formatnum:""" % wd[1] + """%2.2f""" % isanjato + """}}
 | %(depth)s
 """ % wd[1])
-        content += u"\n\n|}\n\n"
-        content += u"""
+        content += "\n\n|}\n\n"
+        content += """
 {|class="wikitable sortable" border="1" cellpadding="2" cellspacing="0" style="width:100%; background: #f9f9f9; border: 1px solid #aaaaaa; border-collapse: collapse; white-space: nowrap; text-align: center"""
-        content += u"""
+        content += """
 |-
 !
 ! Pejim-botoatiny
@@ -165,7 +165,7 @@ class Wikilister(object):
 | '''{{formatnum:%(activeusers)d}}'''
 | '''{{formatnum:%(files)d}}'''
 """ % total
-        content += u"""
+        content += """
 |}"""
 
         while 1:
@@ -174,7 +174,7 @@ class Wikilister(object):
             try:
                 page = pywikibot.Page(pywikibot.Site('mg', 'wiktionary'),
                                       'Mpikambana:%s/Lisitry ny %s/tabilao' % (current_user, wiki))
-                page.put(content, u'Rôbô : fanavaozana ny statistika')
+                page.put(content, 'Rôbô : fanavaozana ny statistika')
                 break
             except Exception:
                 print ('Hadisoana nitranga tampametrahana ilay pejy')
@@ -193,7 +193,7 @@ def main():
             time.sleep(120)
         else:
             print ("Fanavaozana isaky ny adin'ny 6")
-            print ("Miandry ny fotoana tokony hamaozana ny pejy (ora %2d:%2d) (GMT+%d)" % ((t[3] + timeshift), t[4], (timeshift)))
+            print(("Miandry ny fotoana tokony hamaozana ny pejy (ora %2d:%2d) (GMT+%d)" % ((t[3] + timeshift), t[4], (timeshift))))
             time.sleep(30)
 
 

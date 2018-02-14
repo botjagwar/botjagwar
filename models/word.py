@@ -1,10 +1,9 @@
 from models import TypeCheckedObject
-from modules.database import Database
 
 class Word(TypeCheckedObject):
     _additional = False
     properties_types = dict(
-        entry=unicode,
+        entry=str,
         part_of_speech=str,
         language=str)
 
@@ -12,12 +11,12 @@ class Word(TypeCheckedObject):
 class Entry(TypeCheckedObject):
     _additional = False
     properties_types = dict(
-        entry=unicode,
-        part_of_speech=unicode,
-        entry_definition=unicode,
+        entry=str,
+        part_of_speech=str,
+        entry_definition=str,
         language=str,
-        origin_wiktionary_edition=unicode,
-        origin_wiktionary_page_name=unicode)
+        origin_wiktionary_edition=str,
+        origin_wiktionary_page_name=str)
 
     def add_to_database(self):
         pass

@@ -42,12 +42,12 @@ class PasswordManager(object):
 
     def read_db_password_file(self):
         try:
-            f = file(self.password_path, 'r')
+            f = open(self.password_path, 'r')
             self.password = f.read()
             self.password = self._decrypt(self.password)
         except IOError as e:
-            print e
-            print "Tsy nahavaky tenimiafina / Password reading failed."
+            print(e)
+            print("Tsy nahavaky tenimiafina / Password reading failed.")
 
     def get_password(self):
         if self.password is None:
@@ -65,24 +65,24 @@ class PasswordManager(object):
 
     def write_db_password_file(self, new_pass=None):
         """if new_password is None, self.password will be used."""
-        f = file(self.password_path, 'w')
+        f = open(self.password_path, 'w')
         try:
             if new_pass is not None:
                 f.write(self._encrypt(new_pass))
             else:
                 f.write(self._encrypt(self.password))
         except IOError as e:
-            print e
-            print "Tsy nahomby ny fanoatana rakitra tenimiafina vaovao / Failed to write new password to file"
+            print(e)
+            print("Tsy nahomby ny fanoatana rakitra tenimiafina vaovao / Failed to write new password to file")
 
     def run(self):
         valid = self.check_database_password()
         if not valid:
-            print "Tsy nahitana tenimiafina / Password file not found."
+            print("Tsy nahitana tenimiafina / Password file not found.")
         self.read_db_password_file()
 
         if new_password is not None:
-            print "Mametraka tenimiafina vaovao / Setting new password."
+            print("Mametraka tenimiafina vaovao / Setting new password.")
             self.password = new_password
             self.write_db_password_file(new_password)
         # prompt for new password

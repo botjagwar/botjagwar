@@ -21,7 +21,7 @@ SITELANG = 'mg'
 last_entry = 0
 language_code = sys.argv[1]
 category_name = sys.argv[2].decode('utf8')
-template = sys.argv[3].decode('utf8') if len(sys.argv) >= 4 else u'e-ana'
+template = sys.argv[3].decode('utf8') if len(sys.argv) >= 4 else 'e-ana'
 
 
 def get_count():
@@ -53,14 +53,14 @@ def parse_word_forms():
     nouns = pywikibot.Category(pywikibot.Site('en', SITENAME), category_name)
     counter = 0
     for word_page in nouns.articles():
-        pywikibot.output(u'▒▒▒▒▒▒▒▒▒▒▒▒▒▒ \03{green}%-25s\03{default} ▒▒▒▒▒▒▒▒▒▒▒▒▒▒' % word_page.title())
+        pywikibot.output('▒▒▒▒▒▒▒▒▒▒▒▒▒▒ \03{green}%-25s\03{default} ▒▒▒▒▒▒▒▒▒▒▒▒▒▒' % word_page.title())
         counter += 1
         if last_entry > counter:
-            print u'moving on'
+            print('moving on')
             continue
         en_page_processor.process(word_page)
         entries = en_page_processor.getall(definitions_as_is=True)
-        entries = [entry for entry in entries if entry[2] == unicode(language_code)]
+        entries = [entry for entry in entries if entry[2] == str(language_code)]
         for word, pos, language_code, definition in entries:
             last_entry += 1
             mg_page = pywikibot.Page(pywikibot.Site(SITELANG, SITENAME), word)
@@ -70,13 +70,13 @@ def parse_word_forms():
                 malagasy_definition = template_expression_to_malagasy_definition(definition)
                 lemma = get_lemma(definition)
             except (AttributeError, ValueError) as e:
-                print traceback.format_exc()
+                print((traceback.format_exc()))
                 continue
 
             # Do not create page if lemma does not exist
             mg_lemma_page = pywikibot.Page(pywikibot.Site(SITELANG, SITENAME), lemma)
             if not mg_lemma_page.exists():
-                print u'No lemma :/'
+                print('No lemma :/')
                 continue
 
             mg_entry = Entry(
@@ -91,25 +91,25 @@ def parse_word_forms():
                 overwrite = False
             else:
                 overwrite = True
-                print u'PAGE OVERWRITING IS ACTIVE. DELETE /tmp/%s TO DISABLE IT MID-SCRIPT.' % language_code
+                print(('PAGE OVERWRITING IS ACTIVE. DELETE /tmp/%s TO DISABLE IT MID-SCRIPT.' % language_code))
 
             # Create or update the generated page
             if mg_page.exists() and not overwrite:
                 new_entry = page_output.wikipage(mg_entry)
                 page_content = mg_page.get()
-                if page_content.find(u'{{=%s=}}' % language_code) != -1:
-                    if page_content.find(u'{{-%s-|%s}}' % (template, language_code)) != -1:
-                        print u'section already exists : No need to go further'
+                if page_content.find('{{=%s=}}' % language_code) != -1:
+                    if page_content.find('{{-%s-|%s}}' % (template, language_code)) != -1:
+                        print('section already exists : No need to go further')
                         continue
                     else:  # Add part of speech subsection
                         page_content = re.sub(r'==[ ]?{{=%s=}}[ ]?==' % language_code, new_entry, page_content)
                 else:  # Add language section
-                    page_content = new_entry + u'\n' + page_content
+                    page_content = new_entry + '\n' + page_content
             else:  # Create a new page.
                 page_content = page_output.wikipage(mg_entry)
 
-            pywikibot.output(u'\03{blue}%s\03{default}' % page_content)
-            mg_page.put(page_content, u'Teny vaovao')
+            pywikibot.output('\03{blue}%s\03{default}' % page_content)
+            mg_page.put(page_content, 'Teny vaovao')
 
 
 if __name__ == '__main__':
