@@ -1,3 +1,4 @@
+import sys
 import asyncio
 from aiohttp import ClientSession
 import csv
@@ -6,8 +7,9 @@ from modules.decorator import threaded
 from subprocess import Popen
 from database.http import WordAlreadyExistsException
 
-MONOLINGUAL_DICTIONARY = 'user_data/frantsay.csv'  # for parts of speech
-BILINGUAL_DICTIONARY = 'user_data/frantsay_malagasy.csv'  # for parts of speech
+
+MONOLINGUAL_DICTIONARY = 'user_data/%s.csv' % sys.argv[1]  # for parts of speech
+BILINGUAL_DICTIONARY = 'user_data/%s_malagasy.csv' % sys.argv[1]  # for parts of speech
 POS_DICT = {
     '1': 'ana',
     '2': 'mat',
@@ -15,7 +17,7 @@ POS_DICT = {
     '4': 'mpampiankina',
     '5': 'tamb'
 }
-LANGUAGE = 'fr'
+LANGUAGE = sys.argv[2]
 DEFINITION_LANGUAGE = 'mg'
 URL_HEAD = 'http://localhost:8001'
 service_process = None
@@ -47,7 +49,13 @@ async def upload_dictionary():
             bilingual[row['word_id']] = row['malagasy']
 
     print('uploading dictionary')
+    i = 0
     for word_id, malagasy in bilingual.items():
+        i += 1
+        if not i % 250:
+            await session.post(URL_HEAD + '/commit')
+            print('--------------------------')
+        malagasy = malagasy.strip()
         definition = {
             'definition': malagasy,
             'definition_language': str(DEFINITION_LANGUAGE)
@@ -55,8 +63,8 @@ async def upload_dictionary():
         entry = {
             'language': LANGUAGE,
             'definitions': [definition],
-            'word': monolingual[word_id][1],
-            'part_of_speech': monolingual[word_id][0],
+            'word': monolingual[word_id][1].strip(),
+            'part_of_speech': monolingual[word_id][0].strip(),
         }
         resp = await session.post(
             URL_HEAD + '/entry/%s/create' % LANGUAGE,
@@ -83,10 +91,12 @@ async def upload_dictionary():
                         print('definition already exists. Skipping...')
                     break
 
+    await session.get(URL_HEAD + '/commit')
+
 
 def main():
     loop = asyncio.get_event_loop()
-    #launch_service()
+    launch_service()
     loop.run_until_complete(upload_dictionary())
 
 

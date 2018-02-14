@@ -45,6 +45,8 @@ class Output(object):
                 data=json.dumps(entry_json)
             )
 
+        await self.client_session.get(URL_HEAD + '/commit')
+
     def batchfile(self, info):
         "return batch format (see doc)"
         string = "%(entry)s -> %(entry_definition)s -> %(part_of_speech)s -> %(language)s\n" % info.properties

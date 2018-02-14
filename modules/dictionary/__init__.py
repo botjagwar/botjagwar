@@ -4,8 +4,7 @@ import json
 
 
 async def get_dictionary(request):
-    session_class = request.app['database_session']
-    session = session_class()
+    session = request.app['session_instance']
 
     definitions = [w.serialise() for w in session.query(Word).filter(
         Word.language == request.match_info['language']).all()]

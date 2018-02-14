@@ -4,6 +4,7 @@ import database.http as db_http
 from database import Definition, Word
 import json
 
+from .routines import save_changes_on_disk
 
 def get_word(session, word, language, part_of_speech):
     word = session.query(Word).filter_by(
@@ -48,8 +49,7 @@ async def get_entry(request):
         HTTP 200 if the word exists
         HTTP 404 otherwise
     """
-    session_class = request.app['database_session']
-    session = session_class()
+    session = request.app['session_instance']
     objects = session.query(Word).filter_by(
         word=request.match_info['word'],
         language=request.match_info['language']).all()
@@ -67,9 +67,10 @@ async def add_entry(request):
     :return:
         HTTP 200 if entry is OK
     """
-    data = await request.json()
-    session_class = request.app['database_session']
-    session = session_class()
+    json_text_data = await request.json()
+    data = json.loads(json_text_data)
+
+    session = request.app['session_instance']
 
     # Search if definition already exists.
     retained_definitions = []
@@ -97,8 +98,7 @@ async def add_entry(request):
 
     # Updating database
     session.add(word)
-    session.commit()
-    session.flush()
+    await save_changes_on_disk(request.app, session)
 
     # Return HTTP response
     forged_word = word.serialise()
@@ -117,8 +117,8 @@ async def edit_entry(request):
     jsondata = await request.json()
     data = json.loads(jsondata)
 
-    session_class = request.app['database_session']
-    session = session_class()
+
+    session = request.app['session_instance']
 
     # Search if word already exists.
     word = session.query(Word).filter_by(
@@ -141,8 +141,7 @@ async def edit_entry(request):
     word.definitions = definitions
     word.part_of_speech = data['part_of_speech']
 
-    session.commit()
-    session.flush()
+    await save_changes_on_disk(request.app, session)
     return Response(status=200, text=json.dumps(word.serialise()), content_type='application/json')
 
 
@@ -155,12 +154,10 @@ async def delete_entry(request):
     :return:
     """
     # Search if word already exists.
-    session_class = request.app['database_session']
-    session = session_class()
+    session = request.app['session_instance']
 
     session.query(Word).filter(
         Word.id == request.match_info['word_id']).delete()
 
-    session.commit()
-    session.flush()
+    await save_changes_on_disk(request.app, session)
     return Response(status=204, content_type='application/json')

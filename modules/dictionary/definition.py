@@ -1,12 +1,13 @@
-from aiohttp.web import Response
-
-from database import Definition
 import json
+
+from aiohttp.web import Response
+from database import Definition
+
+from .routines import save_changes_on_disk
 
 
 async def get_definition(request):
-    session_class = request.app['database_session']
-    session = session_class()
+    session = request.app['session_instance']
 
     definitions = [m.serialise() for m in session.query(Definition).filter(
         Definition.id == request.match_info['definition_id']).all()]
@@ -24,8 +25,7 @@ async def search_definition(request):
     :param request:
     :return:
     """
-    session_class = request.app['database_session']
-    session = session_class()
+    session = request.app['session_instance']
 
     jsondata = await request.json()
     data = json.loads(jsondata)
@@ -44,13 +44,11 @@ async def delete_definition(request):
         HTTP 204 if the definition has been successfully deleted
     """
     # Search if definition already exists.
-    session_class = request.app['database_session']
-    session = session_class()
+    session = request.app['session_instance']
 
     session.query(Definition).filter(
         Definition.id == request.match_info['definition_id']).delete()
 
-    session.commit()
-    session.flush()
+    await save_changes_on_disk(request.app, session)
     return Response(status=204)
 

@@ -1,5 +1,5 @@
+import time
 import os
-from time import sleep
 from subprocess import Popen
 from unittest import TestCase
 import json
@@ -13,9 +13,8 @@ from database import Base, Definition, Word
 
 import database.http as db_http
 
-URL_HEAD = 'http://localhost:8001'
+URL_HEAD = 'http://0.0.0.0:8001'
 DB_PATH = '/tmp/test.db'
-
 
 class TestDictionaryRestService(TestCase):
     def setUp(self):
@@ -36,13 +35,18 @@ class TestDictionaryRestService(TestCase):
         session.flush()
 
         self.launch_service()
-        sleep(2.5)
+        time.sleep(2)
+        requests.put(
+            URL_HEAD + '/configure',
+            json=json.dumps({
+                'autocommit': True
+            })
+        )
 
     @threaded
     def launch_service(self):
-        self.p2 = Popen(["python3.6", "dictionary_service.py",
-                         '--db-file', DB_PATH,
-                         ])
+        self.p2 = Popen(["python3.6", "dictionary_service.py", '--db-file', DB_PATH])
+        self.p2.communicate()
 
     def tearDown(self):
         self.p2.kill()

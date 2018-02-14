@@ -5,8 +5,7 @@ import json
 
 
 async def get_translation(request):
-    session_class = request.app['database_session']
-    session = session_class()
+    session = request.app['session_instance']
     origin, target = request.match_info['origin'], request.match_info['target']
 
     words = [w.serialise() for w in session.query(Word)
@@ -29,8 +28,7 @@ async def get_all_translations(request):
     Find all translations for the given word in the given language
     :return:
     """
-    session_class = request.app['database_session']
-    session = session_class()
+    session = request.app['session_instance']
     origin = request.match_info['origin']
 
     words = [w.serialise() for w in session.query(Word)
