@@ -82,7 +82,7 @@ def parse_word_forms():
             mg_entry = Entry(
                 entry=word,
                 part_of_speech=template,
-                entry_definition=malagasy_definition,
+                entry_definition=[malagasy_definition],
                 language=language_code,
             )
 
