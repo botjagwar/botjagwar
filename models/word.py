@@ -13,7 +13,7 @@ class Entry(TypeCheckedObject):
     properties_types = dict(
         entry=str,
         part_of_speech=str,
-        entry_definition=str,
+        entry_definition=list,
         language=str,
         origin_wiktionary_edition=str,
         origin_wiktionary_page_name=str)

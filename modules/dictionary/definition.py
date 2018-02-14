@@ -49,6 +49,6 @@ async def delete_definition(request):
     session.query(Definition).filter(
         Definition.id == request.match_info['definition_id']).delete()
 
-    await save_changes_on_disk(request.app, session)
+    await save_changes_on_disk(session)
     return Response(status=204)
 

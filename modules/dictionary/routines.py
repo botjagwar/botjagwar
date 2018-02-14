@@ -1,3 +1,2 @@
-async def save_changes_on_disk(app, session):
+async def save_changes_on_disk(session):
     session.commit()
-    session.flush()

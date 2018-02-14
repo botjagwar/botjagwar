@@ -19,15 +19,15 @@ class Output(object):
 
     async def db(self, info):
         """updates database"""
-        definitions = {
-            'definition': info.entry_definition,
+        definitions = [{
+            'definition': entry_definition,
             'definition_language': 'mg',
-        }
+        } for entry_definition in info.entry_definition]
         entry = {
             'word': info.entry,
             'language': info.language,
             'part_of_speech': info.part_of_speech,
-            'definitions': [definitions]
+            'definitions': definitions
         }
         resp = await self.client_session.post(
             URL_HEAD + '/entry/%s/create' % info.language,
@@ -37,7 +37,8 @@ class Output(object):
             resp = await self.client_session.get(
                 URL_HEAD + '/entry/%s/%s' % (info.language, info.entry)
             )
-            entry_json = [w for w in json.loads(await resp.text())
+            jdata = await resp.json()
+            entry_json = [w for w in jdata
                           if w['part_of_speech'] == info.part_of_speech][0]
             entry_json['entry'] = entry
             resp = await self.client_session.post(
@@ -56,13 +57,13 @@ class Output(object):
         "returns wikipage string"
         additional_note = ""
         if 'origin_wiktionary_page_name' in info.properties and 'origin_wiktionary_edition' in info.properties:
-            additional_note = "{{dikantenin'ny dikanteny|%(origin_wiktionary_page_name)s|%(origin_wiktionary_edition)s}}\n" % info.properties
+            additional_note = " {{dikantenin'ny dikanteny|%(origin_wiktionary_page_name)s|%(origin_wiktionary_edition)s}}\n" % info.properties
 
         s = """
 =={{=%(language)s=}}==
 {{-%(part_of_speech)s-|%(language)s}}
-'''{{subst:BASEPAGENAME}}''' {{fanononana X-SAMPA||%(language)s}} {{fanononana||%(language)s}}
-# %(entry_definition)s"""%info.properties
+'''{{subst:BASEPAGENAME}}''' {{fanononana X-SAMPA||%(language)s}} {{fanononana||%(language)s}}"""%info.properties
+        s += "\n# %s" % ', '.join(info.entry_definition)
         s = s + additional_note % info.properties
         try:
             return s
