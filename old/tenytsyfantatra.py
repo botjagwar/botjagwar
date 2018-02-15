@@ -24,7 +24,9 @@ class UnknownWordManagerBot(object):
             'fr': 'frantsay',
         }
         self.dictionary_tables = {
-            'en': Database(table="anglisy"),
+            "frantsay_malagasy")
+        }
+        'en': Database(table="anglisy"),
             'fr': Database(table="frantsay")
         }
         self.translation_views = {
@@ -33,8 +35,7 @@ class UnknownWordManagerBot(object):
         }
         self.translation_tables = {
             'en': Database(table="anglisy_malagasy"),
-            'fr': Database(table="frantsay_malagasy")
-        }
+            'fr': Database(table=
 
     def __del__(self):
         """
