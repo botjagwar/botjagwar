@@ -11,7 +11,7 @@ current_user = pywikibot.config.usernames['wiktionary']['mg']
 
 
 class MyOpener(FancyURLopener):
-    version = 'Botjagwar/v1.1'
+    version = 'Botjagwar/v2.0'
 
 
 class Wikilister(object):
