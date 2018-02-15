@@ -29,7 +29,7 @@ class Translation:
         self.loop = asyncio.get_event_loop()
 
     async def _save_translation_from_bridge_language(self, infos):
-        summary = "Dikan-teny avy amin'ny dikan-teny avy amin'i %s.wiktionary" % infos.origin_wiktionary_edition
+        summary = "[ng] Dikan-teny avy amin'ny dikan-teny avy amin'i %s.wiktionary" % infos.origin_wiktionary_edition
         wikipage = self.output.wikipage(infos)
         mg_page = pwbot.Page(pwbot.Site('mg', 'wiktionary'), infos.entry)
         try:
@@ -56,7 +56,7 @@ class Translation:
         await self.output.db(infos)
 
     async def _save_translation_from_page(self, infos):
-        summary = "Dikan-teny avy amin'ny pejy avy amin'i %s.wiktionary" % infos.language
+        summary = "[ng] Dikan-teny avy amin'ny pejy avy amin'i %s.wiktionary" % infos.language
         wikipage = self.output.wikipage(infos)
         mg_page = pwbot.Page(pwbot.Site('mg', 'wiktionary'), infos.entry)
         if mg_page.exists():
@@ -99,11 +99,10 @@ class Translation:
                 language=entry_language,
                 origin_wiktionary_edition=language,
                 origin_wiktionary_page_name=title)
-            client_session = ClientSession()
-            resp = await client_session.get(URL_HEAD + '/word/%s/%s' % (infos.language, infos.entry))
-            await client_session.close()
-            if resp.status != WordDoesNotExistException.status_code:
-                continue
+            async with ClientSession() as client_session:
+                async with client_session.get(URL_HEAD + '/word/%s/%s' % (infos.language, infos.entry)) as resp:
+                    if resp.status != WordDoesNotExistException.status_code:
+                        continue
 
             _generate_redirections(infos)
             await self._save_translation_from_bridge_language(infos)
@@ -116,12 +115,10 @@ class Translation:
         if language_code in self.language_blacklist:
             return 0
 
-        client_session = ClientSession()
-        resp = await client_session.get(URL_HEAD + '/word/%s/%s' % (language, word))
-        await client_session.close()
-        if resp.status != WordDoesNotExistException.status_code:
-
-            return 0
+        async with ClientSession() as client_session:
+            async with client_session.get(URL_HEAD + '/word/%s/%s' % (language, word)) as resp:
+                if resp.status != WordDoesNotExistException.status_code:
+                    return 0
 
         title = wiki_page.title()
         try:
@@ -183,11 +180,10 @@ class Translation:
 
     async def translate_word(self, word, language):
         url = URL_HEAD + '/translations/%s/mg/%s' % (language, word)
-        client_session = ClientSession()
-        resp = await client_session.get(url)
-        await client_session.close()
-        if resp.status == WordDoesNotExistException.status_code:
-            raise NoWordException()
+        async with ClientSession() as client_session:
+            async with client_session.get(url) as resp:
+                if resp.status == WordDoesNotExistException.status_code:
+                    raise NoWordException()
 
         translations_json = await resp.json()
         translations = []

@@ -16,7 +16,6 @@ class Output(object):
         pass
 
     async def db(self, info):
-        self.client_session = ClientSession()
         """updates database"""
         definitions = [{
             'definition': entry_definition,
@@ -28,24 +27,22 @@ class Output(object):
             'part_of_speech': info.part_of_speech,
             'definitions': definitions
         }
-        resp = await self.client_session.post(
-            URL_HEAD + '/entry/%s/create' % info.language,
-            data=json.dumps(entry)
-        )
-        if resp.status == WordAlreadyExistsException.status_code:
-            resp = await self.client_session.get(
-                URL_HEAD + '/entry/%s/%s' % (info.language, info.entry)
-            )
-            jdata = await resp.json()
-            entry_json = [w for w in jdata
-                          if w['part_of_speech'] == info.part_of_speech][0]
-            entry_json['entry'] = entry
-            resp = await self.client_session.post(
-                URL_HEAD + '/entry/%s/edit' % entry_json['id'],
-                data=json.dumps(entry_json)
-            )
+        async with ClientSession() as client_session:
+            async with client_session.post( URL_HEAD + '/entry/%s/create' % info.language, data=json.dumps(entry)) as resp:
+                if resp.status == WordAlreadyExistsException.status_code:
+                    resp = await client_session.get(
+                        URL_HEAD + '/entry/%s/%s' % (info.language, info.entry)
+                    )
+                    jdata = await resp.json()
+                    entry_json = [w for w in jdata
+                                  if w['part_of_speech'] == info.part_of_speech][0]
+                    entry_json['entry'] = entry
+                    async with client_session.post(
+                        URL_HEAD + '/entry/%s/edit' % entry_json['id'], data=json.dumps(entry_json)):
+                        pass
 
-        await self.client_session.get(URL_HEAD + '/commit')
+            async with client_session.get(URL_HEAD + '/commit') as resp:
+                pass
 
     def batchfile(self, info):
         "return batch format (see doc)"
