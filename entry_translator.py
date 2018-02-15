@@ -35,10 +35,13 @@ def set_throttle(i):
 
 
 def _update_unknowns(unknowns):
-    f = open(userdata_file + "word_hits", 'a')
+    try:
+        f = open(userdata_file + "word_hits", 'a')
+    except FileNotFoundError:
+        os.system('mkdir -p %s' % userdata_file)
+        f = open(userdata_file + "word_hits", 'a')
     for word, lang in unknowns:
         word += ' [%s]\n' % lang
-        print((type(word)))
         f.write(word)
     f.close()
 

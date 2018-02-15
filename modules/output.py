@@ -7,17 +7,16 @@ from database.http import (
 
 verbose = False
 
-
 USER_DATA = 'user_data/entry_translator'
 URL_HEAD = 'http://localhost:8001'
 
 
 class Output(object):
-    def __init__(self, output_batchfile=USER_DATA + "/translate_batch.txt"):
-        self.output_batchfile = open(output_batchfile, 'a')
-        self.client_session = ClientSession()
+    def __init__(self):
+        pass
 
     async def db(self, info):
+        self.client_session = ClientSession()
         """updates database"""
         definitions = [{
             'definition': entry_definition,
@@ -52,7 +51,7 @@ class Output(object):
         "return batch format (see doc)"
         string = "%(entry)s -> %(entry_definition)s -> %(part_of_speech)s -> %(language)s\n" % info.properties
         return string
-        
+
     def wikipage(self, info):
         "returns wikipage string"
         additional_note = ""
@@ -62,7 +61,7 @@ class Output(object):
         s = """
 =={{=%(language)s=}}==
 {{-%(part_of_speech)s-|%(language)s}}
-'''{{subst:BASEPAGENAME}}''' {{fanononana X-SAMPA||%(language)s}} {{fanononana||%(language)s}}"""%info.properties
+'''{{subst:BASEPAGENAME}}''' {{fanononana X-SAMPA||%(language)s}} {{fanononana||%(language)s}}""" % info.properties
         s += "\n# %s" % ', '.join(['[[%s]]' % (d) for d in info.entry_definition])
         s = s + additional_note % info.properties
         try:

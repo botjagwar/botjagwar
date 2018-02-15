@@ -28,7 +28,7 @@ class Translation:
         self.data_file = data_file or default_data_file
         self.output = Output()
         self.language_blacklist = ['fr', 'en', 'sh', 'ar', 'de', 'zh']
-        self.client_session = ClientSession()
+
         self.loop = asyncio.get_event_loop()
 
     async def _save_translation_from_bridge_language(self, infos):
@@ -76,6 +76,7 @@ class Translation:
         await self.output.db(infos)
 
     async def process_entry_in_native_language(self, wiki_page, language, unknowns):
+
         wiktionary_processor_class = entryprocessor.WiktionaryProcessorFactory.create(language)
         wiktionary_processor = wiktionary_processor_class()
         ret = 0
@@ -83,9 +84,7 @@ class Translation:
             translations = wiktionary_processor.retrieve_translations()
         except Exception as e:
             return ret
-        translations_in_mg = {}  # dictionary {string : list of translation tuple (see below)}
         for entry, pos, entry_language in translations:
-            # translation = tuple(codelangue, entree)
             if entry_language in self.language_blacklist:  # check in language blacklist
                 continue
             title = wiki_page.title()
@@ -103,8 +102,9 @@ class Translation:
                 language=entry_language,
                 origin_wiktionary_edition=language,
                 origin_wiktionary_page_name=title)
-
-            resp = await self.client_session.get(URL_HEAD + '/word/%s/%s' % (infos.language, infos.entry))
+            client_session = ClientSession()
+            resp = await client_session.get(URL_HEAD + '/word/%s/%s' % (infos.language, infos.entry))
+            await client_session.close()
             if resp.status != WordDoesNotExistException.status_code:
                 continue
 
@@ -115,12 +115,15 @@ class Translation:
         return ret
 
     async def process_entry_in_foreign_language(
-            self, wiki_page, word, language_code, language, pos, definition, translations_in_mg, unknowns):
+            self, wiki_page, word, language_code, language, pos, definition, unknowns):
         if language_code in self.language_blacklist:
             return 0
 
-        resp = await self.client_session.get(URL_HEAD + '/word/%s/%s' % (language, word))
+        client_session = ClientSession()
+        resp = await client_session.get(URL_HEAD + '/word/%s/%s' % (language, word))
+        await client_session.close()
         if resp.status != WordDoesNotExistException.status_code:
+
             return 0
 
         title = wiki_page.title()
@@ -148,8 +151,6 @@ class Translation:
     async def process_wiktionary_wiki_page(self, wiki_page):
         language = wiki_page.site.language()
         unknowns = []
-        # fanampiana : wiki_page:wiki_page
-
 
         # BEGINNING
         ret = 0
@@ -167,7 +168,6 @@ class Translation:
         except Exception as e:
             return unknowns, ret
 
-        translations_in_mg = {}  # dictionary {string : list of translation tuple (see below)}
         for word, pos, language_code, definition in entries:
             if word is None or definition is None:
                 continue
@@ -177,9 +177,7 @@ class Translation:
                         wiki_page, language, unknowns)
             else:
                 ret += await self.process_entry_in_foreign_language(
-                        wiki_page, word, language_code,
-                        language, pos, definition,
-                        translations_in_mg, unknowns)
+                        wiki_page, word, language_code, language, pos, definition, unknowns)
 
         # Malagasy language pages
         # self.update_malagasy_word(translations_in_mg)
@@ -188,8 +186,9 @@ class Translation:
 
     async def translate_word(self, word, language):
         url = URL_HEAD + '/translations/%s/mg/%s' % (language, word)
-        print (url)
-        resp = await self.client_session.get(url)
+        client_session = ClientSession()
+        resp = await client_session.get(url)
+        await client_session.close()
         if resp.status == WordDoesNotExistException.status_code:
             raise NoWordException()
 
