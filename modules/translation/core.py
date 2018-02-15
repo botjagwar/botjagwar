@@ -4,8 +4,6 @@ import pywikibot as pwbot
 
 import asyncio
 from aiohttp import ClientSession
-from aiohttp.client_exceptions import ClientConnectorError
-import json
 
 from database.http import WordDoesNotExistException
 
@@ -15,7 +13,6 @@ from modules.output import Output
 from modules.autoformatter import Autoformat
 from models.word import Entry
 
-from subprocess import Popen
 
 default_data_file = os.getcwd() + '/conf/entry_translator/'
 URL_HEAD = 'http://localhost:8001'
