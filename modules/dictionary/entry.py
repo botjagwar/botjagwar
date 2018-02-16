@@ -68,6 +68,8 @@ async def add_entry(request):
         HTTP 200 if entry is OK
     """
     data = await request.json()
+    if isinstance(data, str):
+        data = json.loads(data)
     session = request.app['session_instance']
 
     # Search if definition already exists.

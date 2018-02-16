@@ -26,7 +26,7 @@ cronconf: botscripts
 
 test:
 	sudo apt-get install python3-nose python3-rednose
-	nosetests3 -v --rednose test/
+	python3.6 -m "nose" -vv --rednose test/
 
 .PHONY: test
 

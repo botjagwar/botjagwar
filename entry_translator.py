@@ -1,4 +1,4 @@
-# -*- coding: utf8 -*-
+#!/usr/bin/python3.6
 import os
 import sys
 import time

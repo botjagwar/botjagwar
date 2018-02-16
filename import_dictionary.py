@@ -1,3 +1,5 @@
+#!/usr/bin/python3.6
+
 import sys
 import asyncio
 from aiohttp import ClientSession

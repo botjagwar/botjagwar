@@ -1,10 +1,11 @@
+import datetime
 
 from sqlalchemy import Table, Column, ForeignKey
-from sqlalchemy import Integer, String
+from sqlalchemy import Integer, String, DateTime
 
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship
-
+from sqlalchemy.sql import func
 
 Base = declarative_base()
 dictionary_association = Table('dictionary', Base.metadata,
@@ -16,6 +17,7 @@ dictionary_association = Table('dictionary', Base.metadata,
 class Word(Base):
     __tablename__ = 'word'
     id = Column(Integer, primary_key=True)
+    date_changed = Column(DateTime, default=func.now())
     word = Column(String(150))
     language = Column(String(6))
     part_of_speech = Column(String(15))
@@ -32,6 +34,9 @@ class Word(Base):
             'language': self.language,
             'part_of_speech': self.part_of_speech,
             'definitions': [definition.serialise() for definition in self.definitions],
+            'last_modified':
+                self.date_changed.strftime("%Y-%m-%d %H:%M:%S")
+                if self.date_changed is not None else ''
         }
         return word_data
 
@@ -42,6 +47,9 @@ class Word(Base):
             'word': self.word,
             'language': self.language,
             'part_of_speech': self.part_of_speech,
+            'last_modified':
+                self.date_changed.strftime("%Y-%m-%d %H:%M:%S")
+                if self.date_changed is not None else ''
         }
         return word_data
 
@@ -66,6 +74,7 @@ class Word(Base):
 class Definition(Base):
     __tablename__ = 'definitions'
     id = Column(Integer, primary_key=True)
+    date_changed = Column(DateTime, default=func.now())
     definition = Column(String(250))
     definition_language = Column(String(6))
     words = relationship(
@@ -78,7 +87,10 @@ class Definition(Base):
             'type': self.__class__.__name__,
             'id': self.id,
             'definition': self.definition,
-            'language': self.definition_language
+            'language': self.definition_language,
+            'last_modified':
+                self.date_changed.strftime("%Y-%m-%d %H:%M:%S")
+                if self.date_changed is not None else ''
         }
         return definition_data
 
@@ -88,6 +100,9 @@ class Definition(Base):
             'id': self.id,
             'definition': self.definition,
             'language': self.definition_language,
-            'words': [w.serialise_without_definition() for w in self.words]
+            'words': [w.serialise_without_definition() for w in self.words],
+            'last_modified':
+                self.date_changed.strftime("%Y-%m-%d %H:%M:%S")
+                if self.date_changed is not None else ''
         }
         return definition_data

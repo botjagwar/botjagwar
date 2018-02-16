@@ -17,25 +17,8 @@ class UnknownWordManagerBot(object):
     def __init__(self):
         self.unknown_words_file = open(mt_data_file + "word_hits", "r")
         self.standard_line_regex = re.compile(r"(.*)[ ]\[([a-zA-Z]+)\]")
-        self.word_db = WordDatabase()
         self.aggregated_unknown_words = {}
-        self.language = {
-            'en': 'anglisy',
-            'fr': 'frantsay',
-        }
-        self.dictionary_tables = {
-            "frantsay_malagasy")
-        }
-        'en': Database(table="anglisy"),
-            'fr': Database(table="frantsay")
-        }
-        self.translation_views = {
-            'en': Database(table="en_mg"),
-            'fr': Database(table="fr_mg")
-        }
-        self.translation_tables = {
-            'en': Database(table="anglisy_malagasy"),
-            'fr': Database(table=
+
 
     def __del__(self):
         """
@@ -44,13 +27,6 @@ class UnknownWordManagerBot(object):
 
         """
         self.word_db.close()
-        self.unknown_words_file.close()
-        for _, database in self.dictionary_tables:
-            del database
-        for _, database in self.translation_views:
-            del database
-        for _, database in self.translation_tables:
-            del database
 
     def _get_word_id(self, word, language):
         """
