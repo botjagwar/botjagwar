@@ -50,7 +50,7 @@ def retry_on_fail(exceptions, retries=5, time_between_retries=1):
             m_retries = 0
             try:
                 return f(*args, **kwargs)
-            except exceptions as e:
+            except tuple(exceptions) as e:
                 if m_retries <= retries:
                     m_retries += 1
                     time.sleep(time_between_retries)

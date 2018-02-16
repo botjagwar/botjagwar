@@ -9,6 +9,8 @@ from subprocess import Popen
 import traceback
 
 from modules.decorator import threaded
+from modules.decorator import retry_on_fail
+
 
 userdata_file = os.getcwd() + '/user_data/entry_translator/'
 nwikimax = 5
@@ -54,23 +56,28 @@ class WiktionaryRecentChangesBot(irc.bot.SingleServerIRCBot):
 
     def connect_in_languages(self):
         """mametaka fitohizana amin'ny tsanely irc an'i Wikimedia"""
+
+        @retry_on_fail([requests.exceptions.ConnectionError], retries=3, time_between_retries=0.1)
+        def configure_backend():
+            spawn_backend()
+            time.sleep(.5)
+            requests.put(self.service_address + '/configure', json={'autocommit': True})
+
         print ("\n---------------------\nIRC BOT PAREMETERS : ")
         self.langs = ['en', 'fr']
         self.sitename = 'wiktionary'
         self.channels = ["#%s.%s" % (language.strip(), self.sitename) for language in self.langs]
+
+        try:
+            requests.put(self.service_address + '/configure', json={'autocommit': True})
+        except requests.exceptions.ConnectionError:
+            configure_backend()
 
         for channel in self.channels:
             irc.bot.SingleServerIRCBot.__init__(
                 self, [("irc.wikimedia.org", 6667)], self.username, "Bot-Jagwar [IRCbot v2].")
             self.joined.append(channel)
             print(("Channel:", channel, " Nickname:", self.username))
-
-        try:
-            requests.put(self.service_address + '/configure', json={'autocommit': True})
-        except requests.exceptions.ConnectionError:
-            spawn_backend()
-            time.sleep(2)
-            requests.put(self.service_address + '/configure', json={'autocommit': True})
 
         print ("Connection complete")
 
