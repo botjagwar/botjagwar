@@ -1,5 +1,3 @@
-import datetime
-
 from sqlalchemy import Table, Column, ForeignKey
 from sqlalchemy import Integer, String, DateTime
 

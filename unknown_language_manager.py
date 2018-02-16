@@ -1,9 +1,26 @@
-# coding: utf8
+#!/usr/bin/python3.6
 import time
+
 import pywikibot
-from urllib.request import FancyURLopener, urlopen
 from lxml import etree
+
+from urllib.request import FancyURLopener, urlopen
+
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker
+from sqlalchemy import func
+
+from database import Base, Word
 from modules.decorator import time_this
+from datetime import datetime, timedelta
+
+DATABASE_STORAGE_INFO_FILE = 'data/storage_info'
+with open(DATABASE_STORAGE_INFO_FILE) as storage_file:
+    STORAGE = storage_file.read()
+
+ENGINE = create_engine('sqlite:///%s' % STORAGE)
+Base.metadata.create_all(ENGINE)
+SessionClass = sessionmaker(bind=ENGINE)
 
 WORKING_WIKI = pywikibot.Site("mg", "wiktionary")
 username = "%s" % pywikibot.config.usernames['wiktionary']['mg']
@@ -86,10 +103,11 @@ class UnknownLanguageManagerBot(object):
     Bot script
     """
     def __init__(self):
-        database = WordDatabase()
-        self.db_conn = database.DB
-        self.cursor = self.db_conn.connect.cursor()
         self.lang_list = []
+        self.session = SessionClass()
+
+    def __del__(self):
+        self.session.close()
 
     def get_languages_from_x_days_ago(self, x=30):
         """
@@ -97,14 +115,11 @@ class UnknownLanguageManagerBot(object):
         :param x:
         :return:
         """
-        query = """select distinct(fiteny) as fiteny, count(teny) as isa 
-                from data_botjagwar.`teny` 
-                where teny.daty 
-                    between DATE_SUB(NOW(), INTERVAL %d day) and NOW()
-                group by fiteny
-                order by fiteny asc;""" % x
-        self.cursor.execute(query)
-        for language_code, number_of_words in self.cursor.fetchall():
+        words = self.session.query(Word.language, func.count(Word.word))\
+            .filter(Word.date_changed >= datetime.now() - timedelta(days=x))\
+            .group_by(Word.language)
+
+        for language_code, number_of_words in words:
             yield language_code, number_of_words
 
     def attempt_translations(self):
@@ -143,7 +158,7 @@ class UnknownLanguageManagerBot(object):
         page_content = TABLE_PATTERN % rows
         wikipage = pywikibot.Page(WORKING_WIKI, "Mpikambana:%s/Lisitry ny kaodim-piteny tsy voafaritra" % username)
         f = open("/tmp/wikipage_save", 'w')
-        f.write(page_content.encode('utf8'))
+        f.write(page_content)
         f.close()
         for i in range(10):
             try:
@@ -195,7 +210,6 @@ def get_sil_language_name(language_code):
     page_xpath = '//table/tr[2]/td[2]'
     url = "http://www-01.sil.org/iso639-3/documentation.asp?id=%s" % language_code
     text = urlopen(url).read()
-    text = text.decode("utf8")
     tree = etree.HTML(text)
     r = tree.xpath(page_xpath)
     return r[0].text.strip()

@@ -1,6 +1,5 @@
 #!/usr/bin/python3.6
 from aiohttp import web
-from aiohttp.web import Response
 import argparse
 
 from sqlalchemy import create_engine
