@@ -14,7 +14,9 @@ async def get_definition(request):
     if definitions:
         return Response(
             text=json.dumps(definitions),
-            status=200)
+            status=200,
+            content_type='application/json'
+        )
     else:
         return Response(status=404, content_type='application/json')
 

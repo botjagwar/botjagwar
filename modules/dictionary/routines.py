@@ -1,3 +1,3 @@
 async def save_changes_on_disk(session):
-    pass
-    #session.commit()
+    session.commit()
+    session.flush()
