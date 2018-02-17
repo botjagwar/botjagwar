@@ -8,6 +8,7 @@ from sqlalchemy.orm import sessionmaker
 from database import Base
 from modules.dictionary import get_dictionary
 from modules.dictionary import entry, definition, translation, configuration
+
 parser = argparse.ArgumentParser(description='Dictionary service')
 parser.add_argument('--db-file', dest='STORAGE', required=False)
 args = parser.parse_args()

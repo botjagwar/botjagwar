@@ -54,7 +54,6 @@ class WiktionaryRecentChangesBot(irc.bot.SingleServerIRCBot):
 
         self.connect_in_languages()
 
-
     def connect_in_languages(self):
         """mametaka fitohizana amin'ny tsanely irc an'i Wikimedia"""
 
@@ -110,8 +109,6 @@ class WiktionaryRecentChangesBot(irc.bot.SingleServerIRCBot):
             print((traceback.format_exc()))
             print('NOTE: Spawning "entry_processor.py" backend process.')
         except Exception as e:
-            print((traceback.format_exc()))
-
             self.stats['errors'] += 1
 
 
