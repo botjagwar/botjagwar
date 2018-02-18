@@ -134,8 +134,8 @@ class UnknownLanguageManagerBot(object):
                     try:
                         new_language_name = translate_language_name(language_name)
                         create_category_set(language_code, new_language_name)
-                    except ValueError:
-                        print(('Not translatable ', language_name))
+                    except (ValueError, pywikibot.exceptions.InvalidTitle):
+                        print('Not translatable ', language_name)
                         self.lang_list.append((language_code, language_name, number_of_words))
 
     def start(self):
@@ -177,6 +177,7 @@ def language_code_exists(language_code):
     :param language_code:
     :return:
     """
+    print("checking language code '%s'" % language_code)
     page_titles_to_check = ["Endrika:%s" % language_code,
                             "Endrika:=%s=" % language_code]
     existence = 0
