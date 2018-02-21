@@ -5,16 +5,10 @@ prepare:
 	sudo apt-get install -y libssl-dev
 	sudo apt-get install -y wget
 	sudo apt-get install -y unzip
-
-python: prepare
-	sudo apt-get install -y python3.6-dev
 	sudo apt-get install -y python3-pip
 	sudo pip3 install sqlalchemy
-
-python-requirements: python
+	sudo apt-get install libsqlite3-dev
 	LC_ALL="en_US.UTF-8" sudo pip3 install -r requirements.txt
-
-install-python-deps: python
 	sudo apt-get install -y python3-lxml
 
 botscripts:
@@ -30,5 +24,6 @@ test:
 
 .PHONY: test
 
+all: prepare botscripts cronconf
 
-all: install-python-deps python-requirements cronconf
+.PHONY: all
