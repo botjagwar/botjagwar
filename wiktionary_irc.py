@@ -60,7 +60,7 @@ class WiktionaryRecentChangesBot(irc.bot.SingleServerIRCBot):
         @retry_on_fail([requests.exceptions.ConnectionError], retries=3, time_between_retries=0.1)
         def configure_backend():
             spawn_backend()
-            time.sleep(.5)
+            time.sleep(3)
             requests.put(self.service_address + '/configure', json={'autocommit': True})
 
         print ("\n---------------------\nIRC BOT PAREMETERS : ")

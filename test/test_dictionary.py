@@ -22,8 +22,7 @@ class TestDictionaryRestService(TestCase):
         Base.metadata.create_all(self.ENGINE)
         SessionClass = sessionmaker(bind=self.ENGINE)
         session = SessionClass()
-        definition = Definition(definition='rikizimai',
-                                definition_language='de')
+        definition = Definition('rikizimai', 'de')
         word = Word(word='tehanu',
                     language='jm',
                     part_of_speech='ana',
@@ -90,6 +89,20 @@ class TestDictionaryRestService(TestCase):
             URL_HEAD + '/entry/jm/create',
             json=json.dumps({
                 'definitions': [{
+                    'definition': 'rikizimai',
+                    'definition_language': 'de'
+                }],
+                'word': 'tehanu',
+                'part_of_speech': 'ana',
+            })
+        )
+        self.assertEquals(resp.status_code, db_http.WordAlreadyExistsException.status_code)
+
+    def test_append_to_existing_entry(self):
+        resp = requests.post(
+            URL_HEAD + '/entry/jm/create',
+            json=json.dumps({
+                'definitions': [{
                     'definition': 'nanganasla',
                     'definition_language': 'mg'
                 }],
@@ -97,9 +110,7 @@ class TestDictionaryRestService(TestCase):
                 'part_of_speech': 'ana',
             })
         )
-        self.assertEquals(
-            resp.status_code,
-            db_http.WordAlreadyExistsException.status_code)
+        self.assertEquals(resp.status_code, 200)
 
     def test_create_entry_invalid_json(self):
         resp = requests.post(

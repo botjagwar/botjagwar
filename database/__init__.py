@@ -24,6 +24,19 @@ class Word(Base):
         secondary=dictionary_association,
         back_populates="words")
 
+    def __init__(self, word, language, part_of_speech, definitions):
+        self.word = word
+        self.language = language
+        self.part_of_speech = part_of_speech
+        if not isinstance(definitions, list):
+            raise TypeError("Definitions must be a list object")
+
+        for definition in definitions:
+            if not isinstance(definition, Definition):
+                raise TypeError("Every definition inside definitions list must be a Definition object")
+
+        self.definitions = definitions
+
     def serialise(self):
         word_data = {
             'type': self.__class__.__name__,
@@ -79,6 +92,10 @@ class Definition(Base):
         'Word',
         secondary=dictionary_association,
         back_populates='definitions')
+
+    def __init__(self, definition, language):
+        self.definition = definition
+        self.definition_language = language
 
     def serialise(self):
         definition_data = {
