@@ -48,6 +48,7 @@ app.router.add_route('GET', '/translations/{origin}/{word}', translation.get_all
 
 app.router.add_route('GET', '/ping', configuration.pong)
 app.router.add_route('POST', '/commit', configuration.do_commit)
+app.router.add_route('POST', '/rollback', configuration.do_rollback)
 app.router.add_route('PUT', '/configure', configuration.configure_service)
 
 

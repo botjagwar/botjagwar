@@ -97,7 +97,7 @@ async def upload_dictionary():
                             print('definition already exists. Skipping...')
                         break
 
-        await session.get(URL_HEAD + '/commit')
+        await session.post(URL_HEAD + '/commit')
 
 
 def main():

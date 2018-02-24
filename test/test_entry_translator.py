@@ -3,6 +3,7 @@
 import json
 import requests
 from subprocess import Popen
+from subprocess import PIPE
 from time import sleep
 from test_utils.mocks import PageMock, SiteMock
 from unittest.case import TestCase
@@ -38,7 +39,7 @@ class TestEntryTranslatorProcessWiktionaryPage(TestCase):
 
     @threaded
     def launch_service(self):
-        self.p2 = Popen(["python3.6", "dictionary_service.py", "--db-file", '/tmp/test.db'])
+        self.p2 = Popen(["python3.6", "dictionary_service.py", "--db-file", '/tmp/test.db'], stdout=PIPE, stderr=PIPE)
 
     def test_process_wiktionary_page_english(self):
         for pagename in LIST:
@@ -63,7 +64,7 @@ class TestEntryTranslatorServices(TestCase):
 
     @threaded
     def launch_service(self):
-        self.p2 = Popen(["python3.6", "entry_translator.py", "&"])
+        self.p2 = Popen(["python3.6", "entry_translator.py", "&"], stdout=PIPE, stderr=PIPE)
 
     def check_response_status(self, url, data):
         resp = requests.put(url, json=data)

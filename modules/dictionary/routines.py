@@ -1,2 +1,3 @@
-async def save_changes_on_disk(session):
-    session.commit()
+async def save_changes_on_disk(app, session):
+    if app['autocommit']:
+        session.commit()

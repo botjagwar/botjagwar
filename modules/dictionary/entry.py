@@ -121,7 +121,7 @@ async def add_entry(request):
         # Updating database
         session.add(word)
 
-    await save_changes_on_disk(session)
+    await save_changes_on_disk(request.app, session)
 
     # Return HTTP response
     forged_word = word.serialise()
@@ -163,7 +163,7 @@ async def edit_entry(request):
     word.definitions = definitions
     word.part_of_speech = data['part_of_speech']
 
-    await save_changes_on_disk(session)
+    await save_changes_on_disk(request.app, session)
     return Response(status=HTTPOk.status_code, text=json.dumps(word.serialise()), content_type='application/json')
 
 
@@ -181,5 +181,5 @@ async def delete_entry(request):
     session.query(Word).filter(
         Word.id == request.match_info['word_id']).delete()
 
-    await save_changes_on_disk(session)
+    await save_changes_on_disk(request.app, session)
     return Response(status=HTTPNoContent.status_code, content_type='application/json')

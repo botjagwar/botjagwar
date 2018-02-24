@@ -70,7 +70,6 @@ def parse_word_forms():
                 malagasy_definition = template_expression_to_malagasy_definition(definition)
                 lemma = get_lemma(definition)
             except (AttributeError, ValueError) as e:
-                print((traceback.format_exc()))
                 continue
 
             # Do not create page if lemma does not exist

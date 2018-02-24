@@ -1,12 +1,13 @@
 import time
 import os
-from subprocess import Popen
-from unittest import TestCase
+
 import json
 import requests
-
+from subprocess import Popen
+from subprocess import PIPE
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
+from unittest import TestCase
 
 from modules.decorator import threaded
 from database import Base, Definition, Word
@@ -15,6 +16,7 @@ import database.http as db_http
 
 URL_HEAD = 'http://0.0.0.0:8001'
 DB_PATH = '/tmp/test.db'
+
 
 class TestDictionaryRestService(TestCase):
     def setUp(self):
@@ -44,7 +46,7 @@ class TestDictionaryRestService(TestCase):
 
     @threaded
     def launch_service(self):
-        self.p2 = Popen(["python3.6", "dictionary_service.py", '--db-file', DB_PATH])
+        self.p2 = Popen(["python3.6", "dictionary_service.py", '--db-file', DB_PATH], stdout=PIPE, stderr=PIPE)
         self.p2.communicate()
 
     def tearDown(self):
@@ -66,6 +68,36 @@ class TestDictionaryRestService(TestCase):
         self.assertEquals(resp.status_code, 200)
         j = resp.json()
         # check in database if definition has been added
+
+    def test_disable_autocommit(self):
+        requests.put(
+            URL_HEAD + '/configure',
+            json=json.dumps({
+                'autocommit': False
+            })
+        )
+        for i in range(20):
+            self.create_entry('nanaika%d' % i, 'ka', 'ana', 'tarameguni%d' % i, 'de')
+
+        requests.post(URL_HEAD + '/rollback')
+
+        for i in range(20):
+            resp = requests.get(URL_HEAD + '/entry/ka/nanaika%d' % i)
+            self.assertEquals(resp.status_code, 404)
+
+    def test_enable_autocommit(self):
+        requests.put(
+            URL_HEAD + '/configure',
+            json=json.dumps({
+                'autocommit': True
+            })
+        )
+        for i in range(20):
+            self.create_entry('nanaika%d' % i, 'ka', 'ana', 'tarameguni%d' % i, 'de')
+
+        for i in range(20):
+            resp = requests.get(URL_HEAD + '/entry/ka/nanaika%d' % i)
+            self.assertEquals(resp.status_code, 200)
 
     def test_get_entry(self):
         resp = requests.get(URL_HEAD + '/entry/jm/tehanu')

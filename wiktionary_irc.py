@@ -7,7 +7,6 @@ import os
 import irc.bot
 import requests
 from subprocess import Popen
-import traceback
 
 from modules.decorator import threaded
 from modules.decorator import retry_on_fail
@@ -106,7 +105,6 @@ class WiktionaryRecentChangesBot(irc.bot.SingleServerIRCBot):
                 self.chronometer = ct_time
                 print(("Edit #%d (%.2f edits/min)" % (self.edits, throughput)))
         except requests.ConnectionError as e:
-            print((traceback.format_exc()))
             print('NOTE: Spawning "entry_processor.py" backend process.')
         except Exception as e:
             self.stats['errors'] += 1
@@ -166,8 +164,8 @@ def base36encode(number, alphabet='0123456789abcdefghjiklmnopqrstuvwxyz'):
 
 @threaded
 def spawn_backend():
-    spawned_backend_process = Popen(['python3.6', 'entry_translator.py'])
-    dictionary_service = Popen(['python3.6', 'dictionary_service.py'])
+    spawned_backend_process = Popen(['python3.6', 'entry_translator.py'], stdout=PIPE, stderr=PIPE)
+    dictionary_service = Popen(['python3.6', 'dictionary_service.py'], stdout=PIPE, stderr=PIPE)
     spawned_backend_process.communicate()
     dictionary_service.communicate()
 
