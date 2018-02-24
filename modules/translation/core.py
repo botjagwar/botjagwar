@@ -29,7 +29,7 @@ class Translation:
         self.loop = asyncio.get_event_loop()
 
     async def _save_translation_from_bridge_language(self, infos):
-        summary = "[ng] Dikan-teny avy amin'ny dikan-teny avy amin'i %s.wiktionary" % infos.origin_wiktionary_edition
+        summary = "Dikan-teny avy amin'ny dikan-teny avy amin'i %s.wiktionary (v1.0)" % infos.origin_wiktionary_edition
         wikipage = self.output.wikipage(infos)
         mg_page = pwbot.Page(pwbot.Site('mg', 'wiktionary'), infos.entry)
         try:

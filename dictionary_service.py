@@ -55,7 +55,7 @@ app.router.add_route('PUT', '/configure', configuration.configure_service)
 if __name__ == '__main__':
     try:
         app.router.add_routes(routes)
-        web.run_app(app, port=8001)
+        web.run_app(app, host="0.0.0.0", port=8001)
     finally:
         app['session_instance'].flush()
         app['session_instance'].close()

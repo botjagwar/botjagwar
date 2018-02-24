@@ -164,8 +164,8 @@ def base36encode(number, alphabet='0123456789abcdefghjiklmnopqrstuvwxyz'):
 
 @threaded
 def spawn_backend():
-    spawned_backend_process = Popen(['python3.6', 'entry_translator.py'], stdout=PIPE, stderr=PIPE)
-    dictionary_service = Popen(['python3.6', 'dictionary_service.py'], stdout=PIPE, stderr=PIPE)
+    spawned_backend_process = Popen(['python3.6', 'entry_translator.py'])
+    dictionary_service = Popen(['python3.6', 'dictionary_service.py'])
     spawned_backend_process.communicate()
     dictionary_service.communicate()
 
