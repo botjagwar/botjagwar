@@ -29,7 +29,7 @@ routes = web.RouteTableDef()
 app = web.Application()
 app['database_session'] = SessionClass
 app['session_instance'] = SessionClass()
-app['autocommit'] = False
+app['autocommit'] = True
 
 
 app.router.add_route('GET', '/definition/{definition_id}', definition.get_definition)
