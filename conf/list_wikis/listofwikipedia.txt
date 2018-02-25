@@ -1,167 +1,4023 @@
-{{Languages}}
-<table class="nmbox" style="border: 1px solid #AAAAAA; border-collapse: collapse; clear: both; font-size: 85%; margin: 0.25em 0;">
-<tr style="background: #EEF3E2">
-<th class="mbox-image" style="white-space: nowrap; padding: 4px 1em; border-right: 1px solid #aaaaaa;">'''{{External links|{{SUBPAGENAME}}}}'''</th>
-<td class="mbox-text" style="background: #EEFFEE;">
-{{•|1={{ill|:als:Wikipedia:Sprachen|als}}}}
-{{•|1={{ill|:az:Vikipediya:Bütün Vikipediyaların siyahısı|az}}}}
-{{•|1={{ill|:cs:Wikipedie:Seznam jazyků Wikipedie|cs}}}}
-{{•|1={{ill|:cu:Википє́дїꙗ:Ката́логъ|cu}}}}
-{{•|1={{ill|:de:Wikipedia:Sprachen|de}}}}
-{{•|1={{ill|:fi:Wikipedia:Luettelo Wikipedian kielistä|fi}}}}
-{{•|1={{ill|:ga:Vicipéid:Vicipéid i dteangacha eile|ga}}}}
-{{•|1={{ill|:hu:Wikipédia:Wikipédiák listája|hu}}}}
-{{•|1={{ill|:ja:Wikipedia:ウィキペディアの一覧|ja}}}}
-{{•|1={{ill|:ka:ვიკიპედია:ვიკიპედიების სია|ka}}}}
-{{•|1={{ill|:kk:Уикипедия:Уикипедиялар тізімі|kk}}}}
-{{•|1={{ill|:위키백과의 목록|ko}}}}
-{{•|1={{ill|:ky:Уикипедиялар тизмеси|ky}}}}
-{{•|1={{ill|:lv:Vikipēdija:Vikipēdiju uzskaitījums|lv}}}}
-{{•|1={{ill|:mg:wikt:Mpikambana:Bot-Jagwar/Lisitry ny Wikipedia|mg}}}}
-{{•|1={{ill|:mk:Википедија:Список на википедии|mk}}}}
-{{•|1={{ill|:nan:Wikipedia:Kî-thaⁿ ê gí-giân|nan}}}}
-{{•|1={{ill|:pl:Wikipedia:Lista wersji językowych|pl}}}}
-{{•|1={{ill|:pt:Wikipedia:Wikipédia em outras línguas|pt}}}}
-{{•|1={{ill|:ru:Википедия:Список Википедий|ru}}}}
-{{•|1={{ill|:sr:Википедија:Остали_језици|sr}}}}
-{{•|1={{ill|:sv:Wikipedia:Lista över Wikipedias språkversioner|sv}}}}
-{{•|1={{ill|:ta:Wikipedia:பன்மொழி விக்கிப்பீடியாப் பட்டியல்|ta}}}}
-{{•|1={{ill|:th:วิกิพีเดีย:วิกิพีเดียภาษาต่าง ๆ|th}}}}
-{{•|1={{ill|:uk:Вікіпедія:Список Вікіпедій|uk}}}}
-{{•|1={{ill|:vi:Wikipedia:Phiên bản ngôn ngữ|vi}}}}
-{{•|1={{ill|:yo:Wikipedia:Awon Eede|yo}}}}
-{{•|1={{ill|:zh:wikipedia:維基百科語言列表|zh}}}}
-</td></tr></table>
-{{Project lists/fr}}
+<!-- Update the table as a whole, in the given date. Please DO NOT MAKE PARTIAL UPDATING.
+Please, update also date and time. -->
 
-<div style="float:right;margin-left:5px;">__TOC__</div>
-
-Cette page contient 3&nbsp;listes de Wikipédias dans de nombreuses langues, classées selon trois critères différents :
-
-La première, dans laquelle les Wikipédias sont classées par taille, est une liste simplifiée qui comprend les 296&nbsp;Wikipédias avec l'article en français correspondant à chaque langue.
-
-La seconde comprend la liste détaillée des Wikipédias en anglais. On y trouve un lien vers l’article de Wikipédia en anglais au sujet de cette langue, son nom dans la langue concernée, et un lien vers la page de statistiques de la Wikipédia concernée. Les Wikipédias en phase de test sont présentées dans une autre partie. Chacun peut copier et coller régulièrement la syntaxe wiki des différentes Wikipédias depuis [http://s23.org/wikistats/wikipedias_wiki.php ce lien].
-
-Dans la troisième liste, les Wikipédias sont classées par indicatif de langue (<tt>fr</tt> pour le français, <tt>en</tt> pour l’anglais…).
-
-Une liste maintenue à jour automatiquement (en anglais) est disponible sur [[Special:SiteMatrix]].
-
-'''NB : ajouter un lien dans la liste ci-après ne permet pas de lancer une nouvelle Wikipédia''' (pour avoir des renseignements sur le lancement d’un Wikipédia dans une autre langue, se reporter à [[fr:Aide:Comment créer un Wikipédia dans une langue encore absente|Comment créer un Wikipédia dans une langue encore absente]]&nbsp;;les développeurs pouvant être surchargés, soyez patient(e) après vos demandes).
-
-Si un Wikipédia dans une autre langue devient actif, merci d’inclure un lien vers celui-ci dans toutes les pages appropriées, et d’annoncer la nouvelle sur la [[Mailing list#Projects|Wikipedia-L]], ainsi que sur [[Wikimedia News]].
-
-Les langues mentionnées ci-après ont leur Wikipédia. Leur évolution peut être suivie sur {{lang|en|[[:en:Wikipedia:Multilingual statistics]]}} (en anglais) ou sur [http://s23.org/wikistats/wikipedias_html.php?sort=good_desc Wiki stats] (dont la grammaire est légèrement différente).
-
-== Wikipédias classées par nombre d’articles ==<!-- Vide. ? -->
-
-== Classement simple en français le 11 octobre 2017 ==
-
+* Statistics at 12:00, 25 February 2018 (UTC)
 === 1 000 000+ articles ===
-[[:en:|1]]&nbsp;: [[fr:anglais|anglais]] | [[:ceb:|2]]&nbsp;: [[fr:cébouano|cébouano]] | [[:sv:|3]]&nbsp;: [[fr:suédois|suédois]] | [[:de:|4]]&nbsp;: [[fr:allemand|allemand]] | [[:fr:|5]]&nbsp;: [[fr:français|français]] | [[:nl:|6]]&nbsp;: [[fr:néerlandais|néerlandais]] | [[:ru:|7]]&nbsp;: [[fr:russe|russe]] | [[:it:|8]]&nbsp;: [[fr:italien|italien]] | [[:es:|9]]&nbsp;: [[fr:espagnol|espagnol]] | [[:war:|10]]&nbsp;: [[fr:waray-waray|waray-waray]] | [[:pl:|11]]&nbsp;: [[fr:polonais|polonais]] | [[:vi:|12]]&nbsp;: [[fr:vietnamien|vietnamien]] | [[:ja:|13]]&nbsp;: [[fr:japonais|japonais]]
-
-=== 100 000+ articles ===
-
-[[:pt:|14]]&nbsp;: [[fr:portugais|portugais]] | [[:zh:|15]]&nbsp;: [[fr:chinois|chinois]] | [[:uk:|16]]&nbsp;: [[fr:ukrainien|ukrainien]] | [[:fa:|17]]&nbsp;: [[fr:persan|persan]] | [[:ca:|18]]&nbsp;: [[fr:catalan|catalan]] | [[:ar:|19]]&nbsp;: [[fr:arabe|arabe]] | [[:no:|20]]&nbsp;: [[fr:norvégien|norvégien]] | [[:sh:|21]]&nbsp;: [[fr:serbo-croate|serbo-croate]] | [[:fi:|22]]&nbsp;: [[fr:finnois|finnois]] | [[:hu:|23]]&nbsp;: [[fr:hongrois|hongrois]] | [[:id:|24]]&nbsp;: [[fr:indonésien|indonésien]] | [[:ko:|25]]&nbsp;: [[fr:coréen|coréen]] | [[:cs:|26]]&nbsp;: [[fr:tchèque|tchèque]] | [[:ro:|27]]&nbsp;: [[fr:roumain|roumain]] | [[:sr:|28]]&nbsp;: [[fr:serbe|serbe]] | [[:ms:|29]]&nbsp;: [[fr:malais|malais]] | [[:tr:|30]]&nbsp;: [[fr:turc|turc]] | [[:eu:|31]]&nbsp;: [[fr:basque|basque]] | [[:eo:|32]]&nbsp;: [[fr:espéranto|espéranto]] | [[:bg:|33]]&nbsp;: [[fr:bulgare|bulgare]] | [[:hy:|34]]&nbsp;: [[fr:arménien|arménien]] | [[:da:|35]]&nbsp;: [[fr:danois|danois]] | [[:zh-min-nan:|36]]&nbsp;: [[fr:minnan|minnan]] | [[:sk:|37]]&nbsp;: [[fr:slovaque|slovaque]] | [[:min:|38]]&nbsp;: [[fr:minangkabau (langue)|minangkabau]] | [[:kk:|39]]&nbsp;: [[fr:kazakh|kazakh]] | [[:he:|40]]&nbsp;: [[fr:hébreu|hébreu]] | [[:lt:|41]]&nbsp;: [[fr:lituanien|lituanien]] | [[:hr:|42]]&nbsp;: [[fr:croate|croate]] | [[:ce:|43]]&nbsp;: [[fr:tchétchène|tchétchène]] | [[:et:|44]]&nbsp;: [[fr:estonien|estonien]] | [[:sl:|45]]&nbsp;: [[fr:slovène|slovène]] | [[:be:|46]]&nbsp;: [[fr:biélorusse|biélorusse]] | [[:ga:|47]]&nbsp;: [[fr:galicien|galicien]] |  [[:el:|48]]&nbsp;: [[fr:grec|grec]] | [[:nn:|49]]&nbsp;: [[fr:néo-norvégien|néo-norvégien]] | [[:uz:|50]]&nbsp;: [[fr:ouzbek|ouzbek]] | [[:simple:|51]]&nbsp;: [[fr:anglais simplifié|anglais simplifié]] | [[:la:|52]]&nbsp;: [[fr:latin|latin]] | [[:az:|53]]&nbsp;: [[fr:azéri|azéri]] | [[:ur:|54]]&nbsp;: [[fr:ourdou|ourdou]] | [[:hi:|55]]&nbsp;: [[fr:hindi|hindi]] | [[:vo:|56]]&nbsp;: [[fr:volapük|volapük]] | [[:th:|57]]&nbsp;: [[fr:thaï (langue)|thaï]] | [[:ka:|58]]&nbsp;: [[fr:géorgien|géorgien]] | [[:ta:|59]]&nbsp;: [[fr:tamoul|tamoul]]
-
-=== 10 000+ articles ===
-Cette section est à actualiser.
-
-[[:cy:|60]]&nbsp;: [[fr:gallois|gallois]] | [[:oc:|59]]&nbsp;: [[fr:occitan|occitan]] | [[:mk:|60]]&nbsp;: [[fr:macédonien|macédonien]] | [[:ta:|61]]&nbsp;: [[fr:tamoul|tamoul]] | [[:mg:|62]]&nbsp;: [[fr:malgache|malgache]] | [[:new:|63]]&nbsp;: [[fr:néwar|néwar]] | [[:tt:|65]]&nbsp;: [[fr:tatar|tatar]] | [[:bs:|66]]&nbsp;: [[fr:bosnien|bosnien]] | [[:lv:|67]]&nbsp;: [[fr:letton|letton]] | [[:tl:|68]]&nbsp;: [[fr:tagalog|tagalog]] | [[:pms:|69]]&nbsp;: [[fr:piémontais|piémontais]] | [[:te:|70]]&nbsp;: [[fr:télougou|télougou]] | [[:be-x-old:|71]]&nbsp;: [[fr:biélorusse (tarashkevitsa)|biélorusse (tarashkevitsa)]] | [[:br:|72]]&nbsp;: [[fr:breton|breton]] | [[:ht:|73]]&nbsp;: [[fr:créole haïtien|créole haïtien]] | [[:sq:|74]]&nbsp;: [[fr:albanais|albanais]] | [[:jv:|75]]&nbsp;: [[fr:javanais|javanais]] | [[:ky:|76]]&nbsp;: [[fr:kirghize|kirghize]] | [[:lb:|77]]&nbsp;: [[fr:luxembourgeois|luxembourgeois]] | [[:mr:|78]]&nbsp;: [[fr:marathi (langue)|marathi]] | [[:zh-yue:|79]]&nbsp;: [[fr:cantonais|cantonais]] | [[:ml:|80]]&nbsp;: [[fr:malayalam|malayalam]] | [[:is:|81]]&nbsp;: [[fr:islandais|islandais]] | [[:tg:|82]]&nbsp;: [[fr:tadjik|tadjik]] | [[:bn:|83]]&nbsp;: [[fr:bengali|bengali]] | [[:af:|84]]&nbsp;: [[fr:afrikaans|afrikaans]] | [[:ga:|85]]&nbsp;: [[fr:irlandais|irlandais]] | [[:ba:|86]]&nbsp;: [[fr:bashkir|bashkir]] | [[:sco:|87]]&nbsp;: [[fr:scots|scots]] | [[:pnb:|88]]&nbsp;: [[fr:penjabi occidental|penjabi occidental]] | [[:cv:|89]]&nbsp;: [[fr:tchouvache|tchouvache]] | [[:fy:|90]]&nbsp;: [[fr:frison (langue)|frison]] | [[:lmo:|91]]&nbsp;: [[fr:lombard (langue)|lombard]] | [[:my:|92]]&nbsp;: [[fr:birman|birman]] | [[:yo:|93]]&nbsp;: [[fr:yoruba (langue)|yoruba]] | [[:an:|94]]&nbsp;: [[fr:aragonais|aragonais]] | [[:sw:|95]]&nbsp;: [[fr:swahili|swahili]] | [[:ne:|96]]&nbsp;: [[fr:népalais|népalais]] | [[:ast:|97]]&nbsp;: [[fr:asturien|asturien]] | [[:io:|98]]&nbsp;: [[fr:ido|ido]] | [[:gu:|99]]&nbsp;: [[fr:goudjarati|goudjarati]] | [[:scn:|100]]&nbsp;: [[fr:sicilien|sicilien]] | [[:bpy:|101]]&nbsp;: [[fr:manipuri|manipuri]] | [[:nds:|102]]&nbsp;: [[fr:bas saxon|bas saxon]] | [[:ku:|103]]&nbsp;: [[fr:kurde|kurde]] | [[:als:|104]]&nbsp;: [[fr:alémanique|alémanique]] | [[:qu:|105]]&nbsp;: [[fr:quechua|quechua]] | [[:pa:|106]]&nbsp;: [[fr:penjabi|penjabi]] | [[:su:|107]]&nbsp;: [[fr:sundanais|sundanais]] | [[:kn:|108]]&nbsp;: [[fr:kannada|kannada]] | [[:ckb:|109]]&nbsp;: [[fr:sorani|sorani]] | [[:bar:|110]]&nbsp;: [[fr:bavarois|bavarois]] | [[:mn:|111]]&nbsp;: [[fr:mongol|mongol]] | [[:ia:|112]]&nbsp;: [[fr:interlingua|interlingua]] | [[:arz:|113]]&nbsp;: [[fr:arabe égyptien|arabe égyptien]] | [[:nap:|114]]&nbsp;: [[fr:napolitain|napolitain]] | [[:bug:|115]]&nbsp;: [[fr:buginais|buginais]] | [[:bat-smg:|116]]&nbsp;: [[fr:samogitien|samogitien]] | [[:wa:|117]]&nbsp;: [[fr:wallon|wallon]] | [[:gd:|118]]&nbsp;: [[fr:gaélique écossais|gaélique écossais]] | [[:am:|119]]&nbsp;: [[fr:amharique|amharique]] | [[:map-bms:|120]]&nbsp;: [[fr:banyumasan|banyumasan]] | [[:yi:|121]]&nbsp;: [[fr:yiddish|yiddish]] | [[:mzn:|122]]&nbsp;: [[fr:mazandarani|mazandarani]] | [[:fo:|123]]&nbsp;: [[fr:féroïen|féroïen]] | [[:si:|124]]&nbsp;: [[fr:sinhalese|sinhalese]] | [[:nah:|125]]&nbsp;: [[fr:nahuatl|nahuatl]] | [[:vec:|126]]&nbsp;: [[fr:vénitien|vénitien]] | [[:sah:|127]]&nbsp;: [[fr:iakoute|iakoute]] (sakha) | [[:li:|128]]&nbsp;: [[fr:limbourgeois|limbourgeois]] | [[:hsb:|129]]&nbsp;: [[fr:haut-sorabe|haut-sorabe]] | [[:or:|130]]&nbsp;: [[fr:oriya|oriya]] | [[:os:|131]]&nbsp;: [[fr:ossète|ossète]] | [[:sa:|133]]&nbsp;: [[fr:sanskrit|sanskrit]]| [[:mrj:|137]]&nbsp;: [[fr:mari des montagnes|mari des montagnes]]
-
-=== 1 000+ articles ===
-Cette section est à actualiser.
-
-134&nbsp;: [[fr:tarentin|tarentin]] | 135&nbsp;: [[fr:mari des prairies|mari des prairies]] | 136&nbsp;: [[fr:pampangan|pampangan]] | 137&nbsp;: [[fr:same du Nord|same du Nord]] | 138&nbsp;: [[fr:maori|mari]] o| 139&nbsp;: [[fr:ilokano|ilokano]] | 140&nbsp;: [[fr:azéri du Sud|azéri du Sud]] | 141&nbsp;: [[fr:bikol central|bikol central]] | [[:hif:|142]]&nbsp;: [[fr:hindi des Fidji|hindi des Fidji]] | 143&nbsp;: [[fr:gan (langue)|gan]] | 144&nbsp;: [[fr:pachto|pachto]] | 145&nbsp;: [[fr:hakka (langue)|hakka]] | 146&nbsp;: [[fr:zazaki|zazaki]] | 147&nbsp;: [[fr:bihari|bihari]] | 148&nbsp;: [[fr:gilaki|gilaki]] | 149&nbsp;: [[fr:rusyn|rusyn]]  | 150&nbsp;: [[fr:bas-saxon des Pays-Bas|bas-saxon des Pays-Bas]] | 151&nbsp;: [[fr:flamand occidental|flamand occidental]] | 152&nbsp;: [[fr:tibétain|tibétain]] | 153&nbsp;: [[fr:võro|võro]] | 154&nbsp;: [[fr:mingrélien|mingrélien]] | 155&nbsp;: [[fr:corse|corse]] | 156&nbsp;: [[fr:turkmène|turkmène]] | 157&nbsp;: [[fr:sarde|sarde]] | 158&nbsp;: [[fr:vepse|vepse]] | 159&nbsp;: [[fr:lori du Nord|lori du Nord]] | 160&nbsp;: [[fr:mannois|mannois]] (manx) | 161&nbsp;: [[fr:khmer|khmer]] | 162&nbsp;: [[fr:kachoube|kachoube]] | 163&nbsp;: [[fr:komi (langue)|komi]] | 164&nbsp;: [[fr:tatar de Crimée|tatar de Crimée]] | 165&nbsp;: [[fr:zélandais|zélandais]] | 166&nbsp;: [[fr:émilien-romagnol|émilien-romagnol]]  | 167&nbsp;: [[fr:frison septentrional|frison septentrional]] | 168&nbsp;: [[fr:sindhi|sindhi]] | 169&nbsp;: [[fr:chinois classique|chinois classique]] | 170&nbsp;: [[fr:wu (langue)|wu]] | 171&nbsp;: [[fr:assamais|assamais]] | 172&nbsp;: [[fr:somali|somali]] | 173&nbsp;: [[fr:oudmourte|oudmourte]] | 174&nbsp;: [[fr:aymara|aymara]] | 175&nbsp;: [[fr:silésien (langue slave)|silésien]] | 176&nbsp;: [[fr:cornique|cornique]] | 177&nbsp;: [[fr:frison oriental|frison oriental]] | 178&nbsp;: [[fr:normand|normand]] | 179&nbsp;: [[fr:romanche|romanche]] | 180&nbsp;: [[fr:komi-permiak|komi-permiak]] | 181&nbsp;: [[fr:ladino|ladino]] | 182&nbsp;: [[fr:mindong|mindong]] | 183&nbsp;: [[fr:interlingue|interlingue]] | 184&nbsp;: [[fr:frioulan|frioulan]] | 185&nbsp;: [[fr:maltais|maltais]] | 186&nbsp;: [[fr:picard|picard]] | 187&nbsp;: [[fr:guarani (langue)|guarani]] | 188&nbsp;: [[fr:divehi|divehi]] | 189&nbsp;: [[fr:bas-sorabe|bas-sorabe]] | 190&nbsp;: [[fr:ligure|ligure]] | 191&nbsp;: [[fr:chavacano|chavacano]] | 192&nbsp;: [[fr:francique ripuaire|francique ripuaire]] | 193&nbsp;: [[fr:gagaouze|gagaouze]] | 194&nbsp;: [[fr:erzya|erzya]] | 195&nbsp;: [[fr:estrémaduran|estrémaduran]] | 196&nbsp;: [[fr:mirandais|mirandais]] | 197&nbsp;: [[fr:anglo-saxon|anglo-saxon]] | 198&nbsp;: [[fr:lezguien|lezguien]] | 199&nbsp;: [[fr:sotho du Nord|sotho du Nord]] | 200&nbsp;: [[fr:aceh (langue)|aceh]] | 201&nbsp;: [[fr:ouïghour|ouïghour]] | 202&nbsp;: [[fr:pali|pali]] | 203&nbsp;: [[fr:pangasinan|pangasinan]] | 204&nbsp;: [[fr:kabyle|kabyle]] | 205&nbsp;: [[fr:navajo (langue)|navajo]] | 206&nbsp;: [[fr:francoprovençal|francoprovençal]] | 207&nbsp;: [[fr:shona (langue)|shona]] | 208&nbsp;: [[fr:lingala|lingala]] | 209&nbsp;: [[fr:avar|avar]] | 210&nbsp;: [[fr:hawaïen|hawaïen]] | 211&nbsp;: [[fr:palatin (langue)|palatin]] | 212&nbsp;: [[fr:kalmouk|kalmouk]] | 213&nbsp;: [[fr:karatchaï-balkar|karatchaï-balkar]] | 214&nbsp;: [[fr:karakalpak|karakalpak]] | 215&nbsp;: [[fr:kinyarwanda|kinyarwanda]] | 216&nbsp;: [[fr:allemand de Pennsylvanie|allemand de Pennsylvanie]] | 217&nbsp;: [[fr:tongien|tongien]] | 218&nbsp;: [[fr:groenlandais|groenlandais]] | 219&nbsp;: [[fr:araméen|araméen]] | 220&nbsp;: [[fr:novial|novial]] | 221&nbsp;: [[fr:kabarde|kabarde]] | 222&nbsp;: [[fr:konkani|konkani de Goa]] | 223&nbsp;: [[fr:bouriate|bouriate]] | 224&nbsp;: [[fr:Lao (langue)|lao]] | 225&nbsp;: [[fr:banjar (langue)|banjar]] | 226&nbsp;: [[fr:haoussa|haoussa]] | 227&nbsp;: [[fr:tétoum|tétoum]] | 228&nbsp;: [[fr:papiamento|papiamento]] | 229&nbsp;: [[fr:maïthili|maïthili]] | 230&nbsp;: [[fr:tok pisin|tok pisin]] | 231&nbsp;: [[fr:nauruan|nauruan]] | 232&nbsp;: [[fr:touvain|touvain]] | 233&nbsp;: [[fr:lak|lak]] | 234&nbsp;: [[fr:lojban|lojban]] | 235&nbsp;: [[fr:aroumain|aroumain]] | 236&nbsp;: [[fr:tahitien|tahitien]] | 237&nbsp;: [[fr:mokcha (langue)|mokcha]] | 238&nbsp;: [[fr:zhuang (langue)|zhuang]] | 239&nbsp;: [[fr:igbo|igbo]] | 240&nbsp;: [[fr:wolof (langue)|wolof]] | 241&nbsp;: [[fr:kikongo|kikongo]] | 242&nbsp;: [[fr:sranan|sranan]]
-
-=== 100+ articles ===
-Cette section est à actualiser.
-
-243&nbsp;: [[fr:abkhaze|abkhaze]] | 244&nbsp;: [[fr:latgalien|latgalien]] | 245&nbsp;: [[fr:luganda|luganda]] | 246&nbsp;: [[fr:zoulou|zoulou]] | 247&nbsp;: [[fr:oromo (langue)|oromo]] | 248&nbsp;: [[fr:kikuyu (langue)|kikuyu]] | 249&nbsp;: [[fr:romani|romani]] | 250&nbsp;: [[fr:Cheyenne (langue)|cheyenne]] | 251&nbsp;: [[fr:vieux slave|vieux slave]] | 252&nbsp;: [[fr:twi|twi]] | 253&nbsp;: [[fr:tswana|tswana]] | 254&nbsp;: [[fr:cherokee (langue)|cherokee]] | 255&nbsp;: [[fr:kirundi|kirundi]] | 256&nbsp;: [[fr:norfolk (langue)|norfolk]] | 257&nbsp;: [[fr:bichelamar|bichelamar]] | 258&nbsp;: [[fr:xhosa|xhosa]] | 259&nbsp;: [[fr:tumbuka (langue)|tumbuka]] | 260&nbsp;: [[fr:gotique|gotique]] | 261&nbsp;: [[fr:samoan|samoan]] | 262&nbsp;: [[fr:swati|swati]] | 263&nbsp;: [[fr:grec pontique|grec pontique]] | 264&nbsp;: [[fr:moldave|moldave]] | 265&nbsp;: [[fr:chamorro|chamorro]] | 266&nbsp;: [[fr:bambara|bambara]] | 267&nbsp;: [[fr:inuktitut|inuktitut]] | 268&nbsp;: [[fr:ewe (langue)|ewe]] | 269&nbsp;: [[fr:sotho du Sud|sotho du Sud]] | 270&nbsp;: [[fr:tsonga (langue)|tsonga]] | 271&nbsp;: [[fr:cachemiri|cachemiri]] | 272&nbsp;: [[fr:fidjien|fidjien]] | 273&nbsp;: [[fr:langues akan|akan]] | 274&nbsp;: [[fr:sango|sango]] | 275&nbsp;: [[fr:inupiak|inupiak]] | 276&nbsp;: [[fr:venda (langue)|venda]] | 277&nbsp;: [[fr:peul|peul]] (fula) | 278&nbsp;: [[fr:chichewa|chichewa]] | 279&nbsp;: [[fr:tigrinya|tigrinya]] | 280&nbsp;: [[fr:dzongkha|dzongkha]] | 281&nbsp;: [[fr:cri (langue)|cri]]
-
-=== Bloquées ===
-Cette section est à actualiser.
-
-282 : [[fr:ndonga|ndonga]] |
-283 : [[fr:Choctaw (langue)|choctaw]] |
-284 : [[fr:kuanyama|kuanyama]] |
-285 : [[fr:marshallais|marshallais]] |
-286 : [[fr:hiri motu|hiri motu]] |
-287 : [[fr:yi (langue)|yi du Sichuan]] |
-288 : [[fr:afar (langue)|afar]] |
-289 : [[fr:creek (langue)|creek]] (muscogee) |
-290 : [[fr:héréro (langue)|héréro]] |
-291 :  [[fr:kanouri|kanouri]]
-
-Voir aussi (en anglais) :
-* {{lang|en|''[[List of Wikipedias by edits per article]]''}}
-* {{lang|en|''[[List of Wikipedias by language family]]''}} et {{lang|en|''[[List of Wikipedias by language superfamily]]''}}
-* {{lang|en|''[[Wikimedia News#Wikipedias|Wikipedia Milestones]]''}} et {{lang|en|''[[List of largest wikis]]''}}
-* {{lang|en|''[[List of Wikipedias by sample of articles]]''}}
-
-== Classement détaillé en anglais ==
-
-'''Notes :'''
-* La colonne '''Articles''' décompte les pages présentes dans l’espace principal des articles qui répondent à quelques critères de quantité minimale de texte (hors mise en forme HTML/CSS, liens cibles, code wiki, images, modèles inclus et métadonnées), définis et calculé automatiquement par le logiciel MediaWiki.
-* La colonne '''Total''' indique le nombre de pages dans ''tous'' les espaces de noms (articles, pages d’utilisateur, images, catégories, pages de projet, modèles, discussions,&nbsp;etc.)
-* La colonne '''Depth''' (Profondeur), est le produit '''éditions/articles × non-articles/articles'''. C’est un indicateur approximatif de l’activité d’une Wikipédia, reflétant la fréquence à laquelle les articles sont mis à jour. Pour les Wikipédias ayant moins de <!-- ne pas utiliser formatnum sur meta -->10&nbsp;000&nbsp;articles, une valeur supérieure à 200 est considérée comme non significative.
-
-{|border="1" cellpadding="2" cellspacing="0" class="sortable" style="width: 100%; background: #f9f9f9; border: 1px solid #aaaaaa; border-collapse: collapse; white-space: nowrap; text-align: right;"
+{| border="1" cellpadding="2" cellspacing="0" style="width:100%; background: #f9f9f9; border: 1px solid #aaaaaa; border-collapse: collapse; white-space: nowrap; text-align: right" class="sortable"
 |-
 ! №
-! Langue (article en anglais)
-! Nom dans la langue d’origine
+! Language
+! Language (local)
 ! Wiki
 ! Articles
 ! Total
-! Éditions
-! Admi­nis­tra­teurs
-! Utili­sateurs
-! Utili­sateurs actifs
-! Images
-! Pro­fon­deur
+! Edits
+! Admins
+! Users
+! Active Users
+! Files
+! Depth
+|-
+| 1
+| [[w:English language|English]]
+| class="plainlinksneverexpand" | [{{fullurl:en:English_language}} English]
+| [[:en:|en]]
+| class="plainlinksneverexpand" | [{{fullurl:en:Special:Statistics|action=raw}} '''5,578,081''']
+|  44,236,075
+|  [[:en:Special:Statistics|936,785,494]]
+|  [[:en:Special:Listadmins|1,230]]
+|  [[:en:Special:Listusers|32,984,915]]
+|  [[:en:Special:ActiveUsers|138,479]]
+|  [[:en:Special:FileList|856,455]]
+| 1017
+|-
+| 2
+| [[w:Cebuano language|Cebuano]]
+| class="plainlinksneverexpand" | [{{fullurl:ceb:Sinugboanon}} Sinugboanong Binisaya]
+| [[:ceb:|ceb]]
+| class="plainlinksneverexpand" | [{{fullurl:ceb:Special:Statistics|action=raw}} '''5,383,108''']
+|  8,964,041
+|  [[:ceb:Special:Statistics|20,728,916]]
+|  [[:ceb:Special:Listadmins|5]]
+|  [[:ceb:Special:Listusers|45,214]]
+|  [[:ceb:Special:ActiveUsers|162]]
+|  [[:ceb:Special:FileList|0]]
+| 1
+|-
+| 3
+| [[w:Swedish language|Swedish]]
+| class="plainlinksneverexpand" | [{{fullurl:sv:Svenska}} Svenska]
+| [[:sv:|sv]]
+| class="plainlinksneverexpand" | [{{fullurl:sv:Special:Statistics|action=raw}} '''3,784,331''']
+|  7,644,835
+|  [[:sv:Special:Statistics|42,444,612]]
+|  [[:sv:Special:Listadmins|65]]
+|  [[:sv:Special:Listusers|598,321]]
+|  [[:sv:Special:ActiveUsers|2,929]]
+|  [[:sv:Special:FileList|0]]
+| 6
+|-
+| 4
+| [[w:German language|German]]
+| class="plainlinksneverexpand" | [{{fullurl:de:Deutsch}} Deutsch]
+| [[:de:|de]]
+| class="plainlinksneverexpand" | [{{fullurl:de:Special:Statistics|action=raw}} '''2,157,495''']
+|  6,053,378
+|  [[:de:Special:Statistics|178,727,102]]
+|  [[:de:Special:Listadmins|194]]
+|  [[:de:Special:Listusers|2,847,289]]
+|  [[:de:Special:ActiveUsers|20,085]]
+|  [[:de:Special:FileList|120,930]]
+| 96
+|-
+| 5
+| [[w:French language|French]]
+| class="plainlinksneverexpand" | [{{fullurl:fr:Français}} Français]
+| [[:fr:|fr]]
+| class="plainlinksneverexpand" | [{{fullurl:fr:Special:Statistics|action=raw}} '''1,959,869''']
+|  9,290,837
+|  [[:fr:Special:Statistics|148,327,153]]
+|  [[:fr:Special:Listadmins|164]]
+|  [[:fr:Special:Listusers|3,031,074]]
+|  [[:fr:Special:ActiveUsers|20,440]]
+|  [[:fr:Special:FileList|53,595]]
+| 223
+|-
+| 6
+| [[w:Dutch language|Dutch]]
+| class="plainlinksneverexpand" | [{{fullurl:nl:Nederlands}} Nederlands]
+| [[:nl:|nl]]
+| class="plainlinksneverexpand" | [{{fullurl:nl:Special:Statistics|action=raw}} '''1,924,584''']
+|  3,887,220
+|  [[:nl:Special:Statistics|52,174,943]]
+|  [[:nl:Special:Listadmins|42]]
+|  [[:nl:Special:Listusers|899,375]]
+|  [[:nl:Special:ActiveUsers|4,116]]
+|  [[:nl:Special:FileList|22]]
+| 14
+|-
+| 7
+| [[w:Russian language|Russian]]
+| class="plainlinksneverexpand" | [{{fullurl:ru:Русский_язык}} Русский]
+| [[:ru:|ru]]
+| class="plainlinksneverexpand" | [{{fullurl:ru:Special:Statistics|action=raw}} '''1,455,738''']
+|  5,577,113
+|  [[:ru:Special:Statistics|103,535,875]]
+|  [[:ru:Special:Listadmins|84]]
+|  [[:ru:Special:Listusers|2,249,522]]
+|  [[:ru:Special:ActiveUsers|11,460]]
+|  [[:ru:Special:FileList|207,014]]
+| 149
+|-
+| 8
+| [[w:Italian language|Italian]]
+| class="plainlinksneverexpand" | [{{fullurl:it:Lingua_italiana}} Italiano]
+| [[:it:|it]]
+| class="plainlinksneverexpand" | [{{fullurl:it:Special:Statistics|action=raw}} '''1,420,151''']
+|  5,127,970
+|  [[:it:Special:Statistics|100,202,137]]
+|  [[:it:Special:Listadmins|115]]
+|  [[:it:Special:Listusers|1,624,218]]
+|  [[:it:Special:ActiveUsers|9,267]]
+|  [[:it:Special:FileList|139,051]]
+| 133
+|-
+| 9
+| [[w:Spanish language|Spanish]]
+| class="plainlinksneverexpand" | [{{fullurl:es:Idioma_español}} Español]
+| [[:es:|es]]
+| class="plainlinksneverexpand" | [{{fullurl:es:Special:Statistics|action=raw}} '''1,391,497''']
+|  6,224,858
+|  [[:es:Special:Statistics|105,569,746]]
+|  [[:es:Special:Listadmins|73]]
+|  [[:es:Special:Listusers|4,910,689]]
+|  [[:es:Special:ActiveUsers|16,344]]
+|  [[:es:Special:FileList|0]]
+| 205
+|-
+| 10
+| [[w:Polish language|Polish]]
+| class="plainlinksneverexpand" | [{{fullurl:pl:Język_polski}} Polski]
+| [[:pl:|pl]]
+| class="plainlinksneverexpand" | [{{fullurl:pl:Special:Statistics|action=raw}} '''1,267,501''']
+|  2,797,702
+|  [[:pl:Special:Statistics|52,525,328]]
+|  [[:pl:Special:Listadmins|105]]
+|  [[:pl:Special:Listusers|872,282]]
+|  [[:pl:Special:ActiveUsers|4,628]]
+|  [[:pl:Special:FileList|38]]
+| 27
+|-
+| 11
+| [[w:Waray-Waray language|Waray-Waray]]
+| class="plainlinksneverexpand" | [{{fullurl:war:Winaray}} Winaray]
+| [[:war:|war]]
+| class="plainlinksneverexpand" | [{{fullurl:war:Special:Statistics|action=raw}} '''1,262,835''']
+|  2,875,608
+|  [[:war:Special:Statistics|6,186,479]]
+|  [[:war:Special:Listadmins|2]]
+|  [[:war:Special:Listusers|36,284]]
+|  [[:war:Special:ActiveUsers|70]]
+|  [[:war:Special:FileList|44]]
+| 4
+|-
+| 12
+| [[w:Vietnamese language|Vietnamese]]
+| class="plainlinksneverexpand" | [{{fullurl:vi:Tiếng_Việt}} Tiếng Việt]
+| [[:vi:|vi]]
+| class="plainlinksneverexpand" | [{{fullurl:vi:Special:Statistics|action=raw}} '''1,168,451''']
+|  12,228,033
+|  [[:vi:Special:Statistics|37,399,817]]
+|  [[:vi:Special:Listadmins|22]]
+|  [[:vi:Special:Listusers|588,384]]
+|  [[:vi:Special:ActiveUsers|1,343]]
+|  [[:vi:Special:FileList|25,747]]
+| 274
+|-
+| 13
+| [[w:Japanese language|Japanese]]
+| class="plainlinksneverexpand" | [{{fullurl:ja:日本語}} 日本語]
+| [[:ja:|ja]]
+| class="plainlinksneverexpand" | [{{fullurl:ja:Special:Statistics|action=raw}} '''1,096,843''']
+|  3,232,055
+|  [[:ja:Special:Statistics|68,505,578]]
+|  [[:ja:Special:Listadmins|45]]
+|  [[:ja:Special:Listusers|1,303,839]]
+|  [[:ja:Special:ActiveUsers|13,392]]
+|  [[:ja:Special:FileList|84,365]]
+| 80
 |}
-{{:List of Wikipedias/Table}}
-
-== Wikipédias activement maintenues (ordonnées par nom natif de langue) ==
-{{Active Wikipedias}}
-
-== Wikipédias obsolètes, déplacées et autres ==
-
-# [[:fr:Alsacien|Alsacien]] ([[:als:|als]]) : articles en dialectes [[:fr:Alémanique|alémaniques]] (l’alsacien étant l'un d'eux, et dont « gsw » est le code standard de langue [[:fr:ISO 639|ISO 639-3]]) ; « als » est normalement le code ISO 639-3 de l’[[:fr:Tosque|albanais tosque]].
-# Projets wikis gérés hors de Wikimédia, et dont les statistiques ne sont pas mises à jour dans le tableau ci-avant :
-#* Ancien Wikipedia [[:tokipona:|Toki Pona]] vidé : contenu disparu.
-#* [[:en:Klingon language|Klingon (''tlhIngan Hol'')]] - [[:tlh:|tlh]] : 62&nbsp;articles ([[:tlh:Special:Statistics|statistiques]], [[:tlh:Special:Allpages|Liste de tous les articles]]) : bloqué car langage fictif et communauté sans membre. L’administrateur a laissé ce message : « {{lang|en|''This wiki has been closed for now. (Move to WikiCities?)''}} ».
-#* Wiki [http://lfn.esef.net/ Lingua Franca Nova] hébergé sur esef.net.
-
-=== Tester une nouvelle Wikipédia ===
-
-* Prière d’aller à [//incubator.wikimedia.org/ Wikimedia Incubator Wiki project].
-* Pages obsolètes qui seront déplacées : [[special:Prefixindex/Test-WP]] et [[special:Prefixindex/Test-wp]] ; ne pas les éditer !
-
-== Voir aussi ==
-Sauf indication contraire, toutes les pages en hyperliens ci-après sont en anglais.
-
-=== Autres ressources et statistiques ===
-* [[List of Wikipedias by language family|Liste de Wikipédias par famille de langues]].
-* [[List of Wikipedias by edits per article|Liste de Wikipédias par nombre d’éditions par articles]].
-* [[Wikipedia:Wikipedia:Wikipedia articles per population|Liste de Wikipédias selon le ratio nombre d’articles sur population]].
-* [[Wikimedia News#Wikipedias|Étapes importantes des Wikipédias]].
-* [//en.wikipedia.org/wikistats/EN/Sitemap.htm Statistiques sur les Wikipédias].
-* [//www.wikimedia.org/langlist Liste des langues dites canoniques], telles qu’implantées dans les serveurs Wikimedia.
-* [[Help:Interwiki linking#Interlanguage link|Liens interwikis]].
-* [[Administrators of various Wikipedias|Liste d’administrateurs de différents Wikipédias]].
-* [http://cvs.sourceforge.net/viewcvs.py/wikipedia/phase3/languages/Names.php?view=markup Names.php] : liste contenant les identificateurs de langues, le nom des langues dans ces langues (exemple : « {{lang|de|''Deutsch''}} » en langue allemande) et le nom des langues en anglais (exemple : « {{lang|en|''French''}} » en anglais).
-* [[Wikipedia logo in each language|Le nom Wikipedia en différentes langues]], incluant les logos.
-* [[Meta:Templates for translating language names|Modèles pour la traduction des langues]].
-* [http://www.geonames.de GeoNames], site d’informations sur la toponymie internationale.
-
-=== Projets additionels ===
-* {{lang|en|''[[Wikimedia projects]] - with a link to each "Village Pump" etc.''}}
-* Liste complète des projets WikiMedia : [[Complete list of Wikimedia projects|listes séparées]] (en anglais) |[[Table of Wikimedia projects|table]] (en anglais).
-* [[Wiktionary]] : liste de toutes les langues disponibles et leurs statistiques.
-* [[wikiquote:Wikiquote:Other language Wikiquotes|Autres langues pour Wikiquotes]] ou [[Wikiquote]].
-* {{lang|en|''[[wikisource:|Wikisource]] &ndash; Languages linked at the top; for the software they are together one project.''}}
-* [[wikibooks:Wikibooks portal|Portail des Wikibooks]] ou [[List of Wikibooks|liste des WikiBooks]].
-
-[[Category:Lists of Wikipedias]]
-[[Category:Multilingualism]]
+=== 100 000+ articles ===
+{| border="1" cellpadding="2" cellspacing="0" style="width:100%; background: #f9f9f9; border: 1px solid #aaaaaa; border-collapse: collapse; white-space: nowrap; text-align: right" class="sortable"
+|-
+! №
+! Language
+! Language (local)
+! Wiki
+! Articles
+! Total
+! Edits
+! Admins
+! Users
+! Active Users
+! Files
+! Depth
+|-
+| 14
+| [[w:Chinese language|Chinese]]
+| class="plainlinksneverexpand" | [{{fullurl:zh:汉语}} 中文]
+| [[:zh:|zh]]
+| class="plainlinksneverexpand" | [{{fullurl:zh:Special:Statistics|action=raw}} '''993,440''']
+|  5,309,890
+|  [[:zh:Special:Statistics|49,644,226]]
+|  [[:zh:Special:Listadmins|80]]
+|  [[:zh:Special:Listusers|2,480,026]]
+|  [[:zh:Special:ActiveUsers|7,743]]
+|  [[:zh:Special:FileList|48,299]]
+| 177
+|-
+| 15
+| [[w:Portuguese language|Portuguese]]
+| class="plainlinksneverexpand" | [{{fullurl:pt:Língua_portuguesa}} Português]
+| [[:pt:|pt]]
+| class="plainlinksneverexpand" | [{{fullurl:pt:Special:Statistics|action=raw}} '''992,754''']
+|  4,563,628
+|  [[:pt:Special:Statistics|52,382,022]]
+|  [[:pt:Special:Listadmins|76]]
+|  [[:pt:Special:Listusers|2,054,445]]
+|  [[:pt:Special:ActiveUsers|5,998]]
+|  [[:pt:Special:FileList|47,961]]
+| 149
+|-
+| 16
+| [[w:Ukrainian language|Ukrainian]]
+| class="plainlinksneverexpand" | [{{fullurl:uk:Українська_мова}} Українська]
+| [[:uk:|uk]]
+| class="plainlinksneverexpand" | [{{fullurl:uk:Special:Statistics|action=raw}} '''771,097''']
+|  2,324,221
+|  [[:uk:Special:Statistics|22,289,878]]
+|  [[:uk:Special:Listadmins|41]]
+|  [[:uk:Special:Listusers|394,259]]
+|  [[:uk:Special:ActiveUsers|3,210]]
+|  [[:uk:Special:FileList|92,550]]
+| 39
+|-
+| 17
+| [[w:Serbian language|Serbian]]
+| class="plainlinksneverexpand" | [{{fullurl:sr:Српски_језик}} Српски / Srpski]
+| [[:sr:|sr]]
+| class="plainlinksneverexpand" | [{{fullurl:sr:Special:Statistics|action=raw}} '''603,181''']
+|  3,293,002
+|  [[:sr:Special:Statistics|19,096,512]]
+|  [[:sr:Special:Listadmins|18]]
+|  [[:sr:Special:Listusers|217,325]]
+|  [[:sr:Special:ActiveUsers|861]]
+|  [[:sr:Special:FileList|29,323]]
+| 115
+|-
+| 18
+| [[w:Persian language|Persian]]
+| class="plainlinksneverexpand" | [{{fullurl:fa:فارسی}} فارسی]
+| [[:fa:|fa]]
+| class="plainlinksneverexpand" | [{{fullurl:fa:Special:Statistics|action=raw}} '''594,019''']
+|  3,883,243
+|  [[:fa:Special:Statistics|27,004,178]]
+|  [[:fa:Special:Listadmins|35]]
+|  [[:fa:Special:Listusers|715,638]]
+|  [[:fa:Special:ActiveUsers|4,874]]
+|  [[:fa:Special:FileList|47,895]]
+| 213
+|-
+| 19
+| [[w:Catalan language|Catalan]]
+| class="plainlinksneverexpand" | [{{fullurl:ca:Català}} Català]
+| [[:ca:|ca]]
+| class="plainlinksneverexpand" | [{{fullurl:ca:Special:Statistics|action=raw}} '''573,651''']
+|  1,418,223
+|  [[:ca:Special:Statistics|20,058,696]]
+|  [[:ca:Special:Listadmins|24]]
+|  [[:ca:Special:Listusers|283,583]]
+|  [[:ca:Special:ActiveUsers|1,633]]
+|  [[:ca:Special:FileList|10,270]]
+| 31
+|-
+| 20
+| [[w:Arabic language|Arabic]]
+| class="plainlinksneverexpand" | [{{fullurl:ar:لغة_عربية}} العربية]
+| [[:ar:|ar]]
+| class="plainlinksneverexpand" | [{{fullurl:ar:Special:Statistics|action=raw}} '''560,440''']
+|  3,447,292
+|  [[:ar:Special:Statistics|30,328,165]]
+|  [[:ar:Special:Listadmins|31]]
+|  [[:ar:Special:Listusers|1,452,336]]
+|  [[:ar:Special:ActiveUsers|4,567]]
+|  [[:ar:Special:FileList|30,324]]
+| 233
+|-
+| 21
+| [[w:Norwegian (Bokmål) language|Norwegian (Bokmål)]]
+| class="plainlinksneverexpand" | [{{fullurl:no:Norsk}} Norsk (Bokmål)]
+| [[:no:|no]]
+| class="plainlinksneverexpand" | [{{fullurl:no:Special:Statistics|action=raw}} '''483,505''']
+|  1,277,160
+|  [[:no:Special:Statistics|18,246,170]]
+|  [[:no:Special:Listadmins|42]]
+|  [[:no:Special:Listusers|419,687]]
+|  [[:no:Special:ActiveUsers|1,585]]
+|  [[:no:Special:FileList|1]]
+| 38
+|-
+| 22
+| [[w:Serbo-Croatian language|Serbo-Croatian]]
+| class="plainlinksneverexpand" | [{{fullurl:sh:Srpskohrvatski_jezik}} Srpskohrvatski / Српскохрватски]
+| [[:sh:|sh]]
+| class="plainlinksneverexpand" | [{{fullurl:sh:Special:Statistics|action=raw}} '''442,212''']
+|  4,590,166
+|  [[:sh:Special:Statistics|40,783,751]]
+|  [[:sh:Special:Listadmins|10]]
+|  [[:sh:Special:Listusers|118,569]]
+|  [[:sh:Special:ActiveUsers|238]]
+|  [[:sh:Special:FileList|8,982]]
+| 782
+|-
+| 23
+| [[w:Finnish language|Finnish]]
+| class="plainlinksneverexpand" | [{{fullurl:fi:Suomen_kieli}} Suomi]
+| [[:fi:|fi]]
+| class="plainlinksneverexpand" | [{{fullurl:fi:Special:Statistics|action=raw}} '''431,941''']
+|  1,165,104
+|  [[:fi:Special:Statistics|17,943,470]]
+|  [[:fi:Special:Listadmins|37]]
+|  [[:fi:Special:Listusers|374,821]]
+|  [[:fi:Special:ActiveUsers|1,789]]
+|  [[:fi:Special:FileList|52,367]]
+| 44
+|-
+| 24
+| [[w:Hungarian language|Hungarian]]
+| class="plainlinksneverexpand" | [{{fullurl:hu:Magyar_nyelv}} Magyar]
+| [[:hu:|hu]]
+| class="plainlinksneverexpand" | [{{fullurl:hu:Special:Statistics|action=raw}} '''426,987''']
+|  1,238,505
+|  [[:hu:Special:Statistics|20,316,754]]
+|  [[:hu:Special:Listadmins|31]]
+|  [[:hu:Special:Listusers|373,225]]
+|  [[:hu:Special:ActiveUsers|1,843]]
+|  [[:hu:Special:FileList|24,273]]
+| 59
+|-
+| 25
+| [[w:Indonesian language|Indonesian]]
+| class="plainlinksneverexpand" | [{{fullurl:id:Bahasa_Indonesia}} Bahasa Indonesia]
+| [[:id:|id]]
+| class="plainlinksneverexpand" | [{{fullurl:id:Special:Statistics|action=raw}} '''423,966''']
+|  2,297,545
+|  [[:id:Special:Statistics|14,734,239]]
+|  [[:id:Special:Listadmins|34]]
+|  [[:id:Special:Listusers|941,838]]
+|  [[:id:Special:ActiveUsers|2,305]]
+|  [[:id:Special:FileList|60,583]]
+| 125
+|-
+| 26
+| [[w:Korean language|Korean]]
+| class="plainlinksneverexpand" | [{{fullurl:ko:한국어}} 한국어]
+| [[:ko:|ko]]
+| class="plainlinksneverexpand" | [{{fullurl:ko:Special:Statistics|action=raw}} '''410,134''']
+|  1,586,281
+|  [[:ko:Special:Statistics|22,665,708]]
+|  [[:ko:Special:Listadmins|25]]
+|  [[:ko:Special:Listusers|492,285]]
+|  [[:ko:Special:ActiveUsers|2,215]]
+|  [[:ko:Special:FileList|13,515]]
+| 118
+|-
+| 27
+| [[w:Czech language|Czech]]
+| class="plainlinksneverexpand" | [{{fullurl:cs:Čeština}} Čeština]
+| [[:cs:|cs]]
+| class="plainlinksneverexpand" | [{{fullurl:cs:Special:Statistics|action=raw}} '''401,074''']
+|  1,074,596
+|  [[:cs:Special:Statistics|15,859,607]]
+|  [[:cs:Special:Listadmins|30]]
+|  [[:cs:Special:Listusers|402,959]]
+|  [[:cs:Special:ActiveUsers|2,174]]
+|  [[:cs:Special:FileList|1]]
+| 42
+|-
+| 28
+| [[w:Romanian language|Romanian]]
+| class="plainlinksneverexpand" | [{{fullurl:ro:Limba_română}} Română]
+| [[:ro:|ro]]
+| class="plainlinksneverexpand" | [{{fullurl:ro:Special:Statistics|action=raw}} '''383,985''']
+|  2,007,289
+|  [[:ro:Special:Statistics|12,265,587]]
+|  [[:ro:Special:Listadmins|18]]
+|  [[:ro:Special:Listusers|430,312]]
+|  [[:ro:Special:ActiveUsers|1,084]]
+|  [[:ro:Special:FileList|36,206]]
+| 109
+|-
+| 29
+| [[w:Malay language|Malay]]
+| class="plainlinksneverexpand" | [{{fullurl:ms:Bahasa_Melayu}} Bahasa Melayu]
+| [[:ms:|ms]]
+| class="plainlinksneverexpand" | [{{fullurl:ms:Special:Statistics|action=raw}} '''312,192''']
+|  849,312
+|  [[:ms:Special:Statistics|4,287,595]]
+|  [[:ms:Special:Listadmins|13]]
+|  [[:ms:Special:Listusers|209,049]]
+|  [[:ms:Special:ActiveUsers|408]]
+|  [[:ms:Special:FileList|21,635]]
+| 15
+|-
+| 30
+| [[w:Turkish language|Turkish]]
+| class="plainlinksneverexpand" | [{{fullurl:tr:Türkçe}} Türkçe]
+| [[:tr:|tr]]
+| class="plainlinksneverexpand" | [{{fullurl:tr:Special:Statistics|action=raw}} '''306,144''']
+|  1,546,552
+|  [[:tr:Special:Statistics|20,542,950]]
+|  [[:tr:Special:Listadmins|27]]
+|  [[:tr:Special:Listusers|990,811]]
+|  [[:tr:Special:ActiveUsers|787]]
+|  [[:tr:Special:FileList|30,556]]
+| 218
+|-
+| 31
+| [[w:Basque language|Basque]]
+| class="plainlinksneverexpand" | [{{fullurl:eu:Euskara}} Euskara]
+| [[:eu:|eu]]
+| class="plainlinksneverexpand" | [{{fullurl:eu:Special:Statistics|action=raw}} '''288,988''']
+|  710,327
+|  [[:eu:Special:Statistics|6,127,592]]
+|  [[:eu:Special:Listadmins|12]]
+|  [[:eu:Special:Listusers|86,300]]
+|  [[:eu:Special:ActiveUsers|512]]
+|  [[:eu:Special:FileList|0]]
+| 18
+|-
+| 32
+| [[w:Esperanto language|Esperanto]]
+| class="plainlinksneverexpand" | [{{fullurl:eo:Esperanto}} Esperanto]
+| [[:eo:|eo]]
+| class="plainlinksneverexpand" | [{{fullurl:eo:Special:Statistics|action=raw}} '''245,243''']
+|  541,000
+|  [[:eo:Special:Statistics|6,255,262]]
+|  [[:eo:Special:Listadmins|19]]
+|  [[:eo:Special:Listusers|143,203]]
+|  [[:eo:Special:ActiveUsers|368]]
+|  [[:eo:Special:FileList|4,458]]
+| 17
+|-
+| 33
+| [[w:Bulgarian language|Bulgarian]]
+| class="plainlinksneverexpand" | [{{fullurl:bg:Български_език}} Български]
+| [[:bg:|bg]]
+| class="plainlinksneverexpand" | [{{fullurl:bg:Special:Statistics|action=raw}} '''239,692''']
+|  532,366
+|  [[:bg:Special:Statistics|8,382,983]]
+|  [[:bg:Special:Listadmins|27]]
+|  [[:bg:Special:Listusers|230,099]]
+|  [[:bg:Special:ActiveUsers|891]]
+|  [[:bg:Special:FileList|836]]
+| 23
+|-
+| 34
+| [[w:Armenian language|Armenian]]
+| class="plainlinksneverexpand" | [{{fullurl:hy:Հայերեն}} Հայերեն]
+| [[:hy:|hy]]
+| class="plainlinksneverexpand" | [{{fullurl:hy:Special:Statistics|action=raw}} '''238,069''']
+|  794,907
+|  [[:hy:Special:Statistics|5,651,860]]
+|  [[:hy:Special:Listadmins|11]]
+|  [[:hy:Special:Listusers|72,170]]
+|  [[:hy:Special:ActiveUsers|687]]
+|  [[:hy:Special:FileList|6,993]]
+| 39
+|-
+| 35
+| [[w:Danish language|Danish]]
+| class="plainlinksneverexpand" | [{{fullurl:da:Dansk_(sprog)}} Dansk]
+| [[:da:|da]]
+| class="plainlinksneverexpand" | [{{fullurl:da:Special:Statistics|action=raw}} '''235,535''']
+|  793,203
+|  [[:da:Special:Statistics|9,389,172]]
+|  [[:da:Special:Listadmins|26]]
+|  [[:da:Special:Listusers|317,765]]
+|  [[:da:Special:ActiveUsers|1,045]]
+|  [[:da:Special:FileList|0]]
+| 66
+|-
+| 36
+| [[w:Min Nan language|Min Nan]]
+| class="plainlinksneverexpand" | [{{fullurl:zh-min-nan:Bân-lâm-gú}} Bân-lâm-gú]
+| [[:zh-min-nan:|zh-min-nan]]
+| class="plainlinksneverexpand" | [{{fullurl:zh-min-nan:Special:Statistics|action=raw}} '''226,214''']
+|  714,949
+|  [[:zh-min-nan:Special:Statistics|1,885,637]]
+|  [[:zh-min-nan:Special:Listadmins|5]]
+|  [[:zh-min-nan:Special:Listusers|33,693]]
+|  [[:zh-min-nan:Special:ActiveUsers|83]]
+|  [[:zh-min-nan:Special:FileList|362]]
+| 12
+|-
+| 37
+| [[w:Slovak language|Slovak]]
+| class="plainlinksneverexpand" | [{{fullurl:sk:Slovenčina}} Slovenčina]
+| [[:sk:|sk]]
+| class="plainlinksneverexpand" | [{{fullurl:sk:Special:Statistics|action=raw}} '''225,002''']
+|  488,785
+|  [[:sk:Special:Statistics|6,607,302]]
+|  [[:sk:Special:Listadmins|8]]
+|  [[:sk:Special:Listusers|155,007]]
+|  [[:sk:Special:ActiveUsers|555]]
+|  [[:sk:Special:FileList|0]]
+| 19
+|-
+| 38
+| [[w:Minangkabau language|Minangkabau]]
+| class="plainlinksneverexpand" | [{{fullurl:min:Bahaso_Minangkabau}} Minangkabau]
+| [[:min:|min]]
+| class="plainlinksneverexpand" | [{{fullurl:min:Special:Statistics|action=raw}} '''222,143''']
+|  317,693
+|  [[:min:Special:Statistics|1,546,856]]
+|  [[:min:Special:Listadmins|3]]
+|  [[:min:Special:Listusers|7,146]]
+|  [[:min:Special:ActiveUsers|56]]
+|  [[:min:Special:FileList|104]]
+| 1
+|-
+| 39
+| [[w:Kazakh language|Kazakh]]
+| class="plainlinksneverexpand" | [{{fullurl:kk:Қазақ_тілі}} Қазақша]
+| [[:kk:|kk]]
+| class="plainlinksneverexpand" | [{{fullurl:kk:Special:Statistics|action=raw}} '''220,928''']
+|  517,770
+|  [[:kk:Special:Statistics|2,599,575]]
+|  [[:kk:Special:Listadmins|16]]
+|  [[:kk:Special:Listusers|76,026]]
+|  [[:kk:Special:ActiveUsers|283]]
+|  [[:kk:Special:FileList|9,528]]
+| 9
+|-
+| 40
+| [[w:Hebrew language|Hebrew]]
+| class="plainlinksneverexpand" | [{{fullurl:he:עברית}} עברית]
+| [[:he:|he]]
+| class="plainlinksneverexpand" | [{{fullurl:he:Special:Statistics|action=raw}} '''220,354''']
+|  916,875
+|  [[:he:Special:Statistics|22,490,399]]
+|  [[:he:Special:Listadmins|41]]
+|  [[:he:Special:Listusers|369,278]]
+|  [[:he:Special:ActiveUsers|2,889]]
+|  [[:he:Special:FileList|51,631]]
+| 245
+|-
+| 41
+| [[w:Lithuanian language|Lithuanian]]
+| class="plainlinksneverexpand" | [{{fullurl:lt:Lietuvių_kalba}} Lietuvių]
+| [[:lt:|lt]]
+| class="plainlinksneverexpand" | [{{fullurl:lt:Special:Statistics|action=raw}} '''186,542''']
+|  439,679
+|  [[:lt:Special:Statistics|5,320,273]]
+|  [[:lt:Special:Listadmins|13]]
+|  [[:lt:Special:Listusers|119,114]]
+|  [[:lt:Special:ActiveUsers|380]]
+|  [[:lt:Special:FileList|20,360]]
+| 22
+|-
+| 42
+| [[w:Croatian language|Croatian]]
+| class="plainlinksneverexpand" | [{{fullurl:hr:Hrvatski_jezik}} Hrvatski]
+| [[:hr:|hr]]
+| class="plainlinksneverexpand" | [{{fullurl:hr:Special:Statistics|action=raw}} '''184,885''']
+|  481,721
+|  [[:hr:Special:Statistics|5,024,212]]
+|  [[:hr:Special:Listadmins|21]]
+|  [[:hr:Special:Listusers|194,277]]
+|  [[:hr:Special:ActiveUsers|573]]
+|  [[:hr:Special:FileList|15,519]]
+| 27
+|-
+| 43
+| [[w:Estonian language|Estonian]]
+| class="plainlinksneverexpand" | [{{fullurl:et:Eesti_keel}} Eesti]
+| [[:et:|et]]
+| class="plainlinksneverexpand" | [{{fullurl:et:Special:Statistics|action=raw}} '''169,781''']
+|  428,180
+|  [[:et:Special:Statistics|4,914,141]]
+|  [[:et:Special:Listadmins|33]]
+|  [[:et:Special:Listusers|111,297]]
+|  [[:et:Special:ActiveUsers|750]]
+|  [[:et:Special:FileList|2,797]]
+| 27
+|-
+| 44
+| [[w:Chechen language|Chechen]]
+| class="plainlinksneverexpand" | [{{fullurl:ce:Нохчийн_мотт}} Нохчийн]
+| [[:ce:|ce]]
+| class="plainlinksneverexpand" | [{{fullurl:ce:Special:Statistics|action=raw}} '''164,758''']
+|  189,065
+|  [[:ce:Special:Statistics|2,588,558]]
+|  [[:ce:Special:Listadmins|4]]
+|  [[:ce:Special:Listusers|17,267]]
+|  [[:ce:Special:ActiveUsers|32]]
+|  [[:ce:Special:FileList|275]]
+| 0
+|-
+| 45
+| [[w:Slovenian language|Slovenian]]
+| class="plainlinksneverexpand" | [{{fullurl:sl:Slovenščina}} Slovenščina]
+| [[:sl:|sl]]
+| class="plainlinksneverexpand" | [{{fullurl:sl:Special:Statistics|action=raw}} '''160,264''']
+|  378,862
+|  [[:sl:Special:Statistics|4,951,167]]
+|  [[:sl:Special:Listadmins|26]]
+|  [[:sl:Special:Listusers|165,228]]
+|  [[:sl:Special:ActiveUsers|411]]
+|  [[:sl:Special:FileList|7,904]]
+| 24
+|-
+| 46
+| [[w:Belarusian language|Belarusian]]
+| class="plainlinksneverexpand" | [{{fullurl:be:Беларуская_мова}} Беларуская]
+| [[:be:|be]]
+| class="plainlinksneverexpand" | [{{fullurl:be:Special:Statistics|action=raw}} '''151,878''']
+|  495,694
+|  [[:be:Special:Statistics|3,095,141]]
+|  [[:be:Special:Listadmins|9]]
+|  [[:be:Special:Listusers|75,565]]
+|  [[:be:Special:ActiveUsers|267]]
+|  [[:be:Special:FileList|2,495]]
+| 32
+|-
+| 47
+| [[w:Galician language|Galician]]
+| class="plainlinksneverexpand" | [{{fullurl:gl:Lingua_galega}} Galego]
+| [[:gl:|gl]]
+| class="plainlinksneverexpand" | [{{fullurl:gl:Special:Statistics|action=raw}} '''145,664''']
+|  357,956
+|  [[:gl:Special:Statistics|4,647,535]]
+|  [[:gl:Special:Listadmins|11]]
+|  [[:gl:Special:Listusers|85,952]]
+|  [[:gl:Special:ActiveUsers|332]]
+|  [[:gl:Special:FileList|9,638]]
+| 28
+|-
+| 48
+| [[w:Greek language|Greek]]
+| class="plainlinksneverexpand" | [{{fullurl:el:Ελληνική_γλώσσα}} Ελληνικά]
+| [[:el:|el]]
+| class="plainlinksneverexpand" | [{{fullurl:el:Special:Statistics|action=raw}} '''143,459''']
+|  438,908
+|  [[:el:Special:Statistics|6,900,012]]
+|  [[:el:Special:Listadmins|22]]
+|  [[:el:Special:Listusers|240,361]]
+|  [[:el:Special:ActiveUsers|1,039]]
+|  [[:el:Special:FileList|16,539]]
+| 67
+|-
+| 49
+| [[w:Norwegian (Nynorsk) language|Norwegian (Nynorsk)]]
+| class="plainlinksneverexpand" | [{{fullurl:nn:Nynorsk}} Nynorsk]
+| [[:nn:|nn]]
+| class="plainlinksneverexpand" | [{{fullurl:nn:Special:Statistics|action=raw}} '''136,851''']
+|  324,243
+|  [[:nn:Special:Statistics|3,014,598]]
+|  [[:nn:Special:Listadmins|23]]
+|  [[:nn:Special:Listusers|87,204]]
+|  [[:nn:Special:ActiveUsers|153]]
+|  [[:nn:Special:FileList|16]]
+| 17
+|-
+| 50
+| [[w:Azerbaijani language|Azerbaijani]]
+| class="plainlinksneverexpand" | [{{fullurl:az:Azərbaycan_dili}} Azərbaycanca]
+| [[:az:|az]]
+| class="plainlinksneverexpand" | [{{fullurl:az:Special:Statistics|action=raw}} '''132,195''']
+|  340,443
+|  [[:az:Special:Statistics|4,230,355]]
+|  [[:az:Special:Listadmins|15]]
+|  [[:az:Special:Listusers|149,771]]
+|  [[:az:Special:ActiveUsers|694]]
+|  [[:az:Special:FileList|19,594]]
+| 31
+|-
+| 51
+| [[w:Simple English language|Simple English]]
+| class="plainlinksneverexpand" | [{{fullurl:simple:Wikipedia:Simple_English_Wikipedia}} Simple English]
+| [[:simple:|simple]]
+| class="plainlinksneverexpand" | [{{fullurl:simple:Special:Statistics|action=raw}} '''131,854''']
+|  449,491
+|  [[:simple:Special:Statistics|5,982,652]]
+|  [[:simple:Special:Listadmins|15]]
+|  [[:simple:Special:Listusers|691,396]]
+|  [[:simple:Special:ActiveUsers|961]]
+|  [[:simple:Special:FileList|36]]
+| 77
+|-
+| 52
+| [[w:Urdu language|Urdu]]
+| class="plainlinksneverexpand" | [{{fullurl:ur:اردو}} اردو]
+| [[:ur:|ur]]
+| class="plainlinksneverexpand" | [{{fullurl:ur:Special:Statistics|action=raw}} '''129,823''']
+|  715,641
+|  [[:ur:Special:Statistics|2,919,853]]
+|  [[:ur:Special:Listadmins|8]]
+|  [[:ur:Special:Listusers|76,155]]
+|  [[:ur:Special:ActiveUsers|197]]
+|  [[:ur:Special:FileList|4,720]]
+| 83
+|-
+| 53
+| [[w:Uzbek language|Uzbek]]
+| class="plainlinksneverexpand" | [{{fullurl:uz:Oʻzbek_tili}} O‘zbek]
+| [[:uz:|uz]]
+| class="plainlinksneverexpand" | [{{fullurl:uz:Special:Statistics|action=raw}} '''129,093''']
+|  617,611
+|  [[:uz:Special:Statistics|1,970,793]]
+|  [[:uz:Special:Listadmins|8]]
+|  [[:uz:Special:Listusers|37,549]]
+|  [[:uz:Special:ActiveUsers|111]]
+|  [[:uz:Special:FileList|372]]
+| 46
+|-
+| 54
+| [[w:Latin language|Latin]]
+| class="plainlinksneverexpand" | [{{fullurl:la:Lingua_Latina}} Latina]
+| [[:la:|la]]
+| class="plainlinksneverexpand" | [{{fullurl:la:Special:Statistics|action=raw}} '''128,030''']
+|  248,861
+|  [[:la:Special:Statistics|3,330,735]]
+|  [[:la:Special:Listadmins|17]]
+|  [[:la:Special:Listusers|104,804]]
+|  [[:la:Special:ActiveUsers|162]]
+|  [[:la:Special:FileList|0]]
+| 12
+|-
+| 55
+| [[w:Hindi language|Hindi]]
+| class="plainlinksneverexpand" | [{{fullurl:hi:हिन्दी}} हिन्दी]
+| [[:hi:|hi]]
+| class="plainlinksneverexpand" | [{{fullurl:hi:Special:Statistics|action=raw}} '''123,549''']
+|  728,468
+|  [[:hi:Special:Statistics|3,716,307]]
+|  [[:hi:Special:Listadmins|8]]
+|  [[:hi:Special:Listusers|334,478]]
+|  [[:hi:Special:ActiveUsers|1,487]]
+|  [[:hi:Special:FileList|3,175]]
+| 122
+|-
+| 56
+| [[w:Thai language|Thai]]
+| class="plainlinksneverexpand" | [{{fullurl:th:ภาษาไทย}} ไทย]
+| [[:th:|th]]
+| class="plainlinksneverexpand" | [{{fullurl:th:Special:Statistics|action=raw}} '''122,415''']
+|  702,559
+|  [[:th:Special:Statistics|7,458,288]]
+|  [[:th:Special:Listadmins|15]]
+|  [[:th:Special:Listusers|312,842]]
+|  [[:th:Special:ActiveUsers|1,213]]
+|  [[:th:Special:FileList|35,865]]
+| 238
+|-
+| 57
+| [[w:Volapük language|Volapük]]
+| class="plainlinksneverexpand" | [{{fullurl:vo:Volapük_perevidöl}} Volapük]
+| [[:vo:|vo]]
+| class="plainlinksneverexpand" | [{{fullurl:vo:Special:Statistics|action=raw}} '''120,995''']
+|  249,313
+|  [[:vo:Special:Statistics|3,183,875]]
+|  [[:vo:Special:Listadmins|2]]
+|  [[:vo:Special:Listusers|24,592]]
+|  [[:vo:Special:ActiveUsers|34]]
+|  [[:vo:Special:FileList|0]]
+| 14
+|-
+| 58
+| [[w:Georgian language|Georgian]]
+| class="plainlinksneverexpand" | [{{fullurl:ka:ქართული_ენა}} ქართული]
+| [[:ka:|ka]]
+| class="plainlinksneverexpand" | [{{fullurl:ka:Special:Statistics|action=raw}} '''120,901''']
+|  339,703
+|  [[:ka:Special:Statistics|3,442,632]]
+|  [[:ka:Special:Listadmins|3]]
+|  [[:ka:Special:Listusers|98,609]]
+|  [[:ka:Special:ActiveUsers|326]]
+|  [[:ka:Special:FileList|13,910]]
+| 33
+|-
+| 59
+| [[w:Tamil language|Tamil]]
+| class="plainlinksneverexpand" | [{{fullurl:ta:தமிழ்}} தமிழ்]
+| [[:ta:|ta]]
+| class="plainlinksneverexpand" | [{{fullurl:ta:Special:Statistics|action=raw}} '''115,248''']
+|  332,191
+|  [[:ta:Special:Statistics|2,485,702]]
+|  [[:ta:Special:Listadmins|35]]
+|  [[:ta:Special:Listusers|129,914]]
+|  [[:ta:Special:ActiveUsers|354]]
+|  [[:ta:Special:FileList|7,776]]
+| 27
+|}
+=== 10 000+ articles ===
+{| border="1" cellpadding="2" cellspacing="0" style="width:100%; background: #f9f9f9; border: 1px solid #aaaaaa; border-collapse: collapse; white-space: nowrap; text-align: right" class="sortable"
+|-
+! №
+! Language
+! Language (local)
+! Wiki
+! Articles
+! Total
+! Edits
+! Admins
+! Users
+! Active Users
+! Files
+! Depth
+|-
+| 60
+| [[w:Welsh language|Welsh]]
+| class="plainlinksneverexpand" | [{{fullurl:cy:Cymraeg}} Cymraeg]
+| [[:cy:|cy]]
+| class="plainlinksneverexpand" | [{{fullurl:cy:Special:Statistics|action=raw}} '''97,031''']
+|  210,474
+|  [[:cy:Special:Statistics|4,696,848]]
+|  [[:cy:Special:Listadmins|15]]
+|  [[:cy:Special:Listusers|48,110]]
+|  [[:cy:Special:ActiveUsers|145]]
+|  [[:cy:Special:FileList|16,928]]
+| 31
+|-
+| 61
+| [[w:Tajik language|Tajik]]
+| class="plainlinksneverexpand" | [{{fullurl:tg:Забони_тоҷикӣ}} Тоҷикӣ]
+| [[:tg:|tg]]
+| class="plainlinksneverexpand" | [{{fullurl:tg:Special:Statistics|action=raw}} '''93,332''']
+|  174,067
+|  [[:tg:Special:Statistics|989,782]]
+|  [[:tg:Special:Listadmins|4]]
+|  [[:tg:Special:Listusers|22,221]]
+|  [[:tg:Special:ActiveUsers|66]]
+|  [[:tg:Special:FileList|363]]
+| 4
+|-
+| 62
+| [[w:Macedonian language|Macedonian]]
+| class="plainlinksneverexpand" | [{{fullurl:mk:Македонски_јазик}} Македонски]
+| [[:mk:|mk]]
+| class="plainlinksneverexpand" | [{{fullurl:mk:Special:Statistics|action=raw}} '''93,078''']
+|  422,577
+|  [[:mk:Special:Statistics|3,675,641]]
+|  [[:mk:Special:Listadmins|16]]
+|  [[:mk:Special:Listusers|73,910]]
+|  [[:mk:Special:ActiveUsers|218]]
+|  [[:mk:Special:FileList|7,567]]
+| 109
+|-
+| 63
+| [[w:Tagalog language|Tagalog]]
+| class="plainlinksneverexpand" | [{{fullurl:tl:Wikang_Tagalog}} Tagalog]
+| [[:tl:|tl]]
+| class="plainlinksneverexpand" | [{{fullurl:tl:Special:Statistics|action=raw}} '''86,428''']
+|  235,330
+|  [[:tl:Special:Statistics|1,619,934]]
+|  [[:tl:Special:Listadmins|11]]
+|  [[:tl:Special:Listusers|91,112]]
+|  [[:tl:Special:ActiveUsers|128]]
+|  [[:tl:Special:FileList|1,945]]
+| 20
+|-
+| 64
+| [[w:Malagasy language|Malagasy]]
+| class="plainlinksneverexpand" | [{{fullurl:mg:Fiteny_malagasy}} Malagasy]
+| [[:mg:|mg]]
+| class="plainlinksneverexpand" | [{{fullurl:mg:Special:Statistics|action=raw}} '''84,805''']
+|  219,636
+|  [[:mg:Special:Statistics|809,665]]
+|  [[:mg:Special:Listadmins|2]]
+|  [[:mg:Special:Listusers|17,270]]
+|  [[:mg:Special:ActiveUsers|42]]
+|  [[:mg:Special:FileList|4]]
+| 9
+|-
+| 65
+| [[w:Occitan language|Occitan]]
+| class="plainlinksneverexpand" | [{{fullurl:oc:Occitan}} Occitan]
+| [[:oc:|oc]]
+| class="plainlinksneverexpand" | [{{fullurl:oc:Special:Statistics|action=raw}} '''84,289''']
+|  140,754
+|  [[:oc:Special:Statistics|2,066,575]]
+|  [[:oc:Special:Listadmins|4]]
+|  [[:oc:Special:Listusers|34,476]]
+|  [[:oc:Special:ActiveUsers|87]]
+|  [[:oc:Special:FileList|886]]
+| 7
+|-
+| 66
+| [[w:Latvian language|Latvian]]
+| class="plainlinksneverexpand" | [{{fullurl:lv:Latviešu_valoda}} Latviešu]
+| [[:lv:|lv]]
+| class="plainlinksneverexpand" | [{{fullurl:lv:Special:Statistics|action=raw}} '''82,741''']
+|  337,257
+|  [[:lv:Special:Statistics|2,803,820]]
+|  [[:lv:Special:Listadmins|10]]
+|  [[:lv:Special:Listusers|74,339]]
+|  [[:lv:Special:ActiveUsers|317]]
+|  [[:lv:Special:FileList|20,318]]
+| 79
+|-
+| 67
+| [[w:Kirghiz language|Kirghiz]]
+| class="plainlinksneverexpand" | [{{fullurl:ky:Кыргыз_тили}} Кыргызча]
+| [[:ky:|ky]]
+| class="plainlinksneverexpand" | [{{fullurl:ky:Special:Statistics|action=raw}} '''79,934''']
+|  99,881
+|  [[:ky:Special:Statistics|314,094]]
+|  [[:ky:Special:Listadmins|3]]
+|  [[:ky:Special:Listusers|19,406]]
+|  [[:ky:Special:ActiveUsers|57]]
+|  [[:ky:Special:FileList|2,683]]
+| 0
+|-
+| 68
+| [[w:Bosnian language|Bosnian]]
+| class="plainlinksneverexpand" | [{{fullurl:bs:Bosanski_jezik}} Bosanski]
+| [[:bs:|bs]]
+| class="plainlinksneverexpand" | [{{fullurl:bs:Special:Statistics|action=raw}} '''77,112''']
+|  362,233
+|  [[:bs:Special:Statistics|2,901,394]]
+|  [[:bs:Special:Listadmins|9]]
+|  [[:bs:Special:Listusers|103,807]]
+|  [[:bs:Special:ActiveUsers|193]]
+|  [[:bs:Special:FileList|24,016]]
+| 110
+|-
+| 69
+| [[w:Tatar language|Tatar]]
+| class="plainlinksneverexpand" | [{{fullurl:tt:Tatar_tele}} Tatarça / Татарча]
+| [[:tt:|tt]]
+| class="plainlinksneverexpand" | [{{fullurl:tt:Special:Statistics|action=raw}} '''76,387''']
+|  182,088
+|  [[:tt:Special:Statistics|2,238,013]]
+|  [[:tt:Special:Listadmins|3]]
+|  [[:tt:Special:Listusers|26,398]]
+|  [[:tt:Special:ActiveUsers|78]]
+|  [[:tt:Special:FileList|3,951]]
+| 24
+|-
+| 70
+| [[w:Albanian language|Albanian]]
+| class="plainlinksneverexpand" | [{{fullurl:sq:Gjuha_shqipe}} Shqip]
+| [[:sq:|sq]]
+| class="plainlinksneverexpand" | [{{fullurl:sq:Special:Statistics|action=raw}} '''72,618''']
+|  200,790
+|  [[:sq:Special:Statistics|1,839,304]]
+|  [[:sq:Special:Listadmins|10]]
+|  [[:sq:Special:Listusers|101,800]]
+|  [[:sq:Special:ActiveUsers|321]]
+|  [[:sq:Special:FileList|11,453]]
+| 29
+|-
+| 71
+| [[w:Newar language|Newar]]
+| class="plainlinksneverexpand" | [{{fullurl:new:नेपालभाषा}} नेपाल भाषा]
+| [[:new:|new]]
+| class="plainlinksneverexpand" | [{{fullurl:new:Special:Statistics|action=raw}} '''72,142''']
+|  196,180
+|  [[:new:Special:Statistics|843,653]]
+|  [[:new:Special:Listadmins|1]]
+|  [[:new:Special:Listusers|18,420]]
+|  [[:new:Special:ActiveUsers|19]]
+|  [[:new:Special:FileList|0]]
+| 13
+|-
+| 72
+| [[w:Telugu language|Telugu]]
+| class="plainlinksneverexpand" | [{{fullurl:te:తెలుగు}} తెలుగు]
+| [[:te:|te]]
+| class="plainlinksneverexpand" | [{{fullurl:te:Special:Statistics|action=raw}} '''68,704''']
+|  226,438
+|  [[:te:Special:Statistics|2,304,240]]
+|  [[:te:Special:Listadmins|15]]
+|  [[:te:Special:Listusers|70,121]]
+|  [[:te:Special:ActiveUsers|167]]
+|  [[:te:Special:FileList|11,634]]
+| 54
+|-
+| 73
+| [[w:South Azerbaijani language|South Azerbaijani]]
+| class="plainlinksneverexpand" | [{{fullurl:azb:تۆرکجه}} تۆرکجه]
+| [[:azb:|azb]]
+| class="plainlinksneverexpand" | [{{fullurl:azb:Special:Statistics|action=raw}} '''68,330''']
+|  102,541
+|  [[:azb:Special:Statistics|310,472]]
+|  [[:azb:Special:Listadmins|4]]
+|  [[:azb:Special:Listusers|10,480]]
+|  [[:azb:Special:ActiveUsers|35]]
+|  [[:azb:Special:FileList|0]]
+| 1
+|-
+| 74
+| [[w:Cantonese language|Cantonese]]
+| class="plainlinksneverexpand" | [{{fullurl:zh-yue:粵語}} 粵語]
+| [[:zh-yue:|zh-yue]]
+| class="plainlinksneverexpand" | [{{fullurl:zh-yue:Special:Statistics|action=raw}} '''65,296''']
+|  167,135
+|  [[:zh-yue:Special:Statistics|1,173,121]]
+|  [[:zh-yue:Special:Listadmins|9]]
+|  [[:zh-yue:Special:Listusers|150,790]]
+|  [[:zh-yue:Special:ActiveUsers|245]]
+|  [[:zh-yue:Special:FileList|1,467]]
+| 17
+|-
+| 75
+| [[w:Piedmontese language|Piedmontese]]
+| class="plainlinksneverexpand" | [{{fullurl:pms:Lenga_piemontèisa}} Piemontèis]
+| [[:pms:|pms]]
+| class="plainlinksneverexpand" | [{{fullurl:pms:Special:Statistics|action=raw}} '''64,305''']
+|  98,419
+|  [[:pms:Special:Statistics|838,744]]
+|  [[:pms:Special:Listadmins|9]]
+|  [[:pms:Special:Listusers|18,612]]
+|  [[:pms:Special:ActiveUsers|32]]
+|  [[:pms:Special:FileList|2,078]]
+| 2
+|-
+| 76
+| [[w:Breton language|Breton]]
+| class="plainlinksneverexpand" | [{{fullurl:br:Brezhoneg}} Brezhoneg]
+| [[:br:|br]]
+| class="plainlinksneverexpand" | [{{fullurl:br:Special:Statistics|action=raw}} '''63,943''']
+|  126,096
+|  [[:br:Special:Statistics|1,780,403]]
+|  [[:br:Special:Listadmins|7]]
+|  [[:br:Special:Listusers|48,179]]
+|  [[:br:Special:ActiveUsers|90]]
+|  [[:br:Special:FileList|5,402]]
+| 13
+|-
+| 77
+| [[w:Asturian language|Asturian]]
+| class="plainlinksneverexpand" | [{{fullurl:ast:Asturianu}} Asturianu]
+| [[:ast:|ast]]
+| class="plainlinksneverexpand" | [{{fullurl:ast:Special:Statistics|action=raw}} '''63,794''']
+|  103,167
+|  [[:ast:Special:Statistics|1,250,056]]
+|  [[:ast:Special:Listadmins|9]]
+|  [[:ast:Special:Listusers|42,570]]
+|  [[:ast:Special:ActiveUsers|107]]
+|  [[:ast:Special:FileList|0]]
+| 5
+|-
+| 78
+| [[w:Belarusian (Taraškievica) language|Belarusian (Taraškievica)]]
+| class="plainlinksneverexpand" | [{{fullurl:be-tarask:Беларуская_мова}} Беларуская (тарашкевіца)]
+| [[:be-tarask:|be-tarask]]
+| class="plainlinksneverexpand" | [{{fullurl:be-tarask:Special:Statistics|action=raw}} '''62,246''']
+|  164,626
+|  [[:be-tarask:Special:Statistics|1,951,865]]
+|  [[:be-tarask:Special:Listadmins|5]]
+|  [[:be-tarask:Special:Listusers|54,589]]
+|  [[:be-tarask:Special:ActiveUsers|116]]
+|  [[:be-tarask:Special:FileList|1,479]]
+| 32
+|-
+| 79
+| [[w:Bengali language|Bengali]]
+| class="plainlinksneverexpand" | [{{fullurl:bn:বাংলা_ভাষা}} বাংলা]
+| [[:bn:|bn]]
+| class="plainlinksneverexpand" | [{{fullurl:bn:Special:Statistics|action=raw}} '''56,337''']
+|  562,922
+|  [[:bn:Special:Statistics|2,920,898]]
+|  [[:bn:Special:Listadmins|19]]
+|  [[:bn:Special:Listusers|174,883]]
+|  [[:bn:Special:ActiveUsers|1,405]]
+|  [[:bn:Special:FileList|4,596]]
+| 420
+|-
+| 80
+| [[w:Malayalam language|Malayalam]]
+| class="plainlinksneverexpand" | [{{fullurl:ml:മലയാളം}} മലയാളം]
+| [[:ml:|ml]]
+| class="plainlinksneverexpand" | [{{fullurl:ml:Special:Statistics|action=raw}} '''54,745''']
+|  346,101
+|  [[:ml:Special:Statistics|2,711,175]]
+|  [[:ml:Special:Listadmins|20]]
+|  [[:ml:Special:Listusers|104,492]]
+|  [[:ml:Special:ActiveUsers|310]]
+|  [[:ml:Special:FileList|5,523]]
+| 222
+|-
+| 81
+| [[w:Javanese language|Javanese]]
+| class="plainlinksneverexpand" | [{{fullurl:jv:Basa_Jawa}} Basa Jawa]
+| [[:jv:|jv]]
+| class="plainlinksneverexpand" | [{{fullurl:jv:Special:Statistics|action=raw}} '''54,682''']
+|  142,873
+|  [[:jv:Special:Statistics|1,424,006]]
+|  [[:jv:Special:Listadmins|8]]
+|  [[:jv:Special:Listusers|35,034]]
+|  [[:jv:Special:ActiveUsers|104]]
+|  [[:jv:Special:FileList|5,449]]
+| 26
+|-
+| 82
+| [[w:Haitian language|Haitian]]
+| class="plainlinksneverexpand" | [{{fullurl:ht:Lang_kreyòl_ayisyen}} Krèyol ayisyen]
+| [[:ht:|ht]]
+| class="plainlinksneverexpand" | [{{fullurl:ht:Special:Statistics|action=raw}} '''51,772''']
+|  63,488
+|  [[:ht:Special:Statistics|704,730]]
+|  [[:ht:Special:Listadmins|2]]
+|  [[:ht:Special:Listusers|19,094]]
+|  [[:ht:Special:ActiveUsers|29]]
+|  [[:ht:Special:FileList|0]]
+| 1
+|-
+| 83
+| [[w:Luxembourgish language|Luxembourgish]]
+| class="plainlinksneverexpand" | [{{fullurl:lb:Lëtzebuergesch}} Lëtzebuergesch]
+| [[:lb:|lb]]
+| class="plainlinksneverexpand" | [{{fullurl:lb:Special:Statistics|action=raw}} '''51,375''']
+|  113,024
+|  [[:lb:Special:Statistics|2,096,165]]
+|  [[:lb:Special:Listadmins|5]]
+|  [[:lb:Special:Listusers|38,928]]
+|  [[:lb:Special:ActiveUsers|86]]
+|  [[:lb:Special:FileList|2,558]]
+| 27
+|-
+| 84
+| [[w:Marathi language|Marathi]]
+| class="plainlinksneverexpand" | [{{fullurl:mr:मराठी_भाषा}} मराठी]
+| [[:mr:|mr]]
+| class="plainlinksneverexpand" | [{{fullurl:mr:Special:Statistics|action=raw}} '''50,770''']
+|  209,168
+|  [[:mr:Special:Statistics|1,564,309]]
+|  [[:mr:Special:Listadmins|8]]
+|  [[:mr:Special:Listusers|85,544]]
+|  [[:mr:Special:ActiveUsers|243]]
+|  [[:mr:Special:FileList|19,316]]
+| 73
+|-
+| 85
+| [[w:Scots language|Scots]]
+| class="plainlinksneverexpand" | [{{fullurl:sco:Scots_leid}} Scots]
+| [[:sco:|sco]]
+| class="plainlinksneverexpand" | [{{fullurl:sco:Special:Statistics|action=raw}} '''49,384''']
+|  178,368
+|  [[:sco:Special:Statistics|629,810]]
+|  [[:sco:Special:Listadmins|4]]
+|  [[:sco:Special:Listusers|47,961]]
+|  [[:sco:Special:ActiveUsers|101]]
+|  [[:sco:Special:FileList|1,276]]
+| 24
+|-
+| 86
+| [[w:Afrikaans language|Afrikaans]]
+| class="plainlinksneverexpand" | [{{fullurl:af:Afrikaans}} Afrikaans]
+| [[:af:|af]]
+| class="plainlinksneverexpand" | [{{fullurl:af:Special:Statistics|action=raw}} '''48,970''']
+|  118,592
+|  [[:af:Special:Statistics|1,647,592]]
+|  [[:af:Special:Listadmins|13]]
+|  [[:af:Special:Listusers|97,300]]
+|  [[:af:Special:ActiveUsers|147]]
+|  [[:af:Special:FileList|8,718]]
+| 28
+|-
+| 87
+| [[w:Irish language|Irish]]
+| class="plainlinksneverexpand" | [{{fullurl:ga:Gaeilge}} Gaeilge]
+| [[:ga:|ga]]
+| class="plainlinksneverexpand" | [{{fullurl:ga:Special:Statistics|action=raw}} '''46,377''']
+|  76,630
+|  [[:ga:Special:Statistics|884,239]]
+|  [[:ga:Special:Listadmins|8]]
+|  [[:ga:Special:Listusers|34,183]]
+|  [[:ga:Special:ActiveUsers|103]]
+|  [[:ga:Special:FileList|1,191]]
+| 5
+|-
+| 88
+| [[w:Western Punjabi language|Western Punjabi]]
+| class="plainlinksneverexpand" | [{{fullurl:pnb:شاہ_مکھی_پنجابی}} شاہ مکھی پنجابی (Shāhmukhī Pañjābī)]
+| [[:pnb:|pnb]]
+| class="plainlinksneverexpand" | [{{fullurl:pnb:Special:Statistics|action=raw}} '''46,061''']
+|  65,164
+|  [[:pnb:Special:Statistics|498,663]]
+|  [[:pnb:Special:Listadmins|2]]
+|  [[:pnb:Special:Listusers|20,811]]
+|  [[:pnb:Special:ActiveUsers|41]]
+|  [[:pnb:Special:FileList|238]]
+| 1
+|-
+| 89
+| [[w:Icelandic language|Icelandic]]
+| class="plainlinksneverexpand" | [{{fullurl:is:Íslenska}} Íslenska]
+| [[:is:|is]]
+| class="plainlinksneverexpand" | [{{fullurl:is:Special:Statistics|action=raw}} '''44,356''']
+|  117,704
+|  [[:is:Special:Statistics|1,578,678]]
+|  [[:is:Special:Listadmins|25]]
+|  [[:is:Special:Listusers|60,059]]
+|  [[:is:Special:ActiveUsers|158]]
+|  [[:is:Special:FileList|3,023]]
+| 37
+|-
+| 90
+| [[w:Bashkir language|Bashkir]]
+| class="plainlinksneverexpand" | [{{fullurl:ba:Башҡорт_теле}} Башҡорт]
+| [[:ba:|ba]]
+| class="plainlinksneverexpand" | [{{fullurl:ba:Special:Statistics|action=raw}} '''41,395''']
+|  120,314
+|  [[:ba:Special:Statistics|783,355]]
+|  [[:ba:Special:Listadmins|7]]
+|  [[:ba:Special:Listusers|21,665]]
+|  [[:ba:Special:ActiveUsers|98]]
+|  [[:ba:Special:FileList|1,291]]
+| 24
+|-
+| 91
+| [[w:Chuvash language|Chuvash]]
+| class="plainlinksneverexpand" | [{{fullurl:cv:Чăваш_чĕлхи}} Чăваш]
+| [[:cv:|cv]]
+| class="plainlinksneverexpand" | [{{fullurl:cv:Special:Statistics|action=raw}} '''41,063''']
+|  70,256
+|  [[:cv:Special:Statistics|624,913]]
+|  [[:cv:Special:Listadmins|2]]
+|  [[:cv:Special:Listusers|22,446]]
+|  [[:cv:Special:ActiveUsers|48]]
+|  [[:cv:Special:FileList|536]]
+| 4
+|-
+| 92
+| [[w:West Frisian language|West Frisian]]
+| class="plainlinksneverexpand" | [{{fullurl:fy:Frysk}} Frysk]
+| [[:fy:|fy]]
+| class="plainlinksneverexpand" | [{{fullurl:fy:Special:Statistics|action=raw}} '''39,671''']
+|  115,208
+|  [[:fy:Special:Statistics|906,218]]
+|  [[:fy:Special:Listadmins|10]]
+|  [[:fy:Special:Listusers|29,174]]
+|  [[:fy:Special:ActiveUsers|78]]
+|  [[:fy:Special:FileList|6,311]]
+| 29
+|-
+| 93
+| [[w:Sundanese language|Sundanese]]
+| class="plainlinksneverexpand" | [{{fullurl:su:Basa_Sunda}} Basa Sunda]
+| [[:su:|su]]
+| class="plainlinksneverexpand" | [{{fullurl:su:Special:Statistics|action=raw}} '''39,492''']
+|  67,782
+|  [[:su:Special:Statistics|535,620]]
+|  [[:su:Special:Listadmins|7]]
+|  [[:su:Special:Listusers|19,406]]
+|  [[:su:Special:ActiveUsers|50]]
+|  [[:su:Special:FileList|540]]
+| 4
+|-
+| 94
+| [[w:Swahili language|Swahili]]
+| class="plainlinksneverexpand" | [{{fullurl:sw:Kiswahili}} Kiswahili]
+| [[:sw:|sw]]
+| class="plainlinksneverexpand" | [{{fullurl:sw:Special:Statistics|action=raw}} '''39,358''']
+|  91,252
+|  [[:sw:Special:Statistics|1,021,395]]
+|  [[:sw:Special:Listadmins|9]]
+|  [[:sw:Special:Listusers|31,034]]
+|  [[:sw:Special:ActiveUsers|85]]
+|  [[:sw:Special:FileList|2,143]]
+| 19
+|-
+| 95
+| [[w:Burmese language|Burmese]]
+| class="plainlinksneverexpand" | [{{fullurl:my:မြန်မာဘာသာစကား}} မြန်မာဘာသာ]
+| [[:my:|my]]
+| class="plainlinksneverexpand" | [{{fullurl:my:Special:Statistics|action=raw}} '''38,091''']
+|  78,456
+|  [[:my:Special:Statistics|392,483]]
+|  [[:my:Special:Listadmins|4]]
+|  [[:my:Special:Listusers|48,860]]
+|  [[:my:Special:ActiveUsers|85]]
+|  [[:my:Special:FileList|3,492]]
+| 6
+|-
+| 96
+| [[w:Lombard language|Lombard]]
+| class="plainlinksneverexpand" | [{{fullurl:lmo:Lengua_Lumbarda}} Lumbaart]
+| [[:lmo:|lmo]]
+| class="plainlinksneverexpand" | [{{fullurl:lmo:Special:Statistics|action=raw}} '''36,991''']
+|  96,698
+|  [[:lmo:Special:Statistics|962,656]]
+|  [[:lmo:Special:Listadmins|6]]
+|  [[:lmo:Special:Listusers|22,200]]
+|  [[:lmo:Special:ActiveUsers|47]]
+|  [[:lmo:Special:FileList|4,437]]
+| 26
+|-
+| 97
+| [[w:Aragonese language|Aragonese]]
+| class="plainlinksneverexpand" | [{{fullurl:an:Idioma_aragonés}} Aragonés]
+| [[:an:|an]]
+| class="plainlinksneverexpand" | [{{fullurl:an:Special:Statistics|action=raw}} '''32,739''']
+|  104,895
+|  [[:an:Special:Statistics|1,603,948]]
+|  [[:an:Special:Listadmins|6]]
+|  [[:an:Special:Listusers|47,266]]
+|  [[:an:Special:ActiveUsers|57]]
+|  [[:an:Special:FileList|1,236]]
+| 74
+|-
+| 98
+| [[w:Yoruba language|Yoruba]]
+| class="plainlinksneverexpand" | [{{fullurl:yo:Èdè_Yorùbá}} Yorùbá]
+| [[:yo:|yo]]
+| class="plainlinksneverexpand" | [{{fullurl:yo:Special:Statistics|action=raw}} '''31,608''']
+|  53,656
+|  [[:yo:Special:Statistics|511,287]]
+|  [[:yo:Special:Listadmins|2]]
+|  [[:yo:Special:Listusers|16,981]]
+|  [[:yo:Special:ActiveUsers|31]]
+|  [[:yo:Special:FileList|174]]
+| 5
+|-
+| 99
+| [[w:Nepali language|Nepali]]
+| class="plainlinksneverexpand" | [{{fullurl:ne:नेपाली_भाषा}} नेपाली]
+| [[:ne:|ne]]
+| class="plainlinksneverexpand" | [{{fullurl:ne:Special:Statistics|action=raw}} '''30,392''']
+|  85,230
+|  [[:ne:Special:Statistics|632,777]]
+|  [[:ne:Special:Listadmins|11]]
+|  [[:ne:Special:Listusers|36,374]]
+|  [[:ne:Special:ActiveUsers|95]]
+|  [[:ne:Special:FileList|590]]
+| 24
+|-
+| 100
+| [[w:Low Saxon language|Low Saxon]]
+| class="plainlinksneverexpand" | [{{fullurl:nds:Plattdüütsch}} Plattdüütsch]
+| [[:nds:|nds]]
+| class="plainlinksneverexpand" | [{{fullurl:nds:Special:Statistics|action=raw}} '''28,118''']
+|  77,950
+|  [[:nds:Special:Statistics|808,917]]
+|  [[:nds:Special:Listadmins|3]]
+|  [[:nds:Special:Listusers|31,922]]
+|  [[:nds:Special:ActiveUsers|50]]
+|  [[:nds:Special:FileList|0]]
+| 33
+|-
+| 101
+| [[w:Punjabi language|Punjabi]]
+| class="plainlinksneverexpand" | [{{fullurl:pa:ਪੰਜਾਬੀ}} ਪੰਜਾਬੀ]
+| [[:pa:|pa]]
+| class="plainlinksneverexpand" | [{{fullurl:pa:Special:Statistics|action=raw}} '''27,931''']
+|  95,731
+|  [[:pa:Special:Statistics|412,014]]
+|  [[:pa:Special:Listadmins|9]]
+|  [[:pa:Special:Listusers|22,388]]
+|  [[:pa:Special:ActiveUsers|95]]
+|  [[:pa:Special:FileList|1,257]]
+| 25
+|-
+| 102
+| [[w:Gujarati language|Gujarati]]
+| class="plainlinksneverexpand" | [{{fullurl:gu:ગુજરાતી_ભાષા}} ગુજરાતી]
+| [[:gu:|gu]]
+| class="plainlinksneverexpand" | [{{fullurl:gu:Special:Statistics|action=raw}} '''27,572''']
+|  77,157
+|  [[:gu:Special:Statistics|558,896]]
+|  [[:gu:Special:Listadmins|4]]
+|  [[:gu:Special:Listusers|39,106]]
+|  [[:gu:Special:ActiveUsers|74]]
+|  [[:gu:Special:FileList|1]]
+| 23
+|-
+| 103
+| [[w:Ido language|Ido]]
+| class="plainlinksneverexpand" | [{{fullurl:io:Ido}} Ido]
+| [[:io:|io]]
+| class="plainlinksneverexpand" | [{{fullurl:io:Special:Statistics|action=raw}} '''27,496''']
+|  41,292
+|  [[:io:Special:Statistics|924,542]]
+|  [[:io:Special:Listadmins|4]]
+|  [[:io:Special:Listusers|23,877]]
+|  [[:io:Special:ActiveUsers|38]]
+|  [[:io:Special:FileList|1]]
+| 6
+|-
+| 104
+| [[w:Sicilian language|Sicilian]]
+| class="plainlinksneverexpand" | [{{fullurl:scn:Lingua_siciliana}} Sicilianu]
+| [[:scn:|scn]]
+| class="plainlinksneverexpand" | [{{fullurl:scn:Special:Statistics|action=raw}} '''25,843''']
+|  54,868
+|  [[:scn:Special:Statistics|720,535]]
+|  [[:scn:Special:Listadmins|8]]
+|  [[:scn:Special:Listusers|28,838]]
+|  [[:scn:Special:ActiveUsers|27]]
+|  [[:scn:Special:FileList|1,411]]
+| 17
+|-
+| 105
+| [[w:Bavarian language|Bavarian]]
+| class="plainlinksneverexpand" | [{{fullurl:bar:Boarische_Språch}} Boarisch]
+| [[:bar:|bar]]
+| class="plainlinksneverexpand" | [{{fullurl:bar:Special:Statistics|action=raw}} '''25,559''']
+|  97,478
+|  [[:bar:Special:Statistics|680,879]]
+|  [[:bar:Special:Listadmins|6]]
+|  [[:bar:Special:Listusers|40,615]]
+|  [[:bar:Special:ActiveUsers|65]]
+|  [[:bar:Special:FileList|1,251]]
+| 55
+|-
+| 106
+| [[w:Bishnupriya Manipuri language|Bishnupriya Manipuri]]
+| class="plainlinksneverexpand" | [{{fullurl:bpy:বিষ্ণুপ্রিয়া_মণিপুরী}} ইমার ঠার/বিষ্ণুপ্রিয়া মণিপুরী]
+| [[:bpy:|bpy]]
+| class="plainlinksneverexpand" | [{{fullurl:bpy:Special:Statistics|action=raw}} '''25,080''']
+|  58,140
+|  [[:bpy:Special:Statistics|780,079]]
+|  [[:bpy:Special:Listadmins|1]]
+|  [[:bpy:Special:Listusers|17,876]]
+|  [[:bpy:Special:ActiveUsers|15]]
+|  [[:bpy:Special:FileList|49]]
+| 23
+|-
+| 107
+| [[w:Alemannic language|Alemannic]]
+| class="plainlinksneverexpand" | [{{fullurl:als:Alemannisch}} Alemannisch]
+| [[:als:|als]]
+| class="plainlinksneverexpand" | [{{fullurl:als:Special:Statistics|action=raw}} '''24,118''']
+|  55,540
+|  [[:als:Special:Statistics|808,643]]
+|  [[:als:Special:Listadmins|8]]
+|  [[:als:Special:Listusers|61,769]]
+|  [[:als:Special:ActiveUsers|82]]
+|  [[:als:Special:FileList|437]]
+| 25
+|-
+| 108
+| [[w:Kurdish language|Kurdish]]
+| class="plainlinksneverexpand" | [{{fullurl:ku:Zimanê_kurdî}} Kurdî / كوردی]
+| [[:ku:|ku]]
+| class="plainlinksneverexpand" | [{{fullurl:ku:Special:Statistics|action=raw}} '''23,203''']
+|  58,908
+|  [[:ku:Special:Statistics|697,615]]
+|  [[:ku:Special:Listadmins|3]]
+|  [[:ku:Special:Listusers|34,744]]
+|  [[:ku:Special:ActiveUsers|56]]
+|  [[:ku:Special:FileList|616]]
+| 28
+|-
+| 109
+| [[w:Kannada language|Kannada]]
+| class="plainlinksneverexpand" | [{{fullurl:kn:ಕನ್ನಡ}} ಕನ್ನಡ]
+| [[:kn:|kn]]
+| class="plainlinksneverexpand" | [{{fullurl:kn:Special:Statistics|action=raw}} '''23,070''']
+|  87,136
+|  [[:kn:Special:Statistics|828,487]]
+|  [[:kn:Special:Listadmins|5]]
+|  [[:kn:Special:Listusers|44,516]]
+|  [[:kn:Special:ActiveUsers|649]]
+|  [[:kn:Special:FileList|3,286]]
+| 73
+|-
+| 110
+| [[w:Sorani language|Sorani]]
+| class="plainlinksneverexpand" | [{{fullurl:ckb:دەستپێک}} Soranî / کوردی]
+| [[:ckb:|ckb]]
+| class="plainlinksneverexpand" | [{{fullurl:ckb:Special:Statistics|action=raw}} '''21,001''']
+|  116,191
+|  [[:ckb:Special:Statistics|560,350]]
+|  [[:ckb:Special:Listadmins|7]]
+|  [[:ckb:Special:Listusers|30,836]]
+|  [[:ckb:Special:ActiveUsers|82]]
+|  [[:ckb:Special:FileList|790]]
+| 99
+|-
+| 111
+| [[w:Interlingua language|Interlingua]]
+| class="plainlinksneverexpand" | [{{fullurl:ia:Interlingua}} Interlingua]
+| [[:ia:|ia]]
+| class="plainlinksneverexpand" | [{{fullurl:ia:Special:Statistics|action=raw}} '''20,628''']
+|  32,996
+|  [[:ia:Special:Statistics|592,556]]
+|  [[:ia:Special:Listadmins|7]]
+|  [[:ia:Special:Listusers|31,100]]
+|  [[:ia:Special:ActiveUsers|27]]
+|  [[:ia:Special:FileList|4]]
+| 6
+|-
+| 112
+| [[w:Quechua language|Quechua]]
+| class="plainlinksneverexpand" | [{{fullurl:qu:Qhichwa_simi}} Runa Simi]
+| [[:qu:|qu]]
+| class="plainlinksneverexpand" | [{{fullurl:qu:Special:Statistics|action=raw}} '''20,402''']
+|  51,901
+|  [[:qu:Special:Statistics|631,664]]
+|  [[:qu:Special:Listadmins|2]]
+|  [[:qu:Special:Listusers|19,649]]
+|  [[:qu:Special:ActiveUsers|37]]
+|  [[:qu:Special:FileList|0]]
+| 29
+|-
+| 113
+| [[w:Egyptian Arabic language|Egyptian Arabic]]
+| class="plainlinksneverexpand" | [{{fullurl:arz:اللغه_المصريه_الحديثه}} مصرى (Maṣri)]
+| [[:arz:|arz]]
+| class="plainlinksneverexpand" | [{{fullurl:arz:Special:Statistics|action=raw}} '''17,849''']
+|  151,366
+|  [[:arz:Special:Statistics|797,178]]
+|  [[:arz:Special:Listadmins|5]]
+|  [[:arz:Special:Listusers|96,380]]
+|  [[:arz:Special:ActiveUsers|100]]
+|  [[:arz:Special:FileList|1,460]]
+| 295
+|-
+| 114
+| [[w:Mongolian language|Mongolian]]
+| class="plainlinksneverexpand" | [{{fullurl:mn:Монгол_хэл}} Монгол]
+| [[:mn:|mn]]
+| class="plainlinksneverexpand" | [{{fullurl:mn:Special:Statistics|action=raw}} '''17,838''']
+|  60,650
+|  [[:mn:Special:Statistics|535,842]]
+|  [[:mn:Special:Listadmins|5]]
+|  [[:mn:Special:Listusers|51,041]]
+|  [[:mn:Special:ActiveUsers|89]]
+|  [[:mn:Special:FileList|1,445]]
+| 51
+|-
+| 115
+| [[w:Samogitian language|Samogitian]]
+| class="plainlinksneverexpand" | [{{fullurl:bat-smg:Žemaitiu_kalba}} Žemaitėška]
+| [[:bat-smg:|bat-smg]]
+| class="plainlinksneverexpand" | [{{fullurl:bat-smg:Special:Statistics|action=raw}} '''16,244''']
+|  27,366
+|  [[:bat-smg:Special:Statistics|342,764]]
+|  [[:bat-smg:Special:Listadmins|4]]
+|  [[:bat-smg:Special:Listusers|18,227]]
+|  [[:bat-smg:Special:ActiveUsers|18]]
+|  [[:bat-smg:Special:FileList|109]]
+| 6
+|-
+| 116
+| [[w:Scottish Gaelic language|Scottish Gaelic]]
+| class="plainlinksneverexpand" | [{{fullurl:gd:Gàidhlig}} Gàidhlig]
+| [[:gd:|gd]]
+| class="plainlinksneverexpand" | [{{fullurl:gd:Special:Statistics|action=raw}} '''14,690''']
+|  30,372
+|  [[:gd:Special:Statistics|540,046]]
+|  [[:gd:Special:Listadmins|4]]
+|  [[:gd:Special:Listusers|18,773]]
+|  [[:gd:Special:ActiveUsers|31]]
+|  [[:gd:Special:FileList|347]]
+| 20
+|-
+| 117
+| [[w:Walloon language|Walloon]]
+| class="plainlinksneverexpand" | [{{fullurl:wa:Walon}} Walon]
+| [[:wa:|wa]]
+| class="plainlinksneverexpand" | [{{fullurl:wa:Special:Statistics|action=raw}} '''14,552''']
+|  37,873
+|  [[:wa:Special:Statistics|331,930]]
+|  [[:wa:Special:Listadmins|1]]
+|  [[:wa:Special:Listusers|15,387]]
+|  [[:wa:Special:ActiveUsers|19]]
+|  [[:wa:Special:FileList|2,147]]
+| 23
+|-
+| 118
+| [[w:Sinhalese language|Sinhalese]]
+| class="plainlinksneverexpand" | [{{fullurl:si:සිංහල_භාෂාව}} සිංහල]
+| [[:si:|si]]
+| class="plainlinksneverexpand" | [{{fullurl:si:Special:Statistics|action=raw}} '''14,496''']
+|  66,006
+|  [[:si:Special:Statistics|418,048]]
+|  [[:si:Special:Listadmins|2]]
+|  [[:si:Special:Listusers|34,546]]
+|  [[:si:Special:ActiveUsers|76]]
+|  [[:si:Special:FileList|4,532]]
+| 80
+|-
+| 119
+| [[w:Neapolitan language|Neapolitan]]
+| class="plainlinksneverexpand" | [{{fullurl:nap:Lengua_napulitana}} Nnapulitano]
+| [[:nap:|nap]]
+| class="plainlinksneverexpand" | [{{fullurl:nap:Special:Statistics|action=raw}} '''14,487''']
+|  26,358
+|  [[:nap:Special:Statistics|645,725]]
+|  [[:nap:Special:Listadmins|1]]
+|  [[:nap:Special:Listusers|18,786]]
+|  [[:nap:Special:ActiveUsers|21]]
+|  [[:nap:Special:FileList|368]]
+| 16
+|-
+| 120
+| [[w:Yiddish language|Yiddish]]
+| class="plainlinksneverexpand" | [{{fullurl:yi:יידיש}} ייִדיש]
+| [[:yi:|yi]]
+| class="plainlinksneverexpand" | [{{fullurl:yi:Special:Statistics|action=raw}} '''14,311''']
+|  39,277
+|  [[:yi:Special:Statistics|527,023]]
+|  [[:yi:Special:Listadmins|3]]
+|  [[:yi:Special:Listusers|29,969]]
+|  [[:yi:Special:ActiveUsers|35]]
+|  [[:yi:Special:FileList|1,063]]
+| 41
+|-
+| 121
+| [[w:Amharic language|Amharic]]
+| class="plainlinksneverexpand" | [{{fullurl:am:አማርኛ}} አማርኛ]
+| [[:am:|am]]
+| class="plainlinksneverexpand" | [{{fullurl:am:Special:Statistics|action=raw}} '''14,119''']
+|  44,033
+|  [[:am:Special:Statistics|345,105]]
+|  [[:am:Special:Listadmins|3]]
+|  [[:am:Special:Listusers|25,616]]
+|  [[:am:Special:ActiveUsers|29]]
+|  [[:am:Special:FileList|1,616]]
+| 35
+|-
+| 122
+| [[w:Buginese language|Buginese]]
+| class="plainlinksneverexpand" | [{{fullurl:bug:ᨅᨗᨌᨑ_ᨕᨘᨁᨗ}} Basa Ugi]
+| [[:bug:|bug]]
+| class="plainlinksneverexpand" | [{{fullurl:bug:Special:Statistics|action=raw}} '''14,113''']
+|  18,624
+|  [[:bug:Special:Statistics|191,445]]
+|  [[:bug:Special:Listadmins|0]]
+|  [[:bug:Special:Listusers|9,033]]
+|  [[:bug:Special:ActiveUsers|21]]
+|  [[:bug:Special:FileList|0]]
+| 1
+|-
+| 123
+| [[w:Min Dong language|Min Dong]]
+| class="plainlinksneverexpand" | [{{fullurl:cdo:Mìng-dĕ̤ng-ngṳ̄}} Mìng-dĕ̤ng-ngṳ̄]
+| [[:cdo:|cdo]]
+| class="plainlinksneverexpand" | [{{fullurl:cdo:Special:Statistics|action=raw}} '''13,563''']
+|  26,516
+|  [[:cdo:Special:Statistics|70,599]]
+|  [[:cdo:Special:Listadmins|3]]
+|  [[:cdo:Special:Listusers|13,272]]
+|  [[:cdo:Special:ActiveUsers|19]]
+|  [[:cdo:Special:FileList|2]]
+| 2
+|-
+| 124
+| [[w:Oriya language|Oriya]]
+| class="plainlinksneverexpand" | [{{fullurl:or:ଓଡ଼ିଆ}} ଓଡ଼ିଆ]
+| [[:or:|or]]
+| class="plainlinksneverexpand" | [{{fullurl:or:Special:Statistics|action=raw}} '''13,519''']
+|  58,266
+|  [[:or:Special:Statistics|302,271]]
+|  [[:or:Special:Listadmins|5]]
+|  [[:or:Special:Listusers|16,589]]
+|  [[:or:Special:ActiveUsers|51]]
+|  [[:or:Special:FileList|119]]
+| 57
+|-
+| 125
+| [[w:Banyumasan language|Banyumasan]]
+| class="plainlinksneverexpand" | [{{fullurl:map-bms:Basa_Banyumasan}} Basa Banyumasan]
+| [[:map-bms:|map-bms]]
+| class="plainlinksneverexpand" | [{{fullurl:map-bms:Special:Statistics|action=raw}} '''13,313''']
+|  28,406
+|  [[:map-bms:Special:Statistics|200,595]]
+|  [[:map-bms:Special:Listadmins|1]]
+|  [[:map-bms:Special:Listusers|10,097]]
+|  [[:map-bms:Special:ActiveUsers|14]]
+|  [[:map-bms:Special:FileList|487]]
+| 9
+|-
+| 126
+| [[w:Faroese language|Faroese]]
+| class="plainlinksneverexpand" | [{{fullurl:fo:Føroyskt_(mál)}} Føroyskt]
+| [[:fo:|fo]]
+| class="plainlinksneverexpand" | [{{fullurl:fo:Special:Statistics|action=raw}} '''12,683''']
+|  37,893
+|  [[:fo:Special:Statistics|346,774]]
+|  [[:fo:Special:Listadmins|2]]
+|  [[:fo:Special:Listusers|18,980]]
+|  [[:fo:Special:ActiveUsers|43]]
+|  [[:fo:Special:FileList|0]]
+| 36
+|-
+| 127
+| [[w:Mazandarani language|Mazandarani]]
+| class="plainlinksneverexpand" | [{{fullurl:mzn:مازرونی_زیوون}} مَزِروني]
+| [[:mzn:|mzn]]
+| class="plainlinksneverexpand" | [{{fullurl:mzn:Special:Statistics|action=raw}} '''12,617''']
+|  27,656
+|  [[:mzn:Special:Statistics|144,012]]
+|  [[:mzn:Special:Listadmins|3]]
+|  [[:mzn:Special:Listusers|16,091]]
+|  [[:mzn:Special:ActiveUsers|37]]
+|  [[:mzn:Special:FileList|217]]
+| 7
+|-
+| 128
+| [[w:Upper Sorbian language|Upper Sorbian]]
+| class="plainlinksneverexpand" | [{{fullurl:hsb:Hornjoserbšćina}} Hornjoserbsce]
+| [[:hsb:|hsb]]
+| class="plainlinksneverexpand" | [{{fullurl:hsb:Special:Statistics|action=raw}} '''12,529''']
+|  32,151
+|  [[:hsb:Special:Statistics|355,134]]
+|  [[:hsb:Special:Listadmins|3]]
+|  [[:hsb:Special:Listusers|17,065]]
+|  [[:hsb:Special:ActiveUsers|32]]
+|  [[:hsb:Special:FileList|138]]
+| 27
+|-
+| 129
+| [[w:Mingrelian language|Mingrelian]]
+| class="plainlinksneverexpand" | [{{fullurl:xmf:მარგალური_ნინა}} მარგალური (Margaluri)]
+| [[:xmf:|xmf]]
+| class="plainlinksneverexpand" | [{{fullurl:xmf:Special:Statistics|action=raw}} '''12,372''']
+|  27,561
+|  [[:xmf:Special:Statistics|133,387]]
+|  [[:xmf:Special:Listadmins|2]]
+|  [[:xmf:Special:Listusers|10,824]]
+|  [[:xmf:Special:ActiveUsers|27]]
+|  [[:xmf:Special:FileList|0]]
+| 7
+|-
+| 130
+| [[w:Maithili language|Maithili]]
+| class="plainlinksneverexpand" | [{{fullurl:mai:मैथिली}} मैथिली]
+| [[:mai:|mai]]
+| class="plainlinksneverexpand" | [{{fullurl:mai:Special:Statistics|action=raw}} '''12,366''']
+|  29,189
+|  [[:mai:Special:Statistics|166,398]]
+|  [[:mai:Special:Listadmins|3]]
+|  [[:mai:Special:Listusers|5,496]]
+|  [[:mai:Special:ActiveUsers|38]]
+|  [[:mai:Special:FileList|59]]
+| 11
+|-
+| 131
+| [[w:Limburgish language|Limburgish]]
+| class="plainlinksneverexpand" | [{{fullurl:li:Limburgs}} Limburgs]
+| [[:li:|li]]
+| class="plainlinksneverexpand" | [{{fullurl:li:Special:Statistics|action=raw}} '''12,118''']
+|  60,073
+|  [[:li:Special:Statistics|425,427]]
+|  [[:li:Special:Listadmins|5]]
+|  [[:li:Special:Listusers|18,166]]
+|  [[:li:Special:ActiveUsers|35]]
+|  [[:li:Special:FileList|625]]
+| 111
+|-
+| 132
+| [[w:Sakha language|Sakha]]
+| class="plainlinksneverexpand" | [{{fullurl:sah:Саха_тыла}} Саха тыла (Saxa Tyla)]
+| [[:sah:|sah]]
+| class="plainlinksneverexpand" | [{{fullurl:sah:Special:Statistics|action=raw}} '''11,563''']
+|  39,350
+|  [[:sah:Special:Statistics|338,983]]
+|  [[:sah:Special:Listadmins|3]]
+|  [[:sah:Special:Listusers|15,096]]
+|  [[:sah:Special:ActiveUsers|30]]
+|  [[:sah:Special:FileList|1,766]]
+| 50
+|-
+| 133
+| [[w:Sanskrit language|Sanskrit]]
+| class="plainlinksneverexpand" | [{{fullurl:sa:संस्कृत_भाषा}} संस्कृतम्]
+| [[:sa:|sa]]
+| class="plainlinksneverexpand" | [{{fullurl:sa:Special:Statistics|action=raw}} '''11,220''']
+|  52,203
+|  [[:sa:Special:Statistics|430,937]]
+|  [[:sa:Special:Listadmins|6]]
+|  [[:sa:Special:Listusers|22,331]]
+|  [[:sa:Special:ActiveUsers|121]]
+|  [[:sa:Special:FileList|433]]
+| 110
+|-
+| 134
+| [[w:Venetian language|Venetian]]
+| class="plainlinksneverexpand" | [{{fullurl:vec:Łéngua_vèneta}} Vèneto]
+| [[:vec:|vec]]
+| class="plainlinksneverexpand" | [{{fullurl:vec:Special:Statistics|action=raw}} '''11,111''']
+|  33,973
+|  [[:vec:Special:Statistics|581,731]]
+|  [[:vec:Special:Listadmins|3]]
+|  [[:vec:Special:Listusers|20,481]]
+|  [[:vec:Special:ActiveUsers|48]]
+|  [[:vec:Special:FileList|719]]
+| 72
+|-
+| 135
+| [[w:Ilokano language|Ilokano]]
+| class="plainlinksneverexpand" | [{{fullurl:ilo:Pagsasao_nga_Iloko}} Ilokano]
+| [[:ilo:|ilo]]
+| class="plainlinksneverexpand" | [{{fullurl:ilo:Special:Statistics|action=raw}} '''10,931''']
+|  46,092
+|  [[:ilo:Special:Statistics|314,705]]
+|  [[:ilo:Special:Listadmins|2]]
+|  [[:ilo:Special:Listusers|11,969]]
+|  [[:ilo:Special:ActiveUsers|22]]
+|  [[:ilo:Special:FileList|0]]
+| 71
+|-
+| 136
+| [[w:Ossetian language|Ossetian]]
+| class="plainlinksneverexpand" | [{{fullurl:os:Ирон_æвзаг}} Иронау]
+| [[:os:|os]]
+| class="plainlinksneverexpand" | [{{fullurl:os:Special:Statistics|action=raw}} '''10,554''']
+|  40,776
+|  [[:os:Special:Statistics|464,123]]
+|  [[:os:Special:Listadmins|2]]
+|  [[:os:Special:Listusers|16,998]]
+|  [[:os:Special:ActiveUsers|18]]
+|  [[:os:Special:FileList|185]]
+| 93
+|-
+| 137
+| [[w:Hill Mari language|Hill Mari]]
+| class="plainlinksneverexpand" | [{{fullurl:mrj:Кырык_мары_йӹлмӹ}} Кырык Мары (Kyryk Mary)]
+| [[:mrj:|mrj]]
+| class="plainlinksneverexpand" | [{{fullurl:mrj:Special:Statistics|action=raw}} '''10,265''']
+|  15,209
+|  [[:mrj:Special:Statistics|93,484]]
+|  [[:mrj:Special:Listadmins|0]]
+|  [[:mrj:Special:Listusers|7,385]]
+|  [[:mrj:Special:ActiveUsers|15]]
+|  [[:mrj:Special:FileList|0]]
+| 1
+|}
+=== 1 000+ articles ===
+{| border="1" cellpadding="2" cellspacing="0" style="width:100%; background: #f9f9f9; border: 1px solid #aaaaaa; border-collapse: collapse; white-space: nowrap; text-align: right" class="sortable"
+|-
+! №
+! Language
+! Language (local)
+! Wiki
+! Articles
+! Total
+! Edits
+! Admins
+! Users
+! Active Users
+! Files
+! Depth
+|-
+| 138
+| [[w:Fiji Hindi language|Fiji Hindi]]
+| class="plainlinksneverexpand" | [{{fullurl:hif:Fiji_Hindi_bhasa}} Fiji Hindi]
+| [[:hif:|hif]]
+| class="plainlinksneverexpand" | [{{fullurl:hif:Special:Statistics|action=raw}} '''9,734''']
+|  30,197
+|  [[:hif:Special:Statistics|240,111]]
+|  [[:hif:Special:Listadmins|1]]
+|  [[:hif:Special:Listusers|19,194]]
+|  [[:hif:Special:ActiveUsers|32]]
+|  [[:hif:Special:FileList|193]]
+| 35
+|-
+| 139
+| [[w:Meadow Mari language|Meadow Mari]]
+| class="plainlinksneverexpand" | [{{fullurl:mhr:Тӱҥ_лаштык}} Олык Марий (Olyk Marij)]
+| [[:mhr:|mhr]]
+| class="plainlinksneverexpand" | [{{fullurl:mhr:Special:Statistics|action=raw}} '''9,712''']
+|  22,496
+|  [[:mhr:Special:Statistics|166,714]]
+|  [[:mhr:Special:Listadmins|2]]
+|  [[:mhr:Special:Listusers|9,450]]
+|  [[:mhr:Special:ActiveUsers|22]]
+|  [[:mhr:Special:FileList|0]]
+| 13
+|-
+| 140
+| [[w:Emilian-Romagnol language|Emilian-Romagnol]]
+| class="plainlinksneverexpand" | [{{fullurl:eml:Langua_emiglièna-rumagnôla}} Emiliàn e rumagnòl]
+| [[:eml:|eml]]
+| class="plainlinksneverexpand" | [{{fullurl:eml:Special:Statistics|action=raw}} '''9,573''']
+|  28,566
+|  [[:eml:Special:Statistics|119,309]]
+|  [[:eml:Special:Listadmins|2]]
+|  [[:eml:Special:Listusers|14,459]]
+|  [[:eml:Special:ActiveUsers|25]]
+|  [[:eml:Special:FileList|1,851]]
+| 16
+|-
+| 141
+| [[w:Bihari language|Bihari]]
+| class="plainlinksneverexpand" | [{{fullurl:bh:भोजपुरी_भाषा}} भोजपुरी]
+| [[:bh:|bh]]
+| class="plainlinksneverexpand" | [{{fullurl:bh:Special:Statistics|action=raw}} '''9,536''']
+|  49,616
+|  [[:bh:Special:Statistics|547,447]]
+|  [[:bh:Special:Listadmins|2]]
+|  [[:bh:Special:Listusers|13,294]]
+|  [[:bh:Special:ActiveUsers|29]]
+|  [[:bh:Special:FileList|52]]
+| 195
+|-
+| 142
+| [[w:Tarantino language|Tarantino]]
+| class="plainlinksneverexpand" | [{{fullurl:roa-tara:Dialètte_tarandine}} Tarandíne]
+| [[:roa-tara:|roa-tara]]
+| class="plainlinksneverexpand" | [{{fullurl:roa-tara:Special:Statistics|action=raw}} '''9,228''']
+|  17,307
+|  [[:roa-tara:Special:Statistics|134,264]]
+|  [[:roa-tara:Special:Listadmins|1]]
+|  [[:roa-tara:Special:Listusers|8,018]]
+|  [[:roa-tara:Special:ActiveUsers|10]]
+|  [[:roa-tara:Special:FileList|290]]
+| 6
+|-
+| 143
+| [[w:Pashto language|Pashto]]
+| class="plainlinksneverexpand" | [{{fullurl:ps:پښتو}} پښتو]
+| [[:ps:|ps]]
+| class="plainlinksneverexpand" | [{{fullurl:ps:Special:Statistics|action=raw}} '''8,823''']
+|  30,945
+|  [[:ps:Special:Statistics|216,172]]
+|  [[:ps:Special:Listadmins|1]]
+|  [[:ps:Special:Listusers|16,562]]
+|  [[:ps:Special:ActiveUsers|53]]
+|  [[:ps:Special:FileList|1,426]]
+| 44
+|-
+| 144
+| [[w:Zazaki language|Zazaki]]
+| class="plainlinksneverexpand" | [{{fullurl:diq:Zazaki}} Zazaki]
+| [[:diq:|diq]]
+| class="plainlinksneverexpand" | [{{fullurl:diq:Special:Statistics|action=raw}} '''8,738''']
+|  26,154
+|  [[:diq:Special:Statistics|373,997]]
+|  [[:diq:Special:Listadmins|2]]
+|  [[:diq:Special:Listusers|16,847]]
+|  [[:diq:Special:ActiveUsers|27]]
+|  [[:diq:Special:FileList|215]]
+| 57
+|-
+| 145
+| [[w:Kapampangan language|Kapampangan]]
+| class="plainlinksneverexpand" | [{{fullurl:pam:Kapampangan_(amanu)}} Kapampangan]
+| [[:pam:|pam]]
+| class="plainlinksneverexpand" | [{{fullurl:pam:Special:Statistics|action=raw}} '''8,550''']
+|  18,318
+|  [[:pam:Special:Statistics|278,643]]
+|  [[:pam:Special:Listadmins|2]]
+|  [[:pam:Special:Listusers|14,296]]
+|  [[:pam:Special:ActiveUsers|19]]
+|  [[:pam:Special:FileList|434]]
+| 20
+|-
+| 146
+| [[w:Sindhi language|Sindhi]]
+| class="plainlinksneverexpand" | [{{fullurl:sd:سنڌي_ٻولي}} سنڌي، سندھی ، सिन्ध]
+| [[:sd:|sd]]
+| class="plainlinksneverexpand" | [{{fullurl:sd:Special:Statistics|action=raw}} '''8,514''']
+|  25,373
+|  [[:sd:Special:Statistics|97,307]]
+|  [[:sd:Special:Listadmins|3]]
+|  [[:sd:Special:Listusers|8,643]]
+|  [[:sd:Special:ActiveUsers|33]]
+|  [[:sd:Special:FileList|0]]
+| 15
+|-
+| 147
+| [[w:Hakka language|Hakka]]
+| class="plainlinksneverexpand" | [{{fullurl:hak:Hak-kâ-fa}} Hak-kâ-fa / 客家話]
+| [[:hak:|hak]]
+| class="plainlinksneverexpand" | [{{fullurl:hak:Special:Statistics|action=raw}} '''8,174''']
+|  15,946
+|  [[:hak:Special:Statistics|110,814]]
+|  [[:hak:Special:Listadmins|0]]
+|  [[:hak:Special:Listusers|21,643]]
+|  [[:hak:Special:ActiveUsers|25]]
+|  [[:hak:Special:FileList|0]]
+| 6
+|-
+| 148
+| [[w:Northern Sotho language|Northern Sotho]]
+| class="plainlinksneverexpand" | [{{fullurl:nso:Sepedi}} Sepedi]
+| [[:nso:|nso]]
+| class="plainlinksneverexpand" | [{{fullurl:nso:Special:Statistics|action=raw}} '''7,825''']
+|  9,612
+|  [[:nso:Special:Statistics|37,719]]
+|  [[:nso:Special:Listadmins|0]]
+|  [[:nso:Special:Listusers|3,556]]
+|  [[:nso:Special:ActiveUsers|9]]
+|  [[:nso:Special:FileList|0]]
+| 0
+|-
+| 149
+| [[w:Classical Chinese language|Classical Chinese]]
+| class="plainlinksneverexpand" | [{{fullurl:zh-classical:文言}} 古文 / 文言文]
+| [[:zh-classical:|zh-classical]]
+| class="plainlinksneverexpand" | [{{fullurl:zh-classical:Special:Statistics|action=raw}} '''7,413''']
+|  74,733
+|  [[:zh-classical:Special:Statistics|304,239]]
+|  [[:zh-classical:Special:Listadmins|4]]
+|  [[:zh-classical:Special:Listusers|69,371]]
+|  [[:zh-classical:Special:ActiveUsers|102]]
+|  [[:zh-classical:Special:FileList|0]]
+| 336
+|-
+| 150
+| [[w:Northern Sami language|Northern Sami]]
+| class="plainlinksneverexpand" | [{{fullurl:se:Davvisámegiella}} Sámegiella]
+| [[:se:|se]]
+| class="plainlinksneverexpand" | [{{fullurl:se:Special:Statistics|action=raw}} '''7,356''']
+|  16,981
+|  [[:se:Special:Statistics|279,880]]
+|  [[:se:Special:Listadmins|4]]
+|  [[:se:Special:Listusers|17,874]]
+|  [[:se:Special:ActiveUsers|19]]
+|  [[:se:Special:FileList|0]]
+| 28
+|-
+| 151
+| [[w:Central Bicolano language|Central Bicolano]]
+| class="plainlinksneverexpand" | [{{fullurl:bcl:Tataramon_na_Bikol}} Bikol]
+| [[:bcl:|bcl]]
+| class="plainlinksneverexpand" | [{{fullurl:bcl:Special:Statistics|action=raw}} '''7,330''']
+|  12,335
+|  [[:bcl:Special:Statistics|166,963]]
+|  [[:bcl:Special:Listadmins|0]]
+|  [[:bcl:Special:Listusers|12,216]]
+|  [[:bcl:Special:ActiveUsers|25]]
+|  [[:bcl:Special:FileList|883]]
+| 6
+|-
+| 152
+| [[w:Acehnese language|Acehnese]]
+| class="plainlinksneverexpand" | [{{fullurl:ace:Bahsa_Acèh}} Bahsa Acèh]
+| [[:ace:|ace]]
+| class="plainlinksneverexpand" | [{{fullurl:ace:Special:Statistics|action=raw}} '''7,209''']
+|  13,844
+|  [[:ace:Special:Statistics|106,105]]
+|  [[:ace:Special:Listadmins|1]]
+|  [[:ace:Special:Listusers|16,074]]
+|  [[:ace:Special:ActiveUsers|28]]
+|  [[:ace:Special:FileList|0]]
+| 6
+|-
+| 153
+| [[w:Wu language|Wu]]
+| class="plainlinksneverexpand" | [{{fullurl:wuu:吴语}} 吴语]
+| [[:wuu:|wuu]]
+| class="plainlinksneverexpand" | [{{fullurl:wuu:Special:Statistics|action=raw}} '''7,199''']
+|  17,242
+|  [[:wuu:Special:Statistics|225,460]]
+|  [[:wuu:Special:Listadmins|3]]
+|  [[:wuu:Special:Listusers|53,439]]
+|  [[:wuu:Special:ActiveUsers|42]]
+|  [[:wuu:Special:FileList|239]]
+| 25
+|-
+| 154
+| [[w:Maori language|Maori]]
+| class="plainlinksneverexpand" | [{{fullurl:mi:Reo_Māori}} Māori]
+| [[:mi:|mi]]
+| class="plainlinksneverexpand" | [{{fullurl:mi:Special:Statistics|action=raw}} '''7,138''']
+|  12,745
+|  [[:mi:Special:Statistics|147,766]]
+|  [[:mi:Special:Listadmins|3]]
+|  [[:mi:Special:Listusers|9,277]]
+|  [[:mi:Special:ActiveUsers|13]]
+|  [[:mi:Special:FileList|0]]
+| 7
+|-
+| 155
+| [[w:Nahuatl language|Nahuatl]]
+| class="plainlinksneverexpand" | [{{fullurl:nah:Nāhuatlahtōlli}} Nāhuatl]
+| [[:nah:|nah]]
+| class="plainlinksneverexpand" | [{{fullurl:nah:Special:Statistics|action=raw}} '''7,122''']
+|  18,655
+|  [[:nah:Special:Statistics|437,393]]
+|  [[:nah:Special:Listadmins|3]]
+|  [[:nah:Special:Listusers|15,533]]
+|  [[:nah:Special:ActiveUsers|21]]
+|  [[:nah:Special:FileList|175]]
+| 61
+|-
+| 156
+| [[w:Silesian language|Silesian]]
+| class="plainlinksneverexpand" | [{{fullurl:szl:Ślůnsko_godka}} Ślůnski]
+| [[:szl:|szl]]
+| class="plainlinksneverexpand" | [{{fullurl:szl:Special:Statistics|action=raw}} '''6,840''']
+|  17,207
+|  [[:szl:Special:Statistics|230,785]]
+|  [[:szl:Special:Listadmins|2]]
+|  [[:szl:Special:Listusers|14,390]]
+|  [[:szl:Special:ActiveUsers|27]]
+|  [[:szl:Special:FileList|0]]
+| 31
+|-
+| 157
+| [[w:Dutch Low Saxon language|Dutch Low Saxon]]
+| class="plainlinksneverexpand" | [{{fullurl:nds-nl:Nederlaands_Leegsaksisch}} Nedersaksisch]
+| [[:nds-nl:|nds-nl]]
+| class="plainlinksneverexpand" | [{{fullurl:nds-nl:Special:Statistics|action=raw}} '''6,754''']
+|  16,768
+|  [[:nds-nl:Special:Statistics|294,731]]
+|  [[:nds-nl:Special:Listadmins|6]]
+|  [[:nds-nl:Special:Listusers|17,129]]
+|  [[:nds-nl:Special:ActiveUsers|29]]
+|  [[:nds-nl:Special:FileList|612]]
+| 39
+|-
+| 158
+| [[w:North Frisian language|North Frisian]]
+| class="plainlinksneverexpand" | [{{fullurl:frr:Nordfriisk}} Nordfriisk]
+| [[:frr:|frr]]
+| class="plainlinksneverexpand" | [{{fullurl:frr:Special:Statistics|action=raw}} '''6,557''']
+|  20,369
+|  [[:frr:Special:Statistics|146,195]]
+|  [[:frr:Special:Listadmins|4]]
+|  [[:frr:Special:Listusers|11,055]]
+|  [[:frr:Special:ActiveUsers|21]]
+|  [[:frr:Special:FileList|750]]
+| 32
+|-
+| 159
+| [[w:Rusyn language|Rusyn]]
+| class="plainlinksneverexpand" | [{{fullurl:rue:Русиньскый_язык}} Русиньскый]
+| [[:rue:|rue]]
+| class="plainlinksneverexpand" | [{{fullurl:rue:Special:Statistics|action=raw}} '''6,422''']
+|  11,926
+|  [[:rue:Special:Statistics|104,175]]
+|  [[:rue:Special:Listadmins|0]]
+|  [[:rue:Special:Listusers|15,348]]
+|  [[:rue:Special:ActiveUsers|19]]
+|  [[:rue:Special:FileList|0]]
+| 6
+|-
+| 160
+| [[w:Gan language|Gan]]
+| class="plainlinksneverexpand" | [{{fullurl:gan:贛語}} 贛語]
+| [[:gan:|gan]]
+| class="plainlinksneverexpand" | [{{fullurl:gan:Special:Statistics|action=raw}} '''6,397''']
+|  33,206
+|  [[:gan:Special:Statistics|390,474]]
+|  [[:gan:Special:Listadmins|2]]
+|  [[:gan:Special:Listusers|29,251]]
+|  [[:gan:Special:ActiveUsers|37]]
+|  [[:gan:Special:FileList|149]]
+| 207
+|-
+| 161
+| [[w:West Flemish language|West Flemish]]
+| class="plainlinksneverexpand" | [{{fullurl:vls:West-Vlams}} West-Vlams]
+| [[:vls:|vls]]
+| class="plainlinksneverexpand" | [{{fullurl:vls:Special:Statistics|action=raw}} '''6,344''']
+|  18,474
+|  [[:vls:Special:Statistics|295,784]]
+|  [[:vls:Special:Listadmins|3]]
+|  [[:vls:Special:Listusers|16,130]]
+|  [[:vls:Special:ActiveUsers|27]]
+|  [[:vls:Special:FileList|503]]
+| 59
+|-
+| 162
+| [[w:Khmer language|Khmer]]
+| class="plainlinksneverexpand" | [{{fullurl:km:ភាសាខ្មែរ}} ភាសាខ្មែរ]
+| [[:km:|km]]
+| class="plainlinksneverexpand" | [{{fullurl:km:Special:Statistics|action=raw}} '''6,174''']
+|  25,727
+|  [[:km:Special:Statistics|209,613]]
+|  [[:km:Special:Listadmins|5]]
+|  [[:km:Special:Listusers|23,279]]
+|  [[:km:Special:ActiveUsers|42]]
+|  [[:km:Special:FileList|1,196]]
+| 82
+|-
+| 163
+| [[w:Tibetan language|Tibetan]]
+| class="plainlinksneverexpand" | [{{fullurl:bo:བོད་སྐད།}} བོད་སྐད]
+| [[:bo:|bo]]
+| class="plainlinksneverexpand" | [{{fullurl:bo:Special:Statistics|action=raw}} '''5,817''']
+|  16,156
+|  [[:bo:Special:Statistics|134,092]]
+|  [[:bo:Special:Listadmins|0]]
+|  [[:bo:Special:Listusers|17,001]]
+|  [[:bo:Special:ActiveUsers|26]]
+|  [[:bo:Special:FileList|0]]
+| 26
+|-
+| 164
+| [[w:Vepsian language|Vepsian]]
+| class="plainlinksneverexpand" | [{{fullurl:vep:Vepsän_kel'}} Vepsän]
+| [[:vep:|vep]]
+| class="plainlinksneverexpand" | [{{fullurl:vep:Special:Statistics|action=raw}} '''5,712''']
+|  18,418
+|  [[:vep:Special:Statistics|101,945]]
+|  [[:vep:Special:Listadmins|0]]
+|  [[:vep:Special:Listusers|9,634]]
+|  [[:vep:Special:ActiveUsers|30]]
+|  [[:vep:Special:FileList|0]]
+| 27
+|-
+| 165
+| [[w:Crimean Tatar language|Crimean Tatar]]
+| class="plainlinksneverexpand" | [{{fullurl:crh:Qırımtatar_tili}} Qırımtatarca]
+| [[:crh:|crh]]
+| class="plainlinksneverexpand" | [{{fullurl:crh:Special:Statistics|action=raw}} '''5,656''']
+|  19,589
+|  [[:crh:Special:Statistics|134,667]]
+|  [[:crh:Special:Listadmins|1]]
+|  [[:crh:Special:Listusers|11,998]]
+|  [[:crh:Special:ActiveUsers|25]]
+|  [[:crh:Special:FileList|0]]
+| 42
+|-
+| 166
+| [[w:Sardinian language|Sardinian]]
+| class="plainlinksneverexpand" | [{{fullurl:sc:Limba_sarda}} Sardu]
+| [[:sc:|sc]]
+| class="plainlinksneverexpand" | [{{fullurl:sc:Special:Statistics|action=raw}} '''5,644''']
+|  12,521
+|  [[:sc:Special:Statistics|153,011]]
+|  [[:sc:Special:Listadmins|2]]
+|  [[:sc:Special:Listusers|13,364]]
+|  [[:sc:Special:ActiveUsers|21]]
+|  [[:sc:Special:FileList|121]]
+| 18
+|-
+| 167
+| [[w:Gilaki language|Gilaki]]
+| class="plainlinksneverexpand" | [{{fullurl:glk:گیلکی_زوان}} گیلکی]
+| [[:glk:|glk]]
+| class="plainlinksneverexpand" | [{{fullurl:glk:Special:Statistics|action=raw}} '''5,635''']
+|  11,860
+|  [[:glk:Special:Statistics|51,406]]
+|  [[:glk:Special:Listadmins|3]]
+|  [[:glk:Special:Listusers|9,868]]
+|  [[:glk:Special:ActiveUsers|16]]
+|  [[:glk:Special:FileList|807]]
+| 5
+|-
+| 168
+| [[w:Corsican language|Corsican]]
+| class="plainlinksneverexpand" | [{{fullurl:co:Lingua_corsa}} Corsu]
+| [[:co:|co]]
+| class="plainlinksneverexpand" | [{{fullurl:co:Special:Statistics|action=raw}} '''5,505''']
+|  12,548
+|  [[:co:Special:Statistics|358,066]]
+|  [[:co:Special:Listadmins|1]]
+|  [[:co:Special:Listusers|13,541]]
+|  [[:co:Special:ActiveUsers|23]]
+|  [[:co:Special:FileList|0]]
+| 47
+|-
+| 169
+| [[w:Võro language|Võro]]
+| class="plainlinksneverexpand" | [{{fullurl:fiu-vro:Võro_kiil}} Võro]
+| [[:fiu-vro:|fiu-vro]]
+| class="plainlinksneverexpand" | [{{fullurl:fiu-vro:Special:Statistics|action=raw}} '''5,491''']
+|  10,064
+|  [[:fiu-vro:Special:Statistics|167,262]]
+|  [[:fiu-vro:Special:Listadmins|2]]
+|  [[:fiu-vro:Special:Listusers|9,407]]
+|  [[:fiu-vro:Special:ActiveUsers|14]]
+|  [[:fiu-vro:Special:FileList|211]]
+| 12
+|-
+| 170
+| [[w:Northern Luri language|Northern Luri]]
+| class="plainlinksneverexpand" | [{{fullurl:lrc:لۊری_شومالی}} لۊری شومالی]
+| [[:lrc:|lrc]]
+| class="plainlinksneverexpand" | [{{fullurl:lrc:Special:Statistics|action=raw}} '''5,353''']
+|  8,853
+|  [[:lrc:Special:Statistics|86,217]]
+|  [[:lrc:Special:Listadmins|1]]
+|  [[:lrc:Special:Listusers|2,966]]
+|  [[:lrc:Special:ActiveUsers|15]]
+|  [[:lrc:Special:FileList|0]]
+| 4
+|-
+| 171
+| [[w:Turkmen language|Turkmen]]
+| class="plainlinksneverexpand" | [{{fullurl:tk:Türkmen_dili}} تركمن / Туркмен]
+| [[:tk:|tk]]
+| class="plainlinksneverexpand" | [{{fullurl:tk:Special:Statistics|action=raw}} '''5,324''']
+|  12,496
+|  [[:tk:Special:Statistics|203,417]]
+|  [[:tk:Special:Listadmins|0]]
+|  [[:tk:Special:Listusers|15,703]]
+|  [[:tk:Special:ActiveUsers|29]]
+|  [[:tk:Special:FileList|311]]
+| 30
+|-
+| 172
+| [[w:Komi language|Komi]]
+| class="plainlinksneverexpand" | [{{fullurl:kv:Коми_кыв}} Коми]
+| [[:kv:|kv]]
+| class="plainlinksneverexpand" | [{{fullurl:kv:Special:Statistics|action=raw}} '''5,260''']
+|  11,598
+|  [[:kv:Special:Statistics|127,570]]
+|  [[:kv:Special:Listadmins|0]]
+|  [[:kv:Special:Listusers|9,515]]
+|  [[:kv:Special:ActiveUsers|16]]
+|  [[:kv:Special:FileList|0]]
+| 16
+|-
+| 173
+| [[w:Kashubian language|Kashubian]]
+| class="plainlinksneverexpand" | [{{fullurl:csb:Kaszëbsczi_jãzëk}} Kaszëbsczi]
+| [[:csb:|csb]]
+| class="plainlinksneverexpand" | [{{fullurl:csb:Special:Statistics|action=raw}} '''5,217''']
+|  8,335
+|  [[:csb:Special:Statistics|179,303]]
+|  [[:csb:Special:Listadmins|2]]
+|  [[:csb:Special:Listusers|11,062]]
+|  [[:csb:Special:ActiveUsers|19]]
+|  [[:csb:Special:FileList|0]]
+| 8
+|-
+| 174
+| [[w:Erzya language|Erzya]]
+| class="plainlinksneverexpand" | [{{fullurl:myv:Эрзянь_кель}} Эрзянь (Erzjanj Kelj)]
+| [[:myv:|myv]]
+| class="plainlinksneverexpand" | [{{fullurl:myv:Special:Statistics|action=raw}} '''5,014''']
+|  11,516
+|  [[:myv:Special:Statistics|106,144]]
+|  [[:myv:Special:Listadmins|3]]
+|  [[:myv:Special:Listusers|8,058]]
+|  [[:myv:Special:ActiveUsers|25]]
+|  [[:myv:Special:FileList|0]]
+| 15
+|-
+| 175
+| [[w:Manx language|Manx]]
+| class="plainlinksneverexpand" | [{{fullurl:gv:Gaelg}} Gaelg]
+| [[:gv:|gv]]
+| class="plainlinksneverexpand" | [{{fullurl:gv:Special:Statistics|action=raw}} '''4,968''']
+|  16,813
+|  [[:gv:Special:Statistics|296,946]]
+|  [[:gv:Special:Listadmins|2]]
+|  [[:gv:Special:Listusers|13,118]]
+|  [[:gv:Special:ActiveUsers|19]]
+|  [[:gv:Special:FileList|181]]
+| 100
+|-
+| 176
+| [[w:Assamese language|Assamese]]
+| class="plainlinksneverexpand" | [{{fullurl:as:অসমীয়া_ভাষা_আৰু_লিপি}} অসমীয়া]
+| [[:as:|as]]
+| class="plainlinksneverexpand" | [{{fullurl:as:Special:Statistics|action=raw}} '''4,891''']
+|  38,425
+|  [[:as:Special:Statistics|175,457]]
+|  [[:as:Special:Listadmins|3]]
+|  [[:as:Special:Listusers|18,871]]
+|  [[:as:Special:ActiveUsers|45]]
+|  [[:as:Special:FileList|1,365]]
+| 215
+|-
+| 177
+| [[w:Ladino language|Ladino]]
+| class="plainlinksneverexpand" | [{{fullurl:lad:Lingua_Judeo-Española}} Dzhudezmo]
+| [[:lad:|lad]]
+| class="plainlinksneverexpand" | [{{fullurl:lad:Special:Statistics|action=raw}} '''4,650''']
+|  13,983
+|  [[:lad:Special:Statistics|200,795]]
+|  [[:lad:Special:Listadmins|4]]
+|  [[:lad:Special:Listusers|14,001]]
+|  [[:lad:Special:ActiveUsers|24]]
+|  [[:lad:Special:FileList|23]]
+| 58
+|-
+| 178
+| [[w:Somali language|Somali]]
+| class="plainlinksneverexpand" | [{{fullurl:so:Af-Soomaali}} Soomaali]
+| [[:so:|so]]
+| class="plainlinksneverexpand" | [{{fullurl:so:Special:Statistics|action=raw}} '''4,478''']
+|  17,852
+|  [[:so:Special:Statistics|172,673]]
+|  [[:so:Special:Listadmins|1]]
+|  [[:so:Special:Listusers|19,525]]
+|  [[:so:Special:ActiveUsers|58]]
+|  [[:so:Special:FileList|1]]
+| 86
+|-
+| 179
+| [[w:Zeelandic language|Zeelandic]]
+| class="plainlinksneverexpand" | [{{fullurl:zea:Zeêuws}} Zeêuws]
+| [[:zea:|zea]]
+| class="plainlinksneverexpand" | [{{fullurl:zea:Special:Statistics|action=raw}} '''4,407''']
+|  8,416
+|  [[:zea:Special:Statistics|104,903]]
+|  [[:zea:Special:Listadmins|4]]
+|  [[:zea:Special:Listusers|8,274]]
+|  [[:zea:Special:ActiveUsers|26]]
+|  [[:zea:Special:FileList|1]]
+| 10
+|-
+| 180
+| [[w:Navajo language|Navajo]]
+| class="plainlinksneverexpand" | [{{fullurl:nv:Diné_bizaad}} Diné bizaad]
+| [[:nv:|nv]]
+| class="plainlinksneverexpand" | [{{fullurl:nv:Special:Statistics|action=raw}} '''4,385''']
+|  15,040
+|  [[:nv:Special:Statistics|189,207]]
+|  [[:nv:Special:Listadmins|2]]
+|  [[:nv:Special:Listusers|10,378]]
+|  [[:nv:Special:ActiveUsers|13]]
+|  [[:nv:Special:FileList|537]]
+| 74
+|-
+| 181
+| [[w:Udmurt language|Udmurt]]
+| class="plainlinksneverexpand" | [{{fullurl:udm:Удмурт_кыл}} Удмурт кыл]
+| [[:udm:|udm]]
+| class="plainlinksneverexpand" | [{{fullurl:udm:Special:Statistics|action=raw}} '''4,296''']
+|  11,688
+|  [[:udm:Special:Statistics|108,542]]
+|  [[:udm:Special:Listadmins|4]]
+|  [[:udm:Special:Listusers|9,595]]
+|  [[:udm:Special:ActiveUsers|18]]
+|  [[:udm:Special:FileList|9]]
+| 27
+|-
+| 182
+| [[w:Aymara language|Aymara]]
+| class="plainlinksneverexpand" | [{{fullurl:ay:Aymar_aru}} Aymar]
+| [[:ay:|ay]]
+| class="plainlinksneverexpand" | [{{fullurl:ay:Special:Statistics|action=raw}} '''4,283''']
+|  7,568
+|  [[:ay:Special:Statistics|88,567]]
+|  [[:ay:Special:Listadmins|0]]
+|  [[:ay:Special:Listusers|11,183]]
+|  [[:ay:Special:ActiveUsers|20]]
+|  [[:ay:Special:FileList|0]]
+| 7
+|-
+| 183
+| [[w:Lezgian language|Lezgian]]
+| class="plainlinksneverexpand" | [{{fullurl:lez:Лезги_чIал}} Лезги чІал (Lezgi č’al)]
+| [[:lez:|lez]]
+| class="plainlinksneverexpand" | [{{fullurl:lez:Special:Statistics|action=raw}} '''3,940''']
+|  10,022
+|  [[:lez:Special:Statistics|75,447]]
+|  [[:lez:Special:Listadmins|4]]
+|  [[:lez:Special:Listusers|6,381]]
+|  [[:lez:Special:ActiveUsers|20]]
+|  [[:lez:Special:FileList|10]]
+| 18
+|-
+| 184
+| [[w:Saterland Frisian language|Saterland Frisian]]
+| class="plainlinksneverexpand" | [{{fullurl:stq:Seeltersk}} Seeltersk]
+| [[:stq:|stq]]
+| class="plainlinksneverexpand" | [{{fullurl:stq:Special:Statistics|action=raw}} '''3,923''']
+|  10,013
+|  [[:stq:Special:Statistics|116,240]]
+|  [[:stq:Special:Listadmins|3]]
+|  [[:stq:Special:Listusers|9,269]]
+|  [[:stq:Special:ActiveUsers|14]]
+|  [[:stq:Special:FileList|442]]
+| 28
+|-
+| 185
+| [[w:Interlingue language|Interlingue]]
+| class="plainlinksneverexpand" | [{{fullurl:ie:Interlingue}} Interlingue]
+| [[:ie:|ie]]
+| class="plainlinksneverexpand" | [{{fullurl:ie:Special:Statistics|action=raw}} '''3,893''']
+|  6,432
+|  [[:ie:Special:Statistics|118,728]]
+|  [[:ie:Special:Listadmins|0]]
+|  [[:ie:Special:Listusers|11,199]]
+|  [[:ie:Special:ActiveUsers|22]]
+|  [[:ie:Special:FileList|0]]
+| 8
+|-
+| 186
+| [[w:Cornish language|Cornish]]
+| class="plainlinksneverexpand" | [{{fullurl:kw:Kernewek}} Kernewek/Karnuack]
+| [[:kw:|kw]]
+| class="plainlinksneverexpand" | [{{fullurl:kw:Special:Statistics|action=raw}} '''3,803''']
+|  7,523
+|  [[:kw:Special:Statistics|172,281]]
+|  [[:kw:Special:Listadmins|0]]
+|  [[:kw:Special:Listusers|9,522]]
+|  [[:kw:Special:ActiveUsers|18]]
+|  [[:kw:Special:FileList|0]]
+| 22
+|-
+| 187
+| [[w:Norman language|Norman]]
+| class="plainlinksneverexpand" | [{{fullurl:nrm:Normaund}} Nouormand/Normaund]
+| [[:nrm:|nrm]]
+| class="plainlinksneverexpand" | [{{fullurl:nrm:Special:Statistics|action=raw}} '''3,703''']
+|  8,386
+|  [[:nrm:Special:Statistics|206,961]]
+|  [[:nrm:Special:Listadmins|0]]
+|  [[:nrm:Special:Listusers|9,027]]
+|  [[:nrm:Special:ActiveUsers|12]]
+|  [[:nrm:Special:FileList|0]]
+| 39
+|-
+| 188
+| [[w:Picard language|Picard]]
+| class="plainlinksneverexpand" | [{{fullurl:pcd:Picard}} Picard]
+| [[:pcd:|pcd]]
+| class="plainlinksneverexpand" | [{{fullurl:pcd:Special:Statistics|action=raw}} '''3,629''']
+|  7,991
+|  [[:pcd:Special:Statistics|55,652]]
+|  [[:pcd:Special:Listadmins|1]]
+|  [[:pcd:Special:Listusers|8,466]]
+|  [[:pcd:Special:ActiveUsers|16]]
+|  [[:pcd:Special:FileList|51]]
+| 10
+|-
+| 189
+| [[w:Mirandese language|Mirandese]]
+| class="plainlinksneverexpand" | [{{fullurl:mwl:Lhéngua_mirandesa}} Mirandés]
+| [[:mwl:|mwl]]
+| class="plainlinksneverexpand" | [{{fullurl:mwl:Special:Statistics|action=raw}} '''3,542''']
+|  9,532
+|  [[:mwl:Special:Statistics|92,852]]
+|  [[:mwl:Special:Listadmins|2]]
+|  [[:mwl:Special:Listusers|8,834]]
+|  [[:mwl:Special:ActiveUsers|21]]
+|  [[:mwl:Special:FileList|0]]
+| 28
+|-
+| 190
+| [[w:Uyghur language|Uyghur]]
+| class="plainlinksneverexpand" | [{{fullurl:ug:Uyghur_tili}} ئۇيغۇر تىلى]
+| [[:ug:|ug]]
+| class="plainlinksneverexpand" | [{{fullurl:ug:Special:Statistics|action=raw}} '''3,537''']
+|  11,279
+|  [[:ug:Special:Statistics|143,733]]
+|  [[:ug:Special:Listadmins|1]]
+|  [[:ug:Special:Listusers|13,592]]
+|  [[:ug:Special:ActiveUsers|17]]
+|  [[:ug:Special:FileList|295]]
+| 61
+|-
+| 191
+| [[w:Romansh language|Romansh]]
+| class="plainlinksneverexpand" | [{{fullurl:rm:Rumantsch_dal_Grischun}} Rumantsch]
+| [[:rm:|rm]]
+| class="plainlinksneverexpand" | [{{fullurl:rm:Special:Statistics|action=raw}} '''3,484''']
+|  8,232
+|  [[:rm:Special:Statistics|153,686]]
+|  [[:rm:Special:Listadmins|3]]
+|  [[:rm:Special:Listusers|11,826]]
+|  [[:rm:Special:ActiveUsers|21]]
+|  [[:rm:Special:FileList|51]]
+| 35
+|-
+| 192
+| [[w:Komi-Permyak language|Komi-Permyak]]
+| class="plainlinksneverexpand" | [{{fullurl:koi:Перем_Коми_кыв}} Перем Коми (Perem Komi)]
+| [[:koi:|koi]]
+| class="plainlinksneverexpand" | [{{fullurl:koi:Special:Statistics|action=raw}} '''3,452''']
+|  7,388
+|  [[:koi:Special:Statistics|53,739]]
+|  [[:koi:Special:Listadmins|0]]
+|  [[:koi:Special:Listusers|5,710]]
+|  [[:koi:Special:ActiveUsers|6]]
+|  [[:koi:Special:FileList|0]]
+| 9
+|-
+| 193
+| [[w:Guarani language|Guarani]]
+| class="plainlinksneverexpand" | [{{fullurl:gn:Avañe'ẽ}} Avañe'ẽ]
+| [[:gn:|gn]]
+| class="plainlinksneverexpand" | [{{fullurl:gn:Special:Statistics|action=raw}} '''3,410''']
+|  7,994
+|  [[:gn:Special:Statistics|105,195]]
+|  [[:gn:Special:Listadmins|1]]
+|  [[:gn:Special:Listusers|11,056]]
+|  [[:gn:Special:ActiveUsers|23]]
+|  [[:gn:Special:FileList|0]]
+| 24
+|-
+| 194
+| [[w:Abkhazian language|Abkhazian]]
+| class="plainlinksneverexpand" | [{{fullurl:ab:Аҧсуа_бызшәа}} Аҧсуа]
+| [[:ab:|ab]]
+| class="plainlinksneverexpand" | [{{fullurl:ab:Special:Statistics|action=raw}} '''3,401''']
+|  8,109
+|  [[:ab:Special:Statistics|68,320]]
+|  [[:ab:Special:Listadmins|1]]
+|  [[:ab:Special:Listusers|12,034]]
+|  [[:ab:Special:ActiveUsers|15]]
+|  [[:ab:Special:FileList|1]]
+| 16
+|-
+| 195
+| [[w:Goan Konkani language|Goan Konkani]]
+| class="plainlinksneverexpand" | [{{fullurl:gom:कोंकणी_भास}} गोंयची कोंकणी / Gõychi Konknni]
+| [[:gom:|gom]]
+| class="plainlinksneverexpand" | [{{fullurl:gom:Special:Statistics|action=raw}} '''3,381''']
+|  7,329
+|  [[:gom:Special:Statistics|170,399]]
+|  [[:gom:Special:Listadmins|2]]
+|  [[:gom:Special:Listusers|3,883]]
+|  [[:gom:Special:ActiveUsers|14]]
+|  [[:gom:Special:FileList|0]]
+| 32
+|-
+| 196
+| [[w:Ligurian language|Ligurian]]
+| class="plainlinksneverexpand" | [{{fullurl:lij:Lengoa_zeneize}} Líguru]
+| [[:lij:|lij]]
+| class="plainlinksneverexpand" | [{{fullurl:lij:Special:Statistics|action=raw}} '''3,357''']
+|  14,532
+|  [[:lij:Special:Statistics|156,673]]
+|  [[:lij:Special:Listadmins|3]]
+|  [[:lij:Special:Listusers|8,961]]
+|  [[:lij:Special:ActiveUsers|19]]
+|  [[:lij:Special:FileList|0]]
+| 119
+|-
+| 197
+| [[w:Maltese language|Maltese]]
+| class="plainlinksneverexpand" | [{{fullurl:mt:Lingwa_Maltija}} Malti]
+| [[:mt:|mt]]
+| class="plainlinksneverexpand" | [{{fullurl:mt:Special:Statistics|action=raw}} '''3,290''']
+|  14,994
+|  [[:mt:Special:Statistics|249,769]]
+|  [[:mt:Special:Listadmins|3]]
+|  [[:mt:Special:Listusers|14,247]]
+|  [[:mt:Special:ActiveUsers|29]]
+|  [[:mt:Special:FileList|1,169]]
+| 211
+|-
+| 198
+| [[w:Friulian language|Friulian]]
+| class="plainlinksneverexpand" | [{{fullurl:fur:Lenghe_furlane}} Furlan]
+| [[:fur:|fur]]
+| class="plainlinksneverexpand" | [{{fullurl:fur:Special:Statistics|action=raw}} '''3,204''']
+|  7,311
+|  [[:fur:Special:Statistics|163,301]]
+|  [[:fur:Special:Listadmins|1]]
+|  [[:fur:Special:Listusers|9,612]]
+|  [[:fur:Special:ActiveUsers|12]]
+|  [[:fur:Special:FileList|319]]
+| 37
+|-
+| 199
+| [[w:Lower Sorbian language|Lower Sorbian]]
+| class="plainlinksneverexpand" | [{{fullurl:dsb:Dolnoserbšćina}} Dolnoserbski]
+| [[:dsb:|dsb]]
+| class="plainlinksneverexpand" | [{{fullurl:dsb:Special:Statistics|action=raw}} '''3,114''']
+|  10,533
+|  [[:dsb:Special:Statistics|133,373]]
+|  [[:dsb:Special:Listadmins|2]]
+|  [[:dsb:Special:Listusers|12,929]]
+|  [[:dsb:Special:ActiveUsers|29]]
+|  [[:dsb:Special:FileList|0]]
+| 72
+|-
+| 200
+| [[w:Shona language|Shona]]
+| class="plainlinksneverexpand" | [{{fullurl:sn:chiShona}} chiShona]
+| [[:sn:|sn]]
+| class="plainlinksneverexpand" | [{{fullurl:sn:Special:Statistics|action=raw}} '''3,097''']
+|  9,280
+|  [[:sn:Special:Statistics|55,636]]
+|  [[:sn:Special:Listadmins|0]]
+|  [[:sn:Special:Listusers|8,130]]
+|  [[:sn:Special:ActiveUsers|11]]
+|  [[:sn:Special:FileList|0]]
+| 24
+|-
+| 201
+| [[w:Divehi language|Divehi]]
+| class="plainlinksneverexpand" | [{{fullurl:dv:ދިވެހި}} ދިވެހިބަސް]
+| [[:dv:|dv]]
+| class="plainlinksneverexpand" | [{{fullurl:dv:Special:Statistics|action=raw}} '''3,018''']
+|  10,443
+|  [[:dv:Special:Statistics|120,102]]
+|  [[:dv:Special:Listadmins|1]]
+|  [[:dv:Special:Listusers|18,031]]
+|  [[:dv:Special:ActiveUsers|13]]
+|  [[:dv:Special:FileList|933]]
+| 70
+|-
+| 202
+| [[w:Anglo-Saxon language|Anglo-Saxon]]
+| class="plainlinksneverexpand" | [{{fullurl:ang:Englisc_sprǣc}} Englisc]
+| [[:ang:|ang]]
+| class="plainlinksneverexpand" | [{{fullurl:ang:Special:Statistics|action=raw}} '''2,984''']
+|  14,205
+|  [[:ang:Special:Statistics|189,503]]
+|  [[:ang:Special:Listadmins|1]]
+|  [[:ang:Special:Listusers|90,749]]
+|  [[:ang:Special:ActiveUsers|28]]
+|  [[:ang:Special:FileList|300]]
+| 189
+|-
+| 203
+| [[w:Lingala language|Lingala]]
+| class="plainlinksneverexpand" | [{{fullurl:ln:Lingála}} Lingala]
+| [[:ln:|ln]]
+| class="plainlinksneverexpand" | [{{fullurl:ln:Special:Statistics|action=raw}} '''2,958''']
+|  7,838
+|  [[:ln:Special:Statistics|117,953]]
+|  [[:ln:Special:Listadmins|2]]
+|  [[:ln:Special:Listusers|8,157]]
+|  [[:ln:Special:ActiveUsers|15]]
+|  [[:ln:Special:FileList|28]]
+| 41
+|-
+| 204
+| [[w:Extremaduran language|Extremaduran]]
+| class="plainlinksneverexpand" | [{{fullurl:ext:Luenga_estremeña}} Estremeñu]
+| [[:ext:|ext]]
+| class="plainlinksneverexpand" | [{{fullurl:ext:Special:Statistics|action=raw}} '''2,927''']
+|  6,837
+|  [[:ext:Special:Statistics|108,154]]
+|  [[:ext:Special:Listadmins|0]]
+|  [[:ext:Special:Listusers|11,656]]
+|  [[:ext:Special:ActiveUsers|21]]
+|  [[:ext:Special:FileList|0]]
+| 28
+|-
+| 205
+| [[w:Kabyle language|Kabyle]]
+| class="plainlinksneverexpand" | [{{fullurl:kab:Taqbaylit}} Taqbaylit]
+| [[:kab:|kab]]
+| class="plainlinksneverexpand" | [{{fullurl:kab:Special:Statistics|action=raw}} '''2,898''']
+|  10,903
+|  [[:kab:Special:Statistics|71,725]]
+|  [[:kab:Special:Listadmins|1]]
+|  [[:kab:Special:Listusers|7,791]]
+|  [[:kab:Special:ActiveUsers|16]]
+|  [[:kab:Special:FileList|0]]
+| 50
+|-
+| 206
+| [[w:Zamboanga Chavacano language|Zamboanga Chavacano]]
+| class="plainlinksneverexpand" | [{{fullurl:cbk-zam:Chavacano}} Chavacano de Zamboanga]
+| [[:cbk-zam:|cbk-zam]]
+| class="plainlinksneverexpand" | [{{fullurl:cbk-zam:Special:Statistics|action=raw}} '''2,879''']
+|  5,129
+|  [[:cbk-zam:Special:Statistics|97,820]]
+|  [[:cbk-zam:Special:Listadmins|1]]
+|  [[:cbk-zam:Special:Listusers|10,290]]
+|  [[:cbk-zam:Special:ActiveUsers|16]]
+|  [[:cbk-zam:Special:FileList|1]]
+| 12
+|-
+| 207
+| [[w:Ripuarian language|Ripuarian]]
+| class="plainlinksneverexpand" | [{{fullurl:ksh:Ripoarėsch_(Shprooch)}} Ripoarisch]
+| [[:ksh:|ksh]]
+| class="plainlinksneverexpand" | [{{fullurl:ksh:Special:Statistics|action=raw}} '''2,837''']
+|  10,292
+|  [[:ksh:Special:Statistics|1,599,706]]
+|  [[:ksh:Special:Listadmins|2]]
+|  [[:ksh:Special:Listusers|16,152]]
+|  [[:ksh:Special:ActiveUsers|15]]
+|  [[:ksh:Special:FileList|0]]
+| 1073
+|-
+| 208
+| [[w:Franco-Provençal language|Franco-Provençal]]
+| class="plainlinksneverexpand" | [{{fullurl:frp:Arpitan}} Arpitan]
+| [[:frp:|frp]]
+| class="plainlinksneverexpand" | [{{fullurl:frp:Special:Statistics|action=raw}} '''2,836''']
+|  7,279
+|  [[:frp:Special:Statistics|185,064]]
+|  [[:frp:Special:Listadmins|2]]
+|  [[:frp:Special:Listusers|10,149]]
+|  [[:frp:Special:ActiveUsers|17]]
+|  [[:frp:Special:FileList|0]]
+| 62
+|-
+| 209
+| [[w:Lao language|Lao]]
+| class="plainlinksneverexpand" | [{{fullurl:lo:ພາສາລາວ}} ລາວ]
+| [[:lo:|lo]]
+| class="plainlinksneverexpand" | [{{fullurl:lo:Special:Statistics|action=raw}} '''2,817''']
+|  8,323
+|  [[:lo:Special:Statistics|64,744]]
+|  [[:lo:Special:Listadmins|0]]
+|  [[:lo:Special:Listusers|9,912]]
+|  [[:lo:Special:ActiveUsers|40]]
+|  [[:lo:Special:FileList|0]]
+| 30
+|-
+| 210
+| [[w:Gagauz language|Gagauz]]
+| class="plainlinksneverexpand" | [{{fullurl:gag:Gagauz_dili}} Gagauz]
+| [[:gag:|gag]]
+| class="plainlinksneverexpand" | [{{fullurl:gag:Special:Statistics|action=raw}} '''2,757''']
+|  6,228
+|  [[:gag:Special:Statistics|62,636]]
+|  [[:gag:Special:Listadmins|0]]
+|  [[:gag:Special:Listusers|8,013]]
+|  [[:gag:Special:ActiveUsers|11]]
+|  [[:gag:Special:FileList|0]]
+| 16
+|-
+| 211
+| [[w:Doteli language|Doteli]]
+| class="plainlinksneverexpand" | [{{fullurl:dty:डोटेली_भाषा}} डोटेली]
+| [[:dty:|dty]]
+| class="plainlinksneverexpand" | [{{fullurl:dty:Special:Statistics|action=raw}} '''2,742''']
+|  8,025
+|  [[:dty:Special:Statistics|73,576]]
+|  [[:dty:Special:Listadmins|2]]
+|  [[:dty:Special:Listusers|1,723]]
+|  [[:dty:Special:ActiveUsers|17]]
+|  [[:dty:Special:FileList|0]]
+| 34
+|-
+| 212
+| [[w:Pangasinan language|Pangasinan]]
+| class="plainlinksneverexpand" | [{{fullurl:pag:Salitan_Pangasinan}} Pangasinan]
+| [[:pag:|pag]]
+| class="plainlinksneverexpand" | [{{fullurl:pag:Special:Statistics|action=raw}} '''2,553''']
+|  7,340
+|  [[:pag:Special:Statistics|58,003]]
+|  [[:pag:Special:Listadmins|0]]
+|  [[:pag:Special:Listusers|5,258]]
+|  [[:pag:Special:ActiveUsers|8]]
+|  [[:pag:Special:FileList|0]]
+| 28
+|-
+| 213
+| [[w:Livvi-Karelian language|Livvi-Karelian]]
+| class="plainlinksneverexpand" | [{{fullurl:olo:Karjalan_kieli}} Karjalan]
+| [[:olo:|olo]]
+| class="plainlinksneverexpand" | [{{fullurl:olo:Special:Statistics|action=raw}} '''2,547''']
+|  4,085
+|  [[:olo:Special:Statistics|19,586]]
+|  [[:olo:Special:Listadmins|3]]
+|  [[:olo:Special:Listusers|2,879]]
+|  [[:olo:Special:ActiveUsers|12]]
+|  [[:olo:Special:FileList|0]]
+| 2
+|-
+| 214
+| [[w:Pali language|Pali]]
+| class="plainlinksneverexpand" | [{{fullurl:pi:पाली_भाषा}} पाऴि]
+| [[:pi:|pi]]
+| class="plainlinksneverexpand" | [{{fullurl:pi:Special:Statistics|action=raw}} '''2,528''']
+|  4,423
+|  [[:pi:Special:Statistics|96,084]]
+|  [[:pi:Special:Listadmins|0]]
+|  [[:pi:Special:Listusers|4,570]]
+|  [[:pi:Special:ActiveUsers|5]]
+|  [[:pi:Special:FileList|0]]
+| 12
+|-
+| 215
+| [[w:Avar language|Avar]]
+| class="plainlinksneverexpand" | [{{fullurl:av:МагІарул_мацІ}} Авар]
+| [[:av:|av]]
+| class="plainlinksneverexpand" | [{{fullurl:av:Special:Statistics|action=raw}} '''2,311''']
+|  8,906
+|  [[:av:Special:Statistics|67,001]]
+|  [[:av:Special:Listadmins|0]]
+|  [[:av:Special:Listusers|9,280]]
+|  [[:av:Special:ActiveUsers|11]]
+|  [[:av:Special:FileList|0]]
+| 61
+|-
+| 216
+| [[w:Buryat language|Buryat]]
+| class="plainlinksneverexpand" | [{{fullurl:bxr:Буряад_хэлэн}} Буряад]
+| [[:bxr:|bxr]]
+| class="plainlinksneverexpand" | [{{fullurl:bxr:Special:Statistics|action=raw}} '''2,082''']
+|  7,630
+|  [[:bxr:Special:Statistics|52,767]]
+|  [[:bxr:Special:Listadmins|1]]
+|  [[:bxr:Special:Listusers|9,587]]
+|  [[:bxr:Special:ActiveUsers|15]]
+|  [[:bxr:Special:FileList|0]]
+| 49
+|-
+| 217
+| [[w:Palatine German language|Palatinate German]]
+| class="plainlinksneverexpand" | [{{fullurl:pfl:Pälzisch}} Pälzisch]
+| [[:pfl:|pfl]]
+| class="plainlinksneverexpand" | [{{fullurl:pfl:Special:Statistics|action=raw}} '''2,074''']
+|  5,270
+|  [[:pfl:Special:Statistics|63,086]]
+|  [[:pfl:Special:Listadmins|5]]
+|  [[:pfl:Special:Listusers|6,884]]
+|  [[:pfl:Special:ActiveUsers|15]]
+|  [[:pfl:Special:FileList|0]]
+| 28
+|-
+| 218
+| [[w:Kalmyk language|Kalmyk]]
+| class="plainlinksneverexpand" | [{{fullurl:xal:Хальмг_келн}} Хальмг]
+| [[:xal:|xal]]
+| class="plainlinksneverexpand" | [{{fullurl:xal:Special:Statistics|action=raw}} '''2,065''']
+|  10,213
+|  [[:xal:Special:Statistics|79,699]]
+|  [[:xal:Special:Listadmins|2]]
+|  [[:xal:Special:Listusers|6,942]]
+|  [[:xal:Special:ActiveUsers|32]]
+|  [[:xal:Special:FileList|0]]
+| 121
+|-
+| 219
+| [[w:Hawaiian language|Hawaiian]]
+| class="plainlinksneverexpand" | [{{fullurl:haw:‘Ōlelo_Hawai‘i}} Hawai`i]
+| [[:haw:|haw]]
+| class="plainlinksneverexpand" | [{{fullurl:haw:Special:Statistics|action=raw}} '''2,061''']
+|  4,103
+|  [[:haw:Special:Statistics|73,486]]
+|  [[:haw:Special:Listadmins|0]]
+|  [[:haw:Special:Listusers|9,584]]
+|  [[:haw:Special:ActiveUsers|16]]
+|  [[:haw:Special:FileList|0]]
+| 18
+|-
+| 220
+| [[w:Karachay-Balkar language|Karachay-Balkar]]
+| class="plainlinksneverexpand" | [{{fullurl:krc:Къарачай-малкъар_тил}} Къарачай-Малкъар (Qarachay-Malqar)]
+| [[:krc:|krc]]
+| class="plainlinksneverexpand" | [{{fullurl:krc:Special:Statistics|action=raw}} '''2,020''']
+|  13,466
+|  [[:krc:Special:Statistics|103,441]]
+|  [[:krc:Special:Listadmins|1]]
+|  [[:krc:Special:Listusers|6,924]]
+|  [[:krc:Special:ActiveUsers|7]]
+|  [[:krc:Special:FileList|0]]
+| 247
+|-
+| 221
+| [[w:Papiamentu language|Papiamentu]]
+| class="plainlinksneverexpand" | [{{fullurl:pap:Papiamentu}} Papiamentu]
+| [[:pap:|pap]]
+| class="plainlinksneverexpand" | [{{fullurl:pap:Special:Statistics|action=raw}} '''1,919''']
+|  4,623
+|  [[:pap:Special:Statistics|71,099]]
+|  [[:pap:Special:Listadmins|1]]
+|  [[:pap:Special:Listusers|8,074]]
+|  [[:pap:Special:ActiveUsers|13]]
+|  [[:pap:Special:FileList|0]]
+| 31
+|-
+| 222
+| [[w:Karakalpak language|Karakalpak]]
+| class="plainlinksneverexpand" | [{{fullurl:kaa:Qaraqalpaq_tili}} Qaraqalpaqsha]
+| [[:kaa:|kaa]]
+| class="plainlinksneverexpand" | [{{fullurl:kaa:Special:Statistics|action=raw}} '''1,902''']
+|  4,739
+|  [[:kaa:Special:Statistics|41,859]]
+|  [[:kaa:Special:Listadmins|1]]
+|  [[:kaa:Special:Listusers|7,362]]
+|  [[:kaa:Special:ActiveUsers|10]]
+|  [[:kaa:Special:FileList|0]]
+| 20
+|-
+| 223
+| [[w:Kinyarwanda language|Kinyarwanda]]
+| class="plainlinksneverexpand" | [{{fullurl:rw:Kinyarwanda}} Ikinyarwanda]
+| [[:rw:|rw]]
+| class="plainlinksneverexpand" | [{{fullurl:rw:Special:Statistics|action=raw}} '''1,819''']
+|  5,089
+|  [[:rw:Special:Statistics|71,157]]
+|  [[:rw:Special:Listadmins|0]]
+|  [[:rw:Special:Listusers|7,200]]
+|  [[:rw:Special:ActiveUsers|11]]
+|  [[:rw:Special:FileList|0]]
+| 45
+|-
+| 224
+| [[w:Pennsylvania German language|Pennsylvania German]]
+| class="plainlinksneverexpand" | [{{fullurl:pdc:Pennsilfaanisch_Deitsch}} Deitsch]
+| [[:pdc:|pdc]]
+| class="plainlinksneverexpand" | [{{fullurl:pdc:Special:Statistics|action=raw}} '''1,812''']
+|  5,509
+|  [[:pdc:Special:Statistics|101,726]]
+|  [[:pdc:Special:Listadmins|0]]
+|  [[:pdc:Special:Listusers|22,177]]
+|  [[:pdc:Special:ActiveUsers|16]]
+|  [[:pdc:Special:FileList|0]]
+| 77
+|-
+| 225
+| [[w:Banjar language|Banjar]]
+| class="plainlinksneverexpand" | [{{fullurl:bjn:Basa_Banjar}} Bahasa Banjar]
+| [[:bjn:|bjn]]
+| class="plainlinksneverexpand" | [{{fullurl:bjn:Special:Statistics|action=raw}} '''1,796''']
+|  12,982
+|  [[:bjn:Special:Statistics|58,105]]
+|  [[:bjn:Special:Listadmins|2]]
+|  [[:bjn:Special:Listusers|8,244]]
+|  [[:bjn:Special:ActiveUsers|19]]
+|  [[:bjn:Special:FileList|1]]
+| 174
+|-
+| 226
+| [[w:Tongan language|Tongan]]
+| class="plainlinksneverexpand" | [{{fullurl:to:Lea_fakatonga}} faka Tonga]
+| [[:to:|to]]
+| class="plainlinksneverexpand" | [{{fullurl:to:Special:Statistics|action=raw}} '''1,690''']
+|  4,962
+|  [[:to:Special:Statistics|39,220]]
+|  [[:to:Special:Listadmins|1]]
+|  [[:to:Special:Listusers|5,649]]
+|  [[:to:Special:ActiveUsers|8]]
+|  [[:to:Special:FileList|11]]
+| 30
+|-
+| 227
+| [[w:Hausa language|Hausa]]
+| class="plainlinksneverexpand" | [{{fullurl:ha:Hausa}} هَوُسَ]
+| [[:ha:|ha]]
+| class="plainlinksneverexpand" | [{{fullurl:ha:Special:Statistics|action=raw}} '''1,675''']
+|  4,434
+|  [[:ha:Special:Statistics|35,427]]
+|  [[:ha:Special:Listadmins|1]]
+|  [[:ha:Special:Listusers|7,219]]
+|  [[:ha:Special:ActiveUsers|26]]
+|  [[:ha:Special:FileList|0]]
+| 22
+|-
+| 228
+| [[w:Novial language|Novial]]
+| class="plainlinksneverexpand" | [{{fullurl:nov:Novial}} Novial]
+| [[:nov:|nov]]
+| class="plainlinksneverexpand" | [{{fullurl:nov:Special:Statistics|action=raw}} '''1,652''']
+|  4,397
+|  [[:nov:Special:Statistics|174,052]]
+|  [[:nov:Special:Listadmins|2]]
+|  [[:nov:Special:Listusers|7,362]]
+|  [[:nov:Special:ActiveUsers|14]]
+|  [[:nov:Special:FileList|0]]
+| 109
+|-
+| 229
+| [[w:Greenlandic language|Greenlandic]]
+| class="plainlinksneverexpand" | [{{fullurl:kl:Kalaallisut}} Kalaallisut]
+| [[:kl:|kl]]
+| class="plainlinksneverexpand" | [{{fullurl:kl:Special:Statistics|action=raw}} '''1,642''']
+|  3,907
+|  [[:kl:Special:Statistics|71,398]]
+|  [[:kl:Special:Listadmins|2]]
+|  [[:kl:Special:Listusers|8,854]]
+|  [[:kl:Special:ActiveUsers|10]]
+|  [[:kl:Special:FileList|0]]
+| 35
+|-
+| 230
+| [[w:Aramaic language|Aramaic]]
+| class="plainlinksneverexpand" | [{{fullurl:arc:ܠܫܢܐ_ܐܪܡܝܐ}} ܐܪܡܝܐ]
+| [[:arc:|arc]]
+| class="plainlinksneverexpand" | [{{fullurl:arc:Special:Statistics|action=raw}} '''1,622''']
+|  5,898
+|  [[:arc:Special:Statistics|92,529]]
+|  [[:arc:Special:Listadmins|1]]
+|  [[:arc:Special:Listusers|13,992]]
+|  [[:arc:Special:ActiveUsers|13]]
+|  [[:arc:Special:FileList|0]]
+| 109
+|-
+| 231
+| [[w:Jamaican Patois|Jamaican Patois]]
+| class="plainlinksneverexpand" | [{{fullurl:jam:Jumiekan_Kryuol}} Jumiekan Kryuol]
+| [[:jam:|jam]]
+| class="plainlinksneverexpand" | [{{fullurl:jam:Special:Statistics|action=raw}} '''1,619''']
+|  2,803
+|  [[:jam:Special:Statistics|19,057]]
+|  [[:jam:Special:Listadmins|0]]
+|  [[:jam:Special:Listusers|3,142]]
+|  [[:jam:Special:ActiveUsers|17]]
+|  [[:jam:Special:FileList|0]]
+| 4
+|-
+| 232
+| [[w:Kabardian Circassian language|Kabardian Circassian]]
+| class="plainlinksneverexpand" | [{{fullurl:kbd:Къэбэрдей_Адыгэбзэ}} Адыгэбзэ (Adighabze)]
+| [[:kbd:|kbd]]
+| class="plainlinksneverexpand" | [{{fullurl:kbd:Special:Statistics|action=raw}} '''1,575''']
+|  6,596
+|  [[:kbd:Special:Statistics|41,659]]
+|  [[:kbd:Special:Listadmins|0]]
+|  [[:kbd:Special:Listusers|6,399]]
+|  [[:kbd:Special:ActiveUsers|11]]
+|  [[:kbd:Special:FileList|0]]
+| 64
+|-
+| 233
+| [[w:Tuvan language|Tuvan]]
+| class="plainlinksneverexpand" | [{{fullurl:tyv:Тыва_дыл}} Тыва]
+| [[:tyv:|tyv]]
+| class="plainlinksneverexpand" | [{{fullurl:tyv:Special:Statistics|action=raw}} '''1,523''']
+|  4,946
+|  [[:tyv:Special:Statistics|24,246]]
+|  [[:tyv:Special:Listadmins|0]]
+|  [[:tyv:Special:Listusers|4,799]]
+|  [[:tyv:Special:ActiveUsers|16]]
+|  [[:tyv:Special:FileList|0]]
+| 25
+|-
+| 234
+| [[w:Tok Pisin language|Tok Pisin]]
+| class="plainlinksneverexpand" | [{{fullurl:tpi:Tok_Pisin}} Tok Pisin]
+| [[:tpi:|tpi]]
+| class="plainlinksneverexpand" | [{{fullurl:tpi:Special:Statistics|action=raw}} '''1,429''']
+|  5,583
+|  [[:tpi:Special:Statistics|83,697]]
+|  [[:tpi:Special:Listadmins|0]]
+|  [[:tpi:Special:Listusers|8,259]]
+|  [[:tpi:Special:ActiveUsers|10]]
+|  [[:tpi:Special:FileList|0]]
+| 127
+|-
+| 235
+| [[w:Tetum language|Tetum]]
+| class="plainlinksneverexpand" | [{{fullurl:tet:Lia-tetun}} Tetun]
+| [[:tet:|tet]]
+| class="plainlinksneverexpand" | [{{fullurl:tet:Special:Statistics|action=raw}} '''1,416''']
+|  3,486
+|  [[:tet:Special:Statistics|61,025]]
+|  [[:tet:Special:Listadmins|1]]
+|  [[:tet:Special:Listusers|6,156]]
+|  [[:tet:Special:ActiveUsers|12]]
+|  [[:tet:Special:FileList|0]]
+| 37
+|-
+| 236
+| [[w:Kikuyu language|Kikuyu]]
+| class="plainlinksneverexpand" | [{{fullurl:ki:Gĩgĩkũyũ}} Gĩkũyũ]
+| [[:ki:|ki]]
+| class="plainlinksneverexpand" | [{{fullurl:ki:Special:Statistics|action=raw}} '''1,354''']
+|  2,856
+|  [[:ki:Special:Statistics|19,208]]
+|  [[:ki:Special:Listadmins|0]]
+|  [[:ki:Special:Listusers|4,808]]
+|  [[:ki:Special:ActiveUsers|8]]
+|  [[:ki:Special:FileList|0]]
+| 8
+|-
+| 237
+| [[w:Kabiye language|Kabiye]]
+| class="plainlinksneverexpand" | [{{fullurl:kbp:Kabɩyɛ_kʊnʊŋ}} Kabɩyɛ]
+| [[:kbp:|kbp]]
+| class="plainlinksneverexpand" | [{{fullurl:kbp:Special:Statistics|action=raw}} '''1,290''']
+|  2,397
+|  [[:kbp:Special:Statistics|11,563]]
+|  [[:kbp:Special:Listadmins|1]]
+|  [[:kbp:Special:Listusers|1,293]]
+|  [[:kbp:Special:ActiveUsers|15]]
+|  [[:kbp:Special:FileList|0]]
+| 4
+|-
+| 238
+| [[w:Igbo language|Igbo]]
+| class="plainlinksneverexpand" | [{{fullurl:ig:Asusu_Igbo}} Igbo]
+| [[:ig:|ig]]
+| class="plainlinksneverexpand" | [{{fullurl:ig:Special:Statistics|action=raw}} '''1,286''']
+|  5,253
+|  [[:ig:Special:Statistics|61,493]]
+|  [[:ig:Special:Listadmins|1]]
+|  [[:ig:Special:Listusers|8,149]]
+|  [[:ig:Special:ActiveUsers|31]]
+|  [[:ig:Special:FileList|0]]
+| 111
+|-
+| 239
+| [[w:Nauruan language|Nauruan]]
+| class="plainlinksneverexpand" | [{{fullurl:na:Dorerin_Naoero}} dorerin Naoero]
+| [[:na:|na]]
+| class="plainlinksneverexpand" | [{{fullurl:na:Special:Statistics|action=raw}} '''1,286''']
+|  4,075
+|  [[:na:Special:Statistics|80,366]]
+|  [[:na:Special:Listadmins|1]]
+|  [[:na:Special:Listusers|6,916]]
+|  [[:na:Special:ActiveUsers|11]]
+|  [[:na:Special:FileList|0]]
+| 93
+|-
+| 240
+| [[w:Aromanian language|Aromanian]]
+| class="plainlinksneverexpand" | [{{fullurl:roa-rup:Limba_armãneascã}} Armãneashce]
+| [[:roa-rup:|roa-rup]]
+| class="plainlinksneverexpand" | [{{fullurl:roa-rup:Special:Statistics|action=raw}} '''1,217''']
+|  3,806
+|  [[:roa-rup:Special:Statistics|197,803]]
+|  [[:roa-rup:Special:Listadmins|0]]
+|  [[:roa-rup:Special:Listusers|10,047]]
+|  [[:roa-rup:Special:ActiveUsers|10]]
+|  [[:roa-rup:Special:FileList|0]]
+| 235
+|-
+| 241
+| [[w:Lak language|Lak]]
+| class="plainlinksneverexpand" | [{{fullurl:lbe:Лакку_маз}} Лакку]
+| [[:lbe:|lbe]]
+| class="plainlinksneverexpand" | [{{fullurl:lbe:Special:Statistics|action=raw}} '''1,215''']
+|  11,000
+|  [[:lbe:Special:Statistics|43,702]]
+|  [[:lbe:Special:Listadmins|0]]
+|  [[:lbe:Special:Listusers|5,946]]
+|  [[:lbe:Special:ActiveUsers|10]]
+|  [[:lbe:Special:FileList|0]]
+| 258
+|-
+| 242
+| [[w:Lojban language|Lojban]]
+| class="plainlinksneverexpand" | [{{fullurl:jbo:lojban}} Lojban]
+| [[:jbo:|jbo]]
+| class="plainlinksneverexpand" | [{{fullurl:jbo:Special:Statistics|action=raw}} '''1,206''']
+|  5,469
+|  [[:jbo:Special:Statistics|108,210]]
+|  [[:jbo:Special:Listadmins|2]]
+|  [[:jbo:Special:Listusers|10,514]]
+|  [[:jbo:Special:ActiveUsers|10]]
+|  [[:jbo:Special:FileList|0]]
+| 247
+|-
+| 243
+| [[w:Tahitian language|Tahitian]]
+| class="plainlinksneverexpand" | [{{fullurl:ty:Reo_Tahiti}} Reo Mā`ohi]
+| [[:ty:|ty]]
+| class="plainlinksneverexpand" | [{{fullurl:ty:Special:Statistics|action=raw}} '''1,196''']
+|  2,810
+|  [[:ty:Special:Statistics|51,789]]
+|  [[:ty:Special:Listadmins|0]]
+|  [[:ty:Special:Listusers|5,125]]
+|  [[:ty:Special:ActiveUsers|9]]
+|  [[:ty:Special:FileList|0]]
+| 34
+|-
+| 244
+| [[w:Moksha language|Moksha]]
+| class="plainlinksneverexpand" | [{{fullurl:mdf:Мокшень_кяль}} Мокшень (Mokshanj Kälj)]
+| [[:mdf:|mdf]]
+| class="plainlinksneverexpand" | [{{fullurl:mdf:Special:Statistics|action=raw}} '''1,183''']
+|  4,844
+|  [[:mdf:Special:Statistics|48,783]]
+|  [[:mdf:Special:Listadmins|2]]
+|  [[:mdf:Special:Listusers|6,195]]
+|  [[:mdf:Special:ActiveUsers|10]]
+|  [[:mdf:Special:FileList|0]]
+| 96
+|-
+| 245
+| [[w:Zhuang language|Zhuang]]
+| class="plainlinksneverexpand" | [{{fullurl:za:Sawcuengh}} Cuengh]
+| [[:za:|za]]
+| class="plainlinksneverexpand" | [{{fullurl:za:Special:Statistics|action=raw}} '''1,178''']
+|  2,942
+|  [[:za:Special:Statistics|36,648]]
+|  [[:za:Special:Listadmins|0]]
+|  [[:za:Special:Listusers|6,723]]
+|  [[:za:Special:ActiveUsers|11]]
+|  [[:za:Special:FileList|0]]
+| 28
+|-
+| 246
+| [[w:Kongo language|Kongo]]
+| class="plainlinksneverexpand" | [{{fullurl:kg:Kikongo/Kituba}} KiKongo]
+| [[:kg:|kg]]
+| class="plainlinksneverexpand" | [{{fullurl:kg:Special:Statistics|action=raw}} '''1,177''']
+|  2,747
+|  [[:kg:Special:Statistics|42,347]]
+|  [[:kg:Special:Listadmins|1]]
+|  [[:kg:Special:Listusers|6,685]]
+|  [[:kg:Special:ActiveUsers|9]]
+|  [[:kg:Special:FileList|0]]
+| 27
+|-
+| 247
+| [[w:Luganda language|Luganda]]
+| class="plainlinksneverexpand" | [{{fullurl:lg:Luganda}} Luganda]
+| [[:lg:|lg]]
+| class="plainlinksneverexpand" | [{{fullurl:lg:Special:Statistics|action=raw}} '''1,169''']
+|  4,177
+|  [[:lg:Special:Statistics|23,651]]
+|  [[:lg:Special:Listadmins|0]]
+|  [[:lg:Special:Listusers|4,532]]
+|  [[:lg:Special:ActiveUsers|11]]
+|  [[:lg:Special:FileList|0]]
+| 37
+|-
+| 248
+| [[w:Bislama language|Bislama]]
+| class="plainlinksneverexpand" | [{{fullurl:bi:Bislama}} Bislama]
+| [[:bi:|bi]]
+| class="plainlinksneverexpand" | [{{fullurl:bi:Special:Statistics|action=raw}} '''1,163''']
+|  2,837
+|  [[:bi:Special:Statistics|37,322]]
+|  [[:bi:Special:Listadmins|0]]
+|  [[:bi:Special:Listusers|7,220]]
+|  [[:bi:Special:ActiveUsers|20]]
+|  [[:bi:Special:FileList|0]]
+| 27
+|-
+| 249
+| [[w:Wolof language|Wolof]]
+| class="plainlinksneverexpand" | [{{fullurl:wo:Wolof}} Wolof]
+| [[:wo:|wo]]
+| class="plainlinksneverexpand" | [{{fullurl:wo:Special:Statistics|action=raw}} '''1,161''']
+|  4,459
+|  [[:wo:Special:Statistics|99,171]]
+|  [[:wo:Special:Listadmins|2]]
+|  [[:wo:Special:Listusers|10,124]]
+|  [[:wo:Special:ActiveUsers|13]]
+|  [[:wo:Special:FileList|0]]
+| 179
+|-
+| 250
+| [[w:Sranan Tongo|Sranan]]
+| class="plainlinksneverexpand" | [{{fullurl:srn:Sranantongo}} Sranantongo]
+| [[:srn:|srn]]
+| class="plainlinksneverexpand" | [{{fullurl:srn:Special:Statistics|action=raw}} '''1,059''']
+|  2,631
+|  [[:srn:Special:Statistics|37,736]]
+|  [[:srn:Special:Listadmins|0]]
+|  [[:srn:Special:Listusers|5,032]]
+|  [[:srn:Special:ActiveUsers|9]]
+|  [[:srn:Special:FileList|0]]
+| 32
+|}
+=== 100+ articles ===
+{| border="1" cellpadding="2" cellspacing="0" style="width:100%; background: #f9f9f9; border: 1px solid #aaaaaa; border-collapse: collapse; white-space: nowrap; text-align: right" class="sortable"
+|-
+! №
+! Language
+! Language (local)
+! Wiki
+! Articles
+! Total
+! Edits
+! Admins
+! Users
+! Active Users
+! Files
+! Depth
+|-
+| 251
+| [[w:Tulu language|Tulu]]
+| class="plainlinksneverexpand" | [{{fullurl:tcy:ತುಳು_ಪಾತೆರೊ}} ತುಳು]
+| [[:tcy:|tcy]]
+| class="plainlinksneverexpand" | [{{fullurl:tcy:Special:Statistics|action=raw}} '''902''']
+|  2,575
+|  [[:tcy:Special:Statistics|34,438]]
+|  [[:tcy:Special:Listadmins|1]]
+|  [[:tcy:Special:Listusers|1,952]]
+|  [[:tcy:Special:ActiveUsers|16]]
+|  [[:tcy:Special:FileList|0]]
+| 46
+|-
+| 252
+| [[w:Zulu language|Zulu]]
+| class="plainlinksneverexpand" | [{{fullurl:zu:IsiZulu}} isiZulu]
+| [[:zu:|zu]]
+| class="plainlinksneverexpand" | [{{fullurl:zu:Special:Statistics|action=raw}} '''885''']
+|  4,111
+|  [[:zu:Special:Statistics|45,273]]
+|  [[:zu:Special:Listadmins|0]]
+|  [[:zu:Special:Listusers|10,452]]
+|  [[:zu:Special:ActiveUsers|22]]
+|  [[:zu:Special:FileList|0]]
+| 146
+|-
+| 253
+| [[w:Cherokee language|Cherokee]]
+| class="plainlinksneverexpand" | [{{fullurl:chr:ᏣᎳᎩ_ᎧᏬᏂᎯᏍᏗ}} ᏣᎳᎩ]
+| [[:chr:|chr]]
+| class="plainlinksneverexpand" | [{{fullurl:chr:Special:Statistics|action=raw}} '''871''']
+|  3,544
+|  [[:chr:Special:Statistics|41,282]]
+|  [[:chr:Special:Listadmins|0]]
+|  [[:chr:Special:Listusers|12,398]]
+|  [[:chr:Special:ActiveUsers|15]]
+|  [[:chr:Special:FileList|0]]
+| 110
+|-
+| 254
+| [[w:Latgalian language|Latgalian]]
+| class="plainlinksneverexpand" | [{{fullurl:ltg:Latgaļu_volūda}} Latgaļu]
+| [[:ltg:|ltg]]
+| class="plainlinksneverexpand" | [{{fullurl:ltg:Special:Statistics|action=raw}} '''801''']
+|  2,678
+|  [[:ltg:Special:Statistics|32,154]]
+|  [[:ltg:Special:Listadmins|0]]
+|  [[:ltg:Special:Listusers|4,508]]
+|  [[:ltg:Special:ActiveUsers|8]]
+|  [[:ltg:Special:FileList|0]]
+| 66
+|-
+| 255
+| [[w:Samoan language|Samoan]]
+| class="plainlinksneverexpand" | [{{fullurl:sm:Gagana_fa'a_Sāmoa}} Gagana Samoa]
+| [[:sm:|sm]]
+| class="plainlinksneverexpand" | [{{fullurl:sm:Special:Statistics|action=raw}} '''797''']
+|  2,845
+|  [[:sm:Special:Statistics|38,597]]
+|  [[:sm:Special:Listadmins|0]]
+|  [[:sm:Special:Listusers|5,271]]
+|  [[:sm:Special:ActiveUsers|8]]
+|  [[:sm:Special:FileList|0]]
+| 90
+|-
+| 256
+| [[w:Oromo language|Oromo]]
+| class="plainlinksneverexpand" | [{{fullurl:om:Afaan_Oromoo}} Oromoo]
+| [[:om:|om]]
+| class="plainlinksneverexpand" | [{{fullurl:om:Special:Statistics|action=raw}} '''766''']
+|  3,120
+|  [[:om:Special:Statistics|30,428]]
+|  [[:om:Special:Listadmins|0]]
+|  [[:om:Special:Listusers|5,447]]
+|  [[:om:Special:ActiveUsers|15]]
+|  [[:om:Special:FileList|0]]
+| 92
+|-
+| 257
+| [[w:Xhosa language|Xhosa]]
+| class="plainlinksneverexpand" | [{{fullurl:xh:IsiXhosa}} isiXhosa]
+| [[:xh:|xh]]
+| class="plainlinksneverexpand" | [{{fullurl:xh:Special:Statistics|action=raw}} '''729''']
+|  3,034
+|  [[:xh:Special:Statistics|28,618]]
+|  [[:xh:Special:Listadmins|0]]
+|  [[:xh:Special:Listusers|7,012]]
+|  [[:xh:Special:ActiveUsers|16]]
+|  [[:xh:Special:FileList|0]]
+| 94
+|-
+| 258
+| [[w:Romani language|Romani]]
+| class="plainlinksneverexpand" | [{{fullurl:rmy:Romani_chib}} romani - रोमानी]
+| [[:rmy:|rmy]]
+| class="plainlinksneverexpand" | [{{fullurl:rmy:Special:Statistics|action=raw}} '''655''']
+|  2,514
+|  [[:rmy:Special:Statistics|46,865]]
+|  [[:rmy:Special:Listadmins|0]]
+|  [[:rmy:Special:Listusers|12,017]]
+|  [[:rmy:Special:ActiveUsers|12]]
+|  [[:rmy:Special:FileList|0]]
+| 150
+|-
+| 259
+| [[w:Tswana language|Tswana]]
+| class="plainlinksneverexpand" | [{{fullurl:tn:Setswana}} Setswana]
+| [[:tn:|tn]]
+| class="plainlinksneverexpand" | [{{fullurl:tn:Special:Statistics|action=raw}} '''639''']
+|  2,663
+|  [[:tn:Special:Statistics|21,775]]
+|  [[:tn:Special:Listadmins|1]]
+|  [[:tn:Special:Listusers|5,785]]
+|  [[:tn:Special:ActiveUsers|7]]
+|  [[:tn:Special:FileList|0]]
+| 82
+|-
+| 260
+| [[w:Old Church Slavonic language|Old Church Slavonic]]
+| class="plainlinksneverexpand" | [{{fullurl:cu:Словѣ́ньскъ_ѩꙁꙑ́къ}} Словѣньскъ]
+| [[:cu:|cu]]
+| class="plainlinksneverexpand" | [{{fullurl:cu:Special:Statistics|action=raw}} '''637''']
+|  4,586
+|  [[:cu:Special:Statistics|74,711]]
+|  [[:cu:Special:Listadmins|1]]
+|  [[:cu:Special:Listusers|16,433]]
+|  [[:cu:Special:ActiveUsers|20]]
+|  [[:cu:Special:FileList|0]]
+| 626
+|-
+| 261
+| [[w:Norfolk language|Norfolk]]
+| class="plainlinksneverexpand" | [{{fullurl:pih:Norfuk}} Norfuk]
+| [[:pih:|pih]]
+| class="plainlinksneverexpand" | [{{fullurl:pih:Special:Statistics|action=raw}} '''629''']
+|  2,578
+|  [[:pih:Special:Statistics|37,615]]
+|  [[:pih:Special:Listadmins|0]]
+|  [[:pih:Special:Listusers|6,924]]
+|  [[:pih:Special:ActiveUsers|10]]
+|  [[:pih:Special:FileList|0]]
+| 140
+|-
+| 262
+| [[w:Kirundi language|Kirundi]]
+| class="plainlinksneverexpand" | [{{fullurl:rn:Kirundi}} Kirundi]
+| [[:rn:|rn]]
+| class="plainlinksneverexpand" | [{{fullurl:rn:Special:Statistics|action=raw}} '''610''']
+|  1,967
+|  [[:rn:Special:Statistics|19,464]]
+|  [[:rn:Special:Listadmins|0]]
+|  [[:rn:Special:Listusers|5,189]]
+|  [[:rn:Special:ActiveUsers|10]]
+|  [[:rn:Special:FileList|0]]
+| 49
+|-
+| 263
+| [[w:Cheyenne language|Cheyenne]]
+| class="plainlinksneverexpand" | [{{fullurl:chy:Tsêhesenêstsestôtse}} Tsetsêhestâhese]
+| [[:chy:|chy]]
+| class="plainlinksneverexpand" | [{{fullurl:chy:Special:Statistics|action=raw}} '''608''']
+|  2,149
+|  [[:chy:Special:Statistics|23,069]]
+|  [[:chy:Special:Listadmins|0]]
+|  [[:chy:Special:Listusers|7,413]]
+|  [[:chy:Special:ActiveUsers|11]]
+|  [[:chy:Special:FileList|0]]
+| 69
+|-
+| 264
+| [[w:Twi language|Twi]]
+| class="plainlinksneverexpand" | [{{fullurl:tw:Twi}} Twi]
+| [[:tw:|tw]]
+| class="plainlinksneverexpand" | [{{fullurl:tw:Special:Statistics|action=raw}} '''602''']
+|  1,889
+|  [[:tw:Special:Statistics|17,609]]
+|  [[:tw:Special:Listadmins|0]]
+|  [[:tw:Special:Listusers|7,543]]
+|  [[:tw:Special:ActiveUsers|10]]
+|  [[:tw:Special:FileList|0]]
+| 43
+|-
+| 265
+| [[w:Tsonga language|Tsonga]]
+| class="plainlinksneverexpand" | [{{fullurl:ts:Xitsonga}} Xitsonga]
+| [[:ts:|ts]]
+| class="plainlinksneverexpand" | [{{fullurl:ts:Special:Statistics|action=raw}} '''560''']
+|  2,587
+|  [[:ts:Special:Statistics|30,969]]
+|  [[:ts:Special:Listadmins|1]]
+|  [[:ts:Special:Listusers|5,544]]
+|  [[:ts:Special:ActiveUsers|9]]
+|  [[:ts:Special:FileList|0]]
+| 157
+|-
+| 266
+| [[w:Tumbuka language|Tumbuka]]
+| class="plainlinksneverexpand" | [{{fullurl:tum:ChiTumbuka}} chiTumbuka]
+| [[:tum:|tum]]
+| class="plainlinksneverexpand" | [{{fullurl:tum:Special:Statistics|action=raw}} '''560''']
+|  1,875
+|  [[:tum:Special:Statistics|21,345]]
+|  [[:tum:Special:Listadmins|0]]
+|  [[:tum:Special:Listusers|4,268]]
+|  [[:tum:Special:ActiveUsers|7]]
+|  [[:tum:Special:FileList|0]]
+| 63
+|-
+| 267
+| [[w:Gothic language|Gothic]]
+| class="plainlinksneverexpand" | [{{fullurl:got:𐌲𐌿𐍄𐌰𐍂𐌰𐌶𐌳𐌰}} 𐌲𐌿𐍄𐌹𐍃𐌺]
+| [[:got:|got]]
+| class="plainlinksneverexpand" | [{{fullurl:got:Special:Statistics|action=raw}} '''536''']
+|  3,103
+|  [[:got:Special:Statistics|38,856]]
+|  [[:got:Special:Listadmins|1]]
+|  [[:got:Special:Listusers|12,129]]
+|  [[:got:Special:ActiveUsers|13]]
+|  [[:got:Special:FileList|0]]
+| 287
+|-
+| 268
+| [[w:Sesotho language|Sesotho]]
+| class="plainlinksneverexpand" | [{{fullurl:st:Sesotho}} Sesotho]
+| [[:st:|st]]
+| class="plainlinksneverexpand" | [{{fullurl:st:Special:Statistics|action=raw}} '''536''']
+|  2,152
+|  [[:st:Special:Statistics|22,988]]
+|  [[:st:Special:Listadmins|0]]
+|  [[:st:Special:Listusers|6,165]]
+|  [[:st:Special:ActiveUsers|15]]
+|  [[:st:Special:FileList|0]]
+| 97
+|-
+| 269
+| [[w:Pontic language|Pontic]]
+| class="plainlinksneverexpand" | [{{fullurl:pnt:Ποντιακόν_λαλίαν}} Ποντιακά]
+| [[:pnt:|pnt]]
+| class="plainlinksneverexpand" | [{{fullurl:pnt:Special:Statistics|action=raw}} '''455''']
+|  1,930
+|  [[:pnt:Special:Statistics|33,502]]
+|  [[:pnt:Special:Listadmins|0]]
+|  [[:pnt:Special:Listusers|6,549]]
+|  [[:pnt:Special:ActiveUsers|7]]
+|  [[:pnt:Special:FileList|0]]
+| --
+|-
+| 270
+| [[w:Bambara language|Bambara]]
+| class="plainlinksneverexpand" | [{{fullurl:bm:Bamanankan}} Bamanankan]
+| [[:bm:|bm]]
+| class="plainlinksneverexpand" | [{{fullurl:bm:Special:Statistics|action=raw}} '''440''']
+|  2,293
+|  [[:bm:Special:Statistics|37,628]]
+|  [[:bm:Special:Listadmins|0]]
+|  [[:bm:Special:Listusers|7,196]]
+|  [[:bm:Special:ActiveUsers|10]]
+|  [[:bm:Special:FileList|0]]
+| --
+|-
+| 271
+| [[w:Swati language|Swati]]
+| class="plainlinksneverexpand" | [{{fullurl:ss:SiSwati}} SiSwati]
+| [[:ss:|ss]]
+| class="plainlinksneverexpand" | [{{fullurl:ss:Special:Statistics|action=raw}} '''439''']
+|  2,084
+|  [[:ss:Special:Statistics|35,848]]
+|  [[:ss:Special:Listadmins|2]]
+|  [[:ss:Special:Listusers|5,150]]
+|  [[:ss:Special:ActiveUsers|8]]
+|  [[:ss:Special:FileList|0]]
+| --
+|-
+| 272
+| [[w:Chamorro language|Chamorro]]
+| class="plainlinksneverexpand" | [{{fullurl:ch:Fino'_Chamoru}} Chamoru]
+| [[:ch:|ch]]
+| class="plainlinksneverexpand" | [{{fullurl:ch:Special:Statistics|action=raw}} '''433''']
+|  2,278
+|  [[:ch:Special:Statistics|20,148]]
+|  [[:ch:Special:Listadmins|0]]
+|  [[:ch:Special:Listusers|10,070]]
+|  [[:ch:Special:ActiveUsers|10]]
+|  [[:ch:Special:FileList|0]]
+| --
+|-
+| 273
+| [[w:Fijian language|Fijian]]
+| class="plainlinksneverexpand" | [{{fullurl:fj:Na_vosa_vaka-Viti}} Na Vosa Vakaviti]
+| [[:fj:|fj]]
+| class="plainlinksneverexpand" | [{{fullurl:fj:Special:Statistics|action=raw}} '''426''']
+|  1,968
+|  [[:fj:Special:Statistics|30,780]]
+|  [[:fj:Special:Listadmins|0]]
+|  [[:fj:Special:Listusers|5,435]]
+|  [[:fj:Special:ActiveUsers|8]]
+|  [[:fj:Special:FileList|0]]
+| --
+|-
+| 274
+| [[w:Atikamekw language|Atikamekw]]
+| class="plainlinksneverexpand" | [{{fullurl:atj:Atikamekw_arimwewin}} Atikamekw]
+| [[:atj:|atj]]
+| class="plainlinksneverexpand" | [{{fullurl:atj:Special:Statistics|action=raw}} '''418''']
+|  1,172
+|  [[:atj:Special:Statistics|8,863]]
+|  [[:atj:Special:Listadmins|4]]
+|  [[:atj:Special:Listusers|1,113]]
+|  [[:atj:Special:ActiveUsers|64]]
+|  [[:atj:Special:FileList|0]]
+| --
+|-
+| 275
+| [[w:Adyghe language|Adyghe]]
+| class="plainlinksneverexpand" | [{{fullurl:ady:Адыгабзэ}} Адыгэбзэ]
+| [[:ady:|ady]]
+| class="plainlinksneverexpand" | [{{fullurl:ady:Special:Statistics|action=raw}} '''405''']
+|  1,255
+|  [[:ady:Special:Statistics|7,349]]
+|  [[:ady:Special:Listadmins|1]]
+|  [[:ady:Special:Listusers|2,554]]
+|  [[:ady:Special:ActiveUsers|12]]
+|  [[:ady:Special:FileList|0]]
+| --
+|-
+| 276
+| [[w:Inuktitut language|Inuktitut]]
+| class="plainlinksneverexpand" | [{{fullurl:iu:ᐃᓄᒃᑎᑐᑦ/inuktitut}} ᐃᓄᒃᑎᑐᑦ]
+| [[:iu:|iu]]
+| class="plainlinksneverexpand" | [{{fullurl:iu:Special:Statistics|action=raw}} '''397''']
+|  2,845
+|  [[:iu:Special:Statistics|41,750]]
+|  [[:iu:Special:Listadmins|1]]
+|  [[:iu:Special:Listusers|11,502]]
+|  [[:iu:Special:ActiveUsers|10]]
+|  [[:iu:Special:FileList|0]]
+| --
+|-
+| 277
+| [[w:Chichewa language|Chichewa]]
+| class="plainlinksneverexpand" | [{{fullurl:ny:Chilankhulo_cha_Chichewa}} Chichewa]
+| [[:ny:|ny]]
+| class="plainlinksneverexpand" | [{{fullurl:ny:Special:Statistics|action=raw}} '''382''']
+|  1,815
+|  [[:ny:Special:Statistics|17,527]]
+|  [[:ny:Special:Listadmins|1]]
+|  [[:ny:Special:Listusers|4,972]]
+|  [[:ny:Special:ActiveUsers|8]]
+|  [[:ny:Special:FileList|0]]
+| --
+|-
+| 278
+| [[w:Ewe language|Ewe]]
+| class="plainlinksneverexpand" | [{{fullurl:ee:Eʋegbe}} Eʋegbe]
+| [[:ee:|ee]]
+| class="plainlinksneverexpand" | [{{fullurl:ee:Special:Statistics|action=raw}} '''341''']
+|  2,613
+|  [[:ee:Special:Statistics|47,795]]
+|  [[:ee:Special:Listadmins|1]]
+|  [[:ee:Special:Listusers|9,138]]
+|  [[:ee:Special:ActiveUsers|10]]
+|  [[:ee:Special:FileList|0]]
+| --
+|-
+| 279
+| [[w:Akan language|Akan]]
+| class="plainlinksneverexpand" | [{{fullurl:ak:Akan}} Akana]
+| [[:ak:|ak]]
+| class="plainlinksneverexpand" | [{{fullurl:ak:Special:Statistics|action=raw}} '''330''']
+|  2,114
+|  [[:ak:Special:Statistics|19,552]]
+|  [[:ak:Special:Listadmins|0]]
+|  [[:ak:Special:Listusers|7,212]]
+|  [[:ak:Special:ActiveUsers|13]]
+|  [[:ak:Special:FileList|0]]
+| --
+|-
+| 280
+| [[w:Kashmiri language|Kashmiri]]
+| class="plainlinksneverexpand" | [{{fullurl:ks:कॉशुर_ज़बान}} कश्मीरी / كشميري]
+| [[:ks:|ks]]
+| class="plainlinksneverexpand" | [{{fullurl:ks:Special:Statistics|action=raw}} '''316''']
+|  1,606
+|  [[:ks:Special:Statistics|32,392]]
+|  [[:ks:Special:Listadmins|0]]
+|  [[:ks:Special:Listusers|6,055]]
+|  [[:ks:Special:ActiveUsers|6]]
+|  [[:ks:Special:FileList|0]]
+| --
+|-
+| 281
+| [[w:Inupiak language|Inupiak]]
+| class="plainlinksneverexpand" | [{{fullurl:ik:Iñupiak_uqautchit}} Iñupiak]
+| [[:ik:|ik]]
+| class="plainlinksneverexpand" | [{{fullurl:ik:Special:Statistics|action=raw}} '''260''']
+|  2,262
+|  [[:ik:Special:Statistics|34,969]]
+|  [[:ik:Special:Listadmins|0]]
+|  [[:ik:Special:Listusers|5,355]]
+|  [[:ik:Special:ActiveUsers|8]]
+|  [[:ik:Special:FileList|0]]
+| --
+|-
+| 282
+| [[w:Venda language|Venda]]
+| class="plainlinksneverexpand" | [{{fullurl:ve:TshiVenḓa}} Tshivenda]
+| [[:ve:|ve]]
+| class="plainlinksneverexpand" | [{{fullurl:ve:Special:Statistics|action=raw}} '''256''']
+|  1,616
+|  [[:ve:Special:Statistics|16,697]]
+|  [[:ve:Special:Listadmins|0]]
+|  [[:ve:Special:Listusers|4,285]]
+|  [[:ve:Special:ActiveUsers|6]]
+|  [[:ve:Special:FileList|0]]
+| --
+|-
+| 283
+| [[w:Sango language|Sango]]
+| class="plainlinksneverexpand" | [{{fullurl:sg:Sango}} Sängö]
+| [[:sg:|sg]]
+| class="plainlinksneverexpand" | [{{fullurl:sg:Special:Statistics|action=raw}} '''255''']
+|  1,598
+|  [[:sg:Special:Statistics|19,272]]
+|  [[:sg:Special:Listadmins|0]]
+|  [[:sg:Special:Listusers|4,218]]
+|  [[:sg:Special:ActiveUsers|8]]
+|  [[:sg:Special:FileList|0]]
+| --
+|-
+| 284
+| [[w:Fula language|Fula]]
+| class="plainlinksneverexpand" | [{{fullurl:ff:Fulfulde}} Fulfulde]
+| [[:ff:|ff]]
+| class="plainlinksneverexpand" | [{{fullurl:ff:Special:Statistics|action=raw}} '''227''']
+|  1,743
+|  [[:ff:Special:Statistics|20,929]]
+|  [[:ff:Special:Listadmins|0]]
+|  [[:ff:Special:Listusers|5,283]]
+|  [[:ff:Special:ActiveUsers|9]]
+|  [[:ff:Special:FileList|0]]
+| --
+|-
+| 285
+| [[w:Dzongkha language|Dzongkha]]
+| class="plainlinksneverexpand" | [{{fullurl:dz:རྫོང་ཁ་}} ཇོང་ཁ]
+| [[:dz:|dz]]
+| class="plainlinksneverexpand" | [{{fullurl:dz:Special:Statistics|action=raw}} '''223''']
+|  1,783
+|  [[:dz:Special:Statistics|26,696]]
+|  [[:dz:Special:Listadmins|0]]
+|  [[:dz:Special:Listusers|6,184]]
+|  [[:dz:Special:ActiveUsers|12]]
+|  [[:dz:Special:FileList|0]]
+| --
+|-
+| 286
+| [[w:Tigrinya language|Tigrinya]]
+| class="plainlinksneverexpand" | [{{fullurl:ti:ትግርኛ_ፊደል}} ትግርኛ]
+| [[:ti:|ti]]
+| class="plainlinksneverexpand" | [{{fullurl:ti:Special:Statistics|action=raw}} '''182''']
+|  1,619
+|  [[:ti:Special:Statistics|19,192]]
+|  [[:ti:Special:Listadmins|0]]
+|  [[:ti:Special:Listusers|5,481]]
+|  [[:ti:Special:ActiveUsers|6]]
+|  [[:ti:Special:FileList|0]]
+| --
+|-
+| 287
+| [[w:Cree language|Cree]]
+| class="plainlinksneverexpand" | [{{fullurl:cr:}} Nehiyaw]
+| [[:cr:|cr]]
+| class="plainlinksneverexpand" | [{{fullurl:cr:Special:Statistics|action=raw}} '''131''']
+|  2,165
+|  [[:cr:Special:Statistics|33,393]]
+|  [[:cr:Special:Listadmins|1]]
+|  [[:cr:Special:Listusers|9,812]]
+|  [[:cr:Special:ActiveUsers|13]]
+|  [[:cr:Special:FileList|0]]
+| --
+|}
+=== 10+ articles ===
+{| border="1" cellpadding="2" cellspacing="0" style="width:100%; background: #f9f9f9; border: 1px solid #aaaaaa; border-collapse: collapse; white-space: nowrap; text-align: right" class="sortable"
+|-
+! №
+! Language
+! Language (local)
+! Wiki
+! Articles
+! Total
+! Edits
+! Admins
+! Users
+! Active Users
+! Files
+! Depth
+|-
+| 288
+| [[w:Dinka language|Dinka]]
+| class="plainlinksneverexpand" | [{{fullurl:din:}} Thuɔŋjäŋ]
+| [[:din:|din]]
+| class="plainlinksneverexpand" | [{{fullurl:din:Special:Statistics|action=raw}} '''55''']
+|  407
+|  [[:din:Special:Statistics|2,198]]
+|  [[:din:Special:Listadmins|0]]
+|  [[:din:Special:Listusers|915]]
+|  [[:din:Special:ActiveUsers|15]]
+|  [[:din:Special:FileList|0]]
+| --
+|}
+=== 1+ articles ===
+{| border="1" cellpadding="2" cellspacing="0" style="width:100%; background: #f9f9f9; border: 1px solid #aaaaaa; border-collapse: collapse; white-space: nowrap; text-align: right" class="sortable"
+|-
+! №
+! Language
+! Language (local)
+! Wiki
+! Articles
+! Total
+! Edits
+! Admins
+! Users
+! Active Users
+! Files
+! Depth
+|-
+| 289
+| [[w:Ndonga language|Ndonga]]
+| class="plainlinksneverexpand" | [{{fullurl:ng:}} Oshiwambo]
+| [[:ng:|ng]]
+| class="plainlinksneverexpand" | [{{fullurl:ng:Special:Statistics|action=raw}} '''8''']
+|  442
+|  [[:ng:Special:Statistics|5,918]]
+|  [[:ng:Special:Listadmins|0]]
+|  [[:ng:Special:Listusers|1,754]]
+|  [[:ng:Special:ActiveUsers|0]]
+|  [[:ng:Special:FileList|0]]
+| --
+|-
+| 290
+| [[w:Choctaw language|Choctaw]]
+| class="plainlinksneverexpand" | [{{fullurl:cho:Chahta_Anumpa}} Choctaw]
+| [[:cho:|cho]]
+| class="plainlinksneverexpand" | [{{fullurl:cho:Special:Statistics|action=raw}} '''6''']
+|  200
+|  [[:cho:Special:Statistics|4,217]]
+|  [[:cho:Special:Listadmins|0]]
+|  [[:cho:Special:Listusers|1,410]]
+|  [[:cho:Special:ActiveUsers|0]]
+|  [[:cho:Special:FileList|0]]
+| --
+|-
+| 291
+| [[w:Kuanyama language|Kuanyama]]
+| class="plainlinksneverexpand" | [{{fullurl:kj:}} Kuanyama]
+| [[:kj:|kj]]
+| class="plainlinksneverexpand" | [{{fullurl:kj:Special:Statistics|action=raw}} '''4''']
+|  113
+|  [[:kj:Special:Statistics|3,547]]
+|  [[:kj:Special:Listadmins|0]]
+|  [[:kj:Special:Listusers|1,139]]
+|  [[:kj:Special:ActiveUsers|0]]
+|  [[:kj:Special:FileList|0]]
+| --
+|-
+| 292
+| [[w:Marshallese language|Marshallese]]
+| class="plainlinksneverexpand" | [{{fullurl:mh:Kajin_M̧ajeļ}} Ebon]
+| [[:mh:|mh]]
+| class="plainlinksneverexpand" | [{{fullurl:mh:Special:Statistics|action=raw}} '''4''']
+|  205
+|  [[:mh:Special:Statistics|4,211]]
+|  [[:mh:Special:Listadmins|0]]
+|  [[:mh:Special:Listusers|1,742]]
+|  [[:mh:Special:ActiveUsers|0]]
+|  [[:mh:Special:FileList|0]]
+| --
+|-
+| 293
+| [[w:Hiri Motu language|Hiri Motu]]
+| class="plainlinksneverexpand" | [{{fullurl:ho:}} Hiri Motu]
+| [[:ho:|ho]]
+| class="plainlinksneverexpand" | [{{fullurl:ho:Special:Statistics|action=raw}} '''3''']
+|  128
+|  [[:ho:Special:Statistics|3,785]]
+|  [[:ho:Special:Listadmins|0]]
+|  [[:ho:Special:Listusers|1,277]]
+|  [[:ho:Special:ActiveUsers|0]]
+|  [[:ho:Special:FileList|0]]
+| --
+|-
+| 294
+| [[w:Sichuan Yi language|Sichuan Yi]]
+| class="plainlinksneverexpand" | [{{fullurl:ii:}} ꆇꉙ]
+| [[:ii:|ii]]
+| class="plainlinksneverexpand" | [{{fullurl:ii:Special:Statistics|action=raw}} '''3''']
+|  189
+|  [[:ii:Special:Statistics|11,652]]
+|  [[:ii:Special:Listadmins|0]]
+|  [[:ii:Special:Listusers|1,545]]
+|  [[:ii:Special:ActiveUsers|0]]
+|  [[:ii:Special:FileList|0]]
+| --
+|-
+| 295
+| [[w:Afar language|Afar]]
+| class="plainlinksneverexpand" | [{{fullurl:aa:}} Afar]
+| [[:aa:|aa]]
+| class="plainlinksneverexpand" | [{{fullurl:aa:Special:Statistics|action=raw}} '''1''']
+|  509
+|  [[:aa:Special:Statistics|7,537]]
+|  [[:aa:Special:Listadmins|0]]
+|  [[:aa:Special:Listusers|3,246]]
+|  [[:aa:Special:ActiveUsers|0]]
+|  [[:aa:Special:FileList|0]]
+| --
+|-
+| 296
+| [[w:Muscogee language|Muscogee]]
+| class="plainlinksneverexpand" | [{{fullurl:mus:Mvskoke}} Muskogee]
+| [[:mus:|mus]]
+| class="plainlinksneverexpand" | [{{fullurl:mus:Special:Statistics|action=raw}} '''1''']
+|  114
+|  [[:mus:Special:Statistics|3,600]]
+|  [[:mus:Special:Listadmins|0]]
+|  [[:mus:Special:Listusers|1,629]]
+|  [[:mus:Special:ActiveUsers|0]]
+|  [[:mus:Special:FileList|0]]
+| --
+|}
+=== 0 articles in language (other than main page) ===
+{| border="1" cellpadding="2" cellspacing="0" style="width:100%; background: #f9f9f9; border: 1px solid #aaaaaa; border-collapse: collapse; white-space: nowrap; text-align: right" class="sortable"
+|-
+! №
+! Language
+! Language (local)
+! Wiki
+! Articles
+! Total
+! Edits
+! Admins
+! Users
+! Active Users
+! Files
+! Depth
+|-
+| 297
+| [[w:Herero language|Herero]]
+| class="plainlinksneverexpand" | [{{fullurl:hz:}} Otsiherero]
+| [[:hz:|hz]]
+| class="plainlinksneverexpand" | [{{fullurl:hz:Special:Statistics|action=raw}} '''0''']
+|  175
+|  [[:hz:Special:Statistics|4,480]]
+|  [[:hz:Special:Listadmins|0]]
+|  [[:hz:Special:Listusers|3,080]]
+|  [[:hz:Special:ActiveUsers|0]]
+|  [[:hz:Special:FileList|0]]
+| --
+|-
+| 298
+| [[w:Kanuri language|Kanuri]]
+| class="plainlinksneverexpand" | [{{fullurl:kr:}} Kanuri]
+| [[:kr:|kr]]
+| class="plainlinksneverexpand" | [{{fullurl:kr:Special:Statistics|action=raw}} '''0''']
+|  161
+|  [[:kr:Special:Statistics|4,640]]
+|  [[:kr:Special:Listadmins|0]]
+|  [[:kr:Special:Listusers|4,403]]
+|  [[:kr:Special:ActiveUsers|0]]
+|  [[:kr:Special:FileList|0]]
+| --
+|}
+=== Grand Total ===
+{| border="1" cellpadding="2" cellspacing="0" style="width:75%; background: #f9f9f9; border: 1px solid #aaaaaa; border-collapse: collapse; white-space: nowrap;"
+|-
+! Articles
+! Total
+! Edits
+! Admins
+! Users
+! Files
+|- style="text-align: right;"
+|'''47,530,804'''
+|'''184,636,123'''
+|'''2,506,218,081'''
+|'''3,816'''
+|'''73,528,725'''
+|'''2,504,804'''
+|}

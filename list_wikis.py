@@ -1,17 +1,14 @@
 # -*- coding: utf-8  -*-
 import re
-import urllib.request, urllib.parse, urllib.error
 import time
 import os
+
+import requests
+import json
 import pywikibot
-from urllib.request import FancyURLopener
 
 data_file = os.getcwd() + '/conf/list_wikis/'
 current_user = pywikibot.config.usernames['wiktionary']['mg']
-
-
-class MyOpener(FancyURLopener):
-    version = 'Botjagwar/v2.0'
 
 
 class Wikilister(object):
@@ -33,58 +30,55 @@ class Wikilister(object):
         datas = []
         i = 0
         for lang in self.getLangs(site):
-            ierr = 0
-            # if i>=5:break
-            while ierr < 10:
-                try:
-                    urlstr = 'https://%s.%s.org/w/api.php?action=query&meta=siteinfo&format=json&siprop=statistics&continue' % (
-                        lang, site)
-                    statpage = urllib.request.urlopen(urlstr).read()
-                    print (statpage)
-                    pywikibot.output(urlstr)
-                    break
-                except Exception as e:
-                    print((e.message))
-                    time.sleep(5)
-
-                except IOError as e:
-                    print((e.message))
-                    print(("Hadisoana mitranga amin'i %s" % lang))
-                    time.sleep(5)
-                    ierr += 1
-            del ierr
-            try:
-                stats = eval(statpage)
-            except Exception:
-                print(('Nitrangana hadisoana: %s' % statpage))
+            # Getting and formatting statistics JSON
+            urlstr = 'https://%s.%s.org/w/api.php?action=query&meta=siteinfo&format=json&siprop=statistics&continue' % (
+                lang, site)
+            resp = requests.get(urlstr)
+            if resp.status_code != 200:
                 continue
-            m = stats['query']['statistics']
-            e = (int(m['articles']),
-                 {'articles': int(m['articles']),
-                  'pages': int(m['pages']),
-                  'edits': int(m['edits']),
-                  'users': int(m['users']),
-                  'activeusers': int(m['activeusers']),
-                  'admins': int(m['admins']),
-                  'images': int(m['images']),
-                  'language': lang,
-                  'wiki': site})
             try:
-                e[1]['depth'] = float(e[1]['edits']) / float(e[1]['pages']) * (float(
-                    e[1]['pages'] - e[1]['articles']) / float(e[1]['articles'])) ** 2.
+                stats = resp.json()
+            except json.decoder.JSONDecodeError:
+                continue
 
-                if e[1]['depth'] > 300 and e[1]['articles'] < 100000:
-                    e[1]['depth'] = '-'
+            m = stats['query']['statistics']
+            e = [int(m['articles']),
+                 int(m['pages']),
+                 int(m['edits']),
+                 int(m['users']),
+                 int(m['activeusers']),
+                 int(m['admins']),
+                 int(m['images']),
+                 lang,
+                 site]
+            articles, pages, edits, users, activeusers, admins, images, lang, site = e
 
-                if e[1]['depth'] != '-':
-                    e[1]['depth'] = "%.2f" % e[1]['depth']
+            # Depth calculation
+            try:
+                depth = (edits / pages) * ((float(pages) - articles) / articles) ** 2.
+                if depth > 300 and articles < 100000:
+                    depth = '-'
+                else:
+                    depth = "%.2f" % depth
             except ZeroDivisionError:
-                e[1]['depth'] = '-'
-
+                depth = '-'
+            e.append(depth)
             datas.append(e)
             i += 1
-            print(('%(language)s > lahatsoratra:%(articles)d; pejy:%(pages)d; fanovana:%(edits)d; mpikambana:%(users)d; mavitrika:%(activeusers)d; mpandrindra:%(admins)d; sary:%(images)d; halalina:%(depth)s ' % (e[1])))
+            print(('%s >'
+                   ' lahatsoratra:%d;'
+                   ' pejy:%d;'
+                   ' fanovana:%d;'
+                   ' mpikambana:%d;'
+                   ' mavitrika:%d;'
+                   ' mpandrindra:%d;'
+                   ' sary:%d;'
+                   ' halalina:%s ' % (
+                       lang, articles, pages, edits, users,
+                       activeusers, admins, images, depth
+                   )))
 
+        # Sort
         datas.sort(reverse=True)
         self.wikitext(datas, wiki)
 
@@ -116,17 +110,33 @@ class Wikilister(object):
 ! Halalim-pejy""")
         i = 0
         # total = (0,0,0,0,0,0)
-        for wd in e:
-            total['pages'] += wd[1]['articles']
-            total['allpages'] += wd[1]['pages']
-            total['edits'] += wd[1]['edits']
-            total['admins'] += wd[1]['admins']
-            total['users'] += wd[1]['users']
-            total['activeusers'] += wd[1]['activeusers']
-            total['files'] += wd[1]['images']
-        for wd in e:
+        for wikistats_data in e:
+            print(wikistats_data)
+            articles, pages, edits, users, activeusers, admins, images, lang, site, depth = wikistats_data
+            total['pages'] += articles
+            total['allpages'] += pages
+            total['edits'] += edits
+            total['admins'] += admins
+            total['users'] += users
+            total['activeusers'] += activeusers
+            total['files'] += images
+
+        for wikistats_data in e:
+            articles, pages, edits, users, activeusers, admins, images, lang, site, depth = wikistats_data
+            wikistats_data = {
+                'articles': articles,
+                'pages': pages,
+                'edits': edits,
+                'users': users,
+                'activeusers': activeusers,
+                'admins': admins,
+                'images': images,
+                'language': lang,
+                'wiki': site,
+                'depth': depth
+            }
             i += 1
-            isanjato = float(float(100 * wd[1]['articles']) / total['pages'])
+            isanjato = float(float(100 * articles) / total['pages'])
             content += ("""
 |- style="text-align: right;"
 | """ + str(i) + """
@@ -139,9 +149,9 @@ class Wikilister(object):
 | [//%(language)s.%(wiki)s.org/wiki/Special:Listusers {{formatnum:%(users)d}}]
 | [//%(language)s.%(wiki)s.org/wiki/Special:ActiveUsers {{formatnum:%(activeusers)d}}]
 | [//%(language)s.%(wiki)s.org/wiki/Special:Imagelist {{formatnum:%(images)d}}]
-| {{formatnum:""" % wd[1] + """%2.2f""" % isanjato + """}}
+| {{formatnum:""" % wikistats_data + """%2.2f""" % isanjato + """}}
 | %(depth)s
-""" % wd[1])
+""" % wikistats_data)
         content += "\n\n|}\n\n"
         content += """
 {|class="wikitable sortable" border="1" cellpadding="2" cellspacing="0" style="width:100%; background: #f9f9f9; border: 1px solid #aaaaaa; border-collapse: collapse; white-space: nowrap; text-align: center"""
