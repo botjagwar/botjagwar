@@ -4,4 +4,4 @@ set -e
 
 cd $HOME/botjagwar
 
-python list_wikis.py
+python3.6 list_wikis.py

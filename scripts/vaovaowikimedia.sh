@@ -4,4 +4,4 @@ set -e
 
 cd $HOME/botjagwar
 
-python news_stats.py
+python3.6 news_stats.py
