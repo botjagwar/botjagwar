@@ -6,13 +6,18 @@ async def pong(request):
 
 
 async def do_commit(request):
-    request.app['session_instance'].commit()
-    request.app['session_instance'].flush()
-    return Response(status=200)
+    try:
+        request.app['session_instance'].commit()
+        request.app['session_instance'].flush()
+    except Exception:
+        request.app['session_instance'].rollback()
+        return Response(status=200)
+
 
 async def do_rollback(request):
     request.app['session_instance'].rollback()
     return Response(status=200)
+
 
 async def configure_service(request):
     json_text = await request.json()
