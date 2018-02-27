@@ -4,7 +4,6 @@ import os
 import json
 import requests
 from subprocess import Popen
-from subprocess import PIPE
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from unittest import TestCase

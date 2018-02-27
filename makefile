@@ -1,9 +1,8 @@
 
 prepare:
 	sudo apt-get update
-	sudo apt-get install -y libssl-dev wget unzip python3-pip libsqlite3-dev python3-lxml
-	sudo pip3 install sqlalchemy
-	LC_ALL="en_US.UTF-8" sudo pip3 install -r requirements.txt
+	sudo apt-get install -y libssl-dev wget unzip python3-pip libsqlite3-dev libxml2-dev libxslt1-dev
+	LC_ALL="en_US.UTF-8" sudo pip3.6 install -r requirements.txt
 
 botscripts:
 	cp scripts/*.sh $(HOME)

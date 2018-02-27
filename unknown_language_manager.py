@@ -287,7 +287,6 @@ def create_category_set(language_code, language_name):
 
 def put(title, content):
     """
-
     :param title:
     :param content:
     :return:
