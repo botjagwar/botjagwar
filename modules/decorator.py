@@ -8,7 +8,6 @@ def threaded(f):
         t = threading.Thread(target=f, args=args, kwargs=kwargs)
         t.daemon = False
         t.start()
-        return t
 
     return wrap
 
