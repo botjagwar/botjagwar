@@ -5,10 +5,6 @@ import time
 
 def threaded(f):
     def wrap(*args, **kwargs):
-        '''this is the function returned from the decorator. It fires off
-        wrapped_f in a new thread and returns the thread object with
-        the result queue attached'''
-
         t = threading.Thread(target=f, args=args, kwargs=kwargs)
         t.daemon = False
         t.start()
