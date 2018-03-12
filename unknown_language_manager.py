@@ -222,12 +222,7 @@ def translate_language_name(language_name):
         raise ValueError("Can't properly translate this one")
     language_name += '$'
 
-    letter_replacements = [("o", "ô"), ("u", "o")]
-
-    phonology_replacements = {
-        'i$': 'y$',
-        'y': 'i',
-    }
+    letter_replacements = [("o", "ô"), ("u", "o"), ('i$', 'y$'), ('y', 'i')]
 
     cluster_replacements = {
         'ian$': 'ianina$',
@@ -254,9 +249,6 @@ def translate_language_name(language_name):
         language_name = language_name.replace(c, r)
 
     for c, r in list(cluster_replacements.items()):
-        language_name = language_name.replace(c, r)
-
-    for c, r in list(phonology_replacements.items()):
         language_name = language_name.replace(c, r)
 
     return language_name.strip('$')

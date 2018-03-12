@@ -53,6 +53,7 @@ def retry_on_fail(exceptions, retries=5, time_between_retries=1):
             except tuple(exceptions) as e:
                 if m_retries <= retries:
                     m_retries += 1
+                    print('Attempt %d' % m_retries)
                     time.sleep(time_between_retries)
                 else:
                     raise e
