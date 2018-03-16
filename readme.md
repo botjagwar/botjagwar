@@ -12,6 +12,8 @@ If you intend to use the bot for editing on Wiktionary, you need to set up your 
 Visit [Pywikibots installation manual](https://www.mediawiki.org/wiki/Manual:Pywikibot/Installation) for more details on how to do that.
 
 To confirm whether you have a working installation, run `make test`. All tests should pass.
+However, some of them may not pass on the Raspberry Pi due files not being deleted after teardowns.
+
 
 ## Components 
 
@@ -32,4 +34,4 @@ REST service required by `wiktionary_irc.py`
 
 ## Copyright
 
-© Rado A. (Terakasorotany) -- MIT Licence.
+© 2018 Rado A. (Terakasorotany) -- MIT Licence.
