@@ -14,9 +14,6 @@ Visit [Pywikibots installation manual](https://www.mediawiki.org/wiki/Manual:Pyw
 
 To confirm whether you have a working installation, run `make test`. All tests should pass.
 However, some of them may not pass on the Raspberry Pi due files not being deleted after teardowns.
-Let me know about any solution to robustify those tests on Raspberry Pi. Those tests make use of the 
-Pywikibot framework and will fail if the latter is not properly configured. No worries though, mocks have been set
-up not to edit on-wiki.
 
 
 ## Components 

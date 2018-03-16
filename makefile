@@ -17,12 +17,12 @@ define test_setup
 endef
 
 define test_teardown
-	rm -rf test $(OPT_DIR)
-	rm -rf test_data $(OPT_DIR)
-	rm -rf test_utils $(OPT_DIR)
+	rm -rf $(OPT_DIR)/test
+	rm -rf $(OPT_DIR)/test_data
+	rm -rf $(OPT_DIR)/test_utils
 endef
 
-prepare_tests:
+prepare_tests: install
 	sudo apt-get install python3-nose python3-rednose
 	sudo $(PIP) install nose
 
