@@ -1,23 +1,59 @@
+PYTHON := python3.6
+PIP := pip3.6
+OPT_DIR := /opt/botjagwar
+TEST_DIR := $(OPT_DIR)/test
 
 prepare:
 	sudo apt-get update
 	sudo apt-get install -y libssl-dev wget unzip python3-pip libsqlite3-dev libxml2-dev libxslt1-dev
-	LC_ALL="en_US.UTF-8" sudo pip3.6 install -r requirements.txt
+	LC_ALL="en_US.UTF-8" sudo $(PIP) install -r requirements.txt
+	sudo mkdir -p $(OPT_DIR)
+	sudo chown $(USER) $(OPT_DIR)
 
-botscripts:
-	cp scripts/*.sh $(HOME)
-	mkdir -p user_data/dikantenyvaovao
+define test_setup
+	cp -r test $(OPT_DIR)
+	cp -r test_data $(OPT_DIR)
+	cp -r test_utils $(OPT_DIR)
+endef
 
-cronconf: botscripts
-	DB_PASSWD=$(DB_PASSWD) sudo bash -x deploy/configure-cron.sh
+define test_teardown
+	rm -rf test $(OPT_DIR)
+	rm -rf test_data $(OPT_DIR)
+	rm -rf test_utils $(OPT_DIR)
+endef
 
-test:
+prepare_tests:
 	sudo apt-get install python3-nose python3-rednose
-	sudo pip3.6 install nose
-	python3.6 -m "nose" -vv test/
+	sudo $(PIP) install nose
+
+unit_tests: prepare_tests
+	$(call test_setup)
+	$(PYTHON) -m "nose" -v $(TEST_DIR)/unit_tests
+	$(call test_teardown)
+
+.PHONY: unit_tests
+
+test: prepare_tests
+	$(call test_setup)
+	$(PYTHON) -m "nose" -v $(TEST_DIR)
+	$(call test_teardown)
 
 .PHONY: test
 
-all: prepare botscripts cronconf
+install:
+	cp -r conf $(OPT_DIR)
+	cp -r data $(OPT_DIR)
+	cp -r database $(OPT_DIR)
+	cp -r models $(OPT_DIR)
+	cp -r modules $(OPT_DIR)
+	cp -r user_data $(OPT_DIR)
+	cp *.py $(OPT_DIR)
+	cp scripts/*.sh $(OPT_DIR)
+	mkdir -p $(OPT_DIR)/user_data/dikantenyvaovao
+
+uninstall:
+	sudo rm -rf $(OPT_DIR)
+
+all: prepare install
 
 .PHONY: all
