@@ -2,7 +2,7 @@
 
 set -e
 
-cd $HOME/botjagwar
+cd /opt/botjagwar
 INTERPRETER=python3.6
 
 if ! ps aux | grep python | grep wiktionary_irc

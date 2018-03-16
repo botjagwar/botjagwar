@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-cd $HOME/botjagwar
+cd /opt/botjagwar
 
 
 ARCHIVEREPOSITORY=$(cat conf/BJDBModule/archive_repo)
@@ -14,5 +14,5 @@ if [ ! -d "$SQLREP" ]; then
   fi
 fi
 
-gzip $HOME/botjagwar/word_database.db > $SQLREP/$(date -u +%Y-%m-%d).db.gz
+gzip /opt/botjagwar/word_database.db > $SQLREP/$(date -u +%Y-%m-%d).db.gz
 cat user_data/dikantenyvaovao/word_hits | gzip -f > $UNKNOWNWORDSREP/$(date -u +%Y-%m-%d).txt.gz
