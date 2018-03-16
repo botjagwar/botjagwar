@@ -6,7 +6,8 @@ You'll need a working Python 3.6 interpreter to run the python scripts of this p
 
 ## Installation
 
-In the project directory, type `make all`. This will install shell scripts in your home directory. 
+In the project directory, type `make all`. The Python scripts and the required configuration will be deployed on the target machine at `/opt/botjagwar`. They can be removed with
+`make uninstall`. 
 
 If you intend to use the bot for editing on Wiktionary, you need to set up your pywikibot instance. 
 Visit [Pywikibots installation manual](https://www.mediawiki.org/wiki/Manual:Pywikibot/Installation) for more details on how to do that.
@@ -17,8 +18,6 @@ Let me know about any solution to robustify those tests on Raspberry Pi. Those t
 Pywikibot framework and will fail if the latter is not properly configured. No worries though, mocks have been set
 up not to edit on-wiki.
 
-The Python scripts and the required configuration will be deployed on the target machine at `/opt/botjagwar`. They can be removed with
-`make uninstall`. 
 
 ## Components 
 
