@@ -1,6 +1,6 @@
 from aiohttp.web import Response
 
-from database import Word
+from database.dictionary import Word
 import json
 
 

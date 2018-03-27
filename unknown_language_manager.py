@@ -10,7 +10,7 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy import func
 
-from database import Base, Word
+from database.dictionary import Base, Word
 from modules.decorator import time_this
 from datetime import datetime, timedelta
 

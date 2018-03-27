@@ -5,7 +5,7 @@ import argparse
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
-from database import Base
+from database.dictionary import Base
 from modules.dictionary import get_dictionary
 from modules.dictionary import entry, definition, translation, configuration
 

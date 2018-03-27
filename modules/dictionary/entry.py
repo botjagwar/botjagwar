@@ -2,8 +2,8 @@ from aiohttp.web import Response
 from aiohttp.web_exceptions import HTTPNoContent, HTTPOk
 import json
 
-import database.http as db_http
-from database import Definition, Word
+from database.dictionary import Definition, Word
+from database.exceptions.http import WordAlreadyExistsException, WordDoesNotExistException, InvalidJsonReceivedException
 
 from .routines import save_changes_on_disk
 
@@ -67,12 +67,17 @@ async def get_entry(request):
         HTTP 404 otherwise
     """
     session = request.app['session_instance']
+
     objects = session.query(Word).filter_by(
         word=request.match_info['word'],
         language=request.match_info['language']).all()
+
     jsons = [objekt.serialise() for objekt in objects]
+
+
+
     if not jsons:
-        raise db_http.WordDoesNotExistException()
+        raise WordDoesNotExistException()
     else:
         return Response(text=json.dumps(jsons), status=HTTPOk.status_code, content_type='application/json')
 
@@ -100,7 +105,7 @@ async def add_entry(request):
                 session, definition['definition'], definition['definition_language'])
             normalised_retained_definitions.append(definition_object)
     else:
-        raise db_http.InvalidJsonReceivedException()
+        raise InvalidJsonReceivedException()
 
     if word_exists(session, data['word'], request.match_info['language'], data['part_of_speech']):
         # Get the word and mix it with the normalised retained definitions
@@ -108,7 +113,7 @@ async def add_entry(request):
         normalised_retained_definitions += word.definitions
         normalised_retained_definitions = list(set(normalised_retained_definitions))
         if word.definitions == normalised_retained_definitions:
-            raise db_http.WordAlreadyExistsException()
+            raise WordAlreadyExistsException()
         else:
             word.definitions = normalised_retained_definitions
     else:
@@ -148,7 +153,7 @@ async def edit_entry(request):
     # return exception if it doesn't
     # that because we'd not be editing otherwise.
     if not word:
-        raise db_http.WordDoesNotExistException()
+        raise WordDoesNotExistException()
 
     word = word[0]
     definitions = []

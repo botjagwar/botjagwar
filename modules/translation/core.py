@@ -5,7 +5,7 @@ import pywikibot as pwbot
 import asyncio
 from aiohttp import ClientSession
 
-from database.http import WordDoesNotExistException
+from database.exceptions.http import WordDoesNotExistException
 
 from modules import entryprocessor
 from modules.exceptions import NoWordException

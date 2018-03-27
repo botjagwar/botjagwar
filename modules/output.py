@@ -1,9 +1,7 @@
 from aiohttp import ClientSession
 import json
 
-from database.http import (
-    WordAlreadyExistsException
-)
+from database.exceptions.http import WordAlreadyExistsException
 
 verbose = False
 

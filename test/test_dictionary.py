@@ -9,9 +9,9 @@ from sqlalchemy.orm import sessionmaker
 from unittest import TestCase
 
 from modules.decorator import threaded
-from database import Base, Definition, Word
-
-import database.http as db_http
+from database.dictionary import Base, Definition, Word
+from database.exceptions.http import InvalidJsonReceivedException
+from database.exceptions.http import WordAlreadyExistsException
 
 URL_HEAD = 'http://0.0.0.0:8001'
 DB_PATH = '/tmp/test.db'
@@ -127,7 +127,7 @@ class TestDictionaryRestService(TestCase):
                 'part_of_speech': 'ana',
             })
         )
-        self.assertEquals(resp.status_code, db_http.WordAlreadyExistsException.status_code)
+        self.assertEquals(resp.status_code, WordAlreadyExistsException.status_code)
 
     def test_append_to_existing_entry(self):
         resp = requests.post(
@@ -153,7 +153,7 @@ class TestDictionaryRestService(TestCase):
         )
         self.assertEquals(
             resp.status_code,
-            db_http.InvalidJsonReceivedException.status_code)
+            InvalidJsonReceivedException.status_code)
 
     def test_edit_entry(self):
         resp = requests.get(URL_HEAD + '/entry/jm/tehanu')
