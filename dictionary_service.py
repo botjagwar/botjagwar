@@ -5,7 +5,7 @@ import argparse
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
-from database.dictionary import Base
+from database.dictionary import Base as dictionary_base
 from modules.dictionary import get_dictionary
 from modules.dictionary import entry, definition, translation, configuration
 
@@ -16,12 +16,12 @@ args = parser.parse_args()
 if args.STORAGE:
     STORAGE = args.STORAGE
 else:
-    DATABASE_STORAGE_INFO_FILE = 'data/storage_info'
+    DATABASE_STORAGE_INFO_FILE = 'data/word_database_storage_info'
     with open(DATABASE_STORAGE_INFO_FILE) as storage_file:
         STORAGE = storage_file.read()
 
 ENGINE = create_engine('sqlite:///%s' % STORAGE)
-Base.metadata.create_all(ENGINE)
+dictionary_base.metadata.create_all(ENGINE)
 SessionClass = sessionmaker(bind=ENGINE)
 
 routes = web.RouteTableDef()

@@ -1,26 +1,33 @@
 #!/usr/bin/python3.6
 import time
+from datetime import datetime, timedelta
+from urllib.request import FancyURLopener, urlopen
 
 import pywikibot
 from lxml import etree
-
-from urllib.request import FancyURLopener, urlopen
 
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy import func
 
-from database.dictionary import Base, Word
+from database.dictionary import Word, Base as word_base
+from database.language import Language, Base as language_base
 from modules.decorator import time_this
-from datetime import datetime, timedelta
 
-DATABASE_STORAGE_INFO_FILE = 'data/storage_info'
-with open(DATABASE_STORAGE_INFO_FILE) as storage_file:
-    STORAGE = storage_file.read()
+with open('data/language_storage_info') as storage_file:
+    language_storage = storage_file.read()
+with open('data/word_database_storage_info') as storage_file:
+    word_storage = storage_file.read()
 
-ENGINE = create_engine('sqlite:///%s' % STORAGE)
-Base.metadata.create_all(ENGINE)
-SessionClass = sessionmaker(bind=ENGINE)
+word_engine = create_engine('sqlite:///%s' % word_storage)
+language_engine = create_engine('sqlite:///%s' % language_storage)
+language_base.metadata.create_all(language_engine)
+word_base.metadata.create_all(word_engine)
+
+WordSessionClass = sessionmaker(bind=word_engine)
+LanguageSessionClass = sessionmaker(bind=language_engine)
+language_session = LanguageSessionClass()
+word_session = WordSessionClass()
 
 WORKING_WIKI = pywikibot.Site("mg", "wiktionary")
 username = "%s" % pywikibot.config.usernames['wiktionary']['mg']
@@ -104,10 +111,12 @@ class UnknownLanguageManagerBot(object):
     """
     def __init__(self):
         self.lang_list = []
-        self.session = SessionClass()
+        self.word_session = WordSessionClass()
+        self.language_session = LanguageSessionClass()
 
     def __del__(self):
-        self.session.close()
+        self.word_session.close()
+        self.language_session.close()
 
     def get_languages_from_x_days_ago(self, x=30):
         """
@@ -115,7 +124,7 @@ class UnknownLanguageManagerBot(object):
         :param x:
         :return:
         """
-        words = self.session.query(Word.language, func.count(Word.word))\
+        words = self.word_session.query(Word.language, func.count(Word.word))\
             .filter(Word.date_changed >= datetime.now() - timedelta(days=x))\
             .group_by(Word.language)
 
@@ -130,13 +139,14 @@ class UnknownLanguageManagerBot(object):
             language_exists = language_code_exists(language_code)
             if language_exists == 0:
                 if len(language_code) == 3:
-                    language_name = get_language_name(language_code)
+                    english_language_name = get_language_name(language_code)
                     try:
-                        new_language_name = translate_language_name(language_name)
-                        create_category_set(language_code, new_language_name)
+                        malagasy_language_name = translate_language_name(english_language_name)
+                        add_language_to_db(language_code, english_language_name, malagasy_language_name)
+                        create_category_set(language_code, malagasy_language_name)
                     except (ValueError, pywikibot.exceptions.InvalidTitle):
-                        print('Not translatable ', language_name)
-                        self.lang_list.append((language_code, language_name, number_of_words))
+                        print('Not translatable ', english_language_name)
+                        self.lang_list.append((language_code, english_language_name, number_of_words))
 
     def start(self):
         """
@@ -170,6 +180,17 @@ class UnknownLanguageManagerBot(object):
                 time.sleep(10)
 
 
+def add_language_to_db(language_code, english_language_name, malagasy_language_name):
+    language = Language(
+        iso_code=language_code,
+        english_name=english_language_name,
+        malagasy_name=malagasy_language_name,
+        language_ancestor=None)
+    language_session.add(language)
+    language_session.commit()
+    language_session.flush()
+
+
 @time_this('language_code_exists')
 def language_code_exists(language_code):
     """
@@ -177,6 +198,10 @@ def language_code_exists(language_code):
     :param language_code:
     :return:
     """
+    languages = language_session.query(Language).filter(Language.iso_code == language_code).all()
+    if len(languages) > 1:
+        return 1
+
     print("checking language code '%s'" % language_code)
     page_titles_to_check = ["Endrika:%s" % language_code,
                             "Endrika:=%s=" % language_code]
@@ -185,6 +210,10 @@ def language_code_exists(language_code):
         wikipage = pywikibot.Page(WORKING_WIKI, page_title)
         if wikipage.exists() and not wikipage.isRedirectPage():
             existence += 1
+            if '=%s=' % language_code in page_title:
+                english_name = get_language_name(language_code)
+                malagasy_name = wikipage.get().lower().strip()
+                add_language_to_db(language_code, english_name, malagasy_name)
 
     return existence
 
@@ -197,7 +226,8 @@ def get_language_name(language_code):
     :return:
     """
     if len(language_code) == 3:
-        return get_sil_language_name(language_code)
+        language_name = get_sil_language_name(language_code)
+        return language_name
 
 
 def get_sil_language_name(language_code):
@@ -251,7 +281,8 @@ def translate_language_name(language_name):
     for c, r in list(cluster_replacements.items()):
         language_name = language_name.replace(c, r)
 
-    return language_name.strip('$')
+    language_name = language_name.strip('$')
+    return language_name
 
 
 def create_category_set(language_code, language_name):
