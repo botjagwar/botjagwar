@@ -51,6 +51,10 @@ class UnknownLanguageManagerError(Exception):
     pass
 
 
+class SilPageException(UnknownLanguageManagerError):
+    pass
+
+
 class MyOpener(FancyURLopener):
     version = 'Botjagwar/v0.0.2'
 
@@ -139,12 +143,12 @@ class UnknownLanguageManagerBot(object):
             language_exists = language_code_exists(language_code)
             if language_exists == 0:
                 if len(language_code) == 3:
-                    english_language_name = get_language_name(language_code)
                     try:
+                        english_language_name = get_language_name(language_code)
                         malagasy_language_name = translate_language_name(english_language_name)
                         add_language_to_db(language_code, english_language_name, malagasy_language_name)
                         create_category_set(language_code, malagasy_language_name)
-                    except (ValueError, pywikibot.exceptions.InvalidTitle):
+                    except (ValueError, pywikibot.exceptions.InvalidTitle, SilPageException):
                         print('Not translatable ', english_language_name)
                         self.lang_list.append((language_code, english_language_name, number_of_words))
 
@@ -199,7 +203,7 @@ def language_code_exists(language_code):
     :return:
     """
     languages = language_session.query(Language).filter(Language.iso_code == language_code).all()
-    if len(languages) > 1:
+    if len(languages) > 0:
         return 1
 
     print("checking language code '%s'" % language_code)
@@ -211,10 +215,12 @@ def language_code_exists(language_code):
         if wikipage.exists() and not wikipage.isRedirectPage():
             existence += 1
             if '=%s=' % language_code in page_title:
-                english_name = get_language_name(language_code)
-                malagasy_name = wikipage.get().lower().strip()
-                add_language_to_db(language_code, english_name, malagasy_name)
-
+                try:
+                    english_name = get_language_name(language_code)
+                    malagasy_name = wikipage.get().lower().strip()
+                    add_language_to_db(language_code, english_name, malagasy_name)
+                except SilPageException:
+                    return 0
     return existence
 
 
@@ -243,7 +249,10 @@ def get_sil_language_name(language_code):
     text = urlopen(url).read()
     tree = etree.HTML(text)
     r = tree.xpath(page_xpath)
-    return r[0].text.strip()
+    if len(r) > 0:
+        return r[0].text.strip()
+    else:
+        raise SilPageException()
 
 
 def translate_language_name(language_name):
