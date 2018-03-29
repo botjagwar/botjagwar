@@ -16,7 +16,8 @@ from models.word import Entry
 
 default_data_file = os.getcwd() + '/conf/entry_translator/'
 URL_HEAD = 'http://localhost:8001'
-
+LANGUAGE_BLACKLIST = ['fr', 'en', 'sh', 'ar', 'de', 'zh']
+CYRILLIC_ALPHABET_LANGUAGES = ['ru', 'uk', 'bg', 'be']
 
 class Translation:
     def __init__(self, data_file=False):
@@ -24,7 +25,7 @@ class Translation:
         super(self.__class__, self).__init__()
         self.data_file = data_file or default_data_file
         self.output = Output()
-        self.language_blacklist = ['fr', 'en', 'sh', 'ar', 'de', 'zh']
+        self.language_blacklist = LANGUAGE_BLACKLIST
 
         self.loop = asyncio.get_event_loop()
 
@@ -199,7 +200,7 @@ class Translation:
 
 def _generate_redirections(infos):
     redirection_target = infos.entry
-    if infos.language in ['ru', 'uk', 'bg', 'be']:
+    if infos.language in CYRILLIC_ALPHABET_LANGUAGES:
         for char in "́̀":
             if redirection_target.find(char) != -1:
                 redirection_target = redirection_target.replace(char, "")
