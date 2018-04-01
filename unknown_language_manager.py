@@ -10,8 +10,8 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy import func
 
-from database.dictionary import Word, Base as word_base
-from database.language import Language, Base as language_base
+from database.dictionary import Word, Base as WordBase
+from database.language import Language, Base as LanguageBase
 from modules.decorator import time_this
 
 with open('data/language_storage_info') as storage_file:
@@ -21,8 +21,8 @@ with open('data/word_database_storage_info') as storage_file:
 
 word_engine = create_engine('sqlite:///%s' % word_storage)
 language_engine = create_engine('sqlite:///%s' % language_storage)
-language_base.metadata.create_all(language_engine)
-word_base.metadata.create_all(word_engine)
+LanguageBase.metadata.create_all(language_engine)
+WordBase.metadata.create_all(word_engine)
 
 WordSessionClass = sessionmaker(bind=word_engine)
 LanguageSessionClass = sessionmaker(bind=language_engine)
@@ -259,10 +259,9 @@ def translate_language_name(language_name):
     language_name = language_name.lower()
     if len(language_name.split()) > 1 or len(language_name.split('-')) > 1:
         raise ValueError("Can't properly translate this one")
+
     language_name += '$'
-
     letter_replacements = [("o", "ô"), ("u", "o"), ('y', 'i'), ('i$', 'y$')]
-
     cluster_replacements = {
         'ian$': 'ianina$',
         'ese$': 'ey$',
@@ -332,4 +331,3 @@ if __name__ == '__main__':
     language_updater.start()
     unknown_language_manager = UnknownLanguageManagerBot()
     unknown_language_manager.start()
-

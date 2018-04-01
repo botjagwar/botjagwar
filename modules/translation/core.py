@@ -13,7 +13,6 @@ from modules.output import Output
 from modules.autoformatter import Autoformat
 from models.word import Entry
 
-
 default_data_file = os.getcwd() + '/conf/entry_translator/'
 URL_HEAD = 'http://localhost:8001'
 LANGUAGE_BLACKLIST = ['fr', 'en', 'sh', 'ar', 'de', 'zh']
@@ -57,7 +56,7 @@ class Translation:
         await self.output.db(infos)
 
     async def _save_translation_from_page(self, infos):
-        summary = "[ng] Dikan-teny avy amin'ny pejy avy amin'i %s.wiktionary" % infos.language
+        summary = "Dikan-teny avy amin'ny pejy avy amin'i %s.wiktionary (v1.0)" % infos.language
         wikipage = self.output.wikipage(infos)
         mg_page = pwbot.Page(pwbot.Site('mg', 'wiktionary'), infos.entry)
         if mg_page.exists():
