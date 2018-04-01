@@ -1,4 +1,4 @@
-from models import TypeCheckedObject
+from object_model import TypeCheckedObject
 
 class Word(TypeCheckedObject):
     _additional = False

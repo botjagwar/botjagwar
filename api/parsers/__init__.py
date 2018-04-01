@@ -2,10 +2,10 @@
 
 from .inflection_template import EnWiktionaryInflectionTemplateParser
 
-from modules.parsers.functions import parse_inflection_of
-from modules.parsers.functions import parse_lv_inflection_of
-from modules.parsers.functions import parse_one_parameter_template
-from modules.parsers.inflection_template import EnWiktionaryInflectionTemplateParser
+from api.parsers.functions import parse_inflection_of
+from api.parsers.functions import parse_lv_inflection_of
+from api.parsers.functions import parse_one_parameter_template
+from api.parsers.inflection_template import EnWiktionaryInflectionTemplateParser
 
 
 CASES = {

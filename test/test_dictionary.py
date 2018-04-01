@@ -8,7 +8,7 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from unittest import TestCase
 
-from modules.decorator import threaded
+from api.decorator import threaded
 from database.dictionary import Base, Definition, Word
 from database.exceptions.http import InvalidJsonReceivedException
 from database.exceptions.http import WordAlreadyExistsException

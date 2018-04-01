@@ -1,4 +1,4 @@
-from models import TypeCheckedObject, List
+from object_model import TypeCheckedObject, List
 from unittest.case import TestCase
 
 

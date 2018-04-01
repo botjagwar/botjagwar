@@ -8,8 +8,8 @@ from time import sleep
 from test_utils.mocks import PageMock, SiteMock
 from unittest.case import TestCase
 
-from modules.translation.core import Translation
-from modules.decorator import threaded, retry_on_fail
+from api.translation.core import Translation
+from api.decorator import threaded, retry_on_fail
 
 
 LIST = [

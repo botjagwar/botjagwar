@@ -5,7 +5,7 @@ import asyncio
 from aiohttp import ClientSession
 import csv
 import json
-from modules.decorator import threaded
+from api.decorator import threaded
 from subprocess import Popen
 from database.exceptions.http import WordAlreadyExistsException
 

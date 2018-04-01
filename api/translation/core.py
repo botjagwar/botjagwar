@@ -7,11 +7,11 @@ from aiohttp import ClientSession
 
 from database.exceptions.http import WordDoesNotExistException
 
-from modules import entryprocessor
-from modules.exceptions import NoWordException
-from modules.output import Output
-from modules.autoformatter import Autoformat
-from models.word import Entry
+from api import entryprocessor
+from api.exceptions import NoWordException
+from api.output import Output
+from api.autoformatter import Autoformat
+from object_model.word import Entry
 
 default_data_file = os.getcwd() + '/conf/entry_translator/'
 URL_HEAD = 'http://localhost:8001'

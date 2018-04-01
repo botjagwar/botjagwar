@@ -12,7 +12,7 @@ from sqlalchemy import func
 
 from database.dictionary import Word, Base as WordBase
 from database.language import Language, Base as LanguageBase
-from modules.decorator import time_this
+from api.decorator import time_this
 
 with open('data/language_storage_info') as storage_file:
     language_storage = storage_file.read()

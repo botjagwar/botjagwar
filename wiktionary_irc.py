@@ -8,8 +8,8 @@ import irc.bot
 import requests
 from subprocess import Popen
 
-from modules.decorator import threaded
-from modules.decorator import retry_on_fail
+from api.decorator import threaded
+from api.decorator import retry_on_fail
 
 
 userdata_file = os.getcwd() + '/user_data/entry_translator/'

@@ -8,11 +8,11 @@ import sys
 import os
 import pywikibot
 
-from models.word import Entry
-from modules.entryprocessor import WiktionaryProcessorFactory
-from modules.output import Output
-from modules.parsers import template_expression_to_malagasy_definition
-from modules.parsers import get_lemma
+from object_model.word import Entry
+from api.entryprocessor import WiktionaryProcessorFactory
+from api.output import Output
+from api.parsers import template_expression_to_malagasy_definition
+from api.parsers import get_lemma
 
 import traceback
 
