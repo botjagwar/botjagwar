@@ -1,4 +1,4 @@
-0 21 * * *  bash -x /opt/botjagwar/list-wikis.sh
-* *  * * *  bash -x /opt/botjagwar/entry-translator-start.sh
-0 20 * * *  bash -x /opt/botjagwar/fitenytsyfantatra.sh
-0 18 * * *  kill $(cat /tmp/ircbot.pid)
+0 21 * * *  root /bin/bash -x /opt/botjagwar/list-wikis.sh
+* *  * * *  root /bin/bash -x /opt/botjagwar/entry-translator-start.sh
+0 20 * * *  root /bin/bash -x /opt/botjagwar/fitenytsyfantatra.sh
+0 18 * * *  root /bin/kill $(cat /tmp/ircbot.pid)
