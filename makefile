@@ -54,11 +54,11 @@ test: prepare_tests
 
 install:
 	$(call create_dirs)
+	cp -r api $(OPT_DIR)
 	cp -r conf $(OPT_DIR)
 	cp -r data $(OPT_DIR)
 	cp -r database $(OPT_DIR)
-	cp -r models $(OPT_DIR)
-	cp -r modules $(OPT_DIR)
+	cp -r object_model $(OPT_DIR)
 	cp -r user_data $(OPT_DIR)
 	sudo cp -r cron/* $(CRON_DIR)
 	cp *.py $(OPT_DIR)
