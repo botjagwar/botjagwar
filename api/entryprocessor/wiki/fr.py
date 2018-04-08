@@ -25,14 +25,14 @@ class FRWiktionaryProcessor(WiktionaryProcessor):
     def retrieve_translations(self):
         retcontent = []
         regex = r'\{\{trad[\+\-]+?\|([A-Za-z]{2,3})\|(.*?)\}\}'
-        pos = 'ana'
-        defin = ""
-        for allentrys in self.getall():  # (self.title, pos, self.lang2code(l), defin.strip())
-            if allentrys[2] == 'fr':
-                pos = allentrys[1]
+        part_of_speech = 'ana'
+        definition = ""
+        for title, pos, code, d in self.getall():  # (self.title, pos, self.lang2code(l), defin.strip())
+            if code == 'fr':
+                part_of_speech = pos
                 if pos in self.postran:
-                    pos = self.postran[pos]
-                defin = allentrys[3]
+                    part_of_speech = self.postran[pos]
+                definition = d
                 break
 
         for entry in re.findall(regex, self.content):
@@ -45,9 +45,11 @@ class FRWiktionaryProcessor(WiktionaryProcessor):
             if entry[1].find('|') != -1:
                 entree = entree.split("|")[0]
 
-            if pos in self.postran:
-                pos = self.postran[allentrys[1]]
-            e = (entree, pos, langcode, defin.strip())  # (
+            if part_of_speech in self.postran:
+                part_of_speech = self.postran[part_of_speech]
+
+            # FIXME: return an object instead of a tuple
+            e = (entree, part_of_speech, langcode, definition.strip())
             retcontent.append(e)
         try:
             retcontent.sort()
@@ -58,7 +60,7 @@ class FRWiktionaryProcessor(WiktionaryProcessor):
 
     def getall(self, keepNativeEntries=False):
         """languges sections in a given page formatting: [(POS, lang, definition), ...]"""
-        assert type(self.Page) is pywikibot.Page
+        assert isinstance(self.Page, pywikibot.Page)
         items = []
 
         if self.content is None:
@@ -98,18 +100,22 @@ class FRWiktionaryProcessor(WiktionaryProcessor):
                 ct_content = ct_content[d_ptr:]
                 continue
 
-            if lang[1].strip() == 'fr':
-                pass
-            else:
-                pos = frpos = lang[0].strip()  # POS
-                if frpos in self.postran:
-                    pos = self.postran[frpos]
+            pos = frpos = lang[0].strip()  # POS
+            if frpos in self.postran:
+                pos = self.postran[frpos]
 
+            if lang[1].strip() == 'fr':
+                i = (self.Page.title(),
+                     pos,  # POS
+                     str(lang[1].strip()),  # lang
+                     definition.strip())
+            else:
+                # FIXME: return an object instead of a tuple
                 i = (self.Page.title(),
                      pos,  # POS
                      str(lang[1].strip()),  # lang
                      definition)
-                items.append(i)
-                # pywikibot.output(u" %s --> %s : %s"%i)
+            items.append(i)
+
         # print("Nahitana dikanteny ", len(items))
         return items

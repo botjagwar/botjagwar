@@ -1,6 +1,6 @@
 import pywikibot
 from xml.dom import minidom
-from .api.decorator import time_this
+from api.decorator import time_this
 SiteMock = pywikibot.Site
 
 

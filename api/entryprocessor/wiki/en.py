@@ -156,6 +156,7 @@ class ENWiktionaryProcessor(WiktionaryProcessor):
                 pos = 'ana'
                 defin = defin[1:]
             if len(defin.strip()) < 1: continue
+            # FIXME: return an object instead of a tuple
             try:
                 i = (self.Page.title(),
                      pos,

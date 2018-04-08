@@ -6,6 +6,9 @@ import pywikibot
 
 data_file = os.getcwd() +'/conf/entryprocessor/'
 
+class WiktionaryProcessorException(Exception):
+    pass
+
 
 class WiktionaryProcessor(object):
     """Generic class of all Wiktionary page processors"""
@@ -16,11 +19,14 @@ class WiktionaryProcessor(object):
         self.verbose = verbose
         self.text_set = False
 
-    def process(self, page):
-        assert isinstance(page, pywikibot.Page)
-        self.Page = page
+    def process(self, page=None):
+        if page is not None:
+            assert isinstance(page, pywikibot.Page)
+            self.Page = page
         if not self.text_set:
             try:
+                if page is None:
+                    raise WiktionaryProcessorException("Unable to process: No text has been and 'page' is None")
                 self.content = page.get()
             except Exception:
                 self.content = ""
