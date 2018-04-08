@@ -8,6 +8,7 @@ from .base import data_file
 
 class ENWiktionaryProcessor(WiktionaryProcessor):
     def __init__(self, test=False, verbose=False):
+        super(ENWiktionaryProcessor, self).__init__(test=test, verbose=verbose)
         self.verbose = verbose
         self.text_set = False
         self.test = test

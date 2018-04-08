@@ -56,7 +56,7 @@ class SilPageException(UnknownLanguageManagerError):
 
 
 class MyOpener(FancyURLopener):
-    version = 'Botjagwar/v0.0.2'
+    version = 'Botjagwar/v1.0.0'
 
 
 class UnknownlanguageUpdaterBot(object):

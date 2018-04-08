@@ -4,9 +4,10 @@ import re
 from .base import WiktionaryProcessor
 from .base import data_file
 
+
 class PLWiktionaryProcessor(WiktionaryProcessor):
     def __init__(self, test=False, verbose=False):
-        super(PLWiktionaryProcessor, self).__init__(test=False, verbose=False)
+        super(PLWiktionaryProcessor, self).__init__(test=test, verbose=verbose)
         try:
             f = open(data_file + 'WiktionaryPL_langdata.dct', 'r').read()
             self.langdata = eval(f)

@@ -7,6 +7,7 @@ from .base import stripwikitext
 
 class MGWiktionaryProcessor(WiktionaryProcessor):
     def __init__(self, test=False, verbose=False):
+        super(MGWiktionaryProcessor, self).__init__(test=test, verbose=verbose)
         self.content = None
 
     def retrieve_translations(self, page_c):  # Needs updating
