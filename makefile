@@ -34,6 +34,11 @@ define test_teardown
 	rm -rf $(OPT_DIR)/test_utils
 endef
 
+define copy_crontab
+	sudo cp -r cron/botjagwar $(CRON_DIR)
+	sudo sed -i "s/cronuser/$(USER)/" $(CRON_DIR)/botjagwar
+endef
+
 prepare_tests: install
 	sudo apt-get install python3-nose python3-rednose
 	sudo $(PIP) install nose
@@ -60,7 +65,7 @@ install:
 	cp -r database $(OPT_DIR)
 	cp -r object_model $(OPT_DIR)
 	cp -rn user_data $(OPT_DIR)
-	sudo cp -r cron/* $(CRON_DIR)
+	$(call copy_crontab)
 	cp *.py $(OPT_DIR)
 	cp scripts/*.sh $(OPT_DIR)
 
