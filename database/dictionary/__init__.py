@@ -12,76 +12,6 @@ dictionary_association = Table('dictionary', Base.metadata,
 )
 
 
-class Word(Base):
-    __tablename__ = 'word'
-    id = Column(Integer, primary_key=True)
-    date_changed = Column(DateTime, default=func.now())
-    word = Column(String(150))
-    language = Column(String(6))
-    part_of_speech = Column(String(15))
-    definitions = relationship(
-        "Definition",
-        secondary=dictionary_association,
-        back_populates="words")
-
-    def __init__(self, word, language, part_of_speech, definitions):
-        self.word = word
-        self.language = language
-        self.part_of_speech = part_of_speech
-        if not isinstance(definitions, list):
-            raise TypeError("Definitions must be a list object")
-
-        for definition in definitions:
-            if not isinstance(definition, Definition):
-                raise TypeError("Every definition inside definitions list must be a Definition object")
-
-        self.definitions = definitions
-
-    def serialise(self):
-        word_data = {
-            'type': self.__class__.__name__,
-            'id': self.id,
-            'word': self.word,
-            'language': self.language,
-            'part_of_speech': self.part_of_speech,
-            'definitions': [definition.serialise() for definition in self.definitions],
-            'last_modified':
-                self.date_changed.strftime("%Y-%m-%d %H:%M:%S")
-                if self.date_changed is not None else ''
-        }
-        return word_data
-
-    def serialise_without_definition(self):
-        word_data = {
-            'type': self.__class__.__name__,
-            'id': self.id,
-            'word': self.word,
-            'language': self.language,
-            'part_of_speech': self.part_of_speech,
-            'last_modified':
-                self.date_changed.strftime("%Y-%m-%d %H:%M:%S")
-                if self.date_changed is not None else ''
-        }
-        return word_data
-
-    def set_definition(self, definitions):
-        """
-        Replace the existing definition set by the one given in argument
-        :param definition:
-        :return:
-        """
-        assert isinstance(definitions, list)
-        self.definitions = definitions
-
-    def add_definition(self, definition):
-        if definition not in self.definitions:
-            self.definitions.append(definition)
-
-    def remove_definition(self, definition):
-        if definition not in self.definitions:
-            self.definitions.remove(definition)
-
-
 class Definition(Base):
     __tablename__ = 'definitions'
     id = Column(Integer, primary_key=True)
@@ -93,7 +23,7 @@ class Definition(Base):
         secondary=dictionary_association,
         back_populates='definitions')
 
-    def __init__(self, definition, language):
+    def __init__(self, definition: str, language: str):
         self.definition = definition
         self.definition_language = language
 
@@ -109,15 +39,75 @@ class Definition(Base):
         }
         return definition_data
 
+    def from_json(self, json_data):
+        pass
+
     def serialise_with_words(self):
-        definition_data = {
+        definition_data = self.serialise()
+        definition_data['words'] = [w.serialise_without_definition() for w in self.words],
+        return definition_data
+
+
+class Word(Base):
+    __tablename__ = 'word'
+    id = Column(Integer, primary_key=True)
+    date_changed = Column(DateTime, default=func.now())
+    word = Column(String(150))
+    language = Column(String(6))
+    part_of_speech = Column(String(15))
+    definitions = relationship(
+        "Definition",
+        secondary=dictionary_association,
+        back_populates="words")
+
+    def __init__(self, word: str, language: str, part_of_speech: str, definitions: list):
+        self.word = word
+        self.language = language
+        self.part_of_speech = part_of_speech
+
+        for definition in definitions:
+            if not isinstance(definition, Definition):
+                raise TypeError("Every definition inside definitions list must be a Definition object")
+
+        self.definitions = definitions
+
+    def from_json(self, json_data):
+        pass
+
+    def serialise(self):
+        word_data = self.serialise_without_definition()
+        word_data['definitions'] = [definition.serialise() for definition in self.definitions]
+        return word_data
+
+    def serialise_without_definition(self):
+        word_data = {
             'type': self.__class__.__name__,
             'id': self.id,
-            'definition': self.definition,
-            'language': self.definition_language,
-            'words': [w.serialise_without_definition() for w in self.words],
+            'word': self.word,
+            'language': self.language,
+            'part_of_speech': self.part_of_speech,
             'last_modified':
                 self.date_changed.strftime("%Y-%m-%d %H:%M:%S")
                 if self.date_changed is not None else ''
         }
-        return definition_data
+        return word_data
+
+    def set_definition(self, definitions: list):
+        """
+        Replace the existing definition set by the one given in argument
+        :param definition:
+        :return:
+        """
+        for d in definitions:
+            if not isinstance(d, Definition):
+                raise TypeError("A Definition object is expected.")
+
+        self.definitions = definitions
+
+    def add_definition(self, definition: Definition):
+        if definition not in self.definitions:
+            self.definitions.append(definition)
+
+    def remove_definition(self, definition: Definition):
+        if definition not in self.definitions:
+            self.definitions.remove(definition)

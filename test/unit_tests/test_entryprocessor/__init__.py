@@ -61,4 +61,3 @@ class TestFrenchWiktionaryEntryprocessor(GenericEntryProcessorTester, unittest.T
         self.assertEqual(pos, 'ana')
         self.assertEqual(lang, 'ko')
         self.assertTrue(definition.startswith('mélange'))
-

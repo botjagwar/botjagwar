@@ -18,9 +18,6 @@ class Entry(TypeCheckedObject):
         origin_wiktionary_edition=str,
         origin_wiktionary_page_name=str)
 
-    def add_to_database(self):
-        pass
-
 
 class Translation(TypeCheckedObject):
     _additional = False

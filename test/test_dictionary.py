@@ -60,7 +60,6 @@ class TestDictionaryRestService(TestCase):
         DICTIONARY_SERVICE.kill()
         os.system('rm %s' % DB_PATH)
 
-
     @retry_on_fail([Exception], 10, .3)
     def create_entry(self, word, language, pos, definition, def_language):
         resp = requests.post(
@@ -263,6 +262,7 @@ class TestDictionaryRestService(TestCase):
         self.create_entry('alks', 'tpo', 'ana', 'pals', 'fr')
 
         resp = requests.get(URL_HEAD + '/translations/tpo/de/toki')
+        print(resp)
         j = resp.json()
         print(j)
         self.assertEquals(len(j), 1)
