@@ -62,6 +62,11 @@ class SectionView(View):
         return ret_string
 
 
+class StringListView(TextView):
+    def select_display_data(self, selected_key):
+        pass
+
+
 class PageView(object):
     def __init__(self, title='', template='page_view.html'):
         self.title = title

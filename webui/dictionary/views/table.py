@@ -48,6 +48,23 @@ class LinkedTableColumnView(TableColumnView):
             }))
 
 
+class ActionColumnView(LinkedTableColumnView):
+    """
+    Column view with no data to show, but rather with actions to do on data such as edit or delete
+    """
+    def __init__(self, name, label):
+        super(LinkedTableColumnView, self).__init__(name, label)
+        self.link_pattern = None
+        self.label = label
+
+    def render(self):
+        template = Template("<a href=\"{{ link }}\">{{ text }}</a>")
+        return template.render(Context({
+            'link': self.link_pattern % self.data,
+            'text': self.label
+        }))
+
+
 class CommaSeparatedListTableColumnView(TableColumnView):
     """
     Displays a comma-separated list in a table column. That list contains one value of the list of objects
