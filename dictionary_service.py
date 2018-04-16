@@ -45,6 +45,7 @@ app.router.add_route('DELETE', '/entry/{word_id}/delete', entry.delete_entry)
 
 app.router.add_route('GET', '/translations/{origin}/{target}/{word}', translation.get_translation)
 app.router.add_route('GET', '/translations/{origin}/{word}', translation.get_all_translations)
+app.router.add_route('GET', '/word/{word_id}', entry.get_word_by_id)
 
 app.router.add_route('GET', '/ping', configuration.pong)
 app.router.add_route('POST', '/commit', configuration.do_commit)

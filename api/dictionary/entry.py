@@ -58,6 +58,18 @@ def word_exists(session, word, language, part_of_speech):
         return True
 
 
+async def get_word_by_id(request):
+    session = request.app['session_instance']
+
+    objekt = session.query(Word).filter_by(
+        id=request.match_info['word_id']).one()
+
+    return Response(
+        text=json.dumps(objekt.serialise()),
+        status=HTTPOk.status_code,
+        content_type='application/json')
+
+
 async def get_entry(request):
     """
     Return a list of entries matching the word and the language.
