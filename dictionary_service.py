@@ -14,21 +14,21 @@ parser.add_argument('--db-file', dest='STORAGE', required=False)
 args = parser.parse_args()
 
 if args.STORAGE:
-    STORAGE = args.STORAGE
+    WORD_STORAGE = args.STORAGE
 else:
     DATABASE_STORAGE_INFO_FILE = 'data/word_database_storage_info'
     with open(DATABASE_STORAGE_INFO_FILE) as storage_file:
-        STORAGE = storage_file.read()
+        WORD_STORAGE = storage_file.read()
 
-ENGINE = create_engine('sqlite:///%s' % STORAGE)
-dictionary_base.metadata.create_all(ENGINE)
-SessionClass = sessionmaker(bind=ENGINE)
+WORD_ENGINE = create_engine('sqlite:///%s' % WORD_STORAGE)
+dictionary_base.metadata.create_all(WORD_ENGINE)
+WordSessionClass = sessionmaker(bind=WORD_ENGINE)
 
 routes = web.RouteTableDef()
 
 app = web.Application()
-app['database_session'] = SessionClass
-app['session_instance'] = SessionClass()
+app['database_session'] = WordSessionClass
+app['session_instance'] = WordSessionClass()
 app['autocommit'] = True
 
 
