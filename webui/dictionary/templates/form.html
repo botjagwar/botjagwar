@@ -1,0 +1,7 @@
+<form action="/{{ target }}" method="post">
+    <table class="form table">
+        {% csrf_token %}
+        {{ form }}
+    </table>
+    <input type="submit" value="{{ submit_button_label }}" />
+</form>

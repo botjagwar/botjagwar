@@ -1,26 +1,21 @@
+import json
+import requests
+
 from django.http import HttpResponse
-from django import forms
 
 from .base import PageView
 from .base import SectionView
 from .base import StringListView
-
-from .table import ActionColumnView
-from .table import LinkedTableColumnView
-from .table import CommaSeparatedListTableColumnView
-from .table import TableView
+from .columns import ActionColumnView
+from .columns import LinkedTableColumnView
+from .columns import CommaSeparatedListTableColumnView
 from .table import TableColumnView
+from .table import TableView
+from .form import FormView
 
-import requests
-import json
+from ..models import WordEditionForm
 
-SERVER = '127.0.0.1:8001'
-
-
-class WordEditForm(forms.Form):
-    word = forms.CharField(label='Word', max_length=100)
-    language = forms.CharField(label='Language', max_length=6)
-    part_of_speech = forms.CharField(label='Part of speech', max_length=5)
+SERVER = '10.0.0.2:8001'
 
 
 def index(request):
@@ -97,3 +92,21 @@ def delete_word(request):
     requests.delete('http://' + SERVER + '/entry/%d/delete' % id_)
 
     return HttpResponse('OK')
+
+
+def word_edit(request):
+    if request.method == 'POST':
+        form = WordEditionForm(request.POST)
+        if form.is_valid():
+            form.save()
+        # if a GET (or any other method) we'll create a blank form
+    else:
+        form = WordEditionForm()
+
+    page = PageView("Editing")
+    form_view = FormView(form, 'word_edit', request)
+    edit_section = SectionView("Word")
+    edit_section.add_view(form_view)
+    page.add_section(edit_section)
+
+    return HttpResponse(page.render())
