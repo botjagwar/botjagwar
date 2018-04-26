@@ -2,6 +2,8 @@
 from aiohttp import web
 import argparse
 
+import logging
+
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
@@ -12,6 +14,7 @@ from api.dictionary import entry, definition, translation, configuration
 parser = argparse.ArgumentParser(description='Dictionary service')
 parser.add_argument('--db-file', dest='STORAGE', required=False)
 args = parser.parse_args()
+log = logging.getLogger('dictionary_service')
 
 if args.STORAGE:
     WORD_STORAGE = args.STORAGE
@@ -27,7 +30,7 @@ WordSessionClass = sessionmaker(bind=WORD_ENGINE)
 routes = web.RouteTableDef()
 
 app = web.Application()
-app['database_session'] = WordSessionClass
+app['session_class'] = WordSessionClass
 app['session_instance'] = WordSessionClass()
 app['autocommit'] = True
 
@@ -56,7 +59,7 @@ app.router.add_route('PUT', '/configure', configuration.configure_service)
 if __name__ == '__main__':
     try:
         app.router.add_routes(routes)
-        web.run_app(app, host="0.0.0.0", port=8001)
+        web.run_app(app, host="0.0.0.0", port=8001, access_log=log)
     finally:
         app['session_instance'].flush()
         app['session_instance'].close()

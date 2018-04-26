@@ -3,25 +3,37 @@ import json
 
 
 class ServiceError(aiohttp.web.HTTPError):
-    pass
+    message = 'The service encountered an unknown error.'
 
 
-class WordDoesNotExistException(ServiceError):
+class ElementDoesNotExistException(ServiceError):
     status_code = 404
-    message = json.dumps({
-        'message': 'Word does not exist.'
-    })
 
 
-class WordAlreadyExistsException(ServiceError):
+class ElementAlreadyExistsException(ServiceError):
     status_code = 460
+
+
+class InvalidDataException(ServiceError):
+    status_code = 461
+
+
+class LanguageDoesNotExistsException(ElementDoesNotExistException):
     message = json.dumps({
-        'message': 'Word already exists.'
+        'message': 'Language does not exist.'
     })
 
 
-class InvalidJsonReceivedException(ServiceError):
-    status_code = 461
+class WordDoesNotExistException(ElementDoesNotExistException):
+    status_code = 404
+    message = 'Word does not exist.'
+
+
+class WordAlreadyExistsException(ElementAlreadyExistsException):
+    message = 'Word already exists.'
+
+
+class InvalidJsonReceivedException(InvalidDataException):
     message = json.dumps({
         'message': 'Received JSON is invalid.'
     })

@@ -177,8 +177,8 @@ async def edit_entry(request):
         )
         definitions.append(definition)
 
-    word.definitions = definitions
     word.part_of_speech = data['part_of_speech']
+    word.definitions = definitions
 
     await save_changes_on_disk(request.app, session)
     return Response(status=HTTPOk.status_code, text=json.dumps(word.serialise()), content_type='application/json')

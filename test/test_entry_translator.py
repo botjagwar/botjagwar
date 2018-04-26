@@ -1,4 +1,5 @@
 # coding: utf8
+import asyncio
 import json
 import requests
 from subprocess import Popen
@@ -62,16 +63,18 @@ class TestEntryTranslatorProcessWiktionaryPage(TestCase):
         os.system('rm %s' % DB_PATH)
 
     def test_process_wiktionary_page_english(self):
+        loop = asyncio.get_event_loop()
         for pagename in LIST:
             translation = Translation()
             page = PageMock(SiteMock('en', 'wiktionary'), pagename)
-            translation.process_wiktionary_wiki_page(page)
+            loop.run_until_complete(translation.process_wiktionary_wiki_page(page))
 
     def test_process_wiktionary_page_french(self):
+        loop = asyncio.get_event_loop()
         for pagename in LIST:
             translation = Translation()
             page = PageMock(SiteMock('fr', 'wiktionary'), pagename)
-            translation.process_wiktionary_wiki_page(page)
+            loop.run_until_complete(translation.process_wiktionary_wiki_page(page))
 
 
 class TestEntryTranslatorServices(TestCase):

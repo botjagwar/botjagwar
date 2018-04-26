@@ -10,3 +10,15 @@ class Language(Base):
     english_name = Column(String(100))
     malagasy_name = Column(String(100))
     language_ancestor = Column(String())
+
+    def get_schema(self):
+        pass
+
+    def serialise(self):
+        return {
+            'type': self.__class__.__name__,
+            'iso_code': self.iso_code,
+            'english_name': self.english_name,
+            'malagasy_name': self.malagasy_name,
+            'ancestor': self.language_ancestor
+        }
