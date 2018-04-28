@@ -47,6 +47,14 @@ class Definition(Base):
         definition_data['words'] = [w.serialise_without_definition() for w in self.words],
         return definition_data
 
+    def get_schema(self):
+        """
+        Returns a serialised object containing the current object's schema.
+        Useful to generate forms.
+        :return:
+        """
+        pass
+
 
 class Word(Base):
     __tablename__ = 'word'
@@ -111,3 +119,11 @@ class Word(Base):
     def remove_definition(self, definition: Definition):
         if definition not in self.definitions:
             self.definitions.remove(definition)
+
+    def get_schema(self):
+        """
+        Returns a serialised object containing the current object's schema.
+        Useful to generate forms.
+        :return:
+        """
+        pass
