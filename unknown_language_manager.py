@@ -1,20 +1,20 @@
 #!/usr/bin/python3.6
-import time
-from random import randint
 from datetime import datetime, timedelta
-import requests
 import logging
+from random import randint
+import requests
+import time
 
-import pywikibot
 from lxml import etree
-
+import pywikibot
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy import func
 
+from api.decorator import time_this
+from conf.entryprocessor.languagecodes import LANGUAGE_CODES
 from database.dictionary import Word, Base as WordBase
 from database.language import Language, Base as LanguageBase
-from api.decorator import time_this, retry_on_fail
 
 with open('data/language_storage_info') as storage_file:
     language_storage = storage_file.read()
@@ -241,7 +241,6 @@ def language_code_exists(language_code):
                     return 0
     return existence
 
-from conf.entryprocessor.languagecodes import LANGUAGE_CODES
 
 @time_this('get_language_name')
 def get_language_name(language_code):
