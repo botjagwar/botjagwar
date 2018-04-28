@@ -1,4 +1,4 @@
-{
+LANGUAGE_NAMES = {
 u"Afar":"aa",
 u"Ghotuo":"aaa",
 u"Arum-Tesu":"aab",
@@ -7572,3 +7572,7 @@ u"Yongnan Zhuang":"zyn",
 u"Zyphe":"zyp",
 u"Zazaki":"zza",
 u"Zuojiang Zhuang":"zzj"}
+
+LANGUAGE_CODES = {
+    v: k for k, v in LANGUAGE_NAMES.items()
+}

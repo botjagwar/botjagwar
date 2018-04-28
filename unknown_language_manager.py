@@ -1,7 +1,9 @@
 #!/usr/bin/python3.6
 import time
+from random import randint
 from datetime import datetime, timedelta
-from urllib.request import FancyURLopener, urlopen
+import requests
+import logging
 
 import pywikibot
 from lxml import etree
@@ -12,12 +14,14 @@ from sqlalchemy import func
 
 from database.dictionary import Word, Base as WordBase
 from database.language import Language, Base as LanguageBase
-from api.decorator import time_this
+from api.decorator import time_this, retry_on_fail
 
 with open('data/language_storage_info') as storage_file:
     language_storage = storage_file.read()
 with open('data/word_database_storage_info') as storage_file:
     word_storage = storage_file.read()
+
+log = logging.getLogger(__file__)
 
 word_engine = create_engine('sqlite:///%s' % word_storage)
 language_engine = create_engine('sqlite:///%s' % language_storage)
@@ -42,6 +46,8 @@ TABLE_PATTERN = """
 |}
 """
 
+SIL_CACHE = {}
+
 ROW_PATTERN = """
 | <tt>[[Endrika:%s|%s]]</tt> || ''%s'' || {{formatnum:%d}}
 |-"""
@@ -53,10 +59,6 @@ class UnknownLanguageManagerError(Exception):
 
 class SilPageException(UnknownLanguageManagerError):
     pass
-
-
-class MyOpener(FancyURLopener):
-    version = 'Botjagwar/v1.0.0'
 
 
 class UnknownlanguageUpdaterBot(object):
@@ -139,16 +141,26 @@ class UnknownLanguageManagerBot(object):
         """
         :return:
         """
-        for language_code, number_of_words in self.get_languages_from_x_days_ago(120):
+        undocumented_languages = [
+            (code, n_words) for (code, n_words) in self.get_languages_from_x_days_ago(120)
+            if not is_language_in_base(code)
+        ]
+        print(undocumented_languages)
+        for language_code, number_of_words in undocumented_languages:
             language_exists = language_code_exists(language_code)
             if language_exists == 0:
                 if len(language_code) == 3:
                     try:
                         english_language_name = get_language_name(language_code)
+                    except Exception as exc:
+                        log.error(exc)
+                        self.lang_list.append((language_code, '(tsy fantatra)', number_of_words))
+                        continue
+                    try:
                         malagasy_language_name = translate_language_name(english_language_name)
                         add_language_to_db(language_code, english_language_name, malagasy_language_name)
                         create_category_set(language_code, malagasy_language_name)
-                    except (ValueError, pywikibot.exceptions.InvalidTitle, SilPageException):
+                    except (ValueError, pywikibot.exceptions.InvalidTitle):
                         print('Not translatable ', english_language_name)
                         self.lang_list.append((language_code, english_language_name, number_of_words))
 
@@ -195,6 +207,13 @@ def add_language_to_db(language_code, english_language_name, malagasy_language_n
     language_session.flush()
 
 
+def is_language_in_base(language_code):
+    languages = language_session.query(Language).filter(Language.iso_code == language_code).all()
+    if len(languages) > 0:
+        return True
+    else:
+        return False
+
 @time_this('language_code_exists')
 def language_code_exists(language_code):
     """
@@ -202,8 +221,7 @@ def language_code_exists(language_code):
     :param language_code:
     :return:
     """
-    languages = language_session.query(Language).filter(Language.iso_code == language_code).all()
-    if len(languages) > 0:
+    if is_language_in_base(language_code):
         return 1
 
     print("checking language code '%s'" % language_code)
@@ -223,6 +241,7 @@ def language_code_exists(language_code):
                     return 0
     return existence
 
+from conf.entryprocessor.languagecodes import LANGUAGE_CODES
 
 @time_this('get_language_name')
 def get_language_name(language_code):
@@ -231,7 +250,12 @@ def get_language_name(language_code):
     :param language_code:
     :return:
     """
-    if len(language_code) == 3:
+    if language_code in LANGUAGE_CODES:
+        print(language_code)
+        return LANGUAGE_CODES[language_code]
+    elif language_code in SIL_CACHE:
+        return SIL_CACHE[language_code]
+    else:
         language_name = get_sil_language_name(language_code)
         return language_name
 
@@ -244,15 +268,29 @@ def get_sil_language_name(language_code):
     """
     if len(language_code) == 2:
         return ""
-    page_xpath = '//table/tr[2]/td[2]'
-    url = "http://www-01.sil.org/iso639-3/documentation.asp?id=%s" % language_code
-    text = urlopen(url).read()
+
+    page_xpath = '//*[@id="node-5381"]/div/div[2]/div/div[1]/span/div/div[2]/div/table/tbody/tr/td[2]'
+    url = "https://iso639-3.sil.org/code/%s" % language_code
+    headers = {
+        'User-Agent': 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:59.0) '
+                      'Gecko/20100101 Firefox/59.0'
+    }
+    time.sleep(randint(1, 20))
+    req = requests.get(url, headers=headers)
+    if req.status_code != 200:
+        raise SilPageException("Error: Status code returned HTTP %d: %s" % (req.status_code, req.text))
+
+    text = req.text
     tree = etree.HTML(text)
     r = tree.xpath(page_xpath)
     if len(r) > 0:
-        return r[0].text.strip()
+        language = r[0].text.strip()
+        SIL_CACHE[language_code] = language
+        return language
     else:
-        raise SilPageException()
+        with open('/tmp/error.html', 'w') as f:
+            f.write(text)
+        raise SilPageException('Error')
 
 
 def translate_language_name(language_name):

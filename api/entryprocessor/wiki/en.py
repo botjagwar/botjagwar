@@ -3,7 +3,7 @@
 import re
 import pywikibot
 from .base import WiktionaryProcessor
-from .base import data_file
+from conf.entryprocessor.languagecodes import LANGUAGE_CODES
 
 
 class ENWiktionaryProcessor(WiktionaryProcessor):
@@ -31,15 +31,7 @@ class ENWiktionaryProcessor(WiktionaryProcessor):
 
         self.verbose = verbose
 
-        self.code = {}
-        dictfile = open(data_file + 'languagecodes.dct', 'r')
-        f = dictfile.read()
-        try:
-            self.code = eval(f)
-        except SyntaxError:
-            pass
-        finally:
-            dictfile.close()
+        self.code = LANGUAGE_CODES
 
     def lang2code(self, l):
         return self.code[l]
