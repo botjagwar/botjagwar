@@ -3,13 +3,13 @@
 import re
 import pywikibot
 from .base import WiktionaryProcessor
-from conf.entryprocessor.languagecodes import LANGUAGE_CODES
+from conf.entryprocessor.languagecodes import LANGUAGE_NAMES
 
 
 class ENWiktionaryProcessor(WiktionaryProcessor):
     def __init__(self, test=False, verbose=False):
         super(ENWiktionaryProcessor, self).__init__(test=test, verbose=verbose)
-        self.verbose = verbose
+        self.verbose = True
         self.text_set = False
         self.test = test
         self.postran = {
@@ -31,7 +31,7 @@ class ENWiktionaryProcessor(WiktionaryProcessor):
 
         self.verbose = verbose
 
-        self.code = LANGUAGE_CODES
+        self.code = LANGUAGE_NAMES
 
     def lang2code(self, l):
         return self.code[l]
@@ -84,7 +84,6 @@ class ENWiktionaryProcessor(WiktionaryProcessor):
         c = self.content
         c = re.sub('Etymology', '', c)  # famafana ny etimilojia
         c = re.sub("\{\{l\/en\|(.*)\}\}", "\\1 ", c)  # fanovana ny endrika {{l/en}}
-
         for l in re.findall("[\n]?==[ ]?([A-Za-z]+)[ ]?==\n", c):
             c = c[c.find('==%s==' % l):]
 
