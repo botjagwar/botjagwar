@@ -47,7 +47,7 @@ class Output(object):
         string = "%(entry)s -> %(entry_definition)s -> %(part_of_speech)s -> %(language)s\n" % info.properties
         return string
 
-    def wikipage(self, info):
+    def wikipage(self, info, link=True):
         "returns wikipage string"
         additional_note = ""
         if 'origin_wiktionary_page_name' in info.properties and 'origin_wiktionary_edition' in info.properties:
@@ -57,7 +57,11 @@ class Output(object):
 =={{=%(language)s=}}==
 {{-%(part_of_speech)s-|%(language)s}}
 '''{{subst:BASEPAGENAME}}''' {{fanononana X-SAMPA||%(language)s}} {{fanononana||%(language)s}}""" % info.properties
-        s += "\n# %s" % ', '.join(['[[%s]]' % (d) for d in info.entry_definition])
+        if link:
+            s += "\n# %s" % ', '.join(['[[%s]]' % (d) for d in info.entry_definition])
+        else:
+            s += "\n# %s" % ', '.join(['%s' % (d) for d in info.entry_definition])
+
         s = s + additional_note % info.properties
         try:
             return s

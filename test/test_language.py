@@ -10,9 +10,8 @@ from sqlalchemy.orm import sessionmaker
 from unittest import TestCase
 
 from api.decorator import threaded, retry_on_fail
-from database.dictionary import Base, Definition, Word
+from database.dictionary import Base
 from database.exceptions.http import InvalidJsonReceivedException
-from database.exceptions.http import WordAlreadyExistsException
 
 URL_HEAD = 'http://0.0.0.0:8003'
 DB_PATH = '/tmp/test.db'

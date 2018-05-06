@@ -2,59 +2,37 @@
 
 from .inflection_template import EnWiktionaryInflectionTemplateParser
 
-from api.parsers.functions import parse_inflection_of
-from api.parsers.functions import parse_lv_inflection_of
-from api.parsers.functions import parse_one_parameter_template
+from api.parsers.functions.noun_forms import parse_inflection_of
+from api.parsers.functions.noun_forms import parse_noun_form_lv_inflection_of
+from api.parsers.functions.noun_forms import parse_one_parameter_template
+from api.parsers.functions.verb_forms import parse_verb_form_inflection_of
+from api.parsers.functions.adjective_forms import parse_it_adjective_form
+
+from api.parsers.inflection_template import NounForm, VerbForm, AdjectiveForm
 from api.parsers.inflection_template import EnWiktionaryInflectionTemplateParser
 
 
-CASES = {
-    'nom': 'endriky ny lazaina',
-    'acc': 'endrika teny fameno',
-    'loc': 'endrika teny famaritan-toerana',
-    'dat': 'mpanamarika ny tolorana',
-    'gen': 'mpanamarika ny an\'ny tompo',
-    'ins': 'mpanamarika fomba fanaovana',
-}
-NUMBER = {
-    's': 'singiolary',
-    'p': 'ploraly',
-}
-GENDER = {
-    'm': 'andehilahy',
-    'f': 'ambehivavy',
-    'n': 'tsy miandany'
-}
-
 templates_parser = EnWiktionaryInflectionTemplateParser()
-templates_parser.add_parser('feminine singular of', parse_one_parameter_template('feminine singular of', number='s'))
-templates_parser.add_parser('feminine plural of', parse_one_parameter_template('feminine plural of', number='p'))
-templates_parser.add_parser('feminine of', parse_one_parameter_template('feminine of'))
-templates_parser.add_parser('inflection of', parse_inflection_of)
-templates_parser.add_parser('inflected form of', parse_one_parameter_template('inflected form of'))
-templates_parser.add_parser('lv-inflection of', parse_lv_inflection_of)
-templates_parser.add_parser('masculine plural of', parse_one_parameter_template('masculine plural of', number='p'))
-templates_parser.add_parser('plural of', parse_one_parameter_template('plural of', number='p'))
+
+templates_parser.add_parser(AdjectiveForm, 'feminine plural of', parse_one_parameter_template(AdjectiveForm, 'feminine plural of', number='p'))
+templates_parser.add_parser(AdjectiveForm, 'feminine singular of', parse_one_parameter_template(AdjectiveForm, 'feminine singular of', number='s'))
+templates_parser.add_parser(AdjectiveForm, 'feminine of', parse_one_parameter_template(AdjectiveForm, 'feminine of'))
+templates_parser.add_parser(AdjectiveForm, 'inflection of', parse_inflection_of(AdjectiveForm))
+templates_parser.add_parser(AdjectiveForm, 'it-adj form of', parse_it_adjective_form)
+templates_parser.add_parser(AdjectiveForm, 'masculine plural of', parse_one_parameter_template(AdjectiveForm, 'masculine plural of', number='p', gender='m'))
+templates_parser.add_parser(AdjectiveForm, 'plural of', parse_one_parameter_template(AdjectiveForm, 'plural of', number='p'))
+
+templates_parser.add_parser(NounForm, 'feminine singular of', parse_one_parameter_template(NounForm, 'feminine singular of', number='s'))
+templates_parser.add_parser(NounForm, 'feminine plural of', parse_one_parameter_template(NounForm, 'feminine plural of', number='p'))
+templates_parser.add_parser(NounForm, 'feminine of', parse_one_parameter_template(NounForm, 'feminine of'))
+templates_parser.add_parser(NounForm, 'inflection of', parse_inflection_of(NounForm))
+templates_parser.add_parser(NounForm, 'inflected form of', parse_one_parameter_template(NounForm, 'inflected form of'))
+templates_parser.add_parser(NounForm, 'lv-inflection of', parse_noun_form_lv_inflection_of)
+templates_parser.add_parser(NounForm, 'masculine plural of', parse_one_parameter_template(NounForm, 'masculine plural of', number='p', gender='m'))
+templates_parser.add_parser(NounForm, 'plural of', parse_one_parameter_template(NounForm, 'plural of', number='p'))
+
+templates_parser.add_parser(VerbForm, 'inflection of', parse_inflection_of(VerbForm))
 
 
-def template_expression_to_malagasy_definition(template_expr):
-    """
-    :param template_expr: template instance string with all its parameters
-    :return: A malagasy language definition in unicode
-    """
-    word_form = templates_parser.get_elements(template_expr)
-
-    explanation = ''
-    if word_form.case in CASES:
-        explanation += CASES[word_form.case] + ' '
-    if word_form.gender in GENDER:
-        explanation += GENDER[word_form.gender] + ' '
-    if word_form.number in NUMBER:
-        explanation += NUMBER[word_form.number] + ' '
-
-    ret = '%s ny teny [[%s]]' % (explanation, word_form.lemma)
-    return ret
-
-
-def get_lemma(template_expression):
-    return templates_parser.get_lemma(template_expression)
+def get_lemma(expected_class, template_expression):
+    return templates_parser.get_lemma(expected_class, template_expression)
