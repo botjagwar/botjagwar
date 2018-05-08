@@ -1,17 +1,18 @@
-import time
 import os
+from time import sleep
+from subprocess import Popen
+from subprocess import PIPE
 
 import json
 import requests
-from subprocess import Popen
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from unittest import TestCase
 
-from modules.decorator import threaded
-from database import Base, Definition, Word
-
-import database.http as db_http
+from api.decorator import threaded, retry_on_fail
+from database.dictionary import Base, Definition, Word
+from database.exceptions.http import InvalidJsonReceivedException
+from database.exceptions.http import WordAlreadyExistsException
 
 URL_HEAD = 'http://0.0.0.0:8001'
 DB_PATH = '/tmp/test.db'
@@ -31,27 +32,35 @@ class TestDictionaryRestService(TestCase):
         session.add(definition)
         session.add(word)
 
+        self.launch_service()
+        self.wait_until_ready()
+
         session.commit()
         session.flush()
 
-        self.launch_service()
-        time.sleep(2)
-        requests.put(
-            URL_HEAD + '/configure',
-            json=json.dumps({
-                'autocommit': True
-            })
-        )
-
-    @threaded
-    def launch_service(self):
-        self.p2 = Popen(["python3.6", "dictionary_service.py", '--db-file', DB_PATH])
-        self.p2.communicate()
-
     def tearDown(self):
-        self.p2.kill()
+        self.kill_service()
+        sleep(.4)
+
+    @staticmethod
+    @threaded
+    def launch_service():
+        global DICTIONARY_SERVICE
+        DICTIONARY_SERVICE = Popen(["python3.6", "dictionary_service.py", '--db-file', DB_PATH],
+                                   stdin=PIPE, stdout=PIPE, stderr=PIPE)
+        DICTIONARY_SERVICE.communicate()
+
+    @retry_on_fail([Exception], retries=10, time_between_retries=.4)
+    def wait_until_ready(self):
+        resp = requests.get(URL_HEAD + '/ping')
+        assert resp.status_code == 200
+
+    @staticmethod
+    def kill_service():
+        DICTIONARY_SERVICE.kill()
         os.system('rm %s' % DB_PATH)
 
+    @retry_on_fail([Exception], 10, .3)
     def create_entry(self, word, language, pos, definition, def_language):
         resp = requests.post(
             URL_HEAD + '/entry/%s/create' % language,
@@ -127,7 +136,7 @@ class TestDictionaryRestService(TestCase):
                 'part_of_speech': 'ana',
             })
         )
-        self.assertEquals(resp.status_code, db_http.WordAlreadyExistsException.status_code)
+        self.assertEquals(resp.status_code, WordAlreadyExistsException.status_code)
 
     def test_append_to_existing_entry(self):
         resp = requests.post(
@@ -153,7 +162,7 @@ class TestDictionaryRestService(TestCase):
         )
         self.assertEquals(
             resp.status_code,
-            db_http.InvalidJsonReceivedException.status_code)
+            InvalidJsonReceivedException.status_code)
 
     def test_edit_entry(self):
         resp = requests.get(URL_HEAD + '/entry/jm/tehanu')
@@ -253,6 +262,7 @@ class TestDictionaryRestService(TestCase):
         self.create_entry('alks', 'tpo', 'ana', 'pals', 'fr')
 
         resp = requests.get(URL_HEAD + '/translations/tpo/de/toki')
+        print(resp)
         j = resp.json()
         print(j)
         self.assertEquals(len(j), 1)

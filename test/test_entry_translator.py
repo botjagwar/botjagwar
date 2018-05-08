@@ -1,5 +1,5 @@
 # coding: utf8
-
+import asyncio
 import json
 import requests
 from subprocess import Popen
@@ -8,9 +8,10 @@ from time import sleep
 from test_utils.mocks import PageMock, SiteMock
 from unittest.case import TestCase
 
-from modules.translation.core import Translation
-from modules.decorator import threaded, retry_on_fail
+from api.translation.core import Translation
+from api.decorator import threaded, retry_on_fail
 
+import os
 
 LIST = [
     'eau',
@@ -28,30 +29,52 @@ LIST = [
     'pagne',
 ]
 
+DB_PATH = '/tmp/test.db'
+URL_HEAD = 'http://localhost:8001'
+DICTIONARY_SERVICE = None
+
 
 class TestEntryTranslatorProcessWiktionaryPage(TestCase):
+
     def setUp(self):
         self.launch_service()
-        sleep(2.5)
+        self.wait_until_ready()
 
     def tearDown(self):
-        self.p2.kill()
+        self.kill_service()
+        sleep(.4)
 
+    @staticmethod
     @threaded
-    def launch_service(self):
-        self.p2 = Popen(["python3.6", "dictionary_service.py", "--db-file", '/tmp/test.db'])
+    def launch_service():
+        global DICTIONARY_SERVICE
+        DICTIONARY_SERVICE = Popen(["python3.6", "dictionary_service.py", '--db-file', DB_PATH],
+                                   stdin=PIPE, stdout=PIPE, stderr=PIPE)
+        DICTIONARY_SERVICE.communicate()
+
+    @retry_on_fail([Exception], retries=10, time_between_retries=.4)
+    def wait_until_ready(self):
+        resp = requests.get(URL_HEAD + '/ping')
+        assert resp.status_code == 200
+
+    @staticmethod
+    def kill_service():
+        DICTIONARY_SERVICE.kill()
+        os.system('rm %s' % DB_PATH)
 
     def test_process_wiktionary_page_english(self):
+        loop = asyncio.get_event_loop()
         for pagename in LIST:
             translation = Translation()
             page = PageMock(SiteMock('en', 'wiktionary'), pagename)
-            translation.process_wiktionary_wiki_page(page)
+            loop.run_until_complete(translation.process_wiktionary_wiki_page(page))
 
     def test_process_wiktionary_page_french(self):
+        loop = asyncio.get_event_loop()
         for pagename in LIST:
             translation = Translation()
             page = PageMock(SiteMock('fr', 'wiktionary'), pagename)
-            translation.process_wiktionary_wiki_page(page)
+            loop.run_until_complete(translation.process_wiktionary_wiki_page(page))
 
 
 class TestEntryTranslatorServices(TestCase):

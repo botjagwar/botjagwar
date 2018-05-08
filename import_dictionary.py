@@ -5,9 +5,9 @@ import asyncio
 from aiohttp import ClientSession
 import csv
 import json
-from modules.decorator import threaded
+from api.decorator import threaded
 from subprocess import Popen
-from database.http import WordAlreadyExistsException
+from database.exceptions.http import WordAlreadyExistsException
 
 
 MONOLINGUAL_DICTIONARY = 'user_data/%s.csv' % sys.argv[1]  # for parts of speech

@@ -1,6 +1,6 @@
 import pywikibot
 from xml.dom import minidom
-from .modules.decorator import time_this
+from api.decorator import time_this
 SiteMock = pywikibot.Site
 
 
@@ -19,8 +19,8 @@ class PageMock(pywikibot.Page):
              apply_cosmetic_changes=None, quiet=False, **kwargs):
         print(('Saving page [[%s]] through save' % self.title()))
 
-
-    def get(self):
+    @time_this('Page.get() method mock')
+    def get(self, force=False, get_redirect=False, sysop=False):
         for page in self.pages:
             xml_title = page.getElementsByTagName('title')[0].childNodes[0].nodeValue
             if xml_title == self.title():

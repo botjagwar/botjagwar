@@ -7,9 +7,9 @@ import pywikibot as pwbot
 import traceback
 
 
-from modules import entryprocessor
-from modules.decorator import threaded
-from modules.translation.core import Translation
+from api import entryprocessor
+from api.decorator import threaded
+from api.translation.core import Translation
 
 from pywikibot import Site, Page
 
@@ -92,7 +92,6 @@ async def handle_wiktionary_page(request):
         data['unknowns'], data['new_entries'] = await translations.process_wiktionary_wiki_page(page)
         _update_unknowns(data['unknowns'])
     except Exception as e:
-        traceback.print_exc()
         data['traceback'] = traceback.format_exc()
         data['message'] = '' if not hasattr(e, 'message') else getattr(e, 'message')
         response = Response(text=json.dumps(data), status=500, content_type='application/json')

@@ -2,6 +2,7 @@ from unittest.case import TestCase
 
 from unknown_language_manager import translate_language_name
 
+
 class TestUnknownLanguageManager(TestCase):
     def setUp(self):
         pass

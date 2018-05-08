@@ -2,7 +2,7 @@
 import pywikibot
 import os
 import re, time
-from modules.decorator import time_this
+from api.decorator import time_this
 
 WORKING_WIKI = pywikibot.getSite('mg', 'wiktionary')
 username = "%s" % pywikibot.config.usernames['wiktionary']['mg']

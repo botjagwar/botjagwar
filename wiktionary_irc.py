@@ -8,8 +8,8 @@ import irc.bot
 import requests
 from subprocess import Popen
 
-from modules.decorator import threaded
-from modules.decorator import retry_on_fail
+from api.decorator import threaded
+from api.decorator import retry_on_fail
 
 
 userdata_file = os.getcwd() + '/user_data/entry_translator/'
@@ -43,6 +43,8 @@ class WiktionaryRecentChangesBot(irc.bot.SingleServerIRCBot):
         nick_suffix = '-%s' % base36encode(random.randint(36**3, 36**4 - 1))
         user = nick_prefix + nick_suffix
         self.channels_list = []
+        super(WiktionaryRecentChangesBot, self).__init__(self.channels_list, user, user, 5)
+
         self.chronometer = 0.0
         self.service_address = "http://localhost:8000"
         self.joined = []
@@ -50,7 +52,6 @@ class WiktionaryRecentChangesBot(irc.bot.SingleServerIRCBot):
         self.stats = {'edits': 0.0, 'newentries': 0.0, 'errors': 0.0}
         self.edits = 0
         self.username = user
-
         self.connect_in_languages()
 
     def connect_in_languages(self):
