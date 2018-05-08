@@ -2,47 +2,7 @@
 
 from api.parsers.inflection_template import VerbForm
 from api.parsers.constants import NUMBER, MOOD, TENSE, PERSONS, VOICE
-
-
-def latin_postprocessor(verb_form):
-    """
-    Acts on lemma attributes by removing macron signs from latin long vowels.
-    :param verb_form:
-    :return:
-    """
-    new_lemma = verb_form.lemma
-    letters = {
-        'ā': 'a',
-        'ē': 'e',
-        'ī': 'i',
-        'ō': 'o',
-        'ū': 'u',
-    }
-    for accented, unaccented in letters.items():
-        new_lemma = new_lemma.replace(accented, unaccented)
-
-    verb_form.lemma = new_lemma
-    return verb_form
-
-
-def arabic_postprocessor(verb_form):
-    """
-    Acts on lemma attributes by removing vowel marks on arabic words.
-    :param verb_form:
-    :return:
-    """
-    new_lemma = verb_form.lemma
-    for accented in 'ًٌٍَُِّْ':
-        new_lemma = new_lemma.replace(accented, '')
-
-    verb_form.lemma = new_lemma
-    return verb_form
-
-
-POST_PROCESSORS = {
-    'ar': arabic_postprocessor,
-    'la': latin_postprocessor,
-}
+from api.parsers.functions.postprocessors import POST_PROCESSORS
 
 
 def parse_verb_form_inflection_of(template_expression):
