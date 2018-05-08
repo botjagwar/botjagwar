@@ -18,6 +18,7 @@ URL_HEAD = 'http://localhost:8001'
 LANGUAGE_BLACKLIST = ['fr', 'en', 'sh', 'ar', 'de', 'zh']
 CYRILLIC_ALPHABET_LANGUAGES = ['ru', 'uk', 'bg', 'be']
 
+
 class Translation:
     def __init__(self, data_file=False):
         """Mandika teny ary pejy @ teny malagasy"""
@@ -84,6 +85,7 @@ class Translation:
         for entry, pos, entry_language in translations:
             if entry_language in self.language_blacklist:  # check in language blacklist
                 continue
+
             title = wiki_page.title()
             try:
                 mg_translations = await self.translate_word(title, language)
@@ -110,8 +112,7 @@ class Translation:
 
         return ret
 
-    async def process_entry_in_foreign_language(
-            self, wiki_page, word, language_code, language, pos, definition, unknowns):
+    async def process_entry_in_foreign_language(self, wiki_page, word, language_code, language, pos, definition, unknowns):
         if language_code in self.language_blacklist:
             return 0
 
