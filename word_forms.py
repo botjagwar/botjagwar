@@ -48,6 +48,61 @@ def save_count():
         f.write(str(last_entry))
 
 
+def create_non_lemma_entry(word, pos, code, definition):
+    page_output = Output()
+    mg_page = pywikibot.Page(pywikibot.Site(SITELANG, SITENAME), word)
+
+    # Translate template's content into malagasy
+    try:
+        output_object_class = TEMPLATE_TO_OBJECT[pos]
+        elements = templates_parser.get_elements(output_object_class, definition)
+        malagasy_definition = elements.to_malagasy_definition()
+        lemma = get_lemma(output_object_class, definition)
+        print(elements, malagasy_definition, lemma)
+    except (AttributeError, ValueError) as e:
+        traceback.print_exc()
+        return 0
+
+    # Do not create page if lemma does not exist
+    mg_lemma_page = pywikibot.Page(pywikibot.Site(SITELANG, SITENAME), lemma)
+    if not mg_lemma_page.exists():
+        print('No lemma :/')
+        return 0
+
+    mg_entry = Entry(
+        entry=word,
+        part_of_speech=template,
+        entry_definition=[malagasy_definition],
+        language=code,
+    )
+
+    # Check ability to overwrite page
+    if not os.path.isfile('/tmp/%s' % code):  # overwrite existing content!
+        overwrite = False
+    else:
+        overwrite = True
+        print(('PAGE OVERWRITING IS ACTIVE. DELETE /tmp/%s TO DISABLE IT MID-SCRIPT.' % code))
+
+    # Create or update the generated page
+    if mg_page.exists() and not overwrite:
+        new_entry = page_output.wikipage(mg_entry, link=False)
+        page_content = mg_page.get()
+        if page_content.find('{{=%s=}}' % code) != -1:
+            if page_content.find('{{-%s-|%s}}' % (template, code)) != -1:
+                print('section already exists : No need to go further')
+                return 0
+            else:  # Add part of speech subsection
+                page_content = re.sub(r'==[ ]?{{=%s=}}[ ]?==' % code, new_entry, page_content)
+        else:  # Add language section
+            page_content = new_entry + '\n' + page_content
+    else:  # Create a new page.
+        page_content = page_output.wikipage(mg_entry, link=False)
+
+    pywikibot.output('\03{blue}%s\03{default}' % page_content)
+    mg_page.put(page_content, 'Teny vaovao')
+    return 1
+
+
 def parse_word_forms():
     global language_code
     global category_name
@@ -58,7 +113,6 @@ def parse_word_forms():
     # Initialise processor class
     en_page_processor_class = WiktionaryProcessorFactory.create(working_language)
     en_page_processor = en_page_processor_class()
-    page_output = Output()
 
     # Get list of articles from category
     nouns = pywikibot.Category(pywikibot.Site(working_language, SITENAME), category_name)
@@ -74,57 +128,7 @@ def parse_word_forms():
         print(word_page, entries)
         entries = [entry for entry in entries if entry[2] == str(language_code)]
         for word, pos, language_code, definition in entries:
-            last_entry += 1
-            mg_page = pywikibot.Page(pywikibot.Site(SITELANG, SITENAME), word)
-
-            # Translate template's content into malagasy
-            try:
-                output_object_class = TEMPLATE_TO_OBJECT[template]
-                elements = templates_parser.get_elements(output_object_class, definition)
-                malagasy_definition = elements.to_malagasy_definition()
-                lemma = get_lemma(output_object_class, definition)
-                print(elements, malagasy_definition, lemma)
-            except (AttributeError, ValueError) as e:
-                traceback.print_exc()
-                continue
-
-            # Do not create page if lemma does not exist
-            mg_lemma_page = pywikibot.Page(pywikibot.Site(SITELANG, SITENAME), lemma)
-            if not mg_lemma_page.exists():
-                print('No lemma :/')
-                continue
-
-            mg_entry = Entry(
-                entry=word,
-                part_of_speech=template,
-                entry_definition=[malagasy_definition],
-                language=language_code,
-            )
-
-            # Check ability to overwrite page
-            if not os.path.isfile('/tmp/%s' % language_code):  # overwrite existing content!
-                overwrite = False
-            else:
-                overwrite = True
-                print(('PAGE OVERWRITING IS ACTIVE. DELETE /tmp/%s TO DISABLE IT MID-SCRIPT.' % language_code))
-
-            # Create or update the generated page
-            if mg_page.exists() and not overwrite:
-                new_entry = page_output.wikipage(mg_entry, link=False)
-                page_content = mg_page.get()
-                if page_content.find('{{=%s=}}' % language_code) != -1:
-                    if page_content.find('{{-%s-|%s}}' % (template, language_code)) != -1:
-                        print('section already exists : No need to go further')
-                        continue
-                    else:  # Add part of speech subsection
-                        page_content = re.sub(r'==[ ]?{{=%s=}}[ ]?==' % language_code, new_entry, page_content)
-                else:  # Add language section
-                    page_content = new_entry + '\n' + page_content
-            else:  # Create a new page.
-                page_content = page_output.wikipage(mg_entry, link=False)
-
-            pywikibot.output('\03{blue}%s\03{default}' % page_content)
-            mg_page.put(page_content, 'Teny vaovao')
+            last_entry += create_non_lemma_entry(word, template, language_code, definition)
 
 
 if __name__ == '__main__':

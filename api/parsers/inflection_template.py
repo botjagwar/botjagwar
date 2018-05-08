@@ -1,49 +1,64 @@
 # coding: utf8
-
-CASES = {
-    'nom': 'endriky ny lazaina',
-    'acc': 'endrika teny fameno',
-    'loc': 'endrika teny famaritan-toerana',
-    'dat': 'mpanamarika ny tolorana',
-    'gen': 'mpanamarika ny an\'ny tompo',
-    'ins': 'mpanamarika fomba fanaovana',
-    'pre': 'endrika mampiankina'
-}
-NUMBER = {
-    's': 'singiolary',
-    'p': 'ploraly',
-}
-GENDER = {
-    'm': 'andehilahy',
-    'f': 'ambehivavy',
-    'n': 'tsy miandany'
-}
+from api.parsers.constants import GENDER, CASES, NUMBER, MOOD, TENSE, PERSONS, VOICE
 
 
-class VerbForm(object):
-    tense = None
-    mood = None
-    person = None
-    number = None
-
-    def __init__(self, tense, mood, person, number):
-        self.tense = tense
-        self.mood = mood
-        self.person = person
-        self.number = number
-
-
-class NounForm(object):
-    gender = None
-    number = None
-    case = None
-    lemma = None
-
+class NonLemma(object):
     def __init__(self, lemma, case, number, gender):
         self.gender = gender
         self.case = case
         self.lemma = lemma
         self.number = number
+
+    def to_malagasy_definition(self):
+        raise NotImplementedError()
+
+
+class VerbForm(NonLemma):
+    tense = None
+    mood = None
+    person = None
+    number = None
+
+    def __init__(self, lemma, tense, mood, person, number, voice='act'):
+        super(VerbForm, self).__init__(lemma=lemma, number=number, case=None, gender=None)
+        self.voice = voice
+        self.tense = tense
+        self.mood = mood
+        self.person = person
+
+    def to_malagasy_definition(self):
+        """
+        :param template_expr: template instance string with all its parameters
+        :return: A malagasy language definition in unicode
+        """
+        explanation = ''
+        if self.person in PERSONS:
+            explanation += PERSONS[self.person] + ' '
+        if self.number in NUMBER:
+            explanation += NUMBER[self.number] + ' '
+
+        explanation += 'ny ' if len(explanation.strip()) != 0 else ''
+        if self.tense in TENSE:
+            explanation += TENSE[self.tense] + ' '
+        if self.mood in MOOD:
+            explanation += MOOD[self.mood] + ' '
+
+        explanation += 'ny ' if len(explanation.strip()) != 0 else ''
+        if self.voice in VOICE:
+            explanation += VOICE[self.voice] + ' '
+
+        if not explanation.strip():
+            explanation = 'endriky'
+
+        ret = '%s ny matoanteny [[%s]]' % (explanation, self.lemma)
+        return ret
+
+
+class NounForm(NonLemma):
+    gender = None
+    number = None
+    case = None
+    lemma = None
 
     def to_malagasy_definition(self):
         """
@@ -57,6 +72,9 @@ class NounForm(object):
             explanation += GENDER[self.gender] + ' '
         if self.number in NUMBER:
             explanation += NUMBER[self.number] + ' '
+
+        if not explanation.strip():
+            explanation = 'endriky'
 
         ret = '%s ny teny [[%s]]' % (explanation, self.lemma)
         return ret

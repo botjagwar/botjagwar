@@ -2,7 +2,7 @@
 from api.parsers.inflection_template import AdjectiveForm
 
 
-def parse_it_adjective_form(template_expression):
+def parse_adjective_form(template_expression):
     for char in '{}':
         template_expression = template_expression.replace(char, '')
     parts = template_expression.split('|')
