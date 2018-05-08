@@ -59,7 +59,7 @@ def create_non_lemma_entry(word, pos, code, definition):
         malagasy_definition = elements.to_malagasy_definition()
         lemma = get_lemma(output_object_class, definition)
         print(elements, malagasy_definition, lemma)
-    except (AttributeError, ValueError) as e:
+    except (AttributeError, ValueError) as exc:
         traceback.print_exc()
         return 0
 

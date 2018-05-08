@@ -6,6 +6,11 @@ def parse_one_parameter_template(out_class, template_name='plural of', case_name
     Very generic code that can parse anything like {{plural of|xxyyzz}}, which is very common on en.wiktionary
     Use with caution, though.
     :param template_expression:
+    :param out_class:
+    :param template_name:
+    :param case_name:
+    :param number:
+    :param gender:
     :return: a function which sould return the contents of the template specified in template_name
     """
     def _parse_one_parameter_template(template_expression):

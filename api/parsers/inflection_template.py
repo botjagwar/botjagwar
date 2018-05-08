@@ -28,7 +28,6 @@ class VerbForm(NonLemma):
 
     def to_malagasy_definition(self):
         """
-        :param template_expr: template instance string with all its parameters
         :return: A malagasy language definition in unicode
         """
         explanation = ''
@@ -38,10 +37,11 @@ class VerbForm(NonLemma):
             explanation += NUMBER[self.number] + ' '
 
         explanation += 'ny ' if len(explanation.strip()) != 0 else ''
-        if self.tense in TENSE:
-            explanation += TENSE[self.tense] + ' '
         if self.mood in MOOD:
             explanation += MOOD[self.mood] + ' '
+
+        if self.tense in TENSE:
+            explanation += TENSE[self.tense] + ' '
 
         explanation += 'ny ' if len(explanation.strip()) != 0 else ''
         if self.voice in VOICE:
@@ -62,7 +62,6 @@ class NounForm(NonLemma):
 
     def to_malagasy_definition(self):
         """
-        :param template_expr: template instance string with all its parameters
         :return: A malagasy language definition in unicode
         """
         explanation = ''
