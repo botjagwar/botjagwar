@@ -1,0 +1,231 @@
+<mediawiki xmlns="http://www.mediawiki.org/xml/export-0.10/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mediawiki.org/xml/export-0.10/ http://www.mediawiki.org/xml/export-0.10.xsd" version="0.10" xml:lang="mg">
+  <siteinfo>
+    <sitename>Wiktionary</sitename>
+    <dbname>mgwiktionary</dbname>
+    <base>https://mg.wiktionary.org/wiki/Wiktionary:Fandraisana</base>
+    <generator>MediaWiki 1.32.0-wmf.2</generator>
+    <case>case-sensitive</case>
+    <namespaces>
+      <namespace key="-2" case="case-sensitive">Rakitra</namespace>
+      <namespace key="-1" case="first-letter">Manokana</namespace>
+      <namespace key="0" case="case-sensitive" />
+      <namespace key="1" case="case-sensitive">Dinika</namespace>
+      <namespace key="2" case="first-letter">Mpikambana</namespace>
+      <namespace key="3" case="first-letter">Dinika amin'ny mpikambana</namespace>
+      <namespace key="4" case="case-sensitive">Wiktionary</namespace>
+      <namespace key="5" case="case-sensitive">Dinika amin'ny Wiktionary</namespace>
+      <namespace key="6" case="case-sensitive">Sary</namespace>
+      <namespace key="7" case="case-sensitive">Dinika amin'ny sary</namespace>
+      <namespace key="8" case="first-letter">MediaWiki</namespace>
+      <namespace key="9" case="first-letter">Dinika amin'ny MediaWiki</namespace>
+      <namespace key="10" case="case-sensitive">Endrika</namespace>
+      <namespace key="11" case="case-sensitive">Dinika amin'ny endrika</namespace>
+      <namespace key="12" case="case-sensitive">Fanoroana</namespace>
+      <namespace key="13" case="case-sensitive">Dinika amin'ny fanoroana</namespace>
+      <namespace key="14" case="case-sensitive">Sokajy</namespace>
+      <namespace key="15" case="case-sensitive">Dinika amin'ny sokajy</namespace>
+      <namespace key="100" case="case-sensitive">Rakibolana</namespace>
+      <namespace key="101" case="case-sensitive">Dinika amin'ny rakibolana</namespace>
+      <namespace key="828" case="case-sensitive">Module</namespace>
+      <namespace key="829" case="case-sensitive">Discussion module</namespace>
+      <namespace key="2300" case="case-sensitive">Gadget</namespace>
+      <namespace key="2301" case="case-sensitive">Discussion gadget</namespace>
+      <namespace key="2302" case="case-sensitive">Définition de gadget</namespace>
+      <namespace key="2303" case="case-sensitive">Discussion définition de gadget</namespace>
+    </namespaces>
+  </siteinfo>
+  <page>
+    <title>rano</title>
+    <ns>0</ns>
+    <id>1743869</id>
+    <revision>
+      <id>24754827</id>
+      <parentid>24651577</parentid>
+      <timestamp>2018-04-10T06:19:28Z</timestamp>
+      <contributor>
+        <username>Bot-Jagwar</username>
+        <id>380</id>
+      </contributor>
+      <minor/>
+      <comment>+Dikan-teny avy amin'ny dikan-teny avy amin'i fr.wiktionary (v1.0)</comment>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text xml:space="preserve" bytes="1398">
+=={{=rap=}}==
+{{-ana-|rap}}
+'''rano''' {{fanononana X-SAMPA||rap}} {{fanononana||rap}}
+# [[farihy]] {{dikantenin'ny dikanteny|lac|fr}}
+
+=={{=kzk=}}==
+{{-ana-|kzk}}
+'''rano''' {{fanononana X-SAMPA||kzk}} {{fanononana||kzk}}
+# [[lohany]] {{dikantenin'ny dikanteny|head|en}}
+
+=={{=tnt=}}==
+{{-ana-|tnt}}
+'''rano''' {{fanononana X-SAMPA||tnt}} {{fanononana||tnt}}
+# [[rano]] {{dikantenin'ny dikanteny|eau|fr}}
+
+=={{=tdn=}}==
+{{-ana-|tdn}}
+'''rano''' {{fanononana X-SAMPA||tdn}} {{fanononana||tdn}}
+# [[rano]] {{dikantenin'ny dikanteny|eau|fr}}
+
+=={{=plt=}}==
+{{-ana-|plt}}
+'''rano''' {{fanononana X-SAMPA||plt}} {{fanononana||plt}}
+# [[rano]] {{dikantenin'ny dikanteny|eau|fr}}
+{{jereo|rano-|raño|ráno}}
+=={{=pl=}}==
+{{-ana-|pl}}
+'''rano''' {{fanononana X-SAMPA||pl}} {{fanononana||pl}}
+# [[maraina]]
+=={{=eo=}}==
+{{-ana-|eo}}
+'''rano''' {{fanononana X-SAMPA||eo}} {{fanononana||eo}}
+# [[radaka]], [[sabakaka]], [[sahona]], [[saobakaka]], [[angoaka]]
+=={{=mg=}}==
+{{-ana-|mg}}
+{{mg-ana-e|fototeny=rano}}
+
+'''rano''' {{fanononana X-SAMPA||mg}} {{fanononana|ɾanʷ|mg}}
+# [[rano]]
+=={{=io=}}==
+{{-ana-|io}}
+'''rano''' {{fanononana X-SAMPA||io}} {{fanononana||io}}
+# [[radaka]], [[sabakaka]], [[sahona]], [[saobakaka]], [[angoaka]]
+[[Sokajy:Dikanteny tokony homarinana]]
+
+{{-anagr-}}
+*[[oran']], [[oran-]], [[rano-]], [[raon']], [[raon-]], [[rnao]], [[roan']], [[roan-]], [[rona]], [[rona-]], {{anag+}}</text>
+      <sha1>8j80dznnm347d12m9kqn0frhuo56yf4</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>eau</title>
+    <ns>0</ns>
+    <id>1266230</id>
+    <revision>
+      <id>24651044</id>
+      <parentid>24651043</parentid>
+      <timestamp>2018-01-17T23:44:58Z</timestamp>
+      <contributor>
+        <username>Bot-Jagwar</username>
+        <id>380</id>
+      </contributor>
+      <minor/>
+      <comment>+Dikan-teny avy amin'ny pejy avy amin'i rm.wiktionary, [[Wiktionary:Firafitry_ny_teny_iditra|Firafitra]]; mamerina ny endrika jereo</comment>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text xml:space="preserve" bytes="658">
+
+=={{=rm=}}==
+{{-solo-ana-|rm}}
+'''eau''' {{fanononana X-SAMPA||rm}} {{fanononana||rm}}
+# [[]], [[]] {{dikantenin'ny dikanteny|I|en}}
+=={{=srq=}}==
+{{-mpam-|srq}}
+'''eau''' {{fanononana X-SAMPA||srq}} {{fanononana||srq}}
+# [[rindrina]] {{dikantenin'ny dikanteny|mûr|fr}}
+
+=={{=bch=}}==
+{{-ana-|bch}}
+'''eau''' {{fanononana X-SAMPA||bch}} {{fanononana||bch}}
+# [[ rano]], [[manondraka]] {{dikantenin'ny dikanteny|water|en}}
+
+=={{=fr=}}==
+{{-ana-|fr}}
+'''eau''' {{fanononana X-SAMPA||fr}} {{fanononana||fr}}
+# [[rano]] 
+=={{=frm=}}==
+
+{{-ana-|frm}}
+'''eau''' {{fanononana X-SAMPA||frm}} {{fanononana||frm}}
+# [[rano]]
+
+
+[[Sokajy:Dikanteny tokony homarinana]]</text>
+      <sha1>2ntwczmn2i3odlde32kcz83r4aw3m9c</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>газета</title>
+    <ns>0</ns>
+    <id>1268571</id>
+    <revision>
+      <id>24324080</id>
+      <parentid>22561628</parentid>
+      <timestamp>2017-05-23T18:32:38Z</timestamp>
+      <contributor>
+        <username>OctraBot</username>
+        <id>4830</id>
+      </contributor>
+      <minor/>
+      <comment>Robot : Nettoyage des anciens liens interwiki</comment>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text xml:space="preserve" bytes="854">=={{=tg=}}==
+{{-ana-|tg}}
+'''газета''' {{fanononana X-SAMPA||tg}} {{fanononana||tg}}
+# [[ newspaper]], [[gazety]] {{dikantenin'ny dikanteny|newspaper|en}}
+=={{=ky=}}==
+
+{{-nom-|ky}}
+'''газета''' {{fanononana X-SAMPA||ky}} {{fanononana||ky}}
+# gazety, journal {{dikantenin'ny dikanteny|journal|fr}}
+
+=={{=be=}}==
+{{-ana-|be}}
+'''газета''' {{fanononana X-SAMPA||be}} {{fanononana||be}}
+# [[gazetiboky]], [[gazety]], [[matso]], revio {{fiaviana dikanteny|en}}
+=={{=ru=}}==
+{{-etim-|ru}}
+{{-nom commun-|ru}}
+'''газета''' {{fanononana||ru}} {{dikantsoratra||ru}}
+# [[gazety]] 
+
+{{-anagr-}}
+
+;Litera 4
+*[[агат]], {{anag+}}
+{{-dika-}}
+
+# rosy : [[газета]]
+# okrainianina : [[газета]]
+{{}} :
+=={{=uk=}}==
+{{-etim-|uk}}
+{{-ana-|uk}}
+'''газета''' {{fanononana||ru}} {{dikantsoratra||ru}}
+# [[gazety]], [[газета]]</text>
+      <sha1>o7ii6yiqhg0xcxj3wbbgq4fvd8hhha5</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>geloof</title>
+    <ns>0</ns>
+    <id>394264</id>
+    <revision>
+      <id>23872945</id>
+      <parentid>22297959</parentid>
+      <timestamp>2017-05-02T14:22:26Z</timestamp>
+      <contributor>
+        <username>HydrizBot</username>
+        <id>853</id>
+      </contributor>
+      <minor/>
+      <comment>Rôbô: Manadio ny rohy interwiki taloha</comment>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text xml:space="preserve" bytes="140">=={{=nl=}}==
+
+{{-ana-|nl}}
+'''geloof''' {{fanononana X-SAMPA||nl}} {{fanononana||nl}}
+# [[finoana]]
+
+
+[[Sokajy:Dikanteny tokony homarinana]]</text>
+      <sha1>jjknhwahmkdrk4472ng9h62md5cqalj</sha1>
+    </revision>
+  </page>
+</mediawiki>
