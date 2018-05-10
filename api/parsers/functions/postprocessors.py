@@ -36,7 +36,17 @@ def arabic_postprocessor(verb_form: VerbForm):
     return verb_form
 
 
+def russian_postprocessor(verb_form: VerbForm):
+    new_lemma = verb_form.lemma
+    for accented in '́':
+        new_lemma = new_lemma.replace(accented, '')
+
+    verb_form.lemma = new_lemma
+    return verb_form
+
+
 POST_PROCESSORS = {
     'ar': arabic_postprocessor,
     'la': latin_postprocessor,
+    'ru': russian_postprocessor,
 }

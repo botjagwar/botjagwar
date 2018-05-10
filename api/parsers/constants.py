@@ -27,6 +27,7 @@ TENSE = {
     'phis': 'efa lasa ara-tantara',
     'pfv': 'perfektiva',
     'perfv': 'perfektiva',
+    'impfv': 'imperfektiva',
 }
 
 MOOD = {
