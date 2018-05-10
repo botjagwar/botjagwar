@@ -17,6 +17,13 @@ from database.exceptions.http import WordAlreadyExistsException
 URL_HEAD = 'http://0.0.0.0:8001'
 DB_PATH = '/tmp/test.db'
 
+# Temporarily patch requests API in case of refused connections (connecting while service is not ready)
+possible_errors = [requests.exceptions.ConnectionError]
+requests.post = retry_on_fail(possible_errors, retries=5, time_between_retries=.4)(requests.post)
+requests.get = retry_on_fail(possible_errors, retries=5, time_between_retries=.4)(requests.get)
+requests.put = retry_on_fail(possible_errors, retries=5, time_between_retries=.4)(requests.put)
+requests.delete = retry_on_fail(possible_errors, retries=5, time_between_retries=.4)(requests.delete)
+
 
 class TestDictionaryRestService(TestCase):
     def setUp(self):
@@ -125,6 +132,7 @@ class TestDictionaryRestService(TestCase):
         self.create_entry('nakaina', 'jm', 'ana', 'tarameguni', 'de')
 
     def test_create_existing_entry(self):
+        sleep(1)
         resp = requests.post(
             URL_HEAD + '/entry/jm/create',
             json=json.dumps({

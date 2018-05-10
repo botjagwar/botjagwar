@@ -5,7 +5,11 @@ import re, time
 from api.decorator import time_this
 
 WORKING_WIKI = pywikibot.getSite('mg', 'wiktionary')
-username = "%s" % pywikibot.config.usernames['wiktionary']['mg']
+try:
+    username = "%s" % pywikibot.config.usernames['wiktionary']['mg']
+except KeyError:
+    username = "test"
+
 mt_data_file = os.getcwd() + '/user_data/entry_translator/'
 
 

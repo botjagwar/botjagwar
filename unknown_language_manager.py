@@ -34,7 +34,11 @@ language_session = LanguageSessionClass()
 word_session = WordSessionClass()
 
 WORKING_WIKI = pywikibot.Site("mg", "wiktionary")
-username = "%s" % pywikibot.config.usernames['wiktionary']['mg']
+try:
+    username = "%s" % pywikibot.config.usernames['wiktionary']['mg']
+except KeyError:
+    username = "test"
+
 
 TABLE_PATTERN = """
 {| class=\"wikitable sortable\"

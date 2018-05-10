@@ -45,3 +45,4 @@ def retry_on_fail(exceptions, retries=5, time_between_retries=1):
 
         return wrapper
     return _retry_on_fail
+
