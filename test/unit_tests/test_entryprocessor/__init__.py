@@ -17,18 +17,18 @@ class GenericEntryProcessorTester:
             self.processor.set_text(self.content)
             self.processor.process(page)
             entries = self.processor.getall()
-            assert isinstance(entries, list)
+            assert isinstance(entries, list), entries
             for t in entries:
-                assert len(t) == 4
+                assert len(t) == 4, t
 
     def test_retrieve_translations(self):
         for page_names in self.test_pages:
             page = PageMock(SiteMock(self.language, 'wiktionary'), page_names)
             self.processor.process(page)
             entries = self.processor.retrieve_translations()
-            assert isinstance(entries, list)
+            assert isinstance(entries, list), entries
             for t in entries:
-                assert len(t) == 4
+                assert len(t) == 4, t
 
 
 class TestEnglishWiktionaryEntryprocessor(GenericEntryProcessorTester, unittest.TestCase):
@@ -61,3 +61,19 @@ class TestFrenchWiktionaryEntryprocessor(GenericEntryProcessorTester, unittest.T
         self.assertEqual(pos, 'ana')
         self.assertEqual(lang, 'ko')
         self.assertTrue(definition.startswith('mélange'))
+
+#
+# class TestMalagasyWiktionaryEntryprocessor(GenericEntryProcessorTester, unittest.TestCase):
+#     def setUp(self):
+#         self.setup_for_language('mg', ['rano', 'air', 'газета', 'geloof'])
+#
+#     def test_retrieve_translations_data_output(self):
+#         page = PageMock(SiteMock(self.language, 'wiktionary'), 'rano')
+#         self.processor.process(page)
+#         entries = self.processor.retrieve_translations()
+#         entry = entries[-1]
+#         word, pos, lang, definition = entry
+#         self.assertEqual(word, '공기')
+#         self.assertEqual(pos, 'ana')
+#         self.assertEqual(lang, 'ko')
+#         self.assertTrue(definition.startswith('mélange'))

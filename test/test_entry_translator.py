@@ -89,6 +89,7 @@ class TestEntryTranslatorServices(TestCase):
     def launch_service(self):
         self.p2 = Popen(["python3.6", "entry_translator.py", "&"])
 
+    @retry_on_fail([Exception], retries=10, time_between_retries=.4)
     def check_response_status(self, url, data):
         resp = requests.put(url, json=data)
         resp_data = json.loads(resp.text) if resp.text else {}
@@ -96,7 +97,6 @@ class TestEntryTranslatorServices(TestCase):
         for _, added_entries in list(resp_data.items()):
             self.assertTrue(isinstance(added_entries, list))
 
-    @retry_on_fail(Exception, retries=10, time_between_retries=.5)
     def test_translate_english_word(self):
         data = {
             "dryrun": True,
@@ -107,7 +107,6 @@ class TestEntryTranslatorServices(TestCase):
         url = "http://localhost:8000/translate/en"
         self.check_response_status(url, data)
 
-    @retry_on_fail(Exception, retries=10, time_between_retries=.5)
     def test_translate_french_word(self):
         data = {
             "dryrun": True,

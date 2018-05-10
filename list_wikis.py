@@ -8,7 +8,10 @@ import json
 import pywikibot
 
 data_file = os.getcwd() + '/conf/list_wikis/'
-current_user = pywikibot.config.usernames['wiktionary']['mg']
+try:
+    current_user = "%s" % pywikibot.config.usernames['wiktionary']['mg']
+except KeyError:
+    current_user = "test"
 
 
 class Wikilister(object):

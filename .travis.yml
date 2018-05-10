@@ -1,0 +1,33 @@
+language: python
+
+python:
+  - "3.6"
+
+addons:
+  apt:
+    packages:
+      - "python3"
+      - "python3-pip"
+      - "python3.6"
+      - "python3.6-pip"
+
+sudo: required
+
+os: linux
+dist: bionic
+
+# command to install dependencies
+install:
+  - sudo apt-get install libssl-dev wget unzip libsqlite3-dev libxml2-dev libxslt1-dev
+  - sudo ln -s /opt/python/3.6.5/bin/python3 /usr/bin/python3.6
+  - sudo python3.6 -m pip install -r requirements.txt
+  - make install
+
+# command to run tests
+script:
+  - make install
+  - which python3.6
+  - cp -r test /opt/botjagwar/test
+  - sudo python3.6 -m pip install nose
+  - PYWIKIBOT2_NO_USER_CONFIG=1 sudo /opt/python/3.6.5/bin/python3 -m "nose" -v /opt/botjagwar/test
+  - make uninstall
