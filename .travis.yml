@@ -22,9 +22,13 @@ install:
   - make install
 
 # command to run tests
-script:
-  - make install
+test_requirements: install
   - cp -r test /opt/botjagwar/test
   - sudo python3.6 -m pip install nose
+
+unit_tests: test_requirements
+  - PYWIKIBOT2_NO_USER_CONFIG=1 sudo /opt/python/3.6.5/bin/python3 -m "nose" -v /opt/botjagwar/test/unit_tests
+
+full_test: test_requirements
   - PYWIKIBOT2_NO_USER_CONFIG=1 sudo /opt/python/3.6.5/bin/python3 -m "nose" -v /opt/botjagwar/test
   - make uninstall
