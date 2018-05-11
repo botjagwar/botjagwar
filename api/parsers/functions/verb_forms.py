@@ -40,3 +40,6 @@ def parse_verb_form_inflection_of(template_expression):
 
     return verb_form
 
+
+def parse_es_verb_form_of(template_expression):
+    pass

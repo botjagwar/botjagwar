@@ -18,7 +18,7 @@ from api.parsers import templates_parser
 from api.parsers import AdjectiveForm
 from api.parsers import VerbForm
 from api.parsers import NounForm
-
+from page_lister import get_pages_from_category
 
 SITENAME = 'wiktionary'
 SITELANG = 'mg'
@@ -115,9 +115,8 @@ def parse_word_forms():
     en_page_processor = en_page_processor_class()
 
     # Get list of articles from category
-    nouns = pywikibot.Category(pywikibot.Site(working_language, SITENAME), category_name)
     counter = 0
-    for word_page in nouns.articles():
+    for word_page in get_pages_from_category(working_language, category_name):
         pywikibot.output('▒▒▒▒▒▒▒▒▒▒▒▒▒▒ \03{green}%-25s\03{default} ▒▒▒▒▒▒▒▒▒▒▒▒▒▒' % word_page.title())
         counter += 1
         if last_entry > counter:
