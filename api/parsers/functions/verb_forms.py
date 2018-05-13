@@ -61,6 +61,8 @@ def parse_es_verb_form_of(template_expression):
             pass
 
     lemma = parts[-1].replace('}', '')
+    if 'region=' in lemma:
+        lemma = parts[-2]
 
     verb_form = VerbForm(lemma, tense, mood, person, number)
     return verb_form

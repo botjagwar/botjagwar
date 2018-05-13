@@ -74,6 +74,10 @@ class TestInflectionTemplatesParser(TestCase):
         self.assertEqual(output.mood, 'indicative')
         self.assertEqual(output.person, '1')
 
+        # edge cases (5% of entries)
+        template_expression = '{{es-verb form of|ending=ar|mood=indicative|tense=future|pers=2|formal=no|number=plural|ababillarse|region=Spain}}'
+        output = parse_es_verb_form_of(template_expression)
+        self.assertEqual(output.lemma, 'ababillarse')
 
     def test_parse_noun_form_lv_inflection_of(self):
         template_expression = '{{lv-inflection of|bagātīgs|dat|p|f||adj}}'
