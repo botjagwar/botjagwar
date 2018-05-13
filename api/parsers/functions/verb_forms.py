@@ -43,7 +43,7 @@ def parse_verb_form_inflection_of(template_expression):
 
 def parse_es_verb_form_of(template_expression):
     parts = template_expression.split('|')
-    person = number = tense = mood = lemma = None
+    person = number = tense = mood = None
     count = 0
     for part in parts:
         count += 1

@@ -116,6 +116,9 @@ def parse_word_forms():
 
     # Get list of articles from category
     counter = 0
+    for _ in get_pages_from_category(working_language, category_name):
+        pass
+
     for word_page in get_pages_from_category(working_language, category_name):
         pywikibot.output('▒▒▒▒▒▒▒▒▒▒▒▒▒▒ \03{green}%-25s\03{default} ▒▒▒▒▒▒▒▒▒▒▒▒▒▒' % word_page.title())
         counter += 1
