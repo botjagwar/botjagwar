@@ -46,7 +46,6 @@ def parse_es_verb_form_of(template_expression):
     person = number = tense = mood = lemma = None
     count = 0
     for part in parts:
-        print(part)
         count += 1
         if part.startswith('pers=') or part.startswith('person='):
             person = part.split('=')[1]
