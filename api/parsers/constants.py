@@ -5,7 +5,8 @@ CASES = {
     'dat': 'mpanamarika ny tolorana',
     'gen': 'mpanamarika ny an\'ny tompo',
     'ins': 'mpanamarika fomba fanaovana',
-    'pre': 'endrika mampiankina'
+    'pre': 'endrika mampiankina',
+    'voc': 'endrika miantso',
 }
 
 TENSE = {
@@ -28,6 +29,13 @@ TENSE = {
     'pfv': 'perfektiva',
     'perfv': 'perfektiva',
     'impfv': 'imperfektiva',
+
+    # full forms
+    'present': 'ankehitriny',
+    'imperfect': 'imperfekta',
+    'preterite':'pretterita',
+    'future':'ho avy',
+    'conditional':'kôndisiônaly',
 }
 
 MOOD = {
@@ -45,7 +53,6 @@ MOOD = {
     'potn': 'pôtentsialy',
     'juss': 'josiva',
     'coho': 'kôhôrtativa',
-
     'inf': 'infinitiva',
     'part': 'endrika mpamaritra anarana',
     'ptcp': 'endrika mpamaritra anarana',
@@ -54,6 +61,14 @@ MOOD = {
     'conn': 'endrika miara-mandà',
     'conneg': 'endrika miara-mandà',
     'sup': 'sopinina',
+
+    # full forms
+    'gerund': 'endrika ara-tambin-teny',
+    'participle': 'endrika mpamaritra anarana',
+    'conditional': 'kôndisiônaly',
+    'subjunctive': 'sobjônktiva',
+    'indicative': 'filaza manoro',
+    'imperative': 'filaza mandidy',
 }
 
 NUMBER = {
@@ -65,7 +80,11 @@ NUMBER = {
     'pl': 'ploraly',
     'pau': 'mamaritra zava-bitsy',
     'sgl': 'singiolativa',
-    'col': 'mamondrona'
+    'col': 'mamondrona',
+
+    # full forms
+    'singular': 'singiolary',
+    'plural': 'ploraly',
 }
 GENDER = {
     'm': 'andehilahy',
@@ -88,5 +107,10 @@ PERSONS = {
     '1': 'mpanao voalohany',
     '2': 'mpanao faharoa',
     '3': 'mpanao fahatelo',
-    'impers': 'mpanao tsy fantatra'
+    'impers': 'mpanao tsy fantatra',
+
+    # full forms
+    'first-person': 'mpanao voalohany',
+    'second-person': 'mpanao faharoa',
+    'third-person': 'mpanao fahatelo',
 }

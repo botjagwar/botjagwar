@@ -42,4 +42,26 @@ def parse_verb_form_inflection_of(template_expression):
 
 
 def parse_es_verb_form_of(template_expression):
-    pass
+    parts = template_expression.split('|')
+    person = number = tense = mood = lemma = None
+    count = 0
+    for part in parts:
+        print(part)
+        count += 1
+        if part.startswith('pers=') or part.startswith('person='):
+            person = part.split('=')[1]
+        elif part.startswith('number='):
+            number = part.split('=')[1]
+        elif part.startswith('tense='):
+            tense = part.split('=')[1]
+        elif part.startswith('mood='):
+            mood = part.split('=')[1]
+        elif part.startswith('ending='):
+            pass
+        elif part.startswith('sera='):
+            pass
+
+    lemma = parts[-1].replace('}', '')
+
+    verb_form = VerbForm(lemma, tense, mood, person, number)
+    return verb_form

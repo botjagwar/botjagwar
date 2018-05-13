@@ -40,7 +40,15 @@ def parse_noun_form_lv_inflection_of(template_expression):
     for tparam in parts:
         if tparam.find('=') != -1:
             parts.remove(tparam)
-    lemma, case_name, number_, gender = parts[:4]
+    lemma = parts[1]
+    case_name = number_ = gender = None
+    for pn in parts:
+        if pn in NUMBER:
+            number_ = pn
+        elif pn in CASES:
+            case_name = pn
+        elif pn in GENDER:
+            gender = pn
     return NounForm(lemma, case_name, number_, gender)
 
 
