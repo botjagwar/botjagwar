@@ -124,3 +124,29 @@ def parse_fi_verb_form_of(template_expression):
 
     verb_form = VerbForm(lemma, tense, mood, person, number, voice)
     return verb_form
+
+
+def parse_fi_form_of(template_expression):
+    '{{fi-form of|aateloida|pr=third-person|pl=singular|mood=indicative|tense=present}}'
+    for char in '{}':
+        template_expression = template_expression.replace(char, '')
+
+    parts = template_expression.split('|')
+    number = person = mood = tense = None
+    for tparam in parts:
+        if tparam.startswith('pr='):
+            person = tparam[3:]
+        if tparam.startswith('pl='):
+            number = tparam[3:]
+        if tparam.startswith('mood='):
+            mood = tparam[5:]
+        if tparam.startswith('tense='):
+            tense = tparam[6:]
+
+    if '=' in parts[1]:
+        lemma = parts[-1]
+    else:
+        lemma = parts[1]
+
+    verb_form = VerbForm(lemma, tense, mood, person, number)
+    return verb_form
