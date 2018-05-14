@@ -66,3 +66,59 @@ def parse_es_verb_form_of(template_expression):
 
     verb_form = VerbForm(lemma, tense, mood, person, number)
     return verb_form
+
+
+def parse_fi_verb_form_of(template_expression):
+    parts = template_expression.split('|')
+    voice = 'act'
+    person = number = tense = mood = None
+    count = 0
+    for part in parts:
+        count += 1
+        if part.startswith('pn='):
+            pn = part.split('=')[1]
+            if pn == '1s':
+                person = '1'
+                number = 's'
+            elif pn == '2s':
+                person = '2'
+                number = 's'
+            elif pn == '3s':
+                person = '3'
+                number = 's'
+            elif pn == '1p':
+                person = '1'
+                number = 'p'
+            elif pn == '2p':
+                person = '2'
+                number = 'p'
+            elif pn == '3p':
+                person = '3'
+                number = 'p'
+            elif pn == 'pasv' or pn == 'pass':
+                voice = 'pass'
+
+        if part.startswith('tm='):
+            tense_mood = part.split('=')[1]
+            if tense_mood == 'pres':
+                mood = 'ind'
+                tense = 'pres'
+            elif tense_mood == 'past':
+                mood = 'ind'
+                tense = 'past'
+            elif tense_mood == 'cond':
+                mood = 'cond'
+                tense = 'pres'
+            elif tense_mood == 'impr':
+                mood = 'imp'
+                tense = 'pres'
+            elif tense_mood == 'potn':
+                mood = 'pot'
+                tense = 'pres'
+
+    lemma = parts[-1].replace('}', '')
+    if 'region=' in lemma:
+        lemma = parts[-2]
+
+    verb_form = (lemma, tense, mood, person, number, voice)
+    return verb_form

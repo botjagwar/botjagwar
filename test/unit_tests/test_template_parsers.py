@@ -7,6 +7,7 @@ from api.parsers.functions.noun_forms import parse_noun_form_lv_inflection_of
 from api.parsers.functions.noun_forms import parse_one_parameter_template
 from api.parsers.functions.verb_forms import parse_verb_form_inflection_of
 from api.parsers.functions.verb_forms import parse_es_verb_form_of
+from api.parsers.functions.verb_forms import parse_fi_verb_form_of
 from api.parsers.functions.adjective_forms import parse_adjective_form
 
 from api.parsers.inflection_template import NounForm, VerbForm, AdjectiveForm
@@ -87,6 +88,13 @@ class TestInflectionTemplatesParser(TestCase):
         self.assertEqual(output.case, 'dat')
         self.assertEqual(output.lemma, 'bagātīgs')
 
+    def test_parse_fi_verb_form_of(self):
+        template_expression = '{{fi-verb form of|pn=pass|tm=impr|absorboitua}}'
+        output = parse_fi_verb_form_of(template_expression)
+        self.assertIsInstance(output, VerbForm)
+        self.assertEqual(output.number, 'p')
+        self.assertEqual(output.tense, 'pres')
+        self.assertEqual(output.lemma, 'absorboitua')
 
 class TestInflectionTemplateClasses(TestCase):
     def test_NounForm(self):
