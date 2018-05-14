@@ -71,7 +71,9 @@ def parse_es_verb_form_of(template_expression):
 def parse_fi_verb_form_of(template_expression):
     parts = template_expression.split('|')
     voice = 'act'
-    person = number = tense = mood = None
+    person = '0'
+    number = 's'
+    tense = mood = None
     count = 0
     for part in parts:
         count += 1
@@ -117,8 +119,8 @@ def parse_fi_verb_form_of(template_expression):
                 tense = 'pres'
 
     lemma = parts[-1].replace('}', '')
-    if 'region=' in lemma:
+    if '=' in lemma:
         lemma = parts[-2]
 
-    verb_form = (lemma, tense, mood, person, number, voice)
+    verb_form = VerbForm(lemma, tense, mood, person, number, voice)
     return verb_form

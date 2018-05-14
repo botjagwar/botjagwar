@@ -92,9 +92,10 @@ class TestInflectionTemplatesParser(TestCase):
         template_expression = '{{fi-verb form of|pn=pass|tm=impr|absorboitua}}'
         output = parse_fi_verb_form_of(template_expression)
         self.assertIsInstance(output, VerbForm)
-        self.assertEqual(output.number, 'p')
+        self.assertEqual(output.number, 's')
         self.assertEqual(output.tense, 'pres')
         self.assertEqual(output.lemma, 'absorboitua')
+
 
 class TestInflectionTemplateClasses(TestCase):
     def test_NounForm(self):
