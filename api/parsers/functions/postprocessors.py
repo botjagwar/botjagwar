@@ -1,7 +1,7 @@
-from api.parsers.inflection_template import VerbForm
+from api.parsers.inflection_template import NonLemma
 
 
-def latin_postprocessor(verb_form: VerbForm):
+def latin_postprocessor(verb_form: NonLemma):
     """
     Acts on lemma attributes by removing macron signs from latin long vowels.
     :param verb_form:
@@ -22,7 +22,7 @@ def latin_postprocessor(verb_form: VerbForm):
     return verb_form
 
 
-def arabic_postprocessor(verb_form: VerbForm):
+def arabic_postprocessor(verb_form: NonLemma):
     """
     Acts on lemma attributes by removing vowel marks on arabic words.
     :param verb_form:
@@ -36,7 +36,7 @@ def arabic_postprocessor(verb_form: VerbForm):
     return verb_form
 
 
-def russian_postprocessor(verb_form: VerbForm):
+def russian_postprocessor(verb_form: NonLemma):
     new_lemma = verb_form.lemma
     for accented in '́':
         new_lemma = new_lemma.replace(accented, '')

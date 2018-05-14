@@ -53,8 +53,8 @@ Independent script that updates the statistics table for each Wiktionary, Wikipe
 Independent script, which, in detail:
 - fetches the words created in the last 30 days;
 - checks the missing language templates, and translates them in malagasy with a basic phonetic transcription algorithm;
--- if the language name could be translated: creates the templates and categories for the missing language; or
--- stores a list of untranslated language names in a table, stored on the Malagasy wiktionary at `Mpikambana:<USERNAME>/Lisitry ny kaodim-piteny tsy voafaritra`
+- if the language name could be translated: creates the templates and categories for the missing language; or
+- stores a list of untranslated language names in a table, stored on the Malagasy wiktionary at `Mpikambana:<USERNAME>/Lisitry ny kaodim-piteny tsy voafaritra`
 
 ## Copyright
 

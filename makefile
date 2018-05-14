@@ -57,6 +57,12 @@ test: prepare_tests
 
 .PHONY: test
 
+complexity:
+	sudo pip3.6 install xenon
+	xenon --max-absolute B --max-modules C --max-average B .
+
+.PHONY: complexity
+
 install:
 	$(call create_dirs)
 	cp -r api $(OPT_DIR)
