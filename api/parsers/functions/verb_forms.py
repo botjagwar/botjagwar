@@ -68,6 +68,32 @@ def parse_es_verb_form_of(template_expression):
     return verb_form
 
 
+def parse_ca_verb_form_of(template_expression):
+    '{{ca-verb form of|p=2|n=sg|t=impf|m=ind|abordar}}'
+    for char in '{}':
+        template_expression = template_expression.replace(char, '')
+
+    parts = template_expression.split('|')
+    number = person = mood = tense = None
+    for tparam in parts:
+        if tparam.startswith('p='):
+            person = tparam[2:]
+        if tparam.startswith('n='):
+            number = tparam[2:]
+        if tparam.startswith('t='):
+            tense = tparam[2:]
+        if tparam.startswith('m='):
+            mood = tparam[2:]
+
+    if '=' in parts[1]:
+        lemma = parts[-1]
+    else:
+        lemma = parts[1]
+
+    verb_form = VerbForm(lemma, tense, mood, person, number)
+    return verb_form
+
+
 def parse_fi_verb_form_of(template_expression):
     parts = template_expression.split('|')
     voice = 'act'
