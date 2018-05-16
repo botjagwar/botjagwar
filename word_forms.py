@@ -141,7 +141,7 @@ def parse_word_forms():
     mg_page_set = get_malagasy_page_set()
     en_page_set = get_english_page_set()
     working_set = set([p for p in en_page_set if p not in mg_page_set])
-
+    total = len(working_set)
     for word_page in working_set:
         word_page = pywikibot.Page(pywikibot.Site(working_language, 'wiktionary'), word_page)
         pywikibot.output('▒▒▒▒▒▒▒▒▒▒▒▒▒▒ \03{green}%-25s\03{default} ▒▒▒▒▒▒▒▒▒▒▒▒▒▒' % word_page.title())
@@ -149,7 +149,7 @@ def parse_word_forms():
         if last_entry > counter:
             print('moving on')
             continue
-
+        print("%d / %d (%2.2f%%)" % (counter, total, 100.*counter/total))
         en_page_processor.process(word_page)
         entries = en_page_processor.getall(definitions_as_is=True)
         print(word_page, entries)
