@@ -22,7 +22,7 @@ class ServiceManager:
         self.backend_address = addr
 
     @threaded
-    def spawn_backend(self, proc_name, *args):
+    def spawn_backend(self, *args):
         self.spawned_backend_process = Popen(['python3.6', self.program_name] + list(args), stdin=PIPE, stdout=PIPE)
         self.spawned_backend_process.communicate()
 

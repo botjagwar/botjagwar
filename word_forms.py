@@ -52,6 +52,7 @@ def get_count():
 
 def get_malagasy_language_name(language_code):
     language_service_manager = LanguageServiceManager()
+    language_service_manager.spawn_backend()
     return language_service_manager.get_language(language_code)['malagasy_name']
 
 
@@ -139,16 +140,14 @@ def parse_word_forms():
     counter = 0
     mg_page_set = get_malagasy_page_set()
     en_page_set = get_english_page_set()
-    working_set = en_page_set.difference(mg_page_set)
+    working_set = set([p for p in en_page_set if p not in mg_page_set])
 
-    for word_page in get_pages_from_category(working_language, category_name):
+    for word_page in working_set:
+        word_page = pywikibot.Page(pywikibot.Site(working_language, 'wiktionary'), word_page)
         pywikibot.output('▒▒▒▒▒▒▒▒▒▒▒▒▒▒ \03{green}%-25s\03{default} ▒▒▒▒▒▒▒▒▒▒▒▒▒▒' % word_page.title())
         counter += 1
         if last_entry > counter:
             print('moving on')
-            continue
-
-        if word_page.title() not in working_set:
             continue
 
         en_page_processor.process(word_page)
