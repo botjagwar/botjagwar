@@ -6,7 +6,9 @@ from api.parsers.functions.noun_forms import parse_inflection_of
 from api.parsers.functions.noun_forms import parse_noun_form_lv_inflection_of
 from api.parsers.functions.noun_forms import parse_one_parameter_template
 from api.parsers.functions.verb_forms import parse_verb_form_inflection_of
-from api.parsers.functions.verb_forms import parse_es_verb_form_of, parse_ca_verb_form_of
+from api.parsers.functions.verb_forms import parse_es_verb_form_of
+from api.parsers.functions.verb_forms import parse_ca_verb_form_of
+from api.parsers.functions.verb_forms import parse_de_verb_form_of
 from api.parsers.functions.verb_forms import parse_fi_verb_form_of
 from api.parsers.functions.verb_forms import parse_fi_form_of
 from api.parsers.functions.adjective_forms import parse_adjective_form
@@ -116,6 +118,16 @@ class TestInflectionTemplatesParser(TestCase):
         self.assertEqual(output.tense, 'present')
         self.assertEqual(output.mood, 'indicative')
         self.assertEqual(output.lemma, 'aateloida')
+
+    def test_parse_de_verb_form_of(self):
+        template_expression = '{{de-verb form of|abfangen|1|s|k2|a}}'
+        output = parse_de_verb_form_of(template_expression)
+        self.assertIsInstance(output, VerbForm)
+        self.assertEqual(output.person, '1')
+        self.assertEqual(output.number, 's')
+        self.assertEqual(output.tense, '')
+        self.assertEqual(output.mood, 'subj')
+        self.assertEqual(output.lemma, 'abfangen')
 
 
 class TestInflectionTemplateClasses(TestCase):

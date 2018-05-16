@@ -176,3 +176,28 @@ def parse_fi_form_of(template_expression):
 
     verb_form = VerbForm(lemma, tense, mood, person, number)
     return verb_form
+
+
+def parse_de_verb_form_of(template_expression):
+    '{{de-verb form of|abfangen|1|s|k2|a}}'
+    for char in '{}':
+        template_expression = template_expression.replace(char, '')
+
+    parts = template_expression.split('|')
+    number = person = mood = tense = ''
+    for tparam in parts:
+        if tparam in ['1', '2', '3']:
+            person = tparam
+        elif tparam in NUMBER:
+            number = tparam
+        elif tparam == 'g':
+            tense = 'pres'
+        elif tparam == 'v':
+            tense = 'pret'
+        elif tparam in ('k1', 'k2'):
+            mood = 'subj'
+
+    lemma = parts[1]
+
+    verb_form = VerbForm(lemma, tense, mood, person, number)
+    return verb_form

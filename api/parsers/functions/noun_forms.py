@@ -41,7 +41,7 @@ def parse_noun_form_lv_inflection_of(template_expression):
         if tparam.find('=') != -1:
             parts.remove(tparam)
     lemma = parts[1]
-    case_name = number_ = gender = None
+    case_name = number_ = gender = ''
     for pn in parts:
         if pn in NUMBER:
             number_ = pn

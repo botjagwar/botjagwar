@@ -9,6 +9,7 @@ from api.parsers.functions.verb_forms import parse_verb_form_inflection_of
 from api.parsers.functions.verb_forms import parse_ca_verb_form_of
 from api.parsers.functions.verb_forms import parse_es_verb_form_of
 from api.parsers.functions.verb_forms import parse_fi_verb_form_of
+from api.parsers.functions.verb_forms import parse_de_verb_form_of
 from api.parsers.functions.verb_forms import parse_fi_form_of
 from api.parsers.functions.adjective_forms import parse_adjective_form
 
@@ -39,11 +40,12 @@ templates_parser.add_parser(NounForm, 'lv-inflection of', parse_noun_form_lv_inf
 templates_parser.add_parser(NounForm, 'masculine plural of', parse_one_parameter_template(NounForm, 'masculine plural of', number='p', gender='m'))
 templates_parser.add_parser(NounForm, 'plural of', parse_one_parameter_template(NounForm, 'plural of', number='p'))
 
-templates_parser.add_parser(VerbForm, 'inflection of', parse_verb_form_inflection_of)
 templates_parser.add_parser(VerbForm, 'ca-verb form of', parse_ca_verb_form_of)
+templates_parser.add_parser(VerbForm, 'de-verb form of', parse_de_verb_form_of)
 templates_parser.add_parser(VerbForm, 'es-verb form of', parse_es_verb_form_of)
 templates_parser.add_parser(VerbForm, 'fi-verb form of', parse_fi_verb_form_of)
 templates_parser.add_parser(VerbForm, 'fi-form of', parse_fi_form_of)
+templates_parser.add_parser(VerbForm, 'inflection of', parse_verb_form_inflection_of)
 
 def get_lemma(expected_class, template_expression):
     return templates_parser.get_lemma(expected_class, template_expression)
