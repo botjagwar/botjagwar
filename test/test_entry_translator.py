@@ -1,5 +1,6 @@
 # coding: utf8
 import asyncio
+import aiohttp
 import json
 import requests
 from subprocess import Popen
@@ -63,18 +64,24 @@ class TestEntryTranslatorProcessWiktionaryPage(TestCase):
         os.system('rm %s' % DB_PATH)
 
     def test_process_wiktionary_page_english(self):
-        loop = asyncio.get_event_loop()
-        for pagename in LIST:
-            translation = Translation()
-            page = PageMock(SiteMock('en', 'wiktionary'), pagename)
-            loop.run_until_complete(translation.process_wiktionary_wiki_page(page))
+        @retry_on_fail([aiohttp.client_exceptions.ClientConnectionError])
+        def _wrapped_test():
+            loop = asyncio.get_event_loop()
+            for pagename in LIST:
+                translation = Translation()
+                page = PageMock(SiteMock('en', 'wiktionary'), pagename)
+                loop.run_until_complete(translation.process_wiktionary_wiki_page(page))
+        _wrapped_test()
 
     def test_process_wiktionary_page_french(self):
-        loop = asyncio.get_event_loop()
-        for pagename in LIST:
-            translation = Translation()
-            page = PageMock(SiteMock('fr', 'wiktionary'), pagename)
-            loop.run_until_complete(translation.process_wiktionary_wiki_page(page))
+        @retry_on_fail([aiohttp.client_exceptions.ClientConnectionError])
+        def _wrapped_test():
+            loop = asyncio.get_event_loop()
+            for pagename in LIST:
+                translation = Translation()
+                page = PageMock(SiteMock('fr', 'wiktionary'), pagename)
+                loop.run_until_complete(translation.process_wiktionary_wiki_page(page))
+        _wrapped_test()
 
 
 class TestEntryTranslatorServices(TestCase):
