@@ -4,6 +4,6 @@ pywikibot >= 3.0
 requests-oauthlib == 0.8.0
 requests == 2.18.4
 sqlalchemy == 1.2.7
-irc == 16.2.1
+irc == 3.6.1
 lxml == 4.2.1
 django == 2.0.5
