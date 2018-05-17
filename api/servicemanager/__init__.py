@@ -1,5 +1,5 @@
 import time
-from subprocess import Popen, PIPE
+from subprocess import Popen
 from api.decorator import threaded
 import requests
 
