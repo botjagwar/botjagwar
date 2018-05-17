@@ -7,6 +7,7 @@ from aiohttp import ClientSession
 
 from database.exceptions.http import WordDoesNotExistException
 
+from api import get_version
 from api import entryprocessor
 from api.exceptions import NoWordException
 from api.output import Output
@@ -30,7 +31,8 @@ class Translation:
         self.loop = asyncio.get_event_loop()
 
     async def _save_translation_from_bridge_language(self, infos):
-        summary = "Dikan-teny avy amin'ny dikan-teny avy amin'i %s.wiktionary (v1.0)" % infos.origin_wiktionary_edition
+        summary = "Dikan-teny avy amin'ny dikan-teny avy amin'i %s.wiktionary" % infos.origin_wiktionary_edition
+        summary += " (%s)" % get_version()
         wikipage = self.output.wikipage(infos)
         mg_page = pwbot.Page(pwbot.Site('mg', 'wiktionary'), infos.entry)
         try:
@@ -57,7 +59,8 @@ class Translation:
         await self.output.db(infos)
 
     async def _save_translation_from_page(self, infos):
-        summary = "Dikan-teny avy amin'ny pejy avy amin'i %s.wiktionary (v1.0)" % infos.language
+        summary = "Dikan-teny avy amin'ny pejy avy amin'i %s.wiktionary" % infos.language
+        summary += " (%s)" % get_version()
         wikipage = self.output.wikipage(infos)
         mg_page = pwbot.Page(pwbot.Site('mg', 'wiktionary'), infos.entry)
         if mg_page.exists():

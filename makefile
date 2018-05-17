@@ -65,6 +65,7 @@ complexity:
 
 install:
 	$(call create_dirs)
+	git describe --abbrev=0 --tags > data/version
 	cp -r api $(OPT_DIR)
 	cp -r conf $(OPT_DIR)
 	cp -rn data $(OPT_DIR)
