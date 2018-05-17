@@ -23,7 +23,7 @@ class ServiceManager:
 
     @threaded
     def spawn_backend(self, *args):
-        self.spawned_backend_process = Popen(['python3.6', self.program_name] + list(args), stdin=PIPE, stdout=PIPE)
+        self.spawned_backend_process = Popen(['python3.6', self.program_name] + list(args))
         self.spawned_backend_process.communicate()
 
     # Low-level functions to use with high-level functions
