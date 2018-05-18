@@ -6,7 +6,7 @@ def get_version():
     if VERSION is not None:
         return VERSION
     else:
-        with open('../data/version', 'r') as f:
+        with open('data/version', 'r') as f:
             VERSION = f.read()
     return VERSION
 
