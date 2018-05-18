@@ -1,3 +1,4 @@
+0 12 * * 3  cronuser /bin/bash -x /opt/botjagwar/update.sh
 0 21 * * *  cronuser /bin/bash -x /opt/botjagwar/list-wikis.sh
 30 * * * *  cronuser /bin/bash -x /opt/botjagwar/entry-translator-start.sh
 0 20 * * *  cronuser /bin/bash -x /opt/botjagwar/fitenytsyfantatra.sh
