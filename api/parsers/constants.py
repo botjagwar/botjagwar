@@ -7,6 +7,23 @@ CASES = {
     'ins': 'mpanamarika fomba fanaovana',
     'pre': 'endrika mampiankina',
     'voc': 'endrika miantso',
+
+    # full forms
+    'nominative': 'endriky ny lazaina',
+    'genitive': 'mpanamarika ny an\'ny tompo',
+    'accusative': 'endrika teny fameno',
+    'partitive': 'partitiva',
+    'inessive': 'inesiva',
+    'elative': 'elativa',
+    'illative': 'ilativa',
+    'adessive': 'adesiva',
+    'ablative': 'ablativa',
+    'allative': 'alativa',
+    'essive': 'esiva',
+    'translative': 'translativa',
+    'instructive': 'instroktiva',
+    'abessive': 'abesiva',
+    'comitative': 'komitativa',
 }
 
 TENSE = {

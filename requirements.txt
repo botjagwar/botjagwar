@@ -1,9 +1,9 @@
-aiohttp == 2.3.9
+aiohttp == 3.2.1
 flask == 1.0.2
 pywikibot >= 3.0
 requests-oauthlib == 0.8.0
 requests == 2.18.4
-sqlalchemy == 1.0.11
+sqlalchemy == 1.2.7
 irc == 3.6.1
-lxml == 4.1.1
-django == 2.0.4
+lxml == 4.2.1
+django == 2.0.5

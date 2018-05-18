@@ -18,6 +18,7 @@ from api.parsers import templates_parser
 from api.parsers import AdjectiveForm
 from api.parsers import VerbForm
 from api.parsers import NounForm
+from api.servicemanager import LanguageServiceManager
 from page_lister import get_pages_from_category
 
 SITENAME = 'wiktionary'
@@ -33,6 +34,12 @@ TEMPLATE_TO_OBJECT = {
     'e-mat': VerbForm,
 }
 
+TEMPLATE_TO_MG_CATEGORY = {
+    'e-ana': "Endrik'anarana",
+    'e-mpam-ana': "Endri-pamaritra anarana",
+    'e-mat': "Endriky ny matoanteny",
+}
+
 
 def get_count():
     try:
@@ -41,6 +48,21 @@ def get_count():
             return counter
     except IOError:
         return 0
+
+
+def get_malagasy_language_name(language_code):
+    language_service_manager = LanguageServiceManager()
+    language_service_manager.spawn_backend()
+    return language_service_manager.get_language(language_code)['malagasy_name']
+
+
+def get_malagasy_page_set():
+    mg_category_name = TEMPLATE_TO_MG_CATEGORY[template] + " amin'ny teny " + get_malagasy_language_name(language_code)
+    return set([p.title() for p in get_pages_from_category(SITELANG, mg_category_name)])
+
+
+def get_english_page_set():
+    return set([p.title() for p in get_pages_from_category('en', category_name)])
 
 
 def save_count():
@@ -116,15 +138,18 @@ def parse_word_forms():
 
     # Get list of articles from category
     counter = 0
-    for _ in get_pages_from_category(working_language, category_name):
-        pass
-
-    for word_page in get_pages_from_category(working_language, category_name):
+    mg_page_set = get_malagasy_page_set()
+    en_page_set = get_english_page_set()
+    working_set = set([p for p in en_page_set if p not in mg_page_set])
+    total = len(working_set)
+    for word_page in working_set:
+        word_page = pywikibot.Page(pywikibot.Site(working_language, 'wiktionary'), word_page)
         pywikibot.output('▒▒▒▒▒▒▒▒▒▒▒▒▒▒ \03{green}%-25s\03{default} ▒▒▒▒▒▒▒▒▒▒▒▒▒▒' % word_page.title())
         counter += 1
         if last_entry > counter:
             print('moving on')
             continue
+        print("%d / %d (%2.2f%%)" % (counter, total, 100.*counter/total))
         en_page_processor.process(word_page)
         entries = en_page_processor.getall(definitions_as_is=True)
         print(word_page, entries)

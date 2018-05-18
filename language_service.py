@@ -19,8 +19,8 @@ log = logging.getLogger('language_service')
 if args.STORAGE:
     LANGUAGE_STORAGE = args.STORAGE
 else:
-    DATABASE_STORAGE_INFO_FILE = 'data/word_database_storage_info'
-    with open('data/language_storage_info') as storage_file:
+    DATABASE_STORAGE_INFO_FILE = 'data/language_storage_info'
+    with open(DATABASE_STORAGE_INFO_FILE) as storage_file:
         LANGUAGE_STORAGE = storage_file.read()
 
 LANGUAGE_ENGINE = create_engine('sqlite:///%s' % LANGUAGE_STORAGE)

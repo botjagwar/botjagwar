@@ -6,11 +6,8 @@ import os
 
 import irc.bot
 import requests
-from subprocess import Popen
-
-from api.decorator import threaded
 from api.decorator import retry_on_fail
-
+from api.servicemanager import EntryTranslatorServiceManager, DictionaryServiceManager
 
 userdata_file = os.getcwd() + '/user_data/entry_translator/'
 nwikimax = 5
@@ -52,6 +49,10 @@ class WiktionaryRecentChangesBot(irc.bot.SingleServerIRCBot):
         self.stats = {'edits': 0.0, 'newentries': 0.0, 'errors': 0.0}
         self.edits = 0
         self.username = user
+        self.dictionary_service_manager = DictionaryServiceManager()
+        self.entry_translator_manager = EntryTranslatorServiceManager()
+        self.dictionary_service_manager.spawn_backend()
+        self.entry_translator_manager.spawn_backend()
         self.connect_in_languages()
 
     def connect_in_languages(self):
@@ -59,7 +60,6 @@ class WiktionaryRecentChangesBot(irc.bot.SingleServerIRCBot):
 
         @retry_on_fail([requests.exceptions.ConnectionError], retries=3, time_between_retries=0.1)
         def configure_backend():
-            spawn_backend()
             time.sleep(3)
             requests.put(self.service_address + '/configure', json={'autocommit': True})
 
@@ -161,14 +161,6 @@ def base36encode(number, alphabet='0123456789abcdefghjiklmnopqrstuvwxyz'):
         base36 = alphabet[i] + base36
 
     return sign + base36
-
-
-@threaded
-def spawn_backend():
-    spawned_backend_process = Popen(['python3.6', 'entry_translator.py'])
-    dictionary_service = Popen(['python3.6', 'dictionary_service.py'])
-    spawned_backend_process.communicate()
-    dictionary_service.communicate()
 
 
 if __name__ == '__main__':

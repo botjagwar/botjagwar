@@ -14,7 +14,7 @@ from database.dictionary import Base
 from database.exceptions.http import InvalidJsonReceivedException
 
 URL_HEAD = 'http://0.0.0.0:8003'
-DB_PATH = '/tmp/test.db'
+DB_PATH = '/tmp/test_language.db'
 
 
 class TestLanguageRestService(TestCase):
@@ -113,7 +113,7 @@ class TestLanguageRestService(TestCase):
 
     def test_create_existing_entry(self):
         resp = requests.post(
-            URL_HEAD + '/language/aa',
+            URL_HEAD + '/language/ali',
             json=json.dumps({
                 'english_name': 'asdlksd',
                 'malagasy_name': 'asdlksd',
@@ -122,7 +122,7 @@ class TestLanguageRestService(TestCase):
         )
         self.assertEquals(resp.status_code, 200)
         resp = requests.post(
-            URL_HEAD + '/language/aa',
+            URL_HEAD + '/language/ali',
             json=json.dumps({
                 'english_name': 'asdasdasdlksd',
                 'malagasy_name': 'asdlkasdsadsd',
