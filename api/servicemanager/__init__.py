@@ -24,7 +24,11 @@ class ServiceManager:
     @threaded
     def spawn_backend(self, *args):
         self.spawned_backend_process = Popen(['python3.6', self.program_name] + list(args))
+        with open('/tmp/%s.pid' % self.program_name, 'w') as f:
+            f.write(str(self.spawned_backend_process.pid))
+
         self.spawned_backend_process.communicate()
+
 
     # Low-level functions to use with high-level functions
     def get(self, route, **kwargs):
