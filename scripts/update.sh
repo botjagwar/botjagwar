@@ -29,12 +29,6 @@ make uninstall
 make prepare
 make install
 
-# Testing the install
-sudo cp -r test /opt/botjagwar/test
-sudo python3.6 -m pip install nose
-PYWIKIBOT2_NO_USER_CONFIG=1 sudo python3.6 -m nose -v /opt/botjagwar/test
-sudo rm -rf /opt/botjagwar/test
-
 # Update is finished, copy old files
 sudo cp -r /tmp/botjagwar_saved_data/data /opt/botjagwar/data
 sudo cp -r /tmp/botjagwar_saved_data/user_data /opt/botjagwar/user_data
