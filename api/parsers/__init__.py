@@ -1,29 +1,28 @@
 # coding: utf8
 
-from .inflection_template import EnWiktionaryInflectionTemplateParser
-
+from api.parsers.functions.adjective_forms import parse_adjective_form
+from api.parsers.functions.noun_forms import parse_fi_form_of as parse_fi_noun_form_of
 from api.parsers.functions.noun_forms import parse_inflection_of
 from api.parsers.functions.noun_forms import parse_noun_form_lv_inflection_of
 from api.parsers.functions.noun_forms import parse_one_parameter_template
-from api.parsers.functions.noun_forms import parse_fi_form_of as parse_fi_noun_form_of
-from api.parsers.functions.verb_forms import parse_verb_form_inflection_of
 from api.parsers.functions.verb_forms import parse_ca_verb_form_of
-from api.parsers.functions.verb_forms import parse_es_verb_form_of
-from api.parsers.functions.verb_forms import parse_fi_verb_form_of
 from api.parsers.functions.verb_forms import parse_de_verb_form_of
+from api.parsers.functions.verb_forms import parse_es_verb_form_of
 from api.parsers.functions.verb_forms import parse_fi_form_of
-from api.parsers.functions.adjective_forms import parse_adjective_form
-
-from api.parsers.inflection_template import NounForm, VerbForm, AdjectiveForm
+from api.parsers.functions.verb_forms import parse_fi_verb_form_of
+from api.parsers.functions.verb_forms import parse_verb_form_inflection_of
 from api.parsers.inflection_template import EnWiktionaryInflectionTemplateParser
-
+from api.parsers.inflection_template import NounForm, VerbForm, AdjectiveForm
+from .inflection_template import EnWiktionaryInflectionTemplateParser
 
 templates_parser = EnWiktionaryInflectionTemplateParser()
 
 templates_parser.add_parser(AdjectiveForm, 'de-inflected form of', parse_one_parameter_template(AdjectiveForm, 'de-inflected form of', number='', gender=''))
 templates_parser.add_parser(AdjectiveForm, 'es-adj form of', parse_adjective_form)
-templates_parser.add_parser(AdjectiveForm, 'feminine plural of', parse_one_parameter_template(AdjectiveForm, 'feminine plural of', number='p'))
-templates_parser.add_parser(AdjectiveForm, 'feminine singular of', parse_one_parameter_template(AdjectiveForm, 'feminine singular of', number='s'))
+templates_parser.add_parser(AdjectiveForm, 'feminine plural of',
+                            parse_one_parameter_template(AdjectiveForm, 'feminine plural of', gender='f', number='p'))
+templates_parser.add_parser(AdjectiveForm, 'feminine singular of',
+                            parse_one_parameter_template(AdjectiveForm, 'feminine singular of', gender='f', number='s'))
 templates_parser.add_parser(AdjectiveForm, 'feminine of', parse_one_parameter_template(AdjectiveForm, 'feminine of'))
 templates_parser.add_parser(AdjectiveForm, 'inflected form of', parse_one_parameter_template(AdjectiveForm, 'inflected form of', number='', gender=''))
 templates_parser.add_parser(AdjectiveForm, 'inflection of', parse_inflection_of(AdjectiveForm))

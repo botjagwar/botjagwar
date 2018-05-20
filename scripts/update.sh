@@ -8,14 +8,21 @@ sudo rm -rf /tmp/botjagwar
 
 # Save data if exists
 if [ -d "/opt/botjagwar" ]; then
-    sudo rm -rf /tmp/botjagwar_saved_data
+    if [ -f /tmp/botjagwar_saved_data ]; then
+        echo "Deleting old save"
+        sudo rm -rf /tmp/botjagwar_saved_data
+    fi
     sudo mkdir -p /tmp/botjagwar_saved_data
     sudo cp -r /opt/botjagwar/data /tmp/botjagwar_saved_data
     sudo cp -r /opt/botjagwar/user_data /tmp/botjagwar_saved_data
 
     echo "Stopping all python programs"
     if ps aux | grep python3.6; then
-        sudo killall -9 python3.6
+        if sudo killall -9 python3.6; then
+            echo 'Python scripts killed.'
+        else
+            echo 'No Python scripts killed.'
+        fi
     fi
 fi
 

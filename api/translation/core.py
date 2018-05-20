@@ -1,18 +1,18 @@
 # coding: utf8
-import os
-import pywikibot as pwbot
-
 import asyncio
+import os
+
+import pywikibot as pwbot
 from aiohttp import ClientSession
 
-from database.exceptions.http import WordDoesNotExistException
-
-from api import get_version
 from api import entryprocessor
+from api import get_version
+from api.autoformatter import Autoformat
 from api.exceptions import NoWordException
 from api.output import Output
-from api.autoformatter import Autoformat
+from database.exceptions.http import WordDoesNotExistException
 from object_model.word import Entry
+from word_forms import create_non_lemma_entry
 
 default_data_file = os.getcwd() + '/conf/entry_translator/'
 URL_HEAD = 'http://localhost:8001'
@@ -169,6 +169,11 @@ class Translation:
         for word, pos, language_code, definition in entries:
             if word is None or definition is None:
                 continue
+
+            # Attempt a translation of a possible non-lemma entry.
+            # Part of the effort to integrate word_forms.py in the IRC bot.
+            print(word, pos, language_code, definition)
+            ret += create_non_lemma_entry(word, pos, language_code, definition)
 
             if language_code == language:  # if entry in the content language
                 ret += await self.process_entry_in_native_language(
