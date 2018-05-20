@@ -33,6 +33,9 @@ TEMPLATE_TO_OBJECT = {
     'e-ana': NounForm,
     'e-mpam-ana': AdjectiveForm,
     'e-mat': VerbForm,
+    'ana': NounForm,
+    'mpam-ana': AdjectiveForm,
+    'mat': VerbForm,
 }
 
 TEMPLATE_TO_MG_CATEGORY = {
@@ -81,6 +84,8 @@ def create_non_lemma_entry(word, pos, code, definition):
 
     # Translate template's content into malagasy
     try:
+        if pos not in TEMPLATE_TO_OBJECT:  # unsupported template
+            return 0
         output_object_class = TEMPLATE_TO_OBJECT[pos]
         elements = templates_parser.get_elements(output_object_class, definition)
         malagasy_definition = elements.to_malagasy_definition()

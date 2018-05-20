@@ -172,6 +172,7 @@ class Translation:
 
             # Attempt a translation of a possible non-lemma entry.
             # Part of the effort to integrate word_forms.py in the IRC bot.
+            print(word, pos, language_code, definition)
             ret += create_non_lemma_entry(word, pos, language_code, definition)
 
             if language_code == language:  # if entry in the content language
