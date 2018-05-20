@@ -6,27 +6,28 @@ https://github.com/radomd92/botjagwar/issues/6#issuecomment-361023958
 import os
 import re
 import sys
-import traceback
-import pywikibot
 
-from object_model.word import Entry
+import pywikibot
 
 from api.entryprocessor import WiktionaryProcessorFactory
 from api.output import Output
+from api.parsers import AdjectiveForm
+from api.parsers import NounForm
+from api.parsers import VerbForm
 from api.parsers import get_lemma
 from api.parsers import templates_parser
-from api.parsers import AdjectiveForm
-from api.parsers import VerbForm
-from api.parsers import NounForm
 from api.servicemanager import LanguageServiceManager
+from object_model.word import Entry
 from page_lister import get_pages_from_category
 
 SITENAME = 'wiktionary'
 SITELANG = 'mg'
 last_entry = 0
-language_code = sys.argv[1]
-category_name = sys.argv[2]
-template = sys.argv[3] if len(sys.argv) >= 4 else 'e-ana'
+
+if __name__ == '__main__':
+    language_code = sys.argv[1]
+    category_name = sys.argv[2]
+    template = sys.argv[3] if len(sys.argv) >= 4 else 'e-ana'
 
 TEMPLATE_TO_OBJECT = {
     'e-ana': NounForm,
@@ -53,7 +54,11 @@ def get_count():
 def get_malagasy_language_name(language_code):
     language_service_manager = LanguageServiceManager()
     language_service_manager.spawn_backend()
-    return language_service_manager.get_language(language_code)['malagasy_name']
+    mg_name_request = language_service_manager.get_language(language_code)
+    if mg_name_request.status_code == 404:
+        raise Exception()
+    else:
+        return mg_name_request.json()['malagasy_name']
 
 
 def get_malagasy_page_set():
@@ -82,7 +87,7 @@ def create_non_lemma_entry(word, pos, code, definition):
         lemma = get_lemma(output_object_class, definition)
         print(elements, malagasy_definition, lemma)
     except (AttributeError, ValueError) as exc:
-        traceback.print_exc()
+        print(exc)
         return 0
 
     # Do not create page if lemma does not exist
@@ -153,9 +158,8 @@ def parse_word_forms():
         en_page_processor.process(word_page)
         entries = en_page_processor.getall(definitions_as_is=True)
         print(word_page, entries)
-        entries = [entry for entry in entries if entry[2] == str(language_code)]
-        for word, pos, language_code, definition in entries:
-            last_entry += create_non_lemma_entry(word, template, language_code, definition)
+        for word, pos, code, definition in entries:
+            last_entry += create_non_lemma_entry(word, template, code, definition)
 
 
 if __name__ == '__main__':

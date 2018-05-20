@@ -1,7 +1,9 @@
 import time
 from subprocess import Popen
-from api.decorator import threaded
+
 import requests
+
+from api.decorator import threaded
 
 
 class ServiceManager:
@@ -27,30 +29,26 @@ class ServiceManager:
         with open('/tmp/%s.pid' % self.program_name, 'w') as f:
             f.write(str(self.spawned_backend_process.pid))
 
-        self.spawned_backend_process.communicate()
-
-
     # Low-level functions to use with high-level functions
     def get(self, route, **kwargs):
         time.sleep(1)
         route = '%s://%s:%d/%s' % (self.scheme, self.backend_address, self.port, route)
-        req = requests.get(route, **kwargs)
-        return req.json()
+        return requests.get(route, **kwargs)
 
     def post(self, route, **kwargs):
         time.sleep(1)
         route = '%s://%s:%d/%s' % (self.scheme, self.backend_address, self.port, route)
-        return requests.post(route, **kwargs).json()
+        return requests.post(route, **kwargs)
 
     def put(self, route, **kwargs):
         time.sleep(1)
         route = '%s://%s:%d/%s' % (self.scheme, self.backend_address, self.port, route)
-        return requests.put(route, **kwargs).json()
+        return requests.put(route, **kwargs)
 
     def delete(self, route, **kwargs):
         time.sleep(1)
         route = '%s://%s:%d/%s' % (self.scheme, self.backend_address, self.port, route)
-        return requests.delete(route, **kwargs).json()
+        return requests.delete(route, **kwargs)
 
 
 class EntryTranslatorServiceManager(ServiceManager):
