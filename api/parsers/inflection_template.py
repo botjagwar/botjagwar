@@ -76,8 +76,8 @@ class NounForm(NonLemma):
             explanation += GENDER[self.gender] + ' '
         if self.number in NUMBER:
             explanation += NUMBER[self.number] + ' '
-        if self.definite:
-            explanation += DEFINITENESS['definite'] + ' '
+        if self.definite in DEFINITENESS:
+            explanation += DEFINITENESS[self.definite] + ' '
 
         if not explanation.strip():
             explanation = 'endriky'
