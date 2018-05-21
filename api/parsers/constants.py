@@ -7,6 +7,7 @@ CASES = {
     'ins': 'mpanamarika fomba fanaovana',
     'pre': 'endrika mampiankina',
     'voc': 'endrika miantso',
+    'dim': 'endrika manamari-pahakelezana',
 
     # full forms
     'nominative': 'endriky ny lazaina',

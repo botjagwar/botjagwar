@@ -1,19 +1,18 @@
 from unittest import TestCase
 
 from api.parsers.constants import MOOD, TENSE, NUMBER, PERSONS, VOICE, CASES, GENDER
-
+from api.parsers.functions.adjective_forms import parse_adjective_form
+from api.parsers.functions.noun_forms import parse_fi_form_of as parse_fi_form_of_noun
 from api.parsers.functions.noun_forms import parse_inflection_of
+from api.parsers.functions.noun_forms import parse_nl_noun_form_of
 from api.parsers.functions.noun_forms import parse_noun_form_lv_inflection_of
 from api.parsers.functions.noun_forms import parse_one_parameter_template
-from api.parsers.functions.noun_forms import parse_fi_form_of as parse_fi_form_of_noun
-from api.parsers.functions.verb_forms import parse_verb_form_inflection_of
-from api.parsers.functions.verb_forms import parse_es_verb_form_of
 from api.parsers.functions.verb_forms import parse_ca_verb_form_of
 from api.parsers.functions.verb_forms import parse_de_verb_form_of
-from api.parsers.functions.verb_forms import parse_fi_verb_form_of
+from api.parsers.functions.verb_forms import parse_es_verb_form_of
 from api.parsers.functions.verb_forms import parse_fi_form_of
-from api.parsers.functions.adjective_forms import parse_adjective_form
-
+from api.parsers.functions.verb_forms import parse_fi_verb_form_of
+from api.parsers.functions.verb_forms import parse_verb_form_inflection_of
 from api.parsers.inflection_template import NounForm, VerbForm, AdjectiveForm
 
 
@@ -137,6 +136,26 @@ class TestInflectionTemplatesParser(TestCase):
         self.assertEqual(output.case, 'nominative')
         self.assertEqual(output.number, 'plural')
         self.assertEqual(output.lemma, 'näverrin')
+
+    def test_parse_nl_noun_form_of_plural(self):
+        template_expression = '{{nl-noun form of|pl|aanbouwing}}'
+        output = parse_nl_noun_form_of(template_expression)
+        self.assertEqual(output.number, 'pl')
+        self.assertEqual(output.lemma, 'aanbouwing')
+
+    def test_parse_nl_noun_form_of_diminutive(self):
+        template_expression = '{{nl-noun form of|dim|aanbiedingsfolder}}'
+        output = parse_nl_noun_form_of(template_expression)
+        self.assertEqual(output.number, 's')
+        self.assertEqual(output.case, 'dim')
+        self.assertEqual(output.lemma, 'aanbiedingsfolder')
+
+    def test_parse_nl_noun_form_of_genitive(self):
+        template_expression = '{{nl-noun form of|gen|land}}'
+        output = parse_nl_noun_form_of(template_expression)
+        self.assertEqual(output.number, 's')
+        self.assertEqual(output.case, 'gen')
+        self.assertEqual(output.lemma, 'land')
 
 
 class TestInflectionTemplateClasses(TestCase):

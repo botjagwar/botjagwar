@@ -5,7 +5,6 @@ def parse_one_parameter_template(out_class, template_name='plural of', case_name
     """
     Very generic code that can parse anything like {{plural of|xxyyzz}}, which is very common on en.wiktionary
     Use with caution, though.
-    :param template_expression:
     :param out_class:
     :param template_name:
     :param case_name:
@@ -94,5 +93,26 @@ def parse_fi_form_of(template_expression):
     else:
         lemma = parts[1]
 
-    verb_form = NounForm(lemma, case, number, '')
-    return verb_form
+    noun_form = NounForm(lemma, case, number, '')
+    return noun_form
+
+
+def parse_nl_noun_form_of(template_expression):
+    '{{nl-noun form of|pl|aanbouwing}}'
+    for char in '{}':
+        template_expression = template_expression.replace(char, '')
+
+    parts = template_expression.split('|')
+    number = 's'
+    case = 'nom'
+
+    if parts[1] == 'pl':
+        number = 'pl'
+    elif parts[1] == 'dim':
+        case = 'dim'
+    else:
+        case = parts[1]
+
+    lemma = parts[2]
+    noun_form = NounForm(lemma, case, number, '')
+    return noun_form
