@@ -96,10 +96,14 @@ class EnWiktionaryInflectionTemplateParser(object):
             raise ParserError("parser already exists for '%s'" % template_name)
         self.process_function[(return_class, template_name)] = parser_function
 
-    def get_elements(self, expected_class, template_expression):
-        orig_template_expression = template_expression
+    def get_elements(self, expected_class, form_of_definition):
+        # fixme: detect several templates on the same line, and raise exception if such case is encountered.
+        # current way of parsing template expressions fails spectacularly (InvalidTitle exceptions) in nasty cases:
+        # e.g. {{es-verb form of|mood=imp|num=s|pers=2|formal=n|sense=+|ending=ir|venir}} + {{m|es|te||}}.
+        # (true story)
+        orig_template_expression = form_of_definition
         for c in '{}':
-            template_expression = template_expression.replace(c, '')
+            template_expression = form_of_definition.replace(c, '')
         parts = template_expression.split('|')
         if (expected_class, parts[0]) in list(self.process_function.keys()):
             ret = self.process_function[(expected_class, parts[0])](template_expression)
