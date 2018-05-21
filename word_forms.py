@@ -38,6 +38,12 @@ TEMPLATE_TO_OBJECT = {
     'mat': VerbForm,
 }
 
+FORM_OF_TEMPLATE = {
+    'ana': 'e-ana',
+    'mpam-ana': 'e-mpam-ana',
+    'mat': 'e-mat',
+}
+
 TEMPLATE_TO_MG_CATEGORY = {
     'e-ana': "Endrik'anarana",
     'e-mpam-ana': "Endri-pamaritra anarana",
@@ -104,9 +110,11 @@ def create_non_lemma_entry(word, pos, code, definition):
     except pywikibot.exceptions.InvalidTitle:  # doing something wrong at this point
         return 0
 
+    form_of_template = FORM_OF_TEMPLATE[pos] if pos in FORM_OF_TEMPLATE else pos
+
     mg_entry = Entry(
         entry=word,
-        part_of_speech=template,
+        part_of_speech=form_of_template,
         entry_definition=[malagasy_definition],
         language=code,
     )
@@ -123,7 +131,7 @@ def create_non_lemma_entry(word, pos, code, definition):
         new_entry = page_output.wikipage(mg_entry, link=False)
         page_content = mg_page.get()
         if page_content.find('{{=%s=}}' % code) != -1:
-            if page_content.find('{{-%s-|%s}}' % (template, code)) != -1:
+            if page_content.find('{{-%s-|%s}}' % (form_of_template, code)) != -1:
                 print('section already exists : No need to go further')
                 return 0
             else:  # Add part of speech subsection

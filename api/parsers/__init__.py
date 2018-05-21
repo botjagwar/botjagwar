@@ -36,12 +36,37 @@ templates_parser.add_parser(NounForm, 'feminine singular of', parse_one_paramete
 templates_parser.add_parser(NounForm, 'feminine plural of', parse_one_parameter_template(NounForm, 'feminine plural of', number='p'))
 templates_parser.add_parser(NounForm, 'feminine of', parse_one_parameter_template(NounForm, 'feminine of'))
 templates_parser.add_parser(NounForm, 'fi-form of', parse_fi_noun_form_of)
+templates_parser.add_parser(NounForm, 'genitive plural definite of',
+                            parse_one_parameter_template(NounForm, 'genitive plural indefinite of', number='p',
+                                                         case_name='gen', definiteness='definite'))
+templates_parser.add_parser(NounForm, 'genitive plural indefinite of',
+                            parse_one_parameter_template(NounForm, 'genitive plural indefinite of', number='p',
+                                                         case_name='gen', definiteness='indefinite'))
+templates_parser.add_parser(NounForm, 'genitive singular definite of',
+                            parse_one_parameter_template(NounForm, 'genitive singular definite of', number='s',
+                                                         case_name='gen', definiteness='definite'))
+templates_parser.add_parser(NounForm, 'genitive singular indefinite of',
+                            parse_one_parameter_template(NounForm, 'genitive singular indefinite of', number='s',
+                                                         case_name='gen', definiteness='definite'))
 templates_parser.add_parser(NounForm, 'inflection of', parse_inflection_of(NounForm))
 templates_parser.add_parser(NounForm, 'inflected form of', parse_one_parameter_template(NounForm, 'inflected form of'))
 templates_parser.add_parser(NounForm, 'lv-inflection of', parse_noun_form_lv_inflection_of)
 templates_parser.add_parser(NounForm, 'masculine plural of', parse_one_parameter_template(NounForm, 'masculine plural of', number='p', gender='m'))
-templates_parser.add_parser(NounForm, 'plural of', parse_one_parameter_template(NounForm, 'plural of', number='p'))
 templates_parser.add_parser(NounForm, 'nl-noun form of', parse_nl_noun_form_of)
+templates_parser.add_parser(NounForm, 'plural definite of',
+                            parse_one_parameter_template(NounForm, 'plural definite of', number='p',
+                                                         definiteness='definite'))
+templates_parser.add_parser(NounForm, 'plural indefinite of',
+                            parse_one_parameter_template(NounForm, 'plural indefinite of', number='p',
+                                                         definiteness='indefinite'))
+templates_parser.add_parser(NounForm, 'plural of', parse_one_parameter_template(NounForm, 'plural of', number='p'))
+templates_parser.add_parser(NounForm, 'singular definite of',
+                            parse_one_parameter_template(NounForm, 'singular definite of', number='s',
+                                                         definiteness='definite'))
+templates_parser.add_parser(NounForm, 'singular indefinite of',
+                            parse_one_parameter_template(NounForm, 'singular indefinite of', number='s',
+                                                         definiteness='indefinite'))
+
 
 templates_parser.add_parser(VerbForm, 'ca-verb form of', parse_ca_verb_form_of)
 templates_parser.add_parser(VerbForm, 'de-verb form of', parse_de_verb_form_of)

@@ -1,7 +1,8 @@
 from api.parsers.inflection_template import NounForm, CASES, GENDER, NUMBER
 
 
-def parse_one_parameter_template(out_class, template_name='plural of', case_name='', number='s', gender=None):
+def parse_one_parameter_template(out_class, template_name='plural of', case_name='', number='s', gender=None,
+                                 definiteness=None):
     """
     Very generic code that can parse anything like {{plural of|xxyyzz}}, which is very common on en.wiktionary
     Use with caution, though.
@@ -18,11 +19,13 @@ def parse_one_parameter_template(out_class, template_name='plural of', case_name
         parts = template_expression.split('|')
         lemma = parts[1]
         if parts[0] == template_name:
-            return out_class(
-                lemma=lemma,
-                case=case_name,
-                number=number,
-                gender=gender)
+            ret_obj = out_class()
+            ret_obj.lemma = lemma
+            ret_obj.gender = gender
+            ret_obj.case = case_name
+            ret_obj.number = number
+            ret_obj.definiteness = definiteness
+            return ret_obj
         else:
             raise ValueError("Unrecognised template: expected '%s' but got '%s'" % (parts[0], template_name))
 

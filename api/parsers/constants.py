@@ -132,3 +132,8 @@ PERSONS = {
     'second-person': 'mpanao faharoa',
     'third-person': 'mpanao fahatelo',
 }
+
+DEFINITENESS = {
+    'definite': 'voafaritra',
+    'indefinite': 'tsy voafaritra',
+}
