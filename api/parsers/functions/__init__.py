@@ -77,7 +77,7 @@ def parse_el_form_of(out_class):
                     number = tparam[2:]
                 if tparam.startswith('c='):
                     case = tparam[2:]
-            else:
+            elif tparam:
                 lemma = tparam
 
         noun_form = out_class(lemma, case, number, '')
