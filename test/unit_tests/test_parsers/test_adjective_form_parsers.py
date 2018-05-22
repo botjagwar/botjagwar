@@ -37,6 +37,7 @@ class TestAdjectiveFormParsers(TestCase):
     def test_parse_el_form_of_adjective(self):
         template_expression = '{{el-form-of-nounadj|αβοκέτα|c=gen|n=s}}'
         output = parse_el_form_of(AdjectiveForm)(template_expression)
+        self.assertIsInstance(output, AdjectiveForm)
         self.assertEqual(output.number, 's')
         self.assertEqual(output.case, 'gen')
         self.assertEqual(output.lemma, 'αβοκέτα')
