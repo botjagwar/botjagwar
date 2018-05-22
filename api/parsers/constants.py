@@ -1,4 +1,13 @@
 CASES = {
+    # very abbreviated forms
+    'n': 'endriky ny lazaina',
+    'g': 'mpanamarika ny an\'ny tompo',
+    'd': 'mpanamarika ny tolorana',
+    'a': 'endrika teny fameno',
+    'l': 'endrika teny famaritan-toerana',
+    'v': 'endrika miantso',
+
+    # abbreviated forms
     'nom': 'endriky ny lazaina',
     'acc': 'endrika teny fameno',
     'loc': 'endrika teny famaritan-toerana',

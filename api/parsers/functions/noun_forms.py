@@ -1,4 +1,4 @@
-from api.parsers.inflection_template import NounForm, CASES, GENDER, NUMBER
+from api.parsers.inflection_template import NounForm, CASES, GENDER, NUMBER, DEFINITENESS
 
 
 def parse_one_parameter_template(out_class, template_name='plural of', case_name='', number='s', gender=None,
@@ -65,6 +65,7 @@ def parse_inflection_of(out_class):
         t_name, lemma = parts[:2]
         case_name = number_ = ''
         gender = None
+        definiteness = None
         for pn in parts:
             if pn in NUMBER:
                 number_ = pn
@@ -72,8 +73,12 @@ def parse_inflection_of(out_class):
                 case_name = pn
             elif pn in GENDER:
                 gender = pn
+            elif pn in DEFINITENESS:
+                definiteness = pn
 
-        return out_class(lemma=lemma, case=case_name, number=number_, gender=gender)
+        ret_obj = out_class(lemma=lemma, case=case_name, number=number_, gender=gender)
+        ret_obj.definite = definiteness
+        return ret_obj
 
     return _parse_inflection_of_partial
 
@@ -117,5 +122,19 @@ def parse_nl_noun_form_of(template_expression):
         case = parts[1]
 
     lemma = parts[2]
+    noun_form = NounForm(lemma, case, number, '')
+    return noun_form
+
+
+def parse_lt_noun_form(template_expression):
+    '{{lt-form-noun|d|s|abatė}}'
+    for char in '{}':
+        template_expression = template_expression.replace(char, '')
+
+    parts = template_expression.split('|')
+    case = parts[1]
+    number = parts[2]
+
+    lemma = parts[-1]
     noun_form = NounForm(lemma, case, number, '')
     return noun_form
