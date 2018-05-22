@@ -80,7 +80,7 @@ def parse_el_form_of(out_class):
             else:
                 lemma = tparam
 
-        noun_form = NounForm(lemma, case, number, '')
+        noun_form = out_class(lemma, case, number, '')
         return noun_form
 
     return _wrapped_parse_el_form_of
