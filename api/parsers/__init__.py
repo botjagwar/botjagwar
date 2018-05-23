@@ -52,6 +52,7 @@ templates_parser.add_parser(NounForm, 'genitive singular definite of',
 templates_parser.add_parser(NounForm, 'genitive singular indefinite of',
                             parse_one_parameter_template(NounForm, 'genitive singular indefinite of', number='s',
                                                          case_name='gen', definiteness='definite'))
+templates_parser.add_parser(NounForm, 'got-nom form of', parse_el_form_of(NounForm, -1))
 templates_parser.add_parser(NounForm, 'inflection of', parse_inflection_of(NounForm))
 templates_parser.add_parser(NounForm, 'inflected form of', parse_one_parameter_template(NounForm, 'inflected form of'))
 templates_parser.add_parser(NounForm, 'lt-form-noun', parse_lt_noun_form)
