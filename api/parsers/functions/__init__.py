@@ -62,7 +62,7 @@ def parse_inflection_of(out_class):
     return _parse_inflection_of_partial
 
 
-def parse_el_form_of(out_class):
+def parse_el_form_of(out_class, lemma_pos=1):
     assert out_class in (NounForm, AdjectiveForm)
     def _wrapped_parse_el_form_of(template_expression):
         for char in '{}':
@@ -70,14 +70,14 @@ def parse_el_form_of(out_class):
 
         parts = template_expression.split('|')
         number = case = None
-        lemma = parts[1]
+        lemma = parts[lemma_pos]
         for tparam in parts:
             if '=' in tparam:
                 if tparam.startswith('n='):
                     number = tparam[2:]
                 if tparam.startswith('c='):
                     case = tparam[2:]
-            else:
+            elif tparam:
                 lemma = tparam
 
         noun_form = out_class(lemma, case, number, '')
