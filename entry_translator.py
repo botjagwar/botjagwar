@@ -110,20 +110,20 @@ async def get_wiktionary_processed_page(request):
     wiktionary_processor.process(page)
 
     for entry in wiktionary_processor.getall():
-        word, pos, language_code, translation = entry.to_tuple()
+        word, pos, language_code, definition = entry.to_tuple()
         translation_list = []
         section = dict(
             word=word,
             language=language_code,
             part_of_speech=pos,
-            translation=translation)
+            translation=definition[0])
+
         for translation in wiktionary_processor.retrieve_translations():
-            translation_word, translation_pos, translation_language, translation = translation
             translation_section = dict(
-                word=translation_word,
-                language=translation_language,
-                part_of_speech=translation_pos,
-                translation=translation)
+                word=translation.entry,
+                language=translation.language,
+                part_of_speech=translation.part_of_speech,
+                translation=translation.entry_definition[0])
             translation_list.append(translation_section)
 
         if language_code == language:
