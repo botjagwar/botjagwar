@@ -18,7 +18,7 @@ class TestEnglishWiktionaryEntryprocessor(GenericEntryProcessorTester, unittest.
         page = PageMock(SiteMock(self.language, 'wiktionary'), 'air')
         self.processor.process(page)
         entries = self.processor.retrieve_translations()
-        entry = [e for e in entries if e.language == 'ko'][0]
+        entry = [e for e in entries if e.language == 'ko'][-1]
         word, pos, lang, definition  = entry.entry, entry.part_of_speech, entry.language, entry.entry_definition
         self.assertEqual(word, '공기')
         self.assertEqual(pos, 'mat')
