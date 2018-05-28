@@ -2,8 +2,6 @@
 
 import re
 
-import pywikibot
-
 from conf.entryprocessor.languagecodes import LANGUAGE_NAMES
 from object_model.word import Entry
 from .base import WiktionaryProcessor
@@ -157,8 +155,6 @@ class ENWiktionaryProcessor(WiktionaryProcessor):
                     language=self.lang2code(l),
                     entry_definition=[defin.strip()]
                 )
-                if self.verbose:
-                    pywikibot.output('%s --> teny  "%s" ; famaritana: %s' % i)
                 items.append(i)
             except KeyError:
                 continue

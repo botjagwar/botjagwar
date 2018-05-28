@@ -51,9 +51,9 @@ def _get_page(name, lang):
 @threaded
 def _update_statistics(rc_bot):
     if not rc_bot.stats["edits"] % 5:
-        cttime = time.gmtime()
+        cttime = time.gmtime()[:6]
         rc_bot.chronometer = time.time() - rc_bot.chronometer
-        print(("%d/%02d/%02d %02d:%02d:%02d > " % cttime[:6], \
+        print(("%d/%02d/%02d %02d:%02d:%02d > " % cttime, \
                "Fanovana: %(edits)d; pejy voaforona: %(newentries)d; hadisoana: %(errors)d" % rc_bot.stats \
                + " taha: fanovana %.1f/min" % (60. * (5 / rc_bot.chronometer))))
         rc_bot.chronometer = time.time()
@@ -74,7 +74,7 @@ async def handle_wiktionary_page(request):
     """
     Handle a Wiktionary page, attempts to translate the wiktionary page's content and
     uploads it to the Malagasy Wiktionary.
-    :param lang: Wiktionary edition to look up on.
+    <lang>: Wiktionary edition to look up on.
     :return: 200 if everything worked with the list of database lookups including translations,
     500 if an error occurred
     """

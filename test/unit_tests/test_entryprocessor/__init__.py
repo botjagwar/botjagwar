@@ -4,7 +4,7 @@ from test_utils.mocks import PageMock, SiteMock
 
 
 class GenericEntryProcessorTester:
-    def setup_for_language(self, language, test_pages=[]):
+    def setup_for_language(self, language, test_pages=list()):
         self.language = language
         self.test_pages = test_pages
         test_class = WiktionaryProcessorFactory.create(language)
