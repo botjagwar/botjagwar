@@ -85,7 +85,10 @@ class Translation:
             translations = wiktionary_processor.retrieve_translations()
         except Exception as e:
             return ret
-        for entry, pos, entry_language in translations:
+        for translation in translations:
+            entry = translation.entry
+            pos = translation.part_of_speech
+            entry_language = translation.language
             if entry_language in self.language_blacklist:  # check in language blacklist
                 continue
 
