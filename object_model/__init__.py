@@ -1,4 +1,3 @@
-
 class Property(object):
     def __init__(self, value, _type=object):
         if isinstance(value, _type):
@@ -85,7 +84,3 @@ class TypeCheckedObject(object):
                     name, self.__class__.__name__))
             else:
                 self.properties[name] = value
-
-
-class Entry(TypeCheckedObject):
-    pass
