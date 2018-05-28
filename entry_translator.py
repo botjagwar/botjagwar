@@ -1,21 +1,18 @@
 #!/usr/bin/python3.6
+import json
 import os
 import sys
 import time
-import json
-import pywikibot as pwbot
 import traceback
 
+import pywikibot as pwbot
+from aiohttp import web
+from aiohttp.web import Response
+from pywikibot import Site, Page
 
 from api import entryprocessor
 from api.decorator import threaded
 from api.translation.core import Translation
-
-from pywikibot import Site, Page
-
-from aiohttp import web
-from aiohttp.web import Response
-
 
 # GLOBAL VARS
 verbose = False
@@ -113,7 +110,7 @@ async def get_wiktionary_processed_page(request):
     wiktionary_processor.process(page)
 
     for entry in wiktionary_processor.getall():
-        word, pos, language_code, translation = entry
+        word, pos, language_code, translation = entry.to_tuple()
         translation_list = []
         section = dict(
             word=word,

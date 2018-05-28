@@ -84,7 +84,8 @@ def save_count():
         f.write(str(last_entry))
 
 
-def create_non_lemma_entry(word, pos, code, definition):
+def create_non_lemma_entry(entry: Entry):
+    word, pos, code, definition = entry.entry, entry.part_of_speech, entry.language, entry.entry_definition
     page_output = Output()
     mg_page = pywikibot.Page(pywikibot.Site(SITELANG, SITENAME), word)
 
@@ -174,8 +175,8 @@ def parse_word_forms():
         en_page_processor.process(word_page)
         entries = en_page_processor.getall(definitions_as_is=True)
         print(word_page, entries)
-        for word, pos, code, definition in entries:
-            last_entry += create_non_lemma_entry(word, template, code, definition)
+        for entry in entries:
+            last_entry += create_non_lemma_entry(entry)
 
 
 if __name__ == '__main__':

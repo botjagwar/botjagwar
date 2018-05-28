@@ -1,7 +1,10 @@
 # coding: utf8
 
 import re
+
 import pywikibot
+
+from object_model.word import Entry
 from .base import WiktionaryProcessor
 from .base import stripwikitext
 
@@ -27,12 +30,12 @@ class FRWiktionaryProcessor(WiktionaryProcessor):
         regex = r'\{\{trad[\+\-]+?\|([A-Za-z]{2,3})\|(.*?)\}\}'
         part_of_speech = 'ana'
         definition = ""
-        for title, pos, code, d in self.getall():  # (self.title, pos, self.lang2code(l), defin.strip())
-            if code == 'fr':
-                part_of_speech = pos
-                if pos in self.postran:
-                    part_of_speech = self.postran[pos]
-                definition = d
+        for entry in self.getall():
+            print(entry)
+            if entry.language == 'fr':
+                if entry.part_of_speech in self.postran:
+                    part_of_speech = self.postran[entry.part_of_speech]
+                definition = entry.entry
                 break
 
         for entry in re.findall(regex, self.content):
@@ -48,8 +51,12 @@ class FRWiktionaryProcessor(WiktionaryProcessor):
             if part_of_speech in self.postran:
                 part_of_speech = self.postran[part_of_speech]
 
-            # FIXME: return an object instead of a tuple
-            e = (entree, part_of_speech, langcode, definition.strip())
+            e = Entry(
+                entry=entree,
+                part_of_speech=part_of_speech,
+                language=langcode,
+                entry_definition=[definition.strip()]
+            )
             retcontent.append(e)
         try:
             retcontent.sort()
@@ -68,7 +75,7 @@ class FRWiktionaryProcessor(WiktionaryProcessor):
 
         ct_content = self.content
         for lang in re.findall(
-                '\{\{S\|([a-z]+)\|([a-z]{2,3})',
+                '{{S\|([a-z]+)\|([a-z]{2,3})',
                 self.content):
             # print(ct_content)
             # word DEFINITION Retrieving
@@ -104,17 +111,13 @@ class FRWiktionaryProcessor(WiktionaryProcessor):
             if frpos in self.postran:
                 pos = self.postran[frpos]
 
-            if lang[1].strip() == 'fr':
-                i = (self.Page.title(),
-                     pos,  # POS
-                     str(lang[1].strip()),  # lang
-                     definition.strip())
-            else:
-                # FIXME: return an object instead of a tuple
-                i = (self.Page.title(),
-                     pos,  # POS
-                     str(lang[1].strip()),  # lang
-                     definition)
+            i = Entry(
+                entry=self.Page.title(),
+                part_of_speech=pos,
+                language=lang[1].strip(),
+                entry_definition=[definition.strip()]
+            )
+
             items.append(i)
 
         # print("Nahitana dikanteny ", len(items))
