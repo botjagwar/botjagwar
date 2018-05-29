@@ -6,6 +6,7 @@ https://github.com/radomd92/botjagwar/issues/6#issuecomment-361023958
 import os
 import re
 import sys
+import traceback
 
 import pywikibot
 
@@ -85,7 +86,7 @@ def save_count():
 
 
 def create_non_lemma_entry(entry: Entry):
-    word, pos, code, definition = entry.entry, entry.part_of_speech, entry.language, entry.entry_definition
+    word, pos, code, definition = entry.entry, entry.part_of_speech, entry.language, entry.entry_definition[0]
     page_output = Output()
     mg_page = pywikibot.Page(pywikibot.Site(SITELANG, SITENAME), word)
 
@@ -99,6 +100,7 @@ def create_non_lemma_entry(entry: Entry):
         lemma = get_lemma(output_object_class, definition)
         print(elements, malagasy_definition, lemma)
     except (AttributeError, ValueError) as exc:
+        traceback.print_exc()
         print(exc)
         return 0
 

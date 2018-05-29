@@ -24,6 +24,13 @@ class Entry(TypeCheckedObject):
     def to_tuple(self):
         return self.entry, self.part_of_speech, self.language, self.entry_definition
 
+    def to_dict(self):
+        ret = {}
+        for key in self.properties_types.keys():
+            if hasattr(self, key):
+                ret[key] = getattr(self, key)
+        return ret
+
     def __lt__(self, other):
         """
         Used for sorting entries. Language code will be considered
