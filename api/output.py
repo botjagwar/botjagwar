@@ -70,4 +70,3 @@ class Output(object):
             return s
         except UnicodeDecodeError:
             return s.decode('utf8')
-
