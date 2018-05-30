@@ -6,7 +6,6 @@ https://github.com/radomd92/botjagwar/issues/6#issuecomment-361023958
 import os
 import re
 import sys
-import traceback
 
 import pywikibot
 
@@ -17,6 +16,7 @@ from api.parsers import NounForm
 from api.parsers import VerbForm
 from api.parsers import get_lemma
 from api.parsers import templates_parser
+from api.parsers.inflection_template import ParserError
 from api.servicemanager import LanguageServiceManager
 from object_model.word import Entry
 from page_lister import get_pages_from_category
@@ -99,9 +99,7 @@ def create_non_lemma_entry(entry: Entry):
         malagasy_definition = elements.to_malagasy_definition()
         lemma = get_lemma(output_object_class, definition)
         print(elements, malagasy_definition, lemma)
-    except (AttributeError, ValueError) as exc:
-        traceback.print_exc()
-        print(exc)
+    except ParserError:
         return 0
 
     # Do not create page if lemma does not exist
