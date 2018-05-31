@@ -39,7 +39,7 @@ def _update_unknowns(unknowns):
         f = open(userdata_file + "word_hits", 'a')
     for word, lang in unknowns:
         word += ' [%s]\n' % lang
-        f.write(word)
+        f.write(word[0])
     f.close()
 
 
