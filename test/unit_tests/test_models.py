@@ -1,5 +1,8 @@
-from object_model import TypeCheckedObject, List
+import copy
 from unittest.case import TestCase
+
+from object_model import TypeCheckedObject, List
+from object_model.word import Entry
 
 
 class TestModels(TestCase):
@@ -67,3 +70,75 @@ class TestModels(TestCase):
         self.assertTrue(isinstance(test.test1, int))
         self.assertTrue(isinstance(test.test2, int))
         self.assertTrue(isinstance(test.test3obj, List))
+
+
+class TestEntry(TestCase):
+    def test_to_tuple(self):
+        entry = Entry(
+            entry='1',
+            part_of_speech='2',
+            entry_definition=['3']
+        )
+        self.assertEqual(entry.entry, '1')
+        self.assertEqual(entry.part_of_speech, '2')
+        self.assertEqual(entry.entry_definition, ['3'])
+
+    def test_deep_copy(self):
+        old = Entry(
+            entry='tasumaki',
+            part_of_speech='2',
+            entry_definition=['3']
+        )
+        new = copy.deepcopy(old)
+        new.entry = 'wrong'
+        new.entry_definition = ['potomaki']
+        self.assertNotEqual(new.entry, old.entry)
+        self.assertNotEqual(new.entry_definition, old.entry_definition)
+
+    def test_less_than(self):
+        entry1 = Entry(
+            entry='1',
+            part_of_speech='2',
+            language='kl',
+            entry_definition=['3']
+        )
+        entry2 = Entry(
+            entry='2',
+            part_of_speech='2',
+            language='km',
+            entry_definition=['3']
+        )
+
+        self.assertLess(entry1, entry2)
+
+    def test_less_than_2(self):
+        entry1 = Entry(
+            entry='a',
+            part_of_speech='i',
+            language='kk',
+            entry_definition=['3']
+        )
+        entry2 = Entry(
+            entry='b',
+            part_of_speech='i',
+            language='kk',
+            entry_definition=['3']
+        )
+
+        self.assertLess(entry1, entry2)
+
+    def test_less_than_3(self):
+        entry1 = Entry(
+            entry='1',
+            part_of_speech='2',
+            language='kl',
+            entry_definition=['3']
+        )
+        entry2 = Entry(
+            entry='1',
+            part_of_speech='3',
+            language='kl',
+            entry_definition=['4']
+        )
+
+        self.assertLess(entry1, entry2)

@@ -16,6 +16,7 @@ from api.parsers import NounForm
 from api.parsers import VerbForm
 from api.parsers import get_lemma
 from api.parsers import templates_parser
+from api.parsers.inflection_template import ParserError
 from api.servicemanager import LanguageServiceManager
 from object_model.word import Entry
 from page_lister import get_pages_from_category
@@ -84,7 +85,8 @@ def save_count():
         f.write(str(last_entry))
 
 
-def create_non_lemma_entry(word, pos, code, definition):
+def create_non_lemma_entry(entry: Entry):
+    word, pos, code, definition = entry.entry, entry.part_of_speech, entry.language, entry.entry_definition[0]
     page_output = Output()
     mg_page = pywikibot.Page(pywikibot.Site(SITELANG, SITENAME), word)
 
@@ -97,8 +99,7 @@ def create_non_lemma_entry(word, pos, code, definition):
         malagasy_definition = elements.to_malagasy_definition()
         lemma = get_lemma(output_object_class, definition)
         print(elements, malagasy_definition, lemma)
-    except (AttributeError, ValueError) as exc:
-        print(exc)
+    except ParserError:
         return 0
 
     # Do not create page if lemma does not exist
@@ -174,8 +175,8 @@ def parse_word_forms():
         en_page_processor.process(word_page)
         entries = en_page_processor.getall(definitions_as_is=True)
         print(word_page, entries)
-        for word, pos, code, definition in entries:
-            last_entry += create_non_lemma_entry(word, template, code, definition)
+        for entry in entries:
+            last_entry += create_non_lemma_entry(entry)
 
 
 if __name__ == '__main__':

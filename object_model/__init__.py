@@ -1,4 +1,3 @@
-
 class Property(object):
     def __init__(self, value, _type=object):
         if isinstance(value, _type):
@@ -71,7 +70,7 @@ class TypeCheckedObject(object):
         """
         if name in self.properties_types:
             if isinstance(value, self.properties_types[name]):
-                self.properties[name] = value
+                setattr(self, name, value)
             else:
                 raise AttributeError("%s attribute '%s' expects %s, not %s" % (
                     self.__class__.__name__,
@@ -85,7 +84,3 @@ class TypeCheckedObject(object):
                     name, self.__class__.__name__))
             else:
                 self.properties[name] = value
-
-
-class Entry(TypeCheckedObject):
-    pass

@@ -1,7 +1,9 @@
-from aiohttp import ClientSession
 import json
 
+from aiohttp import ClientSession
+
 from database.exceptions.http import WordAlreadyExistsException
+from object_model.word import Entry
 
 verbose = False
 
@@ -47,16 +49,17 @@ class Output(object):
         string = "%(entry)s -> %(entry_definition)s -> %(part_of_speech)s -> %(language)s\n" % info.properties
         return string
 
-    def wikipage(self, info, link=True):
+    def wikipage(self, info: Entry, link=True):
         "returns wikipage string"
         additional_note = ""
-        if 'origin_wiktionary_page_name' in info.properties and 'origin_wiktionary_edition' in info.properties:
-            additional_note = " {{dikantenin'ny dikanteny|%(origin_wiktionary_page_name)s|%(origin_wiktionary_edition)s}}\n" % info.properties
+        data = info.to_dict()
+        if 'origin_wiktionary_page_name' in data and 'origin_wiktionary_edition' in data:
+            additional_note = " {{dikantenin'ny dikanteny|%(origin_wiktionary_page_name)s|%(origin_wiktionary_edition)s}}\n" % data
 
         s = """
 =={{=%(language)s=}}==
 {{-%(part_of_speech)s-|%(language)s}}
-'''{{subst:BASEPAGENAME}}''' {{fanononana X-SAMPA||%(language)s}} {{fanononana||%(language)s}}""" % info.properties
+'''{{subst:BASEPAGENAME}}''' {{fanononana X-SAMPA||%(language)s}} {{fanononana||%(language)s}}""" % data
         if link:
             s += "\n# %s" % ', '.join(['[[%s]]' % (d) for d in info.entry_definition])
         else:
@@ -67,4 +70,3 @@ class Output(object):
             return s
         except UnicodeDecodeError:
             return s.decode('utf8')
-

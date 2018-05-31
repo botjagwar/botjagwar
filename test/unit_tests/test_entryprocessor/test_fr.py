@@ -1,4 +1,5 @@
 import unittest
+
 from test_utils.mocks import PageMock, SiteMock
 from . import GenericEntryProcessorTester
 
@@ -17,9 +18,9 @@ class TestFrenchWiktionaryEntryprocessor(GenericEntryProcessorTester, unittest.T
         page = PageMock(SiteMock(self.language, 'wiktionary'), 'air')
         self.processor.process(page)
         entries = self.processor.retrieve_translations()
-        entry = entries[-1]
-        word, pos, lang, definition = entry
+        entry = [e for e in entries if e.language == 'ko'][0]
+        word, pos, lang, definition = entry.entry, entry.part_of_speech, entry.language, entry.entry_definition
         self.assertEqual(word, '공기')
         self.assertEqual(pos, 'ana')
         self.assertEqual(lang, 'ko')
-        self.assertTrue(definition.startswith('mélange'))
+        self.assertEqual(definition[0], 'air')

@@ -85,7 +85,10 @@ class Translation:
             translations = wiktionary_processor.retrieve_translations()
         except Exception as e:
             return ret
-        for entry, pos, entry_language in translations:
+        for translation in translations:
+            entry = translation.entry
+            pos = translation.part_of_speech
+            entry_language = translation.language
             if entry_language in self.language_blacklist:  # check in language blacklist
                 continue
 
@@ -115,30 +118,30 @@ class Translation:
 
         return ret
 
-    async def process_entry_in_foreign_language(self, wiki_page, word, language_code, language, pos, definition, unknowns):
-        if language_code in self.language_blacklist:
+    async def process_entry_in_foreign_language(self, entry: Entry, wiki_page, language, unknowns):
+        if entry.language in self.language_blacklist:
             return 0
 
         async with ClientSession() as client_session:
-            async with client_session.get(URL_HEAD + '/word/%s/%s' % (language, word)) as resp:
+            async with client_session.get(URL_HEAD + '/word/%s/%s' % (language, entry.entry)) as resp:
                 if resp.status != WordDoesNotExistException.status_code:
                     return 0
 
         title = wiki_page.title()
         try:
-            mg_translations = await self.translate_word(definition, language)
+            mg_translations = await self.translate_word(entry.entry_definition, language)
         except NoWordException:
             if title not in unknowns:
-                unknowns.append((definition, language))
+                unknowns.append((entry.entry_definition, language))
             return 0
 
         infos = Entry(
             entry=title,
-            part_of_speech=str(pos),
+            part_of_speech=str(entry.pos),
             entry_definition=mg_translations,
-            language=language_code,
+            language=entry.language,
             origin_wiktionary_edition=language,
-            origin_wiktionary_page_name=definition)
+            origin_wiktionary_page_name=entry.entry_definition)
 
         _generate_redirections(infos)
         await self._save_translation_from_bridge_language(infos)
@@ -166,21 +169,20 @@ class Translation:
         except Exception as e:
             return unknowns, ret
 
-        for word, pos, language_code, definition in entries:
-            if word is None or definition is None:
+        for entry in entries:
+            if entry.entry is None or entry.entry_definition is None:
                 continue
 
             # Attempt a translation of a possible non-lemma entry.
             # Part of the effort to integrate word_forms.py in the IRC bot.
-            print(word, pos, language_code, definition)
-            ret += create_non_lemma_entry(word, pos, language_code, definition)
+            ret += create_non_lemma_entry(entry)
 
-            if language_code == language:  # if entry in the content language
+            if entry.language == language:  # if entry in the content language
                 ret += await self.process_entry_in_native_language(
                         wiki_page, language, unknowns)
             else:
                 ret += await self.process_entry_in_foreign_language(
-                        wiki_page, word, language_code, language, pos, definition, unknowns)
+                        entry, wiki_page, language, unknowns)
 
         # Malagasy language pages
         # self.update_malagasy_word(translations_in_mg)

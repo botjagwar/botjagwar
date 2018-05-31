@@ -1,12 +1,12 @@
 PYTHON := python3.6
-PIP := pip3.6
+PIP := python3.6 -m pip
 OPT_DIR := /opt/botjagwar
 TEST_DIR := $(OPT_DIR)/test
 CRON_DIR := /etc/cron.d
 
 define create_dirs
 	sudo mkdir -p $(OPT_DIR)
-	sudo chown $(USER) $(OPT_DIR)
+	if ! sudo chown $(USER) $(OPT_DIR); then echo "chown failed (user is not defined)"; fi
 	sudo mkdir -p $(CRON_DIR)
 	mkdir -p $(OPT_DIR)/user_data/dikantenyvaovao
 endef
