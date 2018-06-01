@@ -76,6 +76,7 @@ async def handle_wiktionary_page(request):
     try:
         await translations.process_wiktionary_wiki_page(page)
     except Exception as e:
+        traceback.print_exc()
         data['traceback'] = traceback.format_exc()
         data['message'] = '' if not hasattr(e, 'message') else getattr(e, 'message')
         response = Response(text=json.dumps(data), status=500, content_type='application/json')

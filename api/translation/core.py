@@ -129,19 +129,19 @@ class Translation:
 
         title = wiki_page.title()
         try:
-            mg_translations = await self.translate_word(entry.entry_definition, language)
+            mg_translations = await self.translate_word(entry.entry_definition[0], language)
         except NoWordException:
             if title not in unknowns:
-                unknowns.append((entry.entry_definition, language))
+                unknowns.append((entry.entry_definition[0], language))
             return 0
 
         infos = Entry(
             entry=title,
-            part_of_speech=str(entry.pos),
+            part_of_speech=str(entry.part_of_speech),
             entry_definition=mg_translations,
             language=entry.language,
             origin_wiktionary_edition=language,
-            origin_wiktionary_page_name=entry.entry_definition)
+            origin_wiktionary_page_name=entry.entry_definition[0])
 
         _generate_redirections(infos)
         await self._save_translation_from_bridge_language(infos)
@@ -150,8 +150,11 @@ class Translation:
         return 1
 
     async def process_wiktionary_wiki_page(self, wiki_page):
-        language = wiki_page.site.language()
         unknowns = []
+        try:
+            language = wiki_page.site.language()
+        except Exception:
+            return unknowns, 0
 
         # BEGINNING
         ret = 0
@@ -189,7 +192,7 @@ class Translation:
 
         return unknowns, ret
 
-    async def translate_word(self, word, language):
+    async def translate_word(self, word: str, language: str):
         url = URL_HEAD + '/translations/%s/mg/%s' % (language, word)
         async with ClientSession() as client_session:
             async with client_session.get(url) as resp:
