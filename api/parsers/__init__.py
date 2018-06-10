@@ -4,6 +4,7 @@ from api.parsers.functions import parse_el_form_of
 from api.parsers.functions import parse_inflection_of
 from api.parsers.functions import parse_one_parameter_template
 from api.parsers.functions.adjective_forms import parse_adjective_form
+from api.parsers.functions.adjective_forms import parse_fi_adjective_form_of
 from api.parsers.functions.noun_forms import parse_fi_form_of as parse_fi_noun_form_of
 from api.parsers.functions.noun_forms import parse_lt_noun_form
 from api.parsers.functions.noun_forms import parse_nl_noun_form_of
@@ -28,6 +29,7 @@ templates_parser.add_parser(AdjectiveForm, 'feminine plural of',
 templates_parser.add_parser(AdjectiveForm, 'feminine singular of',
                             parse_one_parameter_template(AdjectiveForm, 'feminine singular of', gender='f', number='s'))
 templates_parser.add_parser(AdjectiveForm, 'feminine of', parse_one_parameter_template(AdjectiveForm, 'feminine of'))
+templates_parser.add_parser(AdjectiveForm, 'fi-form of', parse_fi_adjective_form_of)
 templates_parser.add_parser(AdjectiveForm, 'inflected form of', parse_one_parameter_template(AdjectiveForm, 'inflected form of', number='', gender=''))
 templates_parser.add_parser(AdjectiveForm, 'inflection of', parse_inflection_of(AdjectiveForm))
 templates_parser.add_parser(AdjectiveForm, 'it-adj form of', parse_adjective_form)
@@ -41,7 +43,7 @@ templates_parser.add_parser(NounForm, 'feminine plural of', parse_one_parameter_
 templates_parser.add_parser(NounForm, 'feminine of', parse_one_parameter_template(NounForm, 'feminine of'))
 templates_parser.add_parser(NounForm, 'fi-form of', parse_fi_noun_form_of)
 templates_parser.add_parser(NounForm, 'genitive plural definite of',
-                            parse_one_parameter_template(NounForm, 'genitive plural indefinite of', number='p',
+                            parse_one_parameter_template(NounForm, 'genitive plural definite of', number='p',
                                                          case_name='gen', definiteness='definite'))
 templates_parser.add_parser(NounForm, 'genitive plural indefinite of',
                             parse_one_parameter_template(NounForm, 'genitive plural indefinite of', number='p',
@@ -51,7 +53,7 @@ templates_parser.add_parser(NounForm, 'genitive singular definite of',
                                                          case_name='gen', definiteness='definite'))
 templates_parser.add_parser(NounForm, 'genitive singular indefinite of',
                             parse_one_parameter_template(NounForm, 'genitive singular indefinite of', number='s',
-                                                         case_name='gen', definiteness='definite'))
+                                                         case_name='gen', definiteness='indefinite'))
 templates_parser.add_parser(NounForm, 'got-nom form of', parse_el_form_of(NounForm, -1))
 templates_parser.add_parser(NounForm, 'inflection of', parse_inflection_of(NounForm))
 templates_parser.add_parser(NounForm, 'inflected form of', parse_one_parameter_template(NounForm, 'inflected form of'))
