@@ -152,6 +152,9 @@ PERSONS = {
 }
 
 DEFINITENESS = {
+    'def': 'voafaritra',
+    'indef': 'tsy voafaritra',
+    # full forms
     'definite': 'voafaritra',
     'indefinite': 'tsy voafaritra',
 }

@@ -31,18 +31,6 @@ def set_throttle(i):
     t.setDelays(i)
 
 
-def _update_unknowns(unknowns):
-    try:
-        f = open(userdata_file + "word_hits", 'a')
-    except FileNotFoundError:
-        os.system('mkdir -p %s' % userdata_file)
-        f = open(userdata_file + "word_hits", 'a')
-    for word, lang in unknowns:
-        word += ' [%s]\n' % lang
-        f.write(word)
-    f.close()
-
-
 def _get_page(name, lang):
     page = pwbot.Page(pwbot.Site(lang, 'wiktionary'), name)
     return page
@@ -86,9 +74,9 @@ async def handle_wiktionary_page(request):
         return
     data = {}
     try:
-        data['unknowns'], data['new_entries'] = await translations.process_wiktionary_wiki_page(page)
-        _update_unknowns(data['unknowns'])
+        await translations.process_wiktionary_wiki_page(page)
     except Exception as e:
+        traceback.print_exc()
         data['traceback'] = traceback.format_exc()
         data['message'] = '' if not hasattr(e, 'message') else getattr(e, 'message')
         response = Response(text=json.dumps(data), status=500, content_type='application/json')

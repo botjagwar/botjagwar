@@ -14,8 +14,8 @@ from api.output import Output
 from api.parsers import AdjectiveForm
 from api.parsers import NounForm
 from api.parsers import VerbForm
-from api.parsers import get_lemma
 from api.parsers import templates_parser
+from api.parsers.functions.postprocessors import POST_PROCESSORS
 from api.parsers.inflection_template import ParserError
 from api.servicemanager import LanguageServiceManager
 from object_model.word import Entry
@@ -36,12 +36,14 @@ TEMPLATE_TO_OBJECT = {
     'e-mat': VerbForm,
     'ana': NounForm,
     'mpam-ana': AdjectiveForm,
+    'mpam': AdjectiveForm,
     'mat': VerbForm,
 }
 
 FORM_OF_TEMPLATE = {
     'ana': 'e-ana',
     'mpam-ana': 'e-mpam-ana',
+    'mpam': 'e-mpam-ana',
     'mat': 'e-mat',
 }
 
@@ -93,20 +95,25 @@ def create_non_lemma_entry(entry: Entry):
     # Translate template's content into malagasy
     try:
         if pos not in TEMPLATE_TO_OBJECT:  # unsupported template
+            print("Unsupported template")
             return 0
         output_object_class = TEMPLATE_TO_OBJECT[pos]
         elements = templates_parser.get_elements(output_object_class, definition)
+        if code in POST_PROCESSORS:
+            elements = POST_PROCESSORS[code](elements)
         malagasy_definition = elements.to_malagasy_definition()
-        lemma = get_lemma(output_object_class, definition)
+        lemma = elements.lemma
+        # lemma = get_lemma(output_object_class, definition)
         print(elements, malagasy_definition, lemma)
-    except ParserError:
+    except ParserError as exc:
+        print(exc)
         return 0
 
     # Do not create page if lemma does not exist
     mg_lemma_page = pywikibot.Page(pywikibot.Site(SITELANG, SITENAME), lemma)
     try:
         if not mg_lemma_page.exists():
-            print('No lemma :/')
+            print('No lemma (%s) :/' % lemma)
             return 0
     except pywikibot.exceptions.InvalidTitle:  # doing something wrong at this point
         return 0
