@@ -56,6 +56,7 @@ templates_parser.add_parser(NounForm, 'genitive singular indefinite of',
                                                          case_name='gen', definiteness='indefinite'))
 templates_parser.add_parser(NounForm, 'got-nom form of', parse_el_form_of(NounForm, -1))
 templates_parser.add_parser(NounForm, 'inflection of', parse_inflection_of(NounForm))
+templates_parser.add_parser(NounForm, 'is-inflection of', parse_inflection_of(NounForm))
 templates_parser.add_parser(NounForm, 'inflected form of', parse_one_parameter_template(NounForm, 'inflected form of'))
 templates_parser.add_parser(NounForm, 'lt-form-noun', parse_lt_noun_form)
 templates_parser.add_parser(NounForm, 'lv-inflection of', parse_noun_form_lv_inflection_of)
