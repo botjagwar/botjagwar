@@ -15,9 +15,10 @@ from object_model.word import Entry
 from word_forms import create_non_lemma_entry
 
 default_data_file = os.getcwd() + '/conf/entry_translator/'
-URL_HEAD = 'http://localhost:8001'
-LANGUAGE_BLACKLIST = ['fr', 'en', 'sh', 'ar', 'de', 'zh']
 CYRILLIC_ALPHABET_LANGUAGES = ['ru', 'uk', 'bg', 'be']
+LANGUAGE_BLACKLIST = ['fr', 'en', 'sh', 'ar', 'de', 'zh']
+URL_HEAD = 'http://localhost:8001'
+WORKING_WIKI_LANGUAGE = 'target_language'
 
 
 class Translation:
@@ -34,10 +35,10 @@ class Translation:
         summary = "Dikan-teny avy amin'ny dikan-teny avy amin'i %s.wiktionary" % infos.origin_wiktionary_edition
         summary += " (%s)" % get_version()
         wikipage = self.output.wikipage(infos)
-        mg_page = pwbot.Page(pwbot.Site('mg', 'wiktionary'), infos.entry)
+        target_language_page = pwbot.Page(pwbot.Site(WORKING_WIKI_LANGUAGE, 'wiktionary'), infos.entry)
         try:
-            if mg_page.exists():
-                page_content = mg_page.get()
+            if target_language_page.exists():
+                page_content = target_language_page.get()
                 if page_content.find('{{=%s=}}' % infos.language) != -1:
                     await self.output.db(infos)
                     return
@@ -45,7 +46,7 @@ class Translation:
                     wikipage += page_content
                     summary = "+" + summary
         except pwbot.exceptions.IsRedirectPage:
-            infos.entry = mg_page.getRedirectTarget().title()
+            infos.entry = target_language_page.getRedirectTarget().title()
             await self._save_translation_from_bridge_language(infos)
             return
 
@@ -55,16 +56,16 @@ class Translation:
         except Exception as e:
             return
 
-        mg_page.put_async(wikipage, summary)
+        target_language_page.put_async(wikipage, summary)
         await self.output.db(infos)
 
     async def _save_translation_from_page(self, infos):
         summary = "Dikan-teny avy amin'ny pejy avy amin'i %s.wiktionary" % infos.language
         summary += " (%s)" % get_version()
         wikipage = self.output.wikipage(infos)
-        mg_page = pwbot.Page(pwbot.Site('mg', 'wiktionary'), infos.entry)
-        if mg_page.exists():
-            page_content = mg_page.get()
+        target_language_page = pwbot.Page(pwbot.Site(WORKING_WIKI_LANGUAGE, 'wiktionary'), infos.entry)
+        if target_language_page.exists():
+            page_content = target_language_page.get()
             if page_content.find('{{=%s=}}' % infos.language) != -1:
                 await self.output.db(infos)
                 return
@@ -73,7 +74,7 @@ class Translation:
                 wikipage, edit_summary = Autoformat(wikipage).wikitext()
                 summary = "+" + summary + ", %s" % edit_summary
 
-        mg_page.put_async(wikipage, summary)
+        target_language_page.put_async(wikipage, summary)
         await self.output.db(infos)
 
     async def process_entry_in_native_language(self, wiki_page, language, unknowns):
@@ -94,7 +95,7 @@ class Translation:
 
             title = wiki_page.title()
             try:
-                mg_translations = await self.translate_word(title, language)
+                target_language_translations = await self.translate_word(title, language)
             except NoWordException:
                 if title not in unknowns:
                     unknowns.append((title, language))
@@ -103,7 +104,7 @@ class Translation:
             infos = Entry(
                 entry=entry,
                 part_of_speech=str(pos),
-                entry_definition=mg_translations,
+                entry_definition=target_language_translations,
                 language=entry_language,
                 origin_wiktionary_edition=language,
                 origin_wiktionary_page_name=title)
@@ -129,7 +130,7 @@ class Translation:
 
         title = wiki_page.title()
         try:
-            mg_translations = await self.translate_word(entry.entry_definition[0], language)
+            target_language_translations = await self.translate_word(entry.entry_definition[0], language)
         except NoWordException:
             if title not in unknowns:
                 unknowns.append((entry.entry_definition[0], language))
@@ -138,7 +139,7 @@ class Translation:
         infos = Entry(
             entry=title,
             part_of_speech=str(entry.part_of_speech),
-            entry_definition=mg_translations,
+            entry_definition=target_language_translations,
             language=entry.language,
             origin_wiktionary_edition=language,
             origin_wiktionary_page_name=entry.entry_definition[0])
@@ -188,12 +189,12 @@ class Translation:
                         entry, wiki_page, language, unknowns)
 
         # Malagasy language pages
-        # self.update_malagasy_word(translations_in_mg)
+        # self.update_malagasy_word(translations_in_target_language)
 
         return unknowns, ret
 
     async def translate_word(self, word: str, language: str):
-        url = URL_HEAD + '/translations/%s/mg/%s' % (language, word)
+        url = URL_HEAD + '/translations/%s/%s/%s' % (language, WORKING_WIKI_LANGUAGE, word)
         async with ClientSession() as client_session:
             async with client_session.get(url) as resp:
                 if resp.status == WordDoesNotExistException.status_code:
@@ -220,7 +221,7 @@ def _generate_redirections(infos):
         if redirection_target.find("æ") != -1:
             redirection_target = redirection_target.replace("æ", "ӕ")
         if infos.entry != redirection_target:
-            page = pwbot.Page(pwbot.Site('mg', 'wiktionary'), infos.entry)
+            page = pwbot.Page(pwbot.Site(WORKING_WIKI_LANGUAGE, 'wiktionary'), infos.entry)
             if not page.exists():
                 page.put_async("#FIHODINANA [[%s]]" % redirection_target, "fihodinana")
             infos.entry = redirection_target
