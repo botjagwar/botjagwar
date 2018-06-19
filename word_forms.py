@@ -101,6 +101,9 @@ def create_non_lemma_entry(entry: Entry):
         elements = templates_parser.get_elements(output_object_class, definition)
         if code in POST_PROCESSORS:
             elements = POST_PROCESSORS[code](elements)
+        if elements is None:
+            print("No elements")
+            return 0
         malagasy_definition = elements.to_malagasy_definition()
         lemma = elements.lemma
         # lemma = get_lemma(output_object_class, definition)
