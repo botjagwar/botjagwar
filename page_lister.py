@@ -11,6 +11,14 @@ def load_pages_from_category(working_language, category_name):
 
 
 def get_pages_from_category(working_language, category_name):
+    """
+    Yields a page list from a given category.
+    - Page list is fetched from a local file in user_data.
+      - If file doesn't exist, load the page list from on-wiki category, and saves it locally for future use
+    :param working_language
+    :param category_name
+    :return:
+    """
     def read_pages_in_category():
         with open('user_data/list_%s_%s' % (working_language, category_name), 'r') as f:
             for line in f.readlines():

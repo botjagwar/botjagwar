@@ -1,14 +1,15 @@
 #!/usr/bin/python3.6
 
-import sys
 import asyncio
-from aiohttp import ClientSession
 import csv
 import json
-from api.decorator import threaded
+import sys
 from subprocess import Popen
-from database.exceptions.http import WordAlreadyExistsException
 
+from aiohttp import ClientSession
+
+from api.decorator import threaded
+from database.exceptions.http import WordAlreadyExistsException
 
 MONOLINGUAL_DICTIONARY = 'user_data/%s.csv' % sys.argv[1]  # for parts of speech
 BILINGUAL_DICTIONARY = 'user_data/%s_malagasy.csv' % sys.argv[1]  # for parts of speech
