@@ -71,7 +71,6 @@ class Entry(TypeCheckedObject):
         else:
             return 1
 
-
     def __repr__(self):
         return "Entry{entry=%s, language=%s, part_of_speech=%s, entry_definition=%s}" % (
             self.entry, self.language, self.part_of_speech, self.entry_definition)
@@ -80,8 +79,11 @@ class Entry(TypeCheckedObject):
 class Translation(TypeCheckedObject):
     _additional = False
     properties_types = dict(
-        origin=Word,
-        target=Word)
+        word=str,
+        language=str,
+        part_of_speech=str,
+        translation=str
+    )
 
 
-__all__ = ['Entry', 'Translation']
+__all__ = ['Word', 'Entry', 'Translation']

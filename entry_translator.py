@@ -13,6 +13,7 @@ from pywikibot import Site, Page
 from api import entryprocessor
 from api.decorator import threaded
 from api.translation.core import Translation
+from object_model.word import Translation as TranslationModel
 
 # GLOBAL VARS
 verbose = False
@@ -107,12 +108,13 @@ async def get_wiktionary_processed_page(request):
             translation=definition[0])
 
         for translation in wiktionary_processor.retrieve_translations():
-            translation_section = dict(
+            translation_section = TranslationModel(
                 word=translation.entry,
                 language=translation.language,
                 part_of_speech=translation.part_of_speech,
-                translation=translation.entry_definition[0])
-            translation_list.append(translation_section)
+                translation=translation.entry_definition[0]
+            )
+            translation_list.append(translation_section.to_dict())
 
         if language_code == language:
             section['translations'] = translation_list

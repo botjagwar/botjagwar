@@ -3,7 +3,7 @@ class Property(object):
         if isinstance(value, _type):
             self.value = value
 
-    def serialize(self):
+    def serialise(self):
         return str(self.value)
 
 
@@ -11,11 +11,11 @@ class List(Property):
     def __init__(self, value=list()):
         Property.__init__(self, value, _type=list)
 
-    def serialize(self):
+    def serialise(self):
         ret = []
         for value in self.value:
             if isinstance(value, Property):
-                ret.append(value.serialize())
+                ret.append(value.serialise())
             else:
                 ret.append(value)
 
@@ -52,7 +52,7 @@ class TypeCheckedObject(object):
         for pname, pvalue in list(self.properties.items()):
             # print 'CLASS:', self.__class__.__name__, '::', pname, '>', pvalue
             if isinstance(pvalue, Property):
-                ret[pname] = pvalue.serialize()
+                ret[pname] = pvalue.serialise()
             else:
                 ret[pname] = pvalue
         return ret
