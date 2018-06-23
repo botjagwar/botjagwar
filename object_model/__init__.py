@@ -1,5 +1,5 @@
 class Property(object):
-    def __init__(self, value, _type=object):
+    def __init__(self, value, _type):
         if isinstance(value, _type):
             self.value = value
 
@@ -18,6 +18,7 @@ class List(Property):
                 ret.append(value.serialise())
             else:
                 ret.append(value)
+        return ret
 
 
 class TypeCheckedObject(object):
@@ -49,12 +50,13 @@ class TypeCheckedObject(object):
 
     def to_dict(self):
         ret = {}
-        for pname, pvalue in list(self.properties.items()):
-            # print 'CLASS:', self.__class__.__name__, '::', pname, '>', pvalue
-            if isinstance(pvalue, Property):
-                ret[pname] = pvalue.serialise()
-            else:
-                ret[pname] = pvalue
+        for key in self.properties_types.keys():
+            if hasattr(self, key):
+                value = getattr(self, key)
+                if isinstance(value, Property):
+                    ret[key] = value.serialise()
+                else:
+                    ret[key] = value
         return ret
 
     def add_attribute(self, name, value):
