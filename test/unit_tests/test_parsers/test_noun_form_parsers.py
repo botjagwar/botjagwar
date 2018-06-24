@@ -1,6 +1,8 @@
 from unittest import TestCase
 
-from api.parsers.functions import parse_inflection_of, parse_el_form_of
+from api.parsers.functions import parse_el_form_of
+from api.parsers.functions import parse_hu_inflection_of
+from api.parsers.functions import parse_inflection_of
 from api.parsers.functions.noun_forms import parse_fi_form_of as parse_fi_form_of_noun
 from api.parsers.functions.noun_forms import parse_lt_noun_form
 from api.parsers.functions.noun_forms import parse_nl_noun_form_of
@@ -68,3 +70,10 @@ class TestAdjectiveFormParsers(TestCase):
         self.assertEqual(output.number, 's')
         self.assertEqual(output.case, 'gen')
         self.assertEqual(output.lemma, 'αβοκέτα')
+
+    def test_parse_hu_inflection_of(self):
+        template_expression = '{{hu-inflection of|sors|ill|s}}'
+        output = parse_hu_inflection_of(template_expression)
+        self.assertEqual(output.number, 's')
+        self.assertEqual(output.case, 'ill')
+        self.assertEqual(output.lemma, 'sors')

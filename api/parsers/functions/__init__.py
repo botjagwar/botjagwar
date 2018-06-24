@@ -61,6 +61,7 @@ def parse_inflection_of(out_class):
 
     return _parse_inflection_of_partial
 
+
 def parse_hu_inflection_of(template_expression):
     for char in '{}':
         template_expression = template_expression.replace(char, '')
