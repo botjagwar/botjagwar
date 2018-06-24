@@ -8,6 +8,8 @@ CASES = {
     'v': 'endrika miantso',
 
     # abbreviated forms
+    'cfin': 'ebdrika kaozaly-mamarana',
+    'ade': 'adesiva',
     'nom': 'endriky ny lazaina',
     'acc': 'endrika teny fameno',
     'loc': 'endrika teny famaritan-toerana',
@@ -143,6 +145,8 @@ PERSONS = {
     '1': 'mpanao voalohany',
     '2': 'mpanao faharoa',
     '3': 'mpanao fahatelo',
+    '4': 'mpanao fahaefatra',
+    '5': 'mpanao fahadimy',
     'impers': 'mpanao tsy fantatra',
 
     # full forms
@@ -158,3 +162,8 @@ DEFINITENESS = {
     'definite': 'voafaritra',
     'indefinite': 'tsy voafaritra',
 }
+
+POSSESSIVENESS = {}
+for person in PERSONS:
+    for number in NUMBER:
+        POSSESSIVENESS[person+number] = PERSONS[person] + ' ' + NUMBER[number]

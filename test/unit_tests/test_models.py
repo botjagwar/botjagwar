@@ -1,11 +1,13 @@
 import copy
 from unittest.case import TestCase
 
-from object_model import TypeCheckedObject, List
+from object_model import List
+from object_model import TypeCheckedObject
 from object_model.word import Entry
+from object_model.word import Translation
 
 
-class TestModels(TestCase):
+class TestModelsBaseBehaviour(TestCase):
 
     def test_instantiate_base(self):
         test = TypeCheckedObject(
@@ -55,8 +57,9 @@ class TestModels(TestCase):
 
         self.assertRaises(AttributeError, do_checks)
 
-    def test_serialise_with_list(self):
 
+class TestList(TestCase):
+    def test_instantiate_with_list(self):
         class YunHang(TypeCheckedObject):
             _additional = False
             properties_types = {
@@ -70,6 +73,20 @@ class TestModels(TestCase):
         self.assertTrue(isinstance(test.test1, int))
         self.assertTrue(isinstance(test.test2, int))
         self.assertTrue(isinstance(test.test3obj, List))
+
+    def test_serialise_with_list(self):
+        class YunHang(TypeCheckedObject):
+            _additional = False
+            properties_types = {
+                "test1": int,
+                "test2": int,
+                'test3obj': List
+            }
+
+        test = YunHang(test1=1, test2=2, test3obj=List(['qw', 'dlk']))
+        serialised = test.to_dict()
+
+        self.assertIsInstance(serialised['test3obj'], list)
 
 
 class TestEntry(TestCase):
@@ -142,3 +159,18 @@ class TestEntry(TestCase):
         )
 
         self.assertLess(entry1, entry2)
+
+
+class TestTranslation(TestCase):
+    def test_serialise(self):
+        translation = Translation(
+            word='kaolak',
+            language='kk',
+            part_of_speech='ana',
+            translation='alskdalskdalkas'
+        )
+        serialised = translation.to_dict()
+        self.assertEqual(serialised['word'], 'kaolak')
+        self.assertEqual(serialised['language'], 'kk')
+        self.assertEqual(serialised['part_of_speech'], 'ana')
+        self.assertEqual(serialised['translation'], 'alskdalskdalkas')

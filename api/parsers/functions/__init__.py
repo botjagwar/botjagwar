@@ -1,4 +1,4 @@
-from api.parsers.constants import CASES, GENDER, NUMBER, DEFINITENESS
+from api.parsers.constants import CASES, GENDER, NUMBER, DEFINITENESS, POSSESSIVENESS
 from api.parsers.inflection_template import NounForm, AdjectiveForm
 
 
@@ -60,6 +60,34 @@ def parse_inflection_of(out_class):
         return ret_obj
 
     return _parse_inflection_of_partial
+
+def parse_hu_inflection_of(template_expression):
+    for char in '{}':
+        template_expression = template_expression.replace(char, '')
+    parts = template_expression.split('|')
+    for tparam in parts:
+        if tparam.find('=') != -1:
+            parts.remove(tparam)
+    t_name, lemma = parts[:2]
+    case_name = number_ = ''
+    gender = None
+    definiteness = None
+    possessiveness = None
+    for pn in parts:
+        if pn in NUMBER:
+            number_ = pn
+        elif pn in CASES:
+            case_name = pn
+        elif pn in GENDER:
+            gender = pn
+        elif pn in DEFINITENESS:
+            definiteness = pn
+        elif pn in POSSESSIVENESS:
+            possessiveness = pn
+
+    ret_obj = NounForm(lemma=lemma, case=case_name, number=number_, gender=gender, possessive=possessiveness)
+    ret_obj.definite = definiteness
+    return ret_obj
 
 
 def parse_el_form_of(out_class, lemma_pos=1):
