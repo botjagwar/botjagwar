@@ -1,6 +1,7 @@
 # coding: utf8
 
 from api.parsers.functions import parse_el_form_of
+from api.parsers.functions import parse_hu_inflection_of
 from api.parsers.functions import parse_inflection_of
 from api.parsers.functions import parse_one_parameter_template
 from api.parsers.functions.adjective_forms import parse_adjective_form
@@ -56,6 +57,7 @@ templates_parser.add_parser(NounForm, 'genitive singular indefinite of',
                                                          case_name='gen', definiteness='indefinite'))
 templates_parser.add_parser(NounForm, 'got-nom form of', parse_el_form_of(NounForm, -1))
 templates_parser.add_parser(NounForm, 'inflection of', parse_inflection_of(NounForm))
+templates_parser.add_parser(NounForm, 'hu-inflection of', parse_hu_inflection_of)
 templates_parser.add_parser(NounForm, 'is-inflection of', parse_inflection_of(NounForm))
 templates_parser.add_parser(NounForm, 'inflected form of', parse_one_parameter_template(NounForm, 'inflected form of'))
 templates_parser.add_parser(NounForm, 'lt-form-noun', parse_lt_noun_form)

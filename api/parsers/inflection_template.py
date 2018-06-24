@@ -1,5 +1,5 @@
 # coding: utf8
-from api.parsers.constants import GENDER, CASES, NUMBER, MOOD, TENSE, PERSONS, VOICE, DEFINITENESS
+from api.parsers.constants import GENDER, CASES, NUMBER, MOOD, TENSE, PERSONS, VOICE, DEFINITENESS, POSSESSIVENESS
 
 
 class NonLemma(object):
@@ -61,15 +61,18 @@ class NounForm(NonLemma):
     lemma = None
     definite = None
 
-    def __init__(self, lemma=None, case=None, number=None, gender=None, definite=None):
+    def __init__(self, lemma=None, case=None, number=None, gender=None, definite=None, possessive=None):
         super(NounForm, self).__init__(lemma=lemma, case=case, number=number, gender=gender)
         self.definite = definite
+        self.possessive = possessive
 
     def to_malagasy_definition(self):
         """
         :return: A malagasy language definition in unicode
         """
         explanation = ''
+        if self.possessive in POSSESSIVENESS:
+            explanation += POSSESSIVENESS[self.possessive] + ' '
         if self.case in CASES:
             explanation += CASES[self.case] + ' '
         if self.gender in GENDER:
