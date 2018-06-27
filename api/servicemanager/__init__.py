@@ -7,11 +7,11 @@ from api.decorator import threaded
 
 
 class ServiceManager:
-    port = 8000
+    backend_address = 'localhost'
+    port = 8888
+    program_name = None
     scheme = 'http'
     spawned_backend_process = None
-    backend_address = 'localhost'
-    program_name = None
 
     def __del__(self):
         self.spawned_backend_process.terminate()
@@ -25,7 +25,10 @@ class ServiceManager:
 
     @threaded
     def spawn_backend(self, *args):
-        self.spawned_backend_process = Popen(['python3.6', self.program_name] + list(args))
+        self.specific_args = ['-p', str(self.port)]  # XXX: requires a list of str objects
+        proc_params = ['python3.6', self.program_name] + self.specific_args + list(args)
+        print (proc_params)
+        self.spawned_backend_process = Popen(proc_params)
         with open('/tmp/%s.pid' % self.program_name, 'w') as f:
             f.write(str(self.spawned_backend_process.pid))
 

@@ -1,11 +1,12 @@
 #!/usr/bin/python3.6
+import os
 import random
 import re
 import time
-import os
 
 import irc.bot
 import requests
+
 from api.decorator import retry_on_fail
 from api.servicemanager import EntryTranslatorServiceManager, DictionaryServiceManager
 
@@ -35,6 +36,7 @@ class WiktionaryRecentChangesBot(irc.bot.SingleServerIRCBot):
     For example : fr,en,de will track fr.wiktionary, en.wiktionary and de.wiktionary
     @user the username which will be use by the IRC client
     """
+    recent_change_server = ("irc.wikimedia.org", 6667)
 
     def __init__(self, nick_prefix="botjagwar"):
         nick_suffix = '-%s' % base36encode(random.randint(36**3, 36**4 - 1))
@@ -43,7 +45,6 @@ class WiktionaryRecentChangesBot(irc.bot.SingleServerIRCBot):
         super(WiktionaryRecentChangesBot, self).__init__(self.channels_list, user, user, 5)
 
         self.chronometer = 0.0
-        self.service_address = "http://localhost:8000"
         self.joined = []
         self.langs = []
         self.stats = {'edits': 0.0, 'newentries': 0.0, 'errors': 0.0}
@@ -58,24 +59,37 @@ class WiktionaryRecentChangesBot(irc.bot.SingleServerIRCBot):
     def connect_in_languages(self):
         """mametaka fitohizana amin'ny tsanely irc an'i Wikimedia"""
 
-        @retry_on_fail([requests.exceptions.ConnectionError], retries=3, time_between_retries=0.1)
+        @retry_on_fail([requests.exceptions.ConnectionError], retries=5, time_between_retries=0.1)
         def configure_backend():
             time.sleep(3)
-            requests.put(self.service_address + '/configure', json={'autocommit': True})
+            self.entry_translator_manager.put(
+                '/configure',
+                json={'autocommit': True}
+            )
 
         print ("\n---------------------\nIRC BOT PAREMETERS : ")
         self.langs = ['en', 'fr']
         self.sitename = 'wiktionary'
-        self.channels = ["#%s.%s" % (language.strip(), self.sitename) for language in self.langs]
+        self.channels = [
+            "#%s.%s" % (language.strip(), self.sitename)
+            for language in self.langs
+        ]
 
         try:
-            requests.put(self.service_address + '/configure', json={'autocommit': True})
+            self.entry_translator_manager.put(
+                '/configure',
+                json={'autocommit': True}
+            )
         except requests.exceptions.ConnectionError:
             configure_backend()
 
         for channel in self.channels:
             irc.bot.SingleServerIRCBot.__init__(
-                self, [("irc.wikimedia.org", 6667)], self.username, "Bot-Jagwar [IRCbot v2].")
+                self,
+                [self.recent_change_server],
+                self.username,
+                "Bot-Jagwar [IRCbot v2]."
+            )
             self.joined.append(channel)
             print(("Channel:", channel, " Nickname:", self.username))
 
@@ -95,11 +109,10 @@ class WiktionaryRecentChangesBot(irc.bot.SingleServerIRCBot):
         try:
             ct_time = time.time()
             msg = _prepare_message(events)
-            wikilanguage = _get_origin_wiki(msg)
-            pagename = _get_pagename(msg)
-            url = self.service_address + "/wiktionary_page/%s" % (wikilanguage)
-            data = {'title': pagename}
-            requests.post(url, json=data)
+            self.entry_translator_manager.post(
+                "/wiktionary_page/%s" % (_get_origin_wiki(msg)),
+                json={'title': _get_pagename(msg)}
+            )
             self.edits += 1
             if not self.edits % 5:
                 throughput = 60. * 5. / (float(ct_time) - self.chronometer)
