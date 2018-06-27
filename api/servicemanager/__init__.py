@@ -6,15 +6,46 @@ import requests
 from api.decorator import threaded
 
 
-class ServiceManager:
-    backend_address = 'localhost'
-    port = 8888
+class ProcessManager:
+    """
+    ProcessManager provides an abstract API to spawn and kills processes.
+    The process is spawned on a call to spawn_backend() method and is terminated
+    upon object destruction.
+    """
     program_name = None
-    scheme = 'http'
     spawned_backend_process = None
 
     def __del__(self):
         self.spawned_backend_process.terminate()
+
+    def get_specific_arguments(self):
+        """
+        Override this method and return a list of strings if you want to give program-specific
+        arguments. An empty list means that no specific arguments are needed.
+        :return:
+        """
+        return []
+
+    @threaded
+    def spawn_backend(self, *args):
+        self.specific_args = self.get_specific_arguments() # XXX: requires a list of str objects
+        proc_params = ['python3.6', self.program_name] + self.specific_args + list(args)
+        self.spawned_backend_process = Popen(proc_params)
+        with open('/tmp/%s.pid' % self.program_name, 'w') as f:
+            f.write(str(self.spawned_backend_process.pid))
+
+
+class ServiceManager(ProcessManager):
+    """
+    ServiceManager provides a minimally abstract APIs to spawn and despawn aiohttp RESTful services.
+    """
+    backend_address = 'localhost'
+    port = 8888
+    scheme = 'http'
+
+
+    def get_specific_arguments(self):
+        return ['-p', str(self.port)]
 
     def set_backend_address(self, addr):
         """
@@ -23,14 +54,6 @@ class ServiceManager:
         """
         self.backend_address = addr
 
-    @threaded
-    def spawn_backend(self, *args):
-        self.specific_args = ['-p', str(self.port)]  # XXX: requires a list of str objects
-        proc_params = ['python3.6', self.program_name] + self.specific_args + list(args)
-        print (proc_params)
-        self.spawned_backend_process = Popen(proc_params)
-        with open('/tmp/%s.pid' % self.program_name, 'w') as f:
-            f.write(str(self.spawned_backend_process.pid))
 
     # Low-level functions to use with high-level functions
     def get(self, route, **kwargs):
