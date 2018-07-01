@@ -53,6 +53,8 @@ TEMPLATE_TO_MG_CATEGORY = {
     'e-mat': "Endriky ny matoanteny",
 }
 
+PAGE_SET = set()
+
 
 def get_count():
     try:
@@ -87,6 +89,11 @@ def save_count():
         f.write(str(last_entry))
 
 
+def get_malagasy_page_list():
+    with open('user_data/mgwiktionary-latest-all-titles-in-ns0', 'r') as f:
+        for line in f.readlines():
+            PAGE_SET.add(line.strip())
+
 def create_non_lemma_entry(entry: Entry):
     word, pos, code, definition = entry.entry, entry.part_of_speech, entry.language, entry.entry_definition[0]
     page_output = Output()
@@ -113,13 +120,9 @@ def create_non_lemma_entry(entry: Entry):
         return 0
 
     # Do not create page if lemma does not exist
-    mg_lemma_page = pywikibot.Page(pywikibot.Site(SITELANG, SITENAME), lemma)
-    try:
-        if not mg_lemma_page.exists():
-            print('No lemma (%s) :/' % lemma)
-            return 0
-    except pywikibot.exceptions.InvalidTitle:  # doing something wrong at this point
-        return 0
+    # if lemma not in PAGE_SET:
+    #     print('No lemma (%s) :/' % lemma)
+    #     return 0
 
     form_of_template = FORM_OF_TEMPLATE[pos] if pos in FORM_OF_TEMPLATE else pos
 
@@ -138,7 +141,7 @@ def create_non_lemma_entry(entry: Entry):
         print(('PAGE OVERWRITING IS ACTIVE. DELETE /tmp/%s TO DISABLE IT MID-SCRIPT.' % code))
 
     # Create or update the generated page
-    if mg_page.exists() and not overwrite:
+    if mg_page.title() in PAGE_SET and not overwrite:
         new_entry = page_output.wikipage(mg_entry, link=False)
         page_content = mg_page.get()
         if page_content.find('{{=%s=}}' % code) != -1:
@@ -191,6 +194,7 @@ def parse_word_forms():
 
 if __name__ == '__main__':
     try:
+        get_malagasy_page_list()
         parse_word_forms()
     finally:
         save_count()
