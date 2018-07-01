@@ -1,18 +1,18 @@
 # coding: utf8
 import asyncio
-import aiohttp
 import json
-import requests
-from subprocess import Popen
+import os
 from subprocess import PIPE
+from subprocess import Popen
 from time import sleep
-from test_utils.mocks import PageMock, SiteMock
 from unittest.case import TestCase
 
-from api.translation.core import Translation
-from api.decorator import threaded, retry_on_fail
+import aiohttp
+import requests
 
-import os
+from api.decorator import threaded, retry_on_fail
+from api.translation.core import Translation
+from test_utils.mocks import PageMock, SiteMock
 
 LIST = [
     'eau',
@@ -49,7 +49,7 @@ class TestEntryTranslatorProcessWiktionaryPage(TestCase):
     @threaded
     def launch_service():
         global DICTIONARY_SERVICE
-        DICTIONARY_SERVICE = Popen(["python3.6", "dictionary_service.py", '--db-file', DB_PATH],
+        DICTIONARY_SERVICE = Popen(["python3.6", "dictionary_service.py", '--db-file', DB_PATH, "-p", '8001'],
                                    stdin=PIPE, stdout=PIPE, stderr=PIPE)
         DICTIONARY_SERVICE.communicate()
 
@@ -94,7 +94,7 @@ class TestEntryTranslatorServices(TestCase):
 
     @threaded
     def launch_service(self):
-        self.p2 = Popen(["python3.6", "entry_translator.py", "&"])
+        self.p2 = Popen(["python3.6", "entry_translator.py", "-p", '8000'])
 
     @retry_on_fail([Exception], retries=10, time_between_retries=.4)
     def check_response_status(self, url, data):
