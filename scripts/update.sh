@@ -37,7 +37,7 @@ make prepare
 make install
 
 # Update is finished, copy old files
-sudo cp -r /tmp/botjagwar_saved_data/data /opt/botjagwar/data
-sudo cp -r /tmp/botjagwar_saved_data/user_data /opt/botjagwar/user_data
+sudo cp -r /tmp/botjagwar_saved_data/data /opt/botjagwar
+sudo cp -r /tmp/botjagwar_saved_data/user_data /opt/botjagwar
 echo "update ok"
 sudo service cron start
