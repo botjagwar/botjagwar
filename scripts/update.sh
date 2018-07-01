@@ -4,7 +4,9 @@ set -e
 cd /tmp
 
 # Cleanup previous updates
-sudo rm -rf /tmp/botjagwar
+if [ -d /tmp/botjagwar ]; then
+    sudo rm -rf /tmp/botjagwar
+fi
 
 # Save data if exists
 if [ -d "/opt/botjagwar" ]; then

@@ -3,7 +3,6 @@ from unittest import TestCase
 from api.parsers.functions import parse_el_form_of
 from api.parsers.functions import parse_hu_inflection_of
 from api.parsers.functions import parse_inflection_of
-from api.parsers.functions import parse_lv_inflection_of
 from api.parsers.functions.noun_forms import parse_et_form_of
 from api.parsers.functions.noun_forms import parse_fi_form_of as parse_fi_form_of_noun
 from api.parsers.functions.noun_forms import parse_lt_noun_form
@@ -20,14 +19,6 @@ class TestAdjectiveFormParsers(TestCase):
         self.assertIsInstance(output, NounForm)
         self.assertEqual(output.lemma, 'abdominal')
         self.assertEqual(output.number, 'p')
-
-    def test_parse_lv_inflection_of(self):
-        template_expression = '{{lv-inflection of|bagātīgs|dat|p|f||adj}}'
-        output = parse_lv_inflection_of(template_expression)
-        self.assertIsInstance(output, NounForm)
-        self.assertEqual(output.number, 'p')
-        self.assertEqual(output.case, 'dat')
-        self.assertEqual(output.lemma, 'bagātīgs')
 
     def test_parse_fi_form_of_noun(self):
         template_expression = '{{fi-form of|näverrin|case=nominative|pl=plural}}'
