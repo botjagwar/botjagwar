@@ -1,18 +1,19 @@
 #!/usr/bin/python3.6
-from aiohttp import web
 import argparse
-
 import logging
 
+from aiohttp import web
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
-from database.dictionary import Base as dictionary_base
-from api.dictionary import get_dictionary
 from api.dictionary import entry, definition, translation, configuration
+from api.dictionary import get_dictionary
+from database.dictionary import Base as dictionary_base
 
 parser = argparse.ArgumentParser(description='Dictionary service')
 parser.add_argument('--db-file', dest='STORAGE', required=False)
+parser.add_argument('-p', '--port', dest='PORT', type=int, default=8001)
+
 args = parser.parse_args()
 log = logging.getLogger('dictionary_service')
 
@@ -59,7 +60,7 @@ app.router.add_route('PUT', '/configure', configuration.configure_service)
 if __name__ == '__main__':
     try:
         app.router.add_routes(routes)
-        web.run_app(app, host="0.0.0.0", port=8001, access_log=log)
+        web.run_app(app, host="0.0.0.0", port=args.PORT, access_log=log)
     finally:
         app['session_instance'].flush()
         app['session_instance'].close()

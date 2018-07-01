@@ -1,18 +1,18 @@
 #!/usr/bin/python3.6
-from aiohttp import web
 import argparse
-
 import logging
 
+from aiohttp import web
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
-from database.language import Base as LanguageBase
-from api.dictionary import languages
 from api.dictionary import configuration
+from api.dictionary import languages
+from database.language import Base as LanguageBase
 
 parser = argparse.ArgumentParser(description='Language service')
 parser.add_argument('--db-file', dest='STORAGE', required=False)
+parser.add_argument('-p', '--port', dest='PORT', type=int, default=8003)
 args = parser.parse_args()
 log = logging.getLogger('language_service')
 
@@ -54,7 +54,7 @@ app.router.add_route('PUT', '/configure', configuration.configure_service)
 if __name__ == '__main__':
     try:
         app.router.add_routes(routes)
-        web.run_app(app, host="0.0.0.0", port=8003, access_log=log)
+        web.run_app(app, host="0.0.0.0", port=args.PORT, access_log=log)
     finally:
         app['session_instance'].flush()
         app['session_instance'].close()

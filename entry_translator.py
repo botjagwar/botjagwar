@@ -4,6 +4,7 @@ import os
 import sys
 import time
 import traceback
+from argparse import ArgumentParser
 
 import pywikibot as pwbot
 from aiohttp import web
@@ -126,9 +127,12 @@ async def get_wiktionary_processed_page(request):
 args = sys.argv
 if __name__ == '__main__':
     try:
+        arg_parser = ArgumentParser(description="Entry translator service")
+        arg_parser.add_argument('-p', '--port', type=int, default=8000)
+        parsed_args = arg_parser.parse_args()
         set_throttle(1)
         app = web.Application()
         app.router.add_routes(routes)
-        web.run_app(app, host="0.0.0.0", port=8000)
+        web.run_app(app, host="0.0.0.0", port=parsed_args.port)
     finally:
         pwbot.stopme()

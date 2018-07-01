@@ -3,6 +3,15 @@ import threading
 import time
 
 
+def singleton(class_):
+    instances = {}
+    def getinstance(*args, **kwargs):
+        if class_ not in instances:
+            instances[class_] = class_(*args, **kwargs)
+        return instances[class_]
+    return getinstance
+
+
 def threaded(f):
     def wrap(*args, **kwargs):
         t = threading.Thread(target=f, args=args, kwargs=kwargs)

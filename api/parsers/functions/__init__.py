@@ -62,6 +62,28 @@ def parse_inflection_of(out_class):
     return _parse_inflection_of_partial
 
 
+def parse_lv_inflection_of(template_expression):
+    """Example of recognised template:
+        {{lv-inflection of|bagātīgs|dat|p|f||adj}}
+       Should return 4 parameter """
+    for char in '{}':
+        template_expression = template_expression.replace(char, '')
+    parts = template_expression.split('|')
+    for tparam in parts:
+        if tparam.find('=') != -1:
+            parts.remove(tparam)
+    lemma = parts[1]
+    case_name = number_ = gender = ''
+    for pn in parts:
+        if pn in NUMBER:
+            number_ = pn
+        elif pn in CASES:
+            case_name = pn
+        elif pn in GENDER:
+            gender = pn
+    return NounForm(lemma, case_name, number_, gender)
+
+
 def parse_hu_inflection_of(template_expression):
     for char in '{}':
         template_expression = template_expression.replace(char, '')

@@ -3,7 +3,7 @@
 import pywikibot
 
 CATEGORIES = {
-    "Mpamaritra anarana": ["Endri-pamaritra anarana"],
+    "Mpamaritra anarana": ["Endri-pamaritra anarana", 'Mpamaritra'],
     "Anarana iombonana": ["Endrik'anarana"],
     "Matoanteny": ["Endriky ny matoanteny"],
 }
