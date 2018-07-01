@@ -4,7 +4,9 @@ set -e
 cd /tmp
 
 # Cleanup previous updates
-sudo rm -rf /tmp/botjagwar
+if [ -d /tmp/botjagwar ]; then
+    sudo rm -rf /tmp/botjagwar
+fi
 
 # Save data if exists
 if [ -d "/opt/botjagwar" ]; then
@@ -37,7 +39,7 @@ make prepare
 make install
 
 # Update is finished, copy old files
-sudo cp -r /tmp/botjagwar_saved_data/data /opt/botjagwar/data
-sudo cp -r /tmp/botjagwar_saved_data/user_data /opt/botjagwar/user_data
+sudo cp -r /tmp/botjagwar_saved_data/data /opt/botjagwar
+sudo cp -r /tmp/botjagwar_saved_data/user_data /opt/botjagwar
 echo "update ok"
 sudo service cron start

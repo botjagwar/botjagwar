@@ -32,7 +32,7 @@ templates_parser.add_parser(AdjectiveForm, 'feminine singular of',
                             parse_one_parameter_template(AdjectiveForm, 'feminine singular of', gender='f', number='s'))
 templates_parser.add_parser(AdjectiveForm, 'feminine of', parse_one_parameter_template(AdjectiveForm, 'feminine of'))
 templates_parser.add_parser(AdjectiveForm, 'fi-form of', parse_fi_adjective_form_of)
-templates_parser.add_parser(AdjectiveForm, 'lv-inflection of', parse_lv_inflection_of)
+templates_parser.add_parser(AdjectiveForm, 'lv-inflection of', parse_lv_inflection_of(AdjectiveForm))
 templates_parser.add_parser(AdjectiveForm, 'inflected form of', parse_one_parameter_template(AdjectiveForm, 'inflected form of', number='', gender=''))
 templates_parser.add_parser(AdjectiveForm, 'inflection of', parse_inflection_of(AdjectiveForm))
 templates_parser.add_parser(AdjectiveForm, 'it-adj form of', parse_adjective_form)
@@ -64,7 +64,7 @@ templates_parser.add_parser(NounForm, 'hu-inflection of', parse_hu_inflection_of
 templates_parser.add_parser(NounForm, 'is-inflection of', parse_inflection_of(NounForm))
 templates_parser.add_parser(NounForm, 'inflected form of', parse_one_parameter_template(NounForm, 'inflected form of'))
 templates_parser.add_parser(NounForm, 'lt-form-noun', parse_lt_noun_form)
-templates_parser.add_parser(NounForm, 'lv-inflection of', parse_lv_inflection_of)
+templates_parser.add_parser(NounForm, 'lv-inflection of', parse_lv_inflection_of(NounForm))
 templates_parser.add_parser(NounForm, 'masculine plural of', parse_one_parameter_template(NounForm, 'masculine plural of', number='p', gender='m'))
 templates_parser.add_parser(NounForm, 'nl-noun form of', parse_nl_noun_form_of)
 templates_parser.add_parser(NounForm, 'plural definite of',
@@ -88,7 +88,7 @@ templates_parser.add_parser(VerbForm, 'es-verb form of', parse_es_verb_form_of)
 templates_parser.add_parser(VerbForm, 'fi-verb form of', parse_fi_verb_form_of)
 templates_parser.add_parser(VerbForm, 'fi-form of', parse_fi_form_of)
 templates_parser.add_parser(VerbForm, 'inflection of', parse_verb_form_inflection_of)
-templates_parser.add_parser(VerbForm, 'lv-inflection of', parse_lv_inflection_of)
+templates_parser.add_parser(VerbForm, 'lv-inflection of', parse_lv_inflection_of(VerbForm))
 
 
 def get_lemma(expected_class, template_expression):
