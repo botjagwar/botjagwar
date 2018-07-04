@@ -1,4 +1,5 @@
 #!/usr/bin/python3.6
+import logging as log
 import os
 import random
 import re
@@ -10,6 +11,7 @@ import requests
 from api.decorator import retry_on_fail
 from api.servicemanager import EntryTranslatorServiceManager, DictionaryServiceManager
 
+log.basicConfig(filename=os.getcwd() + '/user_data/wiktionary_irc.log',level=log.DEBUG)
 userdata_file = os.getcwd() + '/user_data/entry_translator/'
 nwikimax = 5
 spawned_backend_process = None
@@ -63,7 +65,7 @@ class WiktionaryRecentChangesBot(irc.bot.SingleServerIRCBot):
         def configure_backend():
             time.sleep(3)
             self.entry_translator_manager.put(
-                '/configure',
+                'configure',
                 json={'autocommit': True}
             )
 
@@ -77,7 +79,7 @@ class WiktionaryRecentChangesBot(irc.bot.SingleServerIRCBot):
 
         try:
             self.entry_translator_manager.put(
-                '/configure',
+                'configure',
                 json={'autocommit': True}
             )
         except requests.exceptions.ConnectionError:
@@ -106,22 +108,26 @@ class WiktionaryRecentChangesBot(irc.bot.SingleServerIRCBot):
         self.do_join(server, events)
 
     def on_pubmsg(self, server, events):
-        try:
-            ct_time = time.time()
-            msg = _prepare_message(events)
-            self.entry_translator_manager.post(
-                "/wiktionary_page/%s" % (_get_origin_wiki(msg)),
-                json={'title': _get_pagename(msg)}
-            )
-            self.edits += 1
-            if not self.edits % 5:
-                throughput = 60. * 5. / (float(ct_time) - self.chronometer)
-                self.chronometer = ct_time
-                print(("Edit #%d (%.2f edits/min)" % (self.edits, throughput)))
-        except requests.ConnectionError as e:
-            print('NOTE: Spawning "entry_processor.py" backend process.')
-        except Exception as e:
-            self.stats['errors'] += 1
+        @retry_on_fail([requests.ConnectionError], 20, .2)
+        def _process():
+            try:
+                ct_time = time.time()
+                msg = _prepare_message(events)
+                self.entry_translator_manager.post(
+                    "wiktionary_page/%s" % (_get_origin_wiki(msg)),
+                    json={'title': _get_pagename(msg)}
+                )
+                self.edits += 1
+                if not self.edits % 5:
+                    throughput = 60. * 5. / (float(ct_time) - self.chronometer)
+                    self.chronometer = ct_time
+                    print(("Edit #%d (%.2f edits/min)" % (self.edits, throughput)))
+            except requests.ConnectionError as e:
+                print('NOTE: Spawning "entry_processor.py" backend process.')
+            except Exception as e:
+                self.stats['errors'] += 1
+
+        _process()
 
 
 def _get_origin_wiki(message):

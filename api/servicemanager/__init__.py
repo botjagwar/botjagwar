@@ -1,9 +1,12 @@
+import os
 import time
 from subprocess import Popen
+from typing import List
 
 import requests
+from aiohttp.web import Response
 
-from api.decorator import threaded
+from api.decorator import threaded, retry_on_fail
 
 
 class ProcessManager:
@@ -12,13 +15,16 @@ class ProcessManager:
     The process is spawned on a call to spawn_backend() method and is terminated
     upon object destruction.
     """
+    interpreter_name = 'python3.6'
     program_name = None
     spawned_backend_process = None
 
     def __del__(self):
         self.spawned_backend_process.terminate()
+        path = '/tmp/%s.pid' % self.program_name
+        os.system('rm %s' % path)  # Process has died, pid file is irrelevant
 
-    def get_specific_arguments(self):
+    def get_specific_arguments(self) -> List[str]:
         """
         Override this method and return a list of strings if you want to give program-specific
         arguments. An empty list means that no specific arguments are needed.
@@ -28,11 +34,30 @@ class ProcessManager:
 
     @threaded
     def spawn_backend(self, *args):
-        self.specific_args = self.get_specific_arguments() # XXX: requires a list of str objects
-        proc_params = ['python3.6', self.program_name] + self.specific_args + list(args)
+        pid = None
+        path = '/tmp/%s.pid' % self.program_name
+        try:
+            with open(path, 'r') as f:
+                pid = int(f.read())
+        except FileNotFoundError:
+            pass
+
+        if pid is not None:
+            try:
+                print('Checking the existence of the process %d' % pid)
+                os.kill(pid, 0)
+            except OSError:
+                print('Process no longer exists... removing the pid file')
+            else:
+                print('A process exists... nothing to do')
+
+        os.system('rm %s' % path)  # Process has died, pid file is irrelevant
+        time.sleep(.5)
+        self.specific_args = self.get_specific_arguments()  # XXX: requires a list of str objects
+        proc_params = [self.interpreter_name, self.program_name] + self.specific_args + list(args)
         self.spawned_backend_process = Popen(proc_params)
-        with open('/tmp/%s.pid' % self.program_name, 'w') as f:
-            f.write(str(self.spawned_backend_process.pid))
+        with open(path, 'w') as f2:
+            f2.write(str(self.spawned_backend_process.pid))
 
 
 class ServiceManager(ProcessManager):
@@ -43,8 +68,7 @@ class ServiceManager(ProcessManager):
     port = 8888
     scheme = 'http'
 
-
-    def get_specific_arguments(self):
+    def get_specific_arguments(self) -> List[str]:
         return ['-p', str(self.port)]
 
     def set_backend_address(self, addr):
@@ -56,23 +80,23 @@ class ServiceManager(ProcessManager):
 
 
     # Low-level functions to use with high-level functions
+    @retry_on_fail([Exception])
     def get(self, route, **kwargs):
-        time.sleep(1)
         route = '%s://%s:%d/%s' % (self.scheme, self.backend_address, self.port, route)
         return requests.get(route, **kwargs)
 
+    @retry_on_fail([Exception])
     def post(self, route, **kwargs):
-        time.sleep(1)
         route = '%s://%s:%d/%s' % (self.scheme, self.backend_address, self.port, route)
         return requests.post(route, **kwargs)
 
+    @retry_on_fail([Exception])
     def put(self, route, **kwargs):
-        time.sleep(1)
         route = '%s://%s:%d/%s' % (self.scheme, self.backend_address, self.port, route)
         return requests.put(route, **kwargs)
 
+    @retry_on_fail([Exception])
     def delete(self, route, **kwargs):
-        time.sleep(1)
         route = '%s://%s:%d/%s' % (self.scheme, self.backend_address, self.port, route)
         return requests.delete(route, **kwargs)
 
@@ -92,7 +116,7 @@ class LanguageServiceManager(ServiceManager):
     program_name = 'language_service.py'
 
     # high-level function
-    def get_language(self, language_code):
+    def get_language(self, language_code) -> Response:
         result = self.get('language/' + language_code)
         if result is not None:
             return result
