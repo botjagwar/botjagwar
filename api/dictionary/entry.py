@@ -1,11 +1,14 @@
+import json
+import logging
+
 from aiohttp.web import Response
 from aiohttp.web_exceptions import HTTPNoContent, HTTPOk
-import json
 
 from database.dictionary import Definition, Word
 from database.exceptions.http import WordAlreadyExistsException, WordDoesNotExistException, InvalidJsonReceivedException
-
 from .routines import save_changes_on_disk
+
+log = logging.getLogger(__name__)
 
 
 def get_word(session, word, language, part_of_speech):
@@ -154,9 +157,7 @@ async def edit_entry(request):
     :return:
         HTTP 200 with the new entry JSON
     """
-    jsondata = await request.json()
-    data = json.loads(jsondata)
-
+    data = await request.json()
     session = request.app['session_instance']
 
     # Search if word already exists.
@@ -173,7 +174,7 @@ async def edit_entry(request):
         definition = create_definition_if_not_exists(
             session,
             definition_json['definition'],
-            definition_json['definition_language']
+            definition_json['language']
         )
         definitions.append(definition)
 

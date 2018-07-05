@@ -2,6 +2,7 @@ import json
 
 from aiohttp import ClientSession
 
+from api.decorator import retry_on_fail
 from database.exceptions.http import WordAlreadyExistsException
 from object_model.word import Entry
 
@@ -15,6 +16,7 @@ class Output(object):
     def __init__(self):
         pass
 
+    @retry_on_fail([Exception], 5, .5)
     async def db(self, info):
         """updates database"""
         definitions = [{
@@ -28,7 +30,7 @@ class Output(object):
             'definitions': definitions
         }
         async with ClientSession() as client_session:
-            async with client_session.post( URL_HEAD + '/entry/%s/create' % info.language, data=json.dumps(entry)) as resp:
+            async with client_session.post(URL_HEAD + '/entry/%s/create' % info.language, data=json.dumps(entry)) as resp:
                 if resp.status == WordAlreadyExistsException.status_code:
                     resp = await client_session.get(
                         URL_HEAD + '/entry/%s/%s' % (info.language, info.entry)
