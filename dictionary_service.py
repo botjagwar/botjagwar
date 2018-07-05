@@ -1,6 +1,7 @@
 #!/usr/bin/python3.6
 import argparse
-import logging
+import logging as log
+import os
 
 from aiohttp import web
 from sqlalchemy import create_engine
@@ -10,12 +11,12 @@ from api.dictionary import entry, definition, translation, configuration
 from api.dictionary import get_dictionary
 from database.dictionary import Base as dictionary_base
 
+log.basicConfig(filename=os.getcwd() + '/user_data/dictionary_service.log',level=log.DEBUG)
 parser = argparse.ArgumentParser(description='Dictionary service')
 parser.add_argument('--db-file', dest='STORAGE', required=False)
 parser.add_argument('-p', '--port', dest='PORT', type=int, default=8001)
 
 args = parser.parse_args()
-log = logging.getLogger('dictionary_service')
 
 if args.STORAGE:
     WORD_STORAGE = args.STORAGE
