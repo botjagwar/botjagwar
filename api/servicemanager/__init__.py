@@ -80,22 +80,22 @@ class ServiceManager(ProcessManager):
 
 
     # Low-level functions to use with high-level functions
-    @retry_on_fail([Exception])
+    @retry_on_fail([Exception], 5, .5)
     def get(self, route, **kwargs):
         route = '%s://%s:%d/%s' % (self.scheme, self.backend_address, self.port, route)
         return requests.get(route, **kwargs)
 
-    @retry_on_fail([Exception])
+    @retry_on_fail([Exception], 5, .5)
     def post(self, route, **kwargs):
         route = '%s://%s:%d/%s' % (self.scheme, self.backend_address, self.port, route)
         return requests.post(route, **kwargs)
 
-    @retry_on_fail([Exception])
+    @retry_on_fail([Exception], 5, .5)
     def put(self, route, **kwargs):
         route = '%s://%s:%d/%s' % (self.scheme, self.backend_address, self.port, route)
         return requests.put(route, **kwargs)
 
-    @retry_on_fail([Exception])
+    @retry_on_fail([Exception], 5, .5)
     def delete(self, route, **kwargs):
         route = '%s://%s:%d/%s' % (self.scheme, self.backend_address, self.port, route)
         return requests.delete(route, **kwargs)
@@ -118,7 +118,13 @@ class LanguageServiceManager(ServiceManager):
     # high-level function
     def get_language(self, language_code) -> Response:
         result = self.get('language/' + language_code)
-        if result is not None:
-            return result
-        else:
-            raise Exception("Language not found")
+
+        for i in range(10):
+            if result is not None:
+                return result
+            else:
+                print(result)
+                time.sleep(.5)
+                result = self.get('language/' + language_code)
+
+        raise Exception("Language not found: " + language_code)
