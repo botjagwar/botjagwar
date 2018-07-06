@@ -170,6 +170,7 @@ async def edit_entry(request):
 
     word = word[0]
     definitions = []
+    data = json.loads(data)
     for definition_json in data['definitions']:
         definition = create_definition_if_not_exists(
             session,
