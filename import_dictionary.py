@@ -93,7 +93,7 @@ async def upload_dictionary():
                             print('definition does not yet exist. Creating...')
                             m.definitions.append(definition)
                             url = URL_HEAD + '/entry/%s/edit' % m.id
-                            await session.post(url, text=json.dumps(m))
+                            await session.put(url, text=json.dumps(m))
                         else:
                             print('definition already exists. Skipping...')
                         break

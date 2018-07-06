@@ -1,5 +1,6 @@
 # coding: utf8
 import asyncio
+import logging
 import os
 
 import pywikibot as pwbot
@@ -14,11 +15,12 @@ from database.exceptions.http import WordDoesNotExistException
 from object_model.word import Entry
 from word_forms import create_non_lemma_entry
 
+log = logging.getLogger(__name__)
 default_data_file = os.getcwd() + '/conf/entry_translator/'
 CYRILLIC_ALPHABET_LANGUAGES = ['ru', 'uk', 'bg', 'be']
 LANGUAGE_BLACKLIST = ['fr', 'en', 'sh', 'ar', 'de', 'zh']
 URL_HEAD = 'http://localhost:8001'
-WORKING_WIKI_LANGUAGE = 'target_language'
+WORKING_WIKI_LANGUAGE = 'mg'
 
 
 class Translation:
@@ -130,6 +132,7 @@ class Translation:
 
         title = wiki_page.title()
         try:
+            log.debug("Translating word in foreign language")
             target_language_translations = await self.translate_word(entry.entry_definition[0], language)
         except NoWordException:
             if title not in unknowns:
