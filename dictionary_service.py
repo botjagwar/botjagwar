@@ -9,7 +9,8 @@ from sqlalchemy.orm import sessionmaker
 
 from api.dictionary import entry, definition, translation, configuration
 from api.dictionary import get_dictionary
-from database.dictionary import Base as dictionary_base
+from api.dictionary import json_error_handler, auto_committer
+from database.dictionary import Base as DictionaryBase
 
 log.basicConfig(filename=os.getcwd() + '/user_data/dictionary_service.log',level=log.DEBUG)
 parser = argparse.ArgumentParser(description='Dictionary service')
@@ -21,17 +22,15 @@ args = parser.parse_args()
 if args.STORAGE:
     WORD_STORAGE = args.STORAGE
 else:
-    DATABASE_STORAGE_INFO_FILE = 'data/word_database_storage_info'
-    with open(DATABASE_STORAGE_INFO_FILE) as storage_file:
-        WORD_STORAGE = storage_file.read()
+    WORD_STORAGE = 'data/word_database.db'
 
 WORD_ENGINE = create_engine('sqlite:///%s' % WORD_STORAGE)
-dictionary_base.metadata.create_all(WORD_ENGINE)
+DictionaryBase.metadata.create_all(WORD_ENGINE)
 WordSessionClass = sessionmaker(bind=WORD_ENGINE)
 
 routes = web.RouteTableDef()
 
-app = web.Application()
+app = web.Application(middlewares=[json_error_handler, auto_committer])
 app['session_class'] = WordSessionClass
 app['session_instance'] = WordSessionClass()
 app['autocommit'] = True

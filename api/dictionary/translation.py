@@ -1,10 +1,11 @@
+import json
+
 from aiohttp.web import Response
 
 from database.dictionary import Word
-import json
 
 
-async def get_translation(request):
+async def get_translation(request) -> Response:
     session = request.app['session_instance']
     origin, target = request.match_info['origin'], request.match_info['target']
 
@@ -23,7 +24,7 @@ async def get_translation(request):
         text=json.dumps(translations), status=200, content_type='application/json')
 
 
-async def get_all_translations(request):
+async def get_all_translations(request) -> Response:
     """
     Find all translations for the given word in the given language
     :return:

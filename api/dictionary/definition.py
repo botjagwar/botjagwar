@@ -1,12 +1,12 @@
 import json
 
 from aiohttp.web import Response
-from database.dictionary import Definition
 
+from database.dictionary import Definition
 from .routines import save_changes_on_disk
 
 
-async def get_definition(request):
+async def get_definition(request) -> Response:
     session = request.app['session_instance']
 
     definitions = [m.serialise() for m in session.query(Definition).filter(
@@ -21,7 +21,7 @@ async def get_definition(request):
         return Response(status=404, content_type='application/json')
 
 
-async def search_definition(request):
+async def search_definition(request) -> Response:
     """
     Returns every definition containing the one in 'definition' POST parameter.
     :param request:
@@ -38,7 +38,7 @@ async def search_definition(request):
         text=json.dumps(definitions), status=200, content_type='application/json')
 
 
-async def delete_definition(request):
+async def delete_definition(request) -> Response:
     """
     Delete the definition.
     :param request:

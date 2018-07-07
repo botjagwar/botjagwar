@@ -1,25 +1,23 @@
 #!/usr/bin/python3.6
-from datetime import datetime, timedelta
 import logging
-from random import randint
-import requests
 import time
+from datetime import datetime, timedelta
+from random import randint
 
-from lxml import etree
 import pywikibot
+import requests
+from lxml import etree
 from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker
 from sqlalchemy import func
+from sqlalchemy.orm import sessionmaker
 
 from api.decorator import time_this
 from conf.entryprocessor.languagecodes import LANGUAGE_CODES
 from database.dictionary import Word, Base as WordBase
 from database.language import Language, Base as LanguageBase
 
-with open('data/language_storage_info') as storage_file:
-    language_storage = storage_file.read()
-with open('data/word_database_storage_info') as storage_file:
-    word_storage = storage_file.read()
+language_storage = 'data/language.db'
+word_storage = 'data/word_database.db'
 
 log = logging.getLogger(__file__)
 

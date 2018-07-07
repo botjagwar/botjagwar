@@ -11,6 +11,7 @@ from api import get_version
 from api.autoformatter import Autoformat
 from api.exceptions import NoWordException
 from api.output import Output
+from api.servicemanager import DictionaryServiceManager
 from database.exceptions.http import WordDoesNotExistException
 from object_model.word import Entry
 from word_forms import create_non_lemma_entry
@@ -19,7 +20,7 @@ log = logging.getLogger(__name__)
 default_data_file = os.getcwd() + '/conf/entry_translator/'
 CYRILLIC_ALPHABET_LANGUAGES = ['ru', 'uk', 'bg', 'be']
 LANGUAGE_BLACKLIST = ['fr', 'en', 'sh', 'ar', 'de', 'zh']
-URL_HEAD = 'http://localhost:8001'
+URL_HEAD = DictionaryServiceManager().get_url_head()
 WORKING_WIKI_LANGUAGE = 'mg'
 
 
@@ -33,7 +34,7 @@ class Translation:
 
         self.loop = asyncio.get_event_loop()
 
-    async def _save_translation_from_bridge_language(self, infos):
+    async def _save_translation_from_bridge_language(self, infos: Entry):
         summary = "Dikan-teny avy amin'ny dikan-teny avy amin'i %s.wiktionary" % infos.origin_wiktionary_edition
         summary += " (%s)" % get_version()
         wikipage = self.output.wikipage(infos)
@@ -52,16 +53,18 @@ class Translation:
             await self._save_translation_from_bridge_language(infos)
             return
 
-        except pwbot.exceptions.InvalidTitle:
+        except pwbot.exceptions.InvalidTitle as exc:
+            log.exception(exc)
             return
 
-        except Exception as e:
+        except Exception as exc:
+            log.exception(exc)
             return
 
         target_language_page.put_async(wikipage, summary)
         await self.output.db(infos)
 
-    async def _save_translation_from_page(self, infos):
+    async def _save_translation_from_page(self, infos: Entry):
         summary = "Dikan-teny avy amin'ny pejy avy amin'i %s.wiktionary" % infos.language
         summary += " (%s)" % get_version()
         wikipage = self.output.wikipage(infos)
@@ -80,14 +83,16 @@ class Translation:
         await self.output.db(infos)
 
     async def process_entry_in_native_language(self, wiki_page, language, unknowns):
-
         wiktionary_processor_class = entryprocessor.WiktionaryProcessorFactory.create(language)
         wiktionary_processor = wiktionary_processor_class()
         ret = 0
         try:
+            wiktionary_processor.process(wiki_page)
             translations = wiktionary_processor.retrieve_translations()
-        except Exception as e:
+        except Exception as exc:
+            log.exception(exc)
             return ret
+
         for translation in translations:
             entry = translation.entry
             pos = translation.part_of_speech
@@ -98,7 +103,8 @@ class Translation:
             title = wiki_page.title()
             try:
                 target_language_translations = await self.translate_word(title, language)
-            except NoWordException:
+            except NoWordException as exc:
+                log.debug('No translation found for %s in %s' % (title, language))
                 if title not in unknowns:
                     unknowns.append((title, language))
                 break
@@ -123,18 +129,15 @@ class Translation:
 
     async def process_entry_in_foreign_language(self, entry: Entry, wiki_page, language, unknowns):
         if entry.language in self.language_blacklist:
+            log.debug("language '%s' is blacklisted, so not translatig or processing." % language)
             return 0
-
-        async with ClientSession() as client_session:
-            async with client_session.get(URL_HEAD + '/word/%s/%s' % (language, entry.entry)) as resp:
-                if resp.status != WordDoesNotExistException.status_code:
-                    return 0
 
         title = wiki_page.title()
         try:
-            log.debug("Translating word in foreign language")
+            log.debug("Translating word in foreign language (%s in '%s')" % (entry.entry_definition[0], language))
             target_language_translations = await self.translate_word(entry.entry_definition[0], language)
         except NoWordException:
+            log.debug("No translation found")
             if title not in unknowns:
                 unknowns.append((entry.entry_definition[0], language))
             return 0
@@ -173,7 +176,8 @@ class Translation:
 
         try:
             entries = wiktionary_processor.getall()
-        except Exception as e:
+        except Exception as exc:
+            log.exception(exc)
             return unknowns, ret
 
         for entry in entries:
@@ -203,16 +207,16 @@ class Translation:
                 if resp.status == WordDoesNotExistException.status_code:
                     raise NoWordException()
 
-        translations_json = await resp.json()
-        translations = []
-        if len(translations_json) < 1:
-            raise NoWordException()
-        else:
-            for t in translations_json:
-                if t['definition'] not in translations:
-                    translations.append(t['definition'])
+                translations_json = await resp.json()
+                translations = []
+                if len(translations_json) < 1:
+                    raise NoWordException()
+                else:
+                    for t in translations_json:
+                        if t['definition'] not in translations:
+                            translations.append(t['definition'])
 
-            return translations
+                    return translations
 
 
 def _generate_redirections(infos):

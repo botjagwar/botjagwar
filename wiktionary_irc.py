@@ -61,7 +61,7 @@ class WiktionaryRecentChangesBot(irc.bot.SingleServerIRCBot):
     def connect_in_languages(self):
         """mametaka fitohizana amin'ny tsanely irc an'i Wikimedia"""
 
-        @retry_on_fail([requests.exceptions.ConnectionError], retries=5, time_between_retries=0.1)
+        @retry_on_fail([requests.exceptions.ConnectionError], retries=5, time_between_retries=0.5)
         def configure_backend():
             time.sleep(3)
             self.entry_translator_manager.put(

@@ -1,5 +1,6 @@
-import aiohttp.web
 import json
+
+import aiohttp.web
 
 
 class ServiceError(aiohttp.web.HTTPError):

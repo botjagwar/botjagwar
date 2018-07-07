@@ -61,7 +61,7 @@ def word_exists(session, word, language, part_of_speech):
         return True
 
 
-async def get_word_by_id(request):
+async def get_word_by_id(request) -> Response:
     session = request.app['session_instance']
 
     objekt = session.query(Word).filter_by(
@@ -73,7 +73,7 @@ async def get_word_by_id(request):
         content_type='application/json')
 
 
-async def get_entry(request):
+async def get_entry(request) -> Response:
     """
     Return a list of entries matching the word and the language.
     :param request:
@@ -88,16 +88,13 @@ async def get_entry(request):
         language=request.match_info['language']).all()
 
     jsons = [objekt.serialise() for objekt in objects]
-
-
-
     if not jsons:
         raise WordDoesNotExistException()
     else:
         return Response(text=json.dumps(jsons), status=HTTPOk.status_code, content_type='application/json')
 
 
-async def add_entry(request):
+async def add_entry(request) -> Response:
     """
     Adds an antry to the dictionary.
     If the entry exists but not with the definition, the definition will automatically
@@ -148,7 +145,7 @@ async def add_entry(request):
     return Response(status=HTTPOk.status_code, text=json.dumps(forged_word), content_type='application/json')
 
 
-async def edit_entry(request):
+async def edit_entry(request) -> Response:
     """
     Updates the current entry by the one given in JSON.
     The engine will try to find if the entry and definitions
@@ -158,6 +155,7 @@ async def edit_entry(request):
         HTTP 200 with the new entry JSON
     """
     data = await request.json()
+    assert isinstance(data, dict)
     session = request.app['session_instance']
 
     # Search if word already exists.
@@ -170,12 +168,11 @@ async def edit_entry(request):
 
     word = word[0]
     definitions = []
-    data = json.loads(data)
     for definition_json in data['definitions']:
         definition = create_definition_if_not_exists(
             session,
             definition_json['definition'],
-            definition_json['language']
+            definition_json['definition_language']
         )
         definitions.append(definition)
 
@@ -186,7 +183,7 @@ async def edit_entry(request):
     return Response(status=HTTPOk.status_code, text=json.dumps(word.serialise()), content_type='application/json')
 
 
-async def delete_entry(request):
+async def delete_entry(request) -> Response:
     """
     Delete the entry from the database. The definitions however
     are kept. They are also deleted if 'delete_dependent definitions'
