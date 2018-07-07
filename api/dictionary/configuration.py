@@ -4,7 +4,7 @@ from aiohttp.web import Response
 
 
 async def pong(request) -> Response:
-    Response(status=200)
+    return Response(status=200)
 
 
 async def do_commit(request) -> Response:
