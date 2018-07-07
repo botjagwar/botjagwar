@@ -88,9 +88,6 @@ async def get_entry(request) -> Response:
         language=request.match_info['language']).all()
 
     jsons = [objekt.serialise() for objekt in objects]
-
-
-
     if not jsons:
         raise WordDoesNotExistException()
     else:
@@ -158,6 +155,7 @@ async def edit_entry(request) -> Response:
         HTTP 200 with the new entry JSON
     """
     data = await request.json()
+    assert isinstance(data, dict)
     session = request.app['session_instance']
 
     # Search if word already exists.
@@ -170,7 +168,6 @@ async def edit_entry(request) -> Response:
 
     word = word[0]
     definitions = []
-    data = json.loads(data)
     for definition_json in data['definitions']:
         definition = create_definition_if_not_exists(
             session,
