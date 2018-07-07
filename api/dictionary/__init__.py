@@ -1,9 +1,11 @@
-from aiohttp.web import Response
-from database.dictionary import Word
 import json
 
+from aiohttp.web import Response
 
-async def get_dictionary(request):
+from database.dictionary import Word
+
+
+async def get_dictionary(request) -> Response:
     session = request.app['session_instance']
 
     definitions = [w.serialise() for w in session.query(Word).filter(

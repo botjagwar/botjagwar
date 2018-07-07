@@ -46,7 +46,7 @@ def _update_statistics(rc_bot):
     if not rc_bot.stats["edits"] % 5:
         cttime = time.gmtime()[:6]
         rc_bot.chronometer = time.time() - rc_bot.chronometer
-        print(("%d/%02d/%02d %02d:%02d:%02d > " % cttime, \
+        log.debug(("%d/%02d/%02d %02d:%02d:%02d > " % cttime, \
                "Fanovana: %(edits)d; pejy voaforona: %(newentries)d; hadisoana: %(errors)d" % rc_bot.stats \
                + " taha: fanovana %.1f/min" % (60. * (5 / rc_bot.chronometer))))
         rc_bot.chronometer = time.time()
@@ -63,7 +63,7 @@ def put_deletion_notice(page):
 
 
 @routes.post("/wiktionary_page/{lang}")
-async def handle_wiktionary_page(request):
+async def handle_wiktionary_page(request) -> Response:
     """
     Handle a Wiktionary page, attempts to translate the wiktionary page's content and
     uploads it to the Malagasy Wiktionary.
@@ -81,7 +81,7 @@ async def handle_wiktionary_page(request):
     try:
         await translations.process_wiktionary_wiki_page(page)
     except Exception as e:
-        traceback.print_exc()
+        log.exception(e)
         data['traceback'] = traceback.format_exc()
         data['message'] = '' if not hasattr(e, 'message') else getattr(e, 'message')
         response = Response(text=json.dumps(data), status=500, content_type='application/json')
@@ -91,7 +91,7 @@ async def handle_wiktionary_page(request):
 
 
 @routes.get("/wiktionary_page/{language}/{pagename}")
-async def get_wiktionary_processed_page(request):
+async def get_wiktionary_processed_page(request) -> Response:
     language = request.match_info['language']
     pagename = request.match_info['pagename']
 

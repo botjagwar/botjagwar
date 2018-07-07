@@ -35,7 +35,6 @@ app['session_class'] = LanguageSessionClass
 app['session_instance'] = LanguageSessionClass()
 app['autocommit'] = True
 
-
 app.router.add_route('GET', '/languages', languages.list_languages)
 
 # CRUD

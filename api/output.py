@@ -1,15 +1,20 @@
 import json
+import logging
 
 from aiohttp import ClientSession
+from aiohttp.web_exceptions import HTTPOk
 
 from api.decorator import retry_on_fail
+from api.servicemanager import DictionaryServiceManager
 from database.exceptions.http import WordAlreadyExistsException
 from object_model.word import Entry
 
+log = logging.getLogger(__name__)
 verbose = False
 
+dictionary_service = DictionaryServiceManager()
 USER_DATA = 'user_data/entry_translator'
-URL_HEAD = 'http://localhost:8001'
+URL_HEAD = dictionary_service.get_url_head()
 
 
 class Output(object):
@@ -17,36 +22,36 @@ class Output(object):
         pass
 
     @retry_on_fail([Exception], 5, .5)
-    async def db(self, info):
+    async def db(self, info: Entry):
         """updates database"""
-        definitions = [{
-            'definition': entry_definition,
-            'definition_language': 'mg',
-        } for entry_definition in info.entry_definition]
-        entry = {
-            'word': info.entry,
-            'language': info.language,
-            'part_of_speech': info.part_of_speech,
-            'definitions': definitions
-        }
         async with ClientSession() as client_session:
-            async with client_session.post(URL_HEAD + '/entry/%s/create' % info.language, data=json.dumps(entry)) as resp:
-                if resp.status == WordAlreadyExistsException.status_code:
-                    resp = await client_session.get(
+            # Attempt creation
+            log.debug('Attempting entry creation')
+            async with client_session.post(
+                    URL_HEAD + '/entry/%s/create' % info.language,
+                    data=json.dumps(info.to_dict())) as creation_response:
+                # Update if word already exists
+                if creation_response.status == WordAlreadyExistsException.status_code:
+                    read_response = await client_session.get(
                         URL_HEAD + '/entry/%s/%s' % (info.language, info.entry)
                     )
-                    jdata = await resp.json()
-                    entry_json = [w for w in jdata
-                                  if w['part_of_speech'] == info.part_of_speech][0]
-                    entry_json['entry'] = entry
-                    async with client_session.put(
-                        URL_HEAD + '/entry/%s/edit' % entry_json['id'], data=json.dumps(entry_json)):
-                        pass
+                    jdata = await read_response.json()
+                    entry_json = [
+                        w for w in jdata
+                        if w['part_of_speech'] == info.part_of_speech][0]
+                    entry_json['entry'] = info
+                    await client_session.put(
+                        URL_HEAD + '/entry/%s/edit' % entry_json['id'],
+                        data=json.dumps(entry_json))
 
-            async with client_session.post(URL_HEAD + '/commit') as resp:
-                pass
+        log.debug('Attempting commit')
+        async with ClientSession() as client_session:
+            # Commit the whole thing
+            async with client_session.post(URL_HEAD + '/commit') as commit_response:
+                if commit_response.status_code != HTTPOk.status_code:
+                    log.debug("Database commit failed: %d" % commit_response.status_code)
 
-    def batchfile(self, info):
+    def batchfile(self, info: Entry):
         "return batch format (see doc)"
         string = "%(entry)s -> %(entry_definition)s -> %(part_of_speech)s -> %(language)s\n" % info.properties
         return string

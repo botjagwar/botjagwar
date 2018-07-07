@@ -1,9 +1,9 @@
 import json
 
 from aiohttp.web import Response, json_response
-from database.language import Language
-from database.exceptions.http import InvalidDataException, ElementDoesNotExistException
 
+from database.exceptions.http import InvalidDataException, ElementDoesNotExistException
+from database.language import Language
 from .routines import save_changes_on_disk
 
 
@@ -18,13 +18,13 @@ def language_exists(language_code, session):
         return False
 
 
-async def list_languages(request):
+async def list_languages(request) -> Response:
     session = request.app['session_instance']
     languages = [m.serialise() for m in session.query(Language).all()]
     return json_response(languages)
 
 
-async def add_language(request):
+async def add_language(request) -> Response:
     session = request.app['session_instance']
     data = await request.json()
     if isinstance(data, str):
@@ -48,7 +48,7 @@ async def add_language(request):
     return Response(status=200)
 
 
-async def get_language(request):
+async def get_language(request) -> Response:
     session = request.app['session_instance']
     code = request.match_info['iso_code']
     language_data = session.query(Language).filter(
@@ -59,7 +59,7 @@ async def get_language(request):
     return json_response(language_data[0].serialise())
 
 
-async def edit_language(request):
+async def edit_language(request) -> Response:
     session = request.app['session_instance']
     data = await request.json()
     if isinstance(data, str):
@@ -81,7 +81,7 @@ async def edit_language(request):
     return Response(status=200)
 
 
-async def delete_language(request):
+async def delete_language(request) -> Response:
     session = request.app['session_instance']
     session.query(Language).filter(
         Language.iso_code == request.match_info['iso_code']).delete()
