@@ -181,7 +181,7 @@ class TestDictionaryRestService(TestCase):
             json=json.dumps({
                 'definitions': [{
                     'definition': 'tarameguni',
-                    'language': 'mg'
+                    'definition_language': 'mg'
                 }],
                 'part_of_speech': 'aojs',
             })

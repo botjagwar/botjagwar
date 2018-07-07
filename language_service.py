@@ -19,9 +19,7 @@ log.basicConfig(filename=os.getcwd() + '/user_data/language_service.log',level=l
 if args.STORAGE:
     LANGUAGE_STORAGE = args.STORAGE
 else:
-    DATABASE_STORAGE_INFO_FILE = 'data/language_storage_info'
-    with open(DATABASE_STORAGE_INFO_FILE) as storage_file:
-        LANGUAGE_STORAGE = storage_file.read()
+    LANGUAGE_STORAGE = 'data/language.db'
 
 LANGUAGE_ENGINE = create_engine('sqlite:///%s' % LANGUAGE_STORAGE)
 LanguageBase.metadata.create_all(LANGUAGE_ENGINE)

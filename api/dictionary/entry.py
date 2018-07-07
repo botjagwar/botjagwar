@@ -172,7 +172,7 @@ async def edit_entry(request) -> Response:
         definition = create_definition_if_not_exists(
             session,
             definition_json['definition'],
-            definition_json['language']
+            definition_json['definition_language']
         )
         definitions.append(definition)
 

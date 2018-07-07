@@ -40,7 +40,6 @@ def _get_page(name, lang):
     page = pwbot.Page(pwbot.Site(lang, 'wiktionary'), name)
     return page
 
-
 @threaded
 def _update_statistics(rc_bot):
     if not rc_bot.stats["edits"] % 5:
@@ -76,7 +75,7 @@ async def handle_wiktionary_page(request) -> Response:
     pagename = data['title']
     page = _get_page(pagename, request.match_info['lang'])
     if page is None:
-        return
+        return Response()
     data = {}
     try:
         await translations.process_wiktionary_wiki_page(page)

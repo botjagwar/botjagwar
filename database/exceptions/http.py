@@ -12,11 +12,11 @@ class ElementDoesNotExistException(ServiceError):
 
 
 class ElementAlreadyExistsException(ServiceError):
-    status_code = 400
+    status_code = 460
 
 
 class InvalidDataException(ServiceError):
-    status_code = 400
+    status_code = 461
 
 
 class LanguageDoesNotExistsException(ElementDoesNotExistException):
