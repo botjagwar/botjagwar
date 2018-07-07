@@ -178,13 +178,13 @@ class TestDictionaryRestService(TestCase):
         word_id = data[0]['id']
         resp = requests.put(
             URL_HEAD + '/entry/%d/edit' % word_id,
-            json=json.dumps({
+            json={
                 'definitions': [{
                     'definition': 'tarameguni',
                     'definition_language': 'mg'
                 }],
                 'part_of_speech': 'aojs',
-            })
+            }
         )
         self.assertEquals(resp.status_code, 200)
 

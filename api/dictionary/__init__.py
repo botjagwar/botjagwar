@@ -29,15 +29,17 @@ async def auto_committer(request, handler) -> Response:
     response = await handler(request)
     if 'session_instance' not in request.app:
         return response
-
-    try:
-        log.info('Commiting database transaction via autocommit middleware')
-        request.app['session_instance'].commit()
-    except Exception as exc:
-        log.exception(exc)
-        request.app['session_instance'].rollback()
-    finally:
-        return response
+    else:
+        try:
+            if 'autocommit' in request.app:
+                if request.app['autocommit']:
+                    log.info('Commiting database transaction via autocommit middleware')
+                    request.app['session_instance'].commit()
+        except Exception as exc:
+            log.exception(exc)
+            request.app['session_instance'].rollback()
+        finally:
+            return response
 
 
 async def get_dictionary(request) -> Response:
