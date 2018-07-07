@@ -39,7 +39,7 @@ class Output(object):
                     entry_json = [
                         w for w in jdata
                         if w['part_of_speech'] == info.part_of_speech][0]
-                    entry_json['entry'] = info
+                    entry_json['entry'] = info.to_dict()
                     await client_session.put(
                         URL_HEAD + '/entry/%s/edit' % entry_json['id'],
                         data=json.dumps(entry_json))
