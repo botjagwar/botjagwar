@@ -67,7 +67,7 @@ class FRWiktionaryProcessor(WiktionaryProcessor):
 
     def getall(self, keepNativeEntries=False):
         """languges sections in a given page formatting: [(POS, lang, definition), ...]"""
-        assert isinstance(self.Page, pywikibot.Page)
+        assert isinstance(self.Page, pywikibot.Page), self.Page.__class__
         items = []
 
         if self.content is None:

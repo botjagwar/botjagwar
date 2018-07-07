@@ -1,6 +1,6 @@
 # coding: utf8
-import re
 import os
+import re
 
 import pywikibot
 
@@ -21,7 +21,7 @@ class WiktionaryProcessor(object):
 
     def process(self, page=None):
         if page is not None:
-            assert isinstance(page, pywikibot.Page)
+            assert isinstance(page, pywikibot.Page), self.Page.__class__
             self.Page = page
         if not self.text_set:
             try:

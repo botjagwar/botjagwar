@@ -20,9 +20,10 @@ class ProcessManager:
     spawned_backend_process = None
 
     def __del__(self):
-        self.spawned_backend_process.terminate()
-        path = '/tmp/%s.pid' % self.program_name
-        os.system('rm %s' % path)  # Process has died, pid file is irrelevant
+        if self.spawned_backend_process:
+            self.spawned_backend_process.terminate()
+            path = '/tmp/%s.pid' % self.program_name
+            os.system('rm %s' % path)  # Process has died, pid file is irrelevant
 
     def get_specific_arguments(self) -> List[str]:
         """
@@ -78,6 +79,8 @@ class ServiceManager(ProcessManager):
         """
         self.backend_address = addr
 
+    def get_url_head(self):
+        return '%s://%s:%d' % (self.scheme, self.backend_address, self.port)
 
     # Low-level functions to use with high-level functions
     @retry_on_fail([Exception], 5, .5)
