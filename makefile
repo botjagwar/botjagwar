@@ -19,7 +19,14 @@ endef
 
 prepare:
 	sudo apt-get update
-	sudo apt-get install -y libssl-dev wget unzip python3-pip libsqlite3-dev libxml2-dev libxslt1-dev
+	sudo apt-get install -y \
+	    libssl-dev \
+	    wget unzip \
+	    python3-pip \
+	    python3-pip \
+	    libsqlite3-dev \
+	    libxml2-dev \
+	    libxslt1-dev
 	LC_ALL="en_US.UTF-8" sudo $(PIP) install -r requirements.txt
 
 define test_setup

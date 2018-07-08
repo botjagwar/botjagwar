@@ -25,7 +25,7 @@ class PageMock(pywikibot.Page):
 
     def _save(self, summary=None, watch=None, minor=True, botflag=None,
               cc=None, quiet=False, **kwargs):
-        print(('Saving page [[%s]] through _save' % self.title()))
+        print(('Saving page [[%s]] through save' % self.title()))
 
     @time_this('Page.get() method mock')
     def get(self, force=False, get_redirect=False, sysop=False):
