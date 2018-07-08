@@ -10,9 +10,16 @@ from unittest.case import TestCase
 import aiohttp
 import requests
 
+import api.translation.core
+from api import entryprocessor
 from api.decorator import threaded, retry_on_fail
 from api.translation.core import Translation
 from test_utils.mocks import PageMock, SiteMock
+
+#Monkey-patching pywikibot API calls:
+api.translation.core.pwbot.Page = PageMock
+api.translation.core.pwbot.Site = SiteMock
+api.translation.core.LANGUAGE_BLACKLIST = []
 
 LIST = [
     'eau',
@@ -62,6 +69,91 @@ class TestEntryTranslatorProcessWiktionaryPage(TestCase):
     def kill_service():
         DICTIONARY_SERVICE.kill()
         os.system('rm %s' % DB_PATH)
+
+    def test_fr_process_entry_in_native_language(self):
+        loop = asyncio.get_event_loop()
+        @retry_on_fail([aiohttp.client_exceptions.ClientConnectionError])
+        async def _wrapped_test():
+            async def translation_mock(x, y):
+                return [{"definition": "araotra",}]
+            translation = Translation()
+            translation.translate_word = translation_mock
+            page = PageMock(SiteMock('fr', 'wiktionary'), 'peigne')
+            await translation.process_wiktionary_wiki_page(page)
+            fr_entries = [e async for e in translation.process_entry_in_native_language(page, 'fr', [])
+                          if e.language == 'fr']
+            for e in fr_entries:
+                self.assertEqual(e.entry, 'peigne')
+                self.assertEqual(e.language, 'fr')
+                self.assertEqual(e.part_of_speech, 'ana')
+
+        loop.run_until_complete(_wrapped_test())
+
+    def test_fr_process_entry_in_foreign_language(self):
+        loop = asyncio.get_event_loop()
+
+        @retry_on_fail([aiohttp.client_exceptions.ClientConnectionError])
+        async def _wrapped_test():
+            async def translation_mock(x, y):
+                return [{"definition": "misy",}]
+            translation = Translation()
+            translation.translate_word = translation_mock
+            page = PageMock(SiteMock('fr', 'wiktionary'), 'èstre')
+            wiktionary_processor_class = entryprocessor.WiktionaryProcessorFactory.create('fr')
+            wiktionary_processor = wiktionary_processor_class()
+            wiktionary_processor.process(page)
+            entry = [e for e in wiktionary_processor.getall()
+                       if e.language == 'oc'][0]
+            info = await translation.process_entry_in_foreign_language(
+                entry, page, 'fr', [])
+            self.assertEqual(info.entry, 'èstre')
+            self.assertEqual(info.language, 'oc')
+            self.assertEqual(info.part_of_speech, 'mat')
+
+        loop.run_until_complete(_wrapped_test())
+
+    def test_en_process_entry_in_native_language(self):
+        loop = asyncio.get_event_loop()
+        @retry_on_fail([aiohttp.client_exceptions.ClientConnectionError])
+        async def _wrapped_test():
+            async def translation_mock(x, y):
+                return [{"definition": "vody tongotra",}]
+            translation = Translation()
+            translation.translate_word = translation_mock
+            page = PageMock(SiteMock('en', 'wiktionary'), 'heel')
+            await translation.process_wiktionary_wiki_page(page)
+            fr_entries = [e async for e in translation.process_entry_in_native_language(page, 'en', [])
+                          if e.language == 'en']
+            for e in fr_entries:
+                self.assertEqual(e.entry, 'peigne')
+                self.assertEqual(e.language, 'en')
+                self.assertEqual(e.part_of_speech, 'ana')
+
+        loop.run_until_complete(_wrapped_test())
+
+    def test_en_process_entry_in_foreign_language(self):
+        loop = asyncio.get_event_loop()
+
+        @retry_on_fail([aiohttp.client_exceptions.ClientConnectionError])
+        async def _wrapped_test():
+            async def translation_mock(x, y):
+                return [{"definition": "misy",}]
+            translation = Translation()
+            translation.translate_word = translation_mock
+            page = PageMock(SiteMock('en', 'wiktionary'), 'pagne')
+            wiktionary_processor_class = entryprocessor.WiktionaryProcessorFactory.create('en')
+            wiktionary_processor = wiktionary_processor_class()
+            wiktionary_processor.process(page)
+            print(wiktionary_processor.getall())
+            entry = [e for e in wiktionary_processor.getall()
+                       if e.language == 'fr'][0]
+            info = await translation.process_entry_in_foreign_language(
+                entry, page, 'en', [])
+            self.assertEqual(info.entry, 'pagne')
+            self.assertEqual(info.language, 'fr')
+            self.assertEqual(info.part_of_speech, 'ana')
+
+        loop.run_until_complete(_wrapped_test())
 
     def test_process_wiktionary_page_english(self):
         @retry_on_fail([aiohttp.client_exceptions.ClientConnectionError])

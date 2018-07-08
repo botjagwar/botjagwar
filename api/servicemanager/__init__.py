@@ -4,7 +4,7 @@ from subprocess import Popen
 from typing import List
 
 import requests
-from aiohttp.web import Response
+from requests import Response
 
 from api.decorator import threaded, retry_on_fail
 

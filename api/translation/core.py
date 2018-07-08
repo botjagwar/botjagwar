@@ -83,15 +83,21 @@ class Translation:
         await self.output.db(infos)
 
     async def process_entry_in_native_language(self, wiki_page, language, unknowns):
+        """
+        Yields each translation found
+        :param wiki_page: wiki page to process
+        :param language: wiki language
+        :param unknowns: unknown words to find
+        :return:
+        """
         wiktionary_processor_class = entryprocessor.WiktionaryProcessorFactory.create(language)
         wiktionary_processor = wiktionary_processor_class()
-        ret = 0
         try:
             wiktionary_processor.process(wiki_page)
             translations = wiktionary_processor.retrieve_translations()
         except Exception as exc:
             log.exception(exc)
-            return ret
+            return
 
         for translation in translations:
             entry = translation.entry
@@ -116,21 +122,23 @@ class Translation:
                 language=entry_language,
                 origin_wiktionary_edition=language,
                 origin_wiktionary_page_name=title)
-            async with ClientSession() as client_session:
-                async with client_session.get(URL_HEAD + '/word/%s/%s' % (infos.language, infos.entry)) as resp:
-                    if resp.status != WordDoesNotExistException.status_code:
-                        continue
 
-            _generate_redirections(infos)
-            await self._save_translation_from_bridge_language(infos)
-            ret += 1
+            yield infos
 
-        return ret
+    async def process_infos(self, infos):
+        async with ClientSession() as client_session:
+            async with client_session.get(URL_HEAD + '/word/%s/%s' % (infos.language, infos.entry)) as resp:
+                if resp.status != WordDoesNotExistException.status_code:
+                    return 1
+
+        _generate_redirections(infos)
+        await self._save_translation_from_bridge_language(infos)
+        return 1
 
     async def process_entry_in_foreign_language(self, entry: Entry, wiki_page, language, unknowns):
         if entry.language in self.language_blacklist:
             log.debug("language '%s' is blacklisted, so not translatig or processing." % language)
-            return 0
+            return
 
         title = wiki_page.title()
         try:
@@ -140,7 +148,7 @@ class Translation:
             log.debug("No translation found")
             if title not in unknowns:
                 unknowns.append((entry.entry_definition[0], language))
-            return 0
+            return
 
         infos = Entry(
             entry=title,
@@ -150,11 +158,7 @@ class Translation:
             origin_wiktionary_edition=language,
             origin_wiktionary_page_name=entry.entry_definition[0])
 
-        _generate_redirections(infos)
-        await self._save_translation_from_bridge_language(infos)
-        await self._save_translation_from_page(infos)
-
-        return 1
+        return infos
 
     async def process_wiktionary_wiki_page(self, wiki_page):
         unknowns = []
@@ -189,11 +193,15 @@ class Translation:
             ret += create_non_lemma_entry(entry)
 
             if entry.language == language:  # if entry in the content language
-                ret += await self.process_entry_in_native_language(
-                        wiki_page, language, unknowns)
+                async for info in self.process_entry_in_native_language(wiki_page, language, unknowns):
+                    ret += await self.process_infos(info)
             else:
-                ret += await self.process_entry_in_foreign_language(
-                        entry, wiki_page, language, unknowns)
+                info = await self.process_entry_in_foreign_language(entry, wiki_page, language, unknowns)
+                if info is not None:
+                    _generate_redirections(info)
+                    await self._save_translation_from_bridge_language(info)
+                    await self._save_translation_from_page(info)
+                    ret += 1
 
         # Malagasy language pages
         # self.update_malagasy_word(translations_in_target_language)

@@ -52,7 +52,7 @@ unit_tests: prepare_tests
 
 test: prepare_tests
 	$(call test_setup)
-	$(PYTHON) -m "nose" -v $(TEST_DIR)
+	PYWIKIBOT2_NO_USER_CONFIG=1 $(PYTHON) -m "nose" -v $(TEST_DIR)
 	$(call test_teardown)
 
 .PHONY: test
