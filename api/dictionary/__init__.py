@@ -20,7 +20,7 @@ async def json_error_handler(request, handler) -> Response:
             'error_message': response.text,
         }
         log.debug(data)
-        response.text = json.loads(data)
+        response.text = json.dumps(data)
     return response
 
 

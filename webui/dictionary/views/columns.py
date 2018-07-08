@@ -1,4 +1,5 @@
 from django.template import Template, Context
+
 from .base import View
 
 
@@ -69,8 +70,25 @@ class CommaSeparatedListTableColumnView(TableColumnView):
     """
     Displays a comma-separated list in a table column. That list contains one value of the list of objects
     """
+    link_pattern = None
+
     def select_displayed_data(self, key):
         self.displayed_data = key
 
+    def set_element_link_pattern(self, pattern):
+        self.link_pattern = pattern
+
+    def apply_link_pattern(self, element):
+        link = self.link_pattern % element
+        template = Template("<a href=\"{{ link }}\">{{ text }}</a>")
+        if self.link_pattern:
+            return template.render(Context({
+                'link': link,
+                'text': element[self.displayed_data]
+            }))
+        else:
+            return element[self.displayed_data]
+
     def render(self):
-        return ", ".join(datum[self.displayed_data] for datum in self.data[self.object_attribute_name])
+        out_str = ", ".join(self.apply_link_pattern(datum) for datum in self.data[self.object_attribute_name])
+        return Template("{{text|safe}}").render(Context({'text': out_str}))

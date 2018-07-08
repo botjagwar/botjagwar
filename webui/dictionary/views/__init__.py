@@ -1,18 +1,17 @@
 import json
-import requests
 
+import requests
 from django.http import HttpResponse
 
 from .base import PageView
 from .base import SectionView
 from .base import StringListView
 from .columns import ActionColumnView
-from .columns import LinkedTableColumnView
 from .columns import CommaSeparatedListTableColumnView
+from .columns import LinkedTableColumnView
+from .form import FormView
 from .table import TableColumnView
 from .table import TableView
-from .form import FormView
-
 from ..models import WordEditionForm
 
 SERVER = 'localhost:8001'
@@ -74,6 +73,7 @@ def word_list_view(request):
 
     definitions_viewer = CommaSeparatedListTableColumnView('Definition', 'definitions')
     definitions_viewer.select_displayed_data('definition')
+    definitions_viewer.set_element_link_pattern('/definition?id=%(id)d')
     table_view.add_column(definitions_viewer)
 
     delete_word_view = ActionColumnView('Delete', 'delete')
