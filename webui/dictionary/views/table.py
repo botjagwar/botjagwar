@@ -1,4 +1,5 @@
 from django.template import Template, Context
+
 from .base import View
 from .columns import TableColumnView
 
@@ -14,7 +15,7 @@ class TableView(View):
     def set_data(self, data: list):
         """
         Set the data to display in the table
-        :param data: list of dictionaries representing a serialised object
+        :param data: list of object representing a serialised object
         :return:
         """
         self.data = data

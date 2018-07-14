@@ -8,6 +8,6 @@ def fetch_languages(label):
     choices = [(language['iso_code'],
                 language['english_name']
                 if language['english_name'] is not None
-                else language['iso_code']) for language in choices_data]
+                else '(%s)' % language['iso_code']) for language in choices_data]
     choices.sort()
     return fields.ChoiceField(label=label, choices=tuple(choices))

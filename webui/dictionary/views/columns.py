@@ -5,9 +5,13 @@ from .base import View
 
 class TableColumnView(View):
     """
-    Display object data in table columns
+    Display object data in table columns.
     """
     def __init__(self, name, object_attribute_name):
+        """
+        :param name: Name of the column as displayed in the header
+        :param object_attribute_name: JSON element key to bind that column name to
+        """
         super(View, self).__init__()
         self.name = name
         self.object_attribute_name = object_attribute_name
@@ -17,7 +21,9 @@ class TableColumnView(View):
             return self.data[self.object_attribute_name]
         except KeyError as err:
             possible_keys = ', '.join(self.data.keys())
-            raise KeyError('Unable to fetch value from key. Possible values are: %s' % possible_keys) from err
+            msg = 'Unable to fetch value from key "%s".' % self.object_attribute_name
+            msg += ' Possible values are: %s' % possible_keys
+            raise KeyError(msg) from err
 
 
 class LinkedTableColumnView(TableColumnView):
@@ -41,7 +47,10 @@ class LinkedTableColumnView(TableColumnView):
             text = self.data[self.object_attribute_name]
         except KeyError as err:
             possible_keys = ', '.join(self.data.keys())
-            raise KeyError('Unable to fetch value from key. Possible values are: %s' % possible_keys) from err
+            msg = 'Unable to fetch value from key "%s".' % self.object_attribute_name
+            msg += ' Possible values are: %s' % possible_keys
+
+            raise KeyError(msg) from err
         else:
             return template.render(Context({
                 'link': self.link_pattern % self.data,
@@ -58,11 +67,43 @@ class ActionColumnView(LinkedTableColumnView):
         self.link_pattern = None
         self.label = label
 
+    def set_request_context(self, context):
+        self.request_context = context
+
     def render(self):
         template = Template("<a href=\"{{ link }}\">{{ text }}</a>")
         return template.render(Context({
             'link': self.link_pattern % self.data,
             'text': self.label
+        }))
+
+
+class EditColumnView(ActionColumnView):
+    def __init__(self):
+        super(EditColumnView, self).__init__('edit', 'id')
+
+    def render(self):
+        self.link_pattern = '/dictionary/%(type)s/edit?id=%(id)d'
+        template = Template("<a href=\"{{ link }}\">{{ text }}</a>")
+        return template.render(Context({
+            'link': self.link_pattern % self.data,
+            'text': 'edit'
+        }))
+
+
+class DissociateColumnView(ActionColumnView):
+    def __init__(self):
+        super(DissociateColumnView, self).__init__('dissociate', 'id')
+
+    def render(self):
+        self.link_pattern = '/dictionary/%(type)s/dissociate?did=%(id)d'
+        link = self.link_pattern % self.data
+        link += '&wid=%d' % int(self.request_context.GET.get('id', ''))
+        template = Template("<a href=\"{{ link }}\">{{ text }}</a>")
+        print(self.data)
+        return template.render(Context({
+            'link': link,
+            'text': 'dissociate'
         }))
 
 
