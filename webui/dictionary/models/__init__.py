@@ -13,13 +13,17 @@ BACKEND_ADDRESS_HEADER = 'http://localhost:8001'
 class DefinitionEditForm(Form):
     definition_language = fetch_languages('Language')
     definition = fields.CharField(label='Definition', )
+    definition_id = fields.CharField(label='Definition ID')
 
     def __init__(self, request_context=None, *args, **kwargs):
         super(DefinitionEditForm, self).__init__(request_context, *args, **kwargs)
+        self.items['definition_id'] = kwargs.pop('definition_id')
 
     @staticmethod
     def format_to_backend_data(form_data):
+        pprint(form_data)
         return {
+            'definition_id': form_data['definition_id'],
             'type': 'Definition',
             'definition': form_data['definition'],
             'definition_language': form_data['definition_language']
@@ -27,14 +31,14 @@ class DefinitionEditForm(Form):
 
     def save(self):
         form_data = self.cleaned_data
-        pprint(form_data)
         json_data = self.format_to_backend_data(form_data)
-        pprint(json_data)
         # Fixme: Use config instead of hardcoded backend address
-        req = requests.post(BACKEND_ADDRESS_HEADER + '/definition/%(language)s/create' % form_data, json=json_data)
+        req = requests.put(
+            BACKEND_ADDRESS_HEADER + '/definition/%(definition_language)s' % form_data,
+            json=json_data
+        )
         if req.status_code != 200:
             raise Exception("Error: Backend answered: %s" % req.text)
-
 
 
 class WordEditionForm(Form):
@@ -65,9 +69,7 @@ class WordEditionForm(Form):
 
     def save(self):
         form_data = self.cleaned_data
-        pprint(form_data)
         json_data = self.format_to_backend_data(form_data)
-        pprint(json_data)
         req = requests.post(BACKEND_ADDRESS_HEADER + '/entry/%(language)s/create' % form_data, json=json_data)
         if req.status_code != 200:
             raise Exception("Error: Backend answered: %s" % req.text)

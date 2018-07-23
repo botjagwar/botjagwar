@@ -25,7 +25,7 @@ def word_edit(request):
         form = WordEditionForm()
 
     page = PageView("Editing")
-    form_view = FormView(form, 'word_edit', request)
+    form_view = FormView(form, 'dictionary/Word/edit', request)
     edit_section = SectionView("Word")
     edit_section.add_view(form_view)
     page.add_section(edit_section)
@@ -50,15 +50,15 @@ def definition_edit(request):
         definition_object = req.json()[0]
         initial_values = {
             'definition_language': definition_object['language'],
-            'definition' : definition_object['definition']
+            'definition' : definition_object['definition'],
+            'definition_id': request.GET.get('id')
         }
-        print(initial_values, definition_object)
         form = DefinitionEditForm(initial=initial_values)
     else:
         form = DefinitionEditForm()
 
     page = PageView("Editing")
-    form_view = FormView(form, 'definition_edit', request)
+    form_view = FormView(form, 'dictionary/Definition/edit', request)
     edit_section = SectionView("Definition")
     edit_section.add_view(form_view)
     page.add_section(edit_section)
