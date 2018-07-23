@@ -7,29 +7,19 @@ from random import randint
 import pywikibot
 import requests
 from lxml import etree
-from sqlalchemy import create_engine
 from sqlalchemy import func
-from sqlalchemy.orm import sessionmaker
 
+from api.databasemanager import DictionaryDatabaseManager, LanguageDatabaseManager
 from api.decorator import time_this
 from conf.entryprocessor.languagecodes import LANGUAGE_CODES
-from database.dictionary import Word, Base as WordBase
-from database.language import Language, Base as LanguageBase
-
-language_storage = 'data/language.db'
-word_storage = 'data/word_database.db'
+from database.dictionary import Word
+from database.language import Language
 
 log = logging.getLogger(__file__)
-
-word_engine = create_engine('sqlite:///%s' % word_storage)
-language_engine = create_engine('sqlite:///%s' % language_storage)
-LanguageBase.metadata.create_all(language_engine)
-WordBase.metadata.create_all(word_engine)
-
-WordSessionClass = sessionmaker(bind=word_engine)
-LanguageSessionClass = sessionmaker(bind=language_engine)
-language_session = LanguageSessionClass()
-word_session = WordSessionClass()
+dictionary_db_manager = DictionaryDatabaseManager()
+language_db_manager = LanguageDatabaseManager()
+language_session = language_db_manager.session
+word_session = dictionary_db_manager.session
 
 WORKING_WIKI = pywikibot.Site("mg", "wiktionary")
 try:
@@ -63,7 +53,7 @@ class SilPageException(UnknownLanguageManagerError):
     pass
 
 
-class UnknownlanguageUpdaterBot(object):
+class UnknownLanguageUpdaterBot(object):
     """
     Reads kaodim-piteny tsy fantara subpage and create the categories & templates for new languages
     """
@@ -119,8 +109,8 @@ class UnknownLanguageManagerBot(object):
     """
     def __init__(self):
         self.lang_list = []
-        self.word_session = WordSessionClass()
-        self.language_session = LanguageSessionClass()
+        self.word_session = word_session
+        self.language_session = language_session
 
     def __del__(self):
         self.word_session.close()
@@ -367,7 +357,7 @@ def put(title, content):
 
 
 if __name__ == '__main__':
-    language_updater = UnknownlanguageUpdaterBot()
+    language_updater = UnknownLanguageUpdaterBot()
     language_updater.start()
     unknown_language_manager = UnknownLanguageManagerBot()
     unknown_language_manager.start()

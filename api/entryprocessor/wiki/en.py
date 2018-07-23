@@ -155,8 +155,9 @@ class ENWiktionaryProcessor(WiktionaryProcessor):
                 defin = defin[1:]
             if len(defin.strip()) < 1: continue
             try:
+                assert self.title is not None
                 i = Entry(
-                    entry=self.Page.title(),
+                    entry=self.title,
                     part_of_speech=pos,
                     language=self.lang2code(l),
                     entry_definition=[defin.strip()],

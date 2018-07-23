@@ -4,12 +4,10 @@ import logging as log
 import os
 
 from aiohttp import web
-from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker
 
+from api.databasemanager import LanguageDatabaseManager
 from api.dictionary import configuration
 from api.dictionary import languages
-from database.language import Base as LanguageBase
 
 parser = argparse.ArgumentParser(description='Language service')
 parser.add_argument('--db-file', dest='STORAGE', required=False)
@@ -21,16 +19,10 @@ if args.STORAGE:
 else:
     LANGUAGE_STORAGE = 'data/language.db'
 
-LANGUAGE_ENGINE = create_engine('sqlite:///%s' % LANGUAGE_STORAGE)
-LanguageBase.metadata.create_all(LANGUAGE_ENGINE)
-LanguageSessionClass = sessionmaker(bind=LANGUAGE_ENGINE)
-
-
+languge_db_manager = LanguageDatabaseManager(database_file=LANGUAGE_STORAGE)
 routes = web.RouteTableDef()
-
 app = web.Application()
-app['session_class'] = LanguageSessionClass
-app['session_instance'] = LanguageSessionClass()
+app['session_instance'] = languge_db_manager.session
 app['autocommit'] = True
 
 app.router.add_route('GET', '/languages', languages.list_languages)

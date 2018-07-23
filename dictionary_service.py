@@ -4,13 +4,11 @@ import logging as log
 import os
 
 from aiohttp import web
-from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker
 
+from api.databasemanager import DictionaryDatabaseManager
 from api.dictionary import entry, definition, translation, configuration
 from api.dictionary import get_dictionary
-from api.dictionary import json_error_handler, auto_committer
-from database.dictionary import Base as DictionaryBase
+from api.dictionary.middlewares import json_error_handler, auto_committer
 
 log.basicConfig(filename=os.getcwd() + '/user_data/dictionary_service.log',level=log.DEBUG)
 parser = argparse.ArgumentParser(description='Dictionary service')
@@ -24,21 +22,20 @@ if args.STORAGE:
 else:
     WORD_STORAGE = 'data/word_database.db'
 
-WORD_ENGINE = create_engine('sqlite:///%s' % WORD_STORAGE)
-DictionaryBase.metadata.create_all(WORD_ENGINE)
-WordSessionClass = sessionmaker(bind=WORD_ENGINE)
-
+dictionary_db_manager = DictionaryDatabaseManager(database_file=WORD_STORAGE)
 routes = web.RouteTableDef()
-
-app = web.Application(middlewares=[json_error_handler, auto_committer])
-app['session_class'] = WordSessionClass
-app['session_instance'] = WordSessionClass()
+app = web.Application(middlewares=[
+    json_error_handler,
+    auto_committer,
+])
+app['session_instance'] = dictionary_db_manager.session
 app['autocommit'] = True
 
-
 app.router.add_route('GET', '/definition/{definition_id}', definition.get_definition)
-app.router.add_route('POST', '/definition/search', definition.search_definition)
+#app.router.add_route('PUT', '/definition/{language}', definition.edit_definition)
+#app.router.add_route('POST', '/definition/{language}/create', definition.create_definition)
 app.router.add_route('DELETE', '/definition/{definition_id}/delete', definition.delete_definition)
+app.router.add_route('POST', '/definition/search', definition.search_definition)
 
 app.router.add_route('GET', '/dictionary/{language}', get_dictionary)
 

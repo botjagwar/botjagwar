@@ -1,7 +1,5 @@
 import logging
 
-from aiohttp.web_exceptions import HTTPOk
-
 from api.decorator import retry_on_fail
 from api.servicemanager import DictionaryServiceManager
 from database.exceptions.http import WordAlreadyExistsException
@@ -21,7 +19,7 @@ class Output(object):
         pass
 
     @retry_on_fail([Exception], 5, .5)
-    async def db(self, info: Entry):
+    def db(self, info: Entry):
         """updates database"""
         # Adapt to expected format
         log.info(info.to_dict())
@@ -36,10 +34,12 @@ class Output(object):
         }
         response = dictionary_service.post('entry/%s/create' % info.language, json=data)
         if response.status_code == WordAlreadyExistsException.status_code:
-            word_response = dictionary_service.get('entry/%s/%s' % (info.language, info.entry)).json()  # fetch its I
+            word_response = dictionary_service.get('entry/%s/%s' % (info.language, info.entry)).json()  # fetch its ID
             edit_response = dictionary_service.put('entry/%d/edit' % word_response[0]['id'], json=data)  # edit using its ID
-            if edit_response.status_code != HTTPOk.status:
-                log.error('Entry update failed.')
+            if edit_response.status_code == WordAlreadyExistsException.status_code:
+                log.debug('%s [%s] > Attempted to create an already-existing entry.' % (info.entry, info.language))
+            elif edit_response.status_code != 200:
+                log.error('%s [%s] > Entry update failed (%d).' % (info.entry, info.language, edit_response.status_code))
 
 
     def batchfile(self, info: Entry):

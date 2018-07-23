@@ -23,6 +23,7 @@ class WiktionaryProcessor(object):
         if page is not None:
             assert isinstance(page, pywikibot.Page), self.Page.__class__
             self.Page = page
+            self.title = self.Page.title()
         if not self.text_set:
             try:
                 if page is None:
@@ -34,6 +35,9 @@ class WiktionaryProcessor(object):
     def set_text(self, text):
         self.content = text
         self.text_set = True
+
+    def set_title(self, title):
+        self.title = title
 
     def retrieve_translations(self):
         raise NotImplementedError()
