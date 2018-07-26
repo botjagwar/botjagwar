@@ -213,7 +213,8 @@ class Translation:
 
         return unknowns, ret
 
-    def translate_word(self, word: str, language: str):
+    @staticmethod
+    def translate_word(word: str, language: str):
         url = URL_HEAD + '/translations/%s/%s/%s' % (language, WORKING_WIKI_LANGUAGE, word)
         resp = requests.get(url)
         if resp.status_code == WordDoesNotExistException.status_code:
@@ -290,7 +291,6 @@ class Translation:
 
         # Malagasy language pages
         # self.update_malagasy_word(translations_in_target_language)
-
 
 
 def _generate_redirections(infos):
