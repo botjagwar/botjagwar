@@ -78,7 +78,7 @@ async def handle_wiktionary_page(request) -> Response:
         return Response()
     data = {}
     try:
-        await translations.process_wiktionary_wiki_page(page)
+        translations.process_wiktionary_wiki_page(page)
     except Exception as e:
         log.exception(e)
         data['traceback'] = traceback.format_exc()
