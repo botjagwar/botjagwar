@@ -51,6 +51,7 @@ class ProcessManager:
                 print('Process no longer exists... removing the pid file')
             else:
                 print('A process exists... nothing to do')
+                return
 
         os.system('rm %s' % path)  # Process has died, pid file is irrelevant
         time.sleep(.5)

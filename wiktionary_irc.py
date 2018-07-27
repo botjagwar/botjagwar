@@ -41,6 +41,14 @@ class WiktionaryRecentChangesBot(irc.bot.SingleServerIRCBot):
     recent_change_server = ("irc.wikimedia.org", 6667)
 
     def __init__(self, nick_prefix="botjagwar"):
+        @retry_on_fail([requests.exceptions.ConnectionError], retries=5, time_between_retries=0.5)
+        def configure_backend():
+            time.sleep(3)
+            self.entry_translator_manager.put(
+                'configure',
+                json={'autocommit': True}
+            )
+
         nick_suffix = '-%s' % base36encode(random.randint(36**3, 36**4 - 1))
         user = nick_prefix + nick_suffix
         self.channels_list = []
@@ -54,20 +62,15 @@ class WiktionaryRecentChangesBot(irc.bot.SingleServerIRCBot):
         self.username = user
         self.dictionary_service_manager = DictionaryServiceManager()
         self.entry_translator_manager = EntryTranslatorServiceManager()
+        self.connect_in_languages()
         self.dictionary_service_manager.spawn_backend()
         self.entry_translator_manager.spawn_backend()
-        self.connect_in_languages()
+        configure_backend()
 
     def connect_in_languages(self):
         """mametaka fitohizana amin'ny tsanely irc an'i Wikimedia"""
 
-        @retry_on_fail([requests.exceptions.ConnectionError], retries=5, time_between_retries=0.5)
-        def configure_backend():
-            time.sleep(3)
-            self.entry_translator_manager.put(
-                'configure',
-                json={'autocommit': True}
-            )
+
 
         print ("\n---------------------\nIRC BOT PAREMETERS : ")
         self.langs = ['en', 'fr']
@@ -76,15 +79,6 @@ class WiktionaryRecentChangesBot(irc.bot.SingleServerIRCBot):
             "#%s.%s" % (language.strip(), self.sitename)
             for language in self.langs
         ]
-
-        try:
-            self.entry_translator_manager.put(
-                'configure',
-                json={'autocommit': True}
-            )
-        except requests.exceptions.ConnectionError:
-            configure_backend()
-
         for channel in self.channels:
             irc.bot.SingleServerIRCBot.__init__(
                 self,
