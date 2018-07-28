@@ -136,5 +136,8 @@ if __name__ == '__main__':
         app = web.Application()
         app.router.add_routes(routes)
         web.run_app(app, host="0.0.0.0", port=parsed_args.port)
+    except Exception as exc:
+        log.exception(exc)
+        log.critical("Error occurred while setting up the server")
     finally:
         pwbot.stopme()

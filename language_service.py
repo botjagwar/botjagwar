@@ -44,6 +44,9 @@ if __name__ == '__main__':
     try:
         app.router.add_routes(routes)
         web.run_app(app, host="0.0.0.0", port=args.PORT, access_log=log)
+    except Exception as exc:
+        log.exception(exc)
+        log.critical("Error occurred while setting up the server")
     finally:
         app['session_instance'].flush()
         app['session_instance'].close()
