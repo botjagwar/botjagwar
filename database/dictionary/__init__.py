@@ -1,9 +1,10 @@
-from sqlalchemy import Table, Column, ForeignKey
 from sqlalchemy import Integer, String, DateTime
-
+from sqlalchemy import Table, Column, ForeignKey
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship
 from sqlalchemy.sql import func
+
+from object_model.word import Entry
 
 Base = declarative_base()
 dictionary_association = Table('dictionary', Base.metadata,
@@ -86,6 +87,16 @@ class Word(Base):
         word_data = self.serialise_without_definition()
         word_data['definitions'] = [definition.serialise() for definition in self.definitions]
         return word_data
+
+    def serialise_to_entry(self, definitions_language=['mg']):
+        definition = [definition.definition for definition in self.definitions
+                      if definition.definition_language in definitions_language]
+        return Entry(
+            entry=self.word,
+            part_of_speech=self.part_of_speech,
+            entry_definition=definition,
+            language=self.language,
+        )
 
     def serialise_without_definition(self):
         word_data = {
