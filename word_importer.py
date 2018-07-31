@@ -13,14 +13,13 @@ from pprint import pprint
 
 import pywikibot
 
+from api.data_caching import FastWordLookup
 from api.databasemanager import DictionaryDatabaseManager
 from api.decorator import time_this
 from api.output import Output
-from database.dictionary import Word
 from object_model.word import Entry
 
 # To build a really fast tree to avoid IO-expensive table lookups
-output_database = DictionaryDatabaseManager()
 fast_tree = set()
 
 # Sometimes Pywikibot API will do nothing but slow us down
@@ -30,27 +29,9 @@ update_on_wiki = True
 # Path where we should expect to find the exported dictionary
 export_path = 'user_data/dump_export.db'
 
-
-@time_this('Fast tree building')
-def build_fast_tree():
-    """
-    Table lookups are IO-expensive, so build a fast lookup tree to check entry existence in database
-    :return:
-    """
-    print("--- building fast tree ---")
-    q = output_database.session.query(Word)
-    for w in q.yield_per(1000):
-        fast_tree.add((w.word, w.language))
-    print('out fast tree contains %d items' % len(fast_tree))
-    print("--- done building fast tree ---")
-
-
-@time_this('fast tree lookup')
-def lookup(entry, language):
-    if (entry, language) in fast_tree:
-        return True
-    else:
-        return False
+# Fast word lookup table
+lookup_cache = FastWordLookup()
+lookup_cache.build_fast_word_tree()
 
 
 @time_this('entry worker')
@@ -64,7 +45,7 @@ def worker(entry: Entry):
     :return:
     """
     pprint(entry)
-    if lookup(entry.entry, entry.language):
+    if lookup_cache.lookup(entry):
         print('fast tree lookup: already on database')
         return
     else:
@@ -84,7 +65,7 @@ def worker(entry: Entry):
             print('exists on-wiki')
             return
         else:
-            content = wikipage + content
+            content = wikipage + '\n' + content
     else:
         content = wikipage
 
@@ -101,14 +82,47 @@ def import_database(workers=100):
     but Pywikibot API won't let us flood Wikimedia sites :P
     :return:
     """
+    fast_tree = {}
     input_database = DictionaryDatabaseManager(database_file=export_path)
-    query = input_database.session.query(Word) \
-        .order_by(Word.id.desc())
+    with input_database.engine.connect() as connection:
+        query = connection.execute(
+            """
+            select 
+                word.id,
+                word.word, 
+                word.language, 
+                word.part_of_speech, 
+                definitions.definition,
+                definitions.definition_language
+            from 
+                dictionary,
+                word, 
+                definitions
+            where 
+                dictionary.definition = definitions.id
+                and word.id = dictionary.word
+                and definition_language = 'mg'
+            """
+        )
+        print('-- build tree --')
+        for w in query.fetchall():
+            word, language, part_of_speech, definition = w[1], w[2], w[3], w[4]
+            key = (word, language, part_of_speech)
+            if key in fast_tree:
+                fast_tree[key].append(definition)
+            else:
+                fast_tree[key] = [definition]
 
-    for element in query.yield_per(workers):
-        worker(element.serialise_to_entry())
+        print('-- using tree --')
+        for word, language, part_of_speech in fast_tree:
+            entry = Entry(
+                entry=word,
+                language=language,
+                part_of_speech=part_of_speech,
+                entry_definition=fast_tree[(word, language, part_of_speech)]
+            )
+            worker(entry)
 
 
 if __name__ == '__main__':
-    build_fast_tree()
     import_database()
