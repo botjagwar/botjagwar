@@ -44,11 +44,10 @@ def worker(entry: Entry):
     :param entry: entry to create
     :return:
     """
-    pprint(entry)
     if lookup_cache.lookup(entry):
-        print('fast tree lookup: already on database')
         return
     else:
+        pprint(entry)
         output = Output()
         output.db(entry)
 
@@ -59,7 +58,11 @@ def worker(entry: Entry):
     print('attempts to update on wiki...')
     wikipage = output.wikipage(entry)
     page = pywikibot.Page(site, entry.entry)
-    if page.exists() and not page.isRedirectPage():
+
+    if page.isRedirectPage():
+        return
+
+    if page.exists():
         content = page.get()
         if '{{=%s=}}' % entry.language in content:
             print('exists on-wiki')
@@ -121,7 +124,10 @@ def import_database(workers=100):
                 part_of_speech=part_of_speech,
                 entry_definition=fast_tree[(word, language, part_of_speech)]
             )
-            worker(entry)
+            try:
+                worker(entry)
+            except Exception:
+                continue
 
 
 if __name__ == '__main__':

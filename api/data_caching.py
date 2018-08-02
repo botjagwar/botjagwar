@@ -90,7 +90,6 @@ class FastWordLookup:
         print('out fast tree contains %d items' % len(self.fast_tree))
         print("--- done building fast tree ---")
 
-    @time_this('fast tree lookup')
     def lookup(self, entry):
         if (entry.entry, entry.language) in self.fast_tree:
             return True
