@@ -80,8 +80,6 @@ templates_parser.add_parser(NounForm, 'singular definite of',
 templates_parser.add_parser(NounForm, 'singular indefinite of',
                             parse_one_parameter_template(NounForm, 'singular indefinite of', number='s',
                                                          definiteness='indefinite'))
-
-
 templates_parser.add_parser(VerbForm, 'ca-verb form of', parse_ca_verb_form_of)
 templates_parser.add_parser(VerbForm, 'de-verb form of', parse_de_verb_form_of)
 templates_parser.add_parser(VerbForm, 'es-verb form of', parse_es_verb_form_of)
