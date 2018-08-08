@@ -18,6 +18,24 @@ def render_word(objekt):
     return ret_str
 
 
+def languages_view(request):
+    server = request.GET.get('server', SERVER)
+    language_list = requests.get('http://%s/languages/list' % server).text
+
+    page = PageView('List of languages')
+    language_list_view = TableView()
+    language_link = LinkedTableColumnView('Language', 'language')
+    language_link.set_link_pattern('/dictionary/Word/list?lang=%(language)s')
+    language_list_view.set_data(json.loads(language_list))
+    language_list_view.add_column(language_link)
+    language_list_view.add_column(TableColumnView('Number of entries', 'entries'))
+
+    table_section = SectionView('List of languages')
+    table_section.add_view(language_list_view)
+    page.add_section(table_section)
+    return HttpResponse(page.render())
+
+
 def word_view(request):
     id_ = request.GET.get('id', '')
     server = request.GET.get('server', SERVER)

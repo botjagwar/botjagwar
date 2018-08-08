@@ -7,7 +7,7 @@ from aiohttp import web
 
 from api.databasemanager import DictionaryDatabaseManager
 from api.dictionary import entry, definition, translation, configuration
-from api.dictionary import get_dictionary
+from api.dictionary import get_dictionary, get_language_list, download_dictionary
 from api.dictionary.middlewares import json_error_handler, auto_committer
 
 log.basicConfig(filename=os.getcwd() + '/user_data/dictionary_service.log',level=log.DEBUG)
@@ -28,8 +28,12 @@ app = web.Application(middlewares=[
     json_error_handler,
     auto_committer,
 ])
+app['database'] = dictionary_db_manager
 app['session_instance'] = dictionary_db_manager.session
 app['autocommit'] = True
+
+app.router.add_route('GET', '/languages/list', get_language_list)
+app.router.add_route('GET', '/languages/list/download', download_dictionary)
 
 app.router.add_route('GET', '/definition/{definition_id}', definition.get_definition)
 #app.router.add_route('PUT', '/definition/{language}', definition.edit_definition)
@@ -58,6 +62,9 @@ if __name__ == '__main__':
     try:
         app.router.add_routes(routes)
         web.run_app(app, host="0.0.0.0", port=args.PORT, access_log=log)
+    except Exception as exc:
+        log.exception(exc)
+        log.critical("Error occurred while setting up the server")
     finally:
         app['session_instance'].flush()
         app['session_instance'].close()

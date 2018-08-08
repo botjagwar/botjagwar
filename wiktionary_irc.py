@@ -4,12 +4,13 @@ import os
 import random
 import re
 import time
+from signal import SIGTERM
 
 import irc.bot
 import requests
 
-from api.decorator import retry_on_fail
-from api.servicemanager import EntryTranslatorServiceManager, DictionaryServiceManager
+from api.decorator import retry_on_fail, threaded
+from api.servicemanager import EntryTranslatorServiceManager
 
 log.basicConfig(filename=os.getcwd() + '/user_data/wiktionary_irc.log',level=log.DEBUG)
 userdata_file = os.getcwd() + '/user_data/entry_translator/'
@@ -41,14 +42,6 @@ class WiktionaryRecentChangesBot(irc.bot.SingleServerIRCBot):
     recent_change_server = ("irc.wikimedia.org", 6667)
 
     def __init__(self, nick_prefix="botjagwar"):
-        @retry_on_fail([requests.exceptions.ConnectionError], retries=5, time_between_retries=0.5)
-        def configure_backend():
-            time.sleep(3)
-            self.entry_translator_manager.put(
-                'configure',
-                json={'autocommit': True}
-            )
-
         nick_suffix = '-%s' % base36encode(random.randint(36**3, 36**4 - 1))
         user = nick_prefix + nick_suffix
         self.channels_list = []
@@ -60,18 +53,11 @@ class WiktionaryRecentChangesBot(irc.bot.SingleServerIRCBot):
         self.stats = {'edits': 0.0, 'newentries': 0.0, 'errors': 0.0}
         self.edits = 0
         self.username = user
-        self.dictionary_service_manager = DictionaryServiceManager()
         self.entry_translator_manager = EntryTranslatorServiceManager()
         self.connect_in_languages()
-        self.dictionary_service_manager.spawn_backend()
-        self.entry_translator_manager.spawn_backend()
-        configure_backend()
 
     def connect_in_languages(self):
         """mametaka fitohizana amin'ny tsanely irc an'i Wikimedia"""
-
-
-
         print ("\n---------------------\nIRC BOT PAREMETERS : ")
         self.langs = ['en', 'fr']
         self.sitename = 'wiktionary'
@@ -102,7 +88,8 @@ class WiktionaryRecentChangesBot(irc.bot.SingleServerIRCBot):
         self.do_join(server, events)
 
     def on_pubmsg(self, server, events):
-        @retry_on_fail([requests.ConnectionError], 20, .2)
+        @threaded
+        @retry_on_fail([requests.ConnectionError], 10, .3)
         def _process():
             try:
                 ct_time = time.time()
@@ -176,12 +163,32 @@ def base36encode(number, alphabet='0123456789abcdefghjiklmnopqrstuvwxyz'):
     return sign + base36
 
 
+def kill_other_instance():
+    log.info('Killing old wiktionary_irc process')
+    pid = None
+    path = '/tmp/ircbot.pid'
+    try:
+        with open(path, 'r') as f:
+            pid = int(f.read())
+    except FileNotFoundError:
+        print('File /tmp/ircbot.pid not found')
+
+    if pid is not None:
+        try:
+            print('Checking the existence of the process %d' % pid)
+            os.kill(pid, 0)
+        except OSError:
+            print('Process no longer exists... removing the pid file')
+        else:
+            print('A process exists...')
+            os.kill(pid, SIGTERM)
+
+
 if __name__ == '__main__':
     try:
+        kill_other_instance()
+        with open('/tmp/ircbot.pid', 'w') as f:
+            f.write('%d' % os.getpid())
         irc_retrieve()
     finally:
-        if spawned_backend_process is not None:
-            spawned_backend_process.terminate()
-        if dictionary_service is not None:
-            dictionary_service.terminate()
         print("bye")

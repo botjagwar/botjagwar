@@ -141,7 +141,7 @@ def create_non_lemma_entry(entry: Entry):
         print(('PAGE OVERWRITING IS ACTIVE. DELETE /tmp/%s TO DISABLE IT MID-SCRIPT.' % code))
 
     # Create or update the generated page
-    if mg_page.title() in PAGE_SET and not overwrite:
+    if mg_page.exists() and not overwrite:
         new_entry = page_output.wikipage(mg_entry, link=False)
         page_content = mg_page.get()
         if page_content.find('{{=%s=}}' % code) != -1:

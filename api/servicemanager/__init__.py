@@ -1,5 +1,7 @@
+import logging
 import os
 import time
+from signal import SIGTERM
 from subprocess import Popen
 from typing import List
 
@@ -7,6 +9,8 @@ import requests
 from requests import Response
 
 from api.decorator import threaded, retry_on_fail
+
+log = logging.getLogger(__name__)
 
 
 class ProcessManager:
@@ -18,6 +22,7 @@ class ProcessManager:
     interpreter_name = 'python3.6'
     program_name = None
     spawned_backend_process = None
+    kill_if_exists = False
 
     def __del__(self):
         if self.spawned_backend_process:
@@ -45,18 +50,21 @@ class ProcessManager:
 
         if pid is not None:
             try:
-                print('Checking the existence of the process %d' % pid)
+                log.info('Checking the existence of the process %d' % pid)
                 os.kill(pid, 0)
             except OSError:
-                print('Process no longer exists... removing the pid file')
+                log.info('Process no longer exists... removing the pid file')
             else:
-                print('A process exists... nothing to do')
-                return
+                log.info('A process exists...')
+                if self.kill_if_exists:
+                    log.info('Sending SIGTERM to the process...')
+                    os.kill(pid, SIGTERM)
 
         os.system('rm %s' % path)  # Process has died, pid file is irrelevant
         time.sleep(.5)
         self.specific_args = self.get_specific_arguments()  # XXX: requires a list of str objects
         proc_params = [self.interpreter_name, self.program_name] + self.specific_args + list(args)
+
         self.spawned_backend_process = Popen(proc_params)
         with open(path, 'w') as f2:
             f2.write(str(self.spawned_backend_process.pid))
@@ -108,16 +116,19 @@ class ServiceManager(ProcessManager):
 class EntryTranslatorServiceManager(ServiceManager):
     port = 8000
     program_name = 'entry_translator.py'
+    kill_if_exists = False
 
 
 class DictionaryServiceManager(ServiceManager):
     port = 8001
     program_name = 'dictionary_service.py'
+    kill_if_exists = False
 
 
 class LanguageServiceManager(ServiceManager):
     port = 8003
     program_name = 'language_service.py'
+    kill_if_exists = False
 
     # high-level function
     def get_language(self, language_code) -> Response:

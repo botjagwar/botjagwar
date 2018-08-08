@@ -31,7 +31,7 @@ def time_this(identifier='function'):
             t1 = datetime.datetime.now()
             dt = t1 - t0
             d = dt.seconds * 1000 + dt.microseconds / 1000
-            print(("%s took %2.2f seconds to execute" % (identifier, d/1000.)))
+            print(("%s took %2.6f seconds to execute" % (identifier, d/1000.)))
             return ret
 
         return wrapper

@@ -11,4 +11,6 @@ urlpatterns = [
 
     path('Definition/edit', controller_handlers.definition_edit, name='definitionedit'),
     path('Definition/delete', controller_handlers.definition_delete, name='definitiondelete'),
+
+    path('', view_handlers.languages_view, name='languagelist'),
 ]

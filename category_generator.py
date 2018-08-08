@@ -6,7 +6,10 @@ CATEGORIES = {
     "Mpamaritra anarana": ["Endri-pamaritra anarana", 'Mpamaritra'],
     "Anarana iombonana": ["Endrik'anarana"],
     "Matoanteny": ["Endriky ny matoanteny"],
+    "Tambinteny": ["Endrika tambinteny"],
+    "Mpisolo anarana": ["Endrika mpisolo anarana"],
 }
+
 
 wiki = pywikibot.Site('mg', 'wiktionary')
 languages = pywikibot.Category(wiki, 'fiteny')
