@@ -1,6 +1,7 @@
 import logging
 
 from api.decorator import retry_on_fail
+from api.page_renderer import WikiPageRendererFactory
 from api.servicemanager import DictionaryServiceManager
 from database.exceptions.http import WordAlreadyExistsException
 from object_model.word import Entry
@@ -15,8 +16,9 @@ URL_HEAD = dictionary_service.get_url_head()
 
 class Output(object):
     content_language = 'mg'
-    def __init__(self):
-        pass
+    def __init__(self, content_language='default'):
+        if content_language != 'default':
+            self.content_language = content_language
 
     @retry_on_fail([Exception], 5, .5)
     def db(self, info: Entry):
@@ -49,22 +51,5 @@ class Output(object):
 
     def wikipage(self, info: Entry, link=True):
         "returns wikipage string"
-        additional_note = ""
-        data = info.to_dict()
-        if 'origin_wiktionary_page_name' in data and 'origin_wiktionary_edition' in data:
-            additional_note = " {{dikantenin'ny dikanteny|%(origin_wiktionary_page_name)s|%(origin_wiktionary_edition)s}}\n" % data
-
-        s = """
-=={{=%(language)s=}}==
-{{-%(part_of_speech)s-|%(language)s}}
-'''{{subst:BASEPAGENAME}}''' {{fanononana X-SAMPA||%(language)s}} {{fanononana||%(language)s}}""" % data
-        if link:
-            s += "\n# %s" % ', '.join(['[[%s]]' % (d) for d in info.entry_definition])
-        else:
-            s += "\n# %s" % ', '.join(['%s' % (d) for d in info.entry_definition])
-
-        s = s + additional_note % info.properties
-        try:
-            return s
-        except UnicodeDecodeError:
-            return s.decode('utf8')
+        self.wikipage_renderer = WikiPageRendererFactory(self.content_language)()
+        return self.wikipage_renderer.render(info)
