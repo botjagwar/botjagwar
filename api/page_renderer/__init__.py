@@ -11,6 +11,60 @@ class PageRenderer(object):
         raise NotImplementedError()
 
 
+class FAWikiPageRenderer(PageRenderer):
+    def render(self, info: Entry, link=True) -> str:
+        data = info.to_dict()
+        s = """
+{{-%(language)s-}}
+'''{{subst:BASEPAGENAME}}'''""" % data
+        if link:
+            s += "\n# %s" % ', '.join(['[[%s]]' % (d) for d in info.entry_definition])
+        else:
+            s += "\n# %s" % ', '.join(['%s' % (d) for d in info.entry_definition])
+        additional_note = '\n{{bot-made translation|%s}}' % info.origin_wiktionary_page_name
+        s = s + additional_note
+        try:
+            return s
+        except UnicodeDecodeError:
+            return s.decode('utf8')
+
+
+class FJWikiPageRenderer(PageRenderer):
+    def render(self, info: Entry, link=True) -> str:
+        data = info.to_dict()
+        s = """
+{{-%(language)s-}}
+'''{{subst:BASEPAGENAME}}'''""" % data
+        if link:
+            s += "\n# %s" % ', '.join(['[[%s]]' % (d) for d in info.entry_definition])
+        else:
+            s += "\n# %s" % ', '.join(['%s' % (d) for d in info.entry_definition])
+        additional_note = '\n{{bot-made entry|%s}}' % info.origin_wiktionary_page_name
+        s = s + additional_note
+        try:
+            return s
+        except UnicodeDecodeError:
+            return s.decode('utf8')
+
+
+class CHRWikiPageRenderer(PageRenderer):
+    def render(self, info: Entry, link=True) -> str:
+        data = info.to_dict()
+        s = """
+{{-%(language)s-}}
+'''{{subst:BASEPAGENAME}}'''""" % data
+        if link:
+            s += "\n# %s" % ', '.join(['[[%s]]' % (d) for d in info.entry_definition])
+        else:
+            s += "\n# %s" % ', '.join(['%s' % (d) for d in info.entry_definition])
+        additional_note = '\n{{bot-made translation|%s}}' % info.origin_wiktionary_page_name
+        s = s + additional_note
+        try:
+            return s
+        except UnicodeDecodeError:
+            return s.decode('utf8')
+
+
 class MGWikiPageRenderer(PageRenderer):
     def render(self, info: Entry, link=True) -> str:
         additional_note = ""
@@ -19,9 +73,9 @@ class MGWikiPageRenderer(PageRenderer):
             additional_note = " {{dikantenin'ny dikanteny|%(origin_wiktionary_page_name)s|%(origin_wiktionary_edition)s}}\n" % data
 
         s = """
-        =={{=%(language)s=}}==
-        {{-%(part_of_speech)s-|%(language)s}}
-        '''{{subst:BASEPAGENAME}}''' {{fanononana X-SAMPA||%(language)s}} {{fanononana||%(language)s}}""" % data
+=={{=%(language)s=}}==
+{{-%(part_of_speech)s-|%(language)s}}
+'''{{subst:BASEPAGENAME}}''' {{fanononana X-SAMPA||%(language)s}} {{fanononana||%(language)s}}""" % data
         if link:
             s += "\n# %s" % ', '.join(['[[%s]]' % (d) for d in info.entry_definition])
         else:
