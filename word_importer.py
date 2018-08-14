@@ -18,6 +18,7 @@ from api.databasemanager import DictionaryDatabaseManager
 from api.decorator import time_this
 from api.entry_page_file import EntryPageFileReader
 from api.output import Output
+from api.translation.core import LANGUAGE_BLACKLIST
 from object_model.word import Entry
 
 # To build a really fast tree to avoid IO-expensive table lookups
@@ -58,6 +59,9 @@ class Importer(object):
         :param entry: entry to create
         :return:
         """
+        if entry.language in LANGUAGE_BLACKLIST:
+            return
+
         if lookup_cache.lookup(entry):
             return
         else:
