@@ -3,6 +3,17 @@ import threading
 import time
 
 
+def critical_section(cs_lock: threading.Lock):
+    def _critical_section(f):
+        def _critical_section_wrapper(*args, **kwargs):
+            cs_lock.acquire()
+            ret = f(*args, **kwargs)
+            cs_lock.release()
+            return ret
+        return _critical_section_wrapper
+    return _critical_section
+
+
 def singleton(class_):
     instances = {}
     def getinstance(*args, **kwargs):
