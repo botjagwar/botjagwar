@@ -94,6 +94,7 @@ def _get_malagasy_page_list():
         for line in f.readlines():
             PAGE_SET.add(line.strip())
 
+
 def create_non_lemma_entry(entry: Entry):
     word, pos, code, definition = entry.entry, entry.part_of_speech, entry.language, entry.entry_definition[0]
     page_output = Output()

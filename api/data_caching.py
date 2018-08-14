@@ -57,12 +57,15 @@ class FastTranslationLookup:
             print('translation lookup tree contains %d items' % len(self.fast_tree))
         print("--- done building fast tree ---")
 
-    def translate(self, entry):
-        data = (entry.entry, entry.language, entry.part_of_speech)
+    def translate_word(self, entry, language, part_of_speech):
+        data = (entry, language, part_of_speech)
         if data in self.fast_tree:
             return self.fast_tree[data]
         else:
             raise LookupError('No found: %s' % str(data))
+
+    def translate(self, entry):
+        return self.translate_word(entry.entry, entry.language, entry.part_of_speech)
 
     def lookup(self, entry):
         data = (entry.entry, entry.language, entry.part_of_speech)
