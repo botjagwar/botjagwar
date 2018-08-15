@@ -9,13 +9,13 @@ if update_on_wiki is set to True, it also creates entries on-wiki if the latter 
 Wiktionary.
 """
 
+import sys
 from pprint import pprint
 
 import pywikibot
 
 from api.data_caching import FastWordLookup
 from api.databasemanager import DictionaryDatabaseManager
-from api.decorator import time_this
 from api.entry_page_file import EntryPageFileReader
 from api.output import Output
 from api.translation.core import LANGUAGE_BLACKLIST
@@ -33,6 +33,8 @@ update_on_wiki = True
 lookup_cache = FastWordLookup()
 lookup_cache.build_fast_word_tree()
 
+language = sys.argv[1] if len(sys.argv) >= 2 else 'en'
+
 
 class Importer(object):
     summary = "Fanafarana dikan-teny"
@@ -49,7 +51,6 @@ class Importer(object):
         """
         raise NotImplementedError()
 
-    @time_this('entry worker')
     def worker(self, entry: Entry):
         """
         Updates the wiki page with the given entry.
@@ -94,6 +95,8 @@ class Importer(object):
 
 
 class BatchImporter(Importer):
+    summary = "dikan-teny avy amin'ny tahiry XML"
+
     def __init__(self, language):
         self.language = language
         self.file_reader = EntryPageFileReader(self.language)
@@ -156,5 +159,5 @@ class DatabaseImporter(Importer):
 
 
 if __name__ == '__main__':
-    dbi = BatchImporter('en')
+    dbi = BatchImporter(language)
     dbi.do_import()

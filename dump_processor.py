@@ -7,11 +7,10 @@ from lxml import etree
 from api.data_caching import FastWordLookup, FastTranslationLookup
 from api.entry_page_file import EntryPageFileWriter
 from api.entryprocessor import WiktionaryProcessorFactory
-from api.translation.core import Translation
 from object_model.word import Entry
 
-language = sys.argv[1]
-translation = Translation()
+language = sys.argv[1] if len(sys.argv) >= 2 else 'en'
+target_language = sys.argv[2] if len(sys.argv) >= 3 else 'mg'
 count = 0
 log = logging.getLogger(__name__)
 
@@ -38,7 +37,6 @@ class Processor(object):
         if ':' in title_node:
             return
 
-        #print(' >> ', title_node, ' <<')
         processor = processor_class()
         processor.set_title(title_node)
         processor.set_text(content_node)
@@ -76,7 +74,7 @@ class Processor(object):
         buffers = []
         nthreads = 15
         x = 0
-        with open('user_data/%s.xml' % language,'r') as input_file:
+        with open('user_data/%s.xml' % language, 'r') as input_file:
             append = False
             for line in input_file:
                 if '<page>' in line:
@@ -85,7 +83,7 @@ class Processor(object):
                 elif '</page>' in line:
                     input_buffer += line
                     append = False
-                    if x >= nthreads:
+                    if x >= nthreads*100:
                         pool = ThreadPool(nthreads)
                         pool.map(self.worker, buffers)
                         pool.close()
@@ -97,7 +95,7 @@ class Processor(object):
                         x += 1
                         buffers.append(input_buffer)
                     input_buffer = None
-                    del input_buffer #probably redundant...
+                    del input_buffer
                 elif append:
                     input_buffer += line
 
