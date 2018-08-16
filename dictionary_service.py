@@ -6,9 +6,19 @@ import os
 from aiohttp import web
 
 from api.databasemanager import DictionaryDatabaseManager
-from api.dictionary import entry, definition, translation, configuration
-from api.dictionary import get_dictionary, get_language_list, download_dictionary
-from api.dictionary.middlewares import json_error_handler, auto_committer
+from api.dictionary import \
+    entry, \
+    definition, \
+    translation, \
+    configuration
+from api.dictionary import \
+    get_dictionary, \
+    get_language_list, \
+    download_dictionary, \
+    get_inferred_multilingual_dictionary
+from api.dictionary.middlewares import \
+    json_error_handler, \
+    auto_committer
 
 log.basicConfig(filename=os.getcwd() + '/user_data/dictionary_service.log',level=log.DEBUG)
 parser = argparse.ArgumentParser(description='Dictionary service')
@@ -42,6 +52,7 @@ app.router.add_route('DELETE', '/definition/{definition_id}/delete', definition.
 app.router.add_route('POST', '/definition/search', definition.search_definition)
 
 app.router.add_route('GET', '/dictionary/{language}', get_dictionary)
+app.router.add_route('GET', '/dictionary/{source}/{bridge}/{target}', get_inferred_multilingual_dictionary)
 
 app.router.add_route('GET', '/entry/{language}/{word}', entry.get_entry)
 app.router.add_route('POST', '/entry/{language}/create', entry.add_entry)

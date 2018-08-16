@@ -21,23 +21,21 @@ from api.output import Output
 from api.translation.core import LANGUAGE_BLACKLIST
 from object_model.word import Entry
 
-# To build a really fast tree to avoid IO-expensive table lookups
-fast_tree = set()
-
-# Sometimes Pywikibot API will do nothing but slow us down
-site = pywikibot.Site('mg', 'wiktionary')
-update_on_wiki = True
-
-
-# Fast word lookup table
-lookup_cache = FastWordLookup()
-lookup_cache.build_fast_word_tree()
-
 language = sys.argv[1] if len(sys.argv) >= 2 else 'en'
 
 
 class Importer(object):
     summary = "Fanafarana dikan-teny"
+
+    # Sometimes Pywikibot API will do nothing but slow us down
+    site = pywikibot.Site('mg', 'wiktionary')
+    update_on_wiki = True
+
+    # Fast word lookup table
+    lookup_cache = FastWordLookup()
+
+    def __init__(self):
+        self.lookup_cache.build_fast_word_tree()
 
     def do_import(self):
         """
@@ -63,20 +61,20 @@ class Importer(object):
         if entry.language in LANGUAGE_BLACKLIST:
             return
 
-        if lookup_cache.lookup(entry):
+        if self.lookup_cache.lookup(entry):
             return
         else:
             pprint(entry)
             output = Output()
             output.db(entry)
 
-        if not update_on_wiki:
+        if not self.update_on_wiki:
             print('not updating on wiki')
             return
 
         print('attempts to update on wiki...')
         wikipage = output.wikipage(entry)
-        page = pywikibot.Page(site, entry.entry)
+        page = pywikibot.Page(self.site, entry.entry)
 
         if page.isRedirectPage():
             return
@@ -98,6 +96,7 @@ class BatchImporter(Importer):
     summary = "dikan-teny avy amin'ny tahiry XML"
 
     def __init__(self, language):
+        super(BatchImporter, self).__init__()
         self.language = language
         self.file_reader = EntryPageFileReader(self.language)
 
@@ -111,9 +110,9 @@ class BatchImporter(Importer):
 class DatabaseImporter(Importer):
     export_path = 'user_data/dump_export.db'
     summary = "dikan-teny avy amin'ny tahiry XML"
+    fast_tree = {}
 
     def do_import(self, workers=100):
-        fast_tree = {}
         input_database = DictionaryDatabaseManager(database_file=self.export_path)
         with input_database.engine.connect() as connection:
             query = connection.execute(
@@ -139,18 +138,18 @@ class DatabaseImporter(Importer):
             for w in query.fetchall():
                 word, language, part_of_speech, definition = w[1], w[2], w[3], w[4]
                 key = (word, language, part_of_speech)
-                if key in fast_tree:
-                    fast_tree[key].append(definition)
+                if key in self.fast_tree:
+                    self.fast_tree[key].append(definition)
                 else:
-                    fast_tree[key] = [definition]
+                    self.fast_tree[key] = [definition]
 
             print('-- using tree --')
-            for word, language, part_of_speech in fast_tree:
+            for word, language, part_of_speech in self.fast_tree:
                 entry = Entry(
                     entry=word,
                     language=language,
                     part_of_speech=part_of_speech,
-                    entry_definition=fast_tree[(word, language, part_of_speech)]
+                    entry_definition=self.fast_tree[(word, language, part_of_speech)]
                 )
                 try:
                     self.worker(entry)

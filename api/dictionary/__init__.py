@@ -36,6 +36,15 @@ async def get_dictionary(request) -> Response:
         return Response(status=404, content_type='application/json')
 
 
+async def get_inferred_multilingual_dictionary(request) -> Response:
+    """
+    Returns a languge X -> Y multilingual dictionary from a combination of a X -> bridge-language dictionary
+    and a bridge-language -> Y dictionary
+    :param request:
+    :return:
+    """
+    return Response()
+
 async def get_language_list(request) -> Response:
     ret_list = []
     with request.app['database'].engine.connect() as connection:
