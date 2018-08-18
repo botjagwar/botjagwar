@@ -21,6 +21,24 @@ from api.parsers.inflection_template import EnWiktionaryInflectionTemplateParser
 from api.parsers.inflection_template import NounForm, VerbForm, AdjectiveForm
 from .inflection_template import EnWiktionaryInflectionTemplateParser
 
+
+TEMPLATE_TO_OBJECT = {
+    'e-ana': NounForm,
+    'e-mpam-ana': AdjectiveForm,
+    'e-mat': VerbForm,
+    'ana': NounForm,
+    'mpam-ana': AdjectiveForm,
+    'mpam': AdjectiveForm,
+    'mat': VerbForm,
+}
+
+FORM_OF_TEMPLATE = {
+    'ana': 'e-ana',
+    'mpam-ana': 'e-mpam-ana',
+    'mpam': 'e-mpam-ana',
+    'mat': 'e-mat',
+}
+
 templates_parser = EnWiktionaryInflectionTemplateParser()
 
 templates_parser.add_parser(AdjectiveForm, 'de-inflected form of', parse_one_parameter_template(AdjectiveForm, 'de-inflected form of', number='', gender=''))

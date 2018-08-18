@@ -11,9 +11,7 @@ import pywikibot
 
 from api.entryprocessor import WiktionaryProcessorFactory
 from api.output import Output
-from api.parsers import AdjectiveForm
-from api.parsers import NounForm
-from api.parsers import VerbForm
+from api.parsers import TEMPLATE_TO_OBJECT, FORM_OF_TEMPLATE
 from api.parsers import templates_parser
 from api.parsers.functions.postprocessors import POST_PROCESSORS
 from api.parsers.inflection_template import ParserError
@@ -30,22 +28,6 @@ if __name__ == '__main__':
     category_name = sys.argv[2]
     template = sys.argv[3] if len(sys.argv) >= 4 else 'e-ana'
 
-TEMPLATE_TO_OBJECT = {
-    'e-ana': NounForm,
-    'e-mpam-ana': AdjectiveForm,
-    'e-mat': VerbForm,
-    'ana': NounForm,
-    'mpam-ana': AdjectiveForm,
-    'mpam': AdjectiveForm,
-    'mat': VerbForm,
-}
-
-FORM_OF_TEMPLATE = {
-    'ana': 'e-ana',
-    'mpam-ana': 'e-mpam-ana',
-    'mpam': 'e-mpam-ana',
-    'mat': 'e-mat',
-}
 
 TEMPLATE_TO_MG_CATEGORY = {
     'e-ana': "Endrik'anarana",
