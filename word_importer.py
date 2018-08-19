@@ -16,8 +16,8 @@ import pywikibot
 
 from api.data_caching import FastWordLookup
 from api.databasemanager import DictionaryDatabaseManager
-from api.entry_page_file import EntryPageFileReader
 from api.output import Output
+from api.storage import EntryPageFileReader
 from api.translation.core import LANGUAGE_BLACKLIST
 from object_model.word import Entry
 

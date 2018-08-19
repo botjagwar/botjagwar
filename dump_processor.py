@@ -1,14 +1,13 @@
 import logging
-import pickle
 import sys
 from multiprocessing.dummy import Pool as ThreadPool
 
 from lxml import etree
 
 from api.data_caching import FastWordLookup, FastTranslationLookup
-from api.entry_page_file import EntryPageFileWriter
 from api.entryprocessor import WiktionaryProcessorFactory
 from api.parsers import templates_parser, TEMPLATE_TO_OBJECT
+from api.storage import EntryPageFileWriter, MissingTranslationFileWriter
 from object_model.word import Entry
 
 language = sys.argv[1] if len(sys.argv) >= 2 else 'en'
@@ -27,9 +26,8 @@ translation_lookup_table.build_table()
 
 class Processor(object):
     def __init__(self):
-        self.mising_translations_file = open('user_data/missing_translations-%s.pickle' % language, 'wb')
-        self.mising_translations = {}
-        self.writer = EntryPageFileWriter(language)
+        self.missing_translation_writer = MissingTranslationFileWriter(language)
+        self.entry_writer = EntryPageFileWriter(language)
 
     def worker(self, xml_buffer):
         global count
@@ -56,7 +54,7 @@ class Processor(object):
                         language=entry.language,
                         part_of_speech=entry.part_of_speech
                     )
-                    self.writer.add(new_entry)
+                    self.entry_writer.add(new_entry)
             else:
                 # RIP cyclomatic complexity.
                 translations = []
@@ -74,10 +72,7 @@ class Processor(object):
                                     definition)
                             except Exception:
                                 # add to missing translations
-                                if definition in self.mising_translations:
-                                    self.mising_translations[definition] += 1
-                                else:
-                                    self.mising_translations[definition] = 1
+                                self.missing_translation_writer.add(definition)
                             else:
                                 if elements:
                                     # part of speech changes to become a form-of part of speech
@@ -96,7 +91,7 @@ class Processor(object):
                         part_of_speech=pos
                     )
                     print(new_entry.to_dict())
-                    self.writer.add(new_entry)
+                    self.entry_writer.add(new_entry)
 
     def process(self):
         input_buffer = ''
@@ -128,8 +123,8 @@ class Processor(object):
                 elif append:
                     input_buffer += line
 
-        self.writer.write()
-        pickle.dump(self.mising_translations, self.mising_translations_file, pickle.HIGHEST_PROTOCOL)
+        self.entry_writer.write()
+        self.missing_translation_writer.write()
 
 
 if __name__ == '__main__':
@@ -137,4 +132,4 @@ if __name__ == '__main__':
     try:
         p.process()
     finally:
-        print(len(p.writer.page_dump), 'elements parsed')
+        print(len(p.entry_writer.page_dump), 'elements parsed')
