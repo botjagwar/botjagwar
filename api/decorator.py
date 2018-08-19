@@ -4,6 +4,12 @@ import time
 
 
 def critical_section(cs_lock: threading.Lock):
+    """
+    Decorator which uses acquires the specified lock when entering in the decorated function
+    and releases it once out of the decorated function.
+    :param cs_lock:
+    :return:
+    """
     def _critical_section(f):
         def _critical_section_wrapper(*args, **kwargs):
             cs_lock.acquire()
@@ -14,7 +20,47 @@ def critical_section(cs_lock: threading.Lock):
     return _critical_section
 
 
+class run_once(object):
+    """
+    Decorator for run-once methods
+    """
+    __slots__ = ("func", "result", "methods")
+
+    def __init__(self, func):
+        self.func = func
+
+    def __call__(self, *args, **kw):
+        try:
+            return self.result
+        except AttributeError:
+            self.result = self.func(*args, **kw)
+            return self.result
+
+    def __get__(self, instance, cls):
+        method = self.func.__get__(instance, cls)
+        try:
+            return self.methods[method]
+        except (AttributeError,KeyError):
+            decorated = run_once(method)
+            try:
+                self.methods[method] = decorated
+            except AttributeError:
+                self.methods = { method : decorated }
+            return decorated
+
+    def __eq__(self, other):
+        return isinstance(other, run_once) and other.func == self.func
+
+    def __hash__(self):
+        return hash(self.func)
+
+
 def singleton(class_):
+    """
+    Specify that a class is a singleton
+    :param class_:
+    :return:
+    """
     instances = {}
     def getinstance(*args, **kwargs):
         if class_ not in instances:
@@ -24,6 +70,11 @@ def singleton(class_):
 
 
 def threaded(f):
+    """
+    Function runs in a separate, daemon thread
+    :param f:
+    :return:
+    """
     def wrap(*args, **kwargs):
         t = threading.Thread(target=f, args=args, kwargs=kwargs)
         t.daemon = False
@@ -65,4 +116,3 @@ def retry_on_fail(exceptions, retries=5, time_between_retries=1):
 
         return wrapper
     return _retry_on_fail
-
