@@ -63,7 +63,7 @@ class ENWiktionaryProcessor(WiktionaryProcessor):
                 entry=entree,
                 part_of_speech=pos,
                 language=langcode,
-                entry_definition=defin
+                entry_definition=defin,
             )
             retcontent.append(entry)
 
@@ -71,12 +71,11 @@ class ENWiktionaryProcessor(WiktionaryProcessor):
         # print("Nahitana dikanteny ", len(retcontent))
         return retcontent  # liste( (codelangue, entrée)... )
 
-    def retrieve_etymologies(self):
+    def retrieve_etymology(self, content):
         """Maka ny etimolojia rehetra amin'ny teny iray"""
 
         # Etimolojia manta avy amin'ny fizarana rehetra
-        etim = re.findall("===[ ]?Etymology[ ]?[1-9]?===[\n](.*)[\n]+[=]+", self.content)
-        print(etim)
+        etim = re.findall("===[ ]?Etymology[ ]?[1-9]?===[\n](.*)[\n]+[=]+", content)
         return etim
 
     def getall(self, definitions_as_is=False):
@@ -85,13 +84,8 @@ class ENWiktionaryProcessor(WiktionaryProcessor):
         content = re.sub("{{l/en\|(.*)}}", "\\1 ", content)  # remove {{l/en}}
         for l in re.findall("[\n]?==[ ]?([A-Za-z]+)[ ]?==\n", content):
             content = content[content.find('==%s==' % l):]
-            etymology_section_start = content.find('===Etymology===')
-            etymology_section = ''
-            if etymology_section_start != -1:
-                etymology_section_end = content.find('===', etymology_section_start)
-                if etymology_section_end != -1:
-                    etymology_section = content[etymology_section_start:etymology_section_end]
-
+            etimology = self.retrieve_etymology(content)
+            etym = etimology[0] if len(etimology) > 0 else ''
             content = re.sub('Etymology', '', content)  # remove etymology section
 
             # pos
@@ -99,11 +93,13 @@ class ENWiktionaryProcessor(WiktionaryProcessor):
             ptext = regex_ptext = ''
             for p in self.postran:
                 regex_ptext += '%s|' % p
+
             regex_ptext = regex_ptext.strip('|')
 
             ptext = '\n={4}[ ]?(%s)[ ]?={4}\n' % regex_ptext
             if re.search(ptext, content) is None:
                 ptext = '\n={3}[ ]?(%s)[ ]?={3}\n' % regex_ptext
+
             posregex = re.findall(ptext, content)
 
             if not definitions_as_is:
@@ -113,7 +109,6 @@ class ENWiktionaryProcessor(WiktionaryProcessor):
             # definition
             try:
                 defin = content.split('\n#')[1]
-
                 if defin.find('\n') != -1:
                     defin = defin[:defin.find('\n')]
             except IndexError:
@@ -142,30 +137,37 @@ class ENWiktionaryProcessor(WiktionaryProcessor):
                 else:
                     pos = p
                     break
+
             try:
                 pos = self.postran[pos]
             except KeyError:
                 if self.verbose: print(("Tsy nahitana dikan'ny karazan-teny %s" % pos))
                 continue
+
             if defin.startswith('to ') or defin.startswith('To '):
                 pos = 'mat'
                 defin = defin[2:]
             elif defin.startswith('a ') or defin.startswith('A '):
                 pos = 'ana'
                 defin = defin[1:]
-            if len(defin.strip()) < 1: continue
+
+            if len(defin.strip()) < 1:
+                continue
+
             try:
+                language_code = self.lang2code(l)
+            except KeyError:
+                continue
+            else:
                 assert self.title is not None
                 i = Entry(
                     entry=self.title,
                     part_of_speech=pos,
-                    language=self.lang2code(l),
+                    language=language_code,
                     entry_definition=[defin.strip()],
-                    etymology=etymology_section,
+                    etymology=etym
                 )
                 items.append(i)
-            except KeyError:
-                continue
 
         # print("Nahitana dikanteny ", len(items))
         return items

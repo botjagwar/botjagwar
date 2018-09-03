@@ -4,7 +4,7 @@ from multiprocessing.dummy import Pool as ThreadPool
 
 from lxml import etree
 
-from api.data_caching import FastWordLookup, FastTranslationLookup
+from api.data_caching import FastTranslationLookup
 from api.entryprocessor import WiktionaryProcessorFactory
 from api.parsers import templates_parser, TEMPLATE_TO_OBJECT
 from api.storage import EntryPageFileWriter, MissingTranslationFileWriter
@@ -18,8 +18,6 @@ log = logging.getLogger(__name__)
 processor_class = WiktionaryProcessorFactory.create(language)
 
 # Lookup table
-lookup_table = FastWordLookup()
-lookup_table.build_fast_word_tree()
 translation_lookup_table = FastTranslationLookup(language, 'mg')
 translation_lookup_table.build_table()
 
@@ -54,6 +52,7 @@ class Processor(object):
                         language=entry.language,
                         part_of_speech=entry.part_of_speech
                     )
+                    print(new_entry)
                     self.entry_writer.add(new_entry)
             else:
                 # RIP cyclomatic complexity.
