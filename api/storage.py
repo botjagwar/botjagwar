@@ -1,4 +1,5 @@
 import pickle
+from csv import DictWriter
 from threading import Lock
 
 from api.decorator import critical_section, singleton
@@ -54,7 +55,8 @@ class EntryPageFileReader(Reader):
 class MissingTranslationFileReader(Reader):
     def __init__(self, language):
         self.mising_translations = {}
-        self.mising_translations_file = open('user_data/missing_translations-%s.pickle' % language, 'rb')
+        self.language = language
+        self.mising_translations_file = open('user_data/missing_translations-%s.pickle' % self.language, 'rb')
 
     def read(self):
         self.mising_translations = pickle.load(self.mising_translations_file)
@@ -75,3 +77,23 @@ class MissingTranslationFileWriter(Writer):
 
     def write(self):
         pickle.dump(self.mising_translations, self.mising_translations_file, pickle.HIGHEST_PROTOCOL)
+
+
+class MissingTranslationCsvWriter(object):
+    def __init__(self, language):
+        self.language = language
+        self.reader = MissingTranslationFileReader(language)
+        self.reader.read()
+
+    def to_csv(self, filename_pattern='user_data/missing_translations-%s.csv'):
+        # missing_translations is a dictionary where the key is a translation file
+        # and where the value is the number of times it's been looked for
+        out_file = open(filename_pattern % self.language, 'w')
+        dict_list = [
+            {'word': translation, 'hits': hits}
+            for translation, hits in self.reader.mising_translations.items()
+        ]
+        writer = DictWriter(out_file, ['word', 'hits'])
+        writer.writeheader()
+        writer.writerows(dict_list)
+        out_file.close()

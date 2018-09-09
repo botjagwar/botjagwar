@@ -50,7 +50,8 @@ class FastTranslationLookup:
                 word, language, part_of_speech, definition = w[1], w[2], w[3], w[4]
                 key = (word, language, part_of_speech)
                 if key in self.fast_tree:
-                    self.fast_tree[key].append(definition)
+                    if definition not in self.fast_tree[key]:
+                        self.fast_tree[key].append(definition)
                 else:
                     self.fast_tree[key] = [definition]
 
