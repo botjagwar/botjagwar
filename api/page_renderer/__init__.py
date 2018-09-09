@@ -77,9 +77,16 @@ class MGWikiPageRenderer(PageRenderer):
 {{-%(part_of_speech)s-|%(language)s}}
 '''{{subst:BASEPAGENAME}}''' {{fanononana X-SAMPA||%(language)s}} {{fanononana||%(language)s}}""" % data
         if link:
-            s += "\n# %s" % ', '.join(['[[%s]]' % (d) for d in info.entry_definition])
+            definition = []
+            for d in info.entry_definition:
+                if '[[' in d or ']]' in d:
+                    definition.append(d)
+                else:
+                    definition.append('[[%s]]' % d)
         else:
-            s += "\n# %s" % ', '.join(['%s' % (d) for d in info.entry_definition])
+            definition = ['%s' % (d) for d in info.entry_definition]
+
+        s += "\n# %s" % ', '.join(definition)
 
         s = s + additional_note % info.properties
         try:

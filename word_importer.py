@@ -18,7 +18,7 @@ from api.data_caching import FastWordLookup
 from api.databasemanager import DictionaryDatabaseManager
 from api.output import Output
 from api.storage import EntryPageFileReader
-from api.translation.core import LANGUAGE_BLACKLIST
+from api.translation.core import LANGUAGE_BLACKLIST, CYRILLIC_ALPHABET_LANGUAGES, _get_unaccented_word
 from object_model.word import Entry
 
 language = sys.argv[1] if len(sys.argv) >= 2 else 'en'
@@ -59,6 +59,7 @@ class Importer(object):
         :return:
         """
         if entry.language in LANGUAGE_BLACKLIST:
+            print('blackisted: ', entry.language)
             return
 
         if self.lookup_cache.lookup(entry):
@@ -74,11 +75,15 @@ class Importer(object):
 
         print('attempts to update on wiki...')
         wikipage = output.wikipage(entry)
+        if entry.language in CYRILLIC_ALPHABET_LANGUAGES:
+            entry.entry = _get_unaccented_word(entry.entry)
+
         page = pywikibot.Page(self.site, entry.entry)
-
-        if page.isRedirectPage():
+        try:
+            if page.isRedirectPage():
+                return
+        except Exception:
             return
-
         if page.exists():
             content = page.get()
             if '{{=%s=}}' % entry.language in content:

@@ -306,3 +306,9 @@ def _generate_redirections(infos):
             if not page.exists():
                 page.put_async("#FIHODINANA [[%s]]" % redirection_target, "fihodinana")
             infos.entry = redirection_target
+
+def _get_unaccented_word(word):
+    for char in "́̀":
+        if word.find(char) != -1:
+            word = word.replace(char, "")
+    return word

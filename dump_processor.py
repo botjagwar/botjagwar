@@ -52,8 +52,12 @@ class Processor(object):
                         language=entry.language,
                         part_of_speech=entry.part_of_speech
                     )
-                    print(new_entry)
+                    #print('local >', new_entry)
                     self.entry_writer.add(new_entry)
+                    for e in processor.retrieve_translations():
+                        e.entry_definition = translation
+                        self.entry_writer.add(e)
+                        #print('local translation >', e)
             else:
                 # RIP cyclomatic complexity.
                 translations = []
@@ -79,17 +83,16 @@ class Processor(object):
                                         pos = 'e-' + pos
                                     translations.append(elements.to_malagasy_definition())
                     else:
-                        translation.append(translation[0])
+                        translations.append(translation[0])
 
                 if translations:
-                    print(translations)
                     new_entry = Entry(
                         entry=entry.entry,
-                        entry_definition=translations,
+                        entry_definition=list(set(translations)),
                         language=entry.language,
                         part_of_speech=pos
                     )
-                    print(new_entry.to_dict())
+                    #print('foreign >', new_entry)
                     self.entry_writer.add(new_entry)
 
     def process(self):
