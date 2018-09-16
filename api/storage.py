@@ -97,3 +97,35 @@ class MissingTranslationCsvWriter(object):
         writer.writeheader()
         writer.writerows(dict_list)
         out_file.close()
+
+
+class CacheMissError(KeyError):
+    pass
+
+
+class SiteExtractorCacheEngine(object):
+    def __init__(self, sitename):
+        self.sitename = sitename
+        try:
+            old_dump_file = open('user_data/site-extractor-%s.pkl' % self.sitename, 'rb')
+        except FileNotFoundError:
+            self.page_dump = {}
+        else:
+            self.page_dump = pickle.load(old_dump_file)
+            old_dump_file.close()
+
+        self.counter = 0
+
+    def get(self, word):
+        if word in self.page_dump:
+            return self.page_dump[word]
+        else:
+            raise CacheMissError()
+
+    def add(self, word, content):
+        self.page_dump[word] = content
+
+    def write(self):
+        page_dump_file = open('user_data/site-extractor-%s.pkl' % self.sitename, 'wb')
+        pickle.dump(self.page_dump, page_dump_file, pickle.HIGHEST_PROTOCOL)
+        page_dump_file.close()
