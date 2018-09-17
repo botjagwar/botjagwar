@@ -1,4 +1,5 @@
 import logging
+import re
 
 import requests
 from lxml import etree
@@ -6,6 +7,7 @@ from lxml import etree
 from api.decorator import time_this
 from api.storage import SiteExtractorCacheEngine, CacheMissError
 from object_model.word import Entry
+from page_lister import get_pages_from_category
 
 log = logging.getLogger(__name__)
 
@@ -25,7 +27,8 @@ class SiteExtractorException(Exception):
 
 
 class SiteExtractor(object):
-    STRIP_TAGS_LIST = ['a', 'i', 'b', 'br', 'div', 'small', 'big', 'td']
+    STRIP_TAGS_LIST = ['a', 'i', 'b', 'br', 'div',
+                       'small', 'big', 'td', 'tr', 'span']
     lookup_pattern = None
     definition_xpath = None
     pos_xpath = None
@@ -71,10 +74,12 @@ class SiteExtractor(object):
 
         return etree.HTML(page)
 
-
     def reprocess_definition(self, definition):
-        etree.strip_tags(definition, self.STRIP_TAGS_LIST)
-        definition = etree.tostring(definition)
+        """
+        Definition post-processor. Override with your own function
+        :param definition:
+        :return:
+        """
         return definition
 
     @time_this('lookup')
@@ -111,6 +116,14 @@ class TenyMalagasySiteExtractor(SiteExtractor):
         'mpamaritra': 'mpam'
     }
 
+    def reprocess_definition(self, definition):
+        etree.strip_tags(definition, self.STRIP_TAGS_LIST)
+        definition = etree.tostring(definition, encoding='unicode')
+        definition = definition.replace('<td class="main">', '')
+        definition = definition.replace('</td>', '')
+        definition = definition.replace('\n', '')
+        return definition
+
     def lookup(self, word):
         """
         Postprocessor function
@@ -118,11 +131,62 @@ class TenyMalagasySiteExtractor(SiteExtractor):
         :return:
         """
         entry = super(TenyMalagasySiteExtractor, self).lookup(word)
-        entry.part_of_speech = (self.part_of_speech_mapper[entry.part_of_speech]
-                                if entry.part_of_speech in self.part_of_speech_mapper
-                                else entry.part_of_speech)
+
+        # ---- Our postprocessor below -----
+        references_regex = r'([a-zA-Z]+ [0-9]+)'
+        entry.part_of_speech = (
+            self.part_of_speech_mapper[entry.part_of_speech]
+            if entry.part_of_speech in self.part_of_speech_mapper
+            else entry.part_of_speech
+        )
+        entry.references = []
+        new_definitions = []
+        examples = {}
+        for definition_section in entry.entry_definition:
+            for ref in re.findall(references_regex, str(definition_section)):
+                entry.references.append(ref)
+                definition_section = definition_section.replace('[%s]' % ref, '')
+                definition_section = definition_section.replace('%s]' % ref, '')
+
+            for i, d in enumerate(definition_section.split('¶\xa0')):
+                split_definition = d.split(':')
+                if len(split_definition) == 2:
+                    definition, example = split_definition
+                    new_definitions.append(definition)
+                    examples[i] = example
+
+        entry.entry_definition = new_definitions
+        entry.examples = examples
+
         return entry
 
+
+def main():
+    import random
+    import time
+    import pickle
+    extractor = TenyMalagasySiteExtractor()
+    counter = 0
+    new_pagelist = []
+    pagelist = [p for p in get_pages_from_category('mg', 'Famaritana tsy ampy')]
+    random.shuffle(pagelist)
+    for page in pagelist:
+        print('>>>>', page.title(), '<<<<')
+        counter += 1
+        content = page.get()
+        if '=mg=' not in content:
+            continue
+        try:
+            time.sleep(random.randint(1, 4))
+            entry = extractor.lookup(page.title())
+            print(entry)
+        except SiteExtractorException as e:
+            print(e)
+            continue
+        new_pagelist.append(page.title())
+
+    with open('user_data/existingpages-list.pkl', 'wb') as f:
+        pickle.dump(new_pagelist, f)
 
 def test():
     extractor = TenyMalagasySiteExtractor()
@@ -134,7 +198,7 @@ def test():
         'mandray', 'tany',
         'etoana', 'volo',
         'etona', 'fahasoavana',
-        'tontolo', 'fanendrena',
+        'tontolo',
         'sdlfksldkfdf' # non-existent page
     ]:
         try:
@@ -145,4 +209,4 @@ def test():
 
 
 if __name__ == '__main__':
-    test()
+    main()

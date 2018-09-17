@@ -19,6 +19,8 @@ class Entry(TypeCheckedObject):
         origin_wiktionary_edition=str,
         origin_wiktionary_page_name=str,
         etymology=str,
+        reference=list,
+        examples=dict
     )
 
     def to_tuple(self):
