@@ -55,7 +55,7 @@ class SiteExtractor(object):
                 raise SiteExtractorException(response, 'Non-OK')
 
         # variables check
-        for var in ['lookup_pattern', 'definition_xpath', 'pos_xpath']:
+        for var in ['lookup_pattern', 'definition_xpath']:
             check_if_defined(var)
 
         # cache check if page has already been retrieved, and handle known raised exception
@@ -88,9 +88,10 @@ class SiteExtractor(object):
         definitions = [self.reprocess_definition(d)
                        for d in content.xpath(self.definition_xpath)]
 
-        word = word
-        print('>>>>>', word, '<<<<<')
-        pos = content.xpath(self.pos_xpath)[0].text.strip('\n')
+        if self.pos_xpath is not None:
+            pos = content.xpath(self.pos_xpath)[0].text.strip('\n')
+        else:
+            pos = 'ana'
 
         return Entry(
             entry=word,
@@ -102,7 +103,7 @@ class SiteExtractor(object):
 
 class TenyMalagasySiteExtractor(SiteExtractor):
     lookup_pattern = 'http://tenymalagasy.org/bins/teny2/%s'
-    definition_xpath = '//table[2]/tr[3]/td[3]'
+    definition_xpath = "//table[2]/tr[3]/td[3]"
     pos_xpath = '//table[2]/tr[2]/td[3]'
     language = 'mg'
     definition_language = 'mg'
@@ -124,14 +125,19 @@ class TenyMalagasySiteExtractor(SiteExtractor):
         definition = definition.replace('\n', '')
         return definition
 
+    @time_this('tenymalagasy.org lookup')
     def lookup(self, word):
         """
         Postprocessor function
         :param word:
         :return:
         """
-        entry = super(TenyMalagasySiteExtractor, self).lookup(word)
+        content = self.load_page(word)
+        if content.find('Famaritana malagasy') == -1:
+            print('skipping...')
+            raise SiteExtractorException
 
+        entry = super(TenyMalagasySiteExtractor, self).lookup(word)
         # ---- Our postprocessor below -----
         references_regex = r'([a-zA-Z]+ [0-9]+)'
         entry.part_of_speech = (
@@ -154,6 +160,9 @@ class TenyMalagasySiteExtractor(SiteExtractor):
                     definition, example = split_definition
                     new_definitions.append(definition)
                     examples[i] = example
+                else:
+                    sd = ' '.join(split_definition)
+                    new_definitions.append(sd.strip())
 
         entry.entry_definition = new_definitions
         entry.examples = examples
@@ -161,20 +170,56 @@ class TenyMalagasySiteExtractor(SiteExtractor):
         return entry
 
 
-def main():
+class RakibolanaSiteExtactor(SiteExtractor):
+    lookup_pattern = 'http://www.rakibolana.org/rakibolana/teny/%s'
+    definition_xpath = '//*[@id="rakibolana-result"]/div'
+    language = 'mg'
+    definition_language = 'mg'
+    cache_engine = SiteExtractorCacheEngine('www.rakibolana.org')
+
+    def __init__(self):
+        self.STRIP_TAGS_LIST.append('div')
+
+    def reprocess_definition(self, definition):
+        etree.strip_tags(definition, self.STRIP_TAGS_LIST)
+        definition = etree.tostring(definition, encoding='unicode')
+        definition = definition.replace('<div class="rakibolana-definition">', '')
+        definition = definition.replace('\n Ahitsio\n  </div>\n\n', '')
+
+        return definition
+
+    @time_this('rakibolana.org lookup')
+    def lookup(self, word):
+        """
+        Postprocessor function
+        :param word:
+        :return:
+        """
+        content = self.load_page(word)
+        if content.find('Tsy hita ny teny') == -1:
+            print('skipping...')
+            raise SiteExtractorException
+
+        entry = super(RakibolanaSiteExtactor, self).lookup(word)
+        return entry
+
+
+def main(classname):
     import random
     import time
     import pickle
-    extractor = TenyMalagasySiteExtractor()
+    extractor = classname()
     counter = 0
     new_pagelist = []
-    pagelist = [p for p in get_pages_from_category('mg', 'Famaritana tsy ampy')]
+    pagelist = [p for p in get_pages_from_category('mg', 'Famaritana tsy ampy')
+                if p not in extractor.cache_engine.page_dump.keys()]
     random.shuffle(pagelist)
     for page in pagelist:
-        print('>>>>', page.title(), '<<<<')
+        print('>>>> [', classname.__name__, ']: ', page.title(), '<<<<')
         counter += 1
         content = page.get()
         if '=mg=' not in content:
+            print('skipping...')
             continue
         try:
             time.sleep(random.randint(1, 4))
@@ -183,30 +228,48 @@ def main():
         except SiteExtractorException as e:
             print(e)
             continue
-        new_pagelist.append(page.title())
+        except Exception:
+            continue
+        else:
+            new_pagelist.append(page.title())
 
     with open('user_data/existingpages-list.pkl', 'wb') as f:
         pickle.dump(new_pagelist, f)
 
-def test():
+
+def test_teny_malagasy():
     extractor = TenyMalagasySiteExtractor()
     for word in [
-        'fandraisana', 'fantsika',
-        'filazana', 'anao',
-        'laza', 'izaho',
-        'manisy', 'maizina',
-        'mandray', 'tany',
-        'etoana', 'volo',
-        'etona', 'fahasoavana',
-        'tontolo',
-        'sdlfksldkfdf' # non-existent page
+        'fandraisana',
+        'fantsika',
+        'miroahana'
     ]:
         try:
             print(word, extractor.lookup(word))
-        except SiteExtractorException as e:
-            print(e)
+        except SiteExtractorException:
+            continue
+
+
+def test_rakibolana():
+    extractor = RakibolanaSiteExtactor()
+    for word in [
+        'fandraisana',
+        'ray',
+        'fantsika',
+        'miroahana'
+    ]:
+        try:
+            print(word, extractor.lookup(word))
+        except SiteExtractorException:
             continue
 
 
 if __name__ == '__main__':
-    main()
+    x1 = TenyMalagasySiteExtractor
+    x2 = RakibolanaSiteExtactor
+    try:
+        main(x1)
+        main(x2)
+    except KeyboardInterrupt:
+        del x1
+        del x2
