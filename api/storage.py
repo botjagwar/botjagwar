@@ -2,6 +2,7 @@ import pickle
 from csv import DictWriter
 from threading import Lock
 
+from api.data_caching import FastTranslationLookup
 from api.decorator import critical_section, singleton
 from object_model.word import Entry
 
@@ -84,6 +85,8 @@ class MissingTranslationCsvWriter(object):
         self.language = language
         self.reader = MissingTranslationFileReader(language)
         self.reader.read()
+        self.lookup = FastTranslationLookup('en', 'mg')
+        self.lookup.build_table()
 
     def to_csv(self, filename_pattern='user_data/missing_translations-%s.csv'):
         # missing_translations is a dictionary where the key is a translation file
@@ -92,6 +95,7 @@ class MissingTranslationCsvWriter(object):
         dict_list = [
             {'word': translation, 'hits': hits}
             for translation, hits in self.reader.mising_translations.items()
+            if not self.lookup.word_exists(translation)
         ]
         writer = DictWriter(out_file, ['word', 'hits'])
         writer.writeheader()

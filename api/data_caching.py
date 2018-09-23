@@ -75,6 +75,13 @@ class FastTranslationLookup:
         else:
             return False
 
+    def word_exists(self, word):
+        for data in self.fast_tree:
+            if data[0] == word:
+                return True
+
+        return False
+
 
 class FastWordLookup:
     def __init__(self, database_file='default'):
