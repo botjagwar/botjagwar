@@ -126,6 +126,10 @@ class SiteExtractorCacheEngine(object):
         else:
             raise CacheMissError()
 
+    def iterate(self):
+        for word in self.page_dump:
+            yield self.page_dump[word]
+
     def add(self, word, content):
         self.page_dump[word] = content
 
