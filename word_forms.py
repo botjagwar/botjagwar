@@ -103,9 +103,9 @@ def create_non_lemma_entry(entry: Entry):
         return 0
 
     # Do not create page if lemma does not exist
-    # if lemma not in PAGE_SET:
-    #     print('No lemma (%s) :/' % lemma)
-    #     return 0
+    if lemma not in PAGE_SET:
+        print('No lemma (%s) :/' % lemma)
+        return 0
 
     form_of_template = FORM_OF_TEMPLATE[pos] if pos in FORM_OF_TEMPLATE else pos
 
