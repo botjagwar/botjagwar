@@ -1,5 +1,6 @@
 #!/usr/bin/python3.6
 
+import configparser
 import logging
 
 from sqlalchemy import create_engine
@@ -13,17 +14,29 @@ log = logging.getLogger(__file__)
 
 
 class DatabaseManager(object):
+    conf_key = 'database_uri'
     database_file = None
+    db_type = 'default'
 
     def __init__(self, base):
-        if self.database_file is None:
-            self.engine = create_engine(
-                'sqlite://',
-                poolclass=SingletonThreadPool)
-        else:
-            self.engine = create_engine(
-                'sqlite:///%s' % self.database_file,
-                poolclass=SingletonThreadPool)
+        self.config_parser = configparser.ConfigParser()
+        self.config_parser.read('conf/config.ini')
+        self.db_header = self.config_parser.get('global', self.conf_key)
+        assert self.db_header is not None
+        scheme_head = self.db_header.split('://')[0]
+        if 'sqlite' in scheme_head:
+            self.db_type = 'sqlite'
+        elif 'mysql' in scheme_head:
+            self.db_type = 'mysql'
+
+        if self.database_file is not None:
+            if self.db_type == 'sqlite':
+                self.db_header = 'sqlite:///%s' % self.database_file
+
+        log.info('Using database %s' % self.db_header)
+        self.engine = create_engine(
+            self.db_header,
+            poolclass=SingletonThreadPool)
 
         base.metadata.create_all(self.engine)
         self.SessionClass = sessionmaker(bind=self.engine)
