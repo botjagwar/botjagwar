@@ -19,9 +19,6 @@ class DatabaseManager(object):
     db_type = 'default'
 
     def __init__(self, base):
-        self.config_parser = configparser.ConfigParser()
-        self.config_parser.read('conf/config.ini')
-        self.db_header = self.config_parser.get('global', self.conf_key)
         assert self.db_header is not None
         scheme_head = self.db_header.split('://')[0]
         if 'sqlite' in scheme_head:
@@ -42,13 +39,21 @@ class DatabaseManager(object):
         self.SessionClass = sessionmaker(bind=self.engine)
         self.session = self.SessionClass()
 
+    def read_configuration(self):
+        self.config_parser = configparser.ConfigParser()
+        self.config_parser.read('conf/config.ini')
+        self.db_header = self.config_parser.get('global', self.conf_key)
+
 
 class LanguageDatabaseManager(DatabaseManager):
     database_file = 'data/language.db'
 
     def __init__(self, database_file='default'):
-        if database_file != 'default':
+        if database_file != 'default': # when defined, assumed a sqlite database file
             self.database_file = database_file
+            self.db_header = 'sqlite:///%s' % database_file
+        else:
+            self.read_configuration()
 
         super(LanguageDatabaseManager, self).__init__(LanguageBase)
 
@@ -57,7 +62,12 @@ class DictionaryDatabaseManager(DatabaseManager):
     database_file = 'data/word_database.db'
 
     def __init__(self, database_file='default'):
-        if database_file != 'default':
+        log.debug('database_file is %s' % database_file)
+        if database_file != 'default': # when defined, assumed a sqlite database file
             self.database_file = database_file
+            self.db_header = 'sqlite:///%s' % database_file
+        else:
+            self.read_configuration()
 
         super(DictionaryDatabaseManager, self).__init__(WordBase)
+        log.debug('database file/URL: %s' % self.database_file)

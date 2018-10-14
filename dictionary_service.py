@@ -30,7 +30,7 @@ args = parser.parse_args()
 if args.STORAGE:
     WORD_STORAGE = args.STORAGE
 else:
-    WORD_STORAGE = 'data/word_database.db'
+    WORD_STORAGE = 'default'
 
 dictionary_db_manager = DictionaryDatabaseManager(database_file=WORD_STORAGE)
 routes = web.RouteTableDef()
