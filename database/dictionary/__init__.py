@@ -2,6 +2,7 @@ from sqlalchemy import Integer, String, DateTime
 from sqlalchemy import Table, Column, ForeignKey
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship
+from sqlalchemy.orm.exc import DetachedInstanceError
 from sqlalchemy.sql import func
 
 from object_model.word import Entry
@@ -99,15 +100,19 @@ class Word(Base):
         )
 
     def serialise_without_definition(self):
+        last_modified = ''
+        try:
+            if self.date_changed:
+                last_modified = self.date_changed.strftime("%Y-%m-%d %H:%M:%S")
+        except DetachedInstanceError:
+            pass
         word_data = {
             'type': self.__class__.__name__,
             'id': self.id,
             'word': self.word,
             'language': self.language,
             'part_of_speech': self.part_of_speech,
-            'last_modified':
-                self.date_changed.strftime("%Y-%m-%d %H:%M:%S")
-                if self.date_changed is not None else ''
+            'last_modified': last_modified
         }
         return word_data
 
