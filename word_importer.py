@@ -21,8 +21,6 @@ from api.storage import EntryPageFileReader
 from api.translation.core import CYRILLIC_ALPHABET_LANGUAGES, _get_unaccented_word
 from object_model.word import Entry
 
-language = sys.argv[1] if len(sys.argv) >= 2 else 'en'
-
 
 class Importer(object):
     summary = "Fanafarana dikan-teny"
@@ -34,7 +32,7 @@ class Importer(object):
     # Fast word lookup table
     lookup_cache = FastWordLookup()
 
-    def __init__(self):
+    def __init__(self, *args, **kw):
         self.lookup_cache.build_fast_word_tree()
 
     def do_import(self):
@@ -163,5 +161,10 @@ class DatabaseImporter(Importer):
 
 
 if __name__ == '__main__':
-    dbi = DatabaseImporter()
+    programs = {
+        'db': DatabaseImporter,
+        'b': BatchImporter
+    }
+    language = sys.argv[2] if len(sys.argv) >= 3 else 'en'
+    dbi = programs[sys.argv[1]](language)
     dbi.do_import()
