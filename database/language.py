@@ -9,7 +9,7 @@ class Language(Base):
     iso_code = Column(String(6), primary_key=True)
     english_name = Column(String(100))
     malagasy_name = Column(String(100))
-    language_ancestor = Column(String())
+    language_ancestor = Column(String(6))
 
     def get_schema(self):
         pass
