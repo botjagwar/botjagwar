@@ -1,4 +1,5 @@
 #!/usr/bin/python3.6
+import time
 import traceback
 
 import pywikibot
@@ -62,6 +63,17 @@ class DefinitionModificationManagerBot(object):
                 )
 
 
-if __name__ == '__main__':
+async def start_robot():
     bot = DefinitionModificationManagerBot()
-    bot.start()
+    while True:
+        bot.start()
+        print('Done.')
+        time.sleep(5)
+
+
+
+if __name__ == '__main__':
+    import asyncio
+    loop = asyncio.get_event_loop()
+    task = loop.create_task(start_robot())
+    loop.run_until_complete(task)
