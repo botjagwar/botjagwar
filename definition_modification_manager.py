@@ -1,6 +1,5 @@
 #!/usr/bin/python3.6
 import time
-import traceback
 
 import pywikibot
 
@@ -32,9 +31,12 @@ class DefinitionModificationManagerBot(object):
         """
         with self.input_database.engine.connect() as connection:
             query = connection.execute(query_string)
+            change_map = {}
+            fail_map = {}
             for line in query.fetchall():
-                changes = 0
                 word, language, pos, definition_id, old_definition, new_definition = line
+                if definition_id not in change_map:
+                    change_map[definition_id] = 0
                 try:
                     print('>>>>', old_definition, '/', word, '<<<<')
                     mg_word_page = pywikibot.Page(pywikibot.Site('mg', 'wiktionary'), word)
@@ -44,16 +46,18 @@ class DefinitionModificationManagerBot(object):
                         pywikibot.showDiff(content, new_content)
                         if content != new_content:
                             mg_word_page.put(new_content, f'fanitsiana: -{old_definition} +{new_definition}')
-                            changes += 1
+                            change_map[definition_id] += 1
                     else:
                         continue
                 except Exception as exc:
-                    status = 'FAILED'
-                    comment = traceback.format_exc(exc)
-                else:
-                    status = 'DONE'
-                    comment = f'{changes} changes applied.'
+                    if definition_id not in fail_map:
+                        fail_map[definition_id] = "%s failed: %s" % (word, str(exc))
+                    else:
+                        fail_map[definition_id] += "\n%s failed: %s" % (word, str(exc))
 
+            for definition_id, changes in change_map.items():
+                comment = f'{changes} changes applied.'
+                status = 'DONE'
                 connection.execute(f"""
                     UPDATE events_definition_changed SET
                         status = '{status}',
@@ -61,6 +65,16 @@ class DefinitionModificationManagerBot(object):
                         commentary = '{comment}'
                     WHERE definition_id = {definition_id}"""
                 )
+
+            for definition_id, comment in fail_map.items():
+                status = 'FAILED'
+                connection.execute(f"""
+                    UPDATE events_definition_changed SET
+                        status = '{status}',
+                        status_datetime = CURRENT_TIMESTAMP(),
+                        commentary = '{comment}'
+                    WHERE definition_id = {definition_id}"""
+                                   )
 
 
 async def start_robot():
