@@ -63,8 +63,7 @@ class DefinitionModificationManagerBot(object):
                         status = '{status}',
                         status_datetime = CURRENT_TIMESTAMP(),
                         commentary = '{comment}'
-                    WHERE definition_id = {definition_id}"""
-                )
+                    WHERE definition_id = {definition_id}""")
 
             for definition_id, comment in fail_map.items():
                 status = 'FAILED'
@@ -73,8 +72,7 @@ class DefinitionModificationManagerBot(object):
                         status = '{status}',
                         status_datetime = CURRENT_TIMESTAMP(),
                         commentary = '{comment}'
-                    WHERE definition_id = {definition_id}"""
-                                   )
+                    WHERE definition_id = {definition_id}""")
 
 
 async def start_robot():
