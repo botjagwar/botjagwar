@@ -18,7 +18,7 @@ from api.data_caching import FastWordLookup
 from api.databasemanager import DictionaryDatabaseManager
 from api.output import Output
 from api.storage import EntryPageFileReader
-from api.translation.core import CYRILLIC_ALPHABET_LANGUAGES, _get_unaccented_word
+from api.translation.core import CYRILLIC_ALPHABET_LANGUAGES, LANGUAGE_BLACKLIST, _get_unaccented_word
 from object_model.word import Entry
 
 
@@ -27,7 +27,7 @@ class Importer(object):
 
     # Sometimes Pywikibot API will do nothing but slow us down
     site = pywikibot.Site('mg', 'wiktionary')
-    update_on_wiki = False
+    update_on_wiki = True
 
     # Fast word lookup table
     lookup_cache = FastWordLookup()
@@ -56,9 +56,9 @@ class Importer(object):
         :param entry: entry to create
         :return:
         """
-        #if entry.language in LANGUAGE_BLACKLIST:
-        #    print('blackisted: ', entry.language)
-        #    return
+        if entry.language in LANGUAGE_BLACKLIST:
+            print('blackisted: ', entry.language)
+            return
 
         if self.lookup_cache.lookup(entry):
             return
