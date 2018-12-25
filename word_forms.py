@@ -88,7 +88,10 @@ def create_non_lemma_entry(entry: Entry):
             print("Unsupported template")
             return 0
         output_object_class = TEMPLATE_TO_OBJECT[pos]
-        elements = templates_parser.get_elements(output_object_class, definition)
+        try:
+            elements = templates_parser.get_elements(output_object_class, definition)
+        except Exception:
+            return 1
         if code in POST_PROCESSORS:
             elements = POST_PROCESSORS[code](elements)
         if elements is None:
@@ -105,7 +108,7 @@ def create_non_lemma_entry(entry: Entry):
     # Do not create page if lemma does not exist
     if lemma not in PAGE_SET:
         print('No lemma (%s) :/' % lemma)
-        return 0
+        #return 0
 
     form_of_template = FORM_OF_TEMPLATE[pos] if pos in FORM_OF_TEMPLATE else pos
 
@@ -139,7 +142,10 @@ def create_non_lemma_entry(entry: Entry):
         page_content = page_output.wikipage(mg_entry, link=False)
 
     pywikibot.output('\03{blue}%s\03{default}' % page_content)
-    mg_page.put(page_content, 'Teny vaovao')
+    try:
+        mg_page.put(page_content, 'Teny vaovao')
+    except Exception:
+        pass
     return 1
 
 
