@@ -46,7 +46,7 @@ class Output(object):
 
     def batchfile(self, info: Entry):
         "return batch format (see doc)"
-        string = "%(entry)s -> %(entry_definition)s -> %(part_of_speech)s -> %(language)s\n" % info.properties
+        string = "%(entry)s -> %(entry_definition)s -> %(part_of_speech)s -> %(language)s\n" % info.to_dict()
         return string
 
     def wikipage(self, info: Entry, link=True):
