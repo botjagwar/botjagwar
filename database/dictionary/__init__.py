@@ -90,7 +90,8 @@ class Word(Base):
         return word_data
 
     def serialise_to_entry(self, definitions_language=['mg']):
-        definition = [definition.definition for definition in self.definitions
+        definition = [definition.definition
+                      for definition in self.definitions
                       if definition.definition_language in definitions_language]
         return Entry(
             entry=self.word,
@@ -106,6 +107,7 @@ class Word(Base):
                 last_modified = self.date_changed.strftime("%Y-%m-%d %H:%M:%S")
         except DetachedInstanceError:
             pass
+
         word_data = {
             'type': self.__class__.__name__,
             'id': self.id,
