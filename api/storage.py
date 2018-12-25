@@ -138,6 +138,9 @@ class SiteExtractorCacheEngine(object):
     def add(self, word, content):
         self.page_dump[word] = content
 
+    def list(self):
+        return [x for x in self.page_dump.keys()]
+
     def write(self):
         page_dump_file = open('user_data/site-extractor-%s.pkl' % self.sitename, 'wb')
         pickle.dump(self.page_dump, page_dump_file, pickle.HIGHEST_PROTOCOL)
