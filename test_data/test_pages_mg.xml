@@ -3,7 +3,7 @@
     <sitename>Wiktionary</sitename>
     <dbname>mgwiktionary</dbname>
     <base>https://mg.wiktionary.org/wiki/Wiktionary:Fandraisana</base>
-    <generator>MediaWiki 1.32.0-wmf.2</generator>
+    <generator>MediaWiki 1.33.0-wmf.9</generator>
     <case>case-sensitive</case>
     <namespaces>
       <namespace key="-2" case="case-sensitive">Rakitra</namespace>
@@ -35,70 +35,311 @@
     </namespaces>
   </siteinfo>
   <page>
-    <title>rano</title>
+    <title>teny</title>
     <ns>0</ns>
-    <id>1743869</id>
+    <id>1745403</id>
     <revision>
-      <id>24754827</id>
-      <parentid>24651577</parentid>
-      <timestamp>2018-04-10T06:19:28Z</timestamp>
+      <id>26967908</id>
+      <parentid>23598530</parentid>
+      <timestamp>2018-12-27T19:06:55Z</timestamp>
       <contributor>
-        <username>Bot-Jagwar</username>
-        <id>380</id>
+        <username>Jagwar</username>
+        <id>177</id>
       </contributor>
-      <minor/>
-      <comment>+Dikan-teny avy amin'ny dikan-teny avy amin'i fr.wiktionary (v1.0)</comment>
       <model>wikitext</model>
       <format>text/x-wiki</format>
-      <text xml:space="preserve" bytes="1398">
-=={{=rap=}}==
-{{-ana-|rap}}
-'''rano''' {{fanononana X-SAMPA||rap}} {{fanononana||rap}}
-# [[farihy]] {{dikantenin'ny dikanteny|lac|fr}}
-
-=={{=kzk=}}==
-{{-ana-|kzk}}
-'''rano''' {{fanononana X-SAMPA||kzk}} {{fanononana||kzk}}
-# [[lohany]] {{dikantenin'ny dikanteny|head|en}}
-
-=={{=tnt=}}==
-{{-ana-|tnt}}
-'''rano''' {{fanononana X-SAMPA||tnt}} {{fanononana||tnt}}
-# [[rano]] {{dikantenin'ny dikanteny|eau|fr}}
-
-=={{=tdn=}}==
-{{-ana-|tdn}}
-'''rano''' {{fanononana X-SAMPA||tdn}} {{fanononana||tdn}}
-# [[rano]] {{dikantenin'ny dikanteny|eau|fr}}
-
-=={{=plt=}}==
-{{-ana-|plt}}
-'''rano''' {{fanononana X-SAMPA||plt}} {{fanononana||plt}}
-# [[rano]] {{dikantenin'ny dikanteny|eau|fr}}
-{{jereo|rano-|raño|ráno}}
-=={{=pl=}}==
-{{-ana-|pl}}
-'''rano''' {{fanononana X-SAMPA||pl}} {{fanononana||pl}}
-# [[maraina]]
-=={{=eo=}}==
-{{-ana-|eo}}
-'''rano''' {{fanononana X-SAMPA||eo}} {{fanononana||eo}}
-# [[radaka]], [[sabakaka]], [[sahona]], [[saobakaka]], [[angoaka]]
-=={{=mg=}}==
+      <text xml:space="preserve" bytes="33355">=={{=mg=}}==
+{{-etim-|mg}}
 {{-ana-|mg}}
-{{mg-ana-e|fototeny=rano}}
-
-'''rano''' {{fanononana X-SAMPA||mg}} {{fanononana|ɾanʷ|mg}}
-# [[rano]]
-=={{=io=}}==
-{{-ana-|io}}
-'''rano''' {{fanononana X-SAMPA||io}} {{fanononana||io}}
-# [[radaka]], [[sabakaka]], [[sahona]], [[saobakaka]], [[angoaka]]
-[[Sokajy:Dikanteny tokony homarinana]]
-
+'''teny''' {{pron X-SAMPA||}} {{pron|tenʲ|mg}}
+# Feo avoakan'ny vavan'ny olombelona, izay misy heviny: Tsy nanonona teny na dia indraim-bava aza izy.
+# Fitambarana tarehintsoratra misy heviny, rafipeo milaza hevitra iray ka atao indray manonona sy indray manoratra.
+# Enti-milaza koa ny karazan-teny ampiasain'ny firenena samihafa:
+#* {{-vang-oha|mg}}
 {{-anagr-}}
-*[[oran']], [[oran-]], [[rano-]], [[raon']], [[raon-]], [[rnao]], [[roan']], [[roan-]], [[rona]], [[rona-]], {{anag+}}</text>
-      <sha1>8j80dznnm347d12m9kqn0frhuo56yf4</sha1>
+*[[enty]], {{anag+}}
+
+# {{ace}} : {{dikan-teny|bahsa|ace}}
+# {{crh}} : {{dikan-teny|bana|crh}}
+# {{aa}} : {{dikan-teny|busa|aa}}, {{dikan-teny|babur|aa}}
+# {{tpw}} : {{dikan-teny|arara|tpw}}
+# {{os}} : {{dikan-teny|ӕвзаг|os}}
+# {{gag}} : {{dikan-teny|söz|gag}}
+# {{kjh}} : {{dikan-teny|тіл|kjh}}
+# {{asb}} : {{dikan-teny|ceží|asb}}
+# {{pjt}} : {{dikan-teny|tjalinypa|pjt}}
+# {{roa-tar}} : {{dikan-teny|latine|roa-tar}},
+# {{pdc}} : {{dikan-teny|Schprooch|pdc}}
+# {{com}} : {{dikan-teny|eeko̱|com}}, {{dikan-teny|eeko|com}}
+# {{chm}} : {{dikan-teny|йылме|chm}}
+# {{yrk}} : {{dikan-teny|вада|yrk}},
+# {{aqc}} : {{dikan-teny|чӏат|aqc}}
+# {{shh}} : {{dikan-teny|anii|shh}}, {{dikan-teny|a͟iʼgo|shh}}, {{dikan-teny|a͟ikon|shh}}
+# {{par}} : {{dikan-teny|okon|par}}
+# {{kca}} : {{dikan-teny|ясӑӈ|kca}}
+# {{cv}} : {{dikan-teny|чӗлхе|cv}}
+# {{vot}} : {{dikan-teny|sõna|vot}},
+# {{xal}} : {{dikan-teny|келн|xal}}
+# {{kld}} : {{dikan-teny|thalay|kld}}
+# {{ee}} : {{dikan-teny|nya|ee}}
+# {{lmo}} : {{dikan-teny|lengua|lmo}}
+# {{dlg}} : {{dikan-teny|тыла|dlg}}
+# {{bal}} : {{dikan-teny|زبان|bal}}
+# {{fr}} : {{dikan-teny|langue|fr}}
+# {{zkb}} : {{dikan-teny|islip|zkb}}
+# {{goh}} : {{dikan-teny|wort|goh}}
+# {{or}} : {{dikan-teny|ଭାଷା|or}}
+# {{tn}} : {{dikan-teny|lefoko|tn}}
+# {{rop}} : {{dikan-teny|tang|rop}}
+# {{prg}} : {{dikan-teny|insuwis|prg}}
+# {{hke}} : {{dikan-teny|kinwa|hke}}
+# {{avk}} : {{dikan-teny|ava|avk}}
+# {{ty}} : {{dikan-teny|reo|ty}}
+# {{rom}} : {{dikan-teny|chib|rom}}, {{dikan-teny|shib|rom}}
+# {{ce}} : {{dikan-teny|мотт|ce}}
+# {{nap}} : {{dikan-teny|lengua|nap}}
+# {{gil}} : {{dikan-teny|taetae|gil}}
+# {{cui}} : {{dikan-teny|jume|cui}}
+# {{jbo}} : {{dikan-teny|valsi|jbo}}
+# {{pcd}} : {{dikan-teny|langue|pcd}}
+# {{udm}} : {{dikan-teny|кыл|udm}}
+# {{adx}} : {{dikan-teny|hked yəg|adx}}
+# {{roa-g}} : {{dikan-teny|laungg|roa-g}}
+# {{mul}} : {{dikan-teny|辭|mul}}, {{dikan-teny|辞|mul}}, {{dikan-teny|词|mul}}, {{dikan-teny|語|mul}}, {{dikan-teny|話|mul}}, {{dikan-teny|詞|mul}}, {{dikan-teny|言|mul}}, {{dikan-teny|舌|mul}}
+# {{dv}} : {{dikan-teny|ބަސް|dv}}
+# {{inh}} : {{dikan-teny|мотт|inh}}
+# {{roa-t}} : {{dikan-teny|lènga|roa-t}}
+# {{rw}} : {{dikan-teny|urumini|rw}}
+# {{aaq}} : {{dikan-teny|mihkəmαwαtəwéwαkan|aaq}}, {{dikan-teny|wətawαwαtəwéwαkan|aaq}}
+# {{bem}} : {{dikan-teny|ululimi|bem}}
+# {{sgs}} : {{dikan-teny|kalba|sgs}}
+# {{cic}} : {{dikan-teny|anumpa|cic}}, {{dikan-teny|isolash|cic}}, {{dikan-teny|anompa|cic}}
+# {{se}} : {{dikan-teny|njuovčča|se}}
+# {{nv}} : {{dikan-teny|atsooʼ|nv}}, {{dikan-teny|saad|nv}}
+# {{ilo}} : {{dikan-teny|dila|ilo}}
+# {{kla}} : {{dikan-teny|baawac|kla}}
+# {{ban}} : {{dikan-teny|basa|ban}}
+# {{sc}} : {{dikan-teny|limba|sc}}
+# {{rue}} : {{dikan-teny|язык|rue}},
+# {{mxr}} : {{dikan-teny|jela|mxr}}
+# {{tk}} : {{dikan-teny|söz|tk}}, {{dikan-teny|dil|tk}}
+# {{cjh}} : {{dikan-teny|tíxʷcɬ|cjh}}
+# {{ang}} : {{dikan-teny|spræc|ang}}, {{dikan-teny|tunge|ang}}, {{dikan-teny|word|ang}}
+# {{sva}} : {{dikan-teny|ნინ|sva}},
+# {{aus-w}} : {{dikan-teny|djalang|aus-w}}
+# {{wo}} : {{dikan-teny|làmmiñ wi|wo}}
+# {{akz}} : {{dikan-teny|naaɬiilka|akz}}
+# {{na}} : {{dikan-teny|dorer|na}}
+# {{mez}} : {{dikan-teny|wēhcekan|mez}}
+# {{ia}} : {{dikan-teny|lingua|ia}}, {{dikan-teny|vocabulo|ia}}, {{dikan-teny|parola|ia}}, {{dikan-teny|latin|ia}}
+# {{nyn}} : {{dikan-teny|ekigambo|nyn}}
+# {{ha}} : {{dikan-teny|kalma|ha}}, {{dikan-teny|magana|ha}}
+# {{lld}} : {{dikan-teny|parola|lld}}
+# {{lt}} : {{dikan-teny|pranešimas|lt}}, {{dikan-teny|geležtė|lt}}, {{dikan-teny|lotynų kalba|lt}}, {{dikan-teny|liežuvis|lt}}, {{dikan-teny|ašmenys|lt}}, {{dikan-teny|žodis|lt}}
+# {{waq}} : {{dikan-teny|matjjin|waq}}
+# {{mn}} : {{dikan-teny|ᠬᠡᠯᠡ|mn}}, {{dikan-teny|хэл|mn}}, {{dikan-teny|үг|mn}}, {{dikan-teny|энэ хавьд|mn}}
+# {{nov}} : {{dikan-teny|dar|nov}}, {{dikan-teny|vorde|nov}}, {{dikan-teny|lingue|nov}}
+# {{kvg}} : {{dikan-teny|sas|kvg}}
+# {{ba}} : {{dikan-teny|тел|ba}}
+# {{kl}} : {{dikan-teny|oqaaseq|kl}}, {{dikan-teny|oqaq|kl}}, {{dikan-teny|oqaatsit|kl}}
+# {{yur}} : {{dikan-teny|cwinkor|yur}}, {{dikan-teny|cwinkuk|yur}}
+# {{uby}} : {{dikan-teny|bza|uby}}
+# {{frp}} : {{dikan-teny|lenga|frp}}
+# {{hbo}} : {{dikan-teny|אמרה|hbo}}
+# {{tg}} : {{dikan-teny|забон|tg}}, {{dikan-teny|Калом|tg}}, {{dikan-teny|калима|tg}}
+# {{xpm}} : {{dikan-teny|aj|xpm}}
+# {{ht}} : {{dikan-teny|lang|ht}}, {{dikan-teny|mò|ht}}
+# {{lb}} : {{dikan-teny|do|lb}}, {{dikan-teny|Wuert|lb}}, {{dikan-teny|Sprooch|lb}}, {{dikan-teny|Zong|lb}}
+# {{vec}} : {{dikan-teny|łénguagio|vec}}, {{dikan-teny|discórso|vec}}
+# {{kbd}} : {{dikan-teny|бзэ|kbd}}, {{dikan-teny|бзэгу|kbd}}, {{dikan-teny|псалъэ|kbd}}
+# {{hi}} : {{dikan-teny|लफ़्ज़|hi}}, {{dikan-teny|भाषा|hi}}, {{dikan-teny|लातिनी|hi}}, {{dikan-teny|शब्द|hi}}, {{dikan-teny|लातिन|hi}}, {{dikan-teny|ज़बान|hi}}, {{dikan-teny|जीभ|hi}}, {{dikan-teny|बोली|hi}}, {{dikan-teny|बत्ती|hi}}, {{dikan-teny|बात|hi}}
+# {{shp}} : {{dikan-teny|jana|shp}}
+# {{et}} : {{dikan-teny|sõna|et}}, {{dikan-teny|kõne|et}}, {{dikan-teny|keel|et}}
+# {{mt}} : {{dikan-teny|hinn|mt}}, {{dikan-teny|lingwa|mt}}, {{dikan-teny|ilsien|mt}}, {{dikan-teny|lsien|mt}}, {{dikan-teny|kelma|mt}}
+# {{ext}} : {{dikan-teny|luenga|ext}}
+# {{ojs}} : {{dikan-teny|ishikiishiwewin|ojs}}
+# {{shs}} : {{dikan-teny|seqwlút|shs}}
+# {{nb}} : {{dikan-teny|tale|nb}}, {{dikan-teny|latinsk|nb}}, {{dikan-teny|romersk|nb}}
+# {{zko}} : {{dikan-teny|alup|zko}}
+# {{la}} : {{dikan-teny|latīna|la}}, {{dikan-teny|dictum|la}}, {{dikan-teny|logos|la}}, {{dikan-teny|vocabulum|la}}, {{dikan-teny|latinum|la}}, {{dikan-teny|latinus|la}}, {{dikan-teny|fatus|la}}, {{dikan-teny|lamina|la}}, {{dikan-teny|romanus|la}}, {{dikan-teny|Latina|la}}, {{dikan-teny|latīnus|la}}, {{dikan-teny|lingua latina|la}}, {{dikan-teny|rōmānus|la}}, {{dikan-teny|oratio|la}}, {{dikan-teny|verbum|la}}
+# {{xrn}} : {{dikan-teny|elep|xrn}}
+# {{yai}} : {{dikan-teny|зивок|yai}}
+# {{mia}} : {{dikan-teny|kaloosioni|mia}}
+# {{pox}} : {{dikan-teny|jǫzĕk|pox}}
+# {{grc}} : {{dikan-teny|γλῶσσα|grc}}, {{dikan-teny|μῦθος|grc}}
+# {{ady}} : {{dikan-teny|бзэгу|ady}}
+# {{ln}} : {{dikan-teny|nkómbó|ln}}, {{dikan-teny|lolému|ln}}, {{dikan-teny|lokóta|ln}}
+# {{mvf}} : {{dikan-teny|ᠦᠬᠡ|mvf}}, {{dikan-teny|ᠬᠡᠯᠡ|mvf}}
+# {{st}} : {{dikan-teny|puo|st}}, {{dikan-teny|lentswe|st}}
+# {{kab}} : {{dikan-teny|awal|kab}}, {{dikan-teny|tutlayt|kab}}
+# {{srn}} : {{dikan-teny|wortu|srn}}, {{dikan-teny|tongo|srn}}
+# {{pap}} : {{dikan-teny|latin|pap}}, {{dikan-teny|idioma|pap}}, {{dikan-teny|palabra|pap}}, {{dikan-teny|lenga|pap}}, {{dikan-teny|abla|pap}}, {{dikan-teny|latino|pap}}
+# {{ss}} : {{dikan-teny|lú-lwîmi|ss}}
+# {{kg}} : {{dikan-teny|ndiinga|kg}}
+# {{krl}} : {{dikan-teny|sana|krl}}, {{dikan-teny|kieli|krl}}
+# {{my}} : {{dikan-teny|ဘာသာစကား|my}}, {{dikan-teny|စကား|my}}, {{dikan-teny|စကားလုံး|my}}, {{dikan-teny|လျှာ|my}}, {{dikan-teny|ဘာသာ|my}}
+# {{way}} : {{dikan-teny|omi|way}}
+# {{cs}} : {{dikan-teny|čepel|cs}}, {{dikan-teny|jazyk|cs}}, {{dikan-teny|slovo boží|cs}}, {{dikan-teny|slovo|cs}}, {{dikan-teny|řeč|cs}}, {{dikan-teny|latinský|cs}}, {{dikan-teny|slova|cs}}, {{dikan-teny|latina|cs}}
+# {{ti}} : {{dikan-teny|ቃል|ti}}
+# {{chn}} : {{dikan-teny|wawa|chn}}
+# {{bg}} : {{dikan-teny|ези́к|bg}}, {{dikan-teny|го́вор|bg}}, {{dikan-teny|пренебрежителен|bg}}, {{dikan-teny|презрителен|bg}}, {{dikan-teny|латински|bg}}, {{dikan-teny|острие|bg}}, {{dikan-teny|дума|bg}}, {{dikan-teny|език|bg}}, {{dikan-teny|слово|bg}}
+# {{lo}} : {{dikan-teny|ລີ້ນ|lo}}, {{dikan-teny|ຄໍາ|lo}}, {{dikan-teny|ພາສາ|lo}}, {{dikan-teny|ຄວາມ|lo}}
+# {{ka}} : {{dikan-teny|სიტყვა|ka}}, {{dikan-teny|ენა|ka}}, {{dikan-teny|ლათინური ენა|ka}}
+# {{sm}} : {{dikan-teny|gagana|sm}}, {{dikan-teny|laulaufaiva|sm}}
+# {{am}} : {{dikan-teny|ልሳን|am}}
+# {{cu}} : {{dikan-teny|слово|cu}}, {{dikan-teny|ѩзыкъ|cu}}
+# {{ps}} : {{dikan-teny|ژبه|ps}}
+# {{as}} : {{dikan-teny|শব্দ|as}}, {{dikan-teny|ভাষা|as}}
+# {{zdj}} : {{dikan-teny|makalima|zdj}}, {{dikan-teny|ulime|zdj}}
+# {{luo}} : {{dikan-teny|lep|luo}}
+# {{ccp}} : {{dikan-teny|𑄢𑄧|ccp}}
+# {{tpi}} : {{dikan-teny|tang|tpi}}
+# {{vep}} : {{dikan-teny|kelʼ|vep}}, {{dikan-teny|kel'|vep}}
+# {{id}} : {{dikan-teny|lirik|id}}, {{dikan-teny|sandal jepit|id}}, {{dikan-teny|firman|id}}, {{dikan-teny|kata-kata|id}}, {{dikan-teny|terompah|id}}, {{dikan-teny|lidah|id}}, {{dikan-teny|sastra|id}}, {{dikan-teny|lisan|id}}, {{dikan-teny|ujar|id}}, {{dikan-teny|kata|id}},
+# {{af}} : {{dikan-teny|woord|af}}, {{dikan-teny|Latyn|af}}, {{dikan-teny|taal|af}}, {{dikan-teny|praat|af}}, {{dikan-teny|erewoord|af}}, {{dikan-teny|Latyns|af}}, {{dikan-teny|woorde|af}}, {{dikan-teny|tong|af}}
+# {{en}} : {{dikan-teny|nononononono|en}}, {{dikan-teny|tongue|en}}, {{dikan-teny|Latin|en}}, {{dikan-teny|lyrics|en}}, {{dikan-teny|flip flop|en}}, {{dikan-teny|language|en}}, {{dikan-teny|Word|en}}, {{dikan-teny|speech|en}}, {{dikan-teny|word|en}}, {{dikan-teny|words|en}}
+# {{myv}} : {{dikan-teny|вал|myv}}
+# {{tr}} : {{dikan-teny|güfte|tr}}, {{dikan-teny|neşide|tr}}, {{dikan-teny|sözcük|tr}}, {{dikan-teny|söz|tr}}, {{dikan-teny|oraya|tr}}, {{dikan-teny|Latince|tr}}, {{dikan-teny|kelime|tr}}, {{dikan-teny|dilim|tr}}, {{dikan-teny|Romalı|tr}}, {{dikan-teny|şuradaki|tr}}, {{dikan-teny|şurada|tr}}, {{dikan-teny|kelam|tr}}, {{dikan-teny|lisan|tr}}
+# {{nan}} : {{dikan-teny|舌頭|nan}}, {{dikan-teny|舌|nan}}, {{dikan-teny|gí-giân|nan}}, {{dikan-teny|舌头|nan}}
+# {{qu}} : {{dikan-teny|qallu|qu}}
+# {{zu}} : {{dikan-teny|isithembiso|zu}}, {{dikan-teny|igama|zu}}, {{dikan-teny|ulimi|zu}}
+# {{fa}} : {{dikan-teny|زبان لاتین|fa}}, {{dikan-teny|زبان|fa}}, {{dikan-teny|لاتین|fa}}, {{dikan-teny|کلمه|fa}}, {{dikan-teny|قول|fa}}, {{dikan-teny|تیغ|fa}}, {{dikan-teny|واژه|fa}}
+# {{wgy}} : {{dikan-teny|yalany|wgy}}
+# {{sq}} : {{dikan-teny|andej|sq}}, {{dikan-teny|tutje|sq}}, {{dikan-teny|sharje|sq}}, {{dikan-teny|llaf|sq}}, {{dikan-teny|fjalë|sq}}, {{dikan-teny|fjalë|sq}}, {{dikan-teny|gjuhë|sq}}, {{dikan-teny|gjuhë|sq}}
+# {{tcy}} : {{dikan-teny|ಜಿಹ್ವೆ|tcy}}
+# {{nay}} : {{dikan-teny|tallanggi|nay}}, {{dikan-teny|yanun|nay}}
+# {{scn}} : {{dikan-teny|ddà|scn}}, {{dikan-teny|ddassutta|scn}}, {{dikan-teny|parola|scn}}, {{dikan-teny|palora|scn}}, {{dikan-teny|ddocu sutta|scn}}
+# {{fro}} : {{dikan-teny|latin|fro}}, {{dikan-teny|lope|fro}}
+# {{sh}} : {{dikan-teny|rezalo|sh}}, {{dikan-teny|latinski|sh}}, {{dikan-teny|latinički|sh}}, {{dikan-teny|језик|sh}}, {{dikan-teny|jezik|sh}}, {{dikan-teny|latinični|sh}}, {{dikan-teny|làtīnskī|sh}}, {{dikan-teny|latìničnī|sh}}, {{dikan-teny|latìničkī|sh}}, {{dikan-teny|sečivo|sh}}, {{dikan-teny|oštrica|sh}}
+# {{hr}} : {{dikan-teny|glagolj|hr}}, {{dikan-teny|beseda|hr}}, {{dikan-teny|rieč|hr}}, {{dikan-teny|rič|hr}}
+# {{dlm}} : {{dikan-teny|discuars|dlm}}, {{dikan-teny|langa|dlm}}, {{dikan-teny|palaura|dlm}}
+# {{wbw}} : {{dikan-teny|tapare|wbw}}
+# {{he}} : {{dikan-teny|דיבור|he}}, {{dikan-teny|לטינית|he}}, {{dikan-teny|מִלָּה|he}}, {{dikan-teny|לטיני|he}}, {{dikan-teny|מלה|he}}, {{dikan-teny|שפה|he}}, {{dikan-teny|ניסח|he}}, {{dikan-teny|להב|he}}, {{dikan-teny|לשון|he}}
+# {{brc}} : {{dikan-teny|alala|brc}}
+# {{evn}} : {{dikan-teny|чоли|evn}}
+# {{cmn}} : {{dikan-teny|歌詞|cmn}}, {{dikan-teny|歌词|cmn}}, {{dikan-teny|演说|cmn}}, {{dikan-teny|那儿|cmn}}, {{dikan-teny|那里|cmn}}, {{dikan-teny|拉丁|cmn}}, {{dikan-teny|語言|cmn}}, {{dikan-teny|措辞|cmn}}, {{dikan-teny|用语|cmn}}, {{dikan-teny|單詞|cmn}}, {{dikan-teny|舌頭|cmn}}, {{dikan-teny|语言|cmn}}, {{dikan-teny|舌头|cmn}}, {{dikan-teny|拉丁語|cmn}}, {{dikan-teny|舌|cmn}}, {{dikan-teny|拉丁语|cmn}}, {{dikan-teny|词语|cmn}}, {{dikan-teny|诺言|cmn}}, {{dikan-teny|詞|cmn}}, {{dikan-teny|用語|cmn}}, {{dikan-teny|单词|cmn}}, {{dikan-teny|单字|cmn}}, {{dikan-teny|词|cmn}}, {{dikan-teny|古羅馬|cmn}}, {{dikan-teny|拉丁美洲|cmn}}
+# {{ar}} : {{dikan-teny|لغة|ar}}, {{dikan-teny|حَديث|ar}}, {{dikan-teny|شفرة|ar}}, {{dikan-teny|لسان|ar}}, {{dikan-teny|لاتِينِيّ|ar}}, {{dikan-teny|لُغَةٌ|ar}}, {{dikan-teny|كلمة|ar}}, {{dikan-teny|هنالك|ar}}, {{dikan-teny|خِطاب|ar}}, {{dikan-teny|هناك|ar}}, {{dikan-teny|لاتينية|ar}}, {{dikan-teny|كَلِمة|ar}}
+# {{got}} : {{dikan-teny|𐍅𐌰𐌿𐍂𐌳|got}}, {{dikan-teny|𐍄𐌿𐌲𐌲𐍉|got}}
+# {{cy}} : {{dikan-teny|tafod|cy}}, {{dikan-teny|gair|cy}}, {{dikan-teny|acw|cy}}, {{dikan-teny|draw|cy}}, {{dikan-teny|Lladin|cy}}
+# {{kn}} : {{dikan-teny|ನುಡಿ|kn}}, {{dikan-teny|ಪದ|kn}}, {{dikan-teny|ಭಾಷೆ|kn}}, {{dikan-teny|ಶಬ್ದ|kn}}
+# {{hy}} : {{dikan-teny|լեզու|hy}}, {{dikan-teny|բերան|hy}}, {{dikan-teny|բառ|hy}}, {{dikan-teny|լատինական|hy}}, {{dikan-teny|սայր|hy}}, {{dikan-teny|կտոր|hy}}
+# {{tl}} : {{dikan-teny|salitâ|tl}}, {{dikan-teny|talim|tl}}, {{dikan-teny|pagbigkas|tl}}, {{dikan-teny|dilà|tl}}, {{dikan-teny|salitá|tl}}, {{dikan-teny|dila|tl}}, {{dikan-teny|wika|tl}}
+# {{bug}} : {{dikan-teny|bicara|bug}}
+# {{gl}} : {{dikan-teny|palabra|gl}}, {{dikan-teny|vocábulo|gl}}, {{dikan-teny|lingua|gl}}, {{dikan-teny|vocábulo|gl}}
+# {{ky}} : {{dikan-teny|сөз|ky}}, {{dikan-teny|тил|ky}}
+# {{uz}} : {{dikan-teny|soʻz|uz}}, {{dikan-teny|til|uz}}
+# {{sk}} : {{dikan-teny|ta|sk}}, {{dikan-teny|latinčina|sk}}, {{dikan-teny|čestné slovo|sk}}, {{dikan-teny|latinský|sk}}, {{dikan-teny|božie slovo|sk}}, {{dikan-teny|slovo božie|sk}}, {{dikan-teny|slovo|sk}}, {{dikan-teny|slová|sk}}
+# {{ca}} : {{dikan-teny|idioma|ca}}, {{dikan-teny|aquella|ca}}, {{dikan-teny|llengua|ca}}, {{dikan-teny|xancleta|ca}}, {{dikan-teny|mot|ca}}, {{dikan-teny|llatina|ca}}, {{dikan-teny|esdrúixol|ca}}, {{dikan-teny|llatí|ca}}, {{dikan-teny|allà|ca}}, {{dikan-teny|llatí|ca}}, {{dikan-teny|romà|ca}}, {{dikan-teny|paraula|ca}}
+# {{gd}} : {{dikan-teny|briathar|gd}}, {{dikan-teny|an siud|gd}}, {{dikan-teny|teanga|gd}}, {{dikan-teny|facal|gd}}, {{dikan-teny|Ròmanach|gd}}, {{dikan-teny|Laidinn|gd}}
+# {{ml}} : {{dikan-teny|വാക്ക്|ml}}, {{dikan-teny|ശബ്ദം|ml}}, {{dikan-teny|നാക്ക്|ml}}, {{dikan-teny|പദം|ml}}, {{dikan-teny|ഭാഷ|ml}}
+# {{eo}} : {{dikan-teny|romia|eo}}, {{dikan-teny|latina|eo}}, {{dikan-teny|latino|eo}}, {{dikan-teny|vorto|eo}}, {{dikan-teny|parolo|eo}}, {{dikan-teny|romiano|eo}}, {{dikan-teny|tie|eo}}, {{dikan-teny|lango|eo}}
+# {{uk}} : {{dikan-teny|мо́ва|uk}}, {{dikan-teny|латинська|uk}}, {{dikan-teny|язик|uk}}, {{dikan-teny|слово|uk}}
+# {{fo}} : {{dikan-teny|orð|fo}}, {{dikan-teny|mál|fo}}, {{dikan-teny|tunga|fo}}, {{dikan-teny|mál|fo}}, {{dikan-teny|tala|fo}}, {{dikan-teny|orð|fo}}, {{dikan-teny|tungumál|fo}}
+# {{haw}} : {{dikan-teny|elelo|haw}}, {{dikan-teny|alelo|haw}}
+# {{sw}} : {{dikan-teny|Kilatini|sw}}, {{dikan-teny|ulimi|sw}}, {{dikan-teny|neno|sw}}, {{dikan-teny|lú-lwîmi|sw}}
+# {{fi}} : {{dikan-teny|sanoitus|fi}}, {{dikan-teny|siinä|fi}}, {{dikan-teny|siihen|fi}}, {{dikan-teny|sinne|fi}}, {{dikan-teny|sanaa|fi}}, {{dikan-teny|kieli|fi}}, {{dikan-teny|uutiset|fi}}, {{dikan-teny|sana|fi}}, {{dikan-teny|latinalainen|fi}}, {{dikan-teny|iltti|fi}}, {{dikan-teny|muru|fi}}, {{dikan-teny|tuolla|fi}}, {{dikan-teny|latina|fi}}, {{dikan-teny|puheenvuoro|fi}}, {{dikan-teny|latinalaisamerikkalainen|fi}}, {{dikan-teny|terä|fi}}, {{dikan-teny|murunen|fi}}, {{dikan-teny|ohjelmointikieli|fi}}, {{dikan-teny|roomalainen|fi}}
+# {{li}} : {{dikan-teny|waord|li}}, {{dikan-teny|taol|li}}
+# {{rup}} : {{dikan-teny|limbã|rup}}, {{dikan-teny|cuvendã|rup}}, {{dikan-teny|zbor|rup}},
+# {{arn}} : {{dikan-teny|cezugun|arn}}, {{dikan-teny|ce kewvh|arn}}, {{dikan-teny|kewvh|arn}}, {{dikan-teny|hemvl|arn}}
+# {{so}} : {{dikan-teny|aray|so}}, {{dikan-teny|carab|so}}
+# {{oc}} : {{dikan-teny|lenga|oc}}, {{dikan-teny|mot|oc}}, {{dikan-teny|paraula|oc}}, {{dikan-teny|ailalin|oc}}, {{dikan-teny|latin|oc}}
+# {{wrh}} : {{dikan-teny|dhalayn|wrh}}
+# {{ur}} : {{dikan-teny|تقریر|ur}}, {{dikan-teny|کلمہ|ur}}, {{dikan-teny|زبان|ur}}, {{dikan-teny|جیبھ|ur}}, {{dikan-teny|شبد|ur}}, {{dikan-teny|بات|ur}}
+# {{bn}} : {{dikan-teny|ভাষা|bn}}, {{dikan-teny|শব্দ|bn}}, {{dikan-teny|জিভ|bn}}, {{dikan-teny|জিহ্বা|bn}}, {{dikan-teny|জিব|bn}}
+# {{is}} : {{dikan-teny|málfar|is}}, {{dikan-teny|mæli|is}}, {{dikan-teny|ávarp|is}}, {{dikan-teny|þangað|is}}, {{dikan-teny|sverð|is}}, {{dikan-teny|málhæfileiki|is}}, {{dikan-teny|tunga|is}}, {{dikan-teny|tungumál|is}}, {{dikan-teny|tungumál|is}}, {{dikan-teny|orða|is}}, {{dikan-teny|orð|is}}, {{dikan-teny|mál|is}}, {{dikan-teny|mál|is}}, {{dikan-teny|orð|is}}, {{dikan-teny|blað|is}},
+# {{hu}} : {{dikan-teny|beszéd|hu}}, {{dikan-teny|dalszöveg|hu}}, {{dikan-teny|penge|hu}}, {{dikan-teny|szó|hu}}, {{dikan-teny|nyelv|hu}}, {{dikan-teny|latin|hu}}, {{dikan-teny|szó|hu}}
+# {{sa}} : {{dikan-teny|भाषा|sa}}, {{dikan-teny|पदम्|sa}}, {{dikan-teny|जिह्वा|sa}}, {{dikan-teny|जुहू|sa}}
+# {{no}} : {{dikan-teny|programmeringsspråk|no}}, {{dikan-teny|latin|no}}, {{dikan-teny|tunge|no}}, {{dikan-teny|lovnad|no}}, {{dikan-teny|språk|no}}, {{dikan-teny|ord|no}}
+# {{mi}} : {{dikan-teny|matapakinga|mi}}, {{dikan-teny|kupu|mi}}
+# {{an}} : {{dikan-teny|palabra|an}}, {{dikan-teny|idioma|an}}, {{dikan-teny|parola|an}}, {{dikan-teny|luenga|an}}
+# {{si}} : {{dikan-teny|දිව|si}}, {{dikan-teny|ලතින්|si}}, {{dikan-teny|භාෂාව|si}}, {{dikan-teny|වචනය|si}}
+# {{tri}} : {{dikan-teny|omi|tri}}
+# {{te}} : {{dikan-teny|ఉపన్యాసం|te}}, {{dikan-teny|లాటిన్|te}}, {{dikan-teny|భాష|te}}, {{dikan-teny|నాలుక|te}}, {{dikan-teny|సంకేత పదము|te}}, {{dikan-teny|అక్షరమాల|te}}, {{dikan-teny|వచనము|te}}, {{dikan-teny|పదము|te}}, {{dikan-teny|వార్త|te}}, {{dikan-teny|మాట|te}}
+# {{eu}} : {{dikan-teny|latin|eu}}, {{dikan-teny|mingain|eu}}, {{dikan-teny|berba|eu}}, {{dikan-teny|hizkuntza|eu}}, {{dikan-teny|mihi|eu}}, {{dikan-teny|hitz|eu}}, {{dikan-teny|ele|eu}}
+# {{co}} : {{dikan-teny|lingua|co}}
+# {{aus-d}} : {{dikan-teny|dhallung|aus-d}}
+# {{ses}} : {{dikan-teny|šenni|ses}}, {{dikan-teny|kalima|ses}}, {{dikan-teny|hetti|ses}}, {{dikan-teny|ciini|ses}}
+# {{nah}} : {{dikan-teny|tlâtòlli|nah}}, {{dikan-teny|tlahtōlli|nah}}, {{dikan-teny|nenepilli|nah}},
+# {{zh}} : {{dikan-teny|言|zh}}, {{dikan-teny|Utilisateur:JackBot/test|zh}}, {{dikan-teny|演说|zh}}, {{dikan-teny|语|zh}}, {{dikan-teny|詞|zh}}, {{dikan-teny|词|zh}}, {{dikan-teny|語|zh}}, {{dikan-teny|演讲|zh}}
+# {{lv}} : {{dikan-teny|vārds|lv}}, {{dikan-teny|ģelzis|lv}}, {{dikan-teny|latīņu|lv}}, {{dikan-teny|mēle|lv}}
+# {{ta}} : {{dikan-teny|அங்கு|ta}}, {{dikan-teny|நாவு|ta}}, {{dikan-teny|சொல்|ta}}, {{dikan-teny|நாக்கு|ta}}, {{dikan-teny|வார்த்தை|ta}}, {{dikan-teny|நா|ta}}, {{dikan-teny|பாசை|ta}}, {{dikan-teny|மொழி|ta}}
+# {{chb}} : {{dikan-teny|pqua|chb}}, {{dikan-teny|cubun|chb}}
+# {{ru}} : {{dikan-teny|язы́к|ru}}, {{dikan-teny|лирика|ru}}, {{dikan-teny|слова|ru}}, {{dikan-teny|выступле́ние|ru}}, {{dikan-teny|го́вор|ru}}, {{dikan-teny|спич|ru}}, {{dikan-teny|туда|ru}}, {{dikan-teny|кусок|ru}}, {{dikan-teny|римлянин|ru}}, {{dikan-teny|формулировать|ru}}, {{dikan-teny|письменная речь|ru}}, {{dikan-teny|римский|ru}}, {{dikan-teny|римлянка|ru}}, {{dikan-teny|словоR=slova|ru}}, {{dikan-teny|презрительный|ru}}, {{dikan-teny|слово|ru}}, {{dikan-teny|лезвие|ru}}, {{dikan-teny|латинский язык|ru}}, {{dikan-teny|пренебрежительный|ru}}, {{dikan-teny|романский|ru}}, {{dikan-teny|лист|ru}}, {{dikan-teny|латиноамериканский|ru}}, {{dikan-teny|язык|ru}}, {{dikan-teny|латинский|ru}}, {{dikan-teny|порция|ru}}, {{dikan-teny|латынь|ru}}
+# {{sco}} : {{dikan-teny|leid|sco}}, {{dikan-teny|wird|sco}}
+# {{kk}} : {{dikan-teny|ٴتىل|kk}}, {{dikan-teny|сөз|kk}}, {{dikan-teny|тіл|kk}}
+# {{ms}} : {{dikan-teny|sabda|ms}}, {{dikan-teny|kalimah|ms}}, {{dikan-teny|khabar|ms}}, {{dikan-teny|bahasa Latin|ms}}, {{dikan-teny|bilah|ms}}, {{dikan-teny|perbincangan|ms}}, {{dikan-teny|perkataan|ms}}, {{dikan-teny|berita|ms}}, {{dikan-teny|firman|ms}}, {{dikan-teny|lidah|ms}}, {{dikan-teny|istilah|ms}}, {{dikan-teny|bahasa Rumawi|ms}}, {{dikan-teny|kabar|ms}}
+# {{sl}} : {{dikan-teny|latinski|sl}}, {{dikan-teny|beseda|sl}}, {{dikan-teny|izrek|sl}}, {{dikan-teny|častna beseda|sl}}, {{dikan-teny|latinščina|sl}}
+# {{gu}} : {{dikan-teny|બાશા|gu}}, {{dikan-teny|ભાષા|gu}}, {{dikan-teny|જીભ|gu}}
+# {{be}} : {{dikan-teny|мо́ва|be}}, {{dikan-teny|язык|be}}, {{dikan-teny|слова|be}}, {{dikan-teny|мова|be}}
+# {{br}} : {{dikan-teny|ger|br}}, {{dikan-teny|teodoù|br}}, {{dikan-teny|gerioù|br}}, {{dikan-teny|teod|br}}, {{dikan-teny|gerioù|br}}, {{dikan-teny|yezhoù|br}}, {{dikan-teny|yezh|br}}, {{dikan-teny|latin|br}}
+# {{ro}} : {{dikan-teny|romană|ro}}, {{dikan-teny|cuvântare|ro}}, {{dikan-teny|latin|ro}}, {{dikan-teny|limbaj|ro}}, {{dikan-teny|vorbă|ro}}, {{dikan-teny|limbă|ro}}, {{dikan-teny|cuvânt|ro}}, {{dikan-teny|limba|ro}}, {{dikan-teny|cuvînt|ro}}, {{dikan-teny|latină|ro}}, {{dikan-teny|vorbe|ro}}, {{dikan-teny|cuvinte|ro}}, {{dikan-teny|lamă|ro}}
+# {{nn}} : {{dikan-teny|latinsk|nn}}, {{dikan-teny|romersk|nn}}
+# {{yi}} : {{dikan-teny|לשון|yi}}, {{dikan-teny|שפּראַך|yi}}, {{dikan-teny|וואָרט|yi}}
+# {{chr}} : {{dikan-teny|ᎧᏬᏂᎯᏍᏗ|chr}}, {{dikan-teny|ᎦᏬᏂᎯᏍᏗ|chr}}
+# {{io}} : {{dikan-teny|parolo|io}}, {{dikan-teny|Latina|io}}, {{dikan-teny|Latin|io}}, {{dikan-teny|vorto|io}}, {{dikan-teny|lango|io}}, {{dikan-teny|parolado|io}}
+# {{ntj}} : {{dikan-teny|tjaliny|ntj}}
+# {{ne}} : {{dikan-teny|जिब्रो|ne}}, {{dikan-teny|भाषा|ne}}
+# {{mk}} : {{dikan-teny|ја́зик|mk}}, {{dikan-teny|слово|mk}}, {{dikan-teny|латински|mk}}, {{dikan-teny|онде|mk}}, {{dikan-teny|дума|mk}}, {{dikan-teny|ондека|mk}}, {{dikan-teny|јазик|mk}}, {{dikan-teny|божја реч|mk}}, {{dikan-teny|изразува|mk}}, {{dikan-teny|збор|mk}}, {{dikan-teny|формулира|mk}}, {{dikan-teny|римски|mk}}, {{dikan-teny|латиничен|mk}}
+# {{kw}} : {{dikan-teny|yeth|kw}}, {{dikan-teny|tavas|kw}}, {{dikan-teny|ger|kw}}
+# {{lad}} : {{dikan-teny|פאלאברה|lad}}, {{dikan-teny|palavra|lad}}, {{dikan-teny|aluenga|lad}}, {{dikan-teny|byervo|lad}}
+# {{tt}} : {{dikan-teny|süz|tt}}, {{dikan-teny|сүз|tt}}, {{dikan-teny|тел|tt}}, {{dikan-teny|tel|tt}}
+# {{jv}} : {{dikan-teny|sabda|jv}}, {{dikan-teny|basa|jv}}, {{dikan-teny|ukara|jv}}
+# {{gv}} : {{dikan-teny|glare|gv}}, {{dikan-teny|çhengey|gv}}, {{dikan-teny|caaynt|gv}}, {{dikan-teny|fockle|gv}}
+# {{hsb}} : {{dikan-teny|rěč|hsb}}
+# {{ast}} : {{dikan-teny|pallabra|ast}}, {{dikan-teny|idioma|ast}}, {{dikan-teny|llingua|ast}}
+# {{csb}} : {{dikan-teny|słowo|csb}}, {{dikan-teny|jãzëk|csb}}
+# {{pt}} : {{dikan-teny|arara|pt}}, {{dikan-teny|letras|pt}}, {{dikan-teny|[[para]] [[ali]]|pt}}, {{dikan-teny|[[para]] [[aí]]|pt}}, {{dikan-teny|[[para]] [[lá]]|pt}}, {{dikan-teny|[[para]] [[ali]]|pt}}, {{dikan-teny|[[para]] [[aí]]|pt}}, {{dikan-teny|[[para]] [[lá]]|pt}}, {{dikan-teny|[[para]] [[ali]]|pt}}, {{dikan-teny|[[para]] [[aí]]|pt}}, {{dikan-teny|[[para]] [[lá]]|pt}}, {{dikan-teny|idioma|pt}}, {{dikan-teny|palavra|pt}}, {{dikan-teny|língua|pt}}, {{dikan-teny|palavra de Deus|pt}}, {{dikan-teny|mordida|pt}}, {{dikan-teny|acolá|pt}}, {{dikan-teny|romano|pt}}, {{dikan-teny|palavra divina|pt}}, {{dikan-teny|latino|pt}}, {{dikan-teny|porção|pt}}, {{dikan-teny|notícias|pt}}, {{dikan-teny|vocábulo|pt}}, {{dikan-teny|termo|pt}}, {{dikan-teny|latino-americano|pt}}, {{dikan-teny|palavra do Senhor|pt}}, {{dikan-teny|lâmina|pt}}, {{dikan-teny|vocábulo|pt}}, {{dikan-teny|linguagem de programação|pt}}, {{dikan-teny|latim|pt}}, {{dikan-teny|si|pt}}, {{dikan-teny|língua|pt}}
+# {{ulk}} : {{dikan-teny|mir|ulk}}
+# {{pa}} : {{dikan-teny|ਜੀਭ|pa}}, {{dikan-teny|ਸ਼ਬਦ|pa}}
+# {{az}} : {{dikan-teny|сөз|az}}, {{dikan-teny|söz|az}}, {{dikan-teny|sözcük|az}}, {{dikan-teny|kəlmə|az}}
+# {{ug}} : {{dikan-teny|تىل|ug}}, {{dikan-teny|سۆز|ug}}
+# {{tji}} : {{dikan-teny|yiflat|tji}}
+# {{fy}} : {{dikan-teny|paroal|fy}}, {{dikan-teny|tonge|fy}}, {{dikan-teny|wurd|fy}}, {{dikan-teny|jinder|fy}}, {{dikan-teny|sprake|fy}}, {{dikan-teny|Latyn|fy}}
+# {{km}} : {{dikan-teny|ភាសា|km}}, {{dikan-teny|ឡាតាំង|km}}, {{dikan-teny|ពាក្យ|km}}, {{dikan-teny|ពាក្យសំដី|km}}, {{dikan-teny|អណ្ដាត|km}}
+# {{akr}} : {{dikan-teny|m̈em̈e|akr}}
+# {{ja}} : {{dikan-teny|辭|ja}}, {{dikan-teny|辞|ja}}, {{dikan-teny|言葉|ja}}, {{dikan-teny|ことば|ja}}, {{dikan-teny|kata|ja}}, {{dikan-teny|語|ja}}, {{dikan-teny|べろ|ja}}, {{dikan-teny|歌詞|ja}}, {{dikan-teny|舌|ja}}, {{dikan-teny|福音|ja}}, {{dikan-teny|古代ローマ|ja}}, {{dikan-teny|ラテン語|ja}}, {{dikan-teny|言質|ja}}, {{dikan-teny|単語|ja}}, {{dikan-teny|言語|ja}}, {{dikan-teny|刃|ja}}, {{dikan-teny|あそこ|ja}}
+# {{hag}} : {{dikan-teny|zulimini|hag}}
+# {{ko}} : {{dikan-teny|歌詞|ko}}, {{dikan-teny|演說|ko}}, {{dikan-teny|연설|ko}}, {{dikan-teny|혀|ko}}, {{dikan-teny|단어|ko}}, {{dikan-teny|asémantème|ko}}, {{dikan-teny|chirème|ko}}, {{dikan-teny|用語|ko}}, {{dikan-teny|낱말|ko}}, {{dikan-teny|言語|ko}}, {{dikan-teny|용어|ko}}, {{dikan-teny|말씀|ko}}, {{dikan-teny|말|ko}}, {{dikan-teny|chronème|ko}}, {{dikan-teny|라틴어|ko}}, {{dikan-teny|언어|ko}}
+# {{vi}} : {{dikan-teny|chử|vi}}, {{dikan-teny|nhời|vi}}, {{dikan-teny|ngôn ngữ|vi}}, {{dikan-teny|những lời|vi}}, {{dikan-teny|lời|vi}}, {{dikan-teny|tiếng nói|vi}}, {{dikan-teny|Latinh|vi}}, {{dikan-teny|ngoại ngữ|vi}}, {{dikan-teny|thuật ngữ|vi}}, {{dikan-teny|lưỡi|vi}}
+# {{it}} : {{dikan-teny|lirico|it}}, {{dikan-teny|ardiglione|it}}, {{dikan-teny|neolatina|it}}, {{dikan-teny|latina|it}}, {{dikan-teny|bambara|it}}, {{dikan-teny|neolatino|it}}, {{dikan-teny|lingua|it}}, {{dikan-teny|word|it}}, {{dikan-teny|disdegnoso|it}}, {{dikan-teny|idioma|it}}, {{dikan-teny|sprezzante|it}}, {{dikan-teny|parole|it}}, {{dikan-teny|romano|it}}, {{dikan-teny|vocabolo|it}}, {{dikan-teny|laggiù|it}}, {{dikan-teny|parola|it}}, {{dikan-teny|linguetta|it}}, {{dikan-teny|latino|it}}, {{dikan-teny|romana|it}}, {{dikan-teny|termine|it}}, {{dikan-teny|boccone|it}}
+# {{ab}} : {{dikan-teny|бызшәа|ab}}, {{dikan-teny|абызшәа|ab}}, {{dikan-teny|абыз|ab}}, {{dikan-teny|абз|ab}}
+# {{ku}} : {{dikan-teny|ziman|ku}}, {{dikan-teny|latînî|ku}}, {{dikan-teny|e|ku}}, {{dikan-teny|zar|ku}}, {{dikan-teny|زمان|ku}}, {{dikan-teny|gotin|ku}}, {{dikan-teny|peyv|ku}}, {{dikan-teny|peyvik|ku}}, {{dikan-teny|kelîme|ku}}, {{dikan-teny|bêje|ku}}, {{dikan-teny|ده‌م|ku}}, {{dikan-teny|kelîme|ku}}, {{dikan-teny|bêje|ku}}
+# {{iu}} : {{dikan-teny|ᐅᖃᐅᓯᖅ|iu}}, {{dikan-teny|ᐅᖃᖅ|iu}}, {{dikan-teny|uqaq|iu}}, {{dikan-teny|uqausiq|iu}}
+# {{pl}} : {{dikan-teny|słowa|pl}}, {{dikan-teny|przemówienie|pl}}, {{dikan-teny|język|pl}}, {{dikan-teny|łaciński|pl}}, {{dikan-teny|rzymski|pl}}, {{dikan-teny|źdźbło|pl}}, {{dikan-teny|łacina|pl}}, {{dikan-teny|wyraz|pl}}, {{dikan-teny|mowa|pl}}, {{dikan-teny|słowo|pl}}, {{dikan-teny|pogardliwy|pl}}, {{dikan-teny|język łaciński|pl}}, {{dikan-teny|słowo boże|pl}}
+# {{wa}} : {{dikan-teny|linwe|wa}}, {{dikan-teny|mots|wa}}
+# {{ay}} : {{dikan-teny|aru|ay}}, {{dikan-teny|lajhra|ay}}
+# {{av}} : {{dikan-teny|мацӏ|av}}, {{dikan-teny|рагӏул|av}}, {{dikan-teny|мацӀ|av}}, {{dikan-teny|рагӀул|av}}
+# {{el}} : {{dikan-teny|αγόρευση|el}}, {{dikan-teny|λατινικά|el}}, {{dikan-teny|λεπίδα|el}}, {{dikan-teny|λόγια|el}}, {{dikan-teny|διατυπώνω|el}}, {{dikan-teny|συντάσσω|el}}, {{dikan-teny|φρασεολογία|el}}, {{dikan-teny|γλώσσα|el}}, {{dikan-teny|κώδικας|el}}, {{dikan-teny|φύλλο|el}}, {{dikan-teny|λέξη|el}}, {{dikan-teny|λόγος|el}}, {{dikan-teny|λόγοι|el}}
+# {{de}} : {{dikan-teny|römisch|de}}, {{dikan-teny|Latein|de}}, {{dikan-teny|Worte|de}}, {{dikan-teny|Wort|de}}, {{dikan-teny|Lasche|de}}, {{dikan-teny|Wörter|de}}, {{dikan-teny|Fachsprache|de}}, {{dikan-teny|Mischsprache|de}}, {{dikan-teny|Zunge|de}}, {{dikan-teny|Ansprache|de}}, {{dikan-teny|lateinisch|de}}, {{dikan-teny|dort|de}}, {{dikan-teny|Vokabel|de}}, {{dikan-teny|Sprache|de}}, {{dikan-teny|Erstsprache|de}}, {{dikan-teny|geringschätzig|de}}, {{dikan-teny|verächtlich|de}}, {{dikan-teny|Happen|de}}
+# {{sv}} : {{dikan-teny|sångtext|sv}}, {{dikan-teny|anförande|sv}}, {{dikan-teny|språk|sv}}, {{dikan-teny|latin|sv}}, {{dikan-teny|yttrande|sv}}, {{dikan-teny|där borta|sv}}, {{dikan-teny|tungomål|sv}}, {{dikan-teny|plös|sv}}, {{dikan-teny|romare|sv}}, {{dikan-teny|talande|sv}}, {{dikan-teny|ord|sv}}, {{dikan-teny|romersk|sv}}, {{dikan-teny|latinsk|sv}}, {{dikan-teny|lydelse|sv}}
+# {{mr}} : {{dikan-teny|भाषा|mr}}, {{dikan-teny|धार|mr}}, {{dikan-teny|शब्द|mr}}
+# {{nl}} : {{dikan-teny|bahasa|nl}}, {{dikan-teny|liedtekst|nl}}, {{dikan-teny|toespraak|nl}}, {{dikan-teny|onder woorden brengen|nl}}, {{dikan-teny|woordenwisseling|nl}}, {{dikan-teny|verwoorden|nl}}, {{dikan-teny|Latijn|nl}}, {{dikan-teny|Latijns|nl}}, {{dikan-teny|erewoord|nl}}, {{dikan-teny|schamper|nl}}, {{dikan-teny|woorden|nl}}, {{dikan-teny|woord|nl}}, {{dikan-teny|tong|nl}}, {{dikan-teny|daaro|nl}}, {{dikan-teny|spraak|nl}}, {{dikan-teny|parool|nl}}, {{dikan-teny|Romeins|nl}}, {{dikan-teny|code|nl}}, {{dikan-teny|songtekst|nl}}, {{dikan-teny|jargon|nl}}, {{dikan-teny|geestigheid|nl}}, {{dikan-teny|Romein|nl}}
+# {{ksi}} : {{dikan-teny|mái|ksi}}, {{dikan-teny|wèi|ksi}}
+# {{rm}} : {{dikan-teny|là|rm}}, {{dikan-teny|faveala|rm}}, {{dikan-teny|nizza|rm}}, {{dikan-teny|plaid|rm}}, {{dikan-teny|lengua|rm}}, {{dikan-teny|lingua|rm}}, {{dikan-teny|favela|rm}}, {{dikan-teny|laungia|rm}}, {{dikan-teny|faviala|rm}}, {{dikan-teny|leua|rm}}, {{dikan-teny|lungaitg|rm}}, {{dikan-teny|glianga|rm}}, {{dikan-teny|favella|rm}}, {{dikan-teny|linguatg|rm}}, {{dikan-teny|linguach|rm}}, {{dikan-teny|lieunga|rm}}, {{dikan-teny|lungatg|rm}}, {{dikan-teny|loma|rm}}, {{dikan-teny|pled|rm}}
+# {{ga}} : {{dikan-teny|Laidin|ga}}, {{dikan-teny|teanga|ga}}, {{dikan-teny|béarla|ga}}, {{dikan-teny|teanga an bhúcla|ga}}, {{dikan-teny|focal|ga}}, {{dikan-teny|teangaigh|ga}}, {{dikan-teny|briathar|ga}}
+# {{mg}} : {{dikan-teny|teny|mg}}
+# {{bo}} : {{dikan-teny|ལྕེ|bo}}, {{dikan-teny|ཚིག|bo}}
+# {{ccc}} : {{dikan-teny|menu|ccc}}, {{dikan-teny|nachale|ccc}}
+# {{vo}} : {{dikan-teny|beitil|vo}}, {{dikan-teny|vöd|vo}}, {{dikan-teny|lineg|vo}}
+# {{da}} : {{dikan-teny|godbid|da}}, {{dikan-teny|ord|da}}, {{dikan-teny|mål|da}}, {{dikan-teny|latin|da}}, {{dikan-teny|terminologi|da}}, {{dikan-teny|romersk|da}}, {{dikan-teny|bid|da}}, {{dikan-teny|tunge|da}}, {{dikan-teny|latinsk|da}}
+# {{es}} : {{dikan-teny|chatino de Zenzontepec|es}}, {{dikan-teny|chatino de Zacatepec|es}}, {{dikan-teny|ocurrencia|es}}, {{dikan-teny|allí|es}}, {{dikan-teny|latín|es}}, {{dikan-teny|chané|es}}, {{dikan-teny|toromona|es}}, {{dikan-teny|lámina|es}}, {{dikan-teny|romano|es}}, {{dikan-teny|limbo|es}}, {{dikan-teny|idioma|es}}, {{dikan-teny|chancleta|es}}, {{dikan-teny|palabra|es}}, {{dikan-teny|desdeñoso|es}}, {{dikan-teny|chané|es}}, {{dikan-teny|voz|es}}, {{dikan-teny|porción|es}}, {{dikan-teny|hablante|es}}, {{dikan-teny|lengua|es}}, {{dikan-teny|palabras|es}}, {{dikan-teny|allá|es}}, {{dikan-teny|habla|es}}, {{dikan-teny|vocablo|es}}, {{dikan-teny|latino|es}}
+# {{th}} : {{dikan-teny|นิรุกติ|th}}, {{dikan-teny|ภาษา|th}}, {{dikan-teny|ลิ้น|th}}, {{dikan-teny|คำ|th}}, {{dikan-teny|ภาษาละติน|th}}
+
+[[be:teny]]
+[[fr:teny]]
+[[en:teny]]
+[[ru:teny]]
+[[hr:teny]]
+[[tr:teny]]
+[[ko:teny]]
+[[ln:teny]]
+[[hi:teny]]
+[[et:teny]]
+[[az:teny]]
+[[id:teny]]
+[[pl:teny]]
+[[ta:teny]]</text>
+      <sha1>3cjtnrm8pa5vd2t7pzd7h1i62xxhr2f</sha1>
     </revision>
   </page>
   <page>
@@ -106,18 +347,23 @@
     <ns>0</ns>
     <id>1266230</id>
     <revision>
-      <id>24651044</id>
-      <parentid>24651043</parentid>
-      <timestamp>2018-01-17T23:44:58Z</timestamp>
+      <id>25775790</id>
+      <parentid>24651044</parentid>
+      <timestamp>2018-07-08T14:30:03Z</timestamp>
       <contributor>
         <username>Bot-Jagwar</username>
         <id>380</id>
       </contributor>
       <minor/>
-      <comment>+Dikan-teny avy amin'ny pejy avy amin'i rm.wiktionary, [[Wiktionary:Firafitry_ny_teny_iditra|Firafitra]]; mamerina ny endrika jereo</comment>
+      <comment>+Dikan-teny avy amin'ny dikan-teny avy amin'i fr.wiktionary (v.1.2.8)</comment>
       <model>wikitext</model>
       <format>text/x-wiki</format>
-      <text xml:space="preserve" bytes="658">
+      <text xml:space="preserve" bytes="791">
+=={{=frc=}}==
+{{-ana-|frc}}
+'''eau''' {{fanononana X-SAMPA||frc}} {{fanononana||frc}}
+# [[rano]] {{dikantenin'ny dikanteny|eau|fr}}
+
 
 =={{=rm=}}==
 {{-solo-ana-|rm}}
@@ -145,7 +391,7 @@
 
 
 [[Sokajy:Dikanteny tokony homarinana]]</text>
-      <sha1>2ntwczmn2i3odlde32kcz83r4aw3m9c</sha1>
+      <sha1>mngi1g7n4cfzdguju3iypn3y3h37l09</sha1>
     </revision>
   </page>
   <page>
@@ -153,18 +399,18 @@
     <ns>0</ns>
     <id>1268571</id>
     <revision>
-      <id>24324080</id>
-      <parentid>22561628</parentid>
-      <timestamp>2017-05-23T18:32:38Z</timestamp>
+      <id>26366803</id>
+      <parentid>26241578</parentid>
+      <timestamp>2018-09-30T07:59:19Z</timestamp>
       <contributor>
-        <username>OctraBot</username>
-        <id>4830</id>
+        <username>Bot-Jagwar</username>
+        <id>380</id>
       </contributor>
       <minor/>
-      <comment>Robot : Nettoyage des anciens liens interwiki</comment>
+      <comment>rosiana: manampy fanononana</comment>
       <model>wikitext</model>
       <format>text/x-wiki</format>
-      <text xml:space="preserve" bytes="854">=={{=tg=}}==
+      <text xml:space="preserve" bytes="857">=={{=tg=}}==
 {{-ana-|tg}}
 '''газета''' {{fanononana X-SAMPA||tg}} {{fanononana||tg}}
 # [[ newspaper]], [[gazety]] {{dikantenin'ny dikanteny|newspaper|en}}
@@ -181,24 +427,24 @@
 =={{=ru=}}==
 {{-etim-|ru}}
 {{-nom commun-|ru}}
-'''газета''' {{fanononana||ru}} {{dikantsoratra||ru}}
+'''газета''' {{fanononana-ru|газе́та}} {{dikantsoratra||ru}}
 # [[gazety]] 
 
 {{-anagr-}}
 
 ;Litera 4
-*[[агат]], {{anag+}}
-{{-dika-}}
+*[[агат]], 
+
 
 # rosy : [[газета]]
 # okrainianina : [[газета]]
-{{}} :
+
 =={{=uk=}}==
 {{-etim-|uk}}
 {{-ana-|uk}}
-'''газета''' {{fanononana||ru}} {{dikantsoratra||ru}}
+'''газета''' {{fanononana-ru|газе́та}} {{dikantsoratra||ru}}
 # [[gazety]], [[газета]]</text>
-      <sha1>o7ii6yiqhg0xcxj3wbbgq4fvd8hhha5</sha1>
+      <sha1>1h99ijdfhrb13ataapgi5mvib1b5hfq</sha1>
     </revision>
   </page>
   <page>
@@ -206,18 +452,23 @@
     <ns>0</ns>
     <id>394264</id>
     <revision>
-      <id>23872945</id>
-      <parentid>22297959</parentid>
-      <timestamp>2017-05-02T14:22:26Z</timestamp>
+      <id>25782416</id>
+      <parentid>23872945</parentid>
+      <timestamp>2018-07-10T20:51:07Z</timestamp>
       <contributor>
-        <username>HydrizBot</username>
-        <id>853</id>
+        <username>Bot-Jagwar</username>
+        <id>380</id>
       </contributor>
       <minor/>
-      <comment>Rôbô: Manadio ny rohy interwiki taloha</comment>
+      <comment>+Dikan-teny avy amin'ny dikan-teny avy amin'i en.wiktionary (v.1.2.8)</comment>
       <model>wikitext</model>
       <format>text/x-wiki</format>
-      <text xml:space="preserve" bytes="140">=={{=nl=}}==
+      <text xml:space="preserve" bytes="277">
+=={{=af=}}==
+{{-ana-|af}}
+'''geloof''' {{fanononana X-SAMPA||af}} {{fanononana||af}}
+# [[finoana]] {{dikantenin'ny dikanteny|faith|en}}
+=={{=nl=}}==
 
 {{-ana-|nl}}
 '''geloof''' {{fanononana X-SAMPA||nl}} {{fanononana||nl}}
@@ -225,7 +476,7 @@
 
 
 [[Sokajy:Dikanteny tokony homarinana]]</text>
-      <sha1>jjknhwahmkdrk4472ng9h62md5cqalj</sha1>
+      <sha1>54s6fv7chm4k2etwk3yoz5wua975o6y</sha1>
     </revision>
   </page>
 </mediawiki>

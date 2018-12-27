@@ -29,19 +29,3 @@ class GenericEntryProcessorTester:
             assert isinstance(entries, list), entries
             for e in entries:
                 assert isinstance(e, Entry)
-
-#
-# class TestMalagasyWiktionaryEntryprocessor(GenericEntryProcessorTester, unittest.TestCase):
-#     def setUp(self):
-#         self.setup_for_language('mg', ['rano', 'air', 'газета', 'geloof'])
-#
-#     def test_retrieve_translations_data_output(self):
-#         page = PageMock(SiteMock(self.language, 'wiktionary'), 'rano')
-#         self.processor.process(page)
-#         entries = self.processor.retrieve_translations()
-#         entry = entries[-1]
-#         word, pos, lang, definition = entry
-#         self.assertEqual(word, '공기')
-#         self.assertEqual(pos, 'ana')
-#         self.assertEqual(lang, 'ko')
-#         self.assertTrue(definition.startswith('mélange'))
