@@ -12,8 +12,8 @@ import requests
 from api.decorator import retry_on_fail, threaded
 from api.servicemanager import EntryTranslatorServiceManager
 
-log.basicConfig(filename=os.getcwd() + '/user_data/wiktionary_irc.log',level=log.DEBUG)
-userdata_file = os.getcwd() + '/user_data/entry_translator/'
+log.basicConfig(filename='/opt/botjagwar/user_data/wiktionary_irc.log',level=log.DEBUG)
+userdata_file = '/opt/botjagwar/user_data/entry_translator/'
 nwikimax = 5
 spawned_backend_process = None
 dictionary_service = None

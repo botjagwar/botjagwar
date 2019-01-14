@@ -1,13 +1,12 @@
 # -*- coding: utf-8  -*-
+import json
 import re
 import time
-import os
 
-import requests
-import json
 import pywikibot
+import requests
 
-data_file = os.getcwd() + '/conf/list_wikis/'
+data_file = '/opt/botjagwar/conf/list_wikis/'
 try:
     current_user = "%s" % pywikibot.config.usernames['wiktionary']['mg']
 except KeyError:

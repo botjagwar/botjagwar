@@ -1,7 +1,6 @@
 #!/usr/bin/python3.6
 import json
 import logging as log
-import os
 import sys
 import time
 import traceback
@@ -17,13 +16,13 @@ from api.decorator import threaded
 from api.translation.core import Translation
 from object_model.word import Translation as TranslationModel
 
-log.basicConfig(filename=os.getcwd() + '/user_data/entry_translator.log',level=log.DEBUG)
+log.basicConfig(filename='/opt/botjagwar/user_data/entry_translator.log',level=log.DEBUG)
 
 # GLOBAL VARS
 verbose = False
 databases = []
-data_file = os.getcwd() + '/conf/entry_translator/'
-userdata_file = os.getcwd() + '/user_data/entry_translator/'
+data_file = '/opt/botjagwar/conf/entry_translator/'
+userdata_file = '/opt/botjagwar/user_data/entry_translator/'
 translations = Translation()
 routes = web.RouteTableDef()
 

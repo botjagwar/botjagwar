@@ -1,7 +1,6 @@
 #!/usr/bin/python3.6
 import argparse
 import logging as log
-import os
 
 from aiohttp import web
 
@@ -13,7 +12,7 @@ parser = argparse.ArgumentParser(description='Language service')
 parser.add_argument('--db-file', dest='STORAGE', required=False)
 parser.add_argument('-p', '--port', dest='PORT', type=int, default=8003)
 args = parser.parse_args()
-log.basicConfig(filename=os.getcwd() + '/user_data/language_service.log',level=log.DEBUG)
+log.basicConfig(filename='/opt/botjagwar/user_data/language_service.log',level=log.DEBUG)
 if args.STORAGE:
     LANGUAGE_STORAGE = args.STORAGE
 else:

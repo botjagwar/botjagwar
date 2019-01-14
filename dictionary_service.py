@@ -1,7 +1,6 @@
 #!/usr/bin/python3.6
 import argparse
 import logging as log
-import os
 
 from aiohttp import web
 
@@ -20,7 +19,7 @@ from api.dictionary.middlewares import \
     json_error_handler, \
     auto_committer
 
-log.basicConfig(filename=os.getcwd() + '/user_data/dictionary_service.log',level=log.DEBUG)
+log.basicConfig(filename='/opt/botjagwar/user_data/dictionary_service.log',level=log.DEBUG)
 parser = argparse.ArgumentParser(description='Dictionary service')
 parser.add_argument('--db-file', dest='STORAGE', required=False)
 parser.add_argument('-p', '--port', dest='PORT', type=int, default=8001)

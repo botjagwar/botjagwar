@@ -1,7 +1,9 @@
 # coding: utf8
+import re
+import time
+
 import pywikibot
-import os
-import re, time
+
 from api.decorator import time_this
 
 WORKING_WIKI = pywikibot.getSite('mg', 'wiktionary')
@@ -10,7 +12,7 @@ try:
 except KeyError:
     username = "test"
 
-mt_data_file = os.getcwd() + '/user_data/entry_translator/'
+mt_data_file = '/opt/botjagwar/user_data/entry_translator/'
 
 
 class UnknownWordManagerError(Exception):

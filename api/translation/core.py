@@ -1,7 +1,6 @@
 # coding: utf8
 import asyncio
 import logging
-import os
 
 import pywikibot as pwbot
 import requests
@@ -18,7 +17,7 @@ from object_model.word import Entry
 from word_forms import create_non_lemma_entry
 
 log = logging.getLogger(__name__)
-default_data_file = os.getcwd() + '/conf/entry_translator/'
+default_data_file = '/opt/botjagwar/conf/entry_translator/'
 CYRILLIC_ALPHABET_LANGUAGES = ['ru', 'uk', 'bg', 'be']
 LANGUAGE_BLACKLIST = ['fr', 'en', 'sh', 'ar', 'de', 'zh']
 URL_HEAD = DictionaryServiceManager().get_url_head()

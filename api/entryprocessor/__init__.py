@@ -1,8 +1,8 @@
 import inspect
 import sys
-import os
 import warnings
 
+from . import wiki
 from .wiki.base import WiktionaryProcessor
 from .wiki.de import DEWiktionaryProcessor
 from .wiki.en import ENWiktionaryProcessor
@@ -15,9 +15,7 @@ from .wiki.sv import SVWiktionaryProcessor
 from .wiki.vo import VOWiktionaryProcessor
 from .wiki.zh import ZHWiktionaryProcessor
 
-from . import wiki
-
-data_file = os.getcwd() + '/conf/entryprocessor/'
+data_file = '/opt/botjagwar/conf/entryprocessor/'
 verbose = True
 
 
