@@ -41,7 +41,7 @@ class DatabaseManager(object):
 
     def read_configuration(self):
         self.config_parser = configparser.ConfigParser()
-        self.config_parser.read('conf/config.ini')
+        self.config_parser.read('/opt/botjagwar/conf/config.ini')
         self.db_header = self.config_parser.get('global', self.conf_key)
 
 
