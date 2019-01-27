@@ -261,7 +261,9 @@ def get_sil_language_name(language_code):
     if len(language_code) == 2:
         return ""
 
-    page_xpath = '//*[@id="node-5381"]/div/div[2]/div/div[1]/span/div/div[2]/div/table/tbody/tr/td[2]'
+    #page_xpath = '//*[@id="node-5381"]/div/div[2]/div/div[1]/span/div/div[2]/div/table/tbody/tr/td[2]'
+    page_xpath = '//div/div[2]/div/div[1]/span/div/div[2]/div/table/tbody/tr/td[2]'
+
     url = "https://iso639-3.sil.org/code/%s" % language_code
     headers = {
         'User-Agent': 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:59.0) '
