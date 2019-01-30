@@ -74,7 +74,6 @@ install:
 	$(call create_dirs)
 	git describe --tags > data/version
 	cp -r api $(OPT_DIR)
-	cp -r webui $(OPT_DIR)
 	cp -r conf $(OPT_DIR)
 	cp -rn data $(OPT_DIR)
 	cp -r database $(OPT_DIR)
