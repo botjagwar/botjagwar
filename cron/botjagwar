@@ -1,6 +1,6 @@
 */5 * * * *  cronuser /bin/bash -x /opt/botjagwar/entry-translator-start.sh
 00 18 * * *  cronuser /bin/kill $(cat /tmp/ircbot.pid)
-00 19 * * *  cronuser /bin/bash -x /opt/botjagwar/definition_modification_manager.sh
+#00 19 * * *  cronuser /bin/bash -x /opt/botjagwar/definition_modification_manager.sh
 30 19 * * *  cronuser /bin/bash -x /opt/botjagwar/unknown_language_manager.sh
 00 20 * * *  cronuser /bin/bash -x /opt/botjagwar/fitenytsyfantatra.sh
 00 21 * * *  cronuser /bin/bash -x /opt/botjagwar/list-wikis.sh
