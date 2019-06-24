@@ -131,28 +131,28 @@ GENDER = {
 }
 
 VOICE = {
-    'act': 'endriky ny mpanao',
-    'actv': 'endriky ny mpanao',
-    'mid': 'endrika manelanelana',
-    'midl': 'endrika manelanelana',
-    'pass': 'endriky ny atao',
-    'pasv': 'endriky ny atao',
-    'mp': 'endriky ny atao manelanelana',
-    'mpsv': 'endriky ny atao manelanelana',
+    'act': 'fiendrika manano',
+    'actv': 'fiendrika manano',
+    'mid': 'fiendrika anelanelana',
+    'midl': 'fiendrika anelanelana',
+    'pass': 'fiendrika anoina',
+    'pasv': 'fiendrika anoina',
+    'mp': 'fiendrika anelanelana',
+    'mpsv': 'fiendrika anelanelana',
 }
 
 PERSONS = {
-    '1': 'mpanao voalohany',
-    '2': 'mpanao faharoa',
-    '3': 'mpanao fahatelo',
-    '4': 'mpanao fahaefatra',
-    '5': 'mpanao fahadimy',
-    'impers': 'mpanao tsy fantatra',
+    '1': 'mpandray anjara voalohany',
+    '2': 'mpandray anjara faharoa',
+    '3': 'mpandray anjara fahatelo',
+    '4': 'mpandray anjara fahaefatra',
+    '5': 'mpandray anjara fahadimy',
+    'impers': 'mpandray anjara tsy fantatra',
 
     # full forms
-    'first-person': 'mpanao voalohany',
-    'second-person': 'mpanao faharoa',
-    'third-person': 'mpanao fahatelo',
+    'first-person': 'mpnadray anjara voalohany',
+    'second-person': 'mpandray anjara faharoa',
+    'third-person': 'mpandray anjara fahatelo',
 }
 
 DEFINITENESS = {

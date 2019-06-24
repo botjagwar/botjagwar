@@ -60,7 +60,6 @@ def word_exists(session, word, language, part_of_speech):
     else:
         return True
 
-
 async def get_word_by_id(request) -> Response:
     session = request.app['session_instance']
 
