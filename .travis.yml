@@ -19,6 +19,7 @@ install:
   - sudo apt-get install libssl-dev wget unzip libsqlite3-dev libxml2-dev libxslt1-dev
   - python3 --version
   #- sudo ln -s $(which python3) /usr/bin/python3.6
+  - sudo python3.6 -m pip install setuptools
   - sudo python3.6 -m pip install -r requirements.txt
   - make install
 
