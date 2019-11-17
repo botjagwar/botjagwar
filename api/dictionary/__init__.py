@@ -1,5 +1,6 @@
 import json
 import logging
+import xml.etree.cElementTree as ElementTree
 
 from aiohttp.web import Response, StreamResponse
 
@@ -32,6 +33,22 @@ async def get_dictionary(request) -> Response:
         return Response(
             text=json.dumps(definitions),
             status=200)
+    else:
+        return Response(status=404, content_type='application/json')
+
+async def get_dictionary_xml(request) -> Response:
+    session = request.app['session_instance']
+    query = session.query(Word).filter(Word.language == request.match_info['language'])
+    dictionary = ElementTree.Element('Dictionary')
+    for word in query.all():
+        dictionary.append(word.serialise_xml())
+
+    if dictionary:
+        return Response(
+            text=ElementTree.tostring(dictionary).decode('utf8'),
+            status=200,
+            content_type = 'application/xml'
+        )
     else:
         return Response(status=404, content_type='application/json')
 
