@@ -10,7 +10,7 @@ from api.parsers.functions.noun_forms import parse_nl_noun_form_of
 from api.parsers.inflection_template import NounForm
 
 
-class TestAdjectiveFormParsers(TestCase):
+class TestNounFormParsers(TestCase):
 
     def test_parse_inflection_of_noun_form(self):
         template_expression = '{{inflection of|abdominal||p|lang=es}}'
@@ -18,6 +18,14 @@ class TestAdjectiveFormParsers(TestCase):
         output = func(template_expression)
         self.assertIsInstance(output, NounForm)
         self.assertEqual(output.lemma, 'abdominal')
+        self.assertEqual(output.number, 'p')
+
+    def test_parse_inflection_of_noun_form_2(self):
+        template_expression = '{{inflection of|de|Schrödingergleichung||p}}'
+        func = parse_inflection_of(NounForm)
+        output = func(template_expression)
+        self.assertIsInstance(output, NounForm)
+        self.assertEqual(output.lemma, 'Schrödingergleichung')
         self.assertEqual(output.number, 'p')
 
     def test_parse_fi_form_of_noun(self):

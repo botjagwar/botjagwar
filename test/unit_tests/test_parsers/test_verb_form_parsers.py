@@ -20,6 +20,13 @@ class TestAdjectiveFormParsers(TestCase):
         self.assertEqual(output.mood, 'cond')
         self.assertEqual(output.person, '3')
 
+    def test_parse_inflection_of_noun_form_2(self):
+        template_expression = '{{inflection of|fr|sursaturer||3|s|simple|futr}}'
+        output = parse_verb_form_inflection_of(template_expression)
+        self.assertIsInstance(output, VerbForm)
+        self.assertEqual(output.lemma, 'sursaturer')
+        self.assertEqual(output.number, 's')
+
     def test_parse_ca_verb_form_of(self):
         template_expression = '{{ca-verb form of|p=2|n=sg|t=impf|m=ind|abordar}}'
         output = parse_ca_verb_form_of(template_expression)

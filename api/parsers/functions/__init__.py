@@ -18,7 +18,12 @@ def parse_one_parameter_template(out_class, template_name='plural of', case_name
         for char in '{}':
             template_expression = template_expression.replace(char, '')
         parts = template_expression.split('|')
-        lemma = parts[1]
+        t_name = parts[0]
+        if len(parts[1]) in (2, 3):
+            lemma = parts[2]
+        else:
+            lemma = parts[1]
+
         if parts[0] == template_name:
             ret_obj = out_class()
             ret_obj.lemma = lemma
@@ -41,7 +46,13 @@ def parse_inflection_of(out_class):
         for tparam in parts:
             if tparam.find('=') != -1:
                 parts.remove(tparam)
-        t_name, lemma = parts[:2]
+
+        t_name = parts[0]
+        if len(parts[1]) in (2, 3):
+            lemma = parts[2]
+        else:
+            lemma = parts[1]
+
         case_name = number_ = ''
         gender = None
         definiteness = None

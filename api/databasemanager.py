@@ -48,10 +48,10 @@ class DatabaseManager(object):
 class LanguageDatabaseManager(DatabaseManager):
     database_file = 'data/language.db'
 
-    def __init__(self, database_file='default'):
+    def __init__(self, database_file='default', db_header='sqlite:///'):
         if database_file != 'default': # when defined, assumed a sqlite database file
             self.database_file = database_file
-            self.db_header = 'sqlite:///%s' % database_file
+            self.db_header = db_header + database_file
         else:
             self.read_configuration()
 
@@ -59,13 +59,13 @@ class LanguageDatabaseManager(DatabaseManager):
 
 
 class DictionaryDatabaseManager(DatabaseManager):
-    database_file = 'data/word_database.db'
+    database_file = ''
 
-    def __init__(self, database_file='default'):
+    def __init__(self, database_file='default', db_header='sqlite:///'):
         log.debug('database_file is %s' % database_file)
         if database_file != 'default': # when defined, assumed a sqlite database file
             self.database_file = database_file
-            self.db_header = 'sqlite:///%s' % database_file
+            self.db_header = db_header + database_file
         else:
             self.read_configuration()
 

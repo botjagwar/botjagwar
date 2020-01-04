@@ -14,13 +14,14 @@ from api.parsers.functions.noun_forms import parse_nl_noun_form_of
 from api.parsers.functions.verb_forms import parse_ca_verb_form_of
 from api.parsers.functions.verb_forms import parse_de_verb_form_of
 from api.parsers.functions.verb_forms import parse_es_verb_form_of
+# from api.parsers.functions.verb_forms import parse_ru_participle_of
 from api.parsers.functions.verb_forms import parse_fi_form_of
 from api.parsers.functions.verb_forms import parse_fi_verb_form_of
+from api.parsers.functions.verb_forms import parse_la_verb_form_inflection_of
 from api.parsers.functions.verb_forms import parse_verb_form_inflection_of
 from api.parsers.inflection_template import EnWiktionaryInflectionTemplateParser
 from api.parsers.inflection_template import NounForm, VerbForm, AdjectiveForm
 from .inflection_template import EnWiktionaryInflectionTemplateParser
-
 
 TEMPLATE_TO_OBJECT = {
     'e-ana': NounForm,
@@ -103,8 +104,10 @@ templates_parser.add_parser(VerbForm, 'de-verb form of', parse_de_verb_form_of)
 templates_parser.add_parser(VerbForm, 'es-verb form of', parse_es_verb_form_of)
 templates_parser.add_parser(VerbForm, 'fi-verb form of', parse_fi_verb_form_of)
 templates_parser.add_parser(VerbForm, 'fi-form of', parse_fi_form_of)
-templates_parser.add_parser(VerbForm, 'inflection of', parse_verb_form_inflection_of)
+templates_parser.add_parser(VerbForm, 'es-compound of', parse_la_verb_form_inflection_of)
 templates_parser.add_parser(VerbForm, 'lv-inflection of', parse_lv_inflection_of(VerbForm))
+#templates_parser.add_parser(VerbForm, 'ru-participle of', parse_ru_participle_of)
+templates_parser.add_parser(VerbForm, 'inflection of', parse_inflection_of(VerbForm))
 
 
 def get_lemma(expected_class, template_expression):
