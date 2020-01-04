@@ -1,3 +1,5 @@
+import xml.etree.cElementTree as ElementTree
+
 from sqlalchemy import Integer, String, DateTime
 from sqlalchemy import Table, Column, ForeignKey
 from sqlalchemy.ext.declarative import declarative_base
@@ -40,6 +42,14 @@ class Definition(Base):
                 if self.date_changed is not None else ''
         }
         return definition_data
+
+    def serialise_xml(self):
+        root = ElementTree.Element(self.__class__.__name__)
+        json_dict = self.serialise()
+        for node, value in json_dict.items():
+            ElementTree.SubElement(root, node).text = str(value)
+
+        return root
 
     def from_json(self, json_data):
         pass
@@ -88,6 +98,18 @@ class Word(Base):
         word_data = self.serialise_without_definition()
         word_data['definitions'] = [definition.serialise() for definition in self.definitions]
         return word_data
+
+    def serialise_xml(self):
+        root = ElementTree.Element(self.__class__.__name__)
+        word_data = self.serialise_without_definition()
+        definitions = ElementTree.SubElement(root, 'Definitions')
+        for definition in self.definitions:
+            definitions.append(definition.serialise_xml())
+
+        for node, value in word_data.items():
+            ElementTree.SubElement(root, node).text = str(value)
+
+        return root
 
     def serialise_to_entry(self, definitions_language=['mg']):
         definition = [definition.definition
