@@ -5,6 +5,40 @@ from api.parsers.functions.postprocessors import POST_PROCESSORS
 from api.parsers.inflection_template import VerbForm
 
 
+def _parse_es_verb_form_of(parts):
+    count = 0
+    person = number = tense = mood = None
+    for part in parts:
+        count += 1
+        if part.startswith('pers=') or part.startswith('person='):
+            person = part.split('=')[1].strip('}')
+        elif part.startswith('number='):
+            number = part.split('=')[1].strip('}')
+        elif part.startswith('tense='):
+            tense = part.split('=')[1].strip('}')
+        elif part.startswith('mood='):
+            mood = part.split('=')[1].strip('}')
+        elif part.startswith('ending='):
+            pass
+        elif part.startswith('sera='):
+            pass
+        elif part.startswith('formal='):
+            pass
+        elif part.startswith('sense='):
+            pass
+
+    verb_form = VerbForm('', tense, mood, person, number)
+    return verb_form
+
+
+def parse_es_compound_of(template_expression):
+    parts = template_expression.split('|')
+    verb_form = _parse_es_verb_form_of(parts)
+    verb_form.lemma = parts[3]
+
+    return verb_form
+
+
 def parse_verb_form_inflection_of(template_expression):
     post_processor = None
 

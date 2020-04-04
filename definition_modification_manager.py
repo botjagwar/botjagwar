@@ -61,7 +61,7 @@ class DefinitionModificationManagerBot(object):
                 connection.execute(f"""
                     UPDATE events_definition_changed SET
                         status = '{status}',
-                        status_datetime = CURRENT_TIMESTAMP(),
+                        status_datetime = CURRENT_TIMESTAMP,
                         commentary = '{comment}'
                     WHERE definition_id = {definition_id}""")
 
@@ -70,7 +70,7 @@ class DefinitionModificationManagerBot(object):
                 connection.execute(f"""
                     UPDATE events_definition_changed SET
                         status = '{status}',
-                        status_datetime = CURRENT_TIMESTAMP(),
+                        status_datetime = CURRENT_TIMESTAMP,
                         commentary = '{comment}'
                     WHERE definition_id = {definition_id}""")
 

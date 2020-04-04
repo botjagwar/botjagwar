@@ -2,6 +2,7 @@ from unittest import TestCase
 
 from api.parsers.functions.verb_forms import parse_ca_verb_form_of
 from api.parsers.functions.verb_forms import parse_de_verb_form_of
+from api.parsers.functions.verb_forms import parse_es_compound_of
 from api.parsers.functions.verb_forms import parse_es_verb_form_of
 from api.parsers.functions.verb_forms import parse_fi_form_of
 from api.parsers.functions.verb_forms import parse_fi_verb_form_of
@@ -9,7 +10,7 @@ from api.parsers.functions.verb_forms import parse_verb_form_inflection_of
 from api.parsers.inflection_template import VerbForm
 
 
-class TestAdjectiveFormParsers(TestCase):
+class TestVerbFormParsers(TestCase):
 
     def test_parse_verb_form_inflection_of(self):
         template_expression = '{{inflection of|finalizzare||3|p|cond|lang=it}}'
@@ -36,6 +37,11 @@ class TestAdjectiveFormParsers(TestCase):
         self.assertEqual(output.tense, 'impf')
         self.assertEqual(output.mood, 'ind')
         self.assertEqual(output.person, '2')
+
+    def test_parse_es_compound_of(self):
+        template_expression = '{{es-compound of|tipific|ar|tipificando|se|mood=part}}'
+        output = parse_es_compound_of(template_expression)
+        self.assertEqual(output.mood, 'part')
 
     def test_parse_es_verb_form_of(self):
         template_expression = '{{es-verb form of|person=third-person|number=plural|tense=imperfect|mood=subjunctive|sera=ra|ending=ar|terminar}}'

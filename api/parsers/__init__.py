@@ -13,6 +13,7 @@ from api.parsers.functions.noun_forms import parse_lt_noun_form
 from api.parsers.functions.noun_forms import parse_nl_noun_form_of
 from api.parsers.functions.verb_forms import parse_ca_verb_form_of
 from api.parsers.functions.verb_forms import parse_de_verb_form_of
+from api.parsers.functions.verb_forms import parse_es_compound_of
 from api.parsers.functions.verb_forms import parse_es_verb_form_of
 # from api.parsers.functions.verb_forms import parse_ru_participle_of
 from api.parsers.functions.verb_forms import parse_fi_form_of
@@ -100,14 +101,16 @@ templates_parser.add_parser(NounForm, 'singular indefinite of',
                             parse_one_parameter_template(NounForm, 'singular indefinite of', number='s',
                                                          definiteness='indefinite'))
 templates_parser.add_parser(VerbForm, 'ca-verb form of', parse_ca_verb_form_of)
+templates_parser.add_parser(VerbForm, 'pt-verb-form-of', parse_one_parameter_template(VerbForm, 'pt-verb-form-of', number='', gender=''))
 templates_parser.add_parser(VerbForm, 'de-verb form of', parse_de_verb_form_of)
 templates_parser.add_parser(VerbForm, 'es-verb form of', parse_es_verb_form_of)
 templates_parser.add_parser(VerbForm, 'fi-verb form of', parse_fi_verb_form_of)
+templates_parser.add_parser(VerbForm, 'inflection of', parse_verb_form_inflection_of)
 templates_parser.add_parser(VerbForm, 'fi-form of', parse_fi_form_of)
-templates_parser.add_parser(VerbForm, 'es-compound of', parse_la_verb_form_inflection_of)
+templates_parser.add_parser(VerbForm, 'es-compound of', parse_es_compound_of)
 templates_parser.add_parser(VerbForm, 'lv-inflection of', parse_lv_inflection_of(VerbForm))
 #templates_parser.add_parser(VerbForm, 'ru-participle of', parse_ru_participle_of)
-templates_parser.add_parser(VerbForm, 'inflection of', parse_inflection_of(VerbForm))
+#templates_parser.add_parser(VerbForm, 'inflection of', parse_inflection_of(VerbForm))
 
 
 def get_lemma(expected_class, template_expression):
