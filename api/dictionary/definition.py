@@ -21,6 +21,26 @@ async def get_definition_with_words(request) -> Response:
         return Response(status=404, content_type='application/json')
 
 
+async def edit_definition(request) -> Response:
+    session = request.app['session_instance']
+    definition_data = await request.json()
+    definition = session.query(Definition).filter(
+        Definition.id == request.match_info['definition_id']
+    ).one()
+
+    if definition:
+        definition.definition = definition_data['definition']
+        definition.definition_language = definition_data['definition_language']
+        save_changes_on_disk(request.app, session)
+        return Response(
+            text=json.dumps(definition.serialise()),
+            status=200,
+            content_type='application/json'
+        )
+    else:
+        return Response(status=404, content_type='application/json')
+
+
 async def get_definition(request) -> Response:
     session = request.app['session_instance']
 
