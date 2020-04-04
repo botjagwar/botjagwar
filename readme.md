@@ -22,18 +22,23 @@ Visit [Pywikibots installation manual](https://www.mediawiki.org/wiki/Manual:Pyw
 To confirm whether you have a working installation, run `make test`. All tests should pass.
 However, some of them may not pass on the Raspberry Pi due files not being deleted after teardowns.
 
-
 ## Components and scripts
 
 ### Real-time lemma translator
-#### wiktionary_irc.py
 
 Connects to the recent changes real time feed of French and English Wiktionaries on `irc.wikimedia.org` and attempts to translate every entries
 that are being created.
 
+#### wiktionary_irc.py
+
+This is an IRC client and connects to entry_translator.py REST API for translations.
+
 #### dictionary_service.py
 
 Word storage engine. REST API required by the `wiktionary_irc.py` to store and get translations.
+
+You might also be interested in the associated frontend: [https://github.com/radomd92/botjagwar-frontend](dictionary frontend)
+which provides an interfaces to manage dictionary in a more user-friendly manner. Uses VueJS and Nginx.
 
 #### entry_translator.py
 
