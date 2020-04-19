@@ -23,7 +23,7 @@ To confirm whether you have a working installation, run `make test`. All tests s
 However, some of them may not pass on the Raspberry Pi due files not being deleted after teardowns.
 
 ## Running
-
+- Go to `/opt/botjagwar`
 - Run `python3.6 wiktionary_irc.py` in a screen instance
 - Run `python3.6 dictionary_service.py` in a screen instance, serves on 8001
 - Run `python3.6 entry_translator.py`in a screen instance, serves on 8000
