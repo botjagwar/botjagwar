@@ -22,6 +22,15 @@ Visit [Pywikibots installation manual](https://www.mediawiki.org/wiki/Manual:Pyw
 To confirm whether you have a working installation, run `make test`. All tests should pass.
 However, some of them may not pass on the Raspberry Pi due files not being deleted after teardowns.
 
+## Running
+
+- Run `python3.6 wiktionary_irc.py` in a screen instance
+- Run `python3.6 dictionary_service.py` in a screen instance, serves on 8001
+- Run `python3.6 entry_translator.py`in a screen instance, serves on 8000
+
+Alternatively, a supervisor script `supervisor-botjagwar.conf` can help you configure the program above as services.
+
+
 ## Components and scripts
 
 ### Real-time lemma translator
@@ -36,6 +45,8 @@ This is an IRC client and connects to entry_translator.py REST API for translati
 #### dictionary_service.py
 
 Word storage engine. REST API required by the `wiktionary_irc.py` to store and get translations.
+
+Default engine is SQLite, please see `database_uri` at `conf/config.ini` for a change. It is used by SQLAschemy to connect to the database backend.
 
 This API has been tested and used on MySQL (manual test), SQLite (automatic test) and PostgreSQL databases (manual test) thanks to SQLAlchemy. For the best performance and mostly if you want to use the frontend application, please use PostgreSQL.
 
