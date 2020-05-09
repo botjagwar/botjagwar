@@ -17,6 +17,8 @@ class MGWiktionaryProcessor(WiktionaryProcessor):
 
     def getall(self, keep_native_entries=False):
         items = []
+        if self.content is None:
+            return []
         for pos, lang in re.findall('\{\{\-([a-z]{3,7})\-\|([a-z]{2,3})\}\}', self.content):
             pos = pos.strip()
             if pos.strip() in ('etim'):
