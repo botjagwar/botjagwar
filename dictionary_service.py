@@ -41,6 +41,8 @@ app = web.Application(middlewares=[
 app['database'] = dictionary_db_manager
 app['session_instance'] = dictionary_db_manager.session
 app['autocommit'] = True
+app['commit_every'] = 100
+app['commit_count'] = 0
 
 app.router.add_route('GET', '/languages/list', get_language_list)
 app.router.add_route('GET', '/languages/list/download', download_dictionary)
@@ -58,6 +60,7 @@ app.router.add_route('GET', '/dictionary/{source}/{bridge}/{target}', get_inferr
 
 app.router.add_route('GET', '/entry/{language}/{word}', entry.get_entry)
 app.router.add_route('POST', '/entry/{language}/create', entry.add_entry)
+app.router.add_route('POST', '/entry/{language}/batch', entry.add_batch)
 app.router.add_route('PUT', '/entry/{word_id}/edit', entry.edit_entry)
 app.router.add_route('DELETE', '/entry/{word_id}/delete', entry.delete_entry)
 
