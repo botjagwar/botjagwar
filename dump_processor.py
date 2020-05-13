@@ -95,12 +95,17 @@ class Processor(object):
                     #print('foreign >', new_entry)
                     self.entry_writer.add(new_entry)
 
-    def process(self):
+    def load(self, filename):
+        """
+        Generates a list of 100 XML pages
+        :param filename:
+        :return:
+        """
         input_buffer = ''
         buffers = []
         nthreads = 4
         x = 0
-        with open('user_data/%s.xml' % language, 'r') as input_file:
+        with open(filename, 'r') as input_file:
             append = False
             for line in input_file:
                 if '<page>' in line:
@@ -109,11 +114,8 @@ class Processor(object):
                 elif '</page>' in line:
                     input_buffer += line
                     append = False
-                    if x >= nthreads*100:
-                        pool = ThreadPool(nthreads)
-                        pool.map(self.worker, buffers)
-                        pool.close()
-                        pool.join()
+                    if x >= nthreads * 100:
+                        yield buffers
                         del buffers
                         buffers = []
                         x = 0
@@ -124,6 +126,21 @@ class Processor(object):
                     del input_buffer
                 elif append:
                     input_buffer += line
+            yield buffers
+
+        self.entry_writer.write()
+        self.missing_translation_writer.write()
+
+    def process(self):
+        nthreads = 4
+        filename = 'user_data/%s.xml' % language
+        for xml_buffer in self.load(filename):
+            buffers = xml_buffer
+            pool = ThreadPool(nthreads)
+            pool.map(self.worker, buffers)
+            pool.close()
+            pool.join()
+            del buffers
 
         self.entry_writer.write()
         self.missing_translation_writer.write()

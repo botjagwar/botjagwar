@@ -14,31 +14,52 @@ You'll need a working Python 3.6 interpreter to run the python scripts of this p
 ## Installation
 
 In the project directory, type `make all`. The Python scripts and the required configuration will be deployed on the target machine at `/opt/botjagwar`. They can be removed with
-`make uninstall`. 
+`make uninstall`.
 
-If you intend to use the bot for editing on Wiktionary, you need to set up your pywikibot instance. 
+If you intend to use the bot for editing on Wiktionary, you need to set up your pywikibot instance.
 Visit [Pywikibots installation manual](https://www.mediawiki.org/wiki/Manual:Pywikibot/Installation) for more details on how to do that.
 
 To confirm whether you have a working installation, run `make test`. All tests should pass.
 However, some of them may not pass on the Raspberry Pi due files not being deleted after teardowns.
 
+## Running
+- Go to `/opt/botjagwar`
+- Run `python3.6 wiktionary_irc.py` in a screen instance
+- Run `python3.6 dictionary_service.py` in a screen instance, serves on 8001
+- Run `python3.6 entry_translator.py`in a screen instance, serves on 8000
+
+Alternatively, a supervisor script `supervisor-botjagwar.conf` can help you configure the program above as services.
+
 
 ## Components and scripts
 
 ### Real-time lemma translator
-#### wiktionary_irc.py
 
 Connects to the recent changes real time feed of French and English Wiktionaries on `irc.wikimedia.org` and attempts to translate every entries
 that are being created.
+
+#### wiktionary_irc.py
+
+This is an IRC client and connects to entry_translator.py REST API for translations.
 
 #### dictionary_service.py
 
 Word storage engine. REST API required by the `wiktionary_irc.py` to store and get translations.
 
+Default engine is SQLite, please see `database_uri` at `conf/config.ini` for a change. It is used by SQLAschemy to connect to the database backend.
+
+This API has been tested and used on MySQL (manual test), SQLite (automatic test) and PostgreSQL databases (manual test) thanks to SQLAlchemy. For the best performance and mostly if you want to use the frontend application, please use PostgreSQL.
+
+##### Front-end application
+You might also be interested in the associated frontend: [dictionary frontend](https://github.com/radomd92/botjagwar-frontend)
+which provides an interface to manage dictionary in a more user-friendly manner. It will allow you to edit link and delete words and definitions as well as an access to a per-language dictionary.
+
+The frontend application makes use of VueJS, and Nginx. With PostgreSQL backend, Postgrest is used to lessen the load on `dictionary_service` for read operations. Nginx acts as a proxy which redirect requests to either `dictionary_service` or PostgREST API.
+
 #### entry_translator.py
 
 Wiki page handling that also uses translation and page rendering APIs. Side effects are page updates and creations to the target wiki.
-REST service required by `wiktionary_irc.py`  
+REST service required by `wiktionary_irc.py`
 
 ### word_forms.py
 
