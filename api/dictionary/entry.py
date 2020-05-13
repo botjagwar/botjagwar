@@ -94,22 +94,7 @@ async def get_entry(request) -> Response:
         return Response(text=json.dumps(jsons), status=HTTPOk.status_code, content_type='application/json')
 
 
-async def add_entry(request) -> Response:
-    """
-    Adds an antry to the dictionary.
-    If the entry exists but not with the definition, the definition will automatically
-    appended. If the definition also exists, HTTP 460 will be raisen.
-    :param request:
-    :return:
-        HTTP 200 if entry is OK
-        HTTP 460 if entry already exists
-    """
-    data = await request.json()
-    if isinstance(data, str):
-        data = json.loads(data)
-    session = request.app['session_instance']
-
-    # Search if definition already exists.
+def _add_entry(request, data, session):
     normalised_retained_definitions = []
     if 'definitions' in data and len(data['definitions']) > 0:
         for definition in data['definitions']:
@@ -128,6 +113,8 @@ async def add_entry(request) -> Response:
             raise WordAlreadyExistsException()
         else:
             word.definitions = normalised_retained_definitions
+
+        return word
     else:
         # Add a new word if not.
         word = Word(
@@ -136,12 +123,61 @@ async def add_entry(request) -> Response:
             part_of_speech=data['part_of_speech'],
             definitions=normalised_retained_definitions)
         # Updating database
-        session.add(word)
 
+        session.add(word)
+        return word
+
+
+async def add_batch(request) -> Response:
+    """
+    Adds a batch of entries to the dictionary.
+    If the entry exists but not with the definition, the definition will automatically
+    appended. If the definition also exists, HTTP 460 will be raised.
+    :param request:
+    :return:
+        HTTP 200 if entry is OK
+        HTTP 460 if entry already exists
+    """
+    forged_word = []
+    datas = await request.json()
+    session = request.app['session_instance']
+
+    for data in datas:
+        if isinstance(data, str):
+            data = json.loads(data)
+
+        word = _add_entry(request, data, session)
+        # Search if definition already exists.
+        forged_word.append(word.serialise())
+
+    await save_changes_on_disk(request.app, session)
+    return Response(status=HTTPOk.status_code, text=json.dumps(forged_word), content_type='application/json')
+
+
+async def add_entry(request) -> Response:
+    """
+    Adds an entry to the dictionary.
+    If the entry exists but not with the definition, the definition will automatically
+    appended. If the definition also exists, HTTP 460 will be raised.
+    :param request:
+    :return:
+        HTTP 200 if entry is OK
+        HTTP 460 if entry already exists
+    """
+    data = await request.json()
+
+    if isinstance(data, str):
+        data = json.loads(data)
+
+    session = request.app['session_instance']
+    if isinstance(data, str):
+        data = json.loads(data)
+
+    word = _add_entry(request, data, session)
+    forged_word = word.serialise()
     await save_changes_on_disk(request.app, session)
 
     # Return HTTP response
-    forged_word = word.serialise()
     return Response(status=HTTPOk.status_code, text=json.dumps(forged_word), content_type='application/json')
 
 
@@ -158,26 +194,27 @@ async def edit_entry(request) -> Response:
     assert isinstance(data, dict)
     session = request.app['session_instance']
 
-    # Search if word already exists.
-    word = session.query(Word).filter_by(
-        id=request.match_info['word_id']).all()
-    # return exception if it doesn't
-    # that because we'd not be editing otherwise.
-    if not word:
-        raise WordDoesNotExistException()
+    with session.no_autoflush:
+        # Search if word already exists.
+        word = session.query(Word).filter_by(
+            id=request.match_info['word_id']).all()
+        # return exception if it doesn't
+        # that because we'd not be editing otherwise.
+        if not word:
+            raise WordDoesNotExistException()
 
-    word = word[0]
-    definitions = []
-    for definition_json in data['definitions']:
-        definition = create_definition_if_not_exists(
-            session,
-            definition_json['definition'],
-            definition_json['definition_language']
-        )
-        definitions.append(definition)
+        word = word[0]
+        definitions = []
+        for definition_json in data['definitions']:
+            definition = create_definition_if_not_exists(
+                session,
+                definition_json['definition'],
+                definition_json['definition_language']
+            )
+            definitions.append(definition)
 
-    word.part_of_speech = data['part_of_speech']
-    word.definitions = definitions
+        word.part_of_speech = data['part_of_speech']
+        word.definitions = definitions
 
     await save_changes_on_disk(request.app, session)
     return Response(status=HTTPOk.status_code, text=json.dumps(word.serialise()), content_type='application/json')
