@@ -19,8 +19,8 @@ def get_word(session, word, language, part_of_speech):
     return word[0]
 
 
-def create_definition_if_not_exists(session, definition: [str, dict], definition_language: str) -> Definition:
-    definition = definition['definition'] if isinstance(definition, dict) else definition
+def create_definition_if_not_exists(session, definition: dict, definition_language: str) -> Definition:
+    definition = definition['definition']
     definitions = session.query(Definition).filter_by(
         definition=definition,
         definition_language=definition_language

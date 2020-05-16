@@ -108,7 +108,11 @@ class Translation:
                 continue
 
             try:
-                target_language_translations = self.translate_word(title, language)
+                target_language_translations = [
+                    t['definition'] for t in
+                    self.translate_word(title, language)
+                    if t['part_of_speech'] == str(pos)
+                ]
             except NoWordException as exc:
                 log.debug('No translation found for %s in %s' % (title, language))
                 if title not in unknowns:
