@@ -232,7 +232,7 @@ class Translation:
         else:
             for t in translations_json:
                 q = {
-                    'part_of_speech': t['word_pos'],
+                    'part_of_speech': t['part_of_speech'],
                     'definition': t['definition']
                 }
                 if q not in translations:
@@ -255,7 +255,7 @@ class Translation:
                 else:
                     for t in translations_json:
                         q = {
-                            'part_of_speech': t['word_pos'],
+                            'part_of_speech': t['part_of_speech'],
                             'definition': t['definition']
                         }
                         if q not in translations:
