@@ -94,7 +94,7 @@ async def get_entry(request) -> Response:
         return Response(text=json.dumps(jsons), status=HTTPOk.status_code, content_type='application/json')
 
 
-def _add_entry(request, data, session):
+def _add_entry(data, session):
     normalised_retained_definitions = []
     if 'definitions' in data and len(data['definitions']) > 0:
         for definition in data['definitions']:
@@ -104,9 +104,9 @@ def _add_entry(request, data, session):
     else:
         raise InvalidJsonReceivedException()
 
-    if word_exists(session, data['word'], request.match_info['language'], data['part_of_speech']):
+    if word_exists(session, data['word'], data['language'], data['part_of_speech']):
         # Get the word and mix it with the normalised retained definitions
-        word = get_word(session, data['word'], request.match_info['language'], data['part_of_speech'])
+        word = get_word(session, data['word'], data['language'], data['part_of_speech'])
         normalised_retained_definitions += word.definitions
         normalised_retained_definitions = list(set(normalised_retained_definitions))
         if word.definitions == normalised_retained_definitions:
@@ -119,13 +119,14 @@ def _add_entry(request, data, session):
         # Add a new word if not.
         word = Word(
             word=data['word'],
-            language=request.match_info['language'],
+            language=data['language'],
             part_of_speech=data['part_of_speech'],
             definitions=normalised_retained_definitions)
         # Updating database
 
         session.add(word)
-        return word
+
+    return word
 
 
 async def add_batch(request) -> Response:
@@ -138,20 +139,22 @@ async def add_batch(request) -> Response:
         HTTP 200 if entry is OK
         HTTP 460 if entry already exists
     """
-    forged_word = []
+    ret_payload = []
     datas = await request.json()
     session = request.app['session_instance']
+    errors = 0
 
     for data in datas:
         if isinstance(data, str):
             data = json.loads(data)
 
-        word = _add_entry(request, data, session)
+        word = _add_entry(data, session)
         # Search if definition already exists.
-        forged_word.append(word.serialise())
 
-    await save_changes_on_disk(request.app, session)
-    return Response(status=HTTPOk.status_code, text=json.dumps(forged_word), content_type='application/json')
+    session.commit()
+    session.flush()
+
+    return Response(status=HTTPOk.status_code, text=json.dumps(ret_payload), content_type='application/json')
 
 
 async def add_entry(request) -> Response:
@@ -173,7 +176,8 @@ async def add_entry(request) -> Response:
     if isinstance(data, str):
         data = json.loads(data)
 
-    word = _add_entry(request, data, session)
+    data['language'] = request.match_info['language']
+    word = _add_entry(data, session)
     forged_word = word.serialise()
     await save_changes_on_disk(request.app, session)
 

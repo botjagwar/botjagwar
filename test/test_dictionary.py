@@ -131,6 +131,53 @@ class TestDictionaryRestService(TestCase):
     def test_create_entry(self):
         self.create_entry('nakaina', 'jm', 'ana', 'tarameguni', 'de')
 
+    def test_add_batch(self):
+        batch = [
+            {
+                'language': 'mnh',
+                'part_of_speech': 'ana',
+                'word': 'mbala',
+                'definitions': [{
+                    'definition': 'elefanta',
+                    'definition_language': 'mg'
+                }],
+            },
+            {
+                'language': 'kg',
+                'part_of_speech': 'ana',
+                'word': 'mbala',
+                'definitions': [{
+                    'definition': 'ovy',
+                    'definition_language': 'mg'
+                }],
+            },
+            {
+                'language': 'ln',
+                'part_of_speech': 'adv',
+                'word': 'mbala',
+                'definitions': [{
+                    'definition': 'indray mandeha',
+                    'definition_language': 'mg'
+                }],
+            }
+        ]
+        resp = requests.post(URL_HEAD + '/entry/batch', json=batch)
+        self.assertEquals(resp.status_code, 200, 'Batch posting failed!')
+        # committing data
+        requests.get(URL_HEAD + '/commit')
+        entries = [
+            ('ln','mbala'),
+            ('kg','mbala'),
+            ('mnh','mbala'),
+        ]
+        for language, word in entries:
+            resp = requests.get(URL_HEAD + '/entry/{}/{}'.format(language, word))
+            self.assertEquals(resp.status_code, 200, 'Entry check failed!')
+            data = resp.json()
+            self.assertEqual(data[0]['language'], language)
+            self.assertEqual(data[0]['word'], word)
+
+
     def test_create_existing_entry(self):
         sleep(1)
         resp = requests.post(

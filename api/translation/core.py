@@ -142,7 +142,13 @@ class Translation:
 
         try:
             log.debug("Translating word in foreign language (%s in '%s')" % (entry.entry_definition[0], language))
-            target_language_translations = self.translate_word(entry.entry_definition[0], language)
+            target_language_translations = []
+            for translation in self.translate_word(entry.entry_definition[0], language):
+                if translation['part_of_speech'] == entry.part_of_speech:
+                    target_language_translations.append(translation)
+            if len(target_language_translations) == 0:
+                log.debug("No matching translations found")
+                return
         except NoWordException:
             log.debug("No translation found")
             if title not in unknowns:
@@ -218,15 +224,21 @@ class Translation:
         resp = requests.get(url)
         if resp.status_code == WordDoesNotExistException.status_code:
             raise NoWordException()
+
         translations_json = resp.json()
         translations = []
         if len(translations_json) < 1:
             raise NoWordException()
         else:
             for t in translations_json:
-                if t['definition'] not in translations:
-                    translations.append(t['definition'])
+                q = {
+                    'part_of_speech': t['word_pos'],
+                    'definition': t['definition']
+                }
+                if q not in translations:
+                    translations.append(q)
 
+            log.debug(str(translations))
             return translations
 
     async def _translate_word(self, word: str, language: str):
@@ -242,8 +254,12 @@ class Translation:
                     raise NoWordException()
                 else:
                     for t in translations_json:
-                        if t['definition'] not in translations:
-                            translations.append(t['definition'])
+                        q = {
+                            'part_of_speech': t['word_pos'],
+                            'definition': t['definition']
+                        }
+                        if q not in translations:
+                            translations.append(q)
 
                     return translations
 

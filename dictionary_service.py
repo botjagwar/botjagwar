@@ -60,7 +60,7 @@ app.router.add_route('GET', '/dictionary/{source}/{bridge}/{target}', get_inferr
 
 app.router.add_route('GET', '/entry/{language}/{word}', entry.get_entry)
 app.router.add_route('POST', '/entry/{language}/create', entry.add_entry)
-app.router.add_route('POST', '/entry/{language}/batch', entry.add_batch)
+app.router.add_route('POST', '/entry/batch', entry.add_batch)
 app.router.add_route('PUT', '/entry/{word_id}/edit', entry.edit_entry)
 app.router.add_route('DELETE', '/entry/{word_id}/delete', entry.delete_entry)
 

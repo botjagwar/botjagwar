@@ -19,6 +19,10 @@ class InvalidDataException(ServiceError):
     status_code = 461
 
 
+class BatchContainsErrors(ServiceError):
+    status_code = 462
+
+
 class LanguageDoesNotExistsException(ElementDoesNotExistException):
     message = json.dumps({
         'message': 'Language does not exist.'
