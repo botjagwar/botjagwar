@@ -1,6 +1,6 @@
 import xml.etree.cElementTree as ElementTree
 
-from sqlalchemy import Integer, String, DateTime
+from sqlalchemy import Integer, String, DateTime, TEXT
 from sqlalchemy import Table, Column, ForeignKey
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship
@@ -20,7 +20,7 @@ class Definition(Base):
     __tablename__ = 'definitions'
     id = Column(Integer, primary_key=True)
     date_changed = Column(DateTime, default=func.now())
-    definition = Column(String(250))
+    definition = Column(TEXT)
     definition_language = Column(String(6))
     words = relationship(
         'Word',
