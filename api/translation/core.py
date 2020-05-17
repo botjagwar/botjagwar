@@ -108,7 +108,11 @@ class Translation:
                 continue
 
             try:
-                target_language_translations = self.translate_word(title, language)
+                target_language_translations = [
+                    t['definition'] for t in
+                    self.translate_word(title, language)
+                    if t['part_of_speech'] == str(pos)
+                ]
             except NoWordException as exc:
                 log.debug('No translation found for %s in %s' % (title, language))
                 if title not in unknowns:
@@ -232,7 +236,7 @@ class Translation:
         else:
             for t in translations_json:
                 q = {
-                    'part_of_speech': t['word_pos'],
+                    'part_of_speech': t['part_of_speech'],
                     'definition': t['definition']
                 }
                 if q not in translations:
@@ -255,7 +259,7 @@ class Translation:
                 else:
                     for t in translations_json:
                         q = {
-                            'part_of_speech': t['word_pos'],
+                            'part_of_speech': t['part_of_speech'],
                             'definition': t['definition']
                         }
                         if q not in translations:
