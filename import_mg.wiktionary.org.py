@@ -17,7 +17,7 @@ from object_model.word import Entry
 class MgWiktionaryDumpImporter():
     _current_batch = []
     _n_items = 0
-    batch_size = 10
+    batch_size = 1000
     content_language = 'mg'
 
     def __init__(self, file_name):
@@ -28,14 +28,9 @@ class MgWiktionaryDumpImporter():
         self.dictionary_service = DictionaryServiceManager()
 
     def batch_post(self):
-        from pprint import pprint
-        pprint(self._current_batch)
         response = self.dictionary_service.post('entry/batch', json=self._current_batch)
-        err_msg = response.json()
         self._current_batch = []
         self._n_items = 0
-        pprint(self._current_batch)
-        #print(err_msg)
         if response.status_code in (400, 500, BatchContainsErrors.status_code):
             raise Exception('Error on batch send')
 
@@ -71,8 +66,6 @@ class MgWiktionaryDumpImporter():
         content_node = node.xpath('//revision/text')[0].text
         self.entryprocessor.set_title(title_node)
         self.entryprocessor.set_text(content_node)
-        dt = time.time()
-        c = 0
         for entry in self.entryprocessor.getall():
             for definitions in entry.entry_definition:
                 for definition in definitions.split(','):
@@ -82,19 +75,20 @@ class MgWiktionaryDumpImporter():
 
                     new_entry.entry_definition = [definition.strip()]
                     self.batch_push(info=new_entry)
-                    c += 1
-
-            if not c >= 1000:
-                q = 60. * c / (time.time() - dt)
-                print('{} wpm'.format(q,))
-                c = 0
-                dt = time.time()
 
         self.batch_post()
 
     def run(self):
+        c = 0
+        dt = time.time()
         for xml_page in self.load():
+            c += 1
             self.process(xml_page)
+            if c >= 1000:
+                q = 60. * c / (time.time() - dt)
+                print('{} wpm'.format(q))
+                c = 0
+                dt = time.time()
 
 
 if __name__ == '__main__':
