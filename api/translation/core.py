@@ -149,7 +149,7 @@ class Translation:
             target_language_translations = []
             for translation in self.translate_word(entry.entry_definition[0], language):
                 if translation['part_of_speech'] == entry.part_of_speech:
-                    target_language_translations.append(translation)
+                    target_language_translations.append(translation['definition'])
             if len(target_language_translations) == 0:
                 log.debug("No matching translations found")
                 return
