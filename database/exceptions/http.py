@@ -4,6 +4,7 @@ import aiohttp.web
 
 
 class ServiceError(aiohttp.web.HTTPError):
+    status_code = 500
     message = 'The service encountered an unknown error.'
 
 
