@@ -14,16 +14,19 @@ from dump_processor import Processor
 from object_model.word import Entry
 
 
-class MgWiktionaryDumpImporter():
+class WiktionaryDumpImporter():
+    content_language = ''
     _current_batch = []
     _n_items = 0
     batch_size = 1000
-    content_language = 'mg'
 
     def __init__(self, file_name):
         self.file_name = file_name
         self.processor = Processor()
-        self.EntryProcessor = WiktionaryProcessorFactory.create('mg')
+        self._init_processor()
+
+    def _init_processor(self):
+        self.EntryProcessor = WiktionaryProcessorFactory.create(self.content_language)
         self.entryprocessor = self.EntryProcessor()
         self.dictionary_service = DictionaryServiceManager()
 
@@ -83,7 +86,10 @@ class MgWiktionaryDumpImporter():
         dt = time.time()
         for xml_page in self.load():
             c += 1
-            self.process(xml_page)
+            try:
+                self.process(xml_page)
+            except Exception:
+                continue
             if c >= 1000:
                 q = 60. * c / (time.time() - dt)
                 print('{} wpm'.format(q))
@@ -91,6 +97,23 @@ class MgWiktionaryDumpImporter():
                 dt = time.time()
 
 
+class MgWiktDumpImporter(WiktionaryDumpImporter):
+    content_language = 'mg'
+    batch_size = 2500
+
+
+class EnWiktDumpImporter(WiktionaryDumpImporter):
+    content_language = 'en'
+    batch_size = 2500
+
+
+class FrWiktionaryDumpImporter(WiktionaryDumpImporter):
+    content_language = 'fr'
+    batch_size = 2500
+
+
 if __name__ == '__main__':
-    bot = MgWiktionaryDumpImporter('/home/rado/Downloads/mgwiktionary-20200501-pages-articles.xml')
+    #bot = EnWiktDumpImporter('/home/rado/enwiktionary-20200501-pages-articles.xml')
+    bot = FrWiktionaryDumpImporter('/home/rado/Downloads/frwiktionary-20200501-pages-articles.xml')
+    #bot = MgWiktionaryDumpImporter('/home/rado/Downloads/mgwiktionary-20200501-pages-articles.xml')
     bot.run()
