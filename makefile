@@ -1,5 +1,5 @@
-PYTHON := python3.6
-PIP := python3.6 -m pip
+PYTHON := python3
+PIP := $(PYTHON) -m pip
 OPT_DIR := /opt/botjagwar
 TEST_DIR := $(OPT_DIR)/test
 CRON_DIR := /etc/cron.d
