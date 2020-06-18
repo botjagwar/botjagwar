@@ -141,11 +141,11 @@ async def add_batch(request) -> Response:
         HTTP 460 if entry already exists
     """
     ret_payload = []
-    datas = request.json()
+    datas = await request.json()
     session = request.app['session_instance']
     errors = 0
 
-    async for data in datas:
+    for data in datas:
         if isinstance(data, str):
             data = json.loads(data)
 
@@ -208,9 +208,9 @@ async def edit_entry(request) -> Response:
 
         word = word[0]
         definitions = []
-        data = request.json()
+        data = await request.json()
         assert isinstance(data, dict)
-        async for definition_json in data['definitions']:
+        for definition_json in data['definitions']:
             definition = create_definition_if_not_exists(
                 session,
                 definition_json['definition'],
