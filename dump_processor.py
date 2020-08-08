@@ -142,7 +142,6 @@ class Processor(object):
             pool.join()
             del buffers
 
-        self.entry_writer.write()
         self.missing_translation_writer.write()
 
 
