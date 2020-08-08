@@ -1,0 +1,39 @@
+Sentence -> NounPrpn | VerbPrpn | NounPrpn VerbPrpn
+Sentence -> Sentence IN Sentence | Sentence WDT Sentence | Sentence CC Sentence
+Sentence -> Sentence SEP Sentence
+Sentence -> Sentence Sentence
+Sentence -> Sentence STOP
+
+CaseMrkr -> DT | TO
+Preposit -> IN
+MdfdNprp -> JJ NounPrpn | JJ NN | JJ MdfdNprp | JJ CC MdfdNprp
+Propostn -> Propostn NounPrpn
+CaseCmpd -> CaseMrkr Compound | CaseMrkr NounPrpn | NounPrpn POS
+CaseCmpd -> Preposit Compound | Preposit NounPrpn | NounPrpn POS
+Compound -> JJ NN | NN NN | NN Compound | CaseCmpd CaseCmpd | CaseCmpd Compound | Compound CaseCmpd
+NounPrpn -> NN | Compound | CaseMrkr Compound | MdfdNprp | IN NounPrpn
+NounPrpn -> NounPrpn CC NounPrpn
+NounPrpn -> NounPrpn NounPrpn
+MdfdVprp -> RB VerbPrpn | RB VB | RB CC VerbPrpn
+VerbPrpn -> RP VerbPrpn | TO VerbPrpn | CmpdVerb | CmpdVerb NounPrpn | CmpdVerb Propostn | CmpdVerb JJ
+CmpdVerb -> VB | EX CmpdVerb | VB VB | VB CmpdVerb
+
+
+NN -> 'NN' | 'NNS' |'NNP' | 'PRP' | 'NNPS' | 'PDT' | 'FW' | 'UH'
+POS -> 'POS'
+RP -> 'WP' | 'RP' | 'WP$'
+STOP -> '.'
+IN -> 'IN' | 'IN' IN
+SEP -> ':' | ','
+EX -> 'EX'
+VB -> 'VB' | 'VBZ' | 'VBD' | 'VBP' | 'VBN' | 'VBG'
+MD -> 'MD'
+VB -> VB RP
+VB -> MD RB VB
+DT -> 'DT'
+JJ -> 'JJ' | 'JJS' | 'JJR' | 'CD' | JJ RB | RB JJ
+RB -> 'RB' | 'WRB' | 'RBR' | 'RBS'
+TO -> 'TO'
+PPN -> 'PRP$'
+WDT -> 'WDT'
+CC -> 'CC'

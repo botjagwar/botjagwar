@@ -1,3 +1,4 @@
+import asyncio
 import json
 import logging
 
@@ -179,7 +180,7 @@ async def add_entry(request) -> Response:
     data['language'] = request.match_info['language']
     word = _add_entry(data, session)
     forged_word = word.serialise()
-    await save_changes_on_disk(request.app, session)
+    asyncio.ensure_future(save_changes_on_disk(request.app, session))
 
     # Return HTTP response
     return Response(status=HTTPOk.status_code, text=json.dumps(forged_word), content_type='application/json')
@@ -194,8 +195,6 @@ async def edit_entry(request) -> Response:
     :return:
         HTTP 200 with the new entry JSON
     """
-    data = await request.json()
-    assert isinstance(data, dict)
     session = request.app['session_instance']
 
     with session.no_autoflush:
@@ -209,6 +208,8 @@ async def edit_entry(request) -> Response:
 
         word = word[0]
         definitions = []
+        data = await request.json()
+        assert isinstance(data, dict)
         for definition_json in data['definitions']:
             definition = create_definition_if_not_exists(
                 session,
@@ -220,7 +221,7 @@ async def edit_entry(request) -> Response:
         word.part_of_speech = data['part_of_speech']
         word.definitions = definitions
 
-    await save_changes_on_disk(request.app, session)
+    asyncio.ensure_future(save_changes_on_disk(request.app, session))
     return Response(status=HTTPOk.status_code, text=json.dumps(word.serialise()), content_type='application/json')
 
 
@@ -238,5 +239,5 @@ async def delete_entry(request) -> Response:
     session.query(Word).filter(
         Word.id == request.match_info['word_id']).delete()
 
-    await save_changes_on_disk(request.app, session)
+    asyncio.ensure_future(save_changes_on_disk(request.app, session))
     return Response(status=HTTPNoContent.status_code, content_type='application/json')

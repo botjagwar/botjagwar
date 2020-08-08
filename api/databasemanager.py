@@ -5,7 +5,7 @@ import logging
 
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-from sqlalchemy.pool import SingletonThreadPool
+from sqlalchemy.pool import QueuePool
 
 from database.dictionary import Base as WordBase
 from database.language import Base as LanguageBase
@@ -30,10 +30,12 @@ class DatabaseManager(object):
             if self.db_type == 'sqlite':
                 self.db_header = 'sqlite:///%s' % self.database_file
 
-        log.info('Using database %s' % self.db_header)
         self.engine = create_engine(
             self.db_header,
-            poolclass=SingletonThreadPool)
+            poolclass=QueuePool,
+            max_overflow=250,
+        )
+        log.info('Using database %s' % self.db_header)
 
         base.metadata.create_all(self.engine)
         self.SessionClass = sessionmaker(bind=self.engine)
