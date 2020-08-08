@@ -1,12 +1,16 @@
 import re
 
-import nltk
 import requests
 
-f = open('api/parsers/grammar.bnf', 'r')
-bnf = f.read()
-grammar = nltk.CFG.fromstring(bnf)
-f.close()
+try:
+    import nltk
+except ImportError:
+    nltk = None
+else:
+    f = open('api/parsers/grammar.bnf', 'r')
+    bnf = f.read()
+    grammar = nltk.CFG.fromstring(bnf)
+    f.close()
 
 
 class ParserError(Exception):
@@ -15,6 +19,9 @@ class ParserError(Exception):
 
 class EnglishParser:
     def __init__(self):
+        if nltk is None:
+            raise NotImplementedError('Cannot use EnglishParser as nltk module is not installed.')
+
         self.parser = nltk.ChartParser(grammar)
         self.parsed = 0
         self.processed = 0
@@ -98,6 +105,9 @@ class EnglishParser:
 
 
 if __name__ == '__main__':
+    if nltk is None:
+        raise NotImplementedError('Cannot run phrase_parser as nltk module is not installed.')
+
     english_parser = EnglishParser()
     k = """sowing evil and reaping evil."""
     parsed = english_parser.process(k)
