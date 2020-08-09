@@ -40,7 +40,8 @@ def get_new_state():
             urlstr += 'w/api.php?action=query&meta=siteinfo&format=json&siprop=statistics&continue'
             try:
                 stat_page = requests.get(urlstr).json()
-            except json.JSONDecodeError:
+            except Exception as exc:
+                print('Error while trying to get URL', exc)
                 continue
 
             for i in range(5):
