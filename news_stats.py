@@ -1,6 +1,5 @@
 # coding: utf8
 
-import json
 import math
 import os
 import pickle
@@ -185,18 +184,18 @@ def main():
     page = pywikibot.Page(pywikibot.Site("mg", "wikipedia"), "Wikipedia:Vaovao Wikimedia/%d" % ct_time[0])
     news = "\n; %s\n%s" % (ct_date, retstr)
     newsfile = open("/tmp/%s" % ct_date, "w")
-    if page.exists():
-        content = page.get()
-        if content.find(ct_date) != -1:
-            print ("tsy nahitana daty ankehitriny")
-            return
-        content = news + content
-        page.put(content, "+Vaovao androany" + ct_date)
-        newsfile.write(content)
-    else:
-        page.put(news, "Vaovao androany" + ct_date)
-        newsfile.write(news)
+    if len(old) != 0:
+        if page.exists():
+            content = page.get()
+            if content.find(ct_date) != -1:
+                print ("efa nahitana daty ankehitriny")
+                return
+            content = news + content
+            page.put(content, "+Vaovao androany" + ct_date)
+        else:
+            page.put(news, "Vaovao androany" + ct_date)
 
+    newsfile.write(news)
     save_state(new)
     newsfile.close()
 
