@@ -192,10 +192,10 @@ def main():
             return
         content = news + content
         page.put(content, "+Vaovao androany" + ct_date)
-        newsfile.write(content.encode('utf8'))
+        newsfile.write(content)
     else:
         page.put(news, "Vaovao androany" + ct_date)
-        newsfile.write(news.encode('utf8'))
+        newsfile.write(news)
 
     save_state(new)
     newsfile.close()
