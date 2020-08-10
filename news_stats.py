@@ -1,7 +1,6 @@
 # coding: utf8
 
 import math
-import os
 import pickle
 import time
 
@@ -11,8 +10,8 @@ import requests
 from api.decorator import retry_on_fail
 from list_wikis import Wikilister
 
-udata = os.getcwd() + "/user_data/milestones"
-cdata = os.getcwd() + "/conf/list_wikis/langs"
+udata = "/opt/botjagwar/user_data/milestones"
+cdata = "/opt/botjagwar/conf/list_wikis/langs"
 
 possible_errors = [requests.exceptions.ConnectionError]
 requests.get = retry_on_fail(possible_errors, retries=5, time_between_retries=.4)(requests.get)
@@ -60,7 +59,7 @@ def get_new_state():
 
 
 def save_state(state):
-    f = open(udata + "/news_stats", 'w')
+    f = open(udata + "/news_stats", 'wb')
     pickle.dump(state, f)
     f.close()
 
