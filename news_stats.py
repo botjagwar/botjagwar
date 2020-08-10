@@ -20,7 +20,7 @@ requests.get = retry_on_fail(possible_errors, retries=5, time_between_retries=.4
 def get_saved_state():
 
     try:
-        f = open(udata + "/news_stats", 'r')
+        f = open(udata + "/news_stats", 'rb')
         r = pickle.load(f)
         f.close()
         return r
