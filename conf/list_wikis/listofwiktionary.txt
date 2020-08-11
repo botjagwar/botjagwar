@@ -1,3 +1,5 @@
+
+
 {| border="1" cellpadding="2" cellspacing="0" style="background: #f9f9f9; border: 1px solid #aaaaaa; border-collapse: collapse; white-space: nowrap; text-align: left" class="sortable"
 |-
 ! №
@@ -11,2258 +13,2119 @@
 ! Users
 ! Active Users
 ! Files
-! Updated
 |- style="text-align: right;"
 | 1
 | [[w:English language|English]]
-| [[w:English language|English]]
+| class="plainlinksneverexpand" | [{{fullurl:en:English_language}} English]
 | [//en.wiktionary.org/wiki/ en]
-| [//en.wiktionary.org/wiki/Special:Statistics?action=raw '''5493525 ''']
-| 6063310
-| [//en.wiktionary.org/wiki/Special:Recentchanges 49029153 ]
-| [//en.wiktionary.org/wiki/Special:Listadmins 97 ]
-| [//en.wiktionary.org/wiki/Special:Listusers 3385456 ]
-| [//en.wiktionary.org/wiki/Special:ActiveUsers 1479 ]
-| [//en.wiktionary.org/wiki/Special:ListFiles 29 ]
-| style="font-size: 70%;" | 2018-02-25 02:00:20
+| [//en.wiktionary.org/wiki/Special:Statistics?action=raw '''6379801 ''']
+|  7144620
+|  [//en.wiktionary.org/wiki/Special:Recentchanges 60006214]
+|  [//en.wiktionary.org/wiki/Special:Listadmins 100]
+|  [//en.wiktionary.org/wiki/Special:Listusers 3730005]
+|  [//en.wiktionary.org/wiki/Special:ActiveUsers 1693]
+|  [//en.wiktionary.org/wiki/Special:FileList 24]
 |- style="text-align: right;"
 | 2
 | [[w:Malagasy language|Malagasy]]
-| [[w:Malagasy language|Malagasy]]
+| class="plainlinksneverexpand" | [{{fullurl:mg:Fiteny_malagasy}} Malagasy]
 | [//mg.wiktionary.org/wiki/ mg]
-| [//mg.wiktionary.org/wiki/Special:Statistics?action=raw '''4080390 ''']
-| 4147234
-| [//mg.wiktionary.org/wiki/Special:Recentchanges 24722986 ]
-| [//mg.wiktionary.org/wiki/Special:Listadmins 1 ]
-| [//mg.wiktionary.org/wiki/Special:Listusers 6313 ]
-| [//mg.wiktionary.org/wiki/Special:ActiveUsers 12 ]
-| [//mg.wiktionary.org/wiki/Special:ListFiles 3 ]
-| style="font-size: 70%;" | 2018-02-25 02:02:45
+| [//mg.wiktionary.org/wiki/Special:Statistics?action=raw '''6085010 ''']
+|  6186028
+|  [//mg.wiktionary.org/wiki/Special:Recentchanges 28517488]
+|  [//mg.wiktionary.org/wiki/Special:Listadmins 2]
+|  [//mg.wiktionary.org/wiki/Special:Listusers 8830]
+|  [//mg.wiktionary.org/wiki/Special:ActiveUsers 18]
+|  [//mg.wiktionary.org/wiki/Special:FileList 3]
 |- style="text-align: right;"
 | 3
 | [[w:French language|French]]
-| [[w:French language|Français]]
+| class="plainlinksneverexpand" | [{{fullurl:fr:Français}} Français]
 | [//fr.wiktionary.org/wiki/ fr]
-| [//fr.wiktionary.org/wiki/Special:Statistics?action=raw '''3250693 ''']
-| 3532592
-| [//fr.wiktionary.org/wiki/Special:Recentchanges 24552067 ]
-| [//fr.wiktionary.org/wiki/Special:Listadmins 31 ]
-| [//fr.wiktionary.org/wiki/Special:Listusers 219501 ]
-| [//fr.wiktionary.org/wiki/Special:ActiveUsers 470 ]
-| [//fr.wiktionary.org/wiki/Special:ListFiles 3 ]
-| style="font-size: 70%;" | 2018-02-25 02:00:51
+| [//fr.wiktionary.org/wiki/Special:Statistics?action=raw '''3861075 ''']
+|  4223284
+|  [//fr.wiktionary.org/wiki/Special:Recentchanges 28284193]
+|  [//fr.wiktionary.org/wiki/Special:Listadmins 34]
+|  [//fr.wiktionary.org/wiki/Special:Listusers 288844]
+|  [//fr.wiktionary.org/wiki/Special:ActiveUsers 435]
+|  [//fr.wiktionary.org/wiki/Special:FileList 6]
 |- style="text-align: right;"
 | 4
-| [[w:Serbo-Croatian language|Serbo-Croatian]]
-| [[w:Serbo-Croatian language|Srpskohrvatski / Српскохрватски]]
-| [//sh.wiktionary.org/wiki/ sh]
-| [//sh.wiktionary.org/wiki/Special:Statistics?action=raw '''911546 ''']
-| 916361
-| [//sh.wiktionary.org/wiki/Special:Recentchanges 1468518 ]
-| [//sh.wiktionary.org/wiki/Special:Listadmins 5 ]
-| [//sh.wiktionary.org/wiki/Special:Listusers 3515 ]
-| [//sh.wiktionary.org/wiki/Special:ActiveUsers 7 ]
-| [//sh.wiktionary.org/wiki/Special:ListFiles 3 ]
-| style="font-size: 70%;" | 2018-02-25 02:05:56
+| [[w:Russian language|Russian]]
+| class="plainlinksneverexpand" | [{{fullurl:ru:Русский_язык}} Русский]
+| [//ru.wiktionary.org/wiki/ ru]
+| [//ru.wiktionary.org/wiki/Special:Statistics?action=raw '''1082059 ''']
+|  2261234
+|  [//ru.wiktionary.org/wiki/Special:Recentchanges 11506067]
+|  [//ru.wiktionary.org/wiki/Special:Listadmins 14]
+|  [//ru.wiktionary.org/wiki/Special:Listusers 244321]
+|  [//ru.wiktionary.org/wiki/Special:ActiveUsers 222]
+|  [//ru.wiktionary.org/wiki/Special:FileList 334]
 |- style="text-align: right;"
 | 5
-| [[w:Russian language|Russian]]
-| [[w:Russian language|Русский]]
-| [//ru.wiktionary.org/wiki/ ru]
-| [//ru.wiktionary.org/wiki/Special:Statistics?action=raw '''885067 ''']
-| 1312097
-| [//ru.wiktionary.org/wiki/Special:Recentchanges 9644091 ]
-| [//ru.wiktionary.org/wiki/Special:Listadmins 12 ]
-| [//ru.wiktionary.org/wiki/Special:Listusers 192388 ]
-| [//ru.wiktionary.org/wiki/Special:ActiveUsers 242 ]
-| [//ru.wiktionary.org/wiki/Special:ListFiles 309 ]
-| style="font-size: 70%;" | 2018-02-25 02:00:07
+| [[w:German language|German]]
+| class="plainlinksneverexpand" | [{{fullurl:de:Deutsche_Sprache}} Deutsch]
+| [//de.wiktionary.org/wiki/ de]
+| [//de.wiktionary.org/wiki/Special:Statistics?action=raw '''911575 ''']
+|  1043015
+|  [//de.wiktionary.org/wiki/Special:Recentchanges 8064219]
+|  [//de.wiktionary.org/wiki/Special:Listadmins 18]
+|  [//de.wiktionary.org/wiki/Special:Listusers 188455]
+|  [//de.wiktionary.org/wiki/Special:ActiveUsers 217]
+|  [//de.wiktionary.org/wiki/Special:FileList 94]
 |- style="text-align: right;"
 | 6
-| [[w:Spanish language|Spanish]]
-| [[w:Spanish language|Español]]
-| [//es.wiktionary.org/wiki/ es]
-| [//es.wiktionary.org/wiki/Special:Statistics?action=raw '''854436 ''']
-| 901318
-| [//es.wiktionary.org/wiki/Special:Recentchanges 4734292 ]
-| [//es.wiktionary.org/wiki/Special:Listadmins 8 ]
-| [//es.wiktionary.org/wiki/Special:Listusers 89275 ]
-| [//es.wiktionary.org/wiki/Special:ActiveUsers 91 ]
-| [//es.wiktionary.org/wiki/Special:ListFiles 14 ]
-| style="font-size: 70%;" | 2018-02-25 02:01:11
+| [[w:Serbo-Croatian language|Serbo-Croatian]]
+| class="plainlinksneverexpand" | [{{fullurl:sh:Srpskohrvatski_jezik}} Srpskohrvatski / Српскохрватски]
+| [//sh.wiktionary.org/wiki/ sh]
+| [//sh.wiktionary.org/wiki/Special:Statistics?action=raw '''911566 ''']
+|  916404
+|  [//sh.wiktionary.org/wiki/Special:Recentchanges 1469056]
+|  [//sh.wiktionary.org/wiki/Special:Listadmins 5]
+|  [//sh.wiktionary.org/wiki/Special:Listusers 5528]
+|  [//sh.wiktionary.org/wiki/Special:ActiveUsers 6]
+|  [//sh.wiktionary.org/wiki/Special:FileList 3]
 |- style="text-align: right;"
 | 7
-| [[w:Chinese language|Chinese]]
-| [[w:Chinese language|中文]]
-| [//zh.wiktionary.org/wiki/ zh]
-| [//zh.wiktionary.org/wiki/Special:Statistics?action=raw '''836114 ''']
-| 1343410
-| [//zh.wiktionary.org/wiki/Special:Recentchanges 5347340 ]
-| [//zh.wiktionary.org/wiki/Special:Listadmins 6 ]
-| [//zh.wiktionary.org/wiki/Special:Listusers 63617 ]
-| [//zh.wiktionary.org/wiki/Special:ActiveUsers 70 ]
-| [//zh.wiktionary.org/wiki/Special:ListFiles 199 ]
-| style="font-size: 70%;" | 2018-02-25 02:00:10
+| [[w:Spanish language|Spanish]]
+| class="plainlinksneverexpand" | [{{fullurl:es:Idioma_español}} Español]
+| [//es.wiktionary.org/wiki/ es]
+| [//es.wiktionary.org/wiki/Special:Statistics?action=raw '''901901 ''']
+|  954161
+|  [//es.wiktionary.org/wiki/Special:Recentchanges 4941373]
+|  [//es.wiktionary.org/wiki/Special:Listadmins 8]
+|  [//es.wiktionary.org/wiki/Special:Listusers 121272]
+|  [//es.wiktionary.org/wiki/Special:ActiveUsers 96]
+|  [//es.wiktionary.org/wiki/Special:FileList 14]
 |- style="text-align: right;"
 | 8
-| [[w:German language|German]]
-| [[w:German language|Deutsch]]
-| [//de.wiktionary.org/wiki/ de]
-| [//de.wiktionary.org/wiki/Special:Statistics?action=raw '''669895 ''']
-| 755854
-| [//de.wiktionary.org/wiki/Special:Recentchanges 6297757 ]
-| [//de.wiktionary.org/wiki/Special:Listadmins 18 ]
-| [//de.wiktionary.org/wiki/Special:Listusers 148677 ]
-| [//de.wiktionary.org/wiki/Special:ActiveUsers 199 ]
-| [//de.wiktionary.org/wiki/Special:ListFiles 81 ]
-| style="font-size: 70%;" | 2018-02-25 02:00:29
+| [[w:Chinese language|Chinese]]
+| class="plainlinksneverexpand" | [{{fullurl:zh:汉语}} 中文]
+| [//zh.wiktionary.org/wiki/ zh]
+| [//zh.wiktionary.org/wiki/Special:Statistics?action=raw '''879085 ''']
+|  1378888
+|  [//zh.wiktionary.org/wiki/Special:Recentchanges 5753253]
+|  [//zh.wiktionary.org/wiki/Special:Listadmins 7]
+|  [//zh.wiktionary.org/wiki/Special:Listusers 89730]
+|  [//zh.wiktionary.org/wiki/Special:ActiveUsers 87]
+|  [//zh.wiktionary.org/wiki/Special:FileList 36]
 |- style="text-align: right;"
 | 9
-| [[w:Dutch language|Dutch]]
-| [[w:Dutch language|Nederlands]]
-| [//nl.wiktionary.org/wiki/ nl]
-| [//nl.wiktionary.org/wiki/Special:Statistics?action=raw '''643231 ''']
-| 681804
-| [//nl.wiktionary.org/wiki/Special:Recentchanges 3668673 ]
-| [//nl.wiktionary.org/wiki/Special:Listadmins 9 ]
-| [//nl.wiktionary.org/wiki/Special:Listusers 30143 ]
-| [//nl.wiktionary.org/wiki/Special:ActiveUsers 62 ]
-| [//nl.wiktionary.org/wiki/Special:ListFiles 7 ]
-| style="font-size: 70%;" | 2018-02-25 02:00:55
+| [[w:Kurdish language|Kurdish]]
+| class="plainlinksneverexpand" | [{{fullurl:ku:Zimanê_kurdî}} Kurdî / كوردی]
+| [//ku.wiktionary.org/wiki/ ku]
+| [//ku.wiktionary.org/wiki/Special:Statistics?action=raw '''818420 ''']
+|  833214
+|  [//ku.wiktionary.org/wiki/Special:Recentchanges 4013507]
+|  [//ku.wiktionary.org/wiki/Special:Listadmins 6]
+|  [//ku.wiktionary.org/wiki/Special:Listusers 8005]
+|  [//ku.wiktionary.org/wiki/Special:ActiveUsers 49]
+|  [//ku.wiktionary.org/wiki/Special:FileList 15]
 |- style="text-align: right;"
 | 10
-| [[w:Lithuanian language|Lithuanian]]
-| [[w:Lithuanian language|Lietuvių]]
-| [//lt.wiktionary.org/wiki/ lt]
-| [//lt.wiktionary.org/wiki/Special:Statistics?action=raw '''616165 ''']
-| 689362
-| [//lt.wiktionary.org/wiki/Special:Recentchanges 1739963 ]
-| [//lt.wiktionary.org/wiki/Special:Listadmins 3 ]
-| [//lt.wiktionary.org/wiki/Special:Listusers 7530 ]
-| [//lt.wiktionary.org/wiki/Special:ActiveUsers 12 ]
-| [//lt.wiktionary.org/wiki/Special:ListFiles 18 ]
-| style="font-size: 70%;" | 2018-02-25 02:02:11
+| [[w:Greek language|Greek]]
+| class="plainlinksneverexpand" | [{{fullurl:el:Ελληνική_γλώσσα}} Ελληνικά]
+| [//el.wiktionary.org/wiki/ el]
+| [//el.wiktionary.org/wiki/Special:Statistics?action=raw '''795331 ''']
+|  825516
+|  [//el.wiktionary.org/wiki/Special:Recentchanges 4693518]
+|  [//el.wiktionary.org/wiki/Special:Listadmins 7]
+|  [//el.wiktionary.org/wiki/Special:Listusers 41760]
+|  [//el.wiktionary.org/wiki/Special:ActiveUsers 67]
+|  [//el.wiktionary.org/wiki/Special:FileList 62]
 |- style="text-align: right;"
 | 11
-| [[w:Swedish language|Swedish]]
-| [[w:Swedish language|Svenska]]
-| [//sv.wiktionary.org/wiki/ sv]
-| [//sv.wiktionary.org/wiki/Special:Statistics?action=raw '''615105 ''']
-| 651867
-| [//sv.wiktionary.org/wiki/Special:Recentchanges 3098356 ]
-| [//sv.wiktionary.org/wiki/Special:Listadmins 14 ]
-| [//sv.wiktionary.org/wiki/Special:Listusers 34427 ]
-| [//sv.wiktionary.org/wiki/Special:ActiveUsers 80 ]
-| [//sv.wiktionary.org/wiki/Special:ListFiles 1 ]
-| style="font-size: 70%;" | 2018-02-25 02:00:34
+| [[w:Dutch language|Dutch]]
+| class="plainlinksneverexpand" | [{{fullurl:nl:Nederlands}} Nederlands]
+| [//nl.wiktionary.org/wiki/ nl]
+| [//nl.wiktionary.org/wiki/Special:Statistics?action=raw '''764847 ''']
+|  919242
+|  [//nl.wiktionary.org/wiki/Special:Recentchanges 4239930]
+|  [//nl.wiktionary.org/wiki/Special:Listadmins 10]
+|  [//nl.wiktionary.org/wiki/Special:Listusers 43155]
+|  [//nl.wiktionary.org/wiki/Special:ActiveUsers 61]
+|  [//nl.wiktionary.org/wiki/Special:FileList 7]
 |- style="text-align: right;"
 | 12
-| [[w:Kurdish language|Kurdish]]
-| [[w:Kurdish language|Kurdî / كوردی]]
-| [//ku.wiktionary.org/wiki/ ku]
-| [//ku.wiktionary.org/wiki/Special:Statistics?action=raw '''609938 ''']
-| 619786
-| [//ku.wiktionary.org/wiki/Special:Recentchanges 2928939 ]
-| [//ku.wiktionary.org/wiki/Special:Listadmins 3 ]
-| [//ku.wiktionary.org/wiki/Special:Listusers 5764 ]
-| [//ku.wiktionary.org/wiki/Special:ActiveUsers 28 ]
-| [//ku.wiktionary.org/wiki/Special:ListFiles 15 ]
-| style="font-size: 70%;" | 2018-02-25 02:01:00
+| [[w:Swedish language|Swedish]]
+| class="plainlinksneverexpand" | [{{fullurl:sv:Svenska}} Svenska]
+| [//sv.wiktionary.org/wiki/ sv]
+| [//sv.wiktionary.org/wiki/Special:Statistics?action=raw '''750965 ''']
+|  791051
+|  [//sv.wiktionary.org/wiki/Special:Recentchanges 3419444]
+|  [//sv.wiktionary.org/wiki/Special:Listadmins 15]
+|  [//sv.wiktionary.org/wiki/Special:Listusers 45458]
+|  [//sv.wiktionary.org/wiki/Special:ActiveUsers 65]
+|  [//sv.wiktionary.org/wiki/Special:FileList 1]
 |- style="text-align: right;"
 | 13
 | [[w:Polish language|Polish]]
-| [[w:Polish language|Polski]]
+| class="plainlinksneverexpand" | [{{fullurl:pl:Język_polski}} Polski]
 | [//pl.wiktionary.org/wiki/ pl]
-| [//pl.wiktionary.org/wiki/Special:Statistics?action=raw '''608850 ''']
-| 638169
-| [//pl.wiktionary.org/wiki/Special:Recentchanges 6134523 ]
-| [//pl.wiktionary.org/wiki/Special:Listadmins 14 ]
-| [//pl.wiktionary.org/wiki/Special:Listusers 59488 ]
-| [//pl.wiktionary.org/wiki/Special:ActiveUsers 110 ]
-| [//pl.wiktionary.org/wiki/Special:ListFiles 41 ]
-| style="font-size: 70%;" | 2018-02-25 02:00:53
+| [//pl.wiktionary.org/wiki/Special:Statistics?action=raw '''714559 ''']
+|  746107
+|  [//pl.wiktionary.org/wiki/Special:Recentchanges 7387491]
+|  [//pl.wiktionary.org/wiki/Special:Listadmins 15]
+|  [//pl.wiktionary.org/wiki/Special:Listusers 78571]
+|  [//pl.wiktionary.org/wiki/Special:ActiveUsers 111]
+|  [//pl.wiktionary.org/wiki/Special:FileList 45]
 |- style="text-align: right;"
 | 14
-| [[w:Greek language|Greek]]
-| [[w:Greek language|Ελληνικά]]
-| [//el.wiktionary.org/wiki/ el]
-| [//el.wiktionary.org/wiki/Special:Statistics?action=raw '''458711 ''']
-| 481521
-| [//el.wiktionary.org/wiki/Special:Recentchanges 3973175 ]
-| [//el.wiktionary.org/wiki/Special:Listadmins 4 ]
-| [//el.wiktionary.org/wiki/Special:Listusers 28609 ]
-| [//el.wiktionary.org/wiki/Special:ActiveUsers 64 ]
-| [//el.wiktionary.org/wiki/Special:ListFiles 62 ]
-| style="font-size: 70%;" | 2018-02-25 02:00:14
+| [[w:Lithuanian language|Lithuanian]]
+| class="plainlinksneverexpand" | [{{fullurl:lt:Lietuvių_kalba}} Lietuvių]
+| [//lt.wiktionary.org/wiki/ lt]
+| [//lt.wiktionary.org/wiki/Special:Statistics?action=raw '''616776 ''']
+|  682912
+|  [//lt.wiktionary.org/wiki/Special:Recentchanges 1765878]
+|  [//lt.wiktionary.org/wiki/Special:Listadmins 5]
+|  [//lt.wiktionary.org/wiki/Special:Listusers 9339]
+|  [//lt.wiktionary.org/wiki/Special:ActiveUsers 14]
+|  [//lt.wiktionary.org/wiki/Special:FileList 18]
 |- style="text-align: right;"
 | 15
 | [[w:Italian language|Italian]]
-| [[w:Italian language|Italiano]]
+| class="plainlinksneverexpand" | [{{fullurl:it:Lingua_italiana}} Italiano]
 | [//it.wiktionary.org/wiki/ it]
-| [//it.wiktionary.org/wiki/Special:Statistics?action=raw '''429815 ''']
-| 461400
-| [//it.wiktionary.org/wiki/Special:Recentchanges 3217757 ]
-| [//it.wiktionary.org/wiki/Special:Listadmins 7 ]
-| [//it.wiktionary.org/wiki/Special:Listusers 60178 ]
-| [//it.wiktionary.org/wiki/Special:ActiveUsers 61 ]
-| [//it.wiktionary.org/wiki/Special:ListFiles 32 ]
-| style="font-size: 70%;" | 2018-02-25 02:00:23
+| [//it.wiktionary.org/wiki/Special:Statistics?action=raw '''515130 ''']
+|  550316
+|  [//it.wiktionary.org/wiki/Special:Recentchanges 3690989]
+|  [//it.wiktionary.org/wiki/Special:Listadmins 6]
+|  [//it.wiktionary.org/wiki/Special:Listusers 77491]
+|  [//it.wiktionary.org/wiki/Special:ActiveUsers 53]
+|  [//it.wiktionary.org/wiki/Special:FileList 31]
 |- style="text-align: right;"
 | 16
-| [[w:Finnish language|Finnish]]
-| [[w:Finnish language|Suomi]]
-| [//fi.wiktionary.org/wiki/ fi]
-| [//fi.wiktionary.org/wiki/Special:Statistics?action=raw '''356955 ''']
-| 463643
-| [//fi.wiktionary.org/wiki/Special:Recentchanges 3370814 ]
-| [//fi.wiktionary.org/wiki/Special:Listadmins 10 ]
-| [//fi.wiktionary.org/wiki/Special:Listusers 19196 ]
-| [//fi.wiktionary.org/wiki/Special:ActiveUsers 41 ]
-| [//fi.wiktionary.org/wiki/Special:ListFiles 16 ]
-| style="font-size: 70%;" | 2018-02-25 02:00:27
+| [[w:Catalan language|Catalan]]
+| class="plainlinksneverexpand" | [{{fullurl:ca:Català}} Català]
+| [//ca.wiktionary.org/wiki/ ca]
+| [//ca.wiktionary.org/wiki/Special:Statistics?action=raw '''463669 ''']
+|  474286
+|  [//ca.wiktionary.org/wiki/Special:Recentchanges 1589876]
+|  [//ca.wiktionary.org/wiki/Special:Listadmins 3]
+|  [//ca.wiktionary.org/wiki/Special:Listusers 16042]
+|  [//ca.wiktionary.org/wiki/Special:ActiveUsers 31]
+|  [//ca.wiktionary.org/wiki/Special:FileList 4]
 |- style="text-align: right;"
 | 17
-| [[w:Tamil language|Tamil]]
-| [[w:Tamil language|தமிழ்]]
-| [//ta.wiktionary.org/wiki/ ta]
-| [//ta.wiktionary.org/wiki/Special:Statistics?action=raw '''354637 ''']
-| 366870
-| [//ta.wiktionary.org/wiki/Special:Recentchanges 1642187 ]
-| [//ta.wiktionary.org/wiki/Special:Listadmins 7 ]
-| [//ta.wiktionary.org/wiki/Special:Listusers 11609 ]
-| [//ta.wiktionary.org/wiki/Special:ActiveUsers 30 ]
-| [//ta.wiktionary.org/wiki/Special:ListFiles 248 ]
-| style="font-size: 70%;" | 2018-02-25 02:01:26
+| [[w:Finnish language|Finnish]]
+| class="plainlinksneverexpand" | [{{fullurl:fi:Suomen_kieli}} Suomi]
+| [//fi.wiktionary.org/wiki/ fi]
+| [//fi.wiktionary.org/wiki/Special:Statistics?action=raw '''402827 ''']
+|  472153
+|  [//fi.wiktionary.org/wiki/Special:Recentchanges 4115690]
+|  [//fi.wiktionary.org/wiki/Special:Listadmins 9]
+|  [//fi.wiktionary.org/wiki/Special:Listusers 25568]
+|  [//fi.wiktionary.org/wiki/Special:ActiveUsers 47]
+|  [//fi.wiktionary.org/wiki/Special:FileList 16]
 |- style="text-align: right;"
 | 18
-| [[w:Hungarian language|Hungarian]]
-| [[w:Hungarian language|Magyar]]
-| [//hu.wiktionary.org/wiki/ hu]
-| [//hu.wiktionary.org/wiki/Special:Statistics?action=raw '''348468 ''']
-| 406103
-| [//hu.wiktionary.org/wiki/Special:Recentchanges 2287407 ]
-| [//hu.wiktionary.org/wiki/Special:Listadmins 5 ]
-| [//hu.wiktionary.org/wiki/Special:Listusers 17741 ]
-| [//hu.wiktionary.org/wiki/Special:ActiveUsers 27 ]
-| [//hu.wiktionary.org/wiki/Special:ListFiles 0 ]
-| style="font-size: 70%;" | 2018-02-25 02:01:04
+| [[w:Tamil language|Tamil]]
+| class="plainlinksneverexpand" | [{{fullurl:ta:தமிழ்}} தமிழ்]
+| [//ta.wiktionary.org/wiki/ ta]
+| [//ta.wiktionary.org/wiki/Special:Statistics?action=raw '''357056 ''']
+|  368706
+|  [//ta.wiktionary.org/wiki/Special:Recentchanges 1894665]
+|  [//ta.wiktionary.org/wiki/Special:Listadmins 10]
+|  [//ta.wiktionary.org/wiki/Special:Listusers 16096]
+|  [//ta.wiktionary.org/wiki/Special:ActiveUsers 41]
+|  [//ta.wiktionary.org/wiki/Special:FileList 245]
 |- style="text-align: right;"
 | 19
-| [[w:Turkish language|Turkish]]
-| [[w:Turkish language|Türkçe]]
-| [//tr.wiktionary.org/wiki/ tr]
-| [//tr.wiktionary.org/wiki/Special:Statistics?action=raw '''328023 ''']
-| 375566
-| [//tr.wiktionary.org/wiki/Special:Recentchanges 2929623 ]
-| [//tr.wiktionary.org/wiki/Special:Listadmins 4 ]
-| [//tr.wiktionary.org/wiki/Special:Listusers 39131 ]
-| [//tr.wiktionary.org/wiki/Special:ActiveUsers 48 ]
-| [//tr.wiktionary.org/wiki/Special:ListFiles 4 ]
-| style="font-size: 70%;" | 2018-02-25 02:00:40
+| [[w:Hungarian language|Hungarian]]
+| class="plainlinksneverexpand" | [{{fullurl:hu:Magyar_nyelv}} Magyar]
+| [//hu.wiktionary.org/wiki/ hu]
+| [//hu.wiktionary.org/wiki/Special:Statistics?action=raw '''347538 ''']
+|  441760
+|  [//hu.wiktionary.org/wiki/Special:Recentchanges 2774228]
+|  [//hu.wiktionary.org/wiki/Special:Listadmins 4]
+|  [//hu.wiktionary.org/wiki/Special:Listusers 23344]
+|  [//hu.wiktionary.org/wiki/Special:ActiveUsers 28]
+|  [//hu.wiktionary.org/wiki/Special:FileList 0]
 |- style="text-align: right;"
 | 20
-| [[w:Catalan language|Catalan]]
-| [[w:Catalan language|Català]]
-| [//ca.wiktionary.org/wiki/ ca]
-| [//ca.wiktionary.org/wiki/Special:Statistics?action=raw '''309031 ''']
-| 318237
-| [//ca.wiktionary.org/wiki/Special:Recentchanges 1221508 ]
-| [//ca.wiktionary.org/wiki/Special:Listadmins 2 ]
-| [//ca.wiktionary.org/wiki/Special:Listusers 10676 ]
-| [//ca.wiktionary.org/wiki/Special:ActiveUsers 25 ]
-| [//ca.wiktionary.org/wiki/Special:ListFiles 4 ]
-| style="font-size: 70%;" | 2018-02-25 02:00:18
+| [[w:Turkish language|Turkish]]
+| class="plainlinksneverexpand" | [{{fullurl:tr:Türkçe}} Türkçe]
+| [//tr.wiktionary.org/wiki/ tr]
+| [//tr.wiktionary.org/wiki/Special:Statistics?action=raw '''340128 ''']
+|  392871
+|  [//tr.wiktionary.org/wiki/Special:Recentchanges 3641736]
+|  [//tr.wiktionary.org/wiki/Special:Listadmins 4]
+|  [//tr.wiktionary.org/wiki/Special:Listusers 47235]
+|  [//tr.wiktionary.org/wiki/Special:ActiveUsers 66]
+|  [//tr.wiktionary.org/wiki/Special:FileList 4]
 |- style="text-align: right;"
 | 21
-| [[w:Korean language|Korean]]
-| [[w:Korean language|한국어]]
-| [//ko.wiktionary.org/wiki/ ko]
-| [//ko.wiktionary.org/wiki/Special:Statistics?action=raw '''288447 ''']
-| 411502
-| [//ko.wiktionary.org/wiki/Special:Recentchanges 3624134 ]
-| [//ko.wiktionary.org/wiki/Special:Listadmins 0 ]
-| [//ko.wiktionary.org/wiki/Special:Listusers 16177 ]
-| [//ko.wiktionary.org/wiki/Special:ActiveUsers 33 ]
-| [//ko.wiktionary.org/wiki/Special:ListFiles 17 ]
-| style="font-size: 70%;" | 2018-02-25 02:01:15
+| [[w:Armenian language|Armenian]]
+| class="plainlinksneverexpand" | [{{fullurl:hy:Հայերեն}} Հայերեն]
+| [//hy.wiktionary.org/wiki/ hy]
+| [//hy.wiktionary.org/wiki/Special:Statistics?action=raw '''301872 ''']
+|  313655
+|  [//hy.wiktionary.org/wiki/Special:Recentchanges 1726547]
+|  [//hy.wiktionary.org/wiki/Special:Listadmins 2]
+|  [//hy.wiktionary.org/wiki/Special:Listusers 9013]
+|  [//hy.wiktionary.org/wiki/Special:ActiveUsers 22]
+|  [//hy.wiktionary.org/wiki/Special:FileList 16]
 |- style="text-align: right;"
 | 22
 | [[w:Ido language|Ido]]
-| [[w:Ido language|Ido]]
+| class="plainlinksneverexpand" | [{{fullurl:io:Ido}} Ido]
 | [//io.wiktionary.org/wiki/ io]
-| [//io.wiktionary.org/wiki/Special:Statistics?action=raw '''280398 ''']
-| 310757
-| [//io.wiktionary.org/wiki/Special:Recentchanges 2620207 ]
-| [//io.wiktionary.org/wiki/Special:Listadmins 1 ]
-| [//io.wiktionary.org/wiki/Special:Listusers 5858 ]
-| [//io.wiktionary.org/wiki/Special:ActiveUsers 15 ]
-| [//io.wiktionary.org/wiki/Special:ListFiles 4 ]
-| style="font-size: 70%;" | 2018-02-25 02:06:11
+| [//io.wiktionary.org/wiki/Special:Statistics?action=raw '''300579 ''']
+|  331220
+|  [//io.wiktionary.org/wiki/Special:Recentchanges 2786733]
+|  [//io.wiktionary.org/wiki/Special:Listadmins 2]
+|  [//io.wiktionary.org/wiki/Special:Listusers 6919]
+|  [//io.wiktionary.org/wiki/Special:ActiveUsers 12]
+|  [//io.wiktionary.org/wiki/Special:FileList 4]
 |- style="text-align: right;"
 | 23
-| [[w:Kannada language|Kannada]]
-| [[w:Kannada language|ಕನ್ನಡ]]
-| [//kn.wiktionary.org/wiki/ kn]
-| [//kn.wiktionary.org/wiki/Special:Statistics?action=raw '''263879 ''']
-| 267320
-| [//kn.wiktionary.org/wiki/Special:Recentchanges 618212 ]
-| [//kn.wiktionary.org/wiki/Special:Listadmins 1 ]
-| [//kn.wiktionary.org/wiki/Special:Listusers 3746 ]
-| [//kn.wiktionary.org/wiki/Special:ActiveUsers 14 ]
-| [//kn.wiktionary.org/wiki/Special:ListFiles 0 ]
-| style="font-size: 70%;" | 2018-02-25 02:02:24
+| [[w:Korean language|Korean]]
+| class="plainlinksneverexpand" | [{{fullurl:ko:한국어}} 한국어]
+| [//ko.wiktionary.org/wiki/ ko]
+| [//ko.wiktionary.org/wiki/Special:Statistics?action=raw '''294351 ''']
+|  418102
+|  [//ko.wiktionary.org/wiki/Special:Recentchanges 4024237]
+|  [//ko.wiktionary.org/wiki/Special:Listadmins 1]
+|  [//ko.wiktionary.org/wiki/Special:Listusers 22827]
+|  [//ko.wiktionary.org/wiki/Special:ActiveUsers 42]
+|  [//ko.wiktionary.org/wiki/Special:FileList 17]
 |- style="text-align: right;"
 | 24
-| [[w:Portuguese language|Portuguese]]
-| [[w:Portuguese language|Português]]
-| [//pt.wiktionary.org/wiki/ pt]
-| [//pt.wiktionary.org/wiki/Special:Statistics?action=raw '''243632 ''']
-| 347068
-| [//pt.wiktionary.org/wiki/Special:Recentchanges 2484416 ]
-| [//pt.wiktionary.org/wiki/Special:Listadmins 7 ]
-| [//pt.wiktionary.org/wiki/Special:Listusers 65328 ]
-| [//pt.wiktionary.org/wiki/Special:ActiveUsers 55 ]
-| [//pt.wiktionary.org/wiki/Special:ListFiles 0 ]
-| style="font-size: 70%;" | 2018-02-25 02:00:31
+| [[w:Kannada language|Kannada]]
+| class="plainlinksneverexpand" | [{{fullurl:kn:ಕನ್ನಡ}} ಕನ್ನಡ]
+| [//kn.wiktionary.org/wiki/ kn]
+| [//kn.wiktionary.org/wiki/Special:Statistics?action=raw '''264155 ''']
+|  267819
+|  [//kn.wiktionary.org/wiki/Special:Recentchanges 660649]
+|  [//kn.wiktionary.org/wiki/Special:Listadmins 1]
+|  [//kn.wiktionary.org/wiki/Special:Listusers 5180]
+|  [//kn.wiktionary.org/wiki/Special:ActiveUsers 16]
+|  [//kn.wiktionary.org/wiki/Special:FileList 0]
 |- style="text-align: right;"
 | 25
-| [[w:Armenian language|Armenian]]
-| [[w:Armenian language|Հայերեն]]
-| [//hy.wiktionary.org/wiki/ hy]
-| [//hy.wiktionary.org/wiki/Special:Statistics?action=raw '''236963 ''']
-| 244441
-| [//hy.wiktionary.org/wiki/Special:Recentchanges 1321770 ]
-| [//hy.wiktionary.org/wiki/Special:Listadmins 2 ]
-| [//hy.wiktionary.org/wiki/Special:Listusers 5590 ]
-| [//hy.wiktionary.org/wiki/Special:ActiveUsers 95 ]
-| [//hy.wiktionary.org/wiki/Special:ListFiles 16 ]
-| style="font-size: 70%;" | 2018-02-25 02:02:34
+| [[w:Portuguese language|Portuguese]]
+| class="plainlinksneverexpand" | [{{fullurl:pt:Língua_portuguesa}} Português]
+| [//pt.wiktionary.org/wiki/ pt]
+| [//pt.wiktionary.org/wiki/Special:Statistics?action=raw '''261899 ''']
+|  377310
+|  [//pt.wiktionary.org/wiki/Special:Recentchanges 2591283]
+|  [//pt.wiktionary.org/wiki/Special:Listadmins 5]
+|  [//pt.wiktionary.org/wiki/Special:Listusers 77705]
+|  [//pt.wiktionary.org/wiki/Special:ActiveUsers 59]
+|  [//pt.wiktionary.org/wiki/Special:FileList 0]
 |- style="text-align: right;"
 | 26
-| [[w:Vietnamese language|Vietnamese]]
-| [[w:Vietnamese language|Tiếng Việt]]
-| [//vi.wiktionary.org/wiki/ vi]
-| [//vi.wiktionary.org/wiki/Special:Statistics?action=raw '''231997 ''']
-| 245066
-| [//vi.wiktionary.org/wiki/Special:Recentchanges 1990954 ]
-| [//vi.wiktionary.org/wiki/Special:Listadmins 5 ]
-| [//vi.wiktionary.org/wiki/Special:Listusers 31372 ]
-| [//vi.wiktionary.org/wiki/Special:ActiveUsers 30 ]
-| [//vi.wiktionary.org/wiki/Special:ListFiles 5 ]
-| style="font-size: 70%;" | 2018-02-25 02:01:38
+| [[w:Japanese language|Japanese]]
+| class="plainlinksneverexpand" | [{{fullurl:ja:日本語}} 日本語]
+| [//ja.wiktionary.org/wiki/ ja]
+| [//ja.wiktionary.org/wiki/Special:Statistics?action=raw '''245864 ''']
+|  282256
+|  [//ja.wiktionary.org/wiki/Special:Recentchanges 1316091]
+|  [//ja.wiktionary.org/wiki/Special:Listadmins 5]
+|  [//ja.wiktionary.org/wiki/Special:Listusers 75463]
+|  [//ja.wiktionary.org/wiki/Special:ActiveUsers 78]
+|  [//ja.wiktionary.org/wiki/Special:FileList 37]
 |- style="text-align: right;"
 | 27
-| [[w:Serbian language|Serbian]]
-| [[w:Serbian language|Српски / Srpski]]
-| [//sr.wiktionary.org/wiki/ sr]
-| [//sr.wiktionary.org/wiki/Special:Statistics?action=raw '''212286 ''']
-| 223468
-| [//sr.wiktionary.org/wiki/Special:Recentchanges 487722 ]
-| [//sr.wiktionary.org/wiki/Special:Listadmins 4 ]
-| [//sr.wiktionary.org/wiki/Special:Listusers 6579 ]
-| [//sr.wiktionary.org/wiki/Special:ActiveUsers 10 ]
-| [//sr.wiktionary.org/wiki/Special:ListFiles 2 ]
-| style="font-size: 70%;" | 2018-02-25 02:01:58
+| [[w:Vietnamese language|Vietnamese]]
+| class="plainlinksneverexpand" | [{{fullurl:vi:Tiếng_Việt}} Tiếng Việt]
+| [//vi.wiktionary.org/wiki/ vi]
+| [//vi.wiktionary.org/wiki/Special:Statistics?action=raw '''235712 ''']
+|  249218
+|  [//vi.wiktionary.org/wiki/Special:Recentchanges 2008399]
+|  [//vi.wiktionary.org/wiki/Special:Listadmins 7]
+|  [//vi.wiktionary.org/wiki/Special:Listusers 41941]
+|  [//vi.wiktionary.org/wiki/Special:ActiveUsers 45]
+|  [//vi.wiktionary.org/wiki/Special:FileList 5]
 |- style="text-align: right;"
 | 28
-| [[w:Japanese language|Japanese]]
-| [[w:Japanese language|日本語]]
-| [//ja.wiktionary.org/wiki/ ja]
-| [//ja.wiktionary.org/wiki/Special:Statistics?action=raw '''198612 ''']
-| 230187
-| [//ja.wiktionary.org/wiki/Special:Recentchanges 1045665 ]
-| [//ja.wiktionary.org/wiki/Special:Listadmins 5 ]
-| [//ja.wiktionary.org/wiki/Special:Listusers 54161 ]
-| [//ja.wiktionary.org/wiki/Special:ActiveUsers 55 ]
-| [//ja.wiktionary.org/wiki/Special:ListFiles 39 ]
-| style="font-size: 70%;" | 2018-02-25 02:00:36
+| [[w:Serbian language|Serbian]]
+| class="plainlinksneverexpand" | [{{fullurl:sr:Српски_језик}} Српски / Srpski]
+| [//sr.wiktionary.org/wiki/ sr]
+| [//sr.wiktionary.org/wiki/Special:Statistics?action=raw '''218716 ''']
+|  252764
+|  [//sr.wiktionary.org/wiki/Special:Recentchanges 687001]
+|  [//sr.wiktionary.org/wiki/Special:Listadmins 7]
+|  [//sr.wiktionary.org/wiki/Special:Listusers 10519]
+|  [//sr.wiktionary.org/wiki/Special:ActiveUsers 14]
+|  [//sr.wiktionary.org/wiki/Special:FileList 0]
 |- style="text-align: right;"
 | 29
-| [[w:Cherokee language|Cherokee]]
-| [[w:Cherokee language|ᏣᎳᎩ]]
-| [//chr.wiktionary.org/wiki/ chr]
-| [//chr.wiktionary.org/wiki/Special:Statistics?action=raw '''194430 ''']
-| 195407
-| [//chr.wiktionary.org/wiki/Special:Recentchanges 777495 ]
-| [//chr.wiktionary.org/wiki/Special:Listadmins 0 ]
-| [//chr.wiktionary.org/wiki/Special:Listusers 4635 ]
-| [//chr.wiktionary.org/wiki/Special:ActiveUsers 9 ]
-| [//chr.wiktionary.org/wiki/Special:ListFiles 1 ]
-| style="font-size: 70%;" | 2018-02-25 02:05:23
+| [[w:Thai language|Thai]]
+| class="plainlinksneverexpand" | [{{fullurl:th:ภาษาไทย}} ไทย]
+| [//th.wiktionary.org/wiki/ th]
+| [//th.wiktionary.org/wiki/Special:Statistics?action=raw '''200584 ''']
+|  277101
+|  [//th.wiktionary.org/wiki/Special:Recentchanges 1185945]
+|  [//th.wiktionary.org/wiki/Special:Listadmins 4]
+|  [//th.wiktionary.org/wiki/Special:Listusers 11360]
+|  [//th.wiktionary.org/wiki/Special:ActiveUsers 34]
+|  [//th.wiktionary.org/wiki/Special:FileList 0]
 |- style="text-align: right;"
 | 30
-| [[w:Hindi language|Hindi]]
-| [[w:Hindi language|हिन्दी]]
-| [//hi.wiktionary.org/wiki/ hi]
-| [//hi.wiktionary.org/wiki/Special:Statistics?action=raw '''183121 ''']
-| 204402
-| [//hi.wiktionary.org/wiki/Special:Recentchanges 465297 ]
-| [//hi.wiktionary.org/wiki/Special:Listadmins 2 ]
-| [//hi.wiktionary.org/wiki/Special:Listusers 7938 ]
-| [//hi.wiktionary.org/wiki/Special:ActiveUsers 15 ]
-| [//hi.wiktionary.org/wiki/Special:ListFiles 8 ]
-| style="font-size: 70%;" | 2018-02-25 02:01:23
+| [[w:Cherokee language|Cherokee]]
+| class="plainlinksneverexpand" | [{{fullurl:chr:ᏣᎳᎩ_ᎧᏬᏂᎯᏍᏗ}} ᏣᎳᎩ]
+| [//chr.wiktionary.org/wiki/ chr]
+| [//chr.wiktionary.org/wiki/Special:Statistics?action=raw '''194419 ''']
+|  195414
+|  [//chr.wiktionary.org/wiki/Special:Recentchanges 778180]
+|  [//chr.wiktionary.org/wiki/Special:Listadmins 1]
+|  [//chr.wiktionary.org/wiki/Special:Listusers 8101]
+|  [//chr.wiktionary.org/wiki/Special:ActiveUsers 12]
+|  [//chr.wiktionary.org/wiki/Special:FileList 1]
 |- style="text-align: right;"
 | 31
-| [[w:Thai language|Thai]]
-| [[w:Thai language|ไทย]]
-| [//th.wiktionary.org/wiki/ th]
-| [//th.wiktionary.org/wiki/Special:Statistics?action=raw '''161305 ''']
-| 227146
-| [//th.wiktionary.org/wiki/Special:Recentchanges 1019367 ]
-| [//th.wiktionary.org/wiki/Special:Listadmins 3 ]
-| [//th.wiktionary.org/wiki/Special:Listusers 7383 ]
-| [//th.wiktionary.org/wiki/Special:ActiveUsers 18 ]
-| [//th.wiktionary.org/wiki/Special:ListFiles 9 ]
-| style="font-size: 70%;" | 2018-02-25 02:00:49
+| [[w:Hindi language|Hindi]]
+| class="plainlinksneverexpand" | [{{fullurl:hi:हिन्दी}} हिन्दी]
+| [//hi.wiktionary.org/wiki/ hi]
+| [//hi.wiktionary.org/wiki/Special:Statistics?action=raw '''183177 ''']
+|  204754
+|  [//hi.wiktionary.org/wiki/Special:Recentchanges 469160]
+|  [//hi.wiktionary.org/wiki/Special:Listadmins 2]
+|  [//hi.wiktionary.org/wiki/Special:Listusers 11851]
+|  [//hi.wiktionary.org/wiki/Special:ActiveUsers 28]
+|  [//hi.wiktionary.org/wiki/Special:FileList 6]
 |- style="text-align: right;"
 | 32
 | [[w:Romanian language|Romanian]]
-| [[w:Romanian language|Română]]
+| class="plainlinksneverexpand" | [{{fullurl:ro:Limba_română}} Română]
 | [//ro.wiktionary.org/wiki/ ro]
-| [//ro.wiktionary.org/wiki/Special:Statistics?action=raw '''144756 ''']
-| 166955
-| [//ro.wiktionary.org/wiki/Special:Recentchanges 940293 ]
-| [//ro.wiktionary.org/wiki/Special:Listadmins 3 ]
-| [//ro.wiktionary.org/wiki/Special:Listusers 13137 ]
-| [//ro.wiktionary.org/wiki/Special:ActiveUsers 20 ]
-| [//ro.wiktionary.org/wiki/Special:ListFiles 12 ]
-| style="font-size: 70%;" | 2018-02-25 02:01:54
+| [//ro.wiktionary.org/wiki/Special:Statistics?action=raw '''149291 ''']
+|  174232
+|  [//ro.wiktionary.org/wiki/Special:Recentchanges 955332]
+|  [//ro.wiktionary.org/wiki/Special:Listadmins 4]
+|  [//ro.wiktionary.org/wiki/Special:Listusers 17260]
+|  [//ro.wiktionary.org/wiki/Special:ActiveUsers 17]
+|  [//ro.wiktionary.org/wiki/Special:FileList 12]
 |- style="text-align: right;"
 | 33
 | [[w:Norwegian (Bokmål) language|Norwegian (Bokmål)]]
-| [[w:Norwegian (Bokmål) language|Norsk (Bokmål)]]
+| class="plainlinksneverexpand" | [{{fullurl:no:Norsk}} Norsk (Bokmål)]
 | [//no.wiktionary.org/wiki/ no]
-| [//no.wiktionary.org/wiki/Special:Statistics?action=raw '''141582 ''']
-| 153500
-| [//no.wiktionary.org/wiki/Special:Recentchanges 1076109 ]
-| [//no.wiktionary.org/wiki/Special:Listadmins 9 ]
-| [//no.wiktionary.org/wiki/Special:Listusers 10667 ]
-| [//no.wiktionary.org/wiki/Special:ActiveUsers 26 ]
-| [//no.wiktionary.org/wiki/Special:ListFiles 10 ]
-| style="font-size: 70%;" | 2018-02-25 02:00:38
+| [//no.wiktionary.org/wiki/Special:Statistics?action=raw '''143899 ''']
+|  156275
+|  [//no.wiktionary.org/wiki/Special:Recentchanges 1135555]
+|  [//no.wiktionary.org/wiki/Special:Listadmins 6]
+|  [//no.wiktionary.org/wiki/Special:Listusers 14067]
+|  [//no.wiktionary.org/wiki/Special:ActiveUsers 18]
+|  [//no.wiktionary.org/wiki/Special:FileList 10]
 |- style="text-align: right;"
 | 34
-| [[w:Indonesian language|Indonesian]]
-| [[w:Indonesian language|Bahasa Indonesia]]
-| [//id.wiktionary.org/wiki/ id]
-| [//id.wiktionary.org/wiki/Special:Statistics?action=raw '''129856 ''']
-| 204998
-| [//id.wiktionary.org/wiki/Special:Recentchanges 907421 ]
-| [//id.wiktionary.org/wiki/Special:Listadmins 3 ]
-| [//id.wiktionary.org/wiki/Special:Listusers 16887 ]
-| [//id.wiktionary.org/wiki/Special:ActiveUsers 27 ]
-| [//id.wiktionary.org/wiki/Special:ListFiles 3 ]
-| style="font-size: 70%;" | 2018-02-25 02:00:45
+| [[w:Estonian language|Estonian]]
+| class="plainlinksneverexpand" | [{{fullurl:et:Eesti_keel}} Eesti]
+| [//et.wiktionary.org/wiki/ et]
+| [//et.wiktionary.org/wiki/Special:Statistics?action=raw '''137098 ''']
+|  159034
+|  [//et.wiktionary.org/wiki/Special:Recentchanges 1100566]
+|  [//et.wiktionary.org/wiki/Special:Listadmins 4]
+|  [//et.wiktionary.org/wiki/Special:Listusers 8465]
+|  [//et.wiktionary.org/wiki/Special:ActiveUsers 18]
+|  [//et.wiktionary.org/wiki/Special:FileList 2]
 |- style="text-align: right;"
 | 35
-| [[w:Malayalam language|Malayalam]]
-| [[w:Malayalam language|മലയാളം]]
-| [//ml.wiktionary.org/wiki/ ml]
-| [//ml.wiktionary.org/wiki/Special:Statistics?action=raw '''129798 ''']
-| 136575
-| [//ml.wiktionary.org/wiki/Special:Recentchanges 541214 ]
-| [//ml.wiktionary.org/wiki/Special:Listadmins 3 ]
-| [//ml.wiktionary.org/wiki/Special:Listusers 5447 ]
-| [//ml.wiktionary.org/wiki/Special:ActiveUsers 11 ]
-| [//ml.wiktionary.org/wiki/Special:ListFiles 4 ]
-| style="font-size: 70%;" | 2018-02-25 02:01:43
+| [[w:Indonesian language|Indonesian]]
+| class="plainlinksneverexpand" | [{{fullurl:id:Bahasa_Indonesia}} Bahasa Indonesia]
+| [//id.wiktionary.org/wiki/ id]
+| [//id.wiktionary.org/wiki/Special:Statistics?action=raw '''135547 ''']
+|  212799
+|  [//id.wiktionary.org/wiki/Special:Recentchanges 956952]
+|  [//id.wiktionary.org/wiki/Special:Listadmins 6]
+|  [//id.wiktionary.org/wiki/Special:Listusers 26289]
+|  [//id.wiktionary.org/wiki/Special:ActiveUsers 54]
+|  [//id.wiktionary.org/wiki/Special:FileList 3]
 |- style="text-align: right;"
 | 36
-| [[w:Estonian language|Estonian]]
-| [[w:Estonian language|Eesti]]
-| [//et.wiktionary.org/wiki/ et]
-| [//et.wiktionary.org/wiki/Special:Statistics?action=raw '''125285 ''']
-| 143962
-| [//et.wiktionary.org/wiki/Special:Recentchanges 1057710 ]
-| [//et.wiktionary.org/wiki/Special:Listadmins 3 ]
-| [//et.wiktionary.org/wiki/Special:Listusers 6426 ]
-| [//et.wiktionary.org/wiki/Special:ActiveUsers 16 ]
-| [//et.wiktionary.org/wiki/Special:ListFiles 2 ]
-| style="font-size: 70%;" | 2018-02-25 02:01:02
+| [[w:Malayalam language|Malayalam]]
+| class="plainlinksneverexpand" | [{{fullurl:ml:മലയാളം}} മലയാളം]
+| [//ml.wiktionary.org/wiki/ ml]
+| [//ml.wiktionary.org/wiki/Special:Statistics?action=raw '''130587 ''']
+|  137917
+|  [//ml.wiktionary.org/wiki/Special:Recentchanges 544691]
+|  [//ml.wiktionary.org/wiki/Special:Listadmins 6]
+|  [//ml.wiktionary.org/wiki/Special:Listusers 7220]
+|  [//ml.wiktionary.org/wiki/Special:ActiveUsers 30]
+|  [//ml.wiktionary.org/wiki/Special:FileList 4]
 |- style="text-align: right;"
 | 37
-| [[w:Uzbek language|Uzbek]]
-| [[w:Uzbek language|O‘zbek]]
-| [//uz.wiktionary.org/wiki/ uz]
-| [//uz.wiktionary.org/wiki/Special:Statistics?action=raw '''116389 ''']
-| 153427
-| [//uz.wiktionary.org/wiki/Special:Recentchanges 551995 ]
-| [//uz.wiktionary.org/wiki/Special:Listadmins 0 ]
-| [//uz.wiktionary.org/wiki/Special:Listusers 2685 ]
-| [//uz.wiktionary.org/wiki/Special:ActiveUsers 8 ]
-| [//uz.wiktionary.org/wiki/Special:ListFiles 0 ]
-| style="font-size: 70%;" | 2018-02-25 02:03:15
+| [[w:Burmese language|Burmese]]
+| class="plainlinksneverexpand" | [{{fullurl:my:မြန်မာဘာသာစကား}} မြန်မာဘာသာ]
+| [//my.wiktionary.org/wiki/ my]
+| [//my.wiktionary.org/wiki/Special:Statistics?action=raw '''123914 ''']
+|  126842
+|  [//my.wiktionary.org/wiki/Special:Recentchanges 845888]
+|  [//my.wiktionary.org/wiki/Special:Listadmins 2]
+|  [//my.wiktionary.org/wiki/Special:Listusers 6725]
+|  [//my.wiktionary.org/wiki/Special:ActiveUsers 16]
+|  [//my.wiktionary.org/wiki/Special:FileList 0]
 |- style="text-align: right;"
 | 38
-| [[w:Limburgish language|Limburgish]]
-| [[w:Limburgish language|Limburgs]]
-| [//li.wiktionary.org/wiki/ li]
-| [//li.wiktionary.org/wiki/Special:Statistics?action=raw '''114610 ''']
-| 120541
-| [//li.wiktionary.org/wiki/Special:Recentchanges 618367 ]
-| [//li.wiktionary.org/wiki/Special:Listadmins 3 ]
-| [//li.wiktionary.org/wiki/Special:Listusers 3278 ]
-| [//li.wiktionary.org/wiki/Special:ActiveUsers 6 ]
-| [//li.wiktionary.org/wiki/Special:ListFiles 13 ]
-| style="font-size: 70%;" | 2018-02-25 02:05:38
+| [[w:Czech language|Czech]]
+| class="plainlinksneverexpand" | [{{fullurl:cs:Čeština}} Čeština]
+| [//cs.wiktionary.org/wiki/ cs]
+| [//cs.wiktionary.org/wiki/Special:Statistics?action=raw '''122494 ''']
+|  161586
+|  [//cs.wiktionary.org/wiki/Special:Recentchanges 1126162]
+|  [//cs.wiktionary.org/wiki/Special:Listadmins 4]
+|  [//cs.wiktionary.org/wiki/Special:Listusers 36654]
+|  [//cs.wiktionary.org/wiki/Special:ActiveUsers 63]
+|  [//cs.wiktionary.org/wiki/Special:FileList 1]
 |- style="text-align: right;"
 | 39
-| [[w:Burmese language|Burmese]]
-| [[w:Burmese language|မြန်မာဘာသာ]]
-| [//my.wiktionary.org/wiki/ my]
-| [//my.wiktionary.org/wiki/Special:Statistics?action=raw '''109174 ''']
-| 125084
-| [//my.wiktionary.org/wiki/Special:Recentchanges 780226 ]
-| [//my.wiktionary.org/wiki/Special:Listadmins 1 ]
-| [//my.wiktionary.org/wiki/Special:Listusers 4641 ]
-| [//my.wiktionary.org/wiki/Special:ActiveUsers 11 ]
-| [//my.wiktionary.org/wiki/Special:ListFiles 2 ]
-| style="font-size: 70%;" | 2018-02-25 02:04:36
+| [[w:Uzbek language|Uzbek]]
+| class="plainlinksneverexpand" | [{{fullurl:uz:Oʻzbek_tili}} O‘zbek]
+| [//uz.wiktionary.org/wiki/ uz]
+| [//uz.wiktionary.org/wiki/Special:Statistics?action=raw '''116658 ''']
+|  154102
+|  [//uz.wiktionary.org/wiki/Special:Recentchanges 555269]
+|  [//uz.wiktionary.org/wiki/Special:Listadmins 1]
+|  [//uz.wiktionary.org/wiki/Special:Listusers 4122]
+|  [//uz.wiktionary.org/wiki/Special:ActiveUsers 12]
+|  [//uz.wiktionary.org/wiki/Special:FileList 0]
 |- style="text-align: right;"
 | 40
-| [[w:Oriya language|Oriya]]
-| [[w:Oriya language|ଓଡ଼ିଆ]]
-| [//or.wiktionary.org/wiki/ or]
-| [//or.wiktionary.org/wiki/Special:Statistics?action=raw '''108590 ''']
-| 109845
-| [//or.wiktionary.org/wiki/Special:Recentchanges 160418 ]
-| [//or.wiktionary.org/wiki/Special:Listadmins 1 ]
-| [//or.wiktionary.org/wiki/Special:Listusers 1714 ]
-| [//or.wiktionary.org/wiki/Special:ActiveUsers 8 ]
-| [//or.wiktionary.org/wiki/Special:ListFiles 1 ]
-| style="font-size: 70%;" | 2018-02-25 02:04:38
+| [[w:Limburgish language|Limburgish]]
+| class="plainlinksneverexpand" | [{{fullurl:li:Limburgs}} Limburgs]
+| [//li.wiktionary.org/wiki/ li]
+| [//li.wiktionary.org/wiki/Special:Statistics?action=raw '''115499 ''']
+|  122193
+|  [//li.wiktionary.org/wiki/Special:Recentchanges 634533]
+|  [//li.wiktionary.org/wiki/Special:Listadmins 4]
+|  [//li.wiktionary.org/wiki/Special:Listusers 3856]
+|  [//li.wiktionary.org/wiki/Special:ActiveUsers 4]
+|  [//li.wiktionary.org/wiki/Special:FileList 13]
 |- style="text-align: right;"
 | 41
-| [[w:Telugu language|Telugu]]
-| [[w:Telugu language|తెలుగు]]
-| [//te.wiktionary.org/wiki/ te]
-| [//te.wiktionary.org/wiki/Special:Statistics?action=raw '''105988 ''']
-| 121511
-| [//te.wiktionary.org/wiki/Special:Recentchanges 962944 ]
-| [//te.wiktionary.org/wiki/Special:Listadmins 3 ]
-| [//te.wiktionary.org/wiki/Special:Listusers 3766 ]
-| [//te.wiktionary.org/wiki/Special:ActiveUsers 7 ]
-| [//te.wiktionary.org/wiki/Special:ListFiles 931 ]
-| style="font-size: 70%;" | 2018-02-25 02:02:50
+| [[w:Oriya language|Oriya]]
+| class="plainlinksneverexpand" | [{{fullurl:or:ଓଡ଼ିଆ}} ଓଡ଼ିଆ]
+| [//or.wiktionary.org/wiki/ or]
+| [//or.wiktionary.org/wiki/Special:Statistics?action=raw '''108594 ''']
+|  109978
+|  [//or.wiktionary.org/wiki/Special:Recentchanges 161367]
+|  [//or.wiktionary.org/wiki/Special:Listadmins 2]
+|  [//or.wiktionary.org/wiki/Special:Listusers 2205]
+|  [//or.wiktionary.org/wiki/Special:ActiveUsers 4]
+|  [//or.wiktionary.org/wiki/Special:FileList 1]
 |- style="text-align: right;"
 | 42
-| [[w:Czech language|Czech]]
-| [[w:Czech language|Čeština]]
-| [//cs.wiktionary.org/wiki/ cs]
-| [//cs.wiktionary.org/wiki/Special:Statistics?action=raw '''98210 ''']
-| 117961
-| [//cs.wiktionary.org/wiki/Special:Recentchanges 935091 ]
-| [//cs.wiktionary.org/wiki/Special:Listadmins 2 ]
-| [//cs.wiktionary.org/wiki/Special:Listusers 26611 ]
-| [//cs.wiktionary.org/wiki/Special:ActiveUsers 63 ]
-| [//cs.wiktionary.org/wiki/Special:ListFiles 1 ]
-| style="font-size: 70%;" | 2018-02-25 02:00:42
+| [[w:Telugu language|Telugu]]
+| class="plainlinksneverexpand" | [{{fullurl:te:తెలుగు}} తెలుగు]
+| [//te.wiktionary.org/wiki/ te]
+| [//te.wiktionary.org/wiki/Special:Statistics?action=raw '''106380 ''']
+|  122174
+|  [//te.wiktionary.org/wiki/Special:Recentchanges 964666]
+|  [//te.wiktionary.org/wiki/Special:Listadmins 4]
+|  [//te.wiktionary.org/wiki/Special:Listusers 4674]
+|  [//te.wiktionary.org/wiki/Special:ActiveUsers 4]
+|  [//te.wiktionary.org/wiki/Special:FileList 931]
 |- style="text-align: right;"
 | 43
-| [[w:Persian language|Persian]]
-| [[w:Persian language|فارسی]]
-| [//fa.wiktionary.org/wiki/ fa]
-| [//fa.wiktionary.org/wiki/Special:Statistics?action=raw '''97813 ''']
-| 155011
-| [//fa.wiktionary.org/wiki/Special:Recentchanges 764221 ]
-| [//fa.wiktionary.org/wiki/Special:Listadmins 3 ]
-| [//fa.wiktionary.org/wiki/Special:Listusers 17485 ]
-| [//fa.wiktionary.org/wiki/Special:ActiveUsers 31 ]
-| [//fa.wiktionary.org/wiki/Special:ListFiles 8 ]
-| style="font-size: 70%;" | 2018-02-25 02:01:17
+| [[w:Esperanto language|Esperanto]]
+| class="plainlinksneverexpand" | [{{fullurl:eo:Esperanto}} Esperanto]
+| [//eo.wiktionary.org/wiki/ eo]
+| [//eo.wiktionary.org/wiki/Special:Statistics?action=raw '''102275 ''']
+|  120203
+|  [//eo.wiktionary.org/wiki/Special:Recentchanges 889260]
+|  [//eo.wiktionary.org/wiki/Special:Listadmins 2]
+|  [//eo.wiktionary.org/wiki/Special:Listusers 7130]
+|  [//eo.wiktionary.org/wiki/Special:ActiveUsers 20]
+|  [//eo.wiktionary.org/wiki/Special:FileList 27]
 |- style="text-align: right;"
 | 44
-| [[w:Esperanto language|Esperanto]]
-| [[w:Esperanto language|Esperanto]]
-| [//eo.wiktionary.org/wiki/ eo]
-| [//eo.wiktionary.org/wiki/Special:Statistics?action=raw '''97146 ''']
-| 114366
-| [//eo.wiktionary.org/wiki/Special:Recentchanges 510644 ]
-| [//eo.wiktionary.org/wiki/Special:Listadmins 1 ]
-| [//eo.wiktionary.org/wiki/Special:Listusers 5481 ]
-| [//eo.wiktionary.org/wiki/Special:ActiveUsers 17 ]
-| [//eo.wiktionary.org/wiki/Special:ListFiles 27 ]
-| style="font-size: 70%;" | 2018-02-25 02:00:47
+| [[w:Persian language|Persian]]
+| class="plainlinksneverexpand" | [{{fullurl:fa:فارسی}} فارسی]
+| [//fa.wiktionary.org/wiki/ fa]
+| [//fa.wiktionary.org/wiki/Special:Statistics?action=raw '''101510 ''']
+|  171177
+|  [//fa.wiktionary.org/wiki/Special:Recentchanges 820077]
+|  [//fa.wiktionary.org/wiki/Special:Listadmins 4]
+|  [//fa.wiktionary.org/wiki/Special:Listusers 28110]
+|  [//fa.wiktionary.org/wiki/Special:ActiveUsers 36]
+|  [//fa.wiktionary.org/wiki/Special:FileList 8]
 |- style="text-align: right;"
 | 45
 | [[w:Arabic language|Arabic]]
-| [[w:Arabic language|العربية]]
+| class="plainlinksneverexpand" | [{{fullurl:ar:لغة_عربية}} العربية]
 | [//ar.wiktionary.org/wiki/ ar]
-| [//ar.wiktionary.org/wiki/Special:Statistics?action=raw '''64700 ''']
-| 99414
-| [//ar.wiktionary.org/wiki/Special:Recentchanges 730444 ]
-| [//ar.wiktionary.org/wiki/Special:Listadmins 4 ]
-| [//ar.wiktionary.org/wiki/Special:Listusers 22927 ]
-| [//ar.wiktionary.org/wiki/Special:ActiveUsers 40 ]
-| [//ar.wiktionary.org/wiki/Special:ListFiles 1 ]
-| style="font-size: 70%;" | 2018-02-25 02:01:41
+| [//ar.wiktionary.org/wiki/Special:Statistics?action=raw '''66651 ''']
+|  116990
+|  [//ar.wiktionary.org/wiki/Special:Recentchanges 843301]
+|  [//ar.wiktionary.org/wiki/Special:Listadmins 4]
+|  [//ar.wiktionary.org/wiki/Special:Listusers 29299]
+|  [//ar.wiktionary.org/wiki/Special:ActiveUsers 29]
+|  [//ar.wiktionary.org/wiki/Special:FileList 1]
 |- style="text-align: right;"
 | 46
 | [[w:Javanese language|Javanese]]
-| [[w:Javanese language|Basa Jawa]]
+| class="plainlinksneverexpand" | [{{fullurl:jv:Basa_Jawa}} Basa Jawa]
 | [//jv.wiktionary.org/wiki/ jv]
-| [//jv.wiktionary.org/wiki/Special:Statistics?action=raw '''60710 ''']
-| 71972
-| [//jv.wiktionary.org/wiki/Special:Recentchanges 108519 ]
-| [//jv.wiktionary.org/wiki/Special:Listadmins 0 ]
-| [//jv.wiktionary.org/wiki/Special:Listusers 2086 ]
-| [//jv.wiktionary.org/wiki/Special:ActiveUsers 7 ]
-| [//jv.wiktionary.org/wiki/Special:ListFiles 1 ]
-| style="font-size: 70%;" | 2018-02-25 02:03:26
+| [//jv.wiktionary.org/wiki/Special:Statistics?action=raw '''60737 ''']
+|  72106
+|  [//jv.wiktionary.org/wiki/Special:Recentchanges 109518]
+|  [//jv.wiktionary.org/wiki/Special:Listadmins 1]
+|  [//jv.wiktionary.org/wiki/Special:Listusers 2874]
+|  [//jv.wiktionary.org/wiki/Special:ActiveUsers 10]
+|  [//jv.wiktionary.org/wiki/Special:FileList 1]
 |- style="text-align: right;"
 | 47
-| [[w:Azerbaijani language|Azerbaijani]]
-| [[w:Azerbaijani language|Azərbaycanca]]
-| [//az.wiktionary.org/wiki/ az]
-| [//az.wiktionary.org/wiki/Special:Statistics?action=raw '''55033 ''']
-| 62451
-| [//az.wiktionary.org/wiki/Special:Recentchanges 352817 ]
-| [//az.wiktionary.org/wiki/Special:Listadmins 2 ]
-| [//az.wiktionary.org/wiki/Special:Listusers 4778 ]
-| [//az.wiktionary.org/wiki/Special:ActiveUsers 22 ]
-| [//az.wiktionary.org/wiki/Special:ListFiles 1 ]
-| style="font-size: 70%;" | 2018-02-25 02:04:12
+| [[w:Galician language|Galician]]
+| class="plainlinksneverexpand" | [{{fullurl:gl:Lingua_galega}} Galego]
+| [//gl.wiktionary.org/wiki/ gl]
+| [//gl.wiktionary.org/wiki/Special:Statistics?action=raw '''59404 ''']
+|  72257
+|  [//gl.wiktionary.org/wiki/Special:Recentchanges 657545]
+|  [//gl.wiktionary.org/wiki/Special:Listadmins 3]
+|  [//gl.wiktionary.org/wiki/Special:Listusers 5499]
+|  [//gl.wiktionary.org/wiki/Special:ActiveUsers 10]
+|  [//gl.wiktionary.org/wiki/Special:FileList 74]
 |- style="text-align: right;"
 | 48
-| [[w:Basque language|Basque]]
-| [[w:Basque language|Euskara]]
-| [//eu.wiktionary.org/wiki/ eu]
-| [//eu.wiktionary.org/wiki/Special:Statistics?action=raw '''54081 ''']
-| 62456
-| [//eu.wiktionary.org/wiki/Special:Recentchanges 405999 ]
-| [//eu.wiktionary.org/wiki/Special:Listadmins 1 ]
-| [//eu.wiktionary.org/wiki/Special:Listusers 3470 ]
-| [//eu.wiktionary.org/wiki/Special:ActiveUsers 7 ]
-| [//eu.wiktionary.org/wiki/Special:ListFiles 3 ]
-| style="font-size: 70%;" | 2018-02-25 02:02:15
+| [[w:Azerbaijani language|Azerbaijani]]
+| class="plainlinksneverexpand" | [{{fullurl:az:Azərbaycan_dili}} Azərbaycanca]
+| [//az.wiktionary.org/wiki/ az]
+| [//az.wiktionary.org/wiki/Special:Statistics?action=raw '''55844 ''']
+|  64445
+|  [//az.wiktionary.org/wiki/Special:Recentchanges 362776]
+|  [//az.wiktionary.org/wiki/Special:Listadmins 2]
+|  [//az.wiktionary.org/wiki/Special:Listusers 7068]
+|  [//az.wiktionary.org/wiki/Special:ActiveUsers 13]
+|  [//az.wiktionary.org/wiki/Special:FileList 1]
 |- style="text-align: right;"
 | 49
-| [[w:Galician language|Galician]]
-| [[w:Galician language|Galego]]
-| [//gl.wiktionary.org/wiki/ gl]
-| [//gl.wiktionary.org/wiki/Special:Statistics?action=raw '''51265 ''']
-| 63296
-| [//gl.wiktionary.org/wiki/Special:Recentchanges 638278 ]
-| [//gl.wiktionary.org/wiki/Special:Listadmins 2 ]
-| [//gl.wiktionary.org/wiki/Special:Listusers 4479 ]
-| [//gl.wiktionary.org/wiki/Special:ActiveUsers 19 ]
-| [//gl.wiktionary.org/wiki/Special:ListFiles 74 ]
-| style="font-size: 70%;" | 2018-02-25 02:00:58
+| [[w:Occitan language|Occitan]]
+| class="plainlinksneverexpand" | [{{fullurl:oc:Occitan}} Occitan]
+| [//oc.wiktionary.org/wiki/ oc]
+| [//oc.wiktionary.org/wiki/Special:Statistics?action=raw '''55005 ''']
+|  70527
+|  [//oc.wiktionary.org/wiki/Special:Recentchanges 342397]
+|  [//oc.wiktionary.org/wiki/Special:Listadmins 2]
+|  [//oc.wiktionary.org/wiki/Special:Listusers 3810]
+|  [//oc.wiktionary.org/wiki/Special:ActiveUsers 17]
+|  [//oc.wiktionary.org/wiki/Special:FileList 2]
 |- style="text-align: right;"
 | 50
-| [[w:Occitan language|Occitan]]
-| [[w:Occitan language|Occitan]]
-| [//oc.wiktionary.org/wiki/ oc]
-| [//oc.wiktionary.org/wiki/Special:Statistics?action=raw '''41329 ''']
-| 53278
-| [//oc.wiktionary.org/wiki/Special:Recentchanges 297106 ]
-| [//oc.wiktionary.org/wiki/Special:Listadmins 2 ]
-| [//oc.wiktionary.org/wiki/Special:Listusers 3011 ]
-| [//oc.wiktionary.org/wiki/Special:ActiveUsers 11 ]
-| [//oc.wiktionary.org/wiki/Special:ListFiles 2 ]
-| style="font-size: 70%;" | 2018-02-25 02:02:19
+| [[w:Basque language|Basque]]
+| class="plainlinksneverexpand" | [{{fullurl:eu:Euskara}} Euskara]
+| [//eu.wiktionary.org/wiki/ eu]
+| [//eu.wiktionary.org/wiki/Special:Statistics?action=raw '''54360 ''']
+|  62869
+|  [//eu.wiktionary.org/wiki/Special:Recentchanges 407202]
+|  [//eu.wiktionary.org/wiki/Special:Listadmins 2]
+|  [//eu.wiktionary.org/wiki/Special:Listusers 4605]
+|  [//eu.wiktionary.org/wiki/Special:ActiveUsers 13]
+|  [//eu.wiktionary.org/wiki/Special:FileList 3]
 |- style="text-align: right;"
 | 51
-| [[w:Danish language|Danish]]
-| [[w:Danish language|Dansk]]
-| [//da.wiktionary.org/wiki/ da]
-| [//da.wiktionary.org/wiki/Special:Statistics?action=raw '''38470 ''']
-| 50114
-| [//da.wiktionary.org/wiki/Special:Recentchanges 294577 ]
-| [//da.wiktionary.org/wiki/Special:Listadmins 2 ]
-| [//da.wiktionary.org/wiki/Special:Listusers 7985 ]
-| [//da.wiktionary.org/wiki/Special:ActiveUsers 17 ]
-| [//da.wiktionary.org/wiki/Special:ListFiles 0 ]
-| style="font-size: 70%;" | 2018-02-25 02:01:19
+| [[w:Ukrainian language|Ukrainian]]
+| class="plainlinksneverexpand" | [{{fullurl:uk:Українська_мова}} Українська]
+| [//uk.wiktionary.org/wiki/ uk]
+| [//uk.wiktionary.org/wiki/Special:Statistics?action=raw '''50151 ''']
+|  65046
+|  [//uk.wiktionary.org/wiki/Special:Recentchanges 452851]
+|  [//uk.wiktionary.org/wiki/Special:Listadmins 4]
+|  [//uk.wiktionary.org/wiki/Special:Listusers 19642]
+|  [//uk.wiktionary.org/wiki/Special:ActiveUsers 23]
+|  [//uk.wiktionary.org/wiki/Special:FileList 11]
 |- style="text-align: right;"
 | 52
 | [[w:Breton language|Breton]]
-| [[w:Breton language|Brezhoneg]]
+| class="plainlinksneverexpand" | [{{fullurl:br:Brezhoneg}} Brezhoneg]
 | [//br.wiktionary.org/wiki/ br]
-| [//br.wiktionary.org/wiki/Special:Statistics?action=raw '''37716 ''']
-| 45219
-| [//br.wiktionary.org/wiki/Special:Recentchanges 260256 ]
-| [//br.wiktionary.org/wiki/Special:Listadmins 0 ]
-| [//br.wiktionary.org/wiki/Special:Listusers 3170 ]
-| [//br.wiktionary.org/wiki/Special:ActiveUsers 9 ]
-| [//br.wiktionary.org/wiki/Special:ListFiles 39 ]
-| style="font-size: 70%;" | 2018-02-25 02:03:48
+| [//br.wiktionary.org/wiki/Special:Statistics?action=raw '''42805 ''']
+|  51851
+|  [//br.wiktionary.org/wiki/Special:Recentchanges 301000]
+|  [//br.wiktionary.org/wiki/Special:Listadmins 1]
+|  [//br.wiktionary.org/wiki/Special:Listusers 3958]
+|  [//br.wiktionary.org/wiki/Special:ActiveUsers 6]
+|  [//br.wiktionary.org/wiki/Special:FileList 39]
 |- style="text-align: right;"
 | 53
-| [[w:Lao language|Lao]]
-| [[w:Lao language|ລາວ]]
-| [//lo.wiktionary.org/wiki/ lo]
-| [//lo.wiktionary.org/wiki/Special:Statistics?action=raw '''37652 ''']
-| 62240
-| [//lo.wiktionary.org/wiki/Special:Recentchanges 458340 ]
-| [//lo.wiktionary.org/wiki/Special:Listadmins 0 ]
-| [//lo.wiktionary.org/wiki/Special:Listusers 2752 ]
-| [//lo.wiktionary.org/wiki/Special:ActiveUsers 8 ]
-| [//lo.wiktionary.org/wiki/Special:ListFiles 2 ]
-| style="font-size: 70%;" | 2018-02-25 02:05:40
+| [[w:Danish language|Danish]]
+| class="plainlinksneverexpand" | [{{fullurl:da:Dansk_(sprog)}} Dansk]
+| [//da.wiktionary.org/wiki/ da]
+| [//da.wiktionary.org/wiki/Special:Statistics?action=raw '''38739 ''']
+|  50669
+|  [//da.wiktionary.org/wiki/Special:Recentchanges 297396]
+|  [//da.wiktionary.org/wiki/Special:Listadmins 3]
+|  [//da.wiktionary.org/wiki/Special:Listusers 10276]
+|  [//da.wiktionary.org/wiki/Special:ActiveUsers 11]
+|  [//da.wiktionary.org/wiki/Special:FileList 0]
 |- style="text-align: right;"
 | 54
-| [[w:Ukrainian language|Ukrainian]]
-| [[w:Ukrainian language|Українська]]
-| [//uk.wiktionary.org/wiki/ uk]
-| [//uk.wiktionary.org/wiki/Special:Statistics?action=raw '''36490 ''']
-| 45224
-| [//uk.wiktionary.org/wiki/Special:Recentchanges 243514 ]
-| [//uk.wiktionary.org/wiki/Special:Listadmins 3 ]
-| [//uk.wiktionary.org/wiki/Special:Listusers 14955 ]
-| [//uk.wiktionary.org/wiki/Special:ActiveUsers 22 ]
-| [//uk.wiktionary.org/wiki/Special:ListFiles 11 ]
-| style="font-size: 70%;" | 2018-02-25 02:01:49
+| [[w:Lao language|Lao]]
+| class="plainlinksneverexpand" | [{{fullurl:lo:ພາສາລາວ}} ລາວ]
+| [//lo.wiktionary.org/wiki/ lo]
+| [//lo.wiktionary.org/wiki/Special:Statistics?action=raw '''37713 ''']
+|  62330
+|  [//lo.wiktionary.org/wiki/Special:Recentchanges 458926]
+|  [//lo.wiktionary.org/wiki/Special:Listadmins 1]
+|  [//lo.wiktionary.org/wiki/Special:Listusers 3147]
+|  [//lo.wiktionary.org/wiki/Special:ActiveUsers 8]
+|  [//lo.wiktionary.org/wiki/Special:FileList 2]
 |- style="text-align: right;"
 | 55
 | [[w:Croatian language|Croatian]]
-| [[w:Croatian language|Hrvatski]]
+| class="plainlinksneverexpand" | [{{fullurl:hr:Hrvatski_jezik}} Hrvatski]
 | [//hr.wiktionary.org/wiki/ hr]
-| [//hr.wiktionary.org/wiki/Special:Statistics?action=raw '''32670 ''']
-| 40552
-| [//hr.wiktionary.org/wiki/Special:Recentchanges 239943 ]
-| [//hr.wiktionary.org/wiki/Special:Listadmins 4 ]
-| [//hr.wiktionary.org/wiki/Special:Listusers 5750 ]
-| [//hr.wiktionary.org/wiki/Special:ActiveUsers 13 ]
-| [//hr.wiktionary.org/wiki/Special:ListFiles 5 ]
-| style="font-size: 70%;" | 2018-02-25 02:01:34
+| [//hr.wiktionary.org/wiki/Special:Statistics?action=raw '''32743 ''']
+|  40706
+|  [//hr.wiktionary.org/wiki/Special:Recentchanges 241689]
+|  [//hr.wiktionary.org/wiki/Special:Listadmins 4]
+|  [//hr.wiktionary.org/wiki/Special:Listusers 7735]
+|  [//hr.wiktionary.org/wiki/Special:ActiveUsers 9]
+|  [//hr.wiktionary.org/wiki/Special:FileList 5]
 |- style="text-align: right;"
 | 56
-| [[w:Fijian language|Fijian]]
-| [[w:Fijian language|Na Vosa Vakaviti]]
-| [//fj.wiktionary.org/wiki/ fj]
-| [//fj.wiktionary.org/wiki/Special:Statistics?action=raw '''31264 ''']
-| 32078
-| [//fj.wiktionary.org/wiki/Special:Recentchanges 177548 ]
-| [//fj.wiktionary.org/wiki/Special:Listadmins 0 ]
-| [//fj.wiktionary.org/wiki/Special:Listusers 2313 ]
-| [//fj.wiktionary.org/wiki/Special:ActiveUsers 7 ]
-| [//fj.wiktionary.org/wiki/Special:ListFiles 0 ]
-| style="font-size: 70%;" | 2018-02-25 02:03:18
+| [[w:Icelandic language|Icelandic]]
+| class="plainlinksneverexpand" | [{{fullurl:is:Íslenska}} Íslenska]
+| [//is.wiktionary.org/wiki/ is]
+| [//is.wiktionary.org/wiki/Special:Statistics?action=raw '''32674 ''']
+|  37907
+|  [//is.wiktionary.org/wiki/Special:Recentchanges 283122]
+|  [//is.wiktionary.org/wiki/Special:Listadmins 4]
+|  [//is.wiktionary.org/wiki/Special:Listusers 6683]
+|  [//is.wiktionary.org/wiki/Special:ActiveUsers 13]
+|  [//is.wiktionary.org/wiki/Special:FileList 4]
 |- style="text-align: right;"
 | 57
-| [[w:Tajik language|Tajik]]
-| [[w:Tajik language|Тоҷикӣ]]
-| [//tg.wiktionary.org/wiki/ tg]
-| [//tg.wiktionary.org/wiki/Special:Statistics?action=raw '''29514 ''']
-| 34756
-| [//tg.wiktionary.org/wiki/Special:Recentchanges 115041 ]
-| [//tg.wiktionary.org/wiki/Special:Listadmins 1 ]
-| [//tg.wiktionary.org/wiki/Special:Listusers 1934 ]
-| [//tg.wiktionary.org/wiki/Special:ActiveUsers 7 ]
-| [//tg.wiktionary.org/wiki/Special:ListFiles 0 ]
-| style="font-size: 70%;" | 2018-02-25 02:02:32
+| [[w:Simple English language|Simple English]]
+| class="plainlinksneverexpand" | [{{fullurl:simple:Wikipedia:Simple_English_Wikipedia}} Simple English]
+| [//simple.wiktionary.org/wiki/ simple]
+| [//simple.wiktionary.org/wiki/Special:Statistics?action=raw '''31666 ''']
+|  38798
+|  [//simple.wiktionary.org/wiki/Special:Recentchanges 465869]
+|  [//simple.wiktionary.org/wiki/Special:Listadmins 3]
+|  [//simple.wiktionary.org/wiki/Special:Listusers 32840]
+|  [//simple.wiktionary.org/wiki/Special:ActiveUsers 37]
+|  [//simple.wiktionary.org/wiki/Special:FileList 4]
 |- style="text-align: right;"
 | 58
-| [[w:Bulgarian language|Bulgarian]]
-| [[w:Bulgarian language|Български]]
-| [//bg.wiktionary.org/wiki/ bg]
-| [//bg.wiktionary.org/wiki/Special:Statistics?action=raw '''27707 ''']
-| 864115
-| [//bg.wiktionary.org/wiki/Special:Recentchanges 1117124 ]
-| [//bg.wiktionary.org/wiki/Special:Listadmins 3 ]
-| [//bg.wiktionary.org/wiki/Special:Listusers 13567 ]
-| [//bg.wiktionary.org/wiki/Special:ActiveUsers 9 ]
-| [//bg.wiktionary.org/wiki/Special:ListFiles 22 ]
-| style="font-size: 70%;" | 2018-02-25 02:00:25
+| [[w:Fijian language|Fijian]]
+| class="plainlinksneverexpand" | [{{fullurl:fj:Na_vosa_vaka-Viti}} Na Vosa Vakaviti]
+| [//fj.wiktionary.org/wiki/ fj]
+| [//fj.wiktionary.org/wiki/Special:Statistics?action=raw '''31307 ''']
+|  32134
+|  [//fj.wiktionary.org/wiki/Special:Recentchanges 177775]
+|  [//fj.wiktionary.org/wiki/Special:Listadmins 1]
+|  [//fj.wiktionary.org/wiki/Special:Listusers 3127]
+|  [//fj.wiktionary.org/wiki/Special:ActiveUsers 6]
+|  [//fj.wiktionary.org/wiki/Special:FileList 0]
 |- style="text-align: right;"
 | 59
-| [[w:Simple English language|Simple English]]
-| [[w:Simple English language|Simple English]]
-| [//simple.wiktionary.org/wiki/ simple]
-| [//simple.wiktionary.org/wiki/Special:Statistics?action=raw '''25857 ''']
-| 32776
-| [//simple.wiktionary.org/wiki/Special:Recentchanges 432912 ]
-| [//simple.wiktionary.org/wiki/Special:Listadmins 4 ]
-| [//simple.wiktionary.org/wiki/Special:Listusers 21880 ]
-| [//simple.wiktionary.org/wiki/Special:ActiveUsers 34 ]
-| [//simple.wiktionary.org/wiki/Special:ListFiles 4 ]
-| style="font-size: 70%;" | 2018-02-25 02:02:00
+| [[w:Asturian language|Asturian]]
+| class="plainlinksneverexpand" | [{{fullurl:ast:Asturianu}} Asturianu]
+| [//ast.wiktionary.org/wiki/ ast]
+| [//ast.wiktionary.org/wiki/Special:Statistics?action=raw '''30941 ''']
+|  37683
+|  [//ast.wiktionary.org/wiki/Special:Recentchanges 217038]
+|  [//ast.wiktionary.org/wiki/Special:Listadmins 1]
+|  [//ast.wiktionary.org/wiki/Special:Listusers 3571]
+|  [//ast.wiktionary.org/wiki/Special:ActiveUsers 11]
+|  [//ast.wiktionary.org/wiki/Special:FileList 1]
 |- style="text-align: right;"
 | 60
-| [[w:Pashto language|Pashto]]
-| [[w:Pashto language|پښتو]]
-| [//ps.wiktionary.org/wiki/ ps]
-| [//ps.wiktionary.org/wiki/Special:Statistics?action=raw '''25511 ''']
-| 28595
-| [//ps.wiktionary.org/wiki/Special:Recentchanges 81413 ]
-| [//ps.wiktionary.org/wiki/Special:Listadmins 1 ]
-| [//ps.wiktionary.org/wiki/Special:Listusers 1827 ]
-| [//ps.wiktionary.org/wiki/Special:ActiveUsers 6 ]
-| [//ps.wiktionary.org/wiki/Special:ListFiles 2 ]
-| style="font-size: 70%;" | 2018-02-25 02:03:57
+| [[w:Latin language|Latin]]
+| class="plainlinksneverexpand" | [{{fullurl:la:Lingua_Latina}} Latina]
+| [//la.wiktionary.org/wiki/ la]
+| [//la.wiktionary.org/wiki/Special:Statistics?action=raw '''30651 ''']
+|  42629
+|  [//la.wiktionary.org/wiki/Special:Recentchanges 212169]
+|  [//la.wiktionary.org/wiki/Special:Listadmins 1]
+|  [//la.wiktionary.org/wiki/Special:Listusers 11094]
+|  [//la.wiktionary.org/wiki/Special:ActiveUsers 12]
+|  [//la.wiktionary.org/wiki/Special:FileList 68]
 |- style="text-align: right;"
 | 61
-| [[w:Slovak language|Slovak]]
-| [[w:Slovak language|Slovenčina]]
-| [//sk.wiktionary.org/wiki/ sk]
-| [//sk.wiktionary.org/wiki/Special:Statistics?action=raw '''24337 ''']
-| 26484
-| [//sk.wiktionary.org/wiki/Special:Recentchanges 128645 ]
-| [//sk.wiktionary.org/wiki/Special:Listadmins 3 ]
-| [//sk.wiktionary.org/wiki/Special:Listusers 4104 ]
-| [//sk.wiktionary.org/wiki/Special:ActiveUsers 16 ]
-| [//sk.wiktionary.org/wiki/Special:ListFiles 2 ]
-| style="font-size: 70%;" | 2018-02-25 02:01:32
+| [[w:Tajik language|Tajik]]
+| class="plainlinksneverexpand" | [{{fullurl:tg:Забони_тоҷикӣ}} Тоҷикӣ]
+| [//tg.wiktionary.org/wiki/ tg]
+| [//tg.wiktionary.org/wiki/Special:Statistics?action=raw '''30181 ''']
+|  35733
+|  [//tg.wiktionary.org/wiki/Special:Recentchanges 117254]
+|  [//tg.wiktionary.org/wiki/Special:Listadmins 1]
+|  [//tg.wiktionary.org/wiki/Special:Listusers 2472]
+|  [//tg.wiktionary.org/wiki/Special:ActiveUsers 5]
+|  [//tg.wiktionary.org/wiki/Special:FileList 0]
 |- style="text-align: right;"
 | 62
-| [[w:Welsh language|Welsh]]
-| [[w:Welsh language|Cymraeg]]
-| [//cy.wiktionary.org/wiki/ cy]
-| [//cy.wiktionary.org/wiki/Special:Statistics?action=raw '''24113 ''']
-| 27258
-| [//cy.wiktionary.org/wiki/Special:Recentchanges 159361 ]
-| [//cy.wiktionary.org/wiki/Special:Listadmins 1 ]
-| [//cy.wiktionary.org/wiki/Special:Listusers 3313 ]
-| [//cy.wiktionary.org/wiki/Special:ActiveUsers 8 ]
-| [//cy.wiktionary.org/wiki/Special:ListFiles 7 ]
-| style="font-size: 70%;" | 2018-02-25 02:02:09
+| [[w:Kirghiz language|Kirghiz]]
+| class="plainlinksneverexpand" | [{{fullurl:ky:Кыргыз_тили}} Кыргызча]
+| [//ky.wiktionary.org/wiki/ ky]
+| [//ky.wiktionary.org/wiki/Special:Statistics?action=raw '''29751 ''']
+|  76120
+|  [//ky.wiktionary.org/wiki/Special:Recentchanges 188985]
+|  [//ky.wiktionary.org/wiki/Special:Listadmins 1]
+|  [//ky.wiktionary.org/wiki/Special:Listusers 2794]
+|  [//ky.wiktionary.org/wiki/Special:ActiveUsers 6]
+|  [//ky.wiktionary.org/wiki/Special:FileList 0]
 |- style="text-align: right;"
 | 63
-| [[w:Volapük language|Volapük]]
-| [[w:Volapük language|Volapük]]
-| [//vo.wiktionary.org/wiki/ vo]
-| [//vo.wiktionary.org/wiki/Special:Statistics?action=raw '''23384 ''']
-| 25774
-| [//vo.wiktionary.org/wiki/Special:Recentchanges 203403 ]
-| [//vo.wiktionary.org/wiki/Special:Listadmins 0 ]
-| [//vo.wiktionary.org/wiki/Special:Listusers 2210 ]
-| [//vo.wiktionary.org/wiki/Special:ActiveUsers 8 ]
-| [//vo.wiktionary.org/wiki/Special:ListFiles 1 ]
-| style="font-size: 70%;" | 2018-02-25 02:02:13
+| [[w:Slovak language|Slovak]]
+| class="plainlinksneverexpand" | [{{fullurl:sk:Slovenčina}} Slovenčina]
+| [//sk.wiktionary.org/wiki/ sk]
+| [//sk.wiktionary.org/wiki/Special:Statistics?action=raw '''28023 ''']
+|  30546
+|  [//sk.wiktionary.org/wiki/Special:Recentchanges 153733]
+|  [//sk.wiktionary.org/wiki/Special:Listadmins 4]
+|  [//sk.wiktionary.org/wiki/Special:Listusers 5297]
+|  [//sk.wiktionary.org/wiki/Special:ActiveUsers 11]
+|  [//sk.wiktionary.org/wiki/Special:FileList 2]
 |- style="text-align: right;"
 | 64
-| [[w:Walloon language|Walloon]]
-| [[w:Walloon language|Walon]]
-| [//wa.wiktionary.org/wiki/ wa]
-| [//wa.wiktionary.org/wiki/Special:Statistics?action=raw '''22562 ''']
-| 36932
-| [//wa.wiktionary.org/wiki/Special:Recentchanges 215534 ]
-| [//wa.wiktionary.org/wiki/Special:Listadmins 2 ]
-| [//wa.wiktionary.org/wiki/Special:Listusers 2450 ]
-| [//wa.wiktionary.org/wiki/Special:ActiveUsers 7 ]
-| [//wa.wiktionary.org/wiki/Special:ListFiles 48 ]
-| style="font-size: 70%;" | 2018-02-25 02:05:27
+| [[w:Bulgarian language|Bulgarian]]
+| class="plainlinksneverexpand" | [{{fullurl:bg:Български_език}} Български]
+| [//bg.wiktionary.org/wiki/ bg]
+| [//bg.wiktionary.org/wiki/Special:Statistics?action=raw '''28001 ''']
+|  864549
+|  [//bg.wiktionary.org/wiki/Special:Recentchanges 1124001]
+|  [//bg.wiktionary.org/wiki/Special:Listadmins 6]
+|  [//bg.wiktionary.org/wiki/Special:Listusers 16648]
+|  [//bg.wiktionary.org/wiki/Special:ActiveUsers 17]
+|  [//bg.wiktionary.org/wiki/Special:FileList 22]
 |- style="text-align: right;"
 | 65
-| [[w:Icelandic language|Icelandic]]
-| [[w:Icelandic language|Íslenska]]
-| [//is.wiktionary.org/wiki/ is]
-| [//is.wiktionary.org/wiki/Special:Statistics?action=raw '''22056 ''']
-| 26306
-| [//is.wiktionary.org/wiki/Special:Recentchanges 251030 ]
-| [//is.wiktionary.org/wiki/Special:Listadmins 2 ]
-| [//is.wiktionary.org/wiki/Special:Listusers 5486 ]
-| [//is.wiktionary.org/wiki/Special:ActiveUsers 10 ]
-| [//is.wiktionary.org/wiki/Special:ListFiles 4 ]
-| style="font-size: 70%;" | 2018-02-25 02:01:30
+| [[w:Urdu language|Urdu]]
+| class="plainlinksneverexpand" | [{{fullurl:ur:اردو}} اردو]
+| [//ur.wiktionary.org/wiki/ ur]
+| [//ur.wiktionary.org/wiki/Special:Statistics?action=raw '''25619 ''']
+|  32747
+|  [//ur.wiktionary.org/wiki/Special:Recentchanges 107756]
+|  [//ur.wiktionary.org/wiki/Special:Listadmins 2]
+|  [//ur.wiktionary.org/wiki/Special:Listusers 3797]
+|  [//ur.wiktionary.org/wiki/Special:ActiveUsers 12]
+|  [//ur.wiktionary.org/wiki/Special:FileList 2]
 |- style="text-align: right;"
 | 66
-| [[w:Min Nan language|Min Nan]]
-| [[w:Min Nan language|Bân-lâm-gú]]
-| [//zh-min-nan.wiktionary.org/wiki/ zh-min-nan]
-| [//zh-min-nan.wiktionary.org/wiki/Special:Statistics?action=raw '''21633 ''']
-| 23456
-| [//zh-min-nan.wiktionary.org/wiki/Special:Recentchanges 158691 ]
-| [//zh-min-nan.wiktionary.org/wiki/Special:Listadmins 0 ]
-| [//zh-min-nan.wiktionary.org/wiki/Special:Listusers 2819 ]
-| [//zh-min-nan.wiktionary.org/wiki/Special:ActiveUsers 9 ]
-| [//zh-min-nan.wiktionary.org/wiki/Special:ListFiles 1 ]
-| style="font-size: 70%;" | 2018-02-25 02:05:08
+| [[w:Pashto language|Pashto]]
+| class="plainlinksneverexpand" | [{{fullurl:ps:پښتو}} پښتو]
+| [//ps.wiktionary.org/wiki/ ps]
+| [//ps.wiktionary.org/wiki/Special:Statistics?action=raw '''25545 ''']
+|  28638
+|  [//ps.wiktionary.org/wiki/Special:Recentchanges 81617]
+|  [//ps.wiktionary.org/wiki/Special:Listadmins 1]
+|  [//ps.wiktionary.org/wiki/Special:Listusers 2168]
+|  [//ps.wiktionary.org/wiki/Special:ActiveUsers 2]
+|  [//ps.wiktionary.org/wiki/Special:FileList 2]
 |- style="text-align: right;"
 | 67
-| [[w:Latin language|Latin]]
-| [[w:Latin language|Latina]]
-| [//la.wiktionary.org/wiki/ la]
-| [//la.wiktionary.org/wiki/Special:Statistics?action=raw '''21430 ''']
-| 32682
-| [//la.wiktionary.org/wiki/Special:Recentchanges 192732 ]
-| [//la.wiktionary.org/wiki/Special:Listadmins 1 ]
-| [//la.wiktionary.org/wiki/Special:Listusers 8785 ]
-| [//la.wiktionary.org/wiki/Special:ActiveUsers 13 ]
-| [//la.wiktionary.org/wiki/Special:ListFiles 71 ]
-| style="font-size: 70%;" | 2018-02-25 02:01:13
+| [[w:Walloon language|Walloon]]
+| class="plainlinksneverexpand" | [{{fullurl:wa:Walon}} Walon]
+| [//wa.wiktionary.org/wiki/ wa]
+| [//wa.wiktionary.org/wiki/Special:Statistics?action=raw '''25271 ''']
+|  39486
+|  [//wa.wiktionary.org/wiki/Special:Recentchanges 317612]
+|  [//wa.wiktionary.org/wiki/Special:Listadmins 3]
+|  [//wa.wiktionary.org/wiki/Special:Listusers 3126]
+|  [//wa.wiktionary.org/wiki/Special:ActiveUsers 10]
+|  [//wa.wiktionary.org/wiki/Special:FileList 113]
 |- style="text-align: right;"
 | 68
-| [[w:Afrikaans language|Afrikaans]]
-| [[w:Afrikaans language|Afrikaans]]
-| [//af.wiktionary.org/wiki/ af]
-| [//af.wiktionary.org/wiki/Special:Statistics?action=raw '''19612 ''']
-| 26262
-| [//af.wiktionary.org/wiki/Special:Recentchanges 200297 ]
-| [//af.wiktionary.org/wiki/Special:Listadmins 2 ]
-| [//af.wiktionary.org/wiki/Special:Listusers 4158 ]
-| [//af.wiktionary.org/wiki/Special:ActiveUsers 19 ]
-| [//af.wiktionary.org/wiki/Special:ListFiles 966 ]
-| style="font-size: 70%;" | 2018-02-25 02:01:36
+| [[w:Welsh language|Welsh]]
+| class="plainlinksneverexpand" | [{{fullurl:cy:Cymraeg}} Cymraeg]
+| [//cy.wiktionary.org/wiki/ cy]
+| [//cy.wiktionary.org/wiki/Special:Statistics?action=raw '''24174 ''']
+|  27340
+|  [//cy.wiktionary.org/wiki/Special:Recentchanges 160254]
+|  [//cy.wiktionary.org/wiki/Special:Listadmins 1]
+|  [//cy.wiktionary.org/wiki/Special:Listusers 5987]
+|  [//cy.wiktionary.org/wiki/Special:ActiveUsers 7]
+|  [//cy.wiktionary.org/wiki/Special:FileList 7]
 |- style="text-align: right;"
 | 69
-| [[w:Sicilian language|Sicilian]]
-| [[w:Sicilian language|Sicilianu]]
-| [//scn.wiktionary.org/wiki/ scn]
-| [//scn.wiktionary.org/wiki/Special:Statistics?action=raw '''18719 ''']
-| 27737
-| [//scn.wiktionary.org/wiki/Special:Recentchanges 154532 ]
-| [//scn.wiktionary.org/wiki/Special:Listadmins 3 ]
-| [//scn.wiktionary.org/wiki/Special:Listusers 3363 ]
-| [//scn.wiktionary.org/wiki/Special:ActiveUsers 10 ]
-| [//scn.wiktionary.org/wiki/Special:ListFiles 22 ]
-| style="font-size: 70%;" | 2018-02-25 02:01:06
+| [[w:Volapük language|Volapük]]
+| class="plainlinksneverexpand" | [{{fullurl:vo:Volapük_perevidöl}} Volapük]
+| [//vo.wiktionary.org/wiki/ vo]
+| [//vo.wiktionary.org/wiki/Special:Statistics?action=raw '''23389 ''']
+|  25793
+|  [//vo.wiktionary.org/wiki/Special:Recentchanges 203639]
+|  [//vo.wiktionary.org/wiki/Special:Listadmins 1]
+|  [//vo.wiktionary.org/wiki/Special:Listusers 2561]
+|  [//vo.wiktionary.org/wiki/Special:ActiveUsers 5]
+|  [//vo.wiktionary.org/wiki/Special:FileList 1]
 |- style="text-align: right;"
 | 70
-| [[w:Asturian language|Asturian]]
-| [[w:Asturian language|Asturianu]]
-| [//ast.wiktionary.org/wiki/ ast]
-| [//ast.wiktionary.org/wiki/Special:Statistics?action=raw '''18082 ''']
-| 22625
-| [//ast.wiktionary.org/wiki/Special:Recentchanges 184891 ]
-| [//ast.wiktionary.org/wiki/Special:Listadmins 1 ]
-| [//ast.wiktionary.org/wiki/Special:Listusers 2876 ]
-| [//ast.wiktionary.org/wiki/Special:ActiveUsers 7 ]
-| [//ast.wiktionary.org/wiki/Special:ListFiles 1 ]
-| style="font-size: 70%;" | 2018-02-25 02:02:21
+| [[w:Afrikaans language|Afrikaans]]
+| class="plainlinksneverexpand" | [{{fullurl:af:Afrikaans}} Afrikaans]
+| [//af.wiktionary.org/wiki/ af]
+| [//af.wiktionary.org/wiki/Special:Statistics?action=raw '''21984 ''']
+|  29169
+|  [//af.wiktionary.org/wiki/Special:Recentchanges 210743]
+|  [//af.wiktionary.org/wiki/Special:Listadmins 2]
+|  [//af.wiktionary.org/wiki/Special:Listusers 5650]
+|  [//af.wiktionary.org/wiki/Special:ActiveUsers 10]
+|  [//af.wiktionary.org/wiki/Special:FileList 966]
 |- style="text-align: right;"
 | 71
-| [[w:Hebrew language|Hebrew]]
-| [[w:Hebrew language|עברית]]
-| [//he.wiktionary.org/wiki/ he]
-| [//he.wiktionary.org/wiki/Special:Statistics?action=raw '''17902 ''']
-| 36708
-| [//he.wiktionary.org/wiki/Special:Recentchanges 281582 ]
-| [//he.wiktionary.org/wiki/Special:Listadmins 4 ]
-| [//he.wiktionary.org/wiki/Special:Listusers 21268 ]
-| [//he.wiktionary.org/wiki/Special:ActiveUsers 46 ]
-| [//he.wiktionary.org/wiki/Special:ListFiles 265 ]
-| style="font-size: 70%;" | 2018-02-25 02:00:16
+| [[w:Min Nan language|Min Nan]]
+| class="plainlinksneverexpand" | [{{fullurl:zh-min-nan:Bân-lâm-gú}} Bân-lâm-gú]
+| [//zh-min-nan.wiktionary.org/wiki/ zh-min-nan]
+| [//zh-min-nan.wiktionary.org/wiki/Special:Statistics?action=raw '''21815 ''']
+|  23805
+|  [//zh-min-nan.wiktionary.org/wiki/Special:Recentchanges 159922]
+|  [//zh-min-nan.wiktionary.org/wiki/Special:Listadmins 1]
+|  [//zh-min-nan.wiktionary.org/wiki/Special:Listusers 3418]
+|  [//zh-min-nan.wiktionary.org/wiki/Special:ActiveUsers 8]
+|  [//zh-min-nan.wiktionary.org/wiki/Special:FileList 1]
 |- style="text-align: right;"
 | 72
-| [[w:Kirghiz language|Kirghiz]]
-| [[w:Kirghiz language|Kırgızca]]
-| [//ky.wiktionary.org/wiki/ ky]
-| [//ky.wiktionary.org/wiki/Special:Statistics?action=raw '''15679 ''']
-| 61414
-| [//ky.wiktionary.org/wiki/Special:Recentchanges 160921 ]
-| [//ky.wiktionary.org/wiki/Special:Listadmins 0 ]
-| [//ky.wiktionary.org/wiki/Special:Listusers 2085 ]
-| [//ky.wiktionary.org/wiki/Special:ActiveUsers 5 ]
-| [//ky.wiktionary.org/wiki/Special:ListFiles 1 ]
-| style="font-size: 70%;" | 2018-02-25 02:03:44
+| [[w:Hebrew language|Hebrew]]
+| class="plainlinksneverexpand" | [{{fullurl:he:עברית}} עברית]
+| [//he.wiktionary.org/wiki/ he]
+| [//he.wiktionary.org/wiki/Special:Statistics?action=raw '''20688 ''']
+|  42027
+|  [//he.wiktionary.org/wiki/Special:Recentchanges 363653]
+|  [//he.wiktionary.org/wiki/Special:Listadmins 6]
+|  [//he.wiktionary.org/wiki/Special:Listusers 30524]
+|  [//he.wiktionary.org/wiki/Special:ActiveUsers 60]
+|  [//he.wiktionary.org/wiki/Special:FileList 279]
 |- style="text-align: right;"
 | 73
-| [[w:Tagalog language|Tagalog]]
-| [[w:Tagalog language|Tagalog]]
-| [//tl.wiktionary.org/wiki/ tl]
-| [//tl.wiktionary.org/wiki/Special:Statistics?action=raw '''15377 ''']
-| 25955
-| [//tl.wiktionary.org/wiki/Special:Recentchanges 156788 ]
-| [//tl.wiktionary.org/wiki/Special:Listadmins 0 ]
-| [//tl.wiktionary.org/wiki/Special:Listusers 3198 ]
-| [//tl.wiktionary.org/wiki/Special:ActiveUsers 13 ]
-| [//tl.wiktionary.org/wiki/Special:ListFiles 15 ]
-| style="font-size: 70%;" | 2018-02-25 02:03:41
+| [[w:Shan language|Shan]]
+| class="plainlinksneverexpand" | [{{fullurl:shn:လိၵ်ႈတႆးk}} လိၵ်ႈတႆး]
+| [//shn.wiktionary.org/wiki/ shn]
+| [//shn.wiktionary.org/wiki/Special:Statistics?action=raw '''20006 ''']
+|  21787
+|  [//shn.wiktionary.org/wiki/Special:Recentchanges 43266]
+|  [//shn.wiktionary.org/wiki/Special:Listadmins 1]
+|  [//shn.wiktionary.org/wiki/Special:Listusers 133]
+|  [//shn.wiktionary.org/wiki/Special:ActiveUsers 5]
+|  [//shn.wiktionary.org/wiki/Special:FileList 0]
 |- style="text-align: right;"
 | 74
-| [[w:Swahili language|Swahili]]
-| [[w:Swahili language|Kiswahili]]
-| [//sw.wiktionary.org/wiki/ sw]
-| [//sw.wiktionary.org/wiki/Special:Statistics?action=raw '''13979 ''']
-| 16147
-| [//sw.wiktionary.org/wiki/Special:Recentchanges 129020 ]
-| [//sw.wiktionary.org/wiki/Special:Listadmins 1 ]
-| [//sw.wiktionary.org/wiki/Special:Listusers 2657 ]
-| [//sw.wiktionary.org/wiki/Special:ActiveUsers 8 ]
-| [//sw.wiktionary.org/wiki/Special:ListFiles 0 ]
-| style="font-size: 70%;" | 2018-02-25 02:02:28
+| [[w:Sicilian language|Sicilian]]
+| class="plainlinksneverexpand" | [{{fullurl:scn:Lingua_siciliana}} Sicilianu]
+| [//scn.wiktionary.org/wiki/ scn]
+| [//scn.wiktionary.org/wiki/Special:Statistics?action=raw '''18706 ''']
+|  27806
+|  [//scn.wiktionary.org/wiki/Special:Recentchanges 155638]
+|  [//scn.wiktionary.org/wiki/Special:Listadmins 2]
+|  [//scn.wiktionary.org/wiki/Special:Listusers 4169]
+|  [//scn.wiktionary.org/wiki/Special:ActiveUsers 10]
+|  [//scn.wiktionary.org/wiki/Special:FileList 22]
 |- style="text-align: right;"
 | 75
-| [[w:West Frisian language|West Frisian]]
-| [[w:West Frisian language|Frysk]]
-| [//fy.wiktionary.org/wiki/ fy]
-| [//fy.wiktionary.org/wiki/Special:Statistics?action=raw '''13498 ''']
-| 17959
-| [//fy.wiktionary.org/wiki/Special:Recentchanges 138538 ]
-| [//fy.wiktionary.org/wiki/Special:Listadmins 0 ]
-| [//fy.wiktionary.org/wiki/Special:Listusers 2529 ]
-| [//fy.wiktionary.org/wiki/Special:ActiveUsers 9 ]
-| [//fy.wiktionary.org/wiki/Special:ListFiles 13 ]
-| style="font-size: 70%;" | 2018-02-25 02:02:54
+| [[w:Tagalog language|Tagalog]]
+| class="plainlinksneverexpand" | [{{fullurl:tl:Wikang_Tagalog}} Tagalog]
+| [//tl.wiktionary.org/wiki/ tl]
+| [//tl.wiktionary.org/wiki/Special:Statistics?action=raw '''15435 ''']
+|  26039
+|  [//tl.wiktionary.org/wiki/Special:Recentchanges 157816]
+|  [//tl.wiktionary.org/wiki/Special:Listadmins 1]
+|  [//tl.wiktionary.org/wiki/Special:Listusers 3902]
+|  [//tl.wiktionary.org/wiki/Special:ActiveUsers 4]
+|  [//tl.wiktionary.org/wiki/Special:FileList 15]
 |- style="text-align: right;"
 | 76
-| [[w:Norwegian (Nynorsk) language|Norwegian (Nynorsk)]]
-| [[w:Norwegian (Nynorsk) language|Nynorsk]]
-| [//nn.wiktionary.org/wiki/ nn]
-| [//nn.wiktionary.org/wiki/Special:Statistics?action=raw '''12108 ''']
-| 13952
-| [//nn.wiktionary.org/wiki/Special:Recentchanges 79575 ]
-| [//nn.wiktionary.org/wiki/Special:Listadmins 1 ]
-| [//nn.wiktionary.org/wiki/Special:Listusers 2410 ]
-| [//nn.wiktionary.org/wiki/Special:ActiveUsers 6 ]
-| [//nn.wiktionary.org/wiki/Special:ListFiles 1 ]
-| style="font-size: 70%;" | 2018-02-25 02:03:05
+| [[w:Punjabi language|Punjabi]]
+| class="plainlinksneverexpand" | [{{fullurl:pa:ਪੰਜਾਬੀ}} ਪੰਜਾਬੀ]
+| [//pa.wiktionary.org/wiki/ pa]
+| [//pa.wiktionary.org/wiki/Special:Statistics?action=raw '''15382 ''']
+|  16455
+|  [//pa.wiktionary.org/wiki/Special:Recentchanges 34092]
+|  [//pa.wiktionary.org/wiki/Special:Listadmins 2]
+|  [//pa.wiktionary.org/wiki/Special:Listusers 2069]
+|  [//pa.wiktionary.org/wiki/Special:ActiveUsers 3]
+|  [//pa.wiktionary.org/wiki/Special:FileList 0]
 |- style="text-align: right;"
 | 77
-| [[w:Latvian language|Latvian]]
-| [[w:Latvian language|Latviešu]]
-| [//lv.wiktionary.org/wiki/ lv]
-| [//lv.wiktionary.org/wiki/Special:Statistics?action=raw '''11012 ''']
-| 14372
-| [//lv.wiktionary.org/wiki/Special:Recentchanges 89939 ]
-| [//lv.wiktionary.org/wiki/Special:Listadmins 1 ]
-| [//lv.wiktionary.org/wiki/Special:Listusers 2775 ]
-| [//lv.wiktionary.org/wiki/Special:ActiveUsers 12 ]
-| [//lv.wiktionary.org/wiki/Special:ListFiles 1 ]
-| style="font-size: 70%;" | 2018-02-25 02:02:37
+| [[w:Swahili language|Swahili]]
+| class="plainlinksneverexpand" | [{{fullurl:sw:Kiswahili}} Kiswahili]
+| [//sw.wiktionary.org/wiki/ sw]
+| [//sw.wiktionary.org/wiki/Special:Statistics?action=raw '''14042 ''']
+|  16271
+|  [//sw.wiktionary.org/wiki/Special:Recentchanges 129707]
+|  [//sw.wiktionary.org/wiki/Special:Listadmins 1]
+|  [//sw.wiktionary.org/wiki/Special:Listusers 3187]
+|  [//sw.wiktionary.org/wiki/Special:ActiveUsers 4]
+|  [//sw.wiktionary.org/wiki/Special:FileList 0]
 |- style="text-align: right;"
 | 78
-| [[w:Panjabi language|Panjabi]]
-| [[w:Panjabi language|ਪੰਜਾਬੀ]]
-| [//pa.wiktionary.org/wiki/ pa]
-| [//pa.wiktionary.org/wiki/Special:Statistics?action=raw '''9445 ''']
-| 10464
-| [//pa.wiktionary.org/wiki/Special:Recentchanges 25322 ]
-| [//pa.wiktionary.org/wiki/Special:Listadmins 1 ]
-| [//pa.wiktionary.org/wiki/Special:Listusers 1748 ]
-| [//pa.wiktionary.org/wiki/Special:ActiveUsers 7 ]
-| [//pa.wiktionary.org/wiki/Special:ListFiles 0 ]
-| style="font-size: 70%;" | 2018-02-25 02:03:55
+| [[w:West Frisian language|West Frisian]]
+| class="plainlinksneverexpand" | [{{fullurl:fy:Frysk}} Frysk]
+| [//fy.wiktionary.org/wiki/ fy]
+| [//fy.wiktionary.org/wiki/Special:Statistics?action=raw '''14011 ''']
+|  19543
+|  [//fy.wiktionary.org/wiki/Special:Recentchanges 153798]
+|  [//fy.wiktionary.org/wiki/Special:Listadmins 1]
+|  [//fy.wiktionary.org/wiki/Special:Listusers 3095]
+|  [//fy.wiktionary.org/wiki/Special:ActiveUsers 6]
+|  [//fy.wiktionary.org/wiki/Special:FileList 13]
 |- style="text-align: right;"
 | 79
-| [[w:Corsican language|Corsican]]
-| [[w:Corsican language|Corsu]]
-| [//co.wiktionary.org/wiki/ co]
-| [//co.wiktionary.org/wiki/Special:Statistics?action=raw '''9417 ''']
-| 11221
-| [//co.wiktionary.org/wiki/Special:Recentchanges 74015 ]
-| [//co.wiktionary.org/wiki/Special:Listadmins 1 ]
-| [//co.wiktionary.org/wiki/Special:Listusers 2450 ]
-| [//co.wiktionary.org/wiki/Special:ActiveUsers 6 ]
-| [//co.wiktionary.org/wiki/Special:ListFiles 17 ]
-| style="font-size: 70%;" | 2018-02-25 02:01:28
+| [[w:Norwegian (Nynorsk) language|Norwegian (Nynorsk)]]
+| class="plainlinksneverexpand" | [{{fullurl:nn:Nynorsk}} Nynorsk]
+| [//nn.wiktionary.org/wiki/ nn]
+| [//nn.wiktionary.org/wiki/Special:Statistics?action=raw '''12144 ''']
+|  14001
+|  [//nn.wiktionary.org/wiki/Special:Recentchanges 79767]
+|  [//nn.wiktionary.org/wiki/Special:Listadmins 2]
+|  [//nn.wiktionary.org/wiki/Special:Listusers 2914]
+|  [//nn.wiktionary.org/wiki/Special:ActiveUsers 2]
+|  [//nn.wiktionary.org/wiki/Special:FileList 1]
 |- style="text-align: right;"
 | 80
-| [[w:Western Panjabi language|Western Panjabi]]
-| [[w:Western Panjabi language|شاہ مکھی پنجابی (Shāhmukhī Pañj]]
-| [//pnb.wiktionary.org/wiki/ pnb]
-| [//pnb.wiktionary.org/wiki/Special:Statistics?action=raw '''9276 ''']
-| 10181
-| [//pnb.wiktionary.org/wiki/Special:Recentchanges 24182 ]
-| [//pnb.wiktionary.org/wiki/Special:Listadmins 0 ]
-| [//pnb.wiktionary.org/wiki/Special:Listusers 1148 ]
-| [//pnb.wiktionary.org/wiki/Special:ActiveUsers 6 ]
-| [//pnb.wiktionary.org/wiki/Special:ListFiles 0 ]
-| style="font-size: 70%;" | 2018-02-25 02:06:13
+| [[w:Bengali language|Bengali]]
+| class="plainlinksneverexpand" | [{{fullurl:bn:বাংলা_ভাষা}} বাংলা]
+| [//bn.wiktionary.org/wiki/ bn]
+| [//bn.wiktionary.org/wiki/Special:Statistics?action=raw '''12050 ''']
+|  19724
+|  [//bn.wiktionary.org/wiki/Special:Recentchanges 67875]
+|  [//bn.wiktionary.org/wiki/Special:Listadmins 2]
+|  [//bn.wiktionary.org/wiki/Special:Listusers 6524]
+|  [//bn.wiktionary.org/wiki/Special:ActiveUsers 14]
+|  [//bn.wiktionary.org/wiki/Special:FileList 3]
 |- style="text-align: right;"
 | 81
-| [[w:Mongolian language|Mongolian]]
-| [[w:Mongolian language|Монгол]]
-| [//mn.wiktionary.org/wiki/ mn]
-| [//mn.wiktionary.org/wiki/Special:Statistics?action=raw '''9257 ''']
-| 46647
-| [//mn.wiktionary.org/wiki/Special:Recentchanges 245550 ]
-| [//mn.wiktionary.org/wiki/Special:Listadmins 0 ]
-| [//mn.wiktionary.org/wiki/Special:Listusers 2789 ]
-| [//mn.wiktionary.org/wiki/Special:ActiveUsers 6 ]
-| [//mn.wiktionary.org/wiki/Special:ListFiles 113 ]
-| style="font-size: 70%;" | 2018-02-25 02:03:52
+| [[w:Latvian language|Latvian]]
+| class="plainlinksneverexpand" | [{{fullurl:lv:Latviešu_valoda}} Latviešu]
+| [//lv.wiktionary.org/wiki/ lv]
+| [//lv.wiktionary.org/wiki/Special:Statistics?action=raw '''11253 ''']
+|  14634
+|  [//lv.wiktionary.org/wiki/Special:Recentchanges 92423]
+|  [//lv.wiktionary.org/wiki/Special:Listadmins 1]
+|  [//lv.wiktionary.org/wiki/Special:Listusers 4025]
+|  [//lv.wiktionary.org/wiki/Special:ActiveUsers 7]
+|  [//lv.wiktionary.org/wiki/Special:FileList 1]
 |- style="text-align: right;"
 | 82
-| [[w:Georgian language|Georgian]]
-| [[w:Georgian language|ქართული]]
-| [//ka.wiktionary.org/wiki/ ka]
-| [//ka.wiktionary.org/wiki/Special:Statistics?action=raw '''8117 ''']
-| 11504
-| [//ka.wiktionary.org/wiki/Special:Recentchanges 88383 ]
-| [//ka.wiktionary.org/wiki/Special:Listadmins 1 ]
-| [//ka.wiktionary.org/wiki/Special:Listusers 3575 ]
-| [//ka.wiktionary.org/wiki/Special:ActiveUsers 11 ]
-| [//ka.wiktionary.org/wiki/Special:ListFiles 12 ]
-| style="font-size: 70%;" | 2018-02-25 02:02:26
+| [[w:Albanian language|Albanian]]
+| class="plainlinksneverexpand" | [{{fullurl:sq:Gjuha_shqipe}} Shqip]
+| [//sq.wiktionary.org/wiki/ sq]
+| [//sq.wiktionary.org/wiki/Special:Statistics?action=raw '''10014 ''']
+|  46182
+|  [//sq.wiktionary.org/wiki/Special:Recentchanges 149364]
+|  [//sq.wiktionary.org/wiki/Special:Listadmins 1]
+|  [//sq.wiktionary.org/wiki/Special:Listusers 5177]
+|  [//sq.wiktionary.org/wiki/Special:ActiveUsers 5]
+|  [//sq.wiktionary.org/wiki/Special:FileList 0]
 |- style="text-align: right;"
 | 83
-| [[w:Low Saxon language|Low Saxon]]
-| [[w:Low Saxon language|Plattdüütsch]]
-| [//nds.wiktionary.org/wiki/ nds]
-| [//nds.wiktionary.org/wiki/Special:Statistics?action=raw '''7781 ''']
-| 34017
-| [//nds.wiktionary.org/wiki/Special:Recentchanges 132369 ]
-| [//nds.wiktionary.org/wiki/Special:Listadmins 3 ]
-| [//nds.wiktionary.org/wiki/Special:Listusers 2516 ]
-| [//nds.wiktionary.org/wiki/Special:ActiveUsers 10 ]
-| [//nds.wiktionary.org/wiki/Special:ListFiles 16 ]
-| style="font-size: 70%;" | 2018-02-25 02:01:56
+| [[w:Georgian language|Georgian]]
+| class="plainlinksneverexpand" | [{{fullurl:ka:ქართული_ენა}} ქართული]
+| [//ka.wiktionary.org/wiki/ ka]
+| [//ka.wiktionary.org/wiki/Special:Statistics?action=raw '''9715 ''']
+|  13435
+|  [//ka.wiktionary.org/wiki/Special:Recentchanges 94772]
+|  [//ka.wiktionary.org/wiki/Special:Listadmins 2]
+|  [//ka.wiktionary.org/wiki/Special:Listusers 4492]
+|  [//ka.wiktionary.org/wiki/Special:ActiveUsers 6]
+|  [//ka.wiktionary.org/wiki/Special:FileList 12]
 |- style="text-align: right;"
 | 84
-| [[w:Slovenian language|Slovenian]]
-| [[w:Slovenian language|Slovenščina]]
-| [//sl.wiktionary.org/wiki/ sl]
-| [//sl.wiktionary.org/wiki/Special:Statistics?action=raw '''7725 ''']
-| 16288
-| [//sl.wiktionary.org/wiki/Special:Recentchanges 141757 ]
-| [//sl.wiktionary.org/wiki/Special:Listadmins 1 ]
-| [//sl.wiktionary.org/wiki/Special:Listusers 4452 ]
-| [//sl.wiktionary.org/wiki/Special:ActiveUsers 8 ]
-| [//sl.wiktionary.org/wiki/Special:ListFiles 0 ]
-| style="font-size: 70%;" | 2018-02-25 02:01:09
+| [[w:Corsican language|Corsican]]
+| class="plainlinksneverexpand" | [{{fullurl:co:Lingua_corsa}} Corsu]
+| [//co.wiktionary.org/wiki/ co]
+| [//co.wiktionary.org/wiki/Special:Statistics?action=raw '''9474 ''']
+|  11284
+|  [//co.wiktionary.org/wiki/Special:Recentchanges 74886]
+|  [//co.wiktionary.org/wiki/Special:Listadmins 1]
+|  [//co.wiktionary.org/wiki/Special:Listusers 3002]
+|  [//co.wiktionary.org/wiki/Special:ActiveUsers 6]
+|  [//co.wiktionary.org/wiki/Special:FileList 17]
 |- style="text-align: right;"
 | 85
-| [[w:Albanian language|Albanian]]
-| [[w:Albanian language|Shqip]]
-| [//sq.wiktionary.org/wiki/ sq]
-| [//sq.wiktionary.org/wiki/Special:Statistics?action=raw '''7517 ''']
-| 42608
-| [//sq.wiktionary.org/wiki/Special:Recentchanges 133391 ]
-| [//sq.wiktionary.org/wiki/Special:Listadmins 1 ]
-| [//sq.wiktionary.org/wiki/Special:Listusers 3870 ]
-| [//sq.wiktionary.org/wiki/Special:ActiveUsers 8 ]
-| [//sq.wiktionary.org/wiki/Special:ListFiles 0 ]
-| style="font-size: 70%;" | 2018-02-25 02:02:39
+| [[w:Mongolian language|Mongolian]]
+| class="plainlinksneverexpand" | [{{fullurl:mn:Монгол_хэл}} Монгол]
+| [//mn.wiktionary.org/wiki/ mn]
+| [//mn.wiktionary.org/wiki/Special:Statistics?action=raw '''9320 ''']
+|  46973
+|  [//mn.wiktionary.org/wiki/Special:Recentchanges 247801]
+|  [//mn.wiktionary.org/wiki/Special:Listadmins 1]
+|  [//mn.wiktionary.org/wiki/Special:Listusers 4429]
+|  [//mn.wiktionary.org/wiki/Special:ActiveUsers 5]
+|  [//mn.wiktionary.org/wiki/Special:FileList 113]
 |- style="text-align: right;"
 | 86
-| [[w:Luxembourgish language|Luxembourgish]]
-| [[w:Luxembourgish language|Lëtzebuergesch]]
-| [//lb.wiktionary.org/wiki/ lb]
-| [//lb.wiktionary.org/wiki/Special:Statistics?action=raw '''7247 ''']
-| 11867
-| [//lb.wiktionary.org/wiki/Special:Recentchanges 87398 ]
-| [//lb.wiktionary.org/wiki/Special:Listadmins 0 ]
-| [//lb.wiktionary.org/wiki/Special:Listusers 2278 ]
-| [//lb.wiktionary.org/wiki/Special:ActiveUsers 5 ]
-| [//lb.wiktionary.org/wiki/Special:ListFiles 178 ]
-| style="font-size: 70%;" | 2018-02-25 02:03:11
+| [[w:Western Punjabi language|Western Punjabi]]
+| class="plainlinksneverexpand" | [{{fullurl:pnb:شاہ_مکھی_پنجابی}} شاہ مکھی پنجابی (Shāhmukhī Pañjābī)]
+| [//pnb.wiktionary.org/wiki/ pnb]
+| [//pnb.wiktionary.org/wiki/Special:Statistics?action=raw '''9280 ''']
+|  10196
+|  [//pnb.wiktionary.org/wiki/Special:Recentchanges 24291]
+|  [//pnb.wiktionary.org/wiki/Special:Listadmins 1]
+|  [//pnb.wiktionary.org/wiki/Special:Listusers 1430]
+|  [//pnb.wiktionary.org/wiki/Special:ActiveUsers 3]
+|  [//pnb.wiktionary.org/wiki/Special:FileList 0]
 |- style="text-align: right;"
 | 87
-| [[w:Bosnian language|Bosnian]]
-| [[w:Bosnian language|Bosanski]]
-| [//bs.wiktionary.org/wiki/ bs]
-| [//bs.wiktionary.org/wiki/Special:Statistics?action=raw '''7141 ''']
-| 10600
-| [//bs.wiktionary.org/wiki/Special:Recentchanges 66901 ]
-| [//bs.wiktionary.org/wiki/Special:Listadmins 5 ]
-| [//bs.wiktionary.org/wiki/Special:Listusers 2412 ]
-| [//bs.wiktionary.org/wiki/Special:ActiveUsers 7 ]
-| [//bs.wiktionary.org/wiki/Special:ListFiles 0 ]
-| style="font-size: 70%;" | 2018-02-25 02:02:02
+| [[w:Minangkabau language|Minangkabau]]
+| class="plainlinksneverexpand" | [{{fullurl:min:Bahaso_Minangkabau}} Minangkabau]
+| [//min.wiktionary.org/wiki/ min]
+| [//min.wiktionary.org/wiki/Special:Statistics?action=raw '''8858 ''']
+|  9316
+|  [//min.wiktionary.org/wiki/Special:Recentchanges 23381]
+|  [//min.wiktionary.org/wiki/Special:Listadmins 1]
+|  [//min.wiktionary.org/wiki/Special:Listusers 294]
+|  [//min.wiktionary.org/wiki/Special:ActiveUsers 3]
+|  [//min.wiktionary.org/wiki/Special:FileList 0]
 |- style="text-align: right;"
 | 88
-| [[w:Nahuatl language|Nahuatl]]
-| [[w:Nahuatl language|Nahuatl]]
-| [//nah.wiktionary.org/wiki/ nah]
-| [//nah.wiktionary.org/wiki/Special:Statistics?action=raw '''7025 ''']
-| 8980
-| [//nah.wiktionary.org/wiki/Special:Recentchanges 55478 ]
-| [//nah.wiktionary.org/wiki/Special:Listadmins 1 ]
-| [//nah.wiktionary.org/wiki/Special:Listusers 1926 ]
-| [//nah.wiktionary.org/wiki/Special:ActiveUsers 4 ]
-| [//nah.wiktionary.org/wiki/Special:ListFiles 1 ]
-| style="font-size: 70%;" | 2018-02-25 02:03:37
+| [[w:Slovenian language|Slovenian]]
+| class="plainlinksneverexpand" | [{{fullurl:sl:Slovenščina}} Slovenščina]
+| [//sl.wiktionary.org/wiki/ sl]
+| [//sl.wiktionary.org/wiki/Special:Statistics?action=raw '''8697 ''']
+|  17492
+|  [//sl.wiktionary.org/wiki/Special:Recentchanges 144414]
+|  [//sl.wiktionary.org/wiki/Special:Listadmins 2]
+|  [//sl.wiktionary.org/wiki/Special:Listusers 5804]
+|  [//sl.wiktionary.org/wiki/Special:ActiveUsers 7]
+|  [//sl.wiktionary.org/wiki/Special:FileList 0]
 |- style="text-align: right;"
 | 89
-| [[w:Sanskrit language|Sanskrit]]
-| [[w:Sanskrit language|संस्कृतम्]]
-| [//sa.wiktionary.org/wiki/ sa]
-| [//sa.wiktionary.org/wiki/Special:Statistics?action=raw '''5977 ''']
-| 263394
-| [//sa.wiktionary.org/wiki/Special:Recentchanges 507263 ]
-| [//sa.wiktionary.org/wiki/Special:Listadmins 0 ]
-| [//sa.wiktionary.org/wiki/Special:Listusers 3172 ]
-| [//sa.wiktionary.org/wiki/Special:ActiveUsers 6 ]
-| [//sa.wiktionary.org/wiki/Special:ListFiles 4 ]
-| style="font-size: 70%;" | 2018-02-25 02:03:31
+| [[w:Luxembourgish language|Luxembourgish]]
+| class="plainlinksneverexpand" | [{{fullurl:lb:Lëtzebuergesch}} Lëtzebuergesch]
+| [//lb.wiktionary.org/wiki/ lb]
+| [//lb.wiktionary.org/wiki/Special:Statistics?action=raw '''8114 ''']
+|  13488
+|  [//lb.wiktionary.org/wiki/Special:Recentchanges 92512]
+|  [//lb.wiktionary.org/wiki/Special:Listadmins 2]
+|  [//lb.wiktionary.org/wiki/Special:Listusers 2716]
+|  [//lb.wiktionary.org/wiki/Special:ActiveUsers 8]
+|  [//lb.wiktionary.org/wiki/Special:FileList 178]
 |- style="text-align: right;"
 | 90
-| [[w:Kazakh language|Kazakh]]
-| [[w:Kazakh language|қазақша]]
-| [//kk.wiktionary.org/wiki/ kk]
-| [//kk.wiktionary.org/wiki/Special:Statistics?action=raw '''5776 ''']
-| 8261
-| [//kk.wiktionary.org/wiki/Special:Recentchanges 94988 ]
-| [//kk.wiktionary.org/wiki/Special:Listadmins 0 ]
-| [//kk.wiktionary.org/wiki/Special:Listusers 2491 ]
-| [//kk.wiktionary.org/wiki/Special:ActiveUsers 8 ]
-| [//kk.wiktionary.org/wiki/Special:ListFiles 8 ]
-| style="font-size: 70%;" | 2018-02-25 02:01:47
+| [[w:Low Saxon language|Low Saxon]]
+| class="plainlinksneverexpand" | [{{fullurl:nds:Plattdüütsch}} Plattdüütsch]
+| [//nds.wiktionary.org/wiki/ nds]
+| [//nds.wiktionary.org/wiki/Special:Statistics?action=raw '''8016 ''']
+|  34547
+|  [//nds.wiktionary.org/wiki/Special:Recentchanges 134226]
+|  [//nds.wiktionary.org/wiki/Special:Listadmins 3]
+|  [//nds.wiktionary.org/wiki/Special:Listusers 3087]
+|  [//nds.wiktionary.org/wiki/Special:ActiveUsers 5]
+|  [//nds.wiktionary.org/wiki/Special:FileList 16]
 |- style="text-align: right;"
 | 91
-| [[w:Bengali language|Bengali]]
-| [[w:Bengali language|বাংলা]]
-| [//bn.wiktionary.org/wiki/ bn]
-| [//bn.wiktionary.org/wiki/Special:Statistics?action=raw '''4862 ''']
-| 10897
-| [//bn.wiktionary.org/wiki/Special:Recentchanges 46001 ]
-| [//bn.wiktionary.org/wiki/Special:Listadmins 1 ]
-| [//bn.wiktionary.org/wiki/Special:Listusers 4537 ]
-| [//bn.wiktionary.org/wiki/Special:ActiveUsers 14 ]
-| [//bn.wiktionary.org/wiki/Special:ListFiles 3 ]
-| style="font-size: 70%;" | 2018-02-25 02:03:24
+| [[w:Bosnian language|Bosnian]]
+| class="plainlinksneverexpand" | [{{fullurl:bs:Bosanski_jezik}} Bosanski]
+| [//bs.wiktionary.org/wiki/ bs]
+| [//bs.wiktionary.org/wiki/Special:Statistics?action=raw '''7521 ''']
+|  11010
+|  [//bs.wiktionary.org/wiki/Special:Recentchanges 67748]
+|  [//bs.wiktionary.org/wiki/Special:Listadmins 4]
+|  [//bs.wiktionary.org/wiki/Special:Listusers 2870]
+|  [//bs.wiktionary.org/wiki/Special:ActiveUsers 5]
+|  [//bs.wiktionary.org/wiki/Special:FileList 0]
 |- style="text-align: right;"
 | 92
-| [[w:Turkmen language|Turkmen]]
-| [[w:Turkmen language|تركمن / Туркмен]]
-| [//tk.wiktionary.org/wiki/ tk]
-| [//tk.wiktionary.org/wiki/Special:Statistics?action=raw '''4586 ''']
-| 5611
-| [//tk.wiktionary.org/wiki/Special:Recentchanges 26721 ]
-| [//tk.wiktionary.org/wiki/Special:Listadmins 0 ]
-| [//tk.wiktionary.org/wiki/Special:Listusers 1848 ]
-| [//tk.wiktionary.org/wiki/Special:ActiveUsers 5 ]
-| [//tk.wiktionary.org/wiki/Special:ListFiles 0 ]
-| style="font-size: 70%;" | 2018-02-25 02:05:32
+| [[w:Nahuatl language|Nahuatl]]
+| class="plainlinksneverexpand" | [{{fullurl:nah:Nāhuatlahtōlli}} Nāhuatl]
+| [//nah.wiktionary.org/wiki/ nah]
+| [//nah.wiktionary.org/wiki/Special:Statistics?action=raw '''7020 ''']
+|  9840
+|  [//nah.wiktionary.org/wiki/Special:Recentchanges 71122]
+|  [//nah.wiktionary.org/wiki/Special:Listadmins 2]
+|  [//nah.wiktionary.org/wiki/Special:Listusers 2334]
+|  [//nah.wiktionary.org/wiki/Special:ActiveUsers 3]
+|  [//nah.wiktionary.org/wiki/Special:FileList 1]
 |- style="text-align: right;"
 | 93
-| [[w:Cambodian language|Cambodian]]
-| [[w:Cambodian language|ភាសាខ្មែរ]]
-| [//km.wiktionary.org/wiki/ km]
-| [//km.wiktionary.org/wiki/Special:Statistics?action=raw '''4478 ''']
-| 41137
-| [//km.wiktionary.org/wiki/Special:Recentchanges 95795 ]
-| [//km.wiktionary.org/wiki/Special:Listadmins 0 ]
-| [//km.wiktionary.org/wiki/Special:Listusers 2492 ]
-| [//km.wiktionary.org/wiki/Special:ActiveUsers 7 ]
-| [//km.wiktionary.org/wiki/Special:ListFiles 107 ]
-| style="font-size: 70%;" | 2018-02-25 02:03:22
+| [[w:Sanskrit language|Sanskrit]]
+| class="plainlinksneverexpand" | [{{fullurl:sa:संस्कृत_भाषा}} संस्कृतम्]
+| [//sa.wiktionary.org/wiki/ sa]
+| [//sa.wiktionary.org/wiki/Special:Statistics?action=raw '''5992 ''']
+|  263432
+|  [//sa.wiktionary.org/wiki/Special:Recentchanges 507887]
+|  [//sa.wiktionary.org/wiki/Special:Listadmins 1]
+|  [//sa.wiktionary.org/wiki/Special:Listusers 4783]
+|  [//sa.wiktionary.org/wiki/Special:ActiveUsers 7]
+|  [//sa.wiktionary.org/wiki/Special:FileList 4]
 |- style="text-align: right;"
 | 94
-| [[w:Samoan language|Samoan]]
-| [[w:Samoan language|Gagana Samoa]]
-| [//sm.wiktionary.org/wiki/ sm]
-| [//sm.wiktionary.org/wiki/Special:Statistics?action=raw '''4281 ''']
-| 8366
-| [//sm.wiktionary.org/wiki/Special:Recentchanges 63461 ]
-| [//sm.wiktionary.org/wiki/Special:Listadmins 0 ]
-| [//sm.wiktionary.org/wiki/Special:Listusers 1766 ]
-| [//sm.wiktionary.org/wiki/Special:ActiveUsers 7 ]
-| [//sm.wiktionary.org/wiki/Special:ListFiles 0 ]
-| style="font-size: 70%;" | 2018-02-25 02:03:35
+| [[w:Kazakh language|Kazakh]]
+| class="plainlinksneverexpand" | [{{fullurl:kk:Қазақ_тілі}} Қазақша]
+| [//kk.wiktionary.org/wiki/ kk]
+| [//kk.wiktionary.org/wiki/Special:Statistics?action=raw '''5784 ''']
+|  8408
+|  [//kk.wiktionary.org/wiki/Special:Recentchanges 95488]
+|  [//kk.wiktionary.org/wiki/Special:Listadmins 1]
+|  [//kk.wiktionary.org/wiki/Special:Listusers 3027]
+|  [//kk.wiktionary.org/wiki/Special:ActiveUsers 5]
+|  [//kk.wiktionary.org/wiki/Special:FileList 8]
 |- style="text-align: right;"
 | 95
-| [[w:Macedonian language|Macedonian]]
-| [[w:Macedonian language|Македонски]]
-| [//mk.wiktionary.org/wiki/ mk]
-| [//mk.wiktionary.org/wiki/Special:Statistics?action=raw '''4179 ''']
-| 6163
-| [//mk.wiktionary.org/wiki/Special:Recentchanges 48705 ]
-| [//mk.wiktionary.org/wiki/Special:Listadmins 1 ]
-| [//mk.wiktionary.org/wiki/Special:Listusers 2151 ]
-| [//mk.wiktionary.org/wiki/Special:ActiveUsers 6 ]
-| [//mk.wiktionary.org/wiki/Special:ListFiles 0 ]
-| style="font-size: 70%;" | 2018-02-25 02:03:39
+| [[w:Malay language|Malay]]
+| class="plainlinksneverexpand" | [{{fullurl:ms:Bahasa_Melayu}} Bahasa Melayu]
+| [//ms.wiktionary.org/wiki/ ms]
+| [//ms.wiktionary.org/wiki/Special:Statistics?action=raw '''5373 ''']
+|  12531
+|  [//ms.wiktionary.org/wiki/Special:Recentchanges 115011]
+|  [//ms.wiktionary.org/wiki/Special:Listadmins 3]
+|  [//ms.wiktionary.org/wiki/Special:Listusers 4608]
+|  [//ms.wiktionary.org/wiki/Special:ActiveUsers 28]
+|  [//ms.wiktionary.org/wiki/Special:FileList 3]
 |- style="text-align: right;"
 | 96
-| [[w:Upper Sorbian language|Upper Sorbian]]
-| [[w:Upper Sorbian language|Obersorbisch]]
-| [//hsb.wiktionary.org/wiki/ hsb]
-| [//hsb.wiktionary.org/wiki/Special:Statistics?action=raw '''4133 ''']
-| 5367
-| [//hsb.wiktionary.org/wiki/Special:Recentchanges 15796 ]
-| [//hsb.wiktionary.org/wiki/Special:Listadmins 0 ]
-| [//hsb.wiktionary.org/wiki/Special:Listusers 1885 ]
-| [//hsb.wiktionary.org/wiki/Special:ActiveUsers 4 ]
-| [//hsb.wiktionary.org/wiki/Special:ListFiles 0 ]
-| style="font-size: 70%;" | 2018-02-25 02:06:07
+| [[w:Khmer language|Khmer]]
+| class="plainlinksneverexpand" | [{{fullurl:km:ភាសាខ្មែរ}} ភាសាខ្មែរ]
+| [//km.wiktionary.org/wiki/ km]
+| [//km.wiktionary.org/wiki/Special:Statistics?action=raw '''4925 ''']
+|  46476
+|  [//km.wiktionary.org/wiki/Special:Recentchanges 104368]
+|  [//km.wiktionary.org/wiki/Special:Listadmins 2]
+|  [//km.wiktionary.org/wiki/Special:Listusers 3342]
+|  [//km.wiktionary.org/wiki/Special:ActiveUsers 15]
+|  [//km.wiktionary.org/wiki/Special:FileList 107]
 |- style="text-align: right;"
 | 97
-| [[w:Belarusian language|Belarusian]]
-| [[w:Belarusian language|Беларуская]]
-| [//be.wiktionary.org/wiki/ be]
-| [//be.wiktionary.org/wiki/Special:Statistics?action=raw '''3782 ''']
-| 7139
-| [//be.wiktionary.org/wiki/Special:Recentchanges 47898 ]
-| [//be.wiktionary.org/wiki/Special:Listadmins 1 ]
-| [//be.wiktionary.org/wiki/Special:Listusers 2678 ]
-| [//be.wiktionary.org/wiki/Special:ActiveUsers 10 ]
-| [//be.wiktionary.org/wiki/Special:ListFiles 0 ]
-| style="font-size: 70%;" | 2018-02-25 02:03:13
+| [[w:Venetian language|Venetian]]
+| class="plainlinksneverexpand" | [{{fullurl:vec:Łéngua_vèneta}} Vèneto]
+| [//vec.wiktionary.org/wiki/ vec]
+| [//vec.wiktionary.org/wiki/Special:Statistics?action=raw '''4664 ''']
+|  5863
+|  [//vec.wiktionary.org/wiki/Special:Recentchanges 32796]
+|  [//vec.wiktionary.org/wiki/Special:Listadmins 3]
+|  [//vec.wiktionary.org/wiki/Special:Listusers 1931]
+|  [//vec.wiktionary.org/wiki/Special:ActiveUsers 4]
+|  [//vec.wiktionary.org/wiki/Special:FileList 1]
 |- style="text-align: right;"
 | 98
-| [[w:Malay language|Malay]]
-| [[w:Malay language|Bahasa Melayu]]
-| [//ms.wiktionary.org/wiki/ ms]
-| [//ms.wiktionary.org/wiki/Special:Statistics?action=raw '''3541 ''']
-| 8988
-| [//ms.wiktionary.org/wiki/Special:Recentchanges 108728 ]
-| [//ms.wiktionary.org/wiki/Special:Listadmins 2 ]
-| [//ms.wiktionary.org/wiki/Special:Listusers 3556 ]
-| [//ms.wiktionary.org/wiki/Special:ActiveUsers 10 ]
-| [//ms.wiktionary.org/wiki/Special:ListFiles 3 ]
-| style="font-size: 70%;" | 2018-02-25 02:03:00
+| [[w:Turkmen language|Turkmen]]
+| class="plainlinksneverexpand" | [{{fullurl:tk:Türkmen_dili}} Türkmen]
+| [//tk.wiktionary.org/wiki/ tk]
+| [//tk.wiktionary.org/wiki/Special:Statistics?action=raw '''4593 ''']
+|  5624
+|  [//tk.wiktionary.org/wiki/Special:Recentchanges 26880]
+|  [//tk.wiktionary.org/wiki/Special:Listadmins 1]
+|  [//tk.wiktionary.org/wiki/Special:Listusers 2184]
+|  [//tk.wiktionary.org/wiki/Special:ActiveUsers 3]
+|  [//tk.wiktionary.org/wiki/Special:FileList 0]
 |- style="text-align: right;"
 | 99
-| [[w:Urdu language|Urdu]]
-| [[w:Urdu language|اردو]]
-| [//ur.wiktionary.org/wiki/ ur]
-| [//ur.wiktionary.org/wiki/Special:Statistics?action=raw '''2845 ''']
-| 9226
-| [//ur.wiktionary.org/wiki/Special:Recentchanges 36967 ]
-| [//ur.wiktionary.org/wiki/Special:Listadmins 1 ]
-| [//ur.wiktionary.org/wiki/Special:Listusers 2874 ]
-| [//ur.wiktionary.org/wiki/Special:ActiveUsers 19 ]
-| [//ur.wiktionary.org/wiki/Special:ListFiles 2 ]
-| style="font-size: 70%;" | 2018-02-25 02:02:41
+| [[w:Belarusian language|Belarusian]]
+| class="plainlinksneverexpand" | [{{fullurl:be:Беларуская_мова}} Беларуская]
+| [//be.wiktionary.org/wiki/ be]
+| [//be.wiktionary.org/wiki/Special:Statistics?action=raw '''4283 ''']
+|  8248
+|  [//be.wiktionary.org/wiki/Special:Recentchanges 50367]
+|  [//be.wiktionary.org/wiki/Special:Listadmins 2]
+|  [//be.wiktionary.org/wiki/Special:Listusers 3248]
+|  [//be.wiktionary.org/wiki/Special:ActiveUsers 11]
+|  [//be.wiktionary.org/wiki/Special:FileList 0]
 |- style="text-align: right;"
 | 100
-| [[w:Irish language|Irish]]
-| [[w:Irish language|Gaeilge]]
-| [//ga.wiktionary.org/wiki/ ga]
-| [//ga.wiktionary.org/wiki/Special:Statistics?action=raw '''2646 ''']
-| 5620
-| [//ga.wiktionary.org/wiki/Special:Recentchanges 56049 ]
-| [//ga.wiktionary.org/wiki/Special:Listadmins 1 ]
-| [//ga.wiktionary.org/wiki/Special:Listusers 6151 ]
-| [//ga.wiktionary.org/wiki/Special:ActiveUsers 9 ]
-| [//ga.wiktionary.org/wiki/Special:ListFiles 28 ]
-| style="font-size: 70%;" | 2018-02-25 02:02:17
+| [[w:Samoan language|Samoan]]
+| class="plainlinksneverexpand" | [{{fullurl:sm:Gagana_fa'a_Sāmoa}} Gagana Samoa]
+| [//sm.wiktionary.org/wiki/ sm]
+| [//sm.wiktionary.org/wiki/Special:Statistics?action=raw '''4283 ''']
+|  8365
+|  [//sm.wiktionary.org/wiki/Special:Recentchanges 63583]
+|  [//sm.wiktionary.org/wiki/Special:Listadmins 1]
+|  [//sm.wiktionary.org/wiki/Special:Listusers 2513]
+|  [//sm.wiktionary.org/wiki/Special:ActiveUsers 2]
+|  [//sm.wiktionary.org/wiki/Special:FileList 0]
 |- style="text-align: right;"
 | 101
-| [[w:Aragonese language|Aragonese]]
-| [[w:Aragonese language|Aragonés]]
-| [//an.wiktionary.org/wiki/ an]
-| [//an.wiktionary.org/wiki/Special:Statistics?action=raw '''2563 ''']
-| 5814
-| [//an.wiktionary.org/wiki/Special:Recentchanges 30734 ]
-| [//an.wiktionary.org/wiki/Special:Listadmins 1 ]
-| [//an.wiktionary.org/wiki/Special:Listusers 2226 ]
-| [//an.wiktionary.org/wiki/Special:ActiveUsers 6 ]
-| [//an.wiktionary.org/wiki/Special:ListFiles 2 ]
-| style="font-size: 70%;" | 2018-02-25 02:02:47
+| [[w:Macedonian language|Macedonian]]
+| class="plainlinksneverexpand" | [{{fullurl:mk:Македонски_јазик}} Македонски]
+| [//mk.wiktionary.org/wiki/ mk]
+| [//mk.wiktionary.org/wiki/Special:Statistics?action=raw '''4272 ''']
+|  6263
+|  [//mk.wiktionary.org/wiki/Special:Recentchanges 49056]
+|  [//mk.wiktionary.org/wiki/Special:Listadmins 2]
+|  [//mk.wiktionary.org/wiki/Special:Listusers 2491]
+|  [//mk.wiktionary.org/wiki/Special:ActiveUsers 6]
+|  [//mk.wiktionary.org/wiki/Special:FileList 0]
 |- style="text-align: right;"
 | 102
-| [[w:Wolof language|Wolof]]
-| [[w:Wolof language|Wollof]]
-| [//wo.wiktionary.org/wiki/ wo]
-| [//wo.wiktionary.org/wiki/Special:Statistics?action=raw '''2310 ''']
-| 3783
-| [//wo.wiktionary.org/wiki/Special:Recentchanges 23591 ]
-| [//wo.wiktionary.org/wiki/Special:Listadmins 1 ]
-| [//wo.wiktionary.org/wiki/Special:Listusers 1696 ]
-| [//wo.wiktionary.org/wiki/Special:ActiveUsers 5 ]
-| [//wo.wiktionary.org/wiki/Special:ListFiles 5 ]
-| style="font-size: 70%;" | 2018-02-25 02:04:57
+| [[w:Upper Sorbian language|Upper Sorbian]]
+| class="plainlinksneverexpand" | [{{fullurl:hsb:Hornjoserbšćina}} Hornjoserbsce]
+| [//hsb.wiktionary.org/wiki/ hsb]
+| [//hsb.wiktionary.org/wiki/Special:Statistics?action=raw '''4162 ''']
+|  5395
+|  [//hsb.wiktionary.org/wiki/Special:Recentchanges 15926]
+|  [//hsb.wiktionary.org/wiki/Special:Listadmins 1]
+|  [//hsb.wiktionary.org/wiki/Special:Listusers 2187]
+|  [//hsb.wiktionary.org/wiki/Special:ActiveUsers 1]
+|  [//hsb.wiktionary.org/wiki/Special:FileList 0]
 |- style="text-align: right;"
 | 103
-| [[w:Venetian language|Venetian]]
-| [[w:Venetian language|Vèneto]]
-| [//vec.wiktionary.org/wiki/ vec]
-| [//vec.wiktionary.org/wiki/Special:Statistics?action=raw '''2257 ''']
-| 3212
-| [//vec.wiktionary.org/wiki/Special:Recentchanges 22181 ]
-| [//vec.wiktionary.org/wiki/Special:Listadmins 1 ]
-| [//vec.wiktionary.org/wiki/Special:Listusers 1270 ]
-| [//vec.wiktionary.org/wiki/Special:ActiveUsers 8 ]
-| [//vec.wiktionary.org/wiki/Special:ListFiles 1 ]
-| style="font-size: 70%;" | 2018-02-25 02:06:09
+| [[w:粵語 language|粵語]]
+| class="plainlinksneverexpand" | [{{fullurl:yue:Cantonese}} Cantonese]
+| [//yue.wiktionary.org/wiki/ yue]
+| [//yue.wiktionary.org/wiki/Special:Statistics?action=raw '''3815 ''']
+|  6305
+|  [//yue.wiktionary.org/wiki/Special:Recentchanges 16443]
+|  [//yue.wiktionary.org/wiki/Special:Listadmins 2]
+|  [//yue.wiktionary.org/wiki/Special:Listusers 1318]
+|  [//yue.wiktionary.org/wiki/Special:ActiveUsers 9]
+|  [//yue.wiktionary.org/wiki/Special:FileList 0]
 |- style="text-align: right;"
 | 104
-| [[w:Anglo-Saxon language|Anglo-Saxon]]
-| [[w:Anglo-Saxon language|Englisc]]
-| [//ang.wiktionary.org/wiki/ ang]
-| [//ang.wiktionary.org/wiki/Special:Statistics?action=raw '''2148 ''']
-| 3778
-| [//ang.wiktionary.org/wiki/Special:Recentchanges 52081 ]
-| [//ang.wiktionary.org/wiki/Special:Listadmins 0 ]
-| [//ang.wiktionary.org/wiki/Special:Listusers 4119 ]
-| [//ang.wiktionary.org/wiki/Special:ActiveUsers 7 ]
-| [//ang.wiktionary.org/wiki/Special:ListFiles 2 ]
-| style="font-size: 70%;" | 2018-02-25 02:01:21
+| [[w:Scottish Gaelic language|Scottish Gaelic]]
+| class="plainlinksneverexpand" | [{{fullurl:gd:Gàidhlig}} Gàidhlig]
+| [//gd.wiktionary.org/wiki/ gd]
+| [//gd.wiktionary.org/wiki/Special:Statistics?action=raw '''2879 ''']
+|  10841
+|  [//gd.wiktionary.org/wiki/Special:Recentchanges 65358]
+|  [//gd.wiktionary.org/wiki/Special:Listadmins 2]
+|  [//gd.wiktionary.org/wiki/Special:Listusers 2405]
+|  [//gd.wiktionary.org/wiki/Special:ActiveUsers 5]
+|  [//gd.wiktionary.org/wiki/Special:FileList 0]
 |- style="text-align: right;"
 | 105
-| [[w:Tatar language|Tatar]]
-| [[w:Tatar language|Tatarça / Татарча]]
-| [//tt.wiktionary.org/wiki/ tt]
-| [//tt.wiktionary.org/wiki/Special:Statistics?action=raw '''1850 ''']
-| 8918
-| [//tt.wiktionary.org/wiki/Special:Recentchanges 78036 ]
-| [//tt.wiktionary.org/wiki/Special:Listadmins 0 ]
-| [//tt.wiktionary.org/wiki/Special:Listusers 2057 ]
-| [//tt.wiktionary.org/wiki/Special:ActiveUsers 7 ]
-| [//tt.wiktionary.org/wiki/Special:ListFiles 1 ]
-| style="font-size: 70%;" | 2018-02-25 02:03:46
+| [[w:Irish language|Irish]]
+| class="plainlinksneverexpand" | [{{fullurl:ga:Gaeilge}} Gaeilge]
+| [//ga.wiktionary.org/wiki/ ga]
+| [//ga.wiktionary.org/wiki/Special:Statistics?action=raw '''2856 ''']
+|  5931
+|  [//ga.wiktionary.org/wiki/Special:Recentchanges 57632]
+|  [//ga.wiktionary.org/wiki/Special:Listadmins 2]
+|  [//ga.wiktionary.org/wiki/Special:Listusers 7671]
+|  [//ga.wiktionary.org/wiki/Special:ActiveUsers 8]
+|  [//ga.wiktionary.org/wiki/Special:FileList 28]
 |- style="text-align: right;"
 | 106
-| [[w:Sindhi language|Sindhi]]
-| [[w:Sindhi language|سنڌي، سندھی ، सिन्ध]]
-| [//sd.wiktionary.org/wiki/ sd]
-| [//sd.wiktionary.org/wiki/Special:Statistics?action=raw '''1765 ''']
-| 5189
-| [//sd.wiktionary.org/wiki/Special:Recentchanges 26217 ]
-| [//sd.wiktionary.org/wiki/Special:Listadmins 1 ]
-| [//sd.wiktionary.org/wiki/Special:Listusers 1574 ]
-| [//sd.wiktionary.org/wiki/Special:ActiveUsers 9 ]
-| [//sd.wiktionary.org/wiki/Special:ListFiles 43 ]
-| style="font-size: 70%;" | 2018-02-25 02:04:42
+| [[w:Aragonese language|Aragonese]]
+| class="plainlinksneverexpand" | [{{fullurl:an:Idioma_aragonés}} Aragonés]
+| [//an.wiktionary.org/wiki/ an]
+| [//an.wiktionary.org/wiki/Special:Statistics?action=raw '''2586 ''']
+|  5846
+|  [//an.wiktionary.org/wiki/Special:Recentchanges 31261]
+|  [//an.wiktionary.org/wiki/Special:Listadmins 2]
+|  [//an.wiktionary.org/wiki/Special:Listusers 2618]
+|  [//an.wiktionary.org/wiki/Special:ActiveUsers 2]
+|  [//an.wiktionary.org/wiki/Special:FileList 2]
 |- style="text-align: right;"
 | 107
-| [[w:Guarani language|Guarani]]
-| [[w:Guarani language|Avañe'ẽ]]
-| [//gn.wiktionary.org/wiki/ gn]
-| [//gn.wiktionary.org/wiki/Special:Statistics?action=raw '''1739 ''']
-| 2501
-| [//gn.wiktionary.org/wiki/Special:Recentchanges 13568 ]
-| [//gn.wiktionary.org/wiki/Special:Listadmins 0 ]
-| [//gn.wiktionary.org/wiki/Special:Listusers 1787 ]
-| [//gn.wiktionary.org/wiki/Special:ActiveUsers 4 ]
-| [//gn.wiktionary.org/wiki/Special:ListFiles 1 ]
-| style="font-size: 70%;" | 2018-02-25 02:03:20
+| [[w:Wolof language|Wolof]]
+| class="plainlinksneverexpand" | [{{fullurl:wo:Wolof}} Wolof]
+| [//wo.wiktionary.org/wiki/ wo]
+| [//wo.wiktionary.org/wiki/Special:Statistics?action=raw '''2569 ''']
+|  4235
+|  [//wo.wiktionary.org/wiki/Special:Recentchanges 25732]
+|  [//wo.wiktionary.org/wiki/Special:Listadmins 2]
+|  [//wo.wiktionary.org/wiki/Special:Listusers 1975]
+|  [//wo.wiktionary.org/wiki/Special:ActiveUsers 2]
+|  [//wo.wiktionary.org/wiki/Special:FileList 5]
 |- style="text-align: right;"
 | 108
-| [[w:Marathi language|Marathi]]
-| [[w:Marathi language|मराठी]]
-| [//mr.wiktionary.org/wiki/ mr]
-| [//mr.wiktionary.org/wiki/Special:Statistics?action=raw '''1684 ''']
-| 4089
-| [//mr.wiktionary.org/wiki/Special:Recentchanges 19631 ]
-| [//mr.wiktionary.org/wiki/Special:Listadmins 2 ]
-| [//mr.wiktionary.org/wiki/Special:Listusers 2445 ]
-| [//mr.wiktionary.org/wiki/Special:ActiveUsers 6 ]
-| [//mr.wiktionary.org/wiki/Special:ListFiles 4 ]
-| style="font-size: 70%;" | 2018-02-25 02:04:33
+| [[w:Shawiya language|Shawiya]]
+| class="plainlinksneverexpand" | [{{fullurl:shy:Tacawit}} Tacawit]
+| [//shy.wiktionary.org/wiki/ shy]
+| [//shy.wiktionary.org/wiki/Special:Statistics?action=raw '''2227 ''']
+|  2434
+|  [//shy.wiktionary.org/wiki/Special:Recentchanges 7574]
+|  [//shy.wiktionary.org/wiki/Special:Listadmins 1]
+|  [//shy.wiktionary.org/wiki/Special:Listusers 381]
+|  [//shy.wiktionary.org/wiki/Special:ActiveUsers 4]
+|  [//shy.wiktionary.org/wiki/Special:FileList 0]
 |- style="text-align: right;"
 | 109
-| [[w:Somali language|Somali]]
-| [[w:Somali language|Soomaaliga]]
-| [//so.wiktionary.org/wiki/ so]
-| [//so.wiktionary.org/wiki/Special:Statistics?action=raw '''1631 ''']
-| 3206
-| [//so.wiktionary.org/wiki/Special:Recentchanges 19994 ]
-| [//so.wiktionary.org/wiki/Special:Listadmins 0 ]
-| [//so.wiktionary.org/wiki/Special:Listusers 1801 ]
-| [//so.wiktionary.org/wiki/Special:ActiveUsers 4 ]
-| [//so.wiktionary.org/wiki/Special:ListFiles 0 ]
-| style="font-size: 70%;" | 2018-02-25 02:06:00
+| [[w:Goan Konkani language|Goan Konkani]]
+| class="plainlinksneverexpand" | [{{fullurl:gom:कोंकणी_भास}} गोंयची कोंकणी / Gõychi Konknni]
+| [//gom.wiktionary.org/wiki/ gom]
+| [//gom.wiktionary.org/wiki/Special:Statistics?action=raw '''2201 ''']
+|  2480
+|  [//gom.wiktionary.org/wiki/Special:Recentchanges 21048]
+|  [//gom.wiktionary.org/wiki/Special:Listadmins 1]
+|  [//gom.wiktionary.org/wiki/Special:Listusers 294]
+|  [//gom.wiktionary.org/wiki/Special:ActiveUsers 7]
+|  [//gom.wiktionary.org/wiki/Special:FileList 0]
 |- style="text-align: right;"
 | 110
-| [[w:Maltese language|Maltese]]
-| [[w:Maltese language|bil-Malti]]
-| [//mt.wiktionary.org/wiki/ mt]
-| [//mt.wiktionary.org/wiki/Special:Statistics?action=raw '''1608 ''']
-| 2950
-| [//mt.wiktionary.org/wiki/Special:Recentchanges 18665 ]
-| [//mt.wiktionary.org/wiki/Special:Listadmins 0 ]
-| [//mt.wiktionary.org/wiki/Special:Listusers 1634 ]
-| [//mt.wiktionary.org/wiki/Special:ActiveUsers 5 ]
-| [//mt.wiktionary.org/wiki/Special:ListFiles 2 ]
-| style="font-size: 70%;" | 2018-02-25 02:03:29
+| [[w:Anglo-Saxon language|Anglo-Saxon]]
+| class="plainlinksneverexpand" | [{{fullurl:ang:Englisc_sprǣc}} Englisc]
+| [//ang.wiktionary.org/wiki/ ang]
+| [//ang.wiktionary.org/wiki/Special:Statistics?action=raw '''2159 ''']
+|  3842
+|  [//ang.wiktionary.org/wiki/Special:Recentchanges 53726]
+|  [//ang.wiktionary.org/wiki/Special:Listadmins 1]
+|  [//ang.wiktionary.org/wiki/Special:Listusers 4902]
+|  [//ang.wiktionary.org/wiki/Special:ActiveUsers 7]
+|  [//ang.wiktionary.org/wiki/Special:FileList 2]
 |- style="text-align: right;"
 | 111
-| [[w:Kashubian language|Kashubian]]
-| [[w:Kashubian language|Kaszëbsczi]]
-| [//csb.wiktionary.org/wiki/ csb]
-| [//csb.wiktionary.org/wiki/Special:Statistics?action=raw '''1529 ''']
-| 2536
-| [//csb.wiktionary.org/wiki/Special:Recentchanges 35040 ]
-| [//csb.wiktionary.org/wiki/Special:Listadmins 0 ]
-| [//csb.wiktionary.org/wiki/Special:Listusers 1986 ]
-| [//csb.wiktionary.org/wiki/Special:ActiveUsers 8 ]
-| [//csb.wiktionary.org/wiki/Special:ListFiles 0 ]
-| style="font-size: 70%;" | 2018-02-25 02:04:16
+| [[w:Interlingua language|Interlingua]]
+| class="plainlinksneverexpand" | [{{fullurl:ia:Interlingua}} Interlingua]
+| [//ia.wiktionary.org/wiki/ ia]
+| [//ia.wiktionary.org/wiki/Special:Statistics?action=raw '''2059 ''']
+|  9003
+|  [//ia.wiktionary.org/wiki/Special:Recentchanges 43447]
+|  [//ia.wiktionary.org/wiki/Special:Listadmins 1]
+|  [//ia.wiktionary.org/wiki/Special:Listusers 2810]
+|  [//ia.wiktionary.org/wiki/Special:ActiveUsers 2]
+|  [//ia.wiktionary.org/wiki/Special:FileList 5]
 |- style="text-align: right;"
 | 112
-| [[w:Uyghur language|Uyghur]]
-| [[w:Uyghur language|ئۇيغۇر تىلى]]
-| [//ug.wiktionary.org/wiki/ ug]
-| [//ug.wiktionary.org/wiki/Special:Statistics?action=raw '''1516 ''']
-| 3645
-| [//ug.wiktionary.org/wiki/Special:Recentchanges 30559 ]
-| [//ug.wiktionary.org/wiki/Special:Listadmins 0 ]
-| [//ug.wiktionary.org/wiki/Special:Listusers 1731 ]
-| [//ug.wiktionary.org/wiki/Special:ActiveUsers 6 ]
-| [//ug.wiktionary.org/wiki/Special:ListFiles 0 ]
-| style="font-size: 70%;" | 2018-02-25 02:00:12
+| [[w:Tatar language|Tatar]]
+| class="plainlinksneverexpand" | [{{fullurl:tt:Tatar_tele}} Tatarça / Татарча]
+| [//tt.wiktionary.org/wiki/ tt]
+| [//tt.wiktionary.org/wiki/Special:Statistics?action=raw '''2050 ''']
+|  9123
+|  [//tt.wiktionary.org/wiki/Special:Recentchanges 78605]
+|  [//tt.wiktionary.org/wiki/Special:Listadmins 1]
+|  [//tt.wiktionary.org/wiki/Special:Listusers 2409]
+|  [//tt.wiktionary.org/wiki/Special:ActiveUsers 3]
+|  [//tt.wiktionary.org/wiki/Special:FileList 1]
 |- style="text-align: right;"
 | 113
-| [[w:Interlingue language|Interlingue]]
-| [[w:Interlingue language|Interlingue]]
-| [//ie.wiktionary.org/wiki/ ie]
-| [//ie.wiktionary.org/wiki/Special:Statistics?action=raw '''1464 ''']
-| 2977
-| [//ie.wiktionary.org/wiki/Special:Recentchanges 14864 ]
-| [//ie.wiktionary.org/wiki/Special:Listadmins 0 ]
-| [//ie.wiktionary.org/wiki/Special:Listusers 1724 ]
-| [//ie.wiktionary.org/wiki/Special:ActiveUsers 5 ]
-| [//ie.wiktionary.org/wiki/Special:ListFiles 0 ]
-| style="font-size: 70%;" | 2018-02-25 02:02:04
+| [[w:Maltese language|Maltese]]
+| class="plainlinksneverexpand" | [{{fullurl:mt:Lingwa_Maltija}} Malti]
+| [//mt.wiktionary.org/wiki/ mt]
+| [//mt.wiktionary.org/wiki/Special:Statistics?action=raw '''1971 ''']
+|  3314
+|  [//mt.wiktionary.org/wiki/Special:Recentchanges 19833]
+|  [//mt.wiktionary.org/wiki/Special:Listadmins 1]
+|  [//mt.wiktionary.org/wiki/Special:Listusers 1906]
+|  [//mt.wiktionary.org/wiki/Special:ActiveUsers 2]
+|  [//mt.wiktionary.org/wiki/Special:FileList 2]
 |- style="text-align: right;"
 | 114
-| [[w:Scottish Gaelic language|Scottish Gaelic]]
-| [[w:Scottish Gaelic language|Gàidhlig]]
-| [//gd.wiktionary.org/wiki/ gd]
-| [//gd.wiktionary.org/wiki/Special:Statistics?action=raw '''1450 ''']
-| 4149
-| [//gd.wiktionary.org/wiki/Special:Recentchanges 27837 ]
-| [//gd.wiktionary.org/wiki/Special:Listadmins 0 ]
-| [//gd.wiktionary.org/wiki/Special:Listusers 1917 ]
-| [//gd.wiktionary.org/wiki/Special:ActiveUsers 5 ]
-| [//gd.wiktionary.org/wiki/Special:ListFiles 0 ]
-| style="font-size: 70%;" | 2018-02-25 02:04:21
+| [[w:Sindhi language|Sindhi]]
+| class="plainlinksneverexpand" | [{{fullurl:sd:سنڌي_ٻولي}} سنڌي، سندھی ، सिन्ध]
+| [//sd.wiktionary.org/wiki/ sd]
+| [//sd.wiktionary.org/wiki/Special:Statistics?action=raw '''1785 ''']
+|  5404
+|  [//sd.wiktionary.org/wiki/Special:Recentchanges 26801]
+|  [//sd.wiktionary.org/wiki/Special:Listadmins 1]
+|  [//sd.wiktionary.org/wiki/Special:Listusers 1871]
+|  [//sd.wiktionary.org/wiki/Special:ActiveUsers 1]
+|  [//sd.wiktionary.org/wiki/Special:FileList 43]
 |- style="text-align: right;"
 | 115
-| [[w:Southern Sotho language|Southern Sotho]]
-| [[w:Southern Sotho language|seSotho]]
-| [//st.wiktionary.org/wiki/ st]
-| [//st.wiktionary.org/wiki/Special:Statistics?action=raw '''1344 ''']
-| 2147
-| [//st.wiktionary.org/wiki/Special:Recentchanges 15097 ]
-| [//st.wiktionary.org/wiki/Special:Listadmins 0 ]
-| [//st.wiktionary.org/wiki/Special:Listusers 2353 ]
-| [//st.wiktionary.org/wiki/Special:ActiveUsers 7 ]
-| [//st.wiktionary.org/wiki/Special:ListFiles 2 ]
-| style="font-size: 70%;" | 2018-02-25 02:04:49
+| [[w:Guarani language|Guarani]]
+| class="plainlinksneverexpand" | [{{fullurl:gn:Avañe'ẽ}} Avañe'ẽ]
+| [//gn.wiktionary.org/wiki/ gn]
+| [//gn.wiktionary.org/wiki/Special:Statistics?action=raw '''1746 ''']
+|  2658
+|  [//gn.wiktionary.org/wiki/Special:Recentchanges 14228]
+|  [//gn.wiktionary.org/wiki/Special:Listadmins 1]
+|  [//gn.wiktionary.org/wiki/Special:Listusers 2151]
+|  [//gn.wiktionary.org/wiki/Special:ActiveUsers 4]
+|  [//gn.wiktionary.org/wiki/Special:FileList 1]
 |- style="text-align: right;"
 | 116
-| [[w:Aromanian language|Aromanian]]
-| [[w:Aromanian language|Armãneashce]]
-| [//roa-rup.wiktionary.org/wiki/ roa-rup]
-| [//roa-rup.wiktionary.org/wiki/Special:Statistics?action=raw '''1272 ''']
-| 1968
-| [//roa-rup.wiktionary.org/wiki/Special:Recentchanges 15440 ]
-| [//roa-rup.wiktionary.org/wiki/Special:Listadmins 0 ]
-| [//roa-rup.wiktionary.org/wiki/Special:Listusers 1691 ]
-| [//roa-rup.wiktionary.org/wiki/Special:ActiveUsers 5 ]
-| [//roa-rup.wiktionary.org/wiki/Special:ListFiles 0 ]
-| style="font-size: 70%;" | 2018-02-25 02:05:51
+| [[w:Marathi language|Marathi]]
+| class="plainlinksneverexpand" | [{{fullurl:mr:मराठी_भाषा}} मराठी]
+| [//mr.wiktionary.org/wiki/ mr]
+| [//mr.wiktionary.org/wiki/Special:Statistics?action=raw '''1693 ''']
+|  4125
+|  [//mr.wiktionary.org/wiki/Special:Recentchanges 19953]
+|  [//mr.wiktionary.org/wiki/Special:Listadmins 1]
+|  [//mr.wiktionary.org/wiki/Special:Listusers 2938]
+|  [//mr.wiktionary.org/wiki/Special:ActiveUsers 3]
+|  [//mr.wiktionary.org/wiki/Special:FileList 3]
 |- style="text-align: right;"
 | 117
-| [[w:Sinhalese language|Sinhalese]]
-| [[w:Sinhalese language|සිංහල]]
-| [//si.wiktionary.org/wiki/ si]
-| [//si.wiktionary.org/wiki/Special:Statistics?action=raw '''1169 ''']
-| 3049
-| [//si.wiktionary.org/wiki/Special:Recentchanges 17495 ]
-| [//si.wiktionary.org/wiki/Special:Listadmins 1 ]
-| [//si.wiktionary.org/wiki/Special:Listusers 1886 ]
-| [//si.wiktionary.org/wiki/Special:ActiveUsers 7 ]
-| [//si.wiktionary.org/wiki/Special:ListFiles 10 ]
-| style="font-size: 70%;" | 2018-02-25 02:05:58
+| [[w:Interlingue language|Interlingue]]
+| class="plainlinksneverexpand" | [{{fullurl:ie:Interlingue}} Interlingue]
+| [//ie.wiktionary.org/wiki/ ie]
+| [//ie.wiktionary.org/wiki/Special:Statistics?action=raw '''1679 ''']
+|  3209
+|  [//ie.wiktionary.org/wiki/Special:Recentchanges 15626]
+|  [//ie.wiktionary.org/wiki/Special:Listadmins 1]
+|  [//ie.wiktionary.org/wiki/Special:Listusers 1984]
+|  [//ie.wiktionary.org/wiki/Special:ActiveUsers 2]
+|  [//ie.wiktionary.org/wiki/Special:FileList 0]
 |- style="text-align: right;"
 | 118
-| [[w:Fiji Hindi language|Fiji Hindi]]
-| [[w:Fiji Hindi language|Fiji Hindi]]
-| [//hif.wiktionary.org/wiki/ hif]
-| [//hif.wiktionary.org/wiki/Special:Statistics?action=raw '''1129 ''']
-| 1342
-| [//hif.wiktionary.org/wiki/Special:Recentchanges 10870 ]
-| [//hif.wiktionary.org/wiki/Special:Listadmins 0 ]
-| [//hif.wiktionary.org/wiki/Special:Listusers 272 ]
-| [//hif.wiktionary.org/wiki/Special:ActiveUsers 1 ]
-| [//hif.wiktionary.org/wiki/Special:ListFiles 0 ]
-| style="font-size: 70%;" | 2018-02-25 02:06:15
+| [[w:Somali language|Somali]]
+| class="plainlinksneverexpand" | [{{fullurl:so:Af-Soomaali}} Soomaali]
+| [//so.wiktionary.org/wiki/ so]
+| [//so.wiktionary.org/wiki/Special:Statistics?action=raw '''1639 ''']
+|  3317
+|  [//so.wiktionary.org/wiki/Special:Recentchanges 20403]
+|  [//so.wiktionary.org/wiki/Special:Listadmins 1]
+|  [//so.wiktionary.org/wiki/Special:Listusers 2225]
+|  [//so.wiktionary.org/wiki/Special:ActiveUsers 10]
+|  [//so.wiktionary.org/wiki/Special:FileList 0]
 |- style="text-align: right;"
 | 119
-| [[w:Interlingua language|Interlingua]]
-| [[w:Interlingua language|Interlingua]]
-| [//ia.wiktionary.org/wiki/ ia]
-| [//ia.wiktionary.org/wiki/Special:Statistics?action=raw '''1051 ''']
-| 7390
-| [//ia.wiktionary.org/wiki/Special:Recentchanges 39830 ]
-| [//ia.wiktionary.org/wiki/Special:Listadmins 0 ]
-| [//ia.wiktionary.org/wiki/Special:Listusers 2440 ]
-| [//ia.wiktionary.org/wiki/Special:ActiveUsers 5 ]
-| [//ia.wiktionary.org/wiki/Special:ListFiles 5 ]
-| style="font-size: 70%;" | 2018-02-25 02:01:51
+| [[w:Faroese language|Faroese]]
+| class="plainlinksneverexpand" | [{{fullurl:fo:Føroyskt_(mál)}} Føroyskt]
+| [//fo.wiktionary.org/wiki/ fo]
+| [//fo.wiktionary.org/wiki/Special:Statistics?action=raw '''1570 ''']
+|  2923
+|  [//fo.wiktionary.org/wiki/Special:Recentchanges 23111]
+|  [//fo.wiktionary.org/wiki/Special:Listadmins 1]
+|  [//fo.wiktionary.org/wiki/Special:Listusers 2187]
+|  [//fo.wiktionary.org/wiki/Special:ActiveUsers 5]
+|  [//fo.wiktionary.org/wiki/Special:FileList 0]
 |- style="text-align: right;"
 | 120
-| [[w:Maori language|Maori]]
-| [[w:Maori language|Māori]]
-| [//mi.wiktionary.org/wiki/ mi]
-| [//mi.wiktionary.org/wiki/Special:Statistics?action=raw '''910 ''']
-| 2086
-| [//mi.wiktionary.org/wiki/Special:Recentchanges 14777 ]
-| [//mi.wiktionary.org/wiki/Special:Listadmins 0 ]
-| [//mi.wiktionary.org/wiki/Special:Listusers 2183 ]
-| [//mi.wiktionary.org/wiki/Special:ActiveUsers 9 ]
-| [//mi.wiktionary.org/wiki/Special:ListFiles 0 ]
-| style="font-size: 70%;" | 2018-02-25 02:03:03
+| [[w:Kashubian language|Kashubian]]
+| class="plainlinksneverexpand" | [{{fullurl:csb:Kaszëbsczi_jãzëk}} Kaszëbsczi]
+| [//csb.wiktionary.org/wiki/ csb]
+| [//csb.wiktionary.org/wiki/Special:Statistics?action=raw '''1557 ''']
+|  2572
+|  [//csb.wiktionary.org/wiki/Special:Recentchanges 35195]
+|  [//csb.wiktionary.org/wiki/Special:Listadmins 1]
+|  [//csb.wiktionary.org/wiki/Special:Listusers 2283]
+|  [//csb.wiktionary.org/wiki/Special:ActiveUsers 1]
+|  [//csb.wiktionary.org/wiki/Special:FileList 0]
 |- style="text-align: right;"
 | 121
-| [[w:Aymara language|Aymara]]
-| [[w:Aymara language|Aymar]]
-| [//ay.wiktionary.org/wiki/ ay]
-| [//ay.wiktionary.org/wiki/Special:Statistics?action=raw '''886 ''']
-| 1746
-| [//ay.wiktionary.org/wiki/Special:Recentchanges 15516 ]
-| [//ay.wiktionary.org/wiki/Special:Listadmins 0 ]
-| [//ay.wiktionary.org/wiki/Special:Listusers 1885 ]
-| [//ay.wiktionary.org/wiki/Special:ActiveUsers 6 ]
-| [//ay.wiktionary.org/wiki/Special:ListFiles 0 ]
-| style="font-size: 70%;" | 2018-02-25 02:02:30
+| [[w:Uyghur language|Uyghur]]
+| class="plainlinksneverexpand" | [{{fullurl:ug:Uyghur_tili}} ئۇيغۇر تىلى]
+| [//ug.wiktionary.org/wiki/ ug]
+| [//ug.wiktionary.org/wiki/Special:Statistics?action=raw '''1525 ''']
+|  3647
+|  [//ug.wiktionary.org/wiki/Special:Recentchanges 30669]
+|  [//ug.wiktionary.org/wiki/Special:Listadmins 1]
+|  [//ug.wiktionary.org/wiki/Special:Listusers 2024]
+|  [//ug.wiktionary.org/wiki/Special:ActiveUsers 2]
+|  [//ug.wiktionary.org/wiki/Special:FileList 0]
 |- style="text-align: right;"
 | 122
-| [[w:Greenlandic language|Greenlandic]]
-| [[w:Greenlandic language|Kalaallisut]]
-| [//kl.wiktionary.org/wiki/ kl]
-| [//kl.wiktionary.org/wiki/Special:Statistics?action=raw '''864 ''']
-| 2393
-| [//kl.wiktionary.org/wiki/Special:Recentchanges 23270 ]
-| [//kl.wiktionary.org/wiki/Special:Listadmins 0 ]
-| [//kl.wiktionary.org/wiki/Special:Listusers 1812 ]
-| [//kl.wiktionary.org/wiki/Special:ActiveUsers 5 ]
-| [//kl.wiktionary.org/wiki/Special:ListFiles 2 ]
-| style="font-size: 70%;" | 2018-02-25 02:04:29
+| [[w:Sesotho language|Sesotho]]
+| class="plainlinksneverexpand" | [{{fullurl:st:Sesotho}} Sesotho]
+| [//st.wiktionary.org/wiki/ st]
+| [//st.wiktionary.org/wiki/Special:Statistics?action=raw '''1342 ''']
+|  2137
+|  [//st.wiktionary.org/wiki/Special:Recentchanges 15193]
+|  [//st.wiktionary.org/wiki/Special:Listadmins 1]
+|  [//st.wiktionary.org/wiki/Special:Listusers 3772]
+|  [//st.wiktionary.org/wiki/Special:ActiveUsers 3]
+|  [//st.wiktionary.org/wiki/Special:FileList 2]
 |- style="text-align: right;"
 | 123
-| [[w:Faroese language|Faroese]]
-| [[w:Faroese language|Føroyskt]]
-| [//fo.wiktionary.org/wiki/ fo]
-| [//fo.wiktionary.org/wiki/Special:Statistics?action=raw '''849 ''']
-| 1854
-| [//fo.wiktionary.org/wiki/Special:Recentchanges 19446 ]
-| [//fo.wiktionary.org/wiki/Special:Listadmins 1 ]
-| [//fo.wiktionary.org/wiki/Special:Listusers 1909 ]
-| [//fo.wiktionary.org/wiki/Special:ActiveUsers 5 ]
-| [//fo.wiktionary.org/wiki/Special:ListFiles 0 ]
-| style="font-size: 70%;" | 2018-02-25 02:02:43
+| [[w:Aromanian language|Aromanian]]
+| class="plainlinksneverexpand" | [{{fullurl:roa-rup:Limba_armãneascã}} Armãneashce]
+| [//roa-rup.wiktionary.org/wiki/ roa-rup]
+| [//roa-rup.wiktionary.org/wiki/Special:Statistics?action=raw '''1276 ''']
+|  1979
+|  [//roa-rup.wiktionary.org/wiki/Special:Recentchanges 15678]
+|  [//roa-rup.wiktionary.org/wiki/Special:Listadmins 1]
+|  [//roa-rup.wiktionary.org/wiki/Special:Listusers 1987]
+|  [//roa-rup.wiktionary.org/wiki/Special:ActiveUsers 1]
+|  [//roa-rup.wiktionary.org/wiki/Special:FileList 0]
 |- style="text-align: right;"
 | 124
-| [[w:Lojban language|Lojban]]
-| [[w:Lojban language|Lojban]]
-| [//jbo.wiktionary.org/wiki/ jbo]
-| [//jbo.wiktionary.org/wiki/Special:Statistics?action=raw '''726 ''']
-| 1593
-| [//jbo.wiktionary.org/wiki/Special:Recentchanges 12444 ]
-| [//jbo.wiktionary.org/wiki/Special:Listadmins 0 ]
-| [//jbo.wiktionary.org/wiki/Special:Listusers 1707 ]
-| [//jbo.wiktionary.org/wiki/Special:ActiveUsers 6 ]
-| [//jbo.wiktionary.org/wiki/Special:ListFiles 0 ]
-| style="font-size: 70%;" | 2018-02-25 02:05:36
+| [[w:Sinhalese language|Sinhalese]]
+| class="plainlinksneverexpand" | [{{fullurl:si:සිංහල_භාෂාව}} සිංහල]
+| [//si.wiktionary.org/wiki/ si]
+| [//si.wiktionary.org/wiki/Special:Statistics?action=raw '''1257 ''']
+|  3409
+|  [//si.wiktionary.org/wiki/Special:Recentchanges 18307]
+|  [//si.wiktionary.org/wiki/Special:Listadmins 2]
+|  [//si.wiktionary.org/wiki/Special:Listusers 2268]
+|  [//si.wiktionary.org/wiki/Special:ActiveUsers 4]
+|  [//si.wiktionary.org/wiki/Special:FileList 8]
 |- style="text-align: right;"
 | 125
-| [[w:Lingala language|Lingala]]
-| [[w:Lingala language|Lingala]]
-| [//ln.wiktionary.org/wiki/ ln]
-| [//ln.wiktionary.org/wiki/Special:Statistics?action=raw '''673 ''']
-| 1278
-| [//ln.wiktionary.org/wiki/Special:Recentchanges 10424 ]
-| [//ln.wiktionary.org/wiki/Special:Listadmins 0 ]
-| [//ln.wiktionary.org/wiki/Special:Listusers 1732 ]
-| [//ln.wiktionary.org/wiki/Special:ActiveUsers 5 ]
-| [//ln.wiktionary.org/wiki/Special:ListFiles 0 ]
-| style="font-size: 70%;" | 2018-02-25 02:04:31
+| [[w:Fiji Hindi language|Fiji Hindi]]
+| class="plainlinksneverexpand" | [{{fullurl:hif:Fiji_Hindi_bhasa}} Fiji Hindi]
+| [//hif.wiktionary.org/wiki/ hif]
+| [//hif.wiktionary.org/wiki/Special:Statistics?action=raw '''1128 ''']
+|  1357
+|  [//hif.wiktionary.org/wiki/Special:Recentchanges 11034]
+|  [//hif.wiktionary.org/wiki/Special:Listadmins 1]
+|  [//hif.wiktionary.org/wiki/Special:Listusers 613]
+|  [//hif.wiktionary.org/wiki/Special:ActiveUsers 0]
+|  [//hif.wiktionary.org/wiki/Special:FileList 0]
 |- style="text-align: right;"
 | 126
 | [[w:Zulu language|Zulu]]
-| [[w:Zulu language|isiZulu]]
+| class="plainlinksneverexpand" | [{{fullurl:zu:IsiZulu}} isiZulu]
 | [//zu.wiktionary.org/wiki/ zu]
-| [//zu.wiktionary.org/wiki/Special:Statistics?action=raw '''600 ''']
-| 1426
-| [//zu.wiktionary.org/wiki/Special:Recentchanges 13157 ]
-| [//zu.wiktionary.org/wiki/Special:Listadmins 0 ]
-| [//zu.wiktionary.org/wiki/Special:Listusers 1971 ]
-| [//zu.wiktionary.org/wiki/Special:ActiveUsers 9 ]
-| [//zu.wiktionary.org/wiki/Special:ListFiles 0 ]
-| style="font-size: 70%;" | 2018-02-25 02:05:04
+| [//zu.wiktionary.org/wiki/Special:Statistics?action=raw '''1077 ''']
+|  1906
+|  [//zu.wiktionary.org/wiki/Special:Recentchanges 13966]
+|  [//zu.wiktionary.org/wiki/Special:Listadmins 1]
+|  [//zu.wiktionary.org/wiki/Special:Listusers 2414]
+|  [//zu.wiktionary.org/wiki/Special:ActiveUsers 6]
+|  [//zu.wiktionary.org/wiki/Special:FileList 0]
 |- style="text-align: right;"
 | 127
-| [[w:Nauruan language|Nauruan]]
-| [[w:Nauruan language|dorerin Naoero]]
-| [//na.wiktionary.org/wiki/ na]
-| [//na.wiktionary.org/wiki/Special:Statistics?action=raw '''556 ''']
-| 1534
-| [//na.wiktionary.org/wiki/Special:Recentchanges 12856 ]
-| [//na.wiktionary.org/wiki/Special:Listadmins 0 ]
-| [//na.wiktionary.org/wiki/Special:Listusers 1712 ]
-| [//na.wiktionary.org/wiki/Special:ActiveUsers 4 ]
-| [//na.wiktionary.org/wiki/Special:ListFiles 0 ]
-| style="font-size: 70%;" | 2018-02-25 02:02:56
+| [[w:Greenlandic language|Greenlandic]]
+| class="plainlinksneverexpand" | [{{fullurl:kl:Kalaallisut}} Kalaallisut]
+| [//kl.wiktionary.org/wiki/ kl]
+| [//kl.wiktionary.org/wiki/Special:Statistics?action=raw '''1064 ''']
+|  2624
+|  [//kl.wiktionary.org/wiki/Special:Recentchanges 23644]
+|  [//kl.wiktionary.org/wiki/Special:Listadmins 1]
+|  [//kl.wiktionary.org/wiki/Special:Listusers 2051]
+|  [//kl.wiktionary.org/wiki/Special:ActiveUsers 4]
+|  [//kl.wiktionary.org/wiki/Special:FileList 2]
 |- style="text-align: right;"
 | 128
-| [[w:Gujarati language|Gujarati]]
-| [[w:Gujarati language|ગુજરાતી]]
-| [//gu.wiktionary.org/wiki/ gu]
-| [//gu.wiktionary.org/wiki/Special:Statistics?action=raw '''456 ''']
-| 3954
-| [//gu.wiktionary.org/wiki/Special:Recentchanges 20561 ]
-| [//gu.wiktionary.org/wiki/Special:Listadmins 0 ]
-| [//gu.wiktionary.org/wiki/Special:Listusers 2238 ]
-| [//gu.wiktionary.org/wiki/Special:ActiveUsers 7 ]
-| [//gu.wiktionary.org/wiki/Special:ListFiles 9 ]
-| style="font-size: 70%;" | 2018-02-25 02:01:45
+| [[w:Sundanese language|Sundanese]]
+| class="plainlinksneverexpand" | [{{fullurl:su:Basa_Sunda}} Basa Sunda]
+| [//su.wiktionary.org/wiki/ su]
+| [//su.wiktionary.org/wiki/Special:Statistics?action=raw '''1025 ''']
+|  2074
+|  [//su.wiktionary.org/wiki/Special:Recentchanges 12954]
+|  [//su.wiktionary.org/wiki/Special:Listadmins 1]
+|  [//su.wiktionary.org/wiki/Special:Listusers 1795]
+|  [//su.wiktionary.org/wiki/Special:ActiveUsers 2]
+|  [//su.wiktionary.org/wiki/Special:FileList 1]
 |- style="text-align: right;"
 | 129
-| [[w:Manx language|Manx]]
-| [[w:Manx language|Gaelg]]
-| [//gv.wiktionary.org/wiki/ gv]
-| [//gv.wiktionary.org/wiki/Special:Statistics?action=raw '''455 ''']
-| 1349
-| [//gv.wiktionary.org/wiki/Special:Recentchanges 13422 ]
-| [//gv.wiktionary.org/wiki/Special:Listadmins 0 ]
-| [//gv.wiktionary.org/wiki/Special:Listusers 1613 ]
-| [//gv.wiktionary.org/wiki/Special:ActiveUsers 4 ]
-| [//gv.wiktionary.org/wiki/Special:ListFiles 1 ]
-| style="font-size: 70%;" | 2018-02-25 02:04:23
+| [[w:Aymara language|Aymara]]
+| class="plainlinksneverexpand" | [{{fullurl:ay:Aymar_aru}} Aymar]
+| [//ay.wiktionary.org/wiki/ ay]
+| [//ay.wiktionary.org/wiki/Special:Statistics?action=raw '''1014 ''']
+|  1902
+|  [//ay.wiktionary.org/wiki/Special:Recentchanges 15860]
+|  [//ay.wiktionary.org/wiki/Special:Listadmins 1]
+|  [//ay.wiktionary.org/wiki/Special:Listusers 2181]
+|  [//ay.wiktionary.org/wiki/Special:ActiveUsers 2]
+|  [//ay.wiktionary.org/wiki/Special:FileList 0]
 |- style="text-align: right;"
 | 130
-| [[w:Cornish language|Cornish]]
-| [[w:Cornish language|Kernewek/Karnuack]]
-| [//kw.wiktionary.org/wiki/ kw]
-| [//kw.wiktionary.org/wiki/Special:Statistics?action=raw '''442 ''']
-| 1067
-| [//kw.wiktionary.org/wiki/Special:Recentchanges 12656 ]
-| [//kw.wiktionary.org/wiki/Special:Listadmins 0 ]
-| [//kw.wiktionary.org/wiki/Special:Listusers 1579 ]
-| [//kw.wiktionary.org/wiki/Special:ActiveUsers 4 ]
-| [//kw.wiktionary.org/wiki/Special:ListFiles 0 ]
-| style="font-size: 70%;" | 2018-02-25 02:03:50
+| [[w:Maori language|Maori]]
+| class="plainlinksneverexpand" | [{{fullurl:mi:Reo_Māori}} Māori]
+| [//mi.wiktionary.org/wiki/ mi]
+| [//mi.wiktionary.org/wiki/Special:Statistics?action=raw '''1002 ''']
+|  2175
+|  [//mi.wiktionary.org/wiki/Special:Recentchanges 15277]
+|  [//mi.wiktionary.org/wiki/Special:Listadmins 1]
+|  [//mi.wiktionary.org/wiki/Special:Listusers 3464]
+|  [//mi.wiktionary.org/wiki/Special:ActiveUsers 6]
+|  [//mi.wiktionary.org/wiki/Special:FileList 0]
 |- style="text-align: right;"
 | 131
-| [[w:Rwandi language|Rwandi]]
-| [[w:Rwandi language|Kinyarwanda]]
-| [//rw.wiktionary.org/wiki/ rw]
-| [//rw.wiktionary.org/wiki/Special:Statistics?action=raw '''366 ''']
-| 1152
-| [//rw.wiktionary.org/wiki/Special:Recentchanges 11959 ]
-| [//rw.wiktionary.org/wiki/Special:Listadmins 0 ]
-| [//rw.wiktionary.org/wiki/Special:Listusers 1741 ]
-| [//rw.wiktionary.org/wiki/Special:ActiveUsers 4 ]
-| [//rw.wiktionary.org/wiki/Special:ListFiles 0 ]
-| style="font-size: 70%;" | 2018-02-25 02:03:59
+| [[w:Lojban language|Lojban]]
+| class="plainlinksneverexpand" | [{{fullurl:jbo:lojban}} Lojban]
+| [//jbo.wiktionary.org/wiki/ jbo]
+| [//jbo.wiktionary.org/wiki/Special:Statistics?action=raw '''728 ''']
+|  1636
+|  [//jbo.wiktionary.org/wiki/Special:Recentchanges 12731]
+|  [//jbo.wiktionary.org/wiki/Special:Listadmins 1]
+|  [//jbo.wiktionary.org/wiki/Special:Listusers 2322]
+|  [//jbo.wiktionary.org/wiki/Special:ActiveUsers 1]
+|  [//jbo.wiktionary.org/wiki/Special:FileList 0]
 |- style="text-align: right;"
 | 132
-| [[w:Nepali language|Nepali]]
-| [[w:Nepali language|नेपाली]]
-| [//ne.wiktionary.org/wiki/ ne]
-| [//ne.wiktionary.org/wiki/Special:Statistics?action=raw '''363 ''']
-| 14351
-| [//ne.wiktionary.org/wiki/Special:Recentchanges 50415 ]
-| [//ne.wiktionary.org/wiki/Special:Listadmins 0 ]
-| [//ne.wiktionary.org/wiki/Special:Listusers 2345 ]
-| [//ne.wiktionary.org/wiki/Special:ActiveUsers 8 ]
-| [//ne.wiktionary.org/wiki/Special:ListFiles 26 ]
-| style="font-size: 70%;" | 2018-02-25 02:02:52
+| [[w:Lingala language|Lingala]]
+| class="plainlinksneverexpand" | [{{fullurl:ln:Lingála}} Lingala]
+| [//ln.wiktionary.org/wiki/ ln]
+| [//ln.wiktionary.org/wiki/Special:Statistics?action=raw '''674 ''']
+|  1274
+|  [//ln.wiktionary.org/wiki/Special:Recentchanges 10654]
+|  [//ln.wiktionary.org/wiki/Special:Listadmins 1]
+|  [//ln.wiktionary.org/wiki/Special:Listusers 2030]
+|  [//ln.wiktionary.org/wiki/Special:ActiveUsers 2]
+|  [//ln.wiktionary.org/wiki/Special:FileList 0]
 |- style="text-align: right;"
 | 133
-| [[w:Tsonga language|Tsonga]]
-| [[w:Tsonga language|Xitsonga]]
-| [//ts.wiktionary.org/wiki/ ts]
-| [//ts.wiktionary.org/wiki/Special:Statistics?action=raw '''359 ''']
-| 914
-| [//ts.wiktionary.org/wiki/Special:Recentchanges 7969 ]
-| [//ts.wiktionary.org/wiki/Special:Listadmins 0 ]
-| [//ts.wiktionary.org/wiki/Special:Listusers 1500 ]
-| [//ts.wiktionary.org/wiki/Special:ActiveUsers 4 ]
-| [//ts.wiktionary.org/wiki/Special:ListFiles 0 ]
-| style="font-size: 70%;" | 2018-02-25 02:04:53
+| [[w:Yiddish language|Yiddish]]
+| class="plainlinksneverexpand" | [{{fullurl:yi:יידיש}} ייִדיש]
+| [//yi.wiktionary.org/wiki/ yi]
+| [//yi.wiktionary.org/wiki/Special:Statistics?action=raw '''673 ''']
+|  3114
+|  [//yi.wiktionary.org/wiki/Special:Recentchanges 16809]
+|  [//yi.wiktionary.org/wiki/Special:Listadmins 1]
+|  [//yi.wiktionary.org/wiki/Special:Listusers 13509]
+|  [//yi.wiktionary.org/wiki/Special:ActiveUsers 10]
+|  [//yi.wiktionary.org/wiki/Special:FileList 20]
 |- style="text-align: right;"
 | 134
-| [[w:Oromo language|Oromo]]
-| [[w:Oromo language|Oromoo]]
-| [//om.wiktionary.org/wiki/ om]
-| [//om.wiktionary.org/wiki/Special:Statistics?action=raw '''335 ''']
-| 953
-| [//om.wiktionary.org/wiki/Special:Recentchanges 11654 ]
-| [//om.wiktionary.org/wiki/Special:Listadmins 0 ]
-| [//om.wiktionary.org/wiki/Special:Listusers 1573 ]
-| [//om.wiktionary.org/wiki/Special:ActiveUsers 5 ]
-| [//om.wiktionary.org/wiki/Special:ListFiles 0 ]
-| style="font-size: 70%;" | 2018-02-25 02:05:45
+| [[w:Gujarati language|Gujarati]]
+| class="plainlinksneverexpand" | [{{fullurl:gu:ગુજરાતી_ભાષા}} ગુજરાતી]
+| [//gu.wiktionary.org/wiki/ gu]
+| [//gu.wiktionary.org/wiki/Special:Statistics?action=raw '''595 ''']
+|  5291
+|  [//gu.wiktionary.org/wiki/Special:Recentchanges 23998]
+|  [//gu.wiktionary.org/wiki/Special:Listadmins 2]
+|  [//gu.wiktionary.org/wiki/Special:Listusers 2624]
+|  [//gu.wiktionary.org/wiki/Special:ActiveUsers 5]
+|  [//gu.wiktionary.org/wiki/Special:FileList 0]
 |- style="text-align: right;"
 | 135
-| [[w:Quechua language|Quechua]]
-| [[w:Quechua language|Runa Simi]]
-| [//qu.wiktionary.org/wiki/ qu]
-| [//qu.wiktionary.org/wiki/Special:Statistics?action=raw '''301 ''']
-| 1502
-| [//qu.wiktionary.org/wiki/Special:Recentchanges 12990 ]
-| [//qu.wiktionary.org/wiki/Special:Listadmins 0 ]
-| [//qu.wiktionary.org/wiki/Special:Listusers 1568 ]
-| [//qu.wiktionary.org/wiki/Special:ActiveUsers 6 ]
-| [//qu.wiktionary.org/wiki/Special:ListFiles 2 ]
-| style="font-size: 70%;" | 2018-02-25 02:03:33
+| [[w:Nauruan language|Nauruan]]
+| class="plainlinksneverexpand" | [{{fullurl:na:Dorerin_Naoero}} dorerin Naoero]
+| [//na.wiktionary.org/wiki/ na]
+| [//na.wiktionary.org/wiki/Special:Statistics?action=raw '''556 ''']
+|  1533
+|  [//na.wiktionary.org/wiki/Special:Recentchanges 13025]
+|  [//na.wiktionary.org/wiki/Special:Listadmins 1]
+|  [//na.wiktionary.org/wiki/Special:Listusers 2025]
+|  [//na.wiktionary.org/wiki/Special:ActiveUsers 2]
+|  [//na.wiktionary.org/wiki/Special:FileList 0]
 |- style="text-align: right;"
 | 136
-| [[w:Sundanese language|Sundanese]]
-| [[w:Sundanese language|Basa Sunda]]
-| [//su.wiktionary.org/wiki/ su]
-| [//su.wiktionary.org/wiki/Special:Statistics?action=raw '''294 ''']
-| 1358
-| [//su.wiktionary.org/wiki/Special:Recentchanges 10361 ]
-| [//su.wiktionary.org/wiki/Special:Listadmins 0 ]
-| [//su.wiktionary.org/wiki/Special:Listusers 1551 ]
-| [//su.wiktionary.org/wiki/Special:ActiveUsers 5 ]
-| [//su.wiktionary.org/wiki/Special:ListFiles 1 ]
-| style="font-size: 70%;" | 2018-02-25 02:02:58
+| [[w:Manx language|Manx]]
+| class="plainlinksneverexpand" | [{{fullurl:gv:Gaelg}} Gaelg]
+| [//gv.wiktionary.org/wiki/ gv]
+| [//gv.wiktionary.org/wiki/Special:Statistics?action=raw '''522 ''']
+|  1456
+|  [//gv.wiktionary.org/wiki/Special:Recentchanges 13703]
+|  [//gv.wiktionary.org/wiki/Special:Listadmins 1]
+|  [//gv.wiktionary.org/wiki/Special:Listusers 1891]
+|  [//gv.wiktionary.org/wiki/Special:ActiveUsers 4]
+|  [//gv.wiktionary.org/wiki/Special:FileList 1]
 |- style="text-align: right;"
 | 137
-| [[w:Swati language|Swati]]
-| [[w:Swati language|SiSwati]]
-| [//ss.wiktionary.org/wiki/ ss]
-| [//ss.wiktionary.org/wiki/Special:Statistics?action=raw '''292 ''']
-| 1316
-| [//ss.wiktionary.org/wiki/Special:Recentchanges 9782 ]
-| [//ss.wiktionary.org/wiki/Special:Listadmins 2 ]
-| [//ss.wiktionary.org/wiki/Special:Listusers 1587 ]
-| [//ss.wiktionary.org/wiki/Special:ActiveUsers 5 ]
-| [//ss.wiktionary.org/wiki/Special:ListFiles 0 ]
-| style="font-size: 70%;" | 2018-02-25 02:04:46
+| [[w:Cornish language|Cornish]]
+| class="plainlinksneverexpand" | [{{fullurl:kw:Kernewek}} Kernewek/Karnuack]
+| [//kw.wiktionary.org/wiki/ kw]
+| [//kw.wiktionary.org/wiki/Special:Statistics?action=raw '''486 ''']
+|  1112
+|  [//kw.wiktionary.org/wiki/Special:Recentchanges 12812]
+|  [//kw.wiktionary.org/wiki/Special:Listadmins 1]
+|  [//kw.wiktionary.org/wiki/Special:Listusers 1812]
+|  [//kw.wiktionary.org/wiki/Special:ActiveUsers 4]
+|  [//kw.wiktionary.org/wiki/Special:FileList 0]
 |- style="text-align: right;"
 | 138
-| [[w:Hausa language|Hausa]]
-| [[w:Hausa language|هَوُسَ]]
-| [//ha.wiktionary.org/wiki/ ha]
-| [//ha.wiktionary.org/wiki/Special:Statistics?action=raw '''260 ''']
-| 838
-| [//ha.wiktionary.org/wiki/Special:Recentchanges 7654 ]
-| [//ha.wiktionary.org/wiki/Special:Listadmins 0 ]
-| [//ha.wiktionary.org/wiki/Special:Listusers 1578 ]
-| [//ha.wiktionary.org/wiki/Special:ActiveUsers 4 ]
-| [//ha.wiktionary.org/wiki/Special:ListFiles 0 ]
-| style="font-size: 70%;" | 2018-02-25 02:04:25
+| [[w:Tok Pisin language|Tok Pisin]]
+| class="plainlinksneverexpand" | [{{fullurl:tpi:Tok_Pisin}} Tok Pisin]
+| [//tpi.wiktionary.org/wiki/ tpi]
+| [//tpi.wiktionary.org/wiki/Special:Statistics?action=raw '''410 ''']
+|  1131
+|  [//tpi.wiktionary.org/wiki/Special:Recentchanges 10666]
+|  [//tpi.wiktionary.org/wiki/Special:Listadmins 1]
+|  [//tpi.wiktionary.org/wiki/Special:Listusers 2609]
+|  [//tpi.wiktionary.org/wiki/Special:ActiveUsers 5]
+|  [//tpi.wiktionary.org/wiki/Special:FileList 0]
 |- style="text-align: right;"
 | 139
-| [[w:Inuktitut language|Inuktitut]]
-| [[w:Inuktitut language|ᐃᓄᒃᑎᑐᑦ]]
-| [//iu.wiktionary.org/wiki/ iu]
-| [//iu.wiktionary.org/wiki/Special:Statistics?action=raw '''258 ''']
-| 976
-| [//iu.wiktionary.org/wiki/Special:Recentchanges 10263 ]
-| [//iu.wiktionary.org/wiki/Special:Listadmins 0 ]
-| [//iu.wiktionary.org/wiki/Special:Listusers 1769 ]
-| [//iu.wiktionary.org/wiki/Special:ActiveUsers 6 ]
-| [//iu.wiktionary.org/wiki/Special:ListFiles 0 ]
-| style="font-size: 70%;" | 2018-02-25 02:04:27
+| [[w:Kinyarwanda language|Kinyarwanda]]
+| class="plainlinksneverexpand" | [{{fullurl:rw:Kinyarwanda}} Ikinyarwanda]
+| [//rw.wiktionary.org/wiki/ rw]
+| [//rw.wiktionary.org/wiki/Special:Statistics?action=raw '''367 ''']
+|  1150
+|  [//rw.wiktionary.org/wiki/Special:Recentchanges 12103]
+|  [//rw.wiktionary.org/wiki/Special:Listadmins 1]
+|  [//rw.wiktionary.org/wiki/Special:Listusers 2299]
+|  [//rw.wiktionary.org/wiki/Special:ActiveUsers 3]
+|  [//rw.wiktionary.org/wiki/Special:FileList 0]
 |- style="text-align: right;"
 | 140
-| [[w:Amharic language|Amharic]]
-| [[w:Amharic language|አማርኛ]]
-| [//am.wiktionary.org/wiki/ am]
-| [//am.wiktionary.org/wiki/Special:Statistics?action=raw '''216 ''']
-| 1632
-| [//am.wiktionary.org/wiki/Special:Recentchanges 17552 ]
-| [//am.wiktionary.org/wiki/Special:Listadmins 0 ]
-| [//am.wiktionary.org/wiki/Special:Listusers 2258 ]
-| [//am.wiktionary.org/wiki/Special:ActiveUsers 5 ]
-| [//am.wiktionary.org/wiki/Special:ListFiles 0 ]
-| style="font-size: 70%;" | 2018-02-25 02:04:08
+| [[w:Tsonga language|Tsonga]]
+| class="plainlinksneverexpand" | [{{fullurl:ts:Xitsonga}} Xitsonga]
+| [//ts.wiktionary.org/wiki/ ts]
+| [//ts.wiktionary.org/wiki/Special:Statistics?action=raw '''362 ''']
+|  1003
+|  [//ts.wiktionary.org/wiki/Special:Recentchanges 8583]
+|  [//ts.wiktionary.org/wiki/Special:Listadmins 1]
+|  [//ts.wiktionary.org/wiki/Special:Listusers 2282]
+|  [//ts.wiktionary.org/wiki/Special:ActiveUsers 3]
+|  [//ts.wiktionary.org/wiki/Special:FileList 0]
 |- style="text-align: right;"
 | 141
-| [[w:Divehi language|Divehi]]
-| [[w:Divehi language|ދިވެހިބަސް]]
-| [//dv.wiktionary.org/wiki/ dv]
-| [//dv.wiktionary.org/wiki/Special:Statistics?action=raw '''179 ''']
-| 1176
-| [//dv.wiktionary.org/wiki/Special:Recentchanges 8652 ]
-| [//dv.wiktionary.org/wiki/Special:Listadmins 0 ]
-| [//dv.wiktionary.org/wiki/Special:Listusers 1692 ]
-| [//dv.wiktionary.org/wiki/Special:ActiveUsers 5 ]
-| [//dv.wiktionary.org/wiki/Special:ListFiles 2 ]
-| style="font-size: 70%;" | 2018-02-25 02:05:06
+| [[w:Nepali language|Nepali]]
+| class="plainlinksneverexpand" | [{{fullurl:ne:नेपाली_भाषा}} नेपाली]
+| [//ne.wiktionary.org/wiki/ ne]
+| [//ne.wiktionary.org/wiki/Special:Statistics?action=raw '''359 ''']
+|  16498
+|  [//ne.wiktionary.org/wiki/Special:Recentchanges 62313]
+|  [//ne.wiktionary.org/wiki/Special:Listadmins 1]
+|  [//ne.wiktionary.org/wiki/Special:Listusers 3127]
+|  [//ne.wiktionary.org/wiki/Special:ActiveUsers 0]
+|  [//ne.wiktionary.org/wiki/Special:FileList 25]
 |- style="text-align: right;"
 | 142
-| [[w:Zhuang language|Zhuang]]
-| [[w:Zhuang language|Cuengh]]
-| [//za.wiktionary.org/wiki/ za]
-| [//za.wiktionary.org/wiki/Special:Statistics?action=raw '''179 ''']
-| 560
-| [//za.wiktionary.org/wiki/Special:Recentchanges 12760 ]
-| [//za.wiktionary.org/wiki/Special:Listadmins 0 ]
-| [//za.wiktionary.org/wiki/Special:Listusers 817 ]
-| [//za.wiktionary.org/wiki/Special:ActiveUsers 0 ]
-| [//za.wiktionary.org/wiki/Special:ListFiles 0 ]
-| style="font-size: 70%;" | 2018-02-25 02:05:30
+| [[w:Oromo language|Oromo]]
+| class="plainlinksneverexpand" | [{{fullurl:om:Afaan_Oromoo}} Oromoo]
+| [//om.wiktionary.org/wiki/ om]
+| [//om.wiktionary.org/wiki/Special:Statistics?action=raw '''342 ''']
+|  961
+|  [//om.wiktionary.org/wiki/Special:Recentchanges 11760]
+|  [//om.wiktionary.org/wiki/Special:Listadmins 1]
+|  [//om.wiktionary.org/wiki/Special:Listusers 1837]
+|  [//om.wiktionary.org/wiki/Special:ActiveUsers 4]
+|  [//om.wiktionary.org/wiki/Special:FileList 0]
 |- style="text-align: right;"
 | 143
-| [[w:Tok Pisin language|Tok Pisin]]
-| [[w:Tok Pisin language|Tok Pisin]]
-| [//tpi.wiktionary.org/wiki/ tpi]
-| [//tpi.wiktionary.org/wiki/Special:Statistics?action=raw '''151 ''']
-| 871
-| [//tpi.wiktionary.org/wiki/Special:Recentchanges 10109 ]
-| [//tpi.wiktionary.org/wiki/Special:Listadmins 0 ]
-| [//tpi.wiktionary.org/wiki/Special:Listusers 1684 ]
-| [//tpi.wiktionary.org/wiki/Special:ActiveUsers 5 ]
-| [//tpi.wiktionary.org/wiki/Special:ListFiles 0 ]
-| style="font-size: 70%;" | 2018-02-25 02:03:07
+| [[w:Quechua language|Quechua]]
+| class="plainlinksneverexpand" | [{{fullurl:qu:Qhichwa_simi}} Runa Simi]
+| [//qu.wiktionary.org/wiki/ qu]
+| [//qu.wiktionary.org/wiki/Special:Statistics?action=raw '''305 ''']
+|  1510
+|  [//qu.wiktionary.org/wiki/Special:Recentchanges 13121]
+|  [//qu.wiktionary.org/wiki/Special:Listadmins 1]
+|  [//qu.wiktionary.org/wiki/Special:Listusers 1811]
+|  [//qu.wiktionary.org/wiki/Special:ActiveUsers 2]
+|  [//qu.wiktionary.org/wiki/Special:FileList 2]
 |- style="text-align: right;"
 | 144
-| [[w:Inupiak language|Inupiak]]
-| [[w:Inupiak language|Iñupiak]]
-| [//ik.wiktionary.org/wiki/ ik]
-| [//ik.wiktionary.org/wiki/Special:Statistics?action=raw '''143 ''']
-| 615
-| [//ik.wiktionary.org/wiki/Special:Recentchanges 6784 ]
-| [//ik.wiktionary.org/wiki/Special:Listadmins 0 ]
-| [//ik.wiktionary.org/wiki/Special:Listusers 1035 ]
-| [//ik.wiktionary.org/wiki/Special:ActiveUsers 0 ]
-| [//ik.wiktionary.org/wiki/Special:ListFiles 0 ]
-| style="font-size: 70%;" | 2018-02-25 02:05:34
+| [[w:Swati language|Swati]]
+| class="plainlinksneverexpand" | [{{fullurl:ss:SiSwati}} SiSwati]
+| [//ss.wiktionary.org/wiki/ ss]
+| [//ss.wiktionary.org/wiki/Special:Statistics?action=raw '''292 ''']
+|  1318
+|  [//ss.wiktionary.org/wiki/Special:Recentchanges 9927]
+|  [//ss.wiktionary.org/wiki/Special:Listadmins 2]
+|  [//ss.wiktionary.org/wiki/Special:Listusers 2144]
+|  [//ss.wiktionary.org/wiki/Special:ActiveUsers 3]
+|  [//ss.wiktionary.org/wiki/Special:FileList 0]
 |- style="text-align: right;"
 | 145
-| [[w:Yiddish language|Yiddish]]
-| [[w:Yiddish language|ייִדיש]]
-| [//yi.wiktionary.org/wiki/ yi]
-| [//yi.wiktionary.org/wiki/Special:Statistics?action=raw '''124 ''']
-| 2548
-| [//yi.wiktionary.org/wiki/Special:Recentchanges 16067 ]
-| [//yi.wiktionary.org/wiki/Special:Listadmins 2 ]
-| [//yi.wiktionary.org/wiki/Special:Listusers 10374 ]
-| [//yi.wiktionary.org/wiki/Special:ActiveUsers 7 ]
-| [//yi.wiktionary.org/wiki/Special:ListFiles 20 ]
-| style="font-size: 70%;" | 2018-02-25 02:02:06
+| [[w:Hausa language|Hausa]]
+| class="plainlinksneverexpand" | [{{fullurl:ha:Hausa}} Hausa / هَوُسَ]
+| [//ha.wiktionary.org/wiki/ ha]
+| [//ha.wiktionary.org/wiki/Special:Statistics?action=raw '''283 ''']
+|  877
+|  [//ha.wiktionary.org/wiki/Special:Recentchanges 7917]
+|  [//ha.wiktionary.org/wiki/Special:Listadmins 1]
+|  [//ha.wiktionary.org/wiki/Special:Listusers 2222]
+|  [//ha.wiktionary.org/wiki/Special:ActiveUsers 6]
+|  [//ha.wiktionary.org/wiki/Special:FileList 0]
 |- style="text-align: right;"
 | 146
-| [[w:Tigrinya language|Tigrinya]]
-| [[w:Tigrinya language|ትግርኛ]]
-| [//ti.wiktionary.org/wiki/ ti]
-| [//ti.wiktionary.org/wiki/Special:Statistics?action=raw '''115 ''']
-| 1125
-| [//ti.wiktionary.org/wiki/Special:Recentchanges 8893 ]
-| [//ti.wiktionary.org/wiki/Special:Listadmins 0 ]
-| [//ti.wiktionary.org/wiki/Special:Listusers 1534 ]
-| [//ti.wiktionary.org/wiki/Special:ActiveUsers 5 ]
-| [//ti.wiktionary.org/wiki/Special:ListFiles 0 ]
-| style="font-size: 70%;" | 2018-02-25 02:06:02
+| [[w:Inuktitut language|Inuktitut]]
+| class="plainlinksneverexpand" | [{{fullurl:iu:ᐃᓄᒃᑎᑐᑦ/inuktitut}} ᐃᓄᒃᑎᑐᑦ]
+| [//iu.wiktionary.org/wiki/ iu]
+| [//iu.wiktionary.org/wiki/Special:Statistics?action=raw '''258 ''']
+|  974
+|  [//iu.wiktionary.org/wiki/Special:Recentchanges 10365]
+|  [//iu.wiktionary.org/wiki/Special:Listadmins 1]
+|  [//iu.wiktionary.org/wiki/Special:Listusers 2528]
+|  [//iu.wiktionary.org/wiki/Special:ActiveUsers 3]
+|  [//iu.wiktionary.org/wiki/Special:FileList 0]
 |- style="text-align: right;"
 | 147
-| [[w:Sango language|Sango]]
-| [[w:Sango language|Sängö]]
-| [//sg.wiktionary.org/wiki/ sg]
-| [//sg.wiktionary.org/wiki/Special:Statistics?action=raw '''113 ''']
-| 760
-| [//sg.wiktionary.org/wiki/Special:Recentchanges 8205 ]
-| [//sg.wiktionary.org/wiki/Special:Listadmins 0 ]
-| [//sg.wiktionary.org/wiki/Special:Listusers 1491 ]
-| [//sg.wiktionary.org/wiki/Special:ActiveUsers 5 ]
-| [//sg.wiktionary.org/wiki/Special:ListFiles 1 ]
-| style="font-size: 70%;" | 2018-02-25 02:05:54
+| [[w:Amharic language|Amharic]]
+| class="plainlinksneverexpand" | [{{fullurl:am:አማርኛ}} አማርኛ]
+| [//am.wiktionary.org/wiki/ am]
+| [//am.wiktionary.org/wiki/Special:Statistics?action=raw '''219 ''']
+|  1641
+|  [//am.wiktionary.org/wiki/Special:Recentchanges 18849]
+|  [//am.wiktionary.org/wiki/Special:Listadmins 1]
+|  [//am.wiktionary.org/wiki/Special:Listusers 2612]
+|  [//am.wiktionary.org/wiki/Special:ActiveUsers 3]
+|  [//am.wiktionary.org/wiki/Special:FileList 0]
 |- style="text-align: right;"
 | 148
-| [[w:Setswana language|Setswana]]
-| [[w:Setswana language|Setswana]]
-| [//tn.wiktionary.org/wiki/ tn]
-| [//tn.wiktionary.org/wiki/Special:Statistics?action=raw '''106 ''']
-| 729
-| [//tn.wiktionary.org/wiki/Special:Recentchanges 7812 ]
-| [//tn.wiktionary.org/wiki/Special:Listadmins 0 ]
-| [//tn.wiktionary.org/wiki/Special:Listusers 1451 ]
-| [//tn.wiktionary.org/wiki/Special:ActiveUsers 5 ]
-| [//tn.wiktionary.org/wiki/Special:ListFiles 0 ]
-| style="font-size: 70%;" | 2018-02-25 02:04:51
+| [[w:Divehi language|Divehi]]
+| class="plainlinksneverexpand" | [{{fullurl:dv:ދިވެހި}} ދިވެހިބަސް]
+| [//dv.wiktionary.org/wiki/ dv]
+| [//dv.wiktionary.org/wiki/Special:Statistics?action=raw '''184 ''']
+|  1190
+|  [//dv.wiktionary.org/wiki/Special:Recentchanges 8791]
+|  [//dv.wiktionary.org/wiki/Special:Listadmins 1]
+|  [//dv.wiktionary.org/wiki/Special:Listusers 1941]
+|  [//dv.wiktionary.org/wiki/Special:ActiveUsers 4]
+|  [//dv.wiktionary.org/wiki/Special:FileList 2]
 |- style="text-align: right;"
 | 149
-| [[w:Kashmiri language|Kashmiri]]
-| [[w:Kashmiri language|कश्मीरी - (كشميري]]
-| [//ks.wiktionary.org/wiki/ ks]
-| [//ks.wiktionary.org/wiki/Special:Statistics?action=raw '''56 ''']
-| 727
-| [//ks.wiktionary.org/wiki/Special:Recentchanges 7054 ]
-| [//ks.wiktionary.org/wiki/Special:Listadmins 0 ]
-| [//ks.wiktionary.org/wiki/Special:Listusers 1523 ]
-| [//ks.wiktionary.org/wiki/Special:ActiveUsers 5 ]
-| [//ks.wiktionary.org/wiki/Special:ListFiles 0 ]
-| style="font-size: 70%;" | 2018-02-25 02:03:09
+| [[w:Zhuang language|Zhuang]]
+| class="plainlinksneverexpand" | [{{fullurl:za:Sawcuengh}} Cuengh]
+| [//za.wiktionary.org/wiki/ za]
+| [//za.wiktionary.org/wiki/Special:Statistics?action=raw '''179 ''']
+|  555
+|  [//za.wiktionary.org/wiki/Special:Recentchanges 12771]
+|  [//za.wiktionary.org/wiki/Special:Listadmins 1]
+|  [//za.wiktionary.org/wiki/Special:Listusers 883]
+|  [//za.wiktionary.org/wiki/Special:ActiveUsers 2]
+|  [//za.wiktionary.org/wiki/Special:FileList 0]
 |- style="text-align: right;"
 | 150
-| [[w:Assamese language|Assamese]]
-| [[w:Assamese language|অসমীয়া]]
-| [//as.wiktionary.org/wiki/ as]
-| [//as.wiktionary.org/wiki/Special:Statistics?action=raw '''16 ''']
-| 257
-| [//as.wiktionary.org/wiki/Special:Recentchanges 4955 ]
-| [//as.wiktionary.org/wiki/Special:Listadmins 0 ]
-| [//as.wiktionary.org/wiki/Special:Listusers 486 ]
-| [//as.wiktionary.org/wiki/Special:ActiveUsers 0 ]
-| [//as.wiktionary.org/wiki/Special:ListFiles 0 ]
-| style="font-size: 70%;" | 2018-02-25 02:04:10
+| [[w:Inupiak language|Inupiak]]
+| class="plainlinksneverexpand" | [{{fullurl:ik:Iñupiak_uqautchit}} Iñupiak]
+| [//ik.wiktionary.org/wiki/ ik]
+| [//ik.wiktionary.org/wiki/Special:Statistics?action=raw '''143 ''']
+|  610
+|  [//ik.wiktionary.org/wiki/Special:Recentchanges 6795]
+|  [//ik.wiktionary.org/wiki/Special:Listadmins 1]
+|  [//ik.wiktionary.org/wiki/Special:Listusers 1086]
+|  [//ik.wiktionary.org/wiki/Special:ActiveUsers 1]
+|  [//ik.wiktionary.org/wiki/Special:FileList 0]
 |- style="text-align: right;"
 | 151
-| [[w:Moldovan language|Moldovan]]
-| [[w:Moldovan language|Moldoveana]]
-| [//mo.wiktionary.org/wiki/ mo]
-| [//mo.wiktionary.org/wiki/Special:Statistics?action=raw '''5 ''']
-| 230
-| [//mo.wiktionary.org/wiki/Special:Recentchanges 4984 ]
-| [//mo.wiktionary.org/wiki/Special:Listadmins 0 ]
-| [//mo.wiktionary.org/wiki/Special:Listusers 401 ]
-| [//mo.wiktionary.org/wiki/Special:ActiveUsers 0 ]
-| [//mo.wiktionary.org/wiki/Special:ListFiles 0 ]
-| style="font-size: 70%;" | 2017-12-13 02:04:32
+| [[w:Sango language|Sango]]
+| class="plainlinksneverexpand" | [{{fullurl:sg:Sango}} Sängö]
+| [//sg.wiktionary.org/wiki/ sg]
+| [//sg.wiktionary.org/wiki/Special:Statistics?action=raw '''122 ''']
+|  687
+|  [//sg.wiktionary.org/wiki/Special:Recentchanges 8356]
+|  [//sg.wiktionary.org/wiki/Special:Listadmins 1]
+|  [//sg.wiktionary.org/wiki/Special:Listusers 1725]
+|  [//sg.wiktionary.org/wiki/Special:ActiveUsers 4]
+|  [//sg.wiktionary.org/wiki/Special:FileList 1]
 |- style="text-align: right;"
 | 152
-| [[w:Pali language|Pali]]
-| [[w:Pali language|पािऴ]]
-| [//pi.wiktionary.org/wiki/ pi]
-| [//pi.wiktionary.org/wiki/Special:Statistics?action=raw '''1 ''']
-| 53
-| [//pi.wiktionary.org/wiki/Special:Recentchanges 3320 ]
-| [//pi.wiktionary.org/wiki/Special:Listadmins 0 ]
-| [//pi.wiktionary.org/wiki/Special:Listusers 385 ]
-| [//pi.wiktionary.org/wiki/Special:ActiveUsers 0 ]
-| [//pi.wiktionary.org/wiki/Special:ListFiles 0 ]
-| style="font-size: 70%;" | 2018-02-25 02:05:47
+| [[w:Tigrinya language|Tigrinya]]
+| class="plainlinksneverexpand" | [{{fullurl:ti:ትግርኛ_ፊደል}} ትግርኛ]
+| [//ti.wiktionary.org/wiki/ ti]
+| [//ti.wiktionary.org/wiki/Special:Statistics?action=raw '''117 ''']
+|  1128
+|  [//ti.wiktionary.org/wiki/Special:Recentchanges 9003]
+|  [//ti.wiktionary.org/wiki/Special:Listadmins 1]
+|  [//ti.wiktionary.org/wiki/Special:Listusers 1910]
+|  [//ti.wiktionary.org/wiki/Special:ActiveUsers 2]
+|  [//ti.wiktionary.org/wiki/Special:FileList 0]
 |- style="text-align: right;"
 | 153
-| [[w:Alemannic language|Alemannic]]
-| [[w:Alemannic language|Alemannisch]]
-| [//als.wiktionary.org/wiki/ als]
-| [//als.wiktionary.org/wiki/Special:Statistics?action=raw '''0 ''']
-| 1226
-| [//als.wiktionary.org/wiki/Special:Recentchanges 15310 ]
-| [//als.wiktionary.org/wiki/Special:Listadmins 0 ]
-| [//als.wiktionary.org/wiki/Special:Listusers 667 ]
-| [//als.wiktionary.org/wiki/Special:ActiveUsers 0 ]
-| [//als.wiktionary.org/wiki/Special:ListFiles 0 ]
-| style="font-size: 70%;" | 2017-12-13 02:03:40
+| [[w:Tswana language|Tswana]]
+| class="plainlinksneverexpand" | [{{fullurl:tn:Setswana}} Setswana]
+| [//tn.wiktionary.org/wiki/ tn]
+| [//tn.wiktionary.org/wiki/Special:Statistics?action=raw '''106 ''']
+|  729
+|  [//tn.wiktionary.org/wiki/Special:Recentchanges 7894]
+|  [//tn.wiktionary.org/wiki/Special:Listadmins 1]
+|  [//tn.wiktionary.org/wiki/Special:Listusers 1671]
+|  [//tn.wiktionary.org/wiki/Special:ActiveUsers 2]
+|  [//tn.wiktionary.org/wiki/Special:FileList 0]
 |- style="text-align: right;"
 | 154
-| [[w:Abkhazian language|Abkhazian]]
-| [[w:Abkhazian language|Аҧсуа]]
-| [//ab.wiktionary.org/wiki/ ab]
-| [//ab.wiktionary.org/wiki/Special:Statistics?action=raw '''0 ''']
-| 248
-| [//ab.wiktionary.org/wiki/Special:Recentchanges 8979 ]
-| [//ab.wiktionary.org/wiki/Special:Listadmins 0 ]
-| [//ab.wiktionary.org/wiki/Special:Listusers 514 ]
-| [//ab.wiktionary.org/wiki/Special:ActiveUsers 0 ]
-| [//ab.wiktionary.org/wiki/Special:ListFiles 0 ]
-| style="font-size: 70%;" | 2018-02-25 02:04:05
+| [[w:Kashmiri language|Kashmiri]]
+| class="plainlinksneverexpand" | [{{fullurl:ks:कॉशुर_ज़बान}} कश्मीरी / كشميري]
+| [//ks.wiktionary.org/wiki/ ks]
+| [//ks.wiktionary.org/wiki/Special:Statistics?action=raw '''56 ''']
+|  727
+|  [//ks.wiktionary.org/wiki/Special:Recentchanges 7268]
+|  [//ks.wiktionary.org/wiki/Special:Listadmins 1]
+|  [//ks.wiktionary.org/wiki/Special:Listusers 2222]
+|  [//ks.wiktionary.org/wiki/Special:ActiveUsers 10]
+|  [//ks.wiktionary.org/wiki/Special:FileList 0]
 |- style="text-align: right;"
 | 155
-| [[w:Shona language|Shona]]
-| [[w:Shona language|chiShona]]
-| [//sn.wiktionary.org/wiki/ sn]
-| [//sn.wiktionary.org/wiki/Special:Statistics?action=raw '''0 ''']
-| 233
-| [//sn.wiktionary.org/wiki/Special:Recentchanges 4951 ]
-| [//sn.wiktionary.org/wiki/Special:Listadmins 0 ]
-| [//sn.wiktionary.org/wiki/Special:Listusers 334 ]
-| [//sn.wiktionary.org/wiki/Special:ActiveUsers 0 ]
-| [//sn.wiktionary.org/wiki/Special:ListFiles 0 ]
-| style="font-size: 70%;" | 2018-02-25 02:04:44
+| [[w:Assamese language|Assamese]]
+| class="plainlinksneverexpand" | [{{fullurl:as:অসমীয়া_ভাষা_আৰু_লিপি}} অসমীয়া]
+| [//as.wiktionary.org/wiki/ as]
+| [//as.wiktionary.org/wiki/Special:Statistics?action=raw '''16 ''']
+|  258
+|  [//as.wiktionary.org/wiki/Special:Recentchanges 4958]
+|  [//as.wiktionary.org/wiki/Special:Listadmins 1]
+|  [//as.wiktionary.org/wiki/Special:Listusers 565]
+|  [//as.wiktionary.org/wiki/Special:ActiveUsers 1]
+|  [//as.wiktionary.org/wiki/Special:FileList 0]
 |- style="text-align: right;"
 | 156
-| [[w:Bihari language|Bihari]]
-| [[w:Bihari language|भोजपुरी]]
-| [//bh.wiktionary.org/wiki/ bh]
-| [//bh.wiktionary.org/wiki/Special:Statistics?action=raw '''0 ''']
-| 230
-| [//bh.wiktionary.org/wiki/Special:Recentchanges 4853 ]
-| [//bh.wiktionary.org/wiki/Special:Listadmins 0 ]
-| [//bh.wiktionary.org/wiki/Special:Listusers 444 ]
-| [//bh.wiktionary.org/wiki/Special:ActiveUsers 0 ]
-| [//bh.wiktionary.org/wiki/Special:ListFiles 0 ]
-| style="font-size: 70%;" | 2018-02-25 02:05:15
+| [[w:Pali language|Pali]]
+| class="plainlinksneverexpand" | [{{fullurl:pi:पाली_भाषा}} पाऴि]
+| [//pi.wiktionary.org/wiki/ pi]
+| [//pi.wiktionary.org/wiki/Special:Statistics?action=raw '''1 ''']
+|  54
+|  [//pi.wiktionary.org/wiki/Special:Recentchanges 3323]
+|  [//pi.wiktionary.org/wiki/Special:Listadmins 1]
+|  [//pi.wiktionary.org/wiki/Special:Listusers 461]
+|  [//pi.wiktionary.org/wiki/Special:ActiveUsers 0]
+|  [//pi.wiktionary.org/wiki/Special:FileList 0]
 |- style="text-align: right;"
 | 157
-| [[w:Dzongkha language|Dzongkha]]
-| [[w:Dzongkha language|ཇོང་ཁ]]
-| [//dz.wiktionary.org/wiki/ dz]
-| [//dz.wiktionary.org/wiki/Special:Statistics?action=raw '''0 ''']
-| 229
-| [//dz.wiktionary.org/wiki/Special:Recentchanges 4874 ]
-| [//dz.wiktionary.org/wiki/Special:Listadmins 0 ]
-| [//dz.wiktionary.org/wiki/Special:Listusers 404 ]
-| [//dz.wiktionary.org/wiki/Special:ActiveUsers 0 ]
-| [//dz.wiktionary.org/wiki/Special:ListFiles 0 ]
-| style="font-size: 70%;" | 2018-02-25 02:04:18
-|- style="text-align: right;"
-| 158
-| [[w:Twi language|Twi]]
-| [[w:Twi language|Twi]]
-| [//tw.wiktionary.org/wiki/ tw]
-| [//tw.wiktionary.org/wiki/Special:Statistics?action=raw '''0 ''']
-| 225
-| [//tw.wiktionary.org/wiki/Special:Recentchanges 4846 ]
-| [//tw.wiktionary.org/wiki/Special:Listadmins 0 ]
-| [//tw.wiktionary.org/wiki/Special:Listusers 425 ]
-| [//tw.wiktionary.org/wiki/Special:ActiveUsers 0 ]
-| [//tw.wiktionary.org/wiki/Special:ListFiles 0 ]
-| style="font-size: 70%;" | 2018-02-25 02:04:55
-|- style="text-align: right;"
-| 159
-| [[w:Tongan language|Tongan]]
-| [[w:Tongan language|faka Tonga]]
-| [//to.wiktionary.org/wiki/ to]
-| [//to.wiktionary.org/wiki/Special:Statistics?action=raw '''0 ''']
-| 216
-| [//to.wiktionary.org/wiki/Special:Recentchanges 4862 ]
-| [//to.wiktionary.org/wiki/Special:Listadmins 0 ]
-| [//to.wiktionary.org/wiki/Special:Listusers 375 ]
-| [//to.wiktionary.org/wiki/Special:ActiveUsers 0 ]
-| [//to.wiktionary.org/wiki/Special:ListFiles 0 ]
-| style="font-size: 70%;" | 2018-02-25 02:06:05
-|- style="text-align: right;"
-| 160
-| [[w:Bislama language|Bislama]]
-| [[w:Bislama language|Bislama]]
-| [//bi.wiktionary.org/wiki/ bi]
-| [//bi.wiktionary.org/wiki/Special:Statistics?action=raw '''0 ''']
-| 215
-| [//bi.wiktionary.org/wiki/Special:Recentchanges 4795 ]
-| [//bi.wiktionary.org/wiki/Special:Listadmins 0 ]
-| [//bi.wiktionary.org/wiki/Special:Listusers 414 ]
-| [//bi.wiktionary.org/wiki/Special:ActiveUsers 0 ]
-| [//bi.wiktionary.org/wiki/Special:ListFiles 0 ]
-| style="font-size: 70%;" | 2018-02-25 02:05:17
-|- style="text-align: right;"
-| 161
-| [[w:Yoruba language|Yoruba]]
-| [[w:Yoruba language|Yorùbá]]
-| [//yo.wiktionary.org/wiki/ yo]
-| [//yo.wiktionary.org/wiki/Special:Statistics?action=raw '''0 ''']
-| 210
-| [//yo.wiktionary.org/wiki/Special:Recentchanges 4928 ]
-| [//yo.wiktionary.org/wiki/Special:Listadmins 0 ]
-| [//yo.wiktionary.org/wiki/Special:Listusers 365 ]
-| [//yo.wiktionary.org/wiki/Special:ActiveUsers 0 ]
-| [//yo.wiktionary.org/wiki/Special:ListFiles 0 ]
-| style="font-size: 70%;" | 2018-02-25 02:05:02
-|- style="text-align: right;"
-| 162
-| [[w:Tibetan language|Tibetan]]
-| [[w:Tibetan language|Bod skad]]
-| [//bo.wiktionary.org/wiki/ bo]
-| [//bo.wiktionary.org/wiki/Special:Statistics?action=raw '''0 ''']
-| 168
-| [//bo.wiktionary.org/wiki/Special:Recentchanges 4785 ]
-| [//bo.wiktionary.org/wiki/Special:Listadmins 0 ]
-| [//bo.wiktionary.org/wiki/Special:Listusers 396 ]
-| [//bo.wiktionary.org/wiki/Special:ActiveUsers 0 ]
-| [//bo.wiktionary.org/wiki/Special:ListFiles 0 ]
-| style="font-size: 70%;" | 2018-02-25 02:04:14
-|- style="text-align: right;"
-| 163
-| [[w:Raeto Romance language|Raeto Romance]]
-| [[w:Raeto Romance language|Rumantsch]]
-| [//rm.wiktionary.org/wiki/ rm]
-| [//rm.wiktionary.org/wiki/Special:Statistics?action=raw '''0 ''']
-| 122
-| [//rm.wiktionary.org/wiki/Special:Recentchanges 4818 ]
-| [//rm.wiktionary.org/wiki/Special:Listadmins 0 ]
-| [//rm.wiktionary.org/wiki/Special:Listusers 388 ]
-| [//rm.wiktionary.org/wiki/Special:ActiveUsers 0 ]
-| [//rm.wiktionary.org/wiki/Special:ListFiles 0 ]
-| style="font-size: 70%;" | 2018-02-25 02:04:40
-|- style="text-align: right;"
-| 164
-| [[w:Xhosan language|Xhosan]]
-| [[w:Xhosan language|isiXhosa]]
-| [//xh.wiktionary.org/wiki/ xh]
-| [//xh.wiktionary.org/wiki/Special:Statistics?action=raw '''0 ''']
-| 103
-| [//xh.wiktionary.org/wiki/Special:Recentchanges 5143 ]
-| [//xh.wiktionary.org/wiki/Special:Listadmins 0 ]
-| [//xh.wiktionary.org/wiki/Special:Listusers 408 ]
-| [//xh.wiktionary.org/wiki/Special:ActiveUsers 0 ]
-| [//xh.wiktionary.org/wiki/Special:ListFiles 0 ]
-| style="font-size: 70%;" | 2018-02-25 02:04:59
-|- style="text-align: right;"
-| 165
 | [[w:Afar language|Afar]]
-| [[w:Afar language|Afar]]
+| class="plainlinksneverexpand" | [{{fullurl:aa:}} Afar]
 | [//aa.wiktionary.org/wiki/ aa]
 | [//aa.wiktionary.org/wiki/Special:Statistics?action=raw '''0 ''']
-| 100
-| [//aa.wiktionary.org/wiki/Special:Recentchanges 13390 ]
-| [//aa.wiktionary.org/wiki/Special:Listadmins 0 ]
-| [//aa.wiktionary.org/wiki/Special:Listusers 487 ]
-| [//aa.wiktionary.org/wiki/Special:ActiveUsers 0 ]
-| [//aa.wiktionary.org/wiki/Special:ListFiles 0 ]
-| style="font-size: 70%;" | 2018-02-25 02:04:03
+|  102
+|  [//aa.wiktionary.org/wiki/Special:Recentchanges 6805]
+|  [//aa.wiktionary.org/wiki/Special:Listadmins 1]
+|  [//aa.wiktionary.org/wiki/Special:Listusers 571]
+|  [//aa.wiktionary.org/wiki/Special:ActiveUsers 1]
+|  [//aa.wiktionary.org/wiki/Special:FileList 0]
 |- style="text-align: right;"
-| 166
-| [[w:Sardinian language|Sardinian]]
-| [[w:Sardinian language|Sardu]]
-| [//sc.wiktionary.org/wiki/ sc]
-| [//sc.wiktionary.org/wiki/Special:Statistics?action=raw '''0 ''']
-| 94
-| [//sc.wiktionary.org/wiki/Special:Recentchanges 6061 ]
-| [//sc.wiktionary.org/wiki/Special:Listadmins 0 ]
-| [//sc.wiktionary.org/wiki/Special:Listusers 417 ]
-| [//sc.wiktionary.org/wiki/Special:ActiveUsers 0 ]
-| [//sc.wiktionary.org/wiki/Special:ListFiles 0 ]
-| style="font-size: 70%;" | 2018-02-25 02:04:01
+| 158
+| [[w:Abkhazian language|Abkhazian]]
+| class="plainlinksneverexpand" | [{{fullurl:ab:Аҧсуа_бызшәа}} Аҧсуа]
+| [//ab.wiktionary.org/wiki/ ab]
+| [//ab.wiktionary.org/wiki/Special:Statistics?action=raw '''0 ''']
+|  249
+|  [//ab.wiktionary.org/wiki/Special:Recentchanges 8982]
+|  [//ab.wiktionary.org/wiki/Special:Listadmins 1]
+|  [//ab.wiktionary.org/wiki/Special:Listusers 580]
+|  [//ab.wiktionary.org/wiki/Special:ActiveUsers 1]
+|  [//ab.wiktionary.org/wiki/Special:FileList 0]
 |- style="text-align: right;"
-| 167
-| [[w:Bambara language|Bambara]]
-| [[w:Bambara language|Bamanankan]]
-| [//bm.wiktionary.org/wiki/ bm]
-| [//bm.wiktionary.org/wiki/Special:Statistics?action=raw '''0 ''']
-| 86
-| [//bm.wiktionary.org/wiki/Special:Recentchanges 4134 ]
-| [//bm.wiktionary.org/wiki/Special:Listadmins 0 ]
-| [//bm.wiktionary.org/wiki/Special:Listusers 387 ]
-| [//bm.wiktionary.org/wiki/Special:ActiveUsers 0 ]
-| [//bm.wiktionary.org/wiki/Special:ListFiles 0 ]
-| style="font-size: 70%;" | 2018-02-25 02:05:19
-|- style="text-align: right;"
-| 168
+| 159
 | [[w:Akan language|Akan]]
-| [[w:Akan language|Akana]]
+| class="plainlinksneverexpand" | [{{fullurl:ak:Akan}} Akana]
 | [//ak.wiktionary.org/wiki/ ak]
 | [//ak.wiktionary.org/wiki/Special:Statistics?action=raw '''0 ''']
-| 79
-| [//ak.wiktionary.org/wiki/Special:Recentchanges 4361 ]
-| [//ak.wiktionary.org/wiki/Special:Listadmins 0 ]
-| [//ak.wiktionary.org/wiki/Special:Listusers 611 ]
-| [//ak.wiktionary.org/wiki/Special:ActiveUsers 0 ]
-| [//ak.wiktionary.org/wiki/Special:ListFiles 0 ]
-| style="font-size: 70%;" | 2018-02-25 02:05:10
+|  80
+|  [//ak.wiktionary.org/wiki/Special:Recentchanges 4364]
+|  [//ak.wiktionary.org/wiki/Special:Listadmins 1]
+|  [//ak.wiktionary.org/wiki/Special:Listusers 669]
+|  [//ak.wiktionary.org/wiki/Special:ActiveUsers 1]
+|  [//ak.wiktionary.org/wiki/Special:FileList 0]
 |- style="text-align: right;"
-| 169
-| [[w:Cree language|Cree]]
-| [[w:Cree language|Nehiyaw]]
-| [//cr.wiktionary.org/wiki/ cr]
-| [//cr.wiktionary.org/wiki/Special:Statistics?action=raw '''0 ''']
-| 73
-| [//cr.wiktionary.org/wiki/Special:Recentchanges 3352 ]
-| [//cr.wiktionary.org/wiki/Special:Listadmins 0 ]
-| [//cr.wiktionary.org/wiki/Special:Listusers 407 ]
-| [//cr.wiktionary.org/wiki/Special:ActiveUsers 0 ]
-| [//cr.wiktionary.org/wiki/Special:ListFiles 0 ]
-| style="font-size: 70%;" | 2018-02-25 02:05:25
-|- style="text-align: right;"
-| 170
+| 160
 | [[w:Avar language|Avar]]
-| [[w:Avar language|Авар]]
+| class="plainlinksneverexpand" | [{{fullurl:av:МагІарул_мацІ}} Авар]
 | [//av.wiktionary.org/wiki/ av]
 | [//av.wiktionary.org/wiki/Special:Statistics?action=raw '''0 ''']
-| 72
-| [//av.wiktionary.org/wiki/Special:Recentchanges 4859 ]
-| [//av.wiktionary.org/wiki/Special:Listadmins 0 ]
-| [//av.wiktionary.org/wiki/Special:Listusers 449 ]
-| [//av.wiktionary.org/wiki/Special:ActiveUsers 0 ]
-| [//av.wiktionary.org/wiki/Special:ListFiles 0 ]
-| style="font-size: 70%;" | 2018-02-25 02:05:12
+|  73
+|  [//av.wiktionary.org/wiki/Special:Recentchanges 4862]
+|  [//av.wiktionary.org/wiki/Special:Listadmins 1]
+|  [//av.wiktionary.org/wiki/Special:Listusers 502]
+|  [//av.wiktionary.org/wiki/Special:ActiveUsers 1]
+|  [//av.wiktionary.org/wiki/Special:FileList 0]
 |- style="text-align: right;"
-| 171
+| 161
+| [[w:Bhojpuri language|Bhojpuri]]
+| class="plainlinksneverexpand" | [{{fullurl:bh:भोजपुरी_भाषा}} भोजपुरी]
+| [//bh.wiktionary.org/wiki/ bh]
+| [//bh.wiktionary.org/wiki/Special:Statistics?action=raw '''0 ''']
+|  231
+|  [//bh.wiktionary.org/wiki/Special:Recentchanges 4856]
+|  [//bh.wiktionary.org/wiki/Special:Listadmins 1]
+|  [//bh.wiktionary.org/wiki/Special:Listusers 504]
+|  [//bh.wiktionary.org/wiki/Special:ActiveUsers 1]
+|  [//bh.wiktionary.org/wiki/Special:FileList 0]
+|- style="text-align: right;"
+| 162
+| [[w:Bislama language|Bislama]]
+| class="plainlinksneverexpand" | [{{fullurl:bi:Bislama}} Bislama]
+| [//bi.wiktionary.org/wiki/ bi]
+| [//bi.wiktionary.org/wiki/Special:Statistics?action=raw '''0 ''']
+|  216
+|  [//bi.wiktionary.org/wiki/Special:Recentchanges 4798]
+|  [//bi.wiktionary.org/wiki/Special:Listadmins 1]
+|  [//bi.wiktionary.org/wiki/Special:Listusers 465]
+|  [//bi.wiktionary.org/wiki/Special:ActiveUsers 1]
+|  [//bi.wiktionary.org/wiki/Special:FileList 0]
+|- style="text-align: right;"
+| 163
+| [[w:Bambara language|Bambara]]
+| class="plainlinksneverexpand" | [{{fullurl:bm:Bamanankan}} Bamanankan]
+| [//bm.wiktionary.org/wiki/ bm]
+| [//bm.wiktionary.org/wiki/Special:Statistics?action=raw '''0 ''']
+|  87
+|  [//bm.wiktionary.org/wiki/Special:Recentchanges 4137]
+|  [//bm.wiktionary.org/wiki/Special:Listadmins 1]
+|  [//bm.wiktionary.org/wiki/Special:Listusers 436]
+|  [//bm.wiktionary.org/wiki/Special:ActiveUsers 0]
+|  [//bm.wiktionary.org/wiki/Special:FileList 0]
+|- style="text-align: right;"
+| 164
+| [[w:Tibetan language|Tibetan]]
+| class="plainlinksneverexpand" | [{{fullurl:bo:བོད་སྐད།}} བོད་སྐད]
+| [//bo.wiktionary.org/wiki/ bo]
+| [//bo.wiktionary.org/wiki/Special:Statistics?action=raw '''0 ''']
+|  169
+|  [//bo.wiktionary.org/wiki/Special:Recentchanges 4786]
+|  [//bo.wiktionary.org/wiki/Special:Listadmins 1]
+|  [//bo.wiktionary.org/wiki/Special:Listusers 470]
+|  [//bo.wiktionary.org/wiki/Special:ActiveUsers 1]
+|  [//bo.wiktionary.org/wiki/Special:FileList 0]
+|- style="text-align: right;"
+| 165
 | [[w:Chamorro language|Chamorro]]
-| [[w:Chamorro language|Chamoru]]
+| class="plainlinksneverexpand" | [{{fullurl:ch:Fino'_Chamoru}} Chamoru]
 | [//ch.wiktionary.org/wiki/ ch]
 | [//ch.wiktionary.org/wiki/Special:Statistics?action=raw '''0 ''']
-| 67
-| [//ch.wiktionary.org/wiki/Special:Recentchanges 3442 ]
-| [//ch.wiktionary.org/wiki/Special:Listadmins 0 ]
-| [//ch.wiktionary.org/wiki/Special:Listusers 432 ]
-| [//ch.wiktionary.org/wiki/Special:ActiveUsers 0 ]
-| [//ch.wiktionary.org/wiki/Special:ListFiles 0 ]
-| style="font-size: 70%;" | 2018-02-25 02:05:21
+|  68
+|  [//ch.wiktionary.org/wiki/Special:Recentchanges 3445]
+|  [//ch.wiktionary.org/wiki/Special:Listadmins 1]
+|  [//ch.wiktionary.org/wiki/Special:Listusers 488]
+|  [//ch.wiktionary.org/wiki/Special:ActiveUsers 1]
+|  [//ch.wiktionary.org/wiki/Special:FileList 0]
 |- style="text-align: right;"
-| 172
-| [[w:Kirundi language|Kirundi]]
-| [[w:Kirundi language|Kirundi]]
-| [//rn.wiktionary.org/wiki/ rn]
-| [//rn.wiktionary.org/wiki/Special:Statistics?action=raw '''0 ''']
-| 62
-| [//rn.wiktionary.org/wiki/Special:Recentchanges 4702 ]
-| [//rn.wiktionary.org/wiki/Special:Listadmins 0 ]
-| [//rn.wiktionary.org/wiki/Special:Listusers 425 ]
-| [//rn.wiktionary.org/wiki/Special:ActiveUsers 0 ]
-| [//rn.wiktionary.org/wiki/Special:ListFiles 0 ]
-| style="font-size: 70%;" | 2018-02-25 02:05:49
+| 166
+| [[w:Cree language|Cree]]
+| class="plainlinksneverexpand" | [{{fullurl:cr:}} Nehiyaw]
+| [//cr.wiktionary.org/wiki/ cr]
+| [//cr.wiktionary.org/wiki/Special:Statistics?action=raw '''0 ''']
+|  74
+|  [//cr.wiktionary.org/wiki/Special:Recentchanges 3355]
+|  [//cr.wiktionary.org/wiki/Special:Listadmins 1]
+|  [//cr.wiktionary.org/wiki/Special:Listusers 461]
+|  [//cr.wiktionary.org/wiki/Special:ActiveUsers 1]
+|  [//cr.wiktionary.org/wiki/Special:FileList 0]
 |- style="text-align: right;"
-| 173
+| 167
+| [[w:Dzongkha language|Dzongkha]]
+| class="plainlinksneverexpand" | [{{fullurl:dz:རྫོང་ཁ་}} ཇོང་ཁ]
+| [//dz.wiktionary.org/wiki/ dz]
+| [//dz.wiktionary.org/wiki/Special:Statistics?action=raw '''0 ''']
+|  230
+|  [//dz.wiktionary.org/wiki/Special:Recentchanges 4877]
+|  [//dz.wiktionary.org/wiki/Special:Listadmins 1]
+|  [//dz.wiktionary.org/wiki/Special:Listusers 452]
+|  [//dz.wiktionary.org/wiki/Special:ActiveUsers 1]
+|  [//dz.wiktionary.org/wiki/Special:FileList 0]
+|- style="text-align: right;"
+| 168
 | [[w:Marshallese language|Marshallese]]
-| [[w:Marshallese language|Ebon]]
+| class="plainlinksneverexpand" | [{{fullurl:mh:Kajin_M̧ajeļ}} Ebon]
 | [//mh.wiktionary.org/wiki/ mh]
 | [//mh.wiktionary.org/wiki/Special:Statistics?action=raw '''0 ''']
-| 54
-| [//mh.wiktionary.org/wiki/Special:Recentchanges 3360 ]
-| [//mh.wiktionary.org/wiki/Special:Listadmins 0 ]
-| [//mh.wiktionary.org/wiki/Special:Listusers 350 ]
-| [//mh.wiktionary.org/wiki/Special:ActiveUsers 0 ]
-| [//mh.wiktionary.org/wiki/Special:ListFiles 0 ]
-| style="font-size: 70%;" | 2018-02-25 02:05:43
+|  55
+|  [//mh.wiktionary.org/wiki/Special:Recentchanges 3361]
+|  [//mh.wiktionary.org/wiki/Special:Listadmins 1]
+|  [//mh.wiktionary.org/wiki/Special:Listusers 401]
+|  [//mh.wiktionary.org/wiki/Special:ActiveUsers 0]
+|  [//mh.wiktionary.org/wiki/Special:FileList 0]
+|- style="text-align: right;"
+| 169
+| [[w:Romansh language|Romansh]]
+| class="plainlinksneverexpand" | [{{fullurl:rm:Rumantsch_dal_Grischun}} Rumantsch]
+| [//rm.wiktionary.org/wiki/ rm]
+| [//rm.wiktionary.org/wiki/Special:Statistics?action=raw '''0 ''']
+|  123
+|  [//rm.wiktionary.org/wiki/Special:Recentchanges 4821]
+|  [//rm.wiktionary.org/wiki/Special:Listadmins 1]
+|  [//rm.wiktionary.org/wiki/Special:Listusers 454]
+|  [//rm.wiktionary.org/wiki/Special:ActiveUsers 1]
+|  [//rm.wiktionary.org/wiki/Special:FileList 0]
+|- style="text-align: right;"
+| 170
+| [[w:Kirundi language|Kirundi]]
+| class="plainlinksneverexpand" | [{{fullurl:rn:Kirundi}} Kirundi]
+| [//rn.wiktionary.org/wiki/ rn]
+| [//rn.wiktionary.org/wiki/Special:Statistics?action=raw '''0 ''']
+|  63
+|  [//rn.wiktionary.org/wiki/Special:Recentchanges 4703]
+|  [//rn.wiktionary.org/wiki/Special:Listadmins 1]
+|  [//rn.wiktionary.org/wiki/Special:Listusers 479]
+|  [//rn.wiktionary.org/wiki/Special:ActiveUsers 1]
+|  [//rn.wiktionary.org/wiki/Special:FileList 0]
+|- style="text-align: right;"
+| 171
+| [[w:Sardinian language|Sardinian]]
+| class="plainlinksneverexpand" | [{{fullurl:sc:Limba_sarda}} Sardu]
+| [//sc.wiktionary.org/wiki/ sc]
+| [//sc.wiktionary.org/wiki/Special:Statistics?action=raw '''0 ''']
+|  95
+|  [//sc.wiktionary.org/wiki/Special:Recentchanges 6064]
+|  [//sc.wiktionary.org/wiki/Special:Listadmins 1]
+|  [//sc.wiktionary.org/wiki/Special:Listusers 484]
+|  [//sc.wiktionary.org/wiki/Special:ActiveUsers 1]
+|  [//sc.wiktionary.org/wiki/Special:FileList 0]
+|- style="text-align: right;"
+| 172
+| [[w:Shona language|Shona]]
+| class="plainlinksneverexpand" | [{{fullurl:sn:chiShona}} chiShona]
+| [//sn.wiktionary.org/wiki/ sn]
+| [//sn.wiktionary.org/wiki/Special:Statistics?action=raw '''0 ''']
+|  234
+|  [//sn.wiktionary.org/wiki/Special:Recentchanges 4954]
+|  [//sn.wiktionary.org/wiki/Special:Listadmins 1]
+|  [//sn.wiktionary.org/wiki/Special:Listusers 383]
+|  [//sn.wiktionary.org/wiki/Special:ActiveUsers 1]
+|  [//sn.wiktionary.org/wiki/Special:FileList 0]
+|- style="text-align: right;"
+| 173
+| [[w:Tongan language|Tongan]]
+| class="plainlinksneverexpand" | [{{fullurl:to:Lea_fakatonga}} faka Tonga]
+| [//to.wiktionary.org/wiki/ to]
+| [//to.wiktionary.org/wiki/Special:Statistics?action=raw '''0 ''']
+|  217
+|  [//to.wiktionary.org/wiki/Special:Recentchanges 4865]
+|  [//to.wiktionary.org/wiki/Special:Listadmins 1]
+|  [//to.wiktionary.org/wiki/Special:Listusers 426]
+|  [//to.wiktionary.org/wiki/Special:ActiveUsers 1]
+|  [//to.wiktionary.org/wiki/Special:FileList 0]
+|- style="text-align: right;"
+| 174
+| [[w:Twi language|Twi]]
+| class="plainlinksneverexpand" | [{{fullurl:tw:Twi}} Twi]
+| [//tw.wiktionary.org/wiki/ tw]
+| [//tw.wiktionary.org/wiki/Special:Statistics?action=raw '''0 ''']
+|  226
+|  [//tw.wiktionary.org/wiki/Special:Recentchanges 4849]
+|  [//tw.wiktionary.org/wiki/Special:Listadmins 1]
+|  [//tw.wiktionary.org/wiki/Special:Listusers 477]
+|  [//tw.wiktionary.org/wiki/Special:ActiveUsers 1]
+|  [//tw.wiktionary.org/wiki/Special:FileList 0]
+|- style="text-align: right;"
+| 175
+| [[w:Xhosa language|Xhosa]]
+| class="plainlinksneverexpand" | [{{fullurl:xh:IsiXhosa}} isiXhosa]
+| [//xh.wiktionary.org/wiki/ xh]
+| [//xh.wiktionary.org/wiki/Special:Statistics?action=raw '''0 ''']
+|  104
+|  [//xh.wiktionary.org/wiki/Special:Recentchanges 5146]
+|  [//xh.wiktionary.org/wiki/Special:Listadmins 1]
+|  [//xh.wiktionary.org/wiki/Special:Listusers 471]
+|  [//xh.wiktionary.org/wiki/Special:ActiveUsers 1]
+|  [//xh.wiktionary.org/wiki/Special:FileList 0]
+|- style="text-align: right;"
+| 176
+| [[w:Yoruba language|Yoruba]]
+| class="plainlinksneverexpand" | [{{fullurl:yo:Èdè_Yorùbá}} Yorùbá]
+| [//yo.wiktionary.org/wiki/ yo]
+| [//yo.wiktionary.org/wiki/Special:Statistics?action=raw '''0 ''']
+|  211
+|  [//yo.wiktionary.org/wiki/Special:Recentchanges 4931]
+|  [//yo.wiktionary.org/wiki/Special:Listadmins 1]
+|  [//yo.wiktionary.org/wiki/Special:Listusers 424]
+|  [//yo.wiktionary.org/wiki/Special:ActiveUsers 2]
+|  [//yo.wiktionary.org/wiki/Special:FileList 0]
 |}
-
 === Grand Total ===
 {| border="1" cellpadding="2" cellspacing="0" style="width:75%; background: #f9f9f9; border: 1px solid #aaaaaa; border-collapse: collapse; white-space: nowrap;"
 |-
@@ -2272,11 +2135,11 @@
 ! Admins
 ! Users
 ! Files
-|- style=\"text-align: right;\"
-|'''27,824,476'''
-|'''32,693,787'''
-|'''200,384,707'''
-|'''409'''
-|'''5,124,753'''
-|'''4,424'''
+|- style="text-align: right;"
+|'''33,546,719'''
+|'''39,811,517'''
+|'''233,999,376'''
+|'''566'''
+|'''6,030,984'''
+|'''4,342'''
 |}
