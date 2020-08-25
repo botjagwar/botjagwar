@@ -124,6 +124,12 @@ class DictionaryServiceManager(ServiceManager):
     program_name = 'dictionary_service.py'
     kill_if_exists = False
 
+    def create_entry(self, language, entry):
+        return self.post(
+            'entry/%s/create' % language,
+            json=entry
+        )
+
 
 class LanguageServiceManager(ServiceManager):
     port = 8003

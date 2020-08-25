@@ -1,3 +1,5 @@
+
+
 {| border="1" cellpadding="2" cellspacing="0" style="background: #f9f9f9; border: 1px solid #aaaaaa; border-collapse: collapse; white-space: nowrap; text-align: left" class="sortable"
 |-
 ! №
@@ -11,1582 +13,1447 @@
 ! Users
 ! Active Users
 ! Files
-! Updated
 |- style="text-align: right;"
 | 1
 | [[w:English language|English]]
-| [[w:English language|English]]
+| class="plainlinksneverexpand" | [{{fullurl:en:English_language}} English]
 | [//en.wikibooks.org/wiki/ en]
-| [//en.wikibooks.org/wiki/Special:Statistics?action=raw '''79161 ''']
-| 248146
-| [//en.wikibooks.org/wiki/Special:Recentchanges 3377108 ]
-| [//en.wikibooks.org/wiki/Special:Listadmins 8 ]
-| [//en.wikibooks.org/wiki/Special:Listusers 3126260 ]
-| [//en.wikibooks.org/wiki/Special:ActiveUsers 434 ]
-| [//en.wikibooks.org/wiki/Special:ListFiles 1733 ]
-| style="font-size: 70%;" | 2018-02-25 05:03:56
+| [//en.wikibooks.org/wiki/Special:Statistics?action=raw '''87050 ''']
+|  263398
+|  [//en.wikibooks.org/wiki/Special:Recentchanges 3693341]
+|  [//en.wikibooks.org/wiki/Special:Listadmins 9]
+|  [//en.wikibooks.org/wiki/Special:Listusers 3297303]
+|  [//en.wikibooks.org/wiki/Special:ActiveUsers 291]
+|  [//en.wikibooks.org/wiki/Special:FileList 1743]
 |- style="text-align: right;"
 | 2
 | [[w:Hungarian language|Hungarian]]
-| [[w:Hungarian language|Magyar]]
+| class="plainlinksneverexpand" | [{{fullurl:hu:Magyar_nyelv}} Magyar]
 | [//hu.wikibooks.org/wiki/ hu]
-| [//hu.wikibooks.org/wiki/Special:Statistics?action=raw '''29651 ''']
-| 70783
-| [//hu.wikibooks.org/wiki/Special:Recentchanges 321749 ]
-| [//hu.wikibooks.org/wiki/Special:Listadmins 2 ]
-| [//hu.wikibooks.org/wiki/Special:Listusers 8310 ]
-| [//hu.wikibooks.org/wiki/Special:ActiveUsers 13 ]
-| [//hu.wikibooks.org/wiki/Special:ListFiles 17946 ]
-| style="font-size: 70%;" | 2018-02-25 05:04:21
+| [//hu.wikibooks.org/wiki/Special:Statistics?action=raw '''31351 ''']
+|  77640
+|  [//hu.wikibooks.org/wiki/Special:Recentchanges 381125]
+|  [//hu.wikibooks.org/wiki/Special:Listadmins 3]
+|  [//hu.wikibooks.org/wiki/Special:Listusers 10880]
+|  [//hu.wikibooks.org/wiki/Special:ActiveUsers 15]
+|  [//hu.wikibooks.org/wiki/Special:FileList 20328]
 |- style="text-align: right;"
 | 3
 | [[w:German language|German]]
-| [[w:German language|Deutsch]]
+| class="plainlinksneverexpand" | [{{fullurl:de:Deutsche_Sprache}} Deutsch]
 | [//de.wikibooks.org/wiki/ de]
-| [//de.wikibooks.org/wiki/Special:Statistics?action=raw '''25192 ''']
-| 66421
-| [//de.wikibooks.org/wiki/Special:Recentchanges 839931 ]
-| [//de.wikibooks.org/wiki/Special:Listadmins 11 ]
-| [//de.wikibooks.org/wiki/Special:Listusers 79847 ]
-| [//de.wikibooks.org/wiki/Special:ActiveUsers 111 ]
-| [//de.wikibooks.org/wiki/Special:ListFiles 7577 ]
-| style="font-size: 70%;" | 2018-02-25 05:04:06
+| [//de.wikibooks.org/wiki/Special:Statistics?action=raw '''27870 ''']
+|  71348
+|  [//de.wikibooks.org/wiki/Special:Recentchanges 917308]
+|  [//de.wikibooks.org/wiki/Special:Listadmins 11]
+|  [//de.wikibooks.org/wiki/Special:Listusers 96807]
+|  [//de.wikibooks.org/wiki/Special:ActiveUsers 73]
+|  [//de.wikibooks.org/wiki/Special:FileList 7683]
 |- style="text-align: right;"
 | 4
 | [[w:French language|French]]
-| [[w:French language|Français]]
+| class="plainlinksneverexpand" | [{{fullurl:fr:Français}} Français]
 | [//fr.wikibooks.org/wiki/ fr]
-| [//fr.wikibooks.org/wiki/Special:Statistics?action=raw '''14688 ''']
-| 49048
-| [//fr.wikibooks.org/wiki/Special:Recentchanges 585821 ]
-| [//fr.wikibooks.org/wiki/Special:Listadmins 10 ]
-| [//fr.wikibooks.org/wiki/Special:Listusers 70573 ]
-| [//fr.wikibooks.org/wiki/Special:ActiveUsers 62 ]
-| [//fr.wikibooks.org/wiki/Special:ListFiles 166 ]
-| style="font-size: 70%;" | 2018-02-25 05:04:08
+| [//fr.wikibooks.org/wiki/Special:Statistics?action=raw '''16273 ''']
+|  52445
+|  [//fr.wikibooks.org/wiki/Special:Recentchanges 644618]
+|  [//fr.wikibooks.org/wiki/Special:Listadmins 6]
+|  [//fr.wikibooks.org/wiki/Special:Listusers 98898]
+|  [//fr.wikibooks.org/wiki/Special:ActiveUsers 57]
+|  [//fr.wikibooks.org/wiki/Special:FileList 166]
 |- style="text-align: right;"
 | 5
 | [[w:Portuguese language|Portuguese]]
-| [[w:Portuguese language|Português]]
+| class="plainlinksneverexpand" | [{{fullurl:pt:Língua_portuguesa}} Português]
 | [//pt.wikibooks.org/wiki/ pt]
-| [//pt.wikibooks.org/wiki/Special:Statistics?action=raw '''11502 ''']
-| 75793
-| [//pt.wikibooks.org/wiki/Special:Recentchanges 449651 ]
-| [//pt.wikibooks.org/wiki/Special:Listadmins 5 ]
-| [//pt.wikibooks.org/wiki/Special:Listusers 46908 ]
-| [//pt.wikibooks.org/wiki/Special:ActiveUsers 34 ]
-| [//pt.wikibooks.org/wiki/Special:ListFiles 1038 ]
-| style="font-size: 70%;" | 2018-02-25 05:04:13
+| [//pt.wikibooks.org/wiki/Special:Statistics?action=raw '''12732 ''']
+|  78204
+|  [//pt.wikibooks.org/wiki/Special:Recentchanges 464027]
+|  [//pt.wikibooks.org/wiki/Special:Listadmins 4]
+|  [//pt.wikibooks.org/wiki/Special:Listusers 57725]
+|  [//pt.wikibooks.org/wiki/Special:ActiveUsers 31]
+|  [//pt.wikibooks.org/wiki/Special:FileList 1031]
 |- style="text-align: right;"
 | 6
 | [[w:Japanese language|Japanese]]
-| [[w:Japanese language|日本語]]
+| class="plainlinksneverexpand" | [{{fullurl:ja:日本語}} 日本語]
 | [//ja.wikibooks.org/wiki/ ja]
-| [//ja.wikibooks.org/wiki/Special:Statistics?action=raw '''10671 ''']
-| 19732
-| [//ja.wikibooks.org/wiki/Special:Recentchanges 116958 ]
-| [//ja.wikibooks.org/wiki/Special:Listadmins 5 ]
-| [//ja.wikibooks.org/wiki/Special:Listusers 36741 ]
-| [//ja.wikibooks.org/wiki/Special:ActiveUsers 50 ]
-| [//ja.wikibooks.org/wiki/Special:ListFiles 355 ]
-| style="font-size: 70%;" | 2018-02-25 05:04:17
+| [//ja.wikibooks.org/wiki/Special:Statistics?action=raw '''11924 ''']
+|  22499
+|  [//ja.wikibooks.org/wiki/Special:Recentchanges 165354]
+|  [//ja.wikibooks.org/wiki/Special:Listadmins 5]
+|  [//ja.wikibooks.org/wiki/Special:Listusers 56858]
+|  [//ja.wikibooks.org/wiki/Special:ActiveUsers 65]
+|  [//ja.wikibooks.org/wiki/Special:FileList 370]
 |- style="text-align: right;"
 | 7
 | [[w:Italian language|Italian]]
-| [[w:Italian language|Italiano]]
+| class="plainlinksneverexpand" | [{{fullurl:it:Lingua_italiana}} Italiano]
 | [//it.wikibooks.org/wiki/ it]
-| [//it.wikibooks.org/wiki/Special:Statistics?action=raw '''8234 ''']
-| 26341
-| [//it.wikibooks.org/wiki/Special:Recentchanges 335683 ]
-| [//it.wikibooks.org/wiki/Special:Listadmins 4 ]
-| [//it.wikibooks.org/wiki/Special:Listusers 33337 ]
-| [//it.wikibooks.org/wiki/Special:ActiveUsers 62 ]
-| [//it.wikibooks.org/wiki/Special:ListFiles 920 ]
-| style="font-size: 70%;" | 2018-02-25 05:03:58
+| [//it.wikibooks.org/wiki/Special:Statistics?action=raw '''10799 ''']
+|  30786
+|  [//it.wikibooks.org/wiki/Special:Recentchanges 381214]
+|  [//it.wikibooks.org/wiki/Special:Listadmins 4]
+|  [//it.wikibooks.org/wiki/Special:Listusers 42692]
+|  [//it.wikibooks.org/wiki/Special:ActiveUsers 48]
+|  [//it.wikibooks.org/wiki/Special:FileList 780]
 |- style="text-align: right;"
 | 8
-| [[w:Dutch language|Dutch]]
-| [[w:Dutch language|Nederlands]]
-| [//nl.wikibooks.org/wiki/ nl]
-| [//nl.wikibooks.org/wiki/Special:Statistics?action=raw '''8033 ''']
-| 26126
-| [//nl.wikibooks.org/wiki/Special:Recentchanges 325550 ]
-| [//nl.wikibooks.org/wiki/Special:Listadmins 9 ]
-| [//nl.wikibooks.org/wiki/Special:Listusers 19150 ]
-| [//nl.wikibooks.org/wiki/Special:ActiveUsers 33 ]
-| [//nl.wikibooks.org/wiki/Special:ListFiles 12 ]
-| style="font-size: 70%;" | 2018-02-25 05:00:33
+| [[w:Spanish language|Spanish]]
+| class="plainlinksneverexpand" | [{{fullurl:es:Idioma_español}} Español]
+| [//es.wikibooks.org/wiki/ es]
+| [//es.wikibooks.org/wiki/Special:Statistics?action=raw '''8553 ''']
+|  36344
+|  [//es.wikibooks.org/wiki/Special:Recentchanges 385352]
+|  [//es.wikibooks.org/wiki/Special:Listadmins 12]
+|  [//es.wikibooks.org/wiki/Special:Listusers 110685]
+|  [//es.wikibooks.org/wiki/Special:ActiveUsers 39]
+|  [//es.wikibooks.org/wiki/Special:FileList 0]
 |- style="text-align: right;"
 | 9
-| [[w:Spanish language|Spanish]]
-| [[w:Spanish language|Español]]
-| [//es.wikibooks.org/wiki/ es]
-| [//es.wikibooks.org/wiki/Special:Statistics?action=raw '''7889 ''']
-| 34455
-| [//es.wikibooks.org/wiki/Special:Recentchanges 348711 ]
-| [//es.wikibooks.org/wiki/Special:Listadmins 12 ]
-| [//es.wikibooks.org/wiki/Special:Listusers 91947 ]
-| [//es.wikibooks.org/wiki/Special:ActiveUsers 54 ]
-| [//es.wikibooks.org/wiki/Special:ListFiles 0 ]
-| style="font-size: 70%;" | 2018-02-25 05:04:11
+| [[w:Dutch language|Dutch]]
+| class="plainlinksneverexpand" | [{{fullurl:nl:Nederlands}} Nederlands]
+| [//nl.wikibooks.org/wiki/ nl]
+| [//nl.wikibooks.org/wiki/Special:Statistics?action=raw '''8327 ''']
+|  27346
+|  [//nl.wikibooks.org/wiki/Special:Recentchanges 344685]
+|  [//nl.wikibooks.org/wiki/Special:Listadmins 10]
+|  [//nl.wikibooks.org/wiki/Special:Listusers 23640]
+|  [//nl.wikibooks.org/wiki/Special:ActiveUsers 24]
+|  [//nl.wikibooks.org/wiki/Special:FileList 17]
 |- style="text-align: right;"
 | 10
 | [[w:Polish language|Polish]]
-| [[w:Polish language|Polski]]
+| class="plainlinksneverexpand" | [{{fullurl:pl:Język_polski}} Polski]
 | [//pl.wikibooks.org/wiki/ pl]
-| [//pl.wikibooks.org/wiki/Special:Statistics?action=raw '''5145 ''']
-| 19575
-| [//pl.wikibooks.org/wiki/Special:Recentchanges 241417 ]
-| [//pl.wikibooks.org/wiki/Special:Listadmins 4 ]
-| [//pl.wikibooks.org/wiki/Special:Listusers 25414 ]
-| [//pl.wikibooks.org/wiki/Special:ActiveUsers 31 ]
-| [//pl.wikibooks.org/wiki/Special:ListFiles 922 ]
-| style="font-size: 70%;" | 2018-02-25 05:04:15
+| [//pl.wikibooks.org/wiki/Special:Statistics?action=raw '''6365 ''']
+|  39034
+|  [//pl.wikibooks.org/wiki/Special:Recentchanges 383398]
+|  [//pl.wikibooks.org/wiki/Special:Listadmins 3]
+|  [//pl.wikibooks.org/wiki/Special:Listusers 30622]
+|  [//pl.wikibooks.org/wiki/Special:ActiveUsers 20]
+|  [//pl.wikibooks.org/wiki/Special:FileList 920]
 |- style="text-align: right;"
 | 11
-| [[w:Thai language|Thai]]
-| [[w:Thai language|ไทย]]
-| [//th.wikibooks.org/wiki/ th]
-| [//th.wikibooks.org/wiki/Special:Statistics?action=raw '''4742 ''']
-| 14143
-| [//th.wikibooks.org/wiki/Special:Recentchanges 45211 ]
-| [//th.wikibooks.org/wiki/Special:Listadmins 2 ]
-| [//th.wikibooks.org/wiki/Special:Listusers 7177 ]
-| [//th.wikibooks.org/wiki/Special:ActiveUsers 12 ]
-| [//th.wikibooks.org/wiki/Special:ListFiles 318 ]
-| style="font-size: 70%;" | 2018-02-25 05:00:31
+| [[w:Indonesian language|Indonesian]]
+| class="plainlinksneverexpand" | [{{fullurl:id:Bahasa_Indonesia}} Bahasa Indonesia]
+| [//id.wikibooks.org/wiki/ id]
+| [//id.wikibooks.org/wiki/Special:Statistics?action=raw '''4535 ''']
+|  14258
+|  [//id.wikibooks.org/wiki/Special:Recentchanges 69790]
+|  [//id.wikibooks.org/wiki/Special:Listadmins 4]
+|  [//id.wikibooks.org/wiki/Special:Listusers 31719]
+|  [//id.wikibooks.org/wiki/Special:ActiveUsers 27]
+|  [//id.wikibooks.org/wiki/Special:FileList 896]
 |- style="text-align: right;"
 | 12
 | [[w:Hebrew language|Hebrew]]
-| [[w:Hebrew language|עברית]]
+| class="plainlinksneverexpand" | [{{fullurl:he:עברית}} עברית]
 | [//he.wikibooks.org/wiki/ he]
-| [//he.wikibooks.org/wiki/Special:Statistics?action=raw '''4318 ''']
-| 17060
-| [//he.wikibooks.org/wiki/Special:Recentchanges 151016 ]
-| [//he.wikibooks.org/wiki/Special:Listadmins 6 ]
-| [//he.wikibooks.org/wiki/Special:Listusers 14502 ]
-| [//he.wikibooks.org/wiki/Special:ActiveUsers 21 ]
-| [//he.wikibooks.org/wiki/Special:ListFiles 1675 ]
-| style="font-size: 70%;" | 2018-02-25 05:04:00
+| [//he.wikibooks.org/wiki/Special:Statistics?action=raw '''4458 ''']
+|  17744
+|  [//he.wikibooks.org/wiki/Special:Recentchanges 162132]
+|  [//he.wikibooks.org/wiki/Special:Listadmins 5]
+|  [//he.wikibooks.org/wiki/Special:Listusers 19765]
+|  [//he.wikibooks.org/wiki/Special:ActiveUsers 22]
+|  [//he.wikibooks.org/wiki/Special:FileList 1703]
 |- style="text-align: right;"
 | 13
-| [[w:Indonesian language|Indonesian]]
-| [[w:Indonesian language|Bahasa Indonesia]]
-| [//id.wikibooks.org/wiki/ id]
-| [//id.wikibooks.org/wiki/Special:Statistics?action=raw '''3640 ''']
-| 12840
-| [//id.wikibooks.org/wiki/Special:Recentchanges 60915 ]
-| [//id.wikibooks.org/wiki/Special:Listadmins 3 ]
-| [//id.wikibooks.org/wiki/Special:Listusers 24724 ]
-| [//id.wikibooks.org/wiki/Special:ActiveUsers 19 ]
-| [//id.wikibooks.org/wiki/Special:ListFiles 890 ]
-| style="font-size: 70%;" | 2018-02-25 05:00:29
+| [[w:Finnish language|Finnish]]
+| class="plainlinksneverexpand" | [{{fullurl:fi:Suomen_kieli}} Suomi]
+| [//fi.wikibooks.org/wiki/ fi]
+| [//fi.wikibooks.org/wiki/Special:Statistics?action=raw '''3894 ''']
+|  12464
+|  [//fi.wikibooks.org/wiki/Special:Recentchanges 129048]
+|  [//fi.wikibooks.org/wiki/Special:Listadmins 6]
+|  [//fi.wikibooks.org/wiki/Special:Listusers 9843]
+|  [//fi.wikibooks.org/wiki/Special:ActiveUsers 12]
+|  [//fi.wikibooks.org/wiki/Special:FileList 345]
 |- style="text-align: right;"
 | 14
-| [[w:Albanian language|Albanian]]
-| [[w:Albanian language|Shqip]]
-| [//sq.wikibooks.org/wiki/ sq]
-| [//sq.wikibooks.org/wiki/Special:Statistics?action=raw '''3301 ''']
-| 6961
-| [//sq.wikibooks.org/wiki/Special:Recentchanges 32705 ]
-| [//sq.wikibooks.org/wiki/Special:Listadmins 0 ]
-| [//sq.wikibooks.org/wiki/Special:Listusers 3703 ]
-| [//sq.wikibooks.org/wiki/Special:ActiveUsers 8 ]
-| [//sq.wikibooks.org/wiki/Special:ListFiles 308 ]
-| style="font-size: 70%;" | 2018-02-25 05:00:57
+| [[w:Chinese language|Chinese]]
+| class="plainlinksneverexpand" | [{{fullurl:zh:汉语}} 中文]
+| [//zh.wikibooks.org/wiki/ zh]
+| [//zh.wikibooks.org/wiki/Special:Statistics?action=raw '''3358 ''']
+|  17329
+|  [//zh.wikibooks.org/wiki/Special:Recentchanges 136718]
+|  [//zh.wikibooks.org/wiki/Special:Listadmins 7]
+|  [//zh.wikibooks.org/wiki/Special:Listusers 55167]
+|  [//zh.wikibooks.org/wiki/Special:ActiveUsers 44]
+|  [//zh.wikibooks.org/wiki/Special:FileList 91]
 |- style="text-align: right;"
 | 15
-| [[w:Finnish language|Finnish]]
-| [[w:Finnish language|Suomi]]
-| [//fi.wikibooks.org/wiki/ fi]
-| [//fi.wikibooks.org/wiki/Special:Statistics?action=raw '''2955 ''']
-| 11013
-| [//fi.wikibooks.org/wiki/Special:Recentchanges 117973 ]
-| [//fi.wikibooks.org/wiki/Special:Listadmins 4 ]
-| [//fi.wikibooks.org/wiki/Special:Listusers 8168 ]
-| [//fi.wikibooks.org/wiki/Special:ActiveUsers 17 ]
-| [//fi.wikibooks.org/wiki/Special:ListFiles 345 ]
-| style="font-size: 70%;" | 2018-02-25 05:00:07
+| [[w:Albanian language|Albanian]]
+| class="plainlinksneverexpand" | [{{fullurl:sq:Gjuha_shqipe}} Shqip]
+| [//sq.wikibooks.org/wiki/ sq]
+| [//sq.wikibooks.org/wiki/Special:Statistics?action=raw '''3280 ''']
+|  7627
+|  [//sq.wikibooks.org/wiki/Special:Recentchanges 34623]
+|  [//sq.wikibooks.org/wiki/Special:Listadmins 1]
+|  [//sq.wikibooks.org/wiki/Special:Listusers 4322]
+|  [//sq.wikibooks.org/wiki/Special:ActiveUsers 3]
+|  [//sq.wikibooks.org/wiki/Special:FileList 308]
 |- style="text-align: right;"
 | 16
-| [[w:Persian language|Persian]]
-| [[w:Persian language|فارسی]]
-| [//fa.wikibooks.org/wiki/ fa]
-| [//fa.wikibooks.org/wiki/Special:Statistics?action=raw '''2839 ''']
-| 16756
-| [//fa.wikibooks.org/wiki/Special:Recentchanges 92797 ]
-| [//fa.wikibooks.org/wiki/Special:Listadmins 2 ]
-| [//fa.wikibooks.org/wiki/Special:Listusers 14083 ]
-| [//fa.wikibooks.org/wiki/Special:ActiveUsers 24 ]
-| [//fa.wikibooks.org/wiki/Special:ListFiles 842 ]
-| style="font-size: 70%;" | 2018-02-25 05:00:22
+| [[w:Azerbaijani language|Azerbaijani]]
+| class="plainlinksneverexpand" | [{{fullurl:az:Azərbaycan_dili}} Azərbaycanca]
+| [//az.wikibooks.org/wiki/ az]
+| [//az.wikibooks.org/wiki/Special:Statistics?action=raw '''3142 ''']
+|  8216
+|  [//az.wikibooks.org/wiki/Special:Recentchanges 32432]
+|  [//az.wikibooks.org/wiki/Special:Listadmins 3]
+|  [//az.wikibooks.org/wiki/Special:Listusers 6265]
+|  [//az.wikibooks.org/wiki/Special:ActiveUsers 6]
+|  [//az.wikibooks.org/wiki/Special:FileList 1]
 |- style="text-align: right;"
 | 17
-| [[w:Chinese language|Chinese]]
-| [[w:Chinese language|中文]]
-| [//zh.wikibooks.org/wiki/ zh]
-| [//zh.wikibooks.org/wiki/Special:Statistics?action=raw '''2252 ''']
-| 12745
-| [//zh.wikibooks.org/wiki/Special:Recentchanges 98970 ]
-| [//zh.wikibooks.org/wiki/Special:Listadmins 5 ]
-| [//zh.wikibooks.org/wiki/Special:Listusers 43831 ]
-| [//zh.wikibooks.org/wiki/Special:ActiveUsers 48 ]
-| [//zh.wikibooks.org/wiki/Special:ListFiles 96 ]
-| style="font-size: 70%;" | 2018-02-25 05:03:51
+| [[w:Persian language|Persian]]
+| class="plainlinksneverexpand" | [{{fullurl:fa:فارسی}} فارسی]
+| [//fa.wikibooks.org/wiki/ fa]
+| [//fa.wikibooks.org/wiki/Special:Statistics?action=raw '''3067 ''']
+|  24570
+|  [//fa.wikibooks.org/wiki/Special:Recentchanges 108628]
+|  [//fa.wikibooks.org/wiki/Special:Listadmins 3]
+|  [//fa.wikibooks.org/wiki/Special:Listusers 21147]
+|  [//fa.wikibooks.org/wiki/Special:ActiveUsers 20]
+|  [//fa.wikibooks.org/wiki/Special:FileList 861]
 |- style="text-align: right;"
 | 18
-| [[w:Catalan language|Catalan]]
-| [[w:Catalan language|Català]]
-| [//ca.wikibooks.org/wiki/ ca]
-| [//ca.wikibooks.org/wiki/Special:Statistics?action=raw '''2044 ''']
-| 7084
-| [//ca.wikibooks.org/wiki/Special:Recentchanges 61499 ]
-| [//ca.wikibooks.org/wiki/Special:Listadmins 3 ]
-| [//ca.wikibooks.org/wiki/Special:Listusers 4821 ]
-| [//ca.wikibooks.org/wiki/Special:ActiveUsers 10 ]
-| [//ca.wikibooks.org/wiki/Special:ListFiles 14 ]
-| style="font-size: 70%;" | 2018-02-25 05:04:02
+| [[w:Russian language|Russian]]
+| class="plainlinksneverexpand" | [{{fullurl:ru:Русский_язык}} Русский]
+| [//ru.wikibooks.org/wiki/ ru]
+| [//ru.wikibooks.org/wiki/Special:Statistics?action=raw '''2237 ''']
+|  16828
+|  [//ru.wikibooks.org/wiki/Special:Recentchanges 176898]
+|  [//ru.wikibooks.org/wiki/Special:Listadmins 2]
+|  [//ru.wikibooks.org/wiki/Special:Listusers 65362]
+|  [//ru.wikibooks.org/wiki/Special:ActiveUsers 31]
+|  [//ru.wikibooks.org/wiki/Special:FileList 1595]
 |- style="text-align: right;"
 | 19
-| [[w:Russian language|Russian]]
-| [[w:Russian language|Русский]]
-| [//ru.wikibooks.org/wiki/ ru]
-| [//ru.wikibooks.org/wiki/Special:Statistics?action=raw '''1750 ''']
-| 13663
-| [//ru.wikibooks.org/wiki/Special:Recentchanges 144699 ]
-| [//ru.wikibooks.org/wiki/Special:Listadmins 1 ]
-| [//ru.wikibooks.org/wiki/Special:Listusers 54225 ]
-| [//ru.wikibooks.org/wiki/Special:ActiveUsers 41 ]
-| [//ru.wikibooks.org/wiki/Special:ListFiles 1233 ]
-| style="font-size: 70%;" | 2018-02-25 05:03:49
+| [[w:Vietnamese language|Vietnamese]]
+| class="plainlinksneverexpand" | [{{fullurl:vi:Tiếng_Việt}} Tiếng Việt]
+| [//vi.wikibooks.org/wiki/ vi]
+| [//vi.wikibooks.org/wiki/Special:Statistics?action=raw '''2181 ''']
+|  11355
+|  [//vi.wikibooks.org/wiki/Special:Recentchanges 228613]
+|  [//vi.wikibooks.org/wiki/Special:Listadmins 5]
+|  [//vi.wikibooks.org/wiki/Special:Listusers 14024]
+|  [//vi.wikibooks.org/wiki/Special:ActiveUsers 18]
+|  [//vi.wikibooks.org/wiki/Special:FileList 560]
 |- style="text-align: right;"
 | 20
-| [[w:Azerbaijani language|Azerbaijani]]
-| [[w:Azerbaijani language|Azərbaycanca]]
-| [//az.wikibooks.org/wiki/ az]
-| [//az.wikibooks.org/wiki/Special:Statistics?action=raw '''1712 ''']
-| 6406
-| [//az.wikibooks.org/wiki/Special:Recentchanges 25777 ]
-| [//az.wikibooks.org/wiki/Special:Listadmins 1 ]
-| [//az.wikibooks.org/wiki/Special:Listusers 4676 ]
-| [//az.wikibooks.org/wiki/Special:ActiveUsers 12 ]
-| [//az.wikibooks.org/wiki/Special:ListFiles 1 ]
-| style="font-size: 70%;" | 2018-02-25 05:01:31
+| [[w:Catalan language|Catalan]]
+| class="plainlinksneverexpand" | [{{fullurl:ca:Català}} Català]
+| [//ca.wikibooks.org/wiki/ ca]
+| [//ca.wikibooks.org/wiki/Special:Statistics?action=raw '''2108 ''']
+|  7425
+|  [//ca.wikibooks.org/wiki/Special:Recentchanges 65332]
+|  [//ca.wikibooks.org/wiki/Special:Listadmins 2]
+|  [//ca.wikibooks.org/wiki/Special:Listusers 6107]
+|  [//ca.wikibooks.org/wiki/Special:ActiveUsers 6]
+|  [//ca.wikibooks.org/wiki/Special:FileList 14]
 |- style="text-align: right;"
 | 21
-| [[w:Vietnamese language|Vietnamese]]
-| [[w:Vietnamese language|Tiếng Việt]]
-| [//vi.wikibooks.org/wiki/ vi]
-| [//vi.wikibooks.org/wiki/Special:Statistics?action=raw '''1503 ''']
-| 8666
-| [//vi.wikibooks.org/wiki/Special:Recentchanges 169619 ]
-| [//vi.wikibooks.org/wiki/Special:Listadmins 1 ]
-| [//vi.wikibooks.org/wiki/Special:Listusers 12041 ]
-| [//vi.wikibooks.org/wiki/Special:ActiveUsers 9 ]
-| [//vi.wikibooks.org/wiki/Special:ListFiles 560 ]
-| style="font-size: 70%;" | 2018-02-25 05:00:26
+| [[w:Basque language|Basque]]
+| class="plainlinksneverexpand" | [{{fullurl:eu:Euskara}} Euskara]
+| [//eu.wikibooks.org/wiki/ eu]
+| [//eu.wikibooks.org/wiki/Special:Statistics?action=raw '''1390 ''']
+|  2707
+|  [//eu.wikibooks.org/wiki/Special:Recentchanges 22118]
+|  [//eu.wikibooks.org/wiki/Special:Listadmins 2]
+|  [//eu.wikibooks.org/wiki/Special:Listusers 1894]
+|  [//eu.wikibooks.org/wiki/Special:ActiveUsers 18]
+|  [//eu.wikibooks.org/wiki/Special:FileList 79]
 |- style="text-align: right;"
 | 22
 | [[w:Danish language|Danish]]
-| [[w:Danish language|Dansk]]
+| class="plainlinksneverexpand" | [{{fullurl:da:Dansk_(sprog)}} Dansk]
 | [//da.wikibooks.org/wiki/ da]
-| [//da.wikibooks.org/wiki/Special:Statistics?action=raw '''1210 ''']
-| 4113
-| [//da.wikibooks.org/wiki/Special:Recentchanges 27225 ]
-| [//da.wikibooks.org/wiki/Special:Listadmins 0 ]
-| [//da.wikibooks.org/wiki/Special:Listusers 3562 ]
-| [//da.wikibooks.org/wiki/Special:ActiveUsers 7 ]
-| [//da.wikibooks.org/wiki/Special:ListFiles 0 ]
-| style="font-size: 70%;" | 2018-02-25 05:00:35
+| [//da.wikibooks.org/wiki/Special:Statistics?action=raw '''1300 ''']
+|  4245
+|  [//da.wikibooks.org/wiki/Special:Recentchanges 33046]
+|  [//da.wikibooks.org/wiki/Special:Listadmins 1]
+|  [//da.wikibooks.org/wiki/Special:Listusers 4200]
+|  [//da.wikibooks.org/wiki/Special:ActiveUsers 7]
+|  [//da.wikibooks.org/wiki/Special:FileList 0]
 |- style="text-align: right;"
 | 23
-| [[w:Galician language|Galician]]
-| [[w:Galician language|Galego]]
-| [//gl.wikibooks.org/wiki/ gl]
-| [//gl.wikibooks.org/wiki/Special:Statistics?action=raw '''1154 ''']
-| 3187
-| [//gl.wikibooks.org/wiki/Special:Recentchanges 18861 ]
-| [//gl.wikibooks.org/wiki/Special:Listadmins 0 ]
-| [//gl.wikibooks.org/wiki/Special:Listusers 2115 ]
-| [//gl.wikibooks.org/wiki/Special:ActiveUsers 5 ]
-| [//gl.wikibooks.org/wiki/Special:ListFiles 109 ]
-| style="font-size: 70%;" | 2018-02-25 05:00:39
+| [[w:Korean language|Korean]]
+| class="plainlinksneverexpand" | [{{fullurl:ko:한국어}} 한국어]
+| [//ko.wikibooks.org/wiki/ ko]
+| [//ko.wikibooks.org/wiki/Special:Statistics?action=raw '''1241 ''']
+|  6504
+|  [//ko.wikibooks.org/wiki/Special:Recentchanges 40467]
+|  [//ko.wikibooks.org/wiki/Special:Listadmins 2]
+|  [//ko.wikibooks.org/wiki/Special:Listusers 7247]
+|  [//ko.wikibooks.org/wiki/Special:ActiveUsers 13]
+|  [//ko.wikibooks.org/wiki/Special:FileList 23]
 |- style="text-align: right;"
 | 24
-| [[w:Swedish language|Swedish]]
-| [[w:Swedish language|Svenska]]
-| [//sv.wikibooks.org/wiki/ sv]
-| [//sv.wikibooks.org/wiki/Special:Statistics?action=raw '''1152 ''']
-| 6161
-| [//sv.wikibooks.org/wiki/Special:Recentchanges 47901 ]
-| [//sv.wikibooks.org/wiki/Special:Listadmins 6 ]
-| [//sv.wikibooks.org/wiki/Special:Listusers 6809 ]
-| [//sv.wikibooks.org/wiki/Special:ActiveUsers 9 ]
-| [//sv.wikibooks.org/wiki/Special:ListFiles 212 ]
-| style="font-size: 70%;" | 2018-02-25 05:04:19
+| [[w:Bashkir language|Bashkir]]
+| class="plainlinksneverexpand" | [{{fullurl:ba:Башҡорт_теле}} Башҡорт]
+| [//ba.wikibooks.org/wiki/ ba]
+| [//ba.wikibooks.org/wiki/Special:Statistics?action=raw '''1176 ''']
+|  3084
+|  [//ba.wikibooks.org/wiki/Special:Recentchanges 22716]
+|  [//ba.wikibooks.org/wiki/Special:Listadmins 2]
+|  [//ba.wikibooks.org/wiki/Special:Listusers 882]
+|  [//ba.wikibooks.org/wiki/Special:ActiveUsers 9]
+|  [//ba.wikibooks.org/wiki/Special:FileList 0]
 |- style="text-align: right;"
 | 25
-| [[w:Serbian language|Serbian]]
-| [[w:Serbian language|Српски / Srpski]]
-| [//sr.wikibooks.org/wiki/ sr]
-| [//sr.wikibooks.org/wiki/Special:Statistics?action=raw '''1144 ''']
-| 2982
-| [//sr.wikibooks.org/wiki/Special:Recentchanges 21655 ]
-| [//sr.wikibooks.org/wiki/Special:Listadmins 4 ]
-| [//sr.wikibooks.org/wiki/Special:Listusers 5776 ]
-| [//sr.wikibooks.org/wiki/Special:ActiveUsers 6 ]
-| [//sr.wikibooks.org/wiki/Special:ListFiles 168 ]
-| style="font-size: 70%;" | 2018-02-25 05:00:46
+| [[w:Swedish language|Swedish]]
+| class="plainlinksneverexpand" | [{{fullurl:sv:Svenska}} Svenska]
+| [//sv.wikibooks.org/wiki/ sv]
+| [//sv.wikibooks.org/wiki/Special:Statistics?action=raw '''1162 ''']
+|  6225
+|  [//sv.wikibooks.org/wiki/Special:Recentchanges 49624]
+|  [//sv.wikibooks.org/wiki/Special:Listadmins 5]
+|  [//sv.wikibooks.org/wiki/Special:Listusers 8403]
+|  [//sv.wikibooks.org/wiki/Special:ActiveUsers 6]
+|  [//sv.wikibooks.org/wiki/Special:FileList 211]
 |- style="text-align: right;"
 | 26
-| [[w:Korean language|Korean]]
-| [[w:Korean language|한국어]]
-| [//ko.wikibooks.org/wiki/ ko]
-| [//ko.wikibooks.org/wiki/Special:Statistics?action=raw '''1092 ''']
-| 6244
-| [//ko.wikibooks.org/wiki/Special:Recentchanges 37121 ]
-| [//ko.wikibooks.org/wiki/Special:Listadmins 1 ]
-| [//ko.wikibooks.org/wiki/Special:Listusers 5867 ]
-| [//ko.wikibooks.org/wiki/Special:ActiveUsers 16 ]
-| [//ko.wikibooks.org/wiki/Special:ListFiles 23 ]
-| style="font-size: 70%;" | 2018-02-25 05:00:05
+| [[w:Thai language|Thai]]
+| class="plainlinksneverexpand" | [{{fullurl:th:ภาษาไทย}} ไทย]
+| [//th.wikibooks.org/wiki/ th]
+| [//th.wikibooks.org/wiki/Special:Statistics?action=raw '''1158 ''']
+|  13676
+|  [//th.wikibooks.org/wiki/Special:Recentchanges 57273]
+|  [//th.wikibooks.org/wiki/Special:Listadmins 3]
+|  [//th.wikibooks.org/wiki/Special:Listusers 10135]
+|  [//th.wikibooks.org/wiki/Special:ActiveUsers 12]
+|  [//th.wikibooks.org/wiki/Special:FileList 287]
 |- style="text-align: right;"
 | 27
-| [[w:Czech language|Czech]]
-| [[w:Czech language|Čeština]]
-| [//cs.wikibooks.org/wiki/ cs]
-| [//cs.wikibooks.org/wiki/Special:Statistics?action=raw '''1022 ''']
-| 4183
-| [//cs.wikibooks.org/wiki/Special:Recentchanges 36063 ]
-| [//cs.wikibooks.org/wiki/Special:Listadmins 4 ]
-| [//cs.wikibooks.org/wiki/Special:Listusers 7036 ]
-| [//cs.wikibooks.org/wiki/Special:ActiveUsers 13 ]
-| [//cs.wikibooks.org/wiki/Special:ListFiles 27 ]
-| style="font-size: 70%;" | 2018-02-25 05:00:11
+| [[w:Galician language|Galician]]
+| class="plainlinksneverexpand" | [{{fullurl:gl:Lingua_galega}} Galego]
+| [//gl.wikibooks.org/wiki/ gl]
+| [//gl.wikibooks.org/wiki/Special:Statistics?action=raw '''1154 ''']
+|  3202
+|  [//gl.wikibooks.org/wiki/Special:Recentchanges 19331]
+|  [//gl.wikibooks.org/wiki/Special:Listadmins 1]
+|  [//gl.wikibooks.org/wiki/Special:Listusers 2430]
+|  [//gl.wikibooks.org/wiki/Special:ActiveUsers 2]
+|  [//gl.wikibooks.org/wiki/Special:FileList 109]
 |- style="text-align: right;"
 | 28
-| [[w:Croatian language|Croatian]]
-| [[w:Croatian language|Hrvatski]]
-| [//hr.wikibooks.org/wiki/ hr]
-| [//hr.wikibooks.org/wiki/Special:Statistics?action=raw '''974 ''']
-| 3538
-| [//hr.wikibooks.org/wiki/Special:Recentchanges 19608 ]
-| [//hr.wikibooks.org/wiki/Special:Listadmins 2 ]
-| [//hr.wikibooks.org/wiki/Special:Listusers 3589 ]
-| [//hr.wikibooks.org/wiki/Special:ActiveUsers 6 ]
-| [//hr.wikibooks.org/wiki/Special:ListFiles 182 ]
-| style="font-size: 70%;" | 2018-02-25 05:01:10
+| [[w:Serbian language|Serbian]]
+| class="plainlinksneverexpand" | [{{fullurl:sr:Српски_језик}} Српски / Srpski]
+| [//sr.wikibooks.org/wiki/ sr]
+| [//sr.wikibooks.org/wiki/Special:Statistics?action=raw '''1110 ''']
+|  2987
+|  [//sr.wikibooks.org/wiki/Special:Recentchanges 22002]
+|  [//sr.wikibooks.org/wiki/Special:Listadmins 6]
+|  [//sr.wikibooks.org/wiki/Special:Listusers 12488]
+|  [//sr.wikibooks.org/wiki/Special:ActiveUsers 3]
+|  [//sr.wikibooks.org/wiki/Special:FileList 165]
 |- style="text-align: right;"
 | 29
-| [[w:Bashkir language|Bashkir]]
-| [[w:Bashkir language|Башҡорт]]
-| [//ba.wikibooks.org/wiki/ ba]
-| [//ba.wikibooks.org/wiki/Special:Statistics?action=raw '''924 ''']
-| 2475
-| [//ba.wikibooks.org/wiki/Special:Recentchanges 19114 ]
-| [//ba.wikibooks.org/wiki/Special:Listadmins 1 ]
-| [//ba.wikibooks.org/wiki/Special:Listusers 590 ]
-| [//ba.wikibooks.org/wiki/Special:ActiveUsers 10 ]
-| [//ba.wikibooks.org/wiki/Special:ListFiles 0 ]
-| style="font-size: 70%;" | 2018-02-25 05:02:27
+| [[w:Czech language|Czech]]
+| class="plainlinksneverexpand" | [{{fullurl:cs:Čeština}} Čeština]
+| [//cs.wikibooks.org/wiki/ cs]
+| [//cs.wikibooks.org/wiki/Special:Statistics?action=raw '''1067 ''']
+|  4619
+|  [//cs.wikibooks.org/wiki/Special:Recentchanges 42218]
+|  [//cs.wikibooks.org/wiki/Special:Listadmins 5]
+|  [//cs.wikibooks.org/wiki/Special:Listusers 8722]
+|  [//cs.wikibooks.org/wiki/Special:ActiveUsers 12]
+|  [//cs.wikibooks.org/wiki/Special:FileList 27]
 |- style="text-align: right;"
 | 30
-| [[w:Norwegian (Bokmål) language|Norwegian (Bokmål)]]
-| [[w:Norwegian (Bokmål) language|Norsk (Bokmål)]]
-| [//no.wikibooks.org/wiki/ no]
-| [//no.wikibooks.org/wiki/Special:Statistics?action=raw '''861 ''']
-| 4165
-| [//no.wikibooks.org/wiki/Special:Recentchanges 39287 ]
-| [//no.wikibooks.org/wiki/Special:Listadmins 0 ]
-| [//no.wikibooks.org/wiki/Special:Listusers 4284 ]
-| [//no.wikibooks.org/wiki/Special:ActiveUsers 5 ]
-| [//no.wikibooks.org/wiki/Special:ListFiles 6 ]
-| style="font-size: 70%;" | 2018-02-25 05:00:18
+| [[w:Hindi language|Hindi]]
+| class="plainlinksneverexpand" | [{{fullurl:hi:हिन्दी}} हिन्दी]
+| [//hi.wikibooks.org/wiki/ hi]
+| [//hi.wikibooks.org/wiki/Special:Statistics?action=raw '''1057 ''']
+|  6718
+|  [//hi.wikibooks.org/wiki/Special:Recentchanges 65659]
+|  [//hi.wikibooks.org/wiki/Special:Listadmins 3]
+|  [//hi.wikibooks.org/wiki/Special:Listusers 8956]
+|  [//hi.wikibooks.org/wiki/Special:ActiveUsers 19]
+|  [//hi.wikibooks.org/wiki/Special:FileList 3]
 |- style="text-align: right;"
 | 31
-| [[w:Turkish language|Turkish]]
-| [[w:Turkish language|Türkçe]]
-| [//tr.wikibooks.org/wiki/ tr]
-| [//tr.wikibooks.org/wiki/Special:Statistics?action=raw '''806 ''']
-| 6679
-| [//tr.wikibooks.org/wiki/Special:Recentchanges 45487 ]
-| [//tr.wikibooks.org/wiki/Special:Listadmins 1 ]
-| [//tr.wikibooks.org/wiki/Special:Listusers 13996 ]
-| [//tr.wikibooks.org/wiki/Special:ActiveUsers 15 ]
-| [//tr.wikibooks.org/wiki/Special:ListFiles 84 ]
-| style="font-size: 70%;" | 2018-02-25 05:00:24
+| [[w:Croatian language|Croatian]]
+| class="plainlinksneverexpand" | [{{fullurl:hr:Hrvatski_jezik}} Hrvatski]
+| [//hr.wikibooks.org/wiki/ hr]
+| [//hr.wikibooks.org/wiki/Special:Statistics?action=raw '''976 ''']
+|  3639
+|  [//hr.wikibooks.org/wiki/Special:Recentchanges 20568]
+|  [//hr.wikibooks.org/wiki/Special:Listadmins 3]
+|  [//hr.wikibooks.org/wiki/Special:Listusers 4038]
+|  [//hr.wikibooks.org/wiki/Special:ActiveUsers 4]
+|  [//hr.wikibooks.org/wiki/Special:FileList 182]
 |- style="text-align: right;"
 | 32
-| [[w:Arabic language|Arabic]]
-| [[w:Arabic language|العربية]]
-| [//ar.wikibooks.org/wiki/ ar]
-| [//ar.wikibooks.org/wiki/Special:Statistics?action=raw '''734 ''']
-| 33988
-| [//ar.wikibooks.org/wiki/Special:Recentchanges 79803 ]
-| [//ar.wikibooks.org/wiki/Special:Listadmins 3 ]
-| [//ar.wikibooks.org/wiki/Special:Listusers 30366 ]
-| [//ar.wikibooks.org/wiki/Special:ActiveUsers 52 ]
-| [//ar.wikibooks.org/wiki/Special:ListFiles 1 ]
-| style="font-size: 70%;" | 2018-02-25 05:00:13
+| [[w:Norwegian (Bokmål) language|Norwegian (Bokmål)]]
+| class="plainlinksneverexpand" | [{{fullurl:no:Norsk}} Norsk (Bokmål)]
+| [//no.wikibooks.org/wiki/ no]
+| [//no.wikibooks.org/wiki/Special:Statistics?action=raw '''871 ''']
+|  4198
+|  [//no.wikibooks.org/wiki/Special:Recentchanges 40262]
+|  [//no.wikibooks.org/wiki/Special:Listadmins 1]
+|  [//no.wikibooks.org/wiki/Special:Listusers 4733]
+|  [//no.wikibooks.org/wiki/Special:ActiveUsers 1]
+|  [//no.wikibooks.org/wiki/Special:FileList 6]
 |- style="text-align: right;"
 | 33
-| [[w:Tamil language|Tamil]]
-| [[w:Tamil language|தமிழ்]]
-| [//ta.wikibooks.org/wiki/ ta]
-| [//ta.wikibooks.org/wiki/Special:Statistics?action=raw '''692 ''']
-| 3559
-| [//ta.wikibooks.org/wiki/Special:Recentchanges 16043 ]
-| [//ta.wikibooks.org/wiki/Special:Listadmins 3 ]
-| [//ta.wikibooks.org/wiki/Special:Listusers 4617 ]
-| [//ta.wikibooks.org/wiki/Special:ActiveUsers 6 ]
-| [//ta.wikibooks.org/wiki/Special:ListFiles 255 ]
-| style="font-size: 70%;" | 2018-02-25 05:00:37
+| [[w:Turkish language|Turkish]]
+| class="plainlinksneverexpand" | [{{fullurl:tr:Türkçe}} Türkçe]
+| [//tr.wikibooks.org/wiki/ tr]
+| [//tr.wikibooks.org/wiki/Special:Statistics?action=raw '''836 ''']
+|  6842
+|  [//tr.wikibooks.org/wiki/Special:Recentchanges 47664]
+|  [//tr.wikibooks.org/wiki/Special:Listadmins 2]
+|  [//tr.wikibooks.org/wiki/Special:Listusers 16315]
+|  [//tr.wikibooks.org/wiki/Special:ActiveUsers 13]
+|  [//tr.wikibooks.org/wiki/Special:FileList 84]
 |- style="text-align: right;"
 | 34
-| [[w:Sanskrit language|Sanskrit]]
-| [[w:Sanskrit language|संस्कृतम्]]
-| [//sa.wikibooks.org/wiki/ sa]
-| [//sa.wikibooks.org/wiki/Special:Statistics?action=raw '''557 ''']
-| 1334
-| [//sa.wikibooks.org/wiki/Special:Recentchanges 6141 ]
-| [//sa.wikibooks.org/wiki/Special:Listadmins 0 ]
-| [//sa.wikibooks.org/wiki/Special:Listusers 1791 ]
-| [//sa.wikibooks.org/wiki/Special:ActiveUsers 3 ]
-| [//sa.wikibooks.org/wiki/Special:ListFiles 0 ]
-| style="font-size: 70%;" | 2018-02-25 05:03:25
+| [[w:Arabic language|Arabic]]
+| class="plainlinksneverexpand" | [{{fullurl:ar:لغة_عربية}} العربية]
+| [//ar.wikibooks.org/wiki/ ar]
+| [//ar.wikibooks.org/wiki/Special:Statistics?action=raw '''828 ''']
+|  40933
+|  [//ar.wikibooks.org/wiki/Special:Recentchanges 95916]
+|  [//ar.wikibooks.org/wiki/Special:Listadmins 7]
+|  [//ar.wikibooks.org/wiki/Special:Listusers 36795]
+|  [//ar.wikibooks.org/wiki/Special:ActiveUsers 32]
+|  [//ar.wikibooks.org/wiki/Special:FileList 1]
 |- style="text-align: right;"
 | 35
-| [[w:Slovak language|Slovak]]
-| [[w:Slovak language|Slovenčina]]
-| [//sk.wikibooks.org/wiki/ sk]
-| [//sk.wikibooks.org/wiki/Special:Statistics?action=raw '''519 ''']
-| 2187
-| [//sk.wikibooks.org/wiki/Special:Recentchanges 19888 ]
-| [//sk.wikibooks.org/wiki/Special:Listadmins 3 ]
-| [//sk.wikibooks.org/wiki/Special:Listusers 2866 ]
-| [//sk.wikibooks.org/wiki/Special:ActiveUsers 7 ]
-| [//sk.wikibooks.org/wiki/Special:ListFiles 6 ]
-| style="font-size: 70%;" | 2018-02-25 05:00:41
+| [[w:Sanskrit language|Sanskrit]]
+| class="plainlinksneverexpand" | [{{fullurl:sa:संस्कृत_भाषा}} संस्कृतम्]
+| [//sa.wikibooks.org/wiki/ sa]
+| [//sa.wikibooks.org/wiki/Special:Statistics?action=raw '''799 ''']
+|  1628
+|  [//sa.wikibooks.org/wiki/Special:Recentchanges 6843]
+|  [//sa.wikibooks.org/wiki/Special:Listadmins 1]
+|  [//sa.wikibooks.org/wiki/Special:Listusers 2210]
+|  [//sa.wikibooks.org/wiki/Special:ActiveUsers 2]
+|  [//sa.wikibooks.org/wiki/Special:FileList 0]
 |- style="text-align: right;"
 | 36
-| [[w:Ukrainian language|Ukrainian]]
-| [[w:Ukrainian language|Українська]]
-| [//uk.wikibooks.org/wiki/ uk]
-| [//uk.wikibooks.org/wiki/Special:Statistics?action=raw '''488 ''']
-| 2841
-| [//uk.wikibooks.org/wiki/Special:Recentchanges 27667 ]
-| [//uk.wikibooks.org/wiki/Special:Listadmins 3 ]
-| [//uk.wikibooks.org/wiki/Special:Listusers 5441 ]
-| [//uk.wikibooks.org/wiki/Special:ActiveUsers 11 ]
-| [//uk.wikibooks.org/wiki/Special:ListFiles 86 ]
-| style="font-size: 70%;" | 2018-02-25 05:00:20
+| [[w:Tamil language|Tamil]]
+| class="plainlinksneverexpand" | [{{fullurl:ta:தமிழ்}} தமிழ்]
+| [//ta.wikibooks.org/wiki/ ta]
+| [//ta.wikibooks.org/wiki/Special:Statistics?action=raw '''701 ''']
+|  3613
+|  [//ta.wikibooks.org/wiki/Special:Recentchanges 16900]
+|  [//ta.wikibooks.org/wiki/Special:Listadmins 2]
+|  [//ta.wikibooks.org/wiki/Special:Listusers 5532]
+|  [//ta.wikibooks.org/wiki/Special:ActiveUsers 4]
+|  [//ta.wikibooks.org/wiki/Special:FileList 255]
 |- style="text-align: right;"
 | 37
-| [[w:Hindi language|Hindi]]
-| [[w:Hindi language|हिन्दी]]
-| [//hi.wikibooks.org/wiki/ hi]
-| [//hi.wikibooks.org/wiki/Special:Statistics?action=raw '''473 ''']
-| 3118
-| [//hi.wikibooks.org/wiki/Special:Recentchanges 12153 ]
-| [//hi.wikibooks.org/wiki/Special:Listadmins 1 ]
-| [//hi.wikibooks.org/wiki/Special:Listusers 5271 ]
-| [//hi.wikibooks.org/wiki/Special:ActiveUsers 14 ]
-| [//hi.wikibooks.org/wiki/Special:ListFiles 2 ]
-| style="font-size: 70%;" | 2018-02-25 05:01:20
+| [[w:Ukrainian language|Ukrainian]]
+| class="plainlinksneverexpand" | [{{fullurl:uk:Українська_мова}} Українська]
+| [//uk.wikibooks.org/wiki/ uk]
+| [//uk.wikibooks.org/wiki/Special:Statistics?action=raw '''599 ''']
+|  3325
+|  [//uk.wikibooks.org/wiki/Special:Recentchanges 31663]
+|  [//uk.wikibooks.org/wiki/Special:Listadmins 4]
+|  [//uk.wikibooks.org/wiki/Special:Listusers 6848]
+|  [//uk.wikibooks.org/wiki/Special:ActiveUsers 7]
+|  [//uk.wikibooks.org/wiki/Special:FileList 86]
 |- style="text-align: right;"
 | 38
-| [[w:Icelandic language|Icelandic]]
-| [[w:Icelandic language|Íslenska]]
-| [//is.wikibooks.org/wiki/ is]
-| [//is.wikibooks.org/wiki/Special:Statistics?action=raw '''467 ''']
-| 2929
-| [//is.wikibooks.org/wiki/Special:Recentchanges 29278 ]
-| [//is.wikibooks.org/wiki/Special:Listadmins 1 ]
-| [//is.wikibooks.org/wiki/Special:Listusers 3180 ]
-| [//is.wikibooks.org/wiki/Special:ActiveUsers 31 ]
-| [//is.wikibooks.org/wiki/Special:ListFiles 28 ]
-| style="font-size: 70%;" | 2018-02-25 05:01:03
+| [[w:Esperanto language|Esperanto]]
+| class="plainlinksneverexpand" | [{{fullurl:eo:Esperanto}} Esperanto]
+| [//eo.wikibooks.org/wiki/ eo]
+| [//eo.wikibooks.org/wiki/Special:Statistics?action=raw '''537 ''']
+|  3460
+|  [//eo.wikibooks.org/wiki/Special:Recentchanges 24271]
+|  [//eo.wikibooks.org/wiki/Special:Listadmins 2]
+|  [//eo.wikibooks.org/wiki/Special:Listusers 3556]
+|  [//eo.wikibooks.org/wiki/Special:ActiveUsers 6]
+|  [//eo.wikibooks.org/wiki/Special:FileList 452]
 |- style="text-align: right;"
 | 39
-| [[w:Romanian language|Romanian]]
-| [[w:Romanian language|Română]]
-| [//ro.wikibooks.org/wiki/ ro]
-| [//ro.wikibooks.org/wiki/Special:Statistics?action=raw '''458 ''']
-| 4313
-| [//ro.wikibooks.org/wiki/Special:Recentchanges 34889 ]
-| [//ro.wikibooks.org/wiki/Special:Listadmins 1 ]
-| [//ro.wikibooks.org/wiki/Special:Listusers 6072 ]
-| [//ro.wikibooks.org/wiki/Special:ActiveUsers 5 ]
-| [//ro.wikibooks.org/wiki/Special:ListFiles 164 ]
-| style="font-size: 70%;" | 2018-02-25 05:00:59
+| [[w:Slovak language|Slovak]]
+| class="plainlinksneverexpand" | [{{fullurl:sk:Slovenčina}} Slovenčina]
+| [//sk.wikibooks.org/wiki/ sk]
+| [//sk.wikibooks.org/wiki/Special:Statistics?action=raw '''513 ''']
+|  2186
+|  [//sk.wikibooks.org/wiki/Special:Recentchanges 20599]
+|  [//sk.wikibooks.org/wiki/Special:Listadmins 3]
+|  [//sk.wikibooks.org/wiki/Special:Listusers 3212]
+|  [//sk.wikibooks.org/wiki/Special:ActiveUsers 4]
+|  [//sk.wikibooks.org/wiki/Special:FileList 6]
 |- style="text-align: right;"
 | 40
-| [[w:Esperanto language|Esperanto]]
-| [[w:Esperanto language|Esperanto]]
-| [//eo.wikibooks.org/wiki/ eo]
-| [//eo.wikibooks.org/wiki/Special:Statistics?action=raw '''440 ''']
-| 3296
-| [//eo.wikibooks.org/wiki/Special:Recentchanges 22036 ]
-| [//eo.wikibooks.org/wiki/Special:Listadmins 2 ]
-| [//eo.wikibooks.org/wiki/Special:Listusers 3099 ]
-| [//eo.wikibooks.org/wiki/Special:ActiveUsers 5 ]
-| [//eo.wikibooks.org/wiki/Special:ListFiles 452 ]
-| style="font-size: 70%;" | 2018-02-25 05:00:09
+| [[w:Icelandic language|Icelandic]]
+| class="plainlinksneverexpand" | [{{fullurl:is:Íslenska}} Íslenska]
+| [//is.wikibooks.org/wiki/ is]
+| [//is.wikibooks.org/wiki/Special:Statistics?action=raw '''496 ''']
+|  3116
+|  [//is.wikibooks.org/wiki/Special:Recentchanges 32784]
+|  [//is.wikibooks.org/wiki/Special:Listadmins 3]
+|  [//is.wikibooks.org/wiki/Special:Listusers 3602]
+|  [//is.wikibooks.org/wiki/Special:ActiveUsers 2]
+|  [//is.wikibooks.org/wiki/Special:FileList 28]
 |- style="text-align: right;"
 | 41
-| [[w:Sinhalese language|Sinhalese]]
-| [[w:Sinhalese language|සිංහල]]
-| [//si.wikibooks.org/wiki/ si]
-| [//si.wikibooks.org/wiki/Special:Statistics?action=raw '''338 ''']
-| 3304
-| [//si.wikibooks.org/wiki/Special:Recentchanges 11424 ]
-| [//si.wikibooks.org/wiki/Special:Listadmins 1 ]
-| [//si.wikibooks.org/wiki/Special:Listusers 2300 ]
-| [//si.wikibooks.org/wiki/Special:ActiveUsers 4 ]
-| [//si.wikibooks.org/wiki/Special:ListFiles 73 ]
-| style="font-size: 70%;" | 2018-02-25 05:03:30
+| [[w:Romanian language|Romanian]]
+| class="plainlinksneverexpand" | [{{fullurl:ro:Limba_română}} Română]
+| [//ro.wikibooks.org/wiki/ ro]
+| [//ro.wikibooks.org/wiki/Special:Statistics?action=raw '''451 ''']
+|  4384
+|  [//ro.wikibooks.org/wiki/Special:Recentchanges 35641]
+|  [//ro.wikibooks.org/wiki/Special:Listadmins 2]
+|  [//ro.wikibooks.org/wiki/Special:Listusers 6902]
+|  [//ro.wikibooks.org/wiki/Special:ActiveUsers 5]
+|  [//ro.wikibooks.org/wiki/Special:FileList 164]
 |- style="text-align: right;"
 | 42
-| [[w:Simple English language|Simple English]]
-| [[w:Simple English language|Simple English]]
-| [//simple.wikibooks.org/wiki/ simple]
-| [//simple.wikibooks.org/wiki/Special:Statistics?action=raw '''330 ''']
-| 2618
-| [//simple.wikibooks.org/wiki/Special:Recentchanges 17472 ]
-| [//simple.wikibooks.org/wiki/Special:Listadmins 0 ]
-| [//simple.wikibooks.org/wiki/Special:Listusers 3584 ]
-| [//simple.wikibooks.org/wiki/Special:ActiveUsers 0 ]
-| [//simple.wikibooks.org/wiki/Special:ListFiles 5 ]
-| style="font-size: 70%;" | 2018-02-25 05:03:45
+| [[w:Bengali language|Bengali]]
+| class="plainlinksneverexpand" | [{{fullurl:bn:বাংলা_ভাষা}} বাংলা]
+| [//bn.wikibooks.org/wiki/ bn]
+| [//bn.wikibooks.org/wiki/Special:Statistics?action=raw '''419 ''']
+|  7975
+|  [//bn.wikibooks.org/wiki/Special:Recentchanges 23982]
+|  [//bn.wikibooks.org/wiki/Special:Listadmins 2]
+|  [//bn.wikibooks.org/wiki/Special:Listusers 6855]
+|  [//bn.wikibooks.org/wiki/Special:ActiveUsers 12]
+|  [//bn.wikibooks.org/wiki/Special:FileList 0]
 |- style="text-align: right;"
 | 43
-| [[w:Macedonian language|Macedonian]]
-| [[w:Macedonian language|Македонски]]
-| [//mk.wikibooks.org/wiki/ mk]
-| [//mk.wikibooks.org/wiki/Special:Statistics?action=raw '''300 ''']
-| 1932
-| [//mk.wikibooks.org/wiki/Special:Recentchanges 10624 ]
-| [//mk.wikibooks.org/wiki/Special:Listadmins 1 ]
-| [//mk.wikibooks.org/wiki/Special:Listusers 2377 ]
-| [//mk.wikibooks.org/wiki/Special:ActiveUsers 3 ]
-| [//mk.wikibooks.org/wiki/Special:ListFiles 23 ]
-| style="font-size: 70%;" | 2018-02-25 05:01:42
+| [[w:Sinhalese language|Sinhalese]]
+| class="plainlinksneverexpand" | [{{fullurl:si:සිංහල_භාෂාව}} සිංහල]
+| [//si.wikibooks.org/wiki/ si]
+| [//si.wikibooks.org/wiki/Special:Statistics?action=raw '''343 ''']
+|  3503
+|  [//si.wikibooks.org/wiki/Special:Recentchanges 11968]
+|  [//si.wikibooks.org/wiki/Special:Listadmins 2]
+|  [//si.wikibooks.org/wiki/Special:Listusers 2885]
+|  [//si.wikibooks.org/wiki/Special:ActiveUsers 2]
+|  [//si.wikibooks.org/wiki/Special:FileList 71]
 |- style="text-align: right;"
 | 44
-| [[w:Bengali language|Bengali]]
-| [[w:Bengali language|বাংলা]]
-| [//bn.wikibooks.org/wiki/ bn]
-| [//bn.wikibooks.org/wiki/Special:Statistics?action=raw '''297 ''']
-| 5580
-| [//bn.wikibooks.org/wiki/Special:Recentchanges 17331 ]
-| [//bn.wikibooks.org/wiki/Special:Listadmins 1 ]
-| [//bn.wikibooks.org/wiki/Special:Listusers 4940 ]
-| [//bn.wikibooks.org/wiki/Special:ActiveUsers 12 ]
-| [//bn.wikibooks.org/wiki/Special:ListFiles 0 ]
-| style="font-size: 70%;" | 2018-02-25 05:01:14
+| [[w:Simple English language|Simple English]]
+| class="plainlinksneverexpand" | [{{fullurl:simple:Wikipedia:Simple_English_Wikipedia}} Simple English]
+| [//simple.wikibooks.org/wiki/ simple]
+| [//simple.wikibooks.org/wiki/Special:Statistics?action=raw '''330 ''']
+|  2620
+|  [//simple.wikibooks.org/wiki/Special:Recentchanges 17482]
+|  [//simple.wikibooks.org/wiki/Special:Listadmins 1]
+|  [//simple.wikibooks.org/wiki/Special:Listusers 3757]
+|  [//simple.wikibooks.org/wiki/Special:ActiveUsers 0]
+|  [//simple.wikibooks.org/wiki/Special:FileList 5]
 |- style="text-align: right;"
 | 45
-| [[w:Bulgarian language|Bulgarian]]
-| [[w:Bulgarian language|Български]]
-| [//bg.wikibooks.org/wiki/ bg]
-| [//bg.wikibooks.org/wiki/Special:Statistics?action=raw '''289 ''']
-| 1929
-| [//bg.wikibooks.org/wiki/Special:Recentchanges 13984 ]
-| [//bg.wikibooks.org/wiki/Special:Listadmins 1 ]
-| [//bg.wikibooks.org/wiki/Special:Listusers 4050 ]
-| [//bg.wikibooks.org/wiki/Special:ActiveUsers 6 ]
-| [//bg.wikibooks.org/wiki/Special:ListFiles 62 ]
-| style="font-size: 70%;" | 2018-02-25 05:00:16
+| [[w:Macedonian language|Macedonian]]
+| class="plainlinksneverexpand" | [{{fullurl:mk:Македонски_јазик}} Македонски]
+| [//mk.wikibooks.org/wiki/ mk]
+| [//mk.wikibooks.org/wiki/Special:Statistics?action=raw '''295 ''']
+|  1936
+|  [//mk.wikibooks.org/wiki/Special:Recentchanges 10861]
+|  [//mk.wikibooks.org/wiki/Special:Listadmins 1]
+|  [//mk.wikibooks.org/wiki/Special:Listusers 2713]
+|  [//mk.wikibooks.org/wiki/Special:ActiveUsers 0]
+|  [//mk.wikibooks.org/wiki/Special:FileList 23]
 |- style="text-align: right;"
 | 46
-| [[w:Georgian language|Georgian]]
-| [[w:Georgian language|ქართული]]
-| [//ka.wikibooks.org/wiki/ ka]
-| [//ka.wikibooks.org/wiki/Special:Statistics?action=raw '''282 ''']
-| 5075
-| [//ka.wikibooks.org/wiki/Special:Recentchanges 17938 ]
-| [//ka.wikibooks.org/wiki/Special:Listadmins 1 ]
-| [//ka.wikibooks.org/wiki/Special:Listusers 4011 ]
-| [//ka.wikibooks.org/wiki/Special:ActiveUsers 4 ]
-| [//ka.wikibooks.org/wiki/Special:ListFiles 1330 ]
-| style="font-size: 70%;" | 2018-02-25 05:02:14
+| [[w:Bulgarian language|Bulgarian]]
+| class="plainlinksneverexpand" | [{{fullurl:bg:Български_език}} Български]
+| [//bg.wikibooks.org/wiki/ bg]
+| [//bg.wikibooks.org/wiki/Special:Statistics?action=raw '''286 ''']
+|  1941
+|  [//bg.wikibooks.org/wiki/Special:Recentchanges 14921]
+|  [//bg.wikibooks.org/wiki/Special:Listadmins 2]
+|  [//bg.wikibooks.org/wiki/Special:Listusers 4615]
+|  [//bg.wikibooks.org/wiki/Special:ActiveUsers 1]
+|  [//bg.wikibooks.org/wiki/Special:FileList 62]
 |- style="text-align: right;"
 | 47
-| [[w:Malay language|Malay]]
-| [[w:Malay language|Bahasa Melayu]]
-| [//ms.wikibooks.org/wiki/ ms]
-| [//ms.wikibooks.org/wiki/Special:Statistics?action=raw '''275 ''']
-| 1893
-| [//ms.wikibooks.org/wiki/Special:Recentchanges 10396 ]
-| [//ms.wikibooks.org/wiki/Special:Listadmins 1 ]
-| [//ms.wikibooks.org/wiki/Special:Listusers 2280 ]
-| [//ms.wikibooks.org/wiki/Special:ActiveUsers 5 ]
-| [//ms.wikibooks.org/wiki/Special:ListFiles 95 ]
-| style="font-size: 70%;" | 2018-02-25 05:01:57
+| [[w:Georgian language|Georgian]]
+| class="plainlinksneverexpand" | [{{fullurl:ka:ქართული_ენა}} ქართული]
+| [//ka.wikibooks.org/wiki/ ka]
+| [//ka.wikibooks.org/wiki/Special:Statistics?action=raw '''286 ''']
+|  5166
+|  [//ka.wikibooks.org/wiki/Special:Recentchanges 18259]
+|  [//ka.wikibooks.org/wiki/Special:Listadmins 2]
+|  [//ka.wikibooks.org/wiki/Special:Listusers 4492]
+|  [//ka.wikibooks.org/wiki/Special:ActiveUsers 3]
+|  [//ka.wikibooks.org/wiki/Special:FileList 1330]
 |- style="text-align: right;"
 | 48
-| [[w:Lithuanian language|Lithuanian]]
-| [[w:Lithuanian language|Lietuvių]]
-| [//lt.wikibooks.org/wiki/ lt]
-| [//lt.wikibooks.org/wiki/Special:Statistics?action=raw '''273 ''']
-| 2685
-| [//lt.wikibooks.org/wiki/Special:Recentchanges 24304 ]
-| [//lt.wikibooks.org/wiki/Special:Listadmins 0 ]
-| [//lt.wikibooks.org/wiki/Special:Listusers 2452 ]
-| [//lt.wikibooks.org/wiki/Special:ActiveUsers 7 ]
-| [//lt.wikibooks.org/wiki/Special:ListFiles 242 ]
-| style="font-size: 70%;" | 2018-02-25 05:00:48
+| [[w:Malay language|Malay]]
+| class="plainlinksneverexpand" | [{{fullurl:ms:Bahasa_Melayu}} Bahasa Melayu]
+| [//ms.wikibooks.org/wiki/ ms]
+| [//ms.wikibooks.org/wiki/Special:Statistics?action=raw '''276 ''']
+|  1938
+|  [//ms.wikibooks.org/wiki/Special:Recentchanges 10784]
+|  [//ms.wikibooks.org/wiki/Special:Listadmins 2]
+|  [//ms.wikibooks.org/wiki/Special:Listusers 2597]
+|  [//ms.wikibooks.org/wiki/Special:ActiveUsers 3]
+|  [//ms.wikibooks.org/wiki/Special:FileList 93]
 |- style="text-align: right;"
 | 49
 | [[w:Tatar language|Tatar]]
-| [[w:Tatar language|Tatarça]]
+| class="plainlinksneverexpand" | [{{fullurl:tt:Tatar_tele}} Tatarça / Татарча]
 | [//tt.wikibooks.org/wiki/ tt]
-| [//tt.wikibooks.org/wiki/Special:Statistics?action=raw '''260 ''']
-| 1498
-| [//tt.wikibooks.org/wiki/Special:Recentchanges 6838 ]
-| [//tt.wikibooks.org/wiki/Special:Listadmins 0 ]
-| [//tt.wikibooks.org/wiki/Special:Listusers 1538 ]
-| [//tt.wikibooks.org/wiki/Special:ActiveUsers 4 ]
-| [//tt.wikibooks.org/wiki/Special:ListFiles 43 ]
-| style="font-size: 70%;" | 2018-02-25 05:02:12
+| [//tt.wikibooks.org/wiki/Special:Statistics?action=raw '''269 ''']
+|  1599
+|  [//tt.wikibooks.org/wiki/Special:Recentchanges 7090]
+|  [//tt.wikibooks.org/wiki/Special:Listadmins 1]
+|  [//tt.wikibooks.org/wiki/Special:Listusers 1755]
+|  [//tt.wikibooks.org/wiki/Special:ActiveUsers 0]
+|  [//tt.wikibooks.org/wiki/Special:FileList 43]
 |- style="text-align: right;"
 | 50
-| [[w:Greek language|Greek]]
-| [[w:Greek language|Ελληνικά]]
-| [//el.wikibooks.org/wiki/ el]
-| [//el.wikibooks.org/wiki/Special:Statistics?action=raw '''239 ''']
-| 3717
-| [//el.wikibooks.org/wiki/Special:Recentchanges 48975 ]
-| [//el.wikibooks.org/wiki/Special:Listadmins 1 ]
-| [//el.wikibooks.org/wiki/Special:Listusers 5556 ]
-| [//el.wikibooks.org/wiki/Special:ActiveUsers 7 ]
-| [//el.wikibooks.org/wiki/Special:ListFiles 1166 ]
-| style="font-size: 70%;" | 2018-02-25 05:04:04
+| [[w:Lithuanian language|Lithuanian]]
+| class="plainlinksneverexpand" | [{{fullurl:lt:Lietuvių_kalba}} Lietuvių]
+| [//lt.wikibooks.org/wiki/ lt]
+| [//lt.wikibooks.org/wiki/Special:Statistics?action=raw '''261 ''']
+|  2577
+|  [//lt.wikibooks.org/wiki/Special:Recentchanges 25416]
+|  [//lt.wikibooks.org/wiki/Special:Listadmins 2]
+|  [//lt.wikibooks.org/wiki/Special:Listusers 2811]
+|  [//lt.wikibooks.org/wiki/Special:ActiveUsers 3]
+|  [//lt.wikibooks.org/wiki/Special:FileList 210]
 |- style="text-align: right;"
 | 51
-| [[w:Limburgian language|Limburgian]]
-| [[w:Limburgian language|Limburgs]]
-| [//li.wikibooks.org/wiki/ li]
-| [//li.wikibooks.org/wiki/Special:Statistics?action=raw '''237 ''']
-| 1148
-| [//li.wikibooks.org/wiki/Special:Recentchanges 2772 ]
-| [//li.wikibooks.org/wiki/Special:Listadmins 1 ]
-| [//li.wikibooks.org/wiki/Special:Listusers 1017 ]
-| [//li.wikibooks.org/wiki/Special:ActiveUsers 5 ]
-| [//li.wikibooks.org/wiki/Special:ListFiles 1 ]
-| style="font-size: 70%;" | 2018-02-25 05:03:40
+| [[w:Greek language|Greek]]
+| class="plainlinksneverexpand" | [{{fullurl:el:Ελληνική_γλώσσα}} Ελληνικά]
+| [//el.wikibooks.org/wiki/ el]
+| [//el.wikibooks.org/wiki/Special:Statistics?action=raw '''251 ''']
+|  3844
+|  [//el.wikibooks.org/wiki/Special:Recentchanges 54378]
+|  [//el.wikibooks.org/wiki/Special:Listadmins 2]
+|  [//el.wikibooks.org/wiki/Special:Listusers 6574]
+|  [//el.wikibooks.org/wiki/Special:ActiveUsers 7]
+|  [//el.wikibooks.org/wiki/Special:FileList 1166]
 |- style="text-align: right;"
 | 52
-| [[w:Urdu language|Urdu]]
-| [[w:Urdu language|اردو]]
-| [//ur.wikibooks.org/wiki/ ur]
-| [//ur.wikibooks.org/wiki/Special:Statistics?action=raw '''212 ''']
-| 1463
-| [//ur.wikibooks.org/wiki/Special:Recentchanges 8247 ]
-| [//ur.wikibooks.org/wiki/Special:Listadmins 0 ]
-| [//ur.wikibooks.org/wiki/Special:Listusers 2604 ]
-| [//ur.wikibooks.org/wiki/Special:ActiveUsers 7 ]
-| [//ur.wikibooks.org/wiki/Special:ListFiles 37 ]
-| style="font-size: 70%;" | 2018-02-25 05:02:38
+| [[w:Limburgish language|Limburgish]]
+| class="plainlinksneverexpand" | [{{fullurl:li:Limburgs}} Limburgs]
+| [//li.wikibooks.org/wiki/ li]
+| [//li.wikibooks.org/wiki/Special:Statistics?action=raw '''240 ''']
+|  1168
+|  [//li.wikibooks.org/wiki/Special:Recentchanges 2914]
+|  [//li.wikibooks.org/wiki/Special:Listadmins 1]
+|  [//li.wikibooks.org/wiki/Special:Listusers 1175]
+|  [//li.wikibooks.org/wiki/Special:ActiveUsers 1]
+|  [//li.wikibooks.org/wiki/Special:FileList 1]
 |- style="text-align: right;"
 | 53
-| [[w:Slovenian language|Slovenian]]
-| [[w:Slovenian language|Slovenščina]]
-| [//sl.wikibooks.org/wiki/ sl]
-| [//sl.wikibooks.org/wiki/Special:Statistics?action=raw '''191 ''']
-| 1872
-| [//sl.wikibooks.org/wiki/Special:Recentchanges 16737 ]
-| [//sl.wikibooks.org/wiki/Special:Listadmins 2 ]
-| [//sl.wikibooks.org/wiki/Special:Listusers 2788 ]
-| [//sl.wikibooks.org/wiki/Special:ActiveUsers 5 ]
-| [//sl.wikibooks.org/wiki/Special:ListFiles 530 ]
-| style="font-size: 70%;" | 2018-02-25 05:00:54
+| [[w:Urdu language|Urdu]]
+| class="plainlinksneverexpand" | [{{fullurl:ur:اردو}} اردو]
+| [//ur.wikibooks.org/wiki/ ur]
+| [//ur.wikibooks.org/wiki/Special:Statistics?action=raw '''220 ''']
+|  1522
+|  [//ur.wikibooks.org/wiki/Special:Recentchanges 8646]
+|  [//ur.wikibooks.org/wiki/Special:Listadmins 2]
+|  [//ur.wikibooks.org/wiki/Special:Listusers 3058]
+|  [//ur.wikibooks.org/wiki/Special:ActiveUsers 2]
+|  [//ur.wikibooks.org/wiki/Special:FileList 37]
 |- style="text-align: right;"
 | 54
-| [[w:Khmer language|Khmer]]
-| [[w:Khmer language|ភាសាខ្មែរ]]
-| [//km.wikibooks.org/wiki/ km]
-| [//km.wikibooks.org/wiki/Special:Statistics?action=raw '''179 ''']
-| 1027
-| [//km.wikibooks.org/wiki/Special:Recentchanges 8095 ]
-| [//km.wikibooks.org/wiki/Special:Listadmins 0 ]
-| [//km.wikibooks.org/wiki/Special:Listusers 1990 ]
-| [//km.wikibooks.org/wiki/Special:ActiveUsers 5 ]
-| [//km.wikibooks.org/wiki/Special:ListFiles 15 ]
-| style="font-size: 70%;" | 2018-02-25 05:02:57
+| [[w:Slovenian language|Slovenian]]
+| class="plainlinksneverexpand" | [{{fullurl:sl:Slovenščina}} Slovenščina]
+| [//sl.wikibooks.org/wiki/ sl]
+| [//sl.wikibooks.org/wiki/Special:Statistics?action=raw '''214 ''']
+|  1922
+|  [//sl.wikibooks.org/wiki/Special:Recentchanges 19207]
+|  [//sl.wikibooks.org/wiki/Special:Listadmins 3]
+|  [//sl.wikibooks.org/wiki/Special:Listusers 3498]
+|  [//sl.wikibooks.org/wiki/Special:ActiveUsers 3]
+|  [//sl.wikibooks.org/wiki/Special:FileList 530]
 |- style="text-align: right;"
 | 55
-| [[w:Tagalog language|Tagalog]]
-| [[w:Tagalog language|Tagalog]]
-| [//tl.wikibooks.org/wiki/ tl]
-| [//tl.wikibooks.org/wiki/Special:Statistics?action=raw '''154 ''']
-| 2087
-| [//tl.wikibooks.org/wiki/Special:Recentchanges 21086 ]
-| [//tl.wikibooks.org/wiki/Special:Listadmins 0 ]
-| [//tl.wikibooks.org/wiki/Special:Listusers 3602 ]
-| [//tl.wikibooks.org/wiki/Special:ActiveUsers 18 ]
-| [//tl.wikibooks.org/wiki/Special:ListFiles 4 ]
-| style="font-size: 70%;" | 2018-02-25 05:03:36
+| [[w:Khmer language|Khmer]]
+| class="plainlinksneverexpand" | [{{fullurl:km:ភាសាខ្មែរ}} ភាសាខ្មែរ]
+| [//km.wikibooks.org/wiki/ km]
+| [//km.wikibooks.org/wiki/Special:Statistics?action=raw '''175 ''']
+|  990
+|  [//km.wikibooks.org/wiki/Special:Recentchanges 9140]
+|  [//km.wikibooks.org/wiki/Special:Listadmins 2]
+|  [//km.wikibooks.org/wiki/Special:Listusers 2344]
+|  [//km.wikibooks.org/wiki/Special:ActiveUsers 0]
+|  [//km.wikibooks.org/wiki/Special:FileList 15]
 |- style="text-align: right;"
 | 56
-| [[w:Anglo-Saxon language|Anglo-Saxon]]
-| [[w:Anglo-Saxon language|Englisc]]
-| [//ang.wikibooks.org/wiki/ ang]
-| [//ang.wikibooks.org/wiki/Special:Statistics?action=raw '''153 ''']
-| 1246
-| [//ang.wikibooks.org/wiki/Special:Recentchanges 5789 ]
-| [//ang.wikibooks.org/wiki/Special:Listadmins 0 ]
-| [//ang.wikibooks.org/wiki/Special:Listusers 1872 ]
-| [//ang.wikibooks.org/wiki/Special:ActiveUsers 0 ]
-| [//ang.wikibooks.org/wiki/Special:ListFiles 203 ]
-| style="font-size: 70%;" | 2018-02-25 05:00:44
+| [[w:Tagalog language|Tagalog]]
+| class="plainlinksneverexpand" | [{{fullurl:tl:Wikang_Tagalog}} Tagalog]
+| [//tl.wikibooks.org/wiki/ tl]
+| [//tl.wikibooks.org/wiki/Special:Statistics?action=raw '''161 ''']
+|  2117
+|  [//tl.wikibooks.org/wiki/Special:Recentchanges 25645]
+|  [//tl.wikibooks.org/wiki/Special:Listadmins 1]
+|  [//tl.wikibooks.org/wiki/Special:Listusers 4426]
+|  [//tl.wikibooks.org/wiki/Special:ActiveUsers 9]
+|  [//tl.wikibooks.org/wiki/Special:FileList 4]
 |- style="text-align: right;"
 | 57
-| [[w:Kazakh language|Kazakh]]
-| [[w:Kazakh language|қазақша]]
-| [//kk.wikibooks.org/wiki/ kk]
-| [//kk.wikibooks.org/wiki/Special:Statistics?action=raw '''116 ''']
-| 1012
-| [//kk.wikibooks.org/wiki/Special:Recentchanges 6085 ]
-| [//kk.wikibooks.org/wiki/Special:Listadmins 0 ]
-| [//kk.wikibooks.org/wiki/Special:Listusers 1971 ]
-| [//kk.wikibooks.org/wiki/Special:ActiveUsers 3 ]
-| [//kk.wikibooks.org/wiki/Special:ListFiles 1 ]
-| style="font-size: 70%;" | 2018-02-25 05:02:55
+| [[w:Anglo-Saxon language|Anglo-Saxon]]
+| class="plainlinksneverexpand" | [{{fullurl:ang:Englisc_sprǣc}} Englisc]
+| [//ang.wikibooks.org/wiki/ ang]
+| [//ang.wikibooks.org/wiki/Special:Statistics?action=raw '''153 ''']
+|  1242
+|  [//ang.wikibooks.org/wiki/Special:Recentchanges 5814]
+|  [//ang.wikibooks.org/wiki/Special:Listadmins 1]
+|  [//ang.wikibooks.org/wiki/Special:Listusers 1961]
+|  [//ang.wikibooks.org/wiki/Special:ActiveUsers 1]
+|  [//ang.wikibooks.org/wiki/Special:FileList 203]
 |- style="text-align: right;"
 | 58
-| [[w:Estonian language|Estonian]]
-| [[w:Estonian language|Eesti]]
-| [//et.wikibooks.org/wiki/ et]
-| [//et.wikibooks.org/wiki/Special:Statistics?action=raw '''113 ''']
-| 1404
-| [//et.wikibooks.org/wiki/Special:Recentchanges 12189 ]
-| [//et.wikibooks.org/wiki/Special:Listadmins 0 ]
-| [//et.wikibooks.org/wiki/Special:Listusers 2042 ]
-| [//et.wikibooks.org/wiki/Special:ActiveUsers 6 ]
-| [//et.wikibooks.org/wiki/Special:ListFiles 129 ]
-| style="font-size: 70%;" | 2018-02-25 05:00:52
+| [[w:Latin language|Latin]]
+| class="plainlinksneverexpand" | [{{fullurl:la:Lingua_Latina}} Latina]
+| [//la.wikibooks.org/wiki/ la]
+| [//la.wikibooks.org/wiki/Special:Statistics?action=raw '''134 ''']
+|  887
+|  [//la.wikibooks.org/wiki/Special:Recentchanges 8364]
+|  [//la.wikibooks.org/wiki/Special:Listadmins 1]
+|  [//la.wikibooks.org/wiki/Special:Listusers 2265]
+|  [//la.wikibooks.org/wiki/Special:ActiveUsers 1]
+|  [//la.wikibooks.org/wiki/Special:FileList 0]
 |- style="text-align: right;"
 | 59
-| [[w:Malayalam language|Malayalam]]
-| [[w:Malayalam language|മലയാളം]]
-| [//ml.wikibooks.org/wiki/ ml]
-| [//ml.wikibooks.org/wiki/Special:Statistics?action=raw '''96 ''']
-| 3190
-| [//ml.wikibooks.org/wiki/Special:Recentchanges 17129 ]
-| [//ml.wikibooks.org/wiki/Special:Listadmins 2 ]
-| [//ml.wikibooks.org/wiki/Special:Listusers 3417 ]
-| [//ml.wikibooks.org/wiki/Special:ActiveUsers 4 ]
-| [//ml.wikibooks.org/wiki/Special:ListFiles 31 ]
-| style="font-size: 70%;" | 2018-02-25 05:01:59
+| [[w:Estonian language|Estonian]]
+| class="plainlinksneverexpand" | [{{fullurl:et:Eesti_keel}} Eesti]
+| [//et.wikibooks.org/wiki/ et]
+| [//et.wikibooks.org/wiki/Special:Statistics?action=raw '''130 ''']
+|  1560
+|  [//et.wikibooks.org/wiki/Special:Recentchanges 17701]
+|  [//et.wikibooks.org/wiki/Special:Listadmins 1]
+|  [//et.wikibooks.org/wiki/Special:Listusers 2379]
+|  [//et.wikibooks.org/wiki/Special:ActiveUsers 2]
+|  [//et.wikibooks.org/wiki/Special:FileList 129]
 |- style="text-align: right;"
 | 60
-| [[w:Occitan language|Occitan]]
-| [[w:Occitan language|Occitan]]
-| [//oc.wikibooks.org/wiki/ oc]
-| [//oc.wikibooks.org/wiki/Special:Statistics?action=raw '''94 ''']
-| 715
-| [//oc.wikibooks.org/wiki/Special:Recentchanges 5234 ]
-| [//oc.wikibooks.org/wiki/Special:Listadmins 0 ]
-| [//oc.wikibooks.org/wiki/Special:Listusers 1403 ]
-| [//oc.wikibooks.org/wiki/Special:ActiveUsers 4 ]
-| [//oc.wikibooks.org/wiki/Special:ListFiles 1 ]
-| style="font-size: 70%;" | 2018-02-25 05:02:05
+| [[w:Belarusian language|Belarusian]]
+| class="plainlinksneverexpand" | [{{fullurl:be:Беларуская_мова}} Беларуская]
+| [//be.wikibooks.org/wiki/ be]
+| [//be.wikibooks.org/wiki/Special:Statistics?action=raw '''120 ''']
+|  1022
+|  [//be.wikibooks.org/wiki/Special:Recentchanges 6759]
+|  [//be.wikibooks.org/wiki/Special:Listadmins 1]
+|  [//be.wikibooks.org/wiki/Special:Listusers 2104]
+|  [//be.wikibooks.org/wiki/Special:ActiveUsers 5]
+|  [//be.wikibooks.org/wiki/Special:FileList 0]
 |- style="text-align: right;"
 | 61
-| [[w:Belarusian language|Belarusian]]
-| [[w:Belarusian language|Беларуская]]
-| [//be.wikibooks.org/wiki/ be]
-| [//be.wikibooks.org/wiki/Special:Statistics?action=raw '''87 ''']
-| 965
-| [//be.wikibooks.org/wiki/Special:Recentchanges 6408 ]
-| [//be.wikibooks.org/wiki/Special:Listadmins 0 ]
-| [//be.wikibooks.org/wiki/Special:Listusers 1774 ]
-| [//be.wikibooks.org/wiki/Special:ActiveUsers 6 ]
-| [//be.wikibooks.org/wiki/Special:ListFiles 0 ]
-| style="font-size: 70%;" | 2018-02-25 05:01:05
+| [[w:Kazakh language|Kazakh]]
+| class="plainlinksneverexpand" | [{{fullurl:kk:Қазақ_тілі}} Қазақша]
+| [//kk.wikibooks.org/wiki/ kk]
+| [//kk.wikibooks.org/wiki/Special:Statistics?action=raw '''115 ''']
+|  1047
+|  [//kk.wikibooks.org/wiki/Special:Recentchanges 6813]
+|  [//kk.wikibooks.org/wiki/Special:Listadmins 1]
+|  [//kk.wikibooks.org/wiki/Special:Listusers 2424]
+|  [//kk.wikibooks.org/wiki/Special:ActiveUsers 2]
+|  [//kk.wikibooks.org/wiki/Special:FileList 1]
 |- style="text-align: right;"
 | 62
-| [[w:Latvian language|Latvian]]
-| [[w:Latvian language|Latviešu]]
-| [//lv.wikibooks.org/wiki/ lv]
-| [//lv.wikibooks.org/wiki/Special:Statistics?action=raw '''82 ''']
-| 361
-| [//lv.wikibooks.org/wiki/Special:Recentchanges 4787 ]
-| [//lv.wikibooks.org/wiki/Special:Listadmins 0 ]
-| [//lv.wikibooks.org/wiki/Special:Listusers 592 ]
-| [//lv.wikibooks.org/wiki/Special:ActiveUsers 0 ]
-| [//lv.wikibooks.org/wiki/Special:ListFiles 4 ]
-| style="font-size: 70%;" | 2018-02-25 05:03:06
+| [[w:Interlingua language|Interlingua]]
+| class="plainlinksneverexpand" | [{{fullurl:ia:Interlingua}} Interlingua]
+| [//ia.wikibooks.org/wiki/ ia]
+| [//ia.wikibooks.org/wiki/Special:Statistics?action=raw '''114 ''']
+|  772
+|  [//ia.wikibooks.org/wiki/Special:Recentchanges 5616]
+|  [//ia.wikibooks.org/wiki/Special:Listadmins 1]
+|  [//ia.wikibooks.org/wiki/Special:Listusers 1730]
+|  [//ia.wikibooks.org/wiki/Special:ActiveUsers 2]
+|  [//ia.wikibooks.org/wiki/Special:FileList 0]
 |- style="text-align: right;"
 | 63
-| [[w:Interlingua language|Interlingua]]
-| [[w:Interlingua language|Interlingua]]
-| [//ia.wikibooks.org/wiki/ ia]
-| [//ia.wikibooks.org/wiki/Special:Statistics?action=raw '''81 ''']
-| 728
-| [//ia.wikibooks.org/wiki/Special:Recentchanges 5228 ]
-| [//ia.wikibooks.org/wiki/Special:Listadmins 0 ]
-| [//ia.wikibooks.org/wiki/Special:Listusers 1545 ]
-| [//ia.wikibooks.org/wiki/Special:ActiveUsers 3 ]
-| [//ia.wikibooks.org/wiki/Special:ListFiles 0 ]
-| style="font-size: 70%;" | 2018-02-25 05:01:38
+| [[w:Malayalam language|Malayalam]]
+| class="plainlinksneverexpand" | [{{fullurl:ml:മലയാളം}} മലയാളം]
+| [//ml.wikibooks.org/wiki/ ml]
+| [//ml.wikibooks.org/wiki/Special:Statistics?action=raw '''103 ''']
+|  3307
+|  [//ml.wikibooks.org/wiki/Special:Recentchanges 17536]
+|  [//ml.wikibooks.org/wiki/Special:Listadmins 1]
+|  [//ml.wikibooks.org/wiki/Special:Listusers 3842]
+|  [//ml.wikibooks.org/wiki/Special:ActiveUsers 5]
+|  [//ml.wikibooks.org/wiki/Special:FileList 31]
 |- style="text-align: right;"
 | 64
-| [[w:Basque language|Basque]]
-| [[w:Basque language|Euskara]]
-| [//eu.wikibooks.org/wiki/ eu]
-| [//eu.wikibooks.org/wiki/Special:Statistics?action=raw '''78 ''']
-| 1009
-| [//eu.wikibooks.org/wiki/Special:Recentchanges 9776 ]
-| [//eu.wikibooks.org/wiki/Special:Listadmins 0 ]
-| [//eu.wikibooks.org/wiki/Special:Listusers 1602 ]
-| [//eu.wikibooks.org/wiki/Special:ActiveUsers 6 ]
-| [//eu.wikibooks.org/wiki/Special:ListFiles 79 ]
-| style="font-size: 70%;" | 2018-02-25 05:01:25
+| [[w:Occitan language|Occitan]]
+| class="plainlinksneverexpand" | [{{fullurl:oc:Occitan}} Occitan]
+| [//oc.wikibooks.org/wiki/ oc]
+| [//oc.wikibooks.org/wiki/Special:Statistics?action=raw '''94 ''']
+|  718
+|  [//oc.wikibooks.org/wiki/Special:Recentchanges 5323]
+|  [//oc.wikibooks.org/wiki/Special:Listadmins 1]
+|  [//oc.wikibooks.org/wiki/Special:Listusers 1567]
+|  [//oc.wikibooks.org/wiki/Special:ActiveUsers 2]
+|  [//oc.wikibooks.org/wiki/Special:FileList 1]
 |- style="text-align: right;"
 | 65
-| [[w:Nepali language|Nepali]]
-| [[w:Nepali language|नेपाली]]
-| [//ne.wikibooks.org/wiki/ ne]
-| [//ne.wikibooks.org/wiki/Special:Statistics?action=raw '''74 ''']
-| 1965
-| [//ne.wikibooks.org/wiki/Special:Recentchanges 16103 ]
-| [//ne.wikibooks.org/wiki/Special:Listadmins 0 ]
-| [//ne.wikibooks.org/wiki/Special:Listusers 2892 ]
-| [//ne.wikibooks.org/wiki/Special:ActiveUsers 7 ]
-| [//ne.wikibooks.org/wiki/Special:ListFiles 5 ]
-| style="font-size: 70%;" | 2018-02-25 05:02:18
+| [[w:Latvian language|Latvian]]
+| class="plainlinksneverexpand" | [{{fullurl:lv:Latviešu_valoda}} Latviešu]
+| [//lv.wikibooks.org/wiki/ lv]
+| [//lv.wikibooks.org/wiki/Special:Statistics?action=raw '''82 ''']
+|  362
+|  [//lv.wikibooks.org/wiki/Special:Recentchanges 4795]
+|  [//lv.wikibooks.org/wiki/Special:Listadmins 1]
+|  [//lv.wikibooks.org/wiki/Special:Listusers 645]
+|  [//lv.wikibooks.org/wiki/Special:ActiveUsers 0]
+|  [//lv.wikibooks.org/wiki/Special:FileList 4]
 |- style="text-align: right;"
 | 66
-| [[w:Punjabi language|Punjabi]]
-| [[w:Punjabi language|ਪੰਜਾਬੀ]]
-| [//pa.wikibooks.org/wiki/ pa]
-| [//pa.wikibooks.org/wiki/Special:Statistics?action=raw '''74 ''']
-| 663
-| [//pa.wikibooks.org/wiki/Special:Recentchanges 4929 ]
-| [//pa.wikibooks.org/wiki/Special:Listadmins 0 ]
-| [//pa.wikibooks.org/wiki/Special:Listusers 1498 ]
-| [//pa.wikibooks.org/wiki/Special:ActiveUsers 3 ]
-| [//pa.wikibooks.org/wiki/Special:ListFiles 0 ]
-| style="font-size: 70%;" | 2018-02-25 05:03:17
+| [[w:Armenian language|Armenian]]
+| class="plainlinksneverexpand" | [{{fullurl:hy:Հայերեն}} Հայերեն]
+| [//hy.wikibooks.org/wiki/ hy]
+| [//hy.wikibooks.org/wiki/Special:Statistics?action=raw '''75 ''']
+|  1770
+|  [//hy.wikibooks.org/wiki/Special:Recentchanges 10370]
+|  [//hy.wikibooks.org/wiki/Special:Listadmins 1]
+|  [//hy.wikibooks.org/wiki/Special:Listusers 4371]
+|  [//hy.wikibooks.org/wiki/Special:ActiveUsers 2]
+|  [//hy.wikibooks.org/wiki/Special:FileList 35]
 |- style="text-align: right;"
 | 67
-| [[w:Armenian language|Armenian]]
-| [[w:Armenian language|Հայերեն]]
-| [//hy.wikibooks.org/wiki/ hy]
-| [//hy.wikibooks.org/wiki/Special:Statistics?action=raw '''70 ''']
-| 1737
-| [//hy.wikibooks.org/wiki/Special:Recentchanges 10024 ]
-| [//hy.wikibooks.org/wiki/Special:Listadmins 0 ]
-| [//hy.wikibooks.org/wiki/Special:Listusers 3441 ]
-| [//hy.wikibooks.org/wiki/Special:ActiveUsers 5 ]
-| [//hy.wikibooks.org/wiki/Special:ListFiles 35 ]
-| style="font-size: 70%;" | 2018-02-25 05:01:12
+| [[w:Nepali language|Nepali]]
+| class="plainlinksneverexpand" | [{{fullurl:ne:नेपाली_भाषा}} नेपाली]
+| [//ne.wikibooks.org/wiki/ ne]
+| [//ne.wikibooks.org/wiki/Special:Statistics?action=raw '''75 ''']
+|  1967
+|  [//ne.wikibooks.org/wiki/Special:Recentchanges 17020]
+|  [//ne.wikibooks.org/wiki/Special:Listadmins 1]
+|  [//ne.wikibooks.org/wiki/Special:Listusers 3298]
+|  [//ne.wikibooks.org/wiki/Special:ActiveUsers 3]
+|  [//ne.wikibooks.org/wiki/Special:FileList 5]
 |- style="text-align: right;"
 | 68
-| [[w:Latin language|Latin]]
-| [[w:Latin language|Latina]]
-| [//la.wikibooks.org/wiki/ la]
-| [//la.wikibooks.org/wiki/Special:Statistics?action=raw '''66 ''']
-| 813
-| [//la.wikibooks.org/wiki/Special:Recentchanges 7939 ]
-| [//la.wikibooks.org/wiki/Special:Listadmins 0 ]
-| [//la.wikibooks.org/wiki/Special:Listusers 2029 ]
-| [//la.wikibooks.org/wiki/Special:ActiveUsers 4 ]
-| [//la.wikibooks.org/wiki/Special:ListFiles 0 ]
-| style="font-size: 70%;" | 2018-02-25 05:01:01
-|- style="text-align: right;"
-| 69
 | [[w:Chuvash language|Chuvash]]
-| [[w:Chuvash language|Чӑваш - (Ĉăvaŝ)]]
+| class="plainlinksneverexpand" | [{{fullurl:cv:Чăваш_чĕлхи}} Чăваш]
 | [//cv.wikibooks.org/wiki/ cv]
 | [//cv.wikibooks.org/wiki/Special:Statistics?action=raw '''66 ''']
-| 716
-| [//cv.wikibooks.org/wiki/Special:Recentchanges 6796 ]
-| [//cv.wikibooks.org/wiki/Special:Listadmins 0 ]
-| [//cv.wikibooks.org/wiki/Special:Listusers 1587 ]
-| [//cv.wikibooks.org/wiki/Special:ActiveUsers 3 ]
-| [//cv.wikibooks.org/wiki/Special:ListFiles 5 ]
-| style="font-size: 70%;" | 2018-02-25 05:00:50
+|  717
+|  [//cv.wikibooks.org/wiki/Special:Recentchanges 6885]
+|  [//cv.wikibooks.org/wiki/Special:Listadmins 1]
+|  [//cv.wikibooks.org/wiki/Special:Listusers 1755]
+|  [//cv.wikibooks.org/wiki/Special:ActiveUsers 1]
+|  [//cv.wikibooks.org/wiki/Special:FileList 5]
+|- style="text-align: right;"
+| 69
+| [[w:Punjabi language|Punjabi]]
+| class="plainlinksneverexpand" | [{{fullurl:pa:ਪੰਜਾਬੀ}} ਪੰਜਾਬੀ]
+| [//pa.wikibooks.org/wiki/ pa]
+| [//pa.wikibooks.org/wiki/Special:Statistics?action=raw '''66 ''']
+|  648
+|  [//pa.wikibooks.org/wiki/Special:Recentchanges 5022]
+|  [//pa.wikibooks.org/wiki/Special:Listadmins 1]
+|  [//pa.wikibooks.org/wiki/Special:Listusers 1691]
+|  [//pa.wikibooks.org/wiki/Special:ActiveUsers 0]
+|  [//pa.wikibooks.org/wiki/Special:FileList 0]
 |- style="text-align: right;"
 | 70
 | [[w:Tajik language|Tajik]]
-| [[w:Tajik language|Тоҷикӣ]]
+| class="plainlinksneverexpand" | [{{fullurl:tg:Забони_тоҷикӣ}} Тоҷикӣ]
 | [//tg.wikibooks.org/wiki/ tg]
-| [//tg.wikibooks.org/wiki/Special:Statistics?action=raw '''62 ''']
-| 828
-| [//tg.wikibooks.org/wiki/Special:Recentchanges 3222 ]
-| [//tg.wikibooks.org/wiki/Special:Listadmins 0 ]
-| [//tg.wikibooks.org/wiki/Special:Listusers 1333 ]
-| [//tg.wikibooks.org/wiki/Special:ActiveUsers 3 ]
-| [//tg.wikibooks.org/wiki/Special:ListFiles 0 ]
-| style="font-size: 70%;" | 2018-02-25 05:03:38
+| [//tg.wikibooks.org/wiki/Special:Statistics?action=raw '''66 ''']
+|  857
+|  [//tg.wikibooks.org/wiki/Special:Recentchanges 3383]
+|  [//tg.wikibooks.org/wiki/Special:Listadmins 1]
+|  [//tg.wikibooks.org/wiki/Special:Listusers 1538]
+|  [//tg.wikibooks.org/wiki/Special:ActiveUsers 1]
+|  [//tg.wikibooks.org/wiki/Special:FileList 0]
 |- style="text-align: right;"
 | 71
-| [[w:West Frisian language|West Frisian]]
-| [[w:West Frisian language|Frysk]]
-| [//fy.wikibooks.org/wiki/ fy]
-| [//fy.wikibooks.org/wiki/Special:Statistics?action=raw '''41 ''']
-| 602
-| [//fy.wikibooks.org/wiki/Special:Recentchanges 4800 ]
-| [//fy.wikibooks.org/wiki/Special:Listadmins 0 ]
-| [//fy.wikibooks.org/wiki/Special:Listusers 1385 ]
-| [//fy.wikibooks.org/wiki/Special:ActiveUsers 3 ]
-| [//fy.wikibooks.org/wiki/Special:ListFiles 7 ]
-| style="font-size: 70%;" | 2018-02-25 05:01:48
+| [[w:Telugu language|Telugu]]
+| class="plainlinksneverexpand" | [{{fullurl:te:తెలుగు}} తెలుగు]
+| [//te.wikibooks.org/wiki/ te]
+| [//te.wikibooks.org/wiki/Special:Statistics?action=raw '''49 ''']
+|  824
+|  [//te.wikibooks.org/wiki/Special:Recentchanges 7045]
+|  [//te.wikibooks.org/wiki/Special:Listadmins 2]
+|  [//te.wikibooks.org/wiki/Special:Listusers 2276]
+|  [//te.wikibooks.org/wiki/Special:ActiveUsers 9]
+|  [//te.wikibooks.org/wiki/Special:FileList 5]
 |- style="text-align: right;"
 | 72
-| [[w:Interlingue language|Interlingue]]
-| [[w:Interlingue language|Interlingue]]
-| [//ie.wikibooks.org/wiki/ ie]
-| [//ie.wikibooks.org/wiki/Special:Statistics?action=raw '''41 ''']
-| 572
-| [//ie.wikibooks.org/wiki/Special:Recentchanges 5101 ]
-| [//ie.wikibooks.org/wiki/Special:Listadmins 0 ]
-| [//ie.wikibooks.org/wiki/Special:Listusers 1149 ]
-| [//ie.wikibooks.org/wiki/Special:ActiveUsers 0 ]
-| [//ie.wikibooks.org/wiki/Special:ListFiles 0 ]
-| style="font-size: 70%;" | 2018-02-25 05:01:55
+| [[w:Kurdish language|Kurdish]]
+| class="plainlinksneverexpand" | [{{fullurl:ku:Zimanê_kurdî}} Kurdî / كوردی]
+| [//ku.wikibooks.org/wiki/ ku]
+| [//ku.wikibooks.org/wiki/Special:Statistics?action=raw '''45 ''']
+|  586
+|  [//ku.wikibooks.org/wiki/Special:Recentchanges 6594]
+|  [//ku.wikibooks.org/wiki/Special:Listadmins 1]
+|  [//ku.wikibooks.org/wiki/Special:Listusers 1680]
+|  [//ku.wikibooks.org/wiki/Special:ActiveUsers 1]
+|  [//ku.wikibooks.org/wiki/Special:FileList 0]
 |- style="text-align: right;"
 | 73
-| [[w:Kurdish language|Kurdish]]
-| [[w:Kurdish language|Kurdî / كوردی]]
-| [//ku.wikibooks.org/wiki/ ku]
-| [//ku.wikibooks.org/wiki/Special:Statistics?action=raw '''39 ''']
-| 560
-| [//ku.wikibooks.org/wiki/Special:Recentchanges 6397 ]
-| [//ku.wikibooks.org/wiki/Special:Listadmins 0 ]
-| [//ku.wikibooks.org/wiki/Special:Listusers 1487 ]
-| [//ku.wikibooks.org/wiki/Special:ActiveUsers 4 ]
-| [//ku.wikibooks.org/wiki/Special:ListFiles 0 ]
-| style="font-size: 70%;" | 2018-02-25 05:01:07
+| [[w:West Frisian language|West Frisian]]
+| class="plainlinksneverexpand" | [{{fullurl:fy:Frysk}} Frysk]
+| [//fy.wikibooks.org/wiki/ fy]
+| [//fy.wikibooks.org/wiki/Special:Statistics?action=raw '''41 ''']
+|  606
+|  [//fy.wikibooks.org/wiki/Special:Recentchanges 4918]
+|  [//fy.wikibooks.org/wiki/Special:Listadmins 1]
+|  [//fy.wikibooks.org/wiki/Special:Listusers 2057]
+|  [//fy.wikibooks.org/wiki/Special:ActiveUsers 3]
+|  [//fy.wikibooks.org/wiki/Special:FileList 7]
 |- style="text-align: right;"
 | 74
-| [[w:Bosnian language|Bosnian]]
-| [[w:Bosnian language|Bosanski]]
-| [//bs.wikibooks.org/wiki/ bs]
-| [//bs.wikibooks.org/wiki/Special:Statistics?action=raw '''29 ''']
-| 949
-| [//bs.wikibooks.org/wiki/Special:Recentchanges 6602 ]
-| [//bs.wikibooks.org/wiki/Special:Listadmins 1 ]
-| [//bs.wikibooks.org/wiki/Special:Listusers 1817 ]
-| [//bs.wikibooks.org/wiki/Special:ActiveUsers 4 ]
-| [//bs.wikibooks.org/wiki/Special:ListFiles 10 ]
-| style="font-size: 70%;" | 2018-02-25 05:01:22
+| [[w:Interlingue language|Interlingue]]
+| class="plainlinksneverexpand" | [{{fullurl:ie:Interlingue}} Interlingue]
+| [//ie.wikibooks.org/wiki/ ie]
+| [//ie.wikibooks.org/wiki/Special:Statistics?action=raw '''41 ''']
+|  566
+|  [//ie.wikibooks.org/wiki/Special:Recentchanges 5122]
+|  [//ie.wikibooks.org/wiki/Special:Listadmins 1]
+|  [//ie.wikibooks.org/wiki/Special:Listusers 1202]
+|  [//ie.wikibooks.org/wiki/Special:ActiveUsers 0]
+|  [//ie.wikibooks.org/wiki/Special:FileList 0]
 |- style="text-align: right;"
 | 75
-| [[w:Telugu language|Telugu]]
-| [[w:Telugu language|తెలుగు]]
-| [//te.wikibooks.org/wiki/ te]
-| [//te.wikibooks.org/wiki/Special:Statistics?action=raw '''25 ''']
-| 776
-| [//te.wikibooks.org/wiki/Special:Recentchanges 6594 ]
-| [//te.wikibooks.org/wiki/Special:Listadmins 0 ]
-| [//te.wikibooks.org/wiki/Special:Listusers 2014 ]
-| [//te.wikibooks.org/wiki/Special:ActiveUsers 3 ]
-| [//te.wikibooks.org/wiki/Special:ListFiles 5 ]
-| style="font-size: 70%;" | 2018-02-25 05:02:10
+| [[w:Bosnian language|Bosnian]]
+| class="plainlinksneverexpand" | [{{fullurl:bs:Bosanski_jezik}} Bosanski]
+| [//bs.wikibooks.org/wiki/ bs]
+| [//bs.wikibooks.org/wiki/Special:Statistics?action=raw '''30 ''']
+|  726
+|  [//bs.wikibooks.org/wiki/Special:Recentchanges 6758]
+|  [//bs.wikibooks.org/wiki/Special:Listadmins 1]
+|  [//bs.wikibooks.org/wiki/Special:Listusers 2081]
+|  [//bs.wikibooks.org/wiki/Special:ActiveUsers 3]
+|  [//bs.wikibooks.org/wiki/Special:FileList 10]
 |- style="text-align: right;"
 | 76
 | [[w:Welsh language|Welsh]]
-| [[w:Welsh language|Cymraeg]]
+| class="plainlinksneverexpand" | [{{fullurl:cy:Cymraeg}} Cymraeg]
 | [//cy.wikibooks.org/wiki/ cy]
-| [//cy.wikibooks.org/wiki/Special:Statistics?action=raw '''24 ''']
-| 621
-| [//cy.wikibooks.org/wiki/Special:Recentchanges 4757 ]
-| [//cy.wikibooks.org/wiki/Special:Listadmins 0 ]
-| [//cy.wikibooks.org/wiki/Special:Listusers 1635 ]
-| [//cy.wikibooks.org/wiki/Special:ActiveUsers 4 ]
-| [//cy.wikibooks.org/wiki/Special:ListFiles 0 ]
-| style="font-size: 70%;" | 2018-02-25 05:01:29
+| [//cy.wikibooks.org/wiki/Special:Statistics?action=raw '''27 ''']
+|  679
+|  [//cy.wikibooks.org/wiki/Special:Recentchanges 4950]
+|  [//cy.wikibooks.org/wiki/Special:Listadmins 1]
+|  [//cy.wikibooks.org/wiki/Special:Listusers 1831]
+|  [//cy.wikibooks.org/wiki/Special:ActiveUsers 0]
+|  [//cy.wikibooks.org/wiki/Special:FileList 0]
 |- style="text-align: right;"
 | 77
 | [[w:Afrikaans language|Afrikaans]]
-| [[w:Afrikaans language|Afrikaans]]
+| class="plainlinksneverexpand" | [{{fullurl:af:Afrikaans}} Afrikaans]
 | [//af.wikibooks.org/wiki/ af]
 | [//af.wikibooks.org/wiki/Special:Statistics?action=raw '''23 ''']
-| 1029
-| [//af.wikibooks.org/wiki/Special:Recentchanges 5568 ]
-| [//af.wikibooks.org/wiki/Special:Listadmins 0 ]
-| [//af.wikibooks.org/wiki/Special:Listusers 1925 ]
-| [//af.wikibooks.org/wiki/Special:ActiveUsers 10 ]
-| [//af.wikibooks.org/wiki/Special:ListFiles 0 ]
-| style="font-size: 70%;" | 2018-02-25 05:01:16
+|  1054
+|  [//af.wikibooks.org/wiki/Special:Recentchanges 6759]
+|  [//af.wikibooks.org/wiki/Special:Listadmins 1]
+|  [//af.wikibooks.org/wiki/Special:Listusers 2181]
+|  [//af.wikibooks.org/wiki/Special:ActiveUsers 2]
+|  [//af.wikibooks.org/wiki/Special:FileList 0]
 |- style="text-align: right;"
 | 78
 | [[w:Min Nan language|Min Nan]]
-| [[w:Min Nan language|Bân-lâm-gú]]
+| class="plainlinksneverexpand" | [{{fullurl:zh-min-nan:Bân-lâm-gú}} Bân-lâm-gú]
 | [//zh-min-nan.wikibooks.org/wiki/ zh-min-nan]
 | [//zh-min-nan.wikibooks.org/wiki/Special:Statistics?action=raw '''16 ''']
-| 416
-| [//zh-min-nan.wikibooks.org/wiki/Special:Recentchanges 6216 ]
-| [//zh-min-nan.wikibooks.org/wiki/Special:Listadmins 0 ]
-| [//zh-min-nan.wikibooks.org/wiki/Special:Listusers 804 ]
-| [//zh-min-nan.wikibooks.org/wiki/Special:ActiveUsers 0 ]
-| [//zh-min-nan.wikibooks.org/wiki/Special:ListFiles 4 ]
-| style="font-size: 70%;" | 2018-02-25 05:02:51
+|  412
+|  [//zh-min-nan.wikibooks.org/wiki/Special:Recentchanges 6227]
+|  [//zh-min-nan.wikibooks.org/wiki/Special:Listadmins 1]
+|  [//zh-min-nan.wikibooks.org/wiki/Special:Listusers 860]
+|  [//zh-min-nan.wikibooks.org/wiki/Special:ActiveUsers 1]
+|  [//zh-min-nan.wikibooks.org/wiki/Special:FileList 4]
 |- style="text-align: right;"
 | 79
 | [[w:Marathi language|Marathi]]
-| [[w:Marathi language|मराठी]]
+| class="plainlinksneverexpand" | [{{fullurl:mr:मराठी_भाषा}} मराठी]
 | [//mr.wikibooks.org/wiki/ mr]
 | [//mr.wikibooks.org/wiki/Special:Statistics?action=raw '''15 ''']
-| 1020
-| [//mr.wikibooks.org/wiki/Special:Recentchanges 6911 ]
-| [//mr.wikibooks.org/wiki/Special:Listadmins 0 ]
-| [//mr.wikibooks.org/wiki/Special:Listusers 2425 ]
-| [//mr.wikibooks.org/wiki/Special:ActiveUsers 3 ]
-| [//mr.wikibooks.org/wiki/Special:ListFiles 2 ]
-| style="font-size: 70%;" | 2018-02-25 05:02:01
+|  1020
+|  [//mr.wikibooks.org/wiki/Special:Recentchanges 7426]
+|  [//mr.wikibooks.org/wiki/Special:Listadmins 1]
+|  [//mr.wikibooks.org/wiki/Special:Listusers 2752]
+|  [//mr.wikibooks.org/wiki/Special:ActiveUsers 3]
+|  [//mr.wikibooks.org/wiki/Special:FileList 2]
 |- style="text-align: right;"
 | 80
 | [[w:Malagasy language|Malagasy]]
-| [[w:Malagasy language|Malagasy]]
+| class="plainlinksneverexpand" | [{{fullurl:mg:Fiteny_malagasy}} Malagasy]
 | [//mg.wikibooks.org/wiki/ mg]
-| [//mg.wikibooks.org/wiki/Special:Statistics?action=raw '''15 ''']
-| 485
-| [//mg.wikibooks.org/wiki/Special:Recentchanges 4449 ]
-| [//mg.wikibooks.org/wiki/Special:Listadmins 0 ]
-| [//mg.wikibooks.org/wiki/Special:Listusers 1273 ]
-| [//mg.wikibooks.org/wiki/Special:ActiveUsers 5 ]
-| [//mg.wikibooks.org/wiki/Special:ListFiles 0 ]
-| style="font-size: 70%;" | 2018-02-25 05:01:27
+| [//mg.wikibooks.org/wiki/Special:Statistics?action=raw '''14 ''']
+|  488
+|  [//mg.wikibooks.org/wiki/Special:Recentchanges 4540]
+|  [//mg.wikibooks.org/wiki/Special:Listadmins 1]
+|  [//mg.wikibooks.org/wiki/Special:Listusers 1469]
+|  [//mg.wikibooks.org/wiki/Special:ActiveUsers 0]
+|  [//mg.wikibooks.org/wiki/Special:FileList 0]
 |- style="text-align: right;"
 | 81
 | [[w:Kirghiz language|Kirghiz]]
-| [[w:Kirghiz language|Kırgızca]]
+| class="plainlinksneverexpand" | [{{fullurl:ky:Кыргыз_тили}} Кыргызча]
 | [//ky.wikibooks.org/wiki/ ky]
 | [//ky.wikibooks.org/wiki/Special:Statistics?action=raw '''12 ''']
-| 515
-| [//ky.wikibooks.org/wiki/Special:Recentchanges 4504 ]
-| [//ky.wikibooks.org/wiki/Special:Listadmins 0 ]
-| [//ky.wikibooks.org/wiki/Special:Listusers 1452 ]
-| [//ky.wikibooks.org/wiki/Special:ActiveUsers 4 ]
-| [//ky.wikibooks.org/wiki/Special:ListFiles 5 ]
-| style="font-size: 70%;" | 2018-02-25 05:02:16
+|  520
+|  [//ky.wikibooks.org/wiki/Special:Recentchanges 4723]
+|  [//ky.wikibooks.org/wiki/Special:Listadmins 1]
+|  [//ky.wikibooks.org/wiki/Special:Listusers 1823]
+|  [//ky.wikibooks.org/wiki/Special:ActiveUsers 4]
+|  [//ky.wikibooks.org/wiki/Special:FileList 5]
 |- style="text-align: right;"
 | 82
 | [[w:Swahili language|Swahili]]
-| [[w:Swahili language|Kiswahili]]
+| class="plainlinksneverexpand" | [{{fullurl:sw:Kiswahili}} Kiswahili]
 | [//sw.wikibooks.org/wiki/ sw]
 | [//sw.wikibooks.org/wiki/Special:Statistics?action=raw '''9 ''']
-| 211
-| [//sw.wikibooks.org/wiki/Special:Recentchanges 3565 ]
-| [//sw.wikibooks.org/wiki/Special:Listadmins 0 ]
-| [//sw.wikibooks.org/wiki/Special:Listusers 529 ]
-| [//sw.wikibooks.org/wiki/Special:ActiveUsers 0 ]
-| [//sw.wikibooks.org/wiki/Special:ListFiles 0 ]
-| style="font-size: 70%;" | 2018-02-25 05:03:32
+|  212
+|  [//sw.wikibooks.org/wiki/Special:Recentchanges 3573]
+|  [//sw.wikibooks.org/wiki/Special:Listadmins 1]
+|  [//sw.wikibooks.org/wiki/Special:Listusers 575]
+|  [//sw.wikibooks.org/wiki/Special:ActiveUsers 0]
+|  [//sw.wikibooks.org/wiki/Special:FileList 0]
 |- style="text-align: right;"
 | 83
-| [[w:Alemannic German language|Alemannic German]]
-| [[w:Alemannic German language|Alemannisch]]
-| [//als.wikibooks.org/wiki/ als]
-| [//als.wikibooks.org/wiki/Special:Statistics?action=raw '''8 ''']
-| 225
-| [//als.wikibooks.org/wiki/Special:Recentchanges 6759 ]
-| [//als.wikibooks.org/wiki/Special:Listadmins 0 ]
-| [//als.wikibooks.org/wiki/Special:Listusers 624 ]
-| [//als.wikibooks.org/wiki/Special:ActiveUsers 0 ]
-| [//als.wikibooks.org/wiki/Special:ListFiles 0 ]
-| style="font-size: 70%;" | 2017-12-13 05:04:45
-|- style="text-align: right;"
-| 84
 | [[w:Asturian language|Asturian]]
-| [[w:Asturian language|Asturianu]]
+| class="plainlinksneverexpand" | [{{fullurl:ast:Asturianu}} Asturianu]
 | [//ast.wikibooks.org/wiki/ ast]
 | [//ast.wikibooks.org/wiki/Special:Statistics?action=raw '''5 ''']
-| 276
-| [//ast.wikibooks.org/wiki/Special:Recentchanges 3976 ]
-| [//ast.wikibooks.org/wiki/Special:Listadmins 0 ]
-| [//ast.wikibooks.org/wiki/Special:Listusers 656 ]
-| [//ast.wikibooks.org/wiki/Special:ActiveUsers 0 ]
-| [//ast.wikibooks.org/wiki/Special:ListFiles 6 ]
-| style="font-size: 70%;" | 2018-02-25 05:01:18
+|  276
+|  [//ast.wikibooks.org/wiki/Special:Recentchanges 3984]
+|  [//ast.wikibooks.org/wiki/Special:Listadmins 1]
+|  [//ast.wikibooks.org/wiki/Special:Listusers 704]
+|  [//ast.wikibooks.org/wiki/Special:ActiveUsers 0]
+|  [//ast.wikibooks.org/wiki/Special:FileList 6]
 |- style="text-align: right;"
-| 85
-| [[w:Uzbek language|Uzbek]]
-| [[w:Uzbek language|O‘zbek]]
-| [//uz.wikibooks.org/wiki/ uz]
-| [//uz.wikibooks.org/wiki/Special:Statistics?action=raw '''4 ''']
-| 400
-| [//uz.wikibooks.org/wiki/Special:Recentchanges 4108 ]
-| [//uz.wikibooks.org/wiki/Special:Listadmins 0 ]
-| [//uz.wikibooks.org/wiki/Special:Listusers 905 ]
-| [//uz.wikibooks.org/wiki/Special:ActiveUsers 0 ]
-| [//uz.wikibooks.org/wiki/Special:ListFiles 1 ]
-| style="font-size: 70%;" | 2018-02-25 05:02:40
-|- style="text-align: right;"
-| 86
+| 84
 | [[w:Corsican language|Corsican]]
-| [[w:Corsican language|Corsu]]
+| class="plainlinksneverexpand" | [{{fullurl:co:Lingua_corsa}} Corsu]
 | [//co.wikibooks.org/wiki/ co]
 | [//co.wikibooks.org/wiki/Special:Statistics?action=raw '''4 ''']
-| 256
-| [//co.wikibooks.org/wiki/Special:Recentchanges 4602 ]
-| [//co.wikibooks.org/wiki/Special:Listadmins 0 ]
-| [//co.wikibooks.org/wiki/Special:Listusers 588 ]
-| [//co.wikibooks.org/wiki/Special:ActiveUsers 0 ]
-| [//co.wikibooks.org/wiki/Special:ListFiles 3 ]
-| style="font-size: 70%;" | 2018-02-25 05:01:46
+|  257
+|  [//co.wikibooks.org/wiki/Special:Recentchanges 4610]
+|  [//co.wikibooks.org/wiki/Special:Listadmins 1]
+|  [//co.wikibooks.org/wiki/Special:Listusers 635]
+|  [//co.wikibooks.org/wiki/Special:ActiveUsers 0]
+|  [//co.wikibooks.org/wiki/Special:FileList 3]
 |- style="text-align: right;"
-| 87
-| [[w:Quechua language|Quechua]]
-| [[w:Quechua language|Runa Simi]]
-| [//qu.wikibooks.org/wiki/ qu]
-| [//qu.wikibooks.org/wiki/Special:Statistics?action=raw '''4 ''']
-| 75
-| [//qu.wikibooks.org/wiki/Special:Recentchanges 4747 ]
-| [//qu.wikibooks.org/wiki/Special:Listadmins 0 ]
-| [//qu.wikibooks.org/wiki/Special:Listusers 397 ]
-| [//qu.wikibooks.org/wiki/Special:ActiveUsers 0 ]
-| [//qu.wikibooks.org/wiki/Special:ListFiles 1 ]
-| style="font-size: 70%;" | 2018-02-25 05:03:21
-|- style="text-align: right;"
-| 88
+| 85
 | [[w:Gothic language|Gothic]]
-| [[w:Gothic language|𐌲𐌿𐍄𐌹𐍃𐌺]]
+| class="plainlinksneverexpand" | [{{fullurl:got:𐌲𐌿𐍄𐌰𐍂𐌰𐌶𐌳𐌰}} 𐌲𐌿𐍄𐌹𐍃𐌺]
 | [//got.wikibooks.org/wiki/ got]
 | [//got.wikibooks.org/wiki/Special:Statistics?action=raw '''4 ''']
-| 65
-| [//got.wikibooks.org/wiki/Special:Recentchanges 3288 ]
-| [//got.wikibooks.org/wiki/Special:Listadmins 0 ]
-| [//got.wikibooks.org/wiki/Special:Listusers 358 ]
-| [//got.wikibooks.org/wiki/Special:ActiveUsers 0 ]
-| [//got.wikibooks.org/wiki/Special:ListFiles 0 ]
-| style="font-size: 70%;" | 2018-02-25 05:01:50
+|  66
+|  [//got.wikibooks.org/wiki/Special:Recentchanges 3291]
+|  [//got.wikibooks.org/wiki/Special:Listadmins 1]
+|  [//got.wikibooks.org/wiki/Special:Listusers 401]
+|  [//got.wikibooks.org/wiki/Special:ActiveUsers 1]
+|  [//got.wikibooks.org/wiki/Special:FileList 0]
+|- style="text-align: right;"
+| 86
+| [[w:Quechua language|Quechua]]
+| class="plainlinksneverexpand" | [{{fullurl:qu:Qhichwa_simi}} Runa Simi]
+| [//qu.wikibooks.org/wiki/ qu]
+| [//qu.wikibooks.org/wiki/Special:Statistics?action=raw '''4 ''']
+|  76
+|  [//qu.wikibooks.org/wiki/Special:Recentchanges 4750]
+|  [//qu.wikibooks.org/wiki/Special:Listadmins 1]
+|  [//qu.wikibooks.org/wiki/Special:Listusers 434]
+|  [//qu.wikibooks.org/wiki/Special:ActiveUsers 0]
+|  [//qu.wikibooks.org/wiki/Special:FileList 1]
+|- style="text-align: right;"
+| 87
+| [[w:Uzbek language|Uzbek]]
+| class="plainlinksneverexpand" | [{{fullurl:uz:Oʻzbek_tili}} O‘zbek]
+| [//uz.wikibooks.org/wiki/ uz]
+| [//uz.wikibooks.org/wiki/Special:Statistics?action=raw '''4 ''']
+|  399
+|  [//uz.wikibooks.org/wiki/Special:Recentchanges 4131]
+|  [//uz.wikibooks.org/wiki/Special:Listadmins 1]
+|  [//uz.wikibooks.org/wiki/Special:Listusers 960]
+|  [//uz.wikibooks.org/wiki/Special:ActiveUsers 0]
+|  [//uz.wikibooks.org/wiki/Special:FileList 1]
+|- style="text-align: right;"
+| 88
+| [[w:Nahuatl language|Nahuatl]]
+| class="plainlinksneverexpand" | [{{fullurl:nah:Nāhuatlahtōlli}} Nāhuatl]
+| [//nah.wikibooks.org/wiki/ nah]
+| [//nah.wikibooks.org/wiki/Special:Statistics?action=raw '''3 ''']
+|  72
+|  [//nah.wikibooks.org/wiki/Special:Recentchanges 4684]
+|  [//nah.wikibooks.org/wiki/Special:Listadmins 1]
+|  [//nah.wikibooks.org/wiki/Special:Listusers 420]
+|  [//nah.wikibooks.org/wiki/Special:ActiveUsers 0]
+|  [//nah.wikibooks.org/wiki/Special:FileList 0]
 |- style="text-align: right;"
 | 89
 | [[w:Zhuang language|Zhuang]]
-| [[w:Zhuang language|Cuengh]]
+| class="plainlinksneverexpand" | [{{fullurl:za:Sawcuengh}} Cuengh]
 | [//za.wikibooks.org/wiki/ za]
 | [//za.wikibooks.org/wiki/Special:Statistics?action=raw '''3 ''']
-| 142
-| [//za.wikibooks.org/wiki/Special:Recentchanges 11045 ]
-| [//za.wikibooks.org/wiki/Special:Listadmins 0 ]
-| [//za.wikibooks.org/wiki/Special:Listusers 432 ]
-| [//za.wikibooks.org/wiki/Special:ActiveUsers 0 ]
-| [//za.wikibooks.org/wiki/Special:ListFiles 0 ]
-| style="font-size: 70%;" | 2018-02-25 05:03:47
+|  143
+|  [//za.wikibooks.org/wiki/Special:Recentchanges 11048]
+|  [//za.wikibooks.org/wiki/Special:Listadmins 1]
+|  [//za.wikibooks.org/wiki/Special:Listusers 474]
+|  [//za.wikibooks.org/wiki/Special:ActiveUsers 0]
+|  [//za.wikibooks.org/wiki/Special:FileList 0]
 |- style="text-align: right;"
 | 90
-| [[w:Nahuatl language|Nahuatl]]
-| [[w:Nahuatl language|Nahuatl]]
-| [//nah.wikibooks.org/wiki/ nah]
-| [//nah.wikibooks.org/wiki/Special:Statistics?action=raw '''3 ''']
-| 71
-| [//nah.wikibooks.org/wiki/Special:Recentchanges 4681 ]
-| [//nah.wikibooks.org/wiki/Special:Listadmins 0 ]
-| [//nah.wikibooks.org/wiki/Special:Listusers 381 ]
-| [//nah.wikibooks.org/wiki/Special:ActiveUsers 0 ]
-| [//nah.wikibooks.org/wiki/Special:ListFiles 0 ]
-| style="font-size: 70%;" | 2018-02-25 05:03:15
+| [[w:Kannada language|Kannada]]
+| class="plainlinksneverexpand" | [{{fullurl:kn:ಕನ್ನಡ}} ಕನ್ನಡ]
+| [//kn.wikibooks.org/wiki/ kn]
+| [//kn.wikibooks.org/wiki/Special:Statistics?action=raw '''2 ''']
+|  158
+|  [//kn.wikibooks.org/wiki/Special:Recentchanges 3764]
+|  [//kn.wikibooks.org/wiki/Special:Listadmins 1]
+|  [//kn.wikibooks.org/wiki/Special:Listusers 548]
+|  [//kn.wikibooks.org/wiki/Special:ActiveUsers 0]
+|  [//kn.wikibooks.org/wiki/Special:FileList 7]
 |- style="text-align: right;"
 | 91
 | [[w:Sundanese language|Sundanese]]
-| [[w:Sundanese language|Basa Sunda]]
+| class="plainlinksneverexpand" | [{{fullurl:su:Basa_Sunda}} Basa Sunda]
 | [//su.wikibooks.org/wiki/ su]
 | [//su.wikibooks.org/wiki/Special:Statistics?action=raw '''2 ''']
-| 345
-| [//su.wikibooks.org/wiki/Special:Recentchanges 4675 ]
-| [//su.wikibooks.org/wiki/Special:Listadmins 0 ]
-| [//su.wikibooks.org/wiki/Special:Listusers 732 ]
-| [//su.wikibooks.org/wiki/Special:ActiveUsers 0 ]
-| [//su.wikibooks.org/wiki/Special:ListFiles 0 ]
-| style="font-size: 70%;" | 2018-02-25 05:02:08
+|  344
+|  [//su.wikibooks.org/wiki/Special:Recentchanges 4686]
+|  [//su.wikibooks.org/wiki/Special:Listadmins 1]
+|  [//su.wikibooks.org/wiki/Special:Listusers 777]
+|  [//su.wikibooks.org/wiki/Special:ActiveUsers 0]
+|  [//su.wikibooks.org/wiki/Special:FileList 0]
 |- style="text-align: right;"
 | 92
 | [[w:Volapük language|Volapük]]
-| [[w:Volapük language|Volapük]]
+| class="plainlinksneverexpand" | [{{fullurl:vo:Volapük_perevidöl}} Volapük]
 | [//vo.wikibooks.org/wiki/ vo]
 | [//vo.wikibooks.org/wiki/Special:Statistics?action=raw '''2 ''']
-| 305
-| [//vo.wikibooks.org/wiki/Special:Recentchanges 4144 ]
-| [//vo.wikibooks.org/wiki/Special:Listadmins 0 ]
-| [//vo.wikibooks.org/wiki/Special:Listusers 730 ]
-| [//vo.wikibooks.org/wiki/Special:ActiveUsers 0 ]
-| [//vo.wikibooks.org/wiki/Special:ListFiles 0 ]
-| style="font-size: 70%;" | 2018-02-25 05:02:42
+|  303
+|  [//vo.wikibooks.org/wiki/Special:Recentchanges 4154]
+|  [//vo.wikibooks.org/wiki/Special:Listadmins 1]
+|  [//vo.wikibooks.org/wiki/Special:Listusers 776]
+|  [//vo.wikibooks.org/wiki/Special:ActiveUsers 0]
+|  [//vo.wikibooks.org/wiki/Special:FileList 0]
 |- style="text-align: right;"
 | 93
-| [[w:Kannada language|Kannada]]
-| [[w:Kannada language|ಕನ್ನಡ]]
-| [//kn.wikibooks.org/wiki/ kn]
-| [//kn.wikibooks.org/wiki/Special:Statistics?action=raw '''2 ''']
-| 157
-| [//kn.wikibooks.org/wiki/Special:Recentchanges 3761 ]
-| [//kn.wikibooks.org/wiki/Special:Listadmins 0 ]
-| [//kn.wikibooks.org/wiki/Special:Listusers 494 ]
-| [//kn.wikibooks.org/wiki/Special:ActiveUsers 0 ]
-| [//kn.wikibooks.org/wiki/Special:ListFiles 7 ]
-| style="font-size: 70%;" | 2018-02-25 05:03:43
-|- style="text-align: right;"
-| 94
 | [[w:Walloon language|Walloon]]
-| [[w:Walloon language|Walon]]
+| class="plainlinksneverexpand" | [{{fullurl:wa:Walon}} Walon]
 | [//wa.wikibooks.org/wiki/ wa]
 | [//wa.wikibooks.org/wiki/Special:Statistics?action=raw '''2 ''']
-| 129
-| [//wa.wikibooks.org/wiki/Special:Recentchanges 4019 ]
-| [//wa.wikibooks.org/wiki/Special:Listadmins 0 ]
-| [//wa.wikibooks.org/wiki/Special:Listusers 452 ]
-| [//wa.wikibooks.org/wiki/Special:ActiveUsers 0 ]
-| [//wa.wikibooks.org/wiki/Special:ListFiles 0 ]
-| style="font-size: 70%;" | 2018-02-25 05:02:44
+|  130
+|  [//wa.wikibooks.org/wiki/Special:Recentchanges 4022]
+|  [//wa.wikibooks.org/wiki/Special:Listadmins 1]
+|  [//wa.wikibooks.org/wiki/Special:Listusers 494]
+|  [//wa.wikibooks.org/wiki/Special:ActiveUsers 0]
+|  [//wa.wikibooks.org/wiki/Special:FileList 0]
 |- style="text-align: right;"
-| 95
+| 94
 | [[w:Nauruan language|Nauruan]]
-| [[w:Nauruan language|Ekakairũ Naoero]]
+| class="plainlinksneverexpand" | [{{fullurl:na:Dorerin_Naoero}} dorerin Naoero]
 | [//na.wikibooks.org/wiki/ na]
 | [//na.wikibooks.org/wiki/Special:Statistics?action=raw '''1 ''']
-| 250
-| [//na.wikibooks.org/wiki/Special:Recentchanges 3750 ]
-| [//na.wikibooks.org/wiki/Special:Listadmins 0 ]
-| [//na.wikibooks.org/wiki/Special:Listusers 527 ]
-| [//na.wikibooks.org/wiki/Special:ActiveUsers 0 ]
-| [//na.wikibooks.org/wiki/Special:ListFiles 0 ]
-| style="font-size: 70%;" | 2018-02-25 05:02:03
+|  251
+|  [//na.wikibooks.org/wiki/Special:Recentchanges 3758]
+|  [//na.wikibooks.org/wiki/Special:Listadmins 1]
+|  [//na.wikibooks.org/wiki/Special:Listusers 564]
+|  [//na.wikibooks.org/wiki/Special:ActiveUsers 0]
+|  [//na.wikibooks.org/wiki/Special:FileList 0]
 |- style="text-align: right;"
-| 96
-| [[w:Zulu language|Zulu]]
-| [[w:Zulu language|isiZulu]]
-| [//zu.wikibooks.org/wiki/ zu]
-| [//zu.wikibooks.org/wiki/Special:Statistics?action=raw '''1 ''']
-| 207
-| [//zu.wikibooks.org/wiki/Special:Recentchanges 3794 ]
-| [//zu.wikibooks.org/wiki/Special:Listadmins 0 ]
-| [//zu.wikibooks.org/wiki/Special:Listusers 546 ]
-| [//zu.wikibooks.org/wiki/Special:ActiveUsers 0 ]
-| [//zu.wikibooks.org/wiki/Special:ListFiles 0 ]
-| style="font-size: 70%;" | 2018-02-25 05:02:53
-|- style="text-align: right;"
-| 97
+| 95
 | [[w:Low Saxon language|Low Saxon]]
-| [[w:Low Saxon language|Plattdüütsch]]
+| class="plainlinksneverexpand" | [{{fullurl:nds:Plattdüütsch}} Plattdüütsch]
 | [//nds.wikibooks.org/wiki/ nds]
 | [//nds.wikibooks.org/wiki/Special:Statistics?action=raw '''1 ''']
-| 192
-| [//nds.wikibooks.org/wiki/Special:Recentchanges 3288 ]
-| [//nds.wikibooks.org/wiki/Special:Listadmins 0 ]
-| [//nds.wikibooks.org/wiki/Special:Listusers 536 ]
-| [//nds.wikibooks.org/wiki/Special:ActiveUsers 0 ]
-| [//nds.wikibooks.org/wiki/Special:ListFiles 0 ]
-| style="font-size: 70%;" | 2018-02-25 05:01:35
+|  193
+|  [//nds.wikibooks.org/wiki/Special:Recentchanges 3296]
+|  [//nds.wikibooks.org/wiki/Special:Listadmins 1]
+|  [//nds.wikibooks.org/wiki/Special:Listusers 580]
+|  [//nds.wikibooks.org/wiki/Special:ActiveUsers 0]
+|  [//nds.wikibooks.org/wiki/Special:FileList 0]
 |- style="text-align: right;"
-| 98
+| 96
 | [[w:Pashto language|Pashto]]
-| [[w:Pashto language|پښتو]]
+| class="plainlinksneverexpand" | [{{fullurl:ps:پښتو}} پښتو]
 | [//ps.wikibooks.org/wiki/ ps]
 | [//ps.wikibooks.org/wiki/Special:Statistics?action=raw '''1 ''']
-| 139
-| [//ps.wikibooks.org/wiki/Special:Recentchanges 3593 ]
-| [//ps.wikibooks.org/wiki/Special:Listadmins 0 ]
-| [//ps.wikibooks.org/wiki/Special:Listusers 456 ]
-| [//ps.wikibooks.org/wiki/Special:ActiveUsers 0 ]
-| [//ps.wikibooks.org/wiki/Special:ListFiles 0 ]
-| style="font-size: 70%;" | 2018-02-25 05:03:19
+|  140
+|  [//ps.wikibooks.org/wiki/Special:Recentchanges 3596]
+|  [//ps.wikibooks.org/wiki/Special:Listadmins 1]
+|  [//ps.wikibooks.org/wiki/Special:Listusers 494]
+|  [//ps.wikibooks.org/wiki/Special:ActiveUsers 0]
+|  [//ps.wikibooks.org/wiki/Special:FileList 0]
 |- style="text-align: right;"
-| 99
-| [[w:Xhosan language|Xhosan]]
-| [[w:Xhosan language|isiXhosa]]
+| 97
+| [[w:Xhosa language|Xhosa]]
+| class="plainlinksneverexpand" | [{{fullurl:xh:IsiXhosa}} isiXhosa]
 | [//xh.wikibooks.org/wiki/ xh]
 | [//xh.wikibooks.org/wiki/Special:Statistics?action=raw '''1 ''']
-| 130
-| [//xh.wikibooks.org/wiki/Special:Recentchanges 3521 ]
-| [//xh.wikibooks.org/wiki/Special:Listadmins 0 ]
-| [//xh.wikibooks.org/wiki/Special:Listusers 454 ]
-| [//xh.wikibooks.org/wiki/Special:ActiveUsers 0 ]
-| [//xh.wikibooks.org/wiki/Special:ListFiles 0 ]
-| style="font-size: 70%;" | 2018-02-25 05:02:46
+|  131
+|  [//xh.wikibooks.org/wiki/Special:Recentchanges 3524]
+|  [//xh.wikibooks.org/wiki/Special:Listadmins 1]
+|  [//xh.wikibooks.org/wiki/Special:Listusers 496]
+|  [//xh.wikibooks.org/wiki/Special:ActiveUsers 0]
+|  [//xh.wikibooks.org/wiki/Special:FileList 0]
 |- style="text-align: right;"
-| 100
-| [[w:Turkmen language|Turkmen]]
-| [[w:Turkmen language|تركمن / Туркмен]]
-| [//tk.wikibooks.org/wiki/ tk]
-| [//tk.wikibooks.org/wiki/Special:Statistics?action=raw '''0 ''']
-| 245
-| [//tk.wikibooks.org/wiki/Special:Recentchanges 3743 ]
-| [//tk.wikibooks.org/wiki/Special:Listadmins 0 ]
-| [//tk.wikibooks.org/wiki/Special:Listusers 527 ]
-| [//tk.wikibooks.org/wiki/Special:ActiveUsers 0 ]
-| [//tk.wikibooks.org/wiki/Special:ListFiles 0 ]
-| style="font-size: 70%;" | 2018-02-25 05:03:34
+| 98
+| [[w:Zulu language|Zulu]]
+| class="plainlinksneverexpand" | [{{fullurl:zu:IsiZulu}} isiZulu]
+| [//zu.wikibooks.org/wiki/ zu]
+| [//zu.wikibooks.org/wiki/Special:Statistics?action=raw '''1 ''']
+|  208
+|  [//zu.wikibooks.org/wiki/Special:Recentchanges 3802]
+|  [//zu.wikibooks.org/wiki/Special:Listadmins 1]
+|  [//zu.wikibooks.org/wiki/Special:Listusers 596]
+|  [//zu.wikibooks.org/wiki/Special:ActiveUsers 0]
+|  [//zu.wikibooks.org/wiki/Special:FileList 0]
 |- style="text-align: right;"
-| 101
-| [[w:Mongolian language|Mongolian]]
-| [[w:Mongolian language|Монгол]]
-| [//mn.wikibooks.org/wiki/ mn]
-| [//mn.wikibooks.org/wiki/Special:Statistics?action=raw '''0 ''']
-| 210
-| [//mn.wikibooks.org/wiki/Special:Recentchanges 3763 ]
-| [//mn.wikibooks.org/wiki/Special:Listadmins 0 ]
-| [//mn.wikibooks.org/wiki/Special:Listusers 592 ]
-| [//mn.wikibooks.org/wiki/Special:ActiveUsers 0 ]
-| [//mn.wikibooks.org/wiki/Special:ListFiles 0 ]
-| style="font-size: 70%;" | 2018-02-25 05:03:10
-|- style="text-align: right;"
-| 102
-| [[w:Luxembourgish language|Luxembourgish]]
-| [[w:Luxembourgish language|Lëtzebuergesch]]
-| [//lb.wikibooks.org/wiki/ lb]
-| [//lb.wikibooks.org/wiki/Special:Statistics?action=raw '''0 ''']
-| 132
-| [//lb.wikibooks.org/wiki/Special:Recentchanges 3556 ]
-| [//lb.wikibooks.org/wiki/Special:Listadmins 0 ]
-| [//lb.wikibooks.org/wiki/Special:Listusers 467 ]
-| [//lb.wikibooks.org/wiki/Special:ActiveUsers 0 ]
-| [//lb.wikibooks.org/wiki/Special:ListFiles 0 ]
-| style="font-size: 70%;" | 2018-02-25 05:03:01
-|- style="text-align: right;"
-| 103
-| [[w:Yoruba language|Yoruba]]
-| [[w:Yoruba language|Yorùbá]]
-| [//yo.wikibooks.org/wiki/ yo]
-| [//yo.wikibooks.org/wiki/Special:Statistics?action=raw '''0 ''']
-| 111
-| [//yo.wikibooks.org/wiki/Special:Recentchanges 3584 ]
-| [//yo.wikibooks.org/wiki/Special:Listadmins 0 ]
-| [//yo.wikibooks.org/wiki/Special:Listusers 453 ]
-| [//yo.wikibooks.org/wiki/Special:ActiveUsers 0 ]
-| [//yo.wikibooks.org/wiki/Special:ListFiles 0 ]
-| style="font-size: 70%;" | 2018-02-25 05:02:49
-|- style="text-align: right;"
-| 104
-| [[w:Akan language|Akan]]
-| [[w:Akan language|Akana]]
-| [//ak.wikibooks.org/wiki/ ak]
-| [//ak.wikibooks.org/wiki/Special:Statistics?action=raw '''0 ''']
-| 92
-| [//ak.wikibooks.org/wiki/Special:Recentchanges 3421 ]
-| [//ak.wikibooks.org/wiki/Special:Listadmins 0 ]
-| [//ak.wikibooks.org/wiki/Special:Listusers 403 ]
-| [//ak.wikibooks.org/wiki/Special:ActiveUsers 0 ]
-| [//ak.wikibooks.org/wiki/Special:ListFiles 0 ]
-| style="font-size: 70%;" | 2018-02-25 05:02:23
-|- style="text-align: right;"
-| 105
-| [[w:Lingala language|Lingala]]
-| [[w:Lingala language|Lingala]]
-| [//ln.wikibooks.org/wiki/ ln]
-| [//ln.wikibooks.org/wiki/Special:Statistics?action=raw '''0 ''']
-| 88
-| [//ln.wikibooks.org/wiki/Special:Recentchanges 3489 ]
-| [//ln.wikibooks.org/wiki/Special:Listadmins 0 ]
-| [//ln.wikibooks.org/wiki/Special:Listusers 334 ]
-| [//ln.wikibooks.org/wiki/Special:ActiveUsers 0 ]
-| [//ln.wikibooks.org/wiki/Special:ListFiles 0 ]
-| style="font-size: 70%;" | 2018-02-25 05:03:04
-|- style="text-align: right;"
-| 106
-| [[w:Gujarti language|Gujarti]]
-| [[w:Gujarti language|ગુજરાતી]]
-| [//gu.wikibooks.org/wiki/ gu]
-| [//gu.wikibooks.org/wiki/Special:Statistics?action=raw '''0 ''']
-| 86
-| [//gu.wikibooks.org/wiki/Special:Recentchanges 3632 ]
-| [//gu.wikibooks.org/wiki/Special:Listadmins 0 ]
-| [//gu.wikibooks.org/wiki/Special:Listusers 451 ]
-| [//gu.wikibooks.org/wiki/Special:ActiveUsers 0 ]
-| [//gu.wikibooks.org/wiki/Special:ListFiles 0 ]
-| style="font-size: 70%;" | 2018-02-25 05:01:53
-|- style="text-align: right;"
-| 107
-| [[w:Uyghur language|Uyghur]]
-| [[w:Uyghur language|Oyghurque]]
-| [//ug.wikibooks.org/wiki/ ug]
-| [//ug.wikibooks.org/wiki/Special:Statistics?action=raw '''0 ''']
-| 82
-| [//ug.wikibooks.org/wiki/Special:Recentchanges 3455 ]
-| [//ug.wikibooks.org/wiki/Special:Listadmins 0 ]
-| [//ug.wikibooks.org/wiki/Special:Listusers 331 ]
-| [//ug.wikibooks.org/wiki/Special:ActiveUsers 0 ]
-| [//ug.wikibooks.org/wiki/Special:ListFiles 0 ]
-| style="font-size: 70%;" | 2018-02-25 05:03:53
-|- style="text-align: right;"
-| 108
-| [[w:Northern Sami language|Northern Sami]]
-| [[w:Northern Sami language|Sámegiella]]
-| [//se.wikibooks.org/wiki/ se]
-| [//se.wikibooks.org/wiki/Special:Statistics?action=raw '''0 ''']
-| 81
-| [//se.wikibooks.org/wiki/Special:Recentchanges 3468 ]
-| [//se.wikibooks.org/wiki/Special:Listadmins 0 ]
-| [//se.wikibooks.org/wiki/Special:Listusers 386 ]
-| [//se.wikibooks.org/wiki/Special:ActiveUsers 0 ]
-| [//se.wikibooks.org/wiki/Special:ListFiles 0 ]
-| style="font-size: 70%;" | 2018-02-25 05:03:28
-|- style="text-align: right;"
-| 109
+| 99
 | [[w:Afar language|Afar]]
-| [[w:Afar language|Afar]]
+| class="plainlinksneverexpand" | [{{fullurl:aa:}} Afar]
 | [//aa.wikibooks.org/wiki/ aa]
 | [//aa.wikibooks.org/wiki/Special:Statistics?action=raw '''0 ''']
-| 79
-| [//aa.wikibooks.org/wiki/Special:Recentchanges 6702 ]
-| [//aa.wikibooks.org/wiki/Special:Listadmins 0 ]
-| [//aa.wikibooks.org/wiki/Special:Listusers 621 ]
-| [//aa.wikibooks.org/wiki/Special:ActiveUsers 0 ]
-| [//aa.wikibooks.org/wiki/Special:ListFiles 0 ]
-| style="font-size: 70%;" | 2018-02-25 05:02:20
+|  80
+|  [//aa.wikibooks.org/wiki/Special:Recentchanges 3421]
+|  [//aa.wikibooks.org/wiki/Special:Listadmins 1]
+|  [//aa.wikibooks.org/wiki/Special:Listusers 710]
+|  [//aa.wikibooks.org/wiki/Special:ActiveUsers 0]
+|  [//aa.wikibooks.org/wiki/Special:FileList 0]
 |- style="text-align: right;"
-| 110
-| [[w:Tibetan language|Tibetan]]
-| [[w:Tibetan language|Bod skad]]
-| [//bo.wikibooks.org/wiki/ bo]
-| [//bo.wikibooks.org/wiki/Special:Statistics?action=raw '''0 ''']
-| 77
-| [//bo.wikibooks.org/wiki/Special:Recentchanges 3509 ]
-| [//bo.wikibooks.org/wiki/Special:Listadmins 0 ]
-| [//bo.wikibooks.org/wiki/Special:Listusers 368 ]
-| [//bo.wikibooks.org/wiki/Special:ActiveUsers 0 ]
-| [//bo.wikibooks.org/wiki/Special:ListFiles 2 ]
-| style="font-size: 70%;" | 2018-02-25 05:02:31
+| 100
+| [[w:Akan language|Akan]]
+| class="plainlinksneverexpand" | [{{fullurl:ak:Akan}} Akana]
+| [//ak.wikibooks.org/wiki/ ak]
+| [//ak.wikibooks.org/wiki/Special:Statistics?action=raw '''0 ''']
+|  93
+|  [//ak.wikibooks.org/wiki/Special:Recentchanges 3425]
+|  [//ak.wikibooks.org/wiki/Special:Listadmins 1]
+|  [//ak.wikibooks.org/wiki/Special:Listusers 450]
+|  [//ak.wikibooks.org/wiki/Special:ActiveUsers 0]
+|  [//ak.wikibooks.org/wiki/Special:FileList 0]
 |- style="text-align: right;"
-| 111
-| [[w:Maori language|Maori]]
-| [[w:Maori language|Māori]]
-| [//mi.wikibooks.org/wiki/ mi]
-| [//mi.wikibooks.org/wiki/Special:Statistics?action=raw '''0 ''']
-| 74
-| [//mi.wikibooks.org/wiki/Special:Recentchanges 3483 ]
-| [//mi.wikibooks.org/wiki/Special:Listadmins 0 ]
-| [//mi.wikibooks.org/wiki/Special:Listusers 378 ]
-| [//mi.wikibooks.org/wiki/Special:ActiveUsers 0 ]
-| [//mi.wikibooks.org/wiki/Special:ListFiles 0 ]
-| style="font-size: 70%;" | 2018-02-25 05:03:08
-|- style="text-align: right;"
-| 112
-| [[w:Burmese language|Burmese]]
-| [[w:Burmese language|Myanmasa]]
-| [//my.wikibooks.org/wiki/ my]
-| [//my.wikibooks.org/wiki/Special:Statistics?action=raw '''0 ''']
-| 73
-| [//my.wikibooks.org/wiki/Special:Recentchanges 3458 ]
-| [//my.wikibooks.org/wiki/Special:Listadmins 0 ]
-| [//my.wikibooks.org/wiki/Special:Listusers 393 ]
-| [//my.wikibooks.org/wiki/Special:ActiveUsers 0 ]
-| [//my.wikibooks.org/wiki/Special:ListFiles 0 ]
-| style="font-size: 70%;" | 2018-02-25 05:03:12
-|- style="text-align: right;"
-| 113
+| 101
 | [[w:Assamese language|Assamese]]
-| [[w:Assamese language|অসমীয়া]]
+| class="plainlinksneverexpand" | [{{fullurl:as:অসমীয়া_ভাষা_আৰু_লিপি}} অসমীয়া]
 | [//as.wikibooks.org/wiki/ as]
 | [//as.wikibooks.org/wiki/Special:Statistics?action=raw '''0 ''']
-| 71
-| [//as.wikibooks.org/wiki/Special:Recentchanges 3426 ]
-| [//as.wikibooks.org/wiki/Special:Listadmins 0 ]
-| [//as.wikibooks.org/wiki/Special:Listusers 371 ]
-| [//as.wikibooks.org/wiki/Special:ActiveUsers 0 ]
-| [//as.wikibooks.org/wiki/Special:ListFiles 0 ]
-| style="font-size: 70%;" | 2018-02-25 05:02:25
+|  72
+|  [//as.wikibooks.org/wiki/Special:Recentchanges 3429]
+|  [//as.wikibooks.org/wiki/Special:Listadmins 1]
+|  [//as.wikibooks.org/wiki/Special:Listusers 417]
+|  [//as.wikibooks.org/wiki/Special:ActiveUsers 0]
+|  [//as.wikibooks.org/wiki/Special:FileList 0]
 |- style="text-align: right;"
-| 114
-| [[w:Irish language|Irish]]
-| [[w:Irish language|Gaeilge]]
-| [//ga.wikibooks.org/wiki/ ga]
-| [//ga.wikibooks.org/wiki/Special:Statistics?action=raw '''0 ''']
-| 70
-| [//ga.wikibooks.org/wiki/Special:Recentchanges 4077 ]
-| [//ga.wikibooks.org/wiki/Special:Listadmins 0 ]
-| [//ga.wikibooks.org/wiki/Special:Listusers 384 ]
-| [//ga.wikibooks.org/wiki/Special:ActiveUsers 0 ]
-| [//ga.wikibooks.org/wiki/Special:ListFiles 0 ]
-| style="font-size: 70%;" | 2018-02-25 05:01:40
-|- style="text-align: right;"
-| 115
-| [[w:Kashmiri language|Kashmiri]]
-| [[w:Kashmiri language|कश्मीरी - (كشميري]]
-| [//ks.wikibooks.org/wiki/ ks]
-| [//ks.wikibooks.org/wiki/Special:Statistics?action=raw '''0 ''']
-| 64
-| [//ks.wikibooks.org/wiki/Special:Recentchanges 3447 ]
-| [//ks.wikibooks.org/wiki/Special:Listadmins 0 ]
-| [//ks.wikibooks.org/wiki/Special:Listusers 331 ]
-| [//ks.wikibooks.org/wiki/Special:ActiveUsers 0 ]
-| [//ks.wikibooks.org/wiki/Special:ListFiles 0 ]
-| style="font-size: 70%;" | 2018-02-25 05:02:59
-|- style="text-align: right;"
-| 116
-| [[w:Chamorro language|Chamorro]]
-| [[w:Chamorro language|Chamoru]]
-| [//ch.wikibooks.org/wiki/ ch]
-| [//ch.wikibooks.org/wiki/Special:Statistics?action=raw '''0 ''']
-| 60
-| [//ch.wikibooks.org/wiki/Special:Recentchanges 3314 ]
-| [//ch.wikibooks.org/wiki/Special:Listadmins 0 ]
-| [//ch.wikibooks.org/wiki/Special:Listusers 338 ]
-| [//ch.wikibooks.org/wiki/Special:ActiveUsers 0 ]
-| [//ch.wikibooks.org/wiki/Special:ListFiles 0 ]
-| style="font-size: 70%;" | 2018-02-25 05:02:33
-|- style="text-align: right;"
-| 117
-| [[w:Bambara language|Bambara]]
-| [[w:Bambara language|Bamanankan]]
-| [//bm.wikibooks.org/wiki/ bm]
-| [//bm.wikibooks.org/wiki/Special:Statistics?action=raw '''0 ''']
-| 54
-| [//bm.wikibooks.org/wiki/Special:Recentchanges 3995 ]
-| [//bm.wikibooks.org/wiki/Special:Listadmins 0 ]
-| [//bm.wikibooks.org/wiki/Special:Listusers 342 ]
-| [//bm.wikibooks.org/wiki/Special:ActiveUsers 0 ]
-| [//bm.wikibooks.org/wiki/Special:ListFiles 0 ]
-| style="font-size: 70%;" | 2018-02-25 05:01:44
-|- style="text-align: right;"
-| 118
-| [[w:Bislama language|Bislama]]
-| [[w:Bislama language|Bislama]]
-| [//bi.wikibooks.org/wiki/ bi]
-| [//bi.wikibooks.org/wiki/Special:Statistics?action=raw '''0 ''']
-| 54
-| [//bi.wikibooks.org/wiki/Special:Recentchanges 3249 ]
-| [//bi.wikibooks.org/wiki/Special:Listadmins 0 ]
-| [//bi.wikibooks.org/wiki/Special:Listusers 351 ]
-| [//bi.wikibooks.org/wiki/Special:ActiveUsers 0 ]
-| [//bi.wikibooks.org/wiki/Special:ListFiles 0 ]
-| style="font-size: 70%;" | 2018-02-25 05:02:29
-|- style="text-align: right;"
-| 119
-| [[w:Romansh language|Romansh]]
-| [[w:Romansh language|Rumantsch]]
-| [//rm.wikibooks.org/wiki/ rm]
-| [//rm.wikibooks.org/wiki/Special:Statistics?action=raw '''0 ''']
-| 49
-| [//rm.wikibooks.org/wiki/Special:Recentchanges 3235 ]
-| [//rm.wikibooks.org/wiki/Special:Listadmins 0 ]
-| [//rm.wikibooks.org/wiki/Special:Listusers 366 ]
-| [//rm.wikibooks.org/wiki/Special:ActiveUsers 0 ]
-| [//rm.wikibooks.org/wiki/Special:ListFiles 0 ]
-| style="font-size: 70%;" | 2018-02-25 05:03:23
-|- style="text-align: right;"
-| 120
-| [[w:Guarani language|Guarani]]
-| [[w:Guarani language|Avañe'ẽ]]
-| [//gn.wikibooks.org/wiki/ gn]
-| [//gn.wikibooks.org/wiki/Special:Statistics?action=raw '''0 ''']
-| 47
-| [//gn.wikibooks.org/wiki/Special:Recentchanges 4722 ]
-| [//gn.wikibooks.org/wiki/Special:Listadmins 0 ]
-| [//gn.wikibooks.org/wiki/Special:Listusers 362 ]
-| [//gn.wikibooks.org/wiki/Special:ActiveUsers 0 ]
-| [//gn.wikibooks.org/wiki/Special:ListFiles 0 ]
-| style="font-size: 70%;" | 2018-02-25 05:02:35
-|- style="text-align: right;"
-| 121
+| 102
 | [[w:Aymara language|Aymara]]
-| [[w:Aymara language|Aymar]]
+| class="plainlinksneverexpand" | [{{fullurl:ay:Aymar_aru}} Aymar]
 | [//ay.wikibooks.org/wiki/ ay]
 | [//ay.wikibooks.org/wiki/Special:Statistics?action=raw '''0 ''']
-| 45
-| [//ay.wikibooks.org/wiki/Special:Recentchanges 5999 ]
-| [//ay.wikibooks.org/wiki/Special:Listadmins 0 ]
-| [//ay.wikibooks.org/wiki/Special:Listusers 353 ]
-| [//ay.wikibooks.org/wiki/Special:ActiveUsers 0 ]
-| [//ay.wikibooks.org/wiki/Special:ListFiles 0 ]
-| style="font-size: 70%;" | 2018-02-25 05:01:33
+|  46
+|  [//ay.wikibooks.org/wiki/Special:Recentchanges 6000]
+|  [//ay.wikibooks.org/wiki/Special:Listadmins 1]
+|  [//ay.wikibooks.org/wiki/Special:Listusers 393]
+|  [//ay.wikibooks.org/wiki/Special:ActiveUsers 0]
+|  [//ay.wikibooks.org/wiki/Special:FileList 0]
+|- style="text-align: right;"
+| 103
+| [[w:Bislama language|Bislama]]
+| class="plainlinksneverexpand" | [{{fullurl:bi:Bislama}} Bislama]
+| [//bi.wikibooks.org/wiki/ bi]
+| [//bi.wikibooks.org/wiki/Special:Statistics?action=raw '''0 ''']
+|  55
+|  [//bi.wikibooks.org/wiki/Special:Recentchanges 3252]
+|  [//bi.wikibooks.org/wiki/Special:Listadmins 1]
+|  [//bi.wikibooks.org/wiki/Special:Listusers 391]
+|  [//bi.wikibooks.org/wiki/Special:ActiveUsers 0]
+|  [//bi.wikibooks.org/wiki/Special:FileList 0]
+|- style="text-align: right;"
+| 104
+| [[w:Bambara language|Bambara]]
+| class="plainlinksneverexpand" | [{{fullurl:bm:Bamanankan}} Bamanankan]
+| [//bm.wikibooks.org/wiki/ bm]
+| [//bm.wikibooks.org/wiki/Special:Statistics?action=raw '''0 ''']
+|  55
+|  [//bm.wikibooks.org/wiki/Special:Recentchanges 3996]
+|  [//bm.wikibooks.org/wiki/Special:Listadmins 1]
+|  [//bm.wikibooks.org/wiki/Special:Listusers 377]
+|  [//bm.wikibooks.org/wiki/Special:ActiveUsers 0]
+|  [//bm.wikibooks.org/wiki/Special:FileList 0]
+|- style="text-align: right;"
+| 105
+| [[w:Tibetan language|Tibetan]]
+| class="plainlinksneverexpand" | [{{fullurl:bo:བོད་སྐད།}} བོད་སྐད]
+| [//bo.wikibooks.org/wiki/ bo]
+| [//bo.wikibooks.org/wiki/Special:Statistics?action=raw '''0 ''']
+|  78
+|  [//bo.wikibooks.org/wiki/Special:Recentchanges 3512]
+|  [//bo.wikibooks.org/wiki/Special:Listadmins 1]
+|  [//bo.wikibooks.org/wiki/Special:Listusers 408]
+|  [//bo.wikibooks.org/wiki/Special:ActiveUsers 0]
+|  [//bo.wikibooks.org/wiki/Special:FileList 2]
+|- style="text-align: right;"
+| 106
+| [[w:Chamorro language|Chamorro]]
+| class="plainlinksneverexpand" | [{{fullurl:ch:Fino'_Chamoru}} Chamoru]
+| [//ch.wikibooks.org/wiki/ ch]
+| [//ch.wikibooks.org/wiki/Special:Statistics?action=raw '''0 ''']
+|  61
+|  [//ch.wikibooks.org/wiki/Special:Recentchanges 3317]
+|  [//ch.wikibooks.org/wiki/Special:Listadmins 1]
+|  [//ch.wikibooks.org/wiki/Special:Listusers 377]
+|  [//ch.wikibooks.org/wiki/Special:ActiveUsers 0]
+|  [//ch.wikibooks.org/wiki/Special:FileList 0]
+|- style="text-align: right;"
+| 107
+| [[w:Irish language|Irish]]
+| class="plainlinksneverexpand" | [{{fullurl:ga:Gaeilge}} Gaeilge]
+| [//ga.wikibooks.org/wiki/ ga]
+| [//ga.wikibooks.org/wiki/Special:Statistics?action=raw '''0 ''']
+|  71
+|  [//ga.wikibooks.org/wiki/Special:Recentchanges 4080]
+|  [//ga.wikibooks.org/wiki/Special:Listadmins 1]
+|  [//ga.wikibooks.org/wiki/Special:Listusers 429]
+|  [//ga.wikibooks.org/wiki/Special:ActiveUsers 0]
+|  [//ga.wikibooks.org/wiki/Special:FileList 0]
+|- style="text-align: right;"
+| 108
+| [[w:Guarani language|Guarani]]
+| class="plainlinksneverexpand" | [{{fullurl:gn:Avañe'ẽ}} Avañe'ẽ]
+| [//gn.wikibooks.org/wiki/ gn]
+| [//gn.wikibooks.org/wiki/Special:Statistics?action=raw '''0 ''']
+|  48
+|  [//gn.wikibooks.org/wiki/Special:Recentchanges 4725]
+|  [//gn.wikibooks.org/wiki/Special:Listadmins 1]
+|  [//gn.wikibooks.org/wiki/Special:Listusers 404]
+|  [//gn.wikibooks.org/wiki/Special:ActiveUsers 0]
+|  [//gn.wikibooks.org/wiki/Special:FileList 0]
+|- style="text-align: right;"
+| 109
+| [[w:Gujarati language|Gujarati]]
+| class="plainlinksneverexpand" | [{{fullurl:gu:ગુજરાતી_ભાષા}} ગુજરાતી]
+| [//gu.wikibooks.org/wiki/ gu]
+| [//gu.wikibooks.org/wiki/Special:Statistics?action=raw '''0 ''']
+|  87
+|  [//gu.wikibooks.org/wiki/Special:Recentchanges 3635]
+|  [//gu.wikibooks.org/wiki/Special:Listadmins 1]
+|  [//gu.wikibooks.org/wiki/Special:Listusers 500]
+|  [//gu.wikibooks.org/wiki/Special:ActiveUsers 0]
+|  [//gu.wikibooks.org/wiki/Special:FileList 0]
+|- style="text-align: right;"
+| 110
+| [[w:Kashmiri language|Kashmiri]]
+| class="plainlinksneverexpand" | [{{fullurl:ks:कॉशुर_ज़बान}} कश्मीरी / كشميري]
+| [//ks.wikibooks.org/wiki/ ks]
+| [//ks.wikibooks.org/wiki/Special:Statistics?action=raw '''0 ''']
+|  65
+|  [//ks.wikibooks.org/wiki/Special:Recentchanges 3450]
+|  [//ks.wikibooks.org/wiki/Special:Listadmins 1]
+|  [//ks.wikibooks.org/wiki/Special:Listusers 366]
+|  [//ks.wikibooks.org/wiki/Special:ActiveUsers 0]
+|  [//ks.wikibooks.org/wiki/Special:FileList 0]
+|- style="text-align: right;"
+| 111
+| [[w:Luxembourgish language|Luxembourgish]]
+| class="plainlinksneverexpand" | [{{fullurl:lb:Lëtzebuergesch}} Lëtzebuergesch]
+| [//lb.wikibooks.org/wiki/ lb]
+| [//lb.wikibooks.org/wiki/Special:Statistics?action=raw '''0 ''']
+|  133
+|  [//lb.wikibooks.org/wiki/Special:Recentchanges 3561]
+|  [//lb.wikibooks.org/wiki/Special:Listadmins 1]
+|  [//lb.wikibooks.org/wiki/Special:Listusers 505]
+|  [//lb.wikibooks.org/wiki/Special:ActiveUsers 0]
+|  [//lb.wikibooks.org/wiki/Special:FileList 0]
+|- style="text-align: right;"
+| 112
+| [[w:Lingala language|Lingala]]
+| class="plainlinksneverexpand" | [{{fullurl:ln:Lingála}} Lingala]
+| [//ln.wikibooks.org/wiki/ ln]
+| [//ln.wikibooks.org/wiki/Special:Statistics?action=raw '''0 ''']
+|  89
+|  [//ln.wikibooks.org/wiki/Special:Recentchanges 3492]
+|  [//ln.wikibooks.org/wiki/Special:Listadmins 1]
+|  [//ln.wikibooks.org/wiki/Special:Listusers 370]
+|  [//ln.wikibooks.org/wiki/Special:ActiveUsers 0]
+|  [//ln.wikibooks.org/wiki/Special:FileList 0]
+|- style="text-align: right;"
+| 113
+| [[w:Maori language|Maori]]
+| class="plainlinksneverexpand" | [{{fullurl:mi:Reo_Māori}} Māori]
+| [//mi.wikibooks.org/wiki/ mi]
+| [//mi.wikibooks.org/wiki/Special:Statistics?action=raw '''0 ''']
+|  75
+|  [//mi.wikibooks.org/wiki/Special:Recentchanges 3486]
+|  [//mi.wikibooks.org/wiki/Special:Listadmins 1]
+|  [//mi.wikibooks.org/wiki/Special:Listusers 415]
+|  [//mi.wikibooks.org/wiki/Special:ActiveUsers 1]
+|  [//mi.wikibooks.org/wiki/Special:FileList 0]
+|- style="text-align: right;"
+| 114
+| [[w:Mongolian language|Mongolian]]
+| class="plainlinksneverexpand" | [{{fullurl:mn:Монгол_хэл}} Монгол]
+| [//mn.wikibooks.org/wiki/ mn]
+| [//mn.wikibooks.org/wiki/Special:Statistics?action=raw '''0 ''']
+|  211
+|  [//mn.wikibooks.org/wiki/Special:Recentchanges 3771]
+|  [//mn.wikibooks.org/wiki/Special:Listadmins 1]
+|  [//mn.wikibooks.org/wiki/Special:Listusers 638]
+|  [//mn.wikibooks.org/wiki/Special:ActiveUsers 0]
+|  [//mn.wikibooks.org/wiki/Special:FileList 0]
+|- style="text-align: right;"
+| 115
+| [[w:Burmese language|Burmese]]
+| class="plainlinksneverexpand" | [{{fullurl:my:မြန်မာဘာသာစကား}} မြန်မာဘာသာ]
+| [//my.wikibooks.org/wiki/ my]
+| [//my.wikibooks.org/wiki/Special:Statistics?action=raw '''0 ''']
+|  74
+|  [//my.wikibooks.org/wiki/Special:Recentchanges 3461]
+|  [//my.wikibooks.org/wiki/Special:Listadmins 1]
+|  [//my.wikibooks.org/wiki/Special:Listusers 473]
+|  [//my.wikibooks.org/wiki/Special:ActiveUsers 0]
+|  [//my.wikibooks.org/wiki/Special:FileList 0]
+|- style="text-align: right;"
+| 116
+| [[w:Romansh language|Romansh]]
+| class="plainlinksneverexpand" | [{{fullurl:rm:Rumantsch_dal_Grischun}} Rumantsch]
+| [//rm.wikibooks.org/wiki/ rm]
+| [//rm.wikibooks.org/wiki/Special:Statistics?action=raw '''0 ''']
+|  50
+|  [//rm.wikibooks.org/wiki/Special:Recentchanges 3238]
+|  [//rm.wikibooks.org/wiki/Special:Listadmins 1]
+|  [//rm.wikibooks.org/wiki/Special:Listusers 404]
+|  [//rm.wikibooks.org/wiki/Special:ActiveUsers 0]
+|  [//rm.wikibooks.org/wiki/Special:FileList 0]
+|- style="text-align: right;"
+| 117
+| [[w:Northern Sami language|Northern Sami]]
+| class="plainlinksneverexpand" | [{{fullurl:se:Davvisámegiella}} Sámegiella]
+| [//se.wikibooks.org/wiki/ se]
+| [//se.wikibooks.org/wiki/Special:Statistics?action=raw '''0 ''']
+|  82
+|  [//se.wikibooks.org/wiki/Special:Recentchanges 3471]
+|  [//se.wikibooks.org/wiki/Special:Listadmins 1]
+|  [//se.wikibooks.org/wiki/Special:Listusers 425]
+|  [//se.wikibooks.org/wiki/Special:ActiveUsers 0]
+|  [//se.wikibooks.org/wiki/Special:FileList 0]
+|- style="text-align: right;"
+| 118
+| [[w:Turkmen language|Turkmen]]
+| class="plainlinksneverexpand" | [{{fullurl:tk:Türkmen_dili}} Türkmen]
+| [//tk.wikibooks.org/wiki/ tk]
+| [//tk.wikibooks.org/wiki/Special:Statistics?action=raw '''0 ''']
+|  246
+|  [//tk.wikibooks.org/wiki/Special:Recentchanges 3751]
+|  [//tk.wikibooks.org/wiki/Special:Listadmins 1]
+|  [//tk.wikibooks.org/wiki/Special:Listusers 567]
+|  [//tk.wikibooks.org/wiki/Special:ActiveUsers 0]
+|  [//tk.wikibooks.org/wiki/Special:FileList 0]
+|- style="text-align: right;"
+| 119
+| [[w:Uyghur language|Uyghur]]
+| class="plainlinksneverexpand" | [{{fullurl:ug:Uyghur_tili}} ئۇيغۇر تىلى]
+| [//ug.wikibooks.org/wiki/ ug]
+| [//ug.wikibooks.org/wiki/Special:Statistics?action=raw '''0 ''']
+|  83
+|  [//ug.wikibooks.org/wiki/Special:Recentchanges 3458]
+|  [//ug.wikibooks.org/wiki/Special:Listadmins 1]
+|  [//ug.wikibooks.org/wiki/Special:Listusers 369]
+|  [//ug.wikibooks.org/wiki/Special:ActiveUsers 0]
+|  [//ug.wikibooks.org/wiki/Special:FileList 0]
+|- style="text-align: right;"
+| 120
+| [[w:Yoruba language|Yoruba]]
+| class="plainlinksneverexpand" | [{{fullurl:yo:Èdè_Yorùbá}} Yorùbá]
+| [//yo.wikibooks.org/wiki/ yo]
+| [//yo.wikibooks.org/wiki/Special:Statistics?action=raw '''0 ''']
+|  112
+|  [//yo.wikibooks.org/wiki/Special:Recentchanges 3585]
+|  [//yo.wikibooks.org/wiki/Special:Listadmins 1]
+|  [//yo.wikibooks.org/wiki/Special:Listusers 500]
+|  [//yo.wikibooks.org/wiki/Special:ActiveUsers 0]
+|  [//yo.wikibooks.org/wiki/Special:FileList 0]
 |}
-
 === Grand Total ===
 {| border="1" cellpadding="2" cellspacing="0" style="width:75%; background: #f9f9f9; border: 1px solid #aaaaaa; border-collapse: collapse; white-space: nowrap;"
 |-
@@ -1596,11 +1463,11 @@
 ! Admins
 ! Users
 ! Files
-|- style=\"text-align: right;\"
-|'''251,894'''
-|'''933,293'''
-|'''9,089,783'''
-|'''147'''
-|'''3,956,917'''
-|'''42,928'''
+|- style="text-align: right;"
+|'''278,707'''
+|'''1,038,651'''
+|'''10,255,546'''
+|'''256'''
+|'''4,344,084'''
+|'''45,637'''
 |}
