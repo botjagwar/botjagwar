@@ -1,6 +1,7 @@
 """
 use a mg.wiktionary.org dump and import all its contents to the botjagwar database.
 """
+import argparse
 import time
 from copy import deepcopy
 
@@ -97,12 +98,12 @@ class WiktionaryDumpImporter():
                 dt = time.time()
 
 
-class MgWiktDumpImporter(WiktionaryDumpImporter):
+class MgWiktionaryDumpImporter(WiktionaryDumpImporter):
     content_language = 'mg'
     batch_size = 2500
 
 
-class EnWiktDumpImporter(WiktionaryDumpImporter):
+class EnWiktionaryDumpImporter(WiktionaryDumpImporter):
     content_language = 'en'
     batch_size = 2500
 
@@ -112,8 +113,21 @@ class FrWiktionaryDumpImporter(WiktionaryDumpImporter):
     batch_size = 2500
 
 
+def main():
+    parser = argparse.ArgumentParser(description='Import Wiktionary XML dump')
+    parser.add_argument('--dump', dest='dump', action='store', help='tube name')
+    parser.add_argument('--wiki', dest='wiki', action='store', help='instance name')
+
+    args = parser.parse_args()
+    assert args.wiki is not None
+    assert args.dump is not None
+    source_wiki = args.wiki.title().strip()
+    dumpfile = args.dump.strip()
+    DumpImporter = eval(f'{source_wiki}WiktionaryDumpImporter')
+    bot = DumpImporter(dumpfile)
+    print(bot)
+    #bot.run()
+
+
 if __name__ == '__main__':
-    #bot = EnWiktDumpImporter('/home/rado/enwiktionary-20200501-pages-articles.xml')
-    bot = FrWiktionaryDumpImporter('/home/rado/Downloads/frwiktionary-20200501-pages-articles.xml')
-    #bot = MgWiktionaryDumpImporter('/home/rado/Downloads/mgwiktionary-20200501-pages-articles.xml')
-    bot.run()
+    main()
