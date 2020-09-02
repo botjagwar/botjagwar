@@ -126,7 +126,7 @@ def main():
     DumpImporter = eval(f'{source_wiki}WiktionaryDumpImporter')
     bot = DumpImporter(dumpfile)
     print(bot)
-    #bot.run()
+    bot.run()
 
 
 if __name__ == '__main__':
