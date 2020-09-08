@@ -1,7 +1,6 @@
 #!/usr/bin/python3.6
 import json
 import logging as log
-import sys
 import time
 import traceback
 from argparse import ArgumentParser
@@ -16,13 +15,24 @@ from api.decorator import threaded
 from api.translation.core import Translation
 from object_model.word import Translation as TranslationModel
 
-log.basicConfig(filename='/opt/botjagwar/user_data/entry_translator.log',level=log.DEBUG)
-
 # GLOBAL VARS
 verbose = False
 databases = []
-data_file = '/opt/botjagwar/conf/entry_translator/'
-userdata_file = '/opt/botjagwar/user_data/entry_translator/'
+
+parser = ArgumentParser(description="Entry translator service")
+parser.add_argument('-p', '--port', dest='PORT', type=int, default=8000)
+parser.add_argument('-l', '--log-file', dest='LOG', type=str, default='/opt/botjagwar/user_data/entry_translator.log')
+parser.add_argument('--host', dest='HOST', type=str, default='0.0.0.0')
+parser.add_argument('--log-level', dest='LOG_LEVEL', type=str, default='/opt/botjagwar/user_data/entry_translator.log')
+
+args = parser.parse_args()
+
+try:
+    LOG_LEVEL = log._nameToLevel[args.LOG_LEVEL.upper()]
+except KeyError:
+    LOG_LEVEL = 10
+
+log.basicConfig(filename=args.LOG,level=LOG_LEVEL)
 translations = Translation()
 routes = web.RouteTableDef()
 
@@ -125,16 +135,12 @@ async def get_wiktionary_processed_page(request) -> Response:
     return Response(text=json.dumps(ret), status=200, content_type='application/json')
 
 
-args = sys.argv
 if __name__ == '__main__':
     try:
-        arg_parser = ArgumentParser(description="Entry translator service")
-        arg_parser.add_argument('-p', '--port', type=int, default=8000)
-        parsed_args = arg_parser.parse_args()
         set_throttle(1)
         app = web.Application()
         app.router.add_routes(routes)
-        web.run_app(app, host="0.0.0.0", port=parsed_args.port)
+        web.run_app(app, host=args.HOST, port=args.PORT)
     except Exception as exc:
         log.exception(exc)
         log.critical("Error occurred while setting up the server")
