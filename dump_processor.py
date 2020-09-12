@@ -4,7 +4,7 @@ from multiprocessing.dummy import Pool as ThreadPool
 
 from lxml import etree
 
-from api.data_caching import FastTranslationLookup
+from api.data.caching import FastTranslationLookup
 from api.entryprocessor import WiktionaryProcessorFactory
 from api.parsers import templates_parser, TEMPLATE_TO_OBJECT
 from api.storage import EntryPageFileWriter, MissingTranslationFileWriter
