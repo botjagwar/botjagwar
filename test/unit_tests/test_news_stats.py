@@ -1,6 +1,6 @@
 # coding: utf8
 
-from old.news_stats import get_milestones
+from news_stats import get_milestones
 
 
 class TestNewsStats(object):
