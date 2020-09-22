@@ -142,6 +142,14 @@ def parse_es_verb_form_of(template_expression):
             pass
         elif part.startswith('sense='):
             pass
+        elif part.startswith('voseo='):
+            pass
+        elif part.startswith('participle='):
+            pass
+        elif part.startswith('region='):
+            pass
+        elif part.startswith('gender='):
+            pass
         elif '=' not in part:
             lemma = part.replace('}', '')
 
