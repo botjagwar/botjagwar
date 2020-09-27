@@ -4,6 +4,7 @@ import logging
 
 import requests
 from aiohttp import ClientSession
+import pywikibot as pwbot
 
 from api import entryprocessor
 from api.exceptions import NoWordException
