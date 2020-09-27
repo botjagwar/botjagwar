@@ -56,8 +56,8 @@ class TestVerbFormParsers(TestCase):
         template_expression = '{{es-verb form of|ending=ar|mood=indicative|tense=preterite|pers=1|number=singular|despegar}}'
         output = parse_es_verb_form_of(template_expression)
         self.assertIsInstance(output, VerbForm)
-        self.assertEqual(output.number, 'singular')
         self.assertEqual(output.lemma, 'despegar')
+        self.assertEqual(output.number, 'singular')
         self.assertEqual(output.tense, 'preterite')
         self.assertEqual(output.mood, 'indicative')
         self.assertEqual(output.person, '1')
@@ -66,6 +66,10 @@ class TestVerbFormParsers(TestCase):
         template_expression = '{{es-verb form of|ending=ar|mood=indicative|tense=future|pers=2|formal=no|number=plural|ababillarse|region=Spain}}'
         output = parse_es_verb_form_of(template_expression)
         self.assertEqual(output.lemma, 'ababillarse')
+        self.assertEqual(output.number, 'plural')
+        self.assertEqual(output.tense, 'future')
+        self.assertEqual(output.mood, 'indicative')
+        self.assertEqual(output.person, '2')
 
     def test_parse_fi_verb_form_of(self):
         template_expression = '{{fi-verb form of|pn=pass|tm=impr|absorboitua}}'

@@ -2,7 +2,7 @@ import pickle
 from csv import DictWriter
 from threading import Lock
 
-from api.data_caching import FastTranslationLookup
+from api.data.caching import FastTranslationLookup
 from api.decorator import critical_section, singleton
 from object_model.word import Entry
 

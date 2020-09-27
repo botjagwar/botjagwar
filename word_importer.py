@@ -14,7 +14,7 @@ from pprint import pprint
 
 import pywikibot
 
-from api.data_caching import FastWordLookup
+from api.data.caching import FastWordLookup
 from api.databasemanager import DictionaryDatabaseManager
 from api.output import Output
 from api.storage import EntryPageFileReader

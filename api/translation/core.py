@@ -2,13 +2,10 @@
 import asyncio
 import logging
 
-import pywikibot as pwbot
 import requests
 from aiohttp import ClientSession
 
 from api import entryprocessor
-from api import get_version
-from api.autoformatter import Autoformat
 from api.exceptions import NoWordException
 from api.output import Output
 from api.servicemanager import DictionaryServiceManager
@@ -33,52 +30,52 @@ class Translation:
         self.loop = asyncio.get_event_loop()
 
     def _save_translation_from_bridge_language(self, infos: Entry):
-        summary = "Dikan-teny avy amin'ny dikan-teny avy amin'i %s.wiktionary" % infos.origin_wiktionary_edition
-        summary += " (%s)" % get_version()
-        wikipage = self.output.wikipage(infos)
-        target_language_page = pwbot.Page(pwbot.Site(WORKING_WIKI_LANGUAGE, 'wiktionary'), infos.entry)
-        try:
-            if target_language_page.exists():
-                page_content = target_language_page.get()
-                if page_content.find('{{=%s=}}' % infos.language) != -1:
-                    self.output.db(infos)
-                    return
-                else:
-                    wikipage += page_content
-                    summary = "+" + summary
-        except pwbot.exceptions.IsRedirectPage:
-            infos.entry = target_language_page.getRedirectTarget().title()
-            self.output.db(infos)
-            self._save_translation_from_bridge_language(infos)
-            return
-
-        except pwbot.exceptions.InvalidTitle as exc:
-            log.exception(exc)
-            return
-
-        except Exception as exc:
-            log.exception(exc)
-            return
-
-        target_language_page.put_async(wikipage, summary)
+        # summary = "Dikan-teny avy amin'ny dikan-teny avy amin'i %s.wiktionary" % infos.origin_wiktionary_edition
+        # summary += " (%s)" % get_version()
+        # wikipage = self.output.wikipage(infos)
+        # target_language_page = pwbot.Page(pwbot.Site(WORKING_WIKI_LANGUAGE, 'wiktionary'), infos.entry)
+        # try:
+        #     if target_language_page.exists():
+        #         page_content = target_language_page.get()
+        #         if page_content.find('{{=%s=}}' % infos.language) != -1:
+        #             self.output.db(infos)
+        #             return
+        #         else:
+        #             wikipage += page_content
+        #             summary = "+" + summary
+        # except pwbot.exceptions.IsRedirectPage:
+        #     infos.entry = target_language_page.getRedirectTarget().title()
+        #     self.output.db(infos)
+        #     self._save_translation_from_bridge_language(infos)
+        #     return
+        #
+        # except pwbot.exceptions.InvalidTitle as exc:
+        #     log.exception(exc)
+        #     return
+        #
+        # except Exception as exc:
+        #     log.exception(exc)
+        #     return
+        #
+        # target_language_page.put_async(wikipage, summary)
         self.output.db(infos)
 
     def _save_translation_from_page(self, infos: Entry):
-        summary = "Dikan-teny avy amin'ny pejy avy amin'i %s.wiktionary" % infos.language
-        summary += " (%s)" % get_version()
-        wikipage = self.output.wikipage(infos)
-        target_language_page = pwbot.Page(pwbot.Site(WORKING_WIKI_LANGUAGE, 'wiktionary'), infos.entry)
-        if target_language_page.exists():
-            page_content = target_language_page.get()
-            if page_content.find('{{=%s=}}' % infos.language) != -1:
-                self.output.db(infos)
-                return
-            else:
-                wikipage += page_content
-                wikipage, edit_summary = Autoformat(wikipage).wikitext()
-                summary = "+" + summary + ", %s" % edit_summary
-
-        target_language_page.put_async(wikipage, summary)
+        # summary = "Dikan-teny avy amin'ny pejy avy amin'i %s.wiktionary" % infos.language
+        # summary += " (%s)" % get_version()
+        # wikipage = self.output.wikipage(infos)
+        # target_language_page = pwbot.Page(pwbot.Site(WORKING_WIKI_LANGUAGE, 'wiktionary'), infos.entry)
+        # if target_language_page.exists():
+        #     page_content = target_language_page.get()
+        #     if page_content.find('{{=%s=}}' % infos.language) != -1:
+        #         self.output.db(infos)
+        #         return
+        #     else:
+        #         wikipage += page_content
+        #         wikipage, edit_summary = Autoformat(wikipage).wikitext()
+        #         summary = "+" + summary + ", %s" % edit_summary
+        #
+        # target_language_page.put_async(wikipage, summary)
         self.output.db(infos)
 
     def process_entry_in_native_language(self, content: str, title: str, language: str, unknowns: list):
@@ -321,9 +318,9 @@ def _generate_redirections(infos):
         if redirection_target.find("æ") != -1:
             redirection_target = redirection_target.replace("æ", "ӕ")
         if infos.entry != redirection_target:
-            page = pwbot.Page(pwbot.Site(WORKING_WIKI_LANGUAGE, 'wiktionary'), infos.entry)
-            if not page.exists():
-                page.put_async("#FIHODINANA [[%s]]" % redirection_target, "fihodinana")
+            # page = pwbot.Page(pwbot.Site(WORKING_WIKI_LANGUAGE, 'wiktionary'), infos.entry)
+            # if not page.exists():
+            #     page.put_async("#FIHODINANA [[%s]]" % redirection_target, "fihodinana")
             infos.entry = redirection_target
 
 def _get_unaccented_word(word):
