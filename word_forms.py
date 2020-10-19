@@ -142,10 +142,10 @@ def create_non_lemma_entry(entry: Entry):
         page_content = page_output.wikipage(mg_entry, link=False)
 
     pywikibot.output('\03{blue}%s\03{default}' % page_content)
-    try:
-        mg_page.put(page_content, 'Teny vaovao')
-    except Exception:
-        pass
+    # try:
+    #     mg_page.put(page_content, 'Teny vaovao')
+    # except Exception:
+    #     pass
     return 1
 
 
@@ -162,7 +162,7 @@ def parse_word_forms():
 
     # Get list of articles from category
     counter = 0
-    mg_page_set = get_malagasy_page_set()
+    mg_page_set = {} #get_malagasy_page_set()
     en_page_set = get_english_page_set()
     working_set = set([p for p in en_page_set if p not in mg_page_set])
     total = len(working_set)
