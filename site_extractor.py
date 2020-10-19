@@ -1,6 +1,6 @@
 import logging
 
-from api.extractors.site_extractor import RakibolanaSiteExtactor
+from api.extractors.site_extractor import RakibolanaSiteExtactor, TenyMalagasySiteExtractor
 from api.extractors.site_extractor import SiteExtractorException
 from page_lister import get_pages_from_category
 
@@ -42,7 +42,7 @@ def main0(classname):
 def entry_generator():
     from api.output import Output
     output = Output()
-    for extractor_class in [RakibolanaSiteExtactor]:
+    for extractor_class in [RakibolanaSiteExtactor, TenyMalagasySiteExtractor]:
         extractor = extractor_class()
         print(extractor.lookup('voambolana'))
         for word in iter(extractor.cache_engine.list()):
