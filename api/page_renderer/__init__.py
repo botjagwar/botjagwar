@@ -68,31 +68,67 @@ class CHRWikiPageRenderer(PageRenderer):
 class MGWikiPageRenderer(PageRenderer):
     def render(self, info: Entry, link=True) -> str:
         additional_note = ""
-        data = info.to_dict()
-        if 'origin_wiktionary_page_name' in data and 'origin_wiktionary_edition' in data:
-            additional_note = " {{dikantenin'ny dikanteny|%(origin_wiktionary_page_name)s|%(origin_wiktionary_edition)s}}\n" % data
 
-        s = """
-=={{=%(language)s=}}==
-{{-%(part_of_speech)s-|%(language)s}}
-'''{{subst:BASEPAGENAME}}''' {{fanononana X-SAMPA||%(language)s}} {{fanononana||%(language)s}}""" % data
-        if link:
-            definition = []
-            for d in info.entry_definition:
-                if '[[' in d or ']]' in d:
-                    definition.append(d)
-                else:
-                    definition.append('[[%s]]' % d)
+        if (hasattr(info, 'origin_wiktionary_page_name') and hasattr(info, 'origin_wiktionary_edition')):
+            additional_note = " {{dikantenin'ny dikanteny|" + f"{info.origin_wiktionary_page_name}" \
+                                                              f"|{info.origin_wiktionary_edition}" + "}}\n"
+
+        # Language
+        s = "=={{=" + f"{info.language}" + "=}}==\n"
+
+        # Etymology
+        if hasattr(info, 'etymology'):
+            etymology = getattr(info, 'etymology')
+            if etymology:
+                s += '\n{{-etim-}}\n'
+                s += ':' + etymology
+            else:
+                s += '\n{{-etim-}}\n'
+                s += f': {{vang-etim|' + f'{info.language}' + '}}\n'
         else:
-            definition = ['%s' % (d) for d in info.entry_definition]
+            s += '\n{{-etim-}}\n'
+            s += '\n: {{vang-etim|' + "{info.language}" + '}}\n'
 
-        s += "\n# %s" % ', '.join(definition)
+        # Part of speech
+        s += "\n\n{{-" + f'{info.part_of_speech}-|{info.language}' + "}}\n"
 
-        s = s + additional_note % info.properties
-        try:
-            return s
-        except UnicodeDecodeError:
-            return s.decode('utf8')
+        # Pronunciation
+        s += "'''{{subst:BASEPAGENAME}}''' "
+        if hasattr(info, 'pronunciation'):
+            s += "{{fanononana|" + f'{info.pronunciation}' + "|" + f'{info.language}' + "}}"
+        else:
+            s += "{{fanononana||" + f'{info.language}' + "}}"
+
+        # Definition
+        definitions = []
+        if link:
+            for d in info.entry_definition:
+                if len(d.split()) == 1:
+                    definitions.append(f'[[{d}|{d.title()}]]')
+                elif '[[' in d or ']]' in d:
+                    definitions.append(d)
+                else:
+                    definitions.append(d[0].upper() + d[1:])
+        else:
+            definitions = [f'{d}' for d in definitions]
+
+        for d in enumerate(definitions):
+            s += "\n# " + d
+            s += additional_note % info.properties
+
+        # Audio
+        if hasattr(info, 'audio_pronunciations'):
+            s += '\n\n{{-fanononana-}}'
+            for audio in info.audio_pronunciations:
+                s += "\n* " + '{{audio|' + f'{audio}' + '|' + f'{info.entry}' + '}}'
+
+        # References
+        elif hasattr(info, 'references'):
+            s += '\n\n{{-tsiahy-}}'
+            for ref in info.references:
+                s += "\n* " + ref
+
+        return s
 
 
 class WikiPageRendererFactory(object):

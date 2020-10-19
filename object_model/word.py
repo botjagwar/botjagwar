@@ -10,7 +10,7 @@ class Word(TypeCheckedObject):
 
 
 class Entry(TypeCheckedObject):
-    _additional = False
+    _additional = True
     properties_types = dict(
         entry=str,
         part_of_speech=str,
@@ -20,7 +20,7 @@ class Entry(TypeCheckedObject):
         origin_wiktionary_page_name=str,
         etymology=str,
         reference=list,
-        examples=dict
+        examples=list
     )
 
     def to_tuple(self):
