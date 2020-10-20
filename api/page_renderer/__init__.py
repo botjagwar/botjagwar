@@ -112,9 +112,18 @@ class MGWikiPageRenderer(PageRenderer):
         else:
             definitions = [f'{d}' for d in definitions]
 
-        for d in enumerate(definitions):
-            s += "\n# " + d
+        for idx, defn in enumerate(definitions):
+            s += "\n# " + defn
             s += additional_note % info.properties
+            ## Examples:
+            if hasattr(info, 'examples'):
+                if len(info.examples) > idx:
+                    if isinstance(info.examples, list):
+                        if len(info.examples[idx]) > 0:
+                            for example in info.examples[idx]:
+                                s += "\n#* ''" + example + "''"
+                    elif isinstance(info.examples, str):
+                        s += "\n#* ''" + info.examples[idx] + "''"
 
         # Audio
         if hasattr(info, 'audio_pronunciations'):
@@ -123,7 +132,7 @@ class MGWikiPageRenderer(PageRenderer):
                 s += "\n* " + '{{audio|' + f'{audio}' + '|' + f'{info.entry}' + '}}'
 
         # References
-        elif hasattr(info, 'references'):
+        if hasattr(info, 'references'):
             s += '\n\n{{-tsiahy-}}'
             for ref in info.references:
                 s += "\n* " + ref
