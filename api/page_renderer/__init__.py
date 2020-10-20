@@ -131,6 +131,18 @@ class MGWikiPageRenderer(PageRenderer):
             for audio in info.audio_pronunciations:
                 s += "\n* " + '{{audio|' + f'{audio}' + '|' + f'{info.entry}' + '}}'
 
+        # Synonyms
+        if hasattr(info, 'synonyms'):
+            s += '\n\n{{-dika-mitovy-}}'
+            for synonym in info.synonyms:
+                s += "\n* [[" + synonym + ']]'
+
+        # Antonyms
+        if hasattr(info, 'antonyms'):
+            s += '\n\n{{-dika-mifanohitra-}}'
+            for antonym in info.antonyms:
+                s += "\n* [[" + antonym + ']]'
+
         # References
         if hasattr(info, 'references'):
             s += '\n\n{{-tsiahy-}}'
