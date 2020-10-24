@@ -11,7 +11,7 @@ e = Entry(
         etymology='From tesan',
         audio_pronunciations=['asdlkalkej'],
         references=['your mom', 'your dad'],
-        examples=[['I tested my own dick', 'in her cunt', 'Holy moly'], ['Was good']]
+        examples=[[], ['I tested my own dick', 'in her cunt', 'Holy moly'], ['Was good']]
     )
 
 o = WikiPageRendererFactory('mg')()

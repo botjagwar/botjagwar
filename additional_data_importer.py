@@ -1,3 +1,4 @@
+import re
 import sys
 
 import pywikibot
@@ -10,25 +11,22 @@ backend = "http://10.0.0.10:8100"
 
 class AdditionalDataImporter(object):
     def __init__(self, **parameters):
-        def default_template_fetcher(template_title: str, wikipage: str, language: str):
-            retrieved = []
-            for line in wikipage.split('\n'):
-                if "{{" + template_title + "|" + language in line:
-                    line = line[line.find("{{" + template_title + "|" + language):]
-                    data = line.split('|')[2]
-                    data = data.replace('}}', '')
-                    data = data.replace('{{', '')
-                    retrieved.append(data)
-            return retrieved
+        self.languages = {
+            l['english_name']: l['iso_code']
+            for l in requests.get(backend + '/language').json()
+        }
+
+        self.iso_codes = {
+            v: k for k, v in self.languages.items()
+        }
+
+        if 'dry_run' in parameters:
+            self.dry_run = parameters['dry_run']
+        else:
+            self.dry_run = False
 
         if 'data' in parameters:
             self.data_type = parameters['data']
-
-        if 'fetcher' in parameters:
-            assert callable(parameters['fetcher'])
-            self.get_data = parameters['fetcher']
-        else:
-            self.get_data = default_template_fetcher
 
     def additional_word_information_already_exists(self, word_id, information):
         data = {
@@ -46,6 +44,9 @@ class AdditionalDataImporter(object):
                 return True
 
         return False
+
+    def get_data(self, template_title: str, wikipage: str, language: str) -> list:
+        raise NotImplementedError()
 
     def is_data_type_already_defined(self, additional_data):
         for d in additional_data:
@@ -78,7 +79,6 @@ class AdditionalDataImporter(object):
             w['word']
             for w in words
         ])
-
         counter = 0
         category_pages = set([k.title() for k in get_pages_from_category('en', category_name)])
         # Wiki pages who may have not been parsed yet
@@ -106,6 +106,7 @@ class AdditionalDataImporter(object):
                 continue
 
             additional_data_filenames = self.get_data(self.data_type, wikipage.get(), language)
+            assert isinstance(additional_data_filenames, list)
             print(additional_data_filenames)
             for additional_data in additional_data_filenames:
                 data = {
@@ -114,36 +115,93 @@ class AdditionalDataImporter(object):
                     'information': additional_data,
                 }
                 if not self.additional_word_information_already_exists(data['word_id'], additional_data):
-                    response = requests.post(backend + '/additional_word_information', data=data)
-                    if response.status_code != 201:
-                        print(response.status_code)
-                        print(response.text)
+                    if not self.dry_run:
+                        response = requests.post(backend + '/additional_word_information', data=data)
+                        if response.status_code != 201:
+                            print(response.status_code)
+                            print(response.text)
+                    else:
+                        print(data)
                 else:
                     print('already exists and added.')
 
     def run(self, root_category: str, wiktionary=pywikibot.Site('en', 'wiktionary')):
         self.wiktionary = wiktionary
-        languages = {
-            l['english_name']: l['iso_code']
-            for l in requests.get(backend + '/language').json()
-        }
+
         category = pywikibot.Category(wiktionary, root_category)
         for category in category.subcategories():
             name = category.title().replace('Category:', '')
             print(name)
             language_name = name.split()[0]
-            if language_name in languages:
-                iso = languages[language_name]
+            if language_name in self.languages:
+                iso = self.languages[language_name]
                 print(f'Fetching for {language_name} ({iso})')
                 self.fetch_additional_data_for_category(iso, category.title())
             else:
                 print(f'Skipping for {language_name}...')
 
 
+class TemplateImporter(AdditionalDataImporter):
+    def get_data(self, template_title: str, wikipage: str, language: str) -> list:
+        retrieved = []
+        for line in wikipage.split('\n'):
+            if "{{" + template_title + "|" + language in line:
+                line = line[line.find("{{" + template_title + "|" + language):]
+                data = line.split('|')[2]
+                data = data.replace('}}', '')
+                data = data.replace('{{', '')
+                retrieved.append(data)
+
+        return retrieved
+
+
+class SubsectionImporter(AdditionalDataImporter):
+    section_name = ''
+    level = 3
+
+    def __init__(self, **params):
+        super(SubsectionImporter, self).__init__(**params)
+
+    def set_whole_section_name(self, section_name: str):
+        self.section_name = section_name
+
+    def get_data(self, template_title, wikipage: str, language: str) -> list:
+        def retrieve_subsection(wikipage_, regex):
+            retrieved_ = []
+            target_subsection_section = re.search(regex, wikipage_)
+            if target_subsection_section is not None:
+                section = target_subsection_section.group()
+                pos1 = wikipage_.find(section) + len(section)
+                pos2 = wikipage_.find('\n\n', pos1)
+                wikipage_ = wikipage_[pos1:pos2]
+                retrieved_.append(wikipage_.lstrip('\n'))
+
+            return retrieved_
+
+        retrieved = []
+        # Retrieving and narrowing to target section
+        target_language_section = re.search('==[ ]?' + self.iso_codes[language] +'[ ]?==', wikipage)
+        if target_language_section is not None:
+            lang_section_wikipage = wikipage = wikipage[wikipage.find(
+                target_language_section.group()):wikipage.find('----')]
+        else:
+            return []
+
+        for regex_match in re.findall('=' * self.level + '[ ]?' + self.section_name
+                                      + '[ ]?[1-9]?[ ]?' + '=' * self.level, wikipage):
+            print(regex_match)
+            # Retrieving subsection
+            retrieved += retrieve_subsection(wikipage, regex_match)
+            wikipage = lang_section_wikipage
+
+        returned_subsections = [s for s in retrieved if s]
+        print(returned_subsections)
+        return returned_subsections  # retrieved
+
+
 if __name__ == '__main__':
     args = sys.argv
-    enwikt = pywikibot.Site('en', 'wiktionary')
     print(args)
-    addi = AdditionalDataImporter(data=args[1])
+    addi = TemplateImporter(data=args[1])
     print(addi.data_type)
     addi.run(args[2])
