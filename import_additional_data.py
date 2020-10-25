@@ -1,42 +1,39 @@
-import re
+import sys
 
-from additional_data_importer import SubsectionImporter
-
-
-class SynonymImporter(SubsectionImporter):
-    level = 4
-    data_type = 'synonym'
-    section_name = 'Synonyms'
-
-    def get_data(self, template_title, wikipage: str, language: str):
-        subsection_data = SubsectionImporter.get_data(self, template_title, wikipage, language)
-        retrieved = []
-        for subsection_item in subsection_data:
-            if '*' in subsection_item:
-                for item in subsection_item.split('*'):
-                    if '[[Thesaurus:' in item:
-                        continue
-                    if '{{l|' + language in item:
-                        for data in re.findall('{{l\|' + language + '\|([0-9A-Za-z-]+)}}', item):
-                            retrieved.append(data)
-
-        print('asdasd', retrieved)
-        return list(set(retrieved))
+from additional_data_importer import SynonymImporter, AntonymImporter, EtymologyImporter
+from dump_processor import Processor
 
 
-class EtymologyImporter(SubsectionImporter):
-    level = 3
-    data_type = 'etym/en'
-    section_name = 'Etymology'
+class AdditionalDataProcessor(Processor):
+    importer_classes = [SynonymImporter, AntonymImporter, EtymologyImporter]
+    importers = [c(dry_run=False) for c in importer_classes]
+    language_code = 'en'
+
+    def worker(self, xml_buffer: str):
+        title, content = self.base_worker(xml_buffer)
+        for importer in self.importers:
+            importer.process_non_wikipage(title, content, self.language_code)
+
+
+class EnwiktionaryDumpImporter(object):
+    importer_classes = [SynonymImporter, AntonymImporter]
+
+    language_code = 'en'
+
+    def __init__(self):
+        self.processor = AdditionalDataProcessor(self.language_code)
+
+    def run(self, filename):
+        self.processor.process(filename)
 
 
 if __name__ == '__main__':
-    addi = SynonymImporter(dry_run=False)
-    # import pywikibot
-    # page = pywikibot.Page(pywikibot.Site('en', 'wiktionary'), 'malevolence')
-    # data = addi.get_data('', page.get(), 'en')
-    # print(data)
-    addi.run('English nouns')
+    Importer = EnwiktionaryDumpImporter
+    Importer.language_code = sys.argv[1]
+    importer = Importer()
+    importer.run('user_data/en.xml')
+
+    # addi.run('English nouns')
 
     # addi = SubsectionImporter(data='etym/en', dry_run=True)
     # addi.section_name = 'Etymology'

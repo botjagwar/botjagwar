@@ -79,7 +79,7 @@ class AdditionalDataImporter(object):
             w['word']
             for w in words
         ])
-        counter = 0
+        self.counter = 0
         category_pages = set([k.title() for k in get_pages_from_category('en', category_name)])
         # Wiki pages who may have not been parsed yet
         titles = (category_pages & pages_defined_in_database) - already_defined_pages
@@ -92,42 +92,53 @@ class AdditionalDataImporter(object):
               f"out of {len(category_pages)} pages in category\n"
               f"and {len(pages_defined_in_database)} pages currently defined in DB\n\n")
         for wikipage in wikipages:
-            title = wikipage.title()
-            counter += 1
-            print(f'>>> {title} [#{counter}] <<<')
-            rq_params = {
-                'word': 'eq.' + title,
-                'language': 'eq.' + language
-            }
-            response = requests.get(backend + '/word', rq_params)
-            print(response.status_code)
-            query = response.json()
-            if not query:
-                continue
+            self.process_wikipage(wikipage, language)
 
-            additional_data_filenames = self.get_data(self.data_type, wikipage.get(), language)
-            assert isinstance(additional_data_filenames, list)
-            print(additional_data_filenames)
-            for additional_data in additional_data_filenames:
-                data = {
-                    'type': self.data_type,
-                    'word_id': query[0]['id'],
-                    'information': additional_data,
-                }
-                if not self.additional_word_information_already_exists(data['word_id'], additional_data):
-                    if not self.dry_run:
-                        response = requests.post(backend + '/additional_word_information', data=data)
-                        if response.status_code != 201:
-                            print(response.status_code)
-                            print(response.text)
-                    else:
-                        print(data)
+    def process_wikipage(self, wikipage: pywikibot.Page, language: str):
+        content = wikipage.get()
+        title = wikipage.title()
+        return self.process_non_wikipage(title, content, language)
+
+    def process_non_wikipage(self, title: str, content: str, language: str):
+        if hasattr(self, 'counter'):
+            self.counter += 1
+        else:
+            self.counter = 0
+
+        print(f'>>> {title} [#{self.counter}] <<<')
+        rq_params = {
+            'word': 'eq.' + title,
+            'language': 'eq.' + language
+        }
+        response = requests.get(backend + '/word', rq_params)
+        print(response.status_code)
+        query = response.json()
+        if not query:
+            return
+
+        additional_data_filenames = self.get_data(self.data_type, content, language)
+
+        assert isinstance(additional_data_filenames, list)
+        print(additional_data_filenames)
+        for additional_data in additional_data_filenames:
+            data = {
+                'type': self.data_type,
+                'word_id': query[0]['id'],
+                'information': additional_data,
+            }
+            if not self.additional_word_information_already_exists(data['word_id'], additional_data):
+                if not self.dry_run:
+                    response = requests.post(backend + '/additional_word_information', data=data)
+                    if response.status_code != 201:
+                        print(response.status_code)
+                        print(response.text)
                 else:
-                    print('already exists and added.')
+                    print(data)
+            else:
+                print('already exists and added.')
 
     def run(self, root_category: str, wiktionary=pywikibot.Site('en', 'wiktionary')):
         self.wiktionary = wiktionary
-
         category = pywikibot.Category(wiktionary, root_category)
         for category in category.subcategories():
             name = category.title().replace('Category:', '')
@@ -197,6 +208,41 @@ class SubsectionImporter(AdditionalDataImporter):
         returned_subsections = [s for s in retrieved if s]
         print(returned_subsections)
         return returned_subsections  # retrieved
+
+
+class SynonymImporter(SubsectionImporter):
+    level = 4
+    data_type = 'synonym'
+    section_name = 'Synonyms'
+
+    def get_data(self, template_title, content: str, language: str):
+        subsection_data = SubsectionImporter.get_data(self, template_title, content, language)
+        retrieved = []
+        for subsection_item in subsection_data:
+            if '*' in subsection_item:
+                for item in subsection_item.split('*'):
+                    if '[[Thesaurus:' in item:
+                        continue
+                    if '{{l|' + language in item:
+                        for data in re.findall('{{l\|' + language + '\|([0-9A-Za-z- ]+)}}', item):
+                            retrieved.append(data)
+                    elif '[[' in item and ']]' in item:
+                        for data in re.findall('\[\[([0-9A-Za-z- ]+)\]\]', item):
+                            retrieved.append(data)
+
+        return list(set(retrieved))
+
+
+class EtymologyImporter(SubsectionImporter):
+    level = 3
+    data_type = 'etym/en'
+    section_name = 'Etymology'
+
+
+class AntonymImporter(SynonymImporter):
+    level = 4
+    data_type = 'antonym'
+    section_name = 'Antonyms'
 
 
 if __name__ == '__main__':
