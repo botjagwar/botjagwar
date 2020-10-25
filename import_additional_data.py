@@ -17,7 +17,7 @@ class SynonymImporter(SubsectionImporter):
                     if '[[Thesaurus:' in item:
                         continue
                     if '{{l|' + language in item:
-                        for data in re.findall('{{l\|en\|([0-9A-Za-z-]+)}}', item):
+                        for data in re.findall('{{l\|' + language + '\|([0-9A-Za-z-]+)}}', item):
                             retrieved.append(data)
 
         print('asdasd', retrieved)
