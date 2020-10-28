@@ -1,11 +1,12 @@
 import re
+import traceback
 
-from additional_data_importer import SynonymImporter, AntonymImporter, EtymologyImporter
+from additional_data_importer import DerivedTermsImporter
 from dump_processor import Processor
 
 
 class AdditionalDataProcessor(Processor):
-    importer_classes = [SynonymImporter, AntonymImporter, EtymologyImporter]
+    importer_classes = [DerivedTermsImporter]
     importers = [c(dry_run=False) for c in importer_classes]
 
     def __init__(self):
@@ -17,16 +18,20 @@ class AdditionalDataProcessor(Processor):
 
     def worker(self, xml_buffer: str):
         title, content = self.base_worker(xml_buffer)
-        languages = re.findall('==[ ]?([A-Za-z]+)[ ]?==\n', content)
-        for language in languages:
-            for importer in self.importers:
-                if language in importer.languages:
-                    language_code = importer.languages[language]
-                    importer.process_non_wikipage(title, content, language_code)
+        try:
+            languages = re.findall('==[ ]?([A-Za-z]+)[ ]?==\n', content)
+            for language in languages:
+                for importer in self.importers:
+                    if language in importer.languages:
+                        language_code = importer.languages[language]
+                        importer.process_non_wikipage(title, content, language_code)
+        except Exception as exc:
+            traceback.print_exc()
+
 
 
 class EnwiktionaryDumpImporter(object):
-    importer_classes = [SynonymImporter, AntonymImporter]
+    importer_classes = [DerivedTermsImporter]
 
     def __init__(self):
         self.processor = AdditionalDataProcessor()
@@ -38,7 +43,21 @@ class EnwiktionaryDumpImporter(object):
 if __name__ == '__main__':
     Importer = EnwiktionaryDumpImporter
     importer = Importer()
-    importer.run('user_data/en.xml')
+    importer.run('user_data/dumps/en_1.xml')
+    importer.run('user_data/dumps/en_2.xml')
+    importer.run('user_data/dumps/en_3.xml')
+    importer.run('user_data/dumps/en_4.xml')
+    importer.run('user_data/dumps/en_5.xml')
+    importer.run('user_data/dumps/en_6.xml')
+    importer.run('user_data/dumps/en_7.xml')
+    importer.run('user_data/dumps/en_8.xml')
+    importer.run('user_data/dumps/en_9.xml')
+    importer.run('user_data/dumps/en_10.xml')
+    importer.run('user_data/dumps/en_11.xml')
+    importer.run('user_data/dumps/en_12.xml')
+    importer.run('user_data/dumps/en_13.xml')
+
+    # importer.run('user_data/en_6.xml')
 
     # addi.run('English nouns')
 

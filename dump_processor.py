@@ -1,6 +1,7 @@
 import logging
 import sys
-from multiprocessing.dummy import Pool as ThreadPool
+from multiprocessing.pool import MaybeEncodingError
+from multiprocessing.pool import Pool as ThreadPool
 
 from lxml import etree
 
@@ -9,6 +10,8 @@ from api.entryprocessor import WiktionaryProcessorFactory
 from api.parsers import templates_parser, TEMPLATE_TO_OBJECT
 from api.storage import EntryPageFileWriter, MissingTranslationFileWriter
 from object_model.word import Entry
+
+# from multiprocessing.dummy import Pool as ThreadPool
 
 log = logging.getLogger(__name__)
 
@@ -104,9 +107,11 @@ class Processor(object):
         buffers = []
         nthreads = 4
         x = 0
+        buffered = 0
         with open(filename, 'r') as input_file:
             append = False
             for line in input_file:
+                # line = line.encode('utf8')
                 if '<page>' in line:
                     input_buffer = line
                     append = True
@@ -119,7 +124,11 @@ class Processor(object):
                         buffers = []
                         x = 0
                     else:
+                        buffered += 1
                         x += 1
+                        if not buffered % 1000:
+                            print('buffered:', buffered)
+                            print('buffers size:', len(buffers))
                         buffers.append(input_buffer)
                     input_buffer = None
                     del input_buffer
@@ -131,14 +140,23 @@ class Processor(object):
         self.missing_translation_writer.write()
 
     def process(self, filename='default'):
+        def pmap(pool, buffers, lvl=0):
+            print(' ' * lvl, 'buffer size is:', len(buffers))
+            try:
+                pool.map(self.worker, buffers)
+            except MaybeEncodingError:
+                if len(buffers) > 2:
+                    pmap(pool, buffers[:(len(buffers)-1)//2], lvl+1)
+                    pmap(pool, buffers[(len(buffers)-1)//2:], lvl+1)
+
         if filename == 'default':
             filename = 'user_data/%s.xml' % language
 
-        nthreads = 4
+        nthreads = 10
         for xml_buffer in self.load(filename):
             buffers = xml_buffer
             pool = ThreadPool(nthreads)
-            pool.map(self.worker, buffers)
+            pmap(pool, buffers)
             pool.close()
             pool.join()
             del buffers
