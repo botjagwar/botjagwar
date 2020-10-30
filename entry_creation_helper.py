@@ -1,3 +1,8 @@
+import random
+import sys
+import time
+
+import pywikibot
 import requests
 
 from additional_data_importer import dyn_backend
@@ -9,9 +14,52 @@ class SkippedWord(Exception):
     pass
 
 
+class NinjaEntryPublisher(object):
+    typo_reliability = 0.9983
+    speed_wpm = 35
+    random_latency = [40, 130]
+    edit_session_length_minutes = [1, 1]
+
+    def __init__(self):
+        self.timer = time.time()
+        self.session_length = random.randint(
+            self.edit_session_length_minutes[0],
+            self.edit_session_length_minutes[1]
+        )
+
+    def publish(self, entry, title, wikitext, summary_if_exists, summary_if_new):
+        ct_time = time.time()
+        if (ct_time - self.timer)/60 > self.session_length * 60:
+            print('Session over! Waiting 17 hours before publishing again')
+            time.sleep(17*3600)
+
+        wikipage = pywikibot.Page(pywikibot.Site('mg', 'wiktionary'), title)
+        min_sleeptime = (len(wikitext) / 6) // self.speed_wpm
+        sleep = min_sleeptime + random.randint(self.random_latency[0], self.random_latency[1])
+        if wikipage.exists():
+            contents = wikipage.get()
+            if '{{=' + entry.language + '=}}' in contents:
+                print('skipped page as already exists')
+            else:
+                print('waited %d seconds' % sleep)
+                summary = summary_if_exists + ' : Fizarana vaovao'
+                print(summary)
+                contents = wikitext + '\n\n' + contents
+                time.sleep(sleep)
+                wikipage.put(contents, summary)
+        else:
+            print('waited %d seconds' % sleep)
+            summary = summary_if_new
+            print(summary)
+            time.sleep(sleep)
+            wikipage.put(wikitext, summary)
+
+
 class NinjaEntryCreator(object):
+
     def __init__(self):
         Renderer = WikiPageRendererFactory('mg')
+        self.publisher = NinjaEntryPublisher()
         self.renderer = Renderer()
         additional_data_types_rq = requests.get(dyn_backend.backend + '/additional_word_information_types')
         self.additional_data_types = set()
@@ -32,15 +80,32 @@ class NinjaEntryCreator(object):
                 if d['type'] == type_
             ]
 
+    def run(self, language=None):
+        params = {
+            'limit': 40,
+            'offset': 0,
+            'part_of_speech': 'eq.mat'
+        }
+        if language is not None:
+            params['language'] = 'eq.' + language
 
-    def run(self):
-        convergent_translations_rq = requests.get(dyn_backend.backend + '/convergent_translations?limit=100')
+        convergent_translations_rq = requests.get(dyn_backend.backend + '/convergent_translations', params=params)
         if convergent_translations_rq.status_code != 200:
             print('convergent_translations_rq.status_code', convergent_translations_rq.status_code)
             return
 
         for translation in convergent_translations_rq.json():
-            wikipage, summary_if_new, summary_if_exists = self.generate_wikipage_and_summaries(translation)
+            try:
+                title = translation['word']
+                entry, wikistring, summary_if_new, summary_if_exists = self.generate_wikipage_and_summaries(translation)
+                print('>>>>>  ' + title + '  <<<<<')
+                print(wikistring + '\n')
+                summary_if_new = "Pejy voaforona amin'ny « " + summary_if_new + ' »'
+                print(summary_if_exists)
+                print(len(wikistring))
+                self.publisher.publish(entry, title, wikistring, summary_if_exists, summary_if_new)
+            except SkippedWord:
+                continue
 
     def generate_wikipage_and_summaries(self, translation):
         # Fetching base information
@@ -106,18 +171,16 @@ class NinjaEntryCreator(object):
             entry = Entry(**{**entry_data, **additional_data_dict})
             wiki_string = self.renderer.render(entry)
             summary_if_new = wiki_string.replace('\n', ' ')
-            summary_if_already_exists = ''
-            print('>>>>>  ' + entry.entry + '  <<<<<')
-            print(wiki_string + '\n')
-            print('Summary will be:')
-            print("Pejy voaforona amin'ny « " + summary_if_new + ' »')
-            print(summary_if_already_exists)
+            summary_if_already_exists = '/* =={{=' + translation["language"] + '=}}== */'
 
-            return wiki_string, summary_if_new, summary_if_already_exists
+            return entry, wiki_string, summary_if_new, summary_if_already_exists
         else:
             print('definitions', definitions)
 
 
 if __name__ == '__main__':
     entry_creator = NinjaEntryCreator()
-    entry_creator.run()
+    if len(sys.argv) > 1:
+        entry_creator.run(sys.argv[1])
+    else:
+        entry_creator.run()
