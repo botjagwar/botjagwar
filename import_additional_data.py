@@ -6,10 +6,10 @@ from dump_processor import Processor
 
 
 class AdditionalDataProcessor(Processor):
-    importer_classes = [DerivedTermsImporter]
-    importers = [c(dry_run=False) for c in importer_classes]
+    importer_classes = []
 
     def __init__(self):
+        self.importers = [c(dry_run=False) for c in self.importer_classes]
         self.count = 0
         self.missing_translation_writer = None
         self.processor_class = None
@@ -29,12 +29,23 @@ class AdditionalDataProcessor(Processor):
             traceback.print_exc()
 
 
+class EnWiktionaryCategoryImporter(object):
+    importer_classes = [DerivedTermsImporter]
+
+    def __init__(self):
+        pass
+
+    def run(self):
+        pass
+
 
 class EnwiktionaryDumpImporter(object):
     importer_classes = [DerivedTermsImporter]
 
     def __init__(self):
-        self.processor = AdditionalDataProcessor()
+        Processor = AdditionalDataProcessor
+        Processor.importers = self.importer_classes
+        self.processor = Processor()
 
     def run(self, filename):
         self.processor.process(filename)

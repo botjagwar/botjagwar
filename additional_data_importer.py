@@ -11,11 +11,11 @@ from page_lister import get_pages_from_category
 class StaticBackend(object):
     @property
     def backend(self):
-        return 'http://localhost:8100'
+        return 'http://10.0.0.10:8100'
 
 
 class DynamicBackend(object):
-    backends = ["http://localhost:81%s" % (f'{i}'.zfill(2)) for i in range(16)]
+    backends = ["http://10.0.0.10:81%s" % (f'{i}'.zfill(2)) for i in range(16)]
 
     @property
     def backend(self):
@@ -54,7 +54,6 @@ class AdditionalDataImporter(object):
         }
         response = requests.get(dyn_backend.backend + '/additional_word_information', params=data)
         resp_data = response.json()
-        # print(resp_data)
         if resp_data:
             if 'word_id' in resp_data[0] \
                     and 'information' in resp_data[0] \
@@ -74,8 +73,6 @@ class AdditionalDataImporter(object):
         return False
 
     def fetch_additional_data_for_category(self, language, category_name):
-        # print(language, category_name)
-        # print('fetching words in database...')
         url = dyn_backend.backend + f"/word_with_additional_data"
         params = {
             'language': f'eq.{language}',
@@ -305,10 +302,7 @@ class DerivedTermsImporter(SynonymImporter):
                         elif item == '}}':
                             break
 
-
-
         return list(set(retrieved))
-
 
 
 if __name__ == '__main__':

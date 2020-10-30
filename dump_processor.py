@@ -136,8 +136,11 @@ class Processor(object):
                     input_buffer += line
             yield buffers
 
-        self.entry_writer.write()
-        self.missing_translation_writer.write()
+        if self.entry_writer is not None:
+            self.entry_writer.write()
+
+        if self.missing_translation_writer is not None:
+            self.missing_translation_writer.write()
 
     def process(self, filename='default'):
         def pmap(pool, buffers, lvl=0):
@@ -161,7 +164,8 @@ class Processor(object):
             pool.join()
             del buffers
 
-        self.missing_translation_writer.write()
+        if self.missing_translation_writer is not None:
+            self.missing_translation_writer.write()
 
 
 if __name__ == '__main__':
