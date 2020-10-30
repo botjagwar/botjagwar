@@ -87,7 +87,7 @@ class MGWikiPageRenderer(PageRenderer):
                 s += f': {{vang-etim|' + f'{info.language}' + '}}\n'
         else:
             s += '\n{{-etim-}}\n'
-            s += '\n: {{vang-etim|' + "{info.language}" + '}}\n'
+            s += '\n: {{vang-etim|' + f'{info.language}' + '}}\n'
 
         # Part of speech
         s += "\n\n{{-" + f'{info.part_of_speech}-|{info.language}' + "}}\n"
@@ -102,9 +102,9 @@ class MGWikiPageRenderer(PageRenderer):
         # Definition
         definitions = []
         if link:
-            for d in info.entry_definition:
+            for d in set(info.entry_definition):
                 if len(d.split()) == 1:
-                    definitions.append(f'[[{d}|{d.title()}]]')
+                    definitions.append(f'[[{d}]]')
                 elif '[[' in d or ']]' in d:
                     definitions.append(d)
                 else:
@@ -142,6 +142,12 @@ class MGWikiPageRenderer(PageRenderer):
             s += '\n\n{{-dika-mifanohitra-}}'
             for antonym in info.antonyms:
                 s += "\n* [[" + antonym + ']]'
+
+        # Related terms
+        if hasattr(info, 'related_terms'):
+            s += '\n\n{{-teny mifandraika-}}'
+            for d in info.related_terms:
+                s += f"\n* [[{d}]]"
 
         # References
         if hasattr(info, 'references'):
