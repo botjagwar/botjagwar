@@ -38,7 +38,7 @@ CREATE FUNCTION public.add_new_association() RETURNS trigger
     LANGUAGE plpgsql
     AS $$BEGIN
 
-insert into 
+insert into
     new_associations (word, definition, associated_on, status)
 values
     (NEW.word, NEW.definition, current_timestamp, 'PENDING');
@@ -56,10 +56,10 @@ ALTER FUNCTION public.add_new_association() OWNER TO postgres;
 CREATE FUNCTION public.add_pending_definition_change() RETURNS trigger
     LANGUAGE plpgsql
     AS $$BEGIN
-IF NEW.definition != OLD.definition 
+IF NEW.definition != OLD.definition
 THEN
         INSERT into events_definition_changed (
-            definition_id,   
+            definition_id,
             change_datetime,
             status,
             status_datetime,
@@ -389,8 +389,8 @@ ALTER TABLE public.language OWNER TO postgres;
 --
 -- Name: matview_inconsistent_definitions; Type: MATERIALIZED VIEW; Schema: public; Owner: postgres
 --
-
-CREATE MATERIALIZED VIEW public.matview_inconsistent_definitions AS
+drop view public.inconsistent_definitions;
+CREATE VIEW public.inconsistent_definitions AS
  SELECT t1.w_id,
     t1.w1,
     t1.w1_pos,
@@ -409,7 +409,8 @@ CREATE MATERIALIZED VIEW public.matview_inconsistent_definitions AS
             d.definition_language AS d_lang,
             ( SELECT w2.word
                    FROM public.word w2
-                  WHERE (((w2.word)::text = (d.definition)::text) AND ((w2.language)::text = (d.definition_language)::text))
+                  WHERE (((w2.word)::text = (d.definition)::text)
+                  AND ((w2.language)::text = (d.definition_language)::text))
                  LIMIT 1) AS w2,
             ( SELECT w2.part_of_speech
                    FROM public.word w2
@@ -419,7 +420,7 @@ CREATE MATERIALIZED VIEW public.matview_inconsistent_definitions AS
              JOIN public.definitions d ON ((x.definition = d.id)))
              JOIN public.word w ON ((w.id = x.word)))) t1
   WHERE ((t1.w2 IS NOT NULL) AND ((t1.w2_pos)::text <> (t1.w1_pos)::text) AND ((((t1.w1_pos)::text = 'ana'::text) AND ((t1.w2_pos)::text = ANY ((ARRAY['mpam-ana'::character varying, 'mat'::character varying])::text[]))) OR (((t1.w1_pos)::text = ANY ((ARRAY['mat'::character varying, 'mpam-ana'::character varying])::text[])) AND ((t1.w2_pos)::text = 'ana'::text))))
-  WITH NO DATA;
+;
 
 
 ALTER TABLE public.matview_inconsistent_definitions OWNER TO postgres;

@@ -1,7 +1,7 @@
 import re
 import traceback
 
-from additional_data_importer import DerivedTermsImporter
+from api.importer.en import DerivedTermsImporter
 from dump_processor import Processor
 
 

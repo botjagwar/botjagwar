@@ -5,8 +5,8 @@ import time
 import pywikibot
 import requests
 
-from additional_data_importer import dyn_backend
-from api.output import WikiPageRendererFactory
+from api.importer import dyn_backend
+from api.output import WikiPageRendererFactory, Output
 from object_model.word import Entry
 
 
@@ -17,11 +17,11 @@ class SkippedWord(Exception):
 class NinjaEntryPublisher(object):
     typo_reliability = 0.9983
     speed_wpm = 35
-    random_latency = [40, 130]
-    edit_session_length_minutes = [1, 1]
+    random_latency = [40, 90]
+    edit_session_length_minutes = [1, 120]
 
     def __init__(self):
-        self.timer = time.time()
+        self.session_start = time.time()
         self.session_length = random.randint(
             self.edit_session_length_minutes[0],
             self.edit_session_length_minutes[1]
@@ -29,7 +29,7 @@ class NinjaEntryPublisher(object):
 
     def publish(self, entry, title, wikitext, summary_if_exists, summary_if_new):
         ct_time = time.time()
-        if (ct_time - self.timer)/60 > self.session_length * 60:
+        if (ct_time - self.session_start)/60 > self.session_length * 60:
             print('Session over! Waiting 17 hours before publishing again')
             time.sleep(17*3600)
 
@@ -42,7 +42,7 @@ class NinjaEntryPublisher(object):
                 print('skipped page as already exists')
             else:
                 print('waited %d seconds' % sleep)
-                summary = summary_if_exists + ' : Fizarana vaovao'
+                summary = summary_if_exists + ' Fizarana vaovao'
                 print(summary)
                 contents = wikitext + '\n\n' + contents
                 time.sleep(sleep)
@@ -60,6 +60,7 @@ class NinjaEntryCreator(object):
     def __init__(self):
         Renderer = WikiPageRendererFactory('mg')
         self.publisher = NinjaEntryPublisher()
+        self.output = Output()
         self.renderer = Renderer()
         additional_data_types_rq = requests.get(dyn_backend.backend + '/additional_word_information_types')
         self.additional_data_types = set()
@@ -82,9 +83,10 @@ class NinjaEntryCreator(object):
 
     def run(self, language=None):
         params = {
-            'limit': 40,
-            'offset': 0,
-            'part_of_speech': 'eq.mat'
+            #'limit': 1000,
+            #'offset': 50,
+            'fr_definition': 'eq.eau',
+            # 'part_of_speech': 'eq.mat'
         }
         if language is not None:
             params['language'] = 'eq.' + language
@@ -95,17 +97,20 @@ class NinjaEntryCreator(object):
             return
 
         for translation in convergent_translations_rq.json():
+            title = translation['word']
+            entry, wikistring, summary_if_new, summary_if_exists = self.generate_wikipage_and_summaries(translation)
+            summary_if_new = "Pejy voaforona amin'ny « " + summary_if_new + ' »'
             try:
-                title = translation['word']
-                entry, wikistring, summary_if_new, summary_if_exists = self.generate_wikipage_and_summaries(translation)
-                print('>>>>>  ' + title + '  <<<<<')
-                print(wikistring + '\n')
-                summary_if_new = "Pejy voaforona amin'ny « " + summary_if_new + ' »'
-                print(summary_if_exists)
-                print(len(wikistring))
                 self.publisher.publish(entry, title, wikistring, summary_if_exists, summary_if_new)
             except SkippedWord:
-                continue
+                print('skipped')
+            else:
+                print('>>>>>  ' + title + '  <<<<<')
+                print(wikistring + '\n')
+                print(summary_if_exists)
+                print(len(wikistring))
+            finally:
+                self.output.db(entry)
 
     def generate_wikipage_and_summaries(self, translation):
         # Fetching base information
@@ -135,7 +140,6 @@ class NinjaEntryCreator(object):
         else:
             print('request_convergent_definition_rq.status_code ', request_convergent_definition_rq.status_code)
 
-
         # Fetching and mapping additional data
         additional_data_list = json_dictionary_infos[0]['additional_data']
         if additional_data_list is not None:
@@ -146,8 +150,8 @@ class NinjaEntryCreator(object):
                     additional_data_list, translation['word_id'], 'antonym', list),
                 'audio_pronunciations': self.fetch_additional_data(
                     additional_data_list, translation['word_id'], 'IPA', list),
-                'etymology': self.fetch_additional_data(
-                    additional_data_list, translation['word_id'], 'etym/en', str)
+                # 'etymology': self.fetch_additional_data(
+                #     additional_data_list, translation['word_id'], 'etym/en', str)
             }
             additional_data_dict = {
                 k: v for k, v in raw_additional_data_dict.items() if v
