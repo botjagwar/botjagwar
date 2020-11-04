@@ -19,6 +19,7 @@ class NinjaEntryPublisher(object):
     speed_wpm = 35
     random_latency = [10, 100]
     edit_session_length_minutes = [1, 210]
+    overwrite = True
 
     def __init__(self):
         self.session_start = time.time()
@@ -28,6 +29,7 @@ class NinjaEntryPublisher(object):
         )
 
     def publish(self, entry, title, wikitext, summary_if_exists, summary_if_new):
+        print(wikitext)
         ct_time = time.time()
         if (ct_time - self.session_start)/60 > self.session_length * 60:
             print('Session over! Waiting 17 hours before publishing again')
@@ -39,20 +41,26 @@ class NinjaEntryPublisher(object):
         if wikipage.exists():
             contents = wikipage.get()
             if '{{=' + entry.language + '=}}' in contents:
-                print('skipped page as already exists')
+                if self.overwrite:
+                    print('overwriting')
+                    summary = 'fanitsiana'
+                    print('waited %d seconds' % sleep)
+                    wikipage.put(wikitext, summary, minor=False)
+                    time.sleep(sleep/5)
+
+                else:
+                    print('skipped page as already exists')
             else:
-                print('waited %d seconds' % sleep)
                 summary = summary_if_exists + ' Fizarana vaovao'
-                print(summary)
+                print('waited %d seconds' % sleep)
                 contents = wikitext + '\n\n' + contents
+                wikipage.put(contents, summary, minor=False)
                 time.sleep(sleep)
-                wikipage.put(contents, summary)
         else:
             print('waited %d seconds' % sleep)
             summary = summary_if_new
-            print(summary)
+            wikipage.put(wikitext, summary, minor=False)
             time.sleep(sleep)
-            wikipage.put(wikitext, summary)
 
 
 class NinjaEntryCreator(object):
@@ -71,21 +79,22 @@ class NinjaEntryCreator(object):
 
     def fetch_additional_data(self, additional_data_list, word_id, type_, return_as=(str, list)) -> [str, list]:
         if return_as == str:
-            for data in additional_data_list:
+            for data in additional_data_list[0]:
                 if data['type'] == type_:
-                    return data['information']
+                    return data['data']
         else:
-            return [
-                d['information']
-                for d in additional_data_list
-                if d['type'] == type_
-            ]
+            ret = []
+            for dic in additional_data_list:
+                if dic['data_type'] == type_:
+                    ret.append(dic['data'])
+            return ret
 
     def run(self, language=None):
         params = {
             #'limit': 1000,
             #'offset': 50,
-            'fr_definition': 'eq.loup',
+            'en_definition': 'eq.key',
+            # 'language': 'eq.la',
             # 'part_of_speech': 'eq.mat'
         }
         if language is not None:
@@ -98,17 +107,13 @@ class NinjaEntryCreator(object):
 
         for translation in convergent_translations_rq.json():
             title = translation['word']
+            print('>>>>>  ' + title + '  <<<<<')
             entry, wikistring, summary_if_new, summary_if_exists = self.generate_wikipage_and_summaries(translation)
             summary_if_new = "Pejy voaforona amin'ny « " + summary_if_new + ' »'
             try:
                 self.publisher.publish(entry, title, wikistring, summary_if_exists, summary_if_new)
             except SkippedWord:
                 print('skipped')
-            else:
-                print('>>>>>  ' + title + '  <<<<<')
-                print(wikistring + '\n')
-                print(summary_if_exists)
-                print(len(wikistring))
             finally:
                 self.output.db(entry)
 
@@ -148,14 +153,19 @@ class NinjaEntryCreator(object):
                     additional_data_list, translation['word_id'], 'synonym', list),
                 'antonyms': self.fetch_additional_data(
                     additional_data_list, translation['word_id'], 'antonym', list),
-                'audio_pronunciations': self.fetch_additional_data(
+                'ipa': self.fetch_additional_data(
                     additional_data_list, translation['word_id'], 'IPA', list),
+                'audio_pronunciations': self.fetch_additional_data(
+                    additional_data_list, translation['word_id'], 'audio', list),
+                # 'references': self.fetch_additional_data(
+                #     additional_data_list, translation['word_id'], 'reference', list),
                 # 'etymology': self.fetch_additional_data(
                 #     additional_data_list, translation['word_id'], 'etym/en', str)
             }
             additional_data_dict = {
                 k: v for k, v in raw_additional_data_dict.items() if v
             }
+            print(raw_additional_data_dict )
         else:
             additional_data_dict = {}
 

@@ -94,10 +94,10 @@ class MGWikiPageRenderer(PageRenderer):
 
         # Pronunciation
         s += "'''{{subst:BASEPAGENAME}}''' "
-        if hasattr(info, 'pronunciation'):
-            s += "{{fanononana|" + f'{info.pronunciation}' + "|" + f'{info.language}' + "}}"
-        else:
-            s += "{{fanononana||" + f'{info.language}' + "}}"
+        # if hasattr(info, 'pronunciation'):
+        #     s += "{{fanononana|" + f'{info.pronunciation}' + "|" + f'{info.language}' + "}}"
+        # else:
+        #     s += "{{fanononana||" + f'{info.language}' + "}}"
 
         # Definition
         definitions = []
@@ -126,10 +126,18 @@ class MGWikiPageRenderer(PageRenderer):
                         s += "\n#* ''" + info.examples[idx] + "''"
 
         # Audio
-        if hasattr(info, 'audio_pronunciations'):
+        if hasattr(info, 'audio_pronunciations') or\
+           hasattr(info, 'ipa'):
             s += '\n\n{{-fanononana-}}'
-            for audio in info.audio_pronunciations:
-                s += "\n* " + '{{audio|' + f'{audio}' + '|' + f'{info.entry}' + '}}'
+
+            if hasattr(info, 'audio_pronunciations'):
+                for audio in info.audio_pronunciations:
+                    s += "\n* " + '{{audio|' + f'{audio}' + '|' + f'{info.entry}' + '}}'
+
+            if hasattr(info, 'ipa'):
+                for ipa in info.ipa:
+                    s += "\n* " + '{{fanononana|' + f'{ipa}' + '|' + f'{info.language}' + '}}'
+
 
         # Synonyms
         if hasattr(info, 'synonyms'):

@@ -6,7 +6,7 @@ reason = "[[:m:Requests for comment/Large-scale errors at Malagasy Wiktionary/mg
 count = 1
 
 site = pywikibot.Site('mg', 'wiktionary')
-bots = set([i['name'] for i in s.botusers()])
+bots = set([i['name'] for i in site .botusers()])
 
 def is_edited_by_bot_only(page: pywikibot.Page) -> bool:
     contributors = set(page.contributingUsers())
