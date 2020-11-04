@@ -3,11 +3,7 @@ import re
 from . import SubsectionImporter
 
 
-class SynonymImporter(SubsectionImporter):
-    level = 4
-    data_type = 'synonym'
-    section_name = 'Synonyms'
-
+class ListSubsectionImporter(SubsectionImporter):
     def get_data(self, template_title, content: str, language: str):
         subsection_data = SubsectionImporter.get_data(self, template_title, content, language)
         retrieved = []
@@ -22,8 +18,16 @@ class SynonymImporter(SubsectionImporter):
                     elif '[[' in item and ']]' in item:
                         for data in re.findall('\[\[([0-9A-Za-z- ]+)\]\]', item):
                             retrieved.append(data)
+                    else:
+                        retrieved.append(item)
 
         return list(set(retrieved))
+
+
+class SynonymImporter(ListSubsectionImporter):
+    level = 4
+    data_type = 'synonym'
+    section_name = 'Synonyms'
 
 
 class EtymologyImporter(SubsectionImporter):
@@ -32,13 +36,29 @@ class EtymologyImporter(SubsectionImporter):
     section_name = 'Etymology'
 
 
-class AntonymImporter(SynonymImporter):
+class ReferencesImporter(SubsectionImporter):
+    level = 3
+    data_type = 'reference'
+    section_name = 'References'
+
+
+class FurtherReadingImporter(ReferencesImporter):
+    section_name = 'Further reading'
+
+
+class AlternativeFormsImporter(ListSubsectionImporter):
+    level = 4
+    data_type = 'alternative_form'
+    section_name = 'Alternative forms'
+
+
+class AntonymImporter(ListSubsectionImporter):
     level = 4
     data_type = 'antonym'
     section_name = 'Antonyms'
 
 
-class DerivedTermsImporter(SynonymImporter):
+class DerivedTermsImporter(ListSubsectionImporter):
     level = 4
     data_type = 'derived'
     section_name = 'Derived terms'

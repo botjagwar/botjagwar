@@ -87,7 +87,7 @@ class MGWikiPageRenderer(PageRenderer):
                 s += f': {{vang-etim|' + f'{info.language}' + '}}\n'
         else:
             s += '\n{{-etim-}}\n'
-            s += '\n: {{vang-etim|' + f'{info.language}' + '}}\n'
+            s += ': {{vang-etim|' + f'{info.language}' + '}}\n'
 
         # Part of speech
         s += "\n\n{{-" + f'{info.part_of_speech}-|{info.language}' + "}}\n"

@@ -13,8 +13,8 @@ class AdditionalDataImporter(object):
     def __init__(self, **parameters):
         self._languages = None
         self.iso_codes = None
+        self.fetch_default_languages_mapper()
         self.word_id_cache = {}
-
 
         if 'dry_run' in parameters:
             self.dry_run = parameters['dry_run']
@@ -35,8 +35,6 @@ class AdditionalDataImporter(object):
 
     @property
     def languages(self):
-        if self._languages:
-            self.fetch_default_languages_mapper()
         return self._languages
 
     def set_languages(self, languages):
@@ -167,8 +165,6 @@ class AdditionalDataImporter(object):
                 self.fetch_additional_data_for_category(iso, category.title())
             # else:
                 # print(f'Skipping for {language_name}...')
-
-
 
 
 class TemplateImporter(AdditionalDataImporter):

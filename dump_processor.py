@@ -155,7 +155,7 @@ class Processor(object):
         if filename == 'default':
             filename = 'user_data/%s.xml' % language
 
-        nthreads = 10
+        nthreads = 5
         for xml_buffer in self.load(filename):
             buffers = xml_buffer
             pool = ThreadPool(nthreads)

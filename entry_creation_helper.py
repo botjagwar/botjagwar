@@ -17,8 +17,8 @@ class SkippedWord(Exception):
 class NinjaEntryPublisher(object):
     typo_reliability = 0.9983
     speed_wpm = 35
-    random_latency = [40, 90]
-    edit_session_length_minutes = [1, 120]
+    random_latency = [10, 100]
+    edit_session_length_minutes = [1, 210]
 
     def __init__(self):
         self.session_start = time.time()
@@ -85,7 +85,7 @@ class NinjaEntryCreator(object):
         params = {
             #'limit': 1000,
             #'offset': 50,
-            'fr_definition': 'eq.eau',
+            'fr_definition': 'eq.loup',
             # 'part_of_speech': 'eq.mat'
         }
         if language is not None:

@@ -1,15 +1,17 @@
 import re
 import traceback
 
+from api.importer.en import AlternativeFormsImporter
 from api.importer.en import DerivedTermsImporter
+from api.importer.en import FurtherReadingImporter
+from api.importer.en import ReferencesImporter
 from dump_processor import Processor
 
 
 class AdditionalDataProcessor(Processor):
-    importer_classes = []
 
-    def __init__(self):
-        self.importers = [c(dry_run=False) for c in self.importer_classes]
+    def __init__(self, importer_classes: list):
+        self.importers = [c(dry_run=False) for c in importer_classes]
         self.count = 0
         self.missing_translation_writer = None
         self.processor_class = None
@@ -30,8 +32,7 @@ class AdditionalDataProcessor(Processor):
 
 
 class EnWiktionaryCategoryImporter(object):
-    importer_classes = [DerivedTermsImporter]
-
+    importer_classes = []
     def __init__(self):
         pass
 
@@ -40,12 +41,15 @@ class EnWiktionaryCategoryImporter(object):
 
 
 class EnwiktionaryDumpImporter(object):
-    importer_classes = [DerivedTermsImporter]
+    importer_classes = [
+        DerivedTermsImporter,
+        ReferencesImporter,
+        FurtherReadingImporter,
+        AlternativeFormsImporter
+    ]
 
     def __init__(self):
-        Processor = AdditionalDataProcessor
-        Processor.importers = self.importer_classes
-        self.processor = Processor()
+        self.processor = AdditionalDataProcessor(self.importer_classes)
 
     def run(self, filename):
         self.processor.process(filename)
@@ -67,11 +71,3 @@ if __name__ == '__main__':
     importer.run('user_data/dumps/en_11.xml')
     importer.run('user_data/dumps/en_12.xml')
     importer.run('user_data/dumps/en_13.xml')
-
-    # importer.run('user_data/en_6.xml')
-
-    # addi.run('English nouns')
-
-    # addi = SubsectionImporter(data='etym/en', dry_run=True)
-    # addi.section_name = 'Etymology'
-    # addi.run('Lemmas by language')
