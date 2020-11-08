@@ -138,19 +138,22 @@ class AdditionalDataImporter(object):
         assert isinstance(additional_data_filenames, list)
         # print(additional_data_filenames)
         for additional_data in additional_data_filenames:
-            data = {
-                'type': self.data_type,
-                'word_id': self.word_id_cache[(title, language)],
-                'information': additional_data,
-            }
-            if not self.additional_word_information_already_exists(data['word_id'], additional_data):
-                if not self.dry_run:
-                    response = requests.post(dyn_backend.backend + '/additional_word_information', data=data)
-                    if response.status_code != 201:
-                        print(response.status_code)
-                        print(response.text)
-                # else:
-                    # print(data)
+            self.write_additional_data(title, language, additional_data)
+
+    def write_additional_data(self, title, language, additional_data):
+        data = {
+            'type': self.data_type,
+            'word_id': self.word_id_cache[(title, language)],
+            'information': additional_data,
+        }
+        if not self.additional_word_information_already_exists(data['word_id'], additional_data):
+            if not self.dry_run:
+                response = requests.post(dyn_backend.backend + '/additional_word_information', data=data)
+                if response.status_code != 201:
+                    print(response.status_code)
+                    print(response.text)
+            # else:
+            # print(data)
 
     def run(self, root_category: str, wiktionary=pywikibot.Site('en', 'wiktionary')):
         self.wiktionary = wiktionary
