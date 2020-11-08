@@ -1,8 +1,10 @@
 import re
 
 from api.importer.wiktionary import SubsectionImporter
+from api.importer.wiktionary import use_wiktionary
 
 
+@use_wiktionary('en')
 class ListSubsectionImporter(SubsectionImporter):
     def get_data(self, template_title, content: str, language: str):
         subsection_data = SubsectionImporter.get_data(self, template_title, content, language)
@@ -30,12 +32,14 @@ class SynonymImporter(ListSubsectionImporter):
     section_name = 'Synonyms'
 
 
+@use_wiktionary('en')
 class EtymologyImporter(SubsectionImporter):
     level = 3
     data_type = 'etym/en'
     section_name = 'Etymology'
 
 
+@use_wiktionary('en')
 class ReferencesImporter(SubsectionImporter):
     level = 3
     data_type = 'reference'

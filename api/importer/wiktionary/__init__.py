@@ -10,6 +10,14 @@ from page_lister import get_pages_from_category
 dyn_backend = DynamicBackend()
 
 
+def use_wiktionary(language):
+    def wrap_use_wiki(cls):
+        cls.wiki = pywikibot.Site(language, 'wiktionary')
+        return cls
+
+    return wrap_use_wiki
+
+
 class WiktionaryAdditionalDataImporter(AdditionalDataImporter):
 
     def fetch_additional_data_for_category(self, language, category_name):
