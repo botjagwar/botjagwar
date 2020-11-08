@@ -1,6 +1,6 @@
 import re
 
-from . import SubsectionImporter
+from api.importer.wiktionary import SubsectionImporter
 
 
 class ListSubsectionImporter(SubsectionImporter):

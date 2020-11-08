@@ -1,10 +1,10 @@
 import re
 import traceback
 
-from api.importer.en import AlternativeFormsImporter
-from api.importer.en import DerivedTermsImporter
-from api.importer.en import FurtherReadingImporter
-from api.importer.en import ReferencesImporter
+from api.importer.wiktionary.en import AlternativeFormsImporter
+from api.importer.wiktionary.en import DerivedTermsImporter
+from api.importer.wiktionary.en import FurtherReadingImporter
+from api.importer.wiktionary.en import ReferencesImporter
 from dump_processor import Processor
 
 
@@ -31,6 +31,7 @@ class AdditionalDataProcessor(Processor):
             traceback.print_exc()
 
 
+
 class EnWiktionaryCategoryImporter(object):
     importer_classes = []
     def __init__(self):
@@ -53,6 +54,12 @@ class EnwiktionaryDumpImporter(object):
 
     def run(self, filename):
         self.processor.process(filename)
+
+
+class RakibolanaOrgPickleImporter(object):
+
+    def run(self):
+        pass
 
 
 if __name__ == '__main__':

@@ -8,12 +8,14 @@ count = 1
 site = pywikibot.Site('mg', 'wiktionary')
 bots = set([i['name'] for i in site .botusers()])
 
+
 def is_edited_by_bot_only(page: pywikibot.Page) -> bool:
     contributors = set(page.contributingUsers())
     for contributor in contributors:
         if contributor not in bots:
             return False
     return True
+
 
 with open(sys.argv[1], 'r') as f:
     for line in f:
