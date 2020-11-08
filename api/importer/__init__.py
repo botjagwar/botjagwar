@@ -5,6 +5,10 @@ from ..servicemanager.pgrest import DynamicBackend
 dyn_backend = DynamicBackend()
 
 
+class AdditionalDataImporterError(Exception):
+    pass
+
+
 class AdditionalDataImporter(object):
     def __init__(self, **parameters):
         self._languages = None
@@ -95,6 +99,9 @@ class AdditionalDataImporter(object):
             self.write_additional_data(title, language, additional_data)
 
     def write_additional_data(self, title, language, additional_data):
+        if (title, language) not in self.word_id_cache:
+            raise AdditionalDataImporterError('the word is unknown (no id)')
+
         data = {
             'type': self.data_type,
             'word_id': self.word_id_cache[(title, language)],
