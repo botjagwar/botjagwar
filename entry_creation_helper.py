@@ -17,9 +17,9 @@ class SkippedWord(Exception):
 class NinjaEntryPublisher(object):
     typo_reliability = 0.9983
     speed_wpm = 35
-    random_latency = [10, 100]
-    edit_session_length_minutes = [1, 210]
-    overwrite = True
+    random_latency = [10, 50]
+    edit_session_length_minutes = [20, 220]
+    overwrite = False
 
     def __init__(self):
         self.session_start = time.time()
@@ -43,7 +43,7 @@ class NinjaEntryPublisher(object):
             if '{{=' + entry.language + '=}}' in contents:
                 if self.overwrite:
                     print('overwriting')
-                    summary = 'fanitsiana'
+                    summary = '+tsiahy, sns.'
                     print('waited %d seconds' % sleep)
                     wikipage.put(wikitext, summary, minor=False)
                     time.sleep(sleep/5)
@@ -70,12 +70,25 @@ class NinjaEntryCreator(object):
         self.publisher = NinjaEntryPublisher()
         self.output = Output()
         self.renderer = Renderer()
+        mg_word_list = self.fetch_mg_word_list()
+        self.renderer.pages_to_link = mg_word_list
         additional_data_types_rq = requests.get(dyn_backend.backend + '/additional_word_information_types')
         self.additional_data_types = set()
         if additional_data_types_rq == 200:
             self.additional_data_types = {
                 d['type'] for d in additional_data_types_rq.json()
             }
+
+    def fetch_mg_word_list(self):
+        params = {
+            'language': 'eq.mg',
+            'part_of_speech': 'in.(ana,mat,mpam)'
+        }
+
+        resp = requests.get(dyn_backend.backend + '/word', params=params)
+        assert resp.status_code == 200
+        ret = [w['word'] for w in resp.json()]
+        return set(ret)
 
     def fetch_additional_data(self, additional_data_list, word_id, type_, return_as=(str, list)) -> [str, list]:
         if return_as == str:
@@ -92,9 +105,12 @@ class NinjaEntryCreator(object):
     def run(self, language=None):
         params = {
             #'limit': 1000,
-            #'offset': 50,
-            'en_definition': 'eq.key',
-            # 'language': 'eq.la',
+            # 'offset': 1100,
+            # 'en_definition': 'eq.' + sys.argv[1],
+            # 'language': 'neq.mg',
+            'order': 'word_id',
+            'language': 'eq.' + sys.argv[1],
+            # 'word_id': 'eq.471733'
             # 'part_of_speech': 'eq.mat'
         }
         if language is not None:
@@ -157,8 +173,13 @@ class NinjaEntryCreator(object):
                     additional_data_list, translation['word_id'], 'IPA', list),
                 'audio_pronunciations': self.fetch_additional_data(
                     additional_data_list, translation['word_id'], 'audio', list),
-                # 'references': self.fetch_additional_data(
-                #     additional_data_list, translation['word_id'], 'reference', list),
+                # 'related_terms': self.fetch_additional_data(
+                #     additional_data_list, translation['word_id'], 'related', list),
+                # 'derived_terms': self.fetch_additional_data(
+                #     additional_data_list, translation['word_id'], 'derived', list),
+                #'references': ['{{Tsiahy:vortaro.net}}'],
+                'references': self.fetch_additional_data(
+                    additional_data_list, translation['word_id'], 'reference', list),
                 # 'etymology': self.fetch_additional_data(
                 #     additional_data_list, translation['word_id'], 'etym/en', str)
             }
@@ -194,7 +215,7 @@ class NinjaEntryCreator(object):
 
 if __name__ == '__main__':
     entry_creator = NinjaEntryCreator()
-    if len(sys.argv) > 1:
-        entry_creator.run(sys.argv[1])
-    else:
-        entry_creator.run()
+    # if len(sys.argv) > 1:
+    #     entry_creator.run(sys.argv[1])
+    # else:
+    entry_creator.run()

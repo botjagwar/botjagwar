@@ -66,6 +66,20 @@ class CHRWikiPageRenderer(PageRenderer):
 
 
 class MGWikiPageRenderer(PageRenderer):
+
+    def link_if_exists(self, definition_words: list) -> list:
+        ret = []
+        if hasattr(self, 'pages_to_link'):
+            assert isinstance(self.pages_to_link, set)
+            for word in definition_words:
+                if word in self.pages_to_link:
+                    ret.append('[[' + word + ']]')
+                else:
+                    ret.append(word)
+            return ret
+        else:
+            return definition_words
+
     def render(self, info: Entry, link=True) -> str:
         additional_note = ""
 
@@ -102,13 +116,16 @@ class MGWikiPageRenderer(PageRenderer):
         # Definition
         definitions = []
         if link:
-            for d in set(info.entry_definition):
+            defn_list = list(set(info.entry_definition))
+            defn_list.sort()
+            for d in defn_list:
                 if len(d.split()) == 1:
                     definitions.append(f'[[{d}]]')
                 elif '[[' in d or ']]' in d:
                     definitions.append(d)
                 else:
-                    definitions.append(d[0].upper() + d[1:])
+                    multiword_definitions = self.link_if_exists(d.split())
+                    definitions.append(' '.join(multiword_definitions))
         else:
             definitions = [f'{d}' for d in definitions]
 
@@ -151,11 +168,17 @@ class MGWikiPageRenderer(PageRenderer):
             for antonym in info.antonyms:
                 s += "\n* [[" + antonym + ']]'
 
-        # Related terms
-        if hasattr(info, 'related_terms'):
+        # Related/derived terms
+        if hasattr(info, 'related_terms') or \
+            hasattr(info, 'derived_terms'):
             s += '\n\n{{-teny mifandraika-}}'
-            for d in info.related_terms:
-                s += f"\n* [[{d}]]"
+
+            if hasattr(info, 'related_terms'):
+                for d in info.related_terms:
+                    s += f"\n* [[{d}]]"
+            if hasattr(info, 'derived_terms'):
+                for d in info.derived_terms:
+                    s += f"\n* [[{d}]]"
 
         # References
         if hasattr(info, 'references'):
