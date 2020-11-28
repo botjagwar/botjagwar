@@ -10,7 +10,7 @@ bots = set([i['name'] for i in site .botusers()])
 
 
 def is_edited_by_bot_only(page: pywikibot.Page) -> bool:
-    contributors = set(page.contributingUsers())
+    contributors = set(page.contributors())
     for contributor in contributors:
         if contributor not in bots:
             return False
@@ -20,7 +20,7 @@ def is_edited_by_bot_only(page: pywikibot.Page) -> bool:
 with open(sys.argv[1], 'r') as f:
     for line in f:
         count += 1
-        if count <= 1016314:
+        if count <= 0:
             continue
         page = pywikibot.Page(pywikibot.Site('mg', 'wiktionary'), line)
         if page.exists() and not page.isRedirectPage():
@@ -30,7 +30,5 @@ with open(sys.argv[1], 'r') as f:
                 try:
                     if is_edited_by_bot_only(page):
                         page.delete(reason)
-                except Exception:
-                    pass
-
-
+                except Exception as e:
+                    print(e)

@@ -1,5 +1,4 @@
 import random
-import sys
 import time
 
 import pywikibot
@@ -17,7 +16,7 @@ class SkippedWord(Exception):
 class NinjaEntryPublisher(object):
     typo_reliability = 0.9983
     speed_wpm = 35
-    random_latency = [10, 50]
+    random_latency = [10, 180]
     edit_session_length_minutes = [20, 220]
     overwrite = False
 
@@ -109,7 +108,7 @@ class NinjaEntryCreator(object):
             # 'en_definition': 'eq.' + sys.argv[1],
             # 'language': 'neq.mg',
             'order': 'word_id',
-            'language': 'eq.' + sys.argv[1],
+            #'suggested_definition': 'eq.' + sys.argv[1],
             # 'word_id': 'eq.471733'
             # 'part_of_speech': 'eq.mat'
         }
@@ -124,13 +123,13 @@ class NinjaEntryCreator(object):
         for translation in convergent_translations_rq.json():
             title = translation['word']
             print('>>>>>  ' + title + '  <<<<<')
-            entry, wikistring, summary_if_new, summary_if_exists = self.generate_wikipage_and_summaries(translation)
-            summary_if_new = "Pejy voaforona amin'ny « " + summary_if_new + ' »'
             try:
+                entry, wikistring, summary_if_new, summary_if_exists = self.generate_wikipage_and_summaries(translation)
+                summary_if_new = "Pejy voaforona amin'ny « " + summary_if_new + ' »'
                 self.publisher.publish(entry, title, wikistring, summary_if_exists, summary_if_new)
             except SkippedWord:
                 print('skipped')
-            finally:
+            else:
                 self.output.db(entry)
 
     def generate_wikipage_and_summaries(self, translation):
@@ -177,9 +176,9 @@ class NinjaEntryCreator(object):
                 #     additional_data_list, translation['word_id'], 'related', list),
                 # 'derived_terms': self.fetch_additional_data(
                 #     additional_data_list, translation['word_id'], 'derived', list),
-                #'references': ['{{Tsiahy:vortaro.net}}'],
-                'references': self.fetch_additional_data(
-                    additional_data_list, translation['word_id'], 'reference', list),
+                # 'references': ['{{Tsiahy:vortaro.net}}'],
+                # 'references': self.fetch_additional_data(
+                #     additional_data_list, translation['word_id'], 'reference', list),
                 # 'etymology': self.fetch_additional_data(
                 #     additional_data_list, translation['word_id'], 'etym/en', str)
             }
@@ -206,11 +205,12 @@ class NinjaEntryCreator(object):
             entry = Entry(**{**entry_data, **additional_data_dict})
             wiki_string = self.renderer.render(entry)
             summary_if_new = wiki_string.replace('\n', ' ')
-            summary_if_already_exists = '/* =={{=' + translation["language"] + '=}}== */'
+            summary_if_already_exists = '/* {{=' + translation["language"] + '=}} */'
 
             return entry, wiki_string, summary_if_new, summary_if_already_exists
         else:
             print('definitions', definitions)
+            raise SkippedWord()
 
 
 if __name__ == '__main__':

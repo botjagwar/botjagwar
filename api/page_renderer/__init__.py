@@ -184,7 +184,10 @@ class MGWikiPageRenderer(PageRenderer):
         if hasattr(info, 'references'):
             s += '\n\n{{-tsiahy-}}'
             for ref in info.references:
-                s += "\n* " + ref
+                if ref.startswith('*'):
+                    s += '\n' + ref
+                else:
+                    s += "\n* " + ref
 
         return s
 

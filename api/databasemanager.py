@@ -1,6 +1,5 @@
 #!/usr/bin/python3.6
 
-import configparser
 import logging
 
 from sqlalchemy import create_engine
@@ -42,6 +41,7 @@ class DatabaseManager(object):
         self.session = self.SessionClass()
 
     def read_configuration(self):
+        import configparser
         self.config_parser = configparser.ConfigParser()
         self.config_parser.read('/opt/botjagwar/conf/config.ini')
         self.db_header = self.config_parser.get('global', self.conf_key)

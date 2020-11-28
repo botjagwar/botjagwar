@@ -1,14 +1,20 @@
 from random import randint
 
+from api.config import BotjagwarConfig
+
+config = BotjagwarConfig()
+
+ADDR = config.get('postgrest_backend_address')
+
 
 class StaticBackend(object):
     @property
     def backend(self):
-        return 'http://localhost:8100'
+        return 'http://' + ADDR + ':8100'
 
 
 class DynamicBackend(object):
-    backends = ["http://localhost:81%s" % (f'{i}'.zfill(2)) for i in range(16)]
+    backends = ["http://" + ADDR + ":81%s" % (f'{i}'.zfill(2)) for i in range(16)]
 
     @property
     def backend(self):
