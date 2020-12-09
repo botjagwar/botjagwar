@@ -422,6 +422,15 @@ CREATE VIEW public.inconsistent_definitions AS
   WHERE ((t1.w2 IS NOT NULL) AND ((t1.w2_pos)::text <> (t1.w1_pos)::text) AND ((((t1.w1_pos)::text = 'ana'::text) AND ((t1.w2_pos)::text = ANY ((ARRAY['mpam-ana'::character varying, 'mat'::character varying])::text[]))) OR (((t1.w1_pos)::text = ANY ((ARRAY['mat'::character varying, 'mpam-ana'::character varying])::text[])) AND ((t1.w2_pos)::text = 'ana'::text))))
 ;
 
+drop view unpublished_convergent_translations ;
+create view unpublished_convergent_translations_mg as
+select *
+from convergent_translations ct
+where ct.mg_definition_id * 1000000000 + ct.word_id not in (
+    select definition * 1000000000 + word
+    from dictionary
+);
+
 
 ALTER TABLE public.matview_inconsistent_definitions OWNER TO postgres;
 

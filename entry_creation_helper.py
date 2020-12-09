@@ -17,23 +17,9 @@ class NinjaEntryPublisher(object):
     typo_reliability = 0.9983
     speed_wpm = 35
     random_latency = [10, 180]
-    edit_session_length_minutes = [20, 220]
     overwrite = False
 
-    def __init__(self):
-        self.session_start = time.time()
-        self.session_length = random.randint(
-            self.edit_session_length_minutes[0],
-            self.edit_session_length_minutes[1]
-        )
-
     def publish(self, entry, title, wikitext, summary_if_exists, summary_if_new):
-        print(wikitext)
-        ct_time = time.time()
-        if (ct_time - self.session_start)/60 > self.session_length * 60:
-            print('Session over! Waiting 17 hours before publishing again')
-            time.sleep(17*3600)
-
         wikipage = pywikibot.Page(pywikibot.Site('mg', 'wiktionary'), title)
         min_sleeptime = (len(wikitext) / 6) // self.speed_wpm
         sleep = min_sleeptime + random.randint(self.random_latency[0], self.random_latency[1])
@@ -46,9 +32,8 @@ class NinjaEntryPublisher(object):
                     print('waited %d seconds' % sleep)
                     wikipage.put(wikitext, summary, minor=False)
                     time.sleep(sleep/5)
-
                 else:
-                    print('skipped page as already exists')
+                    return
             else:
                 summary = summary_if_exists + ' Fizarana vaovao'
                 print('waited %d seconds' % sleep)
@@ -120,15 +105,36 @@ class NinjaEntryCreator(object):
             print('convergent_translations_rq.status_code', convergent_translations_rq.status_code)
             return
 
-        for translation in convergent_translations_rq.json():
+        new_associations_rq = requests.get(dyn_backend.backend + '/new_associations', params={})
+        if new_associations_rq.status_code != 200:
+            print('new_associations_rq.status_code', new_associations_rq.status_code)
+            return
+
+        new_associations = [(d['word'], d['definition']) for d in new_associations_rq.json()]
+        data = convergent_translations_rq.json()
+        print(len(new_associations), 'associations loaded')
+        print(new_associations[:10])
+        print(data[:10])
+        print(len(data), 'translations loaded')
+        filtered_data = []
+        for translation in data:
+            if (int(translation['word_id']), int(translation['mg_definition_id'])) in new_associations:
+                continue
+            else:
+                filtered_data.append(translation)
+
+        print(len(filtered_data), 'filtered translations loaded')
+        for translation in filtered_data:
             title = translation['word']
-            print('>>>>>  ' + title + '  <<<<<')
+            print(translation['word_id'], translation['mg_definition_id'])
+
+            print('>>>>> ' + title + ' <<<<<')
             try:
                 entry, wikistring, summary_if_new, summary_if_exists = self.generate_wikipage_and_summaries(translation)
                 summary_if_new = "Pejy voaforona amin'ny « " + summary_if_new + ' »'
                 self.publisher.publish(entry, title, wikistring, summary_if_exists, summary_if_new)
             except SkippedWord:
-                print('skipped')
+                continue
             else:
                 self.output.db(entry)
 
@@ -200,7 +206,7 @@ class NinjaEntryCreator(object):
 
             for data_type in self.additional_data_types:
                 if data_type  in additional_data:
-                    entry_data[data_type ] = additional_data[data_type]
+                    entry_data[data_type] = additional_data[data_type]
 
             entry = Entry(**{**entry_data, **additional_data_dict})
             wiki_string = self.renderer.render(entry)
