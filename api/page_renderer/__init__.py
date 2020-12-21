@@ -99,9 +99,9 @@ class MGWikiPageRenderer(PageRenderer):
             else:
                 s += '\n{{-etim-}}\n'
                 s += f': {{vang-etim|' + f'{info.language}' + '}}\n'
-        else:
-            s += '\n{{-etim-}}\n'
-            s += ': {{vang-etim|' + f'{info.language}' + '}}\n'
+        # else:
+        #     s += '\n{{-etim-}}\n'
+        #     s += ': {{vang-etim|' + f'{info.language}' + '}}\n'
 
         # Part of speech
         s += "\n\n{{-" + f'{info.part_of_speech}-|{info.language}' + "}}\n"
@@ -115,9 +115,9 @@ class MGWikiPageRenderer(PageRenderer):
 
         # Definition
         definitions = []
+        defn_list = list(set(info.entry_definition))
+        defn_list.sort()
         if link:
-            defn_list = list(set(info.entry_definition))
-            defn_list.sort()
             for d in defn_list:
                 if len(d.split()) == 1:
                     definitions.append(f'[[{d}]]')
@@ -127,7 +127,7 @@ class MGWikiPageRenderer(PageRenderer):
                     multiword_definitions = self.link_if_exists(d.split())
                     definitions.append(' '.join(multiword_definitions))
         else:
-            definitions = [f'{d}' for d in definitions]
+            definitions = [f'{d}' for d in defn_list]
 
         for idx, defn in enumerate(definitions):
             s += "\n# " + defn
@@ -143,8 +143,8 @@ class MGWikiPageRenderer(PageRenderer):
                         s += "\n#* ''" + info.examples[idx] + "''"
 
         # Audio
-        if hasattr(info, 'audio_pronunciations') or\
-           hasattr(info, 'ipa'):
+        if hasattr(info, 'audio_pronunciations') or \
+            hasattr(info, 'ipa'):
             s += '\n\n{{-fanononana-}}'
 
             if hasattr(info, 'audio_pronunciations'):

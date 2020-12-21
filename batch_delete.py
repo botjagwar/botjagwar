@@ -88,7 +88,7 @@ def remove_bot_section():
                 content = page.get()
                 try:
                     to_delete = False
-                    if is_edited_by_bot_only(page):
+                    if True:#is_edited_by_bot_only(page):
                         to_delete = True
 
                     created = page.getVersionHistory()[-1]
@@ -106,4 +106,4 @@ def remove_bot_section():
 
 
 if __name__ == '__main__':
-    remove_bot_section()
+    mass_delete()

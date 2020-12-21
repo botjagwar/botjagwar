@@ -87,16 +87,20 @@ def create_non_lemma_entry(entry: Entry):
         if pos not in TEMPLATE_TO_OBJECT:  # unsupported template
             print("Unsupported template")
             return 0
+
         output_object_class = TEMPLATE_TO_OBJECT[pos]
         try:
             elements = templates_parser.get_elements(output_object_class, definition)
         except Exception:
             return 1
+
         if code in POST_PROCESSORS:
             elements = POST_PROCESSORS[code](elements)
+
         if elements is None:
             print("No elements")
             return 0
+
         malagasy_definition = elements.to_malagasy_definition()
         lemma = elements.lemma
         # lemma = get_lemma(output_object_class, definition)
@@ -106,9 +110,29 @@ def create_non_lemma_entry(entry: Entry):
         return 0
 
     # Do not create page if lemma does not exist
-    if lemma not in PAGE_SET:
-        print('No lemma (%s) :/' % lemma)
-        #return 0
+    mg_lemma_page = pywikibot.Page(pywikibot.Site(SITELANG, SITENAME), lemma)
+    try:
+        if not mg_lemma_page.exists():
+            print('No lemma (%s) :/' % lemma)
+            return 0
+        else:
+            broken_redirect = False
+            while mg_lemma_page.isRedirectPage():
+                mg_lemma_page = mg_lemma_page.getRedirectTarget()
+                if not mg_lemma_page.exists():
+                    broken_redirect = True
+                    break
+
+            if not broken_redirect:
+                content = mg_lemma_page.get()
+                if '{{=' + language_code + '=}}' not in content:
+                    print('No lemma (%s) :/' % lemma)
+                    return 0
+            else:
+                print('No lemma : broken redirect (%s)' % lemma)
+                return 0
+    except pywikibot.exceptions.InvalidTitle:  # doing something wrong at this point
+        return 0
 
     form_of_template = FORM_OF_TEMPLATE[pos] if pos in FORM_OF_TEMPLATE else pos
 
@@ -142,10 +166,11 @@ def create_non_lemma_entry(entry: Entry):
         page_content = page_output.wikipage(mg_entry, link=False)
 
     pywikibot.output('\03{blue}%s\03{default}' % page_content)
-    # try:
-    #     mg_page.put(page_content, 'Teny vaovao')
-    # except Exception:
-    #     pass
+    try:
+        mg_page.put(page_content, f'endriky ny teny [[{lemma}]]')
+    except Exception:
+        pass
+
     return 1
 
 
@@ -173,6 +198,7 @@ def parse_word_forms():
         if last_entry > counter:
             print('moving on')
             continue
+
         print("%d / %d (%2.2f%%)" % (counter, total, 100.*counter/total))
         en_page_processor.process(word_page)
         entries = en_page_processor.getall(definitions_as_is=True)
