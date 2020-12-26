@@ -1,6 +1,8 @@
 import pickle
 from uuid import uuid4
 
+from api.config import BotjagwarConfig
+
 
 class KeyValueStoreAPI(object):
     def __init__(self):
@@ -38,36 +40,48 @@ class KeyValueStoreAPI(object):
         return key in self.kvstore
 
     def get_attribute(self):
-        def get_attribute_wrapper(f):
-            def wrapper(objekt, attribute):
-                key = str(self.identifier) + 'attribute/' + str(attribute)
-                if not self._has_key(key):
-                    raise AttributeError(self.__class__.__name__ + f' has no attribute {attribute}')
-                else:
-                    return pickle.loads(self._get_attribute(key))
+        def wrapper(objekt, attribute):
+            key = str(self.identifier) + 'attribute/' + str(attribute)
+            print(key, self.kvstore)
+            return pickle.loads(self._get_attribute(key))
 
-            return wrapper
-        return get_attribute_wrapper
+        return wrapper
 
     def _set_attribute(self, attribute, value):
         self.kvstore[attribute] = value
 
     def set_attribute(self):
-        def set_attribute_wrapper(f):
-            def wrapper(objekt, attribute, value):
-                key = str(self.identifier) + 'attribute/' + attribute
-                value = f(objekt, attribute, value)
-                self._set_attribute(key, pickle.dumps(value))
-
-            return wrapper
-        return set_attribute_wrapper
+        def wrapper(objekt, attribute, value):
+            key = str(self.identifier) + 'attribute/' + attribute
+            value = value
+            self._set_attribute(key, pickle.dumps(value))
+            return None
+        return wrapper
 
 
 class RedisWrapperAPI(KeyValueStoreAPI):
-    def __init__(self, host='127.0.0.1', password='qwertyuiop'):
+    def __init__(self, host='default', password='default', singleton=False, persistent=False):
         import redis
-        self.instance = redis.Redis(host=host, password=password)
+        config = BotjagwarConfig()
+        if host == 'default':
+            host = config.get('host', section='redis')
+        if password == 'default':
+            password = config.get('password', section='redis')
+
+        self.singleton = singleton
+        self.persistent = persistent
         self.attributes = set()
+        self.instance = redis.Redis(host=host, password=password)
+        self.set_identifier(self.__class__)
+
+    def set_client_class(self, client_class):
+        self.client_class = client_class
+
+    def set_identifier(self, class_):
+        KeyValueStoreAPI.set_identifier(self, self.__class__)
+        if hasattr(self, 'singleton'):
+            if self.singleton:
+                self.identifier = class_.__name__ + '/'
 
     @property
     def kvstore(self):
@@ -77,10 +91,13 @@ class RedisWrapperAPI(KeyValueStoreAPI):
         return d
 
     def __del__(self):
-        for key in self.attributes:
-            self.instance.delete(key)
+        if not self.persistent:
+            if hasattr(self, 'attributes'):
+                for key in self.attributes:
+                    self.instance.delete(key)
 
-        self.instance.close()
+            if hasattr(self, 'instance'):
+                self.instance.close()
 
     def _set_attribute(self, attribute, value):
         self.attributes.add(attribute)
@@ -88,3 +105,30 @@ class RedisWrapperAPI(KeyValueStoreAPI):
 
     def _get_attribute(self, attribute):
         return self.instance.get(attribute)
+
+
+class KvsPersistentClass(object):
+    def __setattr__(self, key, value):
+        return self.kvs.set_attribute()(self, key, value)
+
+    def __getattr__(self, item):
+        return self.kvs.get_attribute()(self, item)
+
+
+class RedisPersistentClass(KvsPersistentClass):
+    kvs = RedisWrapperAPI(persistent=True)
+
+    @property
+    def kvstore(self):
+        return self.kvs.kvstore
+
+
+class RedisPersistentSingleton(RedisPersistentClass):
+    kvs = RedisWrapperAPI(persistent=True, singleton=True)
+
+    def __init__(self):
+        self.kvs.set_identifier(self.__class__)
+
+    @property
+    def kvstore(self):
+        return self.kvs.kvstore
