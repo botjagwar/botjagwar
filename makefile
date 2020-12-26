@@ -57,6 +57,12 @@ unit_tests: prepare_tests
 
 .PHONY: unit_tests
 
+additional_tests: prepare_tests
+	$(call test_setup)
+	$(PYTHON) -m "nose" -v additional_tests
+
+.PHONY: additional_tests: prepare_tests
+
 test: prepare_tests
 	$(call test_setup)
 	PYWIKIBOT2_NO_USER_CONFIG=1 $(PYTHON) -m "nose" -v $(TEST_DIR)
