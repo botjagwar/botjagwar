@@ -104,7 +104,7 @@ class MGWikiPageRenderer(PageRenderer):
         #     s += ': {{vang-etim|' + f'{info.language}' + '}}\n'
 
         # Part of speech
-        s += "\n\n{{-" + f'{info.part_of_speech}-|{info.language}' + "}}\n"
+        s += "\n{{-" + f'{info.part_of_speech}-|{info.language}' + "}}\n"
 
         # Pronunciation
         s += "'''{{subst:BASEPAGENAME}}''' "
@@ -154,7 +154,6 @@ class MGWikiPageRenderer(PageRenderer):
             if hasattr(info, 'ipa'):
                 for ipa in info.ipa:
                     s += "\n* " + '{{fanononana|' + f'{ipa}' + '|' + f'{info.language}' + '}}'
-
 
         # Synonyms
         if hasattr(info, 'synonyms'):
