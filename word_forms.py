@@ -110,7 +110,11 @@ def create_non_lemma_entry(entry: Entry):
         return 0
 
     # Do not create page if lemma does not exist
-    mg_lemma_page = pywikibot.Page(pywikibot.Site(SITELANG, SITENAME), lemma)
+    if lemma:
+        mg_lemma_page = pywikibot.Page(pywikibot.Site(SITELANG, SITENAME), lemma)
+    else:
+        return 1
+
     try:
         if not mg_lemma_page.exists():
             print('No lemma (%s) :/' % lemma)
@@ -133,6 +137,8 @@ def create_non_lemma_entry(entry: Entry):
                 return 0
     except pywikibot.exceptions.InvalidTitle:  # doing something wrong at this point
         return 0
+    except Exception as e:
+        return 1
 
     form_of_template = FORM_OF_TEMPLATE[pos] if pos in FORM_OF_TEMPLATE else pos
 

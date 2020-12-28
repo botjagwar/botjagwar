@@ -34,7 +34,11 @@ class KeyValueStoreAPI(object):
         return cache_value_wrapper
 
     def _get_attribute(self, key):
-        return self.kvstore[key]
+        data = self.kvstore[key]
+        if data is not None:
+            return data
+        else:
+            raise KeyError(key, ' was not found.')
 
     def _has_key(self, key):
         return key in self.kvstore
@@ -42,7 +46,6 @@ class KeyValueStoreAPI(object):
     def get_attribute(self):
         def wrapper(objekt, attribute):
             key = str(self.identifier) + 'attribute/' + str(attribute)
-            print(key, self.kvstore)
             return pickle.loads(self._get_attribute(key))
 
         return wrapper
@@ -91,20 +94,56 @@ class RedisWrapperAPI(KeyValueStoreAPI):
         return d
 
     def __del__(self):
-        if not self.persistent:
-            if hasattr(self, 'attributes'):
-                for key in self.attributes:
-                    self.instance.delete(key)
+        if hasattr(self, 'persistent'):
+            if not self.persistent:
+                if hasattr(self, 'attributes'):
+                    for key in self.attributes:
+                        self.instance.delete(key)
 
-            if hasattr(self, 'instance'):
-                self.instance.close()
+                if hasattr(self, 'instance'):
+                    self.instance.close()
 
     def _set_attribute(self, attribute, value):
         self.attributes.add(attribute)
         return self.instance.set(attribute, value)
 
     def _get_attribute(self, attribute):
-        return self.instance.get(attribute)
+        data = self.instance.get(attribute)
+        if data is not None:
+            return data
+        else:
+            raise KeyError(attribute)
+
+
+class RedisDictionary(RedisWrapperAPI):
+    def __init__(self, **kwargs):
+        RedisWrapperAPI.__init__(self)
+
+    def __delitem__(self, key: str):
+        assert isinstance(key, str)
+        rkey = self.identifier + 'item/' + key
+        self.instance.delete(rkey)
+
+    def __setitem__(self, key: str, value):
+        assert isinstance(key, str)
+        rkey = self.identifier + 'item/' + key
+        self.instance.set(rkey, pickle.dumps(value, 4))
+
+    def __getitem__(self, item: str):
+        assert isinstance(item, str)
+        rkey = self.identifier + 'item/' + item
+        data = self.instance.get(rkey)
+        if data is None:
+            raise KeyError(item)
+
+        return pickle.loads(data)
+
+    def __del__(self):
+        keys = self.instance.keys()
+        print(self.identifier, keys)
+        for k in keys:
+            if self.identifier in str(k):
+                self.instance.delete(k)
 
 
 class KvsPersistentClass(object):
@@ -121,6 +160,13 @@ class RedisPersistentClass(KvsPersistentClass):
     @property
     def kvstore(self):
         return self.kvs.kvstore
+
+    def __getstate__(self):
+        return self.kvs.kvstore
+
+    def __setstate__(self, state: dict):
+        for k, v in state.items():
+            setattr(self, k, v)
 
 
 class RedisPersistentSingleton(RedisPersistentClass):
