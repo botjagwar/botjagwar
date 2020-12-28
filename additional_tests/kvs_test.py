@@ -63,7 +63,7 @@ class TestDictionary(TestCase):
         self.assertNotEqual(d1['1298'], d2['1299'])
 
 
-class TestRedisDictionary(DictionaryTest):
+class TestRedisDictionary(TestDictionary):
     test_class = RedisDictionary
 
 
