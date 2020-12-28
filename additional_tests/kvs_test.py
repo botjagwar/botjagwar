@@ -32,43 +32,40 @@ class Animal(RedisPersistentSingleton):
         print('noise', self.noise)
         print('legs', self.legs)
 
-
-class TestRedisDictionary(TestCase):
+class TestDictionary(TestCase):
+    test_class = dict
     def setUp(self):
         pass
 
-    # @classmethod
-    # def tearDownClass(cls):
-    #     config = BotjagwarConfig()
-    #     host = config.get('host', section='redis')
-    #     password = config.get('password', section='redis')
-    #     instance = redis.Redis(host=host, password=password)
-    #     instance.flushall()
-
     def test_key_insert(self):
-        d = RedisDictionary()
+        d = self.test_class()
         d['1298'] = 100
         d['1299'] = Animal()
         self.assertIsInstance(d['1299'], Animal)
         self.assertIsInstance(d['1298'], int)
 
     def test_key_delete(self):
-        d = RedisDictionary()
+        d = self.test_class()
         d['1298'] = 100
         del d['1298']
         with self.assertRaises(KeyError):
             print(d['1298'])
 
     def test_multiple_object(self):
-        d1 = RedisDictionary()
+        d1 = self.test_class()
         d1['1298'] = 100
         d1['1299'] = [1,2,3,4,5,6]
-        d2 = RedisDictionary()
+        d2 = self.test_class()
         d2['1298'] = 12300
         d2['1299'] = {'asdlk'}
 
         self.assertNotEqual(d1['1298'], d2['1299'])
         self.assertNotEqual(d1['1298'], d2['1299'])
+
+
+class TestRedisDictionary(DictionaryTest):
+    test_class = RedisDictionary
+
 
 class TestPersistentSingleton(TestCase):
     @classmethod
@@ -90,7 +87,6 @@ class TestPersistentSingleton(TestCase):
 
     def tearDown(self):
         pass
-
 
     def test_instantiate_singleton(self):
         an = Animal()
