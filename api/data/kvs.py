@@ -63,7 +63,7 @@ class KeyValueStoreAPI(object):
 
 
 class RedisWrapperAPI(KeyValueStoreAPI):
-    def __init__(self, host='default', password='default', singleton=False, persistent=False):
+    def __init__(self, host='default', password='default', singleton=False, persistent=False, identifier='default'):
         import redis
         config = BotjagwarConfig()
         if host == 'default':
@@ -75,7 +75,10 @@ class RedisWrapperAPI(KeyValueStoreAPI):
         self.persistent = persistent
         self.attributes = set()
         self.instance = redis.Redis(host=host, password=password)
-        self.set_identifier(self.__class__)
+        if identifier == 'default':
+            self.set_identifier(self.__class__)
+        else:
+            self.identifier = identifier + '/'
 
     def set_client_class(self, client_class):
         self.client_class = client_class
@@ -116,6 +119,12 @@ class RedisWrapperAPI(KeyValueStoreAPI):
 
 
 class RedisDictionary(RedisWrapperAPI):
+    @classmethod
+    def from_identifier(cls, identifier):
+        instance = cls()
+        instance.identifier = identifier
+        return instance
+
     def __init__(self, **kwargs):
         RedisWrapperAPI.__init__(self)
 

@@ -32,7 +32,7 @@ class Processor(object):
 
         return title_node, content_node
 
-    def worker(self, xml_buffer: str):
+    def create_missing_entries(self, xml_buffer: str):
         title_node, content_node = self.base_worker(xml_buffer)
 
         assert title_node is not None
@@ -142,18 +142,21 @@ class Processor(object):
         if self.missing_translation_writer is not None:
             self.missing_translation_writer.write()
 
-    def process(self, filename='default'):
+    def process(self, function='default', filename='default'):
+        if function == 'default':
+            function = self.create_missing_entries
+
+        if filename == 'default':
+            filename = 'user_data/%s.xml' % language
+
         def pmap(pool, buffers, lvl=0):
             print(' ' * lvl, 'buffer size is:', len(buffers))
             try:
-                pool.map(self.worker, buffers)
+                pool.map(function, buffers)
             except MaybeEncodingError:
                 if len(buffers) > 2:
                     pmap(pool, buffers[:(len(buffers)-1)//2], lvl+1)
                     pmap(pool, buffers[(len(buffers)-1)//2:], lvl+1)
-
-        if filename == 'default':
-            filename = 'user_data/%s.xml' % language
 
         nthreads = 5
         for xml_buffer in self.load(filename):

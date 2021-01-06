@@ -63,7 +63,7 @@ class WiktionaryDumpImporter():
             for xml_page in _100_page_batch:
                 yield xml_page
 
-    def process(self, xml_page):
+    def import_wiktionary_page(self, xml_page):
         #print("processing page xml")
         node = etree.XML(str(xml_page))
         title_node = node.xpath('//title')[0].text
@@ -82,13 +82,20 @@ class WiktionaryDumpImporter():
 
         self.batch_post()
 
+    def import_wiktionary_page_db(self, xml_page):
+        #print("processing page xml")
+        node = etree.XML(str(xml_page))
+        title_node = node.xpath('//title')[0].text
+        content_node = node.xpath('//revision/text')[0].text
+
+
     def run(self):
         c = 0
         dt = time.time()
         for xml_page in self.load():
             c += 1
             try:
-                self.process(xml_page)
+                self.import_wiktionary_page(xml_page)
             except Exception:
                 continue
             if c >= 1000:

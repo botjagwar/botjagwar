@@ -2,7 +2,7 @@ import requests
 
 from ..servicemanager.pgrest import DynamicBackend
 
-dyn_backend = DynamicBackend()
+backend = DynamicBackend()
 
 
 class AdditionalDataImporterError(Exception):
@@ -27,7 +27,7 @@ class AdditionalDataImporter(object):
     def fetch_default_languages_mapper(self):
         self._languages = {
             l['english_name']: l['iso_code']
-            for l in requests.get(dyn_backend.backend + '/language').json()
+            for l in requests.get(backend.backend + '/language').json()
         }
         self.iso_codes = {
             v: k for k, v in self.languages.items()
@@ -49,7 +49,7 @@ class AdditionalDataImporter(object):
             'word_id': 'eq.' + str(word_id),
             'information': 'eq.' + information,
         }
-        response = requests.get(dyn_backend.backend + '/additional_word_information', params=data)
+        response = requests.get(backend.backend + '/additional_word_information', params=data)
         resp_data = response.json()
         if resp_data:
             if 'word_id' in resp_data[0] \
@@ -81,7 +81,7 @@ class AdditionalDataImporter(object):
                 'word': 'eq.' + title,
                 'language': 'eq.' + language
             }
-            response = requests.get(dyn_backend.backend + '/word', rq_params)
+            response = requests.get(backend.backend + '/word', rq_params)
             query = response.json()
             if 'code' in query:
                 pass
@@ -96,22 +96,25 @@ class AdditionalDataImporter(object):
         assert isinstance(additional_data_filenames, list)
         # print(additional_data_filenames)
         for additional_data in additional_data_filenames:
-            self.write_additional_data(title, language, additional_data)
+            if (title, language) not in self.word_id_cache:
+                raise AdditionalDataImporterError('the word is unknown (no id)')
 
-    def write_additional_data(self, title, language, additional_data):
-        if (title, language) not in self.word_id_cache:
-            raise AdditionalDataImporterError('the word is unknown (no id)')
+            self.write_additional_data(self.word_id_cache[(title, language)], additional_data)
+
+    def write_additional_data(self, word_id, additional_data):
+        print(additional_data)
 
         data = {
             'type': self.data_type,
-            'word_id': self.word_id_cache[(title, language)],
+            'word_id': word_id,
             'information': additional_data,
         }
+        print(data)
         if not self.additional_word_information_already_exists(data['word_id'], additional_data):
             if not self.dry_run:
-                response = requests.post(dyn_backend.backend + '/additional_word_information', data=data)
+                response = requests.post(backend.backend + '/additional_word_information', data=data)
                 if response.status_code != 201:
                     print(response.status_code)
                     print(response.text)
-            # else:
-            # print(data)
+            else:
+                print(data)
