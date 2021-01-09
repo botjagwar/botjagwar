@@ -17,6 +17,7 @@ dist: bionic
 # command to install dependencies
 install:
   - sudo apt-get install libssl-dev wget unzip libsqlite3-dev libxml2-dev libxslt1-dev
+  - sudo apt-get install redis-server
   - python3 --version
   #- sudo ln -s $(which python3) /usr/bin/python3.6
   - sudo python3.6 -m pip install setuptools
@@ -27,6 +28,7 @@ install:
 script:
   - make install
   - cp -r test /opt/botjagwar/test
+  - make prepare_tests
   - sudo python3.6 -m pip install nose
   - PYWIKIBOT2_NO_USER_CONFIG=1 sudo python3.6 -m "nose" -v /opt/botjagwar/test
   - make uninstall
