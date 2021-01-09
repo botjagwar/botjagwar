@@ -8,7 +8,7 @@ from lxml import etree
 from api.data.caching import FastTranslationLookup
 from api.entryprocessor import WiktionaryProcessorFactory
 from api.parsers import templates_parser, TEMPLATE_TO_OBJECT
-from api.storage import EntryPageFileWriter, MissingTranslationFileWriter
+from api.storage import MissingTranslationFileWriter
 from object_model.word import Entry
 
 # from multiprocessing.dummy import Pool as ThreadPool
@@ -23,7 +23,7 @@ class Processor(object):
         self.processor_class = WiktionaryProcessorFactory.create(language)
         self.translation_lookup_table = FastTranslationLookup(language, 'mg')
         self.translation_lookup_table.build_table()
-        self.entry_writer = EntryPageFileWriter(language)
+        self.entry_writer = None #EntryPageFileWriter(language)
 
     def base_worker(self, xml_buffer: str):
         node = etree.XML(xml_buffer)
@@ -137,7 +137,11 @@ class Processor(object):
             yield buffers
 
         if self.entry_writer is not None:
-            self.entry_writer.write()
+            try:
+                self.entry_writer.write()
+            except ValueError as err:
+                log.exception('Could not write state.')
+
 
         if self.missing_translation_writer is not None:
             self.missing_translation_writer.write()

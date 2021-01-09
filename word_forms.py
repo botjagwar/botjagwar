@@ -21,6 +21,7 @@ from api.parsers.inflection_template import ParserError
 from api.servicemanager import LanguageServiceManager
 from object_model.word import Entry
 from page_lister import get_pages_from_category
+from redis_wikicache import RedisSite, RedisPage
 
 SITENAME = 'wiktionary'
 SITELANG = 'mg'
@@ -277,7 +278,8 @@ def perform_function_on_entry(function):
         working_set = set([p for p in en_page_set if p not in mg_page_set])
         total = len(working_set)
         for word_page in working_set:
-            word_page = pywikibot.Page(pywikibot.Site(working_language, 'wiktionary'), word_page)
+            word_page = RedisPage(RedisSite(working_language, 'wiktionary'), word_page, offline=False)
+            # word_page = pywikibot.Page(pywikibot.Site(working_language, 'wiktionary'), word_page)
             pywikibot.output('▒▒▒▒▒▒▒▒▒▒▒▒▒▒ \03{green}%-25s\03{default} ▒▒▒▒▒▒▒▒▒▒▒▒▒▒' % word_page.title())
             counter += 1
             if last_entry > counter:
