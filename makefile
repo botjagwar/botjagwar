@@ -34,12 +34,15 @@ define test_setup
 	cp -r test $(OPT_DIR)
 	cp -r test_data $(OPT_DIR)
 	cp -r test_utils $(OPT_DIR)
+	cp $(OPT_DIR)/conf/config.ini $(OPT_DIR)/conf/config_new.ini
+	cp $(OPT_DIR)/conf/test_config.ini $(OPT_DIR)/conf/config.ini
 endef
 
 define test_teardown
 	rm -rf $(OPT_DIR)/test
 	rm -rf $(OPT_DIR)/test_data
 	rm -rf $(OPT_DIR)/test_utils
+	cp $(OPT_DIR)/conf/config_new.ini $(OPT_DIR)/conf/config.ini
 endef
 
 define copy_crontab
@@ -50,6 +53,7 @@ endef
 prepare_tests: install
 	sudo apt-get install python3-nose python3-rednose
 	sudo $(PIP) install nose
+
 
 unit_tests: prepare_tests
 	$(call test_setup)
