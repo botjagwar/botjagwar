@@ -16,8 +16,8 @@ from api.translation.core import Translation
 from test_utils.mocks import PageMock, SiteMock
 
 #Monkey-patching pywikibot API calls:
-api.translation.core.pwbot.Page = PageMock
-api.translation.core.pwbot.Site = SiteMock
+#api.translation.core.pwbot.Page = PageMock
+#api.translation.core.pwbot.Site = SiteMock
 api.translation.core.LANGUAGE_BLACKLIST = []
 
 LIST = [
