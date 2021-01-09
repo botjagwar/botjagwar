@@ -8,8 +8,6 @@ addons:
     packages:
       - "python3"
       - "python3-pip"
-      - "apt-get"
-      - "install"
       - "libssl-dev"
       - "wget"
       - "unzip"
