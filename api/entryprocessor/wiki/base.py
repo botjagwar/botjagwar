@@ -2,8 +2,6 @@
 import os
 import re
 
-import pywikibot
-
 data_file = os.getcwd() +'/conf/entryprocessor/'
 
 class WiktionaryProcessorException(Exception):
@@ -21,7 +19,7 @@ class WiktionaryProcessor(object):
 
     def process(self, page=None):
         if page is not None:
-            assert isinstance(page, pywikibot.Page), self.Page.__class__
+            # assert isinstance(page, pywikibot.Page), self.Page.__class__
             self.Page = page
             self.title = self.Page.title()
         if not self.text_set:
@@ -29,7 +27,8 @@ class WiktionaryProcessor(object):
                 if page is None:
                     raise WiktionaryProcessorException("Unable to process: No text has been and 'page' is None")
                 self.content = page.get()
-            except Exception:
+            except SyntaxError as e:
+                print(e)
                 self.content = ""
 
     def set_text(self, text):

@@ -135,7 +135,11 @@ class TenyMalagasySiteExtractor(SiteExtractor):
             print('skipping...')
             raise SiteExtractorException
 
-        entry = super(TenyMalagasySiteExtractor, self).lookup(word)
+        try:
+            entry = super(TenyMalagasySiteExtractor, self).lookup(word)
+        except Exception:
+            raise SiteExtractorException(None)
+
         # ---- Our postprocessor below -----
         references_regex = r'([a-zA-Z]+ [0-9]+)'
         entry.part_of_speech = (
@@ -190,7 +194,7 @@ class RakibolanaSiteExtactor(SiteExtractor):
         for char in 'ABDEFGHIJKLMNOPRSTVZ':
             definition = definition.replace(' ' + char, '. ' + char)
 
-        for char in '.;:?,':
+        for char in '.;:?':
             definition = definition.replace(char, '##')
 
         # fix OCR errors as much as possible
@@ -199,7 +203,7 @@ class RakibolanaSiteExtactor(SiteExtractor):
         definition = definition.replace('Y ', 'y ')
 
         definition = definition.replace(char, '##')
-        definition = ''.join(definition.split('##')[:1]).strip()
+        definition = '$$'.join(definition.split('##')).strip()
 
         return definition
 

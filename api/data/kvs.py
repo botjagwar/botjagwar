@@ -32,59 +32,37 @@ class KeyValueStoreAPI(object):
         return cache_value_wrapper
 
     def _get_attribute(self, key):
-        return self.kvstore[key]
+        data = self.kvstore[key]
+        if data is not None:
+            return data
+        else:
+            raise KeyError(key, ' was not found.')
 
     def _has_key(self, key):
         return key in self.kvstore
 
     def get_attribute(self):
-        def get_attribute_wrapper(f):
-            def wrapper(objekt, attribute):
-                key = str(self.identifier) + 'attribute/' + str(attribute)
-                if not self._has_key(key):
-                    raise AttributeError(self.__class__.__name__ + f' has no attribute {attribute}')
-                else:
-                    return pickle.loads(self._get_attribute(key))
+        def wrapper(objekt, attribute):
+            key = str(self.identifier) + 'attribute/' + str(attribute)
+            return pickle.loads(self._get_attribute(key))
 
-            return wrapper
-        return get_attribute_wrapper
+        return wrapper
 
     def _set_attribute(self, attribute, value):
         self.kvstore[attribute] = value
 
     def set_attribute(self):
-        def set_attribute_wrapper(f):
-            def wrapper(objekt, attribute, value):
-                key = str(self.identifier) + 'attribute/' + attribute
-                value = f(objekt, attribute, value)
-                self._set_attribute(key, pickle.dumps(value))
-
-            return wrapper
-        return set_attribute_wrapper
+        def wrapper(objekt, attribute, value):
+            key = str(self.identifier) + 'attribute/' + attribute
+            value = value
+            self._set_attribute(key, pickle.dumps(value))
+            return None
+        return wrapper
 
 
-class RedisWrapperAPI(KeyValueStoreAPI):
-    def __init__(self, host='127.0.0.1', password='qwertyuiop'):
-        import redis
-        self.instance = redis.Redis(host=host, password=password)
-        self.attributes = set()
+class KvsPersistentClass(object):
+    def __setattr__(self, key, value):
+        return self.kvs.set_attribute()(self, key, value)
 
-    @property
-    def kvstore(self):
-        d = {}
-        for att in self.attributes:
-            d[att] = self.instance.get(att)
-        return d
-
-    def __del__(self):
-        for key in self.attributes:
-            self.instance.delete(key)
-
-        self.instance.close()
-
-    def _set_attribute(self, attribute, value):
-        self.attributes.add(attribute)
-        return self.instance.set(attribute, value)
-
-    def _get_attribute(self, attribute):
-        return self.instance.get(attribute)
+    def __getattr__(self, item):
+        return self.kvs.get_attribute()(self, item)

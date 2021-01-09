@@ -85,4 +85,4 @@ class TypeCheckedObject(object):
                 raise AttributeError("Unspecified Attribute '%s' not allowed in '%s' object" % (
                     name, self.__class__.__name__))
             else:
-                self.properties[name] = value
+                setattr(self, name, value)

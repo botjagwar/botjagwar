@@ -1,51 +1,53 @@
 import logging
 import sys
-from multiprocessing.dummy import Pool as ThreadPool
+from multiprocessing.pool import MaybeEncodingError
+from multiprocessing.pool import Pool as ThreadPool
 
 from lxml import etree
 
 from api.data.caching import FastTranslationLookup
 from api.entryprocessor import WiktionaryProcessorFactory
 from api.parsers import templates_parser, TEMPLATE_TO_OBJECT
-from api.storage import EntryPageFileWriter, MissingTranslationFileWriter
+from api.storage import MissingTranslationFileWriter
 from object_model.word import Entry
 
-language = sys.argv[1] if len(sys.argv) >= 2 else 'en'
-target_language = sys.argv[2] if len(sys.argv) >= 3 else 'mg'
-count = 0
+# from multiprocessing.dummy import Pool as ThreadPool
+
 log = logging.getLogger(__name__)
-
-processor_class = WiktionaryProcessorFactory.create(language)
-
-# Lookup table
-translation_lookup_table = FastTranslationLookup(language, 'mg')
-translation_lookup_table.build_table()
 
 
 class Processor(object):
-    def __init__(self):
+    def __init__(self, language):
+        self.count = 0
         self.missing_translation_writer = MissingTranslationFileWriter(language)
-        self.entry_writer = EntryPageFileWriter(language)
+        self.processor_class = WiktionaryProcessorFactory.create(language)
+        self.translation_lookup_table = FastTranslationLookup(language, 'mg')
+        self.translation_lookup_table.build_table()
+        self.entry_writer = None #EntryPageFileWriter(language)
 
-    def worker(self, xml_buffer):
-        global count
-        node = etree.XML(str(xml_buffer))
+    def base_worker(self, xml_buffer: str):
+        node = etree.XML(xml_buffer)
         title_node = node.xpath('//title')[0].text
         content_node = node.xpath('//revision/text')[0].text
+
+        return title_node, content_node
+
+    def create_missing_entries(self, xml_buffer: str):
+        title_node, content_node = self.base_worker(xml_buffer)
 
         assert title_node is not None
         if ':' in title_node:
             return
 
-        processor = processor_class()
+        processor = self.processor_class()
         processor.set_title(title_node)
         processor.set_text(content_node)
         entries = processor.getall()
 
         for entry in entries:
             if entry.language == language:
-                if translation_lookup_table.lookup(entry):
-                    translation = translation_lookup_table.translate(entry)
+                if self.translation_lookup_table.lookup(entry):
+                    translation = self.translation_lookup_table.translate(entry)
                     new_entry = Entry(
                         entry=entry.entry,
                         entry_definition=translation,
@@ -64,7 +66,7 @@ class Processor(object):
                 pos = entry.part_of_speech
                 for definition in entry.entry_definition:
                     try:
-                        translation = translation_lookup_table.translate_word(
+                        translation = self.translation_lookup_table.translate_word(
                             definition, language, entry.part_of_speech)
                     except LookupError:  # Translation couldn't be found in lookup table
                         if entry.part_of_speech in TEMPLATE_TO_OBJECT:
@@ -105,9 +107,11 @@ class Processor(object):
         buffers = []
         nthreads = 4
         x = 0
+        buffered = 0
         with open(filename, 'r') as input_file:
             append = False
             for line in input_file:
+                # line = line.encode('utf8')
                 if '<page>' in line:
                     input_buffer = line
                     append = True
@@ -120,7 +124,11 @@ class Processor(object):
                         buffers = []
                         x = 0
                     else:
+                        buffered += 1
                         x += 1
+                        if not buffered % 1000:
+                            print('buffered:', buffered)
+                            print('buffers size:', len(buffers))
                         buffers.append(input_buffer)
                     input_buffer = None
                     del input_buffer
@@ -128,25 +136,48 @@ class Processor(object):
                     input_buffer += line
             yield buffers
 
-        self.entry_writer.write()
-        self.missing_translation_writer.write()
+        if self.entry_writer is not None:
+            try:
+                self.entry_writer.write()
+            except ValueError as err:
+                log.exception('Could not write state.')
 
-    def process(self):
-        nthreads = 4
-        filename = 'user_data/%s.xml' % language
+
+        if self.missing_translation_writer is not None:
+            self.missing_translation_writer.write()
+
+    def process(self, function='default', filename='default'):
+        if function == 'default':
+            function = self.create_missing_entries
+
+        if filename == 'default':
+            filename = 'user_data/%s.xml' % language
+
+        def pmap(pool, buffers, lvl=0):
+            print(' ' * lvl, 'buffer size is:', len(buffers))
+            try:
+                pool.map(function, buffers)
+            except MaybeEncodingError:
+                if len(buffers) > 2:
+                    pmap(pool, buffers[:(len(buffers)-1)//2], lvl+1)
+                    pmap(pool, buffers[(len(buffers)-1)//2:], lvl+1)
+
+        nthreads = 5
         for xml_buffer in self.load(filename):
             buffers = xml_buffer
             pool = ThreadPool(nthreads)
-            pool.map(self.worker, buffers)
+            pmap(pool, buffers)
             pool.close()
             pool.join()
             del buffers
 
-        self.missing_translation_writer.write()
+        if self.missing_translation_writer is not None:
+            self.missing_translation_writer.write()
 
 
 if __name__ == '__main__':
-    p = Processor()
+    language = sys.argv[1] if len(sys.argv) >= 2 else 'en'
+    p = Processor(language)
     try:
         p.process()
     finally:
