@@ -25,6 +25,7 @@ prepare:
 	    python3-pip \
 	    python3-pip \
 	    libsqlite3-dev \
+	    redis-server \
 	    libxml2-dev \
 	    libxslt1-dev
 	LC_ALL="en_US.UTF-8" sudo $(PIP) install -r requirements.txt
