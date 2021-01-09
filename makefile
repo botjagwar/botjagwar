@@ -25,6 +25,7 @@ prepare:
 	    python3-pip \
 	    python3-pip \
 	    libsqlite3-dev \
+	    redis-server \
 	    libxml2-dev \
 	    libxslt1-dev
 	LC_ALL="en_US.UTF-8" sudo $(PIP) install -r requirements.txt
@@ -56,6 +57,12 @@ unit_tests: prepare_tests
 	$(call test_teardown)
 
 .PHONY: unit_tests
+
+additional_tests: prepare_tests
+	$(call test_setup)
+	$(PYTHON) -m "nose" -v additional_tests
+
+.PHONY: additional_tests
 
 test: prepare_tests
 	$(call test_setup)

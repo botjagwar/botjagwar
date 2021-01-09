@@ -66,33 +66,129 @@ class CHRWikiPageRenderer(PageRenderer):
 
 
 class MGWikiPageRenderer(PageRenderer):
+
+    def link_if_exists(self, definition_words: list) -> list:
+        ret = []
+        if hasattr(self, 'pages_to_link'):
+            assert isinstance(self.pages_to_link, set)
+            for word in definition_words:
+                if word in self.pages_to_link:
+                    ret.append('[[' + word + ']]')
+                else:
+                    ret.append(word)
+            return ret
+        else:
+            return definition_words
+
     def render(self, info: Entry, link=True) -> str:
         additional_note = ""
-        data = info.to_dict()
-        if 'origin_wiktionary_page_name' in data and 'origin_wiktionary_edition' in data:
-            additional_note = " {{dikantenin'ny dikanteny|%(origin_wiktionary_page_name)s|%(origin_wiktionary_edition)s}}\n" % data
 
-        s = """
-=={{=%(language)s=}}==
-{{-%(part_of_speech)s-|%(language)s}}
-'''{{subst:BASEPAGENAME}}''' {{fanononana X-SAMPA||%(language)s}} {{fanononana||%(language)s}}""" % data
+        if (hasattr(info, 'origin_wiktionary_page_name') and hasattr(info, 'origin_wiktionary_edition')):
+            additional_note = " {{dikantenin'ny dikanteny|" + f"{info.origin_wiktionary_page_name}" \
+                                                              f"|{info.origin_wiktionary_edition}" + "}}\n"
+
+        # Language
+        s = "=={{=" + f"{info.language}" + "=}}==\n"
+
+        # Etymology
+        if hasattr(info, 'etymology'):
+            etymology = getattr(info, 'etymology')
+            if etymology:
+                s += '\n{{-etim-}}\n'
+                s += ':' + etymology
+            else:
+                s += '\n{{-etim-}}\n'
+                s += f': {{vang-etim|' + f'{info.language}' + '}}\n'
+        # else:
+        #     s += '\n{{-etim-}}\n'
+        #     s += ': {{vang-etim|' + f'{info.language}' + '}}\n'
+
+        # Part of speech
+        s += "\n{{-" + f'{info.part_of_speech}-|{info.language}' + "}}\n"
+
+        # Pronunciation
+        s += "'''{{subst:BASEPAGENAME}}''' "
+        # if hasattr(info, 'pronunciation'):
+        #     s += "{{fanononana|" + f'{info.pronunciation}' + "|" + f'{info.language}' + "}}"
+        # else:
+        #     s += "{{fanononana||" + f'{info.language}' + "}}"
+
+        # Definition
+        definitions = []
+        defn_list = list(set(info.entry_definition))
+        defn_list.sort()
         if link:
-            definition = []
-            for d in info.entry_definition:
-                if '[[' in d or ']]' in d:
-                    definition.append(d)
+            for d in defn_list:
+                if len(d.split()) == 1:
+                    definitions.append(f'[[{d}]]')
+                elif '[[' in d or ']]' in d:
+                    definitions.append(d)
                 else:
-                    definition.append('[[%s]]' % d)
+                    multiword_definitions = self.link_if_exists(d.split())
+                    definitions.append(' '.join(multiword_definitions))
         else:
-            definition = ['%s' % (d) for d in info.entry_definition]
+            definitions = [f'{d}' for d in defn_list]
 
-        s += "\n# %s" % ', '.join(definition)
+        for idx, defn in enumerate(definitions):
+            s += "\n# " + defn
+            s += additional_note % info.properties
+            ## Examples:
+            if hasattr(info, 'examples'):
+                if len(info.examples) > idx:
+                    if isinstance(info.examples, list):
+                        if len(info.examples[idx]) > 0:
+                            for example in info.examples[idx]:
+                                s += "\n#* ''" + example + "''"
+                    elif isinstance(info.examples, str):
+                        s += "\n#* ''" + info.examples[idx] + "''"
 
-        s = s + additional_note % info.properties
-        try:
-            return s
-        except UnicodeDecodeError:
-            return s.decode('utf8')
+        # Audio
+        if hasattr(info, 'audio_pronunciations') or \
+            hasattr(info, 'ipa'):
+            s += '\n\n{{-fanononana-}}'
+
+            if hasattr(info, 'audio_pronunciations'):
+                for audio in info.audio_pronunciations:
+                    s += "\n* " + '{{audio|' + f'{audio}' + '|' + f'{info.entry}' + '}}'
+
+            if hasattr(info, 'ipa'):
+                for ipa in info.ipa:
+                    s += "\n* " + '{{fanononana|' + f'{ipa}' + '|' + f'{info.language}' + '}}'
+
+        # Synonyms
+        if hasattr(info, 'synonyms'):
+            s += '\n\n{{-dika-mitovy-}}'
+            for synonym in info.synonyms:
+                s += "\n* [[" + synonym + ']]'
+
+        # Antonyms
+        if hasattr(info, 'antonyms'):
+            s += '\n\n{{-dika-mifanohitra-}}'
+            for antonym in info.antonyms:
+                s += "\n* [[" + antonym + ']]'
+
+        # Related/derived terms
+        if hasattr(info, 'related_terms') or \
+            hasattr(info, 'derived_terms'):
+            s += '\n\n{{-teny mifandraika-}}'
+
+            if hasattr(info, 'related_terms'):
+                for d in info.related_terms:
+                    s += f"\n* [[{d}]]"
+            if hasattr(info, 'derived_terms'):
+                for d in info.derived_terms:
+                    s += f"\n* [[{d}]]"
+
+        # References
+        if hasattr(info, 'references'):
+            s += '\n\n{{-tsiahy-}}'
+            for ref in info.references:
+                if ref.startswith('*'):
+                    s += '\n' + ref
+                else:
+                    s += "\n* " + ref
+
+        return s
 
 
 class WikiPageRendererFactory(object):

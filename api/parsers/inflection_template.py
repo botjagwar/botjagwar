@@ -50,7 +50,7 @@ class VerbForm(NonLemma):
         if not explanation.strip():
             explanation = 'endriky'
 
-        ret = '%s ny matoanteny [[%s]]' % (explanation, self.lemma)
+        ret = explanation + 'ny matoanteny [[%s]]' % (self.lemma)
         return ret
 
 
@@ -85,7 +85,7 @@ class NounForm(NonLemma):
         if not explanation.strip():
             explanation = 'endriky'
 
-        ret = '%s ny teny [[%s]]' % (explanation, self.lemma)
+        ret = explanation + 'ny teny [[%s]]' % (self.lemma)
         return ret
 
 
