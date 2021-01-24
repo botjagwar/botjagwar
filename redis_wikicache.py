@@ -9,8 +9,6 @@ class NoPage(Exception):
 
 
 class RedisSite(object):
-
-
     def __init__(self, language: str, wiki: str, host='127.0.0.1', port=6379, password=None):
         self.language = language
         self.wiki = wiki
@@ -27,7 +25,7 @@ class RedisSite(object):
             except redis.ConnectionError as error:
                 print(error)
             except Exception as error:
-                print('Uknown error ', error)
+                print('Unknown error ', error)
 
     def push_page(self, title: str, content: str):
         if title is not None and content is not None:
@@ -69,22 +67,38 @@ class RedisPage(object):
             cache_contents = str(cache_contents, encoding='utf8')
             return cache_contents
 
-
     def exists(self):
-        return True
+        cache_contents = self.site.instance.get(f'{self.site.wiki}.{self.site.language}/{self._title}')
+        if not cache_contents:
+            if self.offline:
+                return False
+            else:
+                wikisite = pywikibot.Site(self.site.language, self.site.wiki)
+                wikipage = pywikibot.Page(wikisite, self._title)
+                return wikipage.exists()
+        else:
+            return True
+
+    def __getattr__(self, item):
+        if hasattr(self, item):
+            return getattr(self, item)
+        else:
+            wikisite = pywikibot.Site(self.site.language, self.site.wiki)
+            wikipage = pywikibot.Page(wikisite, self._title)
+            return getattr(wikipage, item)
 
 
 if __name__ == '__main__':
     site = RedisSite('en', 'wiktionary')
-    #site.load_xml_dump('user_data/dumps/enwikt_1.xml')
-    #site.load_xml_dump('user_data/dumps/enwikt_2.xml')
-    #site.load_xml_dump('user_data/dumps/enwikt_3.xml')
-    site.load_xml_dump('user_data/dumps/enwikt_4.xml')
-    site.load_xml_dump('user_data/dumps/enwikt_5.xml')
-    site.load_xml_dump('user_data/dumps/enwikt_6.xml')
-    site.load_xml_dump('user_data/dumps/enwikt_7.xml')
-    site.load_xml_dump('user_data/dumps/enwikt_8.xml')
-    site.load_xml_dump('user_data/dumps/enwikt_9.xml')
-    site.load_xml_dump('user_data/dumps/enwikt_10.xml')
-    site.load_xml_dump('user_data/dumps/enwikt_11.xml')
-    site.load_xml_dump('user_data/dumps/enwikt_12.xml')
+    # site.load_xml_dump('user_data/dumps/enwikt_1.xml')
+    # site.load_xml_dump('user_data/dumps/enwikt_2.xml')
+    # site.load_xml_dump('user_data/dumps/enwikt_3.xml')
+    # site.load_xml_dump('user_data/dumps/enwikt_4.xml')
+    # site.load_xml_dump('user_data/dumps/enwikt_5.xml')
+    # site.load_xml_dump('user_data/dumps/enwikt_6.xml')
+    # site.load_xml_dump('user_data/dumps/enwikt_7.xml')
+    # site.load_xml_dump('user_data/dumps/enwikt_8.xml')
+    # site.load_xml_dump('user_data/dumps/enwikt_9.xml')
+    # site.load_xml_dump('user_data/dumps/enwikt_10.xml')
+    # site.load_xml_dump('user_data/dumps/enwikt_11.xml')
+    # site.load_xml_dump('user_data/dumps/enwikt_12.xml')

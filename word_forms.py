@@ -28,9 +28,9 @@ SITELANG = 'mg'
 last_entry = 0
 
 if __name__ == '__main__':
-    language_code = sys.argv[1]
-    category_name = sys.argv[2]
-    template = sys.argv[3] if len(sys.argv) >= 4 else 'e-ana'
+    param_language_code = sys.argv[1]
+    param_category_name = sys.argv[2]
+    param_template = sys.argv[3] if len(sys.argv) >= 4 else 'e-ana'
 
 
 TEMPLATE_TO_MG_CATEGORY = {
@@ -42,9 +42,12 @@ TEMPLATE_TO_MG_CATEGORY = {
 PAGE_SET = set()
 
 
-def get_count():
+def get_count(lang_code_local=None):
+    if lang_code_local is None:
+        global language_code
+        lang_code_local = language_code
     try:
-        with open('user_data/%s-counter' % language_code, 'r') as f:
+        with open('user_data/%s-counter' % lang_code_local, 'r') as f:
             counter = int(f.read())
             return counter
     except IOError:
@@ -61,12 +64,18 @@ def get_malagasy_language_name(language_code):
         return mg_name_request.json()['malagasy_name']
 
 
-def get_malagasy_page_set():
+def get_malagasy_page_set(template=None):
+    if template is None:
+        template = param_template
+
     mg_category_name = TEMPLATE_TO_MG_CATEGORY[template] + " amin'ny teny " + get_malagasy_language_name(language_code)
     return set([p.title() for p in get_pages_from_category(SITELANG, mg_category_name)])
 
 
-def get_english_page_set():
+def get_english_page_set(category_name=None):
+    if category_name is None:
+        category_name = param_category_name
+
     return set([p.title() for p in get_pages_from_category('en', category_name)])
 
 
@@ -216,7 +225,10 @@ def import_additional_data(entry: Entry) -> int:
     malagasy_definition = elements.to_malagasy_definition()
     lemma = elements.lemma
 
-    def get_word_id_query():
+    def get_word_id_query(template=None):
+        if template is None:
+            template = param_template
+
         rq_params = {
             'word': 'eq.' + entry.entry,
             'language': 'eq.' + entry.language,
@@ -226,7 +238,10 @@ def import_additional_data(entry: Entry) -> int:
         response = requests.get(db_backend.backend + '/word', rq_params)
         return response.json()
 
-    def post_new_word():
+    def post_new_word(template=None):
+        if template is None:
+            template = param_template
+
         rq_params = {
             'word': entry.entry,
             'language': entry.language,
@@ -259,12 +274,9 @@ def import_additional_data(entry: Entry) -> int:
     return 0
 
 
-def perform_function_on_entry(function):
+def perform_function_on_entry(function, language=None, category_name=None):
     def process():
-        global language_code
-        global category_name
-        global last_entry
-        last_entry = get_count()
+        last_entry = get_count(language)
         working_language = 'en'
 
         # Initialise processor class
@@ -274,7 +286,7 @@ def perform_function_on_entry(function):
         # Get list of articles from category
         counter = 0
         mg_page_set = {}  # get_malagasy_page_set()
-        en_page_set = get_english_page_set()
+        en_page_set = get_english_page_set(category_name)
         working_set = set([p for p in en_page_set if p not in mg_page_set])
         total = len(working_set)
         for word_page in working_set:
@@ -309,7 +321,7 @@ def import_nonlemma_in_additional_data():
 if __name__ == '__main__':
     try:
         #get_malagasy_page_list()
-        #parse_word_forms()
-        import_nonlemma_in_additional_data()
+        parse_word_forms()
+        #import_nonlemma_in_additional_data()
     finally:
         save_count()
