@@ -1,10 +1,11 @@
+import csv
 import random
 import time
 
 import pywikibot
 import requests
 
-from api.importer import dyn_backend
+from api.importer.wiktionary import dyn_backend
 from api.output import WikiPageRendererFactory, Output
 from object_model.word import Entry
 
@@ -86,7 +87,41 @@ class NinjaEntryCreator(object):
                     ret.append(dic['data'])
             return ret
 
-    def run(self, language=None):
+    def run_from_csv(self, csv_path, language='la'):
+        with open(csv_path, 'r') as csv_file:
+            reader = csv.reader(csv_file, delimiter=';')
+            for row in reader:
+                title, pos, en_defn, mg_defn = row[:4]
+                if not mg_defn.strip():
+                    continue
+
+                pos = pos.strip()
+                mg_defn = mg_defn[0].upper() + mg_defn[1:].lower()
+
+                print('>>>>> ' + title + ' <<<<<')
+
+                try:
+                    entry_data = {
+                        'entry': title,
+                        'language': language,
+                        'part_of_speech': pos,
+                        'entry_definition': [mg_defn],
+                    }
+
+                    entry = Entry(**{**entry_data})
+                    wiki_string = self.renderer.render(entry)
+                    summary_if_new = wiki_string.replace('\n', ' ')
+                    summary_if_already_exists = '/* {{=' + language + '=}} */'
+
+                    summary_if_new = "Pejy voaforona amin'ny « " + summary_if_new + ' »'
+                    print(entry)
+                    self.publisher.publish(entry, title, wiki_string, summary_if_already_exists, summary_if_new)
+                except SkippedWord:
+                    continue
+                else:
+                    self.output.db(entry)
+
+    def run_from_database(self, language=None):
         params = {
             #'limit': 1000,
             # 'offset': 1100,
@@ -224,4 +259,4 @@ if __name__ == '__main__':
     # if len(sys.argv) > 1:
     #     entry_creator.run(sys.argv[1])
     # else:
-    entry_creator.run()
+    entry_creator.run_from_csv("user_data/cache_extractor/la_Latin nouns.csv")
