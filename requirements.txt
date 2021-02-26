@@ -1,4 +1,4 @@
-aiohttp == 3.3.2
+aiohttp == 3.7.4
 flask == 1.0.2
 irc == 3.6.1
 lxml == 4.6.2
