@@ -76,9 +76,9 @@ class RedisPage(object):
 
 if __name__ == '__main__':
     site = RedisSite('en', 'wiktionary')
-    #site.load_xml_dump('user_data/dumps/enwikt_1.xml')
-    #site.load_xml_dump('user_data/dumps/enwikt_2.xml')
-    #site.load_xml_dump('user_data/dumps/enwikt_3.xml')
+    site.load_xml_dump('user_data/dumps/enwikt_1.xml')
+    site.load_xml_dump('user_data/dumps/enwikt_2.xml')
+    site.load_xml_dump('user_data/dumps/enwikt_3.xml')
     site.load_xml_dump('user_data/dumps/enwikt_4.xml')
     site.load_xml_dump('user_data/dumps/enwikt_5.xml')
     site.load_xml_dump('user_data/dumps/enwikt_6.xml')

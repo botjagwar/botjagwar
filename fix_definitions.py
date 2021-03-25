@@ -18,7 +18,7 @@ def fetch_mg_words():
 
 def fetch_en_words():
     cur = conn.cursor()
-    cur.execute("select word from word where language='en';")
+    cur.execute("select word from word where language='fr';")
     return set([i[0] for i in cur.fetchall()])
 
 
@@ -56,7 +56,7 @@ def main():
 
     for rate, defn in definitions_to_change:
         print(rate)
-        change_definition_language(defn, 'en')
+        change_definition_language(defn, 'fr')
 
     print(len(definitions_to_change), 'definitions to change')
 
