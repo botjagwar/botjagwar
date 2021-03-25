@@ -120,7 +120,7 @@ class MGWikiPageRenderer(PageRenderer):
         if link:
             for d in defn_list:
                 if len(d.split()) == 1:
-                    definitions.append(f'[[{d.lower()}|{d}]]')
+                    definitions.append(f'[[{d}]]')
                 elif '[[' in d or ']]' in d:
                     definitions.append(d)
                 else:

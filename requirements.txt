@@ -3,6 +3,7 @@ flask == 1.0.2
 irc == 3.6.1
 lxml == 4.2.1
 parameterized
+psycopg2 == 2.8.4
 pywikibot >= 3.0
 requests == 2.20.0
 requests-oauthlib == 0.8.0

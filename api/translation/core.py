@@ -4,7 +4,6 @@ import logging
 
 import requests
 from aiohttp import ClientSession
-import pywikibot as pwbot
 
 from api import entryprocessor
 from api.exceptions import NoWordException
@@ -12,7 +11,6 @@ from api.output import Output
 from api.servicemanager import DictionaryServiceManager
 from database.exceptions.http import WordDoesNotExistException
 from object_model.word import Entry
-from word_forms import create_non_lemma_entry
 
 log = logging.getLogger(__name__)
 default_data_file = '/opt/botjagwar/conf/entry_translator/'
@@ -200,7 +198,6 @@ class Translation:
 
             # Attempt a translation of a possible non-lemma entry.
             # Part of the effort to integrate word_forms.py in the IRC bot.
-            ret += create_non_lemma_entry(entry)
 
             if entry.language == language:  # if entry in the content language
                 for info in self.process_entry_in_native_language(
@@ -288,11 +285,6 @@ class Translation:
         for entry in entries:
             if entry.entry is None or entry.entry_definition is None:
                 continue
-
-
-            # Attempt a translation of a possible non-lemma entry.
-            # Part of the effort to integrate word_forms.py in the IRC bot.
-            create_non_lemma_entry(entry)
 
             if entry.language == language:  # if entry in the content language
                 pass

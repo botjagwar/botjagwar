@@ -225,10 +225,7 @@ def import_additional_data(entry: Entry) -> int:
     malagasy_definition = elements.to_malagasy_definition()
     lemma = elements.lemma
 
-    def get_word_id_query(template=None):
-        if template is None:
-            template = param_template
-
+    def get_word_id_query():
         rq_params = {
             'word': 'eq.' + entry.entry,
             'language': 'eq.' + entry.language,
@@ -238,10 +235,7 @@ def import_additional_data(entry: Entry) -> int:
         response = requests.get(db_backend.backend + '/word', rq_params)
         return response.json()
 
-    def post_new_word(template=None):
-        if template is None:
-            template = param_template
-
+    def post_new_word():
         rq_params = {
             'word': entry.entry,
             'language': entry.language,
@@ -274,9 +268,12 @@ def import_additional_data(entry: Entry) -> int:
     return 0
 
 
-def perform_function_on_entry(function, language=None, category_name=None):
+def perform_function_on_entry(function):
     def process():
-        last_entry = get_count(language)
+        global language_code
+        global category_name
+        global last_entry
+        last_entry = get_count()
         working_language = 'en'
 
         # Initialise processor class
