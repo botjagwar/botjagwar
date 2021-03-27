@@ -16,11 +16,28 @@ class ENWiktionaryProcessor(WiktionaryProcessor):
         self.postran = {
             'Verb': 'mat',
             'Adjective': 'mpam',
+            'Conjunction': 'mpampitohy',
+            'Determiner': 'mpam',
+            'Idiom': 'fomba fiteny',
+            'Phrase': 'fomba fiteny',
+            'Proverb': 'ohabolana',
+            'Number': 'isa',
             'Noun': 'ana',
+            'Adjectival noun': 'mpam',
+            'Particle': 'kianteny',
             'Adverb': 'tamb',
+            'Root': 'fototeny',
+            'Numeral': 'isa',
             'Pronoun': 'solo-ana',
+            'Preposition': 'mp.ank-teny',
+            'Contraction': 'fanafohezana',
+            'Letter': 'litera',
+            'Proper noun': 'ana-pr',
             'Prefix': 'tovona',
+            'Romanization': 'rômanizasiona',
             'Suffix': 'tovana',
+            'Symbol': 'eva',
+            'Participle': 'ova-mat',
             'Interjection': 'tenim-piontanana',
             'Infix': 'tsofoka',
         }
@@ -39,25 +56,34 @@ class ENWiktionaryProcessor(WiktionaryProcessor):
     def lang2code(self, l):
         return self.code[l]
 
+    def fetch_additional_data(self):
 
-    def getall(self, keepNativeEntries=False):
+
+    def getall(self, keepNativeEntries=False, additional_data=False):
         content = self.content
         entries = []
         content = re.sub("{{l/en\|(.*)}}", "\\1 ", content)  # remove {{l/en}}
         for l in re.findall("[\n]?==[ ]?([A-Za-z]+)[ ]?==\n", content):
-            last_language_code = self.lang2code(l)
+            pos_level = 3
+            try:
+                last_language_code = self.lang2code(l)
+            except KeyError:
+                continue
+
             last_part_of_speech = None
             definitions = {}
             content = content[content.find('==%s==' % l):]
             lines = content.split('\n')
             for line in lines:
                 for en_pos, mg_pos in self.postran.items():
-                    if '===' + en_pos in line:
+                    if re.match('=' * pos_level + '[ ]?' + en_pos + '[ ]?' + '=' * pos_level, line) is not None:
                         last_part_of_speech = mg_pos
 
                 if line.startswith('# '):
                     defn_line = line
                     defn_line = defn_line.lstrip('# ')
+                    if last_part_of_speech is None:
+                        continue
                     if last_part_of_speech in definitions:
                         definitions[last_part_of_speech].append(defn_line)
                     else:
