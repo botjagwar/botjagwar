@@ -17,6 +17,10 @@ class RedisSite(object):
         self.port = port
         self.instance = redis.Redis(self.host, self.port, password)
 
+    def random_page(self):
+        page_name = str(self.instance.randomkey(), encoding='utf8').replace(f'{self.wiki}.{self.language}/','')
+        return RedisPage(self, page_name)
+
     @separate_process
     def load_xml_dump(self, dump='user_data/dumps/enwikt.xml'):
         importer = EnWiktionaryDumpImporter(dump)
@@ -45,6 +49,9 @@ class RedisPage(object):
 
     def title(self, *args):
         return self._title
+
+    def __repr__(self):
+        return f'Page({self.site}/{self.title()})'
 
     def get(self):
         if self._title is None:
@@ -91,6 +98,12 @@ class RedisPage(object):
 
 
 if __name__ == '__main__':
+    print("""
+    Download the en.wiktionary page dumps,
+    split it into several chunks (e.g. using split) and run this script.
+    All en.wiktionary pages will have their latest version uploaded in your Redis.
+    Using RedisSite and RedisPage, you'll have a much faster read and offline access.
+    """)
     site = RedisSite('en', 'wiktionary')
     site.load_xml_dump('user_data/dumps/enwikt_1.xml')
     site.load_xml_dump('user_data/dumps/enwikt_2.xml')
