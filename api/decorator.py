@@ -1,4 +1,5 @@
 import datetime
+import multiprocessing
 import threading
 import time
 
@@ -70,14 +71,22 @@ def singleton(class_):
 
 
 def threaded(f):
+    def wrap(*args, **kwargs):
+        t = threading.Thread(target=f, args=args, kwargs=kwargs)
+        t.daemon = False
+        t.run()
+
+    return wrap
+
+
+def separate_process(f):
     """
     Function runs in a separate, daemon thread
     :param f:
     :return:
     """
     def wrap(*args, **kwargs):
-        t = threading.Thread(target=f, args=args, kwargs=kwargs)
-        t.daemon = False
+        t = multiprocessing.Process(target=f, args=args, kwargs=kwargs)
         t.start()
 
     return wrap

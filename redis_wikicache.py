@@ -1,6 +1,7 @@
 import pywikibot
 import redis
 
+from api.decorator import separate_process
 from import_wiktionary import EnWiktionaryDumpImporter
 
 
@@ -18,6 +19,7 @@ class RedisSite(object):
         self.port = port
         self.instance = redis.Redis(self.host, self.port, password)
 
+    @separate_process
     def load_xml_dump(self, dump='user_data/dumps/enwikt.xml'):
         importer = EnWiktionaryDumpImporter(dump)
         for xml_page in importer.load():
@@ -87,4 +89,8 @@ if __name__ == '__main__':
     site.load_xml_dump('user_data/dumps/enwikt_9.xml')
     site.load_xml_dump('user_data/dumps/enwikt_10.xml')
     site.load_xml_dump('user_data/dumps/enwikt_11.xml')
-    site.load_xml_dump('user_data/dumps/enwikt_12.xml')
+    site.load_xml_dump('user_data/dumps/enwikt_13.xml')
+    site.load_xml_dump('user_data/dumps/enwikt_14.xml')
+    site.load_xml_dump('user_data/dumps/enwikt_15.xml')
+    site.load_xml_dump('user_data/dumps/enwikt_16.xml')
+    site.load_xml_dump('user_data/dumps/enwikt_17.xml')
