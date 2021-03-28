@@ -10,12 +10,17 @@ from api.importer.wiktionary.en import \
     SynonymImporter, \
     EtymologyImporter, \
     AntonymImporter
+from api.parsers import TEMPLATE_TO_OBJECT
+from api.parsers import templates_parser
+from api.parsers.inflection_template import ParserNotFoundError
 from conf.entryprocessor.languagecodes import LANGUAGE_NAMES
 from object_model.word import Entry
 from .base import WiktionaryProcessor
 
 
 class ENWiktionaryProcessor(WiktionaryProcessor):
+    processor_language = 'en'
+
     def __init__(self, test=False, verbose=False):
         super(ENWiktionaryProcessor, self).__init__(test=test, verbose=verbose)
         self.verbose = True
@@ -82,11 +87,36 @@ class ENWiktionaryProcessor(WiktionaryProcessor):
 
         return additional_data
 
-    def getall(self, keepNativeEntries=False, fetch_additional_data=False):
+    def extract_definition(self, part_of_speech, definition_line, translate_definitions_to_malagasy=False):
+        new_definition_line = definition_line
+
+        # Clean up non-needed template to improve readability.
+        # In case these templates are needed, integrate your code above this part.
+        for regex, replacement in self.regexesrep:
+            new_definition_line = re.sub(regex, replacement, new_definition_line)
+
+        # Form-of definitions: they use templates that can be parsed using api.parsers module
+        #   which is tentatively being integrated here to provide human-readable output for
+        #   either English or Malagasy
+        if new_definition_line == '':
+            try:
+                elements = templates_parser.get_elements(TEMPLATE_TO_OBJECT[part_of_speech], definition_line)
+                if translate_definitions_to_malagasy:
+                    new_definition_line = elements.to_definition('mg')
+                else:
+                    new_definition_line = elements.to_definition(self.processor_language)
+            except ParserNotFoundError:
+                new_definition_line = definition_line
+
+        # print(definition_line, new_definition_line)
+        return new_definition_line
+
+    def getall(self, keepNativeEntries=False, fetch_additional_data=False, translate_definitions_to_malagasy=False):
         content = self.content
         entries = []
         content = re.sub("{{l/en\|(.*)}}", "\\1 ", content)  # remove {{l/en}}
         for l in re.findall("[\n]?==[ ]?([A-Za-z]+)[ ]?==\n", content):
+            ct_content = content
             pos_level = 3
             try:
                 last_language_code = self.lang2code(l)
@@ -95,8 +125,14 @@ class ENWiktionaryProcessor(WiktionaryProcessor):
 
             last_part_of_speech = None
             definitions = {}
-            content = content[content.find('==%s==' % l):]
-            lines = content.split('\n')
+            section_init = ct_content.find('==%s==' % l)
+            section_end = ct_content.find('----', section_init)
+            if section_end != -1:
+                ct_content = ct_content[section_init:section_end]
+            else:
+                ct_content = ct_content[section_init:]
+
+            lines = ct_content.split('\n')
             for line in lines:
                 for en_pos, mg_pos in self.postran.items():
                     if re.match('=' * pos_level + '[ ]?' + en_pos + '[ ]?' + '=' * pos_level, line) is not None:
@@ -107,13 +143,18 @@ class ENWiktionaryProcessor(WiktionaryProcessor):
                     defn_line = defn_line.lstrip('# ')
                     if last_part_of_speech is None:
                         continue
+                    definition = self.extract_definition(
+                        last_part_of_speech,
+                        defn_line,
+                        translate_definitions_to_malagasy
+                    )
                     if last_part_of_speech in definitions:
-                        definitions[last_part_of_speech].append(defn_line)
+                        definitions[last_part_of_speech].append(definition)
                     else:
-                        definitions[last_part_of_speech] = [defn_line]
+                        definitions[last_part_of_speech] = [definition]
 
             if fetch_additional_data:
-                additional_data = self.fetch_additional_data(content, last_language_code)
+                additional_data = self.fetch_additional_data(ct_content, last_language_code)
             else:
                 additional_data = None
 
@@ -126,7 +167,8 @@ class ENWiktionaryProcessor(WiktionaryProcessor):
                 )
                 if additional_data is not None and fetch_additional_data:
                     for data_type, data in additional_data.items():
-                        entry.add_attribute(data_type, data)
+                        if data:
+                            entry.add_attribute(data_type, data)
 
                 entries.append(entry)
 

@@ -26,8 +26,10 @@ from .inflection_template import EnWiktionaryInflectionTemplateParser
 
 TEMPLATE_TO_OBJECT = {
     'e-ana': NounForm,
+    'ana-pr': NounForm,
     'e-mpam-ana': AdjectiveForm,
     'e-mat': VerbForm,
+    'ova-mat': VerbForm,
     'ana': NounForm,
     'mpam-ana': AdjectiveForm,
     'mpam': AdjectiveForm,

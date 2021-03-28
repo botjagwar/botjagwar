@@ -1,19 +1,33 @@
 # coding: utf8
-from api.parsers.constants import GENDER, CASES, NUMBER, MOOD, TENSE, PERSONS, VOICE, DEFINITENESS, POSSESSIVENESS
+from api.parsers import renderers
 
 
 class NonLemma(object):
+    renderer = 'noun_form'
+
     def __init__(self, lemma=None, case=None, number=None, gender=None):
         self.gender = gender
         self.case = case
         self.lemma = lemma
         self.number = number
 
+    def to_definition(self, language):
+        if hasattr(renderers, language):
+            renderer_module = getattr(renderers, language)
+            if hasattr(renderer_module, 'render_' + self.renderer):
+                return getattr(renderer_module, 'render_' + self.renderer)(self)
+            else:
+                raise AttributeError(f'Renderer function api.parsers.renderers.{language}.{self.renderer} not found!')
+        else:
+            raise AttributeError(f'Module api.parsers.renderers.{language} not found!')
+
+
     def to_malagasy_definition(self):
         raise NotImplementedError()
 
 
 class VerbForm(NonLemma):
+    renderer = 'verb_form'
     tense = None
     mood = None
     person = None
@@ -27,34 +41,11 @@ class VerbForm(NonLemma):
         self.person = person
 
     def to_malagasy_definition(self):
-        """
-        :return: A malagasy language definition in unicode
-        """
-        explanation = ''
-        if self.person in PERSONS:
-            explanation += PERSONS[self.person] + ' '
-        if self.number in NUMBER:
-            explanation += NUMBER[self.number] + ' '
-
-        explanation += 'ny ' if len(explanation.strip()) != 0 else ''
-        if self.mood in MOOD:
-            explanation += MOOD[self.mood] + ' '
-
-        if self.tense in TENSE:
-            explanation += TENSE[self.tense] + ' '
-
-        explanation += 'ny ' if len(explanation.strip()) != 0 else ''
-        if self.voice in VOICE:
-            explanation += VOICE[self.voice] + ' '
-
-        if not explanation.strip():
-            explanation = 'endriky'
-
-        ret = explanation + 'ny matoanteny [[%s]]' % (self.lemma)
-        return ret
+        return self.to_definition('mg')
 
 
 class NounForm(NonLemma):
+    renderer = 'noun_form'
     gender = None
     number = None
     case = None
@@ -67,26 +58,7 @@ class NounForm(NonLemma):
         self.possessive = possessive
 
     def to_malagasy_definition(self):
-        """
-        :return: A malagasy language definition in unicode
-        """
-        explanation = ''
-        if self.possessive in POSSESSIVENESS:
-            explanation += POSSESSIVENESS[self.possessive] + ' '
-        if self.case in CASES:
-            explanation += CASES[self.case] + ' '
-        if self.gender in GENDER:
-            explanation += GENDER[self.gender] + ' '
-        if self.number in NUMBER:
-            explanation += NUMBER[self.number] + ' '
-        if self.definite in DEFINITENESS:
-            explanation += DEFINITENESS[self.definite] + ' '
-
-        if not explanation.strip():
-            explanation = 'endriky'
-
-        ret = explanation + 'ny teny [[%s]]' % (self.lemma)
-        return ret
+        return self.to_definition('mg')
 
 
 class AdjectiveForm(NounForm):

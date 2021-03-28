@@ -1,4 +1,4 @@
-from api.parsers.constants import CASES, GENDER, NUMBER, DEFINITENESS, POSSESSIVENESS
+from api.parsers.constants.mg import CASES, GENDER, NUMBER, DEFINITENESS, POSSESSIVENESS
 from api.parsers.inflection_template import NounForm, AdjectiveForm
 
 

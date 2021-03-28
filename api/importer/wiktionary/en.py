@@ -52,7 +52,6 @@ class ReferencesImporter(SubsectionImporter):
     def get_data(self, template_title, wikipage: str, language: str):
         refs = super(ReferencesImporter, self).get_data(template_title, wikipage, language)
         refs_to_return = []
-        print(refs)
         returned_references = ''.join(refs)
         for ref_line in returned_references.split('\n'):
             if ref_line == '':
@@ -64,7 +63,6 @@ class ReferencesImporter(SubsectionImporter):
                 refs_to_return.append(ref_line)
 
         return refs_to_return
-
 
 
 class FurtherReadingImporter(ReferencesImporter):
