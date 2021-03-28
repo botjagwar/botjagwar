@@ -2,6 +2,14 @@
 
 import re
 
+from api.importer.wiktionary.en import \
+    FurtherReadingImporter, \
+    ReferencesImporter, \
+    DerivedTermsImporter, \
+    AlternativeFormsImporter, \
+    SynonymImporter, \
+    EtymologyImporter, \
+    AntonymImporter
 from conf.entryprocessor.languagecodes import LANGUAGE_NAMES
 from object_model.word import Entry
 from .base import WiktionaryProcessor
@@ -56,10 +64,25 @@ class ENWiktionaryProcessor(WiktionaryProcessor):
     def lang2code(self, l):
         return self.code[l]
 
-    def fetch_additional_data(self):
+    def fetch_additional_data(self, content, language):
+        additional_data_classes = {
+            FurtherReadingImporter,
+            ReferencesImporter,
+            DerivedTermsImporter,
+            AlternativeFormsImporter,
+            SynonymImporter,
+            EtymologyImporter,
+            AntonymImporter,
+        }
+        additional_data = {}
+        for classe in additional_data_classes:
+            instance = classe()
+            additional_data[instance.data_type] = instance.get_data(
+                instance.section_name, content, language)
 
+        return additional_data
 
-    def getall(self, keepNativeEntries=False, additional_data=False):
+    def getall(self, keepNativeEntries=False, fetch_additional_data=False):
         content = self.content
         entries = []
         content = re.sub("{{l/en\|(.*)}}", "\\1 ", content)  # remove {{l/en}}
@@ -89,15 +112,23 @@ class ENWiktionaryProcessor(WiktionaryProcessor):
                     else:
                         definitions[last_part_of_speech] = [defn_line]
 
+            if fetch_additional_data:
+                additional_data = self.fetch_additional_data(content, last_language_code)
+            else:
+                additional_data = None
+
             for pos, definitions in definitions.items():
-                entries.append(
-                    Entry(
-                        entry=self.title,
-                        part_of_speech=pos,
-                        language=last_language_code,
-                        entry_definition=definitions,
-                    )
+                entry = Entry(
+                    entry=self.title,
+                    part_of_speech=pos,
+                    language=last_language_code,
+                    entry_definition=definitions,
                 )
+                if additional_data is not None and fetch_additional_data:
+                    for data_type, data in additional_data.items():
+                        entry.add_attribute(data_type, data)
+
+                entries.append(entry)
 
         return entries
 

@@ -1,8 +1,10 @@
 import requests
 
-from ..servicemanager.pgrest import DynamicBackend
+from api.decorator import run_once
+from conf.entryprocessor.languagecodes import LANGUAGE_CODES, LANGUAGE_NAMES
+from ..servicemanager.pgrest import StaticBackend
 
-backend = DynamicBackend()
+backend = StaticBackend()
 
 
 class AdditionalDataImporterError(Exception):
@@ -24,7 +26,13 @@ class AdditionalDataImporter(object):
         if 'data' in parameters:
             self.data_type = parameters['data']
 
-    def fetch_default_languages_mapper(self):
+
+    def offline_fetch_default_languages_mapper(self):
+        self._languages = LANGUAGE_NAMES
+        self.iso_codes = LANGUAGE_CODES
+
+    @run_once
+    def online_fetch_default_languages_mapper(self):
         self._languages = {
             l['english_name']: l['iso_code']
             for l in requests.get(backend.backend + '/language').json()
@@ -32,6 +40,8 @@ class AdditionalDataImporter(object):
         self.iso_codes = {
             v: k for k, v in self.languages.items()
         }
+
+    fetch_default_languages_mapper = offline_fetch_default_languages_mapper
 
     @property
     def languages(self):
