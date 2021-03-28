@@ -80,7 +80,7 @@ class Entry(TypeCheckedObject):
             if hasattr(self, d):
                 props += d + '=' + str(getattr(self, d)) + '; '
 
-        return "Entry{%s}""" % (props)
+        return "Entry{%s}" % (props)
 
 
 class Translation(TypeCheckedObject):

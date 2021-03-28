@@ -10,7 +10,7 @@ see redis_wikicache.py for more details.
 enwikt = RedisSite('en', 'wiktionary')
 
 def test_one():
-    page = RedisPage(enwikt, 'fail')
+    page = RedisPage(enwikt, 'pollen')
     processor = ENWiktionaryProcessor()
     processor.set_title(page.title())
     processor.set_text(page.get())
@@ -25,8 +25,9 @@ def test_one():
 
 def test_random():
     errors = 0
-    sample_size = 60
+    sample_size = 500
     for i in range(sample_size):
+        print()
         page = enwikt.random_page()
         processor = ENWiktionaryProcessor()
         processor.set_title(page.title())
@@ -53,5 +54,5 @@ def test_random():
 
 
 if __name__ == '__main__':
-    # test_random()
-    test_one()
+    test_random()
+    # test_one()
