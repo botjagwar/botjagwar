@@ -10,22 +10,22 @@ see redis_wikicache.py for more details.
 enwikt = RedisSite('en', 'wiktionary')
 
 def test_one():
-    page = RedisPage(enwikt, 'пересиливающий')
+    page = RedisPage(enwikt, 'fail')
     processor = ENWiktionaryProcessor()
     processor.set_title(page.title())
     processor.set_text(page.get())
     print(page)
-    for k in processor.getall():
+    for k in processor.getall(fetch_additional_data=True):
         print(k)
 
-    print()
+    # print(k)
     for k in processor.retrieve_translations():
-        print(k)
+        pass
 
 
 def test_random():
     errors = 0
-    sample_size = 1000
+    sample_size = 60
     for i in range(sample_size):
         page = enwikt.random_page()
         processor = ENWiktionaryProcessor()
@@ -36,9 +36,8 @@ def test_random():
 
         processor.set_text(page.get())
         try:
-            for k in processor.getall():
-                pass
-                # print(k)
+            for k in processor.getall(fetch_additional_data=True):
+                print(k)
 
             for k in processor.retrieve_translations():
                 pass
@@ -49,8 +48,10 @@ def test_random():
             errors += 1
 
     rate = (1 - (errors/sample_size))
-    assert rate >= .993
+    print(rate*100, '% of pages could be processed')
+    assert rate >= .995
 
 
 if __name__ == '__main__':
-    test_random()
+    # test_random()
+    test_one()

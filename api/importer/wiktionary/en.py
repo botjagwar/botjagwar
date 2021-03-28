@@ -12,6 +12,9 @@ class ListSubsectionImporter(SubsectionImporter):
         for subsection_item in subsection_data:
             if '*' in subsection_item:
                 for item in subsection_item.split('*'):
+                    if item.strip() == '':
+                        continue
+
                     if '[[Thesaurus:' in item:
                         continue
                     if '{{l|' + language in item:
@@ -27,7 +30,7 @@ class ListSubsectionImporter(SubsectionImporter):
 
 
 class SynonymImporter(ListSubsectionImporter):
-    level = 4
+    level = 5
     data_type = 'synonym'
     section_name = 'Synonyms'
 
@@ -36,6 +39,7 @@ class SynonymImporter(ListSubsectionImporter):
 class EtymologyImporter(SubsectionImporter):
     level = 3
     data_type = 'etym/en'
+    numbered = True
     section_name = 'Etymology'
 
 
@@ -44,6 +48,23 @@ class ReferencesImporter(SubsectionImporter):
     level = 3
     data_type = 'reference'
     section_name = 'References'
+
+    def get_data(self, template_title, wikipage: str, language: str):
+        refs = super(ReferencesImporter, self).get_data(template_title, wikipage, language)
+        refs_to_return = []
+        print(refs)
+        returned_references = ''.join(refs)
+        for ref_line in returned_references.split('\n'):
+            if ref_line == '':
+                continue
+
+            if ref_line.startswith('* '):
+                refs_to_return.append(ref_line.lstrip('* '))
+            else:
+                refs_to_return.append(ref_line)
+
+        return refs_to_return
+
 
 
 class FurtherReadingImporter(ReferencesImporter):

@@ -86,3 +86,4 @@ class TypeCheckedObject(object):
                     name, self.__class__.__name__))
             else:
                 setattr(self, name, value)
+                self.properties_types[name] = value.__class__
