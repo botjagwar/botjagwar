@@ -1,7 +1,7 @@
 aiohttp == 3.3.2
 flask == 1.0.2
 irc == 3.6.1
-lxml == 4.6.2
+lxml == 4.6.3
 parameterized
 psycopg2 == 2.8.4
 pywikibot >= 3.0
