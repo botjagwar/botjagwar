@@ -87,8 +87,13 @@ class ENWiktionaryProcessor(WiktionaryProcessor):
 
         return additional_data
 
-    def extract_definition(self, part_of_speech, definition_line, translate_definitions_to_malagasy=False):
+    def extract_definition(self, part_of_speech, definition_line,
+                           cleanup_definition=True,
+                           translate_definitions_to_malagasy=False):
         new_definition_line = definition_line
+        # No cleanup
+        if not cleanup_definition:
+            return definition_line
 
         # Clean up non-needed template to improve readability.
         # In case these templates are needed, integrate your code above this part.
@@ -100,18 +105,20 @@ class ENWiktionaryProcessor(WiktionaryProcessor):
         #   either English or Malagasy
         if new_definition_line == '':
             try:
-                elements = templates_parser.get_elements(TEMPLATE_TO_OBJECT[part_of_speech], definition_line)
-                if translate_definitions_to_malagasy:
-                    new_definition_line = elements.to_definition('mg')
-                else:
-                    new_definition_line = elements.to_definition(self.processor_language)
+                if part_of_speech in TEMPLATE_TO_OBJECT:
+                    elements = templates_parser.get_elements(TEMPLATE_TO_OBJECT[part_of_speech], definition_line)
+                    if translate_definitions_to_malagasy:
+                        new_definition_line = elements.to_definition('mg')
+                    else:
+                        new_definition_line = elements.to_definition(self.processor_language)
             except ParserNotFoundError:
                 new_definition_line = definition_line
 
         # print(definition_line, new_definition_line)
         return new_definition_line
 
-    def getall(self, keepNativeEntries=False, fetch_additional_data=False, translate_definitions_to_malagasy=False):
+    def getall(self, keepNativeEntries=False, fetch_additional_data=False, cleanup_definitions=True,
+               translate_definitions_to_malagasy=False):
         content = self.content
         entries = []
         content = re.sub("{{l/en\|(.*)}}", "\\1 ", content)  # remove {{l/en}}
@@ -146,7 +153,8 @@ class ENWiktionaryProcessor(WiktionaryProcessor):
                     definition = self.extract_definition(
                         last_part_of_speech,
                         defn_line,
-                        translate_definitions_to_malagasy
+                        cleanup_definition=cleanup_definitions,
+                        translate_definitions_to_malagasy=translate_definitions_to_malagasy
                     )
                     if last_part_of_speech in definitions:
                         definitions[last_part_of_speech].append(definition)

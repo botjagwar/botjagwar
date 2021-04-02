@@ -1,9 +1,9 @@
 from api.parsers.constants.mg import CASES, GENDER, NUMBER, DEFINITENESS, POSSESSIVENESS
-from api.parsers.inflection_template import NounForm, AdjectiveForm
+from api.parsers.inflection_template import NounForm, AdjectiveForm, Romanization
 
 
 def parse_one_parameter_template(out_class, template_name='plural of', case_name='', number='s', gender=None,
-                                 definiteness=None):
+                                 definiteness=None, tense=None, mood=None):
     """
     Very generic code that can parse anything like {{plural of|xxyyzz}}, which is very common on en.wiktionary
     Use with caution, though.
@@ -31,6 +31,8 @@ def parse_one_parameter_template(out_class, template_name='plural of', case_name
             ret_obj.case = case_name
             ret_obj.number = number
             ret_obj.definite = definiteness
+            ret_obj.tense = tense
+            ret_obj.mood = mood
             return ret_obj
         else:
             raise ValueError("Unrecognised template: expected '%s' but got '%s'" % (parts[0], template_name))
@@ -96,6 +98,7 @@ def parse_lv_inflection_of(out_class):
         return out_class(lemma, case_name, number_, gender)
     return _parse_lv_inflection_of
 
+
 def parse_hu_inflection_of(template_expression):
     for char in '{}':
         template_expression = template_expression.replace(char, '')
@@ -147,3 +150,19 @@ def parse_el_form_of(out_class, lemma_pos=1):
         return noun_form
 
     return _wrapped_parse_el_form_of
+
+
+def parse_romanization_template(lemma_position=2):
+    def _wrapped_parse_romanization_template(template_expression):
+        parts = template_expression.split('|')
+        if len(parts) > lemma_position:
+            lemma = parts[lemma_position]
+            lemma = lemma.rstrip('}}')
+            return Romanization(lemma=lemma)
+        else:
+            raise Exception(f'{len(parts)} <= {lemma_position+1}')
+
+    return _wrapped_parse_romanization_template
+
+
+parse_alternative_spelling_template = parse_romanization_template
