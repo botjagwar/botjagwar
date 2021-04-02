@@ -1,5 +1,16 @@
 from api.parsers.constants.mg import GENDER, CASES, NUMBER, MOOD, TENSE, PERSONS, VOICE, DEFINITENESS, POSSESSIVENESS
 
+def render_non_lemma(non_lemma_type):
+    def wrapper(non_lemma) -> str:
+        explanation = non_lemma_type
+        ret = explanation + 'ny teny [[%s]]' % (non_lemma.lemma)
+        return ret
+
+    return wrapper
+
+render_romanization = render_non_lemma('rômanizasiôna')
+render_alternative_spelling = render_non_lemma('tsipelina hafa')
+
 
 def render_noun_form(non_lemma) -> str:
     """

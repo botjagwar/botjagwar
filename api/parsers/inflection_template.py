@@ -3,7 +3,7 @@ from api.parsers import renderers
 
 
 class NonLemma(object):
-    renderer = 'noun_form'
+    renderer = 'non_lemma'
 
     def __init__(self, lemma=None, case=None, number=None, gender=None):
         self.gender = gender
@@ -23,7 +23,15 @@ class NonLemma(object):
 
 
     def to_malagasy_definition(self):
-        raise NotImplementedError()
+        return self.to_definition('mg')
+
+
+class Romanization(NonLemma):
+    renderer = 'romanization'
+
+
+class AlternativeSpelling(NonLemma):
+    renderer = 'alternative_spelling'
 
 
 class VerbForm(NonLemma):
@@ -82,7 +90,7 @@ class EnWiktionaryInflectionTemplateParser(object):
             raise ParserError("parser already exists for '%s'" % template_name)
         self.process_function[(return_class, template_name)] = parser_function
 
-    def get_elements(self, expected_class, form_of_definition) -> [VerbForm, AdjectiveForm, NounForm]:
+    def get_elements(self, expected_class, form_of_definition) -> [VerbForm, AdjectiveForm, NounForm, NonLemma]:
         # fixme: detect several templates on the same line, and raise exception if such case is encountered.
         # current way of parsing template expressions fails spectacularly (InvalidTitle exceptions) in nasty cases:
         # e.g. {{es-verb form of|mood=imp|num=s|pers=2|formal=n|sense=+|ending=ir|venir}} + {{m|es|te||}}.
