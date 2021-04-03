@@ -74,7 +74,7 @@ def threaded(f):
     def wrap(*args, **kwargs):
         t = threading.Thread(target=f, args=args, kwargs=kwargs)
         t.daemon = False
-        t.run()
+        t.start()
 
     return wrap
 
