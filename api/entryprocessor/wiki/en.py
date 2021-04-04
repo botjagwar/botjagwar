@@ -2,12 +2,25 @@
 
 import re
 
+from api.importer.wiktionary.en import \
+    FurtherReadingImporter, \
+    ReferencesImporter, \
+    DerivedTermsImporter, \
+    AlternativeFormsImporter, \
+    SynonymImporter, \
+    EtymologyImporter, \
+    AntonymImporter
+from api.parsers import TEMPLATE_TO_OBJECT
+from api.parsers import templates_parser
+from api.parsers.inflection_template import ParserNotFoundError
 from conf.entryprocessor.languagecodes import LANGUAGE_NAMES
 from object_model.word import Entry
 from .base import WiktionaryProcessor
 
 
 class ENWiktionaryProcessor(WiktionaryProcessor):
+    processor_language = 'en'
+
     def __init__(self, test=False, verbose=False):
         super(ENWiktionaryProcessor, self).__init__(test=test, verbose=verbose)
         self.verbose = True
@@ -16,11 +29,30 @@ class ENWiktionaryProcessor(WiktionaryProcessor):
         self.postran = {
             'Verb': 'mat',
             'Adjective': 'mpam',
+            'Conjunction': 'mpampitohy',
+            'Determiner': 'mpam',
+            'Idiom': 'fomba fiteny',
+            'Phrase': 'fomba fiteny',
+            'Proverb': 'ohabolana',
+            'Number': 'isa',
             'Noun': 'ana',
+            'Adjectival noun': 'mpam',
+            'Particle': 'kianteny',
             'Adverb': 'tamb',
+            'Root': 'fototeny',
+            'Numeral': 'isa',
             'Pronoun': 'solo-ana',
+            'Preposition': 'mp.ank-teny',
+            'Contraction': 'fanafohezana',
+            'Letter': 'litera',
+            'Proper noun': 'ana-pr',
             'Prefix': 'tovona',
-            'Suffix': 'tovana'
+            'Romanization': 'rômanizasiona',
+            'Suffix': 'tovana',
+            'Symbol': 'eva',
+            'Participle': 'ova-mat',
+            'Interjection': 'tenim-piontanana',
+            'Infix': 'tsofoka',
         }
         self.regexesrep = [
             (r'\{\{l\|en\|(.*)\}\}', '\\1'),
@@ -37,137 +69,154 @@ class ENWiktionaryProcessor(WiktionaryProcessor):
     def lang2code(self, l):
         return self.code[l]
 
-    def retrieve_translations(self):
-        """Maka ny dikanteny ao amin'ny pejy iray"""
-        retcontent = []
-        regex = '\{\{t[\+\-]+?\|([A-Za-z]{2,3})\|(.*?)\}\}'
-        pos = 'ana'
-        defin = ""
-        for page_entry in self.getall():  # (self.title, pos, self.lang2code(l), defin.strip())
-            if page_entry.language == 'en':
-                pos = page_entry.part_of_speech
-                defin = page_entry.entry_definition
-                break
+    def fetch_additional_data(self, content, language):
+        additional_data_classes = {
+            FurtherReadingImporter,
+            ReferencesImporter,
+            DerivedTermsImporter,
+            AlternativeFormsImporter,
+            SynonymImporter,
+            EtymologyImporter,
+            AntonymImporter,
+        }
+        additional_data = {}
+        for classe in additional_data_classes:
+            instance = classe()
+            additional_data[instance.data_type] = instance.get_data(
+                instance.section_name, content, language)
 
-        for entry in re.findall(regex, self.content):
-            langcode = entry[0]
-            entree = entry[1]
+        return additional_data
 
-            for x in "();:.,":
-                if entry[1].find(x) != -1:
-                    continue
-            if entry[1].find('|') != -1:
-                entree = entree.split("|")[0]
+    def extract_definition(self, part_of_speech, definition_line,
+                           cleanup_definition=True,
+                           translate_definitions_to_malagasy=False):
+        new_definition_line = definition_line
+        # No cleanup
+        if not cleanup_definition:
+            return definition_line
 
-            entry = Entry(
-                entry=entree,
-                part_of_speech=pos,
-                language=langcode,
-                entry_definition=defin,
-            )
-            retcontent.append(entry)
+        # Clean up non-needed template to improve readability.
+        # In case these templates are needed, integrate your code above this part.
+        for regex, replacement in self.regexesrep:
+            new_definition_line = re.sub(regex, replacement, new_definition_line)
 
-        retcontent.sort()
-        # print("Nahitana dikanteny ", len(retcontent))
-        return retcontent  # liste( (codelangue, entrée)... )
+        # Form-of definitions: they use templates that can be parsed using api.parsers module
+        #   which is tentatively being integrated here to provide human-readable output for
+        #   either English or Malagasy
+        if new_definition_line == '':
+            try:
+                if part_of_speech in TEMPLATE_TO_OBJECT:
+                    elements = templates_parser.get_elements(TEMPLATE_TO_OBJECT[part_of_speech], definition_line)
+                    if translate_definitions_to_malagasy:
+                        new_definition_line = elements.to_definition('mg')
+                    else:
+                        new_definition_line = elements.to_definition(self.processor_language)
+            except ParserNotFoundError:
+                new_definition_line = definition_line
 
-    def retrieve_etymology(self, content):
-        """Maka ny etimolojia rehetra amin'ny teny iray"""
+        # print(definition_line, new_definition_line)
+        return new_definition_line
 
-        # Etimolojia manta avy amin'ny fizarana rehetra
-        etim = re.findall("===[ ]?Etymology[ ]?[1-9]?===[\n](.*)[\n]+[=]+", content)
-        return etim
-
-    def getall(self, definitions_as_is=False):
-        items = []
+    def getall(self, keepNativeEntries=False, fetch_additional_data=False, cleanup_definitions=True,
+               translate_definitions_to_malagasy=False):
         content = self.content
+        entries = []
         content = re.sub("{{l/en\|(.*)}}", "\\1 ", content)  # remove {{l/en}}
         for l in re.findall("[\n]?==[ ]?([A-Za-z]+)[ ]?==\n", content):
-            content = content[content.find('==%s==' % l):]
-            etimology = self.retrieve_etymology(content)
-            etym = etimology[0] if len(etimology) > 0 else ''
-            content = re.sub('Etymology', '', content)  # remove etymology section
-
-            # pos
-            pos = ''
-            ptext = regex_ptext = ''
-            for p in self.postran:
-                regex_ptext += '%s|' % p
-
-            regex_ptext = regex_ptext.strip('|')
-
-            ptext = '\n={4}[ ]?(%s)[ ]?={4}\n' % regex_ptext
-            if re.search(ptext, content) is None:
-                ptext = '\n={3}[ ]?(%s)[ ]?={3}\n' % regex_ptext
-
-            posregex = re.findall(ptext, content)
-
-            if not definitions_as_is:
-                for regex, replacement in self.regexesrep:
-                    c = re.sub(regex, replacement, content)
-
-            # definition
+            ct_content = content
+            pos_level = 3
             try:
-                defin = content.split('\n#')[1]
-                if defin.find('\n') != -1:
-                    defin = defin[:defin.find('\n')]
-            except IndexError:
-                if self.verbose: print("Hadisoana indexerror.")
-                continue
-
-            if not definitions_as_is:
-                for regex, replacement in self.regexesrep:
-                    defin = re.sub(regex, replacement, defin).strip()
-
-                for char in '{}':
-                    defin = defin.replace(char, '')
-
-            for char in '[]':
-                defin = defin.replace(char, '')
-
-            defins = defin.split(',')
-            if len(defins) > 1:
-                defin = defins[0]
-
-            # print(ptext)
-            for p in posregex:
-                if p not in self.postran:
-                    if self.verbose: print("Tsy ao amin'ny lisitry ny karazanteny fantatra ilay teny")
-                    continue
-                else:
-                    pos = p
-                    break
-
-            try:
-                pos = self.postran[pos]
-            except KeyError:
-                if self.verbose: print(("Tsy nahitana dikan'ny karazan-teny %s" % pos))
-                continue
-
-            if defin.startswith('to ') or defin.startswith('To '):
-                pos = 'mat'
-                defin = defin[2:]
-            elif defin.startswith('a ') or defin.startswith('A '):
-                pos = 'ana'
-                defin = defin[1:]
-
-            if len(defin.strip()) < 1:
-                continue
-
-            try:
-                language_code = self.lang2code(l)
+                last_language_code = self.lang2code(l)
             except KeyError:
                 continue
+
+            last_part_of_speech = None
+            definitions = {}
+            section_init = ct_content.find('==%s==' % l)
+            section_end = ct_content.find('----', section_init)
+            if section_end != -1:
+                ct_content = ct_content[section_init:section_end]
             else:
-                assert self.title is not None
-                i = Entry(
+                ct_content = ct_content[section_init:]
+
+            lines = ct_content.split('\n')
+            for line in lines:
+                for en_pos, mg_pos in self.postran.items():
+                    if re.match('=' * pos_level + '[ ]?' + en_pos + '[ ]?' + '=' * pos_level, line) is not None:
+                        last_part_of_speech = mg_pos
+
+                if line.startswith('# '):
+                    defn_line = line
+                    defn_line = defn_line.lstrip('# ')
+                    if last_part_of_speech is None:
+                        continue
+                    definition = self.extract_definition(
+                        last_part_of_speech,
+                        defn_line,
+                        cleanup_definition=cleanup_definitions,
+                        translate_definitions_to_malagasy=translate_definitions_to_malagasy
+                    )
+                    if last_part_of_speech in definitions:
+                        definitions[last_part_of_speech].append(definition)
+                    else:
+                        definitions[last_part_of_speech] = [definition]
+
+            if fetch_additional_data:
+                additional_data = self.fetch_additional_data(ct_content, last_language_code)
+            else:
+                additional_data = None
+
+            for pos, definitions in definitions.items():
+                entry = Entry(
                     entry=self.title,
                     part_of_speech=pos,
-                    language=language_code,
-                    entry_definition=[defin.strip()],
-                    etymology=etym
+                    language=last_language_code,
+                    entry_definition=definitions,
                 )
-                items.append(i)
+                if additional_data is not None and fetch_additional_data:
+                    for data_type, data in additional_data.items():
+                        if data:
+                            entry.add_attribute(data_type, data)
 
-        # print("Nahitana dikanteny ", len(items))
-        return items
+                entries.append(entry)
+
+        return entries
+
+    def retrieve_translations(self):
+        regex = re.compile('\{\{t[\+]?\|([A-Za-z]{2,3})\|(.*?)\}\}')
+        translations = {}
+        entries = []
+        content = re.sub("{{l/en\|(.*)}}", "\\1 ", self.content)  # remove {{l/en}}
+        for l in re.findall("[\n]?==[ ]?([A-Za-z]+)[ ]?==\n", content):
+            last_part_of_speech = None
+            content = content[content.find('==%s==' % l):]
+            lines = content.split('\n')
+            for line in lines:
+                for en_pos, mg_pos in self.postran.items():
+                    if '===' + en_pos in line:
+                        last_part_of_speech = mg_pos
+
+                if len(re.findall(regex, line)) != 0:
+                    for language_code, translation in re.findall(regex, line):
+                        if last_part_of_speech in translations:
+                            translations[last_part_of_speech].append((language_code, translation))
+                        else:
+                            translations[last_part_of_speech] = [(language_code, translation)]
+
+            for pos, translation_list in translations.items():
+                for translation_tuple in translation_list:
+                    language, translation = translation_tuple
+                    translation = translation[:translation.find('|')] \
+                        if translation.find('|') > 0 \
+                        else translation
+                    entries.append(
+                        Entry(
+                            entry=translation,
+                            part_of_speech=pos,
+                            language=language,
+                            entry_definition=[self.title],
+                        )
+                    )
+
+        return entries
+

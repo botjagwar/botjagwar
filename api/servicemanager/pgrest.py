@@ -10,7 +10,7 @@ ADDR = config.get('postgrest_backend_address')
 class StaticBackend(object):
     @property
     def backend(self):
-        return 'http://' + ADDR + ':8113'
+        return 'http://' + ADDR + ':8100'
 
 
 class DynamicBackend(object):

@@ -75,8 +75,12 @@ class Entry(TypeCheckedObject):
 
     def __repr__(self):
         #return str(self.__dict__)
-        return "Entry{entry=%s, language=%s, part_of_speech=%s, entry_definition=%s}" % (
-            self.entry, self.language, self.part_of_speech, self.entry_definition)
+        props = ''
+        for d in self.properties_types:
+            if hasattr(self, d):
+                props += d + '=' + str(getattr(self, d)) + '; '
+
+        return "Entry{%s}" % (props)
 
 
 class Translation(TypeCheckedObject):
