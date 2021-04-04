@@ -223,7 +223,7 @@ class TestEntryTranslatorProcessWiktionaryPage(TestCase):
         _wrapped_test()
 
     def test_en_process_entry_in_foreign_language(self):
-        @retry_on_fail([aiohttp.client_exceptions.ClientConnectionError])
+        @retry_on_fail([aiohttp.client_exceptions.ClientConnectionError, Exception])
         def _wrapped_test():
             def translation_mock(x, y):
                 return [{
