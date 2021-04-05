@@ -20,18 +20,27 @@ from api.dictionary.middlewares import \
     json_error_handler, \
     auto_committer
 
-log.basicConfig(filename='/opt/botjagwar/user_data/dictionary_service.log',level=log.DEBUG)
 parser = argparse.ArgumentParser(description='Dictionary service')
-parser.add_argument('--db-file', dest='STORAGE', required=False)
+parser.add_argument('-d', '--db-file', dest='STORAGE', required=False, default='default')
 parser.add_argument('-p', '--port', dest='PORT', type=int, default=8001)
+parser.add_argument('-l', '--log-file', dest='LOG_FILE', type=str, default='/opt/botjagwar/user_data/dictionary_service.log')
+parser.add_argument('--host', dest='HOST', type=str, default='0.0.0.0')
+parser.add_argument('--log-level', dest='LOG_LEVEL', type=str, default='debug')
+parser.add_argument('--autocommit', dest='autocommit', type=bool, default=True)
+parser.add_argument('--commit-every', dest='commit_every', type=int, default=100)
 
 args = parser.parse_args()
 
-if args.STORAGE:
-    WORD_STORAGE = args.STORAGE
-else:
-    WORD_STORAGE = 'default'
+WORD_STORAGE = args.STORAGE
+HOST = args.HOST
+PORT = args.PORT
+LOG = args.LOG_FILE
+try:
+    LOG_LEVEL = log._nameToLevel[args.LOG_LEVEL.upper()]
+except KeyError:
+    LOG_LEVEL = 10
 
+log.basicConfig(filename=LOG, level=log.DEBUG)
 dictionary_db_manager = DictionaryDatabaseManager(database_file=WORD_STORAGE)
 routes = web.RouteTableDef()
 app = web.Application(middlewares=[
@@ -40,8 +49,8 @@ app = web.Application(middlewares=[
 ])
 app['database'] = dictionary_db_manager
 app['session_instance'] = dictionary_db_manager.session
-app['autocommit'] = True
-app['commit_every'] = 100
+app['autocommit'] = args.autocommit
+app['commit_every'] = args.commit_every
 app['commit_count'] = 0
 
 app.router.add_route('GET', '/languages/list', get_language_list)
@@ -77,7 +86,7 @@ app.router.add_route('PUT', '/configure', configuration.configure_service)
 if __name__ == '__main__':
     try:
         app.router.add_routes(routes)
-        web.run_app(app, host="0.0.0.0", port=args.PORT, access_log=log)
+        web.run_app(app, host=HOST, port=PORT, access_log=log)
     except Exception as exc:
         log.exception(exc)
         log.critical("Error occurred while setting up the server")
