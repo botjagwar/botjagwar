@@ -29,7 +29,7 @@ def test_one():
 
 def test_random():
     errors = 0
-    sample_size = 500
+    sample_size = 50
     for i in range(sample_size):
         print()
         page = enwikt.random_page()
@@ -41,7 +41,11 @@ def test_random():
 
         processor.set_text(page.get())
         try:
-            for k in processor.getall(cleanup_definitions=True, fetch_additional_data=True):
+            for k in processor.getall(
+                cleanup_definitions=True,
+                fetch_additional_data=True,
+                translate_definitions_to_malagasy=True
+            ):
                 print(k)
 
             for k in processor.retrieve_translations():
@@ -59,5 +63,5 @@ def test_random():
 
 
 if __name__ == '__main__':
-    # test_random()
-    test_one()
+    test_random()
+    #test_one()
