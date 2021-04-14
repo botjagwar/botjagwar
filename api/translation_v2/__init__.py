@@ -1,5 +1,5 @@
 from object_model.word import Entry
-from .functions import translate_form_of_templates, translate_using_dictionary
+from .functions import translate_form_of_templates, translate_using_postgrest_json_dictionary
 from .types import TranslatedDefinition, UntranslatedDefinition
 
 
