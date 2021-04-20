@@ -62,6 +62,7 @@ async def get_inferred_multilingual_dictionary(request) -> Response:
     """
     return Response()
 
+
 async def get_language_list(request) -> Response:
     ret_list = []
     with request.app['database'].engine.connect() as connection:

@@ -142,9 +142,9 @@ class MGWikiPageRenderer(PageRenderer):
                     elif isinstance(info.examples, str):
                         s += "\n#* ''" + info.examples[idx] + "''"
 
-        # Audio
+        # Pronunciation and/or Audio
         if hasattr(info, 'audio_pronunciations') or \
-            hasattr(info, 'ipa'):
+              hasattr(info, 'ipa'):
             s += '\n\n{{-fanononana-}}'
 
             if hasattr(info, 'audio_pronunciations'):
@@ -154,6 +154,11 @@ class MGWikiPageRenderer(PageRenderer):
             if hasattr(info, 'ipa'):
                 for ipa in info.ipa:
                     s += "\n* " + '{{fanononana|' + f'{ipa}' + '|' + f'{info.language}' + '}}'
+
+        # Pronunciation section
+        elif hasattr(info, 'pronunciation'):
+            s += '\n\n{{-fanononana-}}'
+            s += "\n" + info.pronunciation
 
         # Synonyms
         if hasattr(info, 'synonyms'):

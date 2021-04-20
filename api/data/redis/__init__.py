@@ -16,7 +16,11 @@ class RedisWrapperAPI(KeyValueStoreAPI):
         self.singleton = singleton
         self.persistent = persistent
         self.attributes = set()
-        self.instance = redis.Redis(host=host, password=password)
+        if password:
+            self.instance = redis.Redis(host=host, password=password)
+        else:
+            self.instance = redis.Redis(host=host)
+
         if identifier == 'default':
             self.set_identifier(self.__class__)
         else:
@@ -63,8 +67,8 @@ class RedisWrapperAPI(KeyValueStoreAPI):
 class RedisDictionary(RedisWrapperAPI):
     @classmethod
     def from_identifier(cls, identifier):
+        cls.identifier = identifier
         instance = cls()
-        instance.identifier = identifier
         return instance
 
     def __init__(self, **kwargs):
@@ -95,6 +99,13 @@ class RedisDictionary(RedisWrapperAPI):
         for k in keys:
             if self.identifier in str(k):
                 self.instance.delete(k)
+
+    def keys(self):
+        return self.instance.keys()
+
+    def items(self):
+        for key in self.instance.scan_iter():
+            return key, self.instance.get(key)
 
 
 class RedisPersistentClass(KvsPersistentClass):

@@ -20,10 +20,11 @@ class Processor(object):
     def __init__(self, language):
         self.count = 0
         self.missing_translation_writer = MissingTranslationFileWriter(language)
-        self.processor_class = WiktionaryProcessorFactory.create(language)
         self.translation_lookup_table = FastTranslationLookup(language, 'mg')
         self.translation_lookup_table.build_table()
         self.entry_writer = None #EntryPageFileWriter(language)
+        self.processor_class = None
+        self.language = language
 
     def base_worker(self, xml_buffer: str):
         node = etree.XML(xml_buffer)
@@ -38,6 +39,9 @@ class Processor(object):
         assert title_node is not None
         if ':' in title_node:
             return
+        if self.processor_class is None:
+            self.processor_class = WiktionaryProcessorFactory.create('en')
+            assert self.processor_class is not None
 
         processor = self.processor_class()
         processor.set_title(title_node)
@@ -45,7 +49,7 @@ class Processor(object):
         entries = processor.getall()
 
         for entry in entries:
-            if entry.language == language:
+            if entry.language == self.language:
                 if self.translation_lookup_table.lookup(entry):
                     translation = self.translation_lookup_table.translate(entry)
                     new_entry = Entry(
@@ -149,6 +153,8 @@ class Processor(object):
     def process(self, function='default', filename='default'):
         if function == 'default':
             function = self.create_missing_entries
+        else:
+            assert callable(function)
 
         if filename == 'default':
             filename = 'user_data/%s.xml' % language
@@ -162,7 +168,7 @@ class Processor(object):
                     pmap(pool, buffers[:(len(buffers)-1)//2], lvl+1)
                     pmap(pool, buffers[(len(buffers)-1)//2:], lvl+1)
 
-        nthreads = 5
+        nthreads = 1
         for xml_buffer in self.load(filename):
             buffers = xml_buffer
             pool = ThreadPool(nthreads)

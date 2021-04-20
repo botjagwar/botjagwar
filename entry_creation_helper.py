@@ -5,25 +5,37 @@ import time
 import pywikibot
 import requests
 
-from api.importer.wiktionary import dyn_backend
+from api.decorator import singleton
+# from api.importer.wiktionary import dyn_backend
 from api.output import WikiPageRendererFactory, Output
+from api.servicemanager.pgrest import StaticBackend
 from object_model.word import Entry
+
+dyn_backend = StaticBackend()
 
 
 class SkippedWord(Exception):
     pass
 
 
+@singleton
+class RandomLatency(object):
+    random_latency = [10, 25]
+    min_sleeptime = 10
+
+    @property
+    def latency(self) -> int:
+        return self.min_sleeptime + random.randint(self.random_latency[0], self.random_latency[1])
+
+
 class NinjaEntryPublisher(object):
     typo_reliability = 0.9983
     speed_wpm = 35
-    random_latency = [10, 180]
     overwrite = False
 
     def publish(self, entry, title, wikitext, summary_if_exists, summary_if_new):
         wikipage = pywikibot.Page(pywikibot.Site('mg', 'wiktionary'), title)
-        min_sleeptime = (len(wikitext) / 6) // self.speed_wpm
-        sleep = min_sleeptime + random.randint(self.random_latency[0], self.random_latency[1])
+        sleep = RandomLatency().latency
         if wikipage.exists():
             contents = wikipage.get()
             if '{{=' + entry.language + '=}}' in contents:
@@ -123,19 +135,19 @@ class NinjaEntryCreator(object):
 
     def run_from_database(self, language=None):
         params = {
-            #'limit': 1000,
+            'limit': 300,
             # 'offset': 1100,
             # 'en_definition': 'eq.' + sys.argv[1],
-            # 'language': 'neq.mg',
-            'order': 'word_id',
-            #'suggested_definition': 'eq.' + sys.argv[1],
-            # 'word_id': 'eq.471733'
+            # 'language': 'not.in.(en,fr)',
+            # 'order': 'word_id',
+            # 'suggested_definition': 'eq.' + sys.argv[1],
+            # 'word_id': 'gt.469562'
             # 'part_of_speech': 'eq.mat'
         }
-        if language is not None:
-            params['language'] = 'eq.' + language
+        # if language is not None:
+        #     params['language'] = 'eq.' + language
 
-        convergent_translations_rq = requests.get(dyn_backend.backend + '/convergent_translations', params=params)
+        convergent_translations_rq = requests.get(dyn_backend.backend + '/m_curated_convergent_translation', params=params)
         if convergent_translations_rq.status_code != 200:
             print('convergent_translations_rq.status_code', convergent_translations_rq.status_code)
             return
@@ -153,6 +165,7 @@ class NinjaEntryCreator(object):
         print(len(data), 'translations loaded')
         filtered_data = []
         for translation in data:
+            filtered_data.append(translation)
             if (int(translation['word_id']), int(translation['mg_definition_id'])) in new_associations:
                 continue
             else:
@@ -204,19 +217,23 @@ class NinjaEntryCreator(object):
         # Fetching and mapping additional data
         additional_data_list = json_dictionary_infos[0]['additional_data']
         if additional_data_list is not None:
+            p = self.fetch_additional_data(
+                additional_data_list, translation['word_id'], 'pronunciation', list)
             raw_additional_data_dict = {
                 'synonyms': self.fetch_additional_data(
                     additional_data_list, translation['word_id'], 'synonym', list),
                 'antonyms': self.fetch_additional_data(
                     additional_data_list, translation['word_id'], 'antonym', list),
-                'ipa': self.fetch_additional_data(
-                    additional_data_list, translation['word_id'], 'IPA', list),
+                # 'ipa': self.fetch_additional_data(
+                #     additional_data_list, translation['word_id'], 'IPA', list),
+                'pronunciation': p[0] if p else [],
+                # 'ipa': ['{{fanononana-ko}}'],
                 'audio_pronunciations': self.fetch_additional_data(
                     additional_data_list, translation['word_id'], 'audio', list),
-                # 'related_terms': self.fetch_additional_data(
-                #     additional_data_list, translation['word_id'], 'related', list),
-                # 'derived_terms': self.fetch_additional_data(
-                #     additional_data_list, translation['word_id'], 'derived', list),
+                'related_terms': self.fetch_additional_data(
+                    additional_data_list, translation['word_id'], 'related', list),
+                'derived_terms': self.fetch_additional_data(
+                    additional_data_list, translation['word_id'], 'derived', list),
                 # 'references': ['{{Tsiahy:vortaro.net}}'],
                 # 'references': self.fetch_additional_data(
                 #     additional_data_list, translation['word_id'], 'reference', list),
@@ -240,14 +257,15 @@ class NinjaEntryCreator(object):
             }
 
             for data_type in self.additional_data_types:
-                if data_type  in additional_data:
+                if data_type in additional_data:
                     entry_data[data_type] = additional_data[data_type]
 
             entry = Entry(**{**entry_data, **additional_data_dict})
             wiki_string = self.renderer.render(entry)
             summary_if_new = wiki_string.replace('\n', ' ')
             summary_if_already_exists = '/* {{=' + translation["language"] + '=}} */'
-
+            if len(summary_if_new) > 147:
+                summary_if_new = summary_if_new[:147] + '...'
             return entry, wiki_string, summary_if_new, summary_if_already_exists
         else:
             print('definitions', definitions)
@@ -256,7 +274,9 @@ class NinjaEntryCreator(object):
 
 if __name__ == '__main__':
     entry_creator = NinjaEntryCreator()
+    import sys
+    entry_creator.run_from_database(sys.argv[1])
     # if len(sys.argv) > 1:
     #     entry_creator.run(sys.argv[1])
     # else:
-    entry_creator.run_from_csv("user_data/cache_extractor/la_Latin nouns.csv")
+    #entry_creator.run_from_csv("user_data/cache_extractor/la_Latin nouns.csv")

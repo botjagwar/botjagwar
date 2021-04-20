@@ -9,7 +9,8 @@ from api.importer.wiktionary.en import \
     AlternativeFormsImporter, \
     SynonymImporter, \
     EtymologyImporter, \
-    AntonymImporter
+    AntonymImporter, \
+    PronunciationImporter
 from api.parsers import TEMPLATE_TO_OBJECT
 from api.parsers import templates_parser
 from api.parsers.inflection_template import ParserNotFoundError
@@ -78,6 +79,7 @@ class ENWiktionaryProcessor(WiktionaryProcessor):
             SynonymImporter,
             EtymologyImporter,
             AntonymImporter,
+            PronunciationImporter
         }
         additional_data = {}
         for classe in additional_data_classes:

@@ -121,3 +121,15 @@ class DerivedTermsImporter(ListSubsectionImporter):
                             break
 
         return list(set(retrieved))
+
+
+class PronunciationImporter(SubsectionImporter):
+    level = 3
+    data_type = 'pronunciation'
+    section_name = 'Pronunciation'
+
+
+all_importers = [
+    FurtherReadingImporter, AlternativeFormsImporter, AntonymImporter, DerivedTermsImporter,
+    PronunciationImporter, ReferencesImporter, EtymologyImporter, SynonymImporter
+]

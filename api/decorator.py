@@ -92,7 +92,7 @@ def separate_process(f):
     return wrap
 
 
-def time_this(identifier='function'):
+def time_this(identifier=''):
     def _time_this(f):
         def wrapper(*args, **kwargs):
             t0 = datetime.datetime.now()
@@ -102,7 +102,11 @@ def time_this(identifier='function'):
             t1 = datetime.datetime.now()
             dt = t1 - t0
             d = dt.seconds * 1000 + dt.microseconds / 1000
-            print(("%s took %2.6f seconds to execute" % (identifier, d/1000.)))
+            if identifier == 'function':
+                print((f"%s took %2.6f seconds to execute" % (identifier, d/1000.)))
+            else:
+                print((f"%s took %2.6f seconds to execute" % (f.__name__, d/1000.)))
+
             return ret
 
         return wrapper

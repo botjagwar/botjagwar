@@ -1,10 +1,12 @@
 import requests
 
+from api.config import BotjagwarConfig
 from api.decorator import run_once
 from conf.entryprocessor.languagecodes import LANGUAGE_CODES, LANGUAGE_NAMES
-from ..servicemanager.pgrest import StaticBackend
+from ..servicemanager.pgrest import DynamicBackend
 
-backend = StaticBackend()
+backend = DynamicBackend()
+config = BotjagwarConfig()
 
 
 class AdditionalDataImporterError(Exception):
@@ -17,6 +19,7 @@ class AdditionalDataImporter(object):
         self.iso_codes = None
         self.fetch_default_languages_mapper()
         self.word_id_cache = {}
+        # self.fetch_word_ids()
 
         if 'dry_run' in parameters:
             self.dry_run = parameters['dry_run']
@@ -26,6 +29,8 @@ class AdditionalDataImporter(object):
         if 'data' in parameters:
             self.data_type = parameters['data']
 
+        self.counter = 0
+        self.batch = []
 
     def offline_fetch_default_languages_mapper(self):
         self._languages = LANGUAGE_NAMES
@@ -120,11 +125,18 @@ class AdditionalDataImporter(object):
             'information': additional_data,
         }
         print(data)
-        if not self.additional_word_information_already_exists(data['word_id'], additional_data):
-            if not self.dry_run:
+        if self.additional_word_information_already_exists(data['word_id'], additional_data):
+            return
+
+        if not self.dry_run:
+            self.batch.append(data)
+            if self.counter > 10:
                 response = requests.post(backend.backend + '/additional_word_information', data=data)
                 if response.status_code != 201:
                     print(response.status_code)
                     print(response.text)
+
+                self.counter = 0
             else:
-                print(data)
+                self.batch.append(data)
+                self.counter += 1
