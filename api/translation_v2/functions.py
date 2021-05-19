@@ -1,16 +1,14 @@
- \
 import re
 from logging import getLogger
 
 import requests
 
-from api.decorator import time_this
 from api.parsers import templates_parser, TEMPLATE_TO_OBJECT
 from api.parsers.inflection_template import ParserNotFoundError
 from api.servicemanager.pgrest import StaticBackend
 from .types import TranslatedDefinition, \
-    UntranslatedDefinition \
- \
+    UntranslatedDefinition
+
 regexesrep = [
     (r'\{\{l\|en\|(.*)\}\}', '\\1'),
     (r'\{\{vern\|(.*)\}\}', '\\1'),
@@ -52,16 +50,38 @@ def _look_up_word(language, part_of_speech, word):
         'part_of_speech': 'eq.' + part_of_speech,
         'word': 'eq.' + word
     }
-    print(params)
+    log.debug(params)
     resp = requests.get(backend.backend + '/word', params=params)
     data = resp.json()
     return data
 
 
+def _generate_redirections(infos):
+    redirection_target = infos.entry
+    if infos.language in CYRILLIC_ALPHABET_LANGUAGES:
+        for char in "́̀":
+            if redirection_target.find(char) != -1:
+                redirection_target = redirection_target.replace(char, "")
+        if redirection_target.find("æ") != -1:
+            redirection_target = redirection_target.replace("æ", "ӕ")
+        if infos.entry != redirection_target:
+            # page = pwbot.Page(pwbot.Site(WORKING_WIKI_LANGUAGE, 'wiktionary'), infos.entry)
+            # if not page.exists():
+            #     page.put_async("#FIHODINANA [[%s]]" % redirection_target, "fihodinana")
+            infos.entry = redirection_target
+
+
+def _get_unaccented_word(word):
+    for char in "́̀":
+        if word.find(char) != -1:
+            word = word.replace(char, "")
+    return word
+
+
 def _translate_using_bridge_language(part_of_speech, definition_line, source_language, target_language, **kw)\
       -> dict:
     # query db
-    print(f'(bridge) {definition_line} ({part_of_speech}) [{source_language} -> {target_language}]',)
+    log.debug(f'(bridge) {definition_line} ({part_of_speech}) [{source_language} -> {target_language}]',)
     data = _look_up_dictionary(source_language, part_of_speech, _delink(definition_line))
     if not data:
         return {}
@@ -77,9 +97,9 @@ def _translate_using_bridge_language(part_of_speech, definition_line, source_lan
                 else:
                     translations[definition['definition']] = [definition['language']]
 
-                print(f"Translated {definition_line} --> {definition['definition']}")
+                log.debug(f"Translated {definition_line} --> {definition['definition']}")
             else:
-                print(f"(bridge) --> {definition['definition']} [{definition['language']}]")
+                log.debug(f"(bridge) --> {definition['definition']} [{definition['language']}]")
                 translation = translate_using_postgrest_json_dictionary(
                     part_of_speech, definition['definition'], definition['language'],
                     target_language, back_check_pos=False
@@ -137,7 +157,7 @@ def translate_form_of_templates(part_of_speech, definition_line, source_language
     return new_definition_line
 
 
-@time_this('translate_using_postgrest_json_dictionary')
+# @time_this('translate_using_postgrest_json_dictionary')
 def translate_using_postgrest_json_dictionary(
     part_of_speech, definition_line, source_language, target_language,
     back_check_pos=False, **kw)\
@@ -157,7 +177,7 @@ def translate_using_postgrest_json_dictionary(
 
         # lookup translation using main word
         for definition in entry['definitions']:
-            print(definition['definition'], f"[{definition['language']}]")
+            log.debug(definition['definition'], f"[{definition['language']}]")
 
     if translations:
         # back-check for part of speech.
@@ -172,7 +192,7 @@ def translate_using_postgrest_json_dictionary(
 
         # finalize
         t_string = ', '.join(translations)
-        print(f'{definition_line} ({part_of_speech}) [{source_language} -> {target_language}]: {t_string}')
+        log.debug(f'{definition_line} ({part_of_speech}) [{source_language} -> {target_language}]: {t_string}')
         return TranslatedDefinition(t_string)
     else:
         return UntranslatedDefinition(definition_line)
@@ -195,13 +215,13 @@ def translate_using_convergent_definition(part_of_speech, definition_line, sourc
         return UntranslatedDefinition(definition_line)
 
 
-@time_this('translate_using_bridge_language')
+# @time_this('translate_using_bridge_language')
 def translate_using_bridge_language(part_of_speech, definition_line, source_language, target_language, **kw) \
       -> [UntranslatedDefinition, TranslatedDefinition]:
     translations = _translate_using_bridge_language(
         part_of_speech, definition_line, source_language, target_language, **kw
     )
-    print(translations)
+    log.debug(translations)
 
     if translations.keys():
         k = ', '.join(sorted(list(set(translations))))

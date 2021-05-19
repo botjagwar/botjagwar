@@ -67,6 +67,7 @@ class ReferencesImporter(SubsectionImporter):
 
 class FurtherReadingImporter(ReferencesImporter):
     section_name = 'Further reading'
+    data_type = 'further_reading'
 
 
 class AlternativeFormsImporter(ListSubsectionImporter):

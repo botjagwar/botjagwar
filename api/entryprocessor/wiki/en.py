@@ -91,7 +91,9 @@ class ENWiktionaryProcessor(WiktionaryProcessor):
 
     def extract_definition(self, part_of_speech, definition_line,
                            cleanup_definition=True,
-                           translate_definitions_to_malagasy=False):
+                           translate_definitions_to_malagasy=False,
+                           human_readable_form_of_definition=True
+                           ):
         new_definition_line = definition_line
         # No cleanup
         if not cleanup_definition:
@@ -106,21 +108,24 @@ class ENWiktionaryProcessor(WiktionaryProcessor):
         #   which is tentatively being integrated here to provide human-readable output for
         #   either English or Malagasy
         if new_definition_line == '':
-            try:
-                if part_of_speech in TEMPLATE_TO_OBJECT:
-                    elements = templates_parser.get_elements(TEMPLATE_TO_OBJECT[part_of_speech], definition_line)
-                    if translate_definitions_to_malagasy:
-                        new_definition_line = elements.to_definition('mg')
-                    else:
-                        new_definition_line = elements.to_definition(self.processor_language)
-            except ParserNotFoundError:
-                new_definition_line = definition_line
+            if human_readable_form_of_definition:
+                try:
+                    if part_of_speech in TEMPLATE_TO_OBJECT:
+                        elements = templates_parser.get_elements(TEMPLATE_TO_OBJECT[part_of_speech], definition_line)
+                        if translate_definitions_to_malagasy:
+                            new_definition_line = elements.to_definition('mg')
+                        else:
+                            new_definition_line = elements.to_definition(self.processor_language)
+                except ParserNotFoundError:
+                    new_definition_line = definition_line
+        else:
+            return definition_line
 
         # print(definition_line, new_definition_line)
         return new_definition_line
 
     def getall(self, keepNativeEntries=False, fetch_additional_data=False, cleanup_definitions=True,
-               translate_definitions_to_malagasy=False):
+               translate_definitions_to_malagasy=False, human_readable_form_of_definition=True):
         content = self.content
         entries = []
         content = re.sub("{{l/en\|(.*)}}", "\\1 ", content)  # remove {{l/en}}
@@ -156,7 +161,8 @@ class ENWiktionaryProcessor(WiktionaryProcessor):
                         last_part_of_speech,
                         defn_line,
                         cleanup_definition=cleanup_definitions,
-                        translate_definitions_to_malagasy=translate_definitions_to_malagasy
+                        translate_definitions_to_malagasy=translate_definitions_to_malagasy,
+                        human_readable_form_of_definition=human_readable_form_of_definition
                     )
                     if last_part_of_speech in definitions:
                         definitions[last_part_of_speech].append(definition)
@@ -183,6 +189,17 @@ class ENWiktionaryProcessor(WiktionaryProcessor):
                 entries.append(entry)
 
         return entries
+
+    @staticmethod
+    def refine_definition(definition):
+        definition = re.sub('\[\[([\w]+)\|[\w]+\]\]', '\\1', definition)
+        definition = re.sub('\[\[([\w]+)\]\]', '\\1', definition)
+        definition = re.sub('[Tt]o ', '', definition)
+        definition = re.sub('[Aa] ', '', definition)
+        if definition.endswith('.'):
+            definition = definition[:-1]
+
+        return [k.strip() for k in definition.split(', ')]
 
     def retrieve_translations(self):
         regex = re.compile('\{\{t[\+]?\|([A-Za-z]{2,3})\|(.*?)\}\}')

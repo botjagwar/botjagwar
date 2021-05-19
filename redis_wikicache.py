@@ -89,7 +89,7 @@ class RedisPage(object):
             return True
 
     def __getattr__(self, item):
-        if hasattr(self, item):
+        if hasattr(RedisPage, item):
             return getattr(self, item)
         else:
             wikisite = pywikibot.Site(self.site.language, self.site.wiki)
@@ -105,19 +105,19 @@ if __name__ == '__main__':
     Using RedisSite and RedisPage, you'll have a much faster read and offline access.
     """)
     site = RedisSite('en', 'wiktionary')
-    site.load_xml_dump('user_data/dumps/enwikt_1.xml')
-    site.load_xml_dump('user_data/dumps/enwikt_2.xml')
-    site.load_xml_dump('user_data/dumps/enwikt_3.xml')
-    site.load_xml_dump('user_data/dumps/enwikt_4.xml')
-    site.load_xml_dump('user_data/dumps/enwikt_5.xml')
-    site.load_xml_dump('user_data/dumps/enwikt_6.xml')
-    site.load_xml_dump('user_data/dumps/enwikt_7.xml')
-    site.load_xml_dump('user_data/dumps/enwikt_8.xml')
-    site.load_xml_dump('user_data/dumps/enwikt_9.xml')
-    site.load_xml_dump('user_data/dumps/enwikt_10.xml')
-    site.load_xml_dump('user_data/dumps/enwikt_11.xml')
-    site.load_xml_dump('user_data/dumps/enwikt_13.xml')
-    site.load_xml_dump('user_data/dumps/enwikt_14.xml')
-    site.load_xml_dump('user_data/dumps/enwikt_15.xml')
-    site.load_xml_dump('user_data/dumps/enwikt_16.xml')
-    site.load_xml_dump('user_data/dumps/enwikt_17.xml')
+    site.load_xml_dump('user_data/dumps/enwikt.xml')
+    # site.load_xml_dump('user_data/dumps/enwikt_2.xml')
+    # site.load_xml_dump('user_data/dumps/enwikt_3.xml')
+    # site.load_xml_dump('user_data/dumps/enwikt_4.xml')
+    # site.load_xml_dump('user_data/dumps/enwikt_5.xml')
+    # site.load_xml_dump('user_data/dumps/enwikt_6.xml')
+    # site.load_xml_dump('user_data/dumps/enwikt_7.xml')
+    # site.load_xml_dump('user_data/dumps/enwikt_8.xml')
+    # site.load_xml_dump('user_data/dumps/enwikt_9.xml')
+    # site.load_xml_dump('user_data/dumps/enwikt_10.xml')
+    # site.load_xml_dump('user_data/dumps/enwikt_11.xml')
+    # site.load_xml_dump('user_data/dumps/enwikt_13.xml')
+    # site.load_xml_dump('user_data/dumps/enwikt_14.xml')
+    # site.load_xml_dump('user_data/dumps/enwikt_15.xml')
+    # site.load_xml_dump('user_data/dumps/enwikt_16.xml')
+    # site.load_xml_dump('user_data/dumps/enwikt_17.xml')

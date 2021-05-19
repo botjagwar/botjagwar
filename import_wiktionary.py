@@ -21,7 +21,7 @@ from object_model.word import Entry
 config = BotjagwarConfig()
 
 
-class WiktionaryDumpImporter():
+class WiktionaryDumpImporter(object):
     content_language = ''
     _current_batch = []
     _insert = {}
@@ -38,8 +38,20 @@ class WiktionaryDumpImporter():
         print(self.additional_data_keys)
 
     def _init_redis_cache(self):
+        """
+        Import ID mappings to existing redis instance to reduce start time.
+        start/restart time takes several minutes in proportion with the number of words.
+        Redis is used to reduce network-induced latency.
+        :return:
+        """
+        key = 'WiktionaryDumpImporter/is_cache_initialised'
+        if self.dictionary.get(key) == '1':
+            print('Skipping redis cache initialization')
+            return
+
         pgsql_conn = psycopg2.connect(config.get('database_uri'))
         cursor = pgsql_conn.cursor()
+
         sql = cursor.mogrify("select id, word, part_of_speech, language from word")
         cursor.execute(sql)
         count = 0
@@ -49,6 +61,8 @@ class WiktionaryDumpImporter():
                 print(count)
             key = '/'.join((word, pos, lang))
             self.dictionary.set(key, id_)
+
+        self.dictionary.set(key, '1')
 
     def _init_processor(self):
         self.EntryProcessor = WiktionaryProcessorFactory.create(self.content_language)
@@ -143,7 +157,7 @@ class WiktionaryDumpImporter():
             pgsql_conn.close()
 
     def import_additional_data(self, xml_page):
-        batch_size = 10000
+        batch_size = self.batch_size
         title_node, content_node = self.get_page_from_xml(xml_page)
         self.entryprocessor.set_title(title_node)
         self.entryprocessor.set_text(content_node)
@@ -184,8 +198,8 @@ class WiktionaryDumpImporter():
         for xml_page in self.load():
             c += 1
             try:
-                self.import_additional_data(xml_page)
-                # self.import_wiktionary_page(xml_page)
+                #self.import_additional_data(xml_page)
+                self.import_wiktionary_page(xml_page)
             except Exception as exc:
                 print(exc)
                 continue

@@ -1,9 +1,10 @@
-import requests
 import time
+
+import requests
 
 
 def merge_entries():
-
+    pass
 
 
 def fix_part_of_speech():
@@ -12,7 +13,6 @@ def fix_part_of_speech():
     with open('user_data/list_fr_Formes de verbes en français', 'r') as f:
         for line in f:
             q.add(line.strip('\n'))
-
 
     print('get list in db')
     c = 0

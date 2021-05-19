@@ -135,10 +135,10 @@ class NinjaEntryCreator(object):
 
     def run_from_database(self, language=None):
         params = {
-            'limit': 300,
+            'limit': 30000,
             # 'offset': 1100,
             # 'en_definition': 'eq.' + sys.argv[1],
-            # 'language': 'not.in.(en,fr)',
+            'language': 'not.in.(mg,fr,en)',
             # 'order': 'word_id',
             # 'suggested_definition': 'eq.' + sys.argv[1],
             # 'word_id': 'gt.469562'
@@ -147,7 +147,7 @@ class NinjaEntryCreator(object):
         # if language is not None:
         #     params['language'] = 'eq.' + language
 
-        convergent_translations_rq = requests.get(dyn_backend.backend + '/m_curated_convergent_translation', params=params)
+        convergent_translations_rq = requests.get(dyn_backend.backend + '/convergent_translations', params=params)
         if convergent_translations_rq.status_code != 200:
             print('convergent_translations_rq.status_code', convergent_translations_rq.status_code)
             return
@@ -165,7 +165,6 @@ class NinjaEntryCreator(object):
         print(len(data), 'translations loaded')
         filtered_data = []
         for translation in data:
-            filtered_data.append(translation)
             if (int(translation['word_id']), int(translation['mg_definition_id'])) in new_associations:
                 continue
             else:
@@ -217,16 +216,16 @@ class NinjaEntryCreator(object):
         # Fetching and mapping additional data
         additional_data_list = json_dictionary_infos[0]['additional_data']
         if additional_data_list is not None:
-            p = self.fetch_additional_data(
-                additional_data_list, translation['word_id'], 'pronunciation', list)
+            # p = self.fetch_additional_data(
+            #     additional_data_list, translation['word_id'], 'pronunciation', list)
             raw_additional_data_dict = {
                 'synonyms': self.fetch_additional_data(
                     additional_data_list, translation['word_id'], 'synonym', list),
                 'antonyms': self.fetch_additional_data(
                     additional_data_list, translation['word_id'], 'antonym', list),
-                # 'ipa': self.fetch_additional_data(
-                #     additional_data_list, translation['word_id'], 'IPA', list),
-                'pronunciation': p[0] if p else [],
+                'ipa': self.fetch_additional_data(
+                    additional_data_list, translation['word_id'], 'ipa', list),
+                # 'pronunciation': p[0] if p else [],
                 # 'ipa': ['{{fanononana-ko}}'],
                 'audio_pronunciations': self.fetch_additional_data(
                     additional_data_list, translation['word_id'], 'audio', list),
