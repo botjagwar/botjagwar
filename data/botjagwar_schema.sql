@@ -149,6 +149,12 @@ CREATE TABLE public.dictionary (
     definition bigint
 );
 
+CREATE TABLE `translation_method` (
+  `word` bigint not NULL,
+  `definition` bigint not NULL,
+  `translation_method` character varying(40),
+);
+
 
 ALTER TABLE public.dictionary OWNER TO postgres;
 

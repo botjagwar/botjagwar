@@ -10,5 +10,5 @@ if __name__ == '__main__':
     # print(translate_using_convergent_definition('ana', 'hover', 'en', 'mg'))
     # print(translate_using_postgrest_json_dictionary('mat', 'flood', 'en', 'fr'))
     t = Translation()
-    wp = RedisPage(RedisSite('en', 'wiktionary'), 'don')
+    wp = RedisPage(RedisSite('en', 'wiktionary'), 'keel')
     t.process_wiktionary_wiki_page(wp)

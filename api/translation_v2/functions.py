@@ -17,6 +17,7 @@ regexesrep = [
     (r'\[\[(.*)\|(.*)\]\]', '\\1'),
     (r"\((.*)\)", "")
 ]
+CYRILLIC_ALPHABET_LANGUAGES = 'be,bg,mk,ru,uk'.split(',')
 backend = StaticBackend()
 log = getLogger(__file__)
 
