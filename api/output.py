@@ -52,4 +52,12 @@ class Output(object):
     def wikipage(self, info: Entry, link=True):
         "returns wikipage string"
         self.wikipage_renderer = WikiPageRendererFactory(self.content_language)()
-        return self.wikipage_renderer.render(info, link=link)
+        return self.wikipage_renderer.render(info)
+
+    def wikipages(self, infos: list, link=True):
+        self.wikipage_renderer = WikiPageRendererFactory(self.content_language)()
+        ret_page = ''
+        for info in infos:
+            ret_page += '\n' + self.wikipage_renderer.render(info)
+
+        return ret_page
