@@ -33,6 +33,7 @@ class Output(object):
             'definitions': definitions,
             'word': info.entry,
             'part_of_speech': info.part_of_speech,
+            'translation_method': info.translation_method if hasattr(info, 'translation_method') else None
         }
         response = dictionary_service.post('entry/%s/create' % info.language, json=data)
         if response.status_code == WordAlreadyExistsException.status_code:
@@ -42,7 +43,6 @@ class Output(object):
                 log.debug('%s [%s] > Attempted to create an already-existing entry.' % (info.entry, info.language))
             elif edit_response.status_code != 200:
                 log.error('%s [%s] > Entry update failed (%d).' % (info.entry, info.language, edit_response.status_code))
-
 
     def batchfile(self, info: Entry):
         "return batch format (see doc)"

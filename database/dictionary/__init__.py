@@ -10,9 +10,23 @@ from sqlalchemy.sql import func
 from object_model.word import Entry
 
 Base = declarative_base()
-dictionary_association = Table('dictionary', Base.metadata,
+
+dictionary_association = Table(
+    'dictionary', Base.metadata,
     Column('word', Integer, ForeignKey('word.id')),
     Column('definition', Integer, ForeignKey('definitions.id'))
+)
+additional_data = Table(
+    'additional_word_information', Base.metadata,
+    Column('word_id', Integer, ForeignKey('word.id')),
+    Column('type', String(50)),
+    Column('information', String(2000))
+)
+translation_method = Table(
+    'additional_word_information', Base.metadata,
+    Column('word', Integer, ForeignKey('word.id')),
+    Column('definition', Integer, ForeignKey('definitions.id')),
+    Column('translation_method', String(40))
 )
 
 
@@ -79,6 +93,14 @@ class Word(Base):
         "Definition",
         secondary=dictionary_association,
         back_populates="words")
+    additional_data = relationship(
+        "AdditionalData",
+        secondary=additional_data,
+        back_populates='additional_data')
+    translation_method = relationship(
+        'TranslationMethod',
+        secondary=additional_data,
+        back_populates='translation_method')
 
     def __init__(self, word: str, language: str, part_of_speech: str, definitions: list):
         self.word = word
@@ -137,7 +159,15 @@ class Word(Base):
             'language': self.language,
             'part_of_speech': self.part_of_speech,
             'last_modified': last_modified
+            'additional_data': {}
         }
+        if self.additional_data:
+            for adt, adi in self.additional_data
+                if adt.type in word_data['additional_data']:
+                    word_data['additional_data'][adt.type].append(adi)
+                else:
+                    word_data['additional_data'][adt.type] = [adi]
+
         return word_data
 
     def set_definition(self, definitions: list):
