@@ -18,6 +18,7 @@ regexesrep = [
     (r"\((.*)\)", "")
 ]
 CYRILLIC_ALPHABET_LANGUAGES = 'be,bg,mk,ru,uk'.split(',')
+MAX_DEPTH = 5
 backend = StaticBackend()
 log = getLogger(__file__)
 
@@ -79,8 +80,11 @@ def _get_unaccented_word(word):
     return word
 
 
-def _translate_using_bridge_language(part_of_speech, definition_line, source_language, target_language, **kw)\
+def _translate_using_bridge_language(part_of_speech, definition_line, source_language, target_language, ct_depth=0, **kw)\
       -> dict:
+    if ct_depth >= MAX_DEPTH:
+        return {}
+
     # query db
     log.debug(f'(bridge) {definition_line} ({part_of_speech}) [{source_language} -> {target_language}]',)
     data = _look_up_dictionary(source_language, part_of_speech, _delink(definition_line))
@@ -118,7 +122,8 @@ def _translate_using_bridge_language(part_of_speech, definition_line, source_lan
                         part_of_speech=part_of_speech,
                         definition_line=definition['definition'],
                         source_language=definition['language'],
-                        target_language=target_language
+                        target_language=target_language,
+                        ct_depth=ct_depth + 1
                     )
 
                     if translation.keys():

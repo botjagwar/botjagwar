@@ -9,17 +9,18 @@ from pywikibot import Page
 from api import entryprocessor
 from api.output import Output
 from api.servicemanager import DictionaryServiceManager
-from api.servicemanager.pgrest import StaticBackend
+from api.servicemanager.pgrest import DynamicBackend
 from object_model.word import Entry
 from .functions import \
     translate_using_bridge_language, \
     translate_form_of_templates, \
-    translate_using_convergent_definition
+    translate_using_convergent_definition, \
+    translate_using_postgrest_json_dictionary
 from .types import \
     UntranslatedDefinition, \
     TranslatedDefinition
 
-backend = StaticBackend().backend
+backend = DynamicBackend().backend
 log = logging.getLogger(__name__)
 default_data_file = '/opt/botjagwar/conf/entry_translator/'
 URL_HEAD = DictionaryServiceManager().get_url_head()
@@ -27,7 +28,7 @@ WORKING_WIKI_LANGUAGE = 'mg'
 translation_methods = [
     translate_using_convergent_definition,
     translate_using_bridge_language,
-    # translate_using_postgrest_json_dictionary,
+    translate_using_postgrest_json_dictionary,
     translate_form_of_templates
 ]
 
@@ -83,7 +84,11 @@ class Translation:
             self.process_wiktionary_wiki_page(wiki_page.getRedirectTarget())
 
         try:
-            entries = wiktionary_processor.getall(human_readable_form_of_definition=True)
+            entries = wiktionary_processor.getall(
+                fetch_additional_data=True,
+                translate_definitions_to_malagasy=True,
+                human_readable_form_of_definition=True
+            )
             out_entries = []
             for entry in entries:
                 # print(entry)
@@ -111,6 +116,7 @@ class Translation:
                                     else:
                                         out_translation_methods[d] = [t_method.__name__]
 
+                                # print(t_method.__name__, refined_definition_line, '>', definitions)
                                 translated_definition += [k.strip() for k in definitions.split(',')]
 
                         translated_from_definition.append(refined_definition_line)
@@ -121,17 +127,21 @@ class Translation:
                 out_entry.entry_definition = entry_definitions
                 out_entry.translated_from_language = wiki_page.site.language
                 out_entry.translation_methods = out_translation_methods
+                # print(entry.__dict__)
                 # print(translated_definition)
                 # print(entry)
                 # print(out_entry)
                 if entry_definitions:
                     out_entries.append(out_entry)
-                print('outentry>', out_entry.translation_methods)
+                # print('outentry>', out_entry.translation_methods)
 
-            print('outentry>', out_entries)
+            # print('outentry>', out_entries)
             out_entries.sort()
             ret = self.output.wikipages(out_entries)
-            print(ret)
+            if ret != '':
+                return len(out_entries)
+            else:
+                return 0
 
         except Exception as exc:
             log.exception(exc)

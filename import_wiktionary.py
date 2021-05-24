@@ -33,9 +33,9 @@ class WiktionaryDumpImporter(object):
         self.processor = Processor('en')
         self._init_processor()
         self.dictionary = redis.Redis(config.get('host', 'redis'))
-        self._init_redis_cache()
-        self.additional_data_keys = set(classe.data_type for classe in all_importers)
-        print(self.additional_data_keys)
+        # self._init_redis_cache()
+        # self.additional_data_keys = set(classe.data_type for classe in all_importers)
+        # print(self.additional_data_keys)
 
     def _init_redis_cache(self):
         """

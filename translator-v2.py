@@ -10,5 +10,24 @@ if __name__ == '__main__':
     # print(translate_using_convergent_definition('ana', 'hover', 'en', 'mg'))
     # print(translate_using_postgrest_json_dictionary('mat', 'flood', 'en', 'fr'))
     t = Translation()
-    wp = RedisPage(RedisSite('en', 'wiktionary'), 'anak')
-    t.process_wiktionary_wiki_page(wp)
+    site = RedisSite('en', 'wiktionary')
+    # wp = RedisPage(site, '')
+    errored = []
+    errors = 0
+    k = 30000
+    entries = 0
+    for i in range(k):
+        try:
+            wp = site.random_page()
+            entries += t.process_wiktionary_wiki_page(wp)
+        except Exception as exception:
+            errors += 1
+            print(exception)
+            errored.append((wp, exception))
+        else:
+            if not i % 200:
+                print(i, 'entries', entries, '/ process error rate:', errors*100. / (i+1))
+
+    print('process error rate:', errors*100. / (k))
+    print('entries created:', entries)
+    print(errored)

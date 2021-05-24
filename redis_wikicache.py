@@ -2,7 +2,7 @@ import pywikibot
 import redis
 
 from api.decorator import separate_process
-from import_wiktionary import EnWiktionaryDumpImporter
+from import_wiktionary import EnWiktionaryDumpImporter, MgWiktionaryDumpImporter
 
 
 class NoPage(Exception):
@@ -18,7 +18,11 @@ class RedisSite(object):
         self.instance = redis.Redis(self.host, self.port, password)
 
     def random_page(self):
-        page_name = str(self.instance.randomkey(), encoding='utf8').replace(f'{self.wiki}.{self.language}/','')
+        rkey = self.instance.randomkey()
+        while not rkey.startswith(bytes(f'{self.wiki}.{self.language}/', 'utf8')):
+            rkey = self.instance.randomkey()
+
+        page_name = str(rkey, encoding='utf8').replace(f'{self.wiki}.{self.language}/','')
         return RedisPage(self, page_name)
 
     @separate_process
@@ -52,6 +56,9 @@ class RedisPage(object):
 
     def __repr__(self):
         return f'Page({self.site}/{self.title()})'
+
+    def isEmpty(self):
+        return self.get() == ''
 
     def get(self):
         if self._title is None:
@@ -87,6 +94,15 @@ class RedisPage(object):
                 return wikipage.exists()
         else:
             return True
+
+    def namespace(self):
+        class Namespace(object):
+            content = self.get()
+
+        return Namespace()
+
+    def isRedirectPage(self):
+        return '#REDIRECT [[' in self.get()
 
     def __getattr__(self, item):
         if hasattr(RedisPage, item):

@@ -45,7 +45,7 @@ def render_verb_form(non_lemma) -> str:
     if non_lemma.number in NUMBER:
         explanation += NUMBER[non_lemma.number] + ' '
 
-    explanation += 'ny ' if len(explanation.strip()) != 0 else ''
+    explanation += '' if len(explanation.strip()) != 0 else ''
     if non_lemma.mood in MOOD:
         explanation += MOOD[non_lemma.mood] + ' '
 

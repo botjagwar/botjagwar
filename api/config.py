@@ -2,7 +2,7 @@ import configparser
 
 from api.decorator import singleton
 
-CONF_ROOT_PATH = '/home/rado/botjagwar/conf'
+CONF_ROOT_PATH = '/mnt/n/botjagwar/conf'
 
 
 @singleton

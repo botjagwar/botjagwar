@@ -89,7 +89,11 @@ class ENWiktionaryProcessor(WiktionaryProcessor):
 
         return additional_data
 
-    def extract_definition(self, part_of_speech, definition_line,
+    def extract_definition(self, part_of_speech, definition_line, **kw):
+        # No cleanup
+        return definition_line
+
+    def advanced_extract_definition(self, part_of_speech, definition_line,
                            cleanup_definition=True,
                            translate_definitions_to_malagasy=False,
                            human_readable_form_of_definition=True
