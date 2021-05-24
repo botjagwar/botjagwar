@@ -1,7 +1,8 @@
 import logging
-
+import requests
 from api.decorator import retry_on_fail
 from api.page_renderer import WikiPageRendererFactory
+from api.servicemanager.pgrest import DynamicBackend
 from api.servicemanager import DictionaryServiceManager
 from database.exceptions.http import WordAlreadyExistsException
 from object_model.word import Entry
@@ -9,6 +10,7 @@ from object_model.word import Entry
 log = logging.getLogger(__name__)
 verbose = False
 
+backend = DynamicBackend().backend
 dictionary_service = DictionaryServiceManager()
 USER_DATA = 'user_data/entry_translator'
 URL_HEAD = dictionary_service.get_url_head()
@@ -21,7 +23,7 @@ class Output(object):
             self.content_language = content_language
 
     @retry_on_fail([Exception], 5, .5)
-    def db(self, info: Entry):
+    def dictionary_service_update_database(self, info: Entry):
         """updates database"""
         # Adapt to expected format
         log.info(info.to_dict())
@@ -43,6 +45,35 @@ class Output(object):
             elif edit_response.status_code != 200:
                 log.error('%s [%s] > Entry update failed (%d).' % (info.entry, info.language, edit_response.status_code))
 
+    def postgrest_update_database(self, info: Entry):
+        raise NotImplementedError()
+
+    @staticmethod
+    def postgrest_add_translation_method(infos: Entry):
+        word_id = requests.get(backend + '/word', data={
+            'word': 'eq.' + infos.entry,
+            'language': 'eq.' + infos.language,
+            'part_of_speech': 'eq.' + infos.part_of_speech,
+        }).json()['id']
+        for definition, methods in infos.translation_methods.items():
+            defn_id = requests.get(backend + '/definitions', data={
+                'definition': 'eq.' + definition,
+                'definition_language': 'eq.',
+            }).json()['id']
+            for method in methods:
+                data = {
+                    'word': word_id,
+                    'definition': defn_id,
+                    'translation_method': method,
+                }
+                requests.post(backend + '/translation_method', data=data)
+
+    @staticmethod
+    def sqlite_add_translation_method(infos: Entry):
+        raise NotImplementedError()
+
+    db = dictionary_service_update_database
+    add_translation_method = postgrest_add_translation_method
 
     def batchfile(self, info: Entry):
         "return batch format (see doc)"

@@ -3,7 +3,6 @@ import asyncio
 import logging
 from copy import deepcopy
 
-import requests
 from pywikibot import Page
 
 from api import entryprocessor
@@ -20,7 +19,6 @@ from .types import \
     UntranslatedDefinition, \
     TranslatedDefinition
 
-backend = DynamicBackend().backend
 log = logging.getLogger(__name__)
 default_data_file = '/opt/botjagwar/conf/entry_translator/'
 URL_HEAD = DictionaryServiceManager().get_url_head()
@@ -42,31 +40,11 @@ class Translation:
 
     def _save_translation_from_bridge_language(self, infos: Entry):
         self.output.db(infos)
-        self.postgrest_add_translation_method(infos)
+        self.output.add_translation_method(infos)
 
     def _save_translation_from_page(self, infos: Entry):
         self.output.db(infos)
-        self.postgrest_add_translation_method(infos)
-
-    @staticmethod
-    def postgrest_add_translation_method(infos: Entry):
-        word_id = requests.get(backend + '/word', data={
-            'word': 'eq.' + infos.entry,
-            'language': 'eq.' + infos.language,
-            'part_of_speech': 'eq.' + infos.part_of_speech,
-        }).json()['id']
-        for definition, methods in infos.translation_methods.items():
-            defn_id = requests.get(backend + '/definitions', data={
-                'definition': 'eq.' + definition,
-                'definition_language': 'eq.',
-            }).json()['id']
-            for method in methods:
-                data = {
-                    'word': word_id,
-                    'definition': defn_id,
-                    'translation_method': method,
-                }
-                requests.post(backend + '/translation_method', data=data)
+        self.output.add_translation_method(infos)
 
     def process_wiktionary_wiki_page(self, wiki_page: Page):
         if wiki_page.isEmpty():
@@ -127,15 +105,9 @@ class Translation:
                 out_entry.entry_definition = entry_definitions
                 out_entry.translated_from_language = wiki_page.site.language
                 out_entry.translation_methods = out_translation_methods
-                # print(entry.__dict__)
-                # print(translated_definition)
-                # print(entry)
-                # print(out_entry)
                 if entry_definitions:
                     out_entries.append(out_entry)
-                # print('outentry>', out_entry.translation_methods)
 
-            # print('outentry>', out_entries)
             out_entries.sort()
             ret = self.output.wikipages(out_entries)
             if ret != '':

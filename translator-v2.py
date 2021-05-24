@@ -14,7 +14,7 @@ if __name__ == '__main__':
     # wp = RedisPage(site, '')
     errored = []
     errors = 0
-    k = 30000
+    k = 250000
     entries = 0
     for i in range(k):
         try:
