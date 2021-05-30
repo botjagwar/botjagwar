@@ -4,6 +4,7 @@ from logging import getLogger
 import requests
 
 from api.parsers import templates_parser, TEMPLATE_TO_OBJECT
+from api.parsers.functions.postprocessors import POST_PROCESSORS
 from api.parsers.inflection_template import ParserNotFoundError
 from api.servicemanager.pgrest import StaticBackend
 from .types import TranslatedDefinition, \
@@ -19,8 +20,22 @@ regexesrep = [
 ]
 CYRILLIC_ALPHABET_LANGUAGES = 'be,bg,mk,ru,uk'.split(',')
 MAX_DEPTH = 5
+form_of_part_of_speech_mapper = {
+    'ana' : 'e-ana',
+    'mat' : 'e-mat',
+    'mpam-ana' : 'e-mpam-ana',
+    'mpam' : 'e-mpam',
+}
+
 backend = StaticBackend()
 log = getLogger(__file__)
+
+
+def _get_unaccented_word(word):
+    for char in "́̀":
+        if word.find(char) != -1:
+            word = word.replace(char, "")
+    return word
 
 
 def _delink(line):
@@ -138,7 +153,6 @@ def _translate_using_bridge_language(part_of_speech, definition_line, source_lan
 
     return translations
 
-
 def translate_form_of_templates(part_of_speech, definition_line, source_language, target_language, **kw)\
       -> [UntranslatedDefinition, TranslatedDefinition]:
 
@@ -156,7 +170,16 @@ def translate_form_of_templates(part_of_speech, definition_line, source_language
         try:
             if part_of_speech in TEMPLATE_TO_OBJECT:
                 elements = templates_parser.get_elements(TEMPLATE_TO_OBJECT[part_of_speech], definition_line)
+                if 'language' in kw:
+                    if kw['language'] in POST_PROCESSORS:
+                        elements = POST_PROCESSORS[kw['language']](elements)
                 new_definition_line = TranslatedDefinition(elements.to_definition(target_language))
+                if hasattr(elements, 'lemma'):
+                    setattr(new_definition_line, 'lemma', elements.lemma)
+                if part_of_speech in form_of_part_of_speech_mapper:
+                    new_definition_line.part_of_speech = form_of_part_of_speech_mapper[part_of_speech]
+                else:
+                    new_definition_line.part_of_speech = part_of_speech
         except ParserNotFoundError:
             new_definition_line = UntranslatedDefinition(definition_line)
 

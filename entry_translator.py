@@ -12,7 +12,7 @@ from pywikibot import Site, Page
 
 from api import entryprocessor
 from api.decorator import threaded
-from api.translation.core import Translation
+from api.translation_v2.core import Translation
 from object_model.word import Translation as TranslationModel
 
 # GLOBAL VARS

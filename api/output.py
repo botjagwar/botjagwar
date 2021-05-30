@@ -2,7 +2,7 @@ import logging
 import requests
 from api.decorator import retry_on_fail
 from api.page_renderer import WikiPageRendererFactory
-from api.servicemanager.pgrest import DynamicBackend
+from api.servicemanager.pgrest import DynamicBackend, StaticBackend
 from api.servicemanager import DictionaryServiceManager
 from database.exceptions.http import WordAlreadyExistsException
 from object_model.word import Entry
@@ -10,7 +10,7 @@ from object_model.word import Entry
 log = logging.getLogger(__name__)
 verbose = False
 
-backend = DynamicBackend().backend
+backend = StaticBackend().backend
 dictionary_service = DictionaryServiceManager()
 USER_DATA = 'user_data/entry_translator'
 URL_HEAD = dictionary_service.get_url_head()
@@ -18,6 +18,7 @@ URL_HEAD = dictionary_service.get_url_head()
 
 class Output(object):
     content_language = 'mg'
+
     def __init__(self, content_language='default'):
         if content_language != 'default':
             self.content_language = content_language
@@ -50,22 +51,41 @@ class Output(object):
 
     @staticmethod
     def postgrest_add_translation_method(infos: Entry):
-        word_id = requests.get(backend + '/word', data={
+        data = {
             'word': 'eq.' + infos.entry,
             'language': 'eq.' + infos.language,
             'part_of_speech': 'eq.' + infos.part_of_speech,
-        }).json()['id']
+            'limit': '1'
+
+        }
+        # print('get /word', data)
+        word_id = requests.get(backend + '/word', params=data).json()
+        if len(word_id) > 0:
+            if 'id' in word_id[0]:
+                word_id = word_id[0]['id']
+            else:
+                raise TypeError(word_id)
+        else:
+            return
         for definition, methods in infos.translation_methods.items():
-            defn_id = requests.get(backend + '/definitions', data={
+            data = {
                 'definition': 'eq.' + definition,
-                'definition_language': 'eq.',
-            }).json()['id']
+                'definition_language': 'eq.mg',
+                'limit': '1'
+            }
+            defn_id = requests.get(backend + '/definitions', params=data).json()
+            if len(defn_id) > 0 and 'id' in defn_id:
+                defn_id = defn_id[0]['id']
+            else:
+                return
+
             for method in methods:
                 data = {
                     'word': word_id,
                     'definition': defn_id,
                     'translation_method': method,
                 }
+                print('get /definitions', data)
                 requests.post(backend + '/translation_method', data=data)
 
     @staticmethod
@@ -88,7 +108,26 @@ class Output(object):
     def wikipages(self, infos: list, link=True):
         self.wikipage_renderer = WikiPageRendererFactory(self.content_language)()
         ret_page = ''
-        for info in infos:
-            ret_page += '\n' + self.wikipage_renderer.render(info)
 
+        # Consolidate by language
+        entries_by_language = {}
+        for entry in infos:
+            if entry.language in entries_by_language:
+                if entry not in entries_by_language[entry.language]:
+                    entries_by_language[entry.language].append(entry)
+            else:
+                entries_by_language[entry.language] = [entry]
+
+        # render
+        print(entries_by_language)
+        for language, entries in entries_by_language.items():
+            for entry in entries:
+                rendered = self.wikipage_renderer.render(entry)
+                language_section = rendered.split('\n')[0]
+                if ret_page.find(language_section) == -1:
+                    ret_page += rendered + "\n"
+                else:
+                    ret_page = ret_page.replace(language_section, rendered) + "\n"
+
+        ret_page = ret_page.replace('\n\n\n', '\n\n')
         return ret_page

@@ -96,13 +96,25 @@ class RedisPage(object):
             return True
 
     def namespace(self):
-        class Namespace(object):
-            content = self.get()
+        if self.offline:
+            class Namespace(object):
+                content = self.get()
 
-        return Namespace()
+            return Namespace()
+        else:
+            wikisite = pywikibot.Site(self.site.language, self.site.wiki)
+            wikipage = pywikibot.Page(wikisite, self._title)
+            return getattr(wikipage, 'namespace')()
 
     def isRedirectPage(self):
-        return '#REDIRECT [[' in self.get()
+        if self.exists():
+            return '#REDIRECT [[' in self.get()
+        else:
+            if not self.offline:
+                wikisite = pywikibot.Site(self.site.language, self.site.wiki)
+                wikipage = pywikibot.Page(wikisite, self._title)
+                return wikipage.isRedirectPage()
+            return False
 
     def __getattr__(self, item):
         if hasattr(RedisPage, item):

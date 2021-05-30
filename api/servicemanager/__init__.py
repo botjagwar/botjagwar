@@ -123,6 +123,7 @@ class DictionaryServiceManager(ServiceManager):
     port = 8001
     program_name = 'dictionary_service.py'
     kill_if_exists = False
+    backend_address = '192.168.10.101'
 
     def create_entry(self, language, entry):
         return self.post(

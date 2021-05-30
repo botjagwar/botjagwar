@@ -10,6 +10,10 @@ from .base import stripwikitext
 
 
 class FRWiktionaryProcessor(WiktionaryProcessor):
+    @property
+    def language(self):
+        return 'fr'
+
     def __init__(self, test=False, verbose=False):
         super(FRWiktionaryProcessor, self).__init__(test=test, verbose=verbose)
         self.verbose = verbose

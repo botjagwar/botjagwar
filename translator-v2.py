@@ -14,19 +14,21 @@ if __name__ == '__main__':
     # wp = RedisPage(site, '')
     errored = []
     errors = 0
-    k = 250000
+    k = 100
     entries = 0
-    for i in range(k):
-        try:
-            wp = site.random_page()
-            entries += t.process_wiktionary_wiki_page(wp)
-        except Exception as exception:
-            errors += 1
-            print(exception)
-            errored.append((wp, exception))
-        else:
-            if not i % 200:
-                print(i, 'entries', entries, '/ process error rate:', errors*100. / (i+1))
+    for v in 'sanaturae,excripserant,apponendas,addubitassemus,veterescentes,inanituras,declamitaturos,clavigerorum'.split(','):
+        entries += t.process_wiktionary_wiki_page(RedisPage(RedisSite('en', 'wiktionary'), v))
+    # for i in range(k):
+    #     try:
+    #         wp = site.random_page()
+    #         entries += t.process_wiktionary_wiki_page(wp)
+    #     except Exception as exception:
+    #         errors += 1
+    #         print(exception)
+    #         errored.append((wp, exception))
+    #     else:
+    #         if not i % 200:
+    #             print(i, 'entries', entries, '/ process error rate:', errors*100. / (i+1))
 
     print('process error rate:', errors*100. / (k))
     print('entries created:', entries)

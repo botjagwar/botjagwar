@@ -5,4 +5,6 @@ from .base import WiktionaryProcessor
 
 
 class RUWiktionaryProcessor(WiktionaryProcessor):
-    pass
+    @property
+    def language(self):
+        return 'ru'

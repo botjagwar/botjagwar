@@ -7,6 +7,10 @@ from .base import data_file
 
 
 class VOWiktionaryProcessor(WiktionaryProcessor):
+    @property
+    def language(self):
+        return 'vo'
+
     def get_WW_definition(self):
         return self._get_param_in_temp("Samafomot:VpVöd", 'WW')
 

@@ -71,7 +71,7 @@ TENSE = {
     # full forms
     'present': 'ankehitriny',
     'imperfect': 'imperfekta',
-    'preterite':'pretterita',
+    'preterite': 'filazam-potoana lasa tsotra',
     'future':'ho avy',
     'conditional':'kôndisiônaly',
 }

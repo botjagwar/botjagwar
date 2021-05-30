@@ -1,5 +1,5 @@
 # coding: utf8
-
+from typing import List
 import re
 
 from api.importer.wiktionary.en import \
@@ -20,7 +20,9 @@ from .base import WiktionaryProcessor
 
 
 class ENWiktionaryProcessor(WiktionaryProcessor):
-    processor_language = 'en'
+    @property
+    def language(self):
+        return 'en'
 
     def __init__(self, test=False, verbose=False):
         super(ENWiktionaryProcessor, self).__init__(test=test, verbose=verbose)
@@ -195,7 +197,7 @@ class ENWiktionaryProcessor(WiktionaryProcessor):
         return entries
 
     @staticmethod
-    def refine_definition(definition):
+    def refine_definition(definition) -> list:
         definition = re.sub('\[\[([\w]+)\|[\w]+\]\]', '\\1', definition)
         definition = re.sub('\[\[([\w]+)\]\]', '\\1', definition)
         definition = re.sub('[Tt]o ', '', definition)
