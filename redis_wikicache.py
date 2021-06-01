@@ -1,8 +1,11 @@
 import pywikibot
 import redis
 
+from api.config import BotjagwarConfig
 from api.decorator import separate_process
-from import_wiktionary import EnWiktionaryDumpImporter, MgWiktionaryDumpImporter
+from import_wiktionary import EnWiktionaryDumpImporter
+
+config = BotjagwarConfig()
 
 
 class NoPage(Exception):
@@ -10,10 +13,13 @@ class NoPage(Exception):
 
 
 class RedisSite(object):
-    def __init__(self, language: str, wiki: str, host='127.0.0.1', port=6379, password=None):
+    def __init__(self, language: str, wiki: str, host='default', port=6379, password=None):
         self.language = language
         self.wiki = wiki
-        self.host = host
+        if host == 'default':
+            self.host = config.get('redis', 'host')
+        else:
+            self.host = host
         self.port = port
         self.instance = redis.Redis(self.host, self.port, socket_timeout=3)
 
