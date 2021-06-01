@@ -58,7 +58,7 @@ class Output(object):
             'limit': '1'
 
         }
-        # print('get /word', data)
+        # log.debug('get /word', data)
         word_id = requests.get(backend + '/word', params=data).json()
         if len(word_id) > 0:
             if 'id' in word_id[0]:
@@ -85,8 +85,8 @@ class Output(object):
                     'definition': defn_id,
                     'translation_method': method,
                 }
-                print('get /definitions', data)
-                requests.post(backend + '/translation_method', data=data)
+                log.debug('post /translation_method', data)
+                requests.post(backend + '/translation_method', json=data)
 
     @staticmethod
     def sqlite_add_translation_method(infos: Entry):
@@ -119,7 +119,7 @@ class Output(object):
                 entries_by_language[entry.language] = [entry]
 
         # render
-        print(entries_by_language)
+        log.debug(entries_by_language)
         for language, entries in entries_by_language.items():
             for entry in entries:
                 rendered = self.wikipage_renderer.render(entry)

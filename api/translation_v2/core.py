@@ -9,7 +9,6 @@ from redis_wikicache import RedisPage as Page, RedisSite as Site
 from api import entryprocessor
 from api.output import Output
 from api.servicemanager import DictionaryServiceManager
-from api.servicemanager.pgrest import DynamicBackend
 from object_model.word import Entry
 from .functions import \
     translate_using_bridge_language, \
@@ -25,11 +24,12 @@ default_data_file = '/opt/botjagwar/conf/entry_translator/'
 URL_HEAD = DictionaryServiceManager().get_url_head()
 translation_methods = [
     translate_using_convergent_definition,
-    translate_using_bridge_language,
-    translate_using_postgrest_json_dictionary,
+    # translate_using_bridge_language,
+    # translate_using_postgrest_json_dictionary,
     translate_form_of_templates
 ]
 
+already_visited = []
 
 class TranslatedPagePushError(Exception):
     pass
@@ -51,16 +51,16 @@ class Translation:
         Update database and translation methods
         """
         for info in infos:
-            # self.output.db(info)
+            self.output.db(info)
             self.output.add_translation_method(info)
 
     def generate_summary(self, entries: List[Entry]):
         summary = 'Dikanteny: '
-        summary += ', '.join([f'{entry.language.lower()}' for entry in entries])
+        summary += ', '.join(sorted(list(set([f'{entry.language.lower()}' for entry in entries]))))
         return summary
 
     def check_if_page_exists(self, lemma):
-        page = Page(Site(self.working_wiki_language, 'wiktionary'), lemma)
+        page = Page(Site(self.working_wiki_language, 'wiktionary'), lemma, offline=False)
         return page.exists()
 
     def aggregate_entry_data(self, entries_translated: List[Entry], entries_already_existing: List[Entry]) -> List[Entry]:
@@ -81,7 +81,7 @@ class Translation:
         """
         site = Site(self.working_wiki_language, 'wiktionary')
         target_page = Page(site, page_title, offline=False)
-        # print(self.output.wikipages(entries))
+        # log.debug(self.output.wikipages(entries))
 
         if target_page.namespace().id != 0:
             raise TranslatedPagePushError(
@@ -122,11 +122,10 @@ class Translation:
         )
         out_entries = []
         for entry in entries:
-            # print(entry)
+            # log.debug(entry)
             translated_definition = []
             translated_from_definition = []
             out_translation_methods = {}
-            lemma_exists = True
             for definition_line in entry.entry_definition:
                 refined_definition_lines = wiktionary_processor.refine_definition(definition_line)
                 for refined_definition_line in refined_definition_lines:
@@ -146,8 +145,12 @@ class Translation:
                             if hasattr(definitions, 'part_of_speech'):
                                 if definitions.part_of_speech is not None:
                                     entry.part_of_speech = definitions.part_of_speech
-                            if hasattr(definitions, 'lemma'):
+                            if hasattr(definitions, 'lemma') and\
+                                    definitions.lemma is not None and\
+                                    definitions.lemma not in already_visited:
+                                already_visited.append(definitions.lemma)
                                 if not self.check_if_page_exists(definitions.lemma):
+                                    log.debug(f'lemma {definitions.lemma} does not exist. Processing...')
                                     page = Page(Site(wiktionary_processor.language, 'wiktionary'), definitions.lemma)
                                     if page.exists():
                                         self.process_wiktionary_wiki_page(page)
@@ -193,7 +196,7 @@ class Translation:
             out_entries = self.translate_wiktionary_page(wiktionary_processor)
             ret = self.output.wikipages(out_entries)
             if ret != '':
-                print('out_entries>', out_entries)
+                log.debug('out_entries>', out_entries)
                 self.publish_to_wiktionary(wiki_page.title(), out_entries)
                 self._save_translation_from_page(out_entries)
                 return len(out_entries)

@@ -1,5 +1,8 @@
+import pywikibot
 from api.translation_v2.core import Translation
+from page_lister import get_pages_from_category
 from redis_wikicache import RedisPage, RedisSite
+import redis
 
 if __name__ == '__main__':
     # print(translate_using_postgrest_json_dictionary('mat', '[[mine|Mine]]', 'en', 'mg'))
@@ -16,8 +19,14 @@ if __name__ == '__main__':
     errors = 0
     k = 100
     entries = 0
-    for v in 'sanaturae,excripserant,apponendas,addubitassemus,veterescentes,inanituras,declamitaturos,clavigerorum'.split(','):
-        entries += t.process_wiktionary_wiki_page(RedisPage(RedisSite('en', 'wiktionary'), v))
+    # for v in 'mo'.split(','):
+    #     entries += t.process_wiktionary_wiki_page(RedisPage(RedisSite('en', 'wiktionary'), v))
+    for wp in get_pages_from_category('en', 'Japanese adjectives'):
+        try:
+            t.process_wiktionary_wiki_page(RedisPage(RedisSite('en', 'wiktionary'), wp.title(), offline=False))
+        except (pywikibot.Error, redis.exceptions.TimeoutError):
+            pass
+
     # for i in range(k):
     #     try:
     #         wp = site.random_page()

@@ -15,7 +15,7 @@ class RedisSite(object):
         self.wiki = wiki
         self.host = host
         self.port = port
-        self.instance = redis.Redis(self.host, self.port, password)
+        self.instance = redis.Redis(self.host, self.port, socket_timeout=3)
 
     def random_page(self):
         rkey = self.instance.randomkey()
