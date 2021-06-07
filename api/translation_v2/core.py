@@ -67,7 +67,8 @@ class Translation:
         aggregated_entries = []
         for translated in entries_translated:
             for existing in entries_already_existing:
-                if existing == translated: # same spelling and language and part of speech
+                if existing.language == translated.language and \
+                        existing.part_of_speech == translated.part_of_speech:  # same spelling and language and part of speech
                     aggregated_entries.append(existing.overlay(translated))
             # if translated not in aggregated_entries:
             #     aggregated_entries.append(translated)
@@ -101,7 +102,9 @@ class Translation:
                 wiktionary_processor.set_text(target_page.get())
                 wiktionary_processor.set_title(page_title)
                 already_present_entries = wiktionary_processor.getall()
-                entries = self.aggregate_entry_data(entries, already_present_entries)
+                print(already_present_entries)
+                print(entries)
+                # entries = self.aggregate_entry_data(entries, already_present_entries)
 
             content = self.output.wikipages(entries)
             # Push aggregated content

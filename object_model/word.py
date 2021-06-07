@@ -81,7 +81,7 @@ class Entry(TypeCheckedObject):
         for apt, ap_type in other.properties_types.items():
             print(other)
             if hasattr(other, apt):
-                setattr(self, apt, getattr(other, apt))
+                setattr(self, apt, deepcopy(getattr(other, apt)))
 
         return deepcopy(self)
 
