@@ -2,7 +2,7 @@ import configparser
 
 from api.decorator import singleton
 
-CONF_ROOT_PATH = '/mnt/n/botjagwar/conf'
+CONF_ROOT_PATH = '/home/rado/botjagwar/conf'
 
 
 @singleton
@@ -13,7 +13,7 @@ class BotjagwarConfig(object):
     """
     def __init__(self, name=None):
         self.default_config_parser = configparser.ConfigParser()
-        self.default_config_parser.read(CONF_ROOT_PATH+ '/config.ini')
+        self.default_config_parser.read(CONF_ROOT_PATH + '/config.ini')
         try:
             if name is not None:
                 self.specific_config_parser = configparser.ConfigParser()

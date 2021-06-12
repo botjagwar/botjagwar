@@ -1,26 +1,27 @@
 # coding: utf8
 import asyncio
+import logging
+import time
 from copy import deepcopy
 from typing import List
-import logging
+
 from pywikibot import output
-from redis_wikicache import RedisPage as Page, RedisSite as Site
 
 from api import entryprocessor
+from api.config import BotjagwarConfig
 from api.output import Output
 from api.servicemanager import DictionaryServiceManager
 from object_model.word import Entry
-from .functions import \
-    translate_using_bridge_language, \
-    translate_form_of_templates, \
-    translate_using_convergent_definition, \
-    translate_using_postgrest_json_dictionary
+from redis_wikicache import RedisPage as Page, RedisSite as Site
+from .functions import translate_form_of_templates
+# from .functions import translate_using_bridge_language
+from .functions import translate_using_convergent_definition
+# from .functions import translate_using_postgrest_json_dictionary
 from .types import \
     UntranslatedDefinition, \
     TranslatedDefinition
 
 log = logging.getLogger(__name__)
-default_data_file = '/opt/botjagwar/conf/entry_translator/'
 URL_HEAD = DictionaryServiceManager().get_url_head()
 translation_methods = [
     translate_using_convergent_definition,
@@ -30,6 +31,7 @@ translation_methods = [
 ]
 
 already_visited = []
+
 
 class TranslatedPagePushError(Exception):
     pass
@@ -45,6 +47,7 @@ class Translation:
         super(self.__class__, self).__init__()
         self.output = Output()
         self.loop = asyncio.get_event_loop()
+        self.config = BotjagwarConfig()
 
     def _save_translation_from_page(self, infos: List[Entry]):
         """
@@ -63,12 +66,14 @@ class Translation:
         page = Page(Site(self.working_wiki_language, 'wiktionary'), lemma, offline=False)
         return page.exists()
 
-    def aggregate_entry_data(self, entries_translated: List[Entry], entries_already_existing: List[Entry]) -> List[Entry]:
+    @staticmethod
+    def aggregate_entry_data(entries_translated: List[Entry], entries_already_existing: List[Entry]) -> List[Entry]:
         aggregated_entries = []
         for translated in entries_translated:
             for existing in entries_already_existing:
+                # same spelling and language and part of speech
                 if existing.language == translated.language and \
-                        existing.part_of_speech == translated.part_of_speech:  # same spelling and language and part of speech
+                        existing.part_of_speech == translated.part_of_speech:
                     aggregated_entries.append(existing.overlay(translated))
             # if translated not in aggregated_entries:
             #     aggregated_entries.append(translated)
@@ -94,7 +99,6 @@ class Translation:
             pass
             target_page.put(self.output.wikipages(entries), self.generate_summary(entries))
         else:
-
             # Get entries to aggregate
             if target_page.exists():
                 wiktionary_processor_class = entryprocessor.WiktionaryProcessorFactory.create(self.working_wiki_language)
@@ -112,7 +116,24 @@ class Translation:
             output('\03{white}' + self.generate_summary(entries) + '\03{default}')
             output('\03{green}' + content + '\03{default}')
             output('\03{yellow}--------------\03{default}')
-            target_page.put(content, self.generate_summary(entries))
+            if self.config.get('ninja_mode', 'translator') == '1':
+                if target_page.exists():
+                    summary = 'nanitsy'
+                    if not target_page.isRedirectPage():
+                        old_content = target_page.get()
+                        if len(content) > len(old_content) * 1.25:
+                            summary = 'nanitatra'
+                else:
+                    if len(content) > 140:
+                        summary = "Pejy voaforona amin'ny « " + content[:137] + '... »'
+                    else:
+                        summary = "Pejy voaforona amin'ny « " + content + ' »'
+            else:
+                summary = self.generate_summary(entries)
+
+            target_page.put(content, summary)
+            if self.config.get('ninja_mode', 'translator') == '1':
+                time.sleep(12)
 
     def translate_wiktionary_page(self, wiktionary_processor: entryprocessor.WiktionaryProcessor) -> List[Entry]:
         """
@@ -188,7 +209,12 @@ class Translation:
         if not wiki_page.namespace().content:
             return
 
-        wiktionary_processor_class = entryprocessor.WiktionaryProcessorFactory.create(wiki_page.site.language)
+        if callable(wiki_page.site.language):
+            language = wiki_page.site.language()
+        else:
+            language = wiki_page.site.language
+
+        wiktionary_processor_class = entryprocessor.WiktionaryProcessorFactory.create(language)
         wiktionary_processor = wiktionary_processor_class()
         if not wiki_page.isRedirectPage():
             wiktionary_processor.set_text(wiki_page.get())

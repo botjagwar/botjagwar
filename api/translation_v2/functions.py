@@ -56,7 +56,7 @@ def _look_up_dictionary(w_language, w_part_of_speech, w_word):
         'part_of_speech': 'eq.' + w_part_of_speech,
         'word': 'eq.' + w_word
     }
-    resp = requests.get(backend.backend + '/vw_json_dictionary', params=params)
+    resp = requests.get(backend.backend + '/json_dictionary', params=params)
     data = resp.json()
     return data
 
@@ -152,6 +152,7 @@ def _translate_using_bridge_language(part_of_speech, definition_line, source_lan
                     raise TypeError()
 
     return translations
+
 
 def translate_form_of_templates(part_of_speech, definition_line, source_language, target_language, **kw)\
       -> [UntranslatedDefinition, TranslatedDefinition]:

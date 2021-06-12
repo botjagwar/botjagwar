@@ -1,8 +1,9 @@
 import pywikibot
+import redis
+
 from api.translation_v2.core import Translation
 from page_lister import get_pages_from_category
 from redis_wikicache import RedisPage, RedisSite
-import redis
 
 if __name__ == '__main__':
     # print(translate_using_postgrest_json_dictionary('mat', '[[mine|Mine]]', 'en', 'mg'))
@@ -19,9 +20,11 @@ if __name__ == '__main__':
     errors = 0
     k = 100
     entries = 0
-    # for v in 'mo'.split(','):
+    # for v in '잠자다,자다,앉다,睡眠,眠る,眠,寝る,眠,微睡む,座る,居,やすむ,睡目'.split(','):
     #     entries += t.process_wiktionary_wiki_page(RedisPage(RedisSite('en', 'wiktionary'), v))
-    for wp in get_pages_from_category('en', 'Japanese adjectives'):
+    # for v in '平均‎'.split(','):
+    #     entries += t.process_wiktionary_wiki_page(RedisPage(RedisSite('en', 'wiktionary'), v, offline=False))
+    for wp in get_pages_from_category('en', 'Chinese verbs'):
         try:
             t.process_wiktionary_wiki_page(RedisPage(RedisSite('en', 'wiktionary'), wp.title(), offline=False))
         except (pywikibot.Error, redis.exceptions.TimeoutError):

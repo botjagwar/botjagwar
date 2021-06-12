@@ -17,7 +17,7 @@ class RedisSite(object):
         self.language = language
         self.wiki = wiki
         if host == 'default':
-            self.host = config.get('redis', 'host')
+            self.host = config.get('host', 'redis')
         else:
             self.host = host
         self.port = port
