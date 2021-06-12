@@ -27,6 +27,7 @@ install:
   #- sudo ln -s $(which python3) /usr/bin/python3.6
   - sudo python3.6 -m pip install setuptools
   - sudo python3.6 -m pip install -r requirements.txt
+  - cp -r conf/test_config.ini /opt/botjagwar/conf/config.ini
   - make install
 
 # command to run tests
