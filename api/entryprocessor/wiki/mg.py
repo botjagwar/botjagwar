@@ -22,7 +22,7 @@ class MGWiktionaryProcessor(WiktionaryProcessor):
     def retrieve_translations(self):
         return []
 
-    def getall(self, keep_native_entries=False):
+    def getall(self, keep_native_entries=False, **kw):
         items = []
         if self.content is None:
             return []
