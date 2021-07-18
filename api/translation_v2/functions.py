@@ -207,7 +207,7 @@ def translate_using_postgrest_json_dictionary(
 
         # lookup translation using main word
         for definition in entry['definitions']:
-            log.debug(definition['definition'], f"[{definition['language']}]")
+            log.debug(definition['definition'] + f" [{definition['language']}]")
 
     if translations:
         # back-check for part of speech.
