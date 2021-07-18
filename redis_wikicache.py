@@ -13,15 +13,23 @@ class NoPage(Exception):
 
 
 class RedisSite(object):
-    def __init__(self, language: str, wiki: str, host='default', port=6379, password=None):
+    def __init__(self, language: str, wiki: str, host='default', port=6379, password='default'):
         self.language = language
         self.wiki = wiki
         if host == 'default':
             self.host = config.get('host', 'redis')
         else:
             self.host = host
+
+        if password == 'default':
+            self.password = config.get('password', 'redis')
+            if not self.password:
+                self.password = None
+        else:
+            self.password = None
+
         self.port = port
-        self.instance = redis.Redis(self.host, self.port, socket_timeout=3)
+        self.instance = redis.Redis(self.host, self.port, password=self.password, socket_timeout=3)
 
     def random_page(self):
         rkey = self.instance.randomkey()
