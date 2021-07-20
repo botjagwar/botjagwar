@@ -4,7 +4,7 @@ irc == 3.6.1
 lxml == 4.6.3
 parameterized
 psycopg2 == 2.8.4
-pywikibot >= 3.0
+pywikibot >= 3.0, <5
 requests-oauthlib == 0.8.0
 mwparserfromhell >= 0.5.0
 requests == 2.20.0
