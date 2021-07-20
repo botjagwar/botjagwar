@@ -40,7 +40,7 @@ class TestLanguageRestService(TestCase):
     @threaded
     def launch_service():
         global DICTIONARY_SERVICE
-        DICTIONARY_SERVICE = Popen(["python3.6", "language_service.py", '--db-file', DB_PATH], stdin=PIPE, stdout=PIPE, stderr=PIPE)
+        DICTIONARY_SERVICE = Popen(["python3", "language_service.py", '--db-file', DB_PATH], stdin=PIPE, stdout=PIPE, stderr=PIPE)
         DICTIONARY_SERVICE.communicate()
 
     @retry_on_fail([Exception], retries=10, time_between_retries=.4)

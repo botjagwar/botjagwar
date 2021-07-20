@@ -127,17 +127,17 @@ class TestEntryTranslatorProcessWiktionaryPage(TestCase):
 
     def tearDown(self):
         self.kill_service()
-        sleep(.4)
+        sleep(2)
 
     @staticmethod
     @threaded
     def launch_service():
         global DICTIONARY_SERVICE
-        DICTIONARY_SERVICE = Popen(["python3.6", "dictionary_service.py", '--db-file', DB_PATH, "-p", '8001'],
+        DICTIONARY_SERVICE = Popen(["python3", "dictionary_service.py", '--db-file', DB_PATH, "-p", '8001'],
                                    stdin=PIPE, stdout=PIPE, stderr=PIPE)
         DICTIONARY_SERVICE.communicate()
 
-    @retry_on_fail([Exception], retries=10, time_between_retries=.4)
+    @retry_on_fail([Exception], retries=10, time_between_retries=1)
     def wait_until_ready(self):
         resp = requests.get(URL_HEAD + '/ping')
         assert resp.status_code == 200
@@ -295,7 +295,7 @@ class TestEntryTranslatorServices(TestCase):
 
     @threaded
     def launch_service(self):
-        self.p2 = Popen(["python3.6", "entry_translator.py", "-p", '8000'])
+        self.p2 = Popen(["python3", "entry_translator.py", "-p", '8000'])
 
     @retry_on_fail([Exception], retries=10, time_between_retries=.4)
     def check_response_status(self, url, data):

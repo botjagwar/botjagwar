@@ -1,13 +1,13 @@
-import os
-from time import sleep
-from subprocess import Popen
-from subprocess import PIPE
-
 import json
+import os
+from subprocess import PIPE
+from subprocess import Popen
+from time import sleep
+from unittest import TestCase
+
 import requests
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-from unittest import TestCase
 
 from api.decorator import threaded, retry_on_fail
 from database.dictionary import Base
@@ -40,7 +40,7 @@ class TestLanguageRestService(TestCase):
     @threaded
     def launch_service():
         global DICTIONARY_SERVICE
-        DICTIONARY_SERVICE = Popen(["python3.6", "language_service.py", '--db-file', DB_PATH], stdin=PIPE, stdout=PIPE, stderr=PIPE)
+        DICTIONARY_SERVICE = Popen(["python3", "language_service.py", '--db-file', DB_PATH], stdin=PIPE, stdout=PIPE, stderr=PIPE)
         DICTIONARY_SERVICE.communicate()
 
     @retry_on_fail([Exception], retries=10, time_between_retries=.4)
