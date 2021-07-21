@@ -88,13 +88,6 @@ def _generate_redirections(infos):
             infos.entry = redirection_target
 
 
-def _get_unaccented_word(word):
-    for char in "́̀":
-        if word.find(char) != -1:
-            word = word.replace(char, "")
-    return word
-
-
 def _translate_using_bridge_language(part_of_speech, definition_line, source_language, target_language, ct_depth=0, **kw)\
       -> dict:
     if ct_depth >= MAX_DEPTH:

@@ -225,7 +225,7 @@ class Translation:
             out_entries = self.translate_wiktionary_page(wiktionary_processor)
             ret = self.output.wikipages(out_entries)
             if ret != '':
-                log.debug('out_entries>', out_entries)
+                log.debug('out_entries>' + str(out_entries))
                 self.publish_to_wiktionary(wiki_page.title(), out_entries)
                 self._save_translation_from_page(out_entries)
                 return len(out_entries)
