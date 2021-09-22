@@ -19,8 +19,7 @@ if [[ $NORUN == 1 ]]; then
 fi
 
 cd "$src_dir" || exit
-python -m nose test
-nosetests3 --with-coverage --cover-html --cover-html-dir=/tmp -vv test
+python -m nose -vv test
 
 if [[ -f $opt_dir/conf/config.ini ]]; then
   sudo rm $opt_dir/conf/config.ini
