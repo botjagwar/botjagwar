@@ -1,6 +1,6 @@
 aiohttp == 3.7.4
 flask == 1.0.2
-irc < 4
+irc == 19
 lxml == 4.6.3
 parameterized
 psycopg2 == 2.8.4
