@@ -1,4 +1,4 @@
-#!/usr/bin/python3.6
+#!/usr/bin/python3
 import logging
 import time
 from datetime import datetime, timedelta

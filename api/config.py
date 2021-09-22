@@ -1,8 +1,17 @@
 import configparser
+import os
 
 from api.decorator import singleton
 
-CONF_ROOT_PATH = '/home/rado/botjagwar/conf'
+conf_paths = [
+    f'/home/{os.getlogin()}/botjagwar/conf',
+    '/opt/botjagwar/conf'
+]
+
+for confpath in conf_paths:
+    if os.path.exists(confpath):
+        CONF_ROOT_PATH = confpath
+        break
 
 
 @singleton

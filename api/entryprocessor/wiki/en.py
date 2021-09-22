@@ -1,5 +1,4 @@
 # coding: utf8
-from typing import List
 import re
 
 from api.importer.wiktionary.en import \
@@ -131,7 +130,7 @@ class ENWiktionaryProcessor(WiktionaryProcessor):
         return new_definition_line
 
     def getall(self, keepNativeEntries=False, fetch_additional_data=False, cleanup_definitions=True,
-               translate_definitions_to_malagasy=False, human_readable_form_of_definition=True):
+               translate_definitions_to_malagasy=False, human_readable_form_of_definition=True, **kw):
         content = self.content
         entries = []
         content = re.sub("{{l/en\|(.*)}}", "\\1 ", content)  # remove {{l/en}}
