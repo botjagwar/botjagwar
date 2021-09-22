@@ -24,7 +24,6 @@ dist: bionic
 # command to install dependencies
 install:
   - python3 --version
-  #- sudo ln -s $(which python3) /usr/bin/python3.6
   - sudo python3 -m pip install setuptools
   - sudo python3 -m pip install -r requirements.txt
 
