@@ -158,11 +158,11 @@ class Word(Base):
             'word': self.word,
             'language': self.language,
             'part_of_speech': self.part_of_speech,
-            'last_modified': last_modified
+            'last_modified': last_modified,
             'additional_data': {}
         }
         if self.additional_data:
-            for adt, adi in self.additional_data
+            for adt, adi in self.additional_data:
                 if adt.type in word_data['additional_data']:
                     word_data['additional_data'][adt.type].append(adi)
                 else:
