@@ -24,7 +24,7 @@ dist: bionic
 # command to install dependencies
 install:
   - python3 --version
-  - sudo python3 -m pip install setuptools
+  - sudo python3 -m pip install "setuptools<58"
   - sudo python3 -m pip install -r requirements.txt
 
 # command to run tests
