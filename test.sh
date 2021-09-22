@@ -14,7 +14,6 @@ fi
 
 source $opt_dir/pyenv/bin/activate
 python -m pip install nose
-python -m pip install nose-cover3
 if [[ $NORUN == 1 ]]; then
   exit
 fi

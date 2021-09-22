@@ -24,8 +24,8 @@ dist: bionic
 # command to install dependencies
 install:
   - python3 --version
-  - bash -xe install.sh
+  - NORUN=1 bash -xe test.sh
 
 # command to run tests
 script:
-  - PYWIKIBOT2_NO_USER_CONFIG=1 NORUN=1 bash -xe test.sh
+  - PYWIKIBOT2_NO_USER_CONFIG=1 bash -xe test.sh
