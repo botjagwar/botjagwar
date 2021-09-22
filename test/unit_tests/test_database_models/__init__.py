@@ -59,16 +59,12 @@ word_2 = (fixture_word_2(),)
 definition_1 = (fixture_definition_1(),)
 definition_2 = (fixture_definition_2(),)
 
+definitions = [definition_1, definition_2]
+words = [word_1, word_2]
+
 
 class TestSerialiser(TestCase):
-    def setUp(self) -> None:
-        self.definition = fixture_definition_1()
-        self.word_1 = fixture_word_1()
-
-    def tearDown(self) -> None:
-        pass
-
-    @parameterized.expand([definition_2, definition_1])
+    @parameterized.expand(definitions)
     def test_definition_serialise(self, definition):
         serialiser = DefinitionSerialiser(definition)
         serialized = serialiser.serialise()
@@ -78,13 +74,13 @@ class TestSerialiser(TestCase):
         self.assertEquals(serialized['definition'], definition.definition)
         self.assertEquals(serialized['language'], definition.definition_language)
 
-    @parameterized.expand([definition_2, definition_1])
+    @parameterized.expand(definitions)
     def test_definition_serialise_with_words(self, definition):
         serialiser = DefinitionSerialiser(definition)
         serialized = serialiser.serialise_with_words()
         self.assertEquals(serialized['words'], definition.words)
 
-    @parameterized.expand([word_1, word_2])
+    @parameterized.expand(words)
     def test_word_serialiser_serialise(self, word):
         serialiser = WordSerialiser(word)
         serialised = serialiser.serialise()
@@ -95,7 +91,7 @@ class TestSerialiser(TestCase):
         self.assertIn('last_modified', serialised)
         self.assertEquals(serialised['last_modified'], word.date_changed.strftime("%Y-%m-%d %H:%M:%S"))
 
-    @parameterized.expand([word_1, word_2])
+    @parameterized.expand(words)
     def test_word_serialiser_serialise_to_entry(self, word):
         serialiser = WordSerialiser(word)
         entry = serialiser.serialise_to_entry(['mg', 'en'])
@@ -104,7 +100,7 @@ class TestSerialiser(TestCase):
         self.assertEquals(entry.entry_definition, [d.definition for d in word.definitions])
         self.assertEquals(entry.language, word.language)
 
-    @parameterized.expand([word_1, word_2])
+    @parameterized.expand(words)
     def test_word_serialiser_serialise_without_definition(self, word):
         serialiser = WordSerialiser(word)
         serialised = serialiser.serialise_without_definition()
