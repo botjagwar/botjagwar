@@ -158,7 +158,11 @@ class MGWikiPageRenderer(PageRenderer):
         # Pronunciation section
         elif hasattr(info, 'pronunciation'):
             s += '\n\n{{-fanononana-}}'
-            s += "\n" + info.pronunciation
+            if isinstance(info.pronunciation, list):
+                for pron in info.pronunciation:
+                    s += "\n* " + pron.strip('*').strip()
+            else:
+                s += "\n* " + info.pronunciation.strip('*').strip()
 
         # Synonyms
         if hasattr(info, 'synonyms'):
@@ -185,15 +189,17 @@ class MGWikiPageRenderer(PageRenderer):
                     s += f"\n* [[{d}]]"
 
         # References
-        if hasattr(info, 'references'):
-            s += '\n\n{{-tsiahy-}}'
-            for ref in info.references:
-                if ref.startswith('*'):
-                    s += '\n' + ref
-                else:
-                    s += "\n* " + ref
+        for attr_name in ['references', 'reference', 'further_reading']:
+            if hasattr(info, attr_name):
+                s += '\n\n{{-tsiahy-}}'
+                for ref in getattr(info, attr_name):
+                    if ref.startswith('*'):
+                        s += '\n' + ref
+                    else:
+                        s += "\n* " + ref
+                break
 
-        return s
+        return s + '\n'
 
 
 class WikiPageRendererFactory(object):

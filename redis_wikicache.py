@@ -1,8 +1,11 @@
 import pywikibot
 import redis
 
+from api.config import BotjagwarConfig
 from api.decorator import separate_process
 from import_wiktionary import EnWiktionaryDumpImporter
+
+config = BotjagwarConfig()
 
 
 class NoPage(Exception):
@@ -10,15 +13,30 @@ class NoPage(Exception):
 
 
 class RedisSite(object):
-    def __init__(self, language: str, wiki: str, host='127.0.0.1', port=6379, password=None):
+    def __init__(self, language: str, wiki: str, host='default', port=6379, password='default'):
         self.language = language
         self.wiki = wiki
-        self.host = host
+        if host == 'default':
+            self.host = config.get('host', 'redis')
+        else:
+            self.host = host
+
+        if password == 'default':
+            self.password = config.get('password', 'redis')
+            if not self.password:
+                self.password = None
+        else:
+            self.password = None
+
         self.port = port
-        self.instance = redis.Redis(self.host, self.port, password)
+        self.instance = redis.Redis(self.host, self.port, password=self.password, socket_timeout=3)
 
     def random_page(self):
-        page_name = str(self.instance.randomkey(), encoding='utf8').replace(f'{self.wiki}.{self.language}/','')
+        rkey = self.instance.randomkey()
+        while not rkey.startswith(bytes(f'{self.wiki}.{self.language}/', 'utf8')):
+            rkey = self.instance.randomkey()
+
+        page_name = str(rkey, encoding='utf8').replace(f'{self.wiki}.{self.language}/','')
         return RedisPage(self, page_name)
 
     @separate_process
@@ -52,6 +70,9 @@ class RedisPage(object):
 
     def __repr__(self):
         return f'Page({self.site}/{self.title()})'
+
+    def isEmpty(self):
+        return self.get() == ''
 
     def get(self):
         if self._title is None:
@@ -87,6 +108,27 @@ class RedisPage(object):
                 return wikipage.exists()
         else:
             return True
+
+    def namespace(self):
+        if self.offline:
+            class Namespace(object):
+                content = self.get()
+
+            return Namespace()
+        else:
+            wikisite = pywikibot.Site(self.site.language, self.site.wiki)
+            wikipage = pywikibot.Page(wikisite, self._title)
+            return getattr(wikipage, 'namespace')()
+
+    def isRedirectPage(self):
+        if self.exists():
+            return '#REDIRECT [[' in self.get()
+        else:
+            if not self.offline:
+                wikisite = pywikibot.Site(self.site.language, self.site.wiki)
+                wikipage = pywikibot.Page(wikisite, self._title)
+                return wikipage.isRedirectPage()
+            return False
 
     def __getattr__(self, item):
         if hasattr(RedisPage, item):

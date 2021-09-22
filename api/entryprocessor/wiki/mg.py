@@ -11,6 +11,10 @@ class MGWiktionaryProcessor(WiktionaryProcessor):
     form_of_regex = r'\{\{\-([a-z]+\-[a-z]{3,7})\-\|([a-z]{2,3})\}\}'
     lemma_regex = r"\{\{\-([a-z]{3,7})\-\|([a-z]{2,3})\}\}"
 
+    @property
+    def language(self):
+        return 'mg'
+
     def __init__(self, test=False, verbose=False):
         super(MGWiktionaryProcessor, self).__init__(test=test, verbose=verbose)
         self.content = None
@@ -18,7 +22,7 @@ class MGWiktionaryProcessor(WiktionaryProcessor):
     def retrieve_translations(self):
         return []
 
-    def getall(self, keep_native_entries=False):
+    def getall(self, keep_native_entries=False, **kw):
         items = []
         if self.content is None:
             return []

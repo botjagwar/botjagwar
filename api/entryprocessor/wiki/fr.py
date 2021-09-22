@@ -10,6 +10,10 @@ from .base import stripwikitext
 
 
 class FRWiktionaryProcessor(WiktionaryProcessor):
+    @property
+    def language(self):
+        return 'fr'
+
     def __init__(self, test=False, verbose=False):
         super(FRWiktionaryProcessor, self).__init__(test=test, verbose=verbose)
         self.verbose = verbose
@@ -65,7 +69,7 @@ class FRWiktionaryProcessor(WiktionaryProcessor):
 
         return retcontent
 
-    def getall(self, keepNativeEntries=False):
+    def getall(self, keepNativeEntries=False, **kw):
         """languges sections in a given page formatting: [(POS, lang, definition), ...]"""
         if self.Page is not None:
             assert isinstance(self.Page, pywikibot.Page), self.Page.__class__

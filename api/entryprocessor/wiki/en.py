@@ -1,5 +1,4 @@
 # coding: utf8
-
 import re
 
 from api.importer.wiktionary.en import \
@@ -20,7 +19,9 @@ from .base import WiktionaryProcessor
 
 
 class ENWiktionaryProcessor(WiktionaryProcessor):
-    processor_language = 'en'
+    @property
+    def language(self):
+        return 'en'
 
     def __init__(self, test=False, verbose=False):
         super(ENWiktionaryProcessor, self).__init__(test=test, verbose=verbose)
@@ -89,7 +90,11 @@ class ENWiktionaryProcessor(WiktionaryProcessor):
 
         return additional_data
 
-    def extract_definition(self, part_of_speech, definition_line,
+    def extract_definition(self, part_of_speech, definition_line, **kw):
+        # No cleanup
+        return definition_line
+
+    def advanced_extract_definition(self, part_of_speech, definition_line,
                            cleanup_definition=True,
                            translate_definitions_to_malagasy=False,
                            human_readable_form_of_definition=True
@@ -125,7 +130,7 @@ class ENWiktionaryProcessor(WiktionaryProcessor):
         return new_definition_line
 
     def getall(self, keepNativeEntries=False, fetch_additional_data=False, cleanup_definitions=True,
-               translate_definitions_to_malagasy=False, human_readable_form_of_definition=True):
+               translate_definitions_to_malagasy=False, human_readable_form_of_definition=True, **kw):
         content = self.content
         entries = []
         content = re.sub("{{l/en\|(.*)}}", "\\1 ", content)  # remove {{l/en}}
@@ -191,7 +196,7 @@ class ENWiktionaryProcessor(WiktionaryProcessor):
         return entries
 
     @staticmethod
-    def refine_definition(definition):
+    def refine_definition(definition) -> list:
         definition = re.sub('\[\[([\w]+)\|[\w]+\]\]', '\\1', definition)
         definition = re.sub('\[\[([\w]+)\]\]', '\\1', definition)
         definition = re.sub('[Tt]o ', '', definition)

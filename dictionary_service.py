@@ -1,4 +1,4 @@
-#!/usr/bin/python3.6
+#!/usr/bin/python3
 import argparse
 import logging as log
 
@@ -41,7 +41,7 @@ except KeyError:
     LOG_LEVEL = 10
 
 log.basicConfig(filename=LOG, level=log.DEBUG)
-dictionary_db_manager = DictionaryDatabaseManager(database_file=WORD_STORAGE)
+dictionary_db_manager = DictionaryDatabaseManager(database_file=WORD_STORAGE, db_header='')
 routes = web.RouteTableDef()
 app = web.Application(middlewares=[
     json_error_handler,

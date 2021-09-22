@@ -4,4 +4,6 @@ from .base import WiktionaryProcessor
 
 
 class SVWiktionaryProcessor(WiktionaryProcessor):
-    pass
+    @property
+    def language(self):
+        return 'sv'

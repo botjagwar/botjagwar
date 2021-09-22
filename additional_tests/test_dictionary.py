@@ -53,7 +53,7 @@ class TestDictionaryRestService(TestCase):
     @threaded
     def launch_service():
         global DICTIONARY_SERVICE
-        DICTIONARY_SERVICE = Popen(["python3.6", "dictionary_service.py", '--db-file', DB_PATH],
+        DICTIONARY_SERVICE = Popen(["python3", "dictionary_service.py", '--db-file', DB_PATH],
                                    stdin=PIPE, stdout=PIPE, stderr=PIPE)
         DICTIONARY_SERVICE.communicate()
 

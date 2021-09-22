@@ -6,6 +6,10 @@ from .base import data_file
 
 
 class PLWiktionaryProcessor(WiktionaryProcessor):
+    @property
+    def language(self):
+        return 'pl'
+
     def __init__(self, test=False, verbose=False):
         super(PLWiktionaryProcessor, self).__init__(test=test, verbose=verbose)
         try:

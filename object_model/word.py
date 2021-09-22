@@ -1,3 +1,4 @@
+from copy import deepcopy
 from object_model import TypeCheckedObject
 
 
@@ -72,6 +73,17 @@ class Entry(TypeCheckedObject):
                 return 1
         else:
             return 1
+
+    def overlay(self, other):
+        self.language = other.language
+        self.part_of_speech = other.part_of_speech
+        self.entry_definition = other.entry_definition
+        for apt, ap_type in other.properties_types.items():
+            print(other)
+            if hasattr(other, apt):
+                setattr(self, apt, deepcopy(getattr(other, apt)))
+
+        return deepcopy(self)
 
     def __repr__(self):
         #return str(self.__dict__)

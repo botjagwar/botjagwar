@@ -1,12 +1,13 @@
 # coding: utf8
 
-import re
-import pywikibot
 from .base import WiktionaryProcessor
-from .base import data_file
 
 
 class VOWiktionaryProcessor(WiktionaryProcessor):
+    @property
+    def language(self):
+        return 'vo'
+
     def get_WW_definition(self):
         return self._get_param_in_temp("Samafomot:VpVöd", 'WW')
 
@@ -21,7 +22,7 @@ class VOWiktionaryProcessor(WiktionaryProcessor):
                         RET_text = params[len(parameterstr) + 1:]
         return RET_text
 
-    def getall(self, keepNativeEntries=False):
+    def getall(self, keepNativeEntries=False, **kw):
         POStran = {"värb": 'mat',
                    'subsat': 'ana',
                    'ladyek': 'mpam-ana'}

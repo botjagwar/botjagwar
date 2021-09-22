@@ -3,7 +3,7 @@ from api.parsers.constants.mg import GENDER, CASES, NUMBER, MOOD, TENSE, PERSONS
 def render_non_lemma(non_lemma_type):
     def wrapper(non_lemma) -> str:
         explanation = non_lemma_type
-        ret = explanation + 'ny teny [[%s]]' % (non_lemma.lemma)
+        ret = explanation.strip() + ' ny teny [[%s]]' % (non_lemma.lemma)
         return ret
 
     return wrapper
@@ -31,7 +31,7 @@ def render_noun_form(non_lemma) -> str:
     if not explanation.strip():
         explanation = 'endriky'
 
-    ret = explanation + 'ny teny [[%s]]' % (non_lemma.lemma)
+    ret = explanation.strip() + ' ny teny [[%s]]' % (non_lemma.lemma)
     return ret
 
 
@@ -45,7 +45,7 @@ def render_verb_form(non_lemma) -> str:
     if non_lemma.number in NUMBER:
         explanation += NUMBER[non_lemma.number] + ' '
 
-    explanation += 'ny ' if len(explanation.strip()) != 0 else ''
+    explanation += '' if len(explanation.strip()) != 0 else ''
     if non_lemma.mood in MOOD:
         explanation += MOOD[non_lemma.mood] + ' '
 

@@ -1,6 +1,7 @@
 # coding: utf8
 import os
 import re
+from typing import List
 
 data_file = os.getcwd() +'/conf/entryprocessor/'
 
@@ -10,6 +11,10 @@ class WiktionaryProcessorException(Exception):
 
 class WiktionaryProcessor(object):
     """Generic class of all Wiktionary page processors"""
+
+    @property
+    def language(self):
+        return NotImplementedError()
 
     def __init__(self, test=False, verbose=False):
         self.content = None
@@ -41,8 +46,12 @@ class WiktionaryProcessor(object):
     def retrieve_translations(self):
         raise NotImplementedError()
 
-    def getall(self, keepNativeEntries=False):
+    def getall(self, keepNativeEntries=False, **kw):
         raise NotImplementedError()
+
+    @staticmethod
+    def refine_definition(definition) -> List[str]:
+        return [definition]
 
 
 def stripwikitext(w):

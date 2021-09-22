@@ -5,4 +5,6 @@ from .base import WiktionaryProcessor
 
 
 class ZHWiktionaryProcessor(WiktionaryProcessor):
-    pass
+    @property
+    def language(self):
+        return 'zh'

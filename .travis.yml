@@ -1,7 +1,7 @@
 language: python
 
 python:
-  - "3.6"
+  - "3.8"
 
 addons:
   apt:
@@ -24,17 +24,8 @@ dist: bionic
 # command to install dependencies
 install:
   - python3 --version
-  #- sudo ln -s $(which python3) /usr/bin/python3.6
-  - sudo python3.6 -m pip install setuptools
-  - sudo python3.6 -m pip install -r requirements.txt
-  - make install
+  - NORUN=1 bash -xe test.sh
 
 # command to run tests
 script:
-  - make install
-  - cp -r test /opt/botjagwar/test
-  - cp -r conf/test_config.ini /opt/botjagwar/conf/config.ini
-  - make prepare_tests
-  - sudo python3.6 -m pip install nose
-  - PYWIKIBOT2_NO_USER_CONFIG=1 sudo python3.6 -m "nose" -v /opt/botjagwar/test
-  - make uninstall
+  - PYWIKIBOT2_NO_USER_CONFIG=1 bash -xe test.sh

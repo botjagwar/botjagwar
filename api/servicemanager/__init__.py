@@ -19,7 +19,7 @@ class ProcessManager:
     The process is spawned on a call to spawn_backend() method and is terminated
     upon object destruction.
     """
-    interpreter_name = 'python3.6'
+    interpreter_name = 'python3'
     program_name = None
     spawned_backend_process = None
     kill_if_exists = False

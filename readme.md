@@ -3,9 +3,9 @@
 
 Bot-Jagwar is a side project which aims to automate editing on the Malagasy Wiktionary as much as possible.
 
-## [Current build status](https://travis-ci.org/radomd92/botjagwar/branches)
-master : ![master](https://travis-ci.org/radomd92/botjagwar.svg?branch=master)
-dev: ![dev](https://travis-ci.org/radomd92/botjagwar.svg?branch=dev)
+## [Current build status](https://travis-ci.com/radomd92/botjagwar/branches)
+master : ![master](https://app.travis-ci.com/radomd92/botjagwar.svg?branch=master)
+dev: ![dev](https://app.travis-ci.com/radomd92/botjagwar.svg?branch=dev)
 
 ## Prerequisites
 

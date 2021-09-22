@@ -1,4 +1,4 @@
-#!/usr/bin/python3.6
+#!/usr/bin/python3
 
 import asyncio
 import csv
@@ -30,7 +30,7 @@ service_process = None
 def launch_service():
     print('launch_service()')
     global service_process
-    service_process = Popen(["python3.6", "dictionary_service.py"])
+    service_process = Popen(["python3", "dictionary_service.py"])
     print('end launch_service()')
 
 

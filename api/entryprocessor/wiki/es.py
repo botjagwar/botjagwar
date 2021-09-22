@@ -4,4 +4,6 @@ from .base import WiktionaryProcessor
 
 
 class ESWiktionaryProcessor(WiktionaryProcessor):
-    pass
+    @property
+    def language(self):
+        return 'es'

@@ -4,6 +4,7 @@ from logging import getLogger
 import requests
 
 from api.parsers import templates_parser, TEMPLATE_TO_OBJECT
+from api.parsers.functions.postprocessors import POST_PROCESSORS
 from api.parsers.inflection_template import ParserNotFoundError
 from api.servicemanager.pgrest import StaticBackend
 from .types import TranslatedDefinition, \
@@ -18,8 +19,23 @@ regexesrep = [
     (r"\((.*)\)", "")
 ]
 CYRILLIC_ALPHABET_LANGUAGES = 'be,bg,mk,ru,uk'.split(',')
+MAX_DEPTH = 5
+form_of_part_of_speech_mapper = {
+    'ana' : 'e-ana',
+    'mat' : 'e-mat',
+    'mpam-ana' : 'e-mpam-ana',
+    'mpam' : 'e-mpam',
+}
+
 backend = StaticBackend()
 log = getLogger(__file__)
+
+
+def _get_unaccented_word(word):
+    for char in "́̀":
+        if word.find(char) != -1:
+            word = word.replace(char, "")
+    return word
 
 
 def _delink(line):
@@ -40,7 +56,7 @@ def _look_up_dictionary(w_language, w_part_of_speech, w_word):
         'part_of_speech': 'eq.' + w_part_of_speech,
         'word': 'eq.' + w_word
     }
-    resp = requests.get(backend.backend + '/vw_json_dictionary', params=params)
+    resp = requests.get(backend.backend + '/json_dictionary', params=params)
     data = resp.json()
     return data
 
@@ -72,15 +88,11 @@ def _generate_redirections(infos):
             infos.entry = redirection_target
 
 
-def _get_unaccented_word(word):
-    for char in "́̀":
-        if word.find(char) != -1:
-            word = word.replace(char, "")
-    return word
-
-
-def _translate_using_bridge_language(part_of_speech, definition_line, source_language, target_language, **kw)\
+def _translate_using_bridge_language(part_of_speech, definition_line, source_language, target_language, ct_depth=0, **kw)\
       -> dict:
+    if ct_depth >= MAX_DEPTH:
+        return {}
+
     # query db
     log.debug(f'(bridge) {definition_line} ({part_of_speech}) [{source_language} -> {target_language}]',)
     data = _look_up_dictionary(source_language, part_of_speech, _delink(definition_line))
@@ -118,7 +130,8 @@ def _translate_using_bridge_language(part_of_speech, definition_line, source_lan
                         part_of_speech=part_of_speech,
                         definition_line=definition['definition'],
                         source_language=definition['language'],
-                        target_language=target_language
+                        target_language=target_language,
+                        ct_depth=ct_depth + 1
                     )
 
                     if translation.keys():
@@ -151,7 +164,16 @@ def translate_form_of_templates(part_of_speech, definition_line, source_language
         try:
             if part_of_speech in TEMPLATE_TO_OBJECT:
                 elements = templates_parser.get_elements(TEMPLATE_TO_OBJECT[part_of_speech], definition_line)
+                if 'language' in kw:
+                    if kw['language'] in POST_PROCESSORS:
+                        elements = POST_PROCESSORS[kw['language']](elements)
                 new_definition_line = TranslatedDefinition(elements.to_definition(target_language))
+                if hasattr(elements, 'lemma'):
+                    setattr(new_definition_line, 'lemma', elements.lemma)
+                if part_of_speech in form_of_part_of_speech_mapper:
+                    new_definition_line.part_of_speech = form_of_part_of_speech_mapper[part_of_speech]
+                else:
+                    new_definition_line.part_of_speech = part_of_speech
         except ParserNotFoundError:
             new_definition_line = UntranslatedDefinition(definition_line)
 
@@ -178,7 +200,7 @@ def translate_using_postgrest_json_dictionary(
 
         # lookup translation using main word
         for definition in entry['definitions']:
-            log.debug(definition['definition'], f"[{definition['language']}]")
+            log.debug(definition['definition'] + f" [{definition['language']}]")
 
     if translations:
         # back-check for part of speech.
