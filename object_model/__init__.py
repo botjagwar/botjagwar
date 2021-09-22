@@ -8,7 +8,7 @@ class Property(object):
 
 
 class List(Property):
-    def __init__(self, value=list()):
+    def __init__(self, value: list):
         Property.__init__(self, value, _type=list)
 
     def serialise(self):
@@ -23,8 +23,9 @@ class List(Property):
 
 class TypeCheckedObject(object):
     _additional = True
-    properties_types = {}
     properties = {}
+    properties_types = {}
+    node_mapper = []
 
     def __init__(self, **properties):
         for attribute, value in list(properties.items()):
@@ -41,14 +42,14 @@ class TypeCheckedObject(object):
         if item in self.properties:
             return self.properties[item]
         else:
-            raise AttributeError("%s object has no attribute '%s'"  % (
+            raise AttributeError("%s object has no attribute '%s'" % (
                 self.__class__.__name__,
                 item))
 
     def __dir__(self):
         return list(self.properties.keys())
 
-    def to_dict(self):
+    def to_dict(self) -> dict:
         ret = {}
         for key in self.properties_types.keys():
             if hasattr(self, key):

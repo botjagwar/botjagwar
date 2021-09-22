@@ -31,9 +31,7 @@ install:
 # command to run tests
 script:
   - cp -r conf/test_config.ini conf/config.ini
-  - make install
   - cp -r test /opt/botjagwar/test
-  - make prepare_tests
-  - sudo python3 -m pip install nose
+  - NORUN=1 bash -xe test.sh
   - PYWIKIBOT2_NO_USER_CONFIG=1 sudo python3 -m "nose" -v /opt/botjagwar/test
   - make uninstall
