@@ -21,7 +21,6 @@ class NonLemma(object):
         else:
             raise AttributeError(f'Module api.parsers.renderers.{language} not found!')
 
-
     def to_malagasy_definition(self):
         return self.to_definition('mg')
 
@@ -113,7 +112,6 @@ class EnWiktionaryInflectionTemplateParser(object):
                 raise exc
         else:
             raise ParserNotFoundError('No parser defined for "%s": %s' % (parts[0], orig_template_expression))
-
 
     def get_lemma(self, expected_class, template_expression) -> str:
         return self.get_elements(expected_class, template_expression).lemma

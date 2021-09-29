@@ -101,6 +101,16 @@ class TestSerialiser(TestCase):
         self.assertEquals(entry.language, word.language)
 
     @parameterized.expand(words)
+    def test_word_serialiser_serialise_to_entry_one_definition(self, word):
+        serialiser = WordSerialiser(word)
+        entry = serialiser.serialise_to_entry(['mg'])
+        self.assertEquals(entry.entry, word.word)
+        self.assertEquals(entry.part_of_speech, word.part_of_speech)
+        self.assertEquals(entry.entry_definition, [d.definition for d in word.definitions
+                                                   if d.definition_language == 'mg'])
+        self.assertEquals(entry.language, word.language)
+
+    @parameterized.expand(words)
     def test_word_serialiser_serialise_without_definition(self, word):
         serialiser = WordSerialiser(word)
         serialised = serialiser.serialise_without_definition()

@@ -293,32 +293,34 @@ def translate_language_name(language_name):
         raise ValueError("Can't properly translate this one")
 
     language_name += '$'
-    letter_replacements = [("o", "ô"), ("u", "o"), ('y', 'i'), ('i$', 'y$')]
-    cluster_replacements = {
-        'ian$': 'ianina$',
-        'ese$': 'ey$',
-        "cl": "kl",
-        "sc": "sk",
-        'gue':'ge',
-        'gui': 'gi',
-        "que": "ke",
-        "qui": "ki",
-        'oo': 'o',
-        'ee': 'i',
-        "ch": "ts",
-        'ca': 'ka',
-        'co': 'kô',
-        'cu': 'ko',
-        'ce': 'se',
-        'ci': 'si',
-        'cy': 'si',
-        "x": "ks",
-    }
+    cluster_replacements = [
+        ('ese$', 'ey$'),
+        ("cl", "kl"),
+        ("sc", "sk"),
+        ("qu", "k"),
+        ("q", "k"),
+        ('oo', 'o'),
+        ('ee', 'i'),
+        ("ch", "ts"),
+        ('ca', 'ka'),
+        ('co', 'kô'),
+        ('cu', 'ko'),
+        ('ce', 'se'),
+        ('ci', 'si'),
+        ('cy', 'si'),
+        ('c', 'k'),
+        ('w', 'u'),
+        ('w', 'u'),
+        ('w', 'u'),
+        ("x", "ks"),
+        ('ian$', 'ianina$')
+    ]
 
-    for c, r in letter_replacements:
+    letter_replacements = [("o", "ô"), ("u", "o"), ('y', 'i'), ('i$', 'y$')]
+    for c, r in cluster_replacements:
         language_name = language_name.replace(c, r)
 
-    for c, r in list(cluster_replacements.items()):
+    for c, r in letter_replacements:
         language_name = language_name.replace(c, r)
 
     language_name = language_name.strip('$')

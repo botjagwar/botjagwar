@@ -115,13 +115,3 @@ class Word(Base):
         :return:
         """
         return {}
-
-    @property
-    def additional_data(self):
-        """To implement later"""
-        return {}
-
-    @property
-    def translation_method(self):
-        """To implement later"""
-        return ''

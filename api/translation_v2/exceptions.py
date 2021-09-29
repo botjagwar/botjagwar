@@ -1,0 +1,3 @@
+class UnhandledTypeError(TypeError):
+    pass
+

@@ -31,7 +31,7 @@ async def edit_definition(request) -> Response:
         definition_data = await request.json()
         definition.definition = definition_data['definition']
         definition.definition_language = definition_data['definition_language']
-        save_changes_on_disk(request.app, session)
+        await save_changes_on_disk(request.app, session)
         return Response(
             text=json.dumps(definition.serialise()),
             status=200,
@@ -88,4 +88,3 @@ async def delete_definition(request) -> Response:
 
     await save_changes_on_disk(request.app, session)
     return Response(status=204)
-

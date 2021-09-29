@@ -30,4 +30,3 @@ class Word(object):
 class Definition(object):
     def __init__(self, model):
         self.model = model
-

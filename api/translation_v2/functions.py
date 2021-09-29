@@ -7,6 +7,7 @@ from api.parsers import templates_parser, TEMPLATE_TO_OBJECT
 from api.parsers.functions.postprocessors import POST_PROCESSORS
 from api.parsers.inflection_template import ParserNotFoundError
 from api.servicemanager.pgrest import StaticBackend
+from .exceptions import UnhandledTypeError
 from .types import TranslatedDefinition, \
     UntranslatedDefinition
 
@@ -142,7 +143,7 @@ def _translate_using_bridge_language(part_of_speech, definition_line, source_lan
                             else:
                                 translations[w] = [definition['language']]
                 else:
-                    raise TypeError()
+                    raise UnhandledTypeError(f"{translations.__class__.__name__}")
 
     return translations
 
