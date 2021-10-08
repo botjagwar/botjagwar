@@ -13,7 +13,7 @@ class TestInflectionTemplateClassesEnglish(TestCase):
         self.assertIn(GENDER['f'], mg_def)
 
     def test_VerbForm(self):
-        obj = VerbForm('alsk', 'pres', 'cond', '1', 'p', 'pass')
+        obj = VerbForm('alsk', 'pres', 'cond', '1', 'p', voice='pass')
         mg_def = obj.to_definition('en')
         self.assertIn(MOOD['cond'], mg_def)
         self.assertIn(PERSONS['1'], mg_def)

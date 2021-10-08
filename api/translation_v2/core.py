@@ -42,7 +42,7 @@ class Translation:
 
     def __init__(self):
         """
-        Mandika teny ary pejy @ teny malagasy
+        Translates pages into Malagasy
         """
         super(self.__class__, self).__init__()
         self.output = Output()
@@ -56,6 +56,22 @@ class Translation:
         for info in infos:
             self.output.db(info)
             self.output.add_translation_method(info)
+
+    @staticmethod
+    def add_wiktionary_credit(entries: List[Entry], wiki_page: Page) -> List[Entry]:
+        reference = "{{wikibolana|" + wiki_page.site.language + '|' + wiki_page.title() + '}}'
+        out_entries = []
+        for entry in entries:
+            if hasattr(entry, 'reference'):
+                if isinstance(entry.reference, list):
+                    entry.reference.append(reference)
+                else:
+                    entry.reference = [reference]
+            else:
+                entry.reference = [reference]
+
+            out_entries.append(entry)
+        return out_entries
 
     def generate_summary(self, entries: List[Entry]):
         summary = 'Dikanteny: '
@@ -223,6 +239,7 @@ class Translation:
             return self.process_wiktionary_wiki_page(wiki_page.getRedirectTarget())
         try:
             out_entries = self.translate_wiktionary_page(wiktionary_processor)
+            out_entries = Translation.add_wiktionary_credit(out_entries, wiki_page)
             ret = self.output.wikipages(out_entries)
             if ret != '':
                 log.debug('out_entries>' + str(out_entries))

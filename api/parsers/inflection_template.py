@@ -40,8 +40,8 @@ class VerbForm(NonLemma):
     person = None
     number = None
 
-    def __init__(self, lemma=None, tense=None, mood=None, person=None, number=None, voice='act'):
-        super(VerbForm, self).__init__(lemma=lemma, number=number, case=None, gender=None)
+    def __init__(self, lemma=None, tense=None, mood=None, person=None, number=None, case=None, gender=None, voice='act'):
+        super(VerbForm, self).__init__(lemma=lemma, number=number, case=case, gender=gender)
         self.voice = voice
         self.tense = tense
         self.mood = mood

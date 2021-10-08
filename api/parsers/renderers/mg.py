@@ -1,5 +1,6 @@
 from api.parsers.constants.mg import GENDER, CASES, NUMBER, MOOD, TENSE, PERSONS, VOICE, DEFINITENESS, POSSESSIVENESS
 
+
 def render_non_lemma(non_lemma_type):
     def wrapper(non_lemma) -> str:
         explanation = non_lemma_type
@@ -7,6 +8,7 @@ def render_non_lemma(non_lemma_type):
         return ret
 
     return wrapper
+
 
 render_romanization = render_non_lemma('rômanizasiôna')
 render_alternative_spelling = render_non_lemma('tsipelina hafa')
@@ -57,7 +59,7 @@ def render_verb_form(non_lemma) -> str:
         explanation += VOICE[non_lemma.voice] + ' '
 
     if not explanation.strip():
-        explanation = 'endriky'
+        explanation = 'endriky '
 
     ret = explanation + 'ny matoanteny [[%s]]' % (non_lemma.lemma)
     return ret
