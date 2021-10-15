@@ -5,6 +5,7 @@ import time
 from copy import deepcopy
 from typing import List
 
+import pywikibot
 from pywikibot import output
 
 from api import entryprocessor
@@ -60,8 +61,8 @@ class Translation:
     @staticmethod
     def add_wiktionary_credit(
             entries: List[Entry],
-            wiki_page: Page) -> List[Entry]:
-        reference = "{{wikibolana|" + wiki_page.site.language + \
+            wiki_page: [pywikibot.Page, Page]) -> List[Entry]:
+        reference = "{{wikibolana|" + wiki_page.site.lang + \
             '|' + wiki_page.title() + '}}'
         out_entries = []
         for entry in entries:
@@ -251,17 +252,11 @@ class Translation:
         out_entries.sort()
         return out_entries
 
-    def process_wiktionary_wiki_page(self, wiki_page: Page):
-        if wiki_page.isEmpty():
-            return
-
+    def process_wiktionary_wiki_page(self, wiki_page: [Page, pywikibot.Page]):
         if not wiki_page.namespace().content:
             return
 
-        if callable(wiki_page.site.language):
-            language = wiki_page.site.language()
-        else:
-            language = wiki_page.site.language
+        language = wiki_page.site.lang
 
         wiktionary_processor_class = entryprocessor.WiktionaryProcessorFactory.create(
             language)

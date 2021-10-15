@@ -22,8 +22,11 @@ if [[ ! -d $opt_dir/pyenv ]]; then
   source $opt_dir/pyenv/bin/activate
 fi
 
+
 cd $src_dir
 python3 -m pip install -r requirements.txt
+
+sudo mkdir -p $opt_dir/user_data
 
 sudo cp -r $src_dir/api $opt_dir
 sudo cp -r $src_dir/conf $opt_dir

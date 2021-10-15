@@ -135,14 +135,18 @@ async def get_wiktionary_processed_page(request) -> Response:
     page = Page(Site(language, 'wiktionary'), pagename)
     wiktionary_processor.process(page)
 
-    for entry in wiktionary_processor.getall():
-        word, pos, language_code, definition = entry.to_tuple()
+    for entry in wiktionary_processor.getall(fetch_additional_data=True):
         translation_list = []
         section = dict(
-            word=word,
-            language=language_code,
-            part_of_speech=pos,
-            translation=definition[0])
+            word=entry.entry,
+            language=entry.language,
+            part_of_speech=entry.part_of_speech,
+            definitions=entry.entry_definition,
+        )
+        section['additional_data'] = {}
+        for additional_data in entry.properties_types.keys():
+            if hasattr(entry, additional_data) and additional_data not in section:
+                section['additional_data'][additional_data] = getattr(entry, additional_data)
 
         for translation in wiktionary_processor.retrieve_translations():
             translation_section = TranslationModel(
@@ -153,7 +157,7 @@ async def get_wiktionary_processed_page(request) -> Response:
             )
             translation_list.append(translation_section.to_dict())
 
-        if language_code == language:
+        if entry.language == language:
             section['translations'] = translation_list
         ret.append(section)
 
