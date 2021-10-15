@@ -47,7 +47,7 @@ def section_delete(section_name, wiki_page):
         section_begin = None
         section_end = None
         for line_no, line in enumerate(lines):
-            section_rgx = re.search('==[ ]?' + section_name +'[ ]?==', line)
+            section_rgx = re.search('==[ ]?' + section_name + '[ ]?==', line)
             if section_rgx is not None and section_begin is None:
                 section_begin = line_no
                 continue
@@ -88,12 +88,13 @@ def remove_bot_section():
                 content = page.get()
                 try:
                     to_delete = False
-                    if True:#is_edited_by_bot_only(page):
+                    if True:  # is_edited_by_bot_only(page):
                         to_delete = True
 
                     created = page.getVersionHistory()[-1]
                     print('created on ', created.timestamp)
-                    if created.timestamp < pywikibot.Timestamp(2020, 9, 28, 0, 0, 0):
+                    if created.timestamp < pywikibot.Timestamp(
+                            2020, 9, 28, 0, 0, 0):
                         to_delete = True
 
                     if to_delete:

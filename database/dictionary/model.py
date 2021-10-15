@@ -72,14 +72,20 @@ class Word(Base):
         secondary=dictionary_association,
         back_populates="words")
 
-    def __init__(self, word: str, language: str, part_of_speech: str, definitions: list):
+    def __init__(
+            self,
+            word: str,
+            language: str,
+            part_of_speech: str,
+            definitions: list):
         self.word = word
         self.language = language
         self.part_of_speech = part_of_speech
 
         for definition in definitions:
             if not isinstance(definition, Definition):
-                raise TypeError("Every definition inside definitions list must be a Definition object")
+                raise TypeError(
+                    "Every definition inside definitions list must be a Definition object")
 
         self.definitions = definitions
 

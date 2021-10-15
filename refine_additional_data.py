@@ -11,7 +11,7 @@ def refine_ipa(data: str) -> str:
     lines = data.split('\n')
     for line in lines:
         if '{{audio|' in line:
-            rgx = re.search('\{\{[Aa]udio\|(.*)\|(.*)\|[A-Za-z]+', line)
+            rgx = re.search('\\{\\{[Aa]udio\\|(.*)\\|(.*)\\|[A-Za-z]+', line)
             if rgx is not None:
                 return rgx.groups()[1]
             else:
@@ -33,8 +33,10 @@ class AdditionalDataRefiner(object):
 
         insert_sql = b'insert into additional_word_information (word_id, type, information) values '
         for wid, output_additional_data_type, ipa_pronunciation in entries:
-            insert_sql += cursor.mogrify(
-                '(%s, %s, %s),', (wid, output_additional_data_type, ipa_pronunciation))
+            insert_sql += cursor.mogrify('(%s, %s, %s),',
+                                         (wid,
+                                          output_additional_data_type,
+                                          ipa_pronunciation))
 
         print(f'uploading 10000 entries...')
         insert_sql = insert_sql[:-1]
@@ -61,15 +63,14 @@ class AdditionalDataRefiner(object):
             ipa_pronunciation = refine_ipa(data)
             if ipa_pronunciation is not None:
                 count += 1
-                entries[(wid, self.output_additional_data_type, ipa_pronunciation)] = 0
+                entries[(wid,
+                         self.output_additional_data_type,
+                         ipa_pronunciation)] = 0
 
             if count > 5000:
                 count = 0
                 self.insert(entries)
                 entries = {}
-
-
-
 
     def run(self):
         self.process()

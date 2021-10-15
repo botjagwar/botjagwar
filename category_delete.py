@@ -15,8 +15,8 @@ def is_edited_by_bot_only(page: pywikibot.Page) -> bool:
     is_edited_by_bot_only = True
     for contributor in contributors:
         if not contributor.lower().endswith('bot') \
-            and not contributor.lower().startswith('bot') \
-            and contributor not in bots:
+                and not contributor.lower().startswith('bot') \
+                and contributor not in bots:
             print(contributor, ' is not a bot!')
             is_edited_by_bot_only = False
 
@@ -26,7 +26,11 @@ def is_edited_by_bot_only(page: pywikibot.Page) -> bool:
 def mass_delete():
     global count
     cat = "Dikanteny tokony homarinana"
-    for page in pywikibot.Category(pywikibot.Site('mg', 'wiktionary'), cat).articles():
+    for page in pywikibot.Category(
+            pywikibot.Site(
+                'mg',
+                'wiktionary'),
+            cat).articles():
         if page.exists() and not page.isRedirectPage():
             print(page.title())
             if ':' in page.title():
@@ -36,7 +40,8 @@ def mass_delete():
             try:
                 if '{{=mg=}}' not in page.get():
                     created = [k for k in page.revisions()][-1]
-                    if created.timestamp < pywikibot.Timestamp(2020, 11, 1, 0, 0, 0):
+                    if created.timestamp < pywikibot.Timestamp(
+                            2020, 11, 1, 0, 0, 0):
                         if is_edited_by_bot_only(page):
                             page.delete(reason)
                             continue
@@ -56,7 +61,7 @@ def section_delete(section_name, wiki_page):
         section_begin = None
         section_end = None
         for line_no, line in enumerate(lines):
-            section_rgx = re.search('==[ ]?' + section_name +'[ ]?==', line)
+            section_rgx = re.search('==[ ]?' + section_name + '[ ]?==', line)
             if section_rgx is not None and section_begin is None:
                 section_begin = line_no
                 continue
@@ -97,12 +102,13 @@ def remove_bot_section():
                 content = page.get()
                 try:
                     to_delete = False
-                    if True:#is_edited_by_bot_only(page):
+                    if True:  # is_edited_by_bot_only(page):
                         to_delete = True
 
                     created = page.getVersionHistory()[-1]
                     print('created on ', created.timestamp)
-                    if created.timestamp < pywikibot.Timestamp(2020, 9, 28, 0, 0, 0):
+                    if created.timestamp < pywikibot.Timestamp(
+                            2020, 9, 28, 0, 0, 0):
                         to_delete = True
 
                     if to_delete:

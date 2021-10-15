@@ -28,7 +28,8 @@ class AnagramsFinderBot(object):
 
         print('Beginning work from alphagram %s' % self.begin)
         self.filename = '/opt/botjagwar/user_data/anagrams_%s' % self.code
-        self.line_filename = '/opt/botjagwar/user_data/anagrams_%s_%s.linefile' % (self.language, self.code)
+        self.line_filename = '/opt/botjagwar/user_data/anagrams_%s_%s.linefile' % (
+            self.language, self.code)
         self.page_list = [
             page for page
             in get_pages_from_category(args.CODE, args.LANGUAGE)
@@ -45,7 +46,7 @@ class AnagramsFinderBot(object):
 
     def get_alphagram(self, word):
         str = word.upper()
-        #return ''.join(sorted(c for c in str if c >= 'A' and c <= 'Z'))
+        # return ''.join(sorted(c for c in str if c >= 'A' and c <= 'Z'))
         return ''.join(sorted(c for c in str))
 
     def populate_anagrams(self):
@@ -104,7 +105,8 @@ class AnagramsFinderBot(object):
         f = open(self.line_filename, 'w')
         for alphagram in self.anagrams:
             for _ in self.anagrams[alphagram]:
-                line = alphagram + ':' + ','.join([page.title() for page in self.anagrams[alphagram]]) + '\n'
+                line = alphagram + ':' + \
+                    ','.join([page.title() for page in self.anagrams[alphagram]]) + '\n'
                 f.write(line)
 
         if self.begin:
@@ -141,7 +143,9 @@ class AnagramsFinderBot(object):
 
                 # anagram section does NOT exist
                 if not old_content:
-                    anag_begin = content.find('=={{=%s=}}==' % self.language_code)
+                    anag_begin = content.find(
+                        '=={{=%s=}}==' %
+                        self.language_code)
                     if anag_begin == -1:
                         print('Language section not found')
                         continue
@@ -166,7 +170,10 @@ class AnagramsFinderBot(object):
                     continue
 
                 pywikibot.showDiff(original_content, new_page_content)
-                page.put(new_page_content, "+anagrama amin'ny teny %s" % self.language)
+                page.put(
+                    new_page_content,
+                    "+anagrama amin'ny teny %s" %
+                    self.language)
                 print('%s/%s' % (self.counter, self.pages_total))
 
 

@@ -66,11 +66,15 @@ async def search_definition(request) -> Response:
 
     jsondata = await request.json()
     data = json.loads(jsondata)
-    definitions = [m.serialise() for m in session.query(
-        Definition).filter(Definition.definition.like(data['definition'])).all()]
+    definitions = [
+        m.serialise() for m in session.query(Definition).filter(
+            Definition.definition.like(
+                data['definition'])).all()]
 
     return Response(
-        text=json.dumps(definitions), status=200, content_type='application/json')
+        text=json.dumps(definitions),
+        status=200,
+        content_type='application/json')
 
 
 async def delete_definition(request) -> Response:

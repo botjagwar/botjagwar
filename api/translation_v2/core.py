@@ -58,8 +58,11 @@ class Translation:
             self.output.add_translation_method(info)
 
     @staticmethod
-    def add_wiktionary_credit(entries: List[Entry], wiki_page: Page) -> List[Entry]:
-        reference = "{{wikibolana|" + wiki_page.site.language + '|' + wiki_page.title() + '}}'
+    def add_wiktionary_credit(
+            entries: List[Entry],
+            wiki_page: Page) -> List[Entry]:
+        reference = "{{wikibolana|" + wiki_page.site.language + \
+            '|' + wiki_page.title() + '}}'
         out_entries = []
         for entry in entries:
             if hasattr(entry, 'reference'):
@@ -75,15 +78,23 @@ class Translation:
 
     def generate_summary(self, entries: List[Entry]):
         summary = 'Dikanteny: '
-        summary += ', '.join(sorted(list(set([f'{entry.language.lower()}' for entry in entries]))))
+        summary += ', '.join(
+            sorted(list(set([f'{entry.language.lower()}' for entry in entries]))))
         return summary
 
     def check_if_page_exists(self, lemma):
-        page = Page(Site(self.working_wiki_language, 'wiktionary'), lemma, offline=False)
+        page = Page(
+            Site(
+                self.working_wiki_language,
+                'wiktionary'),
+            lemma,
+            offline=False)
         return page.exists()
 
     @staticmethod
-    def aggregate_entry_data(entries_translated: List[Entry], entries_already_existing: List[Entry]) -> List[Entry]:
+    def aggregate_entry_data(
+            entries_translated: List[Entry],
+            entries_already_existing: List[Entry]) -> List[Entry]:
         aggregated_entries = []
         for translated in entries_translated:
             for existing in entries_already_existing:
@@ -109,15 +120,17 @@ class Translation:
             raise TranslatedPagePushError(
                 f'Attempted to push translated page to {target_page.namespace().custom_name} '
                 f'namespace (ns:{target_page.namespace().id}). '
-                f'Can only push to ns:0 (main namespace)'
-            )
+                f'Can only push to ns:0 (main namespace)')
         elif target_page.isRedirectPage():
             pass
-            target_page.put(self.output.wikipages(entries), self.generate_summary(entries))
+            target_page.put(
+                self.output.wikipages(entries),
+                self.generate_summary(entries))
         else:
             # Get entries to aggregate
             if target_page.exists():
-                wiktionary_processor_class = entryprocessor.WiktionaryProcessorFactory.create(self.working_wiki_language)
+                wiktionary_processor_class = entryprocessor.WiktionaryProcessorFactory.create(
+                    self.working_wiki_language)
                 wiktionary_processor = wiktionary_processor_class()
                 wiktionary_processor.set_text(target_page.get())
                 wiktionary_processor.set_title(page_title)
@@ -128,8 +141,14 @@ class Translation:
 
             content = self.output.wikipages(entries)
             # Push aggregated content
-            output('**** \03{yellow}' + target_page.title() + '\03{default} ****')
-            output('\03{white}' + self.generate_summary(entries) + '\03{default}')
+            output(
+                '**** \03{yellow}' +
+                target_page.title() +
+                '\03{default} ****')
+            output(
+                '\03{white}' +
+                self.generate_summary(entries) +
+                '\03{default}')
             output('\03{green}' + content + '\03{default}')
             output('\03{yellow}--------------\03{default}')
             if self.config.get('ninja_mode', 'translator') == '1':
@@ -141,7 +160,8 @@ class Translation:
                             summary = 'nanitatra'
                 else:
                     if len(content) > 140:
-                        summary = "Pejy voaforona amin'ny « " + content[:137] + '... »'
+                        summary = "Pejy voaforona amin'ny « " + \
+                            content[:137] + '... »'
                     else:
                         summary = "Pejy voaforona amin'ny « " + content + ' »'
             else:
@@ -151,7 +171,9 @@ class Translation:
             if self.config.get('ninja_mode', 'translator') == '1':
                 time.sleep(12)
 
-    def translate_wiktionary_page(self, wiktionary_processor: entryprocessor.WiktionaryProcessor) -> List[Entry]:
+    def translate_wiktionary_page(
+            self,
+            wiktionary_processor: entryprocessor.WiktionaryProcessor) -> List[Entry]:
         """
         Parse Wiktionary page data and translate any content/section that can be translated
         """
@@ -167,7 +189,8 @@ class Translation:
             translated_from_definition = []
             out_translation_methods = {}
             for definition_line in entry.entry_definition:
-                refined_definition_lines = wiktionary_processor.refine_definition(definition_line)
+                refined_definition_lines = wiktionary_processor.refine_definition(
+                    definition_line)
                 for refined_definition_line in refined_definition_lines:
                     for t_method in translation_methods:
                         if entry.part_of_speech is None:
@@ -189,26 +212,36 @@ class Translation:
                                     definitions.lemma is not None and\
                                     definitions.lemma not in already_visited:
                                 already_visited.append(definitions.lemma)
-                                if not self.check_if_page_exists(definitions.lemma):
-                                    log.debug(f'lemma {definitions.lemma} does not exist. Processing...')
-                                    page = Page(Site(wiktionary_processor.language, 'wiktionary'), definitions.lemma)
+                                if not self.check_if_page_exists(
+                                        definitions.lemma):
+                                    log.debug(
+                                        f'lemma {definitions.lemma} does not exist. Processing...')
+                                    page = Page(
+                                        Site(
+                                            wiktionary_processor.language,
+                                            'wiktionary'),
+                                        definitions.lemma)
                                     if page.exists():
                                         self.process_wiktionary_wiki_page(page)
 
                             for d in definitions.split(','):
                                 translated_definition.append(d.strip())
                                 if d in out_translation_methods:
-                                    out_translation_methods[d].append(t_method.__name__)
+                                    out_translation_methods[d].append(
+                                        t_method.__name__)
                                 else:
-                                    out_translation_methods[d] = [t_method.__name__]
+                                    out_translation_methods[d] = [
+                                        t_method.__name__]
 
-                            translated_definition += [k.strip() for k in definitions.split(',')]
+                            translated_definition += [k.strip()
+                                                      for k in definitions.split(',')]
 
                     translated_from_definition.append(refined_definition_line)
 
             entry_definitions = sorted(list(set(translated_definition)))
             out_entry = deepcopy(entry)
-            out_entry.translated_from_definition = ', '.join(translated_from_definition)
+            out_entry.translated_from_definition = ', '.join(
+                translated_from_definition)
             out_entry.entry_definition = entry_definitions
             out_entry.translated_from_language = wiktionary_processor.language
             out_entry.translation_methods = out_translation_methods
@@ -230,16 +263,19 @@ class Translation:
         else:
             language = wiki_page.site.language
 
-        wiktionary_processor_class = entryprocessor.WiktionaryProcessorFactory.create(language)
+        wiktionary_processor_class = entryprocessor.WiktionaryProcessorFactory.create(
+            language)
         wiktionary_processor = wiktionary_processor_class()
         if not wiki_page.isRedirectPage():
             wiktionary_processor.set_text(wiki_page.get())
             wiktionary_processor.set_title(wiki_page.title())
         else:
-            return self.process_wiktionary_wiki_page(wiki_page.getRedirectTarget())
+            return self.process_wiktionary_wiki_page(
+                wiki_page.getRedirectTarget())
         try:
             out_entries = self.translate_wiktionary_page(wiktionary_processor)
-            out_entries = Translation.add_wiktionary_credit(out_entries, wiki_page)
+            out_entries = Translation.add_wiktionary_credit(
+                out_entries, wiki_page)
             ret = self.output.wikipages(out_entries)
             if ret != '':
                 log.debug('out_entries>' + str(out_entries))

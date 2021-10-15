@@ -3,7 +3,8 @@ import os
 import re
 from typing import List
 
-data_file = os.getcwd() +'/conf/entryprocessor/'
+data_file = os.getcwd() + '/conf/entryprocessor/'
+
 
 class WiktionaryProcessorException(Exception):
     pass
@@ -30,7 +31,8 @@ class WiktionaryProcessor(object):
         if not self.text_set:
             try:
                 if page is None:
-                    raise WiktionaryProcessorException("Unable to process: No text has been and 'page' is None")
+                    raise WiktionaryProcessorException(
+                        "Unable to process: No text has been and 'page' is None")
                 self.content = page.get()
             except SyntaxError as e:
                 print(e)
@@ -55,9 +57,9 @@ class WiktionaryProcessor(object):
 
 
 def stripwikitext(w):
-    w = re.sub('[ ]?\[\[(.*)\|(.*)\]\][ ]?', '\\1', w)
+    w = re.sub('[ ]?\\[\\[(.*)\\|(.*)\\]\\][ ]?', '\\1', w)
     w = w.replace('.', '')
-    w = re.sub('[ ]?\{\{(.*)\}\}[ ]?', '', w)
+    w = re.sub('[ ]?\\{\\{(.*)\\}\\}[ ]?', '', w)
     for c in '[]':
         w = w.replace(c, '')
 

@@ -77,7 +77,12 @@ class Translation:
         # target_language_page.put_async(wikipage, summary)
         self.output.db(infos)
 
-    def process_entry_in_native_language(self, content: str, title: str, language: str, unknowns: list):
+    def process_entry_in_native_language(
+            self,
+            content: str,
+            title: str,
+            language: str,
+            unknowns: list):
         """
         Yields each translation found
         :param content:
@@ -86,7 +91,8 @@ class Translation:
         :param unknowns:
         :return:
         """
-        wiktionary_processor_class = entryprocessor.WiktionaryProcessorFactory.create(language)
+        wiktionary_processor_class = entryprocessor.WiktionaryProcessorFactory.create(
+            language)
         wiktionary_processor = wiktionary_processor_class()
         try:
             wiktionary_processor.set_text(content)
@@ -110,7 +116,9 @@ class Translation:
                     if t['part_of_speech'] == str(pos)
                 ]
             except NoWordException as exc:
-                log.debug('No translation found for %s in %s' % (title, language))
+                log.debug(
+                    'No translation found for %s in %s' %
+                    (title, language))
                 if title not in unknowns:
                     unknowns.append((title, language))
                 break
@@ -126,7 +134,9 @@ class Translation:
             yield infos
 
     def process_infos(self, infos):
-        resp = requests.get(URL_HEAD + '/entry/%s/%s' % (infos.language, infos.entry))
+        resp = requests.get(
+            URL_HEAD + '/entry/%s/%s' %
+            (infos.language, infos.entry))
         if resp.status_code != WordDoesNotExistException.status_code:
             return 1
 
@@ -135,17 +145,28 @@ class Translation:
         self._save_translation_from_bridge_language(infos)
         return 1
 
-    def process_entry_in_foreign_language(self, entry: Entry, title: str, language: str, unknowns: list):
+    def process_entry_in_foreign_language(
+            self,
+            entry: Entry,
+            title: str,
+            language: str,
+            unknowns: list):
         if entry.language in self.language_blacklist:
-            log.debug("language '%s' is blacklisted, so not translating or processing." % language)
+            log.debug(
+                "language '%s' is blacklisted, so not translating or processing." %
+                language)
             return
 
         try:
-            log.debug("Translating word in foreign language (%s in '%s')" % (entry.entry_definition[0], language))
+            log.debug(
+                "Translating word in foreign language (%s in '%s')" %
+                (entry.entry_definition[0], language))
             target_language_translations = []
-            for translation in self.translate_word(entry.entry_definition[0], language):
+            for translation in self.translate_word(
+                    entry.entry_definition[0], language):
                 if translation['part_of_speech'] == entry.part_of_speech:
-                    target_language_translations.append(translation['definition'])
+                    target_language_translations.append(
+                        translation['definition'])
             if len(target_language_translations) == 0:
                 log.debug("No matching translations found")
                 return
@@ -176,7 +197,8 @@ class Translation:
 
         # BEGINNING
         ret = 0
-        wiktionary_processor_class = entryprocessor.WiktionaryProcessorFactory.create(language)
+        wiktionary_processor_class = entryprocessor.WiktionaryProcessorFactory.create(
+            language)
         wiktionary_processor = wiktionary_processor_class()
 
         if wiki_page.title().find(':') != -1:
@@ -219,7 +241,8 @@ class Translation:
 
     @staticmethod
     def translate_word(word: str, language: str):
-        url = URL_HEAD + '/translations/%s/%s/%s' % (language, WORKING_WIKI_LANGUAGE, word)
+        url = URL_HEAD + \
+            '/translations/%s/%s/%s' % (language, WORKING_WIKI_LANGUAGE, word)
         resp = requests.get(url)
         if resp.status_code == WordDoesNotExistException.status_code:
             raise NoWordException()
@@ -241,7 +264,8 @@ class Translation:
             return translations
 
     async def _translate_word(self, word: str, language: str):
-        url = URL_HEAD + '/translations/%s/%s/%s' % (language, WORKING_WIKI_LANGUAGE, word)
+        url = URL_HEAD + \
+            '/translations/%s/%s/%s' % (language, WORKING_WIKI_LANGUAGE, word)
         async with ClientSession() as client_session:
             async with client_session.get(url) as resp:
                 if resp.status == WordDoesNotExistException.status_code:
@@ -262,7 +286,11 @@ class Translation:
 
                     return translations
 
-    def process_wiktionary_wikitext(self, title: str, language: str, content: str):
+    def process_wiktionary_wikitext(
+            self,
+            title: str,
+            language: str,
+            content: str):
         """
         Attempt to make a simplified version of all the methods above
         :param title:
@@ -270,7 +298,8 @@ class Translation:
         :param content:
         :return:
         """
-        wiktionary_processor_class = entryprocessor.WiktionaryProcessorFactory.create(language)
+        wiktionary_processor_class = entryprocessor.WiktionaryProcessorFactory.create(
+            language)
         wiktionary_processor = wiktionary_processor_class()
         wiktionary_processor.set_text(content)
         wiktionary_processor.set_title(title)
@@ -288,10 +317,12 @@ class Translation:
 
             if entry.language == language:  # if entry in the content language
                 pass
-                for info in self.process_entry_in_native_language(content, title, language, []):
+                for info in self.process_entry_in_native_language(
+                        content, title, language, []):
                     self.process_infos(info)
             else:
-                info = self.process_entry_in_foreign_language(entry, title, language, [])
+                info = self.process_entry_in_foreign_language(
+                    entry, title, language, [])
                 if info is not None:
                     self.output.db(info)
                     _generate_redirections(info)
@@ -313,8 +344,10 @@ def _generate_redirections(infos):
         if infos.entry != redirection_target:
             # page = pwbot.Page(pwbot.Site(WORKING_WIKI_LANGUAGE, 'wiktionary'), infos.entry)
             # if not page.exists():
-            #     page.put_async("#FIHODINANA [[%s]]" % redirection_target, "fihodinana")
+            # page.put_async("#FIHODINANA [[%s]]" % redirection_target,
+            # "fihodinana")
             infos.entry = redirection_target
+
 
 def _get_unaccented_word(word):
     for char in "́̀":

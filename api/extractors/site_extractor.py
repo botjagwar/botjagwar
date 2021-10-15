@@ -44,7 +44,9 @@ class SiteExtractor(object):
                 raise NotImplementedError('%s has to be defined' % var)
 
         def _get_html_page():
-            response = requests.get(self.lookup_pattern % word, headers=headers)
+            response = requests.get(
+                self.lookup_pattern %
+                word, headers=headers)
             if response.status_code == 200:
                 if 'tsy misy' in response.text:
                     raise SiteExtractorException(response, 'Empty content')
@@ -56,7 +58,8 @@ class SiteExtractor(object):
         for var in ['lookup_pattern', 'definition_xpath']:
             check_if_defined(var)
 
-        # cache check if page has already been retrieved, and handle known raised exception
+        # cache check if page has already been retrieved, and handle known
+        # raised exception
         if isinstance(self.cache_engine, SiteExtractorCacheEngine):
             try:
                 page = str(self.cache_engine.get(word))
@@ -80,7 +83,7 @@ class SiteExtractor(object):
         """
         return definition
 
-    #@time_this('lookup')
+    # @time_this('lookup')
     def lookup(self, word) -> Entry:
         content = self.load_page(word)
         definitions = [self.reprocess_definition(d)
@@ -123,7 +126,7 @@ class TenyMalagasySiteExtractor(SiteExtractor):
         definition = definition.replace('\n', '')
         return definition
 
-    #@time_this('tenymalagasy.org lookup')
+    # @time_this('tenymalagasy.org lookup')
     def lookup(self, word):
         """
         Postprocessor function
@@ -153,8 +156,10 @@ class TenyMalagasySiteExtractor(SiteExtractor):
         for definition_section in entry.entry_definition:
             for ref in re.findall(references_regex, str(definition_section)):
                 entry.references.append(ref)
-                definition_section = definition_section.replace('[%s]' % ref, '')
-                definition_section = definition_section.replace('%s]' % ref, '')
+                definition_section = definition_section.replace(
+                    '[%s]' % ref, '')
+                definition_section = definition_section.replace(
+                    '%s]' % ref, '')
 
             for i, d in enumerate(definition_section.split('¶\xa0')):
                 split_definition = d.split(':')
@@ -186,7 +191,8 @@ class RakibolanaSiteExtactor(SiteExtractor):
         etree.strip_tags(definition, self.STRIP_TAGS_LIST)
         definition = etree.tostring(definition, encoding='unicode')
 
-        definition = definition.replace('<div class="rakibolana-definition">', '')
+        definition = definition.replace(
+            '<div class="rakibolana-definition">', '')
         definition = definition.replace('\n Ahitsio\n  </div>\n\n', '')
         definition = ''.join(definition.split(':')[1:]).strip()
 
@@ -207,7 +213,7 @@ class RakibolanaSiteExtactor(SiteExtractor):
 
         return definition
 
-    #@time_this('rakibolana.org lookup')
+    # @time_this('rakibolana.org lookup')
     def lookup(self, word):
         """
         Postprocessor function
@@ -221,4 +227,3 @@ class RakibolanaSiteExtactor(SiteExtractor):
 
         entry = super(RakibolanaSiteExtactor, self).lookup(word)
         return entry
-

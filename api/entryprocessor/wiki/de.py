@@ -1,8 +1,10 @@
 # coding: utf8
-import sys, os
+import sys
+import os
 
 
 from .base import WiktionaryProcessor
+
 
 class DEWiktionaryProcessor(WiktionaryProcessor):
     @property

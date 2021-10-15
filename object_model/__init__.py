@@ -83,8 +83,9 @@ class TypeCheckedObject(object):
                 ))
         else:
             if not self._additional:
-                raise AttributeError("Unspecified Attribute '%s' not allowed in '%s' object" % (
-                    name, self.__class__.__name__))
+                raise AttributeError(
+                    "Unspecified Attribute '%s' not allowed in '%s' object" %
+                    (name, self.__class__.__name__))
             else:
                 setattr(self, name, value)
                 self.properties_types[name] = value.__class__

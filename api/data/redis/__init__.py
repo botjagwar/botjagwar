@@ -5,7 +5,13 @@ from api.data.kvs import KvsPersistentClass, KeyValueStoreAPI
 
 
 class RedisWrapperAPI(KeyValueStoreAPI):
-    def __init__(self, host='default', password='default', singleton=False, persistent=False, identifier='default'):
+    def __init__(
+            self,
+            host='default',
+            password='default',
+            singleton=False,
+            persistent=False,
+            identifier='default'):
         import redis
         config = BotjagwarConfig()
         if host == 'default':

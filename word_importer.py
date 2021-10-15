@@ -116,22 +116,23 @@ class DatabaseImporter(Importer):
     fast_tree = {}
 
     def do_import(self, workers=100):
-        input_database = DictionaryDatabaseManager(database_file=self.export_path)
+        input_database = DictionaryDatabaseManager(
+            database_file=self.export_path)
         with input_database.engine.connect() as connection:
             query = connection.execute(
                 """
-                select 
+                select
                     word.id,
-                    word.word, 
-                    word.language, 
-                    word.part_of_speech, 
+                    word.word,
+                    word.language,
+                    word.part_of_speech,
                     definitions.definition,
                     definitions.definition_language
-                from 
+                from
                     dictionary,
-                    word, 
+                    word,
                     definitions
-                where 
+                where
                     dictionary.definition = definitions.id
                     and word.id = dictionary.word
                     and definition_language = 'mg'

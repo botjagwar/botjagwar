@@ -29,7 +29,8 @@ class Definition(object):
 
     def serialise_with_words(self):
         definition_data = self.serialise()
-        definition_data['words'] = [Word(word).serialise_without_definition() for word in self.model.words]
+        definition_data['words'] = [
+            Word(word).serialise_without_definition() for word in self.model.words]
         return definition_data
 
     def serialise_xml(self):
@@ -47,7 +48,8 @@ class Word(object):
 
     def serialise(self):
         word_data = self.serialise_without_definition()
-        word_data['definitions'] = [Definition(definition).serialise() for definition in self.model.definitions]
+        word_data['definitions'] = [
+            Definition(definition).serialise() for definition in self.model.definitions]
         return word_data
 
     def serialise_xml(self):
@@ -77,7 +79,8 @@ class Word(object):
         last_modified = ''
         try:
             if self.model.date_changed:
-                last_modified = self.model.date_changed.strftime("%Y-%m-%d %H:%M:%S")
+                last_modified = self.model.date_changed.strftime(
+                    "%Y-%m-%d %H:%M:%S")
         except DetachedInstanceError:
             pass
 

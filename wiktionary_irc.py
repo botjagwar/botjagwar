@@ -12,7 +12,9 @@ import requests
 from api.decorator import retry_on_fail, threaded
 from api.servicemanager import EntryTranslatorServiceManager
 
-log.basicConfig(filename='/opt/botjagwar/user_data/wiktionary_irc.log',level=log.DEBUG)
+log.basicConfig(
+    filename='/opt/botjagwar/user_data/wiktionary_irc.log',
+    level=log.DEBUG)
 userdata_file = '/opt/botjagwar/user_data/entry_translator/'
 nwikimax = 5
 spawned_backend_process = None
@@ -45,7 +47,13 @@ class WiktionaryRecentChangesBot(irc.bot.SingleServerIRCBot):
         nick_suffix = '-%s' % base36encode(random.randint(36**3, 36**4 - 1))
         user = nick_prefix + nick_suffix
         self.channels_list = []
-        super(WiktionaryRecentChangesBot, self).__init__(self.channels_list, user, user, 5)
+        super(
+            WiktionaryRecentChangesBot,
+            self).__init__(
+            self.channels_list,
+            user,
+            user,
+            5)
 
         self.chronometer = 0.0
         self.joined = []
@@ -58,7 +66,7 @@ class WiktionaryRecentChangesBot(irc.bot.SingleServerIRCBot):
 
     def connect_in_languages(self):
         """mametaka fitohizana amin'ny tsanely irc an'i Wikimedia"""
-        print ("\n---------------------\nIRC BOT PAREMETERS : ")
+        print("\n---------------------\nIRC BOT PAREMETERS : ")
         self.langs = ['en', 'fr']
         self.sitename = 'wiktionary'
         self.channels = [
@@ -75,7 +83,7 @@ class WiktionaryRecentChangesBot(irc.bot.SingleServerIRCBot):
             self.joined.append(channel)
             print(("Channel:", channel, " Nickname:", self.username))
 
-        print ("Connection complete")
+        print("Connection complete")
 
     def do_join(self, server, events):
         for channel in self.joined:
@@ -102,7 +110,8 @@ class WiktionaryRecentChangesBot(irc.bot.SingleServerIRCBot):
                 if not self.edits % 5:
                     throughput = 60. * 5. / (float(ct_time) - self.chronometer)
                     self.chronometer = ct_time
-                    print(("Edit #%d (%.2f edits/min)" % (self.edits, throughput)))
+                    print(("Edit #%d (%.2f edits/min)" %
+                          (self.edits, throughput)))
             except requests.ConnectionError as e:
                 print('NOTE: Spawning "entry_processor.py" backend process.')
             except Exception as e:
@@ -125,7 +134,7 @@ def _get_pagename(message):
     item = re.search(r"\[\[(.*)\]\]", message).groups()[0]
     item = str(item[3:-3])
     if len(item) > 200:
-        print (item)
+        print(item)
         raise IrcBotException("Title is too long")
     return item
 

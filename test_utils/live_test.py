@@ -5,6 +5,7 @@ import requests
 
 URL_HEAD = 'http://0.0.0.0:8001'
 
+
 def create_entry(word, language, pos, definition, def_language):
     resp = requests.post(
         URL_HEAD + '/entry/%s/create' % language,

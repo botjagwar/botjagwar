@@ -19,10 +19,11 @@ log = logging.getLogger(__name__)
 class Processor(object):
     def __init__(self, language):
         self.count = 0
-        self.missing_translation_writer = MissingTranslationFileWriter(language)
+        self.missing_translation_writer = MissingTranslationFileWriter(
+            language)
         self.translation_lookup_table = FastTranslationLookup(language, 'mg')
         self.translation_lookup_table.build_table()
-        self.entry_writer = None #EntryPageFileWriter(language)
+        self.entry_writer = None  # EntryPageFileWriter(language)
         self.processor_class = None
         self.language = language
 
@@ -51,7 +52,8 @@ class Processor(object):
         for entry in entries:
             if entry.language == self.language:
                 if self.translation_lookup_table.lookup(entry):
-                    translation = self.translation_lookup_table.translate(entry)
+                    translation = self.translation_lookup_table.translate(
+                        entry)
                     new_entry = Entry(
                         entry=entry.entry,
                         entry_definition=translation,
@@ -84,10 +86,12 @@ class Processor(object):
                                 self.missing_translation_writer.add(definition)
                             else:
                                 if elements:
-                                    # part of speech changes to become a form-of part of speech
+                                    # part of speech changes to become a
+                                    # form-of part of speech
                                     if not pos.startswith('e-'):
                                         pos = 'e-' + pos
-                                    translations.append(elements.to_malagasy_definition())
+                                    translations.append(
+                                        elements.to_malagasy_definition())
                     else:
                         translations.append(translation[0])
 
@@ -146,7 +150,6 @@ class Processor(object):
             except ValueError as err:
                 log.exception('Could not write state.')
 
-
         if self.missing_translation_writer is not None:
             self.missing_translation_writer.write()
 
@@ -165,8 +168,8 @@ class Processor(object):
                 pool.map(function, buffers)
             except MaybeEncodingError:
                 if len(buffers) > 2:
-                    pmap(pool, buffers[:(len(buffers)-1)//2], lvl+1)
-                    pmap(pool, buffers[(len(buffers)-1)//2:], lvl+1)
+                    pmap(pool, buffers[:(len(buffers) - 1) // 2], lvl + 1)
+                    pmap(pool, buffers[(len(buffers) - 1) // 2:], lvl + 1)
 
         nthreads = 1
         for xml_buffer in self.load(filename):

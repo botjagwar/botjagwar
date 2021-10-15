@@ -55,4 +55,6 @@ class TestPhraseCoverageParser(TestCase):
             pd = self.parser_object.process(d)
             self.parser_object.parsed += 1
 
-        self.assertGreaterEqual(self.parser_object.parsed, 0.70*len(json_data))  # 70% coverage
+        self.assertGreaterEqual(
+            self.parser_object.parsed,
+            0.70 * len(json_data))  # 70% coverage

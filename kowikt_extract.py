@@ -3,7 +3,7 @@ import re
 from object_model.word import Translation
 from page_lister import get_pages_from_category
 
-lang_rgx = '\(([a-z]+)\):'
+lang_rgx = '\\(([a-z]+)\\):'
 
 
 def get_entries_from_content(title, content):
@@ -68,11 +68,16 @@ def get_definitions_from_content(title, content):
 def main():
     f = open('user_data/ko-ko.csv', 'a')
     for page in get_pages_from_category('ko', '한국어 명사'):
-        translations = [i for i in get_definitions_from_content(page.title(), page.get())]
+        translations = [
+            i for i in get_definitions_from_content(
+                page.title(), page.get())]
         for t in translations:
-            s = '%s;%s;%s;%s;%s\n' % (t.word, t.language, t.part_of_speech, t.translation, 'ko')
+            s = '%s;%s;%s;%s;%s\n' % (
+                t.word, t.language, t.part_of_speech, t.translation, 'ko')
             print(s.strip('\n'))
             f.write(s)
     f.close()
+
+
 if __name__ == '__main__':
     main()

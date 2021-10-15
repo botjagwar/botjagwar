@@ -70,9 +70,13 @@ class TestSerialiser(TestCase):
         serialized = serialiser.serialise()
         print(serialized)
         self.assertEquals(serialized['id'], definition.id)
-        self.assertEquals(serialized['last_modified'], definition.date_changed.strftime("%Y-%m-%d %H:%M:%S"))
+        self.assertEquals(
+            serialized['last_modified'],
+            definition.date_changed.strftime("%Y-%m-%d %H:%M:%S"))
         self.assertEquals(serialized['definition'], definition.definition)
-        self.assertEquals(serialized['language'], definition.definition_language)
+        self.assertEquals(
+            serialized['language'],
+            definition.definition_language)
 
     @parameterized.expand(definitions)
     def test_definition_serialise_with_words(self, definition):
@@ -89,7 +93,9 @@ class TestSerialiser(TestCase):
             self.assertEquals(serialised[node], getattr(word, node))
 
         self.assertIn('last_modified', serialised)
-        self.assertEquals(serialised['last_modified'], word.date_changed.strftime("%Y-%m-%d %H:%M:%S"))
+        self.assertEquals(
+            serialised['last_modified'],
+            word.date_changed.strftime("%Y-%m-%d %H:%M:%S"))
 
     @parameterized.expand(words)
     def test_word_serialiser_serialise_to_entry(self, word):
@@ -97,7 +103,9 @@ class TestSerialiser(TestCase):
         entry = serialiser.serialise_to_entry(['mg', 'en'])
         self.assertEquals(entry.entry, word.word)
         self.assertEquals(entry.part_of_speech, word.part_of_speech)
-        self.assertEquals(entry.entry_definition, [d.definition for d in word.definitions])
+        self.assertEquals(
+            entry.entry_definition, [
+                d.definition for d in word.definitions])
         self.assertEquals(entry.language, word.language)
 
     @parameterized.expand(words)
@@ -106,8 +114,9 @@ class TestSerialiser(TestCase):
         entry = serialiser.serialise_to_entry(['mg'])
         self.assertEquals(entry.entry, word.word)
         self.assertEquals(entry.part_of_speech, word.part_of_speech)
-        self.assertEquals(entry.entry_definition, [d.definition for d in word.definitions
-                                                   if d.definition_language == 'mg'])
+        self.assertEquals(
+            entry.entry_definition, [
+                d.definition for d in word.definitions if d.definition_language == 'mg'])
         self.assertEquals(entry.language, word.language)
 
     @parameterized.expand(words)
@@ -119,4 +128,6 @@ class TestSerialiser(TestCase):
             self.assertEquals(serialised[node], getattr(word, node))
 
         self.assertIn('last_modified', serialised)
-        self.assertEquals(serialised['last_modified'], word.date_changed.strftime("%Y-%m-%d %H:%M:%S"))
+        self.assertEquals(
+            serialised['last_modified'],
+            word.date_changed.strftime("%Y-%m-%d %H:%M:%S"))

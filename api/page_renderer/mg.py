@@ -19,7 +19,8 @@ class MGWikiPageRenderer(PageRenderer):
 
     def render(self, info: Entry, link=True) -> str:
         additional_note = ""
-        if (hasattr(info, 'origin_wiktionary_page_name') and hasattr(info, 'origin_wiktionary_edition')):
+        if (hasattr(info, 'origin_wiktionary_page_name')
+                and hasattr(info, 'origin_wiktionary_edition')):
             additional_note = " {{dikantenin'ny dikanteny|" + f"{info.origin_wiktionary_page_name}" \
                                                               f"|{info.origin_wiktionary_edition}" + "}}\n"
 
@@ -62,8 +63,7 @@ class MGWikiPageRenderer(PageRenderer):
     def render_definitions(self, info, additional_note, link):
         s = ''
         definitions = []
-        defn_list = list(set(info.entry_definition))
-        defn_list.sort()
+        defn_list = sorted(set(info.entry_definition))
         if link:
             for d in defn_list:
                 if len(d.split()) == 1:
@@ -79,7 +79,7 @@ class MGWikiPageRenderer(PageRenderer):
         for idx, defn in enumerate(definitions):
             s += "\n# " + defn
             s += additional_note % info.properties
-            ## Examples:
+            # Examples:
             if hasattr(info, 'examples'):
                 if len(info.examples) > idx:
                     if isinstance(info.examples, list):
@@ -95,16 +95,18 @@ class MGWikiPageRenderer(PageRenderer):
         s = ''
         # Pronunciation and/or Audio
         if hasattr(info, 'audio_pronunciations') or \
-              hasattr(info, 'ipa'):
+                hasattr(info, 'ipa'):
             s += '\n\n{{-fanononana-}}'
 
             if hasattr(info, 'audio_pronunciations'):
                 for audio in info.audio_pronunciations:
-                    s += "\n* " + '{{audio|' + f'{audio}' + '|' + f'{info.entry}' + '}}'
+                    s += "\n* " + \
+                        '{{audio|' + f'{audio}' + '|' + f'{info.entry}' + '}}'
 
             if hasattr(info, 'ipa'):
                 for ipa in info.ipa:
-                    s += "\n* " + '{{fanononana|' + f'{ipa}' + '|' + f'{info.language}' + '}}'
+                    s += "\n* " + \
+                        '{{fanononana|' + f'{ipa}' + '|' + f'{info.language}' + '}}'
 
         # Pronunciation section
         elif hasattr(info, 'pronunciation'):
@@ -138,7 +140,7 @@ class MGWikiPageRenderer(PageRenderer):
     def render_related_terms(self, info) -> str:
         s = ''
         if hasattr(info, 'related_terms') or \
-            hasattr(info, 'derived_terms'):
+                hasattr(info, 'derived_terms'):
             s += '\n\n{{-teny mifandraika-}}'
 
             if hasattr(info, 'related_terms'):

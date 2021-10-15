@@ -9,13 +9,14 @@ class CHRWikiPageRenderer(PageRenderer):
 {{-%(language)s-}}
 '''{{subst:BASEPAGENAME}}'''""" % data
         if link:
-            s += "\n# %s" % ', '.join(['[[%s]]' % (d) for d in info.entry_definition])
+            s += "\n# %s" % ', '.join(['[[%s]]' % (d)
+                                      for d in info.entry_definition])
         else:
-            s += "\n# %s" % ', '.join(['%s' % (d) for d in info.entry_definition])
+            s += "\n# %s" % ', '.join(['%s' % (d)
+                                      for d in info.entry_definition])
         additional_note = '\n{{bot-made translation|%s}}' % info.origin_wiktionary_page_name
         s = s + additional_note
         try:
             return s
         except UnicodeDecodeError:
             return s.decode('utf8')
-

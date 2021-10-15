@@ -8,7 +8,7 @@ language_tuples = [
     ('toninu', 'tônino'),
     ('tanana', 'tanana'),
     ('chanki', 'tsanky'),
-    ('zanja',  'zanja'),
+    ('zanja', 'zanja'),
     ('chirque', 'tsirke'),
     ('kuyney', 'koiney'),
     ('chanki', 'tsanky'),

@@ -15,7 +15,7 @@ from api.decorator import threaded, retry_on_fail
 from api.translation.core import Translation
 from test_utils.mocks import PageMock, SiteMock
 
-#Monkey-patching pywikibot API calls:
+# Monkey-patching pywikibot API calls:
 #api.translation.core.pwbot.Page = PageMock
 #api.translation.core.pwbot.Site = SiteMock
 api.translation.core.LANGUAGE_BLACKLIST = []
@@ -133,8 +133,15 @@ class TestEntryTranslatorProcessWiktionaryPage(TestCase):
     @threaded
     def launch_service():
         global DICTIONARY_SERVICE
-        DICTIONARY_SERVICE = Popen(["python3", "dictionary_service.py", '--db-file', DB_PATH, "-p", '8001'],
-                                   stdin=PIPE, stdout=PIPE, stderr=PIPE)
+        DICTIONARY_SERVICE = Popen(["python3",
+                                    "dictionary_service.py",
+                                    '--db-file',
+                                    DB_PATH,
+                                    "-p",
+                                    '8001'],
+                                   stdin=PIPE,
+                                   stdout=PIPE,
+                                   stderr=PIPE)
         DICTIONARY_SERVICE.communicate()
 
     @retry_on_fail([Exception], retries=10, time_between_retries=.4)
@@ -162,8 +169,8 @@ class TestEntryTranslatorProcessWiktionaryPage(TestCase):
             translation.translate_word = translation_mock
             page = PageMock(SiteMock('fr', 'wiktionary'), 'peigne')
             translation.process_wiktionary_wiki_page(page)
-            fr_entries = [e for e in translation.process_entry_in_native_language(page.get(), page.title(), 'fr', [])
-                          if e.language == 'fr']
+            fr_entries = [e for e in translation.process_entry_in_native_language(
+                page.get(), page.title(), 'fr', []) if e.language == 'fr']
             for e in fr_entries:
                 self.assertEqual(e.entry, 'peigne')
                 self.assertEqual(e.language, 'fr')
@@ -185,7 +192,8 @@ class TestEntryTranslatorProcessWiktionaryPage(TestCase):
             translation = Translation()
             translation.translate_word = translation_mock
             page = PageMock(SiteMock('fr', 'wiktionary'), 'èstre')
-            wiktionary_processor_class = entryprocessor.WiktionaryProcessorFactory.create('fr')
+            wiktionary_processor_class = entryprocessor.WiktionaryProcessorFactory.create(
+                'fr')
             wiktionary_processor = wiktionary_processor_class()
             wiktionary_processor.process(page)
             entry = [e for e in wiktionary_processor.getall()
@@ -213,8 +221,8 @@ class TestEntryTranslatorProcessWiktionaryPage(TestCase):
             translation.translate_word = translation_mock
             page = PageMock(SiteMock('en', 'wiktionary'), 'heel')
             translation.process_wiktionary_wiki_page(page)
-            fr_entries = [e for e in translation.process_entry_in_native_language(page.get(), page.title(), 'en', [])
-                          if e.language == 'en']
+            fr_entries = [e for e in translation.process_entry_in_native_language(
+                page.get(), page.title(), 'en', []) if e.language == 'en']
             for e in fr_entries:
                 self.assertEqual(e.entry, 'peigne')
                 self.assertEqual(e.language, 'en')
@@ -233,6 +241,7 @@ class TestEntryTranslatorProcessWiktionaryPage(TestCase):
                     "definition": "salaka",
                     'part_of_speech': 'ana'
                 }]
+
             def page_content_mock():
                 return EN_PAGE_CONTENT
 
@@ -244,7 +253,8 @@ class TestEntryTranslatorProcessWiktionaryPage(TestCase):
             page = PageMock(SiteMock('en', 'wiktionary'), 'pagne')
             page.title = page_title_mock
             page.get = page_content_mock
-            wiktionary_processor_class = entryprocessor.WiktionaryProcessorFactory.create('en')
+            wiktionary_processor_class = entryprocessor.WiktionaryProcessorFactory.create(
+                'en')
             wiktionary_processor = wiktionary_processor_class()
             wiktionary_processor.process(page)
             print(wiktionary_processor.getall())

@@ -37,7 +37,11 @@ class TestAdjectiveFormParsers(TestCase):
 
     def test_parse_one_parameter_template(self):
         template_expression = '{{feminine singular of|comparatif|lang=fr}}'
-        func = parse_one_parameter_template(AdjectiveForm, 'feminine singular of', number='s', definiteness='definite')
+        func = parse_one_parameter_template(
+            AdjectiveForm,
+            'feminine singular of',
+            number='s',
+            definiteness='definite')
         output = func(template_expression)
         self.assertEqual(output.number, 's')
         self.assertEqual(output.definite, 'definite')

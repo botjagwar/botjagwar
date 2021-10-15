@@ -6,6 +6,7 @@ from page_lister import get_pages_from_category
 
 log = logging.getLogger(__name__)
 
+
 def main0(classname):
     import random
     import time
@@ -63,11 +64,14 @@ def main():
             continue
         old_content = content = page.get()
         formatted_definitions = [
-            "# %s<ref>''Rakibolana Malagasy'' (1985) nosoratan'i Rajemisa-Raolison</ref>" % definition for definition in
-            definitions]
-        content = content.replace('# {{...|mg}}', '\n'.join(formatted_definitions))
+            "# %s<ref>''Rakibolana Malagasy'' (1985) nosoratan'i Rajemisa-Raolison</ref>" %
+            definition for definition in definitions]
+        content = content.replace(
+            '# {{...|mg}}',
+            '\n'.join(formatted_definitions))
         pywikibot.showDiff(old_content, content)
         # page.put(content, '+famaritana')
+
 
 if __name__ == '__main__':
     for pagename, definitions in entry_generator():

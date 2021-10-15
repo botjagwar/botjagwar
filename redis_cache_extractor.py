@@ -12,7 +12,8 @@ template = sys.argv[3] if len(sys.argv) >= 4 else 'e-ana'
 @singleton
 class Writer(object):
     def __init__(self):
-        self.file = open(f'user_data/cache_extractor/{language_code}_{category_name}.csv', 'w')
+        self.file = open(
+            f'user_data/cache_extractor/{language_code}_{category_name}.csv', 'w')
 
     def writeln(self, data):
         self.file.write(data + '\n')
@@ -26,11 +27,11 @@ def action(entry: Entry):
 
         if entry.language == 'la':
             defn = defn.replace(';', ',')
-            file_handler.writeln(f'{entry.entry}; {entry.part_of_speech}; {defn}')
+            file_handler.writeln(
+                f'{entry.entry}; {entry.part_of_speech}; {defn}')
 
     return 0
 
 
 if __name__ == '__main__':
     perform_function_on_entry(action, language_code, category_name)()
-

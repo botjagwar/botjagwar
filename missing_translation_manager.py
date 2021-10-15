@@ -36,7 +36,7 @@ class Loader(object):
     def __init__(self, language):
         self.language = language
         self.monolingual_dictionary_filepath = 'user_data/%s.csv' % language
-        self.bilingual_dictionary_filepath  = 'user_data/%s-mg.csv' % language
+        self.bilingual_dictionary_filepath = 'user_data/%s-mg.csv' % language
         self.dictionary_service = DictionaryServiceManager()
         self.monolingual = {}
         self.bilingual = {}
@@ -53,8 +53,6 @@ class Loader(object):
         else:
             return pos_list[0]
 
-
-
     def load_monolingual(self):
         print('reading monolingual dictionary')
         with open(self.monolingual_dictionary_filepath, 'r') as fd:
@@ -65,7 +63,8 @@ class Loader(object):
                 english = row['anglisy'].lower()
                 if english in self.monolingual:
 
-                    self.monolingual[english].append(self.POS_DICT[row['pos_id']])
+                    self.monolingual[english].append(
+                        self.POS_DICT[row['pos_id']])
                 else:
                     self.monolingual[english] = [self.POS_DICT[row['pos_id']]]
 
@@ -90,7 +89,8 @@ class Loader(object):
             if word not in self.monolingual:
                 continue
             pos_list = self.monolingual[word]
-            pos = self.determine_part_of_speech(word, malagasy_translation, pos_list)
+            pos = self.determine_part_of_speech(
+                word, malagasy_translation, pos_list)
 
             entry = {
                 'language': self.language,
@@ -105,6 +105,7 @@ class Loader(object):
             )
             if resp.status_code == WordAlreadyExistsException.status_code:
                 continue
+
 
 if __name__ == '__main__':
     actions = {

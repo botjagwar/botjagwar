@@ -139,7 +139,6 @@ class TestNewsStats(object):
             ('uz', 'wiktionary', 'over', 5000, 'users'),
             ('uk', 'wiktionary', 'over', 6000, 'articles')]
 
-        got = [i for i in get_milestones(old, new)]
-        got.sort()
+        got = sorted([i for i in get_milestones(old, new)])
         expected.sort()
         assert got == expected

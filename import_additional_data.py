@@ -39,7 +39,8 @@ class TenyMalagasyPickleImporter(object):
         definitions = entry.entry_definition
         for definition in definitions:
             try:
-                self.importer.write_additional_data(entry.entry, 'mg', definition)
+                self.importer.write_additional_data(
+                    entry.entry, 'mg', definition)
             except Exception as exception:
                 print(exception)
 
@@ -107,7 +108,10 @@ if __name__ == '__main__':
     importer = Importer()
 
     def delete_additional_word_information():
-        response = requests.delete(backend.backend + '/additional_word_information', data={})
+        response = requests.delete(
+            backend.backend +
+            '/additional_word_information',
+            data={})
         assert response.status_code == 204
 
     delete_additional_word_information()

@@ -12,7 +12,9 @@ parser = argparse.ArgumentParser(description='Language service')
 parser.add_argument('--db-file', dest='STORAGE', required=False)
 parser.add_argument('-p', '--port', dest='PORT', type=int, default=8003)
 args = parser.parse_args()
-log.basicConfig(filename='/opt/botjagwar/user_data/language_service.log',level=log.DEBUG)
+log.basicConfig(
+    filename='/opt/botjagwar/user_data/language_service.log',
+    level=log.DEBUG)
 if args.STORAGE:
     LANGUAGE_STORAGE = args.STORAGE
 else:
@@ -29,8 +31,14 @@ app.router.add_route('GET', '/languages', languages.list_languages)
 # CRUD
 app.router.add_route('GET', '/language/{iso_code}', languages.get_language)
 app.router.add_route('POST', '/language/{iso_code}', languages.add_language)
-app.router.add_route('PUT', '/language/{iso_code}/edit', languages.edit_language)
-app.router.add_route('DELETE', '/language/{iso_code}', languages.delete_language)
+app.router.add_route(
+    'PUT',
+    '/language/{iso_code}/edit',
+    languages.edit_language)
+app.router.add_route(
+    'DELETE',
+    '/language/{iso_code}',
+    languages.delete_language)
 
 # Monitoring
 app.router.add_route('GET', '/ping', configuration.pong)

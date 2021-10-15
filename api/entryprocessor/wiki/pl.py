@@ -32,7 +32,8 @@ class PLWiktionaryProcessor(WiktionaryProcessor):
     def _get_translation_lines(self, page_c):
         ret = []
         # getting borders of translation section
-        tr_start = page_c.find("== polski ({{język polski}}) ==") + len("== polski ({{język polski}}) ==")
+        tr_start = page_c.find(
+            "== polski ({{język polski}}) ==") + len("== polski ({{język polski}}) ==")
         tr_end = 0
 
         if page_c.find("{{tłumaczenia}}", tr_start) != -1:
@@ -43,7 +44,7 @@ class PLWiktionaryProcessor(WiktionaryProcessor):
             tr_end = page_c.find("{{źródła}}", tr_start)
         tr_section = page_c[tr_start:tr_end]
         # retrieving translations using regexes
-        regex = re.compile('\*(.*)')
+        regex = re.compile('\\*(.*)')
         for translation in re.findall(regex, tr_section):
             ret.append(translation)
         return ret

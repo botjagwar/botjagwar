@@ -22,7 +22,8 @@ class TranslatedDefinition(str):
         return self.translation
 
     def __repr__(self):
-        return self.__class__.__name__ + '(' + self.__str__() + ', ' + self.synonym + ')'
+        return self.__class__.__name__ + \
+            '(' + self.__str__() + ', ' + self.synonym + ')'
 
 
 class ConvergentTranslation(TranslatedDefinition):

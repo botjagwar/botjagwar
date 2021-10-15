@@ -32,8 +32,10 @@ class Animal(RedisPersistentSingleton):
         print('noise', self.noise)
         print('legs', self.legs)
 
+
 class TestDictionary(TestCase):
     test_class = dict
+
     def setUp(self):
         pass
 
@@ -54,7 +56,7 @@ class TestDictionary(TestCase):
     def test_multiple_object(self):
         d1 = self.test_class()
         d1['1298'] = 100
-        d1['1299'] = [1,2,3,4,5,6]
+        d1['1299'] = [1, 2, 3, 4, 5, 6]
         d2 = self.test_class()
         d2['1298'] = 12300
         d2['1299'] = {'asdlk'}
@@ -103,5 +105,3 @@ class TestPersistentSingleton(TestCase):
         an = Animal()
         with self.assertRaises(AttributeError):
             del an.speed
-
-

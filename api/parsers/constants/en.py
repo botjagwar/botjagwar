@@ -151,7 +151,7 @@ PERSONS = {
 
     # full forms
     'first-person': 'first-person',
-    'second-person':'second-person',
+    'second-person': 'second-person',
     'third-person': 'third-person',
 }
 
@@ -166,4 +166,5 @@ DEFINITENESS = {
 POSSESSIVENESS = {}
 for person in PERSONS:
     for number in NUMBER:
-        POSSESSIVENESS[person+number] = PERSONS[person] + ' ' + NUMBER[number]
+        POSSESSIVENESS[person + number] = PERSONS[person] + \
+            ' ' + NUMBER[number]

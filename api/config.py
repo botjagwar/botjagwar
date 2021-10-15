@@ -20,6 +20,7 @@ class BotjagwarConfig(object):
     Manage global and script specific configuration.
     All config files should be stored in CONF_ROOT_PATH
     """
+
     def __init__(self, name=None):
         self.default_config_parser = configparser.ConfigParser()
         self.default_config_parser.read(CONF_ROOT_PATH + '/config.ini')

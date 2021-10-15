@@ -27,4 +27,3 @@ class TestInflectionTemplateClassesEnglish(TestCase):
         self.assertIn(CASES['acc'], mg_def)
         self.assertIn(NUMBER['s'], mg_def)
         self.assertIn(GENDER['m'], mg_def)
-

@@ -52,7 +52,9 @@ class Entry(TypeCheckedObject):
             if self.language == other.language:
                 if hasattr(self, 'entry') and hasattr(other, 'entry'):
                     if self.entry == other.entry:
-                        if hasattr(self, 'part_of_speech') and hasattr(other, 'part_of_speech'):
+                        if hasattr(
+                                self, 'part_of_speech') and hasattr(
+                                other, 'part_of_speech'):
                             if self.part_of_speech == other.part_of_speech:
                                 return 0
                             elif self.part_of_speech < other.part_of_speech:
@@ -86,7 +88,7 @@ class Entry(TypeCheckedObject):
         return deepcopy(self)
 
     def __repr__(self):
-        #return str(self.__dict__)
+        # return str(self.__dict__)
         props = ''
         for d in self.properties_types:
             if hasattr(self, d):

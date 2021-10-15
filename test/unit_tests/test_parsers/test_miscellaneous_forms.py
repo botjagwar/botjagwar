@@ -22,7 +22,6 @@ class TestRomanizations(TestCase):
         form_of = fct(template_expression)
         self.assertEquals(form_of.lemma, '變化多端')
 
-
     def test_parse_romanization_case_4(self):
         template_expression = '{{ja-romanization of|アフターバーナー}}'
         fct = parse_romanization_template(1)

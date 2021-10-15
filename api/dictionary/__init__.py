@@ -13,7 +13,8 @@ async def download_dictionary(request) -> StreamResponse:
     session = request.app['session_instance']
     resp = StreamResponse()
     await resp.prepare(request)
-    query = session.query(Word).filter(Word.language == request.match_info['language'])
+    query = session.query(Word).filter(
+        Word.language == request.match_info['language'])
     await resp.write(b'[')
     for element in query.yield_per(100):
         await resp.write(bytes(json.dumps(element.serialise()), 'utf8'))
@@ -27,7 +28,8 @@ async def download_dictionary(request) -> StreamResponse:
 
 async def get_dictionary(request) -> Response:
     session = request.app['session_instance']
-    query = session.query(Word).filter(Word.language == request.match_info['language'])
+    query = session.query(Word).filter(
+        Word.language == request.match_info['language'])
     definitions = [w.serialise() for w in query.all()]
     if definitions:
         return Response(
@@ -36,9 +38,11 @@ async def get_dictionary(request) -> Response:
     else:
         return Response(status=404, content_type='application/json')
 
+
 async def get_dictionary_xml(request) -> Response:
     session = request.app['session_instance']
-    query = session.query(Word).filter(Word.language == request.match_info['language'])
+    query = session.query(Word).filter(
+        Word.language == request.match_info['language'])
     dictionary = ElementTree.Element('Dictionary')
     for word in query.all():
         dictionary.append(word.serialise_xml())
@@ -47,7 +51,7 @@ async def get_dictionary_xml(request) -> Response:
         return Response(
             text=ElementTree.tostring(dictionary).decode('utf8'),
             status=200,
-            content_type = 'application/xml'
+            content_type='application/xml'
         )
     else:
         return Response(status=404, content_type='application/json')
@@ -68,10 +72,10 @@ async def get_language_list(request) -> Response:
     with request.app['database'].engine.connect() as connection:
         query = connection.execute(
             """
-            select 
-                language, 
+            select
+                language,
                 count(id) as nb_entries
-            from 
+            from
                 word
             group by
                 language

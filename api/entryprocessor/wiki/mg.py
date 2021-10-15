@@ -32,8 +32,11 @@ class MGWiktionaryProcessor(WiktionaryProcessor):
                 if pos.strip() in ('etim'):
                     continue
                 # word DEFINITION Retrieving
-                d1 = self.content.find("{{-%s-|%s}}" % (pos, lang)) + len("{{-%s-|%s}}" % (pos, lang))
-                d2 = self.content.find("=={{=", d1) + 1 or self.content.find("== {{=", d1) + 1
+                d1 = self.content.find("{{-%s-|%s}}" %
+                                       (pos, lang)) + len("{{-%s-|%s}}" %
+                                                          (pos, lang))
+                d2 = self.content.find(
+                    "=={{=", d1) + 1 or self.content.find("== {{=", d1) + 1
                 if d2:
                     definition = self.content[d1:d2]
                 else:
@@ -48,7 +51,8 @@ class MGWiktionaryProcessor(WiktionaryProcessor):
                 for definition in definitions:
                     if definition.find('\n') + 1:
                         definition = definition[:definition.find('\n')]
-                        definition = re.sub("\[\[(.*)#(.*)\|?\]?\]?", "\\1", definition)
+                        definition = re.sub(
+                            "\\[\\[(.*)#(.*)\\|?\\]?\\]?", "\\1", definition)
                     definition = stripwikitext(definition)
                     if not definition:
                         continue

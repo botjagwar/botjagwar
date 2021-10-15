@@ -40,7 +40,13 @@ class TestLanguageRestService(TestCase):
     @threaded
     def launch_service():
         global DICTIONARY_SERVICE
-        DICTIONARY_SERVICE = Popen(["python3", "language_service.py", '--db-file', DB_PATH], stdin=PIPE, stdout=PIPE, stderr=PIPE)
+        DICTIONARY_SERVICE = Popen(["python3",
+                                    "language_service.py",
+                                    '--db-file',
+                                    DB_PATH],
+                                   stdin=PIPE,
+                                   stdout=PIPE,
+                                   stderr=PIPE)
         DICTIONARY_SERVICE.communicate()
 
     @retry_on_fail([Exception], retries=10, time_between_retries=.4)
@@ -58,10 +64,10 @@ class TestLanguageRestService(TestCase):
         resp = requests.post(
             URL_HEAD + '/language/%s' % code,
             json=json.dumps({
-                    'english_name': english_name,
-                    'malagasy_name': malagasy_name,
-                    'iso_code': code
-                })
+                'english_name': english_name,
+                'malagasy_name': malagasy_name,
+                'iso_code': code
+            })
         )
         self.assertEquals(resp.status_code, 200)
 
@@ -73,7 +79,13 @@ class TestLanguageRestService(TestCase):
             })
         )
         for i in range(20):
-            self.create_language('zh%d' % i, 'zhenquang%d' % i, 'tsanitsioangy%d' % i)
+            self.create_language(
+                'zh%d' %
+                i,
+                'zhenquang%d' %
+                i,
+                'tsanitsioangy%d' %
+                i)
 
         requests.post(URL_HEAD + '/rollback')
 
@@ -89,7 +101,13 @@ class TestLanguageRestService(TestCase):
             })
         )
         for i in range(20):
-            self.create_language('zh%d' % i, 'zhenquang%d' % i, 'tsanitsioangy%d' % i)
+            self.create_language(
+                'zh%d' %
+                i,
+                'zhenquang%d' %
+                i,
+                'tsanitsioangy%d' %
+                i)
 
         for i in range(20):
             resp = requests.get(URL_HEAD + '/language/zh%d' % i)

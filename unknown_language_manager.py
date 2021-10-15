@@ -57,6 +57,7 @@ class UnknownLanguageUpdaterBot(object):
     """
     Reads kaodim-piteny tsy fantara subpage and create the categories & templates for new languages
     """
+
     def __init__(self):
         self.title = "Mpikambana:%s/Kaodim-piteny fantatra" % username
         self.new_language_page = pywikibot.Page(WORKING_WIKI, self.title)
@@ -88,7 +89,7 @@ class UnknownLanguageUpdaterBot(object):
                     continue
                 language_names.append((code, name))
             except ValueError:
-                print ("Rariteny tsy voaaraka amin'ny andalana")
+                print("Rariteny tsy voaaraka amin'ny andalana")
 
         return language_names
 
@@ -96,7 +97,7 @@ class UnknownLanguageUpdaterBot(object):
         """
         :return:
         """
-        print ("UnknownlanguageUpdaterBot")
+        print("UnknownlanguageUpdaterBot")
         parsed_lines = self.parse_wikipage()
         for language_code, language_name in parsed_lines:
             create_category_set(language_code, language_name)
@@ -107,6 +108,7 @@ class UnknownLanguageManagerBot(object):
     """
     Bot script
     """
+
     def __init__(self):
         self.lang_list = []
         self.word_session = word_session
@@ -143,25 +145,33 @@ class UnknownLanguageManagerBot(object):
             if language_exists == 0:
                 if len(language_code) == 3:
                     try:
-                        english_language_name = get_language_name(language_code)
+                        english_language_name = get_language_name(
+                            language_code)
                     except Exception as exc:
                         log.error(exc)
-                        self.lang_list.append((language_code, '(tsy fantatra)', number_of_words))
+                        self.lang_list.append(
+                            (language_code, '(tsy fantatra)', number_of_words))
                         continue
                     try:
-                        malagasy_language_name = translate_language_name(english_language_name)
-                        add_language_to_db(language_code, english_language_name, malagasy_language_name)
-                        create_category_set(language_code, malagasy_language_name)
+                        malagasy_language_name = translate_language_name(
+                            english_language_name)
+                        add_language_to_db(
+                            language_code,
+                            english_language_name,
+                            malagasy_language_name)
+                        create_category_set(
+                            language_code, malagasy_language_name)
                     except (ValueError, pywikibot.exceptions.InvalidTitle):
                         print('Not translatable ', english_language_name)
-                        self.lang_list.append((language_code, english_language_name, number_of_words))
+                        self.lang_list.append(
+                            (language_code, english_language_name, number_of_words))
 
     def start(self):
         """
         Gets non-existing languages and add them to the wiki page.
         :return:
         """
-        print ("UnknownLanguageManagerBot")
+        print("UnknownLanguageManagerBot")
         self.attempt_translations()
         self.update_wiki_page()
 
@@ -174,7 +184,10 @@ class UnknownLanguageManagerBot(object):
         for code, name, n_words in self.lang_list:
             rows += ROW_PATTERN % (code, code, name, n_words)
         page_content = TABLE_PATTERN % rows
-        wikipage = pywikibot.Page(WORKING_WIKI, "Mpikambana:%s/Lisitry ny kaodim-piteny tsy voafaritra" % username)
+        wikipage = pywikibot.Page(
+            WORKING_WIKI,
+            "Mpikambana:%s/Lisitry ny kaodim-piteny tsy voafaritra" %
+            username)
         f = open("/tmp/wikipage_save", 'w')
         f.write(page_content)
         f.close()
@@ -183,12 +196,15 @@ class UnknownLanguageManagerBot(object):
                 wikipage.put(page_content)
                 break
             except (pywikibot.PageNotSaved, pywikibot.OtherPageSaveError) as e:
-                print (e)
-                print ("Hadisoana, manandrana indray afaka 10 segondra")
+                print(e)
+                print("Hadisoana, manandrana indray afaka 10 segondra")
                 time.sleep(10)
 
 
-def add_language_to_db(language_code, english_language_name, malagasy_language_name):
+def add_language_to_db(
+        language_code,
+        english_language_name,
+        malagasy_language_name):
     language = Language(
         iso_code=language_code,
         english_name=english_language_name,
@@ -200,7 +216,8 @@ def add_language_to_db(language_code, english_language_name, malagasy_language_n
 
 
 def is_language_in_base(language_code):
-    languages = language_session.query(Language).filter(Language.iso_code == language_code).all()
+    languages = language_session.query(Language).filter(
+        Language.iso_code == language_code).all()
     if len(languages) > 0:
         return True
     else:
@@ -229,7 +246,8 @@ def language_code_exists(language_code):
                 try:
                     english_name = get_language_name(language_code)
                     malagasy_name = wikipage.get().lower().strip()
-                    add_language_to_db(language_code, english_name, malagasy_name)
+                    add_language_to_db(
+                        language_code, english_name, malagasy_name)
                 except SilPageException:
                     return 0
     return existence
@@ -272,7 +290,9 @@ def get_sil_language_name(language_code):
     time.sleep(randint(1, 20))
     req = requests.get(url, headers=headers)
     if req.status_code != 200:
-        raise SilPageException("Error: Status code returned HTTP %d: %s" % (req.status_code, req.text))
+        raise SilPageException(
+            "Error: Status code returned HTTP %d: %s" %
+            (req.status_code, req.text))
 
     text = req.text
     tree = etree.HTML(text)

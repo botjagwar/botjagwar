@@ -30,13 +30,15 @@ class PageMock(pywikibot.Page):
     @time_this('Page.get() method mock')
     def get(self, force=False, get_redirect=False, sysop=False):
         for page in self.pages:
-            xml_title = page.getElementsByTagName('title')[0].childNodes[0].nodeValue
+            xml_title = page.getElementsByTagName(
+                'title')[0].childNodes[0].nodeValue
             if xml_title == self.title():
-                return page.getElementsByTagName('text')[0].childNodes[0].nodeValue
+                return page.getElementsByTagName(
+                    'text')[0].childNodes[0].nodeValue
 
         print(('No page %s found in "%s"' % (self.title(), self.filename)))
         return ''
 
 
-p = PageMock(SiteMock('en','wiktionary'), 'gaon')
+p = PageMock(SiteMock('en', 'wiktionary'), 'gaon')
 e = p.get()

@@ -29,24 +29,35 @@ class Output(object):
         # Adapt to expected format
         log.info(info.to_dict())
         definitions = [{
-                'definition': d,
-                'definition_language': self.content_language
+            'definition': d,
+            'definition_language': self.content_language
         } for d in info.entry_definition]
         data = {
             'definitions': definitions,
             'word': info.entry,
             'part_of_speech': info.part_of_speech,
-            'translation_method': info.translation_method if hasattr(info, 'translation_method') else None
-        }
-        response = dictionary_service.post('entry/%s/create' % info.language, json=data)
+            'translation_method': info.translation_method if hasattr(
+                info,
+                'translation_method') else None}
+        response = dictionary_service.post(
+            'entry/%s/create' %
+            info.language, json=data)
         if response.status_code == WordAlreadyExistsException.status_code:
-            word_response = dictionary_service.get('entry/%s/%s' % (info.language, info.entry)).json()  # fetch its ID
-            edit_response = dictionary_service.put('entry/%d/edit' % word_response[0]['id'], json=data)  # edit using its ID
+            word_response = dictionary_service.get(
+                'entry/%s/%s' %
+                (info.language, info.entry)).json()  # fetch its ID
+            edit_response = dictionary_service.put(
+                'entry/%d/edit' %
+                word_response[0]['id'],
+                json=data)  # edit using its ID
             if edit_response.status_code == WordAlreadyExistsException.status_code:
-                log.debug('%s [%s] > Attempted to create an already-existing entry.' % (info.entry, info.language))
+                log.debug(
+                    '%s [%s] > Attempted to create an already-existing entry.' %
+                    (info.entry, info.language))
             elif edit_response.status_code != 200:
-                log.error('%s [%s] > Entry update failed (%d).' % (info.entry, info.language, edit_response.status_code))
-
+                log.error(
+                    '%s [%s] > Entry update failed (%d).' %
+                    (info.entry, info.language, edit_response.status_code))
 
     def postgrest_update_database(self, info: Entry):
         raise NotImplementedError()
@@ -75,7 +86,9 @@ class Output(object):
                 'definition_language': 'eq.mg',
                 'limit': '1'
             }
-            defn_id = requests.get(backend + '/definitions', params=data).json()
+            defn_id = requests.get(
+                backend + '/definitions',
+                params=data).json()
             if len(defn_id) > 0 and 'id' in defn_id:
                 defn_id = defn_id[0]['id']
             else:
@@ -104,11 +117,13 @@ class Output(object):
 
     def wikipage(self, info: Entry, link=True):
         "returns wikipage string"
-        self.wikipage_renderer = WikiPageRendererFactory(self.content_language)()
+        self.wikipage_renderer = WikiPageRendererFactory(
+            self.content_language)()
         return self.wikipage_renderer.render(info)
 
     def wikipages(self, infos: list, link=True):
-        self.wikipage_renderer = WikiPageRendererFactory(self.content_language)()
+        self.wikipage_renderer = WikiPageRendererFactory(
+            self.content_language)()
         ret_page = ''
 
         # Consolidate by language
@@ -129,7 +144,8 @@ class Output(object):
                 if ret_page.find(language_section) == -1:
                     ret_page += rendered + "\n"
                 else:
-                    ret_page = ret_page.replace(language_section, rendered) + "\n"
+                    ret_page = ret_page.replace(
+                        language_section, rendered) + "\n"
 
         ret_page = ret_page.replace('\n\n\n', '\n\n')
         return ret_page

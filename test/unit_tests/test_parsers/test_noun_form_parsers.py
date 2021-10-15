@@ -79,7 +79,7 @@ class TestNounFormParsers(TestCase):
         self.assertEqual(output.lemma, 'sors')
 
     def test_parse_et_form_of(self):
-        template_expression =  '{{et-nom form of|pos=noun|c=nom|n=pl|jalalaba}}'
+        template_expression = '{{et-nom form of|pos=noun|c=nom|n=pl|jalalaba}}'
         output = parse_et_form_of(template_expression)
         self.assertEqual(output.number, 'pl')
         self.assertEqual(output.case, 'nom')

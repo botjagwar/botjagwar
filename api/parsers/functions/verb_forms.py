@@ -153,7 +153,6 @@ def parse_es_verb_form_of(template_expression):
         elif '=' not in part:
             lemma = part.replace('}', '')
 
-
     verb_form = VerbForm(lemma, tense, mood, person, number)
     return verb_form
 

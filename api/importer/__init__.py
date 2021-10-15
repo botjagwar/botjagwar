@@ -64,7 +64,10 @@ class AdditionalDataImporter(object):
             'word_id': 'eq.' + str(word_id),
             'information': 'eq.' + information,
         }
-        response = requests.get(backend.backend + '/additional_word_information', params=data)
+        response = requests.get(
+            backend.backend +
+            '/additional_word_information',
+            params=data)
         resp_data = response.json()
         if resp_data:
             if 'word_id' in resp_data[0] \
@@ -74,7 +77,11 @@ class AdditionalDataImporter(object):
 
         return False
 
-    def get_data(self, template_title: str, wikipage: str, language: str) -> list:
+    def get_data(
+            self,
+            template_title: str,
+            wikipage: str,
+            language: str) -> list:
         raise NotImplementedError()
 
     def is_data_type_already_defined(self, additional_data):
@@ -106,15 +113,18 @@ class AdditionalDataImporter(object):
             else:
                 self.word_id_cache[(title, language)] = query[0]['id']
 
-        additional_data_filenames = self.get_data(self.data_type, content, language)
+        additional_data_filenames = self.get_data(
+            self.data_type, content, language)
 
         assert isinstance(additional_data_filenames, list)
         # print(additional_data_filenames)
         for additional_data in additional_data_filenames:
             if (title, language) not in self.word_id_cache:
-                raise AdditionalDataImporterError('the word is unknown (no id)')
+                raise AdditionalDataImporterError(
+                    'the word is unknown (no id)')
 
-            self.write_additional_data(self.word_id_cache[(title, language)], additional_data)
+            self.write_additional_data(
+                self.word_id_cache[(title, language)], additional_data)
 
     def write_additional_data(self, word_id, additional_data):
         print(additional_data)
@@ -125,13 +135,17 @@ class AdditionalDataImporter(object):
             'information': additional_data,
         }
         print(data)
-        if self.additional_word_information_already_exists(data['word_id'], additional_data):
+        if self.additional_word_information_already_exists(
+                data['word_id'], additional_data):
             return
 
         if not self.dry_run:
             self.batch.append(data)
             if self.counter > 10:
-                response = requests.post(backend.backend + '/additional_word_information', data=data)
+                response = requests.post(
+                    backend.backend +
+                    '/additional_word_information',
+                    data=data)
                 if response.status_code != 201:
                     print(response.status_code)
                     print(response.text)

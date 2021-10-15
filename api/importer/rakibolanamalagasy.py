@@ -21,14 +21,12 @@ class DictionaryImporter(AdditionalDataImporter):
             self.word_id_cache[(json['word'], json['language'])] = json['id']
 
 
-
 class TenyMalagasyImporter(DictionaryImporter):
     data_type = 'tenymalagasy/definition'
 
 
 class RakibolanaMalagasyImporter(DictionaryImporter):
     data_type = 'rakibolana/definition'
-
 
     @critical_section(rmi_lock)
     def write_tif(self, title, language, additional_data):

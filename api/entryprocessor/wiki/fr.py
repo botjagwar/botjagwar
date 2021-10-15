@@ -76,11 +76,12 @@ class FRWiktionaryProcessor(WiktionaryProcessor):
         items = []
 
         if self.content is None:
-            raise Exception("self.page tsy voafaritra. self.process() tsy mbola nantsoina")
+            raise Exception(
+                "self.page tsy voafaritra. self.process() tsy mbola nantsoina")
 
         ct_content = self.content
         for lang in re.findall(
-                '{{S\|([a-z]+)\|([a-z]{2,3})',
+                '{{S\\|([a-z]+)\\|([a-z]{2,3})',
                 self.content):
             # print(ct_content)
             # word DEFINITION Retrieving
@@ -98,7 +99,8 @@ class FRWiktionaryProcessor(WiktionaryProcessor):
                 definition = ct_content[d1:]
             try:
                 definition = definition.split('\n# ')[1]
-                definition = re.sub("\[\[(.*)#(.*)\|?[.*]?\]?\]?", "\\1", definition)
+                definition = re.sub(
+                    "\\[\\[(.*)#(.*)\\|?[.*]?\\]?\\]?", "\\1", definition)
             except IndexError:
                 ct_content = ct_content[d_ptr:]
                 continue

@@ -52,7 +52,8 @@ class WiktionaryDumpImporter(object):
         pgsql_conn = psycopg2.connect(config.get('database_uri'))
         cursor = pgsql_conn.cursor()
 
-        sql = cursor.mogrify("select id, word, part_of_speech, language from word")
+        sql = cursor.mogrify(
+            "select id, word, part_of_speech, language from word")
         cursor.execute(sql)
         count = 0
         for id_, word, pos, lang in cursor:
@@ -65,12 +66,14 @@ class WiktionaryDumpImporter(object):
         self.dictionary.set(key, '1')
 
     def _init_processor(self):
-        self.EntryProcessor = WiktionaryProcessorFactory.create(self.content_language)
+        self.EntryProcessor = WiktionaryProcessorFactory.create(
+            self.content_language)
         self.entryprocessor = self.EntryProcessor()
         self.dictionary_service = DictionaryServiceManager()
 
     def batch_post(self):
-        response = self.dictionary_service.post('entry/batch', json=self._current_batch)
+        response = self.dictionary_service.post(
+            'entry/batch', json=self._current_batch)
         self._current_batch = []
         self._n_items = 0
         if response.status_code in (400, 500, BatchContainsErrors.status_code):
@@ -142,8 +145,10 @@ class WiktionaryDumpImporter(object):
                 pprint(' ' * level + 'Duplicate entry error. Splitting batch')
                 elements = len(_insert.items())
                 if elements > 2:
-                    WiktionaryDumpImporter.do_insert(elements[:elements//2], level+1)
-                    WiktionaryDumpImporter.do_insert(elements[1 + elements//2:], level+1)
+                    WiktionaryDumpImporter.do_insert(
+                        elements[:elements // 2], level + 1)
+                    WiktionaryDumpImporter.do_insert(
+                        elements[1 + elements // 2:], level + 1)
                 else:
                     pprint('[reset indent] could not insert:', elements)
 
@@ -170,7 +175,9 @@ class WiktionaryDumpImporter(object):
                     additional_data[adt] = getattr(entry, adt)
 
             for additional_data_type, data in additional_data.items():
-                key = '/'.join((entry.entry, entry.part_of_speech, entry.language))
+                key = '/'.join((entry.entry,
+                                entry.part_of_speech,
+                                entry.language))
                 if not self.dictionary.get(key):
                     continue
 
@@ -187,7 +194,8 @@ class WiktionaryDumpImporter(object):
                     self._insert[key] = 0
 
                 if self._n_items > batch_size:
-                    print(f'import_additional_data: uploading {batch_size} items...')
+                    print(
+                        f'import_additional_data: uploading {batch_size} items...')
                     self.do_insert(self._insert)
                     self._n_items = 0
                     self._insert = {}
@@ -198,7 +206,7 @@ class WiktionaryDumpImporter(object):
         for xml_page in self.load():
             c += 1
             try:
-                #self.import_additional_data(xml_page)
+                # self.import_additional_data(xml_page)
                 self.import_wiktionary_page(xml_page)
             except Exception as exc:
                 print(exc)
@@ -229,8 +237,16 @@ class FrWiktionaryDumpImporter(WiktionaryDumpImporter):
 
 def main():
     parser = argparse.ArgumentParser(description='Import Wiktionary XML dump')
-    parser.add_argument('--dump', dest='dump', action='store', help='tube name')
-    parser.add_argument('--wiki', dest='wiki', action='store', help='instance name')
+    parser.add_argument(
+        '--dump',
+        dest='dump',
+        action='store',
+        help='tube name')
+    parser.add_argument(
+        '--wiki',
+        dest='wiki',
+        action='store',
+        help='instance name')
 
     args = parser.parse_args()
     assert args.wiki is not None
