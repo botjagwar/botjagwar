@@ -104,7 +104,7 @@ class TestSerialiser(TestCase):
         self.assertEquals(entry.entry, word.word)
         self.assertEquals(entry.part_of_speech, word.part_of_speech)
         self.assertEquals(
-            entry.entry_definition, [
+            entry.definitions, [
                 d.definition for d in word.definitions])
         self.assertEquals(entry.language, word.language)
 
@@ -115,7 +115,7 @@ class TestSerialiser(TestCase):
         self.assertEquals(entry.entry, word.word)
         self.assertEquals(entry.part_of_speech, word.part_of_speech)
         self.assertEquals(
-            entry.entry_definition, [
+            entry.definitions, [
                 d.definition for d in word.definitions if d.definition_language == 'mg'])
         self.assertEquals(entry.language, word.language)
 

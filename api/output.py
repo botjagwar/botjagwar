@@ -1,11 +1,13 @@
 import logging
+
 import requests
+
 from api.decorator import retry_on_fail
+from api.model.word import Entry
 from api.page_renderer import WikiPageRendererFactory
-from api.servicemanager.pgrest import DynamicBackend, StaticBackend
 from api.servicemanager import DictionaryServiceManager
+from api.servicemanager.pgrest import StaticBackend
 from database.exceptions.http import WordAlreadyExistsException
-from object_model.word import Entry
 
 log = logging.getLogger(__name__)
 verbose = False
@@ -31,7 +33,7 @@ class Output(object):
         definitions = [{
             'definition': d,
             'definition_language': self.content_language
-        } for d in info.entry_definition]
+        } for d in info.definitions]
         data = {
             'definitions': definitions,
             'word': info.entry,

@@ -6,10 +6,10 @@ import pywikibot
 import requests
 
 from api.decorator import singleton
+from api.model.word import Entry
 # from api.importer.wiktionary import dyn_backend
 from api.output import WikiPageRendererFactory, Output
 from api.servicemanager.pgrest import StaticBackend
-from object_model.word import Entry
 
 dyn_backend = StaticBackend()
 
@@ -126,7 +126,7 @@ class NinjaEntryCreator(object):
                         'entry': title,
                         'language': language,
                         'part_of_speech': pos,
-                        'entry_definition': [mg_defn],
+                        'definitions': [mg_defn],
                     }
 
                     entry = Entry(**{**entry_data})
@@ -283,7 +283,7 @@ class NinjaEntryCreator(object):
                 'entry': translation["word"],
                 'language': translation["language"],
                 'part_of_speech': translation["part_of_speech"],
-                'entry_definition': definitions,
+                'definitions': definitions,
             }
 
             for data_type in self.additional_data_types:

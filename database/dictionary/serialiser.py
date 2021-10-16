@@ -2,7 +2,7 @@ import xml.etree.cElementTree as ElementTree
 
 from sqlalchemy.orm.exc import DetachedInstanceError
 
-from object_model.word import Entry
+from api.model.word import Entry
 
 
 # do NOT import these models here.
@@ -71,7 +71,7 @@ class Word(object):
         return Entry(
             entry=self.model.word,
             part_of_speech=self.model.part_of_speech,
-            entry_definition=definition,
+            definitions=definition,
             language=self.model.language,
         )
 

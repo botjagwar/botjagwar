@@ -12,8 +12,8 @@ from pywikibot import Site, Page
 
 from api import entryprocessor
 from api.decorator import threaded
+from api.model.word import Translation as TranslationModel
 from api.translation_v2.core import Translation
-from object_model.word import Translation as TranslationModel
 
 # GLOBAL VARS
 verbose = False
@@ -137,23 +137,14 @@ async def get_wiktionary_processed_page(request) -> Response:
 
     for entry in wiktionary_processor.getall(fetch_additional_data=True):
         translation_list = []
-        section = dict(
-            word=entry.entry,
-            language=entry.language,
-            part_of_speech=entry.part_of_speech,
-            definitions=entry.entry_definition,
-        )
-        section['additional_data'] = {}
-        for additional_data in entry.properties_types.keys():
-            if hasattr(entry, additional_data) and additional_data not in section:
-                section['additional_data'][additional_data] = getattr(entry, additional_data)
+        section = entry.to_dict()
 
         for translation in wiktionary_processor.retrieve_translations():
             translation_section = TranslationModel(
                 word=translation.entry,
                 language=translation.language,
                 part_of_speech=translation.part_of_speech,
-                translation=translation.entry_definition[0]
+                translation=translation.definitions[0]
             )
             translation_list.append(translation_section.to_dict())
 

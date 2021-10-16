@@ -7,10 +7,10 @@ from aiohttp import ClientSession
 
 from api import entryprocessor
 from api.exceptions import NoWordException
+from api.model.word import Entry
 from api.output import Output
 from api.servicemanager import DictionaryServiceManager
 from database.exceptions.http import WordDoesNotExistException
-from object_model.word import Entry
 
 log = logging.getLogger(__name__)
 default_data_file = '/opt/botjagwar/conf/entry_translator/'
@@ -126,7 +126,7 @@ class Translation:
             infos = Entry(
                 entry=entry,
                 part_of_speech=str(pos),
-                entry_definition=target_language_translations,
+                definitions=target_language_translations,
                 language=entry_language,
                 origin_wiktionary_edition=language,
                 origin_wiktionary_page_name=title)
@@ -160,10 +160,10 @@ class Translation:
         try:
             log.debug(
                 "Translating word in foreign language (%s in '%s')" %
-                (entry.entry_definition[0], language))
+                (entry.definitions[0], language))
             target_language_translations = []
             for translation in self.translate_word(
-                    entry.entry_definition[0], language):
+                    entry.definitions[0], language):
                 if translation['part_of_speech'] == entry.part_of_speech:
                     target_language_translations.append(
                         translation['definition'])
@@ -173,16 +173,16 @@ class Translation:
         except NoWordException:
             log.debug("No translation found")
             if title not in unknowns:
-                unknowns.append((entry.entry_definition[0], language))
+                unknowns.append((entry.definitions[0], language))
             return
 
         infos = Entry(
             entry=title,
             part_of_speech=str(entry.part_of_speech),
-            entry_definition=target_language_translations,
+            definitions=target_language_translations,
             language=entry.language,
             origin_wiktionary_edition=language,
-            origin_wiktionary_page_name=entry.entry_definition[0])
+            origin_wiktionary_page_name=entry.definitions[0])
 
         return infos
 
@@ -215,7 +215,7 @@ class Translation:
             return unknowns, ret
 
         for entry in entries:
-            if entry.entry is None or entry.entry_definition is None:
+            if entry.entry is None or entry.definitions is None:
                 continue
 
             # Attempt a translation of a possible non-lemma entry.
@@ -312,7 +312,7 @@ class Translation:
 
         print(entries)
         for entry in entries:
-            if entry.entry is None or entry.entry_definition is None:
+            if entry.entry is None or entry.definitions is None:
                 continue
 
             if entry.language == language:  # if entry in the content language

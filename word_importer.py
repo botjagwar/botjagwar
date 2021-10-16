@@ -16,10 +16,10 @@ import pywikibot
 
 from api.data.caching import FastWordLookup
 from api.databasemanager import DictionaryDatabaseManager
+from api.model.word import Entry
 from api.output import Output
 from api.storage import EntryPageFileReader
 from api.translation.core import CYRILLIC_ALPHABET_LANGUAGES, LANGUAGE_BLACKLIST, _get_unaccented_word
-from object_model.word import Entry
 
 
 class Importer(object):
@@ -153,7 +153,7 @@ class DatabaseImporter(Importer):
                     entry=word,
                     language=language,
                     part_of_speech=part_of_speech,
-                    entry_definition=self.fast_tree[(word, language, part_of_speech)]
+                    definitions=self.fast_tree[(word, language, part_of_speech)]
                 )
                 try:
                     self.worker(entry)

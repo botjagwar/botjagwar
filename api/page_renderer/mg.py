@@ -1,4 +1,4 @@
-from object_model.word import Entry
+from api.model.word import Entry
 from .base import PageRenderer
 
 
@@ -63,7 +63,7 @@ class MGWikiPageRenderer(PageRenderer):
     def render_definitions(self, info, additional_note, link):
         s = ''
         definitions = []
-        defn_list = sorted(set(info.entry_definition))
+        defn_list = sorted(set(info.definitions))
         if link:
             for d in defn_list:
                 if len(d.split()) == 1:

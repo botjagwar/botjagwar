@@ -10,11 +10,11 @@ from api.importer.wiktionary.en import \
     EtymologyImporter, \
     AntonymImporter, \
     PronunciationImporter
+from api.model.word import Entry
 from api.parsers import TEMPLATE_TO_OBJECT
 from api.parsers import templates_parser
 from api.parsers.inflection_template import ParserNotFoundError
 from conf.entryprocessor.languagecodes import LANGUAGE_NAMES
-from object_model.word import Entry
 from .base import WiktionaryProcessor
 
 
@@ -202,7 +202,7 @@ class ENWiktionaryProcessor(WiktionaryProcessor):
                     entry=self.title,
                     part_of_speech=pos,
                     language=last_language_code,
-                    entry_definition=definitions,
+                    definitions=definitions,
                 )
                 if additional_data is not None and fetch_additional_data:
                     for data_type, data in additional_data.items():
@@ -261,7 +261,7 @@ class ENWiktionaryProcessor(WiktionaryProcessor):
                             entry=translation,
                             part_of_speech=pos,
                             language=language,
-                            entry_definition=[self.title],
+                            definitions=[self.title],
                         )
                     )
 

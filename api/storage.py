@@ -4,7 +4,7 @@ from threading import Lock
 
 from api.data.caching import FastTranslationLookup
 from api.decorator import critical_section, singleton
-from object_model.word import Entry
+from api.model.word import Entry
 
 entry_page_cs_lock = Lock()
 missing_translation_cs_lock = Lock()

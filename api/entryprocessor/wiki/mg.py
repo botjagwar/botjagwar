@@ -2,7 +2,7 @@
 
 import re
 
-from object_model.word import Entry
+from api.model.word import Entry
 from .base import WiktionaryProcessor
 from .base import stripwikitext
 
@@ -66,7 +66,7 @@ class MGWiktionaryProcessor(WiktionaryProcessor):
                         entry=self.title,
                         part_of_speech=pos.strip(),
                         language=lang.strip(),
-                        entry_definition=entry_definition
+                        definitions=entry_definition
                     )
                     items.append(i)
         # print("Nahitana dikanteny ", len(items) ", len(items))

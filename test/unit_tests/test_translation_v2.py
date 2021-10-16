@@ -1,8 +1,8 @@
 from unittest.case import TestCase
 from unittest.mock import MagicMock
 
+from api.model.word import Entry
 from api.translation_v2.core import Translation
-from object_model.word import Entry
 
 
 class TestTranslationV2(TestCase):
@@ -11,21 +11,21 @@ class TestTranslationV2(TestCase):
             entry='test1',
             language='l1',
             part_of_speech='ana',
-            entry_definition=[
+            definitions=[
                 'def1-1',
                 'def2-1'])
         self.entry2 = Entry(
             entry='test2',
             language='l2',
             part_of_speech='ana',
-            entry_definition=[
+            definitions=[
                 'def2-2',
                 'def2-2'])
         self.entry3 = Entry(
             entry='test3',
             language='l3',
             part_of_speech='ana',
-            entry_definition=[
+            definitions=[
                 'def3-3',
                 'def2-3'])
 

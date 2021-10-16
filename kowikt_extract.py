@@ -1,6 +1,6 @@
 import re
 
-from object_model.word import Translation
+from api.model.word import Translation
 from page_lister import get_pages_from_category
 
 lang_rgx = '\\(([a-z]+)\\):'

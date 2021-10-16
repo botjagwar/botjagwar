@@ -24,6 +24,7 @@ class List(Property):
 class TypeCheckedObject(object):
     _additional = True
     properties = {}
+    additional_data_types = {}
     properties_types = {}
     node_mapper = []
 
@@ -38,14 +39,6 @@ class TypeCheckedObject(object):
 
         return True
 
-    def __getattr__(self, item):
-        if item in self.properties:
-            return self.properties[item]
-        else:
-            raise AttributeError("%s object has no attribute '%s'" % (
-                self.__class__.__name__,
-                item))
-
     def __dir__(self):
         return list(self.properties.keys())
 
@@ -58,6 +51,7 @@ class TypeCheckedObject(object):
                     ret[key] = value.serialise()
                 else:
                     ret[key] = value
+
         return ret
 
     def add_attribute(self, name, value):
@@ -87,5 +81,5 @@ class TypeCheckedObject(object):
                     "Unspecified Attribute '%s' not allowed in '%s' object" %
                     (name, self.__class__.__name__))
             else:
+                self.additional_data_types[name] = value.__class__
                 setattr(self, name, value)
-                self.properties_types[name] = value.__class__

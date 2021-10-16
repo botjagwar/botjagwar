@@ -12,11 +12,10 @@ from lxml import etree
 from api.config import BotjagwarConfig
 from api.decorator import time_this
 from api.entryprocessor import WiktionaryProcessorFactory
-from api.importer.wiktionary.en import all_importers
+from api.model.word import Entry
 from api.servicemanager import DictionaryServiceManager
 from database.exceptions.http import BatchContainsErrors
 from dump_processor import Processor
-from object_model.word import Entry
 
 config = BotjagwarConfig()
 
@@ -86,7 +85,7 @@ class WiktionaryDumpImporter(object):
         definitions = [{
             'definition': d,
             'definition_language': self.content_language
-        } for d in info.entry_definition]
+        } for d in info.definitions]
         data = {
             'definitions': definitions,
             'language': info.language,
@@ -115,13 +114,13 @@ class WiktionaryDumpImporter(object):
         self.entryprocessor.set_title(title_node)
         self.entryprocessor.set_text(content_node)
         for entry in self.entryprocessor.getall():
-            for definitions in entry.entry_definition:
+            for definitions in entry.definitions:
                 for definition in definitions.split(','):
                     new_entry = deepcopy(entry)
                     for char in '[]=':
                         definition = definition.replace(char, '')
 
-                    new_entry.entry_definition = [definition.strip()]
+                    new_entry.definitions = [definition.strip()]
                     self.batch_push(info=new_entry)
 
         self.batch_post()

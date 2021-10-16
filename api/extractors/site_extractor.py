@@ -4,8 +4,8 @@ import re
 import requests
 from lxml import etree
 
+from api.model.word import Entry
 from api.storage import SiteExtractorCacheEngine, CacheMissError
-from object_model.word import Entry
 
 log = logging.getLogger(__name__)
 
@@ -98,7 +98,7 @@ class SiteExtractor(object):
             entry=word,
             part_of_speech=pos,
             language=self.language,
-            entry_definition=definitions,
+            definitions=definitions,
         )
 
 
@@ -153,7 +153,7 @@ class TenyMalagasySiteExtractor(SiteExtractor):
         entry.references = []
         new_definitions = []
         examples = {}
-        for definition_section in entry.entry_definition:
+        for definition_section in entry.definitions:
             for ref in re.findall(references_regex, str(definition_section)):
                 entry.references.append(ref)
                 definition_section = definition_section.replace(
@@ -171,7 +171,7 @@ class TenyMalagasySiteExtractor(SiteExtractor):
                     sd = ' '.join(split_definition)
                     new_definitions.append(sd.strip())
 
-        entry.entry_definition = new_definitions
+        entry.definitions = new_definitions
         entry.examples = examples
 
         return entry

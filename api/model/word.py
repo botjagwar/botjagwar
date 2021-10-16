@@ -1,5 +1,6 @@
 from copy import deepcopy
-from object_model import TypeCheckedObject
+
+from api.model import TypeCheckedObject, Property
 
 
 class Word(TypeCheckedObject):
@@ -12,26 +13,33 @@ class Word(TypeCheckedObject):
 
 class Entry(TypeCheckedObject):
     _additional = True
+    additional_data_types = {}
     properties_types = dict(
         entry=str,
         part_of_speech=str,
-        entry_definition=list,
+        definitions=list,
         language=str,
-        origin_wiktionary_edition=str,
-        origin_wiktionary_page_name=str,
-        etymology=str,
-        reference=list,
-        examples=list
     )
 
     def to_tuple(self):
-        return self.entry, self.part_of_speech, self.language, self.entry_definition
+        return self.entry, self.part_of_speech, self.language, self.definitions
 
-    def to_dict(self):
-        ret = {}
-        for key in self.properties_types.keys():
-            if hasattr(self, key):
-                ret[key] = getattr(self, key)
+    def to_dict(self) -> dict:
+        ret = TypeCheckedObject.to_dict(self)
+
+        ret['additional_data'] = {}
+        # print(self.additional_data_types.keys())
+        for key in self.additional_data_types.keys():
+            value = getattr(self, key)
+            ret['additional_data'][key] = {}
+            if isinstance(value, Property):
+                ret['additional_data'][key] = value.serialise()
+            elif hasattr(value, '__iter__'):
+                ret['additional_data'][key] = [v.serialise() if isinstance(v, Property) else v
+                                               for v in value]
+            else:
+                ret['additional_data'][key] = value
+
         return ret
 
     def __lt__(self, other):
@@ -79,7 +87,7 @@ class Entry(TypeCheckedObject):
     def overlay(self, other):
         self.language = other.language
         self.part_of_speech = other.part_of_speech
-        self.entry_definition = other.entry_definition
+        self.definitions = other.definitions
         for apt, ap_type in other.properties_types.items():
             print(other)
             if hasattr(other, apt):

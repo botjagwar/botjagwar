@@ -7,9 +7,9 @@ from lxml import etree
 
 from api.data.caching import FastTranslationLookup
 from api.entryprocessor import WiktionaryProcessorFactory
+from api.model.word import Entry
 from api.parsers import templates_parser, TEMPLATE_TO_OBJECT
 from api.storage import MissingTranslationFileWriter
-from object_model.word import Entry
 
 # from multiprocessing.dummy import Pool as ThreadPool
 
@@ -56,21 +56,21 @@ class Processor(object):
                         entry)
                     new_entry = Entry(
                         entry=entry.entry,
-                        entry_definition=translation,
+                        definitions=translation,
                         language=entry.language,
                         part_of_speech=entry.part_of_speech
                     )
                     #print('local >', new_entry)
                     self.entry_writer.add(new_entry)
                     for e in processor.retrieve_translations():
-                        e.entry_definition = translation
+                        e.definitions = translation
                         self.entry_writer.add(e)
                         #print('local translation >', e)
             else:
                 # RIP cyclomatic complexity.
                 translations = []
                 pos = entry.part_of_speech
-                for definition in entry.entry_definition:
+                for definition in entry.definitions:
                     try:
                         translation = self.translation_lookup_table.translate_word(
                             definition, language, entry.part_of_speech)
@@ -98,7 +98,7 @@ class Processor(object):
                 if translations:
                     new_entry = Entry(
                         entry=entry.entry,
-                        entry_definition=list(set(translations)),
+                        definitions=list(set(translations)),
                         language=entry.language,
                         part_of_speech=pos
                     )

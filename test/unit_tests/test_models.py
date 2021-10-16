@@ -1,10 +1,10 @@
 import copy
 from unittest.case import TestCase
 
-from object_model import List
-from object_model import TypeCheckedObject
-from object_model.word import Entry
-from object_model.word import Translation
+from api.model import List
+from api.model import TypeCheckedObject
+from api.model.word import Entry
+from api.model.word import Translation
 
 
 class TestModelsBaseBehaviour(TestCase):
@@ -94,36 +94,36 @@ class TestEntry(TestCase):
         entry = Entry(
             entry='1',
             part_of_speech='2',
-            entry_definition=['3']
+            definitions=['3']
         )
         self.assertEqual(entry.entry, '1')
         self.assertEqual(entry.part_of_speech, '2')
-        self.assertEqual(entry.entry_definition, ['3'])
+        self.assertEqual(entry.definitions, ['3'])
 
     def test_deep_copy(self):
         old = Entry(
             entry='tasumaki',
             part_of_speech='2',
-            entry_definition=['3']
+            definitions=['3']
         )
         new = copy.deepcopy(old)
         new.entry = 'wrong'
-        new.entry_definition = ['potomaki']
+        new.definitions = ['potomaki']
         self.assertNotEqual(new.entry, old.entry)
-        self.assertNotEqual(new.entry_definition, old.entry_definition)
+        self.assertNotEqual(new.definitions, old.definitions)
 
     def test_less_than(self):
         entry1 = Entry(
             entry='1',
             part_of_speech='2',
             language='kl',
-            entry_definition=['3']
+            definitions=['3']
         )
         entry2 = Entry(
             entry='2',
             part_of_speech='2',
             language='km',
-            entry_definition=['3']
+            definitions=['3']
         )
 
         self.assertLess(entry1, entry2)
@@ -133,13 +133,13 @@ class TestEntry(TestCase):
             entry='a',
             part_of_speech='i',
             language='kk',
-            entry_definition=['3']
+            definitions=['3']
         )
         entry2 = Entry(
             entry='b',
             part_of_speech='i',
             language='kk',
-            entry_definition=['3']
+            definitions=['3']
         )
 
         self.assertLess(entry1, entry2)
@@ -149,13 +149,13 @@ class TestEntry(TestCase):
             entry='1',
             part_of_speech='2',
             language='kl',
-            entry_definition=['3']
+            definitions=['3']
         )
         entry2 = Entry(
             entry='1',
             part_of_speech='3',
             language='kl',
-            entry_definition=['4']
+            definitions=['4']
         )
 
         self.assertLess(entry1, entry2)

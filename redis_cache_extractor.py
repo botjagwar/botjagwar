@@ -1,7 +1,7 @@
 import sys
 
 from api.decorator import singleton
-from object_model.word import Entry
+from api.model.word import Entry
 from word_forms import perform_function_on_entry
 
 language_code = sys.argv[1]
@@ -21,7 +21,7 @@ class Writer(object):
 
 def action(entry: Entry):
     file_handler = Writer()
-    for defn in entry.entry_definition:
+    for defn in entry.definitions:
         if '{{' in defn or '}}' in defn:
             continue
 

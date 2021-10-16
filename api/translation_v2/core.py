@@ -10,13 +10,12 @@ from pywikibot import output
 
 from api import entryprocessor
 from api.config import BotjagwarConfig
+from api.model.word import Entry
 from api.output import Output
 from api.servicemanager import DictionaryServiceManager
-from object_model.word import Entry
 from redis_wikicache import RedisPage as Page, RedisSite as Site
 from .functions import translate_form_of_templates
 # from .functions import translate_using_bridge_language
-from .functions import translate_using_convergent_definition
 # from .functions import translate_using_postgrest_json_dictionary
 from .types import \
     UntranslatedDefinition, \
@@ -25,7 +24,7 @@ from .types import \
 log = logging.getLogger(__name__)
 URL_HEAD = DictionaryServiceManager().get_url_head()
 translation_methods = [
-    translate_using_convergent_definition,
+    # translate_using_convergent_definition,
     # translate_using_bridge_language,
     # translate_using_postgrest_json_dictionary,
     translate_form_of_templates
@@ -189,7 +188,7 @@ class Translation:
             translated_definition = []
             translated_from_definition = []
             out_translation_methods = {}
-            for definition_line in entry.entry_definition:
+            for definition_line in entry.definitions:
                 refined_definition_lines = wiktionary_processor.refine_definition(
                     definition_line)
                 for refined_definition_line in refined_definition_lines:
@@ -243,7 +242,7 @@ class Translation:
             out_entry = deepcopy(entry)
             out_entry.translated_from_definition = ', '.join(
                 translated_from_definition)
-            out_entry.entry_definition = entry_definitions
+            out_entry.definitions = entry_definitions
             out_entry.translated_from_language = wiktionary_processor.language
             out_entry.translation_methods = out_translation_methods
             if entry_definitions:

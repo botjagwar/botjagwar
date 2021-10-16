@@ -48,10 +48,10 @@ def entry_generator():
         print(extractor.lookup('voambolana'))
         for word in iter(extractor.cache_engine.list()):
             entry = extractor.lookup(word)
-            if entry.entry_definition:
+            if entry.definitions:
                 s = output.batchfile(entry)
                 print(s[:-1])
-                yield (word, entry.entry_definition)
+                yield (word, entry.definitions)
                 #s = json.dumps(entry.to_dict())
 
 

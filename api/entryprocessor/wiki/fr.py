@@ -4,7 +4,7 @@ import re
 
 import pywikibot
 
-from object_model.word import Entry
+from api.model.word import Entry
 from .base import WiktionaryProcessor
 from .base import stripwikitext
 
@@ -59,7 +59,7 @@ class FRWiktionaryProcessor(WiktionaryProcessor):
                 entry=entree,
                 part_of_speech=part_of_speech,
                 language=langcode,
-                entry_definition=[definition.strip()]
+                definitions=[definition.strip()]
             )
             retcontent.append(e)
         try:
@@ -122,7 +122,7 @@ class FRWiktionaryProcessor(WiktionaryProcessor):
                 entry=self.title,
                 part_of_speech=pos,
                 language=lang[1].strip(),
-                entry_definition=[definition.strip()]
+                definitions=[definition.strip()]
             )
 
             items.append(i)

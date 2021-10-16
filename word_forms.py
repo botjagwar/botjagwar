@@ -13,13 +13,13 @@ import requests
 
 from api.entryprocessor import WiktionaryProcessorFactory
 from api.importer import AdditionalDataImporter, AdditionalDataImporterError, backend as db_backend
+from api.model.word import Entry
 from api.output import Output
 from api.parsers import TEMPLATE_TO_OBJECT, FORM_OF_TEMPLATE
 from api.parsers import templates_parser
 from api.parsers.functions.postprocessors import POST_PROCESSORS
 from api.parsers.inflection_template import ParserError
 from api.servicemanager import LanguageServiceManager
-from object_model.word import Entry
 from page_lister import get_pages_from_category
 from redis_wikicache import RedisSite, RedisPage
 
@@ -94,7 +94,7 @@ def _get_malagasy_page_list():
 
 
 def create_non_lemma_entry(entry: Entry):
-    word, pos, code, definition = entry.entry, entry.part_of_speech, entry.language, entry.entry_definition[
+    word, pos, code, definition = entry.entry, entry.part_of_speech, entry.language, entry.definitions[
         0]
     page_output = Output()
     mg_page = pywikibot.Page(pywikibot.Site(SITELANG, SITENAME), word)
@@ -164,7 +164,7 @@ def create_non_lemma_entry(entry: Entry):
     mg_entry = Entry(
         entry=word,
         part_of_speech=form_of_template,
-        entry_definition=[malagasy_definition],
+        definitions=[malagasy_definition],
         language=code,
     )
 
@@ -208,7 +208,7 @@ importer = AdditionalDataImporter(data='lemma')
 
 
 def import_additional_data(entry: Entry) -> int:
-    word, pos, code, definition = entry.entry, entry.part_of_speech, entry.language, entry.entry_definition[
+    word, pos, code, definition = entry.entry, entry.part_of_speech, entry.language, entry.definitions[
         0]
 
     # Translate template's content into malagasy

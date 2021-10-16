@@ -1,4 +1,4 @@
-from object_model.word import Entry
+from api.model.word import Entry
 
 
 class PageRenderer(object):
