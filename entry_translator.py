@@ -146,7 +146,8 @@ async def get_wiktionary_processed_page(request) -> Response:
                 part_of_speech=translation.part_of_speech,
                 translation=translation.definitions[0]
             )
-            translation_list.append(translation_section.to_dict())
+            if translation.part_of_speech == entry.part_of_speech:
+                translation_list.append(translation_section.to_dict())
 
         if entry.language == language:
             section['translations'] = translation_list

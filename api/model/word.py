@@ -30,15 +30,16 @@ class Entry(TypeCheckedObject):
         ret['additional_data'] = {}
         # print(self.additional_data_types.keys())
         for key in self.additional_data_types.keys():
-            value = getattr(self, key)
-            ret['additional_data'][key] = {}
-            if isinstance(value, Property):
-                ret['additional_data'][key] = value.serialise()
-            elif hasattr(value, '__iter__'):
-                ret['additional_data'][key] = [v.serialise() if isinstance(v, Property) else v
-                                               for v in value]
-            else:
-                ret['additional_data'][key] = value
+            if hasattr(self, key):
+                value = getattr(self, key)
+                ret['additional_data'][key] = {}
+                if isinstance(value, Property):
+                    ret['additional_data'][key] = value.serialise()
+                elif hasattr(value, '__iter__'):
+                    ret['additional_data'][key] = [v.serialise() if isinstance(v, Property) else v
+                                                   for v in value]
+                else:
+                    ret['additional_data'][key] = value
 
         return ret
 
