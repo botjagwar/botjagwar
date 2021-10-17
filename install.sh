@@ -35,4 +35,4 @@ sudo cp -r $src_dir/database $opt_dir
 sudo cp -r $src_dir/scripts $opt_dir
 sudo cp -r $src_dir/*.py $opt_dir
 
-chown `whoami`:`whoami` -R $opt_dir
+sudo chown `whoami`:`whoami` -R $opt_dir
