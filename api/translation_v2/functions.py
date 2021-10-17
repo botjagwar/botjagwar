@@ -280,7 +280,6 @@ def translate_using_convergent_definition(
         return UntranslatedDefinition(definition_line)
 
 
-# @time_this('translate_using_bridge_language')
 def translate_using_bridge_language(part_of_speech,
                                     definition_line,
                                     source_language,

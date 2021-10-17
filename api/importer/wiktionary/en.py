@@ -140,6 +140,10 @@ class PronunciationImporter(SubsectionImporter):
     data_type = 'pronunciation'
     section_name = 'Pronunciation'
 
+    def get_data(self, template_title, wikipage: str, language: str) -> list:
+        parent_class_data = super(PronunciationImporter, self).get_data(template_title, wikipage, language)
+        return parent_class_data
+
 
 all_importers = [
     FurtherReadingImporter,

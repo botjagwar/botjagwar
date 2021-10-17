@@ -122,6 +122,37 @@ async def handle_wiktionary_page(request) -> Response:
     return response
 
 
+@routes.get("/translation/{language}/{pagename}")
+async def get_wiktionary_page_translation(request) -> Response:
+    language = request.match_info['language']
+    pagename = request.match_info['pagename']
+    data = {}
+    try:
+        wiktionary_processor_class = entryprocessor.\
+            WiktionaryProcessorFactory.create(language)
+        wiktionary_processor = wiktionary_processor_class()
+        wiki_page = _get_page(pagename, language)
+        wiktionary_processor.set_text(wiki_page.get())
+        wiktionary_processor.set_title(wiki_page.title())
+        data = translations.translate_wiktionary_page(wiktionary_processor)
+    except Exception as e:
+        log.exception(e)
+        data['traceback'] = traceback.format_exc()
+        data['message'] = '' if not hasattr(
+            e, 'message') else getattr(
+            e, 'message')
+        response = Response(
+            text=json.dumps(data),
+            status=500,
+            content_type='application/json')
+    else:
+        response = Response(
+            text=json.dumps([d.to_dict() for d in data]),
+            status=200,
+            content_type='application/json')
+    return response
+
+
 @routes.get("/wiktionary_page/{language}/{pagename}")
 async def get_wiktionary_processed_page(request) -> Response:
     language = request.match_info['language']

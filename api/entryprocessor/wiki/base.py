@@ -15,7 +15,7 @@ class WiktionaryProcessor(object):
 
     @property
     def language(self):
-        return NotImplementedError()
+        raise NotImplementedError()
 
     def __init__(self, test=False, verbose=False):
         self.content = None

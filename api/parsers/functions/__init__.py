@@ -1,5 +1,5 @@
 from api.parsers.constants.mg import CASES, GENDER, NUMBER, DEFINITENESS, POSSESSIVENESS
-from api.parsers.inflection_template import NounForm, AdjectiveForm, Romanization
+from api.parsers.models.inflection import NounForm, AdjectiveForm, Romanization
 
 
 def parse_one_parameter_template(

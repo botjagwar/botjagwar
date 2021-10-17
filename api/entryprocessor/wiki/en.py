@@ -20,8 +20,12 @@ from .base import WiktionaryProcessor
 
 class ENWiktionaryProcessor(WiktionaryProcessor):
     @property
-    def language(self):
+    def processor_language(self):
         return 'en'
+
+    @property
+    def language(self):
+        return self.processor_language
 
     def __init__(self, test=False, verbose=False):
         super(ENWiktionaryProcessor, self).__init__(test=test, verbose=verbose)
@@ -90,9 +94,11 @@ class ENWiktionaryProcessor(WiktionaryProcessor):
 
         return additional_data
 
-    def extract_definition(self, part_of_speech, definition_line, **kw):
-        # No cleanup
-        return definition_line
+    def extract_definition(self, part_of_speech, definition_line, advanced=False, **kw):
+        if not advanced:  # No cleanup
+            return definition_line
+        else:
+            return self.advanced_extract_definition(part_of_speech, definition_line)
 
     def advanced_extract_definition(self, part_of_speech, definition_line,
                                     cleanup_definition=True,
@@ -137,7 +143,7 @@ class ENWiktionaryProcessor(WiktionaryProcessor):
             self,
             keepNativeEntries=False,
             fetch_additional_data=False,
-            cleanup_definitions=True,
+            cleanup_definitions=False,
             translate_definitions_to_malagasy=False,
             human_readable_form_of_definition=True,
             **kw):
@@ -145,14 +151,13 @@ class ENWiktionaryProcessor(WiktionaryProcessor):
         entries = []
         content = re.sub("{{l/en\\|(.*)}}", "\\1 ", content)  # remove {{l/en}}
         for l in re.findall("[\n]?==[ ]?([A-Za-z]+)[ ]?==\n", content):
+            last_part_of_speech = None
             ct_content = content
-            pos_level = 3
             try:
                 last_language_code = self.lang2code(l)
             except KeyError:
                 continue
 
-            last_part_of_speech = None
             definitions = {}
             section_init = ct_content.find('==%s==' % l)
             section_end = ct_content.find('----', section_init)
@@ -163,23 +168,15 @@ class ENWiktionaryProcessor(WiktionaryProcessor):
 
             lines = ct_content.split('\n')
             for line in lines:
-                for en_pos, mg_pos in self.postran.items():
-                    if re.match(
-                        '=' *
-                        pos_level +
-                        '[ ]?' +
-                        en_pos +
-                        '[ ]?' +
-                        '=' *
-                        pos_level,
-                            line) is not None:
-                        last_part_of_speech = mg_pos
+                if last_part_of_speech is None:
+                    last_part_of_speech = self.get_part_of_speech(line)
 
                 if line.startswith('# '):
                     defn_line = line
                     defn_line = defn_line.lstrip('# ')
                     if last_part_of_speech is None:
                         continue
+
                     definition = self.extract_definition(
                         last_part_of_speech,
                         defn_line,
@@ -212,6 +209,19 @@ class ENWiktionaryProcessor(WiktionaryProcessor):
                 entries.append(entry)
 
         return entries
+
+    def get_part_of_speech(self, line, current_level=3, max_level=6):
+        if current_level <= max_level:
+            for en_pos, mg_pos in self.postran.items():
+                if re.match('=' * current_level + '[ ]?'
+                            + en_pos +
+                            '[ ]?' + '=' * current_level,
+                            line) is not None:
+                    return mg_pos
+
+            return self.get_part_of_speech(line, current_level+1)
+        else:
+            return None
 
     @staticmethod
     def refine_definition(definition) -> list:

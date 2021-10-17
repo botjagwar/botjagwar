@@ -15,8 +15,8 @@ from api.output import Output
 from api.servicemanager import DictionaryServiceManager
 from redis_wikicache import RedisPage as Page, RedisSite as Site
 from .functions import translate_form_of_templates
-# from .functions import translate_using_bridge_language
-# from .functions import translate_using_postgrest_json_dictionary
+from .functions import translate_using_bridge_language
+from .functions import translate_using_postgrest_json_dictionary
 from .types import \
     UntranslatedDefinition, \
     TranslatedDefinition
@@ -24,9 +24,9 @@ from .types import \
 log = logging.getLogger(__name__)
 URL_HEAD = DictionaryServiceManager().get_url_head()
 translation_methods = [
-    # translate_using_convergent_definition,
-    # translate_using_bridge_language,
-    # translate_using_postgrest_json_dictionary,
+    #translate_using_convergent_definition,
+    translate_using_bridge_language,
+    translate_using_postgrest_json_dictionary,
     translate_form_of_templates
 ]
 
@@ -135,8 +135,6 @@ class Translation:
                 wiktionary_processor.set_text(target_page.get())
                 wiktionary_processor.set_title(page_title)
                 already_present_entries = wiktionary_processor.getall()
-                print(already_present_entries)
-                print(entries)
                 # entries = self.aggregate_entry_data(entries, already_present_entries)
 
             content = self.output.wikipages(entries)
@@ -170,6 +168,22 @@ class Translation:
             target_page.put(content, summary)
             if self.config.get('ninja_mode', 'translator') == '1':
                 time.sleep(12)
+
+    def create_lemma_if_not_exists(self, wiktionary_processor, definitions, entry):
+        if hasattr(definitions, 'part_of_speech'):
+            if definitions.part_of_speech is not None:
+                entry.part_of_speech = definitions.part_of_speech
+
+        if hasattr(definitions, 'lemma') and \
+            definitions.lemma is not None and \
+            definitions.lemma not in already_visited:
+            already_visited.append(definitions.lemma)
+            if not self.check_if_page_exists(definitions.lemma):
+                log.debug(f'lemma {definitions.lemma} does not exist. Processing...')
+                page = Page(Site(wiktionary_processor.language, 'wiktionary'), definitions.lemma)
+
+                if page.exists():
+                    self.process_wiktionary_wiki_page(page)
 
     def translate_wiktionary_page(
             self,
@@ -205,24 +219,7 @@ class Translation:
                         if isinstance(definitions, UntranslatedDefinition):
                             continue
                         elif isinstance(definitions, TranslatedDefinition):
-                            if hasattr(definitions, 'part_of_speech'):
-                                if definitions.part_of_speech is not None:
-                                    entry.part_of_speech = definitions.part_of_speech
-                            if hasattr(definitions, 'lemma') and\
-                                    definitions.lemma is not None and\
-                                    definitions.lemma not in already_visited:
-                                already_visited.append(definitions.lemma)
-                                if not self.check_if_page_exists(
-                                        definitions.lemma):
-                                    log.debug(
-                                        f'lemma {definitions.lemma} does not exist. Processing...')
-                                    page = Page(
-                                        Site(
-                                            wiktionary_processor.language,
-                                            'wiktionary'),
-                                        definitions.lemma)
-                                    if page.exists():
-                                        self.process_wiktionary_wiki_page(page)
+                            self.create_lemma_if_not_exists(wiktionary_processor, definitions, entry)
 
                             for d in definitions.split(','):
                                 translated_definition.append(d.strip())

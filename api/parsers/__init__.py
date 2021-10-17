@@ -1,30 +1,34 @@
 # coding: utf8
 
-from api.parsers.functions import parse_alternative_spelling_template
-from api.parsers.functions import parse_el_form_of
-from api.parsers.functions import parse_hu_inflection_of
-from api.parsers.functions import parse_inflection_of
-from api.parsers.functions import parse_lv_inflection_of
-from api.parsers.functions import parse_one_parameter_template
-from api.parsers.functions import parse_romanization_template
-from api.parsers.functions.adjective_forms import parse_adjective_form
-from api.parsers.functions.adjective_forms import parse_fi_adjective_form_of
+from api.parsers.functions import parse_alternative_spelling_template, \
+    parse_el_form_of, \
+    parse_hu_inflection_of, \
+    parse_inflection_of, \
+    parse_lv_inflection_of, \
+    parse_one_parameter_template, \
+    parse_romanization_template
+from api.parsers.functions.adjective_forms import parse_adjective_form, \
+    parse_fi_adjective_form_of
 from api.parsers.functions.noun_forms import parse_et_form_of
 from api.parsers.functions.noun_forms import parse_fi_form_of as parse_fi_noun_form_of
-from api.parsers.functions.noun_forms import parse_lt_noun_form
-from api.parsers.functions.noun_forms import parse_nl_noun_form_of
-from api.parsers.functions.verb_forms import parse_ca_verb_form_of
-from api.parsers.functions.verb_forms import parse_de_verb_form_of
-from api.parsers.functions.verb_forms import parse_es_compound_of
-from api.parsers.functions.verb_forms import parse_es_verb_form_of
+from api.parsers.functions.noun_forms import parse_lt_noun_form, \
+    parse_nl_noun_form_of
+from api.parsers.functions.verb_forms import parse_ca_verb_form_of, \
+    parse_de_verb_form_of, \
+    parse_es_compound_of, \
+    parse_es_verb_form_of
 # from api.parsers.functions.verb_forms import parse_ru_participle_of
-from api.parsers.functions.verb_forms import parse_fi_form_of
-from api.parsers.functions.verb_forms import parse_fi_verb_form_of
-from api.parsers.functions.verb_forms import parse_la_verb_form_inflection_of
-from api.parsers.functions.verb_forms import parse_verb_form_inflection_of
+from api.parsers.functions.verb_forms import parse_fi_form_of, \
+    parse_fi_verb_form_of, \
+    parse_la_verb_form_inflection_of, \
+    parse_verb_form_inflection_of
 from api.parsers.inflection_template import EnWiktionaryInflectionTemplateParser
-from api.parsers.inflection_template import \
-    NounForm, VerbForm, AdjectiveForm, NonLemma, Romanization
+from api.parsers.models.inflection import \
+    NounForm, \
+    VerbForm, \
+    AdjectiveForm, \
+    NonLemma, \
+    Romanization
 from .inflection_template import EnWiktionaryInflectionTemplateParser
 
 TEMPLATE_TO_OBJECT = {

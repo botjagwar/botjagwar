@@ -7,6 +7,7 @@ class Word(TypeCheckedObject):
     _additional = False
     properties_types = dict(
         entry=str,
+
         part_of_speech=str,
         language=str)
 
@@ -28,7 +29,6 @@ class Entry(TypeCheckedObject):
         ret = TypeCheckedObject.to_dict(self)
 
         ret['additional_data'] = {}
-        # print(self.additional_data_types.keys())
         for key in self.additional_data_types.keys():
             if hasattr(self, key):
                 value = getattr(self, key)
