@@ -91,7 +91,7 @@ class Word(object):
             'language': self.model.language,
             'part_of_speech': self.model.part_of_speech,
             'last_modified': last_modified,
-            'additional_data': self.model.additional_data
+            'additional_data': {}
         }
         if self.model.additional_data:
             for adt, adi in self.model.additional_data.items():
