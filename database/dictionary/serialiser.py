@@ -94,10 +94,7 @@ class Word(object):
             'additional_data': self.model.additional_data
         }
         if self.model.additional_data:
-            for adt, adi in self.model.additional_data:
-                if adt.type in word_data['additional_data']:
-                    word_data['additional_data'][adt.type].append(adi)
-                else:
-                    word_data['additional_data'][adt.type] = [adi]
+            for adt, adi in self.model.additional_data.items():
+                word_data['additional_data'][adt] = adi
 
         return word_data

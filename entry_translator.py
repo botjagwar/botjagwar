@@ -107,9 +107,7 @@ async def handle_wiktionary_page(request) -> Response:
     except Exception as e:
         log.exception(e)
         data['traceback'] = traceback.format_exc()
-        data['message'] = '' if not hasattr(
-            e, 'message') else getattr(
-            e, 'message')
+        data['message'] = '' if not hasattr(e, 'message') else getattr(e, 'message')
         response = Response(
             text=json.dumps(data),
             status=500,
@@ -138,9 +136,7 @@ async def get_wiktionary_page_translation(request) -> Response:
     except Exception as e:
         log.exception(e)
         data['traceback'] = traceback.format_exc()
-        data['message'] = '' if not hasattr(
-            e, 'message') else getattr(
-            e, 'message')
+        data['message'] = '' if not hasattr(e, 'message') else getattr(e, 'message')
         response = Response(
             text=json.dumps(data),
             status=500,

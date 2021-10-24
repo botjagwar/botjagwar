@@ -1,93 +1,20 @@
 import re
 from logging import getLogger
 
-import requests
-
 from api.parsers import templates_parser, TEMPLATE_TO_OBJECT
 from api.parsers.functions.postprocessors import POST_PROCESSORS
 from api.parsers.inflection_template import ParserNotFoundError
-from api.servicemanager.pgrest import StaticBackend
-from .exceptions import UnhandledTypeError
-from .types import TranslatedDefinition, \
+from .utils import MAX_DEPTH
+from .utils import regexesrep, \
+    _delink, \
+    _look_up_dictionary, \
+    _look_up_word, \
+    form_of_part_of_speech_mapper
+from ..exceptions import UnhandledTypeError
+from ..types import TranslatedDefinition, \
     UntranslatedDefinition
 
-regexesrep = [
-    (r'\{\{l\|en\|(.*)\}\}', '\\1'),
-    (r'\{\{vern\|(.*)\}\}', '\\1'),
-    (r"\[\[(.*)#(.*)\|?[.*]?\]?\]?", "\\1"),
-    (r"\{\{(.*)\}\}", ""),
-    (r'\[\[(.*)\|(.*)\]\]', '\\1'),
-    (r"\((.*)\)", "")
-]
-CYRILLIC_ALPHABET_LANGUAGES = 'be,bg,mk,ru,uk'.split(',')
-MAX_DEPTH = 5
-form_of_part_of_speech_mapper = {
-    'ana': 'e-ana',
-    'mat': 'e-mat',
-    'mpam-ana': 'e-mpam-ana',
-    'mpam': 'e-mpam',
-}
-
-backend = StaticBackend()
 log = getLogger(__file__)
-
-
-def _get_unaccented_word(word):
-    for char in "́̀":
-        if word.find(char) != -1:
-            word = word.replace(char, "")
-    return word
-
-
-def _delink(line):
-    # change link e.g. [[xyz|XYZ#en]] --> xyz
-    for link, link_name in re.findall('\\[\\[(\\w+)\\|(\\w+)\\]\\]', line):
-        line = line.replace(f'[[{link}|{link_name}]]', link)
-
-    # remove remaining wiki markup
-    for c in '{}[]':
-        line = line.replace(c, '')
-
-    return line
-
-
-def _look_up_dictionary(w_language, w_part_of_speech, w_word):
-    params = {
-        'language': 'eq.' + w_language,
-        'part_of_speech': 'eq.' + w_part_of_speech,
-        'word': 'eq.' + w_word
-    }
-    resp = requests.get(backend.backend + '/json_dictionary', params=params)
-    data = resp.json()
-    return data
-
-
-def _look_up_word(language, part_of_speech, word):
-    params = {
-        'language': 'eq.' + language,
-        'part_of_speech': 'eq.' + part_of_speech,
-        'word': 'eq.' + word
-    }
-    log.debug(params)
-    resp = requests.get(backend.backend + '/word', params=params)
-    data = resp.json()
-    return data
-
-
-def _generate_redirections(infos):
-    redirection_target = infos.entry
-    if infos.language in CYRILLIC_ALPHABET_LANGUAGES:
-        for char in "́̀":
-            if redirection_target.find(char) != -1:
-                redirection_target = redirection_target.replace(char, "")
-        if redirection_target.find("æ") != -1:
-            redirection_target = redirection_target.replace("æ", "ӕ")
-        if infos.entry != redirection_target:
-            # page = pwbot.Page(pwbot.Site(WORKING_WIKI_LANGUAGE, 'wiktionary'), infos.entry)
-            # if not page.exists():
-            # page.put_async("#FIHODINANA [[%s]]" % redirection_target,
-            # "fihodinana")
-            infos.entry = redirection_target
 
 
 def _translate_using_bridge_language(
@@ -302,6 +229,5 @@ def translate_using_nltk(part_of_speech,
                          definition_line,
                          source_language,
                          target_language,
-                         **kw) -> [UntranslatedDefinition,
-                                   TranslatedDefinition]:
+                         **kw) -> [UntranslatedDefinition, TranslatedDefinition]:
     pass

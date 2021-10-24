@@ -30,7 +30,7 @@ class WiktionaryProcessorFactory(object):
         classes = inspect.getmembers(ct_module, inspect.isclass)
         processors = [
             x for x in classes if x[0].endswith('WiktionaryProcessor')]
-        language_class_name = "%sWiktionaryProcessor" % language.upper()
+        language_class_name = f"{language.upper()}WiktionaryProcessor"
 
         for current_class_name, processor_class in processors:
             if current_class_name == language_class_name:

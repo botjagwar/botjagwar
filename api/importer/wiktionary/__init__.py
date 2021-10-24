@@ -21,7 +21,7 @@ def use_wiktionary(language):
 class WiktionaryAdditionalDataImporter(AdditionalDataImporter):
 
     def fetch_additional_data_for_category(self, language, category_name):
-        url = dyn_backend.backend + f"/word_with_additional_data"
+        url = dyn_backend.backend + "/word_with_additional_data"
         params = {
             'language': f'eq.{language}',
             'select': 'word,additional_data',
@@ -33,7 +33,7 @@ class WiktionaryAdditionalDataImporter(AdditionalDataImporter):
             if self.is_data_type_already_defined(w['additional_data'])
         ])
 
-        url = dyn_backend.backend + f"/word"
+        url = dyn_backend.backend + "/word"
         params = {
             'language': f'eq.{language}',
         }
@@ -168,15 +168,8 @@ class SubsectionImporter(WiktionaryAdditionalDataImporter):
         else:
             return []
 
-        for regex_match in re.findall(
-            '=' *
-            self.level +
-            '[ ]?' +
-            self.section_name +
-            number_rgx +
-            '=' *
-            self.level,
-                wikipage):
+        for regex_match in re.findall('=' * self.level + '[ ]?' + self.section_name + number_rgx + '=' * self.level,
+                                      wikipage):
             retrieved += retrieve_subsection(wikipage, regex_match)
             wikipage = lang_section_wikipage
 

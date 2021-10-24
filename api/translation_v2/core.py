@@ -15,8 +15,9 @@ from api.output import Output
 from api.servicemanager import DictionaryServiceManager
 from redis_wikicache import RedisPage as Page, RedisSite as Site
 from .functions import translate_form_of_templates
-from .functions import translate_using_bridge_language
-from .functions import translate_using_postgrest_json_dictionary
+from .functions import translate_using_convergent_definition
+from .functions.pronunciation import translate_pronunciation
+from .functions.references import translate_references
 from .types import \
     UntranslatedDefinition, \
     TranslatedDefinition
@@ -24,9 +25,9 @@ from .types import \
 log = logging.getLogger(__name__)
 URL_HEAD = DictionaryServiceManager().get_url_head()
 translation_methods = [
-    #translate_using_convergent_definition,
-    translate_using_bridge_language,
-    translate_using_postgrest_json_dictionary,
+    translate_using_convergent_definition,
+    # translate_using_bridge_language,
+    # translate_using_postgrest_json_dictionary,
     translate_form_of_templates
 ]
 
@@ -242,6 +243,13 @@ class Translation:
             out_entry.definitions = entry_definitions
             out_entry.translated_from_language = wiktionary_processor.language
             out_entry.translation_methods = out_translation_methods
+            for reference_name in ['reference', 'further_reading']:
+                if hasattr(entry, reference_name):
+                    setattr(out_entry, reference_name, translate_references(getattr(entry, reference_name)))
+
+            if hasattr(entry, 'pronunciation'):
+                out_entry.pronunciation = translate_pronunciation(entry.pronunciation)
+
             if entry_definitions:
                 out_entries.append(out_entry)
 

@@ -89,6 +89,21 @@ class Word(Base):
 
         self.definitions = definitions
 
+    @property
+    def additional_data(self):
+        from api.databasemanager import DictionaryDatabaseManager
+        dbm = DictionaryDatabaseManager()
+        sql = f"select word_id, type, information from additional_word_information where word_id = {self.id}"
+        rq = dbm.session.execute(sql)
+        ret = {}
+        for w_id, adt, info in rq.fetchall():
+            if adt in ret:
+                ret[adt].append(info)
+            else:
+                ret[adt] = [info]
+
+        return ret
+
     def from_json(self, json_data):
         pass
 
