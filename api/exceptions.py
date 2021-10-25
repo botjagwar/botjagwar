@@ -4,5 +4,6 @@
 File for Generic Exceptions
 """
 
+
 class NoWordException(Exception):
     pass

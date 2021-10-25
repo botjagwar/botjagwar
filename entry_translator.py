@@ -12,8 +12,8 @@ from pywikibot import Site, Page
 
 from api import entryprocessor
 from api.decorator import threaded
+from api.model.word import Translation as TranslationModel
 from api.translation_v2.core import Translation
-from object_model.word import Translation as TranslationModel
 
 # GLOBAL VARS
 verbose = False
@@ -21,9 +21,18 @@ databases = []
 
 parser = ArgumentParser(description="Entry translator service")
 parser.add_argument('-p', '--port', dest='PORT', type=int, default=8000)
-parser.add_argument('-l', '--log-file', dest='LOG', type=str, default='/opt/botjagwar/user_data/entry_translator.log')
+parser.add_argument(
+    '-l',
+    '--log-file',
+    dest='LOG',
+    type=str,
+    default='/opt/botjagwar/user_data/entry_translator.log')
 parser.add_argument('--host', dest='HOST', type=str, default='0.0.0.0')
-parser.add_argument('--log-level', dest='LOG_LEVEL', type=str, default='/opt/botjagwar/user_data/entry_translator.log')
+parser.add_argument(
+    '--log-level',
+    dest='LOG_LEVEL',
+    type=str,
+    default='/opt/botjagwar/user_data/entry_translator.log')
 
 args = parser.parse_args()
 
@@ -32,7 +41,7 @@ try:
 except KeyError:
     LOG_LEVEL = 10
 
-log.basicConfig(filename=args.LOG,level=LOG_LEVEL)
+log.basicConfig(filename=args.LOG, level=LOG_LEVEL)
 translations = Translation()
 routes = web.RouteTableDef()
 
@@ -40,7 +49,12 @@ routes = web.RouteTableDef()
 # Throttle Config
 def set_throttle(i):
     from pywikibot import throttle
-    t = throttle.Throttle(pwbot.Site('mg', 'wiktionary'), mindelay=0, maxdelay=1)
+    t = throttle.Throttle(
+        pwbot.Site(
+            'mg',
+            'wiktionary'),
+        mindelay=0,
+        maxdelay=1)
     pwbot.config.put_throttle = 1
     t.setDelays(i)
 
@@ -49,14 +63,16 @@ def _get_page(name, lang):
     page = pwbot.Page(pwbot.Site(lang, 'wiktionary'), name)
     return page
 
+
 @threaded
 def _update_statistics(rc_bot):
     if not rc_bot.stats["edits"] % 5:
         cttime = time.gmtime()[:6]
         rc_bot.chronometer = time.time() - rc_bot.chronometer
-        log.debug(("%d/%02d/%02d %02d:%02d:%02d > " % cttime, \
-               "Fanovana: %(edits)d; pejy voaforona: %(newentries)d; hadisoana: %(errors)d" % rc_bot.stats \
-               + " taha: fanovana %.1f/min" % (60. * (5 / rc_bot.chronometer))))
+        log.debug(("%d/%02d/%02d %02d:%02d:%02d > " %
+                   cttime, "Fanovana: %(edits)d; pejy voaforona: %(newentries)d; hadisoana: %(errors)d" %
+                   rc_bot.stats + " taha: fanovana %.1f/min" %
+                   (60. * (5 / rc_bot.chronometer))))
         rc_bot.chronometer = time.time()
 
 
@@ -92,9 +108,44 @@ async def handle_wiktionary_page(request) -> Response:
         log.exception(e)
         data['traceback'] = traceback.format_exc()
         data['message'] = '' if not hasattr(e, 'message') else getattr(e, 'message')
-        response = Response(text=json.dumps(data), status=500, content_type='application/json')
+        response = Response(
+            text=json.dumps(data),
+            status=500,
+            content_type='application/json')
     else:
-        response = Response(text=json.dumps(data), status=200, content_type='application/json')
+        response = Response(
+            text=json.dumps(data),
+            status=200,
+            content_type='application/json')
+    return response
+
+
+@routes.get("/translation/{language}/{pagename}")
+async def get_wiktionary_page_translation(request) -> Response:
+    language = request.match_info['language']
+    pagename = request.match_info['pagename']
+    data = {}
+    try:
+        wiktionary_processor_class = entryprocessor.\
+            WiktionaryProcessorFactory.create(language)
+        wiktionary_processor = wiktionary_processor_class()
+        wiki_page = _get_page(pagename, language)
+        wiktionary_processor.set_text(wiki_page.get())
+        wiktionary_processor.set_title(wiki_page.title())
+        data = translations.translate_wiktionary_page(wiktionary_processor)
+    except Exception as e:
+        log.exception(e)
+        data['traceback'] = traceback.format_exc()
+        data['message'] = '' if not hasattr(e, 'message') else getattr(e, 'message')
+        response = Response(
+            text=json.dumps(data),
+            status=500,
+            content_type='application/json')
+    else:
+        response = Response(
+            text=json.dumps([d.to_dict() for d in data]),
+            status=200,
+            content_type='application/json')
     return response
 
 
@@ -103,36 +154,36 @@ async def get_wiktionary_processed_page(request) -> Response:
     language = request.match_info['language']
     pagename = request.match_info['pagename']
 
-    wiktionary_processor_class = entryprocessor.WiktionaryProcessorFactory.create(language)
+    wiktionary_processor_class = entryprocessor.WiktionaryProcessorFactory.create(
+        language)
     wiktionary_processor = wiktionary_processor_class()
     ret = []
 
     page = Page(Site(language, 'wiktionary'), pagename)
     wiktionary_processor.process(page)
 
-    for entry in wiktionary_processor.getall():
-        word, pos, language_code, definition = entry.to_tuple()
+    for entry in wiktionary_processor.getall(fetch_additional_data=True):
         translation_list = []
-        section = dict(
-            word=word,
-            language=language_code,
-            part_of_speech=pos,
-            translation=definition[0])
+        section = entry.to_dict()
 
         for translation in wiktionary_processor.retrieve_translations():
             translation_section = TranslationModel(
                 word=translation.entry,
                 language=translation.language,
                 part_of_speech=translation.part_of_speech,
-                translation=translation.entry_definition[0]
+                translation=translation.definitions[0]
             )
-            translation_list.append(translation_section.to_dict())
+            if translation.part_of_speech == entry.part_of_speech:
+                translation_list.append(translation_section.to_dict())
 
-        if language_code == language:
+        if entry.language == language:
             section['translations'] = translation_list
         ret.append(section)
 
-    return Response(text=json.dumps(ret), status=200, content_type='application/json')
+    return Response(
+        text=json.dumps(ret),
+        status=200,
+        content_type='application/json')
 
 
 if __name__ == '__main__':

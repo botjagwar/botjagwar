@@ -6,6 +6,7 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.pool import QueuePool
 
+from api.metaclass import SingletonMeta
 from database.dictionary import Base as WordBase
 from database.language import Base as LanguageBase
 
@@ -46,12 +47,11 @@ class DatabaseManager(object):
         self.config_parser.read('/opt/botjagwar/conf/config.ini')
         self.db_header = self.config_parser.get('global', self.conf_key)
 
-
 class LanguageDatabaseManager(DatabaseManager):
     database_file = 'data/language.db'
 
     def __init__(self, database_file='default', db_header='sqlite:///'):
-        if database_file != 'default': # when defined, assumed a sqlite database file
+        if database_file != 'default':  # when defined, assumed a sqlite database file
             self.database_file = database_file
             self.db_header = db_header + database_file
         else:
@@ -60,12 +60,12 @@ class LanguageDatabaseManager(DatabaseManager):
         super(LanguageDatabaseManager, self).__init__(LanguageBase)
 
 
-class DictionaryDatabaseManager(DatabaseManager):
+class DictionaryDatabaseManager(DatabaseManager, metaclass=SingletonMeta):
     database_file = ''
 
     def __init__(self, database_file='default', db_header='sqlite:///'):
         log.debug('database_file is %s' % database_file)
-        if database_file != 'default': # when defined, assumed a sqlite database file
+        if database_file != 'default':  # when defined, assumed a sqlite database file
             self.database_file = database_file
             self.db_header = db_header + database_file
         else:

@@ -4,7 +4,9 @@ from test_utils.mocks import PageMock, SiteMock
 from . import GenericEntryProcessorTester
 
 
-class TestMalagasyWiktionaryEntryprocessor(GenericEntryProcessorTester, unittest.TestCase):
+class TestMalagasyWiktionaryEntryprocessor(
+        GenericEntryProcessorTester,
+        unittest.TestCase):
     def setUp(self):
         self.setup_for_language('mg', ['teny', 'eau', 'газета', 'geloof'])
 
@@ -12,7 +14,8 @@ class TestMalagasyWiktionaryEntryprocessor(GenericEntryProcessorTester, unittest
         super(TestMalagasyWiktionaryEntryprocessor, self).test_getall()
 
     def test_retrieve_translations(self):
-        super(TestMalagasyWiktionaryEntryprocessor, self).test_retrieve_translations()
+        super(TestMalagasyWiktionaryEntryprocessor,
+              self).test_retrieve_translations()
 
     def test_retrieve_translations_data_output(self):
         page = PageMock(SiteMock(self.language, 'wiktionary'), 'teny')

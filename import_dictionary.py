@@ -11,8 +11,10 @@ from aiohttp import ClientSession
 from api.decorator import threaded
 from database.exceptions.http import WordAlreadyExistsException
 
-MONOLINGUAL_DICTIONARY = 'user_data/%s.csv' % sys.argv[1]  # for parts of speech
-BILINGUAL_DICTIONARY = 'user_data/%s_malagasy.csv' % sys.argv[1]  # for parts of speech
+# for parts of speech
+MONOLINGUAL_DICTIONARY = 'user_data/%s.csv' % sys.argv[1]
+# for parts of speech
+BILINGUAL_DICTIONARY = 'user_data/%s_malagasy.csv' % sys.argv[1]
 POS_DICT = {
     '1': 'ana',
     '2': 'mat',
@@ -43,7 +45,8 @@ async def upload_dictionary():
     with open(MONOLINGUAL_DICTIONARY, 'r') as fd:
         reader = csv.DictReader(fd)
         for row in reader:
-            monolingual[row['word_id']] = (POS_DICT[row['pos_id']], row['anglisy'])
+            monolingual[row['word_id']] = (
+                POS_DICT[row['pos_id']], row['anglisy'])
 
     print('reading bilingual dictionary')
     with open(BILINGUAL_DICTIONARY, 'r') as fd:
@@ -80,7 +83,8 @@ async def upload_dictionary():
             print(entry)
             if resp.status == WordAlreadyExistsException.status_code:
                 print('Word already exists... appending definition')
-                url = URL_HEAD + '/entry/%s/%s' % (LANGUAGE, monolingual[word_id][1])
+                url = URL_HEAD + \
+                    '/entry/%s/%s' % (LANGUAGE, monolingual[word_id][1])
                 resp = await session.get(url)
                 jtext = json.loads(await resp.text())
                 for m in jtext:

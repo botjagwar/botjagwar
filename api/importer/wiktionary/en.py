@@ -7,7 +7,8 @@ from api.importer.wiktionary import use_wiktionary
 @use_wiktionary('en')
 class ListSubsectionImporter(SubsectionImporter):
     def get_data(self, template_title, content: str, language: str):
-        subsection_data = SubsectionImporter.get_data(self, template_title, content, language)
+        subsection_data = SubsectionImporter.get_data(
+            self, template_title, content, language)
         retrieved = []
         for subsection_item in subsection_data:
             if '*' in subsection_item:
@@ -18,10 +19,12 @@ class ListSubsectionImporter(SubsectionImporter):
                     if '[[Thesaurus:' in item:
                         continue
                     if '{{l|' + language in item:
-                        for data in re.findall('{{l\|' + language + '\|([0-9A-Za-z- ]+)}}', item):
+                        for data in re.findall(
+                                '{{l\\|' + language + '\\|([0-9A-Za-z- ]+)}}', item):
                             retrieved.append(data)
                     elif '[[' in item and ']]' in item:
-                        for data in re.findall('\[\[([0-9A-Za-z- ]+)\]\]', item):
+                        for data in re.findall(
+                                '\\[\\[([0-9A-Za-z- ]+)\\]\\]', item):
                             retrieved.append(data)
                     else:
                         retrieved.append(item)
@@ -50,7 +53,12 @@ class ReferencesImporter(SubsectionImporter):
     section_name = 'References'
 
     def get_data(self, template_title, wikipage: str, language: str):
-        refs = super(ReferencesImporter, self).get_data(template_title, wikipage, language)
+        refs = super(
+            ReferencesImporter,
+            self).get_data(
+            template_title,
+            wikipage,
+            language)
         refs_to_return = []
         returned_references = ''.join(refs)
         for ref_line in returned_references.split('\n'):
@@ -88,7 +96,8 @@ class DerivedTermsImporter(ListSubsectionImporter):
     section_name = 'Derived terms'
 
     def get_data(self, template_title, content: str, language: str):
-        subsection_data = SubsectionImporter.get_data(self, template_title, content, language)
+        subsection_data = SubsectionImporter.get_data(
+            self, template_title, content, language)
         retrieved = []
         for subsection_item in subsection_data:
             # Simple list
@@ -97,18 +106,20 @@ class DerivedTermsImporter(ListSubsectionImporter):
                     if '[[Thesaurus:' in item:
                         continue
                     if '{{l|' + language in item:
-                        for data in re.findall('{{l\|' + language + '\|([0-9A-Za-z- ]+)}}', item):
+                        for data in re.findall(
+                                '{{l\\|' + language + '\\|([0-9A-Za-z- ]+)}}', item):
                             retrieved.append(data)
                     elif '[[' in item and ']]' in item:
-                        for data in re.findall('\[\[([0-9A-Za-z- ]+)\]\]', item):
+                        for data in re.findall(
+                                '\\[\\[([0-9A-Za-z- ]+)\\]\\]', item):
                             retrieved.append(data)
 
             # List in a template
-            for template_name in [f'der{d}' for d in range(1,5)] +\
+            for template_name in [f'der{d}' for d in range(1, 5)] +\
                                  ['der-bottom', 'der-top', 'der-top3'] +\
-                                 [f'der-mid{d}' for d in range(1,5)] +\
-                                 [f'col{d}' for d in range(1,6)] :
-                if ('{{' + template_name+ '|' + language) in subsection_item:
+                                 [f'der-mid{d}' for d in range(1, 5)] +\
+                                 [f'col{d}' for d in range(1, 6)]:
+                if ('{{' + template_name + '|' + language) in subsection_item:
                     for item in subsection_item.split('\n'):
                         if item.startswith('|'):
                             if '#' in item:
@@ -129,8 +140,17 @@ class PronunciationImporter(SubsectionImporter):
     data_type = 'pronunciation'
     section_name = 'Pronunciation'
 
+    def get_data(self, template_title, wikipage: str, language: str) -> list:
+        parent_class_data = super(PronunciationImporter, self).get_data(template_title, wikipage, language)
+        return parent_class_data
+
 
 all_importers = [
-    FurtherReadingImporter, AlternativeFormsImporter, AntonymImporter, DerivedTermsImporter,
-    PronunciationImporter, ReferencesImporter, EtymologyImporter, SynonymImporter
-]
+    FurtherReadingImporter,
+    AlternativeFormsImporter,
+    AntonymImporter,
+    DerivedTermsImporter,
+    PronunciationImporter,
+    ReferencesImporter,
+    EtymologyImporter,
+    SynonymImporter]

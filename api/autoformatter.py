@@ -16,7 +16,7 @@ class Autoformat(object):
         # ...
         begin_jereo = new_txt.find("{{jereo")
         end_jereo = new_txt.find("}}", begin_jereo)
-        jereo_template = new_txt[begin_jereo:end_jereo+2]
+        jereo_template = new_txt[begin_jereo:end_jereo + 2]
 
         print((begin_jereo, end_jereo))
 
@@ -33,7 +33,8 @@ class Autoformat(object):
         if new_txt.find('{{pron|'):
             new_txt = new_txt.replace('{{pron|', '{{fanononana|')
         if new_txt.find('{{pron X-SAMPA|'):
-            new_txt = new_txt.replace('{{pron X-SAMPA|', '{{fanononana X-SAMPA|')
+            new_txt = new_txt.replace(
+                '{{pron X-SAMPA|', '{{fanononana X-SAMPA|')
         if self.text != new_txt:
             self.summaries.append("manova ny fiantsoana ny endrika fanononana")
             self.text = new_txt

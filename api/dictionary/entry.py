@@ -20,7 +20,10 @@ def get_word(session, word, language, part_of_speech):
     return word[0]
 
 
-def create_definition_if_not_exists(session, definition: str, definition_language: str) -> Definition:
+def create_definition_if_not_exists(
+        session,
+        definition: str,
+        definition_language: str) -> Definition:
     definitions = session.query(Definition).filter_by(
         definition=definition,
         definition_language=definition_language
@@ -36,7 +39,12 @@ def create_definition_if_not_exists(session, definition: str, definition_languag
     return definition
 
 
-def word_with_definition_exists(session, word_, language, part_of_speech, definition):
+def word_with_definition_exists(
+        session,
+        word_,
+        language,
+        part_of_speech,
+        definition):
     words = session.query(Word).filter_by(
         word=word_,
         language=language,
@@ -92,7 +100,10 @@ async def get_entry(request) -> Response:
     if not jsons:
         raise WordDoesNotExistException()
     else:
-        return Response(text=json.dumps(jsons), status=HTTPOk.status_code, content_type='application/json')
+        return Response(
+            text=json.dumps(jsons),
+            status=HTTPOk.status_code,
+            content_type='application/json')
 
 
 def _add_entry(data, session):
@@ -105,11 +116,20 @@ def _add_entry(data, session):
     else:
         raise InvalidJsonReceivedException()
 
-    if word_exists(session, data['word'], data['language'], data['part_of_speech']):
+    if word_exists(
+            session,
+            data['word'],
+            data['language'],
+            data['part_of_speech']):
         # Get the word and mix it with the normalised retained definitions
-        word = get_word(session, data['word'], data['language'], data['part_of_speech'])
+        word = get_word(
+            session,
+            data['word'],
+            data['language'],
+            data['part_of_speech'])
         normalised_retained_definitions += word.definitions
-        normalised_retained_definitions = list(set(normalised_retained_definitions))
+        normalised_retained_definitions = list(
+            set(normalised_retained_definitions))
         if word.definitions == normalised_retained_definitions:
             raise WordAlreadyExistsException()
         else:
@@ -155,7 +175,10 @@ async def add_batch(request) -> Response:
     session.commit()
     session.flush()
 
-    return Response(status=HTTPOk.status_code, text=json.dumps(ret_payload), content_type='application/json')
+    return Response(
+        status=HTTPOk.status_code,
+        text=json.dumps(ret_payload),
+        content_type='application/json')
 
 
 async def add_entry(request) -> Response:
@@ -183,7 +206,10 @@ async def add_entry(request) -> Response:
     asyncio.ensure_future(save_changes_on_disk(request.app, session))
 
     # Return HTTP response
-    return Response(status=HTTPOk.status_code, text=json.dumps(forged_word), content_type='application/json')
+    return Response(
+        status=HTTPOk.status_code,
+        text=json.dumps(forged_word),
+        content_type='application/json')
 
 
 async def edit_entry(request) -> Response:
@@ -222,7 +248,11 @@ async def edit_entry(request) -> Response:
         word.definitions = definitions
 
     asyncio.ensure_future(save_changes_on_disk(request.app, session))
-    return Response(status=HTTPOk.status_code, text=json.dumps(word.serialise()), content_type='application/json')
+    return Response(
+        status=HTTPOk.status_code,
+        text=json.dumps(
+            word.serialise()),
+        content_type='application/json')
 
 
 async def delete_entry(request) -> Response:
@@ -240,4 +270,6 @@ async def delete_entry(request) -> Response:
         Word.id == request.match_info['word_id']).delete()
 
     asyncio.ensure_future(save_changes_on_disk(request.app, session))
-    return Response(status=HTTPNoContent.status_code, content_type='application/json')
+    return Response(
+        status=HTTPNoContent.status_code,
+        content_type='application/json')

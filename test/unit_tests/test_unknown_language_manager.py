@@ -1,6 +1,28 @@
 from unittest.case import TestCase
 
+from parameterized import parameterized
+
 from unknown_language_manager import translate_language_name
+
+language_tuples = [
+    ('toninu', 'tônino'),
+    ('tanana', 'tanana'),
+    ('chanki', 'tsanky'),
+    ('zanja', 'zanja'),
+    ('chirque', 'tsirke'),
+    ('kuyney', 'koiney'),
+    ('chanki', 'tsanky'),
+    ('choctaw', 'tsôktao'),
+    ('lakota', 'lakôta'),
+    ('yuchi', 'iotsy'),
+    ('makwa', 'makoa'),
+    ('maxiyan', 'maksiian'),
+    ('mixtec', 'mikstek'),
+]
+
+error_language_tuples = [
+    ('tenia nanani',)
+]
 
 
 class TestUnknownLanguageManager(TestCase):
@@ -10,11 +32,15 @@ class TestUnknownLanguageManager(TestCase):
     def tearDown(self):
         pass
 
-    def test_translate_language_name(self):
-        translated = translate_language_name('toninu')
-        self.assertEquals(translated, 'tônino')
-        translated = translate_language_name('tanana')
-        self.assertEquals(translated, 'tanana')
-        translated = translate_language_name('chanki')
-        self.assertEquals(translated, 'tsanky')
-        self.assertRaises(ValueError, translate_language_name, 'tenia nanani')
+    @parameterized.expand(language_tuples)
+    def test_translate_language_name(self, language_name, malagasy_name):
+        translated = translate_language_name(language_name)
+        self.assertEquals(translated, malagasy_name)
+        translated = translate_language_name(language_name)
+        self.assertEquals(translated, malagasy_name)
+        translated = translate_language_name(language_name)
+        self.assertEquals(translated, malagasy_name)
+
+    @parameterized.expand(error_language_tuples)
+    def test_translate_language_name_with_error(self, language_name):
+        self.assertRaises(ValueError, translate_language_name, language_name)

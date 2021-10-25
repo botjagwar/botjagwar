@@ -28,7 +28,9 @@ class ProcessManager:
         if self.spawned_backend_process:
             self.spawned_backend_process.terminate()
             path = '/tmp/%s.pid' % self.program_name
-            os.system('rm %s' % path)  # Process has died, pid file is irrelevant
+            os.system(
+                'rm %s' %
+                path)  # Process has died, pid file is irrelevant
 
     def get_specific_arguments(self) -> List[str]:
         """
@@ -62,8 +64,11 @@ class ProcessManager:
 
         os.system('rm %s' % path)  # Process has died, pid file is irrelevant
         time.sleep(.5)
-        self.specific_args = self.get_specific_arguments()  # XXX: requires a list of str objects
-        proc_params = [self.interpreter_name, self.program_name] + self.specific_args + list(args)
+        # XXX: requires a list of str objects
+        self.specific_args = self.get_specific_arguments()
+        proc_params = [
+            self.interpreter_name,
+            self.program_name] + self.specific_args + list(args)
 
         self.spawned_backend_process = Popen(proc_params)
         with open(path, 'w') as f2:
@@ -94,22 +99,26 @@ class ServiceManager(ProcessManager):
     # Low-level functions to use with high-level functions
     @retry_on_fail([Exception], 5, .5)
     def get(self, route, **kwargs):
-        route = '%s://%s:%d/%s' % (self.scheme, self.backend_address, self.port, route)
+        route = '%s://%s:%d/%s' % (self.scheme,
+                                   self.backend_address, self.port, route)
         return requests.get(route, **kwargs)
 
     @retry_on_fail([Exception], 5, .5)
     def post(self, route, **kwargs):
-        route = '%s://%s:%d/%s' % (self.scheme, self.backend_address, self.port, route)
+        route = '%s://%s:%d/%s' % (self.scheme,
+                                   self.backend_address, self.port, route)
         return requests.post(route, **kwargs)
 
     @retry_on_fail([Exception], 5, .5)
     def put(self, route, **kwargs):
-        route = '%s://%s:%d/%s' % (self.scheme, self.backend_address, self.port, route)
+        route = '%s://%s:%d/%s' % (self.scheme,
+                                   self.backend_address, self.port, route)
         return requests.put(route, **kwargs)
 
     @retry_on_fail([Exception], 5, .5)
     def delete(self, route, **kwargs):
-        route = '%s://%s:%d/%s' % (self.scheme, self.backend_address, self.port, route)
+        route = '%s://%s:%d/%s' % (self.scheme,
+                                   self.backend_address, self.port, route)
         return requests.delete(route, **kwargs)
 
 

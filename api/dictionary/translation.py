@@ -17,9 +17,9 @@ async def get_translation(request) -> Response:
     origin, target = request.match_info['origin'], request.match_info['target']
 
     words = [w.serialise() for w in session.query(Word)
-        .filter(Word.language == origin)
-        .filter(Word.word == request.match_info['word'])
-        .all()]
+             .filter(Word.language == origin)
+             .filter(Word.word == request.match_info['word'])
+             .all()]
     translations = []
     for word in words:
         definitions = word['definitions']
@@ -32,7 +32,9 @@ async def get_translation(request) -> Response:
                     print(definition)
 
     return Response(
-        text=json.dumps(translations), status=200, content_type='application/json')
+        text=json.dumps(translations),
+        status=200,
+        content_type='application/json')
 
 
 async def get_all_translations(request) -> Response:
@@ -44,9 +46,9 @@ async def get_all_translations(request) -> Response:
     origin = request.match_info['origin']
 
     words = [w.serialise() for w in session.query(Word)
-        .filter(Word.language == origin)
-        .filter(Word.word == request.match_info['word'])
-        .all()]
+             .filter(Word.language == origin)
+             .filter(Word.word == request.match_info['word'])
+             .all()]
     translations = []
     for word in words:
         definitions = word['definitions']
@@ -55,5 +57,6 @@ async def get_all_translations(request) -> Response:
             translations.append(definition)
 
     return Response(
-        text=json.dumps(translations), status=200, content_type='application/json')
-
+        text=json.dumps(translations),
+        status=200,
+        content_type='application/json')

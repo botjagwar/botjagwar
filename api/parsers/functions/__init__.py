@@ -1,9 +1,16 @@
 from api.parsers.constants.mg import CASES, GENDER, NUMBER, DEFINITENESS, POSSESSIVENESS
-from api.parsers.inflection_template import NounForm, AdjectiveForm, Romanization
+from api.parsers.models.inflection import NounForm, AdjectiveForm, Romanization
 
 
-def parse_one_parameter_template(out_class, template_name='plural of', case_name='', number='s', gender=None,
-                                 definiteness=None, tense=None, mood=None):
+def parse_one_parameter_template(
+        out_class,
+        template_name='plural of',
+        case_name='',
+        number='s',
+        gender=None,
+        definiteness=None,
+        tense=None,
+        mood=None):
     """
     Very generic code that can parse anything like {{plural of|xxyyzz}}, which is very common on en.wiktionary
     Use with caution, though.
@@ -35,7 +42,9 @@ def parse_one_parameter_template(out_class, template_name='plural of', case_name
             ret_obj.mood = mood
             return ret_obj
         else:
-            raise ValueError("Unrecognised template: expected '%s' but got '%s'" % (parts[0], template_name))
+            raise ValueError(
+                "Unrecognised template: expected '%s' but got '%s'" %
+                (parts[0], template_name))
 
     return _parse_one_parameter_template
 
@@ -68,7 +77,11 @@ def parse_inflection_of(out_class):
             elif pn in DEFINITENESS:
                 definiteness = pn
 
-        ret_obj = out_class(lemma=lemma, case=case_name, number=number_, gender=gender)
+        ret_obj = out_class(
+            lemma=lemma,
+            case=case_name,
+            number=number_,
+            gender=gender)
         ret_obj.definite = definiteness
         return ret_obj
 
@@ -123,13 +136,19 @@ def parse_hu_inflection_of(template_expression):
         elif pn in POSSESSIVENESS:
             possessiveness = pn
 
-    ret_obj = NounForm(lemma=lemma, case=case_name, number=number_, gender=gender, possessive=possessiveness)
+    ret_obj = NounForm(
+        lemma=lemma,
+        case=case_name,
+        number=number_,
+        gender=gender,
+        possessive=possessiveness)
     ret_obj.definite = definiteness
     return ret_obj
 
 
 def parse_el_form_of(out_class, lemma_pos=1):
     assert out_class in (NounForm, AdjectiveForm)
+
     def _wrapped_parse_el_form_of(template_expression):
         for char in '{}':
             template_expression = template_expression.replace(char, '')

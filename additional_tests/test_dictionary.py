@@ -17,12 +17,29 @@ from database.exceptions.http import WordAlreadyExistsException
 URL_HEAD = 'http://0.0.0.0:8001'
 DB_PATH = '/tmp/test.db'
 
-# Temporarily patch requests API in case of refused connections (connecting while service is not ready)
+# Temporarily patch requests API in case of refused connections
+# (connecting while service is not ready)
 possible_errors = [requests.exceptions.ConnectionError]
-requests.post = retry_on_fail(possible_errors, retries=5, time_between_retries=.4)(requests.post)
-requests.get = retry_on_fail(possible_errors, retries=5, time_between_retries=.4)(requests.get)
-requests.put = retry_on_fail(possible_errors, retries=5, time_between_retries=.4)(requests.put)
-requests.delete = retry_on_fail(possible_errors, retries=5, time_between_retries=.4)(requests.delete)
+requests.post = retry_on_fail(
+    possible_errors,
+    retries=5,
+    time_between_retries=.4)(
+        requests.post)
+requests.get = retry_on_fail(
+    possible_errors,
+    retries=5,
+    time_between_retries=.4)(
+        requests.get)
+requests.put = retry_on_fail(
+    possible_errors,
+    retries=5,
+    time_between_retries=.4)(
+        requests.put)
+requests.delete = retry_on_fail(
+    possible_errors,
+    retries=5,
+    time_between_retries=.4)(
+        requests.delete)
 
 
 class TestDictionaryRestService(TestCase):
@@ -53,8 +70,13 @@ class TestDictionaryRestService(TestCase):
     @threaded
     def launch_service():
         global DICTIONARY_SERVICE
-        DICTIONARY_SERVICE = Popen(["python3", "dictionary_service.py", '--db-file', DB_PATH],
-                                   stdin=PIPE, stdout=PIPE, stderr=PIPE)
+        DICTIONARY_SERVICE = Popen(["python3",
+                                    "dictionary_service.py",
+                                    '--db-file',
+                                    DB_PATH],
+                                   stdin=PIPE,
+                                   stdout=PIPE,
+                                   stderr=PIPE)
         DICTIONARY_SERVICE.communicate()
 
     @retry_on_fail([Exception], retries=10, time_between_retries=.4)
@@ -92,7 +114,14 @@ class TestDictionaryRestService(TestCase):
             })
         )
         for i in range(20):
-            self.create_entry('nanaika%d' % i, 'ka', 'ana', 'tarameguni%d' % i, 'de')
+            self.create_entry(
+                'nanaika%d' %
+                i,
+                'ka',
+                'ana',
+                'tarameguni%d' %
+                i,
+                'de')
 
         requests.post(URL_HEAD + '/rollback')
 
@@ -108,7 +137,14 @@ class TestDictionaryRestService(TestCase):
             })
         )
         for i in range(20):
-            self.create_entry('nanaika%d' % i, 'ka', 'ana', 'tarameguni%d' % i, 'de')
+            self.create_entry(
+                'nanaika%d' %
+                i,
+                'ka',
+                'ana',
+                'tarameguni%d' %
+                i,
+                'de')
 
         for i in range(20):
             resp = requests.get(URL_HEAD + '/entry/ka/nanaika%d' % i)
@@ -166,17 +202,17 @@ class TestDictionaryRestService(TestCase):
         # committing data
         requests.get(URL_HEAD + '/commit')
         entries = [
-            ('ln','mbala'),
-            ('kg','mbala'),
-            ('mnh','mbala'),
+            ('ln', 'mbala'),
+            ('kg', 'mbala'),
+            ('mnh', 'mbala'),
         ]
         for language, word in entries:
-            resp = requests.get(URL_HEAD + '/entry/{}/{}'.format(language, word))
+            resp = requests.get(URL_HEAD +
+                                '/entry/{}/{}'.format(language, word))
             self.assertEquals(resp.status_code, 200, 'Entry check failed!')
             data = resp.json()
             self.assertEqual(data[0]['language'], language)
             self.assertEqual(data[0]['word'], word)
-
 
     def test_create_existing_entry(self):
         sleep(1)
@@ -191,7 +227,9 @@ class TestDictionaryRestService(TestCase):
                 'part_of_speech': 'ana',
             })
         )
-        self.assertEquals(resp.status_code, WordAlreadyExistsException.status_code)
+        self.assertEquals(
+            resp.status_code,
+            WordAlreadyExistsException.status_code)
 
     def test_append_to_existing_entry(self):
         resp = requests.post(

@@ -7576,5 +7576,5 @@ LANGUAGE_NAMES = {
 }
 
 LANGUAGE_CODES = {
-    v:  k for k, v in LANGUAGE_NAMES.items()
+    v: k for k, v in LANGUAGE_NAMES.items()
 }

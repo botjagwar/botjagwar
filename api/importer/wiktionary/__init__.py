@@ -21,7 +21,7 @@ def use_wiktionary(language):
 class WiktionaryAdditionalDataImporter(AdditionalDataImporter):
 
     def fetch_additional_data_for_category(self, language, category_name):
-        url = dyn_backend.backend + f"/word_with_additional_data"
+        url = dyn_backend.backend + "/word_with_additional_data"
         params = {
             'language': f'eq.{language}',
             'select': 'word,additional_data',
@@ -33,7 +33,7 @@ class WiktionaryAdditionalDataImporter(AdditionalDataImporter):
             if self.is_data_type_already_defined(w['additional_data'])
         ])
 
-        url = dyn_backend.backend + f"/word"
+        url = dyn_backend.backend + "/word"
         params = {
             'language': f'eq.{language}',
         }
@@ -43,9 +43,11 @@ class WiktionaryAdditionalDataImporter(AdditionalDataImporter):
             for w in words
         ])
         self.counter = 0
-        category_pages = set([k.title() for k in get_pages_from_category('en', category_name)])
+        category_pages = set(
+            [k.title() for k in get_pages_from_category('en', category_name)])
         # Wiki pages who may have not been parsed yet
-        titles = (category_pages & pages_defined_in_database) - already_defined_pages
+        titles = (category_pages & pages_defined_in_database) - \
+            already_defined_pages
         wikipages = set([
             pywikibot.Page(self.wiktionary, page) for page in titles
         ])
@@ -53,7 +55,8 @@ class WiktionaryAdditionalDataImporter(AdditionalDataImporter):
         # print(f"{len(wikipages)} pages from '{category_name}';\n"
         #       f"{len(already_defined_pages)} already defined pages "
         #       f"out of {len(category_pages)} pages in category\n"
-        #       f"and {len(pages_defined_in_database)} pages currently defined in DB\n\n")
+        # f"and {len(pages_defined_in_database)} pages currently defined in
+        # DB\n\n")
         for wikipage in wikipages:
             self.process_wikipage(wikipage, language)
 
@@ -62,7 +65,12 @@ class WiktionaryAdditionalDataImporter(AdditionalDataImporter):
         title = wikipage.title()
         return self.process_non_wikipage(title, content, language)
 
-    def run(self, root_category: str, wiktionary=pywikibot.Site('en', 'wiktionary')):
+    def run(
+        self,
+        root_category: str,
+        wiktionary=pywikibot.Site(
+            'en',
+            'wiktionary')):
         self.wiktionary = wiktionary
         category = pywikibot.Category(wiktionary, root_category)
         for category in category.subcategories():
@@ -78,7 +86,11 @@ class WiktionaryAdditionalDataImporter(AdditionalDataImporter):
 
 
 class TemplateImporter(WiktionaryAdditionalDataImporter):
-    def get_data(self, template_title: str, wikipage: str, language: str) -> list:
+    def get_data(
+            self,
+            template_title: str,
+            wikipage: str,
+            language: str) -> list:
         retrieved = []
         for line in wikipage.split('\n'):
             if "{{" + template_title + "|" + language in line:
@@ -93,7 +105,8 @@ class TemplateImporter(WiktionaryAdditionalDataImporter):
 
 class SubsectionImporter(WiktionaryAdditionalDataImporter):
     section_name = ''
-    numbered = False  # True if the section contains a number e.g. Etymology 1, Etymology 2, etc.
+    # True if the section contains a number e.g. Etymology 1, Etymology 2, etc.
+    numbered = False
     level = 3
 
     def __init__(self, **params):
@@ -109,7 +122,8 @@ class SubsectionImporter(WiktionaryAdditionalDataImporter):
             if target_subsection_section is not None:
                 section = target_subsection_section.group()
                 pos1 = wikipage_.find(section) + len(section)
-                pos2 = wikipage_.find('\n\n', pos1)  # section end is 2 newlines
+                # section end is 2 newlines
+                pos2 = wikipage_.find('\n\n', pos1)
                 if pos2 != -1:
                     wikipage_ = wikipage_[pos1:pos2]
                 else:
@@ -142,7 +156,8 @@ class SubsectionImporter(WiktionaryAdditionalDataImporter):
         else:
             number_rgx = ''
 
-        target_language_section = re.search('==[ ]?' + self.iso_codes[language] + '[ ]?==', wikipage)
+        target_language_section = re.search(
+            '==[ ]?' + self.iso_codes[language] + '[ ]?==', wikipage)
         if target_language_section is not None:
             section_begin = wikipage.find(target_language_section.group())
             section_end = wikipage.find('----', section_begin)
@@ -153,7 +168,8 @@ class SubsectionImporter(WiktionaryAdditionalDataImporter):
         else:
             return []
 
-        for regex_match in re.findall('=' * self.level + '[ ]?' + self.section_name + number_rgx + '=' * self.level, wikipage):
+        for regex_match in re.findall('=' * self.level + '[ ]?' + self.section_name + number_rgx + '=' * self.level,
+                                      wikipage):
             retrieved += retrieve_subsection(wikipage, regex_match)
             wikipage = lang_section_wikipage
 

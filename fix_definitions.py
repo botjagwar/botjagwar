@@ -4,17 +4,23 @@ from api.config import BotjagwarConfig
 
 config = BotjagwarConfig()
 host = config.get('postgrest_backend_address')
-conn = psycopg2.connect(f"dbname='botjagwar' user='postgres' host='{host}' password='isa'")
+conn = psycopg2.connect(
+    f"dbname='botjagwar' user='postgres' host='{host}' password='isa'")
+
 
 def fetch_mg_definitions():
     cur = conn.cursor()
-    cur.execute("select definition from definitions where definition_language='mg';")
+    cur.execute(
+        "select definition from definitions where definition_language='mg';")
     return set([i[0] for i in cur.fetchall()])
+
 
 def fetch_mg_words():
     cur = conn.cursor()
-    cur.execute("select definition from definitions where definition_language='mg';")
+    cur.execute(
+        "select definition from definitions where definition_language='mg';")
     return set([i[0]for i in cur.fetchall()])
+
 
 def fetch_en_words():
     cur = conn.cursor()
@@ -51,8 +57,8 @@ def main():
                 enc += 1
 
         if wc != 0:
-            if enc/wc > .75:
-                definitions_to_change.append((enc/wc, defin))
+            if enc / wc > .75:
+                definitions_to_change.append((enc / wc, defin))
 
     for rate, defn in definitions_to_change:
         print(rate)
@@ -60,9 +66,8 @@ def main():
 
     print(len(definitions_to_change), 'definitions to change')
 
+
 if __name__ == '__main__':
     main()
     conn.commit()
     conn.close()
-
-

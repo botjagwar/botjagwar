@@ -26,7 +26,13 @@ if __name__ == '__main__':
     #     entries += t.process_wiktionary_wiki_page(RedisPage(RedisSite('en', 'wiktionary'), v, offline=False))
     for wp in get_pages_from_category('en', 'Chinese verbs'):
         try:
-            t.process_wiktionary_wiki_page(RedisPage(RedisSite('en', 'wiktionary'), wp.title(), offline=False))
+            t.process_wiktionary_wiki_page(
+                RedisPage(
+                    RedisSite(
+                        'en',
+                        'wiktionary'),
+                    wp.title(),
+                    offline=False))
         except (pywikibot.Error, redis.exceptions.TimeoutError):
             pass
 
@@ -42,6 +48,6 @@ if __name__ == '__main__':
     #         if not i % 200:
     #             print(i, 'entries', entries, '/ process error rate:', errors*100. / (i+1))
 
-    print('process error rate:', errors*100. / (k))
+    print('process error rate:', errors * 100. / (k))
     print('entries created:', entries)
     print(errored)

@@ -8,12 +8,13 @@ from api.databasemanager import DictionaryDatabaseManager
 
 class DefinitionModificationManagerBot(object):
     def __init__(self, database_file='default'):
-        self.input_database = DictionaryDatabaseManager(database_file=database_file)
+        self.input_database = DictionaryDatabaseManager(
+            database_file=database_file)
 
     def start(self):
         query_string = """
-        select 
-            wrd.word, 
+        select
+            wrd.word,
             wrd.language,
             wrd.part_of_speech,
             edc.definition_id,
@@ -39,21 +40,26 @@ class DefinitionModificationManagerBot(object):
                     change_map[definition_id] = 0
                 try:
                     print('>>>>', old_definition, '/', word, '<<<<')
-                    mg_word_page = pywikibot.Page(pywikibot.Site('mg', 'wiktionary'), word)
+                    mg_word_page = pywikibot.Page(
+                        pywikibot.Site('mg', 'wiktionary'), word)
                     if mg_word_page.exists() and not mg_word_page.isRedirectPage():
                         content = mg_word_page.get()
-                        new_content = content.replace(f'[[{old_definition}]]', f'[[{new_definition}]]')
+                        new_content = content.replace(
+                            f'[[{old_definition}]]', f'[[{new_definition}]]')
                         pywikibot.showDiff(content, new_content)
                         if content != new_content:
-                            mg_word_page.put(new_content, f'fanitsiana: -{old_definition} +{new_definition}')
+                            mg_word_page.put(
+                                new_content, f'fanitsiana: -{old_definition} +{new_definition}')
                             change_map[definition_id] += 1
                     else:
                         continue
                 except Exception as exc:
                     if definition_id not in fail_map:
-                        fail_map[definition_id] = "%s failed: %s" % (word, str(exc))
+                        fail_map[definition_id] = "%s failed: %s" % (
+                            word, str(exc))
                     else:
-                        fail_map[definition_id] += "\n%s failed: %s" % (word, str(exc))
+                        fail_map[definition_id] += "\n%s failed: %s" % (
+                            word, str(exc))
 
             for definition_id, changes in change_map.items():
                 comment = f'{changes} changes applied.'
@@ -81,7 +87,6 @@ async def start_robot():
         bot.start()
         print('Done.')
         time.sleep(5)
-
 
 
 if __name__ == '__main__':

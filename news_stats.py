@@ -14,7 +14,11 @@ udata = "/opt/botjagwar/user_data/milestones"
 cdata = "/opt/botjagwar/conf/list_wikis/langs"
 
 possible_errors = [requests.exceptions.ConnectionError]
-requests.get = retry_on_fail(possible_errors, retries=5, time_between_retries=.4)(requests.get)
+requests.get = retry_on_fail(
+    possible_errors,
+    retries=5,
+    time_between_retries=.4)(
+        requests.get)
 
 
 def get_saved_state():
@@ -153,15 +157,27 @@ def render_announce(milestone):
 
     if milestone[2] == "over":
         return "* Ny isan'ny %s ao amin'i [[%s|%s.%s]] dia mihoatra ny {{formatnum:%s}}." % (
-                item_type, link, milestone[0], milestone[1], milestone[3])
+            item_type, link, milestone[0], milestone[1], milestone[3])
     elif milestone[2] == "below":
         return "* Ny isan'ny %s ao amin'i [[%s|%s.%s]] dia tafidina ho latsaka ny {{formatnum:%s}}." % (
             item_type, link, milestone[0], milestone[1], milestone[3])
 
 
 def main():
-    months = ["", "Janoary", "Febroary", "Martsa", "Aprily", "Mey", "Jiona",
-              "Jolay", "Aogositra", "Septambra", "Oktobra", "Novambra", "Desambra"]
+    months = [
+        "",
+        "Janoary",
+        "Febroary",
+        "Martsa",
+        "Aprily",
+        "Mey",
+        "Jiona",
+        "Jolay",
+        "Aogositra",
+        "Septambra",
+        "Oktobra",
+        "Novambra",
+        "Desambra"]
     old = get_saved_state()
     new = get_new_state()
     ms = get_milestones(old, new)
@@ -176,18 +192,23 @@ def main():
 
     ct_time = time.localtime()
     if not retstr:
-        print ("tsy misy vaovao ho ampitaina.")
+        print("tsy misy vaovao ho ampitaina.")
         return
 
     ct_date = "%d %s %d" % (ct_time[2], months[ct_time[1]], ct_time[0])
-    page = pywikibot.Page(pywikibot.Site("mg", "wikipedia"), "Wikipedia:Vaovao Wikimedia/%d" % ct_time[0])
+    page = pywikibot.Page(
+        pywikibot.Site(
+            "mg",
+            "wikipedia"),
+        "Wikipedia:Vaovao Wikimedia/%d" %
+        ct_time[0])
     news = "\n; %s\n%s" % (ct_date, retstr)
     newsfile = open("/tmp/%s" % ct_date, "w")
     if len(old) != 0:
         if page.exists():
             content = page.get()
             if content.find(ct_date) != -1:
-                print ("efa nahitana daty ankehitriny")
+                print("efa nahitana daty ankehitriny")
                 return
             content = news + content
             page.put(content, "+Vaovao androany" + ct_date)

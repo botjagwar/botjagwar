@@ -21,10 +21,12 @@ class Wikilister(object):
         dump = open(data_file + 'listof%s.txt' % site, 'r').read()
         print((data_file + 'listof%s.txt' % site))
 
-        wikiregex = re.findall('([a-z|\-]+).%s.org/wiki/Special:Recentchanges' % site, dump)
+        wikiregex = re.findall(
+            '([a-z|\\-]+).%s.org/wiki/Special:Recentchanges' %
+            site, dump)
         if len(wikiregex) == 0:
-            wikiregex = re.findall('\{\{fullurl:([a-z|\-]+):Special', dump)
-        print (wikiregex)
+            wikiregex = re.findall('\\{\\{fullurl:([a-z|\\-]+):Special', dump)
+        print(wikiregex)
         for lang in wikiregex:
             yield lang
 
@@ -57,7 +59,8 @@ class Wikilister(object):
 
             # Depth calculation
             try:
-                depth = (edits / pages) * ((float(pages) - articles) / articles) ** 2.
+                depth = (edits / pages) * \
+                    ((float(pages) - articles) / articles) ** 2.
                 if depth > 300 and articles < 100000:
                     depth = '-'
                 else:
@@ -180,16 +183,18 @@ class Wikilister(object):
         content += """
 |}"""
 
-        while 1:
+        while True:
             if self.test:
                 break
             try:
-                page = pywikibot.Page(pywikibot.Site('mg', 'wiktionary'),
-                                      'Mpikambana:%s/Lisitry ny %s/tabilao' % (current_user, wiki))
+                page = pywikibot.Page(
+                    pywikibot.Site(
+                        'mg', 'wiktionary'), 'Mpikambana:%s/Lisitry ny %s/tabilao' %
+                    (current_user, wiki))
                 page.put(content, 'Rôbô : fanavaozana ny statistika')
                 break
             except Exception:
-                print ('Hadisoana nitranga tampametrahana ilay pejy')
+                print('Hadisoana nitranga tampametrahana ilay pejy')
 
 
 def main():
@@ -204,8 +209,9 @@ def main():
             bot.run('pywikibot', 'pywikibot')
             time.sleep(120)
         else:
-            print ("Fanavaozana isaky ny adin'ny 6")
-            print(("Miandry ny fotoana tokony hamaozana ny pejy (ora %2d:%2d) (GMT+%d)" % ((t[3] + timeshift), t[4], (timeshift))))
+            print("Fanavaozana isaky ny adin'ny 6")
+            print(("Miandry ny fotoana tokony hamaozana ny pejy (ora %2d:%2d) (GMT+%d)" %
+                  ((t[3] + timeshift), t[4], (timeshift))))
             time.sleep(30)
 
 

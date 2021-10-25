@@ -4,7 +4,7 @@ from threading import Lock
 
 from api.data.caching import FastTranslationLookup
 from api.decorator import critical_section, singleton
-from object_model.word import Entry
+from api.model.word import Entry
 
 entry_page_cs_lock = Lock()
 missing_translation_cs_lock = Lock()
@@ -38,16 +38,22 @@ class EntryPageFileWriter(Writer):
             self.page_dump[entry.entry] = [entry]
 
     def write(self):
-        pickle.dump(self.page_dump, self.page_dump_file, pickle.HIGHEST_PROTOCOL)
+        pickle.dump(
+            self.page_dump,
+            self.page_dump_file,
+            pickle.HIGHEST_PROTOCOL)
         self.page_dump_file.close()
 
 
 @singleton
 class EntryPageFileReader(Reader):
     page_dump_file = None
+
     def __init__(self, language):
         try:
-            self.page_dump_file = open('user_data/dump-%s.pkl' % language, 'rb')
+            self.page_dump_file = open(
+                'user_data/dump-%s.pkl' %
+                language, 'rb')
         except FileNotFoundError:
             pass
         self.page_dump = {}
@@ -62,7 +68,9 @@ class MissingTranslationFileReader(Reader):
     def __init__(self, language):
         self.mising_translations = {}
         self.language = language
-        self.mising_translations_file = open('user_data/missing_translations-%s.pickle' % self.language, 'rb')
+        self.mising_translations_file = open(
+            'user_data/missing_translations-%s.pickle' %
+            self.language, 'rb')
 
     def read(self):
         self.mising_translations = pickle.load(self.mising_translations_file)
@@ -72,7 +80,9 @@ class MissingTranslationFileReader(Reader):
 class MissingTranslationFileWriter(Writer):
     def __init__(self, language):
         self.mising_translations = {}
-        self.mising_translations_file = open('user_data/missing_translations-%s.pickle' % language, 'wb')
+        self.mising_translations_file = open(
+            'user_data/missing_translations-%s.pickle' %
+            language, 'wb')
 
     @critical_section(missing_translation_cs_lock)
     def add(self, translation):
@@ -82,7 +92,10 @@ class MissingTranslationFileWriter(Writer):
             self.mising_translations[translation] = 1
 
     def write(self):
-        pickle.dump(self.mising_translations, self.mising_translations_file, pickle.HIGHEST_PROTOCOL)
+        pickle.dump(
+            self.mising_translations,
+            self.mising_translations_file,
+            pickle.HIGHEST_PROTOCOL)
 
 
 class MissingTranslationCsvWriter(object):
@@ -116,7 +129,9 @@ class SiteExtractorCacheEngine(object):
     def __init__(self, sitename):
         self.sitename = sitename
         try:
-            old_dump_file = open('user_data/site-extractor-%s.pkl' % self.sitename, 'rb')
+            old_dump_file = open(
+                'user_data/site-extractor-%s.pkl' %
+                self.sitename, 'rb')
         except FileNotFoundError:
             self.page_dump = {}
         else:
@@ -142,6 +157,8 @@ class SiteExtractorCacheEngine(object):
         return [x for x in self.page_dump.keys()]
 
     def write(self):
-        page_dump_file = open('user_data/site-extractor-%s.pkl' % self.sitename, 'wb')
+        page_dump_file = open(
+            'user_data/site-extractor-%s.pkl' %
+            self.sitename, 'wb')
         pickle.dump(self.page_dump, page_dump_file, pickle.HIGHEST_PROTOCOL)
         page_dump_file.close()

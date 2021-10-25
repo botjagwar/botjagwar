@@ -1,5 +1,6 @@
 from api.parsers.constants.en import GENDER, CASES, NUMBER, MOOD, TENSE, PERSONS, VOICE, DEFINITENESS, POSSESSIVENESS
 
+
 def render_non_lemma(non_lemma_type):
     def wrapper(non_lemma) -> str:
         explanation = non_lemma_type
@@ -7,6 +8,7 @@ def render_non_lemma(non_lemma_type):
         return ret
 
     return wrapper
+
 
 render_romanization = render_non_lemma('romanization')
 render_alternative_spelling = render_non_lemma('alternative spelling')
@@ -52,7 +54,6 @@ def render_verb_form(non_lemma) -> str:
     explanation += 'of the ' if len(explanation.strip()) != 0 else ''
     if non_lemma.voice in VOICE:
         explanation += VOICE[non_lemma.voice] + ' '
-
 
     ret = explanation + 'of [[%s]]' % (non_lemma.lemma)
     return ret

@@ -1,4 +1,8 @@
-import urllib.request, urllib.error, urllib.parse, os, time
+import urllib.request
+import urllib.error
+import urllib.parse
+import os
+import time
 
 
 def DownloadURL(url, file_name=None, overwrite=False):
@@ -18,7 +22,8 @@ def DownloadURL(url, file_name=None, overwrite=False):
     f = open(file_name, 'wb')
     meta = u.info()
     file_size = int(meta.getheaders("Content-Length")[0])
-    # print "Loharano : %s \nTanjona : %s\nLanja : %.1f Kio" % (url, file_name, file_size/1024.)
+    # print "Loharano : %s \nTanjona : %s\nLanja : %.1f Kio" % (url,
+    # file_name, file_size/1024.)
 
     file_size_dl = 0
     block_sz = 32768
@@ -36,8 +41,10 @@ def DownloadURL(url, file_name=None, overwrite=False):
         f.write(buff)
         chrono = time.time() - timer
         if chrono != 0.:
-            dl_spd = ((((file_size_dl - o_file_size_dl) / 1024.) / chrono) + dl_spd) / 2
-        status = r"%d kB [%3.0f%%, %.1f kB/s]" % (file_size_dl / 1024., file_size_dl * 100. / file_size, dl_spd)
+            dl_spd = (
+                (((file_size_dl - o_file_size_dl) / 1024.) / chrono) + dl_spd) / 2
+        status = r"%d kB [%3.0f%%, %.1f kB/s]" % (
+            file_size_dl / 1024., file_size_dl * 100. / file_size, dl_spd)
         o_file_size_dl = file_size_dl
         status = status + chr(8) * (len(status) + 1)
         timer = time.time()
@@ -50,7 +57,20 @@ def DownloadURL(url, file_name=None, overwrite=False):
 if __name__ == '__main__':
     import time
 
-    volana = ['', 'jan', 'feb', 'mar', 'apr', 'mey', 'jon', 'jol', 'aog', 'sep', 'okt', 'nov', 'des']
+    volana = [
+        '',
+        'jan',
+        'feb',
+        'mar',
+        'apr',
+        'mey',
+        'jon',
+        'jol',
+        'aog',
+        'sep',
+        'okt',
+        'nov',
+        'des']
     t = []
     t = list(time.gmtime())
     e = "%d/%d/%d -- %d:%2d:%2d" % (t[2], t[1], t[0], t[3], t[4], t[5])

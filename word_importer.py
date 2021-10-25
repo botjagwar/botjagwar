@@ -16,10 +16,10 @@ import pywikibot
 
 from api.data.caching import FastWordLookup
 from api.databasemanager import DictionaryDatabaseManager
+from api.model.word import Entry
 from api.output import Output
 from api.storage import EntryPageFileReader
 from api.translation.core import CYRILLIC_ALPHABET_LANGUAGES, LANGUAGE_BLACKLIST, _get_unaccented_word
-from object_model.word import Entry
 
 
 class Importer(object):
@@ -116,22 +116,23 @@ class DatabaseImporter(Importer):
     fast_tree = {}
 
     def do_import(self, workers=100):
-        input_database = DictionaryDatabaseManager(database_file=self.export_path)
+        input_database = DictionaryDatabaseManager(
+            database_file=self.export_path)
         with input_database.engine.connect() as connection:
             query = connection.execute(
                 """
-                select 
+                select
                     word.id,
-                    word.word, 
-                    word.language, 
-                    word.part_of_speech, 
+                    word.word,
+                    word.language,
+                    word.part_of_speech,
                     definitions.definition,
                     definitions.definition_language
-                from 
+                from
                     dictionary,
-                    word, 
+                    word,
                     definitions
-                where 
+                where
                     dictionary.definition = definitions.id
                     and word.id = dictionary.word
                     and definition_language = 'mg'
@@ -152,7 +153,7 @@ class DatabaseImporter(Importer):
                     entry=word,
                     language=language,
                     part_of_speech=part_of_speech,
-                    entry_definition=self.fast_tree[(word, language, part_of_speech)]
+                    definitions=self.fast_tree[(word, language, part_of_speech)]
                 )
                 try:
                     self.worker(entry)

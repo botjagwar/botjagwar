@@ -14,11 +14,10 @@ class StaticBackend(object):
 
 
 class DynamicBackend(object):
-    backends = ["http://" + ADDR + ":81%s" % (f'{i}'.zfill(2)) for i in range(16)]
+    backends = ["http://" + ADDR + ":81%s" %
+                (f'{i}'.zfill(2)) for i in range(16)]
 
     @property
     def backend(self):
-        bkd = self.backends[randint(0, len(self.backends)-1)]
+        bkd = self.backends[randint(0, len(self.backends) - 1)]
         return bkd
-
-

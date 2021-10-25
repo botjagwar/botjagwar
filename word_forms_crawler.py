@@ -27,12 +27,19 @@ def crawl_categories_list():
 def crawl_subcategories(category_name):
     working_language = 'en'
     # Initialise processor class
-    en_page_processor_class = WiktionaryProcessorFactory.create(working_language)
+    en_page_processor_class = WiktionaryProcessorFactory.create(
+        working_language)
     en_page_processor = en_page_processor_class()
     print(category_name)
-    category = pywikibot.Category(pywikibot.Site(working_language, 'wiktionary'), category_name)
+    category = pywikibot.Category(
+        pywikibot.Site(
+            working_language,
+            'wiktionary'),
+        category_name)
     if not category.isEmptyCategory():
-        pywikibot.output("▒▒ \03{green}%-25s\03{default} ▒▒" % category.title())
+        pywikibot.output(
+            "▒▒ \03{green}%-25s\03{default} ▒▒" %
+            category.title())
         for article in category.articles():
             pywikibot.output(article.title())
             en_page_processor.process(article)

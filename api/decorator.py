@@ -41,12 +41,12 @@ class run_once(object):
         method = self.func.__get__(instance, cls)
         try:
             return self.methods[method]
-        except (AttributeError,KeyError):
+        except (AttributeError, KeyError):
             decorated = run_once(method)
             try:
                 self.methods[method] = decorated
             except AttributeError:
-                self.methods = { method : decorated }
+                self.methods = {method: decorated}
             return decorated
 
     def __eq__(self, other):
@@ -63,6 +63,7 @@ def singleton(class_):
     :return:
     """
     instances = {}
+
     def getinstance(*args, **kwargs):
         if class_ not in instances:
             instances[class_] = class_(*args, **kwargs)
@@ -103,9 +104,11 @@ def time_this(identifier=''):
             dt = t1 - t0
             d = dt.seconds * 1000 + dt.microseconds / 1000
             if identifier == 'function':
-                print((f"%s took %2.6f seconds to execute" % (identifier, d/1000.)))
+                print((f"%s took %2.6f seconds to execute" %
+                      (identifier, d / 1000.)))
             else:
-                print((f"%s took %2.6f seconds to execute" % (f.__name__, d/1000.)))
+                print((f"%s took %2.6f seconds to execute" %
+                      (f.__name__, d / 1000.)))
 
             return ret
 

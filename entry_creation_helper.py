@@ -6,10 +6,10 @@ import pywikibot
 import requests
 
 from api.decorator import singleton
+from api.model.word import Entry
 # from api.importer.wiktionary import dyn_backend
 from api.output import WikiPageRendererFactory, Output
 from api.servicemanager.pgrest import StaticBackend
-from object_model.word import Entry
 
 dyn_backend = StaticBackend()
 
@@ -25,7 +25,8 @@ class RandomLatency(object):
 
     @property
     def latency(self) -> int:
-        return self.min_sleeptime + random.randint(self.random_latency[0], self.random_latency[1])
+        return self.min_sleeptime + \
+            random.randint(self.random_latency[0], self.random_latency[1])
 
 
 class NinjaEntryPublisher(object):
@@ -33,7 +34,13 @@ class NinjaEntryPublisher(object):
     speed_wpm = 35
     overwrite = False
 
-    def publish(self, entry, title, wikitext, summary_if_exists, summary_if_new):
+    def publish(
+            self,
+            entry,
+            title,
+            wikitext,
+            summary_if_exists,
+            summary_if_new):
         wikipage = pywikibot.Page(pywikibot.Site('mg', 'wiktionary'), title)
         sleep = RandomLatency().latency
         if wikipage.exists():
@@ -44,7 +51,7 @@ class NinjaEntryPublisher(object):
                     summary = '+tsiahy, sns.'
                     print('waited %d seconds' % sleep)
                     wikipage.put(wikitext, summary, minor=False)
-                    time.sleep(sleep/5)
+                    time.sleep(sleep / 5)
                 else:
                     return
             else:
@@ -69,7 +76,8 @@ class NinjaEntryCreator(object):
         self.renderer = Renderer()
         mg_word_list = self.fetch_mg_word_list()
         self.renderer.pages_to_link = mg_word_list
-        additional_data_types_rq = requests.get(dyn_backend.backend + '/additional_word_information_types')
+        additional_data_types_rq = requests.get(
+            dyn_backend.backend + '/additional_word_information_types')
         self.additional_data_types = set()
         if additional_data_types_rq == 200:
             self.additional_data_types = {
@@ -87,7 +95,8 @@ class NinjaEntryCreator(object):
         ret = [w['word'] for w in resp.json()]
         return set(ret)
 
-    def fetch_additional_data(self, additional_data_list, word_id, type_, return_as=(str, list)) -> [str, list]:
+    def fetch_additional_data(self, additional_data_list,
+                              word_id, type_, return_as=(str, list)) -> [str, list]:
         if return_as == str:
             for data in additional_data_list[0]:
                 if data['type'] == type_:
@@ -117,7 +126,7 @@ class NinjaEntryCreator(object):
                         'entry': title,
                         'language': language,
                         'part_of_speech': pos,
-                        'entry_definition': [mg_defn],
+                        'definitions': [mg_defn],
                     }
 
                     entry = Entry(**{**entry_data})
@@ -127,7 +136,12 @@ class NinjaEntryCreator(object):
 
                     summary_if_new = "Pejy voaforona amin'ny « " + summary_if_new + ' »'
                     print(entry)
-                    self.publisher.publish(entry, title, wiki_string, summary_if_already_exists, summary_if_new)
+                    self.publisher.publish(
+                        entry,
+                        title,
+                        wiki_string,
+                        summary_if_already_exists,
+                        summary_if_new)
                 except SkippedWord:
                     continue
                 else:
@@ -147,17 +161,23 @@ class NinjaEntryCreator(object):
         # if language is not None:
         #     params['language'] = 'eq.' + language
 
-        convergent_translations_rq = requests.get(dyn_backend.backend + '/convergent_translations', params=params)
+        convergent_translations_rq = requests.get(
+            dyn_backend.backend + '/convergent_translations', params=params)
         if convergent_translations_rq.status_code != 200:
-            print('convergent_translations_rq.status_code', convergent_translations_rq.status_code)
+            print('convergent_translations_rq.status_code',
+                  convergent_translations_rq.status_code)
             return
 
-        new_associations_rq = requests.get(dyn_backend.backend + '/new_associations', params={})
+        new_associations_rq = requests.get(
+            dyn_backend.backend + '/new_associations', params={})
         if new_associations_rq.status_code != 200:
-            print('new_associations_rq.status_code', new_associations_rq.status_code)
+            print(
+                'new_associations_rq.status_code',
+                new_associations_rq.status_code)
             return
 
-        new_associations = [(d['word'], d['definition']) for d in new_associations_rq.json()]
+        new_associations = [(d['word'], d['definition'])
+                            for d in new_associations_rq.json()]
         data = convergent_translations_rq.json()
         print(len(new_associations), 'associations loaded')
         print(new_associations[:10])
@@ -165,7 +185,8 @@ class NinjaEntryCreator(object):
         print(len(data), 'translations loaded')
         filtered_data = []
         for translation in data:
-            if (int(translation['word_id']), int(translation['mg_definition_id'])) in new_associations:
+            if (int(translation['word_id']), int(
+                    translation['mg_definition_id'])) in new_associations:
                 continue
             else:
                 filtered_data.append(translation)
@@ -177,9 +198,15 @@ class NinjaEntryCreator(object):
 
             print('>>>>> ' + title + ' <<<<<')
             try:
-                entry, wikistring, summary_if_new, summary_if_exists = self.generate_wikipage_and_summaries(translation)
+                entry, wikistring, summary_if_new, summary_if_exists = self.generate_wikipage_and_summaries(
+                    translation)
                 summary_if_new = "Pejy voaforona amin'ny « " + summary_if_new + ' »'
-                self.publisher.publish(entry, title, wikistring, summary_if_exists, summary_if_new)
+                self.publisher.publish(
+                    entry,
+                    title,
+                    wikistring,
+                    summary_if_exists,
+                    summary_if_new)
             except SkippedWord:
                 continue
             else:
@@ -190,14 +217,17 @@ class NinjaEntryCreator(object):
         json_dictionary_infos_params = {
             'id': 'eq.' + str(translation["word_id"])
         }
-        json_dictionary_rq = requests.get(dyn_backend.backend + '/vw_json_dictionary',
-                                          params=json_dictionary_infos_params)
+        json_dictionary_rq = requests.get(
+            dyn_backend.backend + '/vw_json_dictionary',
+            params=json_dictionary_infos_params)
 
         if json_dictionary_rq.status_code == 200:
             json_dictionary_infos = json_dictionary_rq.json()
             additional_data = json_dictionary_infos[0]['additional_data']
         else:
-            print('json_dictionary_rq.status_code', json_dictionary_rq.status_code)
+            print(
+                'json_dictionary_rq.status_code',
+                json_dictionary_rq.status_code)
             raise SkippedWord()
 
         definitions = []
@@ -207,17 +237,18 @@ class NinjaEntryCreator(object):
             }
         )
         if request_convergent_definition_rq.status_code == 200:
-            definitions = [
-                e['suggested_definition'] for e in request_convergent_definition_rq.json()
-            ]
+            definitions = [e['suggested_definition']
+                           for e in request_convergent_definition_rq.json()]
         else:
-            print('request_convergent_definition_rq.status_code ', request_convergent_definition_rq.status_code)
+            print('request_convergent_definition_rq.status_code ',
+                  request_convergent_definition_rq.status_code)
 
         # Fetching and mapping additional data
         additional_data_list = json_dictionary_infos[0]['additional_data']
         if additional_data_list is not None:
             # p = self.fetch_additional_data(
-            #     additional_data_list, translation['word_id'], 'pronunciation', list)
+            # additional_data_list, translation['word_id'], 'pronunciation',
+            # list)
             raw_additional_data_dict = {
                 'synonyms': self.fetch_additional_data(
                     additional_data_list, translation['word_id'], 'synonym', list),
@@ -242,7 +273,7 @@ class NinjaEntryCreator(object):
             additional_data_dict = {
                 k: v for k, v in raw_additional_data_dict.items() if v
             }
-            print(raw_additional_data_dict )
+            print(raw_additional_data_dict)
         else:
             additional_data_dict = {}
 
@@ -252,7 +283,7 @@ class NinjaEntryCreator(object):
                 'entry': translation["word"],
                 'language': translation["language"],
                 'part_of_speech': translation["part_of_speech"],
-                'entry_definition': definitions,
+                'definitions': definitions,
             }
 
             for data_type in self.additional_data_types:
@@ -262,7 +293,8 @@ class NinjaEntryCreator(object):
             entry = Entry(**{**entry_data, **additional_data_dict})
             wiki_string = self.renderer.render(entry)
             summary_if_new = wiki_string.replace('\n', ' ')
-            summary_if_already_exists = '/* {{=' + translation["language"] + '=}} */'
+            summary_if_already_exists = '/* {{=' + \
+                translation["language"] + '=}} */'
             if len(summary_if_new) > 147:
                 summary_if_new = summary_if_new[:147] + '...'
             return entry, wiki_string, summary_if_new, summary_if_already_exists

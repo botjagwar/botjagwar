@@ -5,14 +5,22 @@ SITENAME = 'wiktionary'
 
 def load_pages_from_category(working_language, category_name):
     with open('user_data/list_%s_%s' % (working_language, category_name), 'w') as f:
-        pages = pywikibot.Category(pywikibot.Site(working_language, SITENAME), category_name)
+        pages = pywikibot.Category(
+            pywikibot.Site(
+                working_language,
+                SITENAME),
+            category_name)
         for word_page in pages.articles():
             f.write(word_page.title() + '\n')
 
 
 def load_categories_from_category(working_language, category_name):
     with open('user_data/category_list_%s_%s' % (working_language, category_name), 'w') as f:
-        pages = pywikibot.Category(pywikibot.Site(working_language, SITENAME), category_name)
+        pages = pywikibot.Category(
+            pywikibot.Site(
+                working_language,
+                SITENAME),
+            category_name)
         for word_page in pages.subcategories():
             f.write(word_page.title(with_ns=False) + '\n')
 
@@ -64,11 +72,15 @@ def parameterized_get_pages_from_category(site_class, page_class):
 
 def redis_get_pages_from_category(working_language, category_name):
     from redis_wikicache import RedisSite, RedisPage
-    return parameterized_get_pages_from_category(RedisSite, RedisPage)(working_language, category_name)
+    return parameterized_get_pages_from_category(
+        RedisSite, RedisPage)(
+        working_language, category_name)
 
 
 def get_pages_from_category(working_language, category_name):
-    return parameterized_get_pages_from_category(pywikibot.Site, pywikibot.Page)(working_language, category_name)
+    return parameterized_get_pages_from_category(
+        pywikibot.Site, pywikibot.Page)(
+        working_language, category_name)
 
 
 if __name__ == '__main__':
@@ -77,4 +89,4 @@ if __name__ == '__main__':
     count = 0
     for p in get_pages_from_category(language, category_name):
         count += 1
-    print (language, category_name, count)
+    print(language, category_name, count)

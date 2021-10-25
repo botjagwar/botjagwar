@@ -16,7 +16,8 @@ class KeyValueStoreAPI(object):
     def cache_value(self, value):
         def cache_value_wrapper(f):
             def wrapper(*args, **kwargs):
-                key = str(self.identifier) + 'cache/' + str(value) + '_'.join([str(s) for s in args[1:]])
+                key = str(self.identifier) + 'cache/' + str(value) + \
+                    '_'.join([str(s) for s in args[1:]])
                 if key not in self.kvstore:
                     v = f(*args, **kwargs)
                     self._set_attribute(key, pickle.dumps(v))

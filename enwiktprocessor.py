@@ -57,11 +57,11 @@ def test_random():
             print(e.__class__, e)
             errors += 1
 
-    rate = (1 - (errors/sample_size))
-    print(rate*100, '% of pages could be processed')
+    rate = (1 - (errors / sample_size))
+    print(rate * 100, '% of pages could be processed')
     assert rate >= .995
 
 
 if __name__ == '__main__':
     test_random()
-    #test_one()
+    # test_one()

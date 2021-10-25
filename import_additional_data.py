@@ -29,17 +29,18 @@ class TenyMalagasyPickleImporter(object):
             except SiteExtractorException:
                 continue
 
-            if not entry.entry_definition:
+            if not entry.definitions:
                 continue
             else:
                 print('>>> %s <<<' % entry.entry)
                 self.process_rakibolana_definition(entry)
 
     def process_rakibolana_definition(self, entry):
-        definitions = entry.entry_definition
+        definitions = entry.definitions
         for definition in definitions:
             try:
-                self.importer.write_additional_data(entry.entry, 'mg', definition)
+                self.importer.write_additional_data(
+                    entry.entry, 'mg', definition)
             except Exception as exception:
                 print(exception)
 
@@ -53,14 +54,14 @@ class RakibolanaOrgPickleImporter(object):
     def run(self):
         for data in self.extractor.cache_engine.list():
             entry = self.extractor.lookup(data)
-            if not entry.entry_definition:
+            if not entry.definitions:
                 continue
             else:
                 print('>>> %s <<<' % entry.entry)
                 self.process_rakibolana_definition(entry,)
 
     def process_rakibolana_definition(self, entry):
-        definitions = entry.entry_definition
+        definitions = entry.definitions
         definition = definitions[0]
         definition = definition.replace('amim$$', 'amim-')
         raw_definition = definition.replace('$$', '|')
@@ -107,7 +108,10 @@ if __name__ == '__main__':
     importer = Importer()
 
     def delete_additional_word_information():
-        response = requests.delete(backend.backend + '/additional_word_information', data={})
+        response = requests.delete(
+            backend.backend +
+            '/additional_word_information',
+            data={})
         assert response.status_code == 204
 
     delete_additional_word_information()

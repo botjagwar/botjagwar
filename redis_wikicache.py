@@ -13,7 +13,13 @@ class NoPage(Exception):
 
 
 class RedisSite(object):
-    def __init__(self, language: str, wiki: str, host='default', port=6379, password='default'):
+    def __init__(
+            self,
+            language: str,
+            wiki: str,
+            host='default',
+            port=6379,
+            password='default'):
         self.language = language
         self.wiki = wiki
         if host == 'default':
@@ -29,14 +35,23 @@ class RedisSite(object):
             self.password = None
 
         self.port = port
-        self.instance = redis.Redis(self.host, self.port, password=self.password, socket_timeout=3)
+        self.instance = redis.Redis(
+            self.host,
+            self.port,
+            password=self.password,
+            socket_timeout=3)
 
     def random_page(self):
         rkey = self.instance.randomkey()
-        while not rkey.startswith(bytes(f'{self.wiki}.{self.language}/', 'utf8')):
+        while not rkey.startswith(
+            bytes(
+                f'{self.wiki}.{self.language}/',
+                'utf8')):
             rkey = self.instance.randomkey()
 
-        page_name = str(rkey, encoding='utf8').replace(f'{self.wiki}.{self.language}/','')
+        page_name = str(
+            rkey, encoding='utf8').replace(
+            f'{self.wiki}.{self.language}/', '')
         return RedisPage(self, page_name)
 
     @separate_process
@@ -78,7 +93,8 @@ class RedisPage(object):
         if self._title is None:
             return ''
 
-        cache_contents = self.site.instance.get(f'{self.site.wiki}.{self.site.language}/{self._title}')
+        cache_contents = self.site.instance.get(
+            f'{self.site.wiki}.{self.site.language}/{self._title}')
         if not cache_contents:
             if not self.offline:
                 wikisite = pywikibot.Site(self.site.language, self.site.wiki)
@@ -88,17 +104,20 @@ class RedisPage(object):
                     self.site.push_page(self._title, content)
                     return content
                 else:
-                    raise NoPage(f'Page {self._title} at {self.site} not found '
-                                 f'neither in-redis nor on-wiki')
+                    raise NoPage(
+                        f'Page {self._title} at {self.site} not found '
+                        f'neither in-redis nor on-wiki')
             else:
-                raise NoPage(f'Page  {self._title} at {self.site} not found in redis. '
-                             f'Offline mode is OFF so no on-wiki fetching.')
+                raise NoPage(
+                    f'Page  {self._title} at {self.site} not found in redis. '
+                    f'Offline mode is OFF so no on-wiki fetching.')
         else:
             cache_contents = str(cache_contents, encoding='utf8')
             return cache_contents
 
     def exists(self):
-        cache_contents = self.site.instance.get(f'{self.site.wiki}.{self.site.language}/{self._title}')
+        cache_contents = self.site.instance.get(
+            f'{self.site.wiki}.{self.site.language}/{self._title}')
         if not cache_contents:
             if self.offline:
                 return False

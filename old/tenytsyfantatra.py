@@ -25,7 +25,6 @@ class UnknownWordManagerBot(object):
         self.standard_line_regex = re.compile(r"(.*)[ ]\[([a-zA-Z]+)\]")
         self.aggregated_unknown_words = {}
 
-
     def __del__(self):
         """
         Properly close all database connections.
@@ -42,7 +41,7 @@ class UnknownWordManagerBot(object):
         :return: the word ID
         """
         result = self.dictionary_tables[language].read({
-            self.language[language] : word
+            self.language[language]: word
         }, select="%s_wID" % language)
         return result[0]
 
@@ -66,8 +65,8 @@ class UnknownWordManagerBot(object):
                 # print wid, translation, len(translation)
                 try:
                     self.translation_tables[language].insert({
-                        "%s_wID" % language : str(wid),
-                        "mg" : translation})
+                        "%s_wID" % language: str(wid),
+                        "mg": translation})
                 except (DataError, IntegrityError):
                     pass
             except ValueError:  # too many values to unpack
@@ -77,7 +76,7 @@ class UnknownWordManagerBot(object):
     def get_unknown_words_from_file(self):
         """
         Reads word_hits file. Copares it to the translation table in database
-        
+
         Returns: an aggregated list of unknown words containing the word and the number of hits for that word
         """
         counter = 0
@@ -88,8 +87,8 @@ class UnknownWordManagerBot(object):
             counter += 1
             if (counter % 1000) == 0:
                 dt = time.time() - t
-                print((counter, "lines treated; ", len(pre_aggregate), \
-                    "aggregated.", "(%f wps)" % (100./dt)))
+                print((counter, "lines treated; ", len(pre_aggregate),
+                       "aggregated.", "(%f wps)" % (100. / dt)))
                 t = time.time()
 
             line = line.decode('utf8')
@@ -112,14 +111,19 @@ class UnknownWordManagerBot(object):
             counter += 1
             if (counter % 100) == 0:
                 dt = time.time() - t
-                print((counter, "lines treated; ", len(self.aggregated_unknown_words), \
-                    "aggregated.", "(%f wps)" % (100. / dt)))
+                print((counter,
+                       "lines treated; ",
+                       len(self.aggregated_unknown_words),
+                       "aggregated.",
+                       "(%f wps)" % (100. / dt)))
                 t = time.time()
             translation, language_code = word_and_language
 
             if translation in words[language_code]:
-                if (translation, language_code) not in self.aggregated_unknown_words:
-                    self.aggregated_unknown_words[(translation, language_code)] = hits
+                if (translation,
+                        language_code) not in self.aggregated_unknown_words:
+                    self.aggregated_unknown_words[(
+                        translation, language_code)] = hits
 
         return self.aggregated_unknown_words
 
@@ -128,14 +132,15 @@ class UnknownWordManagerBot(object):
         Saves to the wikipage the aggregated list of unknown words
         Args:
             wikipage: pywikibot.Page instance
-                    
+
         Raises: UnknownWordManagerError if wikipage is not an instance of pywikibot.Page
 
         """
         if not isinstance(wikipage, pywikibot.Page):
             raise UnknownWordManagerError()
         content = ""
-        for unknown_word, language_code in sorted(self.aggregated_unknown_words):
+        for unknown_word, language_code in sorted(
+                self.aggregated_unknown_words):
             content += "# %s" % unknown_word
         wikipage.put(content, "manavao ny lisitry ny teny tsy fantatra")
 
@@ -157,9 +162,11 @@ class UnknownWordManagerBot(object):
             if "=" in line:
                 std_line, mg_translation = line.split("=")
                 try:
-                    word, language = self.standard_line_regex.search(std_line).groups()
+                    word, language = self.standard_line_regex.search(
+                        std_line).groups()
                 except AttributeError:
-                    print ("Left part of '=' could not match expected standard line format. Skipping.")
+                    print(
+                        "Left part of '=' could not match expected standard line format. Skipping.")
                 else:
                     # update database using translation;
                     response = self.dictionary_tables[language].read({
@@ -190,8 +197,7 @@ def aggregate_words():
 
 def save_aggregated_on_wiki(unknowns):
     elems = list(unknowns.items())
-    sorted_by_hits = [(hits, entry) for entry, hits in elems]
-    sorted_by_hits.sort()
+    sorted_by_hits = sorted([(hits, entry) for entry, hits in elems])
     sorted_by_hits = sorted_by_hits[::-1]
     sorted_by_hits = sorted_by_hits[:10000]
 
@@ -207,14 +213,16 @@ def save_aggregated_on_wiki(unknowns):
     f.close()
 
     # Saving page on-wiki
-    page = pywikibot.Page(WORKING_WIKI, 'Mpikambana:%s/Lisitry ny teny tsy fantatra' % username)
+    page = pywikibot.Page(
+        WORKING_WIKI,
+        'Mpikambana:%s/Lisitry ny teny tsy fantatra' %
+        username)
     page.put(wikitext, 'Teny tsy fantatra vaovao')
 
 
 def save_aggregated_in_file(unknowns):
     f = open(mt_data_file + 'unknown_words', "w")
-    elems = list(unknowns.keys())
-    elems.sort()
+    elems = sorted(unknowns.keys())
     for e in elems:
         hits = unknowns[e]
         s = "%s:%s:%d:\n" % (e[0], e[1], hits)
@@ -230,4 +238,4 @@ def insert_words():
 
 if __name__ == '__main__':
     aggregate_words()
-    #insert_words()
+    # insert_words()

@@ -3,8 +3,14 @@ import os
 
 from api.decorator import singleton
 
+try:
+    login = os.getlogin()
+except OSError:
+    import getpass
+    login = getpass.getuser()
+
 conf_paths = [
-    f'/home/{os.getlogin()}/botjagwar/conf',
+    f'/home/{login}/botjagwar/conf',
     '/opt/botjagwar/conf'
 ]
 
@@ -20,6 +26,7 @@ class BotjagwarConfig(object):
     Manage global and script specific configuration.
     All config files should be stored in CONF_ROOT_PATH
     """
+
     def __init__(self, name=None):
         self.default_config_parser = configparser.ConfigParser()
         self.default_config_parser.read(CONF_ROOT_PATH + '/config.ini')
