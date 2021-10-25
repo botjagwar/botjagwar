@@ -3,8 +3,14 @@ import os
 
 from api.decorator import singleton
 
+try:
+    login = os.getlogin()
+except OSError:
+    import getpass
+    login = getpass.getuser()
+
 conf_paths = [
-    f'/home/{os.getlogin()}/botjagwar/conf',
+    f'/home/{login}/botjagwar/conf',
     '/opt/botjagwar/conf'
 ]
 
