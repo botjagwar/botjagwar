@@ -120,15 +120,16 @@ def retry_on_fail(exceptions, retries=5, time_between_retries=1):
     def _retry_on_fail(f):
         def wrapper(*args, **kwargs):
             m_retries = 0
-            try:
-                return f(*args, **kwargs)
-            except tuple(exceptions) as e:
-                if m_retries <= retries:
-                    m_retries += 1
-                    print('Error:', e, '%d' % m_retries)
-                    time.sleep(time_between_retries)
-                else:
-                    raise e
+            while True:
+                try:
+                    return f(*args, **kwargs)
+                except tuple(exceptions) as e:
+                    if m_retries <= retries:
+                        m_retries += 1
+                        print('Error:', e, '%d' % m_retries)
+                        time.sleep(time_between_retries)
+                    else:
+                        raise e
 
         return wrapper
     return _retry_on_fail

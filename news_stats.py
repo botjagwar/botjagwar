@@ -28,7 +28,7 @@ def get_saved_state():
         r = pickle.load(f)
         f.close()
         return r
-    except IOError as e:
+    except (Exception, IOError) as e:
         print(e)
         return []
 
