@@ -37,7 +37,7 @@ def add_translated_title(title, translated_title, source_language='en', target_l
     return None
 
 
-def translate_references(references: list, source='en', target='mg', online=True) -> list:
+def translate_references(references: list, source='en', target='mg', use_postgrest: [bool, str] = 'automatic') -> list:
     """Translates reference templates"""
     translated_references = []
 
@@ -47,6 +47,15 @@ def translate_references(references: list, source='en', target='mg', online=True
                 title = ref[2:ref.find('|', 3)]
             else:
                 title = ref[2:ref.find('}}', 3)]
+
+            if use_postgrest == 'automatic':
+                try:
+                    online = True if backend.backend else False
+                except BackendError:
+                    online = False
+            else:
+                assert isinstance(use_postgrest, bool)
+                online = use_postgrest
 
             if online:
                 translated_title = get_mapped_template_in_database(title, target_language=target)

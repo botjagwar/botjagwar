@@ -261,7 +261,7 @@ class Translation:
                         references,
                         source=wiktionary_processor.language,
                         target=self.working_wiki_language,
-                        online=True
+                        use_postgrest='automatic'
                     )
                     setattr(
                         out_entry,
