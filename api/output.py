@@ -12,7 +12,6 @@ from database.exceptions.http import WordAlreadyExistsException
 log = logging.getLogger(__name__)
 verbose = False
 
-backend = StaticBackend().backend
 dictionary_service = DictionaryServiceManager()
 USER_DATA = 'user_data/entry_translator'
 URL_HEAD = dictionary_service.get_url_head()
@@ -66,6 +65,7 @@ class Output(object):
 
     @staticmethod
     def postgrest_add_translation_method(infos: Entry):
+        backend = StaticBackend().backend
         data = {
             'word': 'eq.' + infos.entry,
             'language': 'eq.' + infos.language,
