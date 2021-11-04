@@ -70,7 +70,7 @@ class ReferencesImporter(SubsectionImporter):
             else:
                 refs_to_return.append(ref_line)
 
-        return refs_to_return
+        return [r for r in refs_to_return if r.strip() != '<references/>']
 
 
 class FurtherReadingImporter(ReferencesImporter):
@@ -142,7 +142,24 @@ class PronunciationImporter(SubsectionImporter):
 
     def get_data(self, template_title, wikipage: str, language: str) -> list:
         parent_class_data = super(PronunciationImporter, self).get_data(template_title, wikipage, language)
-        return parent_class_data
+        pronunciations_list = []
+        buffer = ''
+        if len(parent_class_data):
+            for line in parent_class_data[0].split('\n'):
+                if line.startswith('*'):
+                    pronunciations_list.append(line.strip('*').strip())
+                else:
+                    buffer += line
+
+        if buffer:
+            pronunciations_list.append(buffer)
+
+        pronunciations = []
+        for pron in pronunciations_list:
+            if '-IPA' in pron:
+                pronunciations.append(pron)
+
+        return pronunciations
 
 
 all_importers = [

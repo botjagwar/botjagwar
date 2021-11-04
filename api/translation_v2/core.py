@@ -49,6 +49,7 @@ class Translation:
         self.output = Output()
         self.loop = asyncio.get_event_loop()
         self.config = BotjagwarConfig()
+        self.reference_template_queue = set()
 
     def _save_translation_from_page(self, infos: List[Entry]):
         """
@@ -57,6 +58,12 @@ class Translation:
         for info in infos:
             self.output.db(info)
             self.output.add_translation_method(info)
+
+    def publish_translated_references(self):
+        for original_reference, translated_reference in self.reference_template_queue:
+            self.create_or_rename_template_on_target_wiki(original_reference, translated_reference)
+
+        self.reference_template_queue = []
 
     @staticmethod
     def add_wiktionary_credit(
@@ -186,6 +193,10 @@ class Translation:
                 if page.exists():
                     self.process_wiktionary_wiki_page(page)
 
+    def create_or_rename_template_on_target_wiki(self, source_name, target_name):
+        print("create_or_rename_template_on_target_wiki")
+        pass
+
     def translate_wiktionary_page(
             self,
             wiktionary_processor: entryprocessor.WiktionaryProcessor) -> List[Entry]:
@@ -245,7 +256,20 @@ class Translation:
             out_entry.translation_methods = out_translation_methods
             for reference_name in ['reference', 'further_reading']:
                 if hasattr(entry, reference_name):
-                    setattr(out_entry, reference_name, translate_references(getattr(entry, reference_name)))
+                    references = getattr(entry, reference_name)
+                    translated_references = translate_references(
+                        references,
+                        source=wiktionary_processor.language,
+                        target=self.working_wiki_language,
+                        online=True
+                    )
+                    setattr(
+                        out_entry,
+                        reference_name,
+                        translated_references
+                    )
+                    for reference, translated_reference in list(zip(references, translated_references)):
+                        self.reference_template_queue.add((reference, translated_reference))
 
             if hasattr(entry, 'pronunciation'):
                 out_entry.pronunciation = translate_pronunciation(entry.pronunciation)

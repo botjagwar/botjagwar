@@ -41,6 +41,10 @@ class RedisSite(object):
             password=self.password,
             socket_timeout=3)
 
+    @property
+    def lang(self):
+        return self.language
+
     def random_page(self):
         rkey = self.instance.randomkey()
         while not rkey.startswith(

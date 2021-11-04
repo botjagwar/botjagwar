@@ -8,12 +8,12 @@ from argparse import ArgumentParser
 import pywikibot as pwbot
 from aiohttp import web
 from aiohttp.web import Response
-from pywikibot import Site, Page
 
 from api import entryprocessor
 from api.decorator import threaded
 from api.model.word import Translation as TranslationModel
 from api.translation_v2.core import Translation
+from redis_wikicache import RedisSite as Site, RedisPage as Page
 
 # GLOBAL VARS
 verbose = False

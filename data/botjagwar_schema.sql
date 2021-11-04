@@ -137,6 +137,14 @@ CREATE TABLE public.definitions (
     definition_language character varying(6)
 );
 
+CREATE TABLE public.template_translations (
+    source_template character varying(256),
+    target_template character varying(256),
+    source_language character varying(7),
+    target_language character varying(7)
+);
+
+alter table template_translations add unique (source_template, source_language, target_template, target_language);
 
 ALTER TABLE public.definitions OWNER TO postgres;
 
