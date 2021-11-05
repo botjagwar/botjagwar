@@ -4,17 +4,18 @@ from logging import getLogger
 from api.parsers import templates_parser, TEMPLATE_TO_OBJECT
 from api.parsers.functions.postprocessors import POST_PROCESSORS
 from api.parsers.inflection_template import ParserNotFoundError
+from api.servicemanager.pgrest import JsonDictionary
 from .utils import MAX_DEPTH
 from .utils import regexesrep, \
     _delink, \
-    _look_up_dictionary, \
-    _look_up_word, \
     form_of_part_of_speech_mapper
 from ..exceptions import UnhandledTypeError
 from ..types import TranslatedDefinition, \
     UntranslatedDefinition
 
 log = getLogger(__file__)
+
+json_dictionary = JsonDictionary()
 
 
 def _translate_using_bridge_language(
@@ -31,7 +32,7 @@ def _translate_using_bridge_language(
     log.debug(
         f'(bridge) {definition_line} ({part_of_speech}) [{source_language} -> {target_language}]',
     )
-    data = _look_up_dictionary(
+    data = json_dictionary.look_up_dictionary(
         source_language,
         part_of_speech,
         _delink(definition_line))
@@ -139,7 +140,7 @@ def translate_using_postgrest_json_dictionary(
         back_check_pos=False, **kw)\
         -> [UntranslatedDefinition, TranslatedDefinition]:
 
-    data = _look_up_dictionary(
+    data = json_dictionary.look_up_dictionary(
         source_language,
         part_of_speech,
         _delink(definition_line))
@@ -168,7 +169,7 @@ def translate_using_postgrest_json_dictionary(
         if back_check_pos:
             checked_translations = []
             for translation in translations:
-                data = _look_up_word(
+                data = json_dictionary.look_up_word(
                     target_language, part_of_speech, translation)
                 if data:
                     checked_translations.append(translation)
