@@ -46,15 +46,7 @@ class DynamicBackend(Backend):
 class PostgrestBackend(object):
     backend = StaticBackend()
 
-
-class PostgrestTemplateTranslationHelper(PostgrestBackend):
-    """
-    Controller to fetch already-defined template name mappings
-    from the Postgres database through PostgREST.
-    """
-    backend = StaticBackend()
-
-    def __init__(self, use_postgrest):
+    def __init__(self, use_postgrest: [bool, str] = 'automatic'):
         """
         Translate templates
         :param use_postgrest: True or False to fetch on template_translations table.
@@ -68,6 +60,13 @@ class PostgrestTemplateTranslationHelper(PostgrestBackend):
         else:
             assert isinstance(use_postgrest, bool)
             self.online = use_postgrest
+
+
+class PostgrestTemplateTranslationHelper(PostgrestBackend):
+    """
+    Controller to fetch already-defined template name mappings
+    from the Postgres database through PostgREST.
+    """
 
     def get_mapped_template_in_database(self, title, target_language='mg'):
         if self.online:
@@ -108,13 +107,20 @@ class PostgrestTemplateTranslationHelper(PostgrestBackend):
 
 
 class JsonDictionary(PostgrestBackend):
+    def __init__(self, use_postgrest: [bool, str] = 'automatic', use_materialised_view: [bool] = True):
+        super(JsonDictionary, self).__init__(use_postgrest)
+        if use_materialised_view:
+            self.endpoint_name = '/json_dictionary'
+        else:
+            self.endpoint_name = '/vw_json_dictionary'
+
     def look_up_dictionary(self, w_language, w_part_of_speech, w_word):
         params = {
             'language': 'eq.' + w_language,
             'part_of_speech': 'eq.' + w_part_of_speech,
             'word': 'eq.' + w_word
         }
-        resp = requests.get(self.backend.backend + '/json_dictionary', params=params)
+        resp = requests.get(self.backend.backend + self.endpoint_name, params=params)
         data = resp.json()
         return data
 
