@@ -55,7 +55,7 @@ class ReferencesImporter(SubsectionImporter):
         '<references',  # References defined elsewhere
         '[[category:',  # Category section caught
         '==',  # Section caught
-        '{{c|'  # Categorisation templates
+        '{{c|',  # Categorisation templates
         '{{comcatlite|'  # Commons category
     ]
 
