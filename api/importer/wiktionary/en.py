@@ -51,6 +51,23 @@ class ReferencesImporter(SubsectionImporter):
     level = 3
     data_type = 'reference'
     section_name = 'References'
+    filter_list = [
+        '<references',  # References defined elsewhere
+        '[[category:',  # Category section caught
+        '==',  # Section caught
+        '{{c|'  # Categorisation templates
+        '{{comcatlite|'  # Commons category
+    ]
+
+    def has_filtered_element(self, ref):
+        if ref.startswith('|'):
+            return True
+
+        for element in self.filter_list:
+            if element in ref.lower():
+                return True
+
+        return False
 
     def get_data(self, template_title, wikipage: str, language: str):
         refs = super(
@@ -65,12 +82,13 @@ class ReferencesImporter(SubsectionImporter):
             if ref_line == '':
                 continue
 
-            if ref_line.startswith('* '):
-                refs_to_return.append(ref_line.lstrip('* '))
-            else:
-                refs_to_return.append(ref_line)
+            if not self.has_filtered_element(ref_line):
+                if ref_line.startswith('* '):
+                    refs_to_return.append(ref_line.lstrip('* '))
+                else:
+                    refs_to_return.append(ref_line)
 
-        return [r for r in refs_to_return if r.strip() != '<references/>']
+        return refs_to_return
 
 
 class FurtherReadingImporter(ReferencesImporter):

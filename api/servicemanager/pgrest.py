@@ -41,7 +41,11 @@ class DynamicBackend(Backend):
         return bkd
 
 
-class PostgrestTemplateTranslationHelper(object):
+class PostgrestBackend(object):
+    backend = StaticBackend()
+
+
+class PostgrestTemplateTranslationHelper(PostgrestBackend):
     """
     Controller to fetch already-defined template name mappings
     from the Postgres database through PostgREST.
@@ -99,3 +103,17 @@ class PostgrestTemplateTranslationHelper(object):
             raise BackendError(f'Unexpected error: HTTP {response.status_code}; ' + response.text)
 
         return None
+
+
+class JsonDictionary(PostgrestBackend):
+    @staticmethod
+    def get_word(self, word):
+        pass
+
+    @staticmethod
+    def get_definition(self):
+        pass
+
+    @staticmethod
+    def get_additional_data(self):
+        pass
