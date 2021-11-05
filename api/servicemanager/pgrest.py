@@ -1,9 +1,11 @@
+from logging import getLogger
 from random import randint
 
 import requests
 
 from api.config import BotjagwarConfig
 
+log = getLogger('pgrest')
 config = BotjagwarConfig()
 
 
@@ -106,14 +108,23 @@ class PostgrestTemplateTranslationHelper(PostgrestBackend):
 
 
 class JsonDictionary(PostgrestBackend):
-    @staticmethod
-    def get_word(self, word):
-        pass
+    def look_up_dictionary(self, w_language, w_part_of_speech, w_word):
+        params = {
+            'language': 'eq.' + w_language,
+            'part_of_speech': 'eq.' + w_part_of_speech,
+            'word': 'eq.' + w_word
+        }
+        resp = requests.get(self.backend.backend + '/json_dictionary', params=params)
+        data = resp.json()
+        return data
 
-    @staticmethod
-    def get_definition(self):
-        pass
-
-    @staticmethod
-    def get_additional_data(self):
-        pass
+    def look_up_word(self, language, part_of_speech, word):
+        params = {
+            'language': 'eq.' + language,
+            'part_of_speech': 'eq.' + part_of_speech,
+            'word': 'eq.' + word
+        }
+        log.debug(params)
+        resp = requests.get(self.backend.backend + '/word', params=params)
+        data = resp.json()
+        return data
