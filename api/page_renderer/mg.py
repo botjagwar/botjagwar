@@ -161,7 +161,7 @@ class MGWikiPageRenderer(PageRenderer):
                 if isinstance(references, list):
                     if len(references) < 2:
                         for ref in getattr(info, attr_name):
-                            s += "* " + ref
+                            s += "\n* " + ref
                     else:
                         s += "\n" + references[0]
                 break
