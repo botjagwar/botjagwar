@@ -4,12 +4,12 @@ from logging import getLogger
 from api.parsers import templates_parser, TEMPLATE_TO_OBJECT
 from api.parsers.functions.postprocessors import POST_PROCESSORS
 from api.parsers.inflection_template import ParserNotFoundError
-from api.servicemanager.pgrest import JsonDictionary
+from api.servicemanager.pgrest import JsonDictionary, ConvergentTranslations
 from .utils import MAX_DEPTH
 from .utils import regexesrep, \
     _delink, \
     form_of_part_of_speech_mapper
-from ..exceptions import UnhandledTypeError
+from ..exceptions import UnhandledTypeError, UnsupportedLanguageError
 from ..types import TranslatedDefinition, \
     UntranslatedDefinition
 
@@ -193,14 +193,18 @@ def translate_using_convergent_definition(
         **kw) -> [
             UntranslatedDefinition,
         TranslatedDefinition]:
-    translations = _translate_using_bridge_language(
-        part_of_speech, definition_line, source_language, target_language, **kw
-    )
-    ret_translations = []
-    for translation, languages in translations.items():
-        if len(languages) > 1:
-            ret_translations.append(translation)
+    convergent_translations = ConvergentTranslations()
+    if source_language == 'en':
+        translations = convergent_translations.get_convergent_translation(
+            target_language, en_definition=definition_line)
+    elif source_language == 'fr':
+        translations = convergent_translations.get_convergent_translation(
+            target_language, fr_definition=definition_line)
+    else:
+        raise UnsupportedLanguageError(f"Source language '{source_language}' "
+                                       f"cannot be used for convergent translations")
 
+    ret_translations = [t['suggested_definition'] for t in translations]
     if ret_translations:
         k = ', '.join(sorted(list(set(ret_translations))))
         return TranslatedDefinition(k)

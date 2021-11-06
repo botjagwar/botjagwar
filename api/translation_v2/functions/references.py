@@ -1,8 +1,8 @@
-from api.servicemanager.pgrest import PostgrestTemplateTranslationHelper
+from api.servicemanager.pgrest import TemplateTranslation
 
 
 def translate_reference_templates(ref, source='en', target='mg', use_postgrest='automatic'):
-    postgrest = PostgrestTemplateTranslationHelper(use_postgrest)
+    postgrest = TemplateTranslation(use_postgrest)
 
     if '|' in ref:
         title = ref[2:ref.find('|', 3)]

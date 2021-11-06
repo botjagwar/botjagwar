@@ -62,7 +62,7 @@ class PostgrestBackend(object):
             self.online = use_postgrest
 
 
-class PostgrestTemplateTranslationHelper(PostgrestBackend):
+class TemplateTranslation(PostgrestBackend):
     """
     Controller to fetch already-defined template name mappings
     from the Postgres database through PostgREST.
@@ -79,17 +79,16 @@ class PostgrestTemplateTranslationHelper(PostgrestBackend):
 
     def postgrest_get_mapped_template_in_database(self, title, target_language='mg'):
         response = requests.get(self.backend.backend + '/template_translations', params={
-            'source_template': title,
-            'target_language': target_language
+            'source_template': 'eq.' + title,
+            'target_language': 'eq.' + target_language
         })
         data = response.json()
         if response.status_code == 200: # HTTP OK
             if 'target_template' in data:
                 return data['target_template']
-
-        if response.status_code == 404: # HTTP Not found
+        elif response.status_code == 404: # HTTP Not found
             return None
-        if response.status_code == 500: # HTTP server error:
+        else:  # other HTTP error:
             raise BackendError(f'Unexpected error: HTTP {response.status_code}; ' + response.text)
 
     def postgrest_add_translated_title(self, title, translated_title, source_language='en', target_language='mg'):
@@ -134,3 +133,32 @@ class JsonDictionary(PostgrestBackend):
         resp = requests.get(self.backend.backend + '/word', params=params)
         data = resp.json()
         return data
+
+
+class ConvergentTranslations(PostgrestBackend):
+    endpoint = '/convergent_translations'
+
+    def get_convergent_translation(self, target_language, en_definition=None, fr_definition=None,
+                                  suggested_definition=None, part_of_speech=None):
+        params = {
+            'language': 'eq.' + target_language
+        }
+        if part_of_speech is not None:
+            params['part_of_speech'] = 'eq.' + part_of_speech
+        if en_definition is not None:
+            params['en_definition'] = 'eq.' + en_definition
+        if fr_definition is not None:
+            params['fr_definition'] = 'eq.' + fr_definition
+        if suggested_definition is not None:
+            params['suggested_definition'] = 'eq.' + suggested_definition
+        if len(params) < 2:
+            raise BackendError("Expected at least one of 'en_definition', 'fr_definition' or 'suggested_definition'")
+
+        response = requests.get(self.backend.backend + self.endpoint, params=params)
+        data = response.json()
+        if response.status_code == 200:  # HTTP OK
+            return data
+        elif response.status_code == 404:  # HTTP Not found
+            return None
+        else:  # other HTTP error:
+            raise BackendError(f'Unexpected error: HTTP {response.status_code}; ' + response.text)
