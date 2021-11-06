@@ -157,8 +157,12 @@ class MGWikiPageRenderer(PageRenderer):
             if hasattr(info, attr_name):
                 if '{{-tsiahy-}}' not in s:
                     s += '\n\n{{-tsiahy-}}'
-                if isinstance(getattr(info, attr_name), list):
-                    for ref in getattr(info, attr_name):
-                        s += "\n" + ref
+                references = getattr(info, attr_name)
+                if isinstance(references, list):
+                    if len(references) < 2:
+                        for ref in getattr(info, attr_name):
+                            s += "* " + ref
+                    else:
+                        s += "\n" + references[0]
                 break
         return s

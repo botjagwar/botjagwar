@@ -18,11 +18,12 @@ def translate_reference_templates(ref, source='en', target='mg', use_postgrest='
         if 'R:' in title[:3]:
             translated_title = title[:3].replace('R:', 'Tsiahy:') + title[3:]
 
-    if title != translated_title:
+    if title != translated_title and translated_title is not None:
         postgrest.add_translated_title(title, translated_title, source_language=source, target_language=target)
-
-    translated_reference = ref.replace(title, translated_title)
-    return translated_reference
+        translated_reference = ref.replace(title, translated_title)
+        return translated_reference
+    else:
+        return title
 
 
 def translate_references(references: list, source='en', target='mg', use_postgrest: [bool, str] = 'automatic') -> list:

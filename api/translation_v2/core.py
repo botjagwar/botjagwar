@@ -231,8 +231,6 @@ class Translation:
                         if isinstance(definitions, UntranslatedDefinition):
                             continue
                         elif isinstance(definitions, TranslatedDefinition):
-                            self.create_lemma_if_not_exists(wiktionary_processor, definitions, entry)
-
                             for d in definitions.split(','):
                                 translated_definition.append(d.strip())
                                 if d in out_translation_methods:
