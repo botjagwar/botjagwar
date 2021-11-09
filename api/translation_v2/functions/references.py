@@ -44,5 +44,7 @@ def translate_references(references: list, source='en', target='mg', use_postgre
 
         if translated_reference:
             translated_references.append(translated_reference)
+        else:
+            translated_references.append(ref)
 
     return translated_references

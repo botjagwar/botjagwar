@@ -159,10 +159,10 @@ class MGWikiPageRenderer(PageRenderer):
                     s += '\n\n{{-tsiahy-}}'
                 references = getattr(info, attr_name)
                 if isinstance(references, list):
-                    if len(references) < 2:
+                    if len(references) > 1:
                         for ref in getattr(info, attr_name):
                             s += "\n* " + ref
-                    else:
+                    elif len(references) == 1:
                         s += "\n" + references[0]
                 break
         return s

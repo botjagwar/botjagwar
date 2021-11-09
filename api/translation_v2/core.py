@@ -59,11 +59,13 @@ class Translation:
             self.output.db(info)
             self.output.add_translation_method(info)
 
-    def publish_translated_references(self):
+    def publish_translated_references(self, source_wiki='en', target_wiki='mg'):
         for original_reference, translated_reference in self.reference_template_queue:
-            self.create_or_rename_template_on_target_wiki(original_reference, translated_reference)
+            self.create_or_rename_template_on_target_wiki(
+                source_wiki, original_reference, target_wiki, translated_reference
+            )
 
-        self.reference_template_queue = []
+        self.reference_template_queue = set()
 
     @staticmethod
     def add_wiktionary_credit(
@@ -166,10 +168,10 @@ class Translation:
                             summary = 'nanitatra'
                 else:
                     if len(content) > 140:
-                        summary = "Pejy voaforona amin'ny « " + \
+                        summary = "Pejy noforonina tamin'ny « " + \
                             content[:137] + '... »'
                     else:
-                        summary = "Pejy voaforona amin'ny « " + content + ' »'
+                        summary = "Pejy noforonina tamin'ny « " + content + ' »'
             else:
                 summary = self.generate_summary(entries)
 
@@ -193,9 +195,27 @@ class Translation:
                 if page.exists():
                     self.process_wiktionary_wiki_page(page)
 
-    def create_or_rename_template_on_target_wiki(self, source_name, target_name):
-        print("create_or_rename_template_on_target_wiki")
-        pass
+    def create_or_rename_template_on_target_wiki(self, source_language, source_name, target_language, target_name):
+        print("create_or_rename_template_on_target_wiki", source_name, target_name)
+        source_wiki = Site(source_language, 'wiktionary')
+        target_wiki = Site(target_language, 'wiktionary')
+        source_page = Page(source_wiki, 'Template:' + source_name.replace('{{', '').replace('}}', ''))
+        redirect_target_page = Page(target_wiki, 'Template:' + source_name.replace('{{', '').replace('}}', ''))
+        target_page = Page(target_wiki, 'Endrika:' + target_name.replace('{{', '').replace('}}', ''))
+        if source_page.exists() and not source_page.isRedirectPage():
+            content = source_page.get()
+            if not target_page.exists():
+                target_page.put(
+                    content,
+                    "Pejy noforonina tamin'ny « " + content[:147] + '... »'
+                    if len(content) > 149
+                    else "Pejy noforonina tamin'ny « " + content + ' »'
+                )
+            else:
+                log.info(f"Template {source_page.title()} already exists at {target_wiki.wiki} wiki.")
+
+            if not redirect_target_page.exists():
+                redirect_target_page.set_redirect_target(target_page)
 
     def translate_wiktionary_page(
             self,
@@ -302,6 +322,7 @@ class Translation:
                 log.debug('out_entries>' + str(out_entries))
                 self.publish_to_wiktionary(wiki_page.title(), out_entries)
                 self._save_translation_from_page(out_entries)
+                self.publish_translated_references(wiktionary_processor.language, self.working_wiki_language)
                 return len(out_entries)
             else:
                 return 0

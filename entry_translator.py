@@ -162,8 +162,17 @@ async def get_wiktionary_processed_page(request) -> Response:
     page = Page(Site(language, 'wiktionary'), pagename)
     wiktionary_processor.process(page)
 
-    for entry in wiktionary_processor.getall(fetch_additional_data=True):
+    for entry in wiktionary_processor.getall(
+        fetch_additional_data=True,
+        cleanup_definitions=True,
+        advanced=True
+    ):
         translation_list = []
+        definitions = []
+        for d in entry.definitions:
+            definitions.append(wiktionary_processor.advanced_extract_definition(entry.part_of_speech, d))
+
+        entry.definitions = definitions
         section = entry.to_dict()
 
         for translation in wiktionary_processor.retrieve_translations():

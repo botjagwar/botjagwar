@@ -141,7 +141,7 @@ class ConvergentTranslations(PostgrestBackend):
     def get_convergent_translation(self, target_language, en_definition=None, fr_definition=None,
                                   suggested_definition=None, part_of_speech=None):
         params = {
-            'language': 'eq.' + target_language
+            # 'language': 'eq.' + target_language
         }
         if part_of_speech is not None:
             params['part_of_speech'] = 'eq.' + part_of_speech

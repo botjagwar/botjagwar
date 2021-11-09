@@ -63,6 +63,8 @@ class ENWiktionaryProcessor(WiktionaryProcessor):
         self.regexesrep = [
             (r'\{\{l\|en\|(.*)\}\}', '\\1'),
             (r'\{\{vern\|(.*)\}\}', '\\1'),
+            (r'\{\{lb\|(.*)|(.*)\}\}', ''),
+            (r'\{\{gloss\|(.*)\}\}', '\\1'),
             (r"\[\[(.*)#(.*)\|?[.*]?\]?\]?", "\\1"),
             (r"\{\{(.*)\}\}", ""),
             (r'\[\[(.*)\|(.*)\]\]', '\\1'),
@@ -137,6 +139,7 @@ class ENWiktionaryProcessor(WiktionaryProcessor):
             return definition_line
 
         # print(definition_line, new_definition_line)
+        print(new_definition_line)
         return new_definition_line
 
     def getall(
@@ -182,7 +185,9 @@ class ENWiktionaryProcessor(WiktionaryProcessor):
                         defn_line,
                         cleanup_definition=cleanup_definitions,
                         translate_definitions_to_malagasy=translate_definitions_to_malagasy,
-                        human_readable_form_of_definition=human_readable_form_of_definition)
+                        human_readable_form_of_definition=human_readable_form_of_definition,
+                        advanced=kw['advanced'] if 'advanced' in kw else False
+                    )
                     if last_part_of_speech in definitions:
                         definitions[last_part_of_speech].append(definition)
                     else:
@@ -229,10 +234,16 @@ class ENWiktionaryProcessor(WiktionaryProcessor):
         definition = re.sub('\\[\\[([\\w]+)\\]\\]', '\\1', definition)
         definition = re.sub('[Tt]o ', '', definition)
         definition = re.sub('[Aa] ', '', definition)
+        definition = re.sub('[Of], ', '', definition)
+        definition = re.sub('[Oo]f or relating ', '', definition)
+        definition = definition.replace(', or ', ' or ')
+        definition = definition.replace(', and ', ' and ')
+        # for separator in ';,':
+        #     definition = definition.replace(separator + ' ', '$')
         if definition.endswith('.'):
             definition = definition[:-1]
 
-        return [k.strip() for k in definition.split(', ')]
+        return [definition]
 
     def retrieve_translations(self):
         regex = re.compile('\\{\\{t[\\+]?\\|([A-Za-z]{2,3})\\|(.*?)\\}\\}')

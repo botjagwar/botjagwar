@@ -190,16 +190,14 @@ def translate_using_convergent_definition(
         definition_line,
         source_language,
         target_language,
-        **kw) -> [
-            UntranslatedDefinition,
-        TranslatedDefinition]:
+        **kw) -> [UntranslatedDefinition, TranslatedDefinition]:
     convergent_translations = ConvergentTranslations()
     if source_language == 'en':
         translations = convergent_translations.get_convergent_translation(
-            target_language, en_definition=definition_line)
+            target_language, part_of_speech=part_of_speech, en_definition=definition_line)
     elif source_language == 'fr':
         translations = convergent_translations.get_convergent_translation(
-            target_language, fr_definition=definition_line)
+            target_language, part_of_speech=part_of_speech, fr_definition=definition_line)
     else:
         raise UnsupportedLanguageError(f"Source language '{source_language}' "
                                        f"cannot be used for convergent translations")
