@@ -2,8 +2,12 @@ from api.servicemanager.pgrest import TemplateTranslation
 
 
 def translate_reference_templates(ref, source='en', target='mg', use_postgrest='automatic'):
-    postgrest = TemplateTranslation(use_postgrest)
+    for citation in ['cite-web', 'cite-book']:
+        if citation in ref:
+            # Do not return any translation for the two references above
+            return ''
 
+    postgrest = TemplateTranslation(use_postgrest)
     if '|' in ref:
         title = ref[2:ref.find('|', 3)]
     else:
@@ -13,7 +17,6 @@ def translate_reference_templates(ref, source='en', target='mg', use_postgrest='
             title = ref[2:] + '}}'
 
     translated_title = postgrest.get_mapped_template_in_database(title, target_language=target)
-
     if translated_title is None:
         if 'R:' in title[:3]:
             translated_title = title[:3].replace('R:', 'Tsiahy:') + title[3:]

@@ -200,7 +200,7 @@ class Translation:
         source_wiki = Site(source_language, 'wiktionary')
         target_wiki = Site(target_language, 'wiktionary')
         source_page = Page(source_wiki, 'Template:' + source_name.replace('{{', '').replace('}}', ''))
-        redirect_target_page = Page(target_wiki, 'Template:' + source_name.replace('{{', '').replace('}}', ''))
+        redirect_target_page = Page(target_wiki, 'Endrika:' + source_name.replace('{{', '').replace('}}', ''))
         target_page = Page(target_wiki, 'Endrika:' + target_name.replace('{{', '').replace('}}', ''))
         if source_page.exists() and not source_page.isRedirectPage():
             content = source_page.get()
@@ -215,7 +215,7 @@ class Translation:
                 log.info(f"Template {source_page.title()} already exists at {target_wiki.wiki} wiki.")
 
             if not redirect_target_page.exists():
-                redirect_target_page.set_redirect_target(target_page)
+                redirect_target_page.put(f'#FIHODINANA [[{target_page.title()}]]', 'mametra-pihodinana')
 
     def translate_wiktionary_page(
             self,
@@ -251,6 +251,11 @@ class Translation:
                         if isinstance(definitions, UntranslatedDefinition):
                             continue
                         elif isinstance(definitions, TranslatedDefinition):
+                            # Change POS to something more specific for form-of definitions
+                            if t_method.__name__ == 'translate_form_of_templates':
+                                if not entry.part_of_speech.startswith('e-'):
+                                    entry.part_of_speech = 'e-' + entry.part_of_speech
+
                             for d in definitions.split(','):
                                 translated_definition.append(d.strip())
                                 if d in out_translation_methods:
