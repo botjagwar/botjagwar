@@ -18,6 +18,7 @@ from .functions import translate_form_of_templates
 from .functions import translate_using_convergent_definition
 from .functions.pronunciation import translate_pronunciation
 from .functions.references import translate_references
+from .functions.utils import form_of_part_of_speech_mapper
 from .types import \
     UntranslatedDefinition, \
     TranslatedDefinition
@@ -253,8 +254,8 @@ class Translation:
                         elif isinstance(definitions, TranslatedDefinition):
                             # Change POS to something more specific for form-of definitions
                             if t_method.__name__ == 'translate_form_of_templates':
-                                if not entry.part_of_speech.startswith('e-'):
-                                    entry.part_of_speech = 'e-' + entry.part_of_speech
+                                if entry.part_of_speech in form_of_part_of_speech_mapper.keys():
+                                    entry.part_of_speech = form_of_part_of_speech_mapper[entry.part_of_speech]
 
                             for d in definitions.split(','):
                                 translated_definition.append(d.strip())
