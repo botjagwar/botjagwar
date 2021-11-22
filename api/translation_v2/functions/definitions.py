@@ -11,7 +11,7 @@ from .utils import regexesrep, \
     form_of_part_of_speech_mapper
 from ..exceptions import UnhandledTypeError, UnsupportedLanguageError
 from ..types import TranslatedDefinition, \
-    UntranslatedDefinition
+    UntranslatedDefinition, FormOfTranslaton, ConvergentTranslation
 
 log = getLogger(__file__)
 
@@ -119,8 +119,7 @@ def translate_form_of_templates(part_of_speech,
                 if 'language' in kw:
                     if kw['language'] in POST_PROCESSORS:
                         elements = POST_PROCESSORS[kw['language']](elements)
-                new_definition_line = TranslatedDefinition(
-                    elements.to_definition(target_language))
+                new_definition_line = FormOfTranslaton(elements.to_definition(target_language))
                 if hasattr(elements, 'lemma'):
                     setattr(new_definition_line, 'lemma', elements.lemma)
                 if part_of_speech in form_of_part_of_speech_mapper:
@@ -190,7 +189,7 @@ def translate_using_convergent_definition(
         definition_line,
         source_language,
         target_language,
-        **kw) -> [UntranslatedDefinition, TranslatedDefinition]:
+        **kw) -> [UntranslatedDefinition, ConvergentTranslation]:
     convergent_translations = ConvergentTranslations()
     if source_language == 'en':
         translations = convergent_translations.get_convergent_translation(
@@ -205,7 +204,7 @@ def translate_using_convergent_definition(
     ret_translations = [t['suggested_definition'] for t in translations]
     if ret_translations:
         k = ', '.join(sorted(list(set(ret_translations))))
-        return TranslatedDefinition(k)
+        return ConvergentTranslation(k)
     else:
         return UntranslatedDefinition(definition_line)
 

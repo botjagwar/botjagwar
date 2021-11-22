@@ -139,7 +139,6 @@ class ENWiktionaryProcessor(WiktionaryProcessor):
             return definition_line
 
         # print(definition_line, new_definition_line)
-        print(new_definition_line)
         return new_definition_line
 
     def getall(

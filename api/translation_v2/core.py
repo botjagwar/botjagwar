@@ -21,7 +21,8 @@ from .functions.references import translate_references
 from .functions.utils import form_of_part_of_speech_mapper
 from .types import \
     UntranslatedDefinition, \
-    TranslatedDefinition
+    TranslatedDefinition, \
+    FormOfTranslaton
 
 log = logging.getLogger(__name__)
 URL_HEAD = DictionaryServiceManager().get_url_head()
@@ -251,9 +252,9 @@ class Translation:
                         )
                         if isinstance(definitions, UntranslatedDefinition):
                             continue
-                        elif isinstance(definitions, TranslatedDefinition):
+                        elif isinstance(definitions, TranslatedDefinition) or isinstance(definitions, FormOfTranslaton):
                             # Change POS to something more specific for form-of definitions
-                            if t_method.__name__ == 'translate_form_of_templates':
+                            if isinstance(definitions, FormOfTranslaton):
                                 if entry.part_of_speech in form_of_part_of_speech_mapper.keys():
                                     entry.part_of_speech = form_of_part_of_speech_mapper[entry.part_of_speech]
 

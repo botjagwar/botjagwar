@@ -33,4 +33,8 @@ class ConvergentTranslation(TranslatedDefinition):
         return len(self.languages) > 1
 
 
-__all__ = [UntranslatedDefinition, TranslatedDefinition]
+class FormOfTranslaton(TranslatedDefinition):
+    pass
+
+
+__all__ = [UntranslatedDefinition, TranslatedDefinition, ConvergentTranslation, FormOfTranslaton]
