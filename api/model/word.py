@@ -99,11 +99,19 @@ class Entry(TypeCheckedObject):
     def __repr__(self):
         # return str(self.__dict__)
         props = ''
+        additional_data = ''
         for d in self.properties_types:
             if hasattr(self, d):
                 props += d + '=' + str(getattr(self, d)) + '; '
 
-        return "Entry{%s}" % (props)
+        for k, v in self.additional_data_types.items():
+            if hasattr(self, k):
+                additional_data += str(k) + '=' + str(getattr(self, k))
+
+        if additional_data:
+            return "Entry{%s | additional_data %s}" % (props, additional_data)
+        else:
+            return "Entry{%s}" % (props)
 
 
 class Translation(TypeCheckedObject):

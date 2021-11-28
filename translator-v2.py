@@ -1,9 +1,12 @@
+from csv import writer
+
 import pywikibot
 import redis
 
+from api.entryprocessor import WiktionaryProcessorFactory
 from api.translation_v2.core import Translation
 from page_lister import get_pages_from_category
-from redis_wikicache import RedisPage, RedisSite
+from redis_wikicache import RedisSite
 
 if __name__ == '__main__':
     # print(translate_using_postgrest_json_dictionary('mat', '[[mine|Mine]]', 'en', 'mg'))
@@ -24,17 +27,27 @@ if __name__ == '__main__':
     #     entries += t.process_wiktionary_wiki_page(RedisPage(RedisSite('en', 'wiktionary'), v))
     # for v in '平均‎'.split(','):
     #     entries += t.process_wiktionary_wiki_page(RedisPage(RedisSite('en', 'wiktionary'), v, offline=False))
-    for wp in get_pages_from_category('en', 'Chinese verbs'):
-        try:
-            t.process_wiktionary_wiki_page(
-                RedisPage(
-                    RedisSite(
-                        'en',
-                        'wiktionary'),
-                    wp.title(),
-                    offline=False))
-        except (pywikibot.Error, redis.exceptions.TimeoutError):
-            pass
+    wiktionary_processor_class = WiktionaryProcessorFactory.create('en')
+    category = 'Arabic verbs'
+    with open(f'user_data/translations/{category}.csv', 'w') as output_file:
+        csv_writer = writer(output_file)
+        for wiki_page in get_pages_from_category('en', category):
+            try:
+                # t.process_wiktionary_wiki_page(RedisPage(RedisSite('en', 'wiktionary'), wp.title(), offline=True))
+                # wiktionary_processor = wiktionary_processor_class()
+                # wiktionary_processor.set_text(wiki_page.get())
+                # wiktionary_processor.set_title(wiki_page.title())
+                # entries = t.translate_wiktionary_page(wiktionary_processor)
+                entries = t.process_wiktionary_wiki_page(wiki_page)
+                # if not entries:
+                #     continue
+            except (pywikibot.Error, redis.exceptions.TimeoutError):
+                continue
+            else:
+                # for entry in entries:
+                #     row = [entry.entry, entry.part_of_speech, '', '', ', '.join(entry.definitions)]
+                #     csv_writer.writerow(row)
+                pass
 
     # for i in range(k):
     #     try:

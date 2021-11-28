@@ -19,6 +19,7 @@ def use_wiktionary(language):
 
 
 class WiktionaryAdditionalDataImporter(AdditionalDataImporter):
+    section_name = None
 
     def fetch_additional_data_for_category(self, language, category_name):
         url = dyn_backend.backend + "/word_with_additional_data"

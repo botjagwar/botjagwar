@@ -16,6 +16,7 @@ from api.servicemanager import DictionaryServiceManager
 from redis_wikicache import RedisPage as Page, RedisSite as Site
 from .functions import translate_form_of_templates
 from .functions import translate_using_convergent_definition
+from .functions import translate_using_postgrest_json_dictionary
 from .functions.pronunciation import translate_pronunciation
 from .functions.references import translate_references
 from .functions.utils import form_of_part_of_speech_mapper
@@ -29,7 +30,7 @@ URL_HEAD = DictionaryServiceManager().get_url_head()
 translation_methods = [
     translate_using_convergent_definition,
     # translate_using_bridge_language,
-    # translate_using_postgrest_json_dictionary,
+    translate_using_postgrest_json_dictionary,
     translate_form_of_templates
 ]
 
@@ -261,14 +262,11 @@ class Translation:
                             for d in definitions.split(','):
                                 translated_definition.append(d.strip())
                                 if d in out_translation_methods:
-                                    out_translation_methods[d].append(
-                                        t_method.__name__)
+                                    out_translation_methods[d].append(t_method.__name__)
                                 else:
-                                    out_translation_methods[d] = [
-                                        t_method.__name__]
+                                    out_translation_methods[d] = [t_method.__name__]
 
-                            translated_definition += [k.strip()
-                                                      for k in definitions.split(',')]
+                            translated_definition += [k.strip() for k in definitions.split(',')]
 
                     translated_from_definition.append(refined_definition_line)
 

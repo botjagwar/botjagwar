@@ -1,6 +1,8 @@
 import re
 
-from api.importer.wiktionary import SubsectionImporter
+from api.importer.wiktionary import \
+    SubsectionImporter, \
+    WiktionaryAdditionalDataImporter
 from api.importer.wiktionary import use_wiktionary
 
 
@@ -180,6 +182,44 @@ class PronunciationImporter(SubsectionImporter):
         return pronunciations
 
 
+class HeadwordImporter(WiktionaryAdditionalDataImporter):
+    data_type = 'headwords'
+    section_name = None
+
+    possible_headword_affixes = [
+        'verb', 'noun', 'adj', 'proper noun', 'det',
+        'phrase', 'num', 'prefix', 'suffix', ''
+    ]
+
+    def get_data(self, template_title: str, wikipage: str, language: str) -> list:
+        template_lines = []
+        for line in wikipage.split('\n'):
+            for headword_affix in self.possible_headword_affixes:
+                if line.startswith('{{' + language + '-' + headword_affix):
+                   template_lines.append(line)
+
+        return list(set(template_lines))
+
+
+class TranscriptionImporter(WiktionaryAdditionalDataImporter):
+    data_type = 'transcription'
+    section_name = None
+
+    def get_data(self, template_title: str, wikipage: str, language: str) -> list:
+        template_lines = []
+        headword_importer = HeadwordImporter()
+        headwords = headword_importer.get_data(template_title, wikipage, language)
+        for headword in headwords:
+            if 'tr=' in headword:
+                begin = headword.find('tr=') + 3
+                end = headword.find('|', begin)
+                if end == -1:
+                    end = headword.find('}}', begin)
+                template_lines.append(headword[begin:end].strip())
+
+        return list(set(template_lines))
+
+
 all_importers = [
     FurtherReadingImporter,
     AlternativeFormsImporter,
@@ -188,4 +228,7 @@ all_importers = [
     PronunciationImporter,
     ReferencesImporter,
     EtymologyImporter,
-    SynonymImporter]
+    SynonymImporter,
+    HeadwordImporter,
+    TranscriptionImporter
+]

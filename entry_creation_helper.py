@@ -305,9 +305,8 @@ class NinjaEntryCreator(object):
 
 if __name__ == '__main__':
     entry_creator = NinjaEntryCreator()
-    import sys
-    entry_creator.run_from_database(sys.argv[1])
+    # entry_creator.run_from_database(sys.argv[1])
     # if len(sys.argv) > 1:
     #     entry_creator.run(sys.argv[1])
     # else:
-    #entry_creator.run_from_csv("user_data/cache_extractor/la_Latin nouns.csv")
+    entry_creator.run_from_csv("user_data/cache_extractor/la_Latin nouns.csv")

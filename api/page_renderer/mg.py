@@ -45,6 +45,11 @@ class MGWikiPageRenderer(PageRenderer):
         # Pronunciation
         s += "'''{{subst:BASEPAGENAME}}''' "
 
+        # transcription (if any)
+        if hasattr(info, 'transcription'):
+            transcriptions = ', '.join(getattr(info, 'transcription'))
+            s += f"({transcriptions})"
+
         return s
 
     def render_etymology(self, info):

@@ -1,15 +1,7 @@
 # coding: utf8
 import re
 
-from api.importer.wiktionary.en import \
-    FurtherReadingImporter, \
-    ReferencesImporter, \
-    DerivedTermsImporter, \
-    AlternativeFormsImporter, \
-    SynonymImporter, \
-    EtymologyImporter, \
-    AntonymImporter, \
-    PronunciationImporter
+from api.importer.wiktionary.en import all_importers
 from api.model.word import Entry
 from api.parsers import TEMPLATE_TO_OBJECT
 from api.parsers import templates_parser
@@ -78,18 +70,8 @@ class ENWiktionaryProcessor(WiktionaryProcessor):
         return self.code[l]
 
     def fetch_additional_data(self, content, language):
-        additional_data_classes = {
-            FurtherReadingImporter,
-            ReferencesImporter,
-            DerivedTermsImporter,
-            AlternativeFormsImporter,
-            SynonymImporter,
-            EtymologyImporter,
-            AntonymImporter,
-            PronunciationImporter
-        }
         additional_data = {}
-        for classe in additional_data_classes:
+        for classe in all_importers:
             instance = classe()
             additional_data[instance.data_type] = instance.get_data(
                 instance.section_name, content, language)
