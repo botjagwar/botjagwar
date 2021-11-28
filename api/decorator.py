@@ -56,19 +56,27 @@ class run_once(object):
         return hash(self.func)
 
 
-def singleton(class_):
-    """
-    Specify that a class is a singleton
-    :param class_:
-    :return:
-    """
-    instances = {}
+def singleton(cls):
+    class SingleClass(cls, object):
+        """ The real singleton. """
+        _instance = None
+        __module__ = cls.__module__
+        __doc__ = cls.__doc__
 
-    def getinstance(*args, **kwargs):
-        if class_ not in instances:
-            instances[class_] = class_(*args, **kwargs)
-        return instances[class_]
-    return getinstance
+        def __new__(cls, *args, **kwargs):
+            if SingleClass._instance is None:
+                SingleClass._instance = super(SingleClass, cls).__new__(cls, *args, **kwargs)
+                SingleClass._instance._sealed = False
+
+            return SingleClass._instance
+
+        def __init__(self):
+            if not getattr(self, '_sealed', False):
+                super(SingleClass, self).__init__()
+                self._sealed = True
+
+    SingleClass.__name__ = cls.__name__
+    return SingleClass
 
 
 def threaded(f):
