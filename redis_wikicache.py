@@ -19,7 +19,10 @@ class RedisSite(object):
             wiki: str,
             host='default',
             port=6379,
-            password='default'):
+            password='default',
+            offline=True
+    ):
+        self.offline = offline
         self.language = language
         self.wiki = wiki
         if host == 'default':
@@ -79,8 +82,13 @@ class RedisSite(object):
 
 
 class RedisPage(object):
-    def __init__(self, site: RedisSite, title: str, offline=True):
-        self.offline = offline
+    def __init__(self, site: RedisSite, title: str, offline='automatic'):
+        if offline == 'automatic':
+            self.offline = site.offline
+        else:
+            assert isinstance(offline, bool)
+            self.offline = offline
+
         self.site = site
         self._title = title
 

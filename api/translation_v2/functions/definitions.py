@@ -15,7 +15,7 @@ from ..types import TranslatedDefinition, \
 
 log = getLogger(__file__)
 
-json_dictionary = JsonDictionary()
+json_dictionary = JsonDictionary(use_materialised_view=False)
 
 
 def _translate_using_bridge_language(

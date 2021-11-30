@@ -37,14 +37,18 @@ translation_methods = [
 already_visited = []
 
 
-class TranslatedPagePushError(Exception):
+class TranslationError(Exception):
+    pass
+
+
+class TranslatedPagePushError(TranslationError):
     pass
 
 
 class Translation:
     working_wiki_language = 'mg'
 
-    def __init__(self):
+    def __init__(self, use_postprocessors: bool = False):
         """
         Translates pages into Malagasy
         """
@@ -53,6 +57,7 @@ class Translation:
         self.loop = asyncio.get_event_loop()
         self.config = BotjagwarConfig()
         self.reference_template_queue = set()
+        self.post_processors = list()
 
     def _save_translation_from_page(self, infos: List[Entry]):
         """
@@ -103,6 +108,26 @@ class Translation:
             lemma,
             offline=False)
         return page.exists()
+
+    def run_postprocessors(self, out_entries):
+        if isinstance(self.post_processors, list):
+            if self.post_processors:
+                for post_processor in self.post_processors:
+                    out_entries = post_processor(out_entries)
+                    # Check post-processor hasn't changed output data format
+                    if not isinstance(out_entries, list):
+                        raise TranslationError(f'Post-processor {post_processor.__name__} must return list')
+
+                    for entry in out_entries:
+                        if not isinstance(entry, Entry):
+                            raise TranslationError(
+                                f'Post-processor {post_processor.__name__} return list elements '
+                                f'must all be of type Entry'
+                            )
+        else:
+            raise TranslationError(f"post processor must be a list, not {self.post_processors.__class__}")
+
+        return out_entries
 
     @staticmethod
     def aggregate_entry_data(
@@ -220,9 +245,7 @@ class Translation:
             if not redirect_target_page.exists():
                 redirect_target_page.put(f'#FIHODINANA [[{target_page.title()}]]', 'mametra-pihodinana')
 
-    def translate_wiktionary_page(
-            self,
-            wiktionary_processor: entryprocessor.WiktionaryProcessor) -> List[Entry]:
+    def translate_wiktionary_page(self, wiktionary_processor: entryprocessor.WiktionaryProcessor) -> List[Entry]:
         """
         Parse Wiktionary page data and translate any content/section that can be translated
         """
@@ -301,6 +324,9 @@ class Translation:
                 out_entries.append(out_entry)
 
         out_entries.sort()
+        # Post-processors takes the list of entries and returns the same.
+        out_entries = self.run_postprocessors(out_entries)
+
         return out_entries
 
     def process_wiktionary_wiki_page(self, wiki_page: [Page, pywikibot.Page]):
