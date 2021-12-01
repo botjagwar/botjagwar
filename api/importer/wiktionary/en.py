@@ -178,6 +178,8 @@ class PronunciationImporter(SubsectionImporter):
         for pron in pronunciations_list:
             if '-IPA' in pron:
                 pronunciations.append(pron)
+            if '-pron' in pron:
+                pronunciations.append(pron)
 
         return pronunciations
 

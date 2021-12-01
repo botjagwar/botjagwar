@@ -1,3 +1,4 @@
+import sys
 from csv import writer
 
 import pywikibot
@@ -5,8 +6,6 @@ import redis
 
 from api.entryprocessor import WiktionaryProcessorFactory
 from api.translation_v2.core import Translation
-from api.translation_v2.functions.postprocessors import \
-    add_xlit_if_no_transcription
 from page_lister import redis_get_pages_from_category as get_pages_from_category
 from redis_wikicache import RedisSite
 
@@ -14,7 +13,7 @@ if __name__ == '__main__':
     postprocessors = [
         # add_language_IPA_if_not_exists('ur'),
         # add_wiktionary_credit('en')
-        add_xlit_if_no_transcription
+        # add_xlit_if_no_transcription
     ]
     t = Translation()
     t.post_processors = postprocessors
@@ -24,7 +23,7 @@ if __name__ == '__main__':
     k = 100
     entries = 0
     wiktionary_processor_class = WiktionaryProcessorFactory.create('en')
-    category = 'Bengali nouns'
+    category = sys.argv[1]
     with open(f'user_data/translations/{category}.csv', 'w') as output_file:
         csv_writer = writer(output_file)
         for wiki_page in get_pages_from_category('en', category):
