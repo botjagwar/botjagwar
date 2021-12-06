@@ -4,7 +4,7 @@ import configparser
 import logging
 import time
 from copy import deepcopy
-from typing import List
+from typing import List, Tuple, Any, Callable
 
 import pywikibot
 from pywikibot import output
@@ -72,11 +72,17 @@ class Translation:
     def post_processors(self):
         return self._post_processors
 
-    def set_postprocessors(self, postprocessors):
+    def set_postprocessors(self, postprocessors: List[Callable]):
         self._post_processors = postprocessors
         self.static_postprocessors = True
 
-    def load_postprocessors(self, language, part_of_speech):
+    def load_postprocessors(self, language, part_of_speech) -> List[Tuple[Any, Tuple]]:
+        """
+        Load preprocessors for the specified language and combination of language:part-of-speech.
+        :param language:
+        :param part_of_speech:
+        :return: list of function names along with their static arguments
+        """
         post_processors = []
         pos_specific_section_name = f'{language}:{part_of_speech}'
         try:

@@ -1,3 +1,10 @@
+"""
+NOTE:
+Postprocessors must return a callable accepting a list of Entry objects
+String arguments are recommended for the function generator to allow it to be
+used in dynamic postprocessor loading though config file.
+"""
+
 from logging import getLogger
 
 
