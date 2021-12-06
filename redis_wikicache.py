@@ -20,7 +20,7 @@ class RedisSite(object):
             host='default',
             port=6379,
             password='default',
-            offline=True
+            offline=False
     ):
         self.offline = offline
         self.language = language
