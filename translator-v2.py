@@ -10,13 +10,8 @@ from page_lister import redis_get_pages_from_category as get_pages_from_category
 from redis_wikicache import RedisSite
 
 if __name__ == '__main__':
-    postprocessors = [
-        # add_language_IPA_if_not_exists('ur'),
-        # add_wiktionary_credit('en')
-        # add_xlit_if_no_transcription
-    ]
-    t = Translation()
-    t.post_processors = postprocessors
+    t = Translation(use_configured_postprocessors=True)
+    # t.post_processors = postprocessors
     site = RedisSite('en', 'wiktionary', offline=False)
     errored = []
     errors = 0

@@ -1,5 +1,6 @@
 # coding: utf8
 import asyncio
+import configparser
 import logging
 import time
 from copy import deepcopy
@@ -14,6 +15,7 @@ from api.model.word import Entry
 from api.output import Output
 from api.servicemanager import DictionaryServiceManager
 from redis_wikicache import RedisPage as Page, RedisSite as Site
+from .functions import postprocessors  # do __NOT__ delete!
 from .functions import translate_form_of_templates
 from .functions import translate_using_convergent_definition
 from .functions.pronunciation import translate_pronunciation
@@ -47,16 +49,57 @@ class TranslatedPagePushError(TranslationError):
 class Translation:
     working_wiki_language = 'mg'
 
-    def __init__(self, use_postprocessors: bool = False):
+    def __init__(self, use_configured_postprocessors: bool = True):
         """
-        Translates pages into Malagasy
+        Translates entries into Malagasy. Other languages might be translated but such has not been
+        attempted as of current. Translations methods are handled with separate functions.
+
+        :param use_configured_postprocessors: Use the configuration file to configure postprocessors.
+        Allows postprocessors to be defines on a per-language basis, or a language + part of speech basis.
         """
         super(self.__class__, self).__init__()
         self.output = Output()
         self.loop = asyncio.get_event_loop()
-        self.config = BotjagwarConfig()
+        self.config = BotjagwarConfig(name='entry_translator/postprocessors.ini')
         self.reference_template_queue = set()
-        self.post_processors = list()
+        if not use_configured_postprocessors:
+            self._post_processors = list()
+            self.static_postprocessors = True
+        else:
+            self.static_postprocessors = False
+
+    @property
+    def post_processors(self):
+        return self._post_processors
+
+    def set_postprocessors(self, postprocessors):
+        self._post_processors = postprocessors
+        self.static_postprocessors = True
+
+    def load_postprocessors(self, language, part_of_speech):
+        post_processors = []
+        pos_specific_section_name = f'{language}:{part_of_speech}'
+        try:
+            language_section_postprocessors = self.config.specific_config_parser.options(language)
+        except configparser.NoSectionError:
+            pass
+        else:
+            for postprocessor_name in language_section_postprocessors:
+                arguments = tuple(self.config.specific_config_parser.get(
+                    language, postprocessor_name).split(','))
+                post_processors.append((postprocessor_name, arguments))
+
+        try:
+            pos_specific_section = self.config.specific_config_parser.options(pos_specific_section_name)
+        except configparser.NoSectionError:
+            pass
+        else:
+            for postprocessor_name in pos_specific_section:
+                arguments = tuple(self.config.specific_config_parser.get(
+                    pos_specific_section_name, postprocessor_name).split(','))
+                post_processors.append((postprocessor_name, arguments))
+
+        return post_processors
 
     def _save_translation_from_page(self, infos: List[Entry]):
         """
@@ -100,33 +143,56 @@ class Translation:
         return summary
 
     def check_if_page_exists(self, lemma):
-        page = Page(
-            Site(
-                self.working_wiki_language,
-                'wiktionary'),
-            lemma,
-            offline=False)
+        page = Page(Site(self.working_wiki_language, 'wiktionary'), lemma, offline=False)
         return page.exists()
 
-    def run_postprocessors(self, out_entries):
-        if isinstance(self.post_processors, list):
-            if self.post_processors:
-                for post_processor in self.post_processors:
-                    out_entries = post_processor(out_entries)
-                    # Check post-processor hasn't changed output data format
-                    if not isinstance(out_entries, list):
-                        raise TranslationError(f'Post-processor {post_processor.__name__} must return list')
+    def run_postprocessors(self, entries):
+        def check_post_processor_output(out_entries):
+            # Check post-processor hasn't changed output data format
+            if not isinstance(out_entries, list):
+                raise TranslationError(f'Post-processors must return list')
+            for entry in out_entries:
+                if not isinstance(entry, Entry):
+                    raise TranslationError(
+                        f'Post-processors return list elements '
+                        f'must all be of type Entry'
+                    )
 
-                    for entry in out_entries:
-                        if not isinstance(entry, Entry):
-                            raise TranslationError(
-                                f'Post-processor {post_processor.__name__} return list elements '
-                                f'must all be of type Entry'
-                            )
+        def run_static_postprocessors(out_entries, post_processors):
+            """
+            Static postprocessor, manually set in-code
+            :param out_entries:
+            :param post_processors:
+            :return:
+            """
+            for post_processor in post_processors:
+                out_entries = post_processor(out_entries)
+            check_post_processor_output(out_entries)
+            return out_entries
+
+        def run_dynamic_postprocessors(entries):
+            """
+            Dunamic postprocessor, set in the configuration file and run
+            :param entries:
+            :return:
+            """
+            out_entries = []
+            for entry in entries:
+                for post_processor_name, arguments in self.load_postprocessors(entry.language, entry.part_of_speech):
+                    function = getattr(postprocessors, post_processor_name)(*arguments)
+                    out_entries = function(entries)
+            return out_entries
+
+        if self.static_postprocessors:
+            if isinstance(self.post_processors, list):
+                if self.post_processors:
+                    entries = run_static_postprocessors(entries, self.post_processors)
+            else:
+                raise TranslationError(f"post processor must be a list, not {self.post_processors.__class__}")
         else:
-            raise TranslationError(f"post processor must be a list, not {self.post_processors.__class__}")
+            entries = run_dynamic_postprocessors(entries)
 
-        return out_entries
+        return entries
 
     @staticmethod
     def aggregate_entry_data(
@@ -223,7 +289,6 @@ class Translation:
                     self.process_wiktionary_wiki_page(page)
 
     def create_or_rename_template_on_target_wiki(self, source_language, source_name, target_language, target_name):
-        print("create_or_rename_template_on_target_wiki", source_name, target_name)
         source_wiki = Site(source_language, 'wiktionary')
         target_wiki = Site(target_language, 'wiktionary')
         source_page = Page(source_wiki, 'Template:' + source_name.replace('{{', '').replace('}}', ''))

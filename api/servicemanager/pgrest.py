@@ -98,7 +98,6 @@ class TemplateTranslation(PostgrestBackend):
             'source_language': source_language,
             'target_language': target_language
         })
-        print(response.text)
         if response.status_code in (400, 500): # HTTP Bad request or HTTP server error:
             raise BackendError(f'Unexpected error: HTTP {response.status_code}; ' + response.text)
 
