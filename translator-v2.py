@@ -22,9 +22,10 @@ if __name__ == '__main__':
     with open(f'user_data/translations/{category}.csv', 'w') as output_file:
         csv_writer = writer(output_file)
         for wiki_page in get_pages_from_category('en', category):
+            print(wiki_page)
             try:
                 entries = t.process_wiktionary_wiki_page(wiki_page)
-            except (pywikibot.Error, redis.exceptions.TimeoutError, Exception):
+            except (pywikibot.Error, redis.exceptions.TimeoutError):
                 continue
 
     print('process error rate:', errors * 100. / (k))

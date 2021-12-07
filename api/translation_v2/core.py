@@ -117,9 +117,11 @@ class Translation:
 
     def publish_translated_references(self, source_wiki='en', target_wiki='mg'):
         for original_reference, translated_reference in self.reference_template_queue:
-            self.create_or_rename_template_on_target_wiki(
-                source_wiki, original_reference, target_wiki, translated_reference
-            )
+            # Check if it is a template reference, or a plain-text one
+            if translated_reference.startswith('{{') or original_reference.startswith('{{'):
+                self.create_or_rename_template_on_target_wiki(
+                    source_wiki, original_reference, target_wiki, translated_reference
+                )
 
         self.reference_template_queue = set()
 
@@ -184,9 +186,17 @@ class Translation:
             """
             out_entries = []
             for entry in entries:
-                for post_processor_name, arguments in self.load_postprocessors(entry.language, entry.part_of_speech):
-                    function = getattr(postprocessors, post_processor_name)(*arguments)
-                    out_entries = function(entries)
+                loaded_postprocessors = self.load_postprocessors(entry.language, entry.part_of_speech)
+                if loaded_postprocessors:
+                    entry_to_process = [entry]
+                    for post_processor_name, arguments in loaded_postprocessors:
+                        function = getattr(postprocessors, post_processor_name)(*arguments)
+                        entry_to_process = function(entry_to_process)
+
+                    out_entries += entry_to_process
+                else:
+                    out_entries += [entry]
+
             return out_entries
 
         if self.static_postprocessors:
