@@ -30,6 +30,7 @@ class MGWikiPageRenderer(PageRenderer):
         s += self.render_synonyms(info)
         s += self.render_antonyms(info)
         s += self.render_related_terms(info)
+        s += self.render_further_reading(info)
         s += self.render_references(info)
 
         return s + '\n'
@@ -156,18 +157,26 @@ class MGWikiPageRenderer(PageRenderer):
                     s += f"\n* [[{d}]]"
         return s
 
+    def render_section(self, info, section_header, attr_name):
+        s = ""
+        if hasattr(info, attr_name):
+            if section_header not in s:
+                s += '\n\n' + section_header
+            section_data = getattr(info, attr_name)
+            if isinstance(section_data, list):
+                if len(section_data) > 1:
+                    for ref in getattr(info, attr_name):
+                        s += "\n* " + ref
+                elif len(section_data) == 1:
+                    s += "\n" + section_data[0]
+
+        return s
+
+    def render_further_reading(self, info):
+        return self.render_section(info, '{{-famakiana fanampiny-}}', 'further_reading')
+
     def render_references(self, info) -> str:
         s = ''
-        for attr_name in ['references', 'reference', 'further_reading']:
-            if hasattr(info, attr_name):
-                if '{{-tsiahy-}}' not in s:
-                    s += '\n\n{{-tsiahy-}}'
-                references = getattr(info, attr_name)
-                if isinstance(references, list):
-                    if len(references) > 1:
-                        for ref in getattr(info, attr_name):
-                            s += "\n* " + ref
-                    elif len(references) == 1:
-                        s += "\n" + references[0]
-                break
+        for attr_name in ['references', 'reference', ]:
+            s += self.render_section(info, '{{-tsiahy-}}', attr_name)
         return s

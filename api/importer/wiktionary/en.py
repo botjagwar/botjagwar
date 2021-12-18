@@ -29,7 +29,7 @@ class ListSubsectionImporter(SubsectionImporter):
                                 '\\[\\[([0-9A-Za-z- ]+)\\]\\]', item):
                             retrieved.append(data)
                     else:
-                        retrieved.append(item)
+                        retrieved.append(item.strip())
 
         return list(set(retrieved))
 
@@ -155,6 +155,10 @@ class DerivedTermsImporter(ListSubsectionImporter):
         return list(set(retrieved))
 
 
+class DerivedTermsL5Importer(DerivedTermsImporter):
+    level = 5
+
+
 class PronunciationImporter(SubsectionImporter):
     level = 3
     data_type = 'pronunciation'
@@ -179,6 +183,8 @@ class PronunciationImporter(SubsectionImporter):
             if '-IPA' in pron:
                 pronunciations.append(pron)
             if '-pron' in pron:
+                pronunciations.append(pron)
+            if '{{IPA|' in pron:
                 pronunciations.append(pron)
 
         return pronunciations
@@ -227,6 +233,7 @@ all_importers = [
     AlternativeFormsImporter,
     AntonymImporter,
     DerivedTermsImporter,
+    DerivedTermsL5Importer,
     PronunciationImporter,
     ReferencesImporter,
     EtymologyImporter,

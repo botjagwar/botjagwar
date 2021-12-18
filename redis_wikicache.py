@@ -82,6 +82,8 @@ class RedisSite(object):
 
 
 class RedisPage(object):
+    max_redirection_depth = 10  # number of redirection link following until we consider the page as non-existent
+
     def __init__(self, site: RedisSite, title: str, offline='automatic'):
         if offline == 'automatic':
             self.offline = site.offline
@@ -136,6 +138,18 @@ class RedisPage(object):
             else:
                 wikisite = pywikibot.Site(self.site.language, self.site.wiki)
                 wikipage = pywikibot.Page(wikisite, self._title)
+                if wikipage.exists():
+                    redirection_depth = 0
+                    while wikipage.isRedirectPage():
+                        redirection_depth += 1
+                        if redirection_depth == self.max_redirection_depth:
+                            break
+                        else:
+                            wikipage = wikipage.getRedirectTarget()
+
+                    if redirection_depth == self.max_redirection_depth:
+                        return False
+
                 return wikipage.exists()
         else:
             return True
@@ -153,7 +167,12 @@ class RedisPage(object):
 
     def isRedirectPage(self):
         if self.exists():
-            return '#REDIRECT [[' in self.get()
+            try:
+                content = self.get()
+            except pywikibot.exceptions.IsRedirectPageError:
+                return True
+            else:
+                return '#REDIRECT [[' in content
         else:
             if not self.offline:
                 wikisite = pywikibot.Site(self.site.language, self.site.wiki)

@@ -11,6 +11,7 @@ from pywikibot import output
 
 from api import entryprocessor
 from api.config import BotjagwarConfig
+from api.decorator import catch_exceptions
 from api.model.word import Entry
 from api.output import Output
 from api.servicemanager import DictionaryServiceManager
@@ -304,6 +305,7 @@ class Translation:
                 if page.exists():
                     self.process_wiktionary_wiki_page(page)
 
+    @catch_exceptions(pywikibot.exceptions.InvalidTitleError)
     def create_or_rename_template_on_target_wiki(self, source_language, source_name, target_language, target_name):
         source_wiki = Site(source_language, 'wiktionary')
         target_wiki = Site(target_language, 'wiktionary')
@@ -406,7 +408,6 @@ class Translation:
         out_entries.sort()
         # Post-processors takes the list of entries and returns the same.
         out_entries = self.run_postprocessors(out_entries)
-
         return out_entries
 
     def process_wiktionary_wiki_page(self, wiki_page: [Page, pywikibot.Page]):

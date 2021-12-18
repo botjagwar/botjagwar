@@ -101,6 +101,18 @@ def separate_process(f):
     return wrap
 
 
+def catch_exceptions(*exceptions):
+    def wrapper_catch_exceptions(f):
+        def wrapper(*args, **kwargs):
+            try:
+                return f(*args, **kwargs)
+            except exceptions as exc:
+                return None
+
+        return wrapper
+    return wrapper_catch_exceptions
+
+
 def time_this(identifier=''):
     def _time_this(f):
         def wrapper(*args, **kwargs):
