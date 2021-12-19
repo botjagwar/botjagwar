@@ -191,6 +191,7 @@ class Translation:
                 if loaded_postprocessors:
                     entry_to_process = [entry]
                     for post_processor_name, arguments in loaded_postprocessors:
+                        log.debug(f'Running postprocessor {post_processor_name} with arguments {arguments}')
                         function = getattr(postprocessors, post_processor_name)(*arguments)
                         entry_to_process = function(entry_to_process)
 

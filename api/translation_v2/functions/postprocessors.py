@@ -4,14 +4,14 @@ Postprocessors must return a callable accepting a list of Entry objects
 String arguments are recommended for the function generator to allow it to be
 used in dynamic postprocessor loading though config file.
 """
-
 from logging import getLogger
+from typing import List
 
 
 log = getLogger(__name__)
 
 
-def add_language_ipa_if_not_exists(languages: list = 'automatic'):
+def add_language_ipa_if_not_exists(languages: List = 'automatic'):
     """
     :param language: 'automatic' uses the entry's language.
     If any other value is specified, then that value.
@@ -30,7 +30,7 @@ def add_language_ipa_if_not_exists(languages: list = 'automatic'):
     return add_pronunciation
 
 
-def add_xlit_if_no_transcription(languages: list = 'automatic'):
+def add_xlit_if_no_transcription(languages: List = 'automatic'):
     def wrapped_add_xlit_if_no_transcription(entries):
         out_entries = []
         for entry in entries:
@@ -62,3 +62,13 @@ def add_wiktionary_credit(wiki):
             out_entries.append(entry)
 
         return wrap_add_wiktionary_credit
+
+
+def filter_out_languages(*languages):
+    def _delete_languages(entries):
+        out_entries = []
+        for entry in entries:
+            if entry.language not in languages:
+                out_entries.append(entry)
+        return out_entries
+    return _delete_languages

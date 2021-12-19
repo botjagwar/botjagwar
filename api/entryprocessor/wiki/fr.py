@@ -2,8 +2,6 @@
 
 import re
 
-import pywikibot
-
 from api.model.word import Entry
 from .base import WiktionaryProcessor
 from .base import stripwikitext
@@ -71,8 +69,6 @@ class FRWiktionaryProcessor(WiktionaryProcessor):
 
     def getall(self, keepNativeEntries=False, **kw):
         """languges sections in a given page formatting: [(POS, lang, definition), ...]"""
-        if self.Page is not None:
-            assert isinstance(self.Page, pywikibot.Page), self.Page.__class__
         items = []
 
         if self.content is None:
