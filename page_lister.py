@@ -72,9 +72,7 @@ def parameterized_get_pages_from_category(site_class, page_class):
 
 def redis_get_pages_from_category(working_language, category_name):
     from redis_wikicache import RedisSite, RedisPage
-    return parameterized_get_pages_from_category(
-        RedisSite, RedisPage)(
-        working_language, category_name)
+    return parameterized_get_pages_from_category(RedisSite, RedisPage)(working_language, category_name)
 
 
 def get_pages_from_category(working_language, category_name):

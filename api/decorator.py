@@ -57,6 +57,9 @@ class run_once(object):
 
 
 def singleton(cls):
+    class SingletonCreationError(Exception):
+        pass
+
     class SingleClass(cls, object):
         """ The real singleton. """
         _instance = None
@@ -65,7 +68,10 @@ def singleton(cls):
 
         def __new__(cls, *args, **kwargs):
             if SingleClass._instance is None:
-                SingleClass._instance = super(SingleClass, cls).__new__(cls, *args, **kwargs)
+                try:
+                    SingleClass._instance = super(SingleClass, cls).__new__(cls, *args, **kwargs)
+                except TypeError as error:
+                    raise SingletonCreationError(f'Unexpected arguments: {args} and {kwargs}') from error
                 SingleClass._instance._sealed = False
 
             return SingleClass._instance

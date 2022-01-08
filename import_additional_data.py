@@ -1,31 +1,39 @@
+import bz2
+import os
+
+import requests
+
+from api.entryprocessor.wiki.en import ENWiktionaryProcessor
 from api.extractors.site_extractor import RakibolanaSiteExtactor
 from api.extractors.site_extractor import SiteExtractorException
 from api.extractors.site_extractor import TenyMalagasySiteExtractor
 from api.importer import AdditionalDataImporterError
 from api.importer.rakibolanamalagasy import RakibolanaMalagasyImporter
 from api.importer.rakibolanamalagasy import TenyMalagasyImporter
+from api.servicemanager.pgrest import StaticBackend
+from page_lister import redis_get_pages_from_category as get_pages_from_category
+from redis_wikicache import RedisSite
 
-
-class EnWiktionaryCategoryImporter(object):
-    importer_classes = []
-
-    def __init__(self):
-        pass
-
-    def run(self):
-        pass
+backend = StaticBackend()
 
 
 class TenyMalagasyPickleImporter(object):
     def __init__(self):
-        self.importer = TenyMalagasyImporter()
+        self.importer = TenyMalagasyImporter(dry_run=False)
         self.extractor = TenyMalagasySiteExtractor()
-        self.importer.populate_cache('mg')
+        # self.importer.populate_cache('mg')
 
     def run(self):
-        for data in self.extractor.cache_engine.list():
+        counter = 0
+        to_reach = 0
+        for page in get_pages_from_category('mg', "Anarana iombonana amin'ny teny malagasy"):
+            counter += 1
+            print(counter)
+            if counter <= to_reach:
+                continue
+
             try:
-                entry = self.extractor.lookup(data)
+                entry = self.extractor.lookup(page.title())
             except SiteExtractorException:
                 continue
 
@@ -39,26 +47,46 @@ class TenyMalagasyPickleImporter(object):
         definitions = entry.definitions
         for definition in definitions:
             try:
-                self.importer.write_additional_data(
-                    entry.entry, 'mg', definition)
+                for pos in ['ana', 'mat', 'mpam']:
+                    word_id = self.importer.get_word_id(entry.entry, entry.language, pos)
+                    if word_id is not None:
+                        break
+
+                if word_id is None:
+                    raise AdditionalDataImporterError()
+
+                self.importer.write_additional_data(word_id, definition)
+
             except Exception as exception:
                 print(exception)
 
 
 class RakibolanaOrgPickleImporter(object):
     def __init__(self):
-        self.importer = RakibolanaMalagasyImporter()
+        self.importer = RakibolanaMalagasyImporter(dry_run=False)
         self.extractor = RakibolanaSiteExtactor()
-        self.importer.populate_cache('mg')
+        # self.importer.populate_cache('mg')
 
     def run(self):
-        for data in self.extractor.cache_engine.list():
-            entry = self.extractor.lookup(data)
-            if not entry.definitions:
-                continue
-            else:
-                print('>>> %s <<<' % entry.entry)
-                self.process_rakibolana_definition(entry,)
+        counter = 0
+        to_reach = 0
+        for pos in ['Matoanteny', 'Mpamaritra', 'Fomba fiteny']:
+            for page in get_pages_from_category('mg', f"{pos} amin'ny teny malagasy"):
+                counter += 1
+                print(counter)
+                if counter <= to_reach:
+                    continue
+
+                try:
+                    entry = self.extractor.lookup(page.title())
+                except SiteExtractorException:
+                    continue
+
+                if not entry.definitions:
+                    continue
+                else:
+                    print('>>> %s <<<' % entry.entry)
+                    self.process_rakibolana_definition(entry)
 
     def process_rakibolana_definition(self, entry):
         definitions = entry.definitions
@@ -66,8 +94,8 @@ class RakibolanaOrgPickleImporter(object):
         definition = definition.replace('amim$$', 'amim-')
         raw_definition = definition.replace('$$', '|')
 
-        print(raw_definition)
-        self.importer.write_raw(entry.entry, 'mg', raw_definition)
+        if raw_definition.strip():
+            self.importer.write_raw(entry.entry, 'mg', raw_definition)
 
         # definition listings
         pz = definition.find('$$')
@@ -76,9 +104,19 @@ class RakibolanaOrgPickleImporter(object):
             new_pz = definition.find('$$', pz)
             defn1 = definition[:new_pz].replace('$$', '')
 
-        print(defn1)
+        if not defn1:
+            return
+
         try:
-            self.importer.write_additional_data(entry.entry, 'mg', defn1)
+            for pos in ['ana', 'mat', 'mpam']:
+                word_id = self.importer.get_word_id(entry.entry, entry.language, pos)
+                if word_id is not None:
+                    break
+
+            if word_id is None:
+                raise AdditionalDataImporterError()
+
+            self.importer.write_additional_data(word_id, defn1)
         except AdditionalDataImporterError as exc:
             pass
 
@@ -96,35 +134,115 @@ class RakibolanaOrgPickleImporter(object):
                 tifs = [w.strip().lower() for w in tif.split('|')]
                 for tif in tifs:
                     self.importer.write_tif(entry.entry, 'mg', tif)
-                    print(tif)
 
 
-if __name__ == '__main__':
-    import requests
-    from api.importer import backend
-    # importer = RakibolanaOrgPickleImporter()
-    # importer.run()
-    Importer = EnwiktionaryDumpImporter
-    importer = Importer()
+class EnWiktionaryAdditionalDataImporter(object):
+    """
+    This data importer requires Redis to import all the data from the English Wiktionary.
+    """
+    dump_path = 'user_data/dumps/enwikt.xml'
+    url = 'https://dumps.wikimedia.org/enwiktionary/latest/enwiktionary-latest-pages-articles.xml.bz2'
 
-    def delete_additional_word_information():
+    def __init__(self):
+        self.site = RedisSite('en', 'wiktionary')
+        if os.path.isfile(self.dump_path):
+            print('File is present. Loading xml into Redis...')
+            self.site.load_xml_dump(self.dump_path)
+        else:
+            if not os.path.isfile(self.dump_path + '.bz2'):
+                print('File is absent. Downloading from dumps.wikimedia.org. This may take a while...')
+                with requests.get(self.url, stream=True) as request:
+                    request.raise_for_status()
+                    with open(self.dump_path + '.bz2', 'wb') as f:
+                        for chunk in request.iter_content(chunk_size=8192):
+                            f.write(chunk)
+                print('Download complete.')
+
+            print('Extracting dump file...')
+            with open(self.dump_path, 'wb') as xml_file, bz2.BZ2File(self.dump_path + '.bz2', 'rb') as file:
+                for data in iter(lambda: file.read(100 * 1024), b''):
+                    xml_file.write(data)
+
+            print('Dump file extraction complete. Loading xml into redis...')
+            self.site.load_xml_dump(self.dump_path)
+
+    def get_word_id(self, infos):
+        data = {
+            'word': 'eq.' + infos.entry,
+            'language': 'eq.' + infos.language,
+            'part_of_speech': 'eq.' + infos.part_of_speech,
+            'limit': '1'
+
+        }
+        # log.debug('get /word', data)
+        word_id = requests.get(backend.backend + '/word', params=data).json()
+        if len(word_id) > 0:
+            if 'id' in word_id[0]:
+                word_id = word_id[0]['id']
+                return word_id
+            else:
+                return
+        else:
+            return
+
+    def upload_additional_data(self, word_id: int, additional_data_type: str, additional_data: str):
+        if isinstance(additional_data, list):
+            for data in additional_data:
+                self.upload_additional_data(word_id, additional_data_type, data)
+        else:
+            data = {
+                'type': additional_data_type,
+                'word_id': word_id,
+                'information': additional_data,
+            }
+            response = requests.post(
+                backend.backend +
+                '/additional_word_information',
+                json=data)
+            if 400 <= response.status_code <= 599:
+                print(f'{data}')
+                print(f'import {additional_data_type} to word_id {word_id} failed: HTTP {response.status_code}: {response.text}')
+                return False
+            elif response.status_code < 400:
+                print(f'import {additional_data_type} to word_id {word_id} OK: HTTP {response.status_code}')
+                return True
+
+    def delete_all_additional_data_of_type(self, word_id, additional_data_type):
+        data = {
+            'type': 'eq.' + additional_data_type,
+            'word_id': 'eq.' + str(word_id),
+        }
         response = requests.delete(
             backend.backend +
             '/additional_word_information',
-            data={})
-        assert response.status_code == 204
+            params=data)
+        if 204 == response.status_code:
+            print(f'Deleting {additional_data_type} information on {word_id} OK: HTTP {response.status_code}')
+            return True
+        else:
+            print(f'Failed deleting {additional_data_type} information on {word_id}: HTTP {response.status_code}')
+            return False
 
-    delete_additional_word_information()
-    importer.run('user_data/dumps/en_1.xml')
-    importer.run('user_data/dumps/en_2.xml')
-    importer.run('user_data/dumps/en_3.xml')
-    importer.run('user_data/dumps/en_4.xml')
-    importer.run('user_data/dumps/en_5.xml')
-    importer.run('user_data/dumps/en_6.xml')
-    importer.run('user_data/dumps/en_7.xml')
-    importer.run('user_data/dumps/en_8.xml')
-    importer.run('user_data/dumps/en_9.xml')
-    importer.run('user_data/dumps/en_10.xml')
-    importer.run('user_data/dumps/en_11.xml')
-    importer.run('user_data/dumps/en_12.xml')
-    importer.run('user_data/dumps/en_13.xml')
+    def run(self):
+        processor = ENWiktionaryProcessor()
+        for page in self.site.all_pages():
+            print('>>> ' + page.title() + ' <<< ')
+            processor.set_text(page.get())
+            processor.set_title(page.title())
+            for entry in processor.getall(fetch_additional_data=True, cleanup_definitions=True, advanced=True):
+                entry_as_dict = entry.to_dict()
+                for additional_data_type, additional_data in entry_as_dict['additional_data'].items():
+                    word_id = self.get_word_id(entry)
+                    if word_id:
+                        self.delete_all_additional_data_of_type(word_id, additional_data_type)
+                        self.upload_additional_data(word_id, additional_data_type, additional_data)
+
+
+if __name__ == '__main__':
+    # importer = RakibolanaOrgPickleImporter()
+    # importer.run()
+    # importer = TenyMalagasyPickleImporter()
+    # importer.run()
+    Importer = EnWiktionaryAdditionalDataImporter
+    importer = Importer()
+    importer.run()

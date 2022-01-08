@@ -45,6 +45,9 @@ class WiktionaryProcessor(object):
     def set_title(self, title):
         self.title = title
 
+    def advanced_extract_definition(self, part_of_speech, definition_line):
+        return definition_line
+
     def retrieve_translations(self):
         raise NotImplementedError()
 

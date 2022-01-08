@@ -2,7 +2,7 @@ import pywikibot
 import redis
 
 from api.config import BotjagwarConfig
-from api.decorator import separate_process
+from api.decorator import separate_process, retry_on_fail, run_once
 from import_wiktionary import EnWiktionaryDumpImporter
 
 config = BotjagwarConfig()
@@ -38,15 +38,24 @@ class RedisSite(object):
             self.password = None
 
         self.port = port
-        self.instance = redis.Redis(
-            self.host,
-            self.port,
-            password=self.password,
-            socket_timeout=3)
+
+    def all_pages(self):
+        for key in self.instance.scan_iter(f'{self.wiki}.{self.language}/*'):
+            page_name = str(key, encoding='utf8').replace(f'{self.wiki}.{self.language}/', '')
+            yield RedisPage(RedisSite(self.language, 'wiktionary'), page_name)
 
     @property
     def lang(self):
         return self.language
+
+    @property
+    @run_once
+    def instance(self):
+        return redis.Redis(
+            self.host,
+            self.port,
+            password=self.password,
+            socket_timeout=3)
 
     def random_page(self):
         rkey = self.instance.randomkey()
@@ -103,6 +112,7 @@ class RedisPage(object):
     def isEmpty(self):
         return self.get() == ''
 
+    @retry_on_fail([redis.ConnectionError], retries=5, time_between_retries=.5)
     def get(self):
         if self._title is None:
             return ''

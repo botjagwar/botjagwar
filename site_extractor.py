@@ -2,22 +2,22 @@ import logging
 
 from api.extractors.site_extractor import RakibolanaSiteExtactor, TenyMalagasySiteExtractor
 from api.extractors.site_extractor import SiteExtractorException
-from page_lister import get_pages_from_category
+from page_lister import redis_get_pages_from_category as get_pages_from_category
 
 log = logging.getLogger(__name__)
 
 
 def main0(classname):
     import random
-    import time
     import pickle
     extractor = classname()
     counter = 0
     new_pagelist = []
-    pagelist = [p for p in get_pages_from_category('mg', 'Famaritana tsy ampy')
+    pagelist = [p for p in get_pages_from_category('mg', "Anarana iombonana amin'ny teny malagasy")
                 if p not in extractor.cache_engine.page_dump.keys()]
     random.shuffle(pagelist)
     for page in pagelist:
+
         print('>>>> [', classname.__name__, ']: ', page.title(), '<<<<')
         counter += 1
         content = page.get()
@@ -25,8 +25,9 @@ def main0(classname):
             print('skipping...')
             continue
         try:
-            time.sleep(random.randint(1, 4))
+            # time.sleep(random.randint(5, 10))
             entry = extractor.lookup(page.title())
+
             print(entry)
         except SiteExtractorException as e:
             print(e)
@@ -35,8 +36,9 @@ def main0(classname):
             continue
         else:
             new_pagelist.append(page.title())
+            print(f"{counter} pages collected")
 
-    with open('user_data/existingpages-list.pkl', 'wb') as f:
+    with open(f'user_data/{classname.__name__}-list.pkl', 'wb') as f:
         pickle.dump(new_pagelist, f)
 
 
@@ -74,5 +76,7 @@ def main():
 
 
 if __name__ == '__main__':
-    for pagename, definitions in entry_generator():
-        print(pagename, definitions)
+    main0(TenyMalagasySiteExtractor)
+    # main0(RakibolanaSiteExtactor)
+    # for pagename, definitions in entry_generator():
+    #     print(pagename, definitions)
