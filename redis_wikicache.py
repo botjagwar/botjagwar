@@ -8,6 +8,10 @@ from import_wiktionary import EnWiktionaryDumpImporter
 config = BotjagwarConfig()
 
 
+class RedisWikipageError(Exception):
+    pass
+
+
 class NoPage(Exception):
     pass
 
@@ -40,7 +44,7 @@ class RedisSite(object):
         self.port = port
 
     def all_pages(self):
-        for key in self.instance.scan_iter(f'{self.wiki}.{self.language}/*'):
+        for key in self.instance.scan_iter(match=f'{self.wiki}.{self.language}/*', count=1000):
             page_name = str(key, encoding='utf8').replace(f'{self.wiki}.{self.language}/', '')
             yield RedisPage(RedisSite(self.language, 'wiktionary'), page_name)
 
@@ -173,7 +177,12 @@ class RedisPage(object):
         else:
             wikisite = pywikibot.Site(self.site.language, self.site.wiki)
             wikipage = pywikibot.Page(wikisite, self._title)
-            return getattr(wikipage, 'namespace')()
+            try:
+                return getattr(wikipage, 'namespace')()
+            except pywikibot.exceptions.InvalidTitleError:
+                class Namespace(object):
+                    content = self.get()
+                return Namespace()
 
     def isRedirectPage(self):
         if self.exists():

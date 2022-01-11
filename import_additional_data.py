@@ -1,8 +1,12 @@
+import argparse
 import bz2
 import os
+import time
+from threading import Thread
 
 import requests
 
+from api.decorator import retry_on_fail
 from api.entryprocessor.wiki.en import ENWiktionaryProcessor
 from api.extractors.site_extractor import RakibolanaSiteExtactor
 from api.extractors.site_extractor import SiteExtractorException
@@ -10,15 +14,15 @@ from api.extractors.site_extractor import TenyMalagasySiteExtractor
 from api.importer import AdditionalDataImporterError
 from api.importer.rakibolanamalagasy import RakibolanaMalagasyImporter
 from api.importer.rakibolanamalagasy import TenyMalagasyImporter
-from api.servicemanager.pgrest import StaticBackend
+from api.servicemanager.pgrest import DynamicBackend
 from page_lister import redis_get_pages_from_category as get_pages_from_category
 from redis_wikicache import RedisSite
 
-backend = StaticBackend()
+backend = DynamicBackend()
 
 
 class TenyMalagasyPickleImporter(object):
-    def __init__(self):
+    def __init__(self, args=None):
         self.importer = TenyMalagasyImporter(dry_run=False)
         self.extractor = TenyMalagasySiteExtractor()
         # self.importer.populate_cache('mg')
@@ -143,7 +147,13 @@ class EnWiktionaryAdditionalDataImporter(object):
     dump_path = 'user_data/dumps/enwikt.xml'
     url = 'https://dumps.wikimedia.org/enwiktionary/latest/enwiktionary-latest-pages-articles.xml.bz2'
 
-    def __init__(self):
+    def __init__(self, args=None):
+        if args is not None:
+            if hasattr(args, 'start_page'):
+                self.page_number_to_resume_to = int(args.start_page)
+            else:
+                self.page_number_to_resume_to = 0
+
         self.site = RedisSite('en', 'wiktionary')
         if os.path.isfile(self.dump_path):
             print('File is present. Loading xml into Redis...')
@@ -185,6 +195,7 @@ class EnWiktionaryAdditionalDataImporter(object):
         else:
             return
 
+    @retry_on_fail(exceptions=[requests.exceptions.ConnectionError], retries=5, time_between_retries=1)
     def upload_additional_data(self, word_id: int, additional_data_type: str, additional_data: str):
         if isinstance(additional_data, list):
             for data in additional_data:
@@ -204,7 +215,7 @@ class EnWiktionaryAdditionalDataImporter(object):
                 print(f'import {additional_data_type} to word_id {word_id} failed: HTTP {response.status_code}: {response.text}')
                 return False
             elif response.status_code < 400:
-                print(f'import {additional_data_type} to word_id {word_id} OK: HTTP {response.status_code}')
+                # print(f'import {additional_data_type} to word_id {word_id} OK: HTTP {response.status_code}')
                 return True
 
     def delete_all_additional_data_of_type(self, word_id, additional_data_type):
@@ -217,32 +228,72 @@ class EnWiktionaryAdditionalDataImporter(object):
             '/additional_word_information',
             params=data)
         if 204 == response.status_code:
-            print(f'Deleting {additional_data_type} information on {word_id} OK: HTTP {response.status_code}')
+            # print(f'Deleting {additional_data_type} information on {word_id} OK: HTTP {response.status_code}')
             return True
         else:
             print(f'Failed deleting {additional_data_type} information on {word_id}: HTTP {response.status_code}')
             return False
 
-    def run(self):
+    def process_page(self, page):
         processor = ENWiktionaryProcessor()
+        processor.set_text(page.get())
+        processor.set_title(page.title())
+        for entry in processor.getall(fetch_additional_data=True, cleanup_definitions=True, advanced=True):
+            entry_as_dict = entry.to_dict()
+            for additional_data_type, additional_data in entry_as_dict['additional_data'].items():
+                word_id = self.get_word_id(entry)
+                if word_id:
+                    self.delete_all_additional_data_of_type(word_id, additional_data_type)
+                    self.upload_additional_data(word_id, additional_data_type, additional_data)
+
+    def run(self):
+        threads = []
+        counter = 0
+        page_number = 0
+        thread_batch_size = 300
+        ct_time = time.time()
         for page in self.site.all_pages():
-            print('>>> ' + page.title() + ' <<< ')
-            processor.set_text(page.get())
-            processor.set_title(page.title())
-            for entry in processor.getall(fetch_additional_data=True, cleanup_definitions=True, advanced=True):
-                entry_as_dict = entry.to_dict()
-                for additional_data_type, additional_data in entry_as_dict['additional_data'].items():
-                    word_id = self.get_word_id(entry)
-                    if word_id:
-                        self.delete_all_additional_data_of_type(word_id, additional_data_type)
-                        self.upload_additional_data(word_id, additional_data_type, additional_data)
+            # print(page_number)
+            page_number += 1
+            if self.page_number_to_resume_to > page_number:
+                if not page_number % 10000:
+                    print(f'>>> [{page_number}] ' + page.title() + ' <<< ')
+                continue
+
+            if not page_number % 250:
+                print(f'>>> [{page_number}] ' + page.title() + ' <<< ')
+
+            if page.namespace() != 0:
+                continue
+
+            thread = Thread(target=self.process_page, args=(page,))
+            thread.start()
+            threads.append(thread)
+            counter += 1
+
+            if len(threads) > thread_batch_size:
+                for t in threads:
+                    t.join(5)
+
+                threads = []
+                counter = 0
+                throughput = 60 * thread_batch_size / (time.time() - ct_time)
+                print(f'processing {throughput} pages/min...')
+                ct_time = time.time()
+
+        print(f'Job finished! {page_number} pages processed. ')
+
+
+def main():
+    parser = argparse.ArgumentParser(description='Import Wiktionary XML dump')
+    parser.add_argument('--program', dest='program', action='store', help='Program name')
+    parser.add_argument('--start-from-page', dest='start_page', action='store', help='Start from a certain page number.')
+
+    args = parser.parse_args()
+    Program = eval(f'{args.program}')
+    bot = Program(args)
+    bot.run()
 
 
 if __name__ == '__main__':
-    # importer = RakibolanaOrgPickleImporter()
-    # importer.run()
-    # importer = TenyMalagasyPickleImporter()
-    # importer.run()
-    Importer = EnWiktionaryAdditionalDataImporter
-    importer = Importer()
-    importer.run()
+    main()
