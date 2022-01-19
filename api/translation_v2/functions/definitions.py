@@ -1,6 +1,9 @@
 import re
 from logging import getLogger
 
+from transformers import AutoTokenizer, AutoModelForSeq2SeqLM
+
+from api.decorator import singleton
 from api.parsers import templates_parser, TEMPLATE_TO_OBJECT
 from api.parsers.functions.postprocessors import POST_PROCESSORS
 from api.parsers.inflection_template import ParserNotFoundError
@@ -15,7 +18,12 @@ from ..types import TranslatedDefinition, \
 
 log = getLogger(__file__)
 
-json_dictionary = JsonDictionary(use_materialised_view=False)
+
+@singleton
+class OpusMtTransformer:
+    tokenizer = AutoTokenizer.from_pretrained("user_data/opus-mt-en-mg")
+    model = AutoModelForSeq2SeqLM.from_pretrained("user_data/opus-mt-en-mg")
+    json_dictionary = JsonDictionary(use_materialised_view=False)
 
 
 def _translate_using_bridge_language(
@@ -233,3 +241,16 @@ def translate_using_nltk(part_of_speech,
                          target_language,
                          **kw) -> [UntranslatedDefinition, TranslatedDefinition]:
     pass
+
+
+def translate_using_opus_mt(part_of_speech,
+                         definition_line,
+                         source_language,
+                         target_language,
+                         **kw) -> [UntranslatedDefinition, TranslatedDefinition]:
+    transformer = OpusMtTransformer()
+    batch = transformer.tokenizer([definition_line], return_tensors="pt")
+    gen = transformer.model.generate(**batch)
+    out_text = transformer.tokenizer.batch_decode(gen, skip_special_tokens=True)
+    print(definition_line, '=> ', ' '.join(out_text))
+    return TranslatedDefinition(' '.join(out_text))
