@@ -1,6 +1,5 @@
 import logging
 import sys
-from multiprocessing.pool import MaybeEncodingError
 from multiprocessing.pool import Pool as ThreadPool
 
 from lxml import etree
@@ -166,7 +165,7 @@ class Processor(object):
             print(' ' * lvl, 'buffer size is:', len(buffers))
             try:
                 pool.map(function, buffers)
-            except MaybeEncodingError:
+            except Exception:
                 if len(buffers) > 2:
                     pmap(pool, buffers[:(len(buffers) - 1) // 2], lvl + 1)
                     pmap(pool, buffers[(len(buffers) - 1) // 2:], lvl + 1)
