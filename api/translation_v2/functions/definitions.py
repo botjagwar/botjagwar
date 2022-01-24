@@ -1,9 +1,6 @@
 import re
 from logging import getLogger
 
-from transformers import AutoTokenizer, AutoModelForSeq2SeqLM
-
-from api.decorator import singleton
 from api.parsers import templates_parser, TEMPLATE_TO_OBJECT
 from api.parsers.functions.postprocessors import POST_PROCESSORS
 from api.parsers.inflection_template import ParserNotFoundError
@@ -16,14 +13,10 @@ from ..exceptions import UnhandledTypeError, UnsupportedLanguageError
 from ..types import TranslatedDefinition, \
     UntranslatedDefinition, FormOfTranslaton, ConvergentTranslation
 
+json_dictionary = JsonDictionary(use_materialised_view=False)
 log = getLogger(__file__)
 
 
-@singleton
-class OpusMtTransformer:
-    tokenizer = AutoTokenizer.from_pretrained("user_data/opus-mt-en-mg")
-    model = AutoModelForSeq2SeqLM.from_pretrained("user_data/opus-mt-en-mg")
-    json_dictionary = JsonDictionary(use_materialised_view=False)
 
 
 def _translate_using_bridge_language(
@@ -248,9 +241,17 @@ def translate_using_opus_mt(part_of_speech,
                          source_language,
                          target_language,
                          **kw) -> [UntranslatedDefinition, TranslatedDefinition]:
-    transformer = OpusMtTransformer()
-    batch = transformer.tokenizer([definition_line], return_tensors="pt")
-    gen = transformer.model.generate(**batch)
-    out_text = transformer.tokenizer.batch_decode(gen, skip_special_tokens=True)
-    print(definition_line, '=> ', ' '.join(out_text))
-    return TranslatedDefinition(' '.join(out_text))
+    # skeleton function for now to allow for later integration
+    return UntranslatedDefinition(definition_line)
+
+# def translate_using_opus_mt(part_of_speech,
+#                          definition_line,
+#                          source_language,
+#                          target_language,
+#                          **kw) -> [UntranslatedDefinition, TranslatedDefinition]:
+#     definition_line = re.sub('{{[a-zA-z0-9|]+}}', '', definition_line)
+#     definition_line = re.sub('\[\[[a-zA-z0-9|]+\]\]', '', definition_line)
+#     transformer = OpusMtTransformer()
+#     transformer.load_model(source_language, target_language)
+#     out_text = transformer.translate(definition_line)
+#     return TranslatedDefinition(out_text)

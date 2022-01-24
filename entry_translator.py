@@ -136,7 +136,8 @@ async def get_wiktionary_page_translation(request) -> Response:
     except Exception as e:
         log.exception(e)
         data['traceback'] = traceback.format_exc()
-        data['message'] = '' if not hasattr(e, 'message') else getattr(e, 'message')
+        data['type'] = 'error'
+        data['message'] = 'unknown error' if not hasattr(e, 'message') else getattr(e, 'message')
         response = Response(
             text=json.dumps(data),
             status=500,
