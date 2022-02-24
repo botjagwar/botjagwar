@@ -17,8 +17,6 @@ json_dictionary = JsonDictionary(use_materialised_view=False)
 log = getLogger(__file__)
 
 
-
-
 def _translate_using_bridge_language(
         part_of_speech,
         definition_line,
