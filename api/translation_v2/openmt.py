@@ -24,8 +24,8 @@ class OpusMtTransformer:
         if (source, target) not in self.loaded_languages:
             log.info(f"opus-mt-{source}-{target} has not been loaded yet, loading model...")
             self.loaded_languages.add((source, target))
-            self.tokenizers[(source, target)] = AutoTokenizer.from_pretrained(f"user_data/opus-mt-{source}-{target}")
-            self.models[(source, target)] = AutoModelForSeq2SeqLM.from_pretrained(f"user_data/opus-mt-{source}-{target}")
+            self.tokenizers[(source, target)] = AutoTokenizer.from_pretrained(f"data/opus-mt-{source}-{target}")
+            self.models[(source, target)] = AutoModelForSeq2SeqLM.from_pretrained(f"data/opus-mt-{source}-{target}")
 
         self.tokenizer = self.tokenizers[(source, target)]
         self.model = self.models[(source, target)]
