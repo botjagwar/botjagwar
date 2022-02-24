@@ -1,5 +1,9 @@
+import bz2
+import os
+
 import pywikibot
 import redis
+import requests
 
 from api.config import BotjagwarConfig
 from api.decorator import separate_process, retry_on_fail, run_once
@@ -74,9 +78,33 @@ class RedisSite(object):
             f'{self.wiki}.{self.language}/', '')
         return RedisPage(self, page_name)
 
+    def download_dump(self):
+        url = f'https://dumps.wikimedia.org/{self.language}wiktionary/latest/{self.language}wiktionary-latest-pages-articles.xml.bz2'
+        dump_dir = 'user_data/dumps'
+        dump_path = dump_dir + f'/{self.language}wikt.xml'
+
+        if not os.path.isdir(dump_dir):
+            os.mkdir(dump_dir)
+        if not os.path.isfile(dump_path + '.bz2'):
+            print('File is absent. Downloading from dumps.wikimedia.org. This may take a while...')
+            with requests.get(url, stream=True) as request:
+                request.raise_for_status()
+                with open(dump_path + '.bz2', 'wb') as f:
+                    for chunk in request.iter_content(chunk_size=8192):
+                        f.write(chunk)
+            print('Download complete.')
+
+        print('Extracting dump file...')
+        with open(dump_path, 'wb') as xml_file, bz2.BZ2File(dump_path + '.bz2', 'rb') as file:
+            for data in iter(lambda: file.read(100 * 1024), b''):
+                xml_file.write(data)
+
     @separate_process
-    def load_xml_dump(self, dump='user_data/dumps/enwikt.xml'):
-        importer = EnWiktionaryDumpImporter(dump)
+    def load_xml_dump(self, download=False, dump_path='user_data/dumps/enwikt.xml'):
+        if download:
+            self.download_dump()
+
+        importer = EnWiktionaryDumpImporter(dump_path)
         for xml_page in importer.load():
             try:
                 title, content = importer.get_page_from_xml(xml_page)

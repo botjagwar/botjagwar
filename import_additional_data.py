@@ -1,6 +1,4 @@
 import argparse
-import bz2
-import os
 import time
 from threading import Thread
 
@@ -155,26 +153,7 @@ class EnWiktionaryAdditionalDataImporter(object):
                 self.page_number_to_resume_to = 0
 
         self.site = RedisSite('en', 'wiktionary')
-        if os.path.isfile(self.dump_path):
-            print('File is present. Loading xml into Redis...')
-            self.site.load_xml_dump(self.dump_path)
-        else:
-            if not os.path.isfile(self.dump_path + '.bz2'):
-                print('File is absent. Downloading from dumps.wikimedia.org. This may take a while...')
-                with requests.get(self.url, stream=True) as request:
-                    request.raise_for_status()
-                    with open(self.dump_path + '.bz2', 'wb') as f:
-                        for chunk in request.iter_content(chunk_size=8192):
-                            f.write(chunk)
-                print('Download complete.')
-
-            print('Extracting dump file...')
-            with open(self.dump_path, 'wb') as xml_file, bz2.BZ2File(self.dump_path + '.bz2', 'rb') as file:
-                for data in iter(lambda: file.read(100 * 1024), b''):
-                    xml_file.write(data)
-
-            print('Dump file extraction complete. Loading xml into redis...')
-            self.site.load_xml_dump(self.dump_path)
+        self.site.load_xml_dump(download_dump=True)
 
     def get_word_id(self, infos):
         data = {

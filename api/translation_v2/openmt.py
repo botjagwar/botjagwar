@@ -1,6 +1,6 @@
 from logging import getLogger
 
-from transformers import AutoTokenizer, AutoModelForSeq2SeqLM
+from transformers import AutoTokenizer, AutoModelForSeq2SeqLM, Trainer
 
 from api.decorator import singleton
 
@@ -29,6 +29,13 @@ class OpusMtTransformer:
 
         self.tokenizer = self.tokenizers[(source, target)]
         self.model = self.models[(source, target)]
+
+    def train(self, seconds=3600):
+        self.trainer = Trainer(
+            model=self.model,
+            args=None,
+            data_collator=None,
+        )
 
     def translate(self, text):
         batch = self.tokenizer([text], return_tensors="pt")
