@@ -1,6 +1,10 @@
 import requests
 
 
+class DefinitionTranslationError(Exception):
+    pass
+
+
 class DefinitionTranslation(object):
     def __init__(self):
         self.botjagwar_frontend_url = '192.168.10.100:8080'
@@ -20,6 +24,7 @@ class DefinitionTranslation(object):
         })
         if pages.status_code != 200:
             print(pages.json())
+            raise DefinitionTranslationError(pages.text)
 
         pages_as_json = pages.json()
         for page in pages_as_json:
@@ -32,7 +37,7 @@ class DefinitionTranslation(object):
         }
         request = requests.post(url, json=json)
         if request.status_code != 200:
-            raise Exception('Unknown error: ' + request.text)
+            raise DefinitionTranslationError('Unknown error: ' + request.text)
         else:
             return request.json()['text']
 
@@ -46,7 +51,7 @@ class DefinitionTranslation(object):
         print(json)
         request = requests.post(url, json=json)
         if 400 <= request.status_code <= 599:
-            raise Exception('Unknown error: ' + request.text)
+            raise DefinitionTranslationError('Unknown error: ' + request.text)
 
     def run(self):
         for page in range(70):
