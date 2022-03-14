@@ -3,25 +3,30 @@ import requests
 
 class DefinitionTranslation(object):
     def __init__(self):
-        self.url = '192.168.10.100:8080'
+        self.botjagwar_frontend_url = '192.168.10.100:8080'
+        self.translation_server = 'localhost:8003'
         self.definition_language = 'en'
         self.language = 'en'
 
     def get_words(self, language='en', page_number=1, words_per_page=10000):
-        url = f'http://{self.url}/api/unaggregated_dictionary'
+        url = f'http://{self.botjagwar_frontend_url}/api/unaggregated_dictionary'
 
         pages = requests.get(url, params={
             'limit': words_per_page,
             'offset': words_per_page * page_number,
             'definition_language': f'eq.{self.definition_language}',
             'language': f'eq.{self.language}',
-            'word_id': f'gt.9956694'
-        }).json()
-        for page in pages:
+            'order': 'word_id.desc'
+        })
+        if pages.status_code != 200:
+            print(pages.json())
+
+        pages_as_json = pages.json()
+        for page in pages_as_json:
             yield page
 
     def openmt_get_translation(self, text):
-        url = f'http://192.168.10.109:8003/translate/{self.definition_language}/mg'
+        url = f'http://{self.translation_server}/translate/{self.definition_language}/mg'
         json = {
             'text': text
         }
@@ -32,7 +37,7 @@ class DefinitionTranslation(object):
             return request.json()['text']
 
     def add_additional_data(self, word_id, type, information):
-        url = 'http://192.168.10.100:8080/api/additional_word_information'
+        url = f'http://{self.botjagwar_frontend_url}/api/additional_word_information'
         json = {
             'word_id': word_id,
             'type': type,
