@@ -139,6 +139,7 @@ def site_to_wiki(site):
         'wikipedia': 'w',
         'wikibooks': 'b',
         'wikisource': 's',
+        'wikiquote': 'q',
     }
     try:
         return sites[site]
@@ -211,9 +212,9 @@ def main():
                 print("efa nahitana daty ankehitriny")
                 return
             content = news + content
-            page.put(content, "+Vaovao androany" + ct_date)
+            page.put(content, "+Vaovao androany " + ct_date)
         else:
-            page.put(news, "Vaovao androany" + ct_date)
+            page.put(news, "Vaovao androany " + ct_date)
 
     newsfile.write(news)
     save_state(new)
