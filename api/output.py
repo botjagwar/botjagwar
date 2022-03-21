@@ -82,28 +82,29 @@ class Output(object):
                 raise TypeError(word_id)
         else:
             return
-        for definition, methods in infos.translation_methods.items():
-            data = {
-                'definition': 'eq.' + definition,
-                'definition_language': 'eq.mg',
-                'limit': '1'
-            }
-            defn_id = requests.get(
-                backend + '/definitions',
-                params=data).json()
-            if len(defn_id) > 0 and 'id' in defn_id:
-                defn_id = defn_id[0]['id']
-            else:
-                return
-
-            for method in methods:
+        if hasattr(infos, 'translation_methods'):
+            for definition, methods in infos.translation_methods.items():
                 data = {
-                    'word': word_id,
-                    'definition': defn_id,
-                    'translation_method': method,
+                    'definition': 'eq.' + definition,
+                    'definition_language': 'eq.mg',
+                    'limit': '1'
                 }
-                log.debug('post /translation_method', data)
-                requests.post(backend + '/translation_method', json=data)
+                defn_id = requests.get(
+                    backend + '/definitions',
+                    params=data).json()
+                if len(defn_id) > 0 and 'id' in defn_id:
+                    defn_id = defn_id[0]['id']
+                else:
+                    return
+
+                for method in methods:
+                    data = {
+                        'word': word_id,
+                        'definition': defn_id,
+                        'translation_method': method,
+                    }
+                    log.debug('post /translation_method', data)
+                    requests.post(backend + '/translation_method', json=data)
 
     @staticmethod
     def sqlite_add_translation_method(infos: Entry):
@@ -151,3 +152,8 @@ class Output(object):
 
         ret_page = ret_page.replace('\n\n\n', '\n\n')
         return ret_page
+
+    def delete_section(self, section_name, wiki_page):
+        self.wikipage_renderer = WikiPageRendererFactory(
+            self.content_language)()
+        return self.wikipage_renderer.delete_section(section_name, wiki_page)
