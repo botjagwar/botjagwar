@@ -1,4 +1,8 @@
+import pywikibot
 import requests
+
+from api.model.word import Entry
+from api.translation_v2.core import Translation
 
 
 class DefinitionTranslationError(Exception):
@@ -53,7 +57,7 @@ class DefinitionTranslation(object):
         if 400 <= request.status_code <= 599:
             raise DefinitionTranslationError('Unknown error: ' + request.text)
 
-    def run(self):
+    def import_into_additional_data(self):
         for page in range(70):
             for word in self.get_words('en', page):
                 word_id = word['word_id']
@@ -67,7 +71,112 @@ class DefinitionTranslation(object):
                 except Exception:
                     continue
 
+    def check_translation_quality(self):
+        """
+        Check whether translation has translated all the key words (adjectives, nouns) of the
+        original text, or if some words have been skipped; and check if resulting translation words are
+        present in the dictionary of either dictionary. If a word cannot be traced or referenced in the dictionary,
+        the check fails.
+        :return:
+        """
+        pass
+
+    def get_word_info_with_openmt_additional_data(self, items_per_page):
+        url = f'http://{self.botjagwar_frontend_url}/api/additional_word_information'
+        for page_number in range(100):
+            pages = requests.get(url, params={
+                'limit': items_per_page,
+                'offset': items_per_page * page_number,
+                'type': f'eq.openmt_translation',
+            })
+            if pages.status_code != 200:
+                print(pages.json())
+                raise DefinitionTranslationError(pages.text)
+
+            pages_as_json = pages.json()
+            for page in pages_as_json:
+                yield page
+
+    def get_word_by_id(self, word_id):
+        url = f'http://{self.botjagwar_frontend_url}/api/unaggregated_dictionary'
+        pages = requests.get(url, params={
+            'word_id': f'eq.{word_id}',
+        })
+        if pages.status_code != 200:
+            print(pages.json())
+            raise DefinitionTranslationError(pages.text)
+
+        return pages.json()[0]
+
+    def get_definitions(self, word_id):
+        url = f'http://{self.botjagwar_frontend_url}/api/unaggregated_dictionary'
+        pages = requests.get(url, params={
+            'word_id': f'eq.{word_id}',
+            'definition_language': f'eq.{self.definition_language}',
+        })
+        if pages.status_code != 200:
+            print(pages.json())
+            raise DefinitionTranslationError(pages.text)
+
+        return [line['definition'] for line in pages.json()]
+
+    def mark_definition(self, word_id, mark_as='done'):
+        url = f'http://{self.botjagwar_frontend_url}/api/additional_word_information'
+        pages = requests.patch(url, params={
+            'word_id': f'eq.{word_id}',
+            'type': f'eq.openmt_translation',
+        }, json={
+            'type': f'openmt_translation/{mark_as}'
+        })
+        if pages.status_code != 204:
+            print(pages.json())
+            raise DefinitionTranslationError(pages.text)
+
+    def get_translated_definitions(self, word_id):
+        url = f'http://{self.botjagwar_frontend_url}/api/additional_word_information'
+        pages = requests.get(url, params={
+            'word_id': f'eq.{word_id}',
+            'type': f'eq.openmt_translation',
+        })
+        if pages.status_code != 200:
+            print(pages.json())
+            raise DefinitionTranslationError(pages.text)
+
+        return [line['information'] for line in pages.json()]
+
+    def publish_translated_definition(self):
+        """
+        Publish the translated definition on the target wiki.
+        :return:
+        """
+        definitions = []
+        translation = Translation()
+        for word_additional_data_info in self.get_word_info_with_openmt_additional_data(100):
+            word_info = self.get_word_by_id(word_additional_data_info['word_id'])
+            word_id = word_info['word_id']
+            word = word_info['word']
+            part_of_speech = word_info['part_of_speech']
+            definitions = self.get_definitions(word_id)
+            translated_definitions = self.get_translated_definitions(word_id)
+            print(word_id, definitions, translated_definitions)
+            entry = Entry(
+                entry=word,
+                part_of_speech=part_of_speech,
+                language=self.language,
+                definitions=translated_definitions
+            )
+            response = pywikibot.input('Accept and upload? (y/n)')
+            if response.strip() == 'y':
+                translation.publish_to_wiktionary(entry.entry, [entry])
+                translation._save_translation_from_page([entry])
+                self.mark_definition(word_id, 'done')
+            elif response.strip() == 'n':
+                self.mark_definition(word_id, 'rejected')
+            else:
+                continue
+            # translation._save_translation_from_page(entries)
+
 
 if __name__ == '__main__':
     bot = DefinitionTranslation()
-    bot.run()
+    bot.publish_translated_definition()

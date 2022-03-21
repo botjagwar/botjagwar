@@ -1,3 +1,5 @@
+import re
+
 from api.model.word import Entry
 from .base import PageRenderer
 
@@ -68,12 +70,20 @@ class MGWikiPageRenderer(PageRenderer):
 
     def render_definitions(self, info, additional_note, link):
         s = ''
+        trailing_characters_to_exclude_from_link = ',.;:'
         definitions = []
         defn_list = sorted(set(info.definitions))
         if link:
             for d in defn_list:
                 if len(d.split()) == 1:
-                    definitions.append(f'[[{d}]]')
+                    if d[-1] in trailing_characters_to_exclude_from_link:
+                        for trailing_character_to_exclude_from_link in trailing_characters_to_exclude_from_link:
+                            if d.endswith(trailing_character_to_exclude_from_link):
+                                temp_d = d.strip('.')
+                                definitions.append(f'[[{temp_d}]].')
+                                break
+                    else:
+                        definitions.append(f'[[{d}]]')
                 elif '[[' in d or ']]' in d:
                     definitions.append(d)
                 else:
@@ -180,3 +190,32 @@ class MGWikiPageRenderer(PageRenderer):
         for attr_name in ['references', 'reference', ]:
             s += self.render_section(info, '{{-tsiahy-}}', attr_name)
         return s
+
+    def delete_section(self, language_section, wiki_page):
+        section_name = "{{=" + language_section + "=}}"
+        if section_name in wiki_page:
+            lines = wiki_page.split('\n')
+            section_begin = None
+            section_end = None
+            for line_no, line in enumerate(lines):
+                section_rgx = re.search('==[ ]?' + section_name + '[ ]?==', line)
+                if section_rgx is not None and section_begin is None:
+                    section_begin = line_no
+                    continue
+
+                if section_begin is not None:
+                    section_end_rgx = re.search('==[ ]?{{=', line)
+                    if section_end_rgx is not None:
+                        section_end = line_no
+                        break
+
+            assert section_begin is not None
+            if section_end is not None:
+                to_delete = '\n'.join(lines[section_begin:section_end])
+            else:
+                to_delete = '\n'.join(lines[section_begin:])
+
+            new_text = wiki_page.replace(to_delete, '')
+            return new_text
+        else:
+            return wiki_page

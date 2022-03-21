@@ -238,6 +238,7 @@ class Translation:
         site = Site(self.working_wiki_language, 'wiktionary')
         target_page = Page(site, page_title, offline=False)
         # log.debug(self.output.wikipages(entries))
+        # target_page.put = pywikibot.output
 
         if target_page.namespace().id != 0:
             raise TranslatedPagePushError(
@@ -245,10 +246,10 @@ class Translation:
                 f'namespace (ns:{target_page.namespace().id}). '
                 f'Can only push to ns:0 (main namespace)')
         elif target_page.isRedirectPage():
-            pass
             target_page.put(
                 self.output.wikipages(entries),
-                self.generate_summary(entries))
+                self.generate_summary(entries)
+            )
         else:
             # Get entries to aggregate
             if target_page.exists():
@@ -257,10 +258,13 @@ class Translation:
                 wiktionary_processor = wiktionary_processor_class()
                 wiktionary_processor.set_text(target_page.get())
                 wiktionary_processor.set_title(page_title)
-                already_present_entries = wiktionary_processor.getall()
-                # entries = self.aggregate_entry_data(entries, already_present_entries)
+                content = target_page.get()
+                for entry in entries:
+                    content = self.output.delete_section(entry.language, content) + "\n"
+            else:
+                content = ""
 
-            content = self.output.wikipages(entries)
+            content += self.output.wikipages(entries)
             # Push aggregated content
             output(
                 '**** \03{yellow}' +
