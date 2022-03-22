@@ -16,6 +16,8 @@ class DefinitionTranslation(object):
         self.definition_language = 'en'
         self.language = 'en'
 
+        self._words_to_link = set()
+
     def get_words(self, language='en', page_number=1, words_per_page=10000):
         url = f'http://{self.botjagwar_frontend_url}/api/unaggregated_dictionary'
 
@@ -144,6 +146,24 @@ class DefinitionTranslation(object):
 
         return [line['information'] for line in pages.json()]
 
+    @property
+    def malagasy_words_to_link(self):
+        if self._words_to_link:
+            return self._words_to_link
+        else:
+            url = f'http://{self.botjagwar_frontend_url}/api/word'
+            pages = requests.get(url, params={
+                'language': f'eq.mg',
+                'part_of_speech': f'in.(ana,mat,mpam)',
+                'select': f'word',
+            })
+            if pages.status_code != 200:
+                raise DefinitionTranslationError(pages.text)
+            else:
+                self._words_to_link = {p['word'] for p in pages.json() if len(p['word']) > 4}
+                return self._words_to_link
+
+
     def publish_translated_definition(self):
         """
         Publish the translated definition on the target wiki.
@@ -151,6 +171,8 @@ class DefinitionTranslation(object):
         """
         definitions = []
         translation = Translation()
+        translation.output.wikipage_renderer.pages_to_link = self.malagasy_words_to_link
+
         for word_additional_data_info in self.get_word_info_with_openmt_additional_data(100):
             word_info = self.get_word_by_id(word_additional_data_info['word_id'])
             word_id = word_info['word_id']
@@ -158,7 +180,7 @@ class DefinitionTranslation(object):
             part_of_speech = word_info['part_of_speech']
             definitions = self.get_definitions(word_id)
             translated_definitions = self.get_translated_definitions(word_id)
-            print(word_id, definitions, translated_definitions)
+            print(f'{word} ({word_id}) ->', definitions, translated_definitions)
             entry = Entry(
                 entry=word,
                 part_of_speech=part_of_speech,
