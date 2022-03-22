@@ -24,6 +24,8 @@ class Output(object):
         if content_language != 'default':
             self.content_language = content_language
 
+        self.wikipage_renderer = WikiPageRendererFactory(self.content_language)()
+
     @retry_on_fail([Exception], 5, .5)
     def dictionary_service_update_database(self, info: Entry):
         """updates database"""
@@ -120,13 +122,9 @@ class Output(object):
 
     def wikipage(self, info: Entry, link=True):
         "returns wikipage string"
-        self.wikipage_renderer = WikiPageRendererFactory(
-            self.content_language)()
         return self.wikipage_renderer.render(info)
 
     def wikipages(self, infos: list, link=True):
-        self.wikipage_renderer = WikiPageRendererFactory(
-            self.content_language)()
         ret_page = ''
 
         # Consolidate by language
@@ -154,6 +152,4 @@ class Output(object):
         return ret_page
 
     def delete_section(self, section_name, wiki_page):
-        self.wikipage_renderer = WikiPageRendererFactory(
-            self.content_language)()
         return self.wikipage_renderer.delete_section(section_name, wiki_page)
