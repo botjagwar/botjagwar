@@ -5,8 +5,8 @@ import pywikibot
 import redis
 
 from api.entryprocessor import WiktionaryProcessorFactory
+from api.page_lister import redis_get_pages_from_category as get_pages_from_category
 from api.translation_v2.core import Translation
-from page_lister import redis_get_pages_from_category as get_pages_from_category
 from redis_wikicache import RedisSite
 
 if __name__ == '__main__':

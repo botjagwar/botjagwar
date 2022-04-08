@@ -12,8 +12,8 @@ from api.extractors.site_extractor import TenyMalagasySiteExtractor
 from api.importer import AdditionalDataImporterError
 from api.importer.rakibolanamalagasy import RakibolanaMalagasyImporter
 from api.importer.rakibolanamalagasy import TenyMalagasyImporter
+from api.page_lister import redis_get_pages_from_category as get_pages_from_category
 from api.servicemanager.pgrest import DynamicBackend
-from page_lister import redis_get_pages_from_category as get_pages_from_category
 from redis_wikicache import RedisSite
 
 backend = DynamicBackend()

@@ -15,12 +15,12 @@ from api.entryprocessor import WiktionaryProcessorFactory
 from api.importer import AdditionalDataImporter, AdditionalDataImporterError, backend as db_backend
 from api.model.word import Entry
 from api.output import Output
+from api.page_lister import get_pages_from_category
 from api.parsers import TEMPLATE_TO_OBJECT, FORM_OF_TEMPLATE
 from api.parsers import templates_parser
 from api.parsers.functions.postprocessors import POST_PROCESSORS
 from api.parsers.inflection_template import ParserError
 from api.servicemanager import LanguageServiceManager
-from page_lister import get_pages_from_category
 from redis_wikicache import RedisSite, RedisPage
 
 SITENAME = 'wiktionary'

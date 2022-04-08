@@ -4,8 +4,8 @@ import pywikibot
 import requests
 
 from api.importer import AdditionalDataImporter
+from api.page_lister import get_pages_from_category
 from api.servicemanager.pgrest import DynamicBackend
-from page_lister import get_pages_from_category
 
 dyn_backend = DynamicBackend()
 
