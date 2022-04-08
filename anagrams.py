@@ -5,7 +5,7 @@ import re
 
 import pywikibot
 
-from page_lister import get_pages_from_category
+from api.page_lister import get_pages_from_category
 
 parser = argparse.ArgumentParser(description='Anagrams bot')
 parser.add_argument('--begin', dest='BEGIN', required=False)

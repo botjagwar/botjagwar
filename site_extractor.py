@@ -2,7 +2,7 @@ import logging
 
 from api.extractors.site_extractor import RakibolanaSiteExtactor, TenyMalagasySiteExtractor
 from api.extractors.site_extractor import SiteExtractorException
-from page_lister import redis_get_pages_from_category as get_pages_from_category
+from api.page_lister import redis_get_pages_from_category as get_pages_from_category
 
 log = logging.getLogger(__name__)
 
