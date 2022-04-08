@@ -12,7 +12,9 @@ class MGWikiPageRenderer(PageRenderer):
             assert isinstance(self.pages_to_link, set)
             for word in definition_words:
                 if word in self.pages_to_link:
-                    ret.append('[[' + word + ']]')
+                    ret.append(f'[[{word}]]')
+                elif word.lower() in self.pages_to_link:
+                    ret.append(f'[[{word.lower()}|{word}]]')
                 else:
                     ret.append(word)
             return ret
@@ -80,7 +82,7 @@ class MGWikiPageRenderer(PageRenderer):
                         for trailing_character_to_exclude_from_link in trailing_characters_to_exclude_from_link:
                             if d.endswith(trailing_character_to_exclude_from_link):
                                 temp_d = d.strip('.')
-                                definitions.append(f'[[{temp_d}]].')
+                                definitions.append(f'[[{temp_d.lower()}|{temp_d}]].')
                                 break
                     else:
                         definitions.append(f'[[{d}]]')
@@ -88,7 +90,10 @@ class MGWikiPageRenderer(PageRenderer):
                     definitions.append(d)
                 else:
                     multiword_definitions = self.link_if_exists(d.split())
-                    definitions.append(' '.join(multiword_definitions))
+                    definition = ' '.join(multiword_definitions)
+                    definition = definition.replace(' - ', '-')
+                    definitions.append(definition)
+
         else:
             definitions = [f'{d}' for d in defn_list]
 

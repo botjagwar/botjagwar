@@ -286,7 +286,7 @@ class Translation:
                 else:
                     if len(content) > 140:
                         summary = "Pejy noforonina tamin'ny « " + \
-                            content[:137] + '... »'
+                            content[:200] + '... »'
                     else:
                         summary = "Pejy noforonina tamin'ny « " + content + ' »'
             else:
