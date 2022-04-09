@@ -47,6 +47,7 @@ class DatabaseManager(object):
         self.config_parser.read('/opt/botjagwar/conf/config.ini')
         self.db_header = self.config_parser.get('global', self.conf_key)
 
+
 class LanguageDatabaseManager(DatabaseManager):
     database_file = 'data/language.db'
 
