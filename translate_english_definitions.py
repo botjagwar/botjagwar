@@ -291,7 +291,7 @@ class DefinitionTranslation(object):
             if translated_definitions and translated_definitions[0] == '.':
                 return
 
-            line = f'"{word}","{word_id}","{definitions[0]}","{translated_definitions[0]}"'
+            line = f'"{word}"/"{word_id}"/"{definitions[0]}"/"{translated_definitions[0]}"'
             self._current_file.write(f'{line}\n')
             self._current_file_size += len(definitions[0])
 
