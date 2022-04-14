@@ -10,7 +10,7 @@ from api.exceptions import NoWordException
 from api.model.word import Entry
 from api.output import Output
 from api.servicemanager import DictionaryServiceManager
-from database.exceptions.http import WordDoesNotExistException
+from database.exceptions.http import WordDoesNotExist
 
 log = logging.getLogger(__name__)
 default_data_file = '/opt/botjagwar/conf/entry_translator/'
@@ -137,7 +137,7 @@ class Translation:
         resp = requests.get(
             URL_HEAD + '/entry/%s/%s' %
             (infos.language, infos.entry))
-        if resp.status_code != WordDoesNotExistException.status_code:
+        if resp.status_code != WordDoesNotExist.status_code:
             return 1
 
         self.output.db(infos)
@@ -244,7 +244,7 @@ class Translation:
         url = URL_HEAD + \
             '/translations/%s/%s/%s' % (language, WORKING_WIKI_LANGUAGE, word)
         resp = requests.get(url)
-        if resp.status_code == WordDoesNotExistException.status_code:
+        if resp.status_code == WordDoesNotExist.status_code:
             raise NoWordException()
 
         translations_json = resp.json()
@@ -268,7 +268,7 @@ class Translation:
             '/translations/%s/%s/%s' % (language, WORKING_WIKI_LANGUAGE, word)
         async with ClientSession() as client_session:
             async with client_session.get(url) as resp:
-                if resp.status == WordDoesNotExistException.status_code:
+                if resp.status == WordDoesNotExist.status_code:
                     raise NoWordException()
 
                 translations_json = await resp.json()

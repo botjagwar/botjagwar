@@ -2,7 +2,7 @@ import json
 
 from aiohttp.web import Response, json_response
 
-from database.exceptions.http import InvalidDataException, ElementDoesNotExistException
+from database.exceptions.http import InvalidDataError, ElementDoesNotExist
 from database.language import Language
 from .routines import save_changes_on_disk
 
@@ -34,7 +34,7 @@ async def add_language(request) -> Response:
         return Response(status=460, text='Language already exists')
     # todo: use json_schema
     if 'iso_code' not in data or 'malagasy_name' not in data or 'english_name' not in data:
-        raise InvalidDataException()
+        raise InvalidDataError()
     # /todo
     language = Language(
         iso_code=iso_code,
@@ -54,7 +54,7 @@ async def get_language(request) -> Response:
     language_data = session.query(Language).filter(
         Language.iso_code == code).all()
     if len(language_data) < 1:
-        raise ElementDoesNotExistException()
+        raise ElementDoesNotExist()
 
     return json_response(language_data[0].serialise())
 
@@ -67,7 +67,7 @@ async def edit_language(request) -> Response:
     language_data = session.query(Language).filter(
         Language.iso_code == data['iso_code']).all()
     if len(language_data) < 1:
-        raise ElementDoesNotExistException()
+        raise ElementDoesNotExist()
     else:
         language_data = language_data[0]
 

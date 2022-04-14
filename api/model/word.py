@@ -22,6 +22,16 @@ class Entry(TypeCheckedObject):
         language=str,
     )
 
+    @classmethod
+    def from_word(cls, model):
+        return cls(
+            entry=model.word,
+            part_of_speech=model.part_of_speech,
+            language=model.language,
+            definitions=deepcopy(model.definition),
+            additional_data=deepcopy(model.additional_data)
+        )
+
     def to_tuple(self):
         return self.entry, self.part_of_speech, self.language, self.definitions
 
@@ -62,8 +72,7 @@ class Entry(TypeCheckedObject):
                 if hasattr(self, 'entry') and hasattr(other, 'entry'):
                     if self.entry == other.entry:
                         if hasattr(
-                                self, 'part_of_speech') and hasattr(
-                                other, 'part_of_speech'):
+                            self, 'part_of_speech') and hasattr(other, 'part_of_speech'):
                             if self.part_of_speech == other.part_of_speech:
                                 return 0
                             elif self.part_of_speech < other.part_of_speech:

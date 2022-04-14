@@ -6,7 +6,7 @@ from aiohttp.web import Response
 from aiohttp.web_exceptions import HTTPNoContent, HTTPOk
 
 from database.dictionary import Definition, Word
-from database.exceptions.http import WordAlreadyExistsException, WordDoesNotExistException, InvalidJsonReceivedException
+from database.exceptions.http import WordAlreadyExists, WordDoesNotExist, InvalidJsonReceived
 from .routines import save_changes_on_disk
 
 log = logging.getLogger(__name__)
@@ -98,7 +98,7 @@ async def get_entry(request) -> Response:
 
     jsons = [objekt.serialise() for objekt in objects]
     if not jsons:
-        raise WordDoesNotExistException()
+        raise WordDoesNotExist()
     else:
         return Response(
             text=json.dumps(jsons),
@@ -114,7 +114,7 @@ def _add_entry(data, session):
                 session, definition['definition'], definition['definition_language'])
             normalised_retained_definitions.append(definition_object)
     else:
-        raise InvalidJsonReceivedException()
+        raise InvalidJsonReceived()
 
     if word_exists(
             session,
@@ -131,7 +131,7 @@ def _add_entry(data, session):
         normalised_retained_definitions = list(
             set(normalised_retained_definitions))
         if word.definitions == normalised_retained_definitions:
-            raise WordAlreadyExistsException()
+            raise WordAlreadyExists()
         else:
             word.definitions = normalised_retained_definitions
 
@@ -163,13 +163,12 @@ async def add_batch(request) -> Response:
     ret_payload = []
     datas = await request.json()
     session = request.app['session_instance']
-    errors = 0
 
     for data in datas:
         if isinstance(data, str):
             data = json.loads(data)
 
-        word = _add_entry(data, session)
+        _add_entry(data, session)
         # Search if definition already exists.
 
     session.commit()
@@ -178,7 +177,7 @@ async def add_batch(request) -> Response:
     return Response(
         status=HTTPOk.status_code,
         text=json.dumps(ret_payload),
-        content_type='application/json')
+        content_type='application/xml')
 
 
 async def add_entry(request) -> Response:
@@ -230,7 +229,7 @@ async def edit_entry(request) -> Response:
         # return exception if it doesn't
         # that because we'd not be editing otherwise.
         if not word:
-            raise WordDoesNotExistException()
+            raise WordDoesNotExist()
 
         word = word[0]
         definitions = []

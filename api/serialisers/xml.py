@@ -21,7 +21,39 @@ class XMLBuilder(object):
         # XML node
         self._xml_root = Element(self.xml_node)
 
-    def serialise(self) -> Element:
+    def serialise_dict(self, attribute_value) -> Element:
+        dictionary = Element('KeyValuePairs')
+        for k, v in attribute_value.items():
+            v = v[0]
+            kvp_element = Element('KeyValuePair')
+
+            kvp_key = Element('Key')
+            if isinstance(k, Builder):
+                kvp_key.append(k.serialise())
+                continue
+            elif k.__class__ in (int, str):
+                kvp_key.text = str(k)
+            elif isinstance(k, dict):
+                kvp_key.append(self.serialise_dict(k))
+
+            kvp_value = Element('Value')
+            if isinstance(v, Builder):
+                kvp_value.append(v.serialise())
+                continue
+            elif v.__class__ in (int, str):
+                kvp_value.text = str(v)
+            # elif isinstance(v, list):
+            #     kvp_value.append(self.serialise_list(kvp_value, v))
+            elif isinstance(v, dict):
+                kvp_value.append(self.serialise_dict(v))
+
+            kvp_element.append(kvp_key)
+            kvp_element.append(kvp_value)
+            dictionary.append(kvp_element)
+
+        return dictionary
+
+    def serialise(self) -> dict:
         # Main node
         main_node = Element(self.xml_node)
 
@@ -47,6 +79,9 @@ class XMLBuilder(object):
                 element.text = attribute_value
             elif isinstance(attribute_value, int):
                 element.text = str(attribute_value)
+            elif isinstance(attribute_value, dict):
+                element.append(self.serialise_dict(attribute_value))
+
             elif attribute_value is None:
                 element.text = ""
             else:
