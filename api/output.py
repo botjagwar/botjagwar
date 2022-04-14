@@ -7,7 +7,7 @@ from api.model.word import Entry
 from api.page_renderer import WikiPageRendererFactory
 from api.servicemanager import DictionaryServiceManager
 from api.servicemanager.pgrest import StaticBackend
-from database.exceptions.http import WordAlreadyExistsException
+from database.exceptions.http import WordAlreadyExists
 
 log = logging.getLogger(__name__)
 verbose = False
@@ -45,7 +45,7 @@ class Output(object):
         response = dictionary_service.post(
             'entry/%s/create' %
             info.language, json=data)
-        if response.status_code == WordAlreadyExistsException.status_code:
+        if response.status_code == WordAlreadyExists.status_code:
             word_response = dictionary_service.get(
                 'entry/%s/%s' %
                 (info.language, info.entry)).json()  # fetch its ID
@@ -53,7 +53,7 @@ class Output(object):
                 'entry/%d/edit' %
                 word_response[0]['id'],
                 json=data)  # edit using its ID
-            if edit_response.status_code == WordAlreadyExistsException.status_code:
+            if edit_response.status_code == WordAlreadyExists.status_code:
                 log.debug(
                     '%s [%s] > Attempted to create an already-existing entry.' %
                     (info.entry, info.language))
