@@ -5,7 +5,6 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship
 from sqlalchemy.sql import func
 
-from api.databasemanager import DictionaryDatabaseManager
 from database.dictionary.json import Definition as DefinitionSerialiser
 from database.dictionary.json import Word as WordSerialiser
 from .controller import Definition as DefinitionController
@@ -92,6 +91,7 @@ class Word(Base):
 
     @property
     def additional_data(self):
+        from api.databasemanager import DictionaryDatabaseManager
         dbm = DictionaryDatabaseManager()
         if self.id:
             sql = f"select word_id, type, information from additional_word_information where word_id = {self.id}"
