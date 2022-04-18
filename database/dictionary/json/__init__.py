@@ -1,4 +1,6 @@
+from api.model.word import Entry
 from api.serialisers.json import JSONBuilder
+
 
 # do NOT import these models here.
 # from .model import Word as WordModel
@@ -59,6 +61,7 @@ class Word(JSONBuilder):
             ('id', 'id'),
             ('word', 'word'),
             ('language', 'language'),
+            ('definitions', 'definitions'),
             ('part_of_speech', 'part_of_speech'),
             ('last_modified', 'last_modified'),
             ('additional_data', 'additional_data'),
@@ -66,8 +69,27 @@ class Word(JSONBuilder):
 
     def serialise_without_definition(self):
         data = self.serialise()
-        del data['definitions']
+        if 'definitions' in data:
+            del data['definitions']
+
         return data
+
+    def serialise_to_entry(self, definitions_language=None):
+        if definitions_language is None:
+            definitions_language = ['mg']
+
+        entry = Entry.from_word(self.model)
+        definition = [
+            definition.definition
+            for definition in self.model.definitions
+            if definition.definition_language in definitions_language
+        ]
+        entry.definitions = definition
+        return entry
+
+    @property
+    def definitions(self) -> list:
+        return self.model.definitions
 
     @property
     def type(self) -> str:
