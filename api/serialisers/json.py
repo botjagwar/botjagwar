@@ -34,7 +34,23 @@ class JSONBuilder(Builder):
                     if isinstance(e, Builder):
                         main_node[json_node_name].append(e.serialise())
                     else:
-                        raise JSONBuilderError("'%s' is not a serialisable element" % e.__class__)
+                        if hasattr(e, 'serialise'):
+                            try:
+                                serialised = e.serialise()
+                            except Exception as error:
+                                raise JSONBuilderError(
+                                    f"Error when trying to serialise '{e.__class__}': {e.message}"
+                                ) from error
+                            else:
+                                if not isinstance(serialised, dict):
+                                    raise JSONBuilderError(
+                                        f"'{e.__class__.__name__}' has serialise() method,"
+                                        f" but return type of such method is invalid."
+                                        f" dict is expected. Got {serialised.__class__.__name__}"
+                                    )
+                                main_node[json_node_name].append(serialised)
+                        else:
+                            raise JSONBuilderError("'%s' is not a serialisable element" % e.__class__)
             else:
                 raise JSONBuilderError("'%s' is not a serialisable element" % attribute_value.__class__)
 

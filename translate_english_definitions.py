@@ -295,6 +295,16 @@ class DefinitionTranslation(object):
             self._current_file.write(f'{line}\n')
             self._current_file_size += len(definitions[0])
 
+    def import_translation_batch(self, batch_number=1):
+        translation = Translation()
+        batch_folder = 'user_data/translation_batch'
+        translation.output.wikipage_renderer.pages_to_link = self.malagasy_words_to_link
+        if not os.path.exists(batch_folder):
+            os.mkdir(batch_folder)
+
+        if os.path.exists(f'{batch_folder}/batch-{batch_number}.csv'):
+            self._current_file = open(f'{batch_folder}/batch-{batch_number}.csv', 'r')
+
 
 if __name__ == '__main__':
     bot = DefinitionTranslation()
