@@ -28,7 +28,7 @@ class Entry(TypeCheckedObject):
             entry=model.word,
             part_of_speech=model.part_of_speech,
             language=model.language,
-            definitions=[deepcopy(model.definition)],
+            definitions=deepcopy(model.definitions),
             additional_data=deepcopy(model.additional_data)
         )
 
