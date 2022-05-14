@@ -44,8 +44,8 @@ class TestRenderers(TestCase):
     def test_definitions_with_examples(self):
         renderer = MGWikiPageRenderer()
         info = MagicMock()
-        info.definitions = ['def2', 'def1', 'def4']
-        info.examples = [['exdef2', 'exdef22'], ['exdef1'], ['exdef4']]
+        info.definitions = ['def1', 'def2', 'def4']
+        info.examples = [['exdef1'], ['exdef2', 'exdef22'], ['exdef4']]
         definitions = renderer.render_definitions(info, '', [])
         rendered_definitions = """
 # def1
@@ -238,7 +238,6 @@ class TestRenderers(TestCase):
 """
         removed_section = renderer.delete_section('es', test_wikipage)
         self.assertEquals(removed_section, expected)
-
 
     def test_delete_section_other(self):
         renderer = MGWikiPageRenderer()

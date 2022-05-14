@@ -7,32 +7,32 @@ from api.translation_v2.core import Translation
 
 class TestPostprocessors(TestCase):
     def test_add_language_ipa_if_not_exists(self):
-        pass
+        raise AssertionError()
 
     def test_add_xlit_if_no_transcription(self):
-        pass
+        raise AssertionError()
 
 
 class TestDefinitions(TestCase):
     def test_translate_form_of_templates(self):
-        pass
+        raise AssertionError()
 
     def test_translate_using_postgrest_json_dictionary(self):
-        pass
+        raise AssertionError()
 
     def test_translate_using_convergent_definition(self):
-        pass
+        raise AssertionError()
 
     def test_translate_using_bridge_language(self):
-        pass
+        raise AssertionError()
 
 
 class TestReferences(TestCase):
     def test_translate_reference_templates(self):
-        pass
+        raise AssertionError()
 
     def test_translate_references(self):
-        pass
+        raise AssertionError()
 
 
 class TestTranslationV2(TestCase):
@@ -79,19 +79,19 @@ class TestTranslationV2(TestCase):
         assert hasattr(entries[1], 'reference')
 
     def test_aggregate_entry_data(self):
-        pass
+        raise AssertionError()
 
     def test_run_static_postprocessors(self):
-        pass
+        raise AssertionError()
 
     def test_run_dynamic_postprocessors(self):
-        pass
+        raise AssertionError()
 
     def test_translate_wiktionary_page(self):
-        pass
+        raise AssertionError()
 
     def test_create_lemma_if_not_exists(self):
-        pass
+        raise AssertionError()
 
     def test_publish_to_wiktionary(self):
-        pass
+        raise AssertionError()
