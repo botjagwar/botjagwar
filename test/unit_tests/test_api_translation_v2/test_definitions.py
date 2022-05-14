@@ -64,7 +64,7 @@ class TestTranslateBridgeLanguageCommon(TestCase):
             source_language='ln',
             target_language='nl',
         )
-        definitions.json_dictionary.look_up_dictionary.assert_called_once()
+        definitions.json_dictionary.look_up_dictionary.assert_called()
 
 
 class TestDefinitionsFormOfTemplates(TestCase):
