@@ -108,14 +108,16 @@ class TestVerbFormParsers(TestCase):
         self.assertEqual(output.lemma, 'aateloida')
 
     def test_parse_de_verb_form_of(self):
-        template_expression = '{{de-verb form of|abfangen|1|s|k2|a}}'
-        output = parse_de_verb_form_of(template_expression)
-        self.assertIsInstance(output, VerbForm)
-        self.assertEqual(output.person, '1')
-        self.assertEqual(output.number, 's')
-        self.assertEqual(output.tense, '')
-        self.assertEqual(output.mood, 'subj')
-        self.assertEqual(output.lemma, 'abfangen')
+        for mood in ['k1', 'k2']:
+            for tense_name, tense_param in [('pres', 'g'), ('pret', 'v')]:
+                template_expression = '{{de-verb form of|abfangen|1|%s|s|%s|a}}' % (tense_param, mood)
+                output = parse_de_verb_form_of(template_expression)
+                self.assertIsInstance(output, VerbForm)
+                self.assertEqual(output.person, '1')
+                self.assertEqual(output.number, 's')
+                self.assertEqual(output.tense, tense_name)
+                self.assertEqual(output.mood, 'subj')
+                self.assertEqual(output.lemma, 'abfangen')
 
     def test_parse_la_verb_form_inflection_of(self):
         template_expression = '{{inflection of|la|abaestuō||2|p|impf|actv|indc}}'

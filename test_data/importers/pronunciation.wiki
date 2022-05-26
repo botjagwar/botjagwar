@@ -1,0 +1,30 @@
+==Japanese==
+{{ja-kanjitab|か|ふ|yomi=on}}
+
+===Pronunciation===
+{{ja-pron|かふ|yomi=on|acc=1|acc_ref=DJR}}
+
+===Noun===
+{{ja-noun|かふ|hhira=くわふ}}
+
+# [[widow]]
+
+====Synonyms====
+* {{ja-r|後家|ごけ}}
+* {{ja-r|未%亡%人|み%ぼう%じん}}
+* {{ja-r|やもめ}}
+
+====Related terms====
+* {{ja-r|寡夫|かふ}}
+* {{ja-r|寡フ|かフ}}
+
+====See also====
+* {{ja-r|死%別%者|し%べつ%しゃ}}
+* {{ja-r|離%別%者|り%べつ%しゃ}}
+
+===References===
+<references/>
+
+{{c|ja|Death|Female people|sort=かふ}}
+
+----

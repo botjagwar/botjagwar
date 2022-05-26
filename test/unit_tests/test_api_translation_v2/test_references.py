@@ -13,7 +13,7 @@ class TestReferencesTranslator(TestCase):
         ref = '{{R:Translated|toto titi tata}}'
         postgrest.get_mapped_template_in_database = MagicMock()
         postgrest.get_mapped_template_in_database.return_value = None
-        references.translate_reference_templates([ref], 'en', 'mg')
+        references.translate_reference_templates(ref, 'en', 'mg')
 
     def test_translate_references_is_mapped(self):
         ref = '{{R:Translated|toto titi tata}}'

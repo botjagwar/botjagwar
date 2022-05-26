@@ -17,7 +17,7 @@ def add_language_ipa_if_not_exists(languages: List = 'automatic'):
     If any other value is specified, then that value.
     :return:
     """
-    def add_pronunciation(entries):
+    def add_pronunciation(entries: list):
         out_entries = []
         for entry in entries:
             if languages == 'automatic' or entry.language in languages:
@@ -31,7 +31,7 @@ def add_language_ipa_if_not_exists(languages: List = 'automatic'):
 
 
 def add_xlit_if_no_transcription(languages: List = 'automatic'):
-    def wrapped_add_xlit_if_no_transcription(entries):
+    def wrapped_add_xlit_if_no_transcription(entries: list):
         out_entries = []
         for entry in entries:
             if languages == 'automatic' or entry.language in languages:
@@ -47,8 +47,8 @@ def add_xlit_if_no_transcription(languages: List = 'automatic'):
     return wrapped_add_xlit_if_no_transcription
 
 
-def add_wiktionary_credit(wiki):
-    def wrap_add_wiktionary_credit(entries):
+def add_wiktionary_credit(wiki: str):
+    def wrap_add_wiktionary_credit(entries: list):
         out_entries = []
         for entry in entries:
             reference = "{{wikibolana|" + wiki + '|' + entry.entry + '}}'
@@ -61,11 +61,12 @@ def add_wiktionary_credit(wiki):
                 entry.reference = [reference]
             out_entries.append(entry)
 
-        return wrap_add_wiktionary_credit
+        return out_entries
+    return wrap_add_wiktionary_credit
 
 
 def filter_out_languages(*languages):
-    def _delete_languages(entries):
+    def _delete_languages(entries: list):
         out_entries = []
         for entry in entries:
             if entry.language not in languages:

@@ -1,5 +1,6 @@
 from api.importer.wiktionary.en import (
     FurtherReadingImporter,
+    PronunciationImporter, HeadwordImporter, TranscriptionImporter,
     AlternativeFormsImporter,
     DerivedTermsImporter
 )
@@ -16,7 +17,7 @@ class TestFurtherReadingImporter(ApiImporterTester):
     def test_corner_case(self):
         importer = self.Importer()
         data = importer.get_data('', self.wikipages[self.data_exists_index], self.language)
-        self.assertEquals(len(data), 2)
+        self.assertEquals(len(data), 1)
 
 
 class TestAlternativeFormsImporter(ApiImporterTester):
@@ -47,12 +48,14 @@ class TestDerivedTermsImporter(ApiImporterTester):
     language = 'vi'
 
 
-# class TestPronunciationImporter(ApiImporterTester):
-#     Importer = PronunciationImporter
-#     data_exists_index = 3
-#     data_does_not_exist_index = 0
-#
-#
+class TestPronunciationImporter(ApiImporterTester):
+    Importer = PronunciationImporter
+    data_exists_index = 0
+    data_does_not_exist_index = None
+    filename = 'importers/pronunciation.wiki'
+    language = 'ja'
+
+
 # class TestReferencesImporter(ApiImporterTester):
 #     Importer = ReferencesImporter
 #     data_exists_index = 3
@@ -71,13 +74,13 @@ class TestDerivedTermsImporter(ApiImporterTester):
 #     data_does_not_exist_index = 0
 #
 #
-# class TestHeadwordImporter(ApiImporterTester):
-#     Importer = HeadwordImporter
-#     data_exists_index = 3
-#     data_does_not_exist_index = 0
-#
-#
-# class TestTranscriptionImporter(ApiImporterTester):
-#     Importer = TranscriptionImporter
-#     data_exists_index = 3
-#     data_does_not_exist_index = 0
+class TestHeadwordImporter(ApiImporterTester):
+    Importer = HeadwordImporter
+    data_exists_index = 3
+    data_does_not_exist_index = 0
+
+
+class TestTranscriptionImporter(ApiImporterTester):
+    Importer = TranscriptionImporter
+    data_exists_index = 3
+    data_does_not_exist_index = 0

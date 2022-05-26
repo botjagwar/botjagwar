@@ -325,6 +325,16 @@ templates_parser.add_parser(
 )
 
 templates_parser.add_parser(
+    VerbForm,
+    'past participle of',
+    parse_one_parameter_template(
+        VerbForm,
+        'past participle of',
+        number='s', tense='past', mood='part'
+    )
+)
+
+templates_parser.add_parser(
     Romanization,
     'romanization of',
     parse_romanization_template(2))

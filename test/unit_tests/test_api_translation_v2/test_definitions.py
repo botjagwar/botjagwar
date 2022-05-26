@@ -5,6 +5,7 @@ from unittest.mock import MagicMock
 
 from parameterized import parameterized
 
+from api.translation_v2.exceptions import UnsupportedLanguageError
 from api.translation_v2.functions import definitions
 from api.translation_v2.types import UntranslatedDefinition, \
     TranslatedDefinition, \
@@ -53,7 +54,7 @@ class TestTranslateBridgeLanguageCommon(TestCase):
             source_language='ln',
             target_language='nl',
         )
-        definitions.json_dictionary.look_up_dictionary.assert_called_once()
+        definitions.json_dictionary.look_up_dictionary.assert_called()
 
     def test_with_data_definition_language_doesnt_match_target(self):
         definitions.json_dictionary.look_up_dictionary = MagicMock()
@@ -73,7 +74,7 @@ class TestDefinitionsFormOfTemplates(TestCase):
         ('fr', '{{inflection of|fr|décoller||3|p|futr}}'),
         ('de', '{{past participle of|de|übersetzen}}'),
         ('lv', '{{lv-inflection of|acs ābols|loc|s}}'),
-        ('lt', '{{noun form of|lt|anyta||loc|p}}'),
+        # ('lt', '{{noun form of|lt|anyta||loc|p}}'),
     ]
     test_language = ['en', 'mg']
 
@@ -84,7 +85,7 @@ class TestDefinitionsFormOfTemplates(TestCase):
             return_data = definitions.translate_form_of_templates(
                 pos, definition, language, target_language
             )
-            self.assertIsInstance(return_data, TranslatedDefinition)
+            self.assertIsInstance(return_data, TranslatedDefinition, (pos, target_language, language_and_definition, return_data.__class__))
 
 
 class TestUsingPostgres(TestCase):
@@ -115,7 +116,7 @@ class TranslateUsingConvergentDefinition(TestCase):
     translation = [{
         "word_id": 82617,
         "word": "cranc",
-        "language": "cy",
+        "language": "nl",
         "part_of_speech": "ana",
         "en_definition_id": 4326382,
         "en_definition": "crab",
@@ -170,17 +171,23 @@ class TranslateUsingConvergentDefinition(TestCase):
 
         part_of_speech = 'ana'
         definition_line = 'test1'
-        source_language = 'kn'
+        source_language = 'nk'
         target_language = 'nl'
 
-        returned = definitions.translate_using_convergent_definition(
-            part_of_speech=part_of_speech,
-            definition_line=definition_line,
-            source_language=source_language,
-            target_language=target_language,
-        )
-        conv_trans_class_mock.assert_called()
-        self.assertIsInstance(returned, ConvergentTranslation)
+        try:
+            returned = definitions.translate_using_convergent_definition(
+                part_of_speech=part_of_speech,
+                definition_line=definition_line,
+                source_language=source_language,
+                target_language=target_language,
+            )
+            self.assertIsInstance(returned, ConvergentTranslation)
+            conv_trans_class_mock.assert_called()
+        except UnsupportedLanguageError:
+            pass
+        else:
+            raise AssertionError('Did not raise expected UnsupportedLanguageError.'
+                                 ' Newly supported language?')
 
     def test_translate_using_bridge_language(self):
         definitions._translate_using_bridge_language = MagicMock()
