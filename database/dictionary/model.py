@@ -45,9 +45,6 @@ class Definition(Base):
     def serialise_with_words(self):
         return self.Serialiser(self).serialise_with_words()
 
-    def serialise_xml(self):
-        return self.Serialiser(self).serialise_xml()
-
     def get_schema(self):
         """
         Returns a serialised object containing the current object's schema.
@@ -111,9 +108,6 @@ class Word(Base):
 
     def serialise(self):
         return self.Serialiser(self).serialise()
-
-    def serialise_xml(self):
-        return self.Serialiser(self).serialise_xml()
 
     def serialise_without_definition(self):
         return self.Serialiser(self).serialise_without_definition()
