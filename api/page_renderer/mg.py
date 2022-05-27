@@ -28,50 +28,50 @@ class MGWikiPageRenderer(PageRenderer):
             additional_note = " {{dikantenin'ny dikanteny|" + f"{info.origin_wiktionary_page_name}" \
                                                               f"|{info.origin_wiktionary_edition}" + "}}\n"
 
-        s = self.render_head_section(info)
-        s += self.render_definitions(info, additional_note, link)
-        s += self.render_pronunciation(info)
-        s += self.render_synonyms(info)
-        s += self.render_antonyms(info)
-        s += self.render_related_terms(info)
-        s += self.render_further_reading(info)
-        s += self.render_references(info)
+        returned_string = self.render_head_section(info)
+        returned_string += self.render_definitions(info, additional_note, link)
+        returned_string += self.render_pronunciation(info)
+        returned_string += self.render_synonyms(info)
+        returned_string += self.render_antonyms(info)
+        returned_string += self.render_related_terms(info)
+        returned_string += self.render_further_reading(info)
+        returned_string += self.render_references(info)
 
-        return s + '\n'
+        return returned_string + '\n'
 
     def render_head_section(self, info):
         # Language
-        s = "=={{=" + f"{info.language}" + "=}}==\n"
-        s += self.render_etymology(info)
+        returned_string = "=={{=" + f"{info.language}" + "=}}==\n"
+        returned_string += self.render_etymology(info)
 
         # Part of speech
-        s += "\n{{-" + f'{info.part_of_speech}-|{info.language}' + "}}\n"
+        returned_string += "\n{{-" + f'{info.part_of_speech}-|{info.language}' + "}}\n"
 
         # Pronunciation
-        s += "'''{{subst:BASEPAGENAME}}''' "
+        returned_string += "'''{{subst:BASEPAGENAME}}''' "
 
         # transcription (if any)
         if hasattr(info, 'transcription'):
             transcriptions = ', '.join(getattr(info, 'transcription'))
-            s += f"({transcriptions})"
+            returned_string += f"({transcriptions})"
 
-        return s
+        return returned_string
 
     def render_etymology(self, info):
-        s = ''
+        returned_string = ''
         if hasattr(info, 'etymology'):
             etymology = getattr(info, 'etymology')
             if etymology:
-                s += '\n{{-etim-}}\n'
-                s += ':' + etymology
+                returned_string += '\n{{-etim-}}\n'
+                returned_string += ':' + etymology
             else:
-                s += '\n{{-etim-}}\n'
-                s += f': {{vang-etim|' + f'{info.language}' + '}}\n'
+                returned_string += '\n{{-etim-}}\n'
+                returned_string += f': {{vang-etim|' + f'{info.language}' + '}}\n'
 
-        return s
+        return returned_string
 
     def render_definitions(self, info, additional_note, link):
-        s = ''
+        returned_string = ''
         trailing_characters_to_exclude_from_link = ',.;:'
         definitions = []
         defn_list = sorted(set(info.definitions))
@@ -98,103 +98,103 @@ class MGWikiPageRenderer(PageRenderer):
             definitions = [f'{d}' for d in defn_list]
 
         for idx, defn in enumerate(definitions):
-            s += "\n# " + defn
-            s += additional_note % info.properties
+            returned_string += "\n# " + defn
+            returned_string += additional_note % info.properties
             # Examples:
             if hasattr(info, 'examples'):
                 if len(info.examples) > idx:
                     if isinstance(info.examples, list):
                         if len(info.examples[idx]) > 0:
                             for example in info.examples[idx]:
-                                s += "\n#* ''" + example + "''"
+                                returned_string += "\n#* ''" + example + "''"
                     elif isinstance(info.examples, str):
-                        s += "\n#* ''" + info.examples[idx] + "''"
+                        returned_string += "\n#* ''" + info.examples[idx] + "''"
 
-        return s
+        return returned_string
 
     def render_pronunciation(self, info):
-        s = ''
+        returned_string = ''
         # Pronunciation and/or Audio
         if hasattr(info, 'audio_pronunciations') or \
                 hasattr(info, 'ipa'):
-            s += '\n\n{{-fanononana-}}'
+            returned_string += '\n\n{{-fanononana-}}'
 
             if hasattr(info, 'audio_pronunciations'):
                 for audio in info.audio_pronunciations:
-                    s += "\n* " + \
+                    returned_string += "\n* " + \
                         '{{audio|' + f'{audio}' + '|' + f'{info.entry}' + '}}'
 
             if hasattr(info, 'ipa'):
                 for ipa in info.ipa:
-                    s += "\n* " + \
+                    returned_string += "\n* " + \
                         '{{fanononana|' + f'{ipa}' + '|' + f'{info.language}' + '}}'
 
         # Pronunciation section
         elif hasattr(info, 'pronunciation'):
-            s += '\n\n{{-fanononana-}}'
+            returned_string += '\n\n{{-fanononana-}}'
             if isinstance(info.pronunciation, list):
                 for pron in info.pronunciation:
-                    s += "\n* " + pron.strip('*').strip()
+                    returned_string += "\n* " + pron.strip('*').strip()
             else:
-                s += "\n* " + info.pronunciation.strip('*').strip()
+                returned_string += "\n* " + info.pronunciation.strip('*').strip()
 
-        return s
+        return returned_string
 
     def render_synonyms(self, info):
-        s = ''
+        returned_string = ''
         if hasattr(info, 'synonyms'):
-            s += '\n\n{{-dika-mitovy-}}'
+            returned_string += '\n\n{{-dika-mitovy-}}'
             for synonym in info.synonyms:
-                s += "\n* [[" + synonym + ']]'
+                returned_string += "\n* [[" + synonym + ']]'
 
-        return s
+        return returned_string
 
     def render_antonyms(self, info) -> str:
-        s = ''
+        returned_string = ''
         if hasattr(info, 'antonyms'):
-            s += '\n\n{{-dika-mifanohitra-}}'
+            returned_string += '\n\n{{-dika-mifanohitra-}}'
             for antonym in info.antonyms:
-                s += "\n* [[" + antonym + ']]'
+                returned_string += "\n* [[" + antonym + ']]'
 
-        return s
+        return returned_string
 
     def render_related_terms(self, info) -> str:
-        s = ''
+        returned_string = ''
         if hasattr(info, 'related_terms') or \
                 hasattr(info, 'derived_terms'):
-            s += '\n\n{{-teny mifandraika-}}'
+            returned_string += '\n\n{{-teny mifandraika-}}'
 
             if hasattr(info, 'related_terms'):
                 for d in info.related_terms:
-                    s += f"\n* [[{d}]]"
+                    returned_string += f"\n* [[{d}]]"
             if hasattr(info, 'derived_terms'):
                 for d in info.derived_terms:
-                    s += f"\n* [[{d}]]"
-        return s
+                    returned_string += f"\n* [[{d}]]"
+        return returned_string
 
     def render_section(self, info, section_header, attr_name):
-        s = ""
+        returned_string = ""
         if hasattr(info, attr_name):
-            if section_header not in s:
-                s += '\n\n' + section_header
+            if section_header not in returned_string:
+                returned_string += '\n\n' + section_header
             section_data = getattr(info, attr_name)
             if isinstance(section_data, list):
                 if len(section_data) > 1:
                     for ref in getattr(info, attr_name):
-                        s += "\n* " + ref
+                        returned_string += "\n* " + ref
                 elif len(section_data) == 1:
-                    s += "\n" + section_data[0]
+                    returned_string += "\n" + section_data[0]
 
-        return s
+        return returned_string
 
     def render_further_reading(self, info):
         return self.render_section(info, '{{-famakiana fanampiny-}}', 'further_reading')
 
     def render_references(self, info) -> str:
-        s = ''
+        returned_string = ''
         for attr_name in ['references', 'reference', ]:
-            s += self.render_section(info, '{{-tsiahy-}}', attr_name)
-        return s
+            returned_string += self.render_section(info, '{{-tsiahy-}}', attr_name)
+        return returned_string
 
     def delete_section(self, language_section, wiki_page):
         section_name = "{{=" + language_section + "=}}"
