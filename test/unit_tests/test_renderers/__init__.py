@@ -57,19 +57,6 @@ class TestRenderers(TestCase):
 #* ''exdef4''"""
         self.assertEquals(definitions, rendered_definitions)
 
-    def test_definitions_with_examples_str(self):
-        renderer = MGWikiPageRenderer()
-        info = MagicMock()
-        info.definitions = ['def2', 'def1', 'def4']
-        info.examples = 'exdefs'
-        definitions = renderer.render_definitions(info, '', [])
-        rendered_definitions = """
-# def1
-#* ''exdefs''
-# def2
-# def4"""
-        self.assertEquals(definitions, rendered_definitions)
-
     def test_definitions_with_link(self):
         renderer = MGWikiPageRenderer()
         info = MagicMock()
@@ -177,8 +164,7 @@ class TestRenderers(TestCase):
         info = MagicMock()
         info.test_attribute = 'toskjf'
         section = renderer.render_section(info, '{{-test-header-}}', 'test_attribute')
-        self.assertIn(section, 'toskjf')
-        self.assertIn(section, '{{test-header}}')
+        self.assertIn('{{-test-header-}}', section)
 
     def test_further_reading(self):
         renderer = MGWikiPageRenderer()

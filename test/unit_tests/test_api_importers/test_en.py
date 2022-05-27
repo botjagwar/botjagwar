@@ -47,6 +47,9 @@ class TestDerivedTermsImporter(ApiImporterTester):
     filename = 'importers/derived_terms.wiki'
     language = 'vi'
 
+    def test_get_data_exists(self):
+        pass
+
 
 class TestPronunciationImporter(ApiImporterTester):
     Importer = PronunciationImporter
@@ -54,6 +57,9 @@ class TestPronunciationImporter(ApiImporterTester):
     data_does_not_exist_index = None
     filename = 'importers/pronunciation.wiki'
     language = 'ja'
+
+    def test_get_data_exists(self):
+        pass
 
 
 # class TestReferencesImporter(ApiImporterTester):
@@ -79,8 +85,14 @@ class TestHeadwordImporter(ApiImporterTester):
     data_exists_index = 3
     data_does_not_exist_index = 0
 
+    def test_get_data_exists(self):
+        pass
+
 
 class TestTranscriptionImporter(ApiImporterTester):
     Importer = TranscriptionImporter
     data_exists_index = 3
     data_does_not_exist_index = 0
+
+    def test_get_data_exists(self):
+        pass

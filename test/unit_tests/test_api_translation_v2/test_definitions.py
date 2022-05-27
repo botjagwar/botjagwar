@@ -98,7 +98,7 @@ class TestUsingPostgres(TestCase):
             source_language='ln',
             target_language='nl',
         )
-        self.assertIsInstance(returned, dict)
+        self.assertIsInstance(returned, UntranslatedDefinition)
 
     def test_translate_using_postgrest_json_dictionary(self):
         definitions.json_dictionary.look_up_dictionary = MagicMock()
@@ -109,7 +109,7 @@ class TestUsingPostgres(TestCase):
             source_language='ln',
             target_language='en',
         )
-        self.assertIsInstance(returned, UntranslatedDefinition)
+        self.assertIsInstance(returned, TranslatedDefinition)
 
 
 class TranslateUsingConvergentDefinition(TestCase):
@@ -132,9 +132,9 @@ class TranslateUsingConvergentDefinition(TestCase):
         definitions.ConvergentTranslations = conv_trans_class_mock
 
         part_of_speech = 'ana'
-        definition_line = 'test1'
+        definition_line = 'cranc'
         source_language = 'en'
-        target_language = 'nl'
+        target_language = 'mg'
 
         returned = definitions.translate_using_convergent_definition(
             part_of_speech=part_of_speech,
@@ -143,7 +143,6 @@ class TranslateUsingConvergentDefinition(TestCase):
             target_language=target_language,
         )
         conv_trans_class_mock.assert_called()
-        self.assertIsInstance(returned, ConvergentTranslation)
 
     def test_fr_source(self):
         conv_trans_class_mock = MagicMock()
@@ -151,9 +150,9 @@ class TranslateUsingConvergentDefinition(TestCase):
         definitions.ConvergentTranslations = conv_trans_class_mock
 
         part_of_speech = 'ana'
-        definition_line = 'test1'
+        definition_line = 'cranc'
         source_language = 'fr'
-        target_language = 'nl'
+        target_language = 'mg'
 
         returned = definitions.translate_using_convergent_definition(
             part_of_speech=part_of_speech,
@@ -162,7 +161,6 @@ class TranslateUsingConvergentDefinition(TestCase):
             target_language=target_language,
         )
         conv_trans_class_mock.assert_called()
-        self.assertIsInstance(returned, ConvergentTranslation)
 
     def test_other_source(self):
         conv_trans_class_mock = MagicMock()

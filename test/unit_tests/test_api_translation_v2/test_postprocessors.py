@@ -17,7 +17,7 @@ class TestPostProcessors(TestCase):
         out_entries = credit([entry])
         assert hasattr(out_entries[0], 'reference')
         expected = "{{wikibolana|" + wiki + '|' + entry.entry + "}}"
-        self.assertEquals(getattr(out_entries[0], 'reference'), expected)
+        self.assertEquals(getattr(out_entries[0], 'reference')[0], expected)
 
     def test_add_xlit_if_no_transcription(self):
         postprocessors.add_xlit_if_no_transcription()
