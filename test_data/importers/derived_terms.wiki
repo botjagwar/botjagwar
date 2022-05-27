@@ -1,0 +1,173 @@
+==Vietnamese==
+
+===Pronunciation===
+{{vi-pron}}
+
+===Etymology 1===
+{{vi-etym-sino|飛|to fly; to gallop}}.
+
+====Verb====
+{{vi-verb}}
+
+# {{lb|vi|of a|horse}} to [[gallop]]
+#: {{ux|vi|Ngựa '''phi'''.|The horse gallops.}}
+# to [[flee]]; to [[travel]] very quickly
+#: {{ux|vi|'''Phi''' nhanh về nhà kẻo tối.|Hurry home before it gets dark.}}
+# to [[lance]] {{gloss|to throw in the manner of a lance}}
+#: {{ux|vi|'''phi''' dao găm|to throw a dagger}}
+
+====Derived terms====
+{{der-top}}
+* {{vi-l|phi báo}}
+* {{vi-l|phi cảng}}
+* {{vi-l|phi công}}
+* {{vi-l|phi công vũ trụ}}
+* {{vi-l|phi cơ}}
+* {{vi-l|phi đao}}
+* {{vi-l|phi điểu}}
+* {{vi-l|phi đội}}
+* {{vi-l|phi hành}}
+* {{vi-l|phi hành đoàn}}
+* {{vi-l|phi hành gia}}
+{{der-mid}}
+* {{vi-l|phi hành vũ trụ}}
+* {{vi-l|phi kiếm}}
+* {{vi-l|phi mã}}, {{vi-l|Phi Mã}}
+* {{vi-l|phi ngựa||to gallop a horse}}
+* {{vi-l|phi pháo}}
+* {{vi-l|phi tiêu}}
+* {{vi-l|phi thuyền}}
+* {{vi-l|phi trường}}
+* {{vi-l|phi vụ}}
+* {{vi-l|phi xuất}}
+* {{vi-l|song phi}}
+{{der-bottom}}
+
+===Etymology 2===
+{{vi-etym-sino|非|not}}.
+
+====Prefix====
+{{head|vi|prefix|{{vi-l|非}}}}
+
+# [[non-]], [[in-]]
+#:{{ux|vi|phi (chính) nghĩa|unjust; for an unjustifiable cause}}
+#:{{ux|vi|phi phàm|inhuman; extraordinary}}
+
+=====Derived terms=====
+{{der-top}}
+* {{vi-l|gian phi}}
+* {{vi-l|phi chính nghĩa}}
+* {{vi-l|phi chính phủ||non-governmental}}
+* {{vi-l|phi chính trị}}
+* {{vi-l|phi đạo đức}}
+* {{vi-l|phi giai cấp}}
+* {{vi-l|phi giáo hội}}
+* {{vi-l|phi lộ}}
+* {{vi-l|phi lợi nhuận||non-profit}}
+* {{vi-l|phi lý}}, {{vi-l|phi lí}}
+* {{vi-l|phi mậu dịch}}
+* {{vi-l|phi nghĩa||unjust}}
+* {{vi-l|phi nhân}}
+* {{vi-l|phi ngã}}
+* {{vi-l|phi phàm}}
+* {{vi-l|phi pháp}}
+* {{vi-l|phi phù trí quỷ}}
+{{der-mid}}
+* {{vi-l|phi quân sự}}
+* {{vi-l|phi quân sự hóa}}, {{vi-l|phi quân sự hoá}}
+* {{vi-l|phi sản xuất}}
+* {{vi-l|phi tang}}
+* {{vi-l|phi thời gian}}
+* {{vi-l|phi thực dân hóa}}, {{vi-l|phi thực dân hoá}}
+* {{vi-l|phi thực tại}}
+* {{vi-l|phi thường}}
+* {{vi-l|phi thương bất phú}}
+* {{vi-l|phi trọng lượng}}
+* {{vi-l|phi vi}}
+* {{vi-l|phi vô sản}}
+* {{vi-l|phi vô sản hóa}}, {{vi-l|phi vô sản hoá}}
+* {{vi-l|phi vụ}}
+* {{vi-l|tái ông thất mã, yên tri phi phúc}}
+* {{vi-l|thị phi}}
+* {{vi-l|trừ phi}}
+{{der-bottom}}
+
+====Conjunction====
+{{vi-conj}}
+
+# [[if it isn't]]
+#: {{ux|vi|'''Phi''' anh ấy, không ai biết.|If it isn't him, then who knows?}}
+
+===Etymology 3===
+
+====Verb====
+{{vi-verb}}
+
+# to [[stir-fry]] (an [[onion]], [[scallion]], or clove of [[garlic]]) before preparing a dish
+#: {{ux|vi|'''Phi''' tỏi rồi mới bỏ [[rau muống]] vào.|Stir-fry the garlic before adding in [[water spinach]].}}
+#: {{ux|vi|'''Phi''' hành để nấu [[nước chấm]].|Stir-fry the onion to make dipping sauce.}}
+
+===Etymology 4===
+
+====Noun====
+{{vi-noun|cls=con}}
+
+# Various [[species]] of saltwater [[clam]] of the genus ''[[Sanguinolaria]]'', such as ''[[Sanguinolaria diphos]]'' and ''[[Sanguinolaria planculata]]''.
+
+===Etymology 5===
+Borrowed from {{bor|vi|la|phi}}.
+
+====Noun====
+{{vi-noun}}
+
+# {{l|en|phi}} {{gloss|Φ}}
+
+===Etymology 6===
+{{vi-etym-sino|妃}}.
+
+====Noun====
+{{vi-noun|cls=bà}}
+
+# [[concubine|concubines]], [[mistress|mistresses]], [[lady|ladies]] of a monarch.
+#: {{ux|vi|các bà '''phi''' trong cung|the palace '''concubines'''}}
+
+=====Synonyms=====
+* {{sense|concubine}} {{vi-l|vợ lẽ}}, {{vi-l|vợ bé}}, {{vi-l|phi tần}}
+
+=====Derived terms=====
+{{der-top}}
+* {{vi-l|ái phi}}
+* {{vi-l|cung phi}}
+* {{vi-l|phi hậu}}
+{{der-mid}}
+* {{vi-l|phi tần}}
+* {{vi-l|quý phi}}, {{vi-l|quí phi}}
+* {{vi-l|thứ phi}}
+{{der-bottom}}
+
+===Etymology 7===
+
+====Romanization====
+{{head|vi|romanization}}
+
+# {{sino-vietnamese reading of|妃}}
+
+=====Derived terms=====
+* {{vi-l|Bột Phi}}
+* {{vi-l|Hàn Phi}}
+* {{vi-l|hoàng phi}}
+* {{vi-l|hoành phi}}
+* {{vi-l|Phi Lai Giang}}
+* {{vi-l|Phi Liêm}}
+
+===See also===
+* {{vi-l|phi-la-tốp}}
+* {{vi-l|phi lao}}, {{vi-l|phi-lao}}
+* {{vi-l|phi lê}}, {{vi-l|phi-lê||fillet}}
+* {{vi-l|phi-nan||finale}}
+* {{vi-l|phi-năng||finance}}
+* {{vi-l|phương phi}}
+
+===References===
+* {{R:FVDP}}
+* {{R:WinVNKey:Lê Sơn Thanh}}

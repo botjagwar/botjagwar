@@ -77,7 +77,9 @@ class MGWikiPageRenderer(PageRenderer):
         defn_list = sorted(set(info.definitions))
         if link:
             for d in defn_list:
-                if len(d.split()) == 1:
+                if '[[' in d or ']]' in d:
+                    definitions.append(d)
+                elif len(d.split()) == 1:
                     if d[-1] in trailing_characters_to_exclude_from_link:
                         for trailing_character_to_exclude_from_link in trailing_characters_to_exclude_from_link:
                             if d.endswith(trailing_character_to_exclude_from_link):
@@ -86,8 +88,6 @@ class MGWikiPageRenderer(PageRenderer):
                                 break
                     else:
                         definitions.append(f'[[{d}]]')
-                elif '[[' in d or ']]' in d:
-                    definitions.append(d)
                 else:
                     multiword_definitions = self.link_if_exists(d.split())
                     definition = ' '.join(multiword_definitions)
