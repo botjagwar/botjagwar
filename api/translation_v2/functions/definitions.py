@@ -179,8 +179,8 @@ def translate_using_postgrest_json_dictionary(
         log.debug(
             f'{definition_line} ({part_of_speech}) [{source_language} -> {target_language}]: {t_string}')
         return TranslatedDefinition(t_string)
-    else:
-        return UntranslatedDefinition(definition_line)
+
+    return UntranslatedDefinition(definition_line)
 
 
 def translate_using_convergent_definition(
@@ -204,8 +204,8 @@ def translate_using_convergent_definition(
     if ret_translations:
         k = ', '.join(sorted(list(set(ret_translations))))
         return ConvergentTranslation(k)
-    else:
-        return UntranslatedDefinition(definition_line)
+
+    return UntranslatedDefinition(definition_line)
 
 
 def translate_using_bridge_language(part_of_speech,
@@ -222,8 +222,8 @@ def translate_using_bridge_language(part_of_speech,
     if translations.keys():
         k = ', '.join(sorted(list(set(translations))))
         return TranslatedDefinition(k)
-    else:
-        return UntranslatedDefinition(definition_line)
+
+    return UntranslatedDefinition(definition_line)
 
 
 def translate_using_nltk(part_of_speech,

@@ -23,10 +23,10 @@ class KeyValueStoreAPI(object):
                     self._set_attribute(key, pickle.dumps(v))
                     print('funccall', key, v)
                     return v
-                else:
-                    v = pickle.loads(self.kvstore[key])
-                    print('kvstore', key, v)
-                    return
+
+                v = pickle.loads(self.kvstore[key])
+                print('kvstore', key, v)
+                return
 
             return wrapper
         print(self.kvstore)
@@ -36,8 +36,8 @@ class KeyValueStoreAPI(object):
         data = self.kvstore[key]
         if data is not None:
             return data
-        else:
-            raise KeyError(key, ' was not found.')
+
+        raise KeyError(key, ' was not found.')
 
     def _has_key(self, key):
         return key in self.kvstore

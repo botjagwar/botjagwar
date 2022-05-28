@@ -17,8 +17,8 @@ async def get_definition_with_words(request) -> Response:
             status=200,
             content_type='application/json'
         )
-    else:
-        return Response(status=404, content_type='application/json')
+
+    return Response(status=404, content_type='application/json')
 
 
 async def edit_definition(request) -> Response:
@@ -37,8 +37,8 @@ async def edit_definition(request) -> Response:
             status=200,
             content_type='application/json'
         )
-    else:
-        return Response(status=404, content_type='application/json')
+
+    return Response(status=404, content_type='application/json')
 
 
 async def get_definition(request) -> Response:
@@ -52,8 +52,8 @@ async def get_definition(request) -> Response:
             status=200,
             content_type='application/json'
         )
-    else:
-        return Response(status=404, content_type='application/json')
+
+    return Response(status=404, content_type='application/json')
 
 
 async def search_definition(request) -> Response:

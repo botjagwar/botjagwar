@@ -14,8 +14,8 @@ def language_exists(language_code, session):
         .all()]
     if len(languages) > 0:
         return True
-    else:
-        return False
+
+    return False
 
 
 async def list_languages(request) -> Response:

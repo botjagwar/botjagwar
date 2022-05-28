@@ -7,9 +7,9 @@ class Word(TypeCheckedObject):
     _additional = False
     properties_types = dict(
         entry=str,
-
         part_of_speech=str,
-        language=str)
+        language=str
+    )
 
 
 class Entry(TypeCheckedObject):
@@ -21,6 +21,20 @@ class Entry(TypeCheckedObject):
         definitions=list,
         language=str,
     )
+
+    def __init__(self, **properties):
+        super(Entry, self).__init__(**properties)
+        self.entry = properties['entry']
+        self.part_of_speech = properties['part_of_speech']
+        self.definitions = properties['definitions']
+        if 'language' in properties:
+            self.language = properties['language']
+
+        if 'additional_data' in properties:
+            self.additional_data = properties['additional_data']
+
+        if 'references' in properties:
+            self.references = properties['references']
 
     @classmethod
     def from_word(cls, model):
@@ -70,7 +84,7 @@ class Entry(TypeCheckedObject):
         if hasattr(self, 'language') and hasattr(other, 'language'):
             if self.language == other.language:
                 if hasattr(self, 'entry') and hasattr(other, 'entry'):
-                    if self.entry == other.entry:
+                    if self.entry == other.entry:  # noqa
                         if hasattr(self, 'part_of_speech') and hasattr(other, 'part_of_speech'):
                             if self.part_of_speech == other.part_of_speech:
                                 return 0
@@ -118,8 +132,8 @@ class Entry(TypeCheckedObject):
 
         if additional_data:
             return "Entry{%s | additional_data %s}" % (props, additional_data)
-        else:
-            return "Entry{%s}" % (props)
+
+        return "Entry{%s}" % (props)
 
 
 class Translation(TypeCheckedObject):

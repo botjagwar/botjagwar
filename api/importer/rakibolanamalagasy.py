@@ -23,8 +23,8 @@ class DictionaryImporter(AdditionalDataImporter):
     def get_word_id(self, word, language, part_of_speech):
         if (word, language, part_of_speech) not in self.word_id_cache:
             return self.http_get_word_id(word, language, part_of_speech)
-        else:
-            return self.word_id_cache[(word, language, part_of_speech)]
+
+        return self.word_id_cache[(word, language, part_of_speech)]
 
     def http_get_word_id(self, word, language, part_of_speech):
         rq_params = {

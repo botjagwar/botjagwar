@@ -139,8 +139,8 @@ class SiteExtractorCacheEngine(object):
     def get(self, word):
         if word in self.page_dump:
             return self.page_dump[word]
-        else:
-            raise CacheMissError()
+
+        raise CacheMissError()
 
     def iterate(self):
         for word in self.page_dump:

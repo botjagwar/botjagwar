@@ -25,8 +25,8 @@ def translate_reference_templates(ref, source='en', target='mg', use_postgrest='
         postgrest.add_translated_title(title, translated_title, source_language=source, target_language=target)
         translated_reference = ref.replace(title, translated_title)
         return translated_reference
-    else:
-        return title
+
+    return title
 
 
 def translate_references(references: list, source='en', target='mg', use_postgrest: [bool, str] = 'automatic') -> list:

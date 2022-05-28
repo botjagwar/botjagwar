@@ -157,7 +157,8 @@ class ConvergentTranslations(PostgrestBackend):
         data = response.json()
         if response.status_code == 200:  # HTTP OK
             return data
-        elif response.status_code == 404:  # HTTP Not found
+        if response.status_code == 404:  # HTTP Not found
             return None
-        else:  # other HTTP error:
-            raise BackendError(f'Unexpected error: HTTP {response.status_code}; ' + response.text)
+
+        # other HTTP error:
+        raise BackendError(f'Unexpected error: HTTP {response.status_code}; ' + response.text)

@@ -116,8 +116,8 @@ class AdditionalDataImporter(object):
 
             if not query:
                 return
-            else:
-                self.word_id_cache[(title, language)] = query[0]['id']
+
+            self.word_id_cache[(title, language)] = query[0]['id']
 
         additional_data_filenames = self.get_data(
             self.data_type, content, language)

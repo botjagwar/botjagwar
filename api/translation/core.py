@@ -23,7 +23,7 @@ WORKING_WIKI_LANGUAGE = 'mg'
 class Translation:
     def __init__(self):
         """Mandika teny ary pejy @ teny malagasy"""
-        super(self.__class__, self).__init__()
+        super(Translation, self).__init__()
         self.output = Output()
         self.language_blacklist = LANGUAGE_BLACKLIST
         self.loop = asyncio.get_event_loop()

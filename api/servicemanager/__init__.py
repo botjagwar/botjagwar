@@ -152,9 +152,9 @@ class LanguageServiceManager(ServiceManager):
         for i in range(10):
             if result is not None:
                 return result
-            else:
-                print(result)
-                time.sleep(.5)
-                result = self.get('language/' + language_code)
+
+            print(result)
+            time.sleep(.5)
+            result = self.get('language/' + language_code)
 
         raise Exception("Language not found: " + language_code)

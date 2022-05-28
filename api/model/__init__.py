@@ -22,11 +22,11 @@ class List(Property):
 
 
 class TypeCheckedObject(object):
-    _additional = True
-    properties = {}
-    additional_data_types = {}
-    properties_types = {}
-    node_mapper = []
+    _additional: bool = True
+    properties: dict = {}
+    additional_data_types: dict = {}
+    properties_types: dict = {}
+    node_mapper: list = []
 
     def __init__(self, **properties):
         for attribute, value in list(properties.items()):
@@ -54,7 +54,7 @@ class TypeCheckedObject(object):
 
         return ret
 
-    def add_attribute(self, name, value):
+    def add_attribute(self, name, value) -> None:
         """
         Sets an attribute to the class
         properties_types contains the types expected for each property. If a property

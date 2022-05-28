@@ -1,6 +1,9 @@
 from logging import getLogger
 
-from transformers import AutoTokenizer, AutoModelForSeq2SeqLM, Trainer
+try:
+    from transformers import AutoTokenizer, AutoModelForSeq2SeqLM, Trainer
+except ImportError:
+    raise ImportError('This API needs transformers module to be installed. Please install it and try again')
 
 from api.decorator import singleton
 

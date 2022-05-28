@@ -51,12 +51,13 @@ def word_with_definition_exists(
         part_of_speech=part_of_speech).all()
     if not words:
         return False
-    else:
-        for word in words:
-            for found_definition in word.definitions:
-                if found_definition.definition == definition:
-                    return True
-        return False
+
+    for word in words:
+        for found_definition in word.definitions:
+            if found_definition.definition == definition:
+                return True
+
+    return False
 
 
 def word_exists(session, word, language, part_of_speech):
@@ -66,8 +67,8 @@ def word_exists(session, word, language, part_of_speech):
         part_of_speech=part_of_speech).all()
     if not word:
         return False
-    else:
-        return True
+
+    return True
 
 
 async def get_word_by_id(request) -> Response:
@@ -136,16 +137,16 @@ def _add_entry(data, session):
             word.definitions = normalised_retained_definitions
 
         return word
-    else:
-        # Add a new word if not.
-        word = Word(
-            word=data['word'],
-            language=data['language'],
-            part_of_speech=data['part_of_speech'],
-            definitions=normalised_retained_definitions)
-        # Updating database
 
-        session.add(word)
+    # Add a new word if not.
+    word = Word(
+        word=data['word'],
+        language=data['language'],
+        part_of_speech=data['part_of_speech'],
+        definitions=normalised_retained_definitions)
+
+    # Updating database
+    session.add(word)
 
     return word
 

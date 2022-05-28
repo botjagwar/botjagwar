@@ -41,10 +41,10 @@ def parse_one_parameter_template(
             ret_obj.tense = tense
             ret_obj.mood = mood
             return ret_obj
-        else:
-            raise ValueError(
-                "Unrecognised template: expected '%s' but got '%s'" %
-                (parts[0], template_name))
+
+        raise ValueError(
+            "Unrecognised template: expected '%s' but got '%s'" %
+            (parts[0], template_name))
 
     return _parse_one_parameter_template
 
@@ -178,8 +178,8 @@ def parse_romanization_template(lemma_position=2):
             lemma = parts[lemma_position]
             lemma = lemma.rstrip('}}')
             return Romanization(lemma=lemma)
-        else:
-            raise Exception(f'{len(parts)} <= {lemma_position+1}')
+
+        raise Exception(f'{len(parts)} <= {lemma_position+1}')
 
     return _wrapped_parse_romanization_template
 

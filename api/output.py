@@ -24,7 +24,7 @@ class Output(object):
         if content_language != 'default':
             self.content_language = content_language
 
-        self.wikipage_renderer = WikiPageRendererFactory(self.content_language)()
+        self.wikipage_renderer = WikiPageRendererFactory(self.content_language)()  # pylint: disable=E1102
 
     @retry_on_fail([Exception], 5, .5)
     def dictionary_service_update_database(self, info: Entry):
@@ -105,7 +105,7 @@ class Output(object):
                         'definition': defn_id,
                         'translation_method': method,
                     }
-                    log.debug('post /translation_method', data)
+                    log.debug('post /translation_method' + str(data))
                     requests.post(backend + '/translation_method', json=data)
 
     @staticmethod

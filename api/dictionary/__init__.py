@@ -35,8 +35,8 @@ async def get_dictionary(request) -> Response:
         return Response(
             text=json.dumps(definitions),
             status=200)
-    else:
-        return Response(status=404, content_type='application/json')
+
+    return Response(status=404, content_type='application/json')
 
 
 async def get_dictionary_xml(request) -> Response:
@@ -53,8 +53,8 @@ async def get_dictionary_xml(request) -> Response:
             status=200,
             content_type='application/xml'
         )
-    else:
-        return Response(status=404, content_type='application/json')
+
+    return Response(status=404, content_type='application/json')
 
 
 async def get_inferred_multilingual_dictionary(request) -> Response:

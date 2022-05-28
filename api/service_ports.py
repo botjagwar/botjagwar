@@ -10,8 +10,8 @@ random_port_ranges = [10000, 20000]
 def get_service_port(service_name):
     if service_name in service_ports:
         return service_ports[service_name]
-    else:
-        return generate_service_port()
+
+    return generate_service_port()
 
 
 def generate_service_port():

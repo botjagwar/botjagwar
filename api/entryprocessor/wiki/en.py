@@ -81,8 +81,8 @@ class ENWiktionaryProcessor(WiktionaryProcessor):
     def extract_definition(self, part_of_speech, definition_line, advanced=False, **kw):
         if not advanced:  # No cleanup
             return definition_line
-        else:
-            return self.advanced_extract_definition(part_of_speech, definition_line)
+
+        return self.advanced_extract_definition(part_of_speech, definition_line)
 
     def advanced_extract_definition(self, part_of_speech, definition_line,
                                     cleanup_definition=True,
@@ -206,8 +206,8 @@ class ENWiktionaryProcessor(WiktionaryProcessor):
                     return mg_pos
 
             return self.get_part_of_speech(line, current_level+1)
-        else:
-            return None
+
+        return None
 
     @staticmethod
     def refine_definition(definition) -> list:

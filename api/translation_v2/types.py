@@ -37,4 +37,9 @@ class FormOfTranslaton(TranslatedDefinition):
     pass
 
 
-__all__ = [UntranslatedDefinition, TranslatedDefinition, ConvergentTranslation, FormOfTranslaton]
+__all__ = [
+    "UntranslatedDefinition",
+    "TranslatedDefinition",
+    "ConvergentTranslation",
+    "FormOfTranslaton"
+]

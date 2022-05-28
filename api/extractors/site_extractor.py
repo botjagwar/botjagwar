@@ -48,7 +48,7 @@ class SiteExtractor(object):
                 if 'tsy misy' in response.text:
                     raise SiteExtractorException(response, 'Empty content')
                 return response.text
-            elif 400 <= response.status_code < 600:
+            if 400 <= response.status_code < 600:
                 raise SiteExtractorException(response, 'Non-OK')
 
         # variables check
@@ -154,7 +154,7 @@ class TenyMalagasySiteExtractor(SiteExtractor):
         examples = {}
         for definition_section in entry.definitions:
             for ref in re.findall(references_regex, str(definition_section)):
-                entry.references.append(ref)
+                entry.references.append(ref)  # noqa
                 definition_section = definition_section.replace(
                     '[%s]' % ref, '')
                 definition_section = definition_section.replace(

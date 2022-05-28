@@ -70,10 +70,9 @@ class NinjaEntryPublisher(object):
 class NinjaEntryCreator(object):
 
     def __init__(self):
-        Renderer = WikiPageRendererFactory('mg')
         self.publisher = NinjaEntryPublisher()
         self.output = Output()
-        self.renderer = Renderer()
+        self.renderer = WikiPageRendererFactory('mg')
         mg_word_list = self.fetch_mg_word_list()
         self.renderer.pages_to_link = mg_word_list
         additional_data_types_rq = requests.get(

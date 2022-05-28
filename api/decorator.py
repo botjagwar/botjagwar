@@ -142,20 +142,20 @@ def time_this(identifier=''):
     return _time_this
 
 
-def retry_on_fail(exceptions, retries=5, time_between_retries=1):
+def retry_on_fail(exceptions: [tuple, list, set], retries=5, time_between_retries=1):
     def _retry_on_fail(f):
         def wrapper(*args, **kwargs):
             m_retries = 0
             while True:
                 try:
                     return f(*args, **kwargs)
-                except tuple(exceptions) as e:
+                except exceptions as handled_error:
                     if m_retries <= retries:
                         m_retries += 1
-                        print('Error:', e, '%d' % m_retries)
+                        print('Error:', handled_error, '%d' % m_retries)
                         time.sleep(time_between_retries)
                     else:
-                        raise e
+                        raise handled_error
 
         return wrapper
     return _retry_on_fail

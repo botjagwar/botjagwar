@@ -18,8 +18,8 @@ class MGWikiPageRenderer(PageRenderer):
                 else:
                     ret.append(word)
             return ret
-        else:
-            return definition_words
+
+        return definition_words
 
     def render(self, info: Entry, link=True) -> str:
         additional_note = ""
@@ -222,5 +222,5 @@ class MGWikiPageRenderer(PageRenderer):
 
             new_text = wiki_page.replace(to_delete, '')
             return new_text
-        else:
-            return wiki_page
+
+        return wiki_page

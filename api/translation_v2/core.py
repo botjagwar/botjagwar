@@ -60,7 +60,7 @@ class Translation:
         :param use_configured_postprocessors: Use the configuration file to configure postprocessors.
         Allows postprocessors to be defines on a per-language basis, or a language + part of speech basis.
         """
-        super(self.__class__, self).__init__()
+        super(Translation, self).__init__()
         self.output = Output()
         self.loop = asyncio.get_event_loop()
         self.config = BotjagwarConfig(name='entry_translator/postprocessors.ini')
@@ -443,8 +443,8 @@ class Translation:
                 self._save_translation_from_page(out_entries)
                 self.publish_translated_references(wiktionary_processor.language, self.working_wiki_language)
                 return len(out_entries)
-            else:
-                return 0
+
+            return 0
         except Exception as exc:
             log.exception(exc)
             return -1
