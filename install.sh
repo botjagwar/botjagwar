@@ -8,7 +8,11 @@ fi
 if [[ -z `which virtualenv` ]]; then
   virtualenv_exe=venv
 else
-  virtualenv_exe=virtualenv
+  if [[ -z `which venv` ]]; then
+    virtualenv_exe=virtualenv
+  else
+    virtualenv_exe="python3 -m virtualenv"
+  fi
 fi
 
 src_dir=`pwd`
@@ -29,8 +33,7 @@ if [[ ! -d $opt_dir/pyenv ]]; then
   source $opt_dir/pyenv/bin/activate
 fi
 
-
-cd $src_dir
+cd "$src_dir"
 python3 -m pip install -r requirements.txt
 
 sudo mkdir -p $opt_dir/user_data
