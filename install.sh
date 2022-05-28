@@ -1,8 +1,14 @@
 #!/bin/bash
 echo "Prepare python environment"
 set -xe
-if [[ `which virtualenv` == 1 ]]; then
+if [[ -z `which virtualenv` ]]; then
   sudo python3 -m pip install virtualenv
+fi
+
+if [[ -z `which virtualenv` ]]; then
+  virtualenv_exe=venv
+else
+  virtualenv_exe=virtualenv
 fi
 
 src_dir=`pwd`
@@ -18,7 +24,8 @@ sudo mkdir -p $opt_dir
 sudo chown $current_user $opt_dir
 if [[ ! -d $opt_dir/pyenv ]]; then
   set -e
-  python3 -m virtualenv $opt_dir/pyenv
+  $virtualenv_exe $opt_dir/pyenv
+  $virtualenv_exe $opt_dir/pyenv
   source $opt_dir/pyenv/bin/activate
 fi
 
