@@ -30,10 +30,15 @@ class EnglishParser:
         self.abort = 0
         self.lp = 0
 
-    def xml(self, parsed, tokens=list(), lvl=0):
+    def xml(self, parsed, tokens: list = None, lvl=0):
         xml_str = ''
+        if tokens is None:
+            tokens = []
 
-        def _recursive_xml(parsed, tokens=list(), lvl=0):
+        def _recursive_xml(parsed, tokens: list = None, lvl: int=0):
+            if tokens is None:
+                tokens = []
+
             _xml_str = ''
             for p in parsed:
                 if isinstance(p, nltk.tree.Tree):

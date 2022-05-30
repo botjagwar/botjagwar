@@ -88,24 +88,18 @@ class Entry(TypeCheckedObject):
                         if hasattr(self, 'part_of_speech') and hasattr(other, 'part_of_speech'):
                             if self.part_of_speech == other.part_of_speech:
                                 return 0
-                            elif self.part_of_speech < other.part_of_speech:
+                            if self.part_of_speech < other.part_of_speech:
                                 return -1
-                            else:
-                                return 1
-                        else:
-                            return 0
-                    elif self.entry < other.entry:
+                            return 1
+                        return 0
+                    if self.entry < other.entry:
                         return -1
-                    else:
-                        return 1
-                else:
-                    return 0
-            elif self.language < other.language:
+                    return 1
+                return 0
+            if self.language < other.language:
                 return -1
-            else:
-                return 1
-        else:
             return 1
+        return 1
 
     def overlay(self, other):
         self.language = other.language
