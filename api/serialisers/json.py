@@ -23,7 +23,7 @@ class JSONBuilder(Builder):
             if isinstance(attribute_value, Builder):
                 main_node[json_node_name] = attribute_value.serialise()
                 continue
-            elif type(attribute_value) in (dict, str):
+            if attribute_value.__class__ in (dict, str):
                 main_node[json_node_name] = attribute_value
             elif type(attribute_value) in (float, int):
                 main_node[json_node_name] = attribute_value
@@ -32,7 +32,7 @@ class JSONBuilder(Builder):
                 main_node[json_node_name] = []
                 for e in attribute_value:
                     if isinstance(e, Builder):
-                        main_node[json_node_name].append(e.serialise())
+                        main_node[json_node_name] = e.serialise()
                     else:
                         if hasattr(e, 'serialise'):
                             try:
@@ -50,7 +50,7 @@ class JSONBuilder(Builder):
                                     )
                                 main_node[json_node_name].append(serialised)
                         else:
-                            raise JSONBuilderError("'%s' is not a serialisable element" % e.__class__)
+                            main_node[json_node_name].append(e)
             else:
                 raise JSONBuilderError("'%s' is not a serialisable element" % attribute_value.__class__)
 
