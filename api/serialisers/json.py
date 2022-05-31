@@ -23,11 +23,11 @@ class JSONBuilder(Builder):
             if isinstance(attribute_value, Builder):
                 main_node[json_node_name] = attribute_value.serialise()
                 continue
-            elif attribute_value.__class__ in (dict, str):
+            elif type(attribute_value) in (dict, str):
                 main_node[json_node_name] = attribute_value
-            elif attribute_value.__class__ in (float, int):
-               main_node[json_node_name] = attribute_value
-            elif attribute_value.__class__ in (set, list, tuple):
+            elif type(attribute_value) in (float, int):
+                main_node[json_node_name] = attribute_value
+            elif type(attribute_value) in (set, list, tuple):
                 print(json_node_name, '=', attribute_value)
                 main_node[json_node_name] = []
                 for e in attribute_value:
