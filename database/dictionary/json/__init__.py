@@ -122,6 +122,8 @@ class Word(JSONBuilder):
             for adt, adi in self.model.additional_data.items():
                 if adt in data:
                     data[adt].append(adi)
+                elif hasattr(adi, '__iter__'):
+                    data[adt] = list(adi)
                 else:
                     data[adt] = [adi]
 

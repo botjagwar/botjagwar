@@ -32,7 +32,7 @@ class JSONBuilder(Builder):
                 main_node[json_node_name] = []
                 for e in attribute_value:
                     if isinstance(e, Builder):
-                        main_node[json_node_name] = e.serialise()
+                        main_node[json_node_name].append(e.serialise())
                     else:
                         if hasattr(e, 'serialise'):
                             try:
@@ -53,11 +53,5 @@ class JSONBuilder(Builder):
                             main_node[json_node_name].append(e)
             else:
                 raise JSONBuilderError("'%s' is not a serialisable element" % attribute_value.__class__)
-
-            try:
-                if len(main_node[json_node_name]) == 1:
-                    main_node[json_node_name] = main_node[json_node_name][0]
-            except Exception:
-                print(main_node)
 
         return main_node
