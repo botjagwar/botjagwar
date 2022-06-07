@@ -86,8 +86,8 @@ def get_milestones(old_state, new_state):
     def states_diff(state_1, state_2):
         if (state_1[0], state_1[1]) == (state_2[0], state_2[1]):
             for column in list(state_2[2].keys()):
-                old_figure = state_1[2][column]
-                new_figure = state_2[2][column]
+                old_figure = state_1[2].get(column, 0)
+                new_figure = state_2[2].get(column, 0)
                 # print(old_figure, new_figure)
 
                 s1_pow10 = int(math.log(max(1, old_figure), 10))
