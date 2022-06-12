@@ -118,6 +118,12 @@ class Language(Base, Serialisable):
     malagasy_name = Column(String(100))
     language_ancestor = Column(String(6))
 
+    def __init__(self, iso_code, english_name, malagasy_name, language_ancestor):
+        self.iso_code = iso_code
+        self.english_name = english_name
+        self.malagasy_name = malagasy_name
+        self.language_ancestor = language_ancestor
+
     def get_schema(self):
         pass
 
