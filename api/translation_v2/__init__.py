@@ -12,7 +12,7 @@ class EntryTranslator(object):
                   target_language: str = 'mg') -> Entry:
         out_definitions = []
         for definition in entry.definitions:
-            out_entry_dict = entry.to_dict()
+            out_entry_dict = entry.serialise()
             for method in self.methods:
                 extracted_definition = method(
                     entry.part_of_speech,

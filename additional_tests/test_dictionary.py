@@ -10,9 +10,9 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
 from api.decorator import threaded, retry_on_fail
-from database.dictionary import Base, Definition, Word
-from database.exceptions.http import InvalidJsonReceived
-from database.exceptions.http import WordAlreadyExists
+from api.dictionary.exceptions.http import InvalidJsonReceived
+from api.dictionary.exceptions.http import WordAlreadyExists
+from api.dictionary.model import Base, Definition, Word
 
 URL_HEAD = 'http://0.0.0.0:8001'
 DB_PATH = '/tmp/test.db'

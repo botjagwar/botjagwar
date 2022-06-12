@@ -2,7 +2,7 @@ import json
 
 from aiohttp.web import Response
 
-from database.dictionary import Definition
+from api.dictionary.model import Definition
 from .routines import save_changes_on_disk
 
 

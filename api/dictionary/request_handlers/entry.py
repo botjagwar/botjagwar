@@ -5,8 +5,8 @@ import logging
 from aiohttp.web import Response
 from aiohttp.web_exceptions import HTTPNoContent, HTTPOk
 
-from database.dictionary import Definition, Word
-from database.exceptions.http import WordAlreadyExists, WordDoesNotExist, InvalidJsonReceived
+from api.dictionary.exceptions.http import WordAlreadyExists, WordDoesNotExist, InvalidJsonReceived
+from api.dictionary.model import Definition, Word
 from .routines import save_changes_on_disk
 
 log = logging.getLogger(__name__)

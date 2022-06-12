@@ -4,7 +4,7 @@ from unittest.mock import MagicMock
 
 from parameterized import parameterized
 
-from database.dictionary.model import DefinitionSerialiser, WordSerialiser
+from api.dictionary.serialisers.json import Definition as DefinitionSerialiser, Word as WordSerialiser
 
 
 def fixture_definition_2():

@@ -1,7 +1,7 @@
 from api.databasemanager import DictionaryDatabaseManager
 from api.decorator import time_this
 
-from database.dictionary import Word
+from api.dictionary.model import Word
 
 
 class FastTranslationLookup:

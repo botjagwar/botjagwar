@@ -6,11 +6,11 @@ import requests
 from aiohttp import ClientSession
 
 from api import entryprocessor
+from api.dictionary.exceptions import WordDoesNotExist
 from api.exceptions import NoWordException
 from api.model.word import Entry
 from api.output import Output
 from api.servicemanager import DictionaryServiceManager
-from database.exceptions.http import WordDoesNotExist
 
 log = logging.getLogger(__name__)
 default_data_file = '/opt/botjagwar/conf/entry_translator/'

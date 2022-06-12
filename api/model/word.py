@@ -13,6 +13,9 @@ class Word(TypeCheckedObject):
 
 
 class Entry(TypeCheckedObject):
+    """
+    Non-DB model for entries
+    """
     _additional = True
     additional_data_types = {}
     properties_types = dict(
@@ -49,8 +52,8 @@ class Entry(TypeCheckedObject):
     def to_tuple(self):
         return self.entry, self.part_of_speech, self.language, self.definitions
 
-    def to_dict(self) -> dict:
-        ret = TypeCheckedObject.to_dict(self)
+    def serialise(self) -> dict:
+        ret = TypeCheckedObject.serialise(self)
 
         ret['additional_data'] = {}
         for key in self.additional_data_types.keys():

@@ -144,7 +144,7 @@ async def get_wiktionary_page_translation(request) -> Response:
             content_type='application/json')
     else:
         response = Response(
-            text=json.dumps([d.to_dict() for d in data]),
+            text=json.dumps([d.serialise() for d in data]),
             status=200,
             content_type='application/json')
     return response
@@ -174,7 +174,7 @@ async def get_wiktionary_processed_page(request) -> Response:
             definitions.append(wiktionary_processor.advanced_extract_definition(entry.part_of_speech, d))
 
         entry.definitions = definitions
-        section = entry.to_dict()
+        section = entry.serialise()
 
         for translation in wiktionary_processor.retrieve_translations():
             translation_section = TranslationModel(
@@ -184,7 +184,7 @@ async def get_wiktionary_processed_page(request) -> Response:
                 translation=translation.definitions[0]
             )
             if translation.part_of_speech == entry.part_of_speech:
-                translation_list.append(translation_section.to_dict())
+                translation_list.append(translation_section.serialise())
 
         if entry.language == language:
             section['translations'] = translation_list

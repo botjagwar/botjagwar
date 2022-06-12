@@ -84,7 +84,7 @@ class TestList(TestCase):
             }
 
         test = YunHang(test1=1, test2=2, test3obj=List(['qw', 'dlk']))
-        serialised = test.to_dict()
+        serialised = test.serialise()
 
         self.assertIsInstance(serialised['test3obj'], list)
 
@@ -169,7 +169,7 @@ class TestTranslation(TestCase):
             part_of_speech='ana',
             translation='alskdalskdalkas'
         )
-        serialised = translation.to_dict()
+        serialised = translation.serialise()
         self.assertEqual(serialised['word'], 'kaolak')
         self.assertEqual(serialised['language'], 'kk')
         self.assertEqual(serialised['part_of_speech'], 'ana')

@@ -11,10 +11,10 @@ from lxml import etree
 
 from api.config import BotjagwarConfig
 from api.decorator import time_this
+from api.dictionary.exceptions.http import BatchContainsErrors
 from api.entryprocessor import WiktionaryProcessorFactory
 from api.model.word import Entry
 from api.servicemanager import DictionaryServiceManager
-from database.exceptions.http import BatchContainsErrors
 from dump_processor import Processor
 
 config = BotjagwarConfig()

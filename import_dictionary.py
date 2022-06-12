@@ -9,7 +9,7 @@ from subprocess import Popen
 from aiohttp import ClientSession
 
 from api.decorator import threaded
-from database.exceptions.http import WordAlreadyExists
+from api.dictionary.exceptions.http import WordAlreadyExists
 
 # for parts of speech
 MONOLINGUAL_DICTIONARY = 'user_data/%s.csv' % sys.argv[1]

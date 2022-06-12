@@ -1,9 +1,9 @@
 import sys
 from csv import DictReader
 
+from api.dictionary.exceptions.http import WordAlreadyExists
 from api.servicemanager import DictionaryServiceManager
 from api.storage import MissingTranslationCsvWriter
-from database.exceptions.http import WordAlreadyExists
 
 
 class Extractor(object):

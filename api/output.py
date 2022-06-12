@@ -3,11 +3,11 @@ import logging
 import requests
 
 from api.decorator import retry_on_fail
+from api.dictionary.exceptions.http import WordAlreadyExists
 from api.model.word import Entry
 from api.page_renderer import WikiPageRendererFactory
 from api.servicemanager import DictionaryServiceManager
 from api.servicemanager.pgrest import StaticBackend
-from database.exceptions.http import WordAlreadyExists
 
 log = logging.getLogger(__name__)
 verbose = False
@@ -30,7 +30,7 @@ class Output(object):
     def dictionary_service_update_database(self, info: Entry):
         """updates database"""
         # Adapt to expected format
-        log.info(info.to_dict())
+        log.info(info.serialise())
         definitions = [{
             'definition': d,
             'definition_language': self.content_language
@@ -117,7 +117,7 @@ class Output(object):
 
     def batchfile(self, info: Entry):
         "return batch format (see doc)"
-        string = "%(entry)s -> %(entry_definition)s -> %(part_of_speech)s -> %(language)s\n" % info.to_dict()
+        string = "%(entry)s -> %(entry_definition)s -> %(part_of_speech)s -> %(language)s\n" % info.serialise()
         return string
 
     def wikipage(self, info: Entry, link=True):

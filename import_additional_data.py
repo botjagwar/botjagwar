@@ -218,7 +218,7 @@ class EnWiktionaryAdditionalDataImporter(object):
         processor.set_text(page.get())
         processor.set_title(page.title())
         for entry in processor.getall(fetch_additional_data=True, cleanup_definitions=True, advanced=True):
-            entry_as_dict = entry.to_dict()
+            entry_as_dict = entry.serialise()
             for additional_data_type, additional_data in entry_as_dict['additional_data'].items():
                 word_id = self.get_word_id(entry)
                 if word_id:

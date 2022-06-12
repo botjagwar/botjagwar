@@ -27,6 +27,8 @@ class JSONBuilder(Builder):
                 main_node[json_node_name] = attribute_value
             elif type(attribute_value) in (float, int):
                 main_node[json_node_name] = attribute_value
+            elif attribute_value is None:
+                main_node[json_node_name] = None
             elif hasattr(attribute_value, '__iter__'):
                 print(json_node_name, '=', attribute_value)
                 main_node[json_node_name] = []

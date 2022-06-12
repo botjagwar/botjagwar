@@ -2,8 +2,8 @@ import json
 
 from aiohttp.web import Response, json_response
 
-from database.exceptions.http import InvalidDataError, ElementDoesNotExist
-from database.language import Language
+from api.dictionary.exceptions.http import InvalidDataError, ElementDoesNotExist
+from api.dictionary.model import Language
 from .routines import save_changes_on_disk
 
 

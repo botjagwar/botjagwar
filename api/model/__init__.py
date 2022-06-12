@@ -42,7 +42,7 @@ class TypeCheckedObject(object):
     def __dir__(self):
         return list(self.properties.keys())
 
-    def to_dict(self) -> dict:
+    def serialise(self) -> dict:
         ret = {}
         for key in self.properties_types.keys():
             if hasattr(self, key):

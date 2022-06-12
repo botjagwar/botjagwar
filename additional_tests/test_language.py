@@ -10,8 +10,8 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
 from api.decorator import threaded, retry_on_fail
-from database.dictionary import Base
-from database.exceptions.http import InvalidJsonReceived
+from api.dictionary.exceptions.http import InvalidJsonReceived
+from api.dictionary.model import Base
 
 URL_HEAD = 'http://0.0.0.0:8003'
 DB_PATH = '/tmp/test_language.db'

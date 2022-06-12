@@ -11,9 +11,9 @@ from sqlalchemy import func
 
 from api.databasemanager import DictionaryDatabaseManager, LanguageDatabaseManager
 from api.decorator import time_this
+from api.dictionary.model import Language
+from api.dictionary.model import Word
 from conf.entryprocessor.languagecodes import LANGUAGE_CODES
-from database.dictionary import Word
-from database.language import Language
 
 log = logging.getLogger(__file__)
 dictionary_db_manager = DictionaryDatabaseManager()

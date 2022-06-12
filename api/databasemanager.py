@@ -6,9 +6,9 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.pool import QueuePool
 
+from api.dictionary.model import Base as LanguageBase
+from api.dictionary.model import Base as WordBase
 from api.metaclass import SingletonMeta
-from database.dictionary import Base as WordBase
-from database.language import Base as LanguageBase
 
 log = logging.getLogger(__file__)
 

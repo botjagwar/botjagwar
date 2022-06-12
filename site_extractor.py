@@ -54,7 +54,7 @@ def entry_generator():
                 s = output.batchfile(entry)
                 print(s[:-1])
                 yield (word, entry.definitions)
-                #s = json.dumps(entry.to_dict())
+                #s = json.dumps(entry.serialise())
 
 
 def main():

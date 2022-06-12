@@ -6,6 +6,38 @@ from api.serialisers.json import JSONBuilder
 # from .model import Word as WordModel
 # from .model import Definition as DefinitionModel
 
+class Language(JSONBuilder):
+    def __init__(self, language):
+        super(Language, self).__init__()
+        self.model = language
+        self.mapped_variables = [
+            ('type', 'type'),
+            ('iso_code', 'iso_code'),
+            ('english_name', 'english_name'),
+            ('malagasy_name', 'malagasy_name'),
+            ('ancestor', 'ancestor'),
+        ]
+
+        @property
+        def type(self):
+            return self.model.type
+
+        @property
+        def iso_code(self):
+            return self.model.iso_code
+
+        @property
+        def english_name(self):
+            return self.model.english_name
+
+        @property
+        def malagasy_name(self):
+            return self.model.malagasy_name
+
+        @property
+        def ancestor(self):
+            return self.model.ancestor
+
 
 class Definition(JSONBuilder):
     def __init__(self, definition):

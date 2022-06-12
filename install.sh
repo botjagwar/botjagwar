@@ -41,7 +41,6 @@ sudo mkdir -p $opt_dir/user_data
 sudo cp -r $src_dir/api $opt_dir
 sudo cp -r $src_dir/conf $opt_dir
 sudo cp -r $src_dir/data $opt_dir
-sudo cp -r $src_dir/database $opt_dir
 sudo cp -r $src_dir/scripts $opt_dir
 sudo cp -r $src_dir/*.py $opt_dir
 

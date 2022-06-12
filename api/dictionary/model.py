@@ -5,10 +5,10 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship
 from sqlalchemy.sql import func
 
-from database.dictionary.json import Definition as DefinitionSerialiser
-from database.dictionary.json import Word as WordSerialiser
-from .controller import Definition as DefinitionController
-from .controller import Word as WordController
+from api.dictionary.controller import Definition as DefinitionController
+from api.dictionary.controller import Word as WordController
+from api.dictionary.serialisers.json import Definition as DefinitionSerialiser
+from api.dictionary.serialisers.json import Word as WordSerialiser
 
 Base = declarative_base()
 dictionary_association = Table(
@@ -18,7 +18,25 @@ dictionary_association = Table(
 )
 
 
-class Definition(Base):
+class Serialisable(object):
+    Serialiser = None
+    Controller = None
+
+    def serialise(self):
+        """
+        Pass-through to designated serialiser
+        :return:
+        """
+        if self.Serialiser:
+            return self.Serialiser(self).serialise()
+        else:
+            raise NotImplementedError(f'No serialiser is defined for {self.__class__.__name__} class')
+
+
+class Definition(Base, Serialisable):
+    """
+    Database model for definition
+    """
     Serialiser = DefinitionSerialiser
     Controller = DefinitionController
 
@@ -39,22 +57,11 @@ class Definition(Base):
     def from_json(self, json_data):
         pass
 
-    def serialise(self):
-        return self.Serialiser(self).serialise()
 
-    def serialise_with_words(self):
-        return self.Serialiser(self).serialise_with_words()
-
-    def get_schema(self):
-        """
-        Returns a serialised object containing the current object's schema.
-        Useful to generate forms.
-        :return:
-        """
-        pass
-
-
-class Word(Base):
+class Word(Base, Serialisable):
+    """
+    Database model for Word
+    """
     Serialiser = WordSerialiser
     Controller = WordController
 
@@ -103,32 +110,15 @@ class Word(Base):
         else:
             return None
 
-    def from_json(self, json_data):
+
+class Language(Base, Serialisable):
+    __tablename__ = 'language'
+    iso_code = Column(String(6), primary_key=True)
+    english_name = Column(String(100))
+    malagasy_name = Column(String(100))
+    language_ancestor = Column(String(6))
+
+    def get_schema(self):
         pass
 
-    def serialise(self):
-        return self.Serialiser(self).serialise()
 
-    def serialise_without_definition(self):
-        return self.Serialiser(self).serialise_without_definition()
-
-    def serialise_to_entry(self):
-        return self.Serialiser(self).serialise_to_entry()
-
-    def set_definition(self, definitions: list):
-        return self.Controller(self).set_definition(definitions)
-
-    def add_definition(self, definition: Definition):
-        return self.Controller(self).add_definition(definition)
-
-    def remove_definition(self, definition: Definition):
-        return self.Controller(self).remove_definition(definition)
-
-    @property
-    def schema(self):
-        """
-        Returns a serialised object containing the current object's schema.
-        Useful to generate forms.
-        :return:
-        """
-        return {}

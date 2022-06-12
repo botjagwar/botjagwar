@@ -2,7 +2,7 @@ import json
 
 from aiohttp.web import Response
 
-from database.dictionary import Word
+from api.dictionary.model import Word
 
 # Do not translate with form-of entries as they depend on main entries
 FORM_OF_BLACKLIST = [
