@@ -208,9 +208,9 @@ class Translation:
         wiktionary_processor.process(wiki_page)
 
         try:
-            entries = wiktionary_processor.getall()
+            entries = wiktionary_processor.get_all_entries()
         except Exception as exc:
-            log.error("getall() failed.")
+            log.error("get_all_entries() failed.")
             log.exception(exc)
             return unknowns, ret
 
@@ -305,7 +305,7 @@ class Translation:
         wiktionary_processor.set_title(title)
 
         try:
-            entries = wiktionary_processor.getall()
+            entries = wiktionary_processor.get_all_entries()
         except Exception as exc:
             log.exception(exc)
             return -1

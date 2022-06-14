@@ -163,8 +163,8 @@ async def get_wiktionary_processed_page(request) -> Response:
     page = Page(Site(language, 'wiktionary'), pagename)
     wiktionary_processor.process(page)
 
-    for entry in wiktionary_processor.getall(
-        fetch_additional_data=True,
+    for entry in wiktionary_processor.get_all_entries(
+        get_additional_data=True,
         cleanup_definitions=True,
         advanced=True
     ):

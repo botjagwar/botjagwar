@@ -67,9 +67,20 @@ class ENWiktionaryProcessor(WiktionaryProcessor):
         self.code = LANGUAGE_NAMES
 
     def lang2code(self, l):
+        """
+        Convert language name to its ISO code (2 or 3 characters
+        :param l:
+        :return:
+        """
         return self.code[l]
 
-    def fetch_additional_data(self, content, language):
+    def get_additional_data(self, content, language) -> dict:
+        """
+        Retrieve additional data thanks to parsers at api.importer.wiktionary.en
+        :param content: wiki page
+        :param language: target language
+        :return:
+        """
         additional_data = {}
         for classe in all_importers:
             instance = classe()
@@ -89,21 +100,28 @@ class ENWiktionaryProcessor(WiktionaryProcessor):
                                     translate_definitions_to_malagasy=False,
                                     human_readable_form_of_definition=True
                                     ):
+        """
+        Retrieve definition from the wiki page.
+        :param part_of_speech: targetted part of speech
+        :param definition_line: definition line, should start with a "#"
+        :param cleanup_definition: remove links/templates?
+        :param translate_definitions_to_malagasy: translate to malagasy? (valid for templates)
+        :param human_readable_form_of_definition: put the form-of definition as a sentence
+        :return:
+        """
         new_definition_line = definition_line
-        # No cleanup
+        # No cleanup for definition
         if not cleanup_definition:
             return definition_line
 
         # Clean up non-needed template to improve readability.
-        # In case these templates are needed, integrate your code above this
-        # part.
+        # In case these templates are needed, integrate your code above this part.
         for regex, replacement in self.regexesrep:
             new_definition_line = re.sub(
                 regex, replacement, new_definition_line)
 
-        # Form-of definitions: they use templates that can be parsed using api.parsers module
-        #   which is tentatively being integrated here to provide human-readable output for
-        #   either English or Malagasy
+        # Form-of definitions: they use templates that can be parsed using api.parsers module which is tentatively
+        #   being integrated here to provide human-readable output for either English or Malagasy
         if new_definition_line == '':
             if human_readable_form_of_definition:
                 try:
@@ -123,14 +141,24 @@ class ENWiktionaryProcessor(WiktionaryProcessor):
         # print(definition_line, new_definition_line)
         return new_definition_line
 
-    def getall(
-            self,
-            keepNativeEntries=False,
-            fetch_additional_data=False,
-            cleanup_definitions=False,
-            translate_definitions_to_malagasy=False,
-            human_readable_form_of_definition=True,
-            **kw):
+    def get_all_entries(
+        self,
+        keepNativeEntries=False,
+        get_additional_data=False,
+        cleanup_definitions=False,
+        translate_definitions_to_malagasy=False,
+        human_readable_form_of_definition=True,
+        **kw) -> list:
+        """
+        Retrieves all necessary information in the form of a list of Entry objects
+        :param keepNativeEntries:
+        :param get_additional_data:
+        :param cleanup_definitions:
+        :param translate_definitions_to_malagasy:
+        :param human_readable_form_of_definition:
+        :param kw:
+        :return:
+        """
         content = self.content
         entries = []
         content = re.sub("{{l/en\\|(.*)}}", "\\1 ", content)  # remove {{l/en}}
@@ -155,6 +183,9 @@ class ENWiktionaryProcessor(WiktionaryProcessor):
                 if last_part_of_speech is None:
                     last_part_of_speech = self.get_part_of_speech(line)
 
+                # We assume en.wikt definitions start with a "# " and proceed to extract all definitions from there.
+                # Definitions are then added as a list of strings then added as a list of strings. They are grouped
+                #   by part of speech to ensure correctness, as we can only have one part of speech for a given entry.
                 if line.startswith('# '):
                     defn_line = line
                     defn_line = defn_line.lstrip('# ')
@@ -174,12 +205,14 @@ class ENWiktionaryProcessor(WiktionaryProcessor):
                     else:
                         definitions[last_part_of_speech] = [definition]
 
-            if fetch_additional_data:
-                additional_data = self.fetch_additional_data(
+            # Fetch additional data if flag is set, else put it to none
+            if get_additional_data:
+                additional_data = self.get_additional_data(
                     ct_content, last_language_code)
             else:
                 additional_data = None
 
+            # Create the Entry object to add to the list
             for pos, definitions in definitions.items():
                 entry = Entry(
                     entry=self.title,
@@ -187,7 +220,7 @@ class ENWiktionaryProcessor(WiktionaryProcessor):
                     language=last_language_code,
                     definitions=definitions,
                 )
-                if additional_data is not None and fetch_additional_data:
+                if additional_data is not None and get_additional_data:
                     for data_type, data in additional_data.items():
                         if data:
                             entry.add_attribute(data_type, data)
@@ -226,14 +259,24 @@ class ENWiktionaryProcessor(WiktionaryProcessor):
 
         return [definition]
 
-    def retrieve_translations(self):
+    def retrieve_translations(self) -> list:
+        """
+        Warning: Will need reworking as this does not retrieve the specific definition that's  being translated in a
+        given entry. If a definition is not specified, use the page name as the "definition".
+        :return:
+        """
+
+        # Main regex to retrieve a given translation. Most of entries use this format
         regex = re.compile('\\{\\{t[\\+]?\\|([A-Za-z]{2,3})\\|(.*?)\\}\\}')
+
         translations = {}
         entries = []
         content = re.sub(
             "{{l/en\\|(.*)}}",
             "\\1 ",
             self.content)  # remove {{l/en}}
+
+        # Find the language section
         for l in re.findall("[\n]?==[ ]?([A-Za-z]+)[ ]?==\n", content):
             last_part_of_speech = None
             content = content[content.find('==%s==' % l):]

@@ -10,8 +10,8 @@ class TestEnglishWiktionaryEntryprocessor(
     def setUp(self):
         self.setup_for_language('en', ['eau', 'air', 'газета', 'geloof'])
 
-    def test_getall(self):
-        super(TestEnglishWiktionaryEntryprocessor, self).test_getall()
+    def test_get_all_entries(self):
+        super(TestEnglishWiktionaryEntryprocessor, self).test_get_all_entries()
 
     def test_retrieve_translations(self):
         super(TestEnglishWiktionaryEntryprocessor,

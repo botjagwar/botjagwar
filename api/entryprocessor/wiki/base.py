@@ -51,7 +51,7 @@ class WiktionaryProcessor(object):
     def retrieve_translations(self):
         raise NotImplementedError()
 
-    def getall(self, keepNativeEntries=False, **kw):
+    def get_all_entries(self, keepNativeEntries=False, **kw):
         raise NotImplementedError()
 
     @staticmethod

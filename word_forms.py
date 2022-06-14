@@ -321,7 +321,7 @@ def perform_function_on_entry(function):
                 "%d / %d (%2.2f%%)" %
                 (counter, total, 100. * counter / total))
             en_page_processor.process(word_page)
-            entries = en_page_processor.getall(definitions_as_is=True)
+            entries = en_page_processor.get_all_entries(definitions_as_is=True)
             print(word_page, entries)
             for entry in entries:
                 last_entry += function(entry)

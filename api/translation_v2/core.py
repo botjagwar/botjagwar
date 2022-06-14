@@ -338,8 +338,8 @@ class Translation:
         """
         Parse Wiktionary page data and translate any content/section that can be translated
         """
-        entries = wiktionary_processor.getall(
-            fetch_additional_data=True,
+        entries = wiktionary_processor.get_all_entries(
+            get_additional_data=True,
             translate_definitions_to_malagasy=True,
             human_readable_form_of_definition=True
         )

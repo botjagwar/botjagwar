@@ -46,7 +46,7 @@ class Processor(object):
         processor = self.processor_class()
         processor.set_title(title_node)
         processor.set_text(content_node)
-        entries = processor.getall()
+        entries = processor.get_all_entries()
 
         for entry in entries:
             if entry.language == self.language:

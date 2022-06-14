@@ -32,7 +32,7 @@ class FRWiktionaryProcessor(WiktionaryProcessor):
         regex = r'\{\{trad[\+\-]+?\|([A-Za-z]{2,3})\|(.*?)\}\}'
         part_of_speech = 'ana'
         definition = ""
-        for entry in self.getall():
+        for entry in self.get_all_entries():
             print(entry)
             if entry.language == 'fr':
                 if entry.part_of_speech in self.postran:
@@ -67,7 +67,7 @@ class FRWiktionaryProcessor(WiktionaryProcessor):
 
         return retcontent
 
-    def getall(self, keepNativeEntries=False, **kw):
+    def get_all_entries(self, keepNativeEntries=False, **kw):
         """languges sections in a given page formatting: [(POS, lang, definition), ...]"""
         items = []
 
@@ -77,7 +77,7 @@ class FRWiktionaryProcessor(WiktionaryProcessor):
 
         ct_content = self.content
         for lang in re.findall(
-                '{{S\\|([a-z]+)\\|([a-z]{2,3})',
+            '{{S\\|([a-z]+)\\|([a-z]{2,3})',
                 self.content):
             # print(ct_content)
             # word DEFINITION Retrieving

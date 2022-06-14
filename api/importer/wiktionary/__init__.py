@@ -21,7 +21,7 @@ def use_wiktionary(language):
 class WiktionaryAdditionalDataImporter(AdditionalDataImporter):
     section_name = None
 
-    def fetch_additional_data_for_category(self, language, category_name):
+    def get_additional_data_for_category(self, language, category_name):
         url = dyn_backend.backend + "/word_with_additional_data"
         params = {
             'language': f'eq.{language}',
@@ -81,7 +81,7 @@ class WiktionaryAdditionalDataImporter(AdditionalDataImporter):
             if language_name in self.languages:
                 iso = self.languages[language_name]
                 # print(f'Fetching for {language_name} ({iso})')
-                self.fetch_additional_data_for_category(iso, category.title())
+                self.get_additional_data_for_category(iso, category.title())
             # else:
                 # print(f'Skipping for {language_name}...')
 

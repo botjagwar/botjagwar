@@ -19,7 +19,7 @@ def test_one():
     processor.set_title(page.title())
     processor.set_text(page.get())
     print(page)
-    for k in processor.getall(fetch_additional_data=True):
+    for k in processor.get_all_entries(get_additional_data=True):
         print(k)
 
     # print(k)
@@ -41,9 +41,9 @@ def test_random():
 
         processor.set_text(page.get())
         try:
-            for k in processor.getall(
+            for k in processor.get_all_entries(
                 cleanup_definitions=True,
-                fetch_additional_data=True,
+                get_additional_data=True,
                 translate_definitions_to_malagasy=True
             ):
                 print(k)

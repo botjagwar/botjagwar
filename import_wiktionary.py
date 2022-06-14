@@ -113,7 +113,7 @@ class WiktionaryDumpImporter(object):
         title_node, content_node = self.get_page_from_xml(xml_page)
         self.entryprocessor.set_title(title_node)
         self.entryprocessor.set_text(content_node)
-        for entry in self.entryprocessor.getall():
+        for entry in self.entryprocessor.get_all_entries():
             for definitions in entry.definitions:
                 for definition in definitions.split(','):
                     new_entry = deepcopy(entry)
@@ -166,7 +166,7 @@ class WiktionaryDumpImporter(object):
         self.entryprocessor.set_title(title_node)
         self.entryprocessor.set_text(content_node)
 
-        for entry in self.entryprocessor.getall(fetch_additional_data=True):
+        for entry in self.entryprocessor.get_all_entries(get_additional_data=True):
             # print(entry)
             additional_data = {}
             for adt in self.additional_data_keys:
