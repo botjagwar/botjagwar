@@ -234,22 +234,22 @@ def translate_using_nltk(part_of_speech,
     pass
 
 
-# def translate_using_opus_mt(part_of_speech,
-#                          definition_line,
-#                          source_language,
-#                          target_language,
-#                          **kw) -> [UntranslatedDefinition, TranslatedDefinition]:
-#     # skeleton function for now to allow for later integration
-#     return UntranslatedDefinition(definition_line)
-
 def translate_using_opus_mt(part_of_speech,
                             definition_line,
                             source_language,
                             target_language,
                             **kw) -> [UntranslatedDefinition, TranslatedDefinition]:
-    definition_line = re.sub('{{[a-zA-z0-9|]+}}', '', definition_line)
-    definition_line = re.sub('\[\[[a-zA-z0-9|]+\]\]', '', definition_line)
-    transformer = OpusMtTransformer()
-    transformer.load_model(source_language, target_language)
-    out_text = transformer.translate(definition_line)
-    return TranslatedDefinition(out_text)
+    # skeleton function for now to allow for later integration
+    return UntranslatedDefinition(definition_line)
+
+# def translate_using_opus_mt(part_of_speech,
+#                             definition_line,
+#                             source_language,
+#                             target_language,
+#                             **kw) -> [UntranslatedDefinition, TranslatedDefinition]:
+#     definition_line = re.sub('{{[a-zA-z0-9|]+}}', '', definition_line)
+#     definition_line = re.sub('\[\[[a-zA-z0-9|]+\]\]', '', definition_line)
+#     transformer = OpusMtTransformer()
+#     transformer.load_model(source_language, target_language)
+#     out_text = transformer.translate(definition_line)
+#     return TranslatedDefinition(out_text)
