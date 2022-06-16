@@ -41,6 +41,7 @@ async def translate(request) -> Response:
     translator.load_model(source, target)
     request_json = await request.json()
     try:
+        log.debug('Translating "' + request_json['text'] + '"...')
         returned_json = {
             'type': 'translation',
             'text': translator.translate(request_json['text'])

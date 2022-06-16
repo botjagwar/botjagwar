@@ -19,7 +19,6 @@ from redis_wikicache import RedisPage as Page, RedisSite as Site
 from .functions import postprocessors  # do __NOT__ delete!
 from .functions import translate_form_of_templates
 from .functions import translate_using_convergent_definition
-from .functions import translate_using_opus_mt
 from .functions.pronunciation import translate_pronunciation
 from .functions.references import translate_references
 from .functions.utils import form_of_part_of_speech_mapper
@@ -35,7 +34,7 @@ translation_methods = [
     # translate_using_bridge_language,
     # translate_using_postgrest_json_dictionary,
     translate_form_of_templates,
-    translate_using_opus_mt
+    # translate_using_opus_mt
 ]
 
 already_visited = []
@@ -345,7 +344,6 @@ class Translation:
         )
         out_entries = []
         for entry in entries:
-            # log.debug(entry)
             translated_definition = []
             translated_from_definition = []
             out_translation_methods = {}

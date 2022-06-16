@@ -20,11 +20,31 @@ class TestPostProcessors(TestCase):
         self.assertEquals(getattr(out_entries[0], 'reference')[0], expected)
 
     def test_add_xlit_if_no_transcription(self):
-        postprocessors.add_xlit_if_no_transcription()
+        entry = Entry(
+            entry='काम',
+            part_of_speech='ana',
+            definitions=['def1', 'def2'],
+            language='hi',
+        )
+        function = postprocessors.add_xlit_if_no_transcription()
+        function([entry])
 
     def test_add_language_ipa_if_not_exists(self):
-        postprocessors.add_language_ipa_if_not_exists()
+        entry = Entry(
+            entry='entry',
+            part_of_speech='ana',
+            definitions=['def1', 'def2'],
+            language='hi',
+        )
+        function = postprocessors.add_language_ipa_if_not_exists()
+        function([entry])
 
     def test_filter_out_languages(self):
-        postprocessors.filter_out_languages()
-
+        entry = Entry(
+            entry='entry',
+            part_of_speech='ana',
+            definitions=['def1', 'def2'],
+            language='en',
+        )
+        function = postprocessors.filter_out_languages('en')
+        function([entry])
