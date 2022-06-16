@@ -22,8 +22,8 @@ class TestFrenchWiktionaryEntryprocessor(
         self.processor.process(page)
         entries = self.processor.retrieve_translations()
         entry = [e for e in entries if e.language == 'ko'][0]
-        word, pos, lang, definition = entry.entry, entry.part_of_speech, entry.language, entry.definitions
+        word, pos, lang, definition = entry.word, entry.part_of_speech, entry.language, entry.definition
         self.assertEqual(word, '공기')
         self.assertEqual(pos, 'ana')
         self.assertEqual(lang, 'ko')
-        self.assertEqual(definition[0], 'air')
+        self.assertEqual(definition, 'air')

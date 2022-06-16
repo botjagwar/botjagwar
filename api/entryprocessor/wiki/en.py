@@ -1,7 +1,7 @@
 # coding: utf8
 import re
 
-from api.importer.wiktionary.en import all_importers
+from api.importer.wiktionary.en import all_importers, TranslationImporter
 from api.model.word import Entry
 from api.parsers import TEMPLATE_TO_OBJECT
 from api.parsers import templates_parser
@@ -221,9 +221,10 @@ class ENWiktionaryProcessor(WiktionaryProcessor):
                     definitions=definitions,
                 )
                 if additional_data is not None and get_additional_data:
+                    entry.additional_data = {}
                     for data_type, data in additional_data.items():
                         if data:
-                            entry.add_attribute(data_type, data)
+                            entry.additional_data[data_type] = data
 
                 entries.append(entry)
 
@@ -260,54 +261,4 @@ class ENWiktionaryProcessor(WiktionaryProcessor):
         return [definition]
 
     def retrieve_translations(self) -> list:
-        """
-        Warning: Will need reworking as this does not retrieve the specific definition that's  being translated in a
-        given entry. If a definition is not specified, use the page name as the "definition".
-        :return:
-        """
-
-        # Main regex to retrieve a given translation. Most of entries use this format
-        regex = re.compile('\\{\\{t[\\+]?\\|([A-Za-z]{2,3})\\|(.*?)\\}\\}')
-
-        translations = {}
-        entries = []
-        content = re.sub(
-            "{{l/en\\|(.*)}}",
-            "\\1 ",
-            self.content)  # remove {{l/en}}
-
-        # Find the language section
-        for l in re.findall("[\n]?==[ ]?([A-Za-z]+)[ ]?==\n", content):
-            last_part_of_speech = None
-            content = content[content.find('==%s==' % l):]
-            lines = content.split('\n')
-            for line in lines:
-                for en_pos, mg_pos in self.postran.items():
-                    if '===' + en_pos in line:
-                        last_part_of_speech = mg_pos
-
-                if len(re.findall(regex, line)) != 0:
-                    for language_code, translation in re.findall(regex, line):
-                        if last_part_of_speech in translations:
-                            translations[last_part_of_speech].append(
-                                (language_code, translation))
-                        else:
-                            translations[last_part_of_speech] = [
-                                (language_code, translation)]
-
-            for pos, translation_list in translations.items():
-                for translation_tuple in translation_list:
-                    language, translation = translation_tuple
-                    translation = translation[:translation.find('|')] \
-                        if translation.find('|') > 0 \
-                        else translation
-                    entries.append(
-                        Entry(
-                            entry=translation,
-                            part_of_speech=pos,
-                            language=language,
-                            definitions=[self.title],
-                        )
-                    )
-
-        return entries
+        return TranslationImporter().get_data(self.content, self.language, self.title)

@@ -20,10 +20,12 @@ class TestEnglishWiktionaryEntryprocessor(
     def test_retrieve_translations_data_output(self):
         page = PageMock(SiteMock(self.language, 'wiktionary'), 'air')
         self.processor.process(page)
-        entries = self.processor.retrieve_translations()
-        entry = [e for e in entries if e.language == 'ko'][-1]
-        word, pos, lang, definition = entry.entry, entry.part_of_speech, entry.language, entry.definitions
+        translations = self.processor.retrieve_translations()
+        entries = [e for e in translations if e.language == 'ko']
+        self.assertNotEquals(len(entries), 0, "No entries were found")
+        entry = entries[0]
+        word, pos, lang, definition = entry.word, entry.part_of_speech, entry.language, entry.definition
         self.assertIn(word, ['공기', '空氣'])
         self.assertEqual(pos, 'ana')
         self.assertEqual(lang, 'ko')
-        self.assertEqual(definition[0], "air")
+        self.assertEqual(definition, "mixture of gases making up the atmosphere of the Earth")

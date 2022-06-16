@@ -1,43 +1,30 @@
 from copy import deepcopy
+from dataclasses import dataclass
+from typing import Optional, List
 
-from api.model import TypeCheckedObject, Property
-
-
-class Word(TypeCheckedObject):
-    _additional = False
-    properties_types = dict(
-        entry=str,
-        part_of_speech=str,
-        language=str
-    )
+from api.serialisers.word import \
+    Entry as EntrySerialiser, \
+    Translation as TranslationSerialiser
 
 
-class Entry(TypeCheckedObject):
+@dataclass
+class Word(object):
+    entry: str
+    part_of_speech: str
+    language: str
+
+
+@dataclass
+class Entry(object):
     """
     Non-DB model for entries
     """
-    _additional = True
-    additional_data_types = {}
-    properties_types = dict(
-        entry=str,
-        part_of_speech=str,
-        definitions=list,
-        language=str,
-    )
-
-    def __init__(self, **properties):
-        super(Entry, self).__init__(**properties)
-        self.entry = properties['entry']
-        self.part_of_speech = properties['part_of_speech']
-        self.definitions = properties['definitions']
-        if 'language' in properties:
-            self.language = properties['language']
-
-        if 'additional_data' in properties:
-            self.additional_data = properties['additional_data']
-
-        if 'references' in properties:
-            self.references = properties['references']
+    entry: str
+    part_of_speech: str
+    definitions: List[str]
+    language: str
+    additional_data: Optional[dict] = None
+    references: Optional[list] = None
 
     @classmethod
     def from_word(cls, model):
@@ -53,22 +40,7 @@ class Entry(TypeCheckedObject):
         return self.entry, self.part_of_speech, self.language, self.definitions
 
     def serialise(self) -> dict:
-        ret = TypeCheckedObject.serialise(self)
-
-        ret['additional_data'] = {}
-        for key in self.additional_data_types.keys():
-            if hasattr(self, key):
-                value = getattr(self, key)
-                ret['additional_data'][key] = {}
-                if isinstance(value, Property):
-                    ret['additional_data'][key] = value.serialise()
-                elif hasattr(value, '__iter__'):
-                    ret['additional_data'][key] = [v.serialise() if isinstance(v, Property) else v
-                                                   for v in value]
-                else:
-                    ret['additional_data'][key] = value
-
-        return ret
+        return EntrySerialiser(self).serialise()
 
     def __lt__(self, other):
         """
@@ -115,32 +87,17 @@ class Entry(TypeCheckedObject):
 
         return deepcopy(self)
 
-    def __repr__(self):
-        # return str(self.__dict__)
-        props = ''
-        additional_data = ''
-        for d in self.properties_types:
-            if hasattr(self, d):
-                props += d + '=' + str(getattr(self, d)) + '; '
 
-        for k, v in self.additional_data_types.items():
-            if hasattr(self, k):
-                additional_data += str(k) + '=' + str(getattr(self, k))
+@dataclass(order=True)
+class Translation(object):
+    word: str
+    language: str
+    part_of_speech: str
+    definition: str
 
-        if additional_data:
-            return "Entry{%s | additional_data %s}" % (props, additional_data)
+    def serialise(self) -> dict:
+        return TranslationSerialiser(self).serialise()
 
-        return "Entry{%s}" % (props)
-
-
-class Translation(TypeCheckedObject):
-    _additional = False
-    properties_types = dict(
-        word=str,
-        language=str,
-        part_of_speech=str,
-        translation=str
-    )
 
 
 __all__ = ['Word', 'Entry', 'Translation']

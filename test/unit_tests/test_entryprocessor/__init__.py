@@ -1,5 +1,5 @@
 from api.entryprocessor import WiktionaryProcessorFactory
-from api.model.word import Entry
+from api.model.word import Entry, Translation
 from test_utils.mocks import PageMock, SiteMock
 
 
@@ -28,4 +28,4 @@ class GenericEntryProcessorTester:
             entries = self.processor.retrieve_translations()
             assert isinstance(entries, list), entries
             for e in entries:
-                assert isinstance(e, Entry)
+                assert isinstance(e, Translation)

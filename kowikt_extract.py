@@ -41,7 +41,7 @@ def get_entries_from_content(title, content):
                             word=word,
                             language=lang_found[0],
                             part_of_speech=pos,
-                            translation=title
+                            definition=title
                         )
 
 
@@ -61,7 +61,7 @@ def get_definitions_from_content(title, content):
                     word=word,
                     language='ko',
                     part_of_speech=pos,
-                    translation=line
+                    definition=line
                 )
 
 

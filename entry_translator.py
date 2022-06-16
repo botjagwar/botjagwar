@@ -11,7 +11,6 @@ from aiohttp.web import Response
 
 from api import entryprocessor
 from api.decorator import threaded
-from api.model.word import Translation as TranslationModel
 from api.translation_v2.core import Translation
 from redis_wikicache import RedisSite as Site, RedisPage as Page
 
@@ -177,14 +176,8 @@ async def get_wiktionary_processed_page(request) -> Response:
         section = entry.serialise()
 
         for translation in wiktionary_processor.retrieve_translations():
-            translation_section = TranslationModel(
-                word=translation.entry,
-                language=translation.language,
-                part_of_speech=translation.part_of_speech,
-                translation=translation.definitions[0]
-            )
             if translation.part_of_speech == entry.part_of_speech:
-                translation_list.append(translation_section.serialise())
+                translation_list.append(translation.serialise())
 
         if entry.language == language:
             section['translations'] = translation_list

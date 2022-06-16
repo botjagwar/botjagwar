@@ -1,14 +1,44 @@
 import re
+from typing import List
 
 from api.importer.wiktionary import \
     SubsectionImporter, \
     WiktionaryAdditionalDataImporter
 from api.importer.wiktionary import use_wiktionary
+from api.model.word import Translation
 
+part_of_speech_translation = {
+    'Verb': 'mat',
+    'Adjective': 'mpam',
+    'Conjunction': 'mpampitohy',
+    'Determiner': 'mpam',
+    'Idiom': 'fomba fiteny',
+    'Phrase': 'fomba fiteny',
+    'Proverb': 'ohabolana',
+    'Number': 'isa',
+    'Noun': 'ana',
+    'Adjectival noun': 'mpam',
+    'Particle': 'kianteny',
+    'Adverb': 'tamb',
+    'Root': 'fototeny',
+    'Numeral': 'isa',
+    'Pronoun': 'solo-ana',
+    'Preposition': 'mp.ank-teny',
+    'Contraction': 'fanafohezana',
+    'Letter': 'litera',
+    'Proper noun': 'ana-pr',
+    'Prefix': 'tovona',
+    'Romanization': 'rômanizasiona',
+    'Suffix': 'tovana',
+    'Symbol': 'eva',
+    'Participle': 'ova-mat',
+    'Interjection': 'tenim-piontanana',
+    'Infix': 'tsofoka',
+}
 
 @use_wiktionary('en')
 class ListSubsectionImporter(SubsectionImporter):
-    def get_data(self, template_title, content: str, language: str):
+    def get_data(self, template_title, content: str, language: str) -> List[str]:
         subsection_data = SubsectionImporter.get_data(
             self, template_title, content, language)
         retrieved = []
@@ -204,9 +234,85 @@ class HeadwordImporter(WiktionaryAdditionalDataImporter):
         for line in wikipage.split('\n'):
             for headword_affix in self.possible_headword_affixes:
                 if line.startswith('{{' + language + '-' + headword_affix):
-                   template_lines.append(line)
+                    template_lines.append(line)
 
         return list(set(template_lines))
+
+
+class TranslationImporter(WiktionaryAdditionalDataImporter):
+    level = 4
+    data_type = 'translations'
+    section_name = 'Translations'
+
+    def get_data(self, wikipage: str, language: str, page_name: str = '') -> List[Translation]:
+        """
+        Warning: Will need reworking as this does not retrieve the specific definition that's  being translated in a
+        given entry. If a definition is not specified, use the page name as the "definition".
+        :return:
+        """
+
+        # Main regex to retrieve a given translation. Most of entries use this format
+        regex = r'\{\{t[\+]?\|([A-Za-z]{2,3})\|(.*?)\}\}'
+
+        translations = {}
+        entries = []
+        content = re.sub(
+            "{{l/en\\|(.*)}}",
+            "\\1 ",
+            wikipage)  # remove {{l/en}}
+
+        # Find the language section
+        inside_translation_section = False
+        for language in re.findall("[\n]?==[ ]?([A-Za-z]+)[ ]?==\n", content):
+            last_part_of_speech = None
+            content = content[content.find('==%s==' % language):]
+            lines = content.split('\n')
+            for line in lines:
+                for en_pos, mg_pos in part_of_speech_translation.items():
+                    if '===' + en_pos in line:
+                        last_part_of_speech = mg_pos
+
+                if '{{trans-top' in line:
+                    definition = line.strip('{{trans-top')
+                    if definition[0] == '|':
+                        definition = definition.strip('|')
+                    elif not definition.strip('}}'):
+                        definition = page_name
+
+                    definition = definition.strip('}}')
+                    inside_translation_section = True
+                    continue
+
+                if '{{trans-mid' in line:
+                    continue
+
+                if '{{trans-bottom' in line:
+                    inside_translation_section = False
+
+                if inside_translation_section and len(re.findall(regex, line)) != 0:
+                    for language_code, translation in re.findall(regex, line):
+                        translation = translation[:translation.find('|')] if translation.find(
+                            '|') != -1 else translation
+                        if last_part_of_speech in translations:
+                            translations[last_part_of_speech].append(
+                                (language_code, translation, definition))
+                        else:
+                            translations[last_part_of_speech] = [
+                                (language_code, translation, definition)]
+
+            for pos, translation_list in translations.items():
+                for translation_tuple in translation_list:
+                    language, translation, definition = translation_tuple
+                    entries.append(
+                        Translation(
+                            word=translation,
+                            part_of_speech=pos,
+                            language=language,
+                            definition=definition,
+                        )
+                    )
+
+        return entries
 
 
 class TranscriptionImporter(WiktionaryAdditionalDataImporter):
@@ -239,5 +345,5 @@ all_importers = [
     EtymologyImporter,
     SynonymImporter,
     HeadwordImporter,
-    TranscriptionImporter
+    TranscriptionImporter,
 ]

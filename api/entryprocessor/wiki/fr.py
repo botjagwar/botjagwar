@@ -2,7 +2,7 @@
 
 import re
 
-from api.model.word import Entry
+from api.model.word import Entry, Translation
 from .base import WiktionaryProcessor
 from .base import stripwikitext
 
@@ -53,11 +53,11 @@ class FRWiktionaryProcessor(WiktionaryProcessor):
             if part_of_speech in self.postran:
                 part_of_speech = self.postran[part_of_speech]
 
-            e = Entry(
-                entry=entree,
+            e = Translation(
+                word=entree,
                 part_of_speech=part_of_speech,
                 language=langcode,
-                definitions=[definition.strip()]
+                definition=definition.strip()
             )
             retcontent.append(e)
         try:
