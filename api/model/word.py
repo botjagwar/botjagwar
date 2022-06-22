@@ -24,7 +24,6 @@ class Entry(object):
     definitions: List[str]
     language: str
     additional_data: Optional[dict] = None
-    references: Optional[list] = None
 
     @classmethod
     def from_word(cls, model):

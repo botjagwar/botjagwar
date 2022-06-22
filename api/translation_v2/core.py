@@ -135,13 +135,13 @@ class Translation:
             '|' + wiki_page.title() + '}}'
         out_entries = []
         for entry in entries:
-            if hasattr(entry, 'reference'):
+            if 'reference' in entry.additional_data:
                 if isinstance(entry.reference, list):
-                    entry.reference.append(reference)
+                    entry.additional_data['reference'].append(reference)
                 else:
-                    entry.reference = [reference]
+                    entry.additional_data['reference'] = [reference]
             else:
-                entry.reference = [reference]
+                entry.additional_data['reference'] = [reference]
 
             out_entries.append(entry)
         return out_entries
@@ -259,11 +259,12 @@ class Translation:
                 wiktionary_processor.set_title(page_title)
                 content = target_page.get()
                 for entry in entries:
-                    content = self.output.delete_section(entry.language, content) + "\n"
+                    content = self.output.delete_section(entry.language, content)
             else:
                 content = ""
 
-            content += self.output.wikipages(entries)
+            content = content.strip()
+            content += self.output.wikipages(entries).strip()
             # Push aggregated content
             output(
                 '**** \03{yellow}' +
@@ -388,8 +389,8 @@ class Translation:
             out_entry.translated_from_language = wiktionary_processor.language
             out_entry.translation_methods = out_translation_methods
             for reference_name in ['reference', 'further_reading']:
-                if hasattr(entry, reference_name):
-                    references = getattr(entry, reference_name)
+                if reference_name in entry.additional_data:
+                    references = entry.additional_data[reference_name]
                     translated_references = translate_references(
                         references,
                         source=wiktionary_processor.language,
@@ -404,8 +405,8 @@ class Translation:
                     for reference, translated_reference in list(zip(references, translated_references)):
                         self.reference_template_queue.add((reference, translated_reference))
 
-            if hasattr(entry, 'pronunciation'):
-                out_entry.pronunciation = translate_pronunciation(entry.pronunciation)
+            if 'pronunciation' in entry.additional_data:
+                out_entry.pronunciation = translate_pronunciation(entry.additional_data['pronunciation'])
 
             if entry_definitions:
                 out_entries.append(out_entry)

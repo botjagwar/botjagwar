@@ -140,16 +140,17 @@ class Output(object):
         log.debug(entries_by_language)
         for language, entries in entries_by_language.items():
             for entry in entries:
-                rendered = self.wikipage_renderer.render(entry)
+                rendered = self.wikipage_renderer.render(entry).strip()
                 language_section = rendered.split('\n')[0]
                 if ret_page.find(language_section) == -1:
-                    ret_page += rendered + "\n"
+                    if rendered:
+                        ret_page += rendered + "\n"
                 else:
                     ret_page = ret_page.replace(
                         language_section, rendered) + "\n"
 
         ret_page = ret_page.replace('\n\n\n', '\n\n')
-        return ret_page
+        return ret_page.strip()
 
     def delete_section(self, section_name, wiki_page):
         return self.wikipage_renderer.delete_section(section_name, wiki_page)

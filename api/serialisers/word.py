@@ -10,7 +10,6 @@ class Entry(JSONBuilder):
             ('part_of_speech', 'part_of_speech'),
             ('language', 'language'),
             ('definitions', 'definitions'),
-            ('references', 'references'),
             ('additional_data', 'additional_data'),
         ]
 
