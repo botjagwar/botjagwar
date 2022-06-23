@@ -135,8 +135,11 @@ class Translation:
             '|' + wiki_page.title() + '}}'
         out_entries = []
         for entry in entries:
+            if entry.additional_data is None:
+                entry.additional_data = {}
+
             if 'reference' in entry.additional_data:
-                if isinstance(entry.reference, list):
+                if isinstance(entry.additional_data['reference'], list):
                     entry.additional_data['reference'].append(reference)
                 else:
                     entry.additional_data['reference'] = [reference]

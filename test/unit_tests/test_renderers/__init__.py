@@ -8,33 +8,35 @@ class TestRenderers(TestCase):
     def test_head_section(self):
         renderer = MGWikiPageRenderer()
         info = MagicMock()
+        info.additional_data = {}
         info.language = 'mg'
-        info.etymology = 'no etimologies for you!!'
+        info.additional_data['etymology'] = 'no etimologies for you!!'
         info.part_of_speech = 'ana'
-        info.transcription = ['totot', 'toto']
+        info.additional_data['transcription'] = ['totot', 'toto']
         head_section = renderer.render_head_section(info)
-        expected = """=={{=""" + info.language + """=}}==
+        expected = """
+=={{=""" + info.language + """=}}==
 
 {{-etim-}}
-:""" + info.etymology + """
+:""" + info.additional_data['etymology'] + """
 {{-""" + info.part_of_speech + """-|""" + info.language + """}}
-'''{{subst:BASEPAGENAME}}''' (""" + ', '.join(info.transcription) + """)"""
+'''{{subst:BASEPAGENAME}}''' (""" + ', '.join(info.additional_data['transcription']) + """)"""
         self.assertEquals(head_section, expected)
 
     def test_etymology(self):
         renderer = MGWikiPageRenderer()
         info = MagicMock()
-        info.etymology = 'etimologicheski'
+        info.additional_data = {'etymology': 'etimologicheski'}
         etymology = renderer.render_etymology(info)
         self.assertEquals(etymology, """
 {{-etim-}}
-:""" + info.etymology)
+:""" + info.additional_data['etymology'])
 
     def test_definitions(self):
         renderer = MGWikiPageRenderer()
         info = MagicMock()
         info.definitions = ['def2', 'def1', 'def4']
-        definitions = renderer.render_definitions(info, '', [])
+        definitions = renderer.render_definitions(info, [])
         rendered_definitions = """
 # def1
 # def2
@@ -44,9 +46,10 @@ class TestRenderers(TestCase):
     def test_definitions_with_examples(self):
         renderer = MGWikiPageRenderer()
         info = MagicMock()
+        info.additional_data = {}
         info.definitions = ['def1', 'def2', 'def4']
-        info.examples = [['exdef1'], ['exdef2', 'exdef22'], ['exdef4']]
-        definitions = renderer.render_definitions(info, '', [])
+        info.additional_data['examples'] = [['exdef1'], ['exdef2', 'exdef22'], ['exdef4']]
+        definitions = renderer.render_definitions(info, [])
         rendered_definitions = """
 # def1
 #* ''exdef1''
@@ -62,7 +65,7 @@ class TestRenderers(TestCase):
         info = MagicMock()
         links = ['def2', 'def1', 'ak']
         info.definitions = ['def2.', '[[def1]]', 'def4', 'mult ak']
-        definitions = renderer.render_definitions(info, '', links)
+        definitions = renderer.render_definitions(info, links)
         rendered_definitions = """
 # [[def1]]
 # [[def2|def2]].
@@ -73,28 +76,31 @@ class TestRenderers(TestCase):
     def test_pronunciation_non_list(self):
         renderer = MGWikiPageRenderer()
         info = MagicMock()
-        info.pronunciation = 'abcsded'
+        info.additional_data = {'pronunciation': 'abcsded'}
         pronunciation = renderer.render_pronunciation(info)
         pronunciation_section = """
 
-{{-fanononana-}}"""
+{{-fanononana-}}
+* abcsded"""
         self.assertEquals(pronunciation, pronunciation_section)
 
     def test_pronunciation_list(self):
-            renderer = MGWikiPageRenderer()
-            info = MagicMock()
-            info.pronunciation = ['{{p1|tptp}}']
-            pronunciation = renderer.render_pronunciation(info)
-            pronunciation_section = """
+        renderer = MGWikiPageRenderer()
+        info = MagicMock()
+        info.additional_data = {'pronunciation': ['{{p1|tptp}}', '{{p1|tptp2}}']}
+        pronunciation = renderer.render_pronunciation(info)
+        pronunciation_section = """
 
-{{-fanononana-}}"""
-            self.assertEquals(pronunciation, pronunciation_section)
+{{-fanononana-}}
+* {{p1|tptp}}
+* {{p1|tptp2}}"""
+        self.assertEquals(pronunciation, pronunciation_section)
 
     def test_audio_pronunciation(self):
         renderer = MGWikiPageRenderer()
         info = MagicMock()
+        info.additional_data = {'audio_pronunciations': ['audio1.mp3']}
         info.entry = 'entry'
-        info.audio_pronunciations = ['audio1.mp3']
         pronunciation = renderer.render_pronunciation(info)
         pronunciation_section = """
 
@@ -105,8 +111,8 @@ class TestRenderers(TestCase):
     def test_ipa_pronunciation(self):
         renderer = MGWikiPageRenderer()
         info = MagicMock()
+        info.additional_data = {'ipa': ['akakak']}
         info.entry = 'entry'
-        info.ipa = ['akakak']
         info.language = 'mg'
         pronunciation = renderer.render_pronunciation(info)
         pronunciation_section = """
@@ -118,7 +124,7 @@ class TestRenderers(TestCase):
     def test_synonyms(self):
         renderer = MGWikiPageRenderer()
         info = MagicMock()
-        info.synonyms = ['syn1']
+        info.additional_data = {'synonyms': ['syn1']}
         synonyms = renderer.render_synonyms(info)
         sections = """
 
@@ -129,7 +135,7 @@ class TestRenderers(TestCase):
     def test_antonyms(self):
         renderer = MGWikiPageRenderer()
         info = MagicMock()
-        info.antonyms = ['ant1']
+        info.additional_data = {'antonyms': ['ant1']}
         synonyms = renderer.render_antonyms(info)
         sections = """
 
@@ -140,7 +146,7 @@ class TestRenderers(TestCase):
     def test_related_terms(self):
         renderer = MGWikiPageRenderer()
         info = MagicMock()
-        info.related_terms = ['rt1']
+        info.additional_data = {'related_terms': ['rt1']}
         synonyms = renderer.render_related_terms(info)
         sections = """
 
@@ -151,7 +157,7 @@ class TestRenderers(TestCase):
     def test_derived_terms(self):
         renderer = MGWikiPageRenderer()
         info = MagicMock()
-        info.derived_terms = ['rt1']
+        info.additional_data = {'derived_terms': ['rt1']}
         synonyms = renderer.render_related_terms(info)
         sections = """
 
@@ -162,21 +168,21 @@ class TestRenderers(TestCase):
     def test_section(self):
         renderer = MGWikiPageRenderer()
         info = MagicMock()
-        info.test_attribute = 'toskjf'
+        info.additional_data = {'test_attribute': 'toskjf'}
         section = renderer.render_section(info, '{{-test-header-}}', 'test_attribute')
         self.assertIn('{{-test-header-}}', section)
 
     def test_further_reading(self):
         renderer = MGWikiPageRenderer()
         info = MagicMock()
-        info.further_reading = ''
+        info.additional_data = {'further_reading': ''}
         further_reading = renderer.render_further_reading(info)
         self.assertIn('{{-famakiana fanampiny-}}', further_reading)
 
     def test_references(self):
         renderer = MGWikiPageRenderer()
         info = MagicMock()
-        info.references = ['']
+        info.additional_data = {'references': ['']}
         references = renderer.render_references(info)
         self.assertIn('{{-tsiahy-}}', references)
 

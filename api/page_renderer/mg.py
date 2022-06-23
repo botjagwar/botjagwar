@@ -59,7 +59,7 @@ class MGWikiPageRenderer(PageRenderer):
 
     def render_etymology(self, info):
         returned_string = ''
-        if 'etymology' in info.additional_data:
+        if info.additional_data is not None and 'etymology' in info.additional_data:
             etymology = info.additional_data['etymology']
             if etymology:
                 returned_string += '\n{{-etim-}}\n'
@@ -113,29 +113,35 @@ class MGWikiPageRenderer(PageRenderer):
 
     def render_pronunciation(self, info):
         returned_string = ''
-        # Pronunciation and/or Audio
-        if 'audio_pronunciations' in info.additional_data or \
-            'ipa' in info.additional_data:
-            returned_string += '\n\n{{-fanononana-}}'
+        header_added = False
 
-            if 'audio_pronunciations' in info.additional_data:
-                for audio in info.info.additional_data['audio_pronunciations']:
-                    returned_string += "\n* " + \
-                                       '{{audio|' + f'{audio}' + '|' + f'{info.entry}' + '}}'
-
-            if 'ipa' in info.additional_data:
-                for ipa in info.additional_data['ipa']:
-                    returned_string += "\n* " + \
-                                       '{{fanononana|' + f'{ipa}' + '|' + f'{info.language}' + '}}'
-
-        # Pronunciation section
-        elif 'pronunciation' in info.additional_data:
-            returned_string += '\n\n{{-fanononana-}}'
+        # Generic pronunciation section
+        if 'pronunciation' in info.additional_data:
+            if not header_added:
+                returned_string += '\n\n{{-fanononana-}}'
+                header_added = True
             if isinstance(info.additional_data['pronunciation'], list):
                 for pron in info.additional_data['pronunciation']:
                     returned_string += "\n* " + pron.strip('*').strip()
             else:
                 returned_string += "\n* " + info.additional_data['pronunciation'].strip('*').strip()
+
+        # Pronunciation and/or Audio
+        if 'audio_pronunciations' in info.additional_data:
+            if not header_added:
+                returned_string += '\n\n{{-fanononana-}}'
+                header_added = True
+            for audio in info.additional_data['audio_pronunciations']:
+                returned_string += "\n* " + \
+                                   '{{audio|' + f'{audio}' + '|' + f'{info.entry}' + '}}'
+
+        # IPA
+        if 'ipa' in info.additional_data:
+            if not header_added:
+                returned_string += '\n\n{{-fanononana-}}'
+            for ipa in info.additional_data['ipa']:
+                returned_string += "\n* " + \
+                                   '{{fanononana|' + f'{ipa}' + '|' + f'{info.language}' + '}}'
 
         return returned_string
 

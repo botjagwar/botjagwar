@@ -73,10 +73,10 @@ class TestTranslationV2(TestCase):
         wikipage = MagicMock()
         wikipage.title.return_value = 'test'
         wikipage.site.language = 'en'
-        entries = Translation.add_wiktionary_credit(
-            [self.entry1, self.entry2], wikipage)
-        assert hasattr(entries[0], 'reference')
-        assert hasattr(entries[1], 'reference')
+        entries = Translation.add_wiktionary_credit([self.entry1, self.entry2], wikipage)
+        print(entries)
+        assert 'reference' in entries[0].additional_data
+        assert 'reference' in entries[1].additional_data
 
     def test_aggregate_entry_data(self):
         pass
