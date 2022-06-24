@@ -18,9 +18,8 @@ class NonLemma(object):
                     renderer_module,
                     'render_' +
                     self.renderer)(self)
-            else:
-                raise AttributeError(
-                    f'Renderer function api.parsers.renderers.{language}.{self.renderer} not found!')
+            raise AttributeError(
+                f'Renderer function api.parsers.renderers.{language}.{self.renderer} not found!')
         else:
             raise AttributeError(
                 f'Module api.parsers.renderers.{language} not found!')

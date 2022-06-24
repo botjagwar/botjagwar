@@ -1,0 +1,38 @@
+==Polish==
+{{wp|lang=pl}}
+
+===Etymology 1===
+{{onom|pl}}.
+
+====Pronunciation====
+* {{pl-IPA}}
+* {{audio|pl|LL-Q809 (pol)-Olaf-phi.wav|Audio}}
+* {{hyph|pl|phi}}
+* {{rhymes|pl|i}}
+
+====Interjection====
+{{head|pl|interjection}}
+
+# {{l|en|[[huh]], [[pooh]]}} (''used to express dismissal, contempt, impatience, etc.'')
+
+===Etymology 2===
+From {{bor|pl|grc|φεῖ}}.
+
+====Pronunciation====
+* {{pl-IPA|fi}}
+* {{hyph|pl|phi}}
+* {{rhymes|pl|i}}
+
+====Noun====
+{{pl-noun|n|indecl=yes}}
+
+# {{l|en|phi}} (Greek letter Φ, φ)
+
+====Alternative forms====
+* {{alt|pl|fi}}
+
+===Further reading===
+* {{R:pl:WSJP}}
+* {{R:PWN}}
+
+{{c|pl|Greek letter names}}

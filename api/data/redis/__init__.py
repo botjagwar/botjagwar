@@ -66,8 +66,8 @@ class RedisWrapperAPI(KeyValueStoreAPI):
         data = self.instance.get(attribute)
         if data is not None:
             return data
-        else:
-            raise KeyError(attribute)
+
+        raise KeyError(attribute)
 
 
 class RedisDictionary(RedisWrapperAPI):

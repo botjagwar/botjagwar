@@ -1,6 +1,7 @@
 # coding: utf8
 
 import re
+
 from .base import WiktionaryProcessor
 from .base import data_file
 
@@ -18,12 +19,12 @@ class PLWiktionaryProcessor(WiktionaryProcessor):
         except IOError:
             self.langdata = {}
 
-    def retrieve_translations(self, page_c):
+    def retrieve_translations(self):
         ret = []
-        tr_lines = self._get_translation_lines(page_c)
+        tr_lines = self._get_translation_lines(self.content)
         for line in tr_lines:
             line = line.split(':')
-            language = self.langname2languagecode(line[0].strip())
+            language = self.convert_language_name_to_iso_code(line[0].strip())
             translations = line[1].strip()
             for translation in translations.split(';'):
                 ret.append((language, translation))
@@ -49,6 +50,6 @@ class PLWiktionaryProcessor(WiktionaryProcessor):
             ret.append(translation)
         return ret
 
-    def _langname2langcode(self, langname):
+    def convert_language_name_to_iso_code(self, langname):
         langname = langname.strip()
         return self.langdata[langname]

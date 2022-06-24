@@ -8,25 +8,26 @@ master : ![master](https://app.travis-ci.com/radomd92/botjagwar.svg?branch=maste
 dev: ![dev](https://app.travis-ci.com/radomd92/botjagwar.svg?branch=dev)
 
 ## Prerequisites
+- Linux-like environment (if you're on Windows, WSL will do)
+- Python 3.8 (pip is used for requirements) or later versions
+- PostgreSQL 11 server or later versions, used with psycopg2
 
-You'll need a working Python 3.6 interpreter to run the python scripts of this project.
 
 ## Installation
 
-In the project directory, type `make all`. The Python scripts and the required configuration will be deployed on the target machine at `/opt/botjagwar`. They can be removed with
-`make uninstall`.
+In the project directory, run `install.sh`. The Python virtual environment as well as the scripts and the required configuration will be deployed on the target machine at `/opt/botjagwar`. They can be removed by removing the install folder.
 
 If you intend to use the bot for editing on Wiktionary, you need to set up your pywikibot instance.
 Visit [Pywikibots installation manual](https://www.mediawiki.org/wiki/Manual:Pywikibot/Installation) for more details on how to do that.
 
-To confirm whether you have a working installation, run `make test`. All tests should pass.
+To confirm whether you have a working installation, run `test.sh`. All tests should pass.
 However, some of them may not pass on the Raspberry Pi due files not being deleted after teardowns.
 
 ## Running
 - Go to `/opt/botjagwar`
-- Run `python3.6 wiktionary_irc.py` in a screen instance
-- Run `python3.6 dictionary_service.py` in a screen instance, serves on 8001
-- Run `python3.6 entry_translator.py`in a screen instance, serves on 8000
+- Run `python3 wiktionary_irc.py` in a screen instance
+- Run `python3 dictionary_service.py` in a screen instance, serves on 8001
+- Run `python3 entry_translator.py`in a screen instance, serves on 8000
 
 Alternatively, a supervisor script `supervisor-botjagwar.conf` can help you configure the program above as services.
 

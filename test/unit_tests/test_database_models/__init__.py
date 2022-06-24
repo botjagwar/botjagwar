@@ -4,7 +4,7 @@ from unittest.mock import MagicMock
 
 from parameterized import parameterized
 
-from database.dictionary.model import DefinitionSerialiser, WordSerialiser
+from api.dictionary.serialisers.json import Definition as DefinitionSerialiser, Word as WordSerialiser
 
 
 def fixture_definition_2():
@@ -15,6 +15,13 @@ def fixture_definition_2():
     definition_2.definition = 'ity dia andrana fanonona iray'
     definition_2.definition_language = 'mg'
     definition_2.words = []
+    definition_2.serialise.return_value = {
+        "type": 'Definition',
+        "id": 121298,
+        "date_changed": datetime(2013, 11, 12, 14, 30, 10),
+        "definition": 'ity dia andrana fanonona iray',
+        "definition_language": 'mg',
+    }
 
     return definition_2
 
@@ -51,6 +58,13 @@ def fixture_definition_1():
     definition_1.definition = 'This is a test definition'
     definition_1.definition_language = 'en'
     definition_1.words = []
+    definition_1.serialise.return_value = {
+        'type': 'Definition',
+        'id': 123456,
+        'date_changed': datetime(2019, 11, 12, 14, 30, 10),
+        'definition': 'This is a test definition',
+        'definition_language': 'en',
+    }
     return definition_1
 
 

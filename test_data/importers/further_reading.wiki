@@ -1,0 +1,14 @@
+==French==
+
+===Pronunciation===
+* {{fr-IPA}}
+
+===Noun===
+{{fr-noun|m|phi}}
+
+# [[#English|phi]] {{gloss|Greek letter}}
+
+===Further reading===
+* {{R:TLFi}}
+
+[[Category:fr:Greek letter names]]

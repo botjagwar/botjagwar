@@ -9,7 +9,7 @@ from signal import SIGTERM
 import irc.bot
 import requests
 
-from api.decorator import retry_on_fail, threaded
+from api.decorator import retry_on_fail
 from api.servicemanager import EntryTranslatorServiceManager
 
 log.basicConfig(
@@ -96,7 +96,6 @@ class WiktionaryRecentChangesBot(irc.bot.SingleServerIRCBot):
         self.do_join(server, events)
 
     def on_pubmsg(self, server, events):
-        @threaded
         @retry_on_fail([requests.ConnectionError], 10, .3)
         def _process():
             try:
@@ -115,6 +114,7 @@ class WiktionaryRecentChangesBot(irc.bot.SingleServerIRCBot):
             except requests.ConnectionError as e:
                 print('NOTE: Spawning "entry_processor.py" backend process.')
             except Exception as e:
+                log.exception(e)
                 self.stats['errors'] += 1
 
         _process()
@@ -147,7 +147,7 @@ def _get_message_type(message):
 
 
 def _prepare_message(events):
-    return events.arguments()[0]
+    return events.arguments[0]
 
 
 def base36encode(number, alphabet='0123456789abcdefghjiklmnopqrstuvwxyz'):

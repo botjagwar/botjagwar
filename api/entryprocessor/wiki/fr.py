@@ -2,9 +2,7 @@
 
 import re
 
-import pywikibot
-
-from api.model.word import Entry
+from api.model.word import Entry, Translation
 from .base import WiktionaryProcessor
 from .base import stripwikitext
 
@@ -34,7 +32,7 @@ class FRWiktionaryProcessor(WiktionaryProcessor):
         regex = r'\{\{trad[\+\-]+?\|([A-Za-z]{2,3})\|(.*?)\}\}'
         part_of_speech = 'ana'
         definition = ""
-        for entry in self.getall():
+        for entry in self.get_all_entries():
             print(entry)
             if entry.language == 'fr':
                 if entry.part_of_speech in self.postran:
@@ -55,11 +53,11 @@ class FRWiktionaryProcessor(WiktionaryProcessor):
             if part_of_speech in self.postran:
                 part_of_speech = self.postran[part_of_speech]
 
-            e = Entry(
-                entry=entree,
+            e = Translation(
+                word=entree,
                 part_of_speech=part_of_speech,
                 language=langcode,
-                definitions=[definition.strip()]
+                definition=definition.strip()
             )
             retcontent.append(e)
         try:
@@ -69,10 +67,8 @@ class FRWiktionaryProcessor(WiktionaryProcessor):
 
         return retcontent
 
-    def getall(self, keepNativeEntries=False, **kw):
+    def get_all_entries(self, keepNativeEntries=False, **kw):
         """languges sections in a given page formatting: [(POS, lang, definition), ...]"""
-        if self.Page is not None:
-            assert isinstance(self.Page, pywikibot.Page), self.Page.__class__
         items = []
 
         if self.content is None:
@@ -81,7 +77,7 @@ class FRWiktionaryProcessor(WiktionaryProcessor):
 
         ct_content = self.content
         for lang in re.findall(
-                '{{S\\|([a-z]+)\\|([a-z]{2,3})',
+            '{{S\\|([a-z]+)\\|([a-z]{2,3})',
                 self.content):
             # print(ct_content)
             # word DEFINITION Retrieving

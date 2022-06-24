@@ -5,8 +5,7 @@ import logging as log
 from aiohttp import web
 
 from api.databasemanager import LanguageDatabaseManager
-from api.dictionary import configuration
-from api.dictionary import languages
+from api.dictionary.request_handlers import configuration, languages
 
 parser = argparse.ArgumentParser(description='Language service')
 parser.add_argument('--db-file', dest='STORAGE', required=False)

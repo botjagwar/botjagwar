@@ -6,9 +6,9 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.pool import QueuePool
 
+from api.dictionary.model import Base as LanguageBase
+from api.dictionary.model import Base as WordBase
 from api.metaclass import SingletonMeta
-from database.dictionary import Base as WordBase
-from database.language import Base as LanguageBase
 
 log = logging.getLogger(__file__)
 
@@ -46,6 +46,7 @@ class DatabaseManager(object):
         self.config_parser = configparser.ConfigParser()
         self.config_parser.read('/opt/botjagwar/conf/config.ini')
         self.db_header = self.config_parser.get('global', self.conf_key)
+
 
 class LanguageDatabaseManager(DatabaseManager):
     database_file = 'data/language.db'

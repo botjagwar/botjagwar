@@ -43,7 +43,7 @@ def crawl_subcategories(category_name):
         for article in category.articles():
             pywikibot.output(article.title())
             en_page_processor.process(article)
-            entries = en_page_processor.getall(definitions_as_is=True)
+            entries = en_page_processor.get_all_entries(definitions_as_is=True)
             print(article, entries)
             for entry in entries:
                 create_non_lemma_entry(entry)

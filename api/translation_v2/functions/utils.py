@@ -1,8 +1,6 @@
 import re
 from logging import getLogger
 
-import requests
-
 from api.servicemanager.pgrest import StaticBackend
 
 regexesrep = [
@@ -36,29 +34,6 @@ def _delink(line):
         line = line.replace(c, '')
 
     return line
-
-
-def _look_up_dictionary(w_language, w_part_of_speech, w_word):
-    params = {
-        'language': 'eq.' + w_language,
-        'part_of_speech': 'eq.' + w_part_of_speech,
-        'word': 'eq.' + w_word
-    }
-    resp = requests.get(backend.backend + '/json_dictionary', params=params)
-    data = resp.json()
-    return data
-
-
-def _look_up_word(language, part_of_speech, word):
-    params = {
-        'language': 'eq.' + language,
-        'part_of_speech': 'eq.' + part_of_speech,
-        'word': 'eq.' + word
-    }
-    log.debug(params)
-    resp = requests.get(backend.backend + '/word', params=params)
-    data = resp.json()
-    return data
 
 
 def _generate_redirections(infos):

@@ -150,7 +150,7 @@ PERSONS = {
     'impers': 'mpandray anjara tsy fantatra',
 
     # full forms
-    'first-person': 'mpnadray anjara voalohany',
+    'first-person': 'mpandray anjara voalohany',
     'second-person': 'mpandray anjara faharoa',
     'third-person': 'mpandray anjara fahatelo',
 }

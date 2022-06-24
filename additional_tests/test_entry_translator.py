@@ -196,7 +196,7 @@ class TestEntryTranslatorProcessWiktionaryPage(TestCase):
                 'fr')
             wiktionary_processor = wiktionary_processor_class()
             wiktionary_processor.process(page)
-            entry = [e for e in wiktionary_processor.getall()
+            entry = [e for e in wiktionary_processor.get_all_entries()
                      if e.language == 'oc'][0]
             info = translation.process_entry_in_foreign_language(
                 entry, page.title(), 'fr', [])
@@ -257,8 +257,8 @@ class TestEntryTranslatorProcessWiktionaryPage(TestCase):
                 'en')
             wiktionary_processor = wiktionary_processor_class()
             wiktionary_processor.process(page)
-            print(wiktionary_processor.getall())
-            entry = [e for e in wiktionary_processor.getall()
+            print(wiktionary_processor.get_all_entries())
+            entry = [e for e in wiktionary_processor.get_all_entries()
                      if e.language == 'fr'][0]
             info = translation.process_entry_in_foreign_language(
                 entry, page.title(), 'en', [])

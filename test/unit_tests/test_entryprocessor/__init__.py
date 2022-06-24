@@ -1,5 +1,5 @@
 from api.entryprocessor import WiktionaryProcessorFactory
-from api.model.word import Entry
+from api.model.word import Entry, Translation
 from test_utils.mocks import PageMock, SiteMock
 
 
@@ -10,13 +10,13 @@ class GenericEntryProcessorTester:
         test_class = WiktionaryProcessorFactory.create(language)
         self.processor = test_class()
 
-    def test_getall(self):
+    def test_get_all_entries(self):
         for page_names in self.test_pages:
             page = PageMock(SiteMock(self.language, 'wiktionary'), page_names)
             self.content = page.get()
             self.processor.set_text(self.content)
             self.processor.process(page)
-            entries = self.processor.getall()
+            entries = self.processor.get_all_entries()
             assert isinstance(entries, list), entries
             for e in entries:
                 assert isinstance(e, Entry)
@@ -28,4 +28,4 @@ class GenericEntryProcessorTester:
             entries = self.processor.retrieve_translations()
             assert isinstance(entries, list), entries
             for e in entries:
-                assert isinstance(e, Entry)
+                assert isinstance(e, Translation)

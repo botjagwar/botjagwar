@@ -1,11 +1,19 @@
+import bz2
+import os
+
 import pywikibot
 import redis
+import requests
 
 from api.config import BotjagwarConfig
-from api.decorator import separate_process
+from api.decorator import separate_process, retry_on_fail, run_once
 from import_wiktionary import EnWiktionaryDumpImporter
 
 config = BotjagwarConfig()
+
+
+class RedisWikipageError(Exception):
+    pass
 
 
 class NoPage(Exception):
@@ -19,7 +27,10 @@ class RedisSite(object):
             wiki: str,
             host='default',
             port=6379,
-            password='default'):
+            password='default',
+            offline=False
+    ):
+        self.offline = offline
         self.language = language
         self.wiki = wiki
         if host == 'default':
@@ -35,7 +46,20 @@ class RedisSite(object):
             self.password = None
 
         self.port = port
-        self.instance = redis.Redis(
+
+    def all_pages(self):
+        for key in self.instance.scan_iter(match=f'{self.wiki}.{self.language}/*', count=1000):
+            page_name = str(key, encoding='utf8').replace(f'{self.wiki}.{self.language}/', '')
+            yield RedisPage(RedisSite(self.language, 'wiktionary'), page_name)
+
+    @property
+    def lang(self):
+        return self.language
+
+    @property
+    @run_once
+    def instance(self):
+        return redis.Redis(
             self.host,
             self.port,
             password=self.password,
@@ -54,9 +78,33 @@ class RedisSite(object):
             f'{self.wiki}.{self.language}/', '')
         return RedisPage(self, page_name)
 
+    def download_dump(self):
+        url = f'https://dumps.wikimedia.org/{self.language}wiktionary/latest/{self.language}wiktionary-latest-pages-articles.xml.bz2'
+        dump_dir = 'user_data/dumps'
+        dump_path = dump_dir + f'/{self.language}wikt.xml'
+
+        if not os.path.isdir(dump_dir):
+            os.mkdir(dump_dir)
+        if not os.path.isfile(dump_path + '.bz2'):
+            print('File is absent. Downloading from dumps.wikimedia.org. This may take a while...')
+            with requests.get(url, stream=True) as request:
+                request.raise_for_status()
+                with open(dump_path + '.bz2', 'wb') as f:
+                    for chunk in request.iter_content(chunk_size=8192):
+                        f.write(chunk)
+            print('Download complete.')
+
+        print('Extracting dump file...')
+        with open(dump_path, 'wb') as xml_file, bz2.BZ2File(dump_path + '.bz2', 'rb') as file:
+            for data in iter(lambda: file.read(100 * 1024), b''):
+                xml_file.write(data)
+
     @separate_process
-    def load_xml_dump(self, dump='user_data/dumps/enwikt.xml'):
-        importer = EnWiktionaryDumpImporter(dump)
+    def load_xml_dump(self, download=False, dump_path='user_data/dumps/enwikt.xml'):
+        if download:
+            self.download_dump()
+
+        importer = EnWiktionaryDumpImporter(dump_path)
         for xml_page in importer.load():
             try:
                 title, content = importer.get_page_from_xml(xml_page)
@@ -75,8 +123,15 @@ class RedisSite(object):
 
 
 class RedisPage(object):
-    def __init__(self, site: RedisSite, title: str, offline=True):
-        self.offline = offline
+    max_redirection_depth = 10  # number of redirection link following until we consider the page as non-existent
+
+    def __init__(self, site: RedisSite, title: str, offline='automatic'):
+        if offline == 'automatic':
+            self.offline = site.offline
+        else:
+            assert isinstance(offline, bool)
+            self.offline = offline
+
         self.site = site
         self._title = title
 
@@ -89,6 +144,7 @@ class RedisPage(object):
     def isEmpty(self):
         return self.get() == ''
 
+    @retry_on_fail([redis.ConnectionError], retries=5, time_between_retries=.5)
     def get(self):
         if self._title is None:
             return ''
@@ -124,6 +180,18 @@ class RedisPage(object):
             else:
                 wikisite = pywikibot.Site(self.site.language, self.site.wiki)
                 wikipage = pywikibot.Page(wikisite, self._title)
+                if wikipage.exists():
+                    redirection_depth = 0
+                    while wikipage.isRedirectPage():
+                        redirection_depth += 1
+                        if redirection_depth == self.max_redirection_depth:
+                            break
+                        else:
+                            wikipage = wikipage.getRedirectTarget()
+
+                    if redirection_depth == self.max_redirection_depth:
+                        return False
+
                 return wikipage.exists()
         else:
             return True
@@ -137,11 +205,21 @@ class RedisPage(object):
         else:
             wikisite = pywikibot.Site(self.site.language, self.site.wiki)
             wikipage = pywikibot.Page(wikisite, self._title)
-            return getattr(wikipage, 'namespace')()
+            try:
+                return getattr(wikipage, 'namespace')()
+            except pywikibot.exceptions.InvalidTitleError:
+                class Namespace(object):
+                    content = self.get()
+                return Namespace()
 
     def isRedirectPage(self):
         if self.exists():
-            return '#REDIRECT [[' in self.get()
+            try:
+                content = self.get()
+            except pywikibot.exceptions.IsRedirectPageError:
+                return True
+            else:
+                return '#REDIRECT [[' in content
         else:
             if not self.offline:
                 wikisite = pywikibot.Site(self.site.language, self.site.wiki)
@@ -165,8 +243,8 @@ if __name__ == '__main__':
     All en.wiktionary pages will have their latest version uploaded in your Redis.
     Using RedisSite and RedisPage, you'll have a much faster read and offline access.
     """)
-    site = RedisSite('en', 'wiktionary')
-    site.load_xml_dump('user_data/dumps/enwikt.xml')
+    site = RedisSite('mg', 'wiktionary')
+    site.load_xml_dump('user_data/dumps/mgwikt.xml')
     # site.load_xml_dump('user_data/dumps/enwikt_2.xml')
     # site.load_xml_dump('user_data/dumps/enwikt_3.xml')
     # site.load_xml_dump('user_data/dumps/enwikt_4.xml')

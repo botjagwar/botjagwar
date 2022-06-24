@@ -10,8 +10,8 @@ class TestFrenchWiktionaryEntryprocessor(
     def setUp(self):
         self.setup_for_language('fr', ['eau', 'air', 'газета', 'geloof'])
 
-    def test_getall(self):
-        super(TestFrenchWiktionaryEntryprocessor, self).test_getall()
+    def test_get_all_entries(self):
+        super(TestFrenchWiktionaryEntryprocessor, self).test_get_all_entries()
 
     def test_retrieve_translations(self):
         super(TestFrenchWiktionaryEntryprocessor,
@@ -22,8 +22,8 @@ class TestFrenchWiktionaryEntryprocessor(
         self.processor.process(page)
         entries = self.processor.retrieve_translations()
         entry = [e for e in entries if e.language == 'ko'][0]
-        word, pos, lang, definition = entry.entry, entry.part_of_speech, entry.language, entry.definitions
+        word, pos, lang, definition = entry.word, entry.part_of_speech, entry.language, entry.definition
         self.assertEqual(word, '공기')
         self.assertEqual(pos, 'ana')
         self.assertEqual(lang, 'ko')
-        self.assertEqual(definition[0], 'air')
+        self.assertEqual(definition, 'air')

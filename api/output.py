@@ -3,16 +3,15 @@ import logging
 import requests
 
 from api.decorator import retry_on_fail
+from api.dictionary.exceptions.http import WordAlreadyExists
 from api.model.word import Entry
 from api.page_renderer import WikiPageRendererFactory
 from api.servicemanager import DictionaryServiceManager
 from api.servicemanager.pgrest import StaticBackend
-from database.exceptions.http import WordAlreadyExistsException
 
 log = logging.getLogger(__name__)
 verbose = False
 
-backend = StaticBackend().backend
 dictionary_service = DictionaryServiceManager()
 USER_DATA = 'user_data/entry_translator'
 URL_HEAD = dictionary_service.get_url_head()
@@ -25,11 +24,13 @@ class Output(object):
         if content_language != 'default':
             self.content_language = content_language
 
+        self.wikipage_renderer = WikiPageRendererFactory(self.content_language)()  # pylint: disable=E1102
+
     @retry_on_fail([Exception], 5, .5)
     def dictionary_service_update_database(self, info: Entry):
         """updates database"""
         # Adapt to expected format
-        log.info(info.to_dict())
+        log.info(info.serialise())
         definitions = [{
             'definition': d,
             'definition_language': self.content_language
@@ -44,7 +45,7 @@ class Output(object):
         response = dictionary_service.post(
             'entry/%s/create' %
             info.language, json=data)
-        if response.status_code == WordAlreadyExistsException.status_code:
+        if response.status_code == WordAlreadyExists.status_code:
             word_response = dictionary_service.get(
                 'entry/%s/%s' %
                 (info.language, info.entry)).json()  # fetch its ID
@@ -52,7 +53,7 @@ class Output(object):
                 'entry/%d/edit' %
                 word_response[0]['id'],
                 json=data)  # edit using its ID
-            if edit_response.status_code == WordAlreadyExistsException.status_code:
+            if edit_response.status_code == WordAlreadyExists.status_code:
                 log.debug(
                     '%s [%s] > Attempted to create an already-existing entry.' %
                     (info.entry, info.language))
@@ -66,6 +67,7 @@ class Output(object):
 
     @staticmethod
     def postgrest_add_translation_method(infos: Entry):
+        backend = StaticBackend().backend
         data = {
             'word': 'eq.' + infos.entry,
             'language': 'eq.' + infos.language,
@@ -82,28 +84,29 @@ class Output(object):
                 raise TypeError(word_id)
         else:
             return
-        for definition, methods in infos.translation_methods.items():
-            data = {
-                'definition': 'eq.' + definition,
-                'definition_language': 'eq.mg',
-                'limit': '1'
-            }
-            defn_id = requests.get(
-                backend + '/definitions',
-                params=data).json()
-            if len(defn_id) > 0 and 'id' in defn_id:
-                defn_id = defn_id[0]['id']
-            else:
-                return
-
-            for method in methods:
+        if hasattr(infos, 'translation_methods'):
+            for definition, methods in infos.translation_methods.items():
                 data = {
-                    'word': word_id,
-                    'definition': defn_id,
-                    'translation_method': method,
+                    'definition': 'eq.' + definition,
+                    'definition_language': 'eq.mg',
+                    'limit': '1'
                 }
-                log.debug('post /translation_method', data)
-                requests.post(backend + '/translation_method', json=data)
+                defn_id = requests.get(
+                    backend + '/definitions',
+                    params=data).json()
+                if len(defn_id) > 0 and 'id' in defn_id:
+                    defn_id = defn_id[0]['id']
+                else:
+                    return
+
+                for method in methods:
+                    data = {
+                        'word': word_id,
+                        'definition': defn_id,
+                        'translation_method': method,
+                    }
+                    log.debug('post /translation_method' + str(data))
+                    requests.post(backend + '/translation_method', json=data)
 
     @staticmethod
     def sqlite_add_translation_method(infos: Entry):
@@ -114,18 +117,14 @@ class Output(object):
 
     def batchfile(self, info: Entry):
         "return batch format (see doc)"
-        string = "%(entry)s -> %(entry_definition)s -> %(part_of_speech)s -> %(language)s\n" % info.to_dict()
+        string = "%(entry)s -> %(entry_definition)s -> %(part_of_speech)s -> %(language)s\n" % info.serialise()
         return string
 
     def wikipage(self, info: Entry, link=True):
         "returns wikipage string"
-        self.wikipage_renderer = WikiPageRendererFactory(
-            self.content_language)()
         return self.wikipage_renderer.render(info)
 
     def wikipages(self, infos: list, link=True):
-        self.wikipage_renderer = WikiPageRendererFactory(
-            self.content_language)()
         ret_page = ''
 
         # Consolidate by language
@@ -141,13 +140,17 @@ class Output(object):
         log.debug(entries_by_language)
         for language, entries in entries_by_language.items():
             for entry in entries:
-                rendered = self.wikipage_renderer.render(entry)
+                rendered = self.wikipage_renderer.render(entry).strip()
                 language_section = rendered.split('\n')[0]
                 if ret_page.find(language_section) == -1:
-                    ret_page += rendered + "\n"
+                    if rendered:
+                        ret_page += rendered + "\n"
                 else:
                     ret_page = ret_page.replace(
                         language_section, rendered) + "\n"
 
         ret_page = ret_page.replace('\n\n\n', '\n\n')
-        return ret_page
+        return ret_page.strip()
+
+    def delete_section(self, section_name, wiki_page):
+        return self.wikipage_renderer.delete_section(section_name, wiki_page)

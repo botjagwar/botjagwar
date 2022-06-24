@@ -1,15 +1,29 @@
 from unittest import TestCase
 
+from parameterized import parameterized
+
 from api.parsers.functions.verb_forms import parse_ca_verb_form_of
 from api.parsers.functions.verb_forms import parse_de_verb_form_of
 from api.parsers.functions.verb_forms import parse_es_compound_of
 from api.parsers.functions.verb_forms import parse_es_verb_form_of
 from api.parsers.functions.verb_forms import parse_fi_form_of
 from api.parsers.functions.verb_forms import parse_fi_verb_form_of
+from api.parsers.functions.verb_forms import parse_la_verb_form_inflection_of
 from api.parsers.functions.verb_forms import parse_verb_form_inflection_of
 from api.parsers.inflection_template import VerbForm
 
-
+fi_verb_forms = [
+    '{{fi-verb form of|pn=1p|tm=cond|absorboitua}}',
+    '{{fi-verb form of|pn=pass|tm=pres|c=1|absorboitua}}',
+    '{{fi-verb form of|pn=pass|tm=potn|c=1|aavikoitua}}',
+    '{{fi-verb form of|tm=pres|c=1|absorboitua}}',
+    '{{fi-verb form of|pn=1s|tm=impr|absorboitua}',
+    '{{fi-verb form of|pn=2s|tm=impr|c=1|absorboitu}}',
+    '{{fi-verb form of|pn=3s|tm=pres|absorboitua}}',
+    '{{fi-verb form of|pn=1p|tm=past|absorboitua}',
+    '{{fi-verb form of|pn=2p|tm=pres|c=1|absorboitu}}',
+    '{{fi-verb form of|pn=3p|tm=potn|absorboitua}}'
+]
 class TestVerbFormParsers(TestCase):
 
     def test_parse_verb_form_inflection_of(self):
@@ -79,6 +93,10 @@ class TestVerbFormParsers(TestCase):
         self.assertEqual(output.tense, 'pres')
         self.assertEqual(output.lemma, 'absorboitua')
 
+    @parameterized.expand(fi_verb_forms)
+    def test_parse_fi_verb_form_of_2(self, template_expression):
+        output = parse_fi_verb_form_of(template_expression)
+
     def test_parse_fi_form_of(self):
         template_expression = '{{fi-form of|aateloida|pr=third-person|pl=singular|mood=indicative|tense=present}}'
         output = parse_fi_form_of(template_expression)
@@ -90,11 +108,22 @@ class TestVerbFormParsers(TestCase):
         self.assertEqual(output.lemma, 'aateloida')
 
     def test_parse_de_verb_form_of(self):
-        template_expression = '{{de-verb form of|abfangen|1|s|k2|a}}'
-        output = parse_de_verb_form_of(template_expression)
-        self.assertIsInstance(output, VerbForm)
-        self.assertEqual(output.person, '1')
-        self.assertEqual(output.number, 's')
-        self.assertEqual(output.tense, '')
-        self.assertEqual(output.mood, 'subj')
-        self.assertEqual(output.lemma, 'abfangen')
+        for mood in ['k1', 'k2']:
+            for tense_name, tense_param in [('pres', 'g'), ('pret', 'v')]:
+                template_expression = '{{de-verb form of|abfangen|1|%s|s|%s|a}}' % (tense_param, mood)
+                output = parse_de_verb_form_of(template_expression)
+                self.assertIsInstance(output, VerbForm)
+                self.assertEqual(output.person, '1')
+                self.assertEqual(output.number, 's')
+                self.assertEqual(output.tense, tense_name)
+                self.assertEqual(output.mood, 'subj')
+                self.assertEqual(output.lemma, 'abfangen')
+
+    def test_parse_la_verb_form_inflection_of(self):
+        template_expression = '{{inflection of|la|abaestuō||2|p|impf|actv|indc}}'
+        output = parse_la_verb_form_inflection_of(template_expression)
+        self.assertEqual(output.person, '2')
+        self.assertEqual(output.number, 'p')
+        self.assertEqual(output.tense, 'impf')
+        self.assertEqual(output.lemma, 'abaestuō')
+        self.assertEqual(output.mood, 'indc')

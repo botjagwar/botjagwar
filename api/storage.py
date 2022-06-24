@@ -3,7 +3,7 @@ from csv import DictWriter
 from threading import Lock
 
 from api.data.caching import FastTranslationLookup
-from api.decorator import critical_section, singleton
+from api.decorator import critical_section
 from api.model.word import Entry
 
 entry_page_cs_lock = Lock()
@@ -18,7 +18,6 @@ class Writer(object):
     pass
 
 
-@singleton
 class EntryPageFileWriter(Writer):
     def __init__(self, language):
         self.page_dump_file = open('user_data/dump-%s.pkl' % language, 'wb')
@@ -45,7 +44,6 @@ class EntryPageFileWriter(Writer):
         self.page_dump_file.close()
 
 
-@singleton
 class EntryPageFileReader(Reader):
     page_dump_file = None
 
@@ -63,7 +61,6 @@ class EntryPageFileReader(Reader):
             self.page_dump = pickle.load(self.page_dump_file)
 
 
-@singleton
 class MissingTranslationFileReader(Reader):
     def __init__(self, language):
         self.mising_translations = {}
@@ -76,7 +73,6 @@ class MissingTranslationFileReader(Reader):
         self.mising_translations = pickle.load(self.mising_translations_file)
 
 
-@singleton
 class MissingTranslationFileWriter(Writer):
     def __init__(self, language):
         self.mising_translations = {}
@@ -143,8 +139,8 @@ class SiteExtractorCacheEngine(object):
     def get(self, word):
         if word in self.page_dump:
             return self.page_dump[word]
-        else:
-            raise CacheMissError()
+
+        raise CacheMissError()
 
     def iterate(self):
         for word in self.page_dump:

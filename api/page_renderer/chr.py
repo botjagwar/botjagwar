@@ -4,7 +4,7 @@ from .base import PageRenderer
 
 class CHRWikiPageRenderer(PageRenderer):
     def render(self, info: Entry, link=True) -> str:
-        data = info.to_dict()
+        data = info.serialise()
         s = """
 {{-%(language)s-}}
 '''{{subst:BASEPAGENAME}}'''""" % data

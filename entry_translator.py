@@ -8,12 +8,11 @@ from argparse import ArgumentParser
 import pywikibot as pwbot
 from aiohttp import web
 from aiohttp.web import Response
-from pywikibot import Site, Page
 
 from api import entryprocessor
 from api.decorator import threaded
-from api.model.word import Translation as TranslationModel
 from api.translation_v2.core import Translation
+from redis_wikicache import RedisSite as Site, RedisPage as Page
 
 # GLOBAL VARS
 verbose = False
@@ -136,14 +135,15 @@ async def get_wiktionary_page_translation(request) -> Response:
     except Exception as e:
         log.exception(e)
         data['traceback'] = traceback.format_exc()
-        data['message'] = '' if not hasattr(e, 'message') else getattr(e, 'message')
+        data['type'] = 'error'
+        data['message'] = 'unknown error' if not hasattr(e, 'message') else getattr(e, 'message')
         response = Response(
             text=json.dumps(data),
             status=500,
             content_type='application/json')
     else:
         response = Response(
-            text=json.dumps([d.to_dict() for d in data]),
+            text=json.dumps([d.serialise() for d in data]),
             status=200,
             content_type='application/json')
     return response
@@ -162,19 +162,22 @@ async def get_wiktionary_processed_page(request) -> Response:
     page = Page(Site(language, 'wiktionary'), pagename)
     wiktionary_processor.process(page)
 
-    for entry in wiktionary_processor.getall(fetch_additional_data=True):
+    for entry in wiktionary_processor.get_all_entries(
+        get_additional_data=True,
+        cleanup_definitions=True,
+        advanced=True
+    ):
         translation_list = []
-        section = entry.to_dict()
+        definitions = []
+        for d in entry.definitions:
+            definitions.append(wiktionary_processor.advanced_extract_definition(entry.part_of_speech, d))
+
+        entry.definitions = definitions
+        section = entry.serialise()
 
         for translation in wiktionary_processor.retrieve_translations():
-            translation_section = TranslationModel(
-                word=translation.entry,
-                language=translation.language,
-                part_of_speech=translation.part_of_speech,
-                translation=translation.definitions[0]
-            )
             if translation.part_of_speech == entry.part_of_speech:
-                translation_list.append(translation_section.to_dict())
+                translation_list.append(translation.serialise())
 
         if entry.language == language:
             section['translations'] = translation_list

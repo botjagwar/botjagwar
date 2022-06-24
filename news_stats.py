@@ -28,7 +28,7 @@ def get_saved_state():
         r = pickle.load(f)
         f.close()
         return r
-    except IOError as e:
+    except (Exception, IOError) as e:
         print(e)
         return []
 
@@ -86,8 +86,8 @@ def get_milestones(old_state, new_state):
     def states_diff(state_1, state_2):
         if (state_1[0], state_1[1]) == (state_2[0], state_2[1]):
             for column in list(state_2[2].keys()):
-                old_figure = state_1[2][column]
-                new_figure = state_2[2][column]
+                old_figure = state_1[2].get(column, 0)
+                new_figure = state_2[2].get(column, 0)
                 # print(old_figure, new_figure)
 
                 s1_pow10 = int(math.log(max(1, old_figure), 10))
@@ -139,6 +139,7 @@ def site_to_wiki(site):
         'wikipedia': 'w',
         'wikibooks': 'b',
         'wikisource': 's',
+        'wikiquote': 'q',
     }
     try:
         return sites[site]
@@ -211,9 +212,9 @@ def main():
                 print("efa nahitana daty ankehitriny")
                 return
             content = news + content
-            page.put(content, "+Vaovao androany" + ct_date)
+            page.put(content, "+Vaovao androany " + ct_date)
         else:
-            page.put(news, "Vaovao androany" + ct_date)
+            page.put(news, "Vaovao androany " + ct_date)
 
     newsfile.write(news)
     save_state(new)
