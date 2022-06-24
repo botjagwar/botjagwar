@@ -22,13 +22,12 @@ requests.get = retry_on_fail(
 
 
 def get_saved_state():
-
     try:
         f = open(udata + "/news_stats", 'rb')
         r = pickle.load(f)
         f.close()
         return r
-    except (Exception, IOError) as e:
+    except (Exception, IOError, FileNotFoundError) as e:
         print(e)
         return []
 

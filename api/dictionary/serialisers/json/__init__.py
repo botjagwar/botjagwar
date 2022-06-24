@@ -145,7 +145,8 @@ class Word(JSONBuilder):
 
     @property
     def last_modified(self) -> str:
-        return self.model.date_changed.strftime("%Y-%m-%d %H:%M:%S")
+        return self.model.date_changed.strftime("%Y-%m-%d %H:%M:%S") \
+            if self.model.date_changed is not None else ''
 
     @property
     def additional_data(self) -> dict:
