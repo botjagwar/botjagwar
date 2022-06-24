@@ -1,0 +1,3 @@
+[submodule "openmt-en-mg"]
+path = data/opus-mt-en-mg
+url = https://github.com/radomd92/opus-mt-en-mg.git
