@@ -1,9 +1,9 @@
 import sys
 from csv import DictReader
 
+from api.dictionary.exceptions.http import WordAlreadyExists
 from api.servicemanager import DictionaryServiceManager
 from api.storage import MissingTranslationCsvWriter
-from database.exceptions.http import WordAlreadyExistsException
 
 
 class Extractor(object):
@@ -103,7 +103,7 @@ class Loader(object):
                 'entry/%s/create' % self.language,
                 json=entry
             )
-            if resp.status_code == WordAlreadyExistsException.status_code:
+            if resp.status_code == WordAlreadyExists.status_code:
                 continue
 
 

@@ -1,15 +1,7 @@
 # coding: utf8
 import re
 
-from api.importer.wiktionary.en import \
-    FurtherReadingImporter, \
-    ReferencesImporter, \
-    DerivedTermsImporter, \
-    AlternativeFormsImporter, \
-    SynonymImporter, \
-    EtymologyImporter, \
-    AntonymImporter, \
-    PronunciationImporter
+from api.importer.wiktionary.en import all_importers, TranslationImporter
 from api.model.word import Entry
 from api.parsers import TEMPLATE_TO_OBJECT
 from api.parsers import templates_parser
@@ -63,6 +55,8 @@ class ENWiktionaryProcessor(WiktionaryProcessor):
         self.regexesrep = [
             (r'\{\{l\|en\|(.*)\}\}', '\\1'),
             (r'\{\{vern\|(.*)\}\}', '\\1'),
+            (r'\{\{lb\|(.*)|(.*)\}\}', ''),
+            (r'\{\{gloss\|(.*)\}\}', '\\1'),
             (r"\[\[(.*)#(.*)\|?[.*]?\]?\]?", "\\1"),
             (r"\{\{(.*)\}\}", ""),
             (r'\[\[(.*)\|(.*)\]\]', '\\1'),
@@ -73,21 +67,22 @@ class ENWiktionaryProcessor(WiktionaryProcessor):
         self.code = LANGUAGE_NAMES
 
     def lang2code(self, l):
+        """
+        Convert language name to its ISO code (2 or 3 characters
+        :param l:
+        :return:
+        """
         return self.code[l]
 
-    def fetch_additional_data(self, content, language):
-        additional_data_classes = {
-            FurtherReadingImporter,
-            ReferencesImporter,
-            DerivedTermsImporter,
-            AlternativeFormsImporter,
-            SynonymImporter,
-            EtymologyImporter,
-            AntonymImporter,
-            PronunciationImporter
-        }
+    def get_additional_data(self, content, language) -> dict:
+        """
+        Retrieve additional data thanks to parsers at api.importer.wiktionary.en
+        :param content: wiki page
+        :param language: target language
+        :return:
+        """
         additional_data = {}
-        for classe in additional_data_classes:
+        for classe in all_importers:
             instance = classe()
             additional_data[instance.data_type] = instance.get_data(
                 instance.section_name, content, language)
@@ -97,29 +92,36 @@ class ENWiktionaryProcessor(WiktionaryProcessor):
     def extract_definition(self, part_of_speech, definition_line, advanced=False, **kw):
         if not advanced:  # No cleanup
             return definition_line
-        else:
-            return self.advanced_extract_definition(part_of_speech, definition_line)
+
+        return self.advanced_extract_definition(part_of_speech, definition_line)
 
     def advanced_extract_definition(self, part_of_speech, definition_line,
                                     cleanup_definition=True,
                                     translate_definitions_to_malagasy=False,
                                     human_readable_form_of_definition=True
                                     ):
+        """
+        Retrieve definition from the wiki page.
+        :param part_of_speech: targetted part of speech
+        :param definition_line: definition line, should start with a "#"
+        :param cleanup_definition: remove links/templates?
+        :param translate_definitions_to_malagasy: translate to malagasy? (valid for templates)
+        :param human_readable_form_of_definition: put the form-of definition as a sentence
+        :return:
+        """
         new_definition_line = definition_line
-        # No cleanup
+        # No cleanup for definition
         if not cleanup_definition:
             return definition_line
 
         # Clean up non-needed template to improve readability.
-        # In case these templates are needed, integrate your code above this
-        # part.
+        # In case these templates are needed, integrate your code above this part.
         for regex, replacement in self.regexesrep:
             new_definition_line = re.sub(
                 regex, replacement, new_definition_line)
 
-        # Form-of definitions: they use templates that can be parsed using api.parsers module
-        #   which is tentatively being integrated here to provide human-readable output for
-        #   either English or Malagasy
+        # Form-of definitions: they use templates that can be parsed using api.parsers module which is tentatively
+        #   being integrated here to provide human-readable output for either English or Malagasy
         if new_definition_line == '':
             if human_readable_form_of_definition:
                 try:
@@ -139,14 +141,24 @@ class ENWiktionaryProcessor(WiktionaryProcessor):
         # print(definition_line, new_definition_line)
         return new_definition_line
 
-    def getall(
-            self,
-            keepNativeEntries=False,
-            fetch_additional_data=False,
-            cleanup_definitions=False,
-            translate_definitions_to_malagasy=False,
-            human_readable_form_of_definition=True,
-            **kw):
+    def get_all_entries(
+        self,
+        keepNativeEntries=False,
+        get_additional_data=False,
+        cleanup_definitions=False,
+        translate_definitions_to_malagasy=False,
+        human_readable_form_of_definition=True,
+        **kw) -> list:
+        """
+        Retrieves all necessary information in the form of a list of Entry objects
+        :param keepNativeEntries:
+        :param get_additional_data:
+        :param cleanup_definitions:
+        :param translate_definitions_to_malagasy:
+        :param human_readable_form_of_definition:
+        :param kw:
+        :return:
+        """
         content = self.content
         entries = []
         content = re.sub("{{l/en\\|(.*)}}", "\\1 ", content)  # remove {{l/en}}
@@ -171,6 +183,9 @@ class ENWiktionaryProcessor(WiktionaryProcessor):
                 if last_part_of_speech is None:
                     last_part_of_speech = self.get_part_of_speech(line)
 
+                # We assume en.wikt definitions start with a "# " and proceed to extract all definitions from there.
+                # Definitions are then added as a list of strings then added as a list of strings. They are grouped
+                #   by part of speech to ensure correctness, as we can only have one part of speech for a given entry.
                 if line.startswith('# '):
                     defn_line = line
                     defn_line = defn_line.lstrip('# ')
@@ -182,18 +197,22 @@ class ENWiktionaryProcessor(WiktionaryProcessor):
                         defn_line,
                         cleanup_definition=cleanup_definitions,
                         translate_definitions_to_malagasy=translate_definitions_to_malagasy,
-                        human_readable_form_of_definition=human_readable_form_of_definition)
+                        human_readable_form_of_definition=human_readable_form_of_definition,
+                        advanced=kw['advanced'] if 'advanced' in kw else False
+                    )
                     if last_part_of_speech in definitions:
                         definitions[last_part_of_speech].append(definition)
                     else:
                         definitions[last_part_of_speech] = [definition]
 
-            if fetch_additional_data:
-                additional_data = self.fetch_additional_data(
+            # Fetch additional data if flag is set, else put it to none
+            if get_additional_data:
+                additional_data = self.get_additional_data(
                     ct_content, last_language_code)
             else:
                 additional_data = None
 
+            # Create the Entry object to add to the list
             for pos, definitions in definitions.items():
                 entry = Entry(
                     entry=self.title,
@@ -201,10 +220,11 @@ class ENWiktionaryProcessor(WiktionaryProcessor):
                     language=last_language_code,
                     definitions=definitions,
                 )
-                if additional_data is not None and fetch_additional_data:
+                if additional_data is not None and get_additional_data:
+                    entry.additional_data = {}
                     for data_type, data in additional_data.items():
                         if data:
-                            entry.add_attribute(data_type, data)
+                            entry.additional_data[data_type] = data
 
                 entries.append(entry)
 
@@ -220,8 +240,8 @@ class ENWiktionaryProcessor(WiktionaryProcessor):
                     return mg_pos
 
             return self.get_part_of_speech(line, current_level+1)
-        else:
-            return None
+
+        return None
 
     @staticmethod
     def refine_definition(definition) -> list:
@@ -229,50 +249,16 @@ class ENWiktionaryProcessor(WiktionaryProcessor):
         definition = re.sub('\\[\\[([\\w]+)\\]\\]', '\\1', definition)
         definition = re.sub('[Tt]o ', '', definition)
         definition = re.sub('[Aa] ', '', definition)
+        definition = re.sub('[Of], ', '', definition)
+        definition = re.sub('[Oo]f or relating ', '', definition)
+        definition = definition.replace(', or ', ' or ')
+        definition = definition.replace(', and ', ' and ')
+        # for separator in ';,':
+        #     definition = definition.replace(separator + ' ', '$')
         if definition.endswith('.'):
             definition = definition[:-1]
 
-        return [k.strip() for k in definition.split(', ')]
+        return [definition]
 
-    def retrieve_translations(self):
-        regex = re.compile('\\{\\{t[\\+]?\\|([A-Za-z]{2,3})\\|(.*?)\\}\\}')
-        translations = {}
-        entries = []
-        content = re.sub(
-            "{{l/en\\|(.*)}}",
-            "\\1 ",
-            self.content)  # remove {{l/en}}
-        for l in re.findall("[\n]?==[ ]?([A-Za-z]+)[ ]?==\n", content):
-            last_part_of_speech = None
-            content = content[content.find('==%s==' % l):]
-            lines = content.split('\n')
-            for line in lines:
-                for en_pos, mg_pos in self.postran.items():
-                    if '===' + en_pos in line:
-                        last_part_of_speech = mg_pos
-
-                if len(re.findall(regex, line)) != 0:
-                    for language_code, translation in re.findall(regex, line):
-                        if last_part_of_speech in translations:
-                            translations[last_part_of_speech].append(
-                                (language_code, translation))
-                        else:
-                            translations[last_part_of_speech] = [
-                                (language_code, translation)]
-
-            for pos, translation_list in translations.items():
-                for translation_tuple in translation_list:
-                    language, translation = translation_tuple
-                    translation = translation[:translation.find('|')] \
-                        if translation.find('|') > 0 \
-                        else translation
-                    entries.append(
-                        Entry(
-                            entry=translation,
-                            part_of_speech=pos,
-                            language=language,
-                            definitions=[self.title],
-                        )
-                    )
-
-        return entries
+    def retrieve_translations(self) -> list:
+        return TranslationImporter().get_data(self.content, self.language, self.title)

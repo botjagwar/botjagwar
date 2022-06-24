@@ -10,9 +10,9 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
 from api.decorator import threaded, retry_on_fail
-from database.dictionary import Base, Definition, Word
-from database.exceptions.http import InvalidJsonReceivedException
-from database.exceptions.http import WordAlreadyExistsException
+from api.dictionary.exceptions.http import InvalidJsonReceived
+from api.dictionary.exceptions.http import WordAlreadyExists
+from api.dictionary.model import Base, Definition, Word
 
 URL_HEAD = 'http://0.0.0.0:8001'
 DB_PATH = '/tmp/test.db'
@@ -229,7 +229,7 @@ class TestDictionaryRestService(TestCase):
         )
         self.assertEquals(
             resp.status_code,
-            WordAlreadyExistsException.status_code)
+            WordAlreadyExists.status_code)
 
     def test_append_to_existing_entry(self):
         resp = requests.post(
@@ -255,7 +255,7 @@ class TestDictionaryRestService(TestCase):
         )
         self.assertEquals(
             resp.status_code,
-            InvalidJsonReceivedException.status_code)
+            InvalidJsonReceived.status_code)
 
     def test_edit_entry(self):
         resp = requests.get(URL_HEAD + '/entry/jm/tehanu')

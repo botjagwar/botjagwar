@@ -56,19 +56,33 @@ class run_once(object):
         return hash(self.func)
 
 
-def singleton(class_):
-    """
-    Specify that a class is a singleton
-    :param class_:
-    :return:
-    """
-    instances = {}
+def singleton(cls):
+    class SingletonCreationError(Exception):
+        pass
 
-    def getinstance(*args, **kwargs):
-        if class_ not in instances:
-            instances[class_] = class_(*args, **kwargs)
-        return instances[class_]
-    return getinstance
+    class SingleClass(cls, object):
+        """ The real singleton. """
+        _instance = None
+        __module__ = cls.__module__
+        __doc__ = cls.__doc__
+
+        def __new__(cls, *args, **kwargs):
+            if SingleClass._instance is None:
+                try:
+                    SingleClass._instance = super(SingleClass, cls).__new__(cls, *args, **kwargs)
+                except TypeError as error:
+                    raise SingletonCreationError(f'Unexpected arguments: {args} and {kwargs}') from error
+                SingleClass._instance._sealed = False
+
+            return SingleClass._instance
+
+        def __init__(self):
+            if not getattr(self, '_sealed', False):
+                super(SingleClass, self).__init__()
+                self._sealed = True
+
+    SingleClass.__name__ = cls.__name__
+    return SingleClass
 
 
 def threaded(f):
@@ -91,6 +105,18 @@ def separate_process(f):
         t.start()
 
     return wrap
+
+
+def catch_exceptions(*exceptions):
+    def wrapper_catch_exceptions(f):
+        def wrapper(*args, **kwargs):
+            try:
+                return f(*args, **kwargs)
+            except exceptions as exc:
+                return None
+
+        return wrapper
+    return wrapper_catch_exceptions
 
 
 def time_this(identifier=''):
@@ -116,19 +142,20 @@ def time_this(identifier=''):
     return _time_this
 
 
-def retry_on_fail(exceptions, retries=5, time_between_retries=1):
+def retry_on_fail(exceptions: [tuple, list, set], retries=5, time_between_retries=1):
     def _retry_on_fail(f):
         def wrapper(*args, **kwargs):
             m_retries = 0
-            try:
-                return f(*args, **kwargs)
-            except tuple(exceptions) as e:
-                if m_retries <= retries:
-                    m_retries += 1
-                    print('Error:', e, '%d' % m_retries)
-                    time.sleep(time_between_retries)
-                else:
-                    raise e
+            while True:
+                try:
+                    return f(*args, **kwargs)
+                except exceptions as handled_error:
+                    if m_retries <= retries:
+                        m_retries += 1
+                        print('Error:', handled_error, '%d' % m_retries)
+                        time.sleep(time_between_retries)
+                    else:
+                        raise handled_error
 
         return wrapper
     return _retry_on_fail

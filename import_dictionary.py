@@ -9,7 +9,7 @@ from subprocess import Popen
 from aiohttp import ClientSession
 
 from api.decorator import threaded
-from database.exceptions.http import WordAlreadyExistsException
+from api.dictionary.exceptions.http import WordAlreadyExists
 
 # for parts of speech
 MONOLINGUAL_DICTIONARY = 'user_data/%s.csv' % sys.argv[1]
@@ -81,7 +81,7 @@ async def upload_dictionary():
                 json=json.dumps(entry)
             )
             print(entry)
-            if resp.status == WordAlreadyExistsException.status_code:
+            if resp.status == WordAlreadyExists.status_code:
                 print('Word already exists... appending definition')
                 url = URL_HEAD + \
                     '/entry/%s/%s' % (LANGUAGE, monolingual[word_id][1])

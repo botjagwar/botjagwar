@@ -70,10 +70,9 @@ class NinjaEntryPublisher(object):
 class NinjaEntryCreator(object):
 
     def __init__(self):
-        Renderer = WikiPageRendererFactory('mg')
         self.publisher = NinjaEntryPublisher()
         self.output = Output()
-        self.renderer = Renderer()
+        self.renderer = WikiPageRendererFactory('mg')
         mg_word_list = self.fetch_mg_word_list()
         self.renderer.pages_to_link = mg_word_list
         additional_data_types_rq = requests.get(
@@ -95,8 +94,8 @@ class NinjaEntryCreator(object):
         ret = [w['word'] for w in resp.json()]
         return set(ret)
 
-    def fetch_additional_data(self, additional_data_list,
-                              word_id, type_, return_as=(str, list)) -> [str, list]:
+    def get_additional_data(self, additional_data_list,
+                            word_id, type_, return_as=(str, list)) -> [str, list]:
         if return_as == str:
             for data in additional_data_list[0]:
                 if data['type'] == type_:
@@ -246,28 +245,28 @@ class NinjaEntryCreator(object):
         # Fetching and mapping additional data
         additional_data_list = json_dictionary_infos[0]['additional_data']
         if additional_data_list is not None:
-            # p = self.fetch_additional_data(
+            # p = self.get_additional_data(
             # additional_data_list, translation['word_id'], 'pronunciation',
             # list)
             raw_additional_data_dict = {
-                'synonyms': self.fetch_additional_data(
+                'synonyms': self.get_additional_data(
                     additional_data_list, translation['word_id'], 'synonym', list),
-                'antonyms': self.fetch_additional_data(
+                'antonyms': self.get_additional_data(
                     additional_data_list, translation['word_id'], 'antonym', list),
-                'ipa': self.fetch_additional_data(
+                'ipa': self.get_additional_data(
                     additional_data_list, translation['word_id'], 'ipa', list),
                 # 'pronunciation': p[0] if p else [],
                 # 'ipa': ['{{fanononana-ko}}'],
-                'audio_pronunciations': self.fetch_additional_data(
+                'audio_pronunciations': self.get_additional_data(
                     additional_data_list, translation['word_id'], 'audio', list),
-                'related_terms': self.fetch_additional_data(
+                'related_terms': self.get_additional_data(
                     additional_data_list, translation['word_id'], 'related', list),
-                'derived_terms': self.fetch_additional_data(
+                'derived_terms': self.get_additional_data(
                     additional_data_list, translation['word_id'], 'derived', list),
                 # 'references': ['{{Tsiahy:vortaro.net}}'],
-                # 'references': self.fetch_additional_data(
+                # 'references': self.get_additional_data(
                 #     additional_data_list, translation['word_id'], 'reference', list),
-                # 'etymology': self.fetch_additional_data(
+                # 'etymology': self.get_additional_data(
                 #     additional_data_list, translation['word_id'], 'etym/en', str)
             }
             additional_data_dict = {
@@ -305,9 +304,8 @@ class NinjaEntryCreator(object):
 
 if __name__ == '__main__':
     entry_creator = NinjaEntryCreator()
-    import sys
-    entry_creator.run_from_database(sys.argv[1])
+    # entry_creator.run_from_database(sys.argv[1])
     # if len(sys.argv) > 1:
     #     entry_creator.run(sys.argv[1])
     # else:
-    #entry_creator.run_from_csv("user_data/cache_extractor/la_Latin nouns.csv")
+    entry_creator.run_from_csv("user_data/cache_extractor/la_Latin nouns.csv")

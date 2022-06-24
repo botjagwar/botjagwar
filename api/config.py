@@ -1,8 +1,6 @@
 import configparser
 import os
 
-from api.decorator import singleton
-
 try:
     login = os.getlogin()
 except OSError:
@@ -20,7 +18,6 @@ for confpath in conf_paths:
         break
 
 
-@singleton
 class BotjagwarConfig(object):
     """
     Manage global and script specific configuration.
@@ -41,6 +38,9 @@ class BotjagwarConfig(object):
 
     def get(self, key, section='global'):
         if self.specific_config_parser is not None:
-            self.specific_config_parser.get(section, key)
+            try:
+                self.specific_config_parser.get(section, key)
+            except configparser.NoSectionError:
+                return self.default_config_parser.get(section, key)
         else:
             return self.default_config_parser.get(section, key)

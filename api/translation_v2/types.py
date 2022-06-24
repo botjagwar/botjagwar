@@ -6,7 +6,9 @@ class UntranslatedDefinition(str):
 
 
 class TranslatedDefinition(str):
-    def __init__(self, translation, languages: list = list()):
+    def __init__(self, translation, languages: list = None):
+        if languages is None:
+            languages = []
         self.translation = translation
         self.languages = languages
 
@@ -33,4 +35,13 @@ class ConvergentTranslation(TranslatedDefinition):
         return len(self.languages) > 1
 
 
-__all__ = [UntranslatedDefinition, TranslatedDefinition]
+class FormOfTranslaton(TranslatedDefinition):
+    pass
+
+
+__all__ = [
+    "UntranslatedDefinition",
+    "TranslatedDefinition",
+    "ConvergentTranslation",
+    "FormOfTranslaton"
+]

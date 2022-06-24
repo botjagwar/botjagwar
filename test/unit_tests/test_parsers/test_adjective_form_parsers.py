@@ -5,6 +5,7 @@ from api.parsers.functions import parse_inflection_of
 from api.parsers.functions import parse_lv_inflection_of
 from api.parsers.functions import parse_one_parameter_template
 from api.parsers.functions.adjective_forms import parse_adjective_form
+from api.parsers.functions.adjective_forms import parse_fi_adjective_form_of
 from api.parsers.inflection_template import AdjectiveForm
 
 
@@ -34,6 +35,14 @@ class TestAdjectiveFormParsers(TestCase):
         self.assertEqual(output.number, 'p')
         self.assertEqual(output.gender, 'f')
         self.assertEqual(output.case, 'voc')
+
+    def test_parse_fi_adjective_form_of(self):
+        template_expression = '{{fi-form of|näverrin|case=nominative|pl=plural}}'
+        output = parse_fi_adjective_form_of(template_expression)
+        self.assertIsInstance(output, AdjectiveForm)
+        self.assertEqual(output.lemma, 'näverrin')
+        self.assertEqual(output.number, 'plural')
+        self.assertEqual(output.case, 'nominative')
 
     def test_parse_one_parameter_template(self):
         template_expression = '{{feminine singular of|comparatif|lang=fr}}'

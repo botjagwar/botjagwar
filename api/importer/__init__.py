@@ -3,9 +3,9 @@ import requests
 from api.config import BotjagwarConfig
 from api.decorator import run_once
 from conf.entryprocessor.languagecodes import LANGUAGE_CODES, LANGUAGE_NAMES
-from ..servicemanager.pgrest import DynamicBackend
+from ..servicemanager.pgrest import StaticBackend
 
-backend = DynamicBackend()
+backend = StaticBackend()
 config = BotjagwarConfig()
 
 
@@ -59,6 +59,9 @@ class AdditionalDataImporter(object):
         }
 
     def additional_word_information_already_exists(self, word_id, information):
+        assert word_id is not None
+        assert information is not None
+        assert bool(information) == True
         data = {
             'type': 'eq.' + self.data_type,
             'word_id': 'eq.' + str(word_id),
@@ -70,10 +73,13 @@ class AdditionalDataImporter(object):
             params=data)
         resp_data = response.json()
         if resp_data:
-            if 'word_id' in resp_data[0] \
-                    and 'information' in resp_data[0] \
-                    and 'type' in resp_data[0]:
-                return True
+            if isinstance(resp_data, list):
+                if 'word_id' in resp_data[0] \
+                        and 'information' in resp_data[0] \
+                        and 'type' in resp_data[0]:
+                    return True
+            else:
+                return False
 
         return False
 
@@ -110,8 +116,8 @@ class AdditionalDataImporter(object):
 
             if not query:
                 return
-            else:
-                self.word_id_cache[(title, language)] = query[0]['id']
+
+            self.word_id_cache[(title, language)] = query[0]['id']
 
         additional_data_filenames = self.get_data(
             self.data_type, content, language)
@@ -127,6 +133,9 @@ class AdditionalDataImporter(object):
                 self.word_id_cache[(title, language)], additional_data)
 
     def write_additional_data(self, word_id, additional_data):
+        if not additional_data.strip():
+            return
+
         print(additional_data)
 
         data = {
@@ -137,20 +146,14 @@ class AdditionalDataImporter(object):
         print(data)
         if self.additional_word_information_already_exists(
                 data['word_id'], additional_data):
+            print('additional data already exists. Skipping...')
             return
 
         if not self.dry_run:
-            self.batch.append(data)
-            if self.counter > 10:
-                response = requests.post(
-                    backend.backend +
-                    '/additional_word_information',
-                    data=data)
-                if response.status_code != 201:
-                    print(response.status_code)
-                    print(response.text)
-
-                self.counter = 0
-            else:
-                self.batch.append(data)
-                self.counter += 1
+            response = requests.post(
+                backend.backend +
+                '/additional_word_information',
+                data=data)
+            if response.status_code != 201:
+                print(response.status_code)
+                print(response.text)

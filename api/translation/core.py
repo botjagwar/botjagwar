@@ -6,11 +6,11 @@ import requests
 from aiohttp import ClientSession
 
 from api import entryprocessor
+from api.dictionary.exceptions import WordDoesNotExist
 from api.exceptions import NoWordException
 from api.model.word import Entry
 from api.output import Output
 from api.servicemanager import DictionaryServiceManager
-from database.exceptions.http import WordDoesNotExistException
 
 log = logging.getLogger(__name__)
 default_data_file = '/opt/botjagwar/conf/entry_translator/'
@@ -23,7 +23,7 @@ WORKING_WIKI_LANGUAGE = 'mg'
 class Translation:
     def __init__(self):
         """Mandika teny ary pejy @ teny malagasy"""
-        super(self.__class__, self).__init__()
+        super(Translation, self).__init__()
         self.output = Output()
         self.language_blacklist = LANGUAGE_BLACKLIST
         self.loop = asyncio.get_event_loop()
@@ -137,7 +137,7 @@ class Translation:
         resp = requests.get(
             URL_HEAD + '/entry/%s/%s' %
             (infos.language, infos.entry))
-        if resp.status_code != WordDoesNotExistException.status_code:
+        if resp.status_code != WordDoesNotExist.status_code:
             return 1
 
         self.output.db(infos)
@@ -208,9 +208,9 @@ class Translation:
         wiktionary_processor.process(wiki_page)
 
         try:
-            entries = wiktionary_processor.getall()
+            entries = wiktionary_processor.get_all_entries()
         except Exception as exc:
-            log.error("getall() failed.")
+            log.error("get_all_entries() failed.")
             log.exception(exc)
             return unknowns, ret
 
@@ -244,7 +244,7 @@ class Translation:
         url = URL_HEAD + \
             '/translations/%s/%s/%s' % (language, WORKING_WIKI_LANGUAGE, word)
         resp = requests.get(url)
-        if resp.status_code == WordDoesNotExistException.status_code:
+        if resp.status_code == WordDoesNotExist.status_code:
             raise NoWordException()
 
         translations_json = resp.json()
@@ -268,7 +268,7 @@ class Translation:
             '/translations/%s/%s/%s' % (language, WORKING_WIKI_LANGUAGE, word)
         async with ClientSession() as client_session:
             async with client_session.get(url) as resp:
-                if resp.status == WordDoesNotExistException.status_code:
+                if resp.status == WordDoesNotExist.status_code:
                     raise NoWordException()
 
                 translations_json = await resp.json()
@@ -305,7 +305,7 @@ class Translation:
         wiktionary_processor.set_title(title)
 
         try:
-            entries = wiktionary_processor.getall()
+            entries = wiktionary_processor.get_all_entries()
         except Exception as exc:
             log.exception(exc)
             return -1

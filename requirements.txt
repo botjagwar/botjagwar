@@ -1,9 +1,10 @@
 aiohttp == 3.7.4
+coverage==6.3.2
 flask == 1.0.2
 irc == 19
 lxml == 4.6.5
 parameterized
-psycopg2 == 2.8.4
+psycopg2-binary == 2.8.4
 pywikibot >=6, <7
 requests-oauthlib == 0.8.0
 mwparserfromhell >= 0.5.0

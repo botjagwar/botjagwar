@@ -2,7 +2,7 @@ import sys
 
 import pywikibot
 
-from page_lister import get_categories_for_category
+from api.page_lister import get_categories_for_category
 
 
 def generate_categories(category_name):

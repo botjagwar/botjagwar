@@ -1,6 +1,6 @@
 import pywikibot
 
-from page_lister import get_pages_from_category
+from api.page_lister import get_pages_from_category
 
 
 def cleanup(content):

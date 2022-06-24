@@ -3,7 +3,7 @@ import sys
 
 import pywikibot
 
-from page_lister import get_pages_from_category
+from api.page_lister import get_pages_from_category
 
 
 def replace_pronunciation_template(language, language_name):

@@ -1,8 +1,18 @@
 #!/bin/bash
 echo "Prepare python environment"
 set -xe
-if [[ `which virtualenv` == 1 ]]; then
+if [[ -z `which virtualenv` ]]; then
   sudo python3 -m pip install virtualenv
+fi
+
+if [[ -z `which virtualenv` ]]; then
+  virtualenv_exe=venv
+else
+  if [[ -z `which venv` ]]; then
+    virtualenv_exe=virtualenv
+  else
+    virtualenv_exe="python3 -m virtualenv"
+  fi
 fi
 
 src_dir=`pwd`
@@ -18,12 +28,12 @@ sudo mkdir -p $opt_dir
 sudo chown $current_user $opt_dir
 if [[ ! -d $opt_dir/pyenv ]]; then
   set -e
-  python3 -m virtualenv $opt_dir/pyenv
+  $virtualenv_exe $opt_dir/pyenv
+  $virtualenv_exe $opt_dir/pyenv
   source $opt_dir/pyenv/bin/activate
 fi
 
-
-cd $src_dir
+cd "$src_dir"
 python3 -m pip install -r requirements.txt
 
 sudo mkdir -p $opt_dir/user_data
@@ -31,7 +41,6 @@ sudo mkdir -p $opt_dir/user_data
 sudo cp -r $src_dir/api $opt_dir
 sudo cp -r $src_dir/conf $opt_dir
 sudo cp -r $src_dir/data $opt_dir
-sudo cp -r $src_dir/database $opt_dir
 sudo cp -r $src_dir/scripts $opt_dir
 sudo cp -r $src_dir/*.py $opt_dir
 

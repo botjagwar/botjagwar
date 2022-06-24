@@ -1,0 +1,32 @@
+language: python
+
+python:
+  - "3.8"
+
+addons:
+  apt:
+    packages:
+      - "python3"
+      - "python3-pip"
+      - "libssl-dev"
+      - "wget"
+      - "unzip"
+      - "libsqlite3-dev"
+      - "libxml2-dev"
+      - "libxslt1-dev"
+      - "redis-server"
+
+sudo: required
+
+os: linux
+dist: bionic
+
+# command to install dependencies
+install:
+  - python3 --version
+#  - NORUN=1 bash -xe install.sh
+
+# command to run tests
+script:
+  - python3 --version
+#  - PYWIKIBOT2_NO_USER_CONFIG=1 bash -xe test.sh

@@ -34,16 +34,13 @@ class SiteExtractor(object):
     definition_language = None
     cache_engine = None
 
-    def __del__(self):
-        if isinstance(self.cache_engine, SiteExtractorCacheEngine):
-            self.cache_engine.write()
-
     def load_page(self, word) -> etree._Element:
         def check_if_defined(var):
             if getattr(self, var) is None:
                 raise NotImplementedError('%s has to be defined' % var)
 
         def _get_html_page():
+            # raise SiteExtractorException(404, 'Empty content')
             response = requests.get(
                 self.lookup_pattern %
                 word, headers=headers)
@@ -51,7 +48,7 @@ class SiteExtractor(object):
                 if 'tsy misy' in response.text:
                     raise SiteExtractorException(response, 'Empty content')
                 return response.text
-            elif 400 <= response.status_code < 600:
+            if 400 <= response.status_code < 600:
                 raise SiteExtractorException(response, 'Non-OK')
 
         # variables check
@@ -105,7 +102,9 @@ class SiteExtractor(object):
 class TenyMalagasySiteExtractor(SiteExtractor):
     lookup_pattern = 'http://tenymalagasy.org/bins/teny2/%s'
     definition_xpath = "//table[2]/tr[3]/td[3]"
-    pos_xpath = '//table[2]/tr[2]/td[3]'
+    # definition_xpath = "//table[2]/tr[3]/td[2]"
+    pos_xpath = '//table[2]/tr[2]/td[2]'
+    # pos_xpath = '//table[2]/tr[2]/td[3]'
     language = 'mg'
     definition_language = 'mg'
     cache_engine = SiteExtractorCacheEngine('tenymalagasy.org')
@@ -155,7 +154,7 @@ class TenyMalagasySiteExtractor(SiteExtractor):
         examples = {}
         for definition_section in entry.definitions:
             for ref in re.findall(references_regex, str(definition_section)):
-                entry.references.append(ref)
+                entry.references.append(ref)  # noqa
                 definition_section = definition_section.replace(
                     '[%s]' % ref, '')
                 definition_section = definition_section.replace(
@@ -210,6 +209,7 @@ class RakibolanaSiteExtactor(SiteExtractor):
 
         definition = definition.replace(char, '##')
         definition = '$$'.join(definition.split('##')).strip()
+        print(definition)
 
         return definition
 

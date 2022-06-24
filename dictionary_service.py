@@ -5,18 +5,14 @@ import logging as log
 from aiohttp import web
 
 from api.databasemanager import DictionaryDatabaseManager
-from api.dictionary import \
-    entry, \
-    definition, \
-    translation, \
-    configuration
-from api.dictionary import \
+from api.dictionary.request_handlers import configuration, entry, translation, definition
+from api.dictionary.request_handlers import \
     get_dictionary, \
     get_dictionary_xml, \
     get_language_list, \
     download_dictionary, \
     get_inferred_multilingual_dictionary
-from api.dictionary.middlewares import \
+from api.dictionary.request_handlers.middlewares import \
     json_error_handler, \
     auto_committer
 

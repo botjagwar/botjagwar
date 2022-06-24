@@ -1,92 +1,8 @@
 import copy
 from unittest.case import TestCase
 
-from api.model import List
-from api.model import TypeCheckedObject
 from api.model.word import Entry
 from api.model.word import Translation
-
-
-class TestModelsBaseBehaviour(TestCase):
-
-    def test_instantiate_base(self):
-        test = TypeCheckedObject(
-            test1=10,
-            test2=20,
-            test3=300
-        )
-        self.assertEqual(test.test1, 10)
-        self.assertEqual(test.test2, 20)
-        self.assertEqual(test.test3, 300)
-
-    def test_instantiate_child_class_additional_properties(self):
-        class QingChuan(TypeCheckedObject):
-            _additional = True
-            properties_types = {
-                "test1": int,
-                "test2": int
-            }
-
-        test = QingChuan(
-            test1=1,
-            test2=2,
-            test3="klew"  # additional!
-        )
-        self.assertEqual(test.test1, 1)
-        self.assertEqual(test.test2, 2)
-        self.assertEqual(test.test3, "klew")
-
-    def test_instantiate_child_class_no_additional_properties(self):
-
-        class GuoHang(TypeCheckedObject):
-            _additional = False
-            properties_types = {
-                "test1": int,
-                "test2": int
-            }
-
-        def do_checks():
-            test = GuoHang(
-                test1=1,
-                test2=2,
-                test3="klew"  # additional!
-            )
-            self.assertEqual(test.test1, 1)
-            self.assertEqual(test.test2, 2)
-            self.assertEqual(test.test3, "klew")
-
-        self.assertRaises(AttributeError, do_checks)
-
-
-class TestList(TestCase):
-    def test_instantiate_with_list(self):
-        class YunHang(TypeCheckedObject):
-            _additional = False
-            properties_types = {
-                "test1": int,
-                "test2": int,
-                'test3obj': List
-            }
-
-        test = YunHang(test1=1, test2=2, test3obj=List(['qw', 'dlk']))
-
-        self.assertTrue(isinstance(test.test1, int))
-        self.assertTrue(isinstance(test.test2, int))
-        self.assertTrue(isinstance(test.test3obj, List))
-
-    def test_serialise_with_list(self):
-        class YunHang(TypeCheckedObject):
-            _additional = False
-            properties_types = {
-                "test1": int,
-                "test2": int,
-                'test3obj': List
-            }
-
-        test = YunHang(test1=1, test2=2, test3obj=List(['qw', 'dlk']))
-        serialised = test.to_dict()
-
-        self.assertIsInstance(serialised['test3obj'], list)
 
 
 class TestEntry(TestCase):
@@ -94,7 +10,8 @@ class TestEntry(TestCase):
         entry = Entry(
             entry='1',
             part_of_speech='2',
-            definitions=['3']
+            definitions=['3'],
+            language='fr'
         )
         self.assertEqual(entry.entry, '1')
         self.assertEqual(entry.part_of_speech, '2')
@@ -104,6 +21,7 @@ class TestEntry(TestCase):
         old = Entry(
             entry='tasumaki',
             part_of_speech='2',
+            language='mg',
             definitions=['3']
         )
         new = copy.deepcopy(old)
@@ -167,10 +85,10 @@ class TestTranslation(TestCase):
             word='kaolak',
             language='kk',
             part_of_speech='ana',
-            translation='alskdalskdalkas'
+            definition='alskdalskdalkas'
         )
-        serialised = translation.to_dict()
+        serialised = translation.serialise()
         self.assertEqual(serialised['word'], 'kaolak')
         self.assertEqual(serialised['language'], 'kk')
         self.assertEqual(serialised['part_of_speech'], 'ana')
-        self.assertEqual(serialised['translation'], 'alskdalskdalkas')
+        self.assertEqual(serialised['definition'], 'alskdalskdalkas')

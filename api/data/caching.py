@@ -1,7 +1,7 @@
 from api.databasemanager import DictionaryDatabaseManager
 from api.decorator import time_this
 
-from database.dictionary import Word
+from api.dictionary.model import Word
 
 
 class FastTranslationLookup:
@@ -68,8 +68,8 @@ class FastTranslationLookup:
         data = (entry, language, part_of_speech)
         if data in self.fast_tree:
             return self.fast_tree[data]
-        else:
-            raise LookupError('No found: %s' % str(data))
+
+        raise LookupError('No found: %s' % str(data))
 
     def translate(self, entry):
         return self.translate_word(
@@ -81,8 +81,8 @@ class FastTranslationLookup:
         data = (entry.entry, entry.language, entry.part_of_speech)
         if data in self.fast_tree:
             return True
-        else:
-            return False
+
+        return False
 
     def word_exists(self, word):
         for data in self.fast_tree:
@@ -114,5 +114,5 @@ class FastWordLookup:
     def lookup(self, entry):
         if (entry.entry, entry.language) in self.fast_tree:
             return True
-        else:
-            return False
+
+        return False
