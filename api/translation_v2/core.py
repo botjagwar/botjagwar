@@ -267,6 +267,7 @@ class Translation:
                 content = ""
 
             content = content.strip()
+            content += '\n'
             content += self.output.wikipages(entries).strip()
             # Push aggregated content
             output(
