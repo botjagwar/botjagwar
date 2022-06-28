@@ -395,22 +395,19 @@ class Translation:
             out_entry.definitions = entry_definitions
             out_entry.translated_from_language = wiktionary_processor.language
             out_entry.translation_methods = out_translation_methods
-            for reference_name in ['reference', 'further_reading']:
-                if reference_name in entry.additional_data:
-                    references = entry.additional_data[reference_name]
-                    translated_references = translate_references(
-                        references,
-                        source=wiktionary_processor.language,
-                        target=self.working_wiki_language,
-                        use_postgrest='automatic'
-                    )
-                    setattr(
-                        out_entry,
-                        reference_name,
-                        translated_references
-                    )
-                    for reference, translated_reference in list(zip(references, translated_references)):
-                        self.reference_template_queue.add((reference, translated_reference))
+            if entry.additional_data is not None:
+                for reference_name in ['reference', 'further_reading']:
+                    if reference_name in entry.additional_data:
+                        references = entry.additional_data[reference_name]
+                        translated_references = translate_references(
+                            references,
+                            source=wiktionary_processor.language,
+                            target=self.working_wiki_language,
+                            use_postgrest='automatic'
+                        )
+                        out_entry.additional_data[reference_name] = translated_references
+                        for reference, translated_reference in list(zip(references, translated_references)):
+                            self.reference_template_queue.add((reference, translated_reference))
 
             if 'pronunciation' in entry.additional_data:
                 out_entry.pronunciation = translate_pronunciation(entry.additional_data['pronunciation'])
