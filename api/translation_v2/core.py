@@ -410,7 +410,8 @@ class Translation:
                             self.reference_template_queue.add((reference, translated_reference))
 
             if 'pronunciation' in entry.additional_data:
-                out_entry.pronunciation = translate_pronunciation(entry.additional_data['pronunciation'])
+                out_entry.additional_data['pronunciation'] = translate_pronunciation(
+                    entry.additional_data['pronunciation'])
 
             if entry_definitions:
                 out_entries.append(out_entry)
