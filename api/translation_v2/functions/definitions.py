@@ -4,6 +4,7 @@ from logging import getLogger
 from api.parsers import templates_parser, TEMPLATE_TO_OBJECT
 from api.parsers.functions.postprocessors import POST_PROCESSORS
 from api.parsers.inflection_template import ParserNotFoundError
+from api.servicemanager.openmt import OpenMtTranslation
 from api.servicemanager.pgrest import JsonDictionary, ConvergentTranslations
 from .utils import MAX_DEPTH
 from .utils import regexesrep, \
@@ -239,17 +240,9 @@ def translate_using_opus_mt(part_of_speech,
                             source_language,
                             target_language,
                             **kw) -> [UntranslatedDefinition, TranslatedDefinition]:
-    # skeleton function for now to allow for later integration
-    return UntranslatedDefinition(definition_line)
+    helper = OpenMtTranslation(source_language, target_language)
+    data = helper.get_translation(definition_line)
+    if data is not None:
+        return TranslatedDefinition(data)
 
-# def translate_using_opus_mt(part_of_speech,
-#                             definition_line,
-#                             source_language,
-#                             target_language,
-#                             **kw) -> [UntranslatedDefinition, TranslatedDefinition]:
-#     definition_line = re.sub('{{[a-zA-z0-9|]+}}', '', definition_line)
-#     definition_line = re.sub('\[\[[a-zA-z0-9|]+\]\]', '', definition_line)
-#     transformer = OpusMtTransformer()
-#     transformer.load_model(source_language, target_language)
-#     out_text = transformer.translate(definition_line)
-#     return TranslatedDefinition(out_text)
+    return UntranslatedDefinition(definition_line)

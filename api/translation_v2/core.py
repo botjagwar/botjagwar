@@ -355,6 +355,8 @@ class Translation:
                 refined_definition_lines = wiktionary_processor.refine_definition(
                     definition_line)
                 for refined_definition_line in refined_definition_lines:
+                    # Try translation methods in succession.
+                    # If one method produces something, skip the rest
                     for t_method in translation_methods:
                         if entry.part_of_speech is None:
                             continue
@@ -374,13 +376,14 @@ class Translation:
                                     entry.part_of_speech = form_of_part_of_speech_mapper[entry.part_of_speech]
 
                             for d in definitions.split(','):
-                                translated_definition.append(d.strip())
+                                # translated_definition.append(d.strip())
                                 if d in out_translation_methods:
                                     out_translation_methods[d].append(t_method.__name__)
                                 else:
                                     out_translation_methods[d] = [t_method.__name__]
 
-                            translated_definition += [k.strip() for k in definitions.split(',')]
+                            translated_definition += [str(definitions)]
+                            # break
 
                     translated_from_definition.append(refined_definition_line)
 
