@@ -29,4 +29,11 @@ install:
 # command to run tests
 script:
   - python3 --version
-#  - PYWIKIBOT2_NO_USER_CONFIG=1 bash -xe test.sh
+  # Unit tests to confirm first step is good
+  - PYWIKIBOT2_NO_USER_CONFIG=1 bash -xe test.sh
+  # Advanced tests on optional modules
+  - bash -xe run_redis_tests.sh
+  - bash -xe run_postgrest_tests.sh
+  - bash -xe run_openmt_tests.sh
+  # Acceptance tests on web APIs
+  - bash -xe run_acceptance_tests.sh
