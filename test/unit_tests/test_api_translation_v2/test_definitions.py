@@ -196,5 +196,5 @@ class TestMachineLearningMethods(TestCase):
     def test_translate_using_nltk(self):
         definitions.translate_using_nltk('ana', 'test', 'en', 'mg')
 
-    def test_translate_using_opus_mt(self):
-        definitions.translate_using_opus_mt('ana', 'test', 'en', 'mg')
+    # def test_translate_using_opus_mt(self):
+    #     definitions.translate_using_opus_mt('ana', 'test', 'en', 'mg')
