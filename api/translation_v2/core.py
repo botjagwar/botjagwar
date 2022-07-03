@@ -390,6 +390,9 @@ class Translation:
 
             entry_definitions = sorted(list(set(translated_definition)))
             out_entry = deepcopy(entry)
+            if not out_entry.additional_data:
+                out_entry.additional_data = {}
+
             out_entry.additional_data['translated_from_definition'] = ', '.join(
                 translated_from_definition)
             out_entry.definitions = entry_definitions
