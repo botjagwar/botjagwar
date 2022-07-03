@@ -1,5 +1,6 @@
 import bz2
 import os
+import sys
 
 import pywikibot
 import redis
@@ -243,8 +244,9 @@ if __name__ == '__main__':
     All en.wiktionary pages will have their latest version uploaded in your Redis.
     Using RedisSite and RedisPage, you'll have a much faster read and offline access.
     """)
-    site = RedisSite('mg', 'wiktionary')
-    site.load_xml_dump('user_data/dumps/mgwikt.xml')
+    language = sys.argv[1]
+    site = RedisSite(language, 'wiktionary')
+    site.load_xml_dump(dump_path=f'user_data/dumps/{language}wikt.xml')
     # site.load_xml_dump('user_data/dumps/enwikt_2.xml')
     # site.load_xml_dump('user_data/dumps/enwikt_3.xml')
     # site.load_xml_dump('user_data/dumps/enwikt_4.xml')

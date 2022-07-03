@@ -1,20 +1,64 @@
 import re
 
+import requests
+
+from api.config import BotjagwarConfig
 from api.model.word import Entry
 from .base import PageRenderer
 
 
+class MGWikiPageRendererError(Exception):
+    pass
+
+
 class MGWikiPageRenderer(PageRenderer):
+
+    def __init__(self):
+        super(MGWikiPageRenderer, self).__init__()
+        self.config = BotjagwarConfig()
+        self._words_to_link = set()
+
+    @property
+    def pages_to_link(self):
+        if self._words_to_link:
+            return self._words_to_link
+
+        try:
+            self.fetch_pages_to_link()
+        finally:
+            return self._words_to_link
+
+    def fetch_pages_to_link(self):
+        postgrest_url = self.config.get('postgrest_backend_address')
+        url = f'http://{postgrest_url}:8100/word'
+        print(url)
+
+        pages = requests.get(url, params={
+            'language': f'eq.mg',
+            'part_of_speech': f'in.(ana,mat,mpam)',
+            'select': f'word',
+        })
+        print(pages.status_code)
+        if pages.status_code != 200:
+            raise MGWikiPageRendererError(pages.status_code)
+        else:
+            self._words_to_link = {p['word'] for p in pages.json() if len(p['word']) > 4}
+            print(f'Loading complete! {len(self._words_to_link)} words loaded')
+            return self._words_to_link
 
     def link_if_exists(self, definition_words: list) -> list:
         ret = []
+        print(len(self.pages_to_link), definition_words)
         if hasattr(self, 'pages_to_link'):
             assert isinstance(self.pages_to_link, set)
             for word in definition_words:
-                if word in self.pages_to_link:
-                    ret.append(f'[[{word}]]')
+                word_to_link = word.strip(',')
+                if word_to_link in self.pages_to_link:
+                    word = word.replace(word_to_link, f'[[{word_to_link}]]')
+                    ret.append(word)
                 elif word.lower() in self.pages_to_link:
-                    ret.append(f'[[{word.lower()}|{word}]]')
+                    word = word.replace(word_to_link, f'[[{word_to_link.lower()}|{word_to_link}]]')
+                    ret.append(word)
                 else:
                     ret.append(word)
             return ret
@@ -70,7 +114,7 @@ class MGWikiPageRenderer(PageRenderer):
 
         return returned_string
 
-    def render_definitions(self, info, link):
+    def render_definitions(self, info, link=True):
         returned_string = ''
         trailing_characters_to_exclude_from_link = ',.;:'
         definitions = []

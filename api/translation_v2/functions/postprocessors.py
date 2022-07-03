@@ -62,8 +62,8 @@ def add_wiktionary_credit(wiki: str):
                 entry.additional_data = {}
 
             reference = "{{wikibolana|" + wiki + '|' + entry.entry + '}}'
-            if 'reference' not in entry.additional_data:
-                if isinstance(entry.reference, list):
+            if 'reference' in entry.additional_data:
+                if isinstance(entry.additional_data['reference'], list):
                     entry.additional_data['reference'].append(reference)
                 else:
                     entry.additional_data['reference'] = [reference]

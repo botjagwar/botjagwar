@@ -3,7 +3,7 @@ import sys
 
 import pywikibot
 
-reason = "[[:m:Requests for comment/Large-scale errors at Malagasy Wiktionary/mg|Famafana ambongadiny vokatry ny fanadihadiana momba ny Wikibolana malagasy]]"
+reason = "Voaforona an-kadisoana"
 count = 1
 
 site = pywikibot.Site('mg', 'wiktionary')
@@ -21,7 +21,7 @@ def is_edited_by_bot_only(page: pywikibot.Page) -> bool:
     return is_edited_by_bot_only
 
 
-def mass_delete():
+def mass_delete2():
     global count
     with open(sys.argv[1], 'r') as f:
         for line in f:
@@ -38,6 +38,18 @@ def mass_delete():
                             page.delete(reason)
                     except Exception as e:
                         print(e)
+
+
+def mass_delete():
+    global count
+    with open(sys.argv[1], 'r') as f:
+        for line in f:
+            count += 1
+            if count <= 0:
+                continue
+            page = pywikibot.Page(pywikibot.Site('mg', 'wiktionary'), line)
+            if page.exists() and not page.isRedirectPage():
+                page.delete(reason)
 
 
 def section_delete(section_name, wiki_page):

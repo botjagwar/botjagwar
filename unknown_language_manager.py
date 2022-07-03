@@ -136,7 +136,7 @@ class UnknownLanguageManagerBot(object):
         :return:
         """
         undocumented_languages = [
-            (code, n_words) for (code, n_words) in self.get_languages_from_x_days_ago(120)
+            (code, n_words) for (code, n_words) in self.get_languages_from_x_days_ago(1300)
             if not is_language_in_base(code)
         ]
         print(undocumented_languages)

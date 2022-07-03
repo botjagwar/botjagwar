@@ -390,11 +390,11 @@ class Translation:
 
             entry_definitions = sorted(list(set(translated_definition)))
             out_entry = deepcopy(entry)
-            out_entry.translated_from_definition = ', '.join(
+            out_entry.additional_data['translated_from_definition'] = ', '.join(
                 translated_from_definition)
             out_entry.definitions = entry_definitions
-            out_entry.translated_from_language = wiktionary_processor.language
-            out_entry.translation_methods = out_translation_methods
+            out_entry.additional_data['translated_from_language'] = wiktionary_processor.language
+            out_entry.additional_data['translation_methods'] = out_translation_methods
             if entry.additional_data is not None:
                 for reference_name in ['reference', 'further_reading']:
                     if reference_name in entry.additional_data:
