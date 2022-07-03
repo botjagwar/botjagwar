@@ -20,9 +20,12 @@ def add_language_ipa_if_not_exists(languages: List = 'automatic'):
     def add_pronunciation(entries: list):
         out_entries = []
         for entry in entries:
+            if entry.additional_data is None:
+                entry.additional_data = {}
+
             if languages == 'automatic' or entry.language in languages:
-                if not hasattr(entry, 'pronunciation'):
-                    entry.pronunciation = ['{{' + entry.language + '-IPA}}']
+                if not 'pronunciation' in entry.additional_data:
+                    entry.additional_data['pronunciation'] = ['{{' + entry.language + '-IPA}}']
 
             out_entries.append(entry)
 
@@ -34,12 +37,16 @@ def add_xlit_if_no_transcription(languages: List = 'automatic'):
     def wrapped_add_xlit_if_no_transcription(entries: list):
         out_entries = []
         for entry in entries:
+            if entry.additional_data is None:
+                entry.additional_data = {}
+
             if languages == 'automatic' or entry.language in languages:
-                if not hasattr(entry, 'transcription'):
-                    entry.transcription = ['{{xlit|' + entry.language + '|{{subst:BASEPAGENAME}}}}']
+                if 'transcription' not in entry.additional_data:
+                    entry.additional_data['transcription'] = ['{{xlit|' + entry.language + '|{{subst:BASEPAGENAME}}}}']
                 else:
-                    if ''.join(getattr(entry, 'transcription')).strip() == '':
-                        entry.transcription = ['{{xlit|' + entry.language + '|{{subst:BASEPAGENAME}}}}']
+                    if ''.join(entry.additional_data['transcription']).strip() == '':
+                        entry.additional_data['transcription'] = [
+                            '{{xlit|' + entry.language + '|{{subst:BASEPAGENAME}}}}']
 
             out_entries.append(entry)
 
@@ -51,14 +58,17 @@ def add_wiktionary_credit(wiki: str):
     def wrap_add_wiktionary_credit(entries: list):
         out_entries = []
         for entry in entries:
+            if entry.additional_data is None:
+                entry.additional_data = {}
+
             reference = "{{wikibolana|" + wiki + '|' + entry.entry + '}}'
-            if hasattr(entry, 'reference'):
+            if 'reference' not in entry.additional_data:
                 if isinstance(entry.reference, list):
-                    entry.reference.append(reference)
+                    entry.additional_data['reference'].append(reference)
                 else:
-                    entry.reference = [reference]
+                    entry.additional_data['reference'] = [reference]
             else:
-                entry.reference = [reference]
+                entry.additional_data['reference'] = [reference]
             out_entries.append(entry)
 
         return out_entries
