@@ -114,7 +114,7 @@ class MGWikiPageRenderer(PageRenderer):
 
         return returned_string
 
-    def render_definitions(self, info, link=True):
+    def render_definitions(self, info, link: list):
         returned_string = ''
         trailing_characters_to_exclude_from_link = ',.;:'
         definitions = []
