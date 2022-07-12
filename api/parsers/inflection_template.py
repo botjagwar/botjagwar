@@ -9,7 +9,7 @@ from api.parsers.models.inflection import \
     ParserNotFoundError
 
 
-class EnWiktionaryInflectionTemplateParser(object):
+class WiktionaryInflectionTemplateParser(object):
     def __init__(self):
         self.process_function = {}
 

@@ -1,5 +1,6 @@
 # coding: utf8
 
+from api.parsers.definition import WiktionaryDefinitionParser
 from api.parsers.functions import parse_alternative_spelling_template, \
     parse_el_form_of, \
     parse_hu_inflection_of, \
@@ -7,29 +8,30 @@ from api.parsers.functions import parse_alternative_spelling_template, \
     parse_lv_inflection_of, \
     parse_one_parameter_template, \
     parse_romanization_template
-from api.parsers.functions.adjective_forms import parse_adjective_form, \
+from api.parsers.functions.adjective_forms.templates import parse_adjective_form, \
     parse_fi_adjective_form_of
-from api.parsers.functions.noun_forms import parse_et_form_of
-from api.parsers.functions.noun_forms import parse_fi_form_of as parse_fi_noun_form_of
-from api.parsers.functions.noun_forms import parse_lt_noun_form, \
+from api.parsers.functions.noun_forms.templates import parse_et_form_of
+from api.parsers.functions.noun_forms.templates import parse_fi_form_of as parse_fi_noun_form_of
+from api.parsers.functions.noun_forms.templates import parse_lt_noun_form, \
     parse_nl_noun_form_of
-from api.parsers.functions.verb_forms import parse_ca_verb_form_of, \
+from api.parsers.functions.verb_forms.definitions import parse_fr_definition
+from api.parsers.functions.verb_forms.templates import parse_ca_verb_form_of, \
     parse_de_verb_form_of, \
     parse_es_compound_of, \
     parse_es_verb_form_of
 # from api.parsers.functions.verb_forms import parse_ru_participle_of
-from api.parsers.functions.verb_forms import parse_fi_form_of, \
+from api.parsers.functions.verb_forms.templates import parse_fi_form_of, \
     parse_fi_verb_form_of, \
     parse_la_verb_form_inflection_of, \
     parse_verb_form_inflection_of
-from api.parsers.inflection_template import EnWiktionaryInflectionTemplateParser
+from api.parsers.inflection_template import WiktionaryInflectionTemplateParser
 from api.parsers.models.inflection import \
     NounForm, \
     VerbForm, \
     AdjectiveForm, \
     NonLemma, \
     Romanization
-from .inflection_template import EnWiktionaryInflectionTemplateParser
+from .inflection_template import WiktionaryInflectionTemplateParser
 
 TEMPLATE_TO_OBJECT = {
     'e-ana': NounForm,
@@ -52,7 +54,8 @@ FORM_OF_TEMPLATE = {
     'mat': 'e-mat',
 }
 
-templates_parser = EnWiktionaryInflectionTemplateParser()
+definitions_parser = WiktionaryDefinitionParser()
+templates_parser = WiktionaryInflectionTemplateParser()
 
 templates_parser.add_parser(
     AdjectiveForm,
@@ -359,6 +362,10 @@ templates_parser.add_parser(
     'alternative spelling of',
     parse_romanization_template(1))
 
+definitions_parser.add_parser(
+    VerbForm,
+    parse_fr_definition
+)
 #templates_parser.add_parser(VerbForm, 'ru-participle of', parse_ru_participle_of)
 #templates_parser.add_parser(VerbForm, 'inflection of', parse_inflection_of(VerbForm))
 

@@ -3,10 +3,10 @@ from unittest import TestCase
 from api.parsers.functions import parse_el_form_of
 from api.parsers.functions import parse_hu_inflection_of
 from api.parsers.functions import parse_inflection_of
-from api.parsers.functions.noun_forms import parse_et_form_of
-from api.parsers.functions.noun_forms import parse_fi_form_of as parse_fi_form_of_noun
-from api.parsers.functions.noun_forms import parse_lt_noun_form
-from api.parsers.functions.noun_forms import parse_nl_noun_form_of
+from api.parsers.functions.noun_forms.templates import parse_et_form_of
+from api.parsers.functions.noun_forms.templates import parse_fi_form_of as parse_fi_form_of_noun
+from api.parsers.functions.noun_forms.templates import parse_lt_noun_form
+from api.parsers.functions.noun_forms.templates import parse_nl_noun_form_of
 from api.parsers.inflection_template import NounForm
 
 

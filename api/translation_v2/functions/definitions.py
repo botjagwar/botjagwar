@@ -1,7 +1,7 @@
 import re
 from logging import getLogger
 
-from api.parsers import templates_parser, TEMPLATE_TO_OBJECT
+from api.parsers import definitions_parser, templates_parser, TEMPLATE_TO_OBJECT
 from api.parsers.functions.postprocessors import POST_PROCESSORS
 from api.parsers.inflection_template import ParserNotFoundError
 from api.servicemanager.openmt import OpenMtTranslation
@@ -94,13 +94,38 @@ def _translate_using_bridge_language(
     return translations
 
 
+def translate_form_of_definitions(part_of_speech,
+                                  definition_line,
+                                  source_language,
+                                  target_language,
+                                  **kw) -> [UntranslatedDefinition,
+                                            TranslatedDefinition]:
+    new_definition_line = definition_line
+
+    if part_of_speech in TEMPLATE_TO_OBJECT:
+        elements = definitions_parser.get_elements(
+            TEMPLATE_TO_OBJECT[part_of_speech], definition_line)
+        if 'language' in kw:
+            if kw['language'] in POST_PROCESSORS:
+                elements = POST_PROCESSORS[kw['language']](elements)
+        new_definition_line = FormOfTranslaton(elements.to_definition(target_language))
+        if hasattr(elements, 'lemma'):
+            setattr(new_definition_line, 'lemma', elements.lemma)
+        if part_of_speech in form_of_part_of_speech_mapper:
+            new_definition_line.part_of_speech = form_of_part_of_speech_mapper[
+                part_of_speech]
+        else:
+            new_definition_line.part_of_speech = part_of_speech
+
+    return new_definition_line
+
+
 def translate_form_of_templates(part_of_speech,
                                 definition_line,
                                 source_language,
                                 target_language,
                                 **kw) -> [UntranslatedDefinition,
                                           TranslatedDefinition]:
-
     new_definition_line = definition_line
 
     # Clean up non-needed template to improve readability.

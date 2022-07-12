@@ -4,8 +4,7 @@ import re
 from api.importer.wiktionary.fr import all_importers
 from api.model.word import Entry
 from api.parsers import TEMPLATE_TO_OBJECT
-from api.parsers import templates_parser
-from api.parsers.inflection_template import ParserNotFoundError
+from api.parsers import definitions_parser
 from conf.entryprocessor.languagecodes import LANGUAGE_NAMES
 from .base import WiktionaryProcessor
 
@@ -76,14 +75,11 @@ class FRWiktionaryProcessor(WiktionaryProcessor):
         return additional_data
 
     def extract_definition(self, part_of_speech, definition_line, advanced=False, **kw):
-        if not advanced:  # No cleanup
-            return definition_line
-
         return self.advanced_extract_definition(part_of_speech, definition_line)
 
     def advanced_extract_definition(self, part_of_speech, definition_line,
                                     cleanup_definition=True,
-                                    translate_definitions_to_malagasy=False,
+                                    translate_definitions_to_malagasy=True,
                                     human_readable_form_of_definition=True
                                     ):
         """
@@ -96,27 +92,23 @@ class FRWiktionaryProcessor(WiktionaryProcessor):
         :return:
         """
         new_definition_line = definition_line
-        # No cleanup for definition
-        if not cleanup_definition:
-            return definition_line
 
         # Form-of definitions: they use templates that can be parsed using api.parsers module which is tentatively
         #   being integrated here to provide human-readable output for either English or Malagasy
-        if new_definition_line == '':
-            if human_readable_form_of_definition:
-                try:
-                    if part_of_speech in TEMPLATE_TO_OBJECT:
-                        elements = templates_parser.get_elements(
-                            TEMPLATE_TO_OBJECT[part_of_speech], definition_line)
-                        if translate_definitions_to_malagasy:
-                            new_definition_line = elements.to_definition('mg')
-                        else:
-                            new_definition_line = elements.to_definition(
-                                self.processor_language)
-                except ParserNotFoundError:
-                    new_definition_line = definition_line
-        else:
-            return definition_line
+        if human_readable_form_of_definition:
+            try:
+                if part_of_speech in TEMPLATE_TO_OBJECT:
+                    elements = definitions_parser.get_elements(
+                        TEMPLATE_TO_OBJECT[part_of_speech], definition_line)
+                    print(elements.__dict__)
+
+                    if translate_definitions_to_malagasy:
+                        new_definition_line = elements.to_definition('mg')
+                    else:
+                        new_definition_line = elements.to_definition(
+                            self.processor_language)
+            except SyntaxError:
+                new_definition_line = definition_line
 
         # print(definition_line, new_definition_line)
         return new_definition_line
@@ -165,13 +157,11 @@ class FRWiktionaryProcessor(WiktionaryProcessor):
                 pos_section_match = re.match(POS_LEMMA_SECTION_REGEX, line)
                 pos_flexion_section_match = re.match(POS_FLEXION_SECTION_REGEX, line)
                 if pos_section_match is not None:
-                    print("case 1")
                     last_part_of_speech = self.postran[pos_section_match.groups()[0]]
                     # Reset definitions for part of speech
                     definitions_dict = {}
                     examples = {}
                 elif pos_flexion_section_match is not None:
-                    print("case 2")
                     last_part_of_speech = 'e-' + self.postran[pos_flexion_section_match.groups()[0]]
                     # Reset definitions for part of speech
                     definitions_dict = {}
@@ -183,6 +173,7 @@ class FRWiktionaryProcessor(WiktionaryProcessor):
                 #   by part of speech to ensure correctness, as we can only have one part of speech for a given entry.
                 if line.startswith('# '):
                     definition = line.strip('# ')
+                    # definition = self.extract_definition(last_part_of_speech, definition, advanced=True)
                     last_definition = definition
                     if last_part_of_speech in definitions_dict:
                         definitions_dict[last_part_of_speech].append(definition)

@@ -4,8 +4,8 @@ from api.parsers.functions import parse_el_form_of
 from api.parsers.functions import parse_inflection_of
 from api.parsers.functions import parse_lv_inflection_of
 from api.parsers.functions import parse_one_parameter_template
-from api.parsers.functions.adjective_forms import parse_adjective_form
-from api.parsers.functions.adjective_forms import parse_fi_adjective_form_of
+from api.parsers.functions.adjective_forms.templates import parse_adjective_form
+from api.parsers.functions.adjective_forms.templates import parse_fi_adjective_form_of
 from api.parsers.inflection_template import AdjectiveForm
 
 

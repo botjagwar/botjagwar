@@ -2,6 +2,7 @@ import re
 from logging import getLogger
 
 from api.servicemanager.pgrest import StaticBackend
+from ..types import TranslatedDefinition
 
 regexesrep = [
     (r'\{\{l\|en\|(.*)\}\}', '\\1'),
@@ -50,3 +51,13 @@ def _generate_redirections(infos):
             # page.put_async("#FIHODINANA [[%s]]" % redirection_target,
             # "fihodinana")
             infos.entry = redirection_target
+
+
+def use_fallback(*functions):
+    def _call_fallback(*args, **kw):
+        for function in functions:
+            result = function(*args, **kw)
+            if isinstance(result, TranslatedDefinition):
+                return result
+
+    return _call_fallback
