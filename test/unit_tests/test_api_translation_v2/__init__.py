@@ -1,6 +1,8 @@
 from unittest.case import TestCase
 from unittest.mock import MagicMock
 
+from parameterized import parameterized
+
 from api.model.word import Entry
 from api.translation_v2.core import Translation
 
@@ -62,9 +64,24 @@ class TestTranslationV2(TestCase):
     def tearDown(self) -> None:
         pass
 
-    def test_generate_summary(self):
+    @parameterized.expand([(True,), (False,)])
+    def test_generate_summary_(self, exists):
+        page_mock = MagicMock()
+        page_mock.exists.return_value = exists
+        page_mock.isRedirectPage.return_value = False
+        content = """{{jereo|fan-an'|fan-an-|fana-n'|fana-n-|fanan'|fanan-}}
+== {{=sv=}} ==
+{{-e-ana-|sv}}
+'''fanan''' {{fanononana X-SAMPA||sv}} {{fanononana||sv}}
+# Endriky ny teny [[fana]]
+        """
+        page_mock.get.return_value = content
+
         summary = Translation().generate_summary(
-            [self.entry1, self.entry2, self.entry3])
+            [self.entry1, self.entry2, self.entry3],
+            target_page=page_mock,
+            content=content
+        )
         self.assertIn(self.entry1.language, summary)
         self.assertIn(self.entry2.language, summary)
         self.assertIn(self.entry3.language, summary)

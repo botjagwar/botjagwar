@@ -45,17 +45,17 @@ def render_verb_form(non_lemma) -> str:
     if non_lemma.person in PERSONS:
         explanation += PERSONS[non_lemma.person] + ' '
     if non_lemma.number in NUMBER:
-        explanation += NUMBER[non_lemma.number] + ' '
+        explanation += 'ny ' + NUMBER[non_lemma.number] + ' '
 
-    explanation += '' if len(explanation.strip()) != 0 else ''
     if non_lemma.mood in MOOD:
+        explanation += 'ny ' if len(explanation.strip()) != 0 else ''
         explanation += MOOD[non_lemma.mood] + ' '
 
     if non_lemma.tense in TENSE:
         explanation += TENSE[non_lemma.tense] + ' '
 
-    explanation += 'ny ' if len(explanation.strip()) != 0 else ''
     if non_lemma.voice in VOICE:
+        explanation += 'amin\'ny ' if len(explanation.strip()) != 0 else ''
         explanation += VOICE[non_lemma.voice] + ' '
 
     if not explanation.strip():

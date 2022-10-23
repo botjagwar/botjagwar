@@ -1,3 +1,4 @@
+import csv
 import os.path
 
 import pywikibot
@@ -20,16 +21,16 @@ class DefinitionTranslation(object):
         self.postgrest_url = '192.168.10.100:8080/api'
         self.botjagwar_frontend_url = '192.168.10.100:8080'
         self.translation_server = 'localhost:8003'
-        self.definition_language = 'en'
-        self.language = 'en'
+        self.definition_language = 'fr'
+        self.language = 'fr'
 
         self._words_to_link = set()
-        self._english_wordlist = set()
+        self._wordlist = set()
         self._current_file_size = 0
         self._batch_file_counter = 1
         self._current_file = None
 
-    def get_words(self, language='en', page_number=1, words_per_page=10000):
+    def get_words(self, page_number=1, words_per_page=10000):
         url = f'http://{self.postgrest_url}/unaggregated_dictionary'
 
         pages = requests.get(url, params={
@@ -72,7 +73,7 @@ class DefinitionTranslation(object):
 
     def import_into_additional_data(self):
         for page in range(70):
-            for word in self.get_words('en', page):
+            for word in self.get_words(page):
                 word_id = word['word_id']
                 definition = word['definition']
                 try:
@@ -161,17 +162,17 @@ class DefinitionTranslation(object):
         return [line['information'] for line in pages.json()]
 
     @property
-    def english_wordlist(self):
-        if self._english_wordlist:
-            return self._english_wordlist
+    def wordlist(self):
+        if self._wordlist:
+            return self._wordlist
         else:
-            print('Loading 10,000 most common English words')
-            for word in open('user_data/list-en-1000.txt', 'r'):
+            print('Loading words')
+            for word in open(f'user_data/list-{self.language}.txt', 'r'):
                 word = word.strip()
-                self._english_wordlist.add(word.lower())
+                self._wordlist.add(word.lower())
 
             print('Loading complete!')
-            return self._english_wordlist
+            return self._wordlist
 
     @property
     def malagasy_words_to_link(self):
@@ -192,12 +193,20 @@ class DefinitionTranslation(object):
                 print(f'Loading complete! {len(self._words_to_link)} words loaded')
                 return self._words_to_link
 
+    def get_part_of_speech(self, word_id):
+        url = f'http://{self.postgrest_url}/word'
+        pages = requests.get(url, params={'id': f'eq.{word_id}'})
+        if pages.status_code != 200:
+            raise DefinitionTranslationError(pages.text)
+        else:
+            return pages.json()[0]['part_of_speech']
+
     def get_word_ids(self, words):
         words_as_csl = ','.join(words)
-        url = f'http://{self.postgrest_url}/mv_word_with_openmt_translation'
+        url = f'http://{self.postgrest_url}/unaggregated_dictionary'
         pages = requests.get(url, params={
-            'lowercase_word': f'in.({words_as_csl})',
-            'language': 'eq.en',
+            'word': f'in.({words_as_csl})',
+            'language': f'eq.fr',
         })
         if pages.status_code != 200:
             print(pages.json())
@@ -245,11 +254,8 @@ class DefinitionTranslation(object):
         """
         counter = 0
         words = []
-        for word_list_element in self.english_wordlist:
+        for word_list_element in self.wordlist:
             counter += 1
-            if not counter % 100:
-                print(counter)
-
             words.append(word_list_element)
             if len(words) > 100:
                 for word_additional_data_info in self.get_word_ids(words):
@@ -262,7 +268,7 @@ class DefinitionTranslation(object):
     def build_translation_batches(self, word_additional_data_info, counter=0):
         translation = Translation()
         batch_folder = 'user_data/translation_batch'
-        translation.output.wikipage_renderer.pages_to_link = self.malagasy_words_to_link
+        # translation.output.wikipage_renderer.pages_to_link = self.malagasy_words_to_link
         word = word_additional_data_info['word']
         word_id = word_additional_data_info['word_id']
         definitions = self.get_definitions(word_id)
@@ -287,25 +293,46 @@ class DefinitionTranslation(object):
                 filename = f'{batch_folder}/batch-{self._batch_file_counter}.csv'
                 self._current_file = open(filename, 'a')
 
-        if len(definitions) > 0 and len(translated_definitions) > 0:
-            if translated_definitions and translated_definitions[0] == '.':
-                return
+        print(f'"{word}"/"{word_id}"/"{definitions}"/"{translated_definitions}"')
+        if len(definitions) > 0:
+            # if len(definitions) > 0 and len(translated_definitions) > 0:
+            # if translated_definitions and translated_definitions[0] == '.':
+            #     return
 
-            line = f'"{word}"/"{word_id}"/"{definitions[0]}"/"{translated_definitions[0]}"'
+            # line = f'"{word}"/"{word_id}"/"{definitions[0]}"/"{translated_definitions[0]}"'
+            line = f'"{word}"/"{word_id}"/"{definitions[0]}"'
             self._current_file.write(f'{line}\n')
             self._current_file_size += len(definitions[0])
 
     def import_translation_batch(self, batch_number=1):
         translation = Translation()
         batch_folder = 'user_data/translation_batch'
-        translation.output.wikipage_renderer.pages_to_link = self.malagasy_words_to_link
+        # translation.output.wikipage_renderer.pages_to_link = self.malagasy_words_to_link
         if not os.path.exists(batch_folder):
             os.mkdir(batch_folder)
 
         if os.path.exists(f'{batch_folder}/batch-{batch_number}.csv'):
             self._current_file = open(f'{batch_folder}/batch-{batch_number}.csv', 'r')
 
+        for row in csv.reader(self._current_file, delimiter=','):
+            word, word_id, en_definition, mg_definition = row[:4]
+            print(word, word_id, en_definition, mg_definition)
+            if not mg_definition:
+                continue
+            part_of_speech = self.get_part_of_speech(int(word_id))
+            entry = Entry(
+                part_of_speech=part_of_speech,
+                entry=word,
+                definitions=[mg_definition.strip()],
+                language='fr'
+            )
+            translation.publish_to_wiktionary(entry.entry, [entry])
+            translation._save_translation_from_page([entry])
+
 
 if __name__ == '__main__':
+    import sys
+
     bot = DefinitionTranslation()
-    bot.publish_translated_definition()
+    bot.import_translation_batch(int(sys.argv[1]))
+    # bot.publish_translated_definition()

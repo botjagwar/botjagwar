@@ -1,5 +1,6 @@
 # coding: utf8
 import re
+import traceback
 
 from api.importer.wiktionary.fr import all_importers
 from api.model.word import Entry
@@ -107,7 +108,8 @@ class FRWiktionaryProcessor(WiktionaryProcessor):
                     else:
                         new_definition_line = elements.to_definition(
                             self.processor_language)
-            except SyntaxError:
+            except Exception as error:
+                traceback.print_tb(error)
                 new_definition_line = definition_line
 
         # print(definition_line, new_definition_line)

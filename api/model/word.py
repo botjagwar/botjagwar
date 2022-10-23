@@ -1,6 +1,6 @@
 from copy import deepcopy
-from dataclasses import dataclass
-from typing import Optional, List
+from dataclasses import dataclass, field
+from typing import Optional, List, Dict
 
 from api.serialisers.word import \
     Entry as EntrySerialiser, \
@@ -23,7 +23,7 @@ class Entry(object):
     part_of_speech: str
     definitions: List[str]
     language: str
-    additional_data: Optional[dict] = None
+    additional_data: Optional[Dict] = field(default_factory=dict)
 
     @classmethod
     def from_word(cls, model):

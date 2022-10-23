@@ -2,6 +2,7 @@ import datetime
 import multiprocessing
 import threading
 import time
+from typing import List, Tuple, Set
 
 
 def critical_section(cs_lock: threading.Lock):
@@ -142,7 +143,7 @@ def time_this(identifier=''):
     return _time_this
 
 
-def retry_on_fail(exceptions: [tuple, list, set], retries=5, time_between_retries=1):
+def retry_on_fail(exceptions: [Tuple[Exception], Set[Exception], List[Exception]], retries=5, time_between_retries=1):
     def _retry_on_fail(f):
         def wrapper(*args, **kwargs):
             m_retries = 0

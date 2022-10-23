@@ -67,10 +67,11 @@ class MGWikiPageRenderer(PageRenderer):
 
     def render(self, info: Entry, link=True) -> str:
         additional_note = ""
-        if 'origin_wiktionary_page_name' in info.additional_data and 'origin_wiktionary_edition' in info:
-            additional_note = " {{dikantenin'ny dikanteny|" + \
-                              f"{info.additional_data['origin_wiktionary_page_name']}" \
-                              f"|{info.additional_data['origin_wiktionary_edition']}" + "}}\n"
+        if info.additional_data is not None:
+            if 'origin_wiktionary_page_name' in info.additional_data and 'origin_wiktionary_edition' in info:
+                additional_note = " {{dikantenin'ny dikanteny|" + \
+                                  f"{info.additional_data['origin_wiktionary_page_name']}" \
+                                  f"|{info.additional_data['origin_wiktionary_edition']}" + "}}\n"
 
         returned_string = self.render_head_section(info)
         returned_string += self.render_definitions(info, link) + additional_note
@@ -95,9 +96,10 @@ class MGWikiPageRenderer(PageRenderer):
         returned_string += "'''{{subst:BASEPAGENAME}}''' "
 
         # transcription (if any)
-        if 'transcription' in info.additional_data:
-            transcriptions = ', '.join(info.additional_data['transcription'])
-            returned_string += f"({transcriptions})"
+        if info.additional_data is not None:
+            if 'transcription' in info.additional_data:
+                transcriptions = ', '.join(info.additional_data['transcription'])
+                returned_string += f"({transcriptions})"
 
         return returned_string
 
@@ -144,7 +146,7 @@ class MGWikiPageRenderer(PageRenderer):
         for idx, defn in enumerate(definitions):
             returned_string += "\n# " + defn
             # Examples:
-            if 'examples' in info.additional_data:
+            if info.additional_data and 'examples' in info.additional_data:
                 if len(info.additional_data['examples']) > idx:
                     if isinstance(info.additional_data['examples'], list):
                         if len(info.additional_data['examples'][idx]) > 0:

@@ -102,15 +102,25 @@ def translate_form_of_definitions(part_of_speech,
                                             TranslatedDefinition]:
     new_definition_line = definition_line
 
+    # Preventing translation of non-verb form definitions
+    if not part_of_speech.startswith('e-'):
+        return UntranslatedDefinition(definition_line)
+
     if part_of_speech in TEMPLATE_TO_OBJECT:
-        elements = definitions_parser.get_elements(
-            TEMPLATE_TO_OBJECT[part_of_speech], definition_line)
+        try:
+            elements = definitions_parser.get_elements(
+                TEMPLATE_TO_OBJECT[part_of_speech], definition_line)
+        except ParserNotFoundError:
+            return UntranslatedDefinition(definition_line)
+
         if 'language' in kw:
             if kw['language'] in POST_PROCESSORS:
                 elements = POST_PROCESSORS[kw['language']](elements)
+
         new_definition_line = FormOfTranslaton(elements.to_definition(target_language))
         if hasattr(elements, 'lemma'):
             setattr(new_definition_line, 'lemma', elements.lemma)
+
         if part_of_speech in form_of_part_of_speech_mapper:
             new_definition_line.part_of_speech = form_of_part_of_speech_mapper[
                 part_of_speech]
@@ -144,9 +154,11 @@ def translate_form_of_templates(part_of_speech,
                 if 'language' in kw:
                     if kw['language'] in POST_PROCESSORS:
                         elements = POST_PROCESSORS[kw['language']](elements)
+
                 new_definition_line = FormOfTranslaton(elements.to_definition(target_language))
                 if hasattr(elements, 'lemma'):
                     setattr(new_definition_line, 'lemma', elements.lemma)
+
                 if part_of_speech in form_of_part_of_speech_mapper:
                     new_definition_line.part_of_speech = form_of_part_of_speech_mapper[
                         part_of_speech]

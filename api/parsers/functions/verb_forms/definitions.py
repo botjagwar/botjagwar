@@ -67,7 +67,17 @@ def parse_fr_definition(definition_line):
             definition_line = definition_line.replace(possessiveness, '')
 
     definition_line = definition_line.strip()
-    lemma = re.sub('{{lien\|(.*)\|(.*)}}.', '\\1', definition_line)
-    lemma = re.sub('\[\[(.*)]].', '\\1', lemma)
+
+    # Template links are already removed at this stage, so finding the '{{' and '}}' are
+    #   not needed.
+    lemma_rgx = re.search('lien\|(.*)\|(.*).', definition_line)
+    if lemma_rgx:
+        lemma = lemma_rgx.groups()[0]
+    else:
+        lemma_rgx = re.search('\[\[(.*)]].', definition_line)
+        if lemma_rgx:
+            lemma = lemma_rgx.groups()[0]
+        else:
+            lemma = ''
     returned.lemma = lemma
     return returned

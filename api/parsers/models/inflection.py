@@ -44,15 +44,15 @@ class VerbForm(NonLemma):
     number = None
 
     def __init__(
-            self,
-            lemma=None,
-            tense=None,
-            mood=None,
-            person=None,
-            number=None,
-            case=None,
-            gender=None,
-            voice='act'):
+        self,
+        lemma=None,
+        tense=None,
+        mood=None,
+        person=None,
+        number=None,
+        case=None,
+        gender=None,
+        voice=None):
         super(
             VerbForm,
             self).__init__(

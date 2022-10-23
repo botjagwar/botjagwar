@@ -7,7 +7,6 @@ from copy import deepcopy
 from typing import List, Tuple, Any, Callable
 
 import pywikibot
-from pywikibot import output
 
 from api import entryprocessor
 from api.config import BotjagwarConfig
@@ -17,12 +16,15 @@ from api.output import Output
 from api.servicemanager import DictionaryServiceManager
 from redis_wikicache import RedisPage as Page, RedisSite as Site
 from .functions import postprocessors  # do __NOT__ delete!
-from .functions import translate_form_of_templates, translate_form_of_definitions
-from .functions import translate_using_convergent_definition
+from .functions import \
+    translate_form_of_templates, \
+    translate_form_of_definitions
+from .functions import \
+    translate_using_convergent_definition
 from .functions.pronunciation import translate_pronunciation
 from .functions.references import translate_references
 from .functions.utils import form_of_part_of_speech_mapper
-from .functions.utils import use_fallback
+from .functions.utils import try_methods_until_translated
 from .types import \
     UntranslatedDefinition, \
     TranslatedDefinition, \
@@ -31,11 +33,16 @@ from .types import \
 log = logging.getLogger(__name__)
 URL_HEAD = DictionaryServiceManager().get_url_head()
 translation_methods = [
-    translate_using_convergent_definition,
-    # translate_using_bridge_language,
-    # translate_using_postgrest_json_dictionary,
-    use_fallback(translate_form_of_templates, translate_form_of_definitions),
-    # translate_using_opus_mt
+    try_methods_until_translated(
+        translate_using_convergent_definition,
+        # translate_using_bridge_language,
+        # translate_using_postgrest_json_dictionary,
+        # translate_using_opus_mt
+    ),
+    try_methods_until_translated(
+        translate_form_of_templates,
+        translate_form_of_definitions
+    )
 ]
 
 already_visited = []
@@ -150,7 +157,8 @@ class Translation:
             out_entries.append(entry)
         return out_entries
 
-    def generate_summary(self, entries: List[Entry]):
+    @staticmethod
+    def _generate_summary_from_added_entries(entries: List[Entry]):
         summary = 'Dikanteny: '
         summary += ', '.join(
             sorted(list(set([f'{entry.language.lower()}' for entry in entries]))))
@@ -240,8 +248,6 @@ class Translation:
         """
         site = Site(self.working_wiki_language, 'wiktionary')
         target_page = Page(site, page_title, offline=False)
-        # log.debug(self.output.wikipages(entries))
-        # target_page.put = pywikibot.output
 
         if target_page.namespace().id != 0:
             raise TranslatedPagePushError(
@@ -249,9 +255,10 @@ class Translation:
                 f'namespace (ns:{target_page.namespace().id}). '
                 f'Can only push to ns:0 (main namespace)')
         elif target_page.isRedirectPage():
+            content = self.output.wikipages(entries)
             target_page.put(
-                self.output.wikipages(entries),
-                self.generate_summary(entries)
+                content,
+                self.generate_summary(target_page, entries, content)
             )
         else:
             # Get entries to aggregate
@@ -271,35 +278,28 @@ class Translation:
             content += '\n'
             content += self.output.wikipages(entries).strip()
             # Push aggregated content
-            output(
-                '**** \03{yellow}' +
-                target_page.title() +
-                '\03{default} ****')
-            output(
-                '\03{white}' +
-                self.generate_summary(entries) +
-                '\03{default}')
-            output('\03{green}' + content + '\03{default}')
-            output('\03{yellow}--------------\03{default}')
-            if self.config.get('ninja_mode', 'translator') == '1':
-                if target_page.exists():
-                    summary = 'nanitsy'
-                    if not target_page.isRedirectPage():
-                        old_content = target_page.get()
-                        if len(content) > len(old_content) * 1.25:
-                            summary = 'nanitatra'
-                else:
-                    if len(content) > 140:
-                        summary = "Pejy noforonina tamin'ny « " + \
-                            content[:200] + '... »'
-                    else:
-                        summary = "Pejy noforonina tamin'ny « " + content + ' »'
-            else:
-                summary = self.generate_summary(entries)
-
-            target_page.put(content, summary)
+            target_page.put(content, self.generate_summary(entries, target_page, content))
             if self.config.get('ninja_mode', 'translator') == '1':
                 time.sleep(12)
+
+    def generate_summary(self, entries, target_page, content):
+        if self.config.get('ninja_mode', 'translator') == '1':
+            if target_page.exists():
+                summary = 'nanitsy'
+                if not target_page.isRedirectPage():
+                    old_content = target_page.get()
+                    if len(content) > len(old_content) * 1.25:
+                        summary = 'nanitatra'
+            else:
+                if len(content) > 140:
+                    summary = "Pejy noforonina tamin'ny « " + \
+                              content[:200] + '... »'
+                else:
+                    summary = "Pejy noforonina tamin'ny « " + content + ' »'
+        else:
+            summary = self._generate_summary_from_added_entries(entries)
+
+        return summary
 
     def create_lemma_if_not_exists(self, wiktionary_processor, definitions, entry):
         if hasattr(definitions, 'part_of_speech'):
@@ -360,7 +360,6 @@ class Translation:
                     # Try translation methods in succession.
                     # If one method produces something, skip the rest
                     for t_method in translation_methods:
-                        print(t_method)
                         if entry.part_of_speech is None:
                             continue
                         definitions = t_method(
@@ -395,11 +394,18 @@ class Translation:
             if not out_entry.additional_data:
                 out_entry.additional_data = {}
 
-            out_entry.additional_data['translated_from_definition'] = ', '.join(
-                translated_from_definition)
             out_entry.definitions = entry_definitions
-            out_entry.additional_data['translated_from_language'] = wiktionary_processor.language
-            out_entry.additional_data['translation_methods'] = out_translation_methods
+            for definition in out_entry.definitions:
+                if 'translation_data' not in out_entry.additional_data:
+                    out_entry.additional_data['translation_data'] = []
+
+                translation_data = {
+                    'definition': definition,
+                    'language': wiktionary_processor.language,
+                    'method': out_translation_methods[definition] if definition in out_translation_methods else None
+                }
+                out_entry.additional_data['translation_data'].append(translation_data)
+
             if entry.additional_data is not None:
                 for reference_name in ['reference', 'further_reading']:
                     if reference_name in entry.additional_data:
@@ -456,4 +462,3 @@ class Translation:
             return 0
         except Exception as exc:
             log.exception(exc)
-            return -1

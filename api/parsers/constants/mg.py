@@ -103,6 +103,9 @@ MOOD = {
     # full forms
     'gerund': 'endrika ara-tambin-teny',
     'participle': 'endrika mpamaritra anarana',
+    'past participle': 'endrika mpamaritra anarana efa lasa',
+    'present participle': 'endrika mpamaritra anarana ankehitriny',
+    'future participle': 'endrika mpamaritra anarana hoavy',
     'conditional': 'kôndisiônaly',
     'subjunctive': 'sobjônktiva',
     'indicative': 'filaza manoro',
@@ -152,6 +155,8 @@ PERSONS = {
     # full forms
     'first-person': 'mpandray anjara voalohany',
     'second-person': 'mpandray anjara faharoa',
+    'second-person (tú)': 'mpandray anjara faharoa (tú)',
+    'second-person (vos)': 'mpandray anjara faharoa (vos)',
     'third-person': 'mpandray anjara fahatelo',
 }
 

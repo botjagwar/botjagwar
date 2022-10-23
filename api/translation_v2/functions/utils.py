@@ -43,21 +43,20 @@ def _generate_redirections(infos):
         for char in "́̀":
             if redirection_target.find(char) != -1:
                 redirection_target = redirection_target.replace(char, "")
+
         if redirection_target.find("æ") != -1:
             redirection_target = redirection_target.replace("æ", "ӕ")
+
         if infos.entry != redirection_target:
-            # page = pwbot.Page(pwbot.Site(WORKING_WIKI_LANGUAGE, 'wiktionary'), infos.entry)
-            # if not page.exists():
-            # page.put_async("#FIHODINANA [[%s]]" % redirection_target,
-            # "fihodinana")
             infos.entry = redirection_target
 
 
-def use_fallback(*functions):
-    def _call_fallback(*args, **kw):
+def try_methods_until_translated(*functions):
+    def _try_methods_until_translated(*args, **kw):
         for function in functions:
             result = function(*args, **kw)
             if isinstance(result, TranslatedDefinition):
+                _try_methods_until_translated.__name__ = function.__name__
                 return result
 
-    return _call_fallback
+    return _try_methods_until_translated

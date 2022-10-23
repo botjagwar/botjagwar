@@ -2,7 +2,6 @@ import logging
 
 import requests
 
-from api.decorator import retry_on_fail
 from api.dictionary.exceptions.http import WordAlreadyExists
 from api.model.word import Entry
 from api.page_renderer import WikiPageRendererFactory
@@ -26,7 +25,7 @@ class Output(object):
 
         self.wikipage_renderer = WikiPageRendererFactory(self.content_language)()  # pylint: disable=E1102
 
-    @retry_on_fail([Exception], 5, .5)
+    # @retry_on_fail([Exception], 5, .5)
     def dictionary_service_update_database(self, info: Entry):
         """updates database"""
         # Adapt to expected format
