@@ -65,7 +65,7 @@ class TestTranslationV2(TestCase):
         pass
 
     @parameterized.expand([(True,), (False,)])
-    def test_generate_summary_(self, exists):
+    def test_generate_summary(self, exists):
         page_mock = MagicMock()
         page_mock.exists.return_value = exists
         page_mock.isRedirectPage.return_value = False
@@ -82,9 +82,12 @@ class TestTranslationV2(TestCase):
             target_page=page_mock,
             content=content
         )
-        self.assertIn(self.entry1.language, summary)
-        self.assertIn(self.entry2.language, summary)
-        self.assertIn(self.entry3.language, summary)
+        if not page_mock.exists:
+            self.assertIn(self.entry1.language, summary)
+            self.assertIn(self.entry2.language, summary)
+            self.assertIn(self.entry3.language, summary)
+        else:
+            self.assertEquals(summary, 'nanitsy')
 
     def test_add_credit_no_reference(self):
         wikipage = MagicMock()
