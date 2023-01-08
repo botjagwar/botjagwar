@@ -138,7 +138,7 @@ class ConvergentTranslations(PostgrestBackend):
     endpoint = '/convergent_translations'
 
     def get_convergent_translation(self, target_language, en_definition=None, fr_definition=None,
-                                  suggested_definition=None, part_of_speech=None):
+                                   suggested_definition=None, part_of_speech=None):
         params = {
             # 'language': 'eq.' + target_language
         }

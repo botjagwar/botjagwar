@@ -19,8 +19,8 @@ from .functions import postprocessors  # do __NOT__ delete!
 from .functions import \
     translate_form_of_templates, \
     translate_form_of_definitions
-from .functions import \
-    translate_using_convergent_definition
+from .functions import translate_using_convergent_definition
+# from .functions import translate_using_bridge_language
 from .functions.pronunciation import translate_pronunciation
 from .functions.references import translate_references
 from .functions.utils import form_of_part_of_speech_mapper
@@ -37,12 +37,10 @@ translation_methods = [
         translate_using_convergent_definition,
         # translate_using_bridge_language,
         # translate_using_postgrest_json_dictionary,
-        # translate_using_opus_mt
-    ),
-    try_methods_until_translated(
+        # translate_using_opus_mt,
         translate_form_of_templates,
-        translate_form_of_definitions
-    )
+        translate_form_of_definitions,
+    ),
 ]
 
 already_visited = []
@@ -333,7 +331,6 @@ class Translation:
                     if len(content) > 149
                     else "Pejy noforonina tamin'ny « " + content + ' »'
                 )
-            else:
                 log.info(f"Template {source_page.title()} already exists at {target_wiki.wiki} wiki.")
 
             if not redirect_target_page.exists():
