@@ -75,6 +75,7 @@ class MGWikiPageRenderer(PageRenderer):
 
         returned_string = self.render_head_section(info)
         returned_string += self.render_definitions(info, link) + additional_note
+        returned_string += self.render_inflection(info)
         returned_string += self.render_pronunciation(info)
         returned_string += self.render_synonyms(info)
         returned_string += self.render_antonyms(info)
@@ -154,6 +155,13 @@ class MGWikiPageRenderer(PageRenderer):
                                 returned_string += "\n#* ''" + example + "''"
                     elif isinstance(info.additional_data['examples'], str):
                         returned_string += "\n#* ''" + info.additional_data['examples'][idx] + "''"
+
+        return returned_string
+
+    def render_inflection(self, info):
+        returned_string = '\n{{-bikan-teny-}}\n'
+        if 'inflection' in info.additional_data:
+            returned_string += info['inflection'] + '\n'
 
         return returned_string
 

@@ -30,7 +30,26 @@ def add_language_ipa_if_not_exists(languages: List = 'automatic'):
             out_entries.append(entry)
 
         return out_entries
+
     return add_pronunciation
+
+
+def add_japanese_verb_form(languages: List = 'automatic'):
+    def wrapped_add_japanese_verb_form(entries: list):
+        out_entries = []
+        for entry in entries:
+
+            if entry.language == 'ja':
+                if entry.additional_data is None:
+                    entry.additional_data = {}
+
+                if 'inflection' not in entry.additional_data:
+                    entry.additional_data['inflection'] = ['{{ja-ojad}}']
+
+            out_entries.append(entry)
+        return out_entries
+
+    return wrapped_add_japanese_verb_form
 
 
 def add_xlit_if_no_transcription(languages: List = 'automatic'):

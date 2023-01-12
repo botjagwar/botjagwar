@@ -16,9 +16,6 @@ from api.output import Output
 from api.servicemanager import DictionaryServiceManager
 from redis_wikicache import RedisPage as Page, RedisSite as Site
 from .functions import postprocessors  # do __NOT__ delete!
-from .functions import \
-    translate_form_of_templates, \
-    translate_form_of_definitions
 from .functions import translate_using_convergent_definition
 # from .functions import translate_using_bridge_language
 from .functions.pronunciation import translate_pronunciation
@@ -38,8 +35,8 @@ translation_methods = [
         # translate_using_bridge_language,
         # translate_using_postgrest_json_dictionary,
         # translate_using_opus_mt,
-        translate_form_of_templates,
-        translate_form_of_definitions,
+        # translate_form_of_templates,
+        # translate_form_of_definitions,
     ),
 ]
 
