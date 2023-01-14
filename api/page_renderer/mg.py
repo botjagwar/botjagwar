@@ -159,8 +159,9 @@ class MGWikiPageRenderer(PageRenderer):
         return returned_string
 
     def render_inflection(self, info):
-        returned_string = '\n{{-bikan-teny-}}\n'
+        returned_string = ''
         if 'inflection' in info.additional_data:
+            returned_string = '\n{{-bikan-teny-}}\n'
             returned_string += info['inflection'] + '\n'
 
         return returned_string

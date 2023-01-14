@@ -25,7 +25,7 @@ for page in get_pages_from_category('mg', 'Pejy ahitana dikan-teny'):
     else:
         if (content.find('-e-mat-|mg') != -1
             or content.find('-e-ana-|mg') != -1
-            ):
+        ):
             changed = True
             content = cleanup(content)
 
