@@ -104,7 +104,7 @@ MOOD = {
     'gerund': 'endrika ara-tambin-teny',
     'participle': 'ova matoanteny',
     'past participle': 'ova matoanteny efa lasa',
-    'present participle': 'ova matoanteny ankehitriny',
+    'present participle': 'ova matoanteny',
     'future participle': 'ova matoanteny hoavy',
     'conditional': 'kôndisiônaly',
     'subjunctive': 'sobjônktiva',

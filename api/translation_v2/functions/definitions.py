@@ -172,9 +172,11 @@ def translate_form_of_templates(part_of_speech,
 
 # @time_this('translate_using_postgrest_json_dictionary')
 def translate_using_postgrest_json_dictionary(
-        part_of_speech, definition_line, source_language, target_language,
-        back_check_pos=False, **kw)\
-        -> [UntranslatedDefinition, TranslatedDefinition]:
+    part_of_speech, definition_line, source_language, target_language,
+    back_check_pos=False, **kw) \
+    -> [UntranslatedDefinition, TranslatedDefinition]:
+    if definition_line.endswith('.'):
+        definition_line = definition_line.strip('.')
 
     data = json_dictionary.look_up_dictionary(
         source_language,
@@ -221,12 +223,35 @@ def translate_using_postgrest_json_dictionary(
     return UntranslatedDefinition(definition_line)
 
 
+def translate_using_suggested_translations_fr_mg(
+    part_of_speech,
+    definition_line,
+    source_language,
+    target_language,
+    **kw) -> [UntranslatedDefinition, ConvergentTranslation]:
+    convergent_translations = ConvergentTranslations()
+    if source_language == 'fr':
+        translations = convergent_translations.get_suggested_translations_fr_mg(
+            target_language, part_of_speech=part_of_speech, definition=definition_line)
+    else:
+        raise UnsupportedLanguageError(f"Source language '{source_language}' "
+                                       f"cannot be used for convergent translations")
+
+    if translations:
+        ret_translations = [t['suggested_definition'] for t in translations]
+        if ret_translations:
+            k = ', '.join(sorted(list(set(ret_translations))))
+            return ConvergentTranslation(k)
+
+    return UntranslatedDefinition(definition_line)
+
+
 def translate_using_convergent_definition(
-        part_of_speech,
-        definition_line,
-        source_language,
-        target_language,
-        **kw) -> [UntranslatedDefinition, ConvergentTranslation]:
+    part_of_speech,
+    definition_line,
+    source_language,
+    target_language,
+    **kw) -> [UntranslatedDefinition, ConvergentTranslation]:
     convergent_translations = ConvergentTranslations()
     if source_language == 'en':
         translations = convergent_translations.get_convergent_translation(

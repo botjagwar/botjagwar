@@ -4,8 +4,17 @@ import requests
 from api.page_lister import get_pages_from_category
 
 
-class TranslationFixer(object):
-    def fix_translation(self, page):
+class Fixer(object):
+    def run_fixer(self, *args, **kwargs):
+        raise NotImplementedError()
+
+    def run(self):
+        for page in get_pages_from_category('mg', 'Pejy ahitana dikan-teny'):
+            self.run_fixer(page)
+
+
+class TranslationFixer(Fixer):
+    def run_fixer(self, page):
         """
         Translations are included in the "{{-dika-}}" section and traditionally end with "{{}} :"
         This function will change that by deleting the "{{}} :" section and including each translation with a dedicated
@@ -47,10 +56,6 @@ class TranslationFixer(object):
             summary = 'Nanitsy fizarana sy ny mpitazon-toerana'
 
         page.put(new_text, summary)
-
-    def run(self):
-        for page in get_pages_from_category('mg', 'Pejy ahitana dikan-teny'):
-            self.fix_translation(page)
 
     @staticmethod
     def get_part_of_speech(content):
@@ -107,10 +112,15 @@ class TranslationFixer(object):
         return kept_lines, deleted_lines
 
 
+class AnagramFixer(Fixer):
+    def run_fixer(self, page):
+        pass
+
+
 if __name__ == '__main__':
     bot = TranslationFixer()
     try:
         bot.run()
-        # bot.fix_translation(pywikibot.Page(pywikibot.Site('mg', 'wiktionary'), 'adaka'))
+        # bot.run_fixer(pywikibot.Page(pywikibot.Site('mg', 'wiktionary'), 'rano'))
     finally:
         pywikibot.stopme()

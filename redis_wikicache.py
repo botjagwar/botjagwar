@@ -23,13 +23,14 @@ class NoPage(Exception):
 
 class RedisSite(object):
     def __init__(
-            self,
-            language: str,
-            wiki: str,
-            host='default',
-            port=6379,
-            password='default',
-            offline=False
+        self,
+        language: str,
+        wiki: str,
+        host='default',
+        port=6379,
+        password='default',
+        offline=False,
+        download_dump_if_not_exists=True
     ):
         self.offline = offline
         self.language = language
@@ -47,6 +48,7 @@ class RedisSite(object):
             self.password = None
 
         self.port = port
+        self.download_dump_if_not_exists = download_dump_if_not_exists
 
     def all_pages(self):
         for key in self.instance.scan_iter(match=f'{self.wiki}.{self.language}/*', count=1000):
@@ -80,7 +82,8 @@ class RedisSite(object):
         return RedisPage(self, page_name)
 
     def download_dump(self):
-        url = f'https://dumps.wikimedia.org/{self.language}wiktionary/latest/{self.language}wiktionary-latest-pages-articles.xml.bz2'
+        url = f'https://dumps.wikimedia.org/{self.language}wiktionary/latest' \
+              f'/{self.language}wiktionary-latest-pages-articles.xml.bz2'
         dump_dir = 'user_data/dumps'
         dump_path = dump_dir + f'/{self.language}wikt.xml'
 
@@ -102,7 +105,7 @@ class RedisSite(object):
 
     @separate_process
     def load_xml_dump(self, download=False, dump_path='user_data/dumps/enwikt.xml'):
-        if download:
+        if self.download_dump_if_not_exists or download:
             self.download_dump()
 
         importer = EnWiktionaryDumpImporter(dump_path)
@@ -245,7 +248,7 @@ if __name__ == '__main__':
     Using RedisSite and RedisPage, you'll have a much faster read and offline access.
     """)
     language = sys.argv[1]
-    site = RedisSite(language, 'wiktionary')
+    site = RedisSite(language, 'wiktionary', download_dump_if_not_exists=True)
     site.load_xml_dump(dump_path=f'user_data/dumps/{language}wikt.xml')
     # site.load_xml_dump('user_data/dumps/enwikt_2.xml')
     # site.load_xml_dump('user_data/dumps/enwikt_3.xml')

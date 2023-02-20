@@ -162,3 +162,23 @@ class ConvergentTranslations(PostgrestBackend):
 
         # other HTTP error:
         raise BackendError(f'Unexpected error: HTTP {response.status_code}; ' + response.text)
+
+    def get_suggested_translations_fr_mg(self, target_language, definition=None,
+                                         suggested_definition=None, part_of_speech=None):
+        params = {
+            # 'language': 'eq.' + target_language
+        }
+        if part_of_speech is not None:
+            params['part_of_speech'] = 'eq.' + part_of_speech
+        if definition is not None:
+            params['definition'] = 'eq.' + definition
+        if suggested_definition is not None:
+            params['suggested_definition'] = 'eq.' + suggested_definition
+
+        response = requests.get(self.backend.backend + '/suggested_translations_fr_mg', params=params)
+        data = response.json()
+        if response.status_code == 200:  # HTTP OK
+            return data
+
+        # other HTTP error:
+        raise BackendError(f'Unexpected error: HTTP {response.status_code}; ' + response.text)

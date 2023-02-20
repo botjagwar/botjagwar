@@ -59,7 +59,7 @@ def set_throttle(i):
 
 
 def _get_page(name, lang):
-    page = pwbot.Page(pwbot.Site(lang, 'wiktionary'), name)
+    page = Page(Site(lang, 'wiktionary'), name)
     return page
 
 

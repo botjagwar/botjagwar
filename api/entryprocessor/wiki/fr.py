@@ -1,6 +1,5 @@
 # coding: utf8
 import re
-import traceback
 
 from api.importer.wiktionary.fr import all_importers
 from api.model.word import Entry
@@ -93,6 +92,8 @@ class FRWiktionaryProcessor(WiktionaryProcessor):
         :return:
         """
         new_definition_line = definition_line
+        if not part_of_speech.startswith('e-'):
+            return new_definition_line
 
         # Form-of definitions: they use templates that can be parsed using api.parsers module which is tentatively
         #   being integrated here to provide human-readable output for either English or Malagasy
@@ -109,7 +110,6 @@ class FRWiktionaryProcessor(WiktionaryProcessor):
                         new_definition_line = elements.to_definition(
                             self.processor_language)
             except Exception as error:
-                traceback.print_tb(error)
                 new_definition_line = definition_line
 
         # print(definition_line, new_definition_line)

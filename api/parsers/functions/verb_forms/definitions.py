@@ -37,7 +37,7 @@ def parse_fr_definition(definition_line):
             returned.tense = TENSE[tense]
             definition_line = definition_line.replace(tense, '')
 
-    returned.tense = 'present' if returned.tense is None else returned.tense
+    # returned.tense = None if returned.tense is None else returned.tense
 
     for number in NUMBER:
         if number in definition_line:

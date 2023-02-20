@@ -34,6 +34,7 @@ translation_methods = [
         translate_using_convergent_definition,
         # translate_using_bridge_language,
         # translate_using_postgrest_json_dictionary,
+        # translate_using_suggested_translations_fr_mg
         # translate_using_opus_mt,
         # translate_form_of_templates,
         # translate_form_of_definitions,
@@ -273,6 +274,7 @@ class Translation:
             content += '\n'
             content += self.output.wikipages(entries).strip()
             # Push aggregated content
+
             target_page.put(content, self.generate_summary(entries, target_page, content))
             if self.config.get('ninja_mode', 'translator') == '1':
                 time.sleep(12)
@@ -286,7 +288,7 @@ class Translation:
                     if len(content) > len(old_content) * 1.25:
                         summary = 'nanitatra'
             else:
-                if len(content) > 140:
+                if len(content) > 200:
                     summary = "Pejy noforonina tamin'ny « " + \
                               content[:200] + '... »'
                 else:
