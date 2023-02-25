@@ -22,7 +22,7 @@ class TestEnglishWiktionaryEntryprocessor(
         self.processor.process(page)
         translations = self.processor.retrieve_translations()
         entries = [e for e in translations if e.language == 'ko']
-        self.assertNotEquals(len(entries), 0, "No entries were found")
+        self.assertNotEqual(len(entries), 0, "No entries were found")
         entry = entries[0]
         word, pos, lang, definition = entry.word, entry.part_of_speech, entry.language, entry.definition
         self.assertIn(word, ['공기', '空氣'])

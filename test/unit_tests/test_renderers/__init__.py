@@ -21,14 +21,14 @@ class TestRenderers(TestCase):
 :""" + info.additional_data['etymology'] + """
 {{-""" + info.part_of_speech + """-|""" + info.language + """}}
 '''{{subst:BASEPAGENAME}}''' (""" + ', '.join(info.additional_data['transcription']) + """)"""
-        self.assertEquals(head_section, expected)
+        self.assertEqual(head_section, expected)
 
     def test_etymology(self):
         renderer = MGWikiPageRenderer()
         info = MagicMock()
         info.additional_data = {'etymology': 'etimologicheski'}
         etymology = renderer.render_etymology(info)
-        self.assertEquals(etymology, """
+        self.assertEqual(etymology, """
 {{-etim-}}
 :""" + info.additional_data['etymology'])
 
@@ -41,7 +41,7 @@ class TestRenderers(TestCase):
 # def1
 # def2
 # def4"""
-        self.assertEquals(definitions, rendered_definitions)
+        self.assertEqual(definitions, rendered_definitions)
 
     def test_definitions_with_examples(self):
         renderer = MGWikiPageRenderer()
@@ -58,7 +58,7 @@ class TestRenderers(TestCase):
 #* ''exdef22''
 # def4
 #* ''exdef4''"""
-        self.assertEquals(definitions, rendered_definitions)
+        self.assertEqual(definitions, rendered_definitions)
 
     def test_definitions_with_link(self):
         renderer = MGWikiPageRenderer()
@@ -71,7 +71,7 @@ class TestRenderers(TestCase):
 # [[def2|def2]].
 # [[def4]]
 # mult ak"""
-        self.assertEquals(definitions, rendered_definitions)
+        self.assertEqual(definitions, rendered_definitions)
 
     def test_pronunciation_non_list(self):
         renderer = MGWikiPageRenderer()
@@ -82,7 +82,7 @@ class TestRenderers(TestCase):
 
 {{-fanononana-}}
 * abcsded"""
-        self.assertEquals(pronunciation, pronunciation_section)
+        self.assertEqual(pronunciation, pronunciation_section)
 
     def test_pronunciation_list(self):
         renderer = MGWikiPageRenderer()
@@ -94,7 +94,7 @@ class TestRenderers(TestCase):
 {{-fanononana-}}
 * {{p1|tptp}}
 * {{p1|tptp2}}"""
-        self.assertEquals(pronunciation, pronunciation_section)
+        self.assertEqual(pronunciation, pronunciation_section)
 
     def test_audio_pronunciation(self):
         renderer = MGWikiPageRenderer()
@@ -106,7 +106,7 @@ class TestRenderers(TestCase):
 
 {{-fanononana-}}
 * {{audio|audio1.mp3|entry}}"""
-        self.assertEquals(pronunciation, pronunciation_section)
+        self.assertEqual(pronunciation, pronunciation_section)
 
     def test_ipa_pronunciation(self):
         renderer = MGWikiPageRenderer()
@@ -119,7 +119,7 @@ class TestRenderers(TestCase):
 
 {{-fanononana-}}
 * {{fanononana|akakak|mg}}"""
-        self.assertEquals(pronunciation, pronunciation_section)
+        self.assertEqual(pronunciation, pronunciation_section)
 
     def test_synonyms(self):
         renderer = MGWikiPageRenderer()
@@ -130,7 +130,7 @@ class TestRenderers(TestCase):
 
 {{-dika-mitovy-}}
 * [[syn1]]"""
-        self.assertEquals(synonyms, sections)
+        self.assertEqual(synonyms, sections)
 
     def test_antonyms(self):
         renderer = MGWikiPageRenderer()
@@ -141,7 +141,7 @@ class TestRenderers(TestCase):
 
 {{-dika-mifanohitra-}}
 * [[ant1]]"""
-        self.assertEquals(synonyms, sections)
+        self.assertEqual(synonyms, sections)
 
     def test_related_terms(self):
         renderer = MGWikiPageRenderer()
@@ -152,7 +152,7 @@ class TestRenderers(TestCase):
 
 {{-teny mifandraika-}}
 * [[rt1]]"""
-        self.assertEquals(synonyms, sections)
+        self.assertEqual(synonyms, sections)
 
     def test_derived_terms(self):
         renderer = MGWikiPageRenderer()
@@ -163,7 +163,7 @@ class TestRenderers(TestCase):
 
 {{-teny mifandraika-}}
 * [[rt1]]"""
-        self.assertEquals(synonyms, sections)
+        self.assertEqual(synonyms, sections)
 
     def test_section(self):
         renderer = MGWikiPageRenderer()
@@ -229,7 +229,7 @@ class TestRenderers(TestCase):
 
 """
         removed_section = renderer.delete_section('es', test_wikipage)
-        self.assertEquals(removed_section, expected)
+        self.assertEqual(removed_section, expected)
 
     def test_delete_section_other(self):
         renderer = MGWikiPageRenderer()
@@ -274,4 +274,4 @@ class TestRenderers(TestCase):
 # [[saobakaka]]
 """
         removed_section = renderer.delete_section('pt', test_wikipage)
-        self.assertEquals(removed_section, expected)
+        self.assertEqual(removed_section, expected)

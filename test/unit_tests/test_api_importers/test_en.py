@@ -17,7 +17,7 @@ class TestFurtherReadingImporter(ApiImporterTester):
     def test_corner_case(self):
         importer = self.Importer()
         data = importer.get_data('', self.wikipages[self.data_exists_index], self.language)
-        self.assertEquals(len(data), 1)
+        self.assertEqual(len(data), 1)
 
 
 class TestAlternativeFormsImporter(ApiImporterTester):
@@ -30,8 +30,8 @@ class TestAlternativeFormsImporter(ApiImporterTester):
     def test_get_data_check_equality(self):
         importer = self.Importer()
         data = importer.get_data('', self.wikipages[self.data_exists_index], 'pl')
-        self.assertEquals(len(data), 1)
-        self.assertEquals(data[0], '{{alt|pl|fi}}')
+        self.assertEqual(len(data), 1)
+        self.assertEqual(data[0], '{{alt|pl|fi}}')
 
 
 # class TestAntonymImporter(ApiImporterTester):

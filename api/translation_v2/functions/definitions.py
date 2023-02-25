@@ -98,8 +98,7 @@ def translate_form_of_definitions(part_of_speech,
                                   definition_line,
                                   source_language,
                                   target_language,
-                                  **kw) -> [UntranslatedDefinition,
-                                            TranslatedDefinition]:
+                                  **kw) -> [UntranslatedDefinition, TranslatedDefinition]:
     new_definition_line = definition_line
 
     # Preventing translation of non-verb form definitions

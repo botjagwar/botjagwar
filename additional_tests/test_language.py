@@ -69,7 +69,7 @@ class TestLanguageRestService(TestCase):
                 'iso_code': code
             })
         )
-        self.assertEquals(resp.status_code, 200)
+        self.assertEqual(resp.status_code, 200)
 
     def test_disable_autocommit(self):
         requests.put(
@@ -91,7 +91,7 @@ class TestLanguageRestService(TestCase):
 
         for i in range(20):
             resp = requests.get(URL_HEAD + '/language/zh%d' % i)
-            self.assertEquals(resp.status_code, 404)
+            self.assertEqual(resp.status_code, 404)
 
     def test_enable_autocommit(self):
         requests.put(
@@ -111,20 +111,20 @@ class TestLanguageRestService(TestCase):
 
         for i in range(20):
             resp = requests.get(URL_HEAD + '/language/zh%d' % i)
-            self.assertEquals(resp.status_code, 200)
+            self.assertEqual(resp.status_code, 200)
 
     def test_get_language(self):
         self.create_language('ch0', 'zhenquang', 'tsanitsioangy')
         resp = requests.get(URL_HEAD + '/language/ch0')
         data = resp.json()
-        self.assertEquals(resp.status_code, 200)
-        self.assertEquals(data['iso_code'], 'ch0')
-        self.assertEquals(data['malagasy_name'], 'tsanitsioangy')
-        self.assertEquals(data['english_name'], 'zhenquang')
+        self.assertEqual(resp.status_code, 200)
+        self.assertEqual(data['iso_code'], 'ch0')
+        self.assertEqual(data['malagasy_name'], 'tsanitsioangy')
+        self.assertEqual(data['english_name'], 'zhenquang')
 
     def test_get_language_404(self):
         resp = requests.get(URL_HEAD + '/language/c9')
-        self.assertEquals(resp.status_code, 404)
+        self.assertEqual(resp.status_code, 404)
 
     def test_create_language(self):
         self.create_language('ch10', 'zhenquang', 'tsanitsioangy')
@@ -138,7 +138,7 @@ class TestLanguageRestService(TestCase):
                 'iso_code': 'as'
             })
         )
-        self.assertEquals(resp.status_code, 200)
+        self.assertEqual(resp.status_code, 200)
         resp = requests.post(
             URL_HEAD + '/language/ali',
             json=json.dumps({
@@ -147,7 +147,7 @@ class TestLanguageRestService(TestCase):
                 'iso_code': 'as'
             })
         )
-        self.assertEquals(resp.status_code, 460)
+        self.assertEqual(resp.status_code, 460)
 
     def test_create_entry_invalid_json(self):
         resp = requests.post(
@@ -158,7 +158,7 @@ class TestLanguageRestService(TestCase):
                 'engilsh_naem': 'alskasd',
             })
         )
-        self.assertEquals(
+        self.assertEqual(
             resp.status_code,
             InvalidJsonReceived.status_code)
 
@@ -173,17 +173,17 @@ class TestLanguageRestService(TestCase):
                 'iso_code': 'chq'
             })
         )
-        self.assertEquals(resp.status_code, 200)
+        self.assertEqual(resp.status_code, 200)
 
     def test_read_after_write_get_after_delete(self):
         self.test_delete_language()
         resp = requests.get(URL_HEAD + '/language/chq')
-        self.assertEquals(resp.status_code, 404)
+        self.assertEqual(resp.status_code, 404)
 
     def test_delete_language(self):
         resp = requests.get(URL_HEAD + '/language/chq')
-        self.assertEquals(resp.status_code, 200)
+        self.assertEqual(resp.status_code, 200)
 
         del_url = URL_HEAD + '/language/chq'
         resp = requests.delete(del_url)
-        self.assertEquals(resp.status_code, 204)
+        self.assertEqual(resp.status_code, 204)

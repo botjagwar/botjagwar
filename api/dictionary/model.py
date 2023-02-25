@@ -1,3 +1,4 @@
+from typing import Optional
 
 from sqlalchemy import Integer, String, DateTime, TEXT
 from sqlalchemy import Table, Column, ForeignKey
@@ -8,6 +9,7 @@ from sqlalchemy.sql import func
 from api.dictionary.controller import Definition as DefinitionController
 from api.dictionary.controller import Word as WordController
 from api.dictionary.serialisers.json import Definition as DefinitionSerialiser
+from api.dictionary.serialisers.json import JSONBuilder
 from api.dictionary.serialisers.json import Word as WordSerialiser
 
 Base = declarative_base()
@@ -19,8 +21,8 @@ dictionary_association = Table(
 
 
 class Serialisable(object):
-    Serialiser = None
-    Controller = None
+    Serialiser: Optional[JSONBuilder] = None
+    Controller: Optional = None
 
     def serialise(self):
         """

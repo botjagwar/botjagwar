@@ -35,11 +35,11 @@ class TestUnknownLanguageManager(TestCase):
     @parameterized.expand(language_tuples)
     def test_translate_language_name(self, language_name, malagasy_name):
         translated = translate_language_name(language_name)
-        self.assertEquals(translated, malagasy_name)
+        self.assertEqual(translated, malagasy_name)
         translated = translate_language_name(language_name)
-        self.assertEquals(translated, malagasy_name)
+        self.assertEqual(translated, malagasy_name)
         translated = translate_language_name(language_name)
-        self.assertEquals(translated, malagasy_name)
+        self.assertEqual(translated, malagasy_name)
 
     @parameterized.expand(error_language_tuples)
     def test_translate_language_name_with_error(self, language_name):
