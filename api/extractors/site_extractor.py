@@ -1,5 +1,6 @@
 import logging
 import re
+from typing import Optional
 
 import requests
 from lxml import etree
@@ -27,12 +28,12 @@ class SiteExtractorException(Exception):
 class SiteExtractor(object):
     STRIP_TAGS_LIST = ['a', 'i', 'b', 'br', 'div',
                        'small', 'big', 'td', 'tr', 'span']
-    lookup_pattern = None
-    definition_xpath = None
-    pos_xpath = None
-    language = None
-    definition_language = None
-    cache_engine = None
+    lookup_pattern: Optional[None, str] = None
+    definition_xpath: Optional[None, str] = None
+    pos_xpath: Optional[None, str] = None
+    language: Optional[None, str] = None
+    definition_language: Optional[None, str] = None
+    cache_engine: Optional[None, str] = None
 
     def load_page(self, word) -> etree._Element:
         def check_if_defined(var):

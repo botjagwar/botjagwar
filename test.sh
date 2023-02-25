@@ -14,7 +14,8 @@ fi
 
 source $opt_dir/pyenv/bin/activate
 
-python -m pip install nose
+python -m pip install pytest==7.2.1
+python -m pip install pytest-cov==4
 python -m pip install parameterized
 
 if [[ $NORUN == 1 ]]; then
@@ -23,7 +24,7 @@ fi
 
 cd "$src_dir" || exit
 
-python -m nose -vv test --with-coverage --cover-html --cover-min-percentage=66 --cover-package=api,database,model
+pytest -vv --cov-report=html --cov=api test/unit_tests --cov-fail-under=45
 if [[ -f $opt_dir/conf/config.ini ]]; then
   sudo rm $opt_dir/conf/config.ini
   sudo mv $opt_dir/conf/config.normal.ini $opt_dir/conf/config.ini

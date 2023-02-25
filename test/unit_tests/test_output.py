@@ -21,7 +21,7 @@ class TestOutput(TestCase):
 """
         output = Output()
         rendered = output.wikipage(entry1)
-        self.assertEquals(rendered.strip(), expected.strip())
+        self.assertEqual(rendered.strip(), expected.strip())
 
     def test_wikipage_many_pages(self):
         entry1 = MagicMock(
@@ -78,4 +78,4 @@ class TestOutput(TestCase):
         output = Output()
         rendered = output.wikipages([entry1, entry1_1, entry2, entry3])
         print(rendered)
-        self.assertEquals(rendered.strip(), expected.strip())
+        self.assertEqual(rendered.strip(), expected.strip())

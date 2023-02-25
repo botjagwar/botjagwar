@@ -26,6 +26,8 @@ def parse_fr_definition(definition_line):
             definition_line = definition_line.replace(mood, '')
 
     returned.mood = 'indicative' if returned.mood is None else returned.mood
+    if returned.mood == 'imperative':
+        returned.tense = 'present'
 
     for cases in CASES:
         if cases in definition_line:

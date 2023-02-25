@@ -17,7 +17,7 @@ class TestPostProcessors(TestCase):
         out_entries = credit([entry])
         assert 'reference' in out_entries[0].additional_data
         expected = "{{wikibolana|" + wiki + '|' + entry.entry + "}}"
-        self.assertEquals(out_entries[0].additional_data['reference'][0], expected)
+        self.assertEqual(out_entries[0].additional_data['reference'][0], expected)
 
     def test_add_xlit_if_no_transcription(self):
         entry = Entry(

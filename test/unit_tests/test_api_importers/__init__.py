@@ -22,11 +22,10 @@ class ApiImporterTester(TestCase):
         # print(self.wikipages[self.data_exists_index])
         if self.data_exists_index is not None:
             data = importer.get_data('', self.wikipages[self.data_exists_index], self.language)
-            self.assertNotEquals(data, [])
+            self.assertNotEqual(data, [])
 
     def test_get_data_returns_right_type(self):
         importer = self.Importer()
         if self.data_does_not_exist_index is not None:
             data = importer.get_data('', self.wikipages[self.data_exists_index], self.language)
-            self.assertNotEquals(data, list)
-
+            self.assertNotEqual(data, list)

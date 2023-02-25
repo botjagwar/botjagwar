@@ -88,7 +88,7 @@ class TestTranslationV2(TestCase):
         #     self.assertIn(self.entry2.language, summary)
         #     self.assertIn(self.entry3.language, summary)
         # else:
-        #     self.assertEquals(summary, 'nanitsy')
+        #     self.assertEqual(summary, 'nanitsy')
 
     def test_add_credit_no_reference(self):
         wikipage = MagicMock()
