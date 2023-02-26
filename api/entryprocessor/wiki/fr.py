@@ -5,7 +5,7 @@ from api.importer.wiktionary.fr import all_importers
 from api.model.word import Entry
 from api.parsers import TEMPLATE_TO_OBJECT
 from api.parsers import definitions_parser
-from conf.entryprocessor.languagecodes import LANGUAGE_NAMES
+from conf.entryprocessor.languagecodes.en import LANGUAGE_NAMES
 from .base import WiktionaryProcessor
 
 LANG_SECTION_REGEX = "==[ ]?{{langue\|([a-z]+)}}[ ]?=="

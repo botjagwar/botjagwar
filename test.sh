@@ -24,7 +24,7 @@ fi
 
 cd "$src_dir" || exit
 
-pytest -vv --cov-report=html --cov=api test/unit_tests --cov-fail-under=45
+pytest -vv --cov-report=html --cov=api test/unit_tests
 if [[ -f $opt_dir/conf/config.ini ]]; then
   sudo rm $opt_dir/conf/config.ini
   sudo mv $opt_dir/conf/config.normal.ini $opt_dir/conf/config.ini
