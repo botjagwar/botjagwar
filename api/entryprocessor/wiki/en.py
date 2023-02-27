@@ -11,6 +11,14 @@ from .base import WiktionaryProcessor
 
 
 class ENWiktionaryProcessor(WiktionaryProcessor):
+    must_have_part_of_speech = True
+    empty_definitions_list_if_no_definitions_found = False
+
+    template_to_object_mapper = TEMPLATE_TO_OBJECT
+    language_section_regex = "[\n]?==[ ]?([A-Za-z]+)[ ]?==\n"
+
+    all_importers = all_importers
+
     @property
     def processor_language(self):
         return 'en'
@@ -83,7 +91,7 @@ class ENWiktionaryProcessor(WiktionaryProcessor):
         :return:
         """
         additional_data = {}
-        for classe in all_importers:
+        for classe in self.all_importers:
             instance = classe()
             additional_data[instance.data_type] = instance.get_data(
                 instance.section_name, content, language)
@@ -126,9 +134,9 @@ class ENWiktionaryProcessor(WiktionaryProcessor):
         if new_definition_line == '':
             if human_readable_form_of_definition:
                 try:
-                    if part_of_speech in TEMPLATE_TO_OBJECT:
+                    if part_of_speech in self.template_to_object_mapper:
                         elements = templates_parser.get_elements(
-                            TEMPLATE_TO_OBJECT[part_of_speech], definition_line)
+                            self.template_to_object_mapper[part_of_speech], definition_line)
                         if translate_definitions_to_malagasy:
                             new_definition_line = elements.to_definition('mg')
                         else:
@@ -163,16 +171,16 @@ class ENWiktionaryProcessor(WiktionaryProcessor):
         content = self.content
         entries = []
         content = re.sub("{{l/en\\|(.*)}}", "\\1 ", content)  # remove {{l/en}}
-        for l in re.findall("[\n]?==[ ]?([A-Za-z]+)[ ]?==\n", content):
+        for language_name in re.findall(self.language_section_regex, content):
             last_part_of_speech = None
             ct_content = content
             try:
-                last_language_code = self.lang2code(l)
+                last_language_code = self.lang2code(language_name)
             except KeyError:
                 continue
 
             definitions = {}
-            section_init = ct_content.find('==%s==' % l)
+            section_init = ct_content.find('==%s==' % language_name)
             section_end = ct_content.find('----', section_init)
             if section_end != -1:
                 ct_content = ct_content[section_init:section_end]
@@ -190,12 +198,12 @@ class ENWiktionaryProcessor(WiktionaryProcessor):
                 if line.startswith('# '):
                     defn_line = line
                     defn_line = defn_line.lstrip('# ')
-                    if last_part_of_speech is None:
+                    if last_part_of_speech is None and self.must_have_part_of_speech:
                         continue
 
                     definition = self.extract_definition(
-                        last_part_of_speech,
-                        defn_line,
+                        part_of_speech=last_part_of_speech,
+                        definition_line=defn_line,
                         cleanup_definition=cleanup_definitions,
                         translate_definitions_to_malagasy=translate_definitions_to_malagasy,
                         human_readable_form_of_definition=human_readable_form_of_definition,
@@ -212,6 +220,10 @@ class ENWiktionaryProcessor(WiktionaryProcessor):
                     ct_content, last_language_code)
             else:
                 additional_data = None
+
+            # entries may be definition-less or definition formatting is inconsistent
+            if not definitions and self.empty_definitions_list_if_no_definitions_found:
+                definitions[last_part_of_speech] = []
 
             # Create the Entry object to add to the list
             for pos, definitions in definitions.items():
