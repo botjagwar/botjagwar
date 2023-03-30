@@ -258,20 +258,40 @@ class ENWiktionaryProcessor(WiktionaryProcessor):
 
     @staticmethod
     def refine_definition(definition) -> list:
-        definition = re.sub('\\[\\[([\\w]+)\\|[\\w]+\\]\\]', '\\1', definition)
-        definition = re.sub('\\[\\[([\\w]+)\\]\\]', '\\1', definition)
-        definition = re.sub('[Tt]o ', '', definition)
-        definition = re.sub('[Aa] ', '', definition)
-        definition = re.sub('[Of], ', '', definition)
-        definition = re.sub('[Oo]f or relating ', '', definition)
-        definition = definition.replace(', or ', ' or ')
-        definition = definition.replace(', and ', ' and ')
-        # for separator in ';,':
-        #     definition = definition.replace(separator + ' ', '$')
-        if definition.endswith('.'):
-            definition = definition[:-1]
+        # handle {{lb}} template calls
+        refined = definition
+        lb_template_rgx = r'\{\{l[b]?\|([a-zA-Z0-9\ ]{2,3})\|([\w ]+)'
 
-        return [definition]
+        lb_match = re.match(lb_template_rgx, definition)
+        if lb_match:
+            lb_data = lb_match.groups()
+            lb_match = lb_match.group()
+            lb_begin = definition.find(lb_match)
+            if lb_begin != -1:
+                lb_end = definition.find('}}', lb_begin)
+                label_data = definition[lb_begin:lb_end]
+                label_data = label_data.replace('_', '')
+                label_data = label_data.replace('|', ' ')
+                print(label_data)
+            # Ensure that no unexpected characters has been onboarded,
+            # if it's the case, just ditch the label information.
+            if re.match(r'^([a-zA-Z0-9\,\ ]+)$', label_data):
+                refined = f'({label_data}) ' + definition[lb_end + 2:].strip()
+            else:
+                refined = definition[lb_end + 2:].strip()
+
+        # Handle {{gloss}}
+        gloss_template_begin = refined.find('{{gloss|')
+        if gloss_template_begin != -1:
+            gloss_template_begin += len('{{gloss|')
+            gloss_template_end = refined.find('}}', gloss_template_begin)
+            refined = refined[gloss_template_begin:gloss_template_end]
+
+        # Handle [[]] links
+        refined = re.sub(r'\[\[([\w ]+)\|[\w ]+\]\]', '\\1', refined)
+        refined = re.sub(r'\[\[([\w ]+)\]\]', '\\1', refined)
+
+        return [refined]
 
     def retrieve_translations(self) -> list:
         return TranslationImporter().get_data(self.content, self.language, self.title)
