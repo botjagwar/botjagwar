@@ -15,7 +15,7 @@ class ENWiktionaryProcessor(WiktionaryProcessor):
     empty_definitions_list_if_no_definitions_found = False
 
     template_to_object_mapper = TEMPLATE_TO_OBJECT
-    language_section_regex = "[\n]?==[ ]?([A-Za-z]+)[ ]?==\n"
+    language_section_regex = "^==[ ]?([\w+ \-]+)[ ]?==$"
 
     all_importers = all_importers
 
@@ -171,67 +171,66 @@ class ENWiktionaryProcessor(WiktionaryProcessor):
         content = self.content
         entries = []
         content = re.sub("{{l/en\\|(.*)}}", "\\1 ", content)  # remove {{l/en}}
-        for language_name in re.findall(self.language_section_regex, content):
-            last_part_of_speech = None
-            ct_content = content
-            try:
-                last_language_code = self.lang2code(language_name)
-            except KeyError:
-                continue
+        lines = content.split('\n')
+        last_language_code = None
+        last_part_of_speech = None
+        definitions = {}
 
-            definitions = {}
-            section_init = ct_content.find('==%s==' % language_name)
-            section_end = ct_content.find('----', section_init)
-            if section_end != -1:
-                ct_content = ct_content[section_init:section_end]
-            else:
-                ct_content = ct_content[section_init:]
+        for line_number, line in enumerate(lines):
+            language_matched = re.match(self.language_section_regex, line)
+            if language_matched:
+                language_name = language_matched.groups()[0]
+                try:
+                    last_language_code = self.lang2code(language_name)
+                except KeyError:
+                    print(f"Could not determine code: {language_name}")
+                    pass
 
-            lines = ct_content.split('\n')
-            for line in lines:
-                if last_part_of_speech is None:
-                    last_part_of_speech = self.get_part_of_speech(line)
+            print(last_language_code, last_part_of_speech, line)
 
-                # We assume en.wikt definitions start with a "# " and proceed to extract all definitions from there.
-                # Definitions are then added as a list of strings then added as a list of strings. They are grouped
-                #   by part of speech to ensure correctness, as we can only have one part of speech for a given entry.
-                if line.startswith('# '):
-                    defn_line = line
-                    defn_line = defn_line.lstrip('# ')
-                    if last_part_of_speech is None and self.must_have_part_of_speech:
-                        continue
+            # print(counter, last_language_code, last_part_of_speech, line)
+            if last_part_of_speech is None:
+                last_part_of_speech = self.get_part_of_speech(line)
 
-                    definition = self.extract_definition(
-                        part_of_speech=last_part_of_speech,
-                        definition_line=defn_line,
-                        cleanup_definition=cleanup_definitions,
-                        translate_definitions_to_malagasy=translate_definitions_to_malagasy,
-                        human_readable_form_of_definition=human_readable_form_of_definition,
-                        advanced=kw['advanced'] if 'advanced' in kw else False
-                    )
-                    if last_part_of_speech in definitions:
-                        definitions[last_part_of_speech].append(definition)
-                    else:
-                        definitions[last_part_of_speech] = [definition]
+            # We assume en.wikt definitions start with a "# " and proceed to extract all definitions from there.
+            # Definitions are then added as a list of strings then added as a list of strings. They are grouped
+            #   by part of speech to ensure correctness, as we can only have one part of speech for a given entry.
+            if line.startswith('# '):
+                defn_line = line
+                defn_line = defn_line.lstrip('# ')
+                if last_part_of_speech is None and self.must_have_part_of_speech:
+                    continue
 
-            # Fetch additional data if flag is set, else put it to none
-            if get_additional_data:
-                additional_data = self.get_additional_data(
-                    ct_content, last_language_code)
-            else:
-                additional_data = None
+                definition = self.extract_definition(
+                    part_of_speech=last_part_of_speech,
+                    definition_line=defn_line,
+                    cleanup_definition=cleanup_definitions,
+                    translate_definitions_to_malagasy=translate_definitions_to_malagasy,
+                    human_readable_form_of_definition=human_readable_form_of_definition,
+                    advanced=kw['advanced'] if 'advanced' in kw else False
+                )
+                if last_language_code not in definitions:
+                    definitions[last_language_code] = {}
 
-            # entries may be definition-less or definition formatting is inconsistent
-            if not definitions and self.empty_definitions_list_if_no_definitions_found:
-                definitions[last_part_of_speech] = []
+                if last_part_of_speech in definitions[last_language_code]:
+                    definitions[last_language_code][last_part_of_speech].append(definition)
+                else:
+                    definitions[last_language_code][last_part_of_speech] = [definition]
 
-            # Create the Entry object to add to the list
-            for pos, definitions in definitions.items():
+        # Fetch additional data if flag is set, else put it to none
+        if get_additional_data:
+            additional_data = self.get_additional_data(content, last_language_code)
+        else:
+            additional_data = None
+
+        # entries may be definition-less or definition formatting is inconsistent
+        for language_code in definitions:
+            for pos, definitions_ in definitions[language_code].items():
                 entry = Entry(
                     entry=self.title,
                     part_of_speech=pos,
                     language=last_language_code,
-                    definitions=definitions,
+                    definitions=definitions_,
                 )
                 if additional_data is not None and get_additional_data:
                     entry.additional_data = {}
@@ -264,7 +263,6 @@ class ENWiktionaryProcessor(WiktionaryProcessor):
 
         lb_match = re.match(lb_template_rgx, definition)
         if lb_match:
-            lb_data = lb_match.groups()
             lb_match = lb_match.group()
             lb_begin = definition.find(lb_match)
             if lb_begin != -1:
@@ -273,12 +271,12 @@ class ENWiktionaryProcessor(WiktionaryProcessor):
                 label_data = label_data.replace('_', '')
                 label_data = label_data.replace('|', ' ')
                 print(label_data)
-            # Ensure that no unexpected characters has been onboarded,
-            # if it's the case, just ditch the label information.
-            if re.match(r'^([a-zA-Z0-9\,\ ]+)$', label_data):
-                refined = f'({label_data}) ' + definition[lb_end + 2:].strip()
-            else:
-                refined = definition[lb_end + 2:].strip()
+                # Ensure that no unexpected characters has been onboarded,
+                # if it's the case, just ditch the label information.
+                if re.match(r'^([a-zA-Z0-9\,\ ]+)$', label_data):
+                    refined = f'({label_data}) ' + definition[lb_end + 2:].strip()
+                else:
+                    refined = definition[lb_end + 2:].strip()
 
         # Handle {{gloss}}
         gloss_template_begin = refined.find('{{gloss|')
