@@ -183,10 +183,10 @@ class ENWiktionaryProcessor(WiktionaryProcessor):
                 try:
                     last_language_code = self.lang2code(language_name)
                 except KeyError:
-                    print(f"Could not determine code: {language_name}")
+                    # print(f"Could not determine code: {language_name}")
                     pass
 
-            print(last_language_code, last_part_of_speech, line)
+            # print(last_language_code, last_part_of_speech, line)
 
             # print(counter, last_language_code, last_part_of_speech, line)
             if last_part_of_speech is None:
@@ -218,10 +218,12 @@ class ENWiktionaryProcessor(WiktionaryProcessor):
                     definitions[last_language_code][last_part_of_speech] = [definition]
 
         # Fetch additional data if flag is set, else put it to none
-        if get_additional_data:
-            additional_data = self.get_additional_data(content, last_language_code)
-        else:
-            additional_data = None
+        # TODO: fix it. broken for now.
+        additional_data = None
+        # if get_additional_data:
+        #     additional_data = self.get_additional_data(content, last_language_code)
+        # else:
+        #     additional_data = None
 
         # entries may be definition-less or definition formatting is inconsistent
         for language_code in definitions:
@@ -229,7 +231,7 @@ class ENWiktionaryProcessor(WiktionaryProcessor):
                 entry = Entry(
                     entry=self.title,
                     part_of_speech=pos,
-                    language=last_language_code,
+                    language=language_code,
                     definitions=definitions_,
                 )
                 if additional_data is not None and get_additional_data:

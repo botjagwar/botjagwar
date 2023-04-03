@@ -111,8 +111,11 @@ class DefinitionTranslation(object):
         return ENWiktionaryProcessor.refine_definition(definition)[0]
 
     def import_translations_from_json_dictionary_table(self, page_number=1):
-        for word in self.get_json_dictionary(page_number, part_of_speech='ana', language='fr'):
-            definitions = [d for d in word['definitions'] if d['language'] == self.language]
+        for word in self.get_json_dictionary(page_number, part_of_speech='mpam', language='uk,lt,la,cs,no,fi,ru,pl,'
+                                                                                          'da,sl,cs,ko,ja,vi,th,cmn,yue,km,id,ms,'
+                                                                                          'hi,sa,mr,kn,gu,bn,ne,ur,'
+                                                                                          'fa,ar,tr,ku,ps,kk,uz'):
+            definitions = [d for d in word['definitions'] if d['language'] == self.definition_language]
             for definition in definitions:
                 processed_definition = self.process_definition(definition['definition'])
                 unwanted_character = False
@@ -129,7 +132,7 @@ class DefinitionTranslation(object):
 
                     # The 1.6B model of NLLB sometimes gets stuck in a loop, which can be easily caught here
                     # which leads the translated definition to be more than double the size of the original definition
-                    if len(translation) > 2 * len(definition['definition']):
+                    if len(translation) > 4 * len(definition['definition']):
                         continue
 
                     self.add_mt_translated_definition(
@@ -218,7 +221,10 @@ class DefinitionTranslation(object):
             'order': 'id.asc'
         }
         if language is not None:
-            request_parameters['language'] = 'eq.' + language
+            if ',' in language:
+                request_parameters['language'] = 'in.(' + language + ')'
+            else:
+                request_parameters['language'] = 'eq.' + language
         if part_of_speech is not None:
             request_parameters['part_of_speech'] = 'eq.' + part_of_speech
 
@@ -474,7 +480,7 @@ class NllbDefinitionTranslation(DefinitionTranslation):
         self.language = 'en'
 
         # Translator parameters
-        self.translator_definition_language = 'fr_Latn'
+        self.translator_definition_language = 'en_Latn'
         self.translator_target_language = 'plt_Latn'
 
     @property
