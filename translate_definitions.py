@@ -2,7 +2,6 @@ import csv
 import os.path
 from random import randint
 
-import pywikibot
 import requests
 
 import api.config
@@ -82,18 +81,6 @@ class DefinitionTranslation(object):
     def get_translation(self, text):
         raise NotImplementedError()
 
-    def add_additional_data(self, word_id, type, information):
-        url = f'{self.postgrest_url}/additional_word_information'
-        json = {
-            'word_id': word_id,
-            'type': type,
-            'information': information
-        }
-        print(url, json)
-        request = requests.post(url, json=json)
-        if 400 <= request.status_code <= 599:
-            raise DefinitionTranslationError('Unknown error: ' + request.text)
-
     def add_mt_translated_definition(self, definition_id, translated_definition, method):
         url = f'{self.postgrest_url}/mt_translated_definition'
         json = {
@@ -111,10 +98,7 @@ class DefinitionTranslation(object):
         return ENWiktionaryProcessor.refine_definition(definition)[0]
 
     def import_translations_from_json_dictionary_table(self, page_number=1):
-        for word in self.get_json_dictionary(page_number, part_of_speech='mpam', language='uk,lt,la,cs,no,fi,ru,pl,'
-                                                                                          'da,sl,cs,ko,ja,vi,th,cmn,yue,km,id,ms,'
-                                                                                          'hi,sa,mr,kn,gu,bn,ne,ur,'
-                                                                                          'fa,ar,tr,ku,ps,kk,uz'):
+        for word in self.get_json_dictionary(page_number, part_of_speech='ana', language='en,es,fr'):
             definitions = [d for d in word['definitions'] if d['language'] == self.definition_language]
             for definition in definitions:
                 processed_definition = self.process_definition(definition['definition'])
@@ -248,30 +232,6 @@ class DefinitionTranslation(object):
 
         return pages.json()
 
-    def mark_definition(self, word_id, mark_as='done'):
-        url = f'{self.postgrest_url}/additional_word_information'
-        pages = requests.patch(url, params={
-            'word_id': f'eq.{word_id}',
-            'type': f'eq.' + self.additional_data_type,
-        }, json={
-            'type': self.additional_data_type + f'/{mark_as}'
-        })
-        if pages.status_code != 204:
-            print(pages.json())
-            raise DefinitionTranslationError(pages.text)
-
-    def get_translated_definitions(self, word_id):
-        url = f'{self.postgrest_url}/additional_word_information'
-        pages = requests.get(url, params={
-            'word_id': f'eq.{word_id}',
-            'type': f'eq.' + self.additional_data_type,
-        })
-        if pages.status_code != 200:
-            print(pages.json())
-            raise DefinitionTranslationError(pages.text)
-
-        return [line['information'] for line in pages.json()]
-
     @property
     def wordlist(self):
         if self._wordlist:
@@ -328,35 +288,7 @@ class DefinitionTranslation(object):
             yield page
 
     def run(self, word_additional_data_info, counter=0):
-        translation = Translation()
-        translation.output.wikipage_renderer.pages_to_link = self.malagasy_words_to_link
-        word = word_additional_data_info['word']
-        word_id = word_additional_data_info['word_id']
-        part_of_speech = word_additional_data_info['part_of_speech']
-        definitions = self.get_definitions_for_word(word_id)
-        translated_definitions = self.get_translated_definitions(word_id)
-        print(f'{word} ({word_id}) ->', definitions, translated_definitions)
-        entry = Entry(
-            entry=word,
-            part_of_speech=part_of_speech,
-            language=self.language,
-            definitions=translated_definitions
-        )
-        if not translated_definitions:
-            return
-
-        if translated_definitions and translated_definitions[0] == '.':
-            return
-
-        response = pywikibot.input(f'Entry # {counter + 1}: Accept and upload? (y/n)')
-        if response.strip() == 'y':
-            translation.publish_to_wiktionary(entry.entry, [entry])
-            translation._save_translation_from_page([entry])
-            self.mark_definition(word_id, 'done')
-        elif response.strip() == 'n':
-            self.mark_definition(word_id, 'rejected')
-        else:
-            return
+        pass
 
     def publish_translated_definition(self):
         """
@@ -375,6 +307,9 @@ class DefinitionTranslation(object):
                     # if not counter % 100:
                     #     print('You can take a break now!')
                 words = []
+
+    def get_translated_definitions(self, word_id):
+        return []
 
     def build_translation_batches(self, word_additional_data_info, counter=0):
         translation = Translation()
