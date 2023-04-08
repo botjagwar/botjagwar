@@ -1,4 +1,5 @@
 from .definitions import \
+    translate_using_suggested_translations_fr_mg, \
     translate_using_convergent_definition, \
     translate_using_bridge_language, \
     translate_using_nltk, \

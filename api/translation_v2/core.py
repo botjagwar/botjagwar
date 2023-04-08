@@ -17,7 +17,6 @@ from api.servicemanager import DictionaryServiceManager
 from redis_wikicache import RedisPage as Page, RedisSite as Site
 from .functions import postprocessors  # do __NOT__ delete!
 from .functions import translate_using_convergent_definition
-# from .functions import translate_using_bridge_language
 from .functions.pronunciation import translate_pronunciation
 from .functions.references import translate_references
 from .functions.utils import form_of_part_of_speech_mapper
@@ -27,6 +26,13 @@ from .types import \
     TranslatedDefinition, \
     FormOfTranslaton
 
+# from .functions import translate_using_postgrest_json_dictionary
+# from .functions import translate_using_suggested_translations_fr_mg
+# from .functions import translate_using_bridge_language
+# from .functions import translate_using_opus_mt
+# from .functions import translate_form_of_templates
+# from .functions import translate_form_of_definitions
+
 log = logging.getLogger(__name__)
 URL_HEAD = DictionaryServiceManager().get_url_head()
 translation_methods = [
@@ -34,7 +40,7 @@ translation_methods = [
         translate_using_convergent_definition,
         # translate_using_bridge_language,
         # translate_using_postgrest_json_dictionary,
-        # translate_using_suggested_translations_fr_mg
+        # translate_using_suggested_translations_fr_mg,
         # translate_using_opus_mt,
         # translate_form_of_templates,
         # translate_form_of_definitions,
@@ -106,10 +112,11 @@ class Translation:
         except configparser.NoSectionError:
             pass
         else:
-            for postprocessor_name in pos_specific_section:
-                arguments = tuple(self.config.specific_config_parser.get(
-                    pos_specific_section_name, postprocessor_name).split(','))
-                post_processors.append((postprocessor_name, arguments))
+            if pos_specific_section is not None:
+                for postprocessor_name in pos_specific_section:
+                    arguments = tuple(self.config.specific_config_parser.get(
+                        pos_specific_section_name, postprocessor_name).split(','))
+                    post_processors.append((postprocessor_name, arguments))
 
         return post_processors
 
