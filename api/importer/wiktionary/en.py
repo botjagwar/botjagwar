@@ -90,17 +90,19 @@ class SubsectionImporter(BaseSubsectionImporter):
         else:
             number_rgx = ''
 
-        target_language_section = re.search(
-            '==[ ]?' + self.iso_codes[language] + '[ ]?==', wikipage)
-        if target_language_section is not None:
-            section_begin = wikipage.find(target_language_section.group())
-            section_end = wikipage.find('----', section_begin)
-            if section_end != -1:
-                lang_section_wikipage = wikipage = wikipage[section_begin:section_end]
-            else:
-                lang_section_wikipage = wikipage = wikipage[section_begin:]
-        else:
-            return []
+        lines = wikipage.split('\n')
+        begin = 0
+        end = 1
+        for line_number, line in enumerate(lines):
+            target_language_section = re.search('==[ ]?' + self.iso_codes[language] + '[ ]?==', wikipage)
+            if target_language_section is not None:
+                begin = line_number
+                continue
+            if re.search('==[ ]?([A-Za-z]+)[ ]?==', line) is not None:
+                end = line_number
+                break
+
+        lang_section_wikipage = wikipage = '\n'.join(lines[begin:end])
 
         for regex_match in re.findall('=' * self.level + '[ ]?' + self.section_name + number_rgx + '=' * self.level,
                                       wikipage):

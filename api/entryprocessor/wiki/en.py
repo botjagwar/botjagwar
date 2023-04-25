@@ -83,18 +83,21 @@ class ENWiktionaryProcessor(WiktionaryProcessor):
         """
         return self.code[l]
 
-    def get_additional_data(self, content, language) -> dict:
+    def get_additional_data(self, page_section, language) -> dict:
         """
         Retrieve additional data thanks to parsers at api.importer.wiktionary.en
-        :param content: wiki page
-        :param language: target language
+        :param page_section: Page section for one language. This assumes only ONE language section is being provided.
+                             Failure to pass only one language may cause it to misbehave and return unexpected data.
+                             This is due to the suppression of '----' to delimit language sections in addition to the
+                             L2 section.
+        :param language: target language. Made for additional check in the get_data() method. Must
         :return:
         """
         additional_data = {}
         for classe in self.all_importers:
             instance = classe()
             additional_data[instance.data_type] = instance.get_data(
-                instance.section_name, content, language)
+                instance.section_name, page_section, language)
 
         return additional_data
 
@@ -176,19 +179,26 @@ class ENWiktionaryProcessor(WiktionaryProcessor):
         last_part_of_speech = None
         definitions = {}
 
+        lines_by_language = {}  # Key is language, value are the content for that language
+
         for line_number, line in enumerate(lines):
             language_matched = re.match(self.language_section_regex, line)
             if language_matched:
                 language_name = language_matched.groups()[0]
                 try:
                     last_language_code = self.lang2code(language_name)
+                    last_part_of_speech = None  # Reset part of speech for the language section
                 except KeyError:
                     # print(f"Could not determine code: {language_name}")
                     pass
 
-            # print(last_language_code, last_part_of_speech, line)
+            # Add to the lines per language
+            if last_language_code in lines_by_language:
+                lines_by_language[last_language_code].append(line)
+            else:
+                lines_by_language[last_language_code] = [line]
 
-            # print(counter, last_language_code, last_part_of_speech, line)
+            # Fetch part of speech for the language section
             if last_part_of_speech is None:
                 last_part_of_speech = self.get_part_of_speech(line)
 
@@ -217,16 +227,14 @@ class ENWiktionaryProcessor(WiktionaryProcessor):
                 else:
                     definitions[last_language_code][last_part_of_speech] = [definition]
 
-        # Fetch additional data if flag is set, else put it to none
-        # TODO: fix it. broken for now.
-        additional_data = None
-        # if get_additional_data:
-        #     additional_data = self.get_additional_data(content, last_language_code)
-        # else:
-        #     additional_data = None
-
         # entries may be definition-less or definition formatting is inconsistent
         for language_code in definitions:
+            if get_additional_data and language_code in lines_by_language:
+                content = '\n'.join(lines_by_language[language_code])
+                additional_data = self.get_additional_data(content, language_code)
+            else:
+                additional_data = None
+
             for pos, definitions_ in definitions[language_code].items():
                 entry = Entry(
                     entry=self.title,
