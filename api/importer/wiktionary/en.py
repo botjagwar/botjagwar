@@ -207,6 +207,10 @@ class AntonymImporter(ListSubsectionImporter):
     section_name = 'Antonyms'
 
 
+class AntonymImporterL5(AntonymImporter):
+    level = 5
+
+
 class DerivedTermsImporter(ListSubsectionImporter):
     level = 4
     data_type = 'derived'
