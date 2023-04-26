@@ -1,0 +1,69 @@
+{{also|Phi|PHI|phỉ|phị|phî|-phi}}
+==English==
+{{wikipedia}}
+{{letter disp2|upsilon|[[image:Greek letter uppercase Phi.svg|36px]] [[image:Greek_lc_phi.png|27px]]|chi|φεῖ|Φ|φ}}
+
+===Etymology===
+From {{der|en|LL|phi}}, from {{der|en|grc|φεῖ}}.<ref>''Oxford English Dictionary'', {{nowrap|3rd ed.}} "phi, ''n.''" Oxford University Press (Oxford), 2005.</ref>
+
+===Pronunciation===
+* {{IPA|en|/faɪ/}}
+* {{audio|en|En-us-phi.ogg|Audio (US)}}
+** {{rhymes|en|aɪ|s=1}}
+** Homophone: [[fie]]
+* {{IPA|en|/fiː/}}
+* {{audio|en|En-us-phi_long_e.ogg|Audio (US)}}
+** {{rhymes|en|iː}}
+** Homophone: [[fee]]
+
+===Noun===
+{{en-noun}}
+
+# [[Φ]], the 21st letter of the [[Euclidean alphabet|Euclidean]] and [[Greek alphabet|modern Greek alphabet]], [[usually]] [[romanize]]d as "ph".
+# {{lb|en|mathematics}} The [[golden ratio]].
+# A [[visual]] [[illusion]] [[whereby]] a [[sequential]] [[pattern]] of [[light]]s [[produce]]s a [[false]] [[sense]] of [[motion]].
+#* '''1963''', ''Psychology Through Experiment'' (George Humphrey, Jaroslav Antonio Deutsch), page 90:
+#*: {{...}} tolerance (Frenkel-Brunswik 1949) for it showed that those persons with the strongest defences against internal conflict, i.e. obsessionals and conversion hysterics, were those least able to perceive the reality-conflicting phenomenon of '''phi'''.
+#* {{quote-book|en|year=2007|author=Wayne Weiten|title=Psychology: Themes and Variations: Themes And Variations|page=138|passage=The illusion of movement in a highway construction sign is an instance of the '''phi''' phenomenon, which is also at work in motion pictures and television.}}
+#* {{quote-book|en|year=2013|author=Francis Glebas|title=The Animator's Eye: Composition and Design|page=66|passage=Is it the '''phi''' phenomenon or the persistence of vision? Originally, the illusion of motion that movies excel at was thought to be the effect of the persistence of vision.}}
+
+====Translations====
+{{trans-top|Greek letter}}
+* Arabic: {{t|ar|فَاي|m|tr=fay}}
+* Catalan: {{t+|ca|fi|f}}
+* Chinese:
+*: Mandarin: {{t+|cmn|弗愛|sc=Hani}}, {{t|cmn|佛爱|tr=fú'ài|sc=Hani}}, {{t+|cmn|斐|tr=fěi|sc=Hani}}
+* Czech: {{t|cs|fí|n}}
+* Dutch: {{t|nl|phi|m|f}}
+* Esperanto: {{t+|eo|fio}}
+* Finnish: {{t+|fi|fii}}
+* French: {{t+|fr|phi|m}}
+* German: {{t+|de|Phi|n}}
+* Greek: {{t+|el|φι|n}}
+*: Ancient: {{t|grc|φεῖ|n}}
+* Hebrew: {{t+|he|פִי|f|tr=fi}}
+{{trans-mid}}
+* Hungarian: {{t+|hu|fi}}
+* Interlingua: {{t|ia|phi}}
+* Japanese: {{t|ja|ファイ|tr=fai|sc=Jpan}}, {{t|ja|フィ|tr=fi|sc=Jpan}}, {{t|ja|ピー|tr=pī|sc=Jpan}}
+* Korean: {{t+|ko|피}}
+* Malay: {{t|ms|fi}}
+* Persian: {{t+|fa|فی|tr=fi|sc=fa-Arab}}
+* Polish: {{t+|pl|fi|n}}, {{t+|pl|phi|n}}
+* Portuguese: {{t+|pt|fi|m}}
+* Romanian: {{t+|ro|fi}}
+* Russian: {{t+|ru|фи|n}}
+* Slovak: {{t|sk|fí|n}}
+* Spanish: {{t+|es|fi|f}}
+{{trans-bottom}}
+
+===See also===
+* {{sense|Greek letter}} Previous: [[upsilon]], Next: [[chi]]
+
+===References===
+<references/>
+
+===Anagrams===
+* {{anagrams|en|a=hip|HIP|PIH|hip}}
+
+[[Category:en:Greek letter names]]

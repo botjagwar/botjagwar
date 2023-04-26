@@ -22,7 +22,7 @@ class VOWiktionaryProcessor(WiktionaryProcessor):
                         RET_text = params[len(parameterstr) + 1:]
         return RET_text
 
-    def get_all_entries(self, keepNativeEntries=False, **kw):
+    def get_all_entries(self, keep_native_entries=False, **kw):
         POStran = {"värb": 'mat',
                    'subsat': 'ana',
                    'ladyek': 'mpam-ana'}

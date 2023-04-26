@@ -155,7 +155,7 @@ class ENWiktionaryProcessor(WiktionaryProcessor):
 
     def get_all_entries(
         self,
-        keepNativeEntries=False,
+        keep_native_entries=False,
         get_additional_data=False,
         cleanup_definitions=False,
         translate_definitions_to_malagasy=False,
@@ -163,7 +163,7 @@ class ENWiktionaryProcessor(WiktionaryProcessor):
         **kw) -> list:
         """
         Retrieves all necessary information in the form of a list of Entry objects
-        :param keepNativeEntries:
+        :param keep_native_entries:
         :param get_additional_data:
         :param cleanup_definitions:
         :param translate_definitions_to_malagasy:

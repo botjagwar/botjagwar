@@ -90,24 +90,9 @@ class SubsectionImporter(BaseSubsectionImporter):
         else:
             number_rgx = ''
 
-        lines = wikipage.split('\n')
-        begin = 0
-        end = 1
-        for line_number, line in enumerate(lines):
-            target_language_section = re.search('==[ ]?' + self.iso_codes[language] + '[ ]?==', wikipage)
-            if target_language_section is not None:
-                begin = line_number
-                continue
-            if re.search('==[ ]?([A-Za-z]+)[ ]?==', line) is not None:
-                end = line_number
-                break
-
-        lang_section_wikipage = wikipage = '\n'.join(lines[begin:end])
-
-        for regex_match in re.findall('=' * self.level + '[ ]?' + self.section_name + number_rgx + '=' * self.level,
+        for regex_match in re.findall('=' * self.level + '[ ]?' + self.section_name + number_rgx + '[ ]?=' * self.level,
                                       wikipage):
             retrieved += retrieve_subsection(wikipage, regex_match)
-            wikipage = lang_section_wikipage
 
         returned_subsections = [s for s in retrieved if s]
         # print(returned_subsections)
@@ -204,6 +189,10 @@ class ReferencesImporter(SubsectionImporter):
 class FurtherReadingImporter(ReferencesImporter):
     section_name = 'Further reading'
     data_type = 'further_reading'
+
+
+class SeeAlsoImporter(FurtherReadingImporter):
+    section_name = "See also"
 
 
 class AlternativeFormsImporter(ListSubsectionImporter):
@@ -414,6 +403,7 @@ class TranscriptionImporter(WiktionaryAdditionalDataImporter):
 
 all_importers = [
     FurtherReadingImporter,
+    SeeAlsoImporter,
     AlternativeFormsImporter,
     AntonymImporter,
     DerivedTermsImporter,
