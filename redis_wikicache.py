@@ -148,7 +148,7 @@ class RedisPage(object):
     def isEmpty(self):
         return self.get() == ''
 
-    @retry_on_fail([redis.ConnectionError], retries=5, time_between_retries=.5)
+    @retry_on_fail((redis.ConnectionError), retries=5, time_between_retries=.5)
     def get(self):
         if self._title is None:
             return ''

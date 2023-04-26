@@ -265,7 +265,7 @@ ALTER TABLE public.fr_mg OWNER TO postgres;
 -- Name: unaggregated_dictionary; Type: VIEW; Schema: public; Owner: postgres
 --
 
-CREATE VIEW public.unaggregated_dictionary AS
+CREATE VIEW public.unaggregated_dictionary_with_undefined_words AS
  SELECT wrd.id AS word_id,
     wrd.word,
     wrd.language,
@@ -274,7 +274,7 @@ CREATE VIEW public.unaggregated_dictionary AS
     defn.definition,
     defn.definition_language
    FROM ((public.dictionary dct
-     LEFT JOIN public.word wrd ON ((wrd.id = dct.word)))
+     LEFT outer JOIN public.word wrd ON ((wrd.id = dct.word)))
      JOIN public.definitions defn ON ((defn.id = dct.definition)));
 
 

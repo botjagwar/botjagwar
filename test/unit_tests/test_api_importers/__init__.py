@@ -1,13 +1,13 @@
 from unittest.case import TestCase
 
-from api.importer.wiktionary.en import FurtherReadingImporter
+from api.importer.wiktionary.en import SeeAlsoImporter
 
 
 class ApiImporterTester(TestCase):
-    Importer = FurtherReadingImporter
-    data_exists_index = 1
+    Importer = SeeAlsoImporter
+    data_exists_index = 0
     data_does_not_exist_index = 1
-    corner_case_index = 3
+    corner_case_index = 0
     language = 'fr'
     filename = 'importers/en-wikipage.txt'
 
@@ -22,6 +22,7 @@ class ApiImporterTester(TestCase):
         # print(self.wikipages[self.data_exists_index])
         if self.data_exists_index is not None:
             data = importer.get_data('', self.wikipages[self.data_exists_index], self.language)
+            print(self.wikipages[self.data_exists_index], data, self.Importer)
             self.assertNotEqual(data, [])
 
     def test_get_data_returns_right_type(self):

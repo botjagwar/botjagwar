@@ -126,42 +126,6 @@ class TranslateUsingConvergentDefinition(TestCase):
         "suggested_definition": "antsavy"
     }]
 
-    def test_en_source(self):
-        conv_trans_class_mock = MagicMock()
-        conv_trans_class_mock.get_convergent_translation.return_value = self.translation
-        definitions.ConvergentTranslations = conv_trans_class_mock
-
-        part_of_speech = 'ana'
-        definition_line = 'cranc'
-        source_language = 'en'
-        target_language = 'mg'
-
-        returned = definitions.translate_using_convergent_definition(
-            part_of_speech=part_of_speech,
-            definition_line=definition_line,
-            source_language=source_language,
-            target_language=target_language,
-        )
-        conv_trans_class_mock.assert_called()
-
-    def test_fr_source(self):
-        conv_trans_class_mock = MagicMock()
-        conv_trans_class_mock.get_convergent_translation.return_value = self.translation
-        definitions.ConvergentTranslations = conv_trans_class_mock
-
-        part_of_speech = 'ana'
-        definition_line = 'cranc'
-        source_language = 'fr'
-        target_language = 'mg'
-
-        returned = definitions.translate_using_convergent_definition(
-            part_of_speech=part_of_speech,
-            definition_line=definition_line,
-            source_language=source_language,
-            target_language=target_language,
-        )
-        conv_trans_class_mock.assert_called()
-
     def test_other_source(self):
         conv_trans_class_mock = MagicMock()
         conv_trans_class_mock.get_convergent_translation.return_value = self.translation

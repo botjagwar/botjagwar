@@ -2,7 +2,7 @@ import requests
 
 from api.config import BotjagwarConfig
 from api.decorator import run_once
-from conf.entryprocessor.languagecodes import LANGUAGE_CODES, LANGUAGE_NAMES
+from conf.entryprocessor.languagecodes.en import LANGUAGE_CODES, LANGUAGE_NAMES
 from ..servicemanager.pgrest import StaticBackend
 
 backend = StaticBackend()

@@ -2,7 +2,7 @@ aiohttp == 3.7.4
 coverage==6.3.2
 flask == 1.0.2
 irc == 19
-lxml == 4.9.1
+lxml <= 5
 parameterized
 psycopg2-binary == 2.8.4
 pywikibot >=6, <7

@@ -158,5 +158,6 @@ def retry_on_fail(exceptions: [Tuple[Exception], Set[Exception], List[Exception]
                     else:
                         raise handled_error
 
+        wrapper.__name__ = f'retry_on_fail_for_{f.__name__}'
         return wrapper
     return _retry_on_fail

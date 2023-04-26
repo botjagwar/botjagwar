@@ -15,6 +15,7 @@ from ..types import TranslatedDefinition, \
     UntranslatedDefinition, FormOfTranslaton, ConvergentTranslation
 
 json_dictionary = JsonDictionary(use_materialised_view=False)
+convergent_translations = ConvergentTranslations()
 log = getLogger(__file__)
 
 
@@ -251,7 +252,6 @@ def translate_using_convergent_definition(
     source_language,
     target_language,
     **kw) -> [UntranslatedDefinition, ConvergentTranslation]:
-    convergent_translations = ConvergentTranslations()
     if source_language == 'en':
         translations = convergent_translations.get_convergent_translation(
             target_language, part_of_speech=part_of_speech, en_definition=definition_line)
@@ -263,6 +263,7 @@ def translate_using_convergent_definition(
                                        f"cannot be used for convergent translations")
 
     ret_translations = [t['suggested_definition'] for t in translations]
+    print(ret_translations)
     if ret_translations:
         k = ', '.join(sorted(list(set(ret_translations))))
         return ConvergentTranslation(k)

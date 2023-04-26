@@ -13,7 +13,7 @@ from api.databasemanager import DictionaryDatabaseManager, LanguageDatabaseManag
 from api.decorator import time_this
 from api.dictionary.model import Language
 from api.dictionary.model import Word
-from conf.entryprocessor.languagecodes import LANGUAGE_CODES
+from conf.entryprocessor.languagecodes.en import LANGUAGE_CODES
 
 log = logging.getLogger(__file__)
 dictionary_db_manager = DictionaryDatabaseManager()

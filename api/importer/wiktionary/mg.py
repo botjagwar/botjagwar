@@ -7,8 +7,11 @@ from api.importer.wiktionary import use_wiktionary
 @use_wiktionary('mg')
 class ListSubsectionImporter(SubsectionImporter):
     def get_data(self, template_title, content: str, language: str):
-        subsection_data = SubsectionImporter.get_data(
-            self, template_title, content, language)
+        try:
+            subsection_data = SubsectionImporter.get_data(self, template_title, content, language)
+        except NotImplementedError:
+            subsection_data = []
+
         retrieved = []
         for subsection_item in subsection_data:
             if '*' in subsection_item:
