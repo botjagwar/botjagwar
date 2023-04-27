@@ -4,6 +4,7 @@ from logging import getLogger
 from api.parsers import definitions_parser, templates_parser, TEMPLATE_TO_OBJECT
 from api.parsers.functions.postprocessors import POST_PROCESSORS
 from api.parsers.inflection_template import ParserNotFoundError
+from api.servicemanager.nllb import NllbDefinitionTranslation
 from api.servicemanager.openmt import OpenMtTranslation
 from api.servicemanager.pgrest import JsonDictionary, ConvergentTranslations
 from .utils import MAX_DEPTH
@@ -19,13 +20,8 @@ convergent_translations = ConvergentTranslations()
 log = getLogger(__file__)
 
 
-def _translate_using_bridge_language(
-        part_of_speech,
-        definition_line,
-        source_language,
-        target_language,
-        ct_depth=0,
-        **kw) -> dict:
+def _translate_using_bridge_language(part_of_speech, definition_line, source_language, target_language, ct_depth=0,
+                                     **kw) -> dict:
     if ct_depth >= MAX_DEPTH:
         return {}
 
@@ -95,10 +91,7 @@ def _translate_using_bridge_language(
     return translations
 
 
-def translate_form_of_definitions(part_of_speech,
-                                  definition_line,
-                                  source_language,
-                                  target_language,
+def translate_form_of_definitions(part_of_speech, definition_line, source_language, target_language,
                                   **kw) -> [UntranslatedDefinition, TranslatedDefinition]:
     new_definition_line = definition_line
 
@@ -130,12 +123,8 @@ def translate_form_of_definitions(part_of_speech,
     return new_definition_line
 
 
-def translate_form_of_templates(part_of_speech,
-                                definition_line,
-                                source_language,
-                                target_language,
-                                **kw) -> [UntranslatedDefinition,
-                                          TranslatedDefinition]:
+def translate_form_of_templates(part_of_speech, definition_line, source_language, target_language,
+                                **kw) -> [UntranslatedDefinition, TranslatedDefinition]:
     new_definition_line = definition_line
 
     # Clean up non-needed template to improve readability.
@@ -171,9 +160,8 @@ def translate_form_of_templates(part_of_speech,
 
 
 # @time_this('translate_using_postgrest_json_dictionary')
-def translate_using_postgrest_json_dictionary(
-    part_of_speech, definition_line, source_language, target_language,
-    back_check_pos=False, **kw) \
+def translate_using_postgrest_json_dictionary(part_of_speech, definition_line, source_language, target_language,
+                                              back_check_pos=False, **kw) \
     -> [UntranslatedDefinition, TranslatedDefinition]:
     if definition_line.endswith('.'):
         definition_line = definition_line.strip('.')
@@ -223,12 +211,8 @@ def translate_using_postgrest_json_dictionary(
     return UntranslatedDefinition(definition_line)
 
 
-def translate_using_suggested_translations_fr_mg(
-    part_of_speech,
-    definition_line,
-    source_language,
-    target_language,
-    **kw) -> [UntranslatedDefinition, ConvergentTranslation]:
+def translate_using_suggested_translations_fr_mg(part_of_speech, definition_line, source_language, target_language,
+                                                 **kw) -> [UntranslatedDefinition, ConvergentTranslation]:
     convergent_translations = ConvergentTranslations()
     if source_language == 'fr':
         translations = convergent_translations.get_suggested_translations_fr_mg(
@@ -246,12 +230,8 @@ def translate_using_suggested_translations_fr_mg(
     return UntranslatedDefinition(definition_line)
 
 
-def translate_using_convergent_definition(
-    part_of_speech,
-    definition_line,
-    source_language,
-    target_language,
-    **kw) -> [UntranslatedDefinition, ConvergentTranslation]:
+def translate_using_convergent_definition(part_of_speech, definition_line, source_language, target_language,
+                                          **kw) -> [UntranslatedDefinition, ConvergentTranslation]:
     if source_language == 'en':
         translations = convergent_translations.get_convergent_translation(
             target_language, part_of_speech=part_of_speech, en_definition=definition_line)
@@ -271,12 +251,8 @@ def translate_using_convergent_definition(
     return UntranslatedDefinition(definition_line)
 
 
-def translate_using_bridge_language(part_of_speech,
-                                    definition_line,
-                                    source_language,
-                                    target_language,
-                                    **kw) -> [UntranslatedDefinition,
-                                              TranslatedDefinition]:
+def translate_using_bridge_language(part_of_speech, definition_line, source_language, target_language,
+                                    **kw) -> [UntranslatedDefinition, TranslatedDefinition]:
     translations = _translate_using_bridge_language(
         part_of_speech, definition_line, source_language, target_language, **kw
     )
@@ -289,21 +265,28 @@ def translate_using_bridge_language(part_of_speech,
     return UntranslatedDefinition(definition_line)
 
 
-def translate_using_nltk(part_of_speech,
-                         definition_line,
-                         source_language,
-                         target_language,
+def translate_using_nltk(part_of_speech, definition_line, source_language, target_language,
                          **kw) -> [UntranslatedDefinition, TranslatedDefinition]:
     pass
 
 
-def translate_using_opus_mt(part_of_speech,
-                            definition_line,
-                            source_language,
-                            target_language,
+def translate_using_opus_mt(part_of_speech, definition_line, source_language, target_language,
                             **kw) -> [UntranslatedDefinition, TranslatedDefinition]:
     helper = OpenMtTranslation(source_language, target_language)
     data = helper.get_translation(definition_line)
+    if data is not None:
+        return TranslatedDefinition(data)
+
+    return UntranslatedDefinition(definition_line)
+
+
+def translate_using_nllb(part_of_speech, definition_line, source_language, target_language,
+                         **kw) -> [UntranslatedDefinition, TranslatedDefinition]:
+    helper = NllbDefinitionTranslation(source_language, target_language)
+    data = helper.get_translation(definition_line)
+    if len(data) > len(definition_line) * 3:
+        return UntranslatedDefinition(definition_line)
+
     if data is not None:
         return TranslatedDefinition(data)
 

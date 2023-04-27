@@ -11,12 +11,19 @@ import pywikibot
 from api import entryprocessor
 from api.config import BotjagwarConfig
 from api.decorator import catch_exceptions
+from api.entryprocessor.wiki.base import WiktionaryProcessorException
 from api.model.word import Entry
 from api.output import Output
 from api.servicemanager import DictionaryServiceManager
 from redis_wikicache import RedisPage as Page, RedisSite as Site
 from .functions import postprocessors  # do __NOT__ delete!
+# from .functions import translate_using_postgrest_json_dictionary
+# from .functions import translate_using_suggested_translations_fr_mg
+# from .functions import translate_using_bridge_language
+# from .functions import translate_form_of_templates
+from .functions import translate_form_of_definitions
 from .functions import translate_using_convergent_definition
+from .functions.definitions import translate_using_nllb
 from .functions.pronunciation import translate_pronunciation
 from .functions.references import translate_references
 from .functions.utils import form_of_part_of_speech_mapper
@@ -26,24 +33,19 @@ from .types import \
     TranslatedDefinition, \
     FormOfTranslaton
 
-# from .functions import translate_using_postgrest_json_dictionary
-# from .functions import translate_using_suggested_translations_fr_mg
-# from .functions import translate_using_bridge_language
-# from .functions import translate_using_opus_mt
-# from .functions import translate_form_of_templates
-# from .functions import translate_form_of_definitions
-
 log = logging.getLogger(__name__)
 URL_HEAD = DictionaryServiceManager().get_url_head()
 translation_methods = [
     try_methods_until_translated(
         translate_using_convergent_definition,
+        translate_form_of_definitions,
+        translate_using_nllb
         # translate_using_bridge_language,
         # translate_using_postgrest_json_dictionary,
         # translate_using_suggested_translations_fr_mg,
         # translate_using_opus_mt,
+        # translate_using_opus_mt,
         # translate_form_of_templates,
-        # translate_form_of_definitions,
     ),
 ]
 
@@ -357,14 +359,19 @@ class Translation:
             translated_from_definition = []
             out_translation_methods = {}
             for definition_line in entry.definitions:
-                refined_definition_lines = wiktionary_processor.refine_definition(
-                    definition_line)
+                try:
+                    refined_definition_lines = wiktionary_processor.refine_definition(definition_line)
+                except WiktionaryProcessorException:
+                    print(definition_line)
+                    continue
+
                 for refined_definition_line in refined_definition_lines:
                     # Try translation methods in succession.
                     # If one method produces something, skip the rest
                     for t_method in translation_methods:
                         if entry.part_of_speech is None:
                             continue
+
                         definitions = t_method(
                             entry.part_of_speech,
                             refined_definition_line,

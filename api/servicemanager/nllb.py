@@ -42,7 +42,9 @@ class NllbDefinitionTranslation(object):
         self.source_language = NLLB_CODE.get(source_language, NLLB_CODE['en'])
         self.target_language = NLLB_CODE.get(target_language, NLLB_CODE['mg'])
 
+
     def get_translation(self, sentence: str):
+
         url = f'http://{self.translation_server}/translate/' \
               f'{self.source_language}/' \
               f'{self.target_language}'
@@ -53,4 +55,5 @@ class NllbDefinitionTranslation(object):
         if request.status_code != 200:
             raise DefinitionTranslationError('Unknown error: ' + request.text)
         else:
-            return request.json()['translated']
+            translated = request.json()['translated']
+            return translated

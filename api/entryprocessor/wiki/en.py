@@ -7,7 +7,7 @@ from api.parsers import TEMPLATE_TO_OBJECT
 from api.parsers import templates_parser
 from api.parsers.inflection_template import ParserNotFoundError
 from conf.entryprocessor.languagecodes.en import LANGUAGE_NAMES
-from .base import WiktionaryProcessor
+from .base import WiktionaryProcessor, WiktionaryProcessorException
 
 
 class ENWiktionaryProcessor(WiktionaryProcessor):
@@ -269,24 +269,27 @@ class ENWiktionaryProcessor(WiktionaryProcessor):
     def refine_definition(definition) -> list:
         # handle {{lb}} template calls
         refined = definition
-        lb_template_rgx = r'\{\{l[b]?\|([a-zA-Z0-9\ ]{2,3})\|([\w ]+)'
-
-        lb_match = re.match(lb_template_rgx, definition)
-        if lb_match:
-            lb_match = lb_match.group()
-            lb_begin = definition.find(lb_match)
-            if lb_begin != -1:
-                lb_end = definition.find('}}', lb_begin)
-                label_data = definition[lb_begin:lb_end]
-                label_data = label_data.replace('_', '')
-                label_data = label_data.replace('|', ' ')
-                print(label_data)
-                # Ensure that no unexpected characters has been onboarded,
-                # if it's the case, just ditch the label information.
-                if re.match(r'^([a-zA-Z0-9\,\ ]+)$', label_data):
-                    refined = f'({label_data}) ' + definition[lb_end + 2:].strip()
-                else:
-                    refined = definition[lb_end + 2:].strip()
+        lb_template_rgxs = [
+            r'\{\{l[b]?\|([a-zA-Z0-9\ ]{2,3})\|([\w ]+)'
+            r'\{\{l[b]? [a-z]+\|([a-zA-Z0-9\ ]{2,3})\|([\w ]+)'
+        ]
+        for lb_template_rgx in lb_template_rgxs:
+            lb_match = re.match(lb_template_rgx, definition)
+            if lb_match:
+                lb_match = lb_match.group()
+                lb_begin = definition.find(lb_match)
+                if lb_begin != -1:
+                    lb_end = definition.find('}}', lb_begin)
+                    label_data = definition[lb_begin:lb_end]
+                    label_data = label_data.replace('_', '')
+                    label_data = label_data.replace('|', ' ')
+                    print(label_data)
+                    # Ensure that no unexpected characters has been onboarded,
+                    # if it's the case, just ditch the label information.
+                    if re.match(r'^([a-zA-Z0-9\,\ ]+)$', label_data):
+                        refined = f'({label_data}) ' + definition[lb_end + 2:].strip()
+                    else:
+                        refined = definition[lb_end + 2:].strip()
 
         # Handle {{gloss}}
         gloss_template_begin = refined.find('{{gloss|')
@@ -298,6 +301,15 @@ class ENWiktionaryProcessor(WiktionaryProcessor):
         # Handle [[]] links
         refined = re.sub(r'\[\[([\w ]+)\|[\w ]+\]\]', '\\1', refined)
         refined = re.sub(r'\[\[([\w ]+)\]\]', '\\1', refined)
+
+        unwanted_character = False
+        for character in "{}[]|":
+            if character in refined:
+                unwanted_character = True
+                break
+
+        if unwanted_character:
+            raise WiktionaryProcessorException("Refined definition still has unwanted characters : '" + character + "'")
 
         return [refined]
 
