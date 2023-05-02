@@ -42,9 +42,13 @@ class NllbDefinitionTranslation(object):
         self.source_language = NLLB_CODE.get(source_language, NLLB_CODE['en'])
         self.target_language = NLLB_CODE.get(target_language, NLLB_CODE['mg'])
 
-
     def get_translation(self, sentence: str):
+        # fix weird behaviour where original text can be kept
+        sentence = sentence.replace('’', "'")
+        sentence = sentence.replace(']', '')
+        sentence = sentence.replace('[', '')
 
+        print(f"Translating sentence: {sentence}")
         url = f'http://{self.translation_server}/translate/' \
               f'{self.source_language}/' \
               f'{self.target_language}'
@@ -56,4 +60,8 @@ class NllbDefinitionTranslation(object):
             raise DefinitionTranslationError('Unknown error: ' + request.text)
         else:
             translated = request.json()['translated']
+            if translated.startswith('(') and translated.endswith(')'):
+                translated = translated[1:-1]
+            translated = translated.replace(sentence, '')  # fix weird behaviour where original text can be kept...
+            print('TRANSLATED:::' + translated)
             return translated

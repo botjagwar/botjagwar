@@ -10,7 +10,7 @@ import pywikibot
 
 from api import entryprocessor
 from api.config import BotjagwarConfig
-from api.decorator import catch_exceptions
+from api.decorator import catch_exceptions, threaded
 from api.entryprocessor.wiki.base import WiktionaryProcessorException
 from api.model.word import Entry
 from api.output import Output
@@ -246,11 +246,13 @@ class Translation:
 
         return aggregated_entries
 
+    @threaded
     def publish_to_wiktionary(self, page_title: str, entries: List[Entry]):
         """
         Push translated data and if possible avoid any information loss
         on target wiki if information is not filled in
         """
+        time.sleep(300)
         site = Site(self.working_wiki_language, 'wiktionary')
         target_page = Page(site, page_title, offline=False)
 
@@ -362,7 +364,6 @@ class Translation:
                 try:
                     refined_definition_lines = wiktionary_processor.refine_definition(definition_line)
                 except WiktionaryProcessorException:
-                    print(definition_line)
                     continue
 
                 for refined_definition_line in refined_definition_lines:
@@ -370,6 +371,7 @@ class Translation:
                     # If one method produces something, skip the rest
                     for t_method in translation_methods:
                         if entry.part_of_speech is None:
+                            print(f'No part of speech found! Skipping {t_method.__name__}')
                             continue
 
                         definitions = t_method(
@@ -380,6 +382,8 @@ class Translation:
                             language=entry.language
                         )
                         if isinstance(definitions, UntranslatedDefinition):
+                            print(
+                                f'{t_method.__name__} found no translation for "{refined_definition_lines}"... Skipping')
                             continue
                         elif isinstance(definitions, TranslatedDefinition) or isinstance(definitions, FormOfTranslaton):
                             # Change POS to something more specific for form-of definitions

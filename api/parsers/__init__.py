@@ -10,6 +10,7 @@ from api.parsers.functions import parse_alternative_spelling_template, \
     parse_romanization_template
 from api.parsers.functions.adjective_forms.templates import parse_adjective_form, \
     parse_fi_adjective_form_of
+from api.parsers.functions.noun_forms.definitions import parameterized_parse_fr_definition
 from api.parsers.functions.noun_forms.templates import parse_et_form_of
 from api.parsers.functions.noun_forms.templates import parse_fi_form_of as parse_fi_noun_form_of
 from api.parsers.functions.noun_forms.templates import parse_lt_noun_form, \
@@ -363,11 +364,23 @@ templates_parser.add_parser(
     parse_romanization_template(1))
 
 definitions_parser.add_parser(
+    NounForm,
+    parameterized_parse_fr_definition(NounForm)
+)
+
+definitions_parser.add_parser(
+    AdjectiveForm,
+    parameterized_parse_fr_definition(AdjectiveForm)
+)
+
+definitions_parser.add_parser(
     VerbForm,
     parse_fr_definition
 )
-#templates_parser.add_parser(VerbForm, 'ru-participle of', parse_ru_participle_of)
-#templates_parser.add_parser(VerbForm, 'inflection of', parse_inflection_of(VerbForm))
+
+
+# templates_parser.add_parser(VerbForm, 'ru-participle of', parse_ru_participle_of)
+# templates_parser.add_parser(VerbForm, 'inflection of', parse_inflection_of(VerbForm))
 
 
 def get_lemma(expected_class, template_expression):

@@ -283,11 +283,83 @@ def translate_using_opus_mt(part_of_speech, definition_line, source_language, ta
 def translate_using_nllb(part_of_speech, definition_line, source_language, target_language,
                          **kw) -> [UntranslatedDefinition, TranslatedDefinition]:
     helper = NllbDefinitionTranslation(source_language, target_language)
-    data = helper.get_translation(definition_line)
+
+    # Tricks to improve the translation quality provided by NLLB on one-word translation sometimes given
+    # as definition
+    definition_line = definition_line[0].lower() + definition_line[1:].strip('.')
+    enriched = False
+    unexpected_format = False
+    if part_of_speech.startswith('e-'):
+        print("NLLB should not translate form words.")
+        return UntranslatedDefinition(definition_line)
+
+    if part_of_speech == 'ana':
+        if source_language == 'en':
+            enriched = True
+            prefix = 'it is '
+            if not definition_line.lower().startswith('a '):
+                prefix += 'a '
+            definition_line = prefix + definition_line
+
+        elif source_language == 'fr':
+            prefix = 'c\'est'
+            if not definition_line.lower().startswith('un ') or not definition_line.lower().startswith('une '):
+                prefix += 'une '
+            definition_line = prefix + definition_line + '.'
+
+    elif part_of_speech == 'mpam':
+        if source_language == 'en':
+            prefix = 'something that is '
+            definition_line = prefix + definition_line
+        elif source_language == 'fr':
+            definition_line = 'quelque chose de ' + definition_line
+
+    if len(definition_line.split()) <= 2:
+        if part_of_speech == 'mat':
+            if source_language == 'en':
+                enriched = True
+                translation = helper.get_translation('he is able to ' + definition_line + '.')
+            elif source_language == 'fr':
+                enriched = True
+                translation = helper.get_translation('il est capable de ' + definition_line + '.')
+            else:
+                translation = helper.get_translation(definition_line)
+
+            if translation.lower().endswith(' izy.'):
+                if translation.lower().startswith('afaka '):
+                    translation = translation.lower().strip('afaka').strip('izy.')
+                elif translation.lower().startswith('mahay '):
+                    translation = translation.lower().strip('mahay').strip('izy.')
+                else:
+                    unexpected_format = True
+            else:
+                unexpected_format = True
+
+            if enriched and unexpected_format:
+                translation = helper.get_translation(definition_line)
+        else:
+            translation = helper.get_translation(definition_line)
+    else:
+        translation = helper.get_translation(definition_line)
+
+    if part_of_speech == 'ana' and enriched and translation.lower().startswith('dia '):
+        translation = translation[3:].strip()
+
+    translation = translation.strip()
+    data_as_list = translation.split(',')
+    print(data_as_list)
+    out_data = []
+    for d in data_as_list:
+        d = d.strip()
+        if d not in out_data:
+            out_data.append(d)
+
+    data = ', '.join(out_data)
+
     if len(data) > len(definition_line) * 3:
         return UntranslatedDefinition(definition_line)
 
     if data is not None:
-        return TranslatedDefinition(data)
+        return TranslatedDefinition(translation)
 
     return UntranslatedDefinition(definition_line)
