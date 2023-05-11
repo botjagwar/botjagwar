@@ -42,8 +42,8 @@ class Translator:
 translator = Translator()
 
 
-@app.route('/translate', methods=['POST', 'GET'])
-def translate():
+@app.route('/translate/<source>/<target>', methods=['POST', 'GET'])
+def translate(source, target):
     text = request.args.get('text')
     return jsonify({
         'translated': translator.translate(text)

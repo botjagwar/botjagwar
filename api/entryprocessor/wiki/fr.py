@@ -216,10 +216,12 @@ class FRWiktionaryProcessor(WiktionaryProcessor):
         return entries
 
     @staticmethod
-    def refine_definition(definition) -> list:
+    def refine_definition(definition, part_of_speech=None) -> list:
         refined = definition
         lb_template_rgxs = [
             r'\{\{lexique\|[a-zA-Z0-9\ \|]+\}\}'
+            r'\{\{familier\|[a-zA-Z0-9\ \|]+\}\}'
+            r'\{\{[a-zA-Z0-9\ \|]+\|[a-zA-Z0-9\ \|]+\}\}'
         ]
 
         for lb_template_rgx in lb_template_rgxs:
@@ -241,6 +243,9 @@ class FRWiktionaryProcessor(WiktionaryProcessor):
                         refined = definition[lb_end + 2:].strip()
 
         # # Handle [[]] links
+        refined = re.sub(r'\[\[([\w ]+)\|[\w ]+\]\]', '\\1', refined)
+        if not part_of_speech.startswith('e-'):  # Link name is still required in lemmata entries for frwikt
+            refined = re.sub(r'\[\[([\w ]+)\]\]', '\\1', refined)
 
         unwanted_character = False
         for character in "{}|":

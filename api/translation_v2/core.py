@@ -252,7 +252,7 @@ class Translation:
         Push translated data and if possible avoid any information loss
         on target wiki if information is not filled in
         """
-        time.sleep(300)
+        # time.sleep(300)
         site = Site(self.working_wiki_language, 'wiktionary')
         target_page = Page(site, page_title, offline=False)
 
@@ -362,7 +362,9 @@ class Translation:
             out_translation_methods = {}
             for definition_line in entry.definitions:
                 try:
-                    refined_definition_lines = wiktionary_processor.refine_definition(definition_line)
+                    refined_definition_lines = wiktionary_processor.refine_definition(
+                        definition_line, part_of_speech=entry.part_of_speech
+                    )
                 except WiktionaryProcessorException:
                     continue
 

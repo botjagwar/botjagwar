@@ -284,41 +284,59 @@ def translate_using_nllb(part_of_speech, definition_line, source_language, targe
                          **kw) -> [UntranslatedDefinition, TranslatedDefinition]:
     helper = NllbDefinitionTranslation(source_language, target_language)
 
-    # Tricks to improve the translation quality provided by NLLB on one-word translation sometimes given
-    # as definition
-    definition_line = definition_line[0].lower() + definition_line[1:].strip('.')
+    # Implementation of various tricks to improve the translation quality
+    # provided by NLLB on one-word translation sometimes given as definition
+    definition_line = definition_line[:3].lower() + definition_line[3:].strip('.')
     enriched = False
     unexpected_format = False
     if part_of_speech.startswith('e-'):
         print("NLLB should not translate form words.")
         return UntranslatedDefinition(definition_line)
 
-    if part_of_speech == 'ana':
-        if source_language == 'en':
-            enriched = True
-            prefix = 'it is '
-            if not definition_line.lower().startswith('a '):
-                prefix += 'a '
-            definition_line = prefix + definition_line
+    # Restrict to short definition, as longer definitions seems to be doing just fine (for now)
+    if len(definition_line.split()) <= 4:
+        # Add "it is (a/an)" before the definition if it is a noun
+        if part_of_speech == 'ana':
+            if source_language == 'en':
+                enriched = True
+                prefix = 'it is '
+                if not definition_line.lower().startswith('a ') or not definition_line.lower().startswith('an '):
+                    prefix += 'a '
+                definition_line = prefix + definition_line
+            elif source_language == 'fr':
+                prefix = 'c\'est'
+                if not definition_line.lower().startswith('un ') or not definition_line.lower().startswith('une '):
+                    prefix += ' une '
+                definition_line = prefix + definition_line + '.'
 
-        elif source_language == 'fr':
-            prefix = 'c\'est'
-            if not definition_line.lower().startswith('un ') or not definition_line.lower().startswith('une '):
-                prefix += 'une '
-            definition_line = prefix + definition_line + '.'
+        elif part_of_speech == 'mat':
+            if definition_line.endswith(' à'):
+                definition_line += " quelqu'un ou quelque chose"
 
-    elif part_of_speech == 'mpam':
-        if source_language == 'en':
-            prefix = 'something that is '
-            definition_line = prefix + definition_line
-        elif source_language == 'fr':
-            definition_line = 'quelque chose de ' + definition_line
+        # Another trick when it is an adjective
+        elif part_of_speech == 'mpam':
+            if source_language == 'en':
+                prefix = 'something that is '
+                definition_line = prefix + definition_line
+            elif source_language == 'fr':
+                definition_line = 'quelque chose de ' + definition_line
 
-    if len(definition_line.split()) <= 2:
+    # Specific case for verbs. use a form like "He is able to X" to force X being
+    # an impersonal verb in Malagasy. Put the translation in the active voice, where that is possible.
+    if len(definition_line.split()) <= 10:
         if part_of_speech == 'mat':
             if source_language == 'en':
                 enriched = True
-                translation = helper.get_translation('he is able to ' + definition_line + '.')
+                prefix = 'he is able '
+                if not definition_line.startswith('to '):
+                    prefix += ' to '
+
+                definition_line = re.sub("\([a-zA-Z\ \,\;]+\)", '', definition_line)
+                definition_line = definition_line.strip('.').strip()
+                if definition_line.endswith(' of'):
+                    definition_line += ' someone or something'
+
+                translation = helper.get_translation(prefix + definition_line + '.')
             elif source_language == 'fr':
                 enriched = True
                 translation = helper.get_translation('il est capable de ' + definition_line + '.')
@@ -332,34 +350,55 @@ def translate_using_nllb(part_of_speech, definition_line, source_language, targe
                     translation = translation.lower().strip('mahay').strip('izy.')
                 else:
                     unexpected_format = True
+            elif translation.lower().endswith(' azy.'):
+                translation = translation.lower().strip('azy.')
+            elif translation.lower().endswith(' azy'):
+                translation = translation.lower().strip('azy.')
+            elif translation.lower().endswith(' izany.'):
+                translation = translation.lower().strip('izany.')
             else:
                 unexpected_format = True
 
-            if enriched and unexpected_format:
-                translation = helper.get_translation(definition_line)
+            # if enriched and unexpected_format:
+            #     translation = helper.get_translation(definition_line)
         else:
             translation = helper.get_translation(definition_line)
     else:
         translation = helper.get_translation(definition_line)
 
-    if part_of_speech == 'ana' and enriched and translation.lower().startswith('dia '):
-        translation = translation[3:].strip()
+    # Remove all translation artefacts that could have been generated by the tricks performed above.
+    if part_of_speech in ('ana', 'mat') and enriched:
+        if translation.lower().startswith('afaka '):
+            translation = translation.strip('afaka ')
 
-    translation = translation.strip()
-    data_as_list = translation.split(',')
+        if translation.lower().startswith('dia '):
+            translation = translation[3:].strip()
+        elif ' izany' in translation.lower():
+            translation = translation.replace(' izany', '')
+        elif ' io' in translation.lower():
+            translation = translation.replace(' io', '')
+        elif ' izy' in translation.lower():
+            translation = translation.replace(' izy', '')
+        elif translation.startswith('io dia '):
+            translation = translation.replace('io dia ', '')
+
+    translation = translation.strip('.')
+    data = ''
+    for character in ',;':
+        data_as_list = translation.split(character)
+        out_data = []
+        for d in data_as_list:
+            d = d.strip()
+            if d not in out_data:
+                out_data.append(d)
+
+        data = f'{character} '.join(out_data)
+
     print(data_as_list)
-    out_data = []
-    for d in data_as_list:
-        d = d.strip()
-        if d not in out_data:
-            out_data.append(d)
-
-    data = ', '.join(out_data)
-
     if len(data) > len(definition_line) * 3:
         return UntranslatedDefinition(definition_line)
 
     if data is not None:
-        return TranslatedDefinition(translation)
+        return TranslatedDefinition(data)
 
     return UntranslatedDefinition(definition_line)

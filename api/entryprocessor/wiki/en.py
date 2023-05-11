@@ -199,8 +199,9 @@ class ENWiktionaryProcessor(WiktionaryProcessor):
                 lines_by_language[last_language_code] = [line]
 
             # Fetch part of speech for the language section
-            if last_part_of_speech is None:
-                last_part_of_speech = self.get_part_of_speech(line)
+            current_part_of_speech = self.get_part_of_speech(line)
+            if current_part_of_speech is not None:
+                last_part_of_speech = current_part_of_speech
 
             # We assume en.wikt definitions start with a "# " and proceed to extract all definitions from there.
             # Definitions are then added as a list of strings then added as a list of strings. They are grouped
@@ -266,7 +267,7 @@ class ENWiktionaryProcessor(WiktionaryProcessor):
         return None
 
     @staticmethod
-    def refine_definition(definition) -> list:
+    def refine_definition(definition, part_of_speech=None) -> list:
         # handle {{lb}} template calls
         refined = definition
         lb_template_rgxs = [

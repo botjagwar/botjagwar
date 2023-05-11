@@ -4,12 +4,12 @@ from api.config import BotjagwarConfig
 
 CONFIG = BotjagwarConfig()
 NLLB_CODE = {
-    'en': 'en_Latn',
-    'fr': 'fr_Latn',
+    'en': 'eng_Latn',
+    'fr': 'fra_Latn',
     'mg': 'plt_Latn',
-    'de': 'de_Latn',
-    'ru': 'ru_Cyrl',
-    'uk': 'uk_Cyrl',
+    'de': 'deu_Latn',
+    'ru': 'rus_Cyrl',
+    'uk': 'ukr_Cyrl',
     'nl': 'nl_Latn',
     'no': 'no_Latn',
     'sv': 'sv_Latn',
@@ -17,7 +17,7 @@ NLLB_CODE = {
     'da': 'da_Latn',
     'zh': 'zh_Hans',
     'cmn': 'cmn_Hans',
-    'vi': 'vi_Latn',
+    'vi': 'vie_Latn',
     'id': 'id_Latn',
     'ms': 'ms_Latn',
     'fil': 'fil_Latn',
@@ -50,8 +50,7 @@ class NllbDefinitionTranslation(object):
 
         print(f"Translating sentence: {sentence}")
         url = f'http://{self.translation_server}/translate/' \
-              f'{self.source_language}/' \
-              f'{self.target_language}'
+              f'{self.target_language}/{self.source_language}'
         json = {
             'text': sentence
         }
