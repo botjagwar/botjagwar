@@ -340,19 +340,19 @@ def translate_using_nllb(part_of_speech, definition_line, source_language, targe
                 translation = helper.get_translation(definition_line)
 
             if translation.lower().startswith('afaka '):
-                translation = translation.lower().strip('afaka').strip('izy.')
+                translation = translation.lower().replace('afaka ', '')
             if translation.lower().startswith('mahay '):
-                translation = translation.lower().strip('mahay').strip('izy.')
+                translation = translation.lower().replace('mahay ', '')
             if translation.lower().endswith(' azy.'):
-                translation = translation.lower().strip('azy.')
+                translation = translation.lower().replace('azy.', '')
             if translation.lower().endswith(' izy.'):
-                translation = translation.lower().strip('izy.')
+                translation = translation.lower().replace('izy.', '')
             if translation.lower().endswith(' azy'):
-                translation = translation.lower().strip('azy.')
+                translation = translation.lower().replace('azy.', '')
             if translation.lower().endswith(' izany.'):
-                translation = translation.lower().strip('izany.')
+                translation = translation.lower().replace('izany.', '')
             if translation.lower().endswith(' izao.'):
-                translation = translation.lower().strip('izao.')
+                translation = translation.lower().replace('izao.', '')
             # if enriched and unexpected_format:
             #     translation = helper.get_translation(definition_line)
         else:
@@ -373,12 +373,13 @@ def translate_using_nllb(part_of_speech, definition_line, source_language, targe
                 translation = translation.replace(f' {word}', '').strip()
             if f' {word}.' in translation.lower():
                 translation = translation.replace(f' {word}.', '').strip()
-
-        if translation.startswith('io dia '):
-            translation = translation.replace('io dia ', '')
+            if translation.startswith(f'{word.lower()} dia '):
+                translation = translation.replace(f'{word.title()} dia ', '')
+            if translation.startswith(f'{word.title()} dia '):
+                translation = translation.replace(f'{word.title()} dia ', '')
 
         if translation.lower().endswith(' izao'):
-            translation = translation.lower().replace('izao', '')
+            translation = translation.lower().replace(' izao', '')
 
     translation = translation.strip('.')
     data = translation
