@@ -6,12 +6,12 @@ from unittest.mock import MagicMock
 from parameterized import parameterized
 
 from api.translation_v2.exceptions import UnsupportedLanguageError
-from api.translation_v2.functions import definitions
+from api.translation_v2.functions.definitions import database_based, language_model_based, rule_based
 from api.translation_v2.types import UntranslatedDefinition, \
     TranslatedDefinition, \
     ConvergentTranslation
 
-definitions.json_dictionary = MagicMock()
+database_based.json_dictionary = MagicMock()
 entry_with_matching_definition = [
     # Simplified output (removed all timestamp details)
     {
@@ -35,37 +35,37 @@ entry_without_matching_definition[0]['definitions'][0]['language'] = 'ne'
 
 class TestTranslateBridgeLanguageCommon(TestCase):
     def test_no_data(self):
-        definitions.json_dictionary.look_up_dictionary = MagicMock()
-        definitions.json_dictionary.look_up_dictionary.return_value = {}
-        definitions._translate_using_bridge_language(
+        database_based.json_dictionary.look_up_dictionary = MagicMock()
+        database_based.json_dictionary.look_up_dictionary.return_value = {}
+        database_based.translate_using_bridge_language(
             part_of_speech='ana',
             definition_line='test1',
             source_language='ln',
             target_language='en',
         )
-        definitions.json_dictionary.look_up_dictionary.assert_called_once()
+        database_based.json_dictionary.look_up_dictionary.assert_called_once()
 
     def test_with_data_definition_language_matches_target(self):
-        definitions.json_dictionary.look_up_dictionary = MagicMock()
-        definitions.json_dictionary.look_up_dictionary.return_value = entry_with_matching_definition
-        definitions._translate_using_bridge_language(
+        database_based.json_dictionary.look_up_dictionary = MagicMock()
+        database_based.json_dictionary.look_up_dictionary.return_value = entry_with_matching_definition
+        database_based.translate_using_bridge_language(
             part_of_speech='ana',
             definition_line='test1',
             source_language='ln',
             target_language='nl',
         )
-        definitions.json_dictionary.look_up_dictionary.assert_called()
+        database_based.json_dictionary.look_up_dictionary.assert_called()
 
     def test_with_data_definition_language_doesnt_match_target(self):
-        definitions.json_dictionary.look_up_dictionary = MagicMock()
-        definitions.json_dictionary.look_up_dictionary.return_value = entry_without_matching_definition
-        definitions._translate_using_bridge_language(
+        database_based.json_dictionary.look_up_dictionary = MagicMock()
+        database_based.json_dictionary.look_up_dictionary.return_value = entry_without_matching_definition
+        database_based.translate_using_bridge_language(
             part_of_speech='ana',
             definition_line='test1',
             source_language='ln',
             target_language='nl',
         )
-        definitions.json_dictionary.look_up_dictionary.assert_called()
+        database_based.json_dictionary.look_up_dictionary.assert_called()
 
 
 class TestDefinitionsFormOfTemplates(TestCase):
@@ -82,7 +82,7 @@ class TestDefinitionsFormOfTemplates(TestCase):
     def test_translate_form_of_templates(self, language_and_definition, target_language):
         language, definition = language_and_definition
         for pos in ['e-mat', 'mat']:
-            return_data = definitions.translate_form_of_templates(
+            return_data = rule_based.translate_form_of_templates(
                 pos, definition, language, target_language
             )
             self.assertIsInstance(return_data, TranslatedDefinition, (pos, target_language, language_and_definition, return_data.__class__))
@@ -90,9 +90,9 @@ class TestDefinitionsFormOfTemplates(TestCase):
 
 class TestUsingPostgres(TestCase):
     def test_translate_using_postgrest_json_dictionary_no_data(self):
-        definitions.json_dictionary.look_up_dictionary = MagicMock()
-        definitions.json_dictionary.look_up_dictionary.return_value = {}
-        returned = definitions.translate_using_postgrest_json_dictionary(
+        database_based.json_dictionary.look_up_dictionary = MagicMock()
+        database_based.json_dictionary.look_up_dictionary.return_value = {}
+        returned = database_based.translate_using_postgrest_json_dictionary(
             part_of_speech='ana',
             definition_line='test1',
             source_language='ln',
@@ -101,9 +101,9 @@ class TestUsingPostgres(TestCase):
         self.assertIsInstance(returned, UntranslatedDefinition)
 
     def test_translate_using_postgrest_json_dictionary(self):
-        definitions.json_dictionary.look_up_dictionary = MagicMock()
-        definitions.json_dictionary.look_up_dictionary.return_value = entry_with_matching_definition
-        returned = definitions.translate_using_postgrest_json_dictionary(
+        database_based.json_dictionary.look_up_dictionary = MagicMock()
+        database_based.json_dictionary.look_up_dictionary.return_value = entry_with_matching_definition
+        returned = database_based.translate_using_postgrest_json_dictionary(
             part_of_speech='ana',
             definition_line='test1',
             source_language='ln',
@@ -129,7 +129,7 @@ class TranslateUsingConvergentDefinition(TestCase):
     def test_other_source(self):
         conv_trans_class_mock = MagicMock()
         conv_trans_class_mock.get_convergent_translation.return_value = self.translation
-        definitions.ConvergentTranslations = conv_trans_class_mock
+        database_based.ConvergentTranslations = conv_trans_class_mock
 
         part_of_speech = 'ana'
         definition_line = 'test1'
@@ -137,7 +137,7 @@ class TranslateUsingConvergentDefinition(TestCase):
         target_language = 'nl'
 
         try:
-            returned = definitions.translate_using_convergent_definition(
+            returned = database_based.translate_using_convergent_definition(
                 part_of_speech=part_of_speech,
                 definition_line=definition_line,
                 source_language=source_language,
@@ -152,13 +152,13 @@ class TranslateUsingConvergentDefinition(TestCase):
                                  ' Newly supported language?')
 
     def test_translate_using_bridge_language(self):
-        definitions._translate_using_bridge_language = MagicMock()
-        definitions.translate_using_bridge_language('ana', 'test', 'en', 'mg')
+        database_based._translate_using_bridge_language = MagicMock()
+        database_based.translate_using_bridge_language('ana', 'test', 'en', 'mg')
 
 
 class TestMachineLearningMethods(TestCase):
     def test_translate_using_nltk(self):
-        definitions.translate_using_nltk('ana', 'test', 'en', 'mg')
+        language_model_based.translate_using_nltk('ana', 'test', 'en', 'mg')
 
     # def test_translate_using_opus_mt(self):
-    #     definitions.translate_using_opus_mt('ana', 'test', 'en', 'mg')
+    #     database_based.translate_using_opus_mt('ana', 'test', 'en', 'mg')

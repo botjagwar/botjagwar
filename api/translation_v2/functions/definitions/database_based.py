@@ -190,8 +190,11 @@ def translate_using_bridge_language(part_of_speech, definition_line, source_lang
 
 
 __all__ = [
+    'json_dictionary',
+    'convergent_translations',
     'translate_using_bridge_language',
     'translate_using_convergent_definition',
     'translate_using_postgrest_json_dictionary',
     'translate_using_suggested_translations_fr_mg',
+    '_translate_using_bridge_language',
 ]
