@@ -168,7 +168,8 @@ class RedisPage(object):
 
     def __del__(self):
         # Close the connection
-        self._connection.close()
+        if self._connection:
+            self._connection.close()
 
     @property
     def message_broker_channel(self):
