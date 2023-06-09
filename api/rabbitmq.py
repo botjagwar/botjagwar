@@ -9,6 +9,11 @@ config = BotjagwarConfig()
 
 class RabbitMqPublisher(object):
     def __init__(self, queue_name='default'):
+        self._connection = None
+        self._channel = None
+        self._queue_name = None
+        self.initialize_rabbitmq()
+
         if queue_name != 'default':
             self.set_queue(queue_name)
         else:
