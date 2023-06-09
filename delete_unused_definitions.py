@@ -9,11 +9,12 @@ class GarbageCollectorBot(object):
             database_file=database_file)
 
     def start(self):
-        used_definitions_q = "select definition from dictionary"
+        used_definitions_q = "select distinct definition from dictionary"
         all_definitions_q = "select id from definitions"
         all_definitions = set()
         used_definitions = set()
         session = self.input_database.session
+        session.begin(subtransactions=True)
         print("Fetching all definitions...")
         for k in session.execute(all_definitions_q).fetchall():
             all_definitions.add(k[0])
@@ -43,12 +44,17 @@ class GarbageCollectorBot(object):
                 deletion_query_mt_translated_definitions += ','.join(chunk)
                 deletion_query_mt_translated_definitions += ')'
                 try:
-                    session.execute(deletion_query_definitions)
                     session.execute(deletion_query_mt_translated_definitions)
-                except Exception:
+                    session.execute(deletion_query_definitions)
+                except Exception as exc:
+                    print("Error! rollbacking", exc)
                     session.rollback()
                 else:
                     session.commit()
+                finally:
+                    session.close()
+                    session.begin(subtransactions=True)
+
                 chunk = set()
                 count = 0
                 deleted += 1000
@@ -61,16 +67,17 @@ class GarbageCollectorBot(object):
         deletion_query_mt_translated_definitions += ','.join(chunk)
         deletion_query_mt_translated_definitions += ')'
         try:
-            session.execute(deletion_query_definitions)
             session.execute(deletion_query_mt_translated_definitions)
-        except Exception:
+            session.execute(deletion_query_definitions)
+        except Exception as exc:
+            print("Error! rollbacking", exc)
             session.rollback()
         else:
             session.commit()
-
-        end_time = time.time()
-        print(f"Deletion complete. Took {end_time - begin_time} seconds")
-        session.close()
+        finally:
+            end_time = time.time()
+            print(f"Deletion complete. Took {end_time - begin_time} seconds")
+            session.close()
 
 
 if __name__ == '__main__':

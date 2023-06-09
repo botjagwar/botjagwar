@@ -191,6 +191,12 @@ async def get_wiktionary_processed_page(request) -> Response:
 
 if __name__ == '__main__':
     try:
+        import os
+
+        current_pid = os.getpid()
+        with open('/tmp/entry_translator.pid', 'w') as f:
+            f.write(str(current_pid))
+
         set_throttle(1)
         app = web.Application()
         app.router.add_routes(routes)

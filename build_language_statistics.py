@@ -50,27 +50,28 @@ class LanguageStatisticsBuilder(object):
             if language.replace(' ', '_') not in data:
                 continue
 
-            entries = data[language.replace(' ', '_')]
             lemma = 0
-            for pos in ['Anarana iombonana', 'Mpamaritra', 'Matoanteny', 'Tambinteny']:
+            for pos in ['Anarana', 'Anarana iombonana', 'Mpamaritra', 'Mpamaritra anarana ', 'Matoanteny',
+                        'Tambinteny', 'Fomba fiteny', 'Mpampiankin-teny', 'Litera']:
                 if f"{pos} amin'ny teny {language}".replace(' ', '_') not in data:
                     continue
 
                 lemma += data[f"{pos} amin'ny teny {language}".replace(' ', '_')]
 
             form_of = 0
-            for pos in ["Endrik'anarana", 'Endri-pamaritra', 'Endriky ny matoanteny']:
+            for pos in ["Endrik'anarana", 'Endri-pamaritra', 'Endriky ny matoanteny', 'Ova matoanteny']:
                 if f"{pos} amin'ny teny {language}".replace(' ', '_') not in data:
                     continue
 
                 form_of += data[f"{pos} amin'ny teny {language}".replace(' ', '_')]
 
+            entries = lemma + form_of
             table_text += f"""
 |-
 | [[:sokajy:{language}|{language}]]
-| {entries}
-| {lemma}
-| {form_of}
+| {" {{formatnum:" + str(entries) + "}}"}
+| {" {{formatnum:" + str(lemma) + '}}'}
+| {" {{formatnum:" + str(form_of) + '}}'}
 """
             print(language, entries, lemma, form_of)
         page = Page(Site('mg', 'wiktionary'), 'Wiktionary:statistika/tabilao')

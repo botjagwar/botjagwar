@@ -28,9 +28,9 @@ def translate_using_opus_mt(part_of_speech, definition_line, source_language, ta
 def enrich_english_definition(part_of_speech, definition_line):
     if part_of_speech == 'ana':
         prefix = 'it is '
-        if not definition_line.lower().startswith('a ') and definition_line.lower()[0] not in 'aeioy':
+        if not definition_line.lower().startswith('a') and definition_line.lower()[1:].strip()[0] not in 'aeioy':
             prefix += 'a '
-        elif not definition_line.lower().startswith('an ') and definition_line.lower()[0] in 'aeioy':
+        elif not definition_line.lower().startswith('an') and definition_line.lower()[2:].strip()[0] in 'aeioy':
             prefix += 'an '
 
         definition_line = prefix + definition_line
@@ -60,8 +60,8 @@ def enrich_french_definition(part_of_speech, definition_line):
             prefix += ' une '
         definition_line = prefix + definition_line + '.'
     elif part_of_speech == 'mat':
+        definition_line = 'il est capable de ' + definition_line
         if definition_line.endswith(' à'):
-            definition_line = 'il est capable de ' + definition_line
             definition_line += " quelqu'un ou quelque chose"
     elif part_of_speech == 'mpam':
         definition_line = 'quelque chose de ' + definition_line
@@ -69,44 +69,74 @@ def enrich_french_definition(part_of_speech, definition_line):
     return definition_line
 
 
+def enrich_german_definition(part_of_speech, definition_line):
+    if part_of_speech == 'ana':
+        prefix = 'es ist '
+        if not definition_line.lower().startswith('ein ') or not definition_line.lower().startswith('eine'):
+            prefix += 'ein '
+        definition_line = prefix + definition_line + '.'
+    elif part_of_speech == 'mat':
+        if definition_line.endswith(' à'):
+            definition_line = 'Er kannt ' + definition_line + ' können'
+
+    return definition_line
+
+
 def remove_enrichment_artefacts(part_of_speech, translation):
     if translation.lower().startswith('afaka '):
-        translation = translation.lower().replace('afaka ', '')
+        translation = translation.replace('afaka ', '')
     if translation.lower().startswith('mahay '):
-        translation = translation.lower().replace('mahay ', '')
-    if translation.lower().endswith(' azy.'):
-        translation = translation.lower().replace('azy.', '')
-    if translation.lower().endswith(' izy.'):
-        translation = translation.lower().replace('izy.', '')
+        translation = translation.replace('mahay ', '')
+    if translation.lower().startswith('mahavita '):
+        translation = translation.replace('mahavita ', '')
     if translation.lower().endswith(' azy'):
-        translation = translation.lower().replace('azy.', '')
-    if translation.lower().endswith(' izany.'):
-        translation = translation.lower().replace('izany.', '')
-    if translation.lower().endswith(' izao.'):
-        translation = translation.lower().replace('izao.', '')
+        translation = translation[:-4].strip()
+    if translation.lower().endswith(' izy'):
+        translation = translation[:-4].strip()
+    if translation.lower().endswith(' azy'):
+        translation = translation[:-4].strip()
+    if translation.lower().endswith(' izany'):
+        translation = translation[:-5].strip()
+    if translation.lower().endswith(' izao'):
+        translation = translation[:-4].strip()
 
     if part_of_speech in ('ana', 'mat'):
         if translation.lower().startswith('afaka '):
             translation = translation.replace('afaka ', '')
+            translation = translation.replace('Afaka ', '')
+
+        if translation.lower().startswith('mety ho '):
+            translation = translation.replace('mety ho ', '')
+            translation = translation.replace('Mety ho ', '')
 
         if translation.lower().startswith('dia '):
             translation = translation.replace('dia ', '')
+            translation = translation.replace('Dia ', '')
+
+        if translation.lower().startswith('azony atao ny '):
+            translation = translation.replace('azony atao ny ', '')
+            translation = translation.replace('Azony atao ny ', '')
 
         while translation.lower().startswith('a '):
+            print("stripping 'a' at the beginning of sentence")
             translation = translation[2:]
 
-        for word in 'izany izao izy io iny'.split():
-            if f' {word}' in translation.lower():
-                translation = translation.replace(f' {word}', '').strip()
-            if f' {word}.' in translation.lower():
-                translation = translation.replace(f' {word}.', '').strip()
-            if translation.startswith(f'{word.lower()} dia '):
-                translation = translation.replace(f'{word.title()} dia ', '')
-            if translation.startswith(f'{word.title()} dia '):
-                translation = translation.replace(f'{word.title()} dia ', '')
+        for word in 'Izany Izao Izy Io Iny Ireo'.split():
+            if translation.startswith(word):
+                translation = translation[len(word):].strip()
+
+            if translation.startswith(word.lower()):
+                translation = translation[len(word):].strip()
+
+            if translation.startswith('dia '):
+                translation = translation[len('dia'):].strip()
+
+            first_occurrence = translation.find(f' {word.lower()}')
+            if first_occurrence > 0:
+                translation = translation[:first_occurrence].strip()
 
             if translation.lower().startswith(f'{word} no '):
-                translation = translation.replace(f'{word.title()} no ', '')
+                translation = translation.replace(f'{word} no ', '')
                 translation = translation.replace(f'{word} no ', '')
 
         if translation.lower().endswith(' izao'):
@@ -154,11 +184,13 @@ def translate_using_nllb(part_of_speech, definition_line, source_language, targe
             definition_line = enrich_english_definition(part_of_speech, definition_line)
         elif source_language == 'fr':
             definition_line = enrich_french_definition(part_of_speech, definition_line)
+        elif source_language == 'de':
+            definition_line = enrich_german_definition(part_of_speech, definition_line)
 
     translation = helper.get_translation(definition_line)
     # Remove all translation artefacts that could have been generated by the tricks performed above.
-    translation = remove_enrichment_artefacts(part_of_speech, translation)
     translation = remove_duplicate_definitions(translation)
+    translation = remove_enrichment_artefacts(part_of_speech, translation)
 
     if len(translation) > len(definition_line) * 3:
         return UntranslatedDefinition(definition_line)

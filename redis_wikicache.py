@@ -1,9 +1,7 @@
 import bz2
-import json
 import os
 import sys
 
-import pika
 import pywikibot
 import redis
 import requests
@@ -141,52 +139,6 @@ class RedisPage(object):
         self.site = site
         self._title = title
 
-        self._connection = None
-        self._channel = None
-        self._queue_name = None
-
-    def initialize_rabbitmq(self):
-        rabbitmq_host = config.get('host', 'rabbitmq')
-        rabbitmq_queue = config.get('queue', 'rabbitmq')
-        self._queue_name = rabbitmq_queue
-        rabbitmq_username = config.get('username', 'rabbitmq')
-        rabbitmq_password = config.get('password', 'rabbitmq')
-        rabbitmq_virtual_host = config.get('virtual_host', 'rabbitmq')
-
-        # Create credentials for RabbitMQ authentication
-        credentials = pika.PlainCredentials(rabbitmq_username, rabbitmq_password)
-
-        # Establish a connection to RabbitMQ with authentication and vhost
-        parameters = pika.ConnectionParameters(
-            host=rabbitmq_host,
-            virtual_host=rabbitmq_virtual_host,
-            credentials=credentials
-        )
-        self._connection = pika.BlockingConnection(parameters)
-        self._channel = self._connection.channel()
-        self._channel.queue_declare(queue=rabbitmq_queue)
-
-    def __del__(self):
-        # Close the connection
-        if self._connection:
-            self._connection.close()
-
-    @property
-    def message_broker_channel(self):
-        if not self._channel:
-            print("Initializing a connection to the message broker...")
-            self.initialize_rabbitmq()
-
-        return self._channel
-
-    @property
-    def queue_name(self):
-        if not self._channel:
-            print("Initializing a connection to the message broker...")
-            self.initialize_rabbitmq()
-
-        return self._queue_name
-
     def title(self, *args):
         return self._title
 
@@ -287,14 +239,6 @@ class RedisPage(object):
             wikisite = pywikibot.Site(self.site.language, self.site.wiki)
             wikipage = pywikibot.Page(wikisite, self._title)
             return getattr(wikipage, item)
-
-    def async_put(self, content, summary, minor):
-        message = json.dumps({
-            'page': self.title(),
-            "content": content,
-            'summary': summary
-        })
-        self.message_broker_channel.basic_publish(exchange='', routing_key=self._queue_name, body=message)
 
 
 if __name__ == '__main__':
