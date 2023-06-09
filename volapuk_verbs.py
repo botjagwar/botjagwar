@@ -1,11 +1,8 @@
-import json
-
-import pika
-
 from api import entryprocessor
 from api.config import BotjagwarConfig
 from api.model.word import Entry
 from api.output import Output
+from api.rabbitmq import RabbitMqPublisher
 from redis_wikicache import RedisPage as Page, RedisSite as Site
 
 config = BotjagwarConfig()
@@ -66,56 +63,7 @@ class VerbFormGenerator():
 
 class VolapukImporter(object):
     def __init__(self):
-        self._connection = None
-        self._channel = None
-        self._queue_name = None
-
-    def set_queue(self, queue_name):
-
-        self._queue_name = queue_name
-        self._channel.queue_declare(queue=queue_name)
-
-    def __del__(self):
-        # Close the connection
-        if self._connection:
-            self._connection.close()
-
-    @property
-    def message_broker_channel(self):
-        if not self._channel:
-            print("Initializing a connection to the message broker...")
-            self.initialize_rabbitmq()
-
-        return self._channel
-
-    @property
-    def queue_name(self):
-        if not self._channel:
-            print("Initializing a connection to the message broker...")
-            self.initialize_rabbitmq()
-
-        return self._queue_name
-
-    def initialize_rabbitmq(self):
-        rabbitmq_host = config.get('host', 'rabbitmq')
-        rabbitmq_queue = 'ikotobaity'
-        self._queue_name = rabbitmq_queue
-        rabbitmq_username = config.get('username', 'rabbitmq')
-        rabbitmq_password = config.get('password', 'rabbitmq')
-        rabbitmq_virtual_host = config.get('virtual_host', 'rabbitmq')
-
-        # Create credentials for RabbitMQ authentication
-        credentials = pika.PlainCredentials(rabbitmq_username, rabbitmq_password)
-
-        # Establish a connection to RabbitMQ with authentication and vhost
-        parameters = pika.ConnectionParameters(
-            host=rabbitmq_host,
-            virtual_host=rabbitmq_virtual_host,
-            credentials=credentials
-        )
-        self._connection = pika.BlockingConnection(parameters)
-        self._channel = self._connection.channel()
-        self._channel.queue_declare(queue=self._queue_name)
+        self.publisher = RabbitMqPublisher('ikotobaity')
 
     def publish(self, entry):
         print(entry)
@@ -130,7 +78,7 @@ class VolapukImporter(object):
             content = output.wikipages([entry])
             print(">>> " + entry.entry + ' <<<')
             print(content)
-            self.async_put(target_page, content, "/* {{=vo=}} */")
+            self.publisher.async_put(target_page, content, "/* {{=vo=}} */")
         else:
             # Get entries to aggregate
             original_content = ''
@@ -156,7 +104,7 @@ class VolapukImporter(object):
             print(">>> " + entry.entry + ' <<<')
             # print(content)
             if len(content) > len(original_content):
-                self.async_put(target_page, content.strip('\n'), summary)
+                self.publisher.async_put(target_page, content.strip('\n'), summary)
 
     def run(self):
         with open("user_data/list_mg_Matoanteny amin'ny teny volapoky") as pages:
@@ -172,17 +120,6 @@ class VolapukImporter(object):
                 self.publish(entry)
 
         print(count)
-
-    def async_put(self, page, content, summary, minor=False):
-        message = json.dumps({
-            'language': page.site.language,
-            'site': page.site.wiki,
-            'page': page.title(),
-            "content": content,
-            'summary': summary,
-            'minor': minor,
-        })
-        self.message_broker_channel.basic_publish(exchange='', routing_key=self._queue_name, body=message)
 
 
 if __name__ == '__main__':
