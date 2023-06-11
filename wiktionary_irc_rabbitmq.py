@@ -103,9 +103,11 @@ class WiktionaryRecentChangesBot(irc.bot.SingleServerIRCBot):
             try:
                 ct_time = time.time()
                 msg = _prepare_message(events)
+                print(msg)
                 json_message = {
                     'site': _get_origin_wiki(msg),
-                    'title': _get_pagename(msg)
+                    'title': _get_pagename(msg),
+                    'user': _get_user(msg),
                 }
                 self.edits += 1
                 self.publisher.push_to_queue(json_message)
@@ -130,6 +132,14 @@ def _get_origin_wiki(message):
     except AttributeError:
         lang = 'fr'  # fiteny defaulta
         return lang
+
+
+def _get_user(message):
+    if message.find('5*') == -1:
+        return None
+    item = message[message.find('5*') + 2:]
+    item = item[:item.find('5*')].strip()
+    return item
 
 
 def _get_pagename(message):

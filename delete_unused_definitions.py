@@ -1,5 +1,7 @@
 import time
 
+import requests
+
 from api.databasemanager import DictionaryDatabaseManager
 
 
@@ -29,7 +31,6 @@ class GarbageCollectorBot(object):
         print("Starting deletion...", time.time())
         data = [str(k) for k in unused]
         chunk = set()
-        problematic_chunks = set()
         count = 0
         deleted = 0
         for d in data:
@@ -37,47 +38,24 @@ class GarbageCollectorBot(object):
             count += 1
             chunk.add(d)
             if count >= 1000:
-                deletion_query_definitions = "delete from definitions where id in ("
-                deletion_query_definitions += ','.join(chunk)
-                deletion_query_definitions += ')'
-                deletion_query_mt_translated_definitions = "delete from mt_translated_definition where id in ("
-                deletion_query_mt_translated_definitions += ','.join(chunk)
-                deletion_query_mt_translated_definitions += ')'
-                try:
-                    session.execute(deletion_query_mt_translated_definitions)
-                    session.execute(deletion_query_definitions)
-                except Exception as exc:
-                    print("Error! rollbacking", exc)
-                    session.rollback()
-                else:
-                    session.commit()
-                finally:
-                    session.close()
-                    session.begin(subtransactions=True)
+                response = requests.delete(
+                    'http://localhost:8100/mt_translated_definition?id=in.(' + ','.join([str(k) for k in chunk]) + ')')
+                if response.status_code >= 400:
+                    print('Error!', response.json())
+                # else:
+                # print('Success!', response.status_code)
+
+                response = requests.delete(
+                    'http://localhost:8100/definitions?id=in.(' + ','.join([str(k) for k in chunk]) + ')')
+                if response.status_code >= 400:
+                    print('Error!', response.json())
+                # else:
+                #     print('Success!', response.status_code)
 
                 chunk = set()
                 count = 0
                 deleted += 1000
                 print(f"Deleted {deleted}/{unused_len}")
-
-        deletion_query_definitions = "delete from definitions where id in ("
-        deletion_query_definitions += ','.join(chunk)
-        deletion_query_definitions += ')'
-        deletion_query_mt_translated_definitions = "delete from mt_translated_definition where id in ("
-        deletion_query_mt_translated_definitions += ','.join(chunk)
-        deletion_query_mt_translated_definitions += ')'
-        try:
-            session.execute(deletion_query_mt_translated_definitions)
-            session.execute(deletion_query_definitions)
-        except Exception as exc:
-            print("Error! rollbacking", exc)
-            session.rollback()
-        else:
-            session.commit()
-        finally:
-            end_time = time.time()
-            print(f"Deletion complete. Took {end_time - begin_time} seconds")
-            session.close()
 
 
 if __name__ == '__main__':

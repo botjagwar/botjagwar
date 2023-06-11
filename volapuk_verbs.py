@@ -27,11 +27,11 @@ class VerbFormGenerator():
             'ü': "hoavin'ny lasa efa",
         }
         self.persons = {
-            'ob': 'Mpandray anjara voalohany',
-            'ol': 'Mpandray anjara faharoa',
-            'on': 'Mpandray anjara fahatelo',
-            # 'obs': 'Mpandray anjara voalohany ploraly',
-            # 'ols': 'Mpandray anjara faharoa ploraly',
+            # 'ob': 'Mpandray anjara voalohany',
+            # 'ol': 'Mpandray anjara faharoa',
+            # 'on': 'Mpandray anjara fahatelo',
+            'obs': 'Mpandray anjara voalohany ploraly',
+            'ols': 'Mpandray anjara faharoa ploraly',
             # 'ons': 'Mpandray anjara fahatelo ploraly',
             # 'os': "Endrika tsy manonona mpandray anjara",
             # 'oy': "Mpandray anjara tsy voalaaza",
@@ -98,7 +98,7 @@ class VolapukImporter(object):
                 content += output.wikipages([entry]).strip()
                 s = content.replace('\n', ' ')
                 # summary = f"Pejy noforonina tamin'ny « {s} »"
-                summary = f"endri-teny volapoka vaovao avy"
+                summary = f"bika matoanteny volapoka vaovao"
 
             # Push aggregated content
             print(">>> " + entry.entry + ' <<<')
@@ -111,6 +111,8 @@ class VolapukImporter(object):
             pages = [k.strip('\n') for k in pages.readlines()]
         count = 0
         for page in pages:
+            if not page.endswith('ön'):
+                continue
             main_form = VerbFormGenerator(page[:-2])
             for entry in main_form.forms:
                 print(count)
