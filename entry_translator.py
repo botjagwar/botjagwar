@@ -85,6 +85,50 @@ def put_deletion_notice(page):
         page.put(page_c, "+filazana")
 
 
+@routes.post("/wiktionary_page_async/{lang}")
+async def handle_wiktionary_page(request) -> Response:
+    """
+    Handle a Wiktionary page, attempts to translate the wiktionary page's content and
+    uploads it to the Malagasy Wiktionary.
+    <lang>: Wiktionary edition to look up on.
+    :return: 200 if everything worked with the list of database lookups including translations,
+    500 if an error occurred
+    """
+    data = await request.json()
+    pagename = data['title']
+    page = _get_page(pagename, request.match_info['lang'])
+    if page is None:
+        return Response()
+    data = {}
+
+    @threaded
+    def task():
+        try:
+            translations.process_wiktionary_wiki_page(page)
+        except Exception as e:
+            log.exception(e)
+            data['traceback'] = traceback.format_exc()
+            data['message'] = '' if not hasattr(e, 'message') else getattr(e, 'message')
+            response = Response(
+                text=json.dumps(data),
+                status=500,
+                content_type='application/json')
+        else:
+            response = Response(
+                text=json.dumps(data),
+                status=200,
+                content_type='application/json')
+
+    task()
+    # cooldown
+    time.sleep(1)
+    return Response(
+        text=json.dumps({'message': 'task successfully pushed.'}),
+        status=200,
+        content_type='application/json'
+    )
+
+
 @routes.post("/wiktionary_page/{lang}")
 async def handle_wiktionary_page(request) -> Response:
     """

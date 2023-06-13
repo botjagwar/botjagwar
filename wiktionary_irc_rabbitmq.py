@@ -10,7 +10,7 @@ import irc.bot
 import requests
 
 from api.decorator import retry_on_fail
-from api.rabbitmq import RabbitMqPublisher
+from api.rabbitmq import RabbitMqProducer
 from api.servicemanager import EntryTranslatorServiceManager
 
 log.basicConfig(
@@ -64,7 +64,7 @@ class WiktionaryRecentChangesBot(irc.bot.SingleServerIRCBot):
         self.username = user
         self.entry_translator_manager = EntryTranslatorServiceManager()
         self.connect_in_languages()
-        self.publisher = RabbitMqPublisher('edit')
+        self.publisher = RabbitMqProducer('edit')
 
     def connect_in_languages(self):
         """mametaka fitohizana amin'ny tsanely irc an'i Wikimedia"""

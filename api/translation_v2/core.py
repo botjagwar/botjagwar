@@ -2,7 +2,6 @@
 import asyncio
 import configparser
 import logging
-import time
 from copy import deepcopy
 from typing import List, Tuple, Any, Callable
 
@@ -10,12 +9,13 @@ import pywikibot
 
 from api import entryprocessor
 from api.config import BotjagwarConfig
-from api.decorator import catch_exceptions, threaded
+from api.decorator import catch_exceptions
 from api.entryprocessor.wiki.base import WiktionaryProcessorException
 from api.model.word import Entry
 from api.output import Output
 from api.servicemanager import DictionaryServiceManager
 from redis_wikicache import RedisPage as Page, RedisSite as Site
+from .exceptions import TranslationError
 from .functions import postprocessors  # do __NOT__ delete!
 # from .functions import translate_using_postgrest_json_dictionary
 # from .functions import translate_using_suggested_translations_fr_mg
@@ -28,6 +28,7 @@ from .functions.pronunciation import translate_pronunciation
 from .functions.references import translate_references
 from .functions.utils import form_of_part_of_speech_mapper
 from .functions.utils import try_methods_until_translated
+from .publishers import WiktionaryDirectPublisher
 from .types import \
     UntranslatedDefinition, \
     TranslatedDefinition, \
@@ -52,14 +53,6 @@ translation_methods = [
 already_visited = []
 
 
-class TranslationError(Exception):
-    pass
-
-
-class TranslatedPagePushError(TranslationError):
-    pass
-
-
 class Translation:
     working_wiki_language = 'mg'
 
@@ -72,6 +65,8 @@ class Translation:
         Allows postprocessors to be defines on a per-language basis, or a language + part of speech basis.
         """
         super(Translation, self).__init__()
+        self.publisher = WiktionaryDirectPublisher.publish_to_wiktionary()
+
         self.output = Output()
         self.loop = asyncio.get_event_loop()
         self.config = BotjagwarConfig(name='entry_translator/postprocessors.ini')
@@ -246,50 +241,6 @@ class Translation:
 
         return aggregated_entries
 
-    @threaded
-    def publish_to_wiktionary(self, page_title: str, entries: List[Entry]):
-        """
-        Push translated data and if possible avoid any information loss
-        on target wiki if information is not filled in
-        """
-        # time.sleep(300)
-        site = Site(self.working_wiki_language, 'wiktionary')
-        target_page = Page(site, page_title, offline=False)
-
-        if target_page.namespace().id != 0:
-            raise TranslatedPagePushError(
-                f'Attempted to push translated page to {target_page.namespace().custom_name} '
-                f'namespace (ns:{target_page.namespace().id}). '
-                f'Can only push to ns:0 (main namespace)')
-        elif target_page.isRedirectPage():
-            content = self.output.wikipages(entries)
-            target_page.put(
-                content,
-                self.generate_summary(target_page, entries, content)
-            )
-        else:
-            # Get entries to aggregate
-            if target_page.exists():
-                wiktionary_processor_class = entryprocessor.WiktionaryProcessorFactory.create(
-                    self.working_wiki_language)
-                wiktionary_processor = wiktionary_processor_class()
-                wiktionary_processor.set_text(target_page.get())
-                wiktionary_processor.set_title(page_title)
-                content = target_page.get()
-                for entry in entries:
-                    content = self.output.delete_section(entry.language, content)
-            else:
-                content = ""
-
-            content = content.strip()
-            content += '\n'
-            content += self.output.wikipages(entries).strip()
-            # Push aggregated content
-
-            target_page.put(content, self.generate_summary(entries, target_page, content))
-            if self.config.get('ninja_mode', 'translator') == '1':
-                time.sleep(12)
-
     def generate_summary(self, entries, target_page, content):
         if self.config.get('ninja_mode', 'translator') == '1':
             if target_page.exists():
@@ -448,7 +399,12 @@ class Translation:
         out_entries = self.run_postprocessors(out_entries)
         return out_entries
 
-    def process_wiktionary_wiki_page(self, wiki_page: [Page, pywikibot.Page]):
+    def process_wiktionary_wiki_page(self, wiki_page: [Page, pywikibot.Page], custom_publish_function=None):
+        if custom_publish_function is None:
+            publish = self.publisher.publish_to_wiktionary()
+        else:
+            publish = custom_publish_function(self)
+
         if not wiki_page.namespace().content:
             return
 
@@ -470,7 +426,7 @@ class Translation:
             ret = self.output.wikipages(out_entries)
             if ret != '':
                 log.debug('out_entries>' + str(out_entries))
-                self.publish_to_wiktionary(wiki_page.title(), out_entries)
+                publish(wiki_page.title(), out_entries)
                 self._save_translation_from_page(out_entries)
                 self.publish_translated_references(wiktionary_processor.language, self.working_wiki_language)
                 return len(out_entries)

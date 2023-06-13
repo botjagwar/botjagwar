@@ -128,6 +128,9 @@ def remove_enrichment_artefacts(part_of_speech, translation):
             if translation.startswith(word.lower()):
                 translation = translation[len(word):].strip()
 
+            if translation.startswith('no '):
+                translation = translation[len('no'):].strip()
+
             if translation.startswith('dia '):
                 translation = translation[len('dia'):].strip()
 
