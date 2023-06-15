@@ -12,6 +12,7 @@ from aiohttp.web import Response
 from api import entryprocessor
 from api.decorator import threaded
 from api.translation_v2.core import Translation
+from api.translation_v2.publishers import WiktionaryRabbitMqPublisher
 from redis_wikicache import RedisSite as Site, RedisPage as Page
 
 # GLOBAL VARS
@@ -43,6 +44,7 @@ except KeyError:
 log.basicConfig(filename=args.LOG, level=LOG_LEVEL)
 translations = Translation()
 routes = web.RouteTableDef()
+rabbitmq_publisher = WiktionaryRabbitMqPublisher()
 
 
 # Throttle Config
@@ -99,29 +101,57 @@ async def handle_wiktionary_page(request) -> Response:
     page = _get_page(pagename, request.match_info['lang'])
     if page is None:
         return Response()
+
     data = {}
+    publish = None
 
     @threaded
     def task():
         try:
-            translations.process_wiktionary_wiki_page(page)
+            translations.process_wiktionary_wiki_page(page, custom_publish_function=publish)
         except Exception as e:
             log.exception(e)
             data['traceback'] = traceback.format_exc()
             data['message'] = '' if not hasattr(e, 'message') else getattr(e, 'message')
-            response = Response(
-                text=json.dumps(data),
-                status=500,
-                content_type='application/json')
-        else:
-            response = Response(
-                text=json.dumps(data),
-                status=200,
-                content_type='application/json')
 
     task()
     # cooldown
-    time.sleep(1)
+    return Response(
+        text=json.dumps({'message': 'task successfully pushed.'}),
+        status=200,
+        content_type='application/json'
+    )
+
+
+@routes.post("/wiktionary_page_async_new/{lang}")
+async def handle_wiktionary_page(request) -> Response:
+    """
+    Handle a Wiktionary page, attempts to translate the wiktionary page's content and
+    uploads it to the Malagasy Wiktionary.
+    <lang>: Wiktionary edition to look up on.
+    :return: 200 if everything worked with the list of database lookups including translations,
+    500 if an error occurred
+    """
+    data = await request.json()
+    pagename = data['title']
+    page = _get_page(pagename, request.match_info['lang'])
+    if page is None:
+        return Response()
+
+    data = {}
+    publish = rabbitmq_publisher.publish_to_wiktionary(translations)
+
+    @threaded
+    def task():
+        try:
+            translations.process_wiktionary_wiki_page(page, custom_publish_function=publish)
+        except Exception as e:
+            log.exception(e)
+            data['traceback'] = traceback.format_exc()
+            data['message'] = '' if not hasattr(e, 'message') else getattr(e, 'message')
+
+    task()
+    # cooldown
     return Response(
         text=json.dumps({'message': 'task successfully pushed.'}),
         status=200,

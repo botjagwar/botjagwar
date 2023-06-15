@@ -26,6 +26,7 @@ def translate_using_opus_mt(part_of_speech, definition_line, source_language, ta
 
 
 def enrich_english_definition(part_of_speech, definition_line):
+    definition_line = definition_line.strip()
     if part_of_speech == 'ana':
         prefix = 'it is '
         if not definition_line.lower().startswith('a') and definition_line.lower()[1:].strip()[0] not in 'aeioy':
@@ -44,6 +45,8 @@ def enrich_english_definition(part_of_speech, definition_line):
         prefix = 'he is able '
         if not definition_line.startswith('to '):
             prefix += ' to '
+
+        definition_line = prefix + definition_line
 
         definition_line = re.sub("\([a-zA-Z\ \,\;]+\)", '', definition_line)
         definition_line = definition_line.strip('.').strip()

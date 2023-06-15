@@ -65,8 +65,6 @@ class Translation:
         Allows postprocessors to be defines on a per-language basis, or a language + part of speech basis.
         """
         super(Translation, self).__init__()
-        self.publisher = WiktionaryDirectPublisher.publish_to_wiktionary()
-
         self.output = Output()
         self.loop = asyncio.get_event_loop()
         self.config = BotjagwarConfig(name='entry_translator/postprocessors.ini')
@@ -81,8 +79,8 @@ class Translation:
     def post_processors(self):
         return self._post_processors
 
-    def set_postprocessors(self, postprocessors: List[Callable]):
-        self._post_processors = postprocessors
+    def set_postprocessors(self, postprocessor_list: List[Callable]):
+        self._post_processors = postprocessor_list
         self.static_postprocessors = True
 
     def load_postprocessors(self, language, part_of_speech) -> List[Tuple[Any, Tuple]]:
@@ -192,14 +190,14 @@ class Translation:
             check_post_processor_output(out_entries)
             return out_entries
 
-        def run_dynamic_postprocessors(entries):
+        def run_dynamic_postprocessors(input_entries):
             """
             Dunamic postprocessor, set in the configuration file and run
-            :param entries:
+            :param input_entries:
             :return:
             """
             out_entries = []
-            for entry in entries:
+            for entry in input_entries:
                 loaded_postprocessors = self.load_postprocessors(entry.language, entry.part_of_speech)
                 if loaded_postprocessors:
                     entry_to_process = [entry]
@@ -265,9 +263,7 @@ class Translation:
             if definitions.part_of_speech is not None:
                 entry.part_of_speech = definitions.part_of_speech
 
-        if hasattr(definitions, 'lemma') and \
-            definitions.lemma is not None and \
-            definitions.lemma not in already_visited:
+        if hasattr(definitions, 'lemma') and definitions.lemma is not None and definitions.lemma not in already_visited:
             already_visited.append(definitions.lemma)
             if not self.check_if_page_exists(definitions.lemma):
                 log.debug(f'lemma {definitions.lemma} does not exist. Processing...')
@@ -401,7 +397,7 @@ class Translation:
 
     def process_wiktionary_wiki_page(self, wiki_page: [Page, pywikibot.Page], custom_publish_function=None):
         if custom_publish_function is None:
-            publish = self.publisher.publish_to_wiktionary()
+            publish = WiktionaryDirectPublisher.publish_to_wiktionary(self)
         else:
             publish = custom_publish_function(self)
 
@@ -417,8 +413,7 @@ class Translation:
             wiktionary_processor.set_text(wiki_page.get())
             wiktionary_processor.set_title(wiki_page.title())
         else:
-            return self.process_wiktionary_wiki_page(
-                wiki_page.getRedirectTarget())
+            return self.process_wiktionary_wiki_page(wiki_page.getRedirectTarget())
         try:
             out_entries = self.translate_wiktionary_page(wiktionary_processor)
             out_entries = Translation.add_wiktionary_credit(

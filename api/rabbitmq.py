@@ -64,9 +64,6 @@ class RabbitMqConsumer(RabbitMq):
 class RabbitMqProducer(RabbitMq):
     def __init__(self, queue_name='default'):
         super(RabbitMqProducer, self).__init__(queue_name)
-        self._connection = None
-        self._channel = None
-        self._queue_name = None
 
         if queue_name != 'default':
             self.set_queue(queue_name)
