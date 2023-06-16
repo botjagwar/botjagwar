@@ -19,7 +19,7 @@ class SimpleEntryTranslatorClientFeeder(object):
         title = arguments.get('title', '')
         print(f'>>> {site} :: {title} <<<')
 
-        resp = requests.post(f'http://localhost:8000/wiktionary_page_async/{site}', json={'title': title})
+        resp = requests.post(f'http://localhost:8000/wiktionary_page_async_new/{site}', json={'title': title})
         print(resp.status_code)
         if resp.status_code != 200:
             print('Error! ', resp.status_code)

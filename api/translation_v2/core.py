@@ -28,7 +28,6 @@ from .functions.pronunciation import translate_pronunciation
 from .functions.references import translate_references
 from .functions.utils import form_of_part_of_speech_mapper
 from .functions.utils import try_methods_until_translated
-from .publishers import WiktionaryDirectPublisher
 from .types import \
     UntranslatedDefinition, \
     TranslatedDefinition, \
@@ -232,15 +231,15 @@ class Translation:
             for existing in entries_already_existing:
                 # same spelling and language and part of speech
                 if existing.language == translated.language and \
-                        existing.part_of_speech == translated.part_of_speech:
+                    existing.part_of_speech == translated.part_of_speech:
                     aggregated_entries.append(existing.overlay(translated))
             # if translated not in aggregated_entries:
             #     aggregated_entries.append(translated)
 
         return aggregated_entries
 
-    def generate_summary(self, entries, target_page, content):
-        if self.config.get('ninja_mode', 'translator') == '1':
+    def generate_summary(self, entries, target_page, content, force_ninja=False):
+        if force_ninja or self.config.get('ninja_mode', 'translator') == '1':
             if target_page.exists():
                 summary = 'nanitsy'
                 if not target_page.isRedirectPage():
@@ -397,7 +396,7 @@ class Translation:
 
     def process_wiktionary_wiki_page(self, wiki_page: [Page, pywikibot.Page], custom_publish_function=None):
         if custom_publish_function is None:
-            publish = WiktionaryDirectPublisher.publish_to_wiktionary(self)
+            publish = self.default_publisher.publish_to_wiktionary(self)
         else:
             publish = custom_publish_function(self)
 
@@ -421,7 +420,7 @@ class Translation:
             ret = self.output.wikipages(out_entries)
             if ret != '':
                 log.debug('out_entries>' + str(out_entries))
-                publish(wiki_page.title(), out_entries)
+                publish(page_title=wiki_page.title(), entries=out_entries)
                 self._save_translation_from_page(out_entries)
                 self.publish_translated_references(wiktionary_processor.language, self.working_wiki_language)
                 return len(out_entries)

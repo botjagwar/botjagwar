@@ -18,6 +18,10 @@ class RabbitMq(object):
         self._channel = None
         self.initialize_rabbitmq()
 
+    @property
+    def queue(self):
+        return self._queue_name
+
     def initialize_rabbitmq(self):
         rabbitmq_host = config.get('host', 'rabbitmq')
         rabbitmq_username = config.get('username', 'rabbitmq')

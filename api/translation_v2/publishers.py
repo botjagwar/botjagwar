@@ -27,8 +27,7 @@ class Publisher(object):
 
 
 class WiktionaryDirectPublisher(Publisher):
-    @staticmethod
-    def publish_to_wiktionary(translation):
+    def publish_to_wiktionary(self, translation):
         @threaded
         def _publish_to_wiktionary(page_title: str, entries: List[Entry]):
             """
@@ -77,12 +76,13 @@ class WiktionaryDirectPublisher(Publisher):
 
 class WiktionaryRabbitMqPublisher(Publisher):
     def __init__(self):
-        self.producers = [
-            RabbitMqProducer('lohataona'),
-            RabbitMqProducer('botjagwar'),
-            RabbitMqProducer('ikotobaity'),
-        ]
-        for producer in self.producers:
+        self.producers = {
+            'lohataona': RabbitMqProducer('lohataona'),
+            'botjagwar': RabbitMqProducer('botjagwar'),
+            'ikotobaity': RabbitMqProducer('ikotobaity'),
+        }
+
+        for username, producer in self.producers.items():
             producer.initialize_rabbitmq()
 
     def publish_to_wiktionary(self, translation):
@@ -93,7 +93,8 @@ class WiktionaryRabbitMqPublisher(Publisher):
             on target wiki if information is not filled in
             """
             # time.sleep(300)
-            publisher = random.choices(self.producers)
+            user, publisher = random.choice([v for v in self.producers.values()])
+            print(publisher.queue)
             site = Site(translation.working_wiki_language, 'wiktionary')
             target_page = Page(site, page_title, offline=False)
 
@@ -109,7 +110,7 @@ class WiktionaryRabbitMqPublisher(Publisher):
                     'site': 'wiktionary',
                     'page': page_title,
                     'content': content,
-                    "summary": "manitsy",
+                    "summary": "nanitatra",
                     "minor": False,
                 }
                 publisher.push_to_queue(message)
@@ -132,19 +133,14 @@ class WiktionaryRabbitMqPublisher(Publisher):
                 content += translation.output.wikipages(entries).strip()
                 # Push aggregated content
 
-                target_page.put(content, )
-
                 message = {
                     'language': 'mg',
                     'site': 'wiktionary',
                     'page': page_title,
                     'content': content,
-                    "summary": 'translation.generate_summary(entries, target_page, content)',
+                    "summary": translation.generate_summary(entries, target_page, content),
                     "minor": False,
                 }
                 publisher.push_to_queue(message)
-
-                if translation.config.get('ninja_mode', 'translator') == '1':
-                    time.sleep(12)
 
         return _publish_to_wiktionary
