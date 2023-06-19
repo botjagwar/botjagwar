@@ -2,7 +2,7 @@ from api import entryprocessor
 from api.config import BotjagwarConfig
 from api.model.word import Entry
 from api.output import Output
-from api.rabbitmq import RabbitMqPublisher
+from api.rabbitmq import RabbitMqWikipageProducer
 from redis_wikicache import RedisPage as Page, RedisSite as Site
 
 config = BotjagwarConfig()
@@ -27,15 +27,15 @@ class VerbFormGenerator():
             'ü': "hoavin'ny lasa efa",
         }
         self.persons = {
-            # 'ob': 'Mpandray anjara voalohany',
-            # 'ol': 'Mpandray anjara faharoa',
-            # 'on': 'Mpandray anjara fahatelo',
+            'ob': 'Mpandray anjara voalohany',
+            'ol': 'Mpandray anjara faharoa',
+            'on': 'Mpandray anjara fahatelo',
             'obs': 'Mpandray anjara voalohany ploraly',
             'ols': 'Mpandray anjara faharoa ploraly',
-            # 'ons': 'Mpandray anjara fahatelo ploraly',
-            # 'os': "Endrika tsy manonona mpandray anjara",
-            # 'oy': "Mpandray anjara tsy voalaaza",
-            # 'ods': "Mpandray anjara mifanao",
+            'ons': 'Mpandray anjara fahatelo ploraly',
+            'os': "Endrika tsy manonona mpandray anjara",
+            'oy': "Mpandray anjara tsy voalaaza",
+            'ods': "Mpandray anjara mifanao",
         }
 
     @property
@@ -63,7 +63,7 @@ class VerbFormGenerator():
 
 class VolapukImporter(object):
     def __init__(self):
-        self.publisher = RabbitMqPublisher('ikotobaity')
+        self.publisher = RabbitMqWikipageProducer('ikotobaity')
 
     def publish(self, entry):
         print(entry)
@@ -108,20 +108,31 @@ class VolapukImporter(object):
 
     def run(self):
         with open("user_data/list_mg_Matoanteny amin'ny teny volapoky") as pages:
-            pages = [k.strip('\n') for k in pages.readlines()]
+            base_forms = [k.strip('\n') for k in pages.readlines()]
+        print(f"There are {len(base_forms)} base forms")
+
+        with open("user_data/list_mg_Endriky ny matoanteny amin'ny teny volapoky", 'r') as pages:
+            page_already_created = set([k.strip('\n') for k in pages.readlines()])
+
+        print(f"{len(page_already_created)} have already been created")
         count = 0
-        for page in pages:
+        page_dict = {}
+        page_generated = set()
+        for page in base_forms:
             if not page.endswith('ön'):
                 continue
             main_form = VerbFormGenerator(page[:-2])
             for entry in main_form.forms:
-                print(count)
+                page_generated.add(entry.entry)
+                page_dict[entry.entry] = entry
                 count += 1
-                # print(entry)
-                print(entry, entry.language, entry.definitions)
-                self.publish(entry)
 
-        print(count)
+        pages_to_create = page_generated - page_already_created
+        print(f"{len(pages_to_create)} pages are to be created")
+        for page in pages_to_create:
+            self.publish(page_dict[page])
+
+        print(f"{count} forms were calculated")
 
 
 if __name__ == '__main__':

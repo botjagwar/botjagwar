@@ -44,7 +44,9 @@ except KeyError:
 log.basicConfig(filename=args.LOG, level=LOG_LEVEL)
 translations = Translation()
 routes = web.RouteTableDef()
+print("Initiating connection to rabbitmq...")
 rabbitmq_publisher = WiktionaryRabbitMqPublisher()
+print("Done initiating connection to rabbitmq!")
 
 
 # Throttle Config
@@ -103,42 +105,6 @@ async def handle_wiktionary_page(request) -> Response:
         return Response()
 
     data = {}
-    publish = None
-
-    @threaded
-    def task():
-        try:
-            translations.process_wiktionary_wiki_page(page, custom_publish_function=publish)
-        except Exception as e:
-            log.exception(e)
-            data['traceback'] = traceback.format_exc()
-            data['message'] = '' if not hasattr(e, 'message') else getattr(e, 'message')
-
-    task()
-    # cooldown
-    return Response(
-        text=json.dumps({'message': 'task successfully pushed.'}),
-        status=200,
-        content_type='application/json'
-    )
-
-
-@routes.post("/wiktionary_page_async_new/{lang}")
-async def handle_wiktionary_page(request) -> Response:
-    """
-    Handle a Wiktionary page, attempts to translate the wiktionary page's content and
-    uploads it to the Malagasy Wiktionary.
-    <lang>: Wiktionary edition to look up on.
-    :return: 200 if everything worked with the list of database lookups including translations,
-    500 if an error occurred
-    """
-    data = await request.json()
-    pagename = data['title']
-    page = _get_page(pagename, request.match_info['lang'])
-    if page is None:
-        return Response()
-
-    data = {}
     publish = rabbitmq_publisher.publish_to_wiktionary(translations)
 
     @threaded
@@ -150,6 +116,7 @@ async def handle_wiktionary_page(request) -> Response:
             data['traceback'] = traceback.format_exc()
             data['message'] = '' if not hasattr(e, 'message') else getattr(e, 'message')
 
+    time.sleep(3.5)
     task()
     # cooldown
     return Response(
@@ -174,23 +141,21 @@ async def handle_wiktionary_page(request) -> Response:
     page = _get_page(pagename, request.match_info['lang'])
     if page is None:
         return Response()
-    data = {}
-    try:
-        translations.process_wiktionary_wiki_page(page)
-    except Exception as e:
-        log.exception(e)
-        data['traceback'] = traceback.format_exc()
-        data['message'] = '' if not hasattr(e, 'message') else getattr(e, 'message')
-        response = Response(
-            text=json.dumps(data),
-            status=500,
-            content_type='application/json')
-    else:
-        response = Response(
-            text=json.dumps(data),
-            status=200,
-            content_type='application/json')
-    return response
+
+    @threaded
+    def task():
+        try:
+            translations.process_wiktionary_wiki_page(page)
+        except Exception as e:
+            log.exception(e)
+
+    task()
+    time.sleep(3.5)
+    return Response(
+        text=json.dumps({'message': 'treatment acknowledged.'}),
+        status=200,
+        content_type='application/json'
+    )
 
 
 @routes.get("/translation/{language}/{pagename}")

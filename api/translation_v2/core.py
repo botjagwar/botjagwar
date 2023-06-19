@@ -28,6 +28,7 @@ from .functions.pronunciation import translate_pronunciation
 from .functions.references import translate_references
 from .functions.utils import form_of_part_of_speech_mapper
 from .functions.utils import try_methods_until_translated
+from .publishers import WiktionaryDirectPublisher
 from .types import \
     UntranslatedDefinition, \
     TranslatedDefinition, \
@@ -65,6 +66,7 @@ class Translation:
         """
         super(Translation, self).__init__()
         self.output = Output()
+        self.default_publisher = WiktionaryDirectPublisher()
         self.loop = asyncio.get_event_loop()
         self.config = BotjagwarConfig(name='entry_translator/postprocessors.ini')
         self.reference_template_queue = set()
@@ -398,7 +400,7 @@ class Translation:
         if custom_publish_function is None:
             publish = self.default_publisher.publish_to_wiktionary(self)
         else:
-            publish = custom_publish_function(self)
+            publish = custom_publish_function
 
         if not wiki_page.namespace().content:
             return

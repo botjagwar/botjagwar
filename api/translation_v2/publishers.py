@@ -1,4 +1,3 @@
-import random
 import time
 from typing import List
 
@@ -28,7 +27,6 @@ class Publisher(object):
 
 class WiktionaryDirectPublisher(Publisher):
     def publish_to_wiktionary(self, translation):
-        @threaded
         def _publish_to_wiktionary(page_title: str, entries: List[Entry]):
             """
             Push translated data and if possible avoid any information loss
@@ -76,25 +74,32 @@ class WiktionaryDirectPublisher(Publisher):
 
 class WiktionaryRabbitMqPublisher(Publisher):
     def __init__(self):
-        self.producers = {
-            'lohataona': RabbitMqProducer('lohataona'),
-            'botjagwar': RabbitMqProducer('botjagwar'),
-            'ikotobaity': RabbitMqProducer('ikotobaity'),
-        }
+        self.queue_name = 'soavolana'
+        self.publisher = None
+        self.init_rmq()
 
-        for username, producer in self.producers.items():
-            producer.initialize_rabbitmq()
+    @threaded
+    def init_rmq(self):
+        """
+        Initialise RabbitMq connection in a separate thread to speed up initialisation of caller class/functions
+        :return:
+        """
+        self.publisher = RabbitMqProducer(self.queue_name)
+
+    def wait_for_ready(self):
+        while self.publisher is None:
+            print("Waiting for publisher initialize...")
+            time.sleep(1)
+        while not self.publisher.is_ready:
+            print("Waiting for publisher to be ready...")
+            time.sleep(1)
 
     def publish_to_wiktionary(self, translation):
-        @threaded
         def _publish_to_wiktionary(page_title: str, entries: List[Entry]):
             """
             Push translated data and if possible avoid any information loss
             on target wiki if information is not filled in
             """
-            # time.sleep(300)
-            user, publisher = random.choice([v for v in self.producers.values()])
-            print(publisher.queue)
             site = Site(translation.working_wiki_language, 'wiktionary')
             target_page = Page(site, page_title, offline=False)
 
@@ -113,7 +118,8 @@ class WiktionaryRabbitMqPublisher(Publisher):
                     "summary": "nanitatra",
                     "minor": False,
                 }
-                publisher.push_to_queue(message)
+                self.wait_for_ready()
+                self.publisher.push_to_queue(message)
             else:
                 # Get entries to aggregate
                 if target_page.exists():
@@ -141,6 +147,7 @@ class WiktionaryRabbitMqPublisher(Publisher):
                     "summary": translation.generate_summary(entries, target_page, content),
                     "minor": False,
                 }
-                publisher.push_to_queue(message)
+                self.wait_for_ready()
+                self.publisher.push_to_queue(message)
 
         return _publish_to_wiktionary

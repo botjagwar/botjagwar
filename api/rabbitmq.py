@@ -1,6 +1,7 @@
 import json
 
 import pika
+from pika.exceptions import ChannelWrongStateError
 
 from api.config import BotjagwarConfig
 
@@ -16,7 +17,9 @@ class RabbitMq(object):
         self._queue_name = queue_name
         self._connection = None
         self._channel = None
+        self.is_ready = False
         self.initialize_rabbitmq()
+        self.is_ready = True
 
     @property
     def queue(self):
@@ -32,12 +35,12 @@ class RabbitMq(object):
         credentials = pika.PlainCredentials(rabbitmq_username, rabbitmq_password)
 
         # Establish a connection to RabbitMQ with authentication and vhost
-        parameters = pika.ConnectionParameters(
+        self.parameters = pika.ConnectionParameters(
             host=rabbitmq_host,
             virtual_host=rabbitmq_virtual_host,
             credentials=credentials
         )
-        self._connection = pika.BlockingConnection(parameters)
+        self._connection = pika.BlockingConnection(self.parameters)
         self._channel = self._connection.channel()
         self._channel.queue_declare(queue=self._queue_name)
 
@@ -67,6 +70,7 @@ class RabbitMqConsumer(RabbitMq):
 
 class RabbitMqProducer(RabbitMq):
     def __init__(self, queue_name='default'):
+        print(f'Initializing queue {queue_name}')
         super(RabbitMqProducer, self).__init__(queue_name)
 
         if queue_name != 'default':
@@ -100,9 +104,18 @@ class RabbitMqProducer(RabbitMq):
 
         return self._queue_name
 
+    def reopen_channel(self):
+        self._connection = pika.BlockingConnection(self.parameters)
+        self._channel = self._connection.channel()
+        self._channel.queue_declare(queue=self._queue_name)
+
     def push_to_queue(self, message):
         message = json.dumps(message)
-        self.message_broker_channel.basic_publish(exchange='', routing_key=self._queue_name, body=message)
+        try:
+            self.message_broker_channel.basic_publish(exchange='', routing_key=self._queue_name, body=message)
+        except ChannelWrongStateError as error:
+            self.reopen_channel()
+            self.message_broker_channel.basic_publish(exchange='', routing_key=self._queue_name, body=message)
 
 
 class RabbitMqWikipageProducer(RabbitMqProducer):

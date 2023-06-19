@@ -1,3 +1,4 @@
+import random
 import time
 
 import requests
@@ -14,12 +15,17 @@ class SimpleEntryTranslatorClientFeeder(object):
         self.consumer.run()
 
     def on_page_edit(self, **arguments):
-        time.sleep(4.5)
+        time.sleep(6)
         site = arguments.get('site', 'en')
         title = arguments.get('title', '')
         print(f'>>> {site} :: {title} <<<')
+        roll = random.randint(0, 100)
+        if roll < 85:
+            route = 'wiktionary_page_async'
+        else:
+            route = 'wiktionary_page'
 
-        resp = requests.post(f'http://localhost:8000/wiktionary_page_async_new/{site}', json={'title': title})
+        resp = requests.post(f'http://localhost:8000/{route}/{site}', json={'title': title})
         print(resp.status_code)
         if resp.status_code != 200:
             print('Error! ', resp.status_code)
