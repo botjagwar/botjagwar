@@ -51,6 +51,10 @@ def _generate_redirections(infos):
             infos.entry = redirection_target
 
 
+def filter_additional_data(additional_data: dict):
+    return additional_data
+
+
 def try_methods_until_translated(*functions):
     """
     Try one method after another until a translation is provided.

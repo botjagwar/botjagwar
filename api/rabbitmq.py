@@ -1,4 +1,5 @@
 import json
+import time
 
 import pika
 from pika.exceptions import ChannelWrongStateError
@@ -105,17 +106,26 @@ class RabbitMqProducer(RabbitMq):
         return self._queue_name
 
     def reopen_channel(self):
+        self.is_ready = False
         self._connection = pika.BlockingConnection(self.parameters)
         self._channel = self._connection.channel()
         self._channel.queue_declare(queue=self._queue_name)
+        self.is_ready = True
 
-    def push_to_queue(self, message):
-        message = json.dumps(message)
+    def publish(self, message):
         try:
             self.message_broker_channel.basic_publish(exchange='', routing_key=self._queue_name, body=message)
         except ChannelWrongStateError as error:
             self.reopen_channel()
             self.message_broker_channel.basic_publish(exchange='', routing_key=self._queue_name, body=message)
+
+    def push_to_queue(self, message: dict):
+        while not self.is_ready:
+            print(f"Waiting for {self.__class__.__name__} on {self._queue_name} to be ready...")
+            time.sleep(1)
+
+        message = json.dumps(message)
+        self.publish(message)
 
 
 class RabbitMqWikipageProducer(RabbitMqProducer):
@@ -128,4 +138,4 @@ class RabbitMqWikipageProducer(RabbitMqProducer):
             'summary': summary,
             'minor': minor,
         })
-        self.message_broker_channel.basic_publish(exchange='', routing_key=self._queue_name, body=message)
+        self.publish(message)

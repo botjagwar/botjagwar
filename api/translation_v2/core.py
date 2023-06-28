@@ -26,6 +26,7 @@ from .functions import translate_using_convergent_definition
 from .functions.definitions import translate_using_nllb
 from .functions.pronunciation import translate_pronunciation
 from .functions.references import translate_references
+from .functions.utils import filter_additional_data
 from .functions.utils import form_of_part_of_speech_mapper
 from .functions.utils import try_methods_until_translated
 from .publishers import WiktionaryDirectPublisher
@@ -125,7 +126,8 @@ class Translation:
             self.output.add_translation_method(info)
 
     def publish_translated_references(self, source_wiki='en', target_wiki='mg'):
-        for original_reference, translated_reference in self.reference_template_queue:
+        template_queue_copy = deepcopy(self.reference_template_queue)
+        for original_reference, translated_reference in template_queue_copy:
             # Check if it is a template reference, or a plain-text one
             if translated_reference.startswith('{{') or original_reference.startswith('{{'):
                 self.create_or_rename_template_on_target_wiki(
@@ -388,6 +390,7 @@ class Translation:
                 out_entry.additional_data['pronunciation'] = translate_pronunciation(
                     entry.additional_data['pronunciation'])
 
+            entry.additional_data = filter_additional_data(entry.additional_data)
             if entry_definitions:
                 out_entries.append(out_entry)
 

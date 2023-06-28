@@ -73,8 +73,8 @@ class WiktionaryDirectPublisher(Publisher):
 
 
 class WiktionaryRabbitMqPublisher(Publisher):
-    def __init__(self):
-        self.queue_name = 'soavolana'
+    def __init__(self, queue='botjagwar'):
+        self.queue_name = queue
         self.publisher = None
         self.init_rmq()
 
