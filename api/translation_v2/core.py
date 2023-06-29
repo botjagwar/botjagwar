@@ -39,7 +39,7 @@ log = logging.getLogger(__name__)
 URL_HEAD = DictionaryServiceManager().get_url_head()
 translation_methods = [
     try_methods_until_translated(
-        translate_using_convergent_definition,
+        # translate_using_convergent_definition,
         translate_form_of_definitions,
         translate_using_nllb
         # translate_using_bridge_language,
