@@ -141,7 +141,7 @@ class Translation:
             entries: List[Entry],
             wiki_page: [pywikibot.Page, Page]) -> List[Entry]:
         reference = "{{wikibolana|" + wiki_page.site.lang + \
-            '|' + wiki_page.title() + '}}'
+                    '|' + wiki_page.title() + '}}'
         out_entries = []
         for entry in entries:
             if entry.additional_data is None:
@@ -235,7 +235,7 @@ class Translation:
             for existing in entries_already_existing:
                 # same spelling and language and part of speech
                 if existing.language == translated.language and \
-                    existing.part_of_speech == translated.part_of_speech:
+                        existing.part_of_speech == translated.part_of_speech:
                     aggregated_entries.append(existing.overlay(translated))
             # if translated not in aggregated_entries:
             #     aggregated_entries.append(translated)
