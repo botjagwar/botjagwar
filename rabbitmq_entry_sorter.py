@@ -6,7 +6,7 @@ from api.rabbitmq import RabbitMqProducer, RabbitMqConsumer
 
 class SimpleEntryTranslatorSorter(object):
     def __init__(self):
-        self.consumer = RabbitMqConsumer('temp_triage', callback_function=self.on_page_edit)
+        self.consumer = RabbitMqConsumer('temp_triage_2', callback_function=self.on_page_edit)
         # self.backup = RabbitMqProducer('translated_backlog_bkp')
         self.bot = None
         self.soavolana = None

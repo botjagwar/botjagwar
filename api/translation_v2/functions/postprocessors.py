@@ -100,6 +100,7 @@ def filter_out_languages(*languages):
         for entry in entries:
             if entry.language not in languages:
                 out_entries.append(entry)
+
         return out_entries
     return _delete_languages
 
@@ -107,13 +108,15 @@ def filter_out_languages(*languages):
 def only_accept_from_source_wiki(*args):
     def _delete_languages(entries: list):
         out_entries = []
-        source_wiki = args[1]
+        source_wiki = args[0]
         for entry in entries:
             exclude = False
             if hasattr(entry, 'origin_wiktionary'):
                 if entry.origin_wiktionary != source_wiki:
                     exclude = True
+
             if not exclude:
                 out_entries.append(entry)
+
         return out_entries
     return _delete_languages

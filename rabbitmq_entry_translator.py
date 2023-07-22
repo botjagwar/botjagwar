@@ -25,19 +25,21 @@ class SimpleEntryTranslatorClientFeeder(object):
                 print(f'There are {data["jobs"]} jobs currently in progress')
                 cool_down = False
             else:
-                print(f'COOLING DOWN: sleeping for 5 seconds as there are {data["jobs"]} jobs currently in progress')
-                time.sleep(5)
+                print(f'COOLING DOWN: sleeping for 15 seconds as there are {data["jobs"]} jobs currently in progress')
+                time.sleep(15)
 
         site = arguments.get('site', 'en')
         title = arguments.get('title', '')
         print(f'>>> {site} :: {title} <<<')
         roll = random.randint(0, 100)
-        if roll < 101:
+        if roll < 50:
             route = 'wiktionary_page_async'
         else:
             route = 'wiktionary_page'
 
-        resp = requests.post(f'http://localhost:{service_port}/{route}/{site}', json={'title': title})
+        url = f'http://localhost:{service_port}/{route}/{site}'
+        print(url)
+        resp = requests.post(url, json={'title': title})
         print(resp.status_code)
         if resp.status_code != 200:
             print('Error! ', resp.status_code)

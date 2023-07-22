@@ -212,8 +212,7 @@ async def get_wiktionary_processed_page(request) -> Response:
     language = request.match_info['language']
     pagename = request.match_info['pagename']
 
-    wiktionary_processor_class = entryprocessor.WiktionaryProcessorFactory.create(
-        language)
+    wiktionary_processor_class = entryprocessor.WiktionaryProcessorFactory.create(language)
     wiktionary_processor = wiktionary_processor_class()
     ret = []
 
