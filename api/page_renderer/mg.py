@@ -48,7 +48,7 @@ class MGWikiPageRenderer(PageRenderer):
 
     def link_if_exists(self, definition_words: list) -> list:
         ret = []
-        print(len(self.pages_to_link), definition_words)
+        # print(len(self.pages_to_link), definition_words)
         if hasattr(self, 'pages_to_link'):
             assert isinstance(self.pages_to_link, set)
             for word in definition_words:
@@ -75,7 +75,7 @@ class MGWikiPageRenderer(PageRenderer):
 
         returned_string = self.render_head_section(info)
         returned_string += self.render_definitions(info, link) + additional_note
-        returned_string += self.render_inflection(info)
+        # returned_string += self.render_inflection(info)
         returned_string += self.render_pronunciation(info)
         returned_string += self.render_synonyms(info)
         returned_string += self.render_antonyms(info)
@@ -162,7 +162,7 @@ class MGWikiPageRenderer(PageRenderer):
         returned_string = ''
         if 'inflection' in info.additional_data:
             returned_string = '\n{{-bikan-teny-}}\n'
-            returned_string += info['inflection'] + '\n'
+            returned_string += '\n'.join(info.additional_data['inflection']) + '\n'
 
         return returned_string
 

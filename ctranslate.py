@@ -51,8 +51,8 @@ class Translator:
     #     source_sents_subworded = [[source] + sent + ["</s>"] for sent in source_sents_subworded]
     #
     #     # Translate the source sentences
-    #     translations_subworded = self.model.translate_batch(source_sents_subworded, batch_type="tokens",
-    #                                                         max_batch_size=2024, beam_size=4, target_prefix=[[target]])
+    #     translations_subworded = self.model.translate_batch(
+    #       source_sents_subworded, batch_type="tokens", max_batch_size=2024, beam_size=4, target_prefix=[[target]])
     #     translations_subworded = [translation[0]['tokens'] for translation in translations_subworded]
     #     for translation in translations_subworded:
     #         if target in translation:

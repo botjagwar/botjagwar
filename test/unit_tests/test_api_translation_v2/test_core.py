@@ -159,7 +159,7 @@ class TestLoadPostprocessors(unittest.TestCase):
     def test_no_sections_exist(self):
         self.config_mock.specific_config_parser.options.side_effect = configparser.NoSectionError("section not found")
         result = self.obj.load_postprocessors(self.language, self.part_of_speech)
-        self.assertEqual(result, [])
+        self.assertEqual([], result)
 
     def test_language_section_exists(self):
         self.config_mock.specific_config_parser.options.side_effect = None

@@ -1,5 +1,6 @@
 import time
 from typing import List
+from copy import deepcopy
 
 from api import entryprocessor
 from api.decorator import threaded
@@ -11,9 +12,10 @@ from .exceptions import TranslatedPagePushError
 
 class Publisher(object):
     @staticmethod
-    def publish_translated_references():
-        def _publish_translated_references(translation, source_wiki='en', target_wiki='mg'):
-            for original_reference, translated_reference in translation.reference_template_queue:
+    def publish_translated_references(translation):
+        def _publish_translated_references(source_wiki='en', target_wiki='mg'):
+            reference_template_queue = deepcopy(translation.reference_template_queue)
+            for original_reference, translated_reference in reference_template_queue:
                 # Check if it is a template reference, or a plain-text one
                 if translated_reference.startswith('{{') or original_reference.startswith('{{'):
                     translation.create_or_rename_template_on_target_wiki(
@@ -111,7 +113,7 @@ class WiktionaryRabbitMqPublisher(Publisher):
             elif target_page.isRedirectPage():
                 content = translation.output.wikipages(entries)
                 message = {
-                    'language': 'mg',
+                    'language': translation.working_wiki_language,
                     'site': 'wiktionary',
                     'page': page_title,
                     'content': content,
@@ -140,7 +142,7 @@ class WiktionaryRabbitMqPublisher(Publisher):
                 # Push aggregated content
 
                 message = {
-                    'language': 'mg',
+                    'language': translation.working_wiki_language,
                     'site': 'wiktionary',
                     'page': page_title,
                     'content': content,
