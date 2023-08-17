@@ -10,12 +10,12 @@ PORT = 8443
 config = BotjagwarConfig()
 app = Flask(__name__)
 folder = '/tmp'
-# folder = '/root/soavolana_queue'
+# folder = '/root/soamasina_queue'
 
 
 # RabbitMQ connection parameters
 RABBITMQ_HOST = config.get('host', 'rabbitmq')
-RABBITMQ_QUEUE = 'lohataona'
+RABBITMQ_QUEUE = 'lohmasina'
 RABBITMQ_USERNAME = config.get('username', 'rabbitmq')
 RABBITMQ_PASSWORD = config.get('password', 'rabbitmq')
 RABBITMQ_VIRTUAL_HOST = config.get('virtual_host', 'rabbitmq')
