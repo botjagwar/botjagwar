@@ -1,4 +1,3 @@
-import os
 import re
 from logging import getLogger
 
@@ -11,29 +10,6 @@ from api.translation_v2.types import TranslatedDefinition, \
 json_dictionary = JsonDictionary(use_materialised_view=False)
 convergent_translations = ConvergentTranslations()
 log = getLogger(__file__)
-
-# whitelists to limit translation to certain words
-whitelists = {}
-
-# All translation bugs by NLLB belong here
-nllb_gotchas = [
-    'famaritana malagasy',
-    'fa tsy misy dikany'
-]
-
-
-def fetch_whitelist(language):
-    global whitelists
-    returned_data = set()
-    whitelist = os.path.join(os.path.dirname(__file__), f'{language}-whitelist')
-    for line in open(whitelist, 'r').readlines():
-        returned_data.add(line)
-
-    whitelists[language] = returned_data
-
-
-fetch_whitelist('en')
-fetch_whitelist('fr')
 
 
 def translate_using_nltk(part_of_speech, definition_line, source_language, target_language,
@@ -52,7 +28,7 @@ def translate_using_opus_mt(part_of_speech, definition_line, source_language, ta
 def enrich_english_definition(part_of_speech, definition_line):
     definition_line = definition_line.strip()
     if part_of_speech == 'ana':
-        prefix = 'that is '
+        prefix = 'it is '
         if not definition_line.lower().startswith('a') and definition_line.lower()[1:].strip()[0] not in 'aeioy':
             prefix += 'a '
         elif not definition_line.lower().startswith('an') and definition_line.lower()[2:].strip()[0] in 'aeioy':
@@ -82,9 +58,9 @@ def enrich_english_definition(part_of_speech, definition_line):
 
 def enrich_french_definition(part_of_speech, definition_line):
     if part_of_speech == 'ana':
-        prefix = 'cela est'
+        prefix = 'c\'est'
         if not definition_line.lower().startswith('un ') or not definition_line.lower().startswith('une '):
-            prefix += ' un ou une '
+            prefix += ' une '
         definition_line = prefix + definition_line + '.'
     elif part_of_speech == 'mat':
         definition_line = 'il est capable de ' + definition_line
@@ -119,11 +95,6 @@ def remove_unknown_characters(translation):
 def remove_enrichment_artefacts(part_of_speech, translation):
     if translation.lower().startswith('afaka '):
         translation = translation.replace('afaka ', '')
-    if translation.lower().startswith('izay '):
-        translation = translation.strip()[4:].strip()
-
-    if translation.lower().startswith('fa '):
-        translation = translation.strip()[2:].strip()
     if translation.lower().startswith('mahay '):
         translation = translation.replace('mahay ', '')
     if translation.lower().startswith('mahavita '):
@@ -131,13 +102,13 @@ def remove_enrichment_artefacts(part_of_speech, translation):
     if not translation.lower().endswith('ho azy') or not translation.lower().endswith(' izy azy'):
         if translation.lower().endswith(' azy'):
             translation = translation[:-4].strip()
-    if translation.lower().endswith(' izy') and not translation.lower().endswith('maha izy'):
+    if translation.lower().endswith(' izy'):
         translation = translation[:-4].strip()
     # if translation.lower().endswith(' azy'):
     #     translation = translation[:-4].strip()
-    if translation.lower().endswith(' izany') and not translation.lower().endswith('toy izany'):
+    if translation.lower().endswith(' izany'):
         translation = translation[:-5].strip()
-    if translation.lower().endswith(' izao') and not translation.lower().endswith('toy izao'):
+    if translation.lower().endswith(' izao'):
         translation = translation[:-4].strip()
 
     if part_of_speech in ('ana', 'mat'):
@@ -185,9 +156,6 @@ def remove_enrichment_artefacts(part_of_speech, translation):
         if translation.lower().endswith(' izao'):
             translation = translation.lower().replace(' izao', '')
 
-        if translation.lower().startswith('hoe '):
-            translation = translation.strip()[3:].strip()
-
     return translation
 
 
@@ -208,50 +176,8 @@ def remove_duplicate_definitions(translation):
     return data
 
 
-def remove_gotcha_translations(translation):
-    for gotcha in nllb_gotchas:
-        translation = translation.replace(gotcha, '')
-        translation = translation.replace(gotcha.title(), '')
-        translation = translation.replace(gotcha.upper(), '')
-        translation = translation.replace(gotcha.lower(), '')
-
-    return translation
-
-
-def translate_individual_word_using_dictionary(word, source_language, target_language):
-    source_matches = []
-    target_matches = []
-    if word.strip() in whitelists[source_language]:
-        for pos in ['ana', 'mat', 'mpam', 'tamb']:
-            data = json_dictionary.look_up_dictionary(source_language, pos, word)
-            if data:
-                definitions = data[0]['definitions']
-                for definition in definitions:
-                    if definition['language'] == target_language:
-                        source_matches.append(definition['definition'])
-
-    if len(target_matches) == 0:
-        return source_matches
-    else:
-        return []
-
-
-def translate_using_dictionary(translation, source_language, target_language):
-    words = translation.split()
-    out_translation = ''
-    for w in words:
-        matches = translate_individual_word_using_dictionary(w, source_language, target_language)
-        if matches:
-            out_translation += ' ' + matches[0]
-        else:
-            out_translation += ' ' + w
-
-    print(f'translate_using_dictionary: {out_translation}')
-    return out_translation.strip()
-
-
 def translate_using_nllb(part_of_speech, definition_line, source_language, target_language,
-                         **additional_arguments) -> [UntranslatedDefinition, TranslatedDefinition]:
+                         **kw) -> [UntranslatedDefinition, TranslatedDefinition]:
     helper = NllbDefinitionTranslation(source_language, target_language)
 
     # Implementation of various tricks to improve the translation quality
@@ -266,12 +192,8 @@ def translate_using_nllb(part_of_speech, definition_line, source_language, targe
     definition_line = re.sub("\{\{([\w]+)\|" + source_language + "\}\}", '(\\1)', definition_line)
     definition_line = re.sub("<ref>(.*)<\/ref>", '', definition_line)
 
-    # One-word definitions are trickier to translate without appropriate context
-    # if len(definition_line.split()) < 2:
-    #     return UntranslatedDefinition(definition_line)
-
-    # For medium-sized definitions, further enrich as longer definitions seems to be doing just fine (for now)
-    if len(definition_line.split()) <= 30:
+    # Restrict to short definition, as longer definitions seems to be doing just fine (for now)
+    if len(definition_line.split()) <= 10:
         if source_language == 'en':
             definition_line = enrich_english_definition(part_of_speech, definition_line)
         elif source_language == 'fr':
@@ -280,28 +202,36 @@ def translate_using_nllb(part_of_speech, definition_line, source_language, targe
             definition_line = enrich_german_definition(part_of_speech, definition_line)
 
     translation = helper.get_translation(definition_line)
-
     # Remove all translation artefacts that could have been generated by the tricks performed above.
     translation = remove_enrichment_artefacts(part_of_speech, translation)
     translation = remove_unknown_characters(translation)
     translation = remove_duplicate_definitions(translation)
-    translation = remove_gotcha_translations(translation)
-    if len(translation.split()) < 5:
-        translation = translate_using_dictionary(translation, source_language, target_language)
 
-    print(f'translate_using_nllb: {definition_line}')
-
-    if definition_line.lower() in nllb_gotchas:
+    if len(translation) > len(definition_line) * 3:
         return UntranslatedDefinition(definition_line)
-
-    if len(definition_line.split()) > 3:
-        if len(translation) > len(definition_line) * 3:
-            return UntranslatedDefinition(definition_line)
 
     if translation is not None:
         return TranslatedDefinition(translation)
 
     return UntranslatedDefinition(definition_line)
+
+
+def translate_roundtrip_using_nllb(part_of_speech, definition_line, source_language='mg', target_language='mg',
+                         **kw) -> [UntranslatedDefinition, TranslatedDefinition]:
+    # Performs a round-trip translation malagasy -> x -> malagasy to reformulate the definition
+    # in order to avoid copyright infringement.
+    # This is a very expensive operation, so it should be used only when the definition is not]
+    if source_language != target_language:
+        raise ValueError("Round-trip translation is only possible when source and target languages are the same.")
+
+    x_to_english = NllbDefinitionTranslation(source_language, 'eng_Latn')
+    english_to_x = NllbDefinitionTranslation('eng_Latn', source_language)
+    translation = x_to_english.get_translation(definition_line)
+    back_translation = english_to_x.get_translation(translation)
+    if translation == back_translation:
+        return UntranslatedDefinition(definition_line)
+    else:
+        return TranslatedDefinition(back_translation)
 
 
 __all__ = [

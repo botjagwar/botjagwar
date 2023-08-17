@@ -10,18 +10,18 @@ PORT = 8443
 config = BotjagwarConfig()
 app = Flask(__name__)
 folder = '/tmp'
-# folder = '/root/soavolana_queue'
+# folder = '/root/soamasina_queue'
 
 
 # RabbitMQ connection parameters
 RABBITMQ_HOST = config.get('host', 'rabbitmq')
-RABBITMQ_QUEUE = 'lohataona'
+RABBITMQ_QUEUE = 'lohmasina'
 RABBITMQ_USERNAME = config.get('username', 'rabbitmq')
 RABBITMQ_PASSWORD = config.get('password', 'rabbitmq')
 RABBITMQ_VIRTUAL_HOST = config.get('virtual_host', 'rabbitmq')
 
 
-def fetch(queue_name='soavolana'):
+def fetch():
     credentials = pika.PlainCredentials(RABBITMQ_USERNAME, RABBITMQ_PASSWORD)
     parameters = pika.ConnectionParameters(
         host=RABBITMQ_HOST,
@@ -31,32 +31,32 @@ def fetch(queue_name='soavolana'):
     connection = pika.BlockingConnection(parameters)
     channel = connection.channel()
 
-    method_frame, _, body = channel.basic_get(queue=queue_name, auto_ack=True)
+    method_frame, _, body = channel.basic_get(queue=RABBITMQ_QUEUE, auto_ack=True)
     if method_frame:
         print("Message fetched:", body.decode())
     return json.loads(body.decode())
 
 
-@app.route('/<user>/title.txt', methods=['GET'])
-def title(user='soavolana'):
+@app.route('/title.txt', methods=['GET'])
+def title():
     """Renders the contact page."""
-    return send_file(f'{folder}/{user}_title.txt', )
+    return send_file(f'{folder}/title.txt', )
 
 
-@app.route('/<user>/text.txt', methods=['GET'])
-def text(user='soavolana'):
+@app.route('/text.txt', methods=['GET'])
+def text():
     """Renders the contact page."""
-    return send_file(f'{folder}/{user}_text.txt', )
+    return send_file(f'{folder}/text.txt', )
 
 
-@app.route('/<user>/next', methods=['GET'])
-def next_edit(user='soavolana'):
+@app.route('/next', methods=['GET'])
+def next_edit():
     """Renders the contact page."""
-    data = fetch(user)
-    with open(f'{folder}/{user}_title.txt', 'w') as f:
+    data = fetch()
+    with open(f'{folder}/title.txt', 'w') as f:
         f.write(data['page'])
 
-    with open(f'{folder}/{user}_text.txt', 'w') as f:
+    with open(f'{folder}/text.txt', 'w') as f:
         f.write(data['content'])
 
     return Response('New title and text updated.', status=200)
