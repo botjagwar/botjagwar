@@ -114,7 +114,8 @@ class Translation:
                 for postprocessor_name in pos_specific_section:
                     arguments = tuple(self.postprocessors_config.specific_config_parser.get(
                         pos_specific_section_name, postprocessor_name).split(','))
-                    post_processors.append((postprocessor_name, arguments))
+                    if (postprocessor_name, arguments) not in post_processors:
+                        post_processors.append((postprocessor_name, arguments))
 
         return post_processors
 
