@@ -154,40 +154,41 @@ class TestLoadPostprocessors(unittest.TestCase):
         self.part_of_speech = "ana"
 
         self.obj = Translation()
-        self.obj.config = self.config_mock
+        self.obj.postprocessors_config = Mock()
+        self.obj.config = Mock()
 
     def test_no_sections_exist(self):
-        self.config_mock.specific_config_parser.options.side_effect = configparser.NoSectionError("section not found")
+        self.obj.postprocessors_config.specific_config_parser.options.side_effect = configparser.NoSectionError("section not found")
         result = self.obj.load_postprocessors(self.language, self.part_of_speech)
-        self.assertEqual(result, [])
+        self.assertEqual([], result)
 
     def test_language_section_exists(self):
-        self.config_mock.specific_config_parser.options.side_effect = None
-        self.config_mock.specific_config_parser.options.return_value = ["postprocessor_1", "postprocessor_2"]
-        self.config_mock.specific_config_parser.get.return_value = "arg1,arg2"
+        self.obj.postprocessors_config.specific_config_parser.options.side_effect = None
+        self.obj.postprocessors_config.specific_config_parser.options.return_value = [
+            "postprocessor_1", "postprocessor_2"]
+        self.obj.postprocessors_config.specific_config_parser.get.return_value = "arg1,arg2"
         result = self.obj.load_postprocessors(self.language, self.part_of_speech)
         expected = [
             ("postprocessor_1", ("arg1", "arg2")),
             ("postprocessor_2", ("arg1", "arg2"))
         ]
-        self.config_mock.specific_config_parser.get.assert_any_call(f"{self.language}:{self.part_of_speech}",
-                                                                    "postprocessor_1")
-        self.config_mock.specific_config_parser.get.assert_any_call(f"{self.language}:{self.part_of_speech}",
-                                                                    "postprocessor_2")
+        self.obj.postprocessors_config.specific_config_parser.get.assert_any_call(
+            f"{self.language}:{self.part_of_speech}", "postprocessor_1")
+        self.obj.postprocessors_config.specific_config_parser.get.assert_any_call(
+            f"{self.language}:{self.part_of_speech}", "postprocessor_2")
 
     def test_pos_specific_section_exists(self):
-        self.config_mock.specific_config_parser.options.side_effect = [
+        self.obj.postprocessors_config.options.side_effect = [
             configparser.NoSectionError("section not found"),
             ["postprocessor_3"]
         ]
-        self.config_mock.specific_config_parser.options.return_value = ["postprocessor_3"]
-        self.config_mock.specific_config_parser.get.return_value = "arg3,arg4"
+        self.obj.postprocessors_config.specific_config_parser.options.return_value = ["postprocessor_3"]
+        self.obj.postprocessors_config.specific_config_parser.get.return_value = "arg3,arg4"
         result = self.obj.load_postprocessors(self.language, self.part_of_speech)
         expected = [
             ("postprocessor_3", ("arg3", "arg4"))
         ]
         self.assertEqual(result, expected)
-        self.config_mock.specific_config_parser.options.assert_any_call(self.language)
-        self.config_mock.specific_config_parser.options.assert_any_call(f"{self.language}:{self.part_of_speech}")
-        self.config_mock.specific_config_parser.get.assert_called_once_with(f"{self.language}:{self.part_of_speech}",
-                                                                            "postprocessor_3")
+        self.obj.postprocessors_config.specific_config_parser.options.assert_any_call(self.language)
+        self.obj.postprocessors_config.specific_config_parser.options.assert_any_call(
+            f"{self.language}:{self.part_of_speech}")

@@ -214,6 +214,7 @@ class RedisPage(object):
             except pywikibot.exceptions.InvalidTitleError:
                 class Namespace(object):
                     content = self.get()
+
                 return Namespace()
 
     def isRedirectPage(self):

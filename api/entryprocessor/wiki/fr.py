@@ -6,7 +6,7 @@ from api.model.word import Entry
 from api.parsers import TEMPLATE_TO_OBJECT
 from api.parsers import definitions_parser
 from conf.entryprocessor.languagecodes.en import LANGUAGE_NAMES
-from .base import WiktionaryProcessor
+from .base import WiktionaryProcessor, WiktionaryProcessorException
 
 LANG_SECTION_REGEX = "==[ ]?{{langue\|([a-z]+)}}[ ]?=="
 POS_FLEXION_SECTION_REGEX = "===[ ]?{{S\|([A-Za-z0-9 ]+)\|([a-z]+)\|flexion}}[ ]?==="
@@ -214,6 +214,49 @@ class FRWiktionaryProcessor(WiktionaryProcessor):
                 entries.append(entry)
 
         return entries
+
+    @staticmethod
+    def refine_definition(definition, part_of_speech=None) -> list:
+        refined = definition
+        lb_template_rgxs = [
+            r'\{\{lexique\|[a-zA-Z0-9\ \|]+\}\}'
+            r'\{\{familier\|[a-zA-Z0-9\ \|]+\}\}'
+            r'\{\{[a-zA-Z0-9\ \|]+\|[a-zA-Z0-9\ \|]+\}\}'
+        ]
+
+        for lb_template_rgx in lb_template_rgxs:
+            lb_match = re.match(lb_template_rgx, definition)
+            if lb_match:
+                lb_match = lb_match.group()
+                lb_begin = definition.find(lb_match)
+                if lb_begin != -1:
+                    lb_end = definition.find('}}', lb_begin)
+                    label_data = definition[lb_begin:lb_end]
+                    label_data = label_data.replace('_', '')
+                    label_data = label_data.replace('|', ' ')
+                    print(label_data)
+                    # Ensure that no unexpected characters has been onboarded,
+                    # if it's the case, just ditch the label information.
+                    if re.match(r'^([a-zA-Z0-9\,\ ]+)$', label_data):
+                        refined = f'({label_data}) ' + definition[lb_end + 2:].strip()
+                    else:
+                        refined = definition[lb_end + 2:].strip()
+
+        # # Handle [[]] links
+        refined = re.sub(r'\[\[([\w ]+)\|[\w ]+\]\]', '\\1', refined)
+        if not part_of_speech.startswith('e-'):  # Link name is still required in lemmata entries for frwikt
+            refined = re.sub(r'\[\[([\w ]+)\]\]', '\\1', refined)
+
+        unwanted_character = False
+        for character in "{}|":
+            if character in refined:
+                unwanted_character = True
+                break
+
+        if unwanted_character:
+            raise WiktionaryProcessorException("Refined definition still has unwanted characters : '" + character + "'")
+
+        return [refined]
 
     def retrieve_translations(self) -> list:
         return []

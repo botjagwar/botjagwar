@@ -24,9 +24,14 @@ class TranslatedDefinition(str):
         return self.translation
 
     def __repr__(self):
-        return self.__class__.__name__ + \
-            '(' + self.__str__() + ', ' + self.synonym + ')'
+        ret = self.__class__.__name__
+        ret += '(' + self + ', '
+        if self.synonym:
+            ret += self.synonym + ')'
+        else:
+            ret += ')'
 
+        return ret
 
 class ConvergentTranslation(TranslatedDefinition):
 

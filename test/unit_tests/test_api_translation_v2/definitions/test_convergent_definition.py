@@ -6,7 +6,7 @@ from api.translation_v2.types import ConvergentTranslation
 
 
 class TestTranslateUsingConvergentDefinition(TestCase):
-    @mock.patch('api.translation_v2.functions.definitions.convergent_translations')
+    @mock.patch('api.translation_v2.functions.definitions.database_based.convergent_translations')
     def test_translate_using_convergent_definition_1(self, convergent_translations):
         # Test case 1: Successful translation from English to Spanish
         convergent_translations.get_convergent_translation.return_value = [{'suggested_definition': 'translation 1'}]
@@ -14,7 +14,7 @@ class TestTranslateUsingConvergentDefinition(TestCase):
                                                        source_language='en', target_language='mg')
         convergent_translations.get_convergent_translation.assert_called_once()
 
-    @mock.patch('api.translation_v2.functions.definitions.convergent_translations')
+    @mock.patch('api.translation_v2.functions.definitions.database_based.convergent_translations')
     def test_translate_using_convergent_definition_2(self, convergent_translations):
         # Test case 2: Successful translation from French to Portuguese
         convergent_translations.get_convergent_translation.return_value = [{'suggested_definition': 'translation 2'}]

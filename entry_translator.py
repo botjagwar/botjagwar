@@ -12,6 +12,7 @@ from aiohttp.web import Response
 from api import entryprocessor
 from api.decorator import threaded
 from api.translation_v2.core import Translation
+from api.translation_v2.publishers import WiktionaryRabbitMqPublisher
 from redis_wikicache import RedisSite as Site, RedisPage as Page
 
 # GLOBAL VARS
@@ -20,6 +21,7 @@ databases = []
 
 parser = ArgumentParser(description="Entry translator service")
 parser.add_argument('-p', '--port', dest='PORT', type=int, default=8000)
+parser.add_argument('-q', '--queue', dest='QUEUE', type=str, default='botjagwar')
 parser.add_argument(
     '-l',
     '--log-file',
@@ -43,6 +45,10 @@ except KeyError:
 log.basicConfig(filename=args.LOG, level=LOG_LEVEL)
 translations = Translation()
 routes = web.RouteTableDef()
+queue_size = 0
+print("Initiating connection to rabbitmq...")
+rabbitmq_publisher = WiktionaryRabbitMqPublisher(args.QUEUE)
+print("Done initiating connection to rabbitmq!")
 
 
 # Throttle Config
@@ -85,6 +91,60 @@ def put_deletion_notice(page):
         page.put(page_c, "+filazana")
 
 
+@routes.get("/jobs")
+async def get_job_queue(request) -> Response:
+    global queue_size
+    return Response(
+        text=json.dumps({'jobs': queue_size}),
+        status=200,
+        content_type='application/json'
+    )
+
+
+@routes.post("/wiktionary_page_async/{lang}")
+async def handle_wiktionary_page(request) -> Response:
+    """
+    Handle a Wiktionary page asynchronously.
+
+    Attempts to translate the wiktionary page's content and pushes translated wikipage data
+    into a queue that can then be consumed by a worker to push pages asynchronously.
+
+    This requires a workign rabbitmq installation, that can be wither either local or remote.
+
+    <lang>: Wiktionary edition to look up on.
+    :return: 200 if everything worked with the list of database lookups including translations,
+    500 if an error occurred
+    """
+    data = await request.json()
+    pagename = data['title']
+    page = _get_page(pagename, request.match_info['lang'])
+    if page is None:
+        return Response()
+
+    data = {}
+    publish = rabbitmq_publisher.publish_to_wiktionary(translations)
+
+    @threaded
+    def task():
+        global queue_size
+        queue_size += 1
+        try:
+            translations.process_wiktionary_wiki_page(page, custom_publish_function=publish)
+        except Exception as e:
+            log.exception(e)
+            data['traceback'] = traceback.format_exc()
+            data['message'] = '' if not hasattr(e, 'message') else getattr(e, 'message')
+        finally:
+            queue_size -= 1
+
+    task()
+    return Response(
+        text=json.dumps({'message': 'task successfully pushed.'}),
+        status=200,
+        content_type='application/json'
+    )
+
+
 @routes.post("/wiktionary_page/{lang}")
 async def handle_wiktionary_page(request) -> Response:
     """
@@ -100,23 +160,21 @@ async def handle_wiktionary_page(request) -> Response:
     page = _get_page(pagename, request.match_info['lang'])
     if page is None:
         return Response()
-    data = {}
-    try:
-        translations.process_wiktionary_wiki_page(page)
-    except Exception as e:
-        log.exception(e)
-        data['traceback'] = traceback.format_exc()
-        data['message'] = '' if not hasattr(e, 'message') else getattr(e, 'message')
-        response = Response(
-            text=json.dumps(data),
-            status=500,
-            content_type='application/json')
-    else:
-        response = Response(
-            text=json.dumps(data),
-            status=200,
-            content_type='application/json')
-    return response
+
+    @threaded
+    def task():
+        try:
+            translations.process_wiktionary_wiki_page(page)
+        except Exception as e:
+            log.exception(e)
+
+    task()
+    time.sleep(3.5)
+    return Response(
+        text=json.dumps({'message': 'treatment acknowledged.'}),
+        status=200,
+        content_type='application/json'
+    )
 
 
 @routes.get("/translation/{language}/{pagename}")
@@ -154,8 +212,7 @@ async def get_wiktionary_processed_page(request) -> Response:
     language = request.match_info['language']
     pagename = request.match_info['pagename']
 
-    wiktionary_processor_class = entryprocessor.WiktionaryProcessorFactory.create(
-        language)
+    wiktionary_processor_class = entryprocessor.WiktionaryProcessorFactory.create(language)
     wiktionary_processor = wiktionary_processor_class()
     ret = []
 
@@ -191,6 +248,12 @@ async def get_wiktionary_processed_page(request) -> Response:
 
 if __name__ == '__main__':
     try:
+        import os
+
+        current_pid = os.getpid()
+        with open('/tmp/entry_translator.pid', 'w') as f:
+            f.write(str(current_pid))
+
         set_throttle(1)
         app = web.Application()
         app.router.add_routes(routes)
