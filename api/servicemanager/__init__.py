@@ -9,9 +9,11 @@ import requests
 from requests import Response
 
 from api.decorator import threaded, retry_on_fail
+from api.config import BotjagwarConfig
 
 log = logging.getLogger(__name__)
 
+config = BotjagwarConfig()
 
 class ProcessManager:
     """
@@ -79,9 +81,26 @@ class ServiceManager(ProcessManager):
     """
     ServiceManager provides a minimally abstract APIs to spawn and despawn aiohttp RESTful services.
     """
-    backend_address = 'localhost'
+    service_name = 'service_manager'
     port = 8888
     scheme = 'http'
+
+    def __init__(self):
+        self._address = None
+
+    @property
+    def backend_address(self):
+        if self._address:
+            return self._address
+
+        try:
+            self._address = config.get('backend_address', self.service_name)
+            print(f'Success getting backend address for {self.service_name}: {self._address}')
+            return self._address
+        except Exception as unknown_error:
+            print(f"Error {unknown_error.__class__.__name__} trying to get backend address from configuration."
+                  f" Using localhost.")
+            return 'localhost'
 
     def get_specific_arguments(self) -> List[str]:
         return ['-p', str(self.port)]
@@ -124,12 +143,14 @@ class ServiceManager(ProcessManager):
 
 class EntryTranslatorServiceManager(ServiceManager):
     port = 8000
+    service_name = 'entry_translator'
     program_name = 'entry_translator.py'
     kill_if_exists = False
 
 
 class DictionaryServiceManager(ServiceManager):
     port = 8001
+    service_name = 'dictionary_service'
     program_name = 'dictionary_service.py'
     kill_if_exists = False
 

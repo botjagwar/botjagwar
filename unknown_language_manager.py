@@ -118,14 +118,14 @@ class UnknownLanguageManagerBot(object):
         self.word_session.close()
         self.language_session.close()
 
-    def get_languages_from_x_days_ago(self, x=30):
+    def get_languages_from_x_days_ago(self, x=75):
         """
         Retrieves languages codes of languages that have been added since x days ago.
         :param x:
         :return:
         """
-        words = self.word_session.query(Word.language, func.count(Word.word))\
-            .filter(Word.date_changed >= datetime.now() - timedelta(days=x))\
+        words = self.word_session.query(Word.language, func.count(Word.word)) \
+            .filter(Word.date_changed >= datetime.now() - timedelta(days=x)) \
             .group_by(Word.language)
 
         for language_code, number_of_words in words:

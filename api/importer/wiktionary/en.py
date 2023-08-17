@@ -207,6 +207,10 @@ class AntonymImporter(ListSubsectionImporter):
     section_name = 'Antonyms'
 
 
+class AntonymImporterL5(AntonymImporter):
+    level = 5
+
+
 class DerivedTermsImporter(ListSubsectionImporter):
     level = 4
     data_type = 'derived'
@@ -300,8 +304,9 @@ class HeadwordImporter(WiktionaryAdditionalDataImporter):
         template_lines = []
         for line in wikipage.split('\n'):
             for headword_affix in self.possible_headword_affixes:
-                if line.startswith('{{' + language + '-' + headword_affix):
-                    template_lines.append(line)
+                if language is not None:
+                    if line.startswith('{{' + language + '-' + headword_affix):
+                        template_lines.append(line)
 
         return list(set(template_lines))
 

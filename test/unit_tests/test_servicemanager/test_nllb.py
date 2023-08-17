@@ -16,7 +16,7 @@ class TestNllbDefinitionTranslation(unittest.TestCase):
         result = nllb.get_translation('Hello')
         self.assertEqual(result, 'Bonjour')
 
-        expected_url = 'http://localhost:12020/translate/en_Latn/fr_Latn'
+        expected_url = 'http://localhost:12020/translate/fra_Latn/eng_Latn'
         expected_params = {'text': 'Hello'}
         mock_get.assert_called_once_with(expected_url, params=expected_params)
 

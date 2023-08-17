@@ -55,7 +55,7 @@ class WiktionaryProcessor(object):
         raise NotImplementedError()
 
     @staticmethod
-    def refine_definition(definition) -> List[str]:
+    def refine_definition(definition, part_of_speech=None) -> List[str]:
         return [definition]
 
 

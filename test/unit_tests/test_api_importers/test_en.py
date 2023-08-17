@@ -1,8 +1,14 @@
 from api.importer.wiktionary.en import (
     FurtherReadingImporter,
-    PronunciationImporter, HeadwordImporter, TranscriptionImporter,
+    PronunciationImporter,
+    AntonymImporterL5,
+    HeadwordImporter,
+    TranscriptionImporter,
     AlternativeFormsImporter,
-    DerivedTermsImporter
+    DerivedTermsImporter,
+    ReferencesImporter,
+    EtymologyImporter,
+    SynonymImporter
 )
 from . import ApiImporterTester
 
@@ -34,11 +40,12 @@ class TestAlternativeFormsImporter(ApiImporterTester):
         self.assertEqual(data[0], '{{alt|pl|fi}}')
 
 
-# class TestAntonymImporter(ApiImporterTester):
-#     Importer = AntonymImporter
-#     data_exists_index = 3
-#     data_does_not_exist_index = 0
-#
+class TestAntonymImporter(ApiImporterTester):
+    Importer = AntonymImporterL5
+    data_exists_index = 6
+    data_does_not_exist_index = 0
+    filename = 'importers/en-wikipage_references.txt'
+
 
 class TestDerivedTermsImporter(ApiImporterTester):
     Importer = DerivedTermsImporter
@@ -58,28 +65,29 @@ class TestPronunciationImporter(ApiImporterTester):
     filename = 'importers/pronunciation.wiki'
     language = 'ja'
 
-    def test_get_data_exists(self):
-        pass
+    # def test_get_data_exists(self):
+    #     pass
 
 
-# class TestReferencesImporter(ApiImporterTester):
-#     Importer = ReferencesImporter
-#     data_exists_index = 3
-#     data_does_not_exist_index = 0
-#
-#
-# class TestEtymologyImporter(ApiImporterTester):
-#     Importer = EtymologyImporter
-#     data_exists_index = 3
-#     data_does_not_exist_index = 0
-#
-#
-# class TestSynonymImporter(ApiImporterTester):
-#     Importer = SynonymImporter
-#     data_exists_index = 3
-#     data_does_not_exist_index = 0
-#
-#
+class TestReferencesImporter(ApiImporterTester):
+    Importer = ReferencesImporter
+    data_exists_index = 0
+    data_does_not_exist_index = 2
+    filename = 'importers/en-wikipage_references.txt'
+
+
+class TestEtymologyImporter(ApiImporterTester):
+    Importer = EtymologyImporter
+    data_exists_index = 6
+    data_does_not_exist_index = 1
+
+
+class TestSynonymImporter(ApiImporterTester):
+    Importer = SynonymImporter
+    data_exists_index = 6
+    data_does_not_exist_index = 1
+
+
 class TestHeadwordImporter(ApiImporterTester):
     Importer = HeadwordImporter
     data_exists_index = 3
