@@ -189,8 +189,14 @@ class ENWiktionaryProcessor(WiktionaryProcessor):
                     last_language_code = self.lang2code(language_name)
                     last_part_of_speech = None  # Reset part of speech for the language section
                 except KeyError:
-                    # print(f"Could not determine code: {language_name}")
-                    pass
+                    if self.debug:
+                        print(f"Could not determine code: {language_name}")
+
+                    last_language_code = None
+
+            # Skip the language if a code couldn't be found to avoid assignment of the entry to the wrong language code.
+            if not last_language_code:
+                continue
 
             # Add to the lines per language
             if last_language_code in lines_by_language:
@@ -227,6 +233,9 @@ class ENWiktionaryProcessor(WiktionaryProcessor):
                     definitions[last_language_code][last_part_of_speech].append(definition)
                 else:
                     definitions[last_language_code][last_part_of_speech] = [definition]
+
+            if self.debug:
+                print(f"{line_number} [{last_part_of_speech}|{last_language_code}] : {line}")
 
         # entries may be definition-less or definition formatting is inconsistent
         for language_code in definitions:

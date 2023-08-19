@@ -2,6 +2,7 @@
 import os
 import re
 from typing import List
+from api.config import BotjagwarConfig
 
 data_file = os.getcwd() + '/conf/entryprocessor/'
 
@@ -21,6 +22,9 @@ class WiktionaryProcessor(object):
         self.content = None
         self.Page = None
         self.verbose = verbose
+
+        self.configuration = BotjagwarConfig('wiktionary_processor')
+        self.debug = self.configuration.get('debug').lower() == 'true'
         self.text_set = False
 
     def process(self, page=None):
