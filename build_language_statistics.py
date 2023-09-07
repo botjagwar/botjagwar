@@ -1,12 +1,12 @@
 import json
 
-from api.page_lister import get_categories_for_category
+from api.page_lister import load_categories_from_category
 from redis_wikicache import RedisSite as Site, RedisPage as Page
 
 
 class LanguageStatisticsBuilder(object):
     def __init__(self):
-        get_categories_for_category('mg', 'fiteny')
+        load_categories_from_category('mg', 'fiteny')
 
         self.languages = []
         with open('user_data/category_list_mg_fiteny', 'r') as opened_file:
@@ -51,7 +51,7 @@ class LanguageStatisticsBuilder(object):
                 continue
 
             lemma = 0
-            for pos in ['Anarana', 'Anarana iombonana', 'Mpamaritra', 'Mpamaritra anarana ', 'Matoanteny',
+            for pos in ['Anarana', 'Anarana iombonana', 'Mpamaritra', 'Mpamaritra anarana', 'Matoanteny',
                         'Tambinteny', 'Fomba fiteny', 'Mpampiankin-teny', 'Litera']:
                 if f"{pos} amin'ny teny {language}".replace(' ', '_') not in data:
                     continue
@@ -59,7 +59,7 @@ class LanguageStatisticsBuilder(object):
                 lemma += data[f"{pos} amin'ny teny {language}".replace(' ', '_')]
 
             form_of = 0
-            for pos in ["Endrik'anarana", 'Endri-pamaritra', 'Endriky ny matoanteny', 'Ova matoanteny']:
+            for pos in ["Endrik'anarana", 'Endri-pamaritra', 'Endriky ny matoanteny', 'Ova matoanteny', 'Rômanizasiona']:
                 if f"{pos} amin'ny teny {language}".replace(' ', '_') not in data:
                     continue
 

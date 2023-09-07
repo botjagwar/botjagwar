@@ -4371,6 +4371,7 @@ LANGUAGE_NAMES = {
     "Notsi": "ncf",
     "Nisga'a": "ncg",
     "Central Huasteca Nahuatl": "nch",
+    "Classical Syriac": "syr",
     "Classical Nahuatl": "nci",
     "Northern Puebla Nahuatl": "ncj",
     "Nakara": "nck",

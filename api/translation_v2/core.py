@@ -22,7 +22,7 @@ from .functions import postprocessors  # do __NOT__ delete!
 # from .functions import translate_using_bridge_language
 # from .functions import translate_form_of_templates
 from .functions import translate_form_of_definitions
-from .functions import translate_using_convergent_definition
+# from .functions import translate_using_convergent_definition
 from .functions.definitions import translate_using_nllb
 from .functions.pronunciation import translate_pronunciation
 from .functions.references import translate_references
@@ -69,7 +69,8 @@ class Translation:
         self.output = Output()
         self.default_publisher = WiktionaryDirectPublisher()
         self.loop = asyncio.get_event_loop()
-        self.config = BotjagwarConfig(name='entry_translator/postprocessors.ini')
+        self.config = BotjagwarConfig()
+        self.postprocessors_config = BotjagwarConfig(name='entry_translator/postprocessors.ini')
         self.reference_template_queue = set()
         if not use_configured_postprocessors:
             self._post_processors = list()
@@ -95,25 +96,26 @@ class Translation:
         post_processors = []
         pos_specific_section_name = f'{language}:{part_of_speech}'
         try:
-            language_section_postprocessors = self.config.specific_config_parser.options(language)
+            language_section_postprocessors = self.postprocessors_config.specific_config_parser.options(language)
         except configparser.NoSectionError:
             pass
         else:
             for postprocessor_name in language_section_postprocessors:
-                arguments = tuple(self.config.specific_config_parser.get(
+                arguments = tuple(self.postprocessors_config.specific_config_parser.get(
                     language, postprocessor_name).split(','))
                 post_processors.append((postprocessor_name, arguments))
 
         try:
-            pos_specific_section = self.config.specific_config_parser.options(pos_specific_section_name)
+            pos_specific_section = self.postprocessors_config.specific_config_parser.options(pos_specific_section_name)
         except configparser.NoSectionError:
             pass
         else:
             if pos_specific_section is not None:
                 for postprocessor_name in pos_specific_section:
-                    arguments = tuple(self.config.specific_config_parser.get(
+                    arguments = tuple(self.postprocessors_config.specific_config_parser.get(
                         pos_specific_section_name, postprocessor_name).split(','))
-                    post_processors.append((postprocessor_name, arguments))
+                    if (postprocessor_name, arguments) not in post_processors:
+                        post_processors.append((postprocessor_name, arguments))
 
         return post_processors
 
@@ -126,15 +128,7 @@ class Translation:
             self.output.add_translation_method(info)
 
     def publish_translated_references(self, source_wiki='en', target_wiki='mg'):
-        template_queue_copy = deepcopy(self.reference_template_queue)
-        for original_reference, translated_reference in template_queue_copy:
-            # Check if it is a template reference, or a plain-text one
-            if translated_reference.startswith('{{') or original_reference.startswith('{{'):
-                self.create_or_rename_template_on_target_wiki(
-                    source_wiki, original_reference, target_wiki, translated_reference
-                )
-
-        self.reference_template_queue = set()
+        return self.default_publisher.publish_translated_references(self)(source_wiki, target_wiki)
 
     @staticmethod
     def add_wiktionary_credit(
@@ -144,6 +138,7 @@ class Translation:
                     '|' + wiki_page.title() + '}}'
         out_entries = []
         for entry in entries:
+            entry.origin_wiktionary = wiki_page.site.lang
             if entry.additional_data is None:
                 entry.additional_data = {}
 
@@ -321,12 +316,12 @@ class Translation:
                 for refined_definition_line in refined_definition_lines:
                     # Try translation methods in succession.
                     # If one method produces something, skip the rest
-                    for t_method in translation_methods:
+                    for translation_method in translation_methods:
                         if entry.part_of_speech is None:
-                            print(f'No part of speech found! Skipping {t_method.__name__}')
+                            print(f'No part of speech found! Skipping {translation_method.__name__}')
                             continue
 
-                        definitions = t_method(
+                        definitions = translation_method(
                             entry.part_of_speech,
                             refined_definition_line,
                             wiktionary_processor.language,
@@ -334,8 +329,8 @@ class Translation:
                             language=entry.language
                         )
                         if isinstance(definitions, UntranslatedDefinition):
-                            print(
-                                f'{t_method.__name__} found no translation for "{refined_definition_lines}"... Skipping')
+                            print(f'{translation_method.__name__} found no translation '
+                                  f'for "{refined_definition_lines}"... Skipping')
                             continue
                         elif isinstance(definitions, TranslatedDefinition) or isinstance(definitions, FormOfTranslaton):
                             # Change POS to something more specific for form-of definitions
@@ -346,12 +341,11 @@ class Translation:
                             for d in definitions.split(','):
                                 # translated_definition.append(d.strip())
                                 if d in out_translation_methods:
-                                    out_translation_methods[d].append(t_method.__name__)
+                                    out_translation_methods[d].append(translation_method.__name__)
                                 else:
-                                    out_translation_methods[d] = [t_method.__name__]
+                                    out_translation_methods[d] = [translation_method.__name__]
 
                             translated_definition += [str(definitions)]
-                            # break
 
                     translated_from_definition.append(refined_definition_line)
 
@@ -410,8 +404,7 @@ class Translation:
 
         language = wiki_page.site.lang
 
-        wiktionary_processor_class = entryprocessor.WiktionaryProcessorFactory.create(
-            language)
+        wiktionary_processor_class = entryprocessor.WiktionaryProcessorFactory.create(language)
         wiktionary_processor = wiktionary_processor_class()
         if not wiki_page.isRedirectPage():
             wiktionary_processor.set_text(wiki_page.get())
@@ -420,8 +413,7 @@ class Translation:
             return self.process_wiktionary_wiki_page(wiki_page.getRedirectTarget())
         try:
             out_entries = self.translate_wiktionary_page(wiktionary_processor)
-            out_entries = Translation.add_wiktionary_credit(
-                out_entries, wiki_page)
+            out_entries = Translation.add_wiktionary_credit(out_entries, wiki_page)
             ret = self.output.wikipages(out_entries)
             if ret != '':
                 log.debug('out_entries>' + str(out_entries))

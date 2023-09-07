@@ -42,5 +42,7 @@ class BotjagwarConfig(object):
                 self.specific_config_parser.get(section, key)
             except configparser.NoSectionError:
                 return self.default_config_parser.get(section, key)
+            except KeyError:
+                raise KeyError(f'No key {key} in section {section}')
         else:
             return self.default_config_parser.get(section, key)

@@ -99,8 +99,9 @@ def remove_enrichment_artefacts(part_of_speech, translation):
         translation = translation.replace('mahay ', '')
     if translation.lower().startswith('mahavita '):
         translation = translation.replace('mahavita ', '')
-    if translation.lower().endswith(' azy'):
-        translation = translation[:-4].strip()
+    if not translation.lower().endswith('ho azy') or not translation.lower().endswith(' izy azy'):
+        if translation.lower().endswith(' azy'):
+            translation = translation[:-4].strip()
     if translation.lower().endswith(' izy'):
         translation = translation[:-4].strip()
     # if translation.lower().endswith(' azy'):
@@ -213,6 +214,24 @@ def translate_using_nllb(part_of_speech, definition_line, source_language, targe
         return TranslatedDefinition(translation)
 
     return UntranslatedDefinition(definition_line)
+
+
+def translate_roundtrip_using_nllb(part_of_speech, definition_line, source_language='mg', target_language='mg',
+                         **kw) -> [UntranslatedDefinition, TranslatedDefinition]:
+    # Performs a round-trip translation malagasy -> x -> malagasy to reformulate the definition
+    # in order to avoid copyright infringement.
+    # This is a very expensive operation, so it should be used only when the definition is not]
+    if source_language != target_language:
+        raise ValueError("Round-trip translation is only possible when source and target languages are the same.")
+
+    x_to_english = NllbDefinitionTranslation(source_language, 'eng_Latn')
+    english_to_x = NllbDefinitionTranslation('eng_Latn', source_language)
+    translation = x_to_english.get_translation(definition_line)
+    back_translation = english_to_x.get_translation(translation)
+    if translation == back_translation:
+        return UntranslatedDefinition(definition_line)
+    else:
+        return TranslatedDefinition(back_translation)
 
 
 __all__ = [

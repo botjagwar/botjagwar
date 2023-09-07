@@ -9,6 +9,7 @@ from api.rabbitmq import RabbitMqConsumer
 
 service_port = int(sys.argv[1])
 
+
 class SimpleEntryTranslatorClientFeeder(object):
     def __init__(self):
         self.consumer = RabbitMqConsumer('edit', callback_function=self.on_page_edit)
@@ -31,9 +32,10 @@ class SimpleEntryTranslatorClientFeeder(object):
         site = arguments.get('site', 'en')
         title = arguments.get('title', '')
         print(f'>>> {site} :: {title} <<<')
-        roll = random.randint(0, 100)
-        # if roll < 50:
+        # roll = random.randint(0, 100)
         route = 'wiktionary_page_async'
+        # if roll < 50:
+        #     route = 'wiktionary_page_async'
         # else:
         #     route = 'wiktionary_page'
 

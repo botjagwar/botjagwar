@@ -4,6 +4,7 @@ import sys
 
 import pywikibot
 import redis
+import redis.exceptions
 import requests
 
 from api.config import BotjagwarConfig
@@ -120,7 +121,10 @@ class RedisSite(object):
 
     def push_page(self, title: str, content: str):
         if title is not None and content is not None:
-            self.instance.set(f'{self.wiki}.{self.language}/{title}', content)
+            try:
+                self.instance.set(f'{self.wiki}.{self.language}/{title}', content)
+            except redis.exceptions.ConnectionError as error:
+                print(error)
 
     def __str__(self):
         return f'{self.wiki}.{self.language}'
@@ -153,8 +157,12 @@ class RedisPage(object):
         if self._title is None:
             return ''
 
-        cache_contents = self.site.instance.get(
-            f'{self.site.wiki}.{self.site.language}/{self._title}')
+        try:
+            cache_contents = self.site.instance.get(
+                f'{self.site.wiki}.{self.site.language}/{self._title}')
+        except redis.exceptions.ConnectionError:
+            cache_contents = None
+
         if not cache_contents:
             if not self.offline:
                 wikisite = pywikibot.Site(self.site.language, self.site.wiki)
@@ -176,8 +184,11 @@ class RedisPage(object):
             return cache_contents
 
     def exists(self):
-        cache_contents = self.site.instance.get(
-            f'{self.site.wiki}.{self.site.language}/{self._title}')
+        try:
+            cache_contents = self.site.instance.get(
+                f'{self.site.wiki}.{self.site.language}/{self._title}')
+        except redis.exceptions.ConnectionError:
+            cache_contents = None
         if not cache_contents:
             if self.offline:
                 return False

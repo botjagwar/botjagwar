@@ -151,6 +151,7 @@ class ReferencesImporter(SubsectionImporter):
         '[[category:',  # Category section caught
         '==',  # Section caught
         '{{c|',  # Categorisation templates
+        '{{l|',  # List element templates
         '{{comcatlite|'  # Commons category
     ]
 
