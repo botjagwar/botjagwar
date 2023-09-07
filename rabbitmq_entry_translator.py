@@ -32,10 +32,10 @@ class SimpleEntryTranslatorClientFeeder(object):
         title = arguments.get('title', '')
         print(f'>>> {site} :: {title} <<<')
         roll = random.randint(0, 100)
-        if roll < 50:
-            route = 'wiktionary_page_async'
-        else:
-            route = 'wiktionary_page'
+        # if roll < 50:
+        route = 'wiktionary_page_async'
+        # else:
+        #     route = 'wiktionary_page'
 
         url = f'http://localhost:{service_port}/{route}/{site}'
         print(url)

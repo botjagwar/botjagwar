@@ -3,11 +3,13 @@ import time
 
 import requests
 
+service = int(sys.argv[3])
+
 with open(sys.argv[2], 'r') as file:
     for data in file:
         cool_down = True
         while cool_down:
-            resp = requests.get(f'http://localhost:8000/jobs')
+            resp = requests.get(f'http://localhost:{service}/jobs')
             resp_data = resp.json()
             if resp_data['jobs'] < 10:
                 print(f'There are {resp_data["jobs"]} jobs currently in progress')
@@ -21,7 +23,7 @@ with open(sys.argv[2], 'r') as file:
         print('>>>', data, '<<<')
         while True:
             try:
-                requests.post("http://localhost:8000/wiktionary_page_async/" + sys.argv[1], json={"title": data})
+                requests.post(f"http://localhost:{service}/wiktionary_page_async/" + sys.argv[1], json={"title": data})
                 break
             except KeyboardInterrupt:
                 print("Stopped.")
