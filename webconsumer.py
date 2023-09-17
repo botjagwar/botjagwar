@@ -21,7 +21,7 @@ RABBITMQ_PASSWORD = config.get('password', 'rabbitmq')
 RABBITMQ_VIRTUAL_HOST = config.get('virtual_host', 'rabbitmq')
 
 
-def fetch():
+def fetch(queue_name='soavolana'):
     credentials = pika.PlainCredentials(RABBITMQ_USERNAME, RABBITMQ_PASSWORD)
     parameters = pika.ConnectionParameters(
         host=RABBITMQ_HOST,
@@ -31,36 +31,35 @@ def fetch():
     connection = pika.BlockingConnection(parameters)
     channel = connection.channel()
 
-    method_frame, _, body = channel.basic_get(queue=RABBITMQ_QUEUE, auto_ack=True)
+    method_frame, _, body = channel.basic_get(queue=queue_name, auto_ack=True)
     if method_frame:
         print("Message fetched:", body.decode())
     return json.loads(body.decode())
 
 
-@app.route('/title.txt', methods=['GET'])
-def title():
+@app.route('/<user>/title.txt', methods=['GET'])
+def title(user='soavolana'):
     """Renders the contact page."""
-    return send_file(f'{folder}/title.txt', )
+    return send_file(f'{folder}/{user}_title.txt', )
 
 
-@app.route('/text.txt', methods=['GET'])
-def text():
+@app.route('/<user>/text.txt', methods=['GET'])
+def text(user='soavolana'):
     """Renders the contact page."""
-    return send_file(f'{folder}/text.txt', )
+    return send_file(f'{folder}/{user}_text.txt', )
 
 
-@app.route('/next', methods=['GET'])
-def next_edit():
+@app.route('/<user>/next', methods=['GET'])
+def next_edit(user='soavolana'):
     """Renders the contact page."""
-    data = fetch()
-    with open(f'{folder}/title.txt', 'w') as f:
+    data = fetch(user)
+    with open(f'{folder}/{user}_title.txt', 'w') as f:
         f.write(data['page'])
 
-    with open(f'{folder}/text.txt', 'w') as f:
+    with open(f'{folder}/{user}_text.txt', 'w') as f:
         f.write(data['content'])
 
     return Response('New title and text updated.', status=200)
-
 
 if __name__ == '__main__':
     HOST = '0.0.0.0'
