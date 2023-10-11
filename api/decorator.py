@@ -108,6 +108,18 @@ def separate_process(f):
     return wrap
 
 
+def reraise_exceptions(exceptions, new_exception_type):
+    def wrapper_catch_exceptions(f):
+        def wrapper(*args, **kwargs):
+            try:
+                return f(*args, **kwargs)
+            except exceptions as exc:
+                raise new_exception_type from exc
+
+        return wrapper
+    return wrapper_catch_exceptions
+
+
 def catch_exceptions(*exceptions):
     def wrapper_catch_exceptions(f):
         def wrapper(*args, **kwargs):

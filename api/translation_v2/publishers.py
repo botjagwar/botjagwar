@@ -3,11 +3,23 @@ from typing import List
 from copy import deepcopy
 
 from api import entryprocessor
-from api.decorator import threaded
+from api.decorator import reraise_exceptions, threaded
 from api.model.word import Entry
 from api.rabbitmq import RabbitMqProducer
 from redis_wikicache import RedisPage as Page, RedisSite as Site
 from .exceptions import TranslatedPagePushError
+
+
+class PublisherError(Exception):
+    pass
+
+
+class WiktionaryPublisherError(PublisherError):
+    pass
+
+
+class WiktionaryRabbitMqPublisherError(PublisherError):
+    pass
 
 
 class Publisher(object):
@@ -28,6 +40,7 @@ class Publisher(object):
 
 
 class WiktionaryDirectPublisher(Publisher):
+
     def publish_to_wiktionary(self, translation):
         def _publish_to_wiktionary(page_title: str, entries: List[Entry]):
             """
@@ -88,15 +101,17 @@ class WiktionaryRabbitMqPublisher(Publisher):
         """
         self.publisher = RabbitMqProducer(self.queue_name)
 
-    def wait_for_ready(self):
+    def wait_for_ready(self, timeout=10):
         while self.publisher is None:
             print("Waiting for publisher initialize...")
             time.sleep(1)
+
         while not self.publisher.is_ready:
             print("Waiting for publisher to be ready...")
             time.sleep(1)
 
     def publish_to_wiktionary(self, translation):
+        @reraise_exceptions((Exception,), WiktionaryRabbitMqPublisherError)
         def _publish_to_wiktionary(page_title: str, entries: List[Entry]):
             """
             Push translated data and if possible avoid any information loss

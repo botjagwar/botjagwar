@@ -61,6 +61,7 @@ def next_edit(user='soavolana'):
 
     return Response('New title and text updated.', status=200)
 
+
 if __name__ == '__main__':
     HOST = '0.0.0.0'
     app.run(HOST, PORT)

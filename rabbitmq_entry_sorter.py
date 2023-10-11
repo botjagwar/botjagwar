@@ -1,5 +1,5 @@
 import time
-
+from random import choice
 from api.decorator import separate_process
 from api.rabbitmq import RabbitMqProducer, RabbitMqConsumer
 
@@ -35,10 +35,13 @@ class SimpleEntryTranslatorSorter(object):
         init_ramaromiadana()
         init_manaona()
 
-    def run(self):
-        self.consumer.run()
+        self.users = [self.lohataona, self.soavolana, self.ramaromiadana, self.manaona]
 
-    def on_page_edit(self, **arguments):
+
+    def shuffle_queue(self, **arguments):
+        pass
+
+    def language_specialist(self, **arguments):
         # self.backup.push_to_queue(arguments)
         content = arguments['content']
 
@@ -92,11 +95,29 @@ class SimpleEntryTranslatorSorter(object):
 
             return self.ramaromiadana.push_to_queue(arguments)
 
-        print(f'{arguments["page"]} > lohataona')
-        while self.lohataona is None:
+        # lohataona handles
+        conditions = False
+        for language in 'sw zu af am sq oc ca tr bg ro pl cs sk da be lt lv he my'.split():
+            conditions = conditions or '{{=' + language + '=}}' in content
+        if conditions:
+            print(f'{arguments["page"]} > ramaromiadana')
+            while self.lohataona is None:
+                time.sleep(1)
+            while not self.lohataona.is_ready:
+                time.sleep(1)
+
+            return self.lohataona.push_to_queue(arguments)
+
+        print(f'{arguments["page"]} > botjagwar')
+        while self.bot is None:
             time.sleep(1)
 
-        return self.lohataona.push_to_queue(arguments)
+        return choice(self.users).push_to_queue(arguments)
+
+    def run(self):
+        self.consumer.run()
+
+    on_page_edit = language_specialist
 
 
 if __name__ == '__main__':
