@@ -1,4 +1,5 @@
 #!/bin/bash
+
 echo "Prepare python environment"
 set -xe
 if [[ -z `which virtualenv` ]]; then
@@ -44,4 +45,30 @@ sudo cp -r $src_dir/data $opt_dir
 sudo cp -r $src_dir/scripts $opt_dir
 sudo cp -r $src_dir/*.py $opt_dir
 
+if [[ -z $TEST ]]; then
+  # Install dependencies if NOT in test mode
+  # this should allow for an increase of the speed-up regarding build time and is not needed
+  # anyway by the unit tests when in testing mode
+  sudo apt-get install -y haproxy
+  sudo cp conf/haproxy.cfg $opt_dir/conf/
+  sudo apt-get install -y supervisor
+
+  if [[ ! -d /etc/supervisor/conf.d ]]; then
+    sudo cp $src_dir/conf/supervisor-botjagwar.conf /etc/supervisor/conf.d/supervisor-botjagwar.conf
+
+    # replace current from a potentially privileged user down to a non-privileged one. Pywikibot user
+    # might be configured for the user and but not for the root user, as generally advised.
+    sed -i "s/user=root/user=`whoami`/g" /etc/supervisor/conf.d/supervisor-botjagwar.conf
+
+    echo "Supervisor installation is complete. Reloading config"
+    sudo supervisorctl reload -y
+  fi
+fi
+
+if [[ ! -z $INSTALL_PG ]]; then
+  # Feature coming soon
+  echo "Automatic postgreSQL installation/configuration is currently not supported."
+fi
+
 sudo chown `whoami`:`whoami` -R $opt_dir
+

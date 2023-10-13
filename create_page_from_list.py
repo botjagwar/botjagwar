@@ -11,7 +11,12 @@ with open(sys.argv[2], 'r') as file:
         cool_down = True
         while cool_down:
             resp = requests.get(f'http://{server}:{service}/jobs')
-            resp_data = resp.json()
+            try:
+                resp_data = resp.json()
+            except Exception:
+                time.sleep(.5)
+                continue
+
             if resp_data['jobs'] < 10:
                 print(f'There are {resp_data["jobs"]} jobs currently in progress')
                 cool_down = False
