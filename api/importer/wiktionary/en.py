@@ -355,8 +355,6 @@ class TranslationImporter(WiktionaryAdditionalDataImporter):
                     definition = definition.strip('}}')
                     inside_translation_section = True
                     continue
-                else:
-                    definition = wikipage.title()
 
                 if '{{trans-mid' in line:
                     continue
