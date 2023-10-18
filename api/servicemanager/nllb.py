@@ -30,7 +30,7 @@ class DefinitionTranslationError(Exception):
 
 
 class NllbDefinitionTranslation(object):
-    def __init__(self, target_language, source_language='en'):
+    def __init__(self, target_language, source_language='en', backend='default'):
         """
         Translate using a NLLB service spun up on another server.
         :param target_language:
