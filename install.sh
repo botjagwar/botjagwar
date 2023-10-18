@@ -71,5 +71,11 @@ if [[ ! -z $INSTALL_PG ]]; then
   echo "Automatic postgreSQL installation/configuration is currently not supported."
 fi
 
+if [[ ! -d ${opt_dir}/bin ]]; then
+  mkdir -p ${opt_dir}/bin
+fi
+
+cp bin/postgrest $opt_dir/bin
+
 sudo chown `whoami`:`whoami` -R $opt_dir
 
