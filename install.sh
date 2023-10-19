@@ -58,8 +58,8 @@ if [[ -z $TEST ]]; then
 
     # replace current from a potentially privileged user down to a non-privileged one. Pywikibot user
     # might be configured for the user and but not for the root user, as generally advised.
-    sed -i "s/user=user/user=`whoami`/g" /etc/supervisor/conf.d/supervisor-botjagwar.conf
-    sed -i "s/\/home\/user/\/home\/`whoami`/g" /etc/supervisor/conf.d/supervisor-botjagwar.conf
+    sudo sed -i "s/user=user/user=`whoami`/g" /etc/supervisor/conf.d/supervisor-botjagwar.conf
+    sudo sed -i "s/\/home\/user/\/home\/`whoami`/g" /etc/supervisor/conf.d/supervisor-botjagwar.conf
 
     echo "Supervisor installation is complete. Reloading config"
     sudo supervisorctl reload -y
