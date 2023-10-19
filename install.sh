@@ -62,7 +62,7 @@ if [[ -z $TEST ]]; then
     sudo sed -i "s/\/home\/user/\/home\/`whoami`/g" /etc/supervisor/conf.d/supervisor-botjagwar.conf
 
     echo "Supervisor installation is complete. Reloading config"
-    sudo supervisorctl reload -y
+    sudo supervisorctl reload
   fi
 fi
 
