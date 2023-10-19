@@ -37,7 +37,19 @@ from .types import \
 
 log = logging.getLogger(__name__)
 URL_HEAD = DictionaryServiceManager().get_url_head()
-
+translation_methods = [
+    try_methods_until_translated(
+        # translate_using_convergent_definition,
+        translate_form_of_definitions,
+        translate_using_nllb
+        # translate_using_bridge_language,
+        # translate_using_postgrest_json_dictionary,
+        # translate_using_suggested_translations_fr_mg,
+        # translate_using_opus_mt,
+        # translate_using_opus_mt,
+        # translate_form_of_templates,
+    ),
+]
 
 already_visited = []
 
@@ -54,52 +66,17 @@ class Translation:
         Allows postprocessors to be defines on a per-language basis, or a language + part of speech basis.
         """
         super(Translation, self).__init__()
-
-        self.config = BotjagwarConfig()
-
-        # Config override parameter
-        self._override_translator = None
-
-        # Translation methods
-        self.translation_methods = [
-            try_methods_until_translated(
-                # translate_using_convergent_definition,
-                translate_form_of_definitions,
-                translate_using_nllb(backend=self.nllb_translator)
-                # translate_using_bridge_language,
-                # translate_using_postgrest_json_dictionary,
-                # translate_using_suggested_translations_fr_mg,
-                # translate_using_opus_mt,
-                # translate_using_opus_mt,
-                # translate_form_of_templates,
-            ),
-        ]
-
         self.output = Output()
         self.default_publisher = WiktionaryDirectPublisher()
         self.loop = asyncio.get_event_loop()
+        self.config = BotjagwarConfig()
         self.postprocessors_config = BotjagwarConfig(name='entry_translator/postprocessors.ini')
         self.reference_template_queue = set()
-
         if not use_configured_postprocessors:
             self._post_processors = list()
             self.static_postprocessors = True
         else:
             self.static_postprocessors = False
-
-    def set_nllb_backend(self, new_value):
-        if isinstance(new_value, str):
-            self._override_translator = new_value
-        else:
-            raise TypeError("Invalid type for the NLLB Backend address")
-
-    @property
-    def nllb_translator(self):
-        """Allow for override of the backend address"""
-        if not self._override_translator:
-            return self.config.get('backend_address', 'nllb')
-        else:
-            return self._override_translator
 
     @property
     def post_processors(self):
@@ -339,7 +316,7 @@ class Translation:
                 for refined_definition_line in refined_definition_lines:
                     # Try translation methods in succession.
                     # If one method produces something, skip the rest
-                    for translation_method in self.translation_methods:
+                    for translation_method in translation_methods:
                         if entry.part_of_speech is None:
                             print(f'No part of speech found! Skipping {translation_method.__name__}')
                             continue

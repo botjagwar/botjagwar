@@ -21,7 +21,6 @@ databases = []
 
 parser = ArgumentParser(description="Entry translator service")
 parser.add_argument('-p', '--port', dest='PORT', type=int, default=8000)
-parser.add_argument('-t', '--translator', dest='TRANSLATOR', type=int, default=None)
 parser.add_argument('-q', '--queue', dest='QUEUE', type=str, default='botjagwar')
 parser.add_argument(
     '-l',
@@ -45,10 +44,6 @@ except KeyError:
 
 log.basicConfig(filename=args.LOG, level=LOG_LEVEL)
 translations = Translation()
-
-if args.TRANSLATOR is not None:
-    translations.set_nllb_backend(args.TRANSLATOR)
-
 routes = web.RouteTableDef()
 queue_size = 0
 print("Initiating connection to rabbitmq...")
