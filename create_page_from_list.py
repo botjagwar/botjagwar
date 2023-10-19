@@ -3,7 +3,7 @@ import time
 
 import requests
 
-server = '192.168.1.21'
+server = 'localhost'
 service = 8000  #int(sys.argv[3])
 
 with open(sys.argv[2], 'r') as file:
@@ -22,10 +22,10 @@ with open(sys.argv[2], 'r') as file:
                 cool_down = False
             else:
                 print(
-                    f'COOLING DOWN: sleeping for 5 seconds as there are {resp_data["jobs"]} jobs currently in progress')
-                time.sleep(5)
+                    f'COOLING DOWN: sleeping for 15 seconds as there are {resp_data["jobs"]} jobs currently in progress')
+                time.sleep(15)
         data = data.strip('\n')
-        time.sleep(.2)
+        time.sleep(5)
         print('>>>', data, '<<<')
         while True:
             try:
