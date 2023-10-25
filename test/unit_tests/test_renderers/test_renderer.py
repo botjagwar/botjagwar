@@ -361,3 +361,101 @@ class TestRenderers(TestCase):
         removed_section = renderer.delete_section('fro', test_wikipage)
         self.assertEqual(removed_section, expected)
 
+
+    def test_delete_section_middle_2(self):
+        renderer = MGWikiPageRenderer()
+        test_wikipage = """
+=={{=es=}}==
+
+{{-mat-|es}}
+'''valer''' 
+# [[+''''de''']]
+# [[manampy]] na manan-danja
+# ny ho [[matanjaka]]
+# ny ho [[mendrika]]
+# ny ho [[salama]] [[tsara]]
+
+{{-tsiahy-}}
+{{wikibolana|en|valer}}
+
+=={{=fro=}}==
+
+{{-mat-|fro}}
+'''valer''' 
+# [[midina]]
+
+{{-tsiahy-}}
+* {{Tsiahy:Godefroy}}
+* {{Tsiahy:Anglo-Norman On-Line Hub}}
+* {{wikibolana|en|valer}}
+
+=={{=mfe=}}==
+
+{{-ana-|mfe}}
+'''valer''' 
+# ny [[lanjany]]
+
+{{-tsiahy-}}
+* Baker, Philip & Hookoomsing, Vinesh Y. 1987. ''Dictionnaire de créole mauricien. Morisyen – English – Français''
+* {{wikibolana|en|valer}}
+
+=={{=gl=}}==
+
+{{-mat-|gl}}
+'''valer''' 
+# [[manampy]]
+# [[mifanaraka]] amin'ny
+# ny ho azo [[ekena]]
+# ny ho [[mendrika]]
+
+{{-fanononana-}}
+* {{IPA|gl|[baˈleɾ]}}
+
+{{-tsiahy-}}
+* {{Tsiahy:gl:DDGM}}
+* {{Tsiahy:gl:CX}}
+* {{Tsiahy:gl:DDLG}}
+* {{Tsiahy:gl:TILG}}
+* {{Tsiahy:TLPGP}}
+* {{wikibolana|en|valer}}        
+"""
+        expected = """
+=={{=es=}}==
+
+{{-mat-|es}}
+'''valer''' 
+# [[+''''de''']]
+# [[manampy]] na manan-danja
+# ny ho [[matanjaka]]
+# ny ho [[mendrika]]
+# ny ho [[salama]] [[tsara]]
+
+{{-tsiahy-}}
+{{wikibolana|en|valer}}
+
+
+
+=={{=gl=}}==
+
+{{-mat-|gl}}
+'''valer''' 
+# [[manampy]]
+# [[mifanaraka]] amin'ny
+# ny ho azo [[ekena]]
+# ny ho [[mendrika]]
+
+{{-fanononana-}}
+* {{IPA|gl|[baˈleɾ]}}
+
+{{-tsiahy-}}
+* {{Tsiahy:gl:DDGM}}
+* {{Tsiahy:gl:CX}}
+* {{Tsiahy:gl:DDLG}}
+* {{Tsiahy:gl:TILG}}
+* {{Tsiahy:TLPGP}}
+* {{wikibolana|en|valer}}        
+"""
+        removed_section = renderer.delete_section('fro', test_wikipage)
+        removed_section = renderer.delete_section('mfe', removed_section)
+        self.assertEqual(removed_section, expected)
+
