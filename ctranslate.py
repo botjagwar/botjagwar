@@ -8,6 +8,10 @@ from transformers import AutoModelForSeq2SeqLM, AutoTokenizer, pytorch_utils
 app = Flask(__name__)
 
 
+class TranslatorError(Exception):
+    pass
+
+
 class Translator:
     def __init__(self, model_name='nllb-200-distilled-3.3B'):
         self._device = "cpu"
@@ -22,7 +26,6 @@ class Translator:
         self.sp.load(sp_model_path)
 
         print("Model loaded")
-
 
     @property
     def model(self):
@@ -42,9 +45,13 @@ class Translator:
         translated_tokens = self.model.generate(
             **inputs, forced_bos_token_id=self.tokenizer.lang_code_to_id[target], max_length=1000
         )
+        if len(translated_tokens) > 512:
+            raise TranslatorError(f"Text too long. Maximum translatable tokens is 512"
+                                  f" but tokenised input contained {len(translated_tokens)} tokens."
+                                  f" This limit has been set because translation quality will strongly degrade.")
         translated = self.tokenizer.batch_decode(translated_tokens, skip_special_tokens=True)[0]
         return translated
-    #
+
     # def translate(self, text, source, target):
     #     #
     #     source_sents_subworded = self.sp.encode_as_pieces([text])

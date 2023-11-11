@@ -31,7 +31,7 @@ def push_to_entry_translator():
             print('>>>', data, '<<<')
             while True:
                 try:
-                    requests.post(f"http://{server}:{service}/wiktionary_page_async/" + sys.argv[1],
+                    requests.post(f"http://{server}:{service}/wiktionary_page/" + sys.argv[1],
                                   json={"title": data})
                     break
                 except KeyboardInterrupt:
@@ -57,4 +57,4 @@ def push_to_edit_queue():
 
 
 if __name__ == '__main__':
-    push_to_edit_queue()
+    push_to_entry_translator()
