@@ -47,7 +47,7 @@ def push_to_edit_queue():
     publisher = RabbitMqProducer('edit')
     with open(sys.argv[2], 'r') as file:
         for data in file:
-            time.sleep(.2)
+            # time.sleep(.2)
             print('>>>', data.strip('\n'), '<<<')
             publisher.push_to_queue({
                 'site': sys.argv[1],
@@ -57,4 +57,4 @@ def push_to_edit_queue():
 
 
 if __name__ == '__main__':
-    push_to_entry_translator()
+    push_to_edit_queue()
