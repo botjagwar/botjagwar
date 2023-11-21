@@ -221,7 +221,7 @@ def remove_gotcha_translations(translation):
 def translate_individual_word_using_dictionary(word, source_language, target_language):
     source_matches = []
     target_matches = []
-    if word in whitelists[source_matches]:
+    if word in whitelists[source_language]:
         for pos in ['ana', 'mat', 'mpam', 'tamb']:
             data = json_dictionary.look_up_dictionary(source_language, pos, word)
             if data:
