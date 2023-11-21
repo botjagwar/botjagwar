@@ -1,3 +1,4 @@
+import os
 import re
 from logging import getLogger
 
@@ -11,11 +12,28 @@ json_dictionary = JsonDictionary(use_materialised_view=False)
 convergent_translations = ConvergentTranslations()
 log = getLogger(__file__)
 
+# whitelists to limit translation to certain words
+whitelists = {}
+
 # All translations bugs by NLLB belong here
 nllb_gotchas = [
     'famaritana malagasy',
     'fa tsy misy dikany'
 ]
+
+
+def fetch_whitelist(language):
+    global whitelists
+    returned_data = set()
+    whitelist = os.path.join(os.path.dirname(__file__), f'{language}-whitelist')
+    for line in open(whitelist, 'r').readlines():
+        returned_data.add(line)
+
+    whitelists[language] = returned_data
+
+
+fetch_whitelist('en')
+fetch_whitelist('fr')
 
 
 def translate_using_nltk(part_of_speech, definition_line, source_language, target_language,
@@ -201,18 +219,21 @@ def remove_gotcha_translations(translation):
 
 
 def translate_individual_word_using_dictionary(word, source_language, target_language):
-    matches = []
-    for pos in ['ana', 'mat', 'mpam', 'tamb']:
-        data = json_dictionary.look_up_dictionary(source_language, pos, word)
-        target_data = json_dictionary.look_up_dictionary('mg', pos, word)
-        if data and not target_data:
-            definitions = data[0]['definitions']
-            for definition in definitions:
-                if definition['language'] == target_language:
-                    matches.append(definition['definition'])
+    source_matches = []
+    target_matches = []
+    if word in whitelists[source_matches]:
+        for pos in ['ana', 'mat', 'mpam', 'tamb']:
+            data = json_dictionary.look_up_dictionary(source_language, pos, word)
+            if data:
+                definitions = data[0]['definitions']
+                for definition in definitions:
+                    if definition['language'] == target_language:
+                        source_matches.append(definition['definition'])
 
-    print(f'translate_individual_word_using_dictionary: {matches}')
-    return matches
+    if len(target_matches) == 0:
+        return source_matches
+    else:
+        return []
 
 
 def translate_using_dictionary(translation, source_language, target_language):
@@ -221,7 +242,7 @@ def translate_using_dictionary(translation, source_language, target_language):
     for w in words:
         matches = translate_individual_word_using_dictionary(w, source_language, target_language)
         if matches:
-            out_translation += ' ' + translate_individual_word_using_dictionary(w, source_language, target_language)[0]
+            out_translation += ' ' + matches[0]
         else:
             out_translation += ' ' + w
 
@@ -265,7 +286,8 @@ def translate_using_nllb(part_of_speech, definition_line, source_language, targe
     translation = remove_unknown_characters(translation)
     translation = remove_duplicate_definitions(translation)
     translation = remove_gotcha_translations(translation)
-    translation = translate_using_dictionary(translation, source_language, target_language)
+    if len(translation.split()) < 3:
+        translation = translate_using_dictionary(translation, source_language, target_language)
 
     print(f'translate_using_nllb: {definition_line}')
 
