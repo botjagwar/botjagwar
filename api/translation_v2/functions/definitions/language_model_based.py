@@ -64,7 +64,7 @@ def enrich_english_definition(part_of_speech, definition_line):
 
 def enrich_french_definition(part_of_speech, definition_line):
     if part_of_speech == 'ana':
-        prefix = 'c\'est'
+        prefix = 'cela est'
         if not definition_line.lower().startswith('un ') or not definition_line.lower().startswith('une '):
             prefix += ' un ou une '
         definition_line = prefix + definition_line + '.'
@@ -204,11 +204,14 @@ def translate_individual_word_using_dictionary(word, source_language, target_lan
     matches = []
     for pos in ['ana', 'mat', 'mpam', 'tamb']:
         data = json_dictionary.look_up_dictionary(source_language, pos, word)
-        if data:
+        target_data = json_dictionary.look_up_dictionary('mg', pos, word)
+        if data and not target_data:
             definitions = data[0]['definitions']
             for definition in definitions:
                 if definition['language'] == target_language:
                     matches.append(definition['definition'])
+
+    print(f'translate_individual_word_using_dictionary: {matches}')
     return matches
 
 
@@ -222,6 +225,7 @@ def translate_using_dictionary(translation, source_language, target_language):
         else:
             out_translation += ' ' + w
 
+    print(f'translate_using_dictionary: {out_translation}')
     return out_translation.strip()
 
 
@@ -262,6 +266,8 @@ def translate_using_nllb(part_of_speech, definition_line, source_language, targe
     translation = remove_duplicate_definitions(translation)
     translation = remove_gotcha_translations(translation)
     translation = translate_using_dictionary(translation, source_language, target_language)
+
+    print(f'translate_using_nllb: {definition_line}')
 
     if definition_line.lower() in nllb_gotchas:
         return UntranslatedDefinition(definition_line)
