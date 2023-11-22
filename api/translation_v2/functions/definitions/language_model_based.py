@@ -15,7 +15,7 @@ log = getLogger(__file__)
 # whitelists to limit translation to certain words
 whitelists = {}
 
-# All translations bugs by NLLB belong here
+# All translation bugs by NLLB belong here
 nllb_gotchas = [
     'famaritana malagasy',
     'fa tsy misy dikany'
@@ -266,9 +266,9 @@ def translate_using_nllb(part_of_speech, definition_line, source_language, targe
     definition_line = re.sub("\{\{([\w]+)\|" + source_language + "\}\}", '(\\1)', definition_line)
     definition_line = re.sub("<ref>(.*)<\/ref>", '', definition_line)
 
-    # One-word definitions are tricker to translate without appropriate context
-    if len(definition_line.split()) < 2:
-        return UntranslatedDefinition(definition_line)
+    # One-word definitions are trickier to translate without appropriate context
+    # if len(definition_line.split()) < 2:
+    #     return UntranslatedDefinition(definition_line)
 
     # For medium-sized definitions, further enrich as longer definitions seems to be doing just fine (for now)
     if len(definition_line.split()) <= 30:
@@ -286,7 +286,7 @@ def translate_using_nllb(part_of_speech, definition_line, source_language, targe
     translation = remove_unknown_characters(translation)
     translation = remove_duplicate_definitions(translation)
     translation = remove_gotcha_translations(translation)
-    if len(translation.split()) < 3:
+    if len(translation.split()) < 5:
         translation = translate_using_dictionary(translation, source_language, target_language)
 
     print(f'translate_using_nllb: {definition_line}')
