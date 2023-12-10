@@ -1,6 +1,6 @@
-aiohttp == 3.8.5
+aiohttp == 3.9.0
 coverage==6.3.2
-flask == 1.0.2
+flask == 2.2.5
 irc == 19
 lxml == 4.9.1
 parameterized
