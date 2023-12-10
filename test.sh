@@ -3,6 +3,8 @@ echo "Prepare python environment"
 opt_dir=/opt/botjagwar
 src_dir=$(pwd)
 
+export TEST=1
+
 # Setup test environment
 set -x
 bash -xe install.sh

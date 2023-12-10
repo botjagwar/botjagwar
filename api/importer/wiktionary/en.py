@@ -64,15 +64,15 @@ class SubsectionImporter(BaseSubsectionImporter):
                     wikipage_ = wikipage_[pos1:]
 
                 # More often than we'd like to admit,
-                #   the section level for the given sub-section is one level deeper than expected.
-                # As a consequence, a '=<newline>' can appear before the sub-section content.
+                #   the section level for the given subsection is one level deeper than expected.
+                # As a consequence, a '=<newline>' can appear before the subsection content.
                 # That often happens for references, derived terms, synonyms, etymologies and part of speech.
                 # We could throw an Exception,
                 #   but there are 6.5M pages and God knows how many more cases to handle;
                 #   so we don't: let's focus on the job while still keeping it simple.
                 # Hence, the hack below can help the script fall back on its feet while still doing its job
                 #   of fetching the subsection's content.
-                # I didn't look for sub-sections that are actually 2 levels or more deeper than expected.
+                # I didn't look for subsections that are actually 2+ levels deeper than expected.
                 # Should there be any of that, copy and adapt the condition.
                 #   I didn't do it here because -- I.M.H.O -- Y.A.G.N.I right now.
                 # My most sincere apologies to perfectionists.
@@ -151,6 +151,7 @@ class ReferencesImporter(SubsectionImporter):
         '[[category:',  # Category section caught
         '==',  # Section caught
         '{{c|',  # Categorisation templates
+        '{{l|',  # List element templates
         '{{comcatlite|'  # Commons category
     ]
 
@@ -323,7 +324,7 @@ class TranslationImporter(WiktionaryAdditionalDataImporter):
         :return:
         """
 
-        # Main regex to retrieve a given translation. Most of entries use this format
+        # Main regex to retrieve a given translation. Most entries use this format
         regex = r'\{\{t[\+]?\|([A-Za-z]{2,3})\|(.*?)\}\}'
 
         translations = {}
