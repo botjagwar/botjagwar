@@ -10,12 +10,11 @@ PORT = 8443
 config = BotjagwarConfig()
 app = Flask(__name__)
 folder = '/tmp'
-# folder = '/root/soavolana_queue'
 
 
 # RabbitMQ connection parameters
 RABBITMQ_HOST = config.get('host', 'rabbitmq')
-RABBITMQ_QUEUE = 'lohataona'
+RABBITMQ_QUEUE = 'queue'
 RABBITMQ_USERNAME = config.get('username', 'rabbitmq')
 RABBITMQ_PASSWORD = config.get('password', 'rabbitmq')
 RABBITMQ_VIRTUAL_HOST = config.get('virtual_host', 'rabbitmq')
@@ -55,7 +54,7 @@ def push(queue_name, message):
     channel.basic_publish(exchange='', routing_key=queue_name, body=message)
 
 
-def fetch(queue_name='soavolana'):
+def fetch(queue_name=''):
     channel = make_channel()
     method_frame, _, body = channel.basic_get(queue=queue_name, auto_ack=True)
     if method_frame:
@@ -79,19 +78,19 @@ def send(user):
 
 
 @app.route('/<user>/title.txt', methods=['GET'])
-def title(user='soavolana'):
+def title(user=''):
     """Renders the contact page."""
     return send_file(f'{folder}/{user}_title.txt', )
 
 
 @app.route('/<user>/text.txt', methods=['GET'])
-def text(user='soavolana'):
+def text(user=''):
     """Renders the contact page."""
     return send_file(f'{folder}/{user}_text.txt', )
 
 
 @app.route('/<user>/next', methods=['GET'])
-def next_edit(user='soavolana'):
+def next_edit(user=''):
     """Renders the contact page."""
     data = fetch(user)
     with open(f'{folder}/{user}_title.txt', 'w') as f:
