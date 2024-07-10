@@ -54,9 +54,6 @@ class TestDerivedTermsImporter(ApiImporterTester):
     filename = 'importers/derived_terms.wiki'
     language = 'vi'
 
-    def test_get_data_exists(self):
-        pass
-
 
 class TestPronunciationImporter(ApiImporterTester):
     Importer = PronunciationImporter

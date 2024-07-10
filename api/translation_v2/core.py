@@ -133,12 +133,12 @@ class Translation:
     @staticmethod
     def add_wiktionary_credit(
             entries: List[Entry],
-            wiki_page: [pywikibot.Page, Page]) -> List[Entry]:
-        reference = "{{wikibolana|" + wiki_page.site.lang + \
-                    '|' + wiki_page.title() + '}}'
+            wiki_page: [entryprocessor.WiktionaryProcessor]) -> List[Entry]:
+        reference = "{{wikibolana|" + wiki_page.language + \
+                    '|' + wiki_page.title + '}}'
         out_entries = []
         for entry in entries:
-            entry.origin_wiktionary = wiki_page.site.lang
+            entry.origin_wiktionary = wiki_page.language
             if entry.additional_data is None:
                 entry.additional_data = {}
 
@@ -389,6 +389,8 @@ class Translation:
                 out_entries.append(out_entry)
 
         out_entries.sort()
+        out_entries = Translation.add_wiktionary_credit(out_entries, wiktionary_processor)
+
         # Post-processors takes the list of entries and returns the same.
         out_entries = self.run_postprocessors(out_entries)
         return out_entries
@@ -413,7 +415,6 @@ class Translation:
             return self.process_wiktionary_wiki_page(wiki_page.getRedirectTarget())
         try:
             out_entries = self.translate_wiktionary_page(wiktionary_processor)
-            out_entries = Translation.add_wiktionary_credit(out_entries, wiki_page)
             ret = self.output.wikipages(out_entries)
             if ret != '':
                 log.debug('out_entries>' + str(out_entries))

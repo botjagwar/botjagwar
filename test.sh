@@ -18,6 +18,7 @@ source $opt_dir/pyenv/bin/activate
 
 python -m pip install pytest==7.2.1
 python -m pip install pytest-cov==4
+python -m pip install pytest-mock
 python -m pip install parameterized
 
 if [[ $NORUN == 1 ]]; then

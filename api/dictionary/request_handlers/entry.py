@@ -226,7 +226,8 @@ async def edit_entry(request) -> Response:
     with session.no_autoflush:
         # Search if word already exists.
         word = session.query(Word).filter_by(
-            id=request.match_info['word_id']).all()
+            id=request.match_info['word_id']
+        ).all()
         # return exception if it doesn't
         # that because we'd not be editing otherwise.
         if not word:

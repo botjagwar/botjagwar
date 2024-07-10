@@ -57,6 +57,14 @@ class Wikilister(object):
                  site]
             articles, pages, edits, users, activeusers, admins, images, lang, site = e
 
+            # words per page calculation
+            if float(m['articles']) != 0:
+                words_p_article = float(m["cirrussearch-article-words"])/float(m['articles'])
+            else:
+                words_p_article = 0
+
+            e.append(words_p_article)
+
             # Depth calculation
             try:
                 depth = (edits / pages) * \
@@ -69,6 +77,7 @@ class Wikilister(object):
                 depth = '-'
             e.append(depth)
             datas.append(e)
+
             i += 1
             print(('%s >'
                    ' lahatsoratra:%d;'
@@ -78,9 +87,10 @@ class Wikilister(object):
                    ' mavitrika:%d;'
                    ' mpandrindra:%d;'
                    ' sary:%d;'
+                   ' teny:%2.2f;'
                    ' halalina:%s ' % (
                        lang, articles, pages, edits, users,
-                       activeusers, admins, images, depth
+                       activeusers, admins, images, words_p_article, depth
                    )))
 
         # Sort
@@ -112,12 +122,13 @@ class Wikilister(object):
 ! <small>Mpikambana<br>mavitrika</small>
 ! Sary
 ! Isan-jato
+! Teny/pejy
 ! Halalim-pejy""")
         i = 0
         # total = (0,0,0,0,0,0)
         for wikistats_data in e:
             print(wikistats_data)
-            articles, pages, edits, users, activeusers, admins, images, lang, site, depth = wikistats_data
+            articles, pages, edits, users, activeusers, admins, images, lang, site, words_per_page, depth = wikistats_data
             total['pages'] += articles
             total['allpages'] += pages
             total['edits'] += edits
@@ -127,7 +138,7 @@ class Wikilister(object):
             total['files'] += images
 
         for wikistats_data in e:
-            articles, pages, edits, users, activeusers, admins, images, lang, site, depth = wikistats_data
+            articles, pages, edits, users, activeusers, admins, images, lang, site, words_per_page, depth = wikistats_data
             wikistats_data = {
                 'articles': articles,
                 'pages': pages,
@@ -138,6 +149,7 @@ class Wikilister(object):
                 'images': images,
                 'language': lang,
                 'wiki': site,
+                'words_per_page': "{{formatnum:%2.2f}}" % words_per_page,
                 'depth': depth
             }
             i += 1
@@ -155,6 +167,7 @@ class Wikilister(object):
 | [//%(language)s.%(wiki)s.org/wiki/Special:ActiveUsers {{formatnum:%(activeusers)d}}]
 | [//%(language)s.%(wiki)s.org/wiki/Special:Imagelist {{formatnum:%(images)d}}]
 | {{formatnum:""" % wikistats_data + """%2.2f""" % isanjato + """}}
+| %(words_per_page)s
 | %(depth)s
 """ % wikistats_data)
         content += "\n\n|}\n\n"

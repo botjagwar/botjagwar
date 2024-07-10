@@ -1,17 +1,14 @@
 import json
 
 import pika
+import sys
 
 from api.config import BotjagwarConfig
 
 config = BotjagwarConfig()
 
-language_en = 'Estonian'
-language_mg = 'estoniana'
-
-golden_file = f'user_data/list_en_{language_en} lemmas'
-non_golden_file = f'user_data/list_mg_{language_mg}'
-already_deleted = f'user_data/list_mg_{language_mg}_deleted'
+golden_file = sys.argv[1]
+non_golden_file = sys.argv[2]
 
 with open(golden_file, 'r') as f:
     golden_source = set([k.strip('\n').strip() for k in f.readlines()])

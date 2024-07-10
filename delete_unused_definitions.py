@@ -1,7 +1,7 @@
 import time
 
 import requests
-
+from api.config import BotjagwarConfig
 from api.databasemanager import DictionaryDatabaseManager
 
 
@@ -11,6 +11,7 @@ class GarbageCollectorBot(object):
             database_file=database_file)
 
     def start(self):
+        server = BotjagwarConfig().get('global', 'postgrest_backend_address')
         used_definitions_q = "select distinct definition from dictionary"
         all_definitions_q = "select id from definitions"
         all_definitions = set()
@@ -37,16 +38,16 @@ class GarbageCollectorBot(object):
             d = str(d)
             count += 1
             chunk.add(d)
-            if count >= 1000:
+            if count >= 100:
                 response = requests.delete(
-                    'http://localhost:8100/mt_translated_definition?id=in.(' + ','.join([str(k) for k in chunk]) + ')')
+                    f'http://{server}:8100/mt_translated_definition?id=in.(' + ','.join([str(k) for k in chunk]) + ')')
                 if response.status_code >= 400:
                     print('Error!', response.json())
                 # else:
                 # print('Success!', response.status_code)
 
                 response = requests.delete(
-                    'http://localhost:8100/definitions?id=in.(' + ','.join([str(k) for k in chunk]) + ')')
+                    f'http://{server}:8100/definitions?id=in.(' + ','.join([str(k) for k in chunk]) + ')')
                 if response.status_code >= 400:
                     print('Error!', response.json())
                 # else:
@@ -54,7 +55,7 @@ class GarbageCollectorBot(object):
 
                 chunk = set()
                 count = 0
-                deleted += 1000
+                deleted += 100
                 print(f"Deleted {deleted}/{unused_len}")
 
 
