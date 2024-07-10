@@ -27,8 +27,8 @@ class TestTranslationStaticMethods(unittest.TestCase):
     def test_add_wiktionary_credit(self):
         # Create a mock pywikibot.Page object for testing purposes
         wiki_page = MagicMock()
-        wiki_page.site.lang = 'en'
-        wiki_page.title.return_value = 'Test Page'
+        wiki_page.language = 'en'
+        wiki_page.title = 'Test Page'
 
         # Create some sample input entries
         entries = [

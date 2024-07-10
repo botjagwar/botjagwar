@@ -21,7 +21,7 @@ dictionary_association = Table(
 
 
 class Serialisable(object):
-    Serialiser: Optional[JSONBuilder] = None
+    Serialiser: JSONBuilder = None
     Controller: Optional = None
 
     def serialise(self):
@@ -29,7 +29,7 @@ class Serialisable(object):
         Pass-through to designated serialiser
         :return:
         """
-        if self.Serialiser:
+        if self.Serialiser is not None:
             return self.Serialiser(self).serialise()
         else:
             raise NotImplementedError(f'No serialiser is defined for {self.__class__.__name__} class')
@@ -53,11 +53,15 @@ class Definition(Base, Serialisable):
         back_populates='definitions')
 
     def __init__(self, definition: str, language: str):
+        super(Definition, self).__init__()
         self.definition = definition
         self.definition_language = language
 
     def from_json(self, json_data):
         pass
+
+    def serialise_with_words(self):
+        return self.Serialiser(self).serialise_with_words()
 
 
 class Word(Base, Serialisable):

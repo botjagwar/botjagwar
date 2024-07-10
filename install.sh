@@ -18,6 +18,7 @@ fi
 
 src_dir=`pwd`
 opt_dir=/opt/botjagwar
+opt_dir_ctranslate=/opt/ctranslate
 current_user=`whoami`
 
 # Create virtual environment
@@ -50,6 +51,7 @@ if [[ -z $TEST ]]; then
   # this should allow for an increase of the speed-up regarding build time and is not needed
   # anyway by the unit tests when in testing mode
   sudo apt-get install -y haproxy
+  sudo apt-get install -y redis-server
   sudo cp conf/haproxy.cfg $opt_dir/conf/
   sudo apt-get install -y supervisor
 
@@ -77,5 +79,6 @@ fi
 
 cp bin/postgrest $opt_dir/bin
 
-sudo chown `whoami`:`whoami` -R $opt_dir
+
+sudo chown "`whoami`":"`whoami`" -R $opt_dir
 

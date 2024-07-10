@@ -2,6 +2,7 @@ import json
 import time
 
 import pika
+import requests
 from pika.exceptions import ChannelWrongStateError
 
 from api.config import BotjagwarConfig
@@ -13,14 +14,13 @@ class RabbitMqError(Exception):
     pass
 
 
-class RabbitMq(object):
+class RabbitMqConnector(object):
     def __init__(self, queue_name):
         self._queue_name = queue_name
         self._connection = None
         self._channel = None
         self.is_ready = False
         self.initialize_rabbitmq()
-        self.is_ready = True
 
     @property
     def queue(self):
@@ -44,9 +44,41 @@ class RabbitMq(object):
         self._connection = pika.BlockingConnection(self.parameters)
         self._channel = self._connection.channel()
         self._channel.queue_declare(queue=self._queue_name)
+        self.is_ready = True
 
 
-class RabbitMqConsumer(RabbitMq):
+class RabbitMqWebService(object):
+    def __init__(self, queue_name='default'):
+        self._queue_name = queue_name
+
+        if queue_name != 'default':
+            self.set_queue(queue_name)
+        else:
+            self.set_queue(config.get('queue', 'rabbitmq'))
+
+        self.service = config.get('host', 'rabbitmq')
+
+    def set_queue(self, queue_name):
+        self._queue_name = queue_name
+
+    @property
+    def queue_name(self):
+        return self._queue_name
+
+    def publish(self, message: dict):
+
+        response = requests.post(f"http://{self.service}:8443/{self.queue_name}", json=message)
+        if response.status_code != 204:
+            if response.status_code == 400:
+                raise RabbitMqError("Data error: " + str(response.json()['error']))
+            else:
+                raise RabbitMqError("Unknown error: " + str(response.text))
+
+    def push_to_queue(self, message: dict):
+        self.publish(message)
+
+
+class RabbitMqConsumer(RabbitMqConnector):
     def __init__(self, queue, callback_function):
         super(RabbitMqConsumer, self).__init__(queue)
         self.callback_function = callback_function
@@ -69,7 +101,20 @@ class RabbitMqConsumer(RabbitMq):
         self.consume_messages()
 
 
-class RabbitMqProducer(RabbitMq):
+class RabbitMqWikipageProducer(RabbitMqWebService):
+    def async_put(self, page, content, summary, minor=False):
+        message = {
+            'language': page.site.language,
+            'site': page.site.wiki,
+            'page': page.title(),
+            "content": content,
+            'summary': summary,
+            'minor': minor,
+        }
+        self.publish(message)
+
+
+class RabbitMqProducer(RabbitMqConnector):
     def __init__(self, queue_name='default'):
         print(f'Initializing queue {queue_name}')
         super(RabbitMqProducer, self).__init__(queue_name)
@@ -125,17 +170,4 @@ class RabbitMqProducer(RabbitMq):
             time.sleep(1)
 
         message = json.dumps(message)
-        self.publish(message)
-
-
-class RabbitMqWikipageProducer(RabbitMqProducer):
-    def async_put(self, page, content, summary, minor=False):
-        message = json.dumps({
-            'language': page.site.language,
-            'site': page.site.wiki,
-            'page': page.title(),
-            "content": content,
-            'summary': summary,
-            'minor': minor,
-        })
         self.publish(message)

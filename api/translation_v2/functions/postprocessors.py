@@ -114,8 +114,12 @@ def only_accept_from_source_wiki(*args):
             if hasattr(entry, 'origin_wiktionary'):
                 if entry.origin_wiktionary != source_wiki:
                     exclude = True
+            else:
+                log.warning(f"Cannot apply only_accept_from_source_wiki for "
+                            f"{entry.entry}: it has no 'origin_wiktionary' attribute.")
 
             if not exclude:
+                log.debug("Removing entry: " + entry.entry)
                 out_entries.append(entry)
 
         return out_entries
