@@ -225,6 +225,7 @@ class DerivedTermsImporter(ListSubsectionImporter):
             # Simple list
             if '*' in subsection_item:
                 for item in subsection_item.split('*'):
+                    item = item.strip()
                     if '[[Thesaurus:' in item:
                         continue
                     if '{{l|' + language in item:
@@ -235,6 +236,11 @@ class DerivedTermsImporter(ListSubsectionImporter):
                         for data in re.findall(
                                 '\\[\\[([0-9A-Za-z- ]+)\\]\\]', item):
                             retrieved.append(data)
+                    elif '-l' in item:
+                        specific_list_item = re.findall('\{\{([a-z\-]+)-l\|(.*)\}\}', item)
+                        print('yes')
+                        for language, word in specific_list_item:
+                            retrieved.append(word)
 
             # List in a template
             for template_name in [f'der{d}' for d in range(1, 5)] +\

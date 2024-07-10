@@ -12,6 +12,7 @@ from lxml import etree
 from api.config import BotjagwarConfig
 from api.decorator import time_this
 from api.dictionary.exceptions.http import BatchContainsErrors
+from api.importer.wiktionary.en import all_importers
 from api.entryprocessor import WiktionaryProcessorFactory
 from api.model.word import Entry
 from api.servicemanager import DictionaryServiceManager
@@ -33,7 +34,7 @@ class WiktionaryDumpImporter(object):
         self._init_processor()
         self.dictionary = redis.Redis(config.get('host', 'redis'))
         # self._init_redis_cache()
-        # self.additional_data_keys = set(classe.data_type for classe in all_importers)
+        self.additional_data_keys = set(classe.data_type for classe in all_importers)
         # print(self.additional_data_keys)
 
     def _init_redis_cache(self):
@@ -149,7 +150,7 @@ class WiktionaryDumpImporter(object):
                     WiktionaryDumpImporter.do_insert(
                         elements[1 + elements // 2:], level + 1)
                 else:
-                    pprint('[reset indent] could not insert:', elements)
+                    pprint('[reset indent] could not insert:' + str(elements))
 
         except Exception as unknown_error:
             print(sql)

@@ -278,28 +278,15 @@ class ENWiktionaryProcessor(WiktionaryProcessor):
     @staticmethod
     def refine_definition(definition, part_of_speech=None) -> list:
         # handle {{lb}} template calls
-        refined = definition
-        lb_template_rgxs = [
-            r'\{\{l[b]?\|([a-zA-Z0-9\ ]{2,3})\|([\w ]+)'
-            r'\{\{l[b]? [a-z]+\|([a-zA-Z0-9\ ]{2,3})\|([\w ]+)'
-        ]
-        for lb_template_rgx in lb_template_rgxs:
-            lb_match = re.match(lb_template_rgx, definition)
-            if lb_match:
-                lb_match = lb_match.group()
-                lb_begin = definition.find(lb_match)
-                if lb_begin != -1:
-                    lb_end = definition.find('}}', lb_begin)
-                    label_data = definition[lb_begin:lb_end]
-                    label_data = label_data.replace('_', '')
-                    label_data = label_data.replace('|', ' ')
-                    print(label_data)
-                    # Ensure that no unexpected characters has been onboarded,
-                    # if it's the case, just ditch the label information.
-                    if re.match(r'^([a-zA-Z0-9\,\ ]+)$', label_data):
-                        refined = f'({label_data}) ' + definition[lb_end + 2:].strip()
-                    else:
-                        refined = definition[lb_end + 2:].strip()
+        try:
+            refined = re.sub('\{\{l[b]?\|([a-zA-Z0-9\ ]{2,3})\|([\w ]+)\}\}', '', definition)
+        except Exception:
+            refined = definition
+
+        try:
+            refined = re.sub('\{\{l[b]?\|([a-zA-Z0-9\ ]{2,3})\|item|([\w ]+)}}', '\\2', refined)
+        except Exception:
+            pass
 
         # Handle {{gloss}}
         gloss_template_begin = refined.find('{{gloss|')

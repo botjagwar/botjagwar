@@ -2,15 +2,34 @@ import time
 from typing import List
 from copy import deepcopy
 
+import requests
+
 from api import entryprocessor
-from api.decorator import threaded
+from api.config import BotjagwarConfig
+from api.decorator import reraise_exceptions
 from api.model.word import Entry
-from api.rabbitmq import RabbitMqProducer
 from redis_wikicache import RedisPage as Page, RedisSite as Site
 from .exceptions import TranslatedPagePushError
 
 
+class PublisherError(Exception):
+    pass
+
+
+class WiktionaryPublisherError(PublisherError):
+    pass
+
+
+class WiktionaryRabbitMqPublisherError(PublisherError):
+    pass
+
+
 class Publisher(object):
+    def __init__(self):
+        # Load service from BotjagwarConfig
+        self.config = BotjagwarConfig()
+        self.service = self.config.get('service', 'rabbitmq')
+
     @staticmethod
     def publish_translated_references(translation):
         def _publish_translated_references(source_wiki='en', target_wiki='mg'):
@@ -28,6 +47,7 @@ class Publisher(object):
 
 
 class WiktionaryDirectPublisher(Publisher):
+
     def publish_to_wiktionary(self, translation):
         def _publish_to_wiktionary(page_title: str, entries: List[Entry]):
             """
@@ -76,27 +96,20 @@ class WiktionaryDirectPublisher(Publisher):
 
 class WiktionaryRabbitMqPublisher(Publisher):
     def __init__(self, queue='botjagwar'):
+        super(WiktionaryRabbitMqPublisher, self).__init__()
         self.queue_name = queue
-        self.publisher = None
-        self.init_rmq()
 
-    @threaded
-    def init_rmq(self):
-        """
-        Initialise RabbitMq connection in a separate thread to speed up initialisation of caller class/functions
-        :return:
-        """
-        self.publisher = RabbitMqProducer(self.queue_name)
-
-    def wait_for_ready(self):
-        while self.publisher is None:
-            print("Waiting for publisher initialize...")
-            time.sleep(1)
-        while not self.publisher.is_ready:
-            print("Waiting for publisher to be ready...")
-            time.sleep(1)
+    def push(self, message: dict):
+        # Publish using a REST service
+        response = requests.post(f"http://{self.service}:8443/{self.queue_name}", json=message)
+        if response.status_code != 204:
+            if response.status_code == 400:
+                raise WiktionaryRabbitMqPublisherError("Data error: " + str(response.json()['error']))
+            else:
+                raise WiktionaryRabbitMqPublisherError("Unknown error: " + str(response.text))
 
     def publish_to_wiktionary(self, translation):
+        @reraise_exceptions((Exception,), WiktionaryRabbitMqPublisherError)
         def _publish_to_wiktionary(page_title: str, entries: List[Entry]):
             """
             Push translated data and if possible avoid any information loss
@@ -117,11 +130,10 @@ class WiktionaryRabbitMqPublisher(Publisher):
                     'site': 'wiktionary',
                     'page': page_title,
                     'content': content,
-                    "summary": "nanitatra",
+                    "summary": "mamafa ny fihodinana",
                     "minor": False,
                 }
-                self.wait_for_ready()
-                self.publisher.push_to_queue(message)
+                self.push(message)
             else:
                 # Get entries to aggregate
                 if target_page.exists():
@@ -149,7 +161,6 @@ class WiktionaryRabbitMqPublisher(Publisher):
                     "summary": translation.generate_summary(entries, target_page, content),
                     "minor": False,
                 }
-                self.wait_for_ready()
-                self.publisher.push_to_queue(message)
+                self.push(message)
 
         return _publish_to_wiktionary

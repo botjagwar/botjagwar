@@ -124,7 +124,6 @@ async def handle_wiktionary_page(request) -> Response:
     data = {}
     publish = rabbitmq_publisher.publish_to_wiktionary(translations)
 
-    @threaded
     def task():
         global queue_size
         queue_size += 1
