@@ -15,7 +15,7 @@ folder = '/tmp'
 
 # RabbitMQ connection parameters
 RABBITMQ_HOST = config.get('host', 'rabbitmq')
-RABBITMQ_QUEUE = 'lohataona'
+RABBITMQ_QUEUE = 'queue'
 RABBITMQ_USERNAME = config.get('username', 'rabbitmq')
 RABBITMQ_PASSWORD = config.get('password', 'rabbitmq')
 RABBITMQ_VIRTUAL_HOST = config.get('virtual_host', 'rabbitmq')

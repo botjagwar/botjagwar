@@ -3,15 +3,24 @@
 
 Bot-Jagwar is a side project which aims to automate editing on the Malagasy Wiktionary as much as possible.
 
-## [Current build status](https://travis-ci.com/radomd92/botjagwar/branches)
-master : ![master](https://app.travis-ci.com/radomd92/botjagwar.svg?branch=master)
-dev: ![dev](https://app.travis-ci.com/radomd92/botjagwar.svg?branch=dev)
 
 ## Prerequisites
-- Linux-like environment (if you're on Windows, WSL will do)
-- Python 3.8 (pip is used for requirements) or later versions
-- PostgreSQL 11 server or later versions, used with psycopg2
 
+### Mandatory
+- Linux-like environment (if you're on Windows, WSL will do)
+- Python 3.10 (pip is used for requirements) or later versions. It can work on earlier versions
+  of Python 3, but their compatibility with those earlier versions is no longer being tested.
+- PostgreSQL 11 server or later versions, used with psycopg2
+- HAProxy, used for the NLLB inference server
+- Supervisor, to manage the services
+- PostgREST, used for `entry_translator`
+- Pywikibot, to access Wiktionary through its API
+
+### Optional
+- Screen, to run the services in the background
+- Nginx, used for the frontend application
+- VueJS, used for the frontend application
+- ctranslate2, used for the NLLB inference server, used by `entry_translator` 
 
 ## Installation
 
@@ -47,20 +56,41 @@ This is an IRC client and connects to entry_translator.py REST API for translati
 
 Word storage engine. REST API required by the `wiktionary_irc.py` to store and get translations.
 
-Default engine is SQLite, please see `database_uri` at `conf/config.ini` for a change. It is used by SQLAschemy to connect to the database backend.
+Default engine is SQLite, please see `database_uri` at `conf/config.ini` for a change. 
+It is used by SQLAschemy to connect to the database backend.
 
-This API has been tested and used on MySQL (manual test), SQLite (automatic test) and PostgreSQL databases (manual test) thanks to SQLAlchemy. For the best performance and mostly if you want to use the frontend application, please use PostgreSQL.
+This API has been tested and used on MySQL (manual test), SQLite (automatic test)
+and PostgreSQL databases (manual test) thanks to SQLAlchemy.
+For the best performance and mostly if you want to use the frontend application, please use PostgreSQL.
 
 ##### Front-end application
 You might also be interested in the associated frontend: [dictionary frontend](https://github.com/radomd92/botjagwar-frontend)
-which provides an interface to manage dictionary in a more user-friendly manner. It will allow you to edit link and delete words and definitions as well as an access to a per-language dictionary.
+which provides an interface to manage dictionary in a more user-friendly manner. 
+It will allow you to edit link and delete words and definitions as well as 
+an access to a per-language dictionary.
 
-The frontend application makes use of VueJS, and Nginx. With PostgreSQL backend, Postgrest is used to lessen the load on `dictionary_service` for read operations. Nginx acts as a proxy which redirect requests to either `dictionary_service` or PostgREST API.
+The frontend application makes use of VueJS, and Nginx. With PostgreSQL backend,
+Postgrest is used to lessen the load on `dictionary_service` for read operations.
+Nginx acts as a proxy which redirect requests to either `dictionary_service` or PostgREST API.
 
 #### entry_translator.py
 
-Wiki page handling that also uses translation and page rendering APIs. Side effects are page updates and creations to the target wiki.
+Wiki page handling that also uses translation and page rendering APIs. 
+Side effects are page updates and creations to the target wiki.
 REST service required by `wiktionary_irc.py`
+
+The requirements for this script are:
+- NLLB inference server (`ctranslate.py`) being installed and running (see below for more information). You can install it using `install-ctranslate.sh` script.
+- A running instance of the `dictionary_service.py` script.
+
+
+#### ctranslate.py NLLB inference 
+
+This script uses the NLLB 3.3B model to run. It has its own requirements that have minimal impact on the rest of the project.
+However, for your convenience, it must be separately installed, as the whole deployment environment requires
+30+ gigabytes of storage. If you ever choose to, you can install it on a separate machine. If you do that, do not forget to change 
+the HAProxy settings (`translator_<x>` backends) in `conf/haproxy.conf`, so as not to break `entry_translator.py`.
+
 
 ### word_forms.py
 
