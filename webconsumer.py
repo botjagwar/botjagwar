@@ -10,6 +10,7 @@ PORT = 8443
 config = BotjagwarConfig()
 app = Flask(__name__)
 folder = '/tmp'
+# folder = '/root/user_queue'
 
 
 # RabbitMQ connection parameters
@@ -54,7 +55,7 @@ def push(queue_name, message):
     channel.basic_publish(exchange='', routing_key=queue_name, body=message)
 
 
-def fetch(queue_name=''):
+def fetch(queue_name='user'):
     channel = make_channel()
     method_frame, _, body = channel.basic_get(queue=queue_name, auto_ack=True)
     if method_frame:
@@ -78,19 +79,19 @@ def send(user):
 
 
 @app.route('/<user>/title.txt', methods=['GET'])
-def title(user=''):
+def title(user='user'):
     """Renders the contact page."""
     return send_file(f'{folder}/{user}_title.txt', )
 
 
 @app.route('/<user>/text.txt', methods=['GET'])
-def text(user=''):
+def text(user='user'):
     """Renders the contact page."""
     return send_file(f'{folder}/{user}_text.txt', )
 
 
 @app.route('/<user>/next', methods=['GET'])
-def next_edit(user=''):
+def next_edit(user='user'):
     """Renders the contact page."""
     data = fetch(user)
     with open(f'{folder}/{user}_title.txt', 'w') as f:
