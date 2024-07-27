@@ -8,13 +8,17 @@ Bot-Jagwar is a side project which aims to automate editing on the Malagasy Wikt
 
 ### Mandatory
 - Linux-like environment (if you're on Windows, WSL will do)
-- Python 3.10 (pip is used for requirements) or later versions. It can work on earlier versions
-  of Python 3, but their compatibility with those earlier versions is no longer being tested.
+- Python 3.9, 3.10, 3.11 or 3.12. `pip` is used for requirements It can work on later or earlier versions
+  of Python 3, but their compatibility with those earlier versions is not tested.
 - PostgreSQL 11 server or later versions, used with psycopg2
-- HAProxy, used for the NLLB inference server
-- Supervisor, to manage the services
-- PostgREST, used for `entry_translator`
+ - Create a database for botjagwar to populate
+- HAProxy, used for the NLLB inference server and to load balance between `entry_translator` instances.
+- Supervisor, to manage the load balancer and other services
+- PostgREST, used for `entry_translator
+ - Change the configuration in `conf/config.ini` with appropriate credentials to point to the database for botjagwar  
 - Pywikibot, to access Wiktionary through its API
+- RabbitMQ
+- Redis server
 
 ### Optional
 - Screen, to run the services in the background
@@ -25,6 +29,7 @@ Bot-Jagwar is a side project which aims to automate editing on the Malagasy Wikt
 ## Installation
 
 In the project directory, run `install.sh`. The Python virtual environment as well as the scripts and the required configuration will be deployed on the target machine at `/opt/botjagwar`. They can be removed by removing the install folder.
+The installation procedure will install Python3 Virtualenv, Redis, HAProxy and Supervisor, using APT package manager. It will _not_ install PostgreSQL or RabbitMQ. If you don't have a PostgreSQL or RabbitMQ, please install them. 
 
 If you intend to use the bot for editing on Wiktionary, you need to set up your pywikibot instance.
 Visit [Pywikibots installation manual](https://www.mediawiki.org/wiki/Manual:Pywikibot/Installation) for more details on how to do that.
@@ -33,15 +38,13 @@ To confirm whether you have a working installation, run `test.sh`. All tests sho
 However, some of them may not pass on the Raspberry Pi due files not being deleted after teardowns.
 
 ## Running
-- Go to `/opt/botjagwar`
-- Run `python3 wiktionary_irc.py` in a screen instance
-- Run `python3 dictionary_service.py` in a screen instance, serves on 8001
-- Run `python3 entry_translator.py`in a screen instance, serves on 8000
+![image](https://github.com/user-attachments/assets/59a458bf-167c-4f8d-a7a0-803253c6ce40)
 
-Alternatively, a supervisor script `supervisor-botjagwar.conf` can help you configure the program above as services.
+The `supervisor` has been parametered to run a bunch of services upon install. To see which services are started and which ones are not, see `conf/supervisor-botjagwar.conf`.
 
+`translator_X` services are installed separately through `install-ctranslate.sh`. 30 GB of free space is required for the virtual environment and the model. Approximately 15 GB of RAM or VRAM (if running on GPU) is required _for each_ translator. Their run is managed here.
 
-## Components and scripts
+##  Components and scripts
 
 ### Real-time lemma translator
 
