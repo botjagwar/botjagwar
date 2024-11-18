@@ -1,4 +1,4 @@
-aiohttp == 3.9.4
+aiohttp == 3.10.11
 coverage==6.3.2
 flask > 2.0.0
 irc == 19
