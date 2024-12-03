@@ -55,7 +55,6 @@ class Autoformat(object):
         summary_sum = '; '.join(summary for summary in self.summaries)
         return self.text, summary_sum
 
-
 def test():
     new_text = """
 =={{=io=}}==

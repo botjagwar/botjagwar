@@ -8,3 +8,5 @@ dikantenyvaovao.exceptions
 translate_batch.txt
 database_password
 userdata/*
+/.github/
+/apicache-py3/

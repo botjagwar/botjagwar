@@ -9,13 +9,17 @@ except OSError:
 
 conf_paths = [
     f'/home/{login}/botjagwar/conf',
+    f'/home/{login}/Documents/botjagwar/conf',
     '/opt/botjagwar/conf'
 ]
+
+CONF_ROOT_PATH = '/opt/botjagwar/conf'
 
 for confpath in conf_paths:
     if os.path.exists(confpath):
         CONF_ROOT_PATH = confpath
         break
+
 
 
 class BotjagwarConfig(object):

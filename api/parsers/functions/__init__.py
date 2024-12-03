@@ -12,7 +12,7 @@ def parse_one_parameter_template(
         tense=None,
         mood=None):
     """
-    Very generic code that can parse anything like {{plural of|xxyyzz}}, which is very common on en.wiktionary
+    Very generic code that can parse anything like {{plural of|en|xxyyzz}}, which is very common on en.wiktionary
     Use with caution, though.
     :param out_class:
     :param template_name:

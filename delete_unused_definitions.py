@@ -40,7 +40,7 @@ class GarbageCollectorBot(object):
             chunk.add(d)
             if count >= 100:
                 response = requests.delete(
-                    f'http://{server}:8100/mt_translated_definition?id=in.(' + ','.join([str(k) for k in chunk]) + ')')
+                    f'http://{server}/mt_translated_definition?id=in.(' + ','.join([str(k) for k in chunk]) + ')')
                 if response.status_code >= 400:
                     print('Error!', response.json())
                 # else:

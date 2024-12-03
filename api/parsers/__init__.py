@@ -139,6 +139,7 @@ templates_parser.add_parser(
     AdjectiveForm,
     'pt-adj form of',
     parse_adjective_form)
+
 templates_parser.add_parser(
     AdjectiveForm,
     'plural of',
@@ -148,6 +149,7 @@ templates_parser.add_parser(
         number='p'
     )
 )
+
 templates_parser.add_parser(
     NounForm,
     'el-form-of-nounadj',

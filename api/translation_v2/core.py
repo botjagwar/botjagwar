@@ -291,6 +291,24 @@ class Translation:
             if not redirect_target_page.exists():
                 redirect_target_page.put(f'#FIHODINANA [[{target_page.title()}]]', 'mametra-pihodinana')
 
+    def get_single_word_definitions(self, definition, language, part_of_speech):
+        """
+        Get single word definitions from the dictionary
+        """
+        wiktionary_processor_class = entryprocessor.WiktionaryProcessorFactory.create(language)
+        wiktionary_processor = wiktionary_processor_class()
+        ret = []
+
+        page = Page(Site(language, 'wiktionary'), definition)
+        wiktionary_processor.process(page)
+
+        for entry in wiktionary_processor.get_all_entries(
+                get_additional_data=True, cleanup_definitions=True, advanced=True):
+            if entry.part_of_speech == part_of_speech and entry.language == language:
+                ret += entry.definitions
+
+        return ret
+
     def translate_wiktionary_page(self, wiktionary_processor: entryprocessor.WiktionaryProcessor) -> List[Entry]:
         """
         Parse Wiktionary page data and translate any content/section that can be translated
@@ -305,6 +323,7 @@ class Translation:
             translated_definition = []
             translated_from_definition = []
             out_translation_methods = {}
+            definitions_count = len(entry.definitions)
             for definition_line in entry.definitions:
                 try:
                     refined_definition_lines = wiktionary_processor.refine_definition(
@@ -312,6 +331,18 @@ class Translation:
                     )
                 except WiktionaryProcessorException:
                     continue
+
+                # Handle single-word definitions: fetch single word definitions and use those instead
+                if definitions_count == 1:
+                    for refined_definition_line in refined_definition_lines:
+                        if len(refined_definition_line.split()) == 1:
+                            single_word_definitions = self.get_single_word_definitions(
+                                refined_definition_lines[0],
+                                language=wiktionary_processor.language,
+                                part_of_speech=entry.part_of_speech
+                            )
+                            if single_word_definitions:
+                                refined_definition_lines = single_word_definitions
 
                 for refined_definition_line in refined_definition_lines:
                     # Try translation methods in succession.

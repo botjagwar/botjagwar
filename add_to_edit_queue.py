@@ -2,41 +2,42 @@ import json
 
 import pika
 import sys
+import time
 
 from api.config import BotjagwarConfig
 
 config = BotjagwarConfig()
 
-golden_file = sys.argv[1]
-non_golden_file = sys.argv[2]
+en_file = sys.argv[1]
+mg_file = sys.argv[2]
 
-with open(golden_file, 'r') as f:
-    golden_source = set([k.strip('\n').strip() for k in f.readlines()])
+with open(en_file, 'r') as f:
+    en_entries = set([k.strip('\n').strip() for k in f.readlines()])
 
-with open(non_golden_file, 'r') as f:
-    non_golden_source = set([k.strip('\n').strip() for k in f.readlines()])
+with open(mg_file, 'r') as f:
+    mg_entries = set([k.strip('\n').strip() for k in f.readlines()])
 
 try:
-    with open(non_golden_file, 'r') as f:
-        already_deleted_entries = set([k.strip('\n').strip() for k in f.readlines()])
+    with open(en_file, 'r') as f:
+        to_create = set([k.strip('\n').strip() for k in f.readlines()])
 except FileNotFoundError:
-    already_deleted_entries = set()
+    to_create = set()
 
-if already_deleted_entries:
-    to_delete = non_golden_source - golden_source
+if to_create:
+    to_create = en_entries - mg_entries
 else:
-    to_delete = non_golden_source - golden_source - already_deleted_entries
+    to_create = en_entries - mg_entries - to_create
 
-print(f'Golden source contains {len(golden_source)} entries')
-print(f'Non-golden source contains {len(non_golden_source)} entries')
-print(f'{len(to_delete)} entries will be deleted.')
+print(f'Golden source contains {len(en_entries)} entries')
+print(f'Non-golden source contains {len(mg_entries)} entries')
+print(f'{len(to_create)} entries will be deleted.')
 
 # ---------------------------------------------------------------------------------------------------------------------
 
 print("Connecting to RabbitMQ")
 
 RABBITMQ_HOST = config.get('host', 'rabbitmq')
-RABBITMQ_QUEUE = 'jagwar'
+RABBITMQ_QUEUE = 'edit'
 RABBITMQ_USERNAME = config.get('username', 'rabbitmq')
 RABBITMQ_PASSWORD = config.get('password', 'rabbitmq')
 RABBITMQ_VIRTUAL_HOST = config.get('virtual_host', 'rabbitmq')
@@ -62,15 +63,19 @@ channel.queue_declare(queue=RABBITMQ_QUEUE, durable=True)
 
 print('Connection OK.')
 
-for page in to_delete:
-    print(f"To delete: {page}")
+for page in to_create:
+    print(f"To create: {page}")
     message = json.dumps({
-        'language': 'mg',
-        'site': 'wiktionary',
-        'page': page,
-        "content": '',
-        'summary': '',
-        'action': 'delete',
-        'minor': True,
+        "site": "en",
+        "title": page,
+        "user": "Jagwar"
     })
-    channel.basic_publish(exchange='', routing_key=RABBITMQ_QUEUE, body=bytes(message, encoding='utf8'), properties=pika.BasicProperties(delivery_mode=2))
+    channel.basic_publish(
+        exchange='',
+        routing_key=RABBITMQ_QUEUE,
+        body=bytes(message, encoding='utf8'),
+        properties=pika.BasicProperties(
+            delivery_mode=2  # Makes the message persistent
+        )
+    )
+    time.sleep(.02)

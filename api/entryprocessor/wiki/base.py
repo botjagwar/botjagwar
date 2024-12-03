@@ -49,13 +49,13 @@ class WiktionaryProcessor(object):
     def set_title(self, title):
         self.title = title
 
-    def advanced_extract_definition(self, part_of_speech, definition_line):
+    def advanced_extract_definition(self, part_of_speech, definition_line, **other_params):
         return definition_line
 
     def retrieve_translations(self):
         raise NotImplementedError()
 
-    def get_all_entries(self, keep_native_entries=False, **kw):
+    def get_all_entries(self, keep_native_entries=False, **other_params):
         raise NotImplementedError()
 
     @staticmethod

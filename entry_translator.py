@@ -124,6 +124,7 @@ async def handle_wiktionary_page(request) -> Response:
     data = {}
     publish = rabbitmq_publisher.publish_to_wiktionary(translations)
 
+    @threaded
     def task():
         global queue_size
         queue_size += 1
@@ -160,7 +161,6 @@ async def handle_wiktionary_page(request) -> Response:
     if page is None:
         return Response()
 
-    @threaded
     def task():
         try:
             translations.process_wiktionary_wiki_page(page)
@@ -168,9 +168,8 @@ async def handle_wiktionary_page(request) -> Response:
             log.exception(e)
 
     task()
-    time.sleep(3.5)
     return Response(
-        text=json.dumps({'message': 'treatment acknowledged.'}),
+        text=json.dumps({'message': 'treatment complete.'}),
         status=200,
         content_type='application/json'
     )

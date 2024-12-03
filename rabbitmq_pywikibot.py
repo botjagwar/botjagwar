@@ -62,7 +62,7 @@ def consume_wiki_messages():
     # Declare the queue from which messages will be consumed
     # channel.queue_delete(queue=RABBITMQ_QUEUE)
     print(f"Resetting current queue in use: {RABBITMQ_QUEUE}")
-    channel.queue_declare(queue=RABBITMQ_QUEUE)
+    channel.queue_declare(queue=RABBITMQ_QUEUE, durable=True)
 
     # Set the maximum number of unacknowledged messages
     channel.basic_qos(prefetch_count=1)

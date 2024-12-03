@@ -29,7 +29,7 @@ class StaticBackend(Backend):
     @property
     def backend(self):
         self.check_postgrest_backend()
-        return 'http://' + self.postgrest + ':8100'
+        return 'http://' + self.postgrest
 
 
 class DynamicBackend(Backend):
