@@ -15,7 +15,7 @@ class WiktionaryInflectionTemplateParser(object):
 
     def add_parser(self, return_class, template_name, parser_function):
         if (return_class, template_name) in self.process_function:
-            raise ParserError("parser already exists for '%s'" % template_name)
+            raise ParserError(f"parser already exists for '{return_class}', '{template_name}' ")
         self.process_function[(return_class, template_name)] = parser_function
 
     def get_elements(self,

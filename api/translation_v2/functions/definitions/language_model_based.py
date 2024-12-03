@@ -155,7 +155,8 @@ def remove_enrichment_artefacts(part_of_speech, translation):
             'mety ho ',
             'dia ',
             'azony atao ny '
-            'azo atao ny '
+            'azo atao ny ',
+            'atao hoe ',
         ]
 
         for enrichment_artefact in enrichment_artefacts_startswith:

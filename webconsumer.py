@@ -52,7 +52,7 @@ def make_channel():
 
 def push(queue_name, message):
     channel = make_channel()
-    channel.basic_publish(exchange='', routing_key=queue_name, body=message)
+    channel.basic_publish(exchange='', routing_key=queue_name, body=message, properties=pika.BasicProperties(delivery_mode=2))
 
 
 def fetch(queue_name='user'):

@@ -30,7 +30,7 @@ class MGWikiPageRenderer(PageRenderer):
 
     def fetch_pages_to_link(self):
         postgrest_url = self.config.get('postgrest_backend_address')
-        url = f'http://{postgrest_url}:8100/word'
+        url = f'http://{postgrest_url}/word'
         print(url)
 
         pages = requests.get(url, params={

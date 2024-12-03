@@ -62,7 +62,8 @@ if [[ -z $TEST ]]; then
     # might be configured for the user and but not for the root user, as generally advised.
     sudo sed -i "s/user=user/user=`whoami`/g" /etc/supervisor/conf.d/supervisor-botjagwar.conf
     sudo sed -i "s/\/home\/user/\/home\/`whoami`/g" /etc/supervisor/conf.d/supervisor-botjagwar.conf
-
+  fi
+  if [[ -z $RESTART_ALL ]]; then
     echo "Supervisor installation is complete. Reloading config"
     sudo supervisorctl reload
   fi

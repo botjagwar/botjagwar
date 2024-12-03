@@ -25,7 +25,7 @@ if __name__ == '__main__':
             print(wiki_page)
             try:
                 entries = t.process_wiktionary_wiki_page(wiki_page)
-            except (pywikibot.Error, redis.exceptions.TimeoutError):
+            except (pywikibot.exceptions.Error, redis.exceptions.TimeoutError):
                 continue
 
     print('process error rate:', errors * 100. / (k))

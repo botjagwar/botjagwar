@@ -43,7 +43,7 @@ class RabbitMqConnector(object):
         )
         self._connection = pika.BlockingConnection(self.parameters)
         self._channel = self._connection.channel()
-        self._channel.queue_declare(queue=self._queue_name)
+        self._channel.queue_declare(queue=self._queue_name, durable=True)
         self.is_ready = True
 
 
@@ -127,7 +127,7 @@ class RabbitMqProducer(RabbitMqConnector):
     def set_queue(self, queue_name):
 
         self._queue_name = queue_name
-        self._channel.queue_declare(queue=queue_name)
+        self._channel.queue_declare(queue=queue_name, durable=True)
 
     def __del__(self):
         # Close the connection
@@ -154,15 +154,15 @@ class RabbitMqProducer(RabbitMqConnector):
         self.is_ready = False
         self._connection = pika.BlockingConnection(self.parameters)
         self._channel = self._connection.channel()
-        self._channel.queue_declare(queue=self._queue_name)
+        self._channel.queue_declare(queue=self._queue_name, durable=True)
         self.is_ready = True
 
     def publish(self, message):
         try:
-            self.message_broker_channel.basic_publish(exchange='', routing_key=self._queue_name, body=message)
+            self.message_broker_channel.basic_publish(exchange='', routing_key=self._queue_name, body=message, properties=pika.BasicProperties(delivery_mode=2))
         except ChannelWrongStateError as error:
             self.reopen_channel()
-            self.message_broker_channel.basic_publish(exchange='', routing_key=self._queue_name, body=message)
+            self.message_broker_channel.basic_publish(exchange='', routing_key=self._queue_name, body=message, properties=pika.BasicProperties(delivery_mode=2))
 
     def push_to_queue(self, message: dict):
         while not self.is_ready:

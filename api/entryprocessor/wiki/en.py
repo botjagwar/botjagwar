@@ -6,8 +6,11 @@ from api.model.word import Entry
 from api.parsers import TEMPLATE_TO_OBJECT
 from api.parsers import templates_parser
 from api.parsers.inflection_template import ParserNotFoundError
+
+from api.translation_v2.functions.definitions.preprocessors import refine_definition, drop_definitions_with_labels
+
 from conf.entryprocessor.languagecodes.en import LANGUAGE_NAMES
-from .base import WiktionaryProcessor, WiktionaryProcessorException
+from .base import WiktionaryProcessor
 
 
 class ENWiktionaryProcessor(WiktionaryProcessor):
@@ -15,7 +18,7 @@ class ENWiktionaryProcessor(WiktionaryProcessor):
     empty_definitions_list_if_no_definitions_found = False
 
     template_to_object_mapper = TEMPLATE_TO_OBJECT
-    language_section_regex = "^==[ ]?([\w+ \-]+)[ ]?==$"
+    language_section_regex = "^==[ ]?([a-zA-Z'\ ]+)[ ]?==$"
 
     all_importers = all_importers
 
@@ -154,13 +157,13 @@ class ENWiktionaryProcessor(WiktionaryProcessor):
         return new_definition_line
 
     def get_all_entries(
-        self,
-        keep_native_entries=False,
-        get_additional_data=False,
-        cleanup_definitions=False,
-        translate_definitions_to_malagasy=False,
-        human_readable_form_of_definition=True,
-        **kw) -> list:
+            self,
+            keep_native_entries=False,
+            get_additional_data=False,
+            cleanup_definitions=False,
+            translate_definitions_to_malagasy=False,
+            human_readable_form_of_definition=True,
+            **kw) -> list:
         """
         Retrieves all necessary information in the form of a list of Entry objects
         :param keep_native_entries:
@@ -195,6 +198,7 @@ class ENWiktionaryProcessor(WiktionaryProcessor):
                     last_language_code = None
 
             # Skip the language if a code couldn't be found to avoid assignment of the entry to the wrong language code.
+            print('<', last_language_code, last_part_of_speech, line_number, '>', line)
             if not last_language_code:
                 continue
 
@@ -217,6 +221,12 @@ class ENWiktionaryProcessor(WiktionaryProcessor):
                 defn_line = defn_line.lstrip('# ')
                 if last_part_of_speech is None and self.must_have_part_of_speech:
                     continue
+
+                defn_line = self.refine_definition(defn_line, last_language_code, last_part_of_speech)
+                if not defn_line:
+                    continue
+                else:
+                    defn_line = defn_line[0]
 
                 definition = self.extract_definition(
                     part_of_speech=last_part_of_speech,
@@ -271,44 +281,29 @@ class ENWiktionaryProcessor(WiktionaryProcessor):
                             line) is not None:
                     return mg_pos
 
-            return self.get_part_of_speech(line, current_level+1)
+            return self.get_part_of_speech(line, current_level + 1)
 
         return None
 
+
     @staticmethod
-    def refine_definition(definition, part_of_speech=None) -> list:
-        # handle {{lb}} template calls
-        try:
-            refined = re.sub('\{\{l[b]?\|([a-zA-Z0-9\ ]{2,3})\|([\w ]+)\}\}', '', definition)
-        except Exception:
-            refined = definition
+    def refine_definition(definition, language=None, part_of_speech=None) -> list:
+        """Please define your function in api.translation_v2.functions.definitions.preprocessors and use them here."""
 
-        try:
-            refined = re.sub('\{\{l[b]?\|([a-zA-Z0-9\ ]{2,3})\|item|([\w ]+)}}', '\\2', refined)
-        except Exception:
-            pass
+        if part_of_speech.startswith('e-'):
+            refined = refine_definition(definition, remove_all_templates=True)
+        else:
+            refined = refine_definition(definition, remove_all_templates=False)
 
-        # Handle {{gloss}}
-        gloss_template_begin = refined.find('{{gloss|')
-        if gloss_template_begin != -1:
-            gloss_template_begin += len('{{gloss|')
-            gloss_template_end = refined.find('}}', gloss_template_begin)
-            refined = refined[gloss_template_begin:gloss_template_end]
+        if language != ENWiktionaryProcessor.processor_language:
+            # Remove obsolete and dated definitions for English, as they are not always relevant for language for which
+            # we fetched the english definition due to the definition being a one-word.
+            refined = drop_definitions_with_labels('obsolete', 'dated', 'archaic')(refined)
 
-        # Handle [[]] links
-        refined = re.sub(r'\[\[([\w ]+)\|[\w ]+\]\]', '\\1', refined)
-        refined = re.sub(r'\[\[([\w ]+)\]\]', '\\1', refined)
-
-        unwanted_character = False
-        for character in "{}[]|":
-            if character in refined:
-                unwanted_character = True
-                break
-
-        if unwanted_character:
-            raise WiktionaryProcessorException("Refined definition still has unwanted characters : '" + character + "'")
-
-        return [refined]
+        if refined.strip():
+            return [refined]
+        else:
+            return []
 
     def retrieve_translations(self) -> list:
         return TranslationImporter().get_data(self.content, self.language, self.title)

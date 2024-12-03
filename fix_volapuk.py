@@ -30,7 +30,7 @@ class VolapukImporter(object):
     def set_queue(self, queue_name):
 
         self._queue_name = queue_name
-        self._channel.queue_declare(queue=queue_name)
+        self._channel.queue_declare(queue=queue_name, durable=True)
 
     def __del__(self):
         # Close the connection
@@ -72,7 +72,7 @@ class VolapukImporter(object):
         )
         self._connection = pika.BlockingConnection(parameters)
         self._channel = self._connection.channel()
-        self._channel.queue_declare(queue=self._queue_name)
+        self._channel.queue_declare(queue=self._queue_name, durable=True)
 
     def publish(self, entry):
         print(entry)
@@ -172,7 +172,7 @@ class VolapukImporter(object):
             'summary': summary,
             'minor': minor,
         })
-        self.message_broker_channel.basic_publish(exchange='', routing_key=self._queue_name, body=message)
+        self.message_broker_channel.basic_publish(exchange='', routing_key=self._queue_name, body=message, properties=pika.BasicProperties(delivery_mode=2))
 
 
 if __name__ == '__main__':

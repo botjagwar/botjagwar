@@ -45,7 +45,7 @@ class DefinitionTranslation(object):
     def __init__(self):
         pgrest_backend = CONFIG.get('postgrest_backend_address', 'global')
         self.method = None
-        self.postgrest_url = f'http://{pgrest_backend}:8100'
+        self.postgrest_url = f'http://{pgrest_backend}'
         self.translation_server = None
         self.definition_language = None
         self.language = None

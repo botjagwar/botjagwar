@@ -37,12 +37,43 @@ class NllbDefinitionTranslation(object):
         :param source_language:
         """
         self.translation_server = CONFIG.get('backend_address', 'nllb')
+        self.postgrest_server = CONFIG.get('postgrest_backend_address', 'global')
 
         # Translator parameters
         self.source_language = NLLB_CODE.get(source_language, NLLB_CODE['en'])
         self.target_language = NLLB_CODE.get(target_language, NLLB_CODE['mg'])
 
     def get_translation(self, sentence: str):
+        translation = self.get_translation_in_cache(sentence)
+        if translation:
+            return translation
+        else:
+            translation = self.get_nllb_translation(sentence)
+            url = f'http://{self.postgrest_server}/nllb_translations'
+            json = {
+                'sentence': sentence,
+                'translation': translation,
+                'source_language': self.source_language,
+                'target_language': self.target_language
+            }
+            request = requests.post(url, json=json)
+            if request.status_code != 201:
+                raise DefinitionTranslationError('Unknown error: ' + request.text)
+            else:
+                return translation
+
+    def get_translation_in_cache(self, sentence: str):
+        url = f'http://{self.postgrest_server}/nllb_translations?source_language=eq.{self.source_language}&target_language=eq.{self.target_language}&sentence=eq.{sentence}'
+        request = requests.get(url)
+        if request.status_code != 200:
+            return None
+        else:
+            if request.json():
+                return request.json()[0]['translation']
+            else:
+                return None
+
+    def get_nllb_translation(self, sentence: str):
         # fix weird behaviour where original text can be kept
         sentence = sentence.replace('’', "'")
         sentence = sentence.replace(']', '')
@@ -54,7 +85,7 @@ class NllbDefinitionTranslation(object):
         json = {
             'text': sentence
         }
-        request = requests.get(url, params=json)
+        request = requests.get(url, params=json, timeout=3600)
         if request.status_code != 200:
             raise DefinitionTranslationError('Unknown error: ' + request.text)
         else:
