@@ -2,8 +2,8 @@
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 12.14 (Ubuntu 12.14-0ubuntu0.20.04.1)
--- Dumped by pg_dump version 12.14 (Ubuntu 12.14-0ubuntu0.20.04.1)
+-- Dumped from database version 14.12 (Ubuntu 14.12-0ubuntu0.22.04.1)
+-- Dumped by pg_dump version 14.12 (Ubuntu 14.12-0ubuntu0.22.04.1)
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -648,6 +648,20 @@ CREATE TABLE public.new_associations (
 ALTER TABLE public.new_associations OWNER TO postgres;
 
 --
+-- Name: nllb_translations; Type: TABLE; Schema: public; Owner: botjagwar
+--
+
+CREATE TABLE public.nllb_translations (
+    source_language character varying(40) NOT NULL,
+    target_language character varying(40) NOT NULL,
+    sentence character varying(2000),
+    translation character varying(2000)
+);
+
+
+ALTER TABLE public.nllb_translations OWNER TO botjagwar;
+
+--
 -- Name: template_translations; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -975,6 +989,13 @@ ALTER TABLE ONLY public.word
 
 
 --
+-- Name: en_mg_line_is_unique; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE UNIQUE INDEX en_mg_line_is_unique ON public.en_mg USING btree (definition, part_of_speech, word);
+
+
+--
 -- Name: idx_16431_definition_idx; Type: INDEX; Schema: public; Owner: postgres
 --
 
@@ -1101,6 +1122,27 @@ CREATE INDEX idx_word_word ON public.word USING hash (word);
 
 
 --
+-- Name: line_is_unique; Type: INDEX; Schema: public; Owner: botjagwar
+--
+
+CREATE UNIQUE INDEX line_is_unique ON public.nllb_translations USING btree (source_language, target_language, sentence);
+
+
+--
+-- Name: suggested_translations_en_fr_line_is_unique; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE UNIQUE INDEX suggested_translations_en_fr_line_is_unique ON public.suggested_translations_fr_mg USING btree (word_id, definition_id, suggested_definition);
+
+
+--
+-- Name: suggested_translations_en_mg_line_is_unique; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE UNIQUE INDEX suggested_translations_en_mg_line_is_unique ON public.suggested_translations_en_mg USING btree (word_id, definition_id, suggested_definition);
+
+
+--
 -- Name: unique_association; Type: INDEX; Schema: public; Owner: postgres
 --
 
@@ -1122,23 +1164,6 @@ CREATE UNIQUE INDEX word_language_part_of_speech_are_unique ON public.json_dicti
 
 
 --
--- Name: word_with_additional_data _RETURN; Type: RULE; Schema: public; Owner: postgres
---
-
-CREATE OR REPLACE VIEW public.word_with_additional_data AS
- SELECT 'Word'::text AS type,
-    wrd.id,
-    wrd.word,
-    wrd.language,
-    wrd.part_of_speech,
-    wrd.date_changed AS last_modified,
-    array_to_json(array_agg(json_build_object('type', 'AdditionalData', 'data_type', awi.type, 'data', awi.information))) AS additional_data
-   FROM (public.word wrd
-     JOIN public.additional_word_information awi ON ((awi.word_id = wrd.id)))
-  GROUP BY wrd.id;
-
-
---
 -- Name: vw_json_dictionary _RETURN; Type: RULE; Schema: public; Owner: postgres
 --
 
@@ -1157,6 +1182,23 @@ CREATE OR REPLACE VIEW public.vw_json_dictionary AS
    FROM ((public.dictionary dct
      LEFT JOIN public.word wrd ON ((wrd.id = dct.word)))
      JOIN public.definitions defn ON ((defn.id = dct.definition)))
+  GROUP BY wrd.id;
+
+
+--
+-- Name: word_with_additional_data _RETURN; Type: RULE; Schema: public; Owner: postgres
+--
+
+CREATE OR REPLACE VIEW public.word_with_additional_data AS
+ SELECT 'Word'::text AS type,
+    wrd.id,
+    wrd.word,
+    wrd.language,
+    wrd.part_of_speech,
+    wrd.date_changed AS last_modified,
+    array_to_json(array_agg(json_build_object('type', 'AdditionalData', 'data_type', awi.type, 'data', awi.information))) AS additional_data
+   FROM (public.word wrd
+     JOIN public.additional_word_information awi ON ((awi.word_id = wrd.id)))
   GROUP BY wrd.id;
 
 
