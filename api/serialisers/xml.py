@@ -66,18 +66,15 @@ class XMLBuilder(object):
                 attribute_value = getattr(self, attribute_name)
             except AttributeError as e:
                 raise XMLBuilderError(
-                    "XML node '%s' in %s class is mapped to non-existing attribute '%s'"
-                    % (xml_node_name, self.__class__.__name__, attribute_name)
-                )
+                    f"XML node '{xml_node_name}' in {self.__class__.__name__} class is mapped to non-existing attribute '{attribute_name}'"
+                ) from e
 
             if isinstance(attribute_value, list):
                 for e in attribute_value:
                     if isinstance(e, Builder):
                         element.append(e.serialise())
                     else:
-                        raise XMLBuilderError(
-                            "'%s' is not a serialisable element" % e.__class__
-                        )
+                        raise XMLBuilderError(f"'{e.__class__}' is not a serialisable element")
             elif isinstance(attribute_value, Builder):
                 main_node.append(attribute_value.serialise())
                 continue
@@ -92,7 +89,7 @@ class XMLBuilder(object):
                 element.text = ""
             else:
                 raise XMLBuilderError(
-                    "'%s' is not a serialisable element" % attribute_value.__class__
+                    f"'{attribute_value.__class__}' is not a serialisable element"
                 )
 
             main_node.append(element)

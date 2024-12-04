@@ -17,9 +17,9 @@ languages = pywikibot.Category(wiki, "fiteny")
 for language in languages.subcategories():
     print(">>>>>", language, "<<<<<")
     language_name = language.title().split(":")[1]
-    for root, subcat_titles in CATEGORIES.items():
+    for subcat_titles in CATEGORIES.values():
         for subcat_element in subcat_titles:
-            subcat_title = "%s amin'ny teny %s" % (subcat_element, language_name)
+            subcat_title = f"{subcat_element} amin'ny teny {language_name}"
             subcat = pywikibot.Category(wiki, subcat_title)
 
             if not subcat.isEmptyCategory():

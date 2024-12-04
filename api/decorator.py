@@ -155,9 +155,9 @@ def time_this(identifier=""):
             dt = t1 - t0
             d = dt.seconds * 1000 + dt.microseconds / 1000
             if identifier == "function":
-                print((f"%s took %2.6f seconds to execute" % (identifier, d / 1000.0)))
+                print("%s took %2.6f seconds to execute" % (identifier, d / 1000.0))
             else:
-                print((f"%s took %2.6f seconds to execute" % (f.__name__, d / 1000.0)))
+                print("%s took %2.6f seconds to execute" % (f.__name__, d / 1000.0))
 
             return ret
 

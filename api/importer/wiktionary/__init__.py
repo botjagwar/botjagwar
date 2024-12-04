@@ -20,34 +20,32 @@ class WiktionaryAdditionalDataImporter(AdditionalDataImporter):
     section_name: str = None
 
     def get_additional_data_for_category(self, language, category_name):
-        url = dyn_backend.backend + "/word_with_additional_data"
+        url = f"{dyn_backend.backend}/word_with_additional_data"
         params = {
             "language": f"eq.{language}",
             "select": "word,additional_data",
         }
         words = requests.get(url, params=params).json()
         # Database entries containing the data_type already defined.
-        already_defined_pages = set(
-            [
-                w["word"]
-                for w in words
-                if self.is_data_type_already_defined(w["additional_data"])
-            ]
-        )
+        already_defined_pages = {
+            w["word"]
+            for w in words
+            if self.is_data_type_already_defined(w["additional_data"])
+        }
 
-        url = dyn_backend.backend + "/word"
+        url = f"{dyn_backend.backend}/word"
         params = {
             "language": f"eq.{language}",
         }
         words = requests.get(url, params=params).json()
-        pages_defined_in_database = set([w["word"] for w in words])
+        pages_defined_in_database = {w["word"] for w in words}
         self.counter = 0
-        category_pages = set(
-            [k.title() for k in get_pages_from_category("en", category_name)]
-        )
+        category_pages = {
+            k.title() for k in get_pages_from_category("en", category_name)
+        }
         # Wiki pages who may have not been parsed yet
         titles = (category_pages & pages_defined_in_database) - already_defined_pages
-        wikipages = set([pywikibot.Page(self.wiktionary, page) for page in titles])
+        wikipages = {pywikibot.Page(self.wiktionary, page) for page in titles}
 
         # print(f"{len(wikipages)} pages from '{category_name}';\n"
         #       f"{len(already_defined_pages)} already defined pages "

@@ -54,10 +54,9 @@ class Translator:
                 f" but tokenised input contained {len(translated_tokens)} tokens."
                 f" This limit has been set because translation quality will strongly degrade."
             )
-        translated = self.tokenizer.batch_decode(
+        return self.tokenizer.batch_decode(
             translated_tokens, skip_special_tokens=True
         )[0]
-        return translated
 
 
 translator = Translator("nllb-200-3.3B")

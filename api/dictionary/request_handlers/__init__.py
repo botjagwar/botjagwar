@@ -28,8 +28,7 @@ async def download_dictionary(request) -> StreamResponse:
 async def get_dictionary(request) -> Response:
     session = request.app["session_instance"]
     query = session.query(Word).filter(Word.language == request.match_info["language"])
-    definitions = [w.serialise() for w in query.all()]
-    if definitions:
+    if definitions := [w.serialise() for w in query.all()]:
         return Response(text=json.dumps(definitions), status=200)
 
     return Response(status=404, content_type="application/json")

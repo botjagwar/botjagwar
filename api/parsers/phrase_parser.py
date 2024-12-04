@@ -7,12 +7,9 @@ try:
 except ImportError:
     nltk = None
 else:
-    f = open("api/parsers/grammar.bnf", "r")
-    bnf = f.read()
-    grammar = nltk.CFG.fromstring(bnf)
-    f.close()
-
-
+    with open("api/parsers/grammar.bnf", "r") as f:
+        bnf = f.read()
+        grammar = nltk.CFG.fromstring(bnf)
 class ParserError(Exception):
     pass
 

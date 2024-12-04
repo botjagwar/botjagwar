@@ -9,13 +9,12 @@ from .routines import save_changes_on_disk
 async def get_definition_with_words(request) -> Response:
     session = request.app["session_instance"]
 
-    definitions = [
+    if definitions := [
         m.serialise_with_words()
         for m in session.query(Definition)
         .filter(Definition.id == request.match_info["definition_id"])
         .all()
-    ]
-    if definitions:
+    ]:
         return Response(
             text=json.dumps(definitions), status=200, content_type="application/json"
         )
@@ -25,13 +24,11 @@ async def get_definition_with_words(request) -> Response:
 
 async def edit_definition(request) -> Response:
     session = request.app["session_instance"]
-    definition = (
+    if definition := (
         session.query(Definition)
         .filter(Definition.id == request.match_info["definition_id"])
         .one()
-    )
-
-    if definition:
+    ):
         definition_data = await request.json()
         definition.definition = definition_data["definition"]
         definition.definition_language = definition_data["definition_language"]
@@ -48,13 +45,12 @@ async def edit_definition(request) -> Response:
 async def get_definition(request) -> Response:
     session = request.app["session_instance"]
 
-    definitions = [
+    if definitions := [
         m.serialise()
         for m in session.query(Definition)
         .filter(Definition.id == request.match_info["definition_id"])
         .all()
-    ]
-    if definitions:
+    ]:
         return Response(
             text=json.dumps(definitions), status=200, content_type="application/json"
         )

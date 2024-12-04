@@ -143,13 +143,13 @@ class TestEntryTranslatorProcessWiktionaryPage(TestCase):
 
     @retry_on_fail([Exception], retries=10, time_between_retries=0.4)
     def wait_until_ready(self):
-        resp = requests.get(URL_HEAD + "/ping")
+        resp = requests.get(f"{URL_HEAD}/ping")
         assert resp.status_code == 200
 
     @staticmethod
     def kill_service():
         DICTIONARY_SERVICE.kill()
-        os.system("rm %s" % DB_PATH)
+        os.system(f"rm {DB_PATH}")
 
     def test_fr_process_entry_in_native_language(self):
         @retry_on_fail([aiohttp.client_exceptions.ClientConnectionError])

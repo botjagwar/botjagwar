@@ -18,11 +18,11 @@ class ListSubsectionImporter(SubsectionImporter):
         retrieved = []
         for subsection_item in subsection_data:
             if "*" in subsection_item:
-                for item in subsection_item.split("*"):
-                    if item.strip() == "":
-                        continue
-                    retrieved.append(item)
-
+                retrieved.extend(
+                    item
+                    for item in subsection_item.split("*")
+                    if item.strip() != ""
+                )
         return list(set(retrieved))
 
 
@@ -93,14 +93,16 @@ class DerivedTermsImporter(ListSubsectionImporter):
                     if "[[Thesaurus:" in item:
                         continue
                     if "{{l|" + language in item:
-                        for data in re.findall(
-                            "{{l\\|" + language + "\\|([0-9A-Za-z- ]+)}}", item
-                        ):
-                            retrieved.append(data)
+                        retrieved.extend(
+                            iter(
+                                re.findall(
+                                    "{{l\\|" + language + "\\|([0-9A-Za-z- ]+)}}",
+                                    item,
+                                )
+                            )
+                        )
                     elif "[[" in item and "]]" in item:
-                        for data in re.findall("\\[\\[([0-9A-Za-z- ]+)\\]\\]", item):
-                            retrieved.append(data)
-
+                        retrieved.extend(iter(re.findall("\\[\\[([0-9A-Za-z- ]+)\\]\\]", item)))
             # List in a template
             for template_name in (
                 [f"der{d}" for d in range(1, 5)]

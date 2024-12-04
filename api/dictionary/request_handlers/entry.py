@@ -28,16 +28,17 @@ def get_word(session, word, language, part_of_speech):
 def create_definition_if_not_exists(
     session, definition: str, definition_language: str
 ) -> Definition:
-    definitions = (
+    if definitions := (
         session.query(Definition)
-        .filter_by(definition=definition, definition_language=definition_language)
+        .filter_by(
+            definition=definition, definition_language=definition_language
+        )
         .all()
-    )
-    if not definitions:
+    ):
+        definition = definitions[0]
+    else:
         definition = Definition(definition=definition, language=definition_language)
         session.add(definition)
-    else:
-        definition = definitions[0]
     return definition
 
 
@@ -64,10 +65,7 @@ def word_exists(session, word, language, part_of_speech):
         .filter_by(word=word, language=language, part_of_speech=part_of_speech)
         .all()
     )
-    if not word:
-        return False
-
-    return True
+    return bool(word)
 
 
 async def get_word_by_id(request) -> Response:
@@ -100,28 +98,26 @@ async def get_entry(request) -> Response:
         .all()
     )
 
-    jsons = [objekt.serialise() for objekt in objects]
-    if not jsons:
-        raise WordDoesNotExist()
-    else:
+    if jsons := [objekt.serialise() for objekt in objects]:
         return Response(
             text=json.dumps(jsons),
             status=HTTPOk.status_code,
             content_type="application/json",
         )
+    else:
+        raise WordDoesNotExist()
 
 
 def _add_entry(data, session):
     normalised_retained_definitions = []
-    if "definitions" in data and len(data["definitions"]) > 0:
-        for definition in data["definitions"]:
-            definition_object = create_definition_if_not_exists(
-                session, definition["definition"], definition["definition_language"]
-            )
-            normalised_retained_definitions.append(definition_object)
-    else:
+    if "definitions" not in data or len(data["definitions"]) <= 0:
         raise InvalidJsonReceived()
 
+    for definition in data["definitions"]:
+        definition_object = create_definition_if_not_exists(
+            session, definition["definition"], definition["definition_language"]
+        )
+        normalised_retained_definitions.append(definition_object)
     if word_exists(session, data["word"], data["language"], data["part_of_speech"]):
         # Get the word and mix it with the normalised retained definitions
         word = get_word(session, data["word"], data["language"], data["part_of_speech"])

@@ -87,7 +87,7 @@ class Processor(object):
                                     # part of speech changes to become a
                                     # form-of part of speech
                                     if not pos.startswith("e-"):
-                                        pos = "e-" + pos
+                                        pos = f"e-{pos}"
                                     translations.append(
                                         elements.to_malagasy_definition()
                                     )
@@ -159,7 +159,7 @@ class Processor(object):
             assert callable(function)
 
         if filename == "default":
-            filename = "user_data/%s.xml" % language
+            filename = f"user_data/{language}.xml"
 
         def pmap(pool, buffers, lvl=0):
             print(" " * lvl, "buffer size is:", len(buffers))

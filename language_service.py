@@ -14,11 +14,7 @@ args = parser.parse_args()
 log.basicConfig(
     filename="/opt/botjagwar/user_data/language_service.log", level=log.DEBUG
 )
-if args.STORAGE:
-    LANGUAGE_STORAGE = args.STORAGE
-else:
-    LANGUAGE_STORAGE = "data/language.db"
-
+LANGUAGE_STORAGE = args.STORAGE or "data/language.db"
 languge_db_manager = LanguageDatabaseManager(database_file=LANGUAGE_STORAGE)
 routes = web.RouteTableDef()
 app = web.Application()

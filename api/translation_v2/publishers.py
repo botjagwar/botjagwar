@@ -122,9 +122,7 @@ class WiktionaryRabbitMqPublisher(Publisher):
                     "Data error: " + str(response.json()["error"])
                 )
             else:
-                raise WiktionaryRabbitMqPublisherError(
-                    "Unknown error: " + str(response.text)
-                )
+                raise WiktionaryRabbitMqPublisherError(f"Unknown error: {response.text}")
 
     def publish_to_wiktionary(self, translation):
         @reraise_exceptions((Exception,), WiktionaryRabbitMqPublisherError)

@@ -8,20 +8,18 @@ def crawl_categories_list():
     done = set()
     task_list = set()
     with open("user_data/crawled", "r") as crawled:
-        for line in crawled.readlines():
+        for line in crawled:
             done.add(line.strip("\n"))
 
-    crawled = open("user_data/crawled", "w")
-    with open("user_data/categories", "r") as f:
-        for line in f.readlines():
-            task_list.add(line.strip("\n"))
+    with open("user_data/crawled", "w") as crawled:
+        with open("user_data/categories", "r") as f:
+            for line in f:
+                task_list.add(line.strip("\n"))
 
-    remaining = task_list.difference(done)
-    for line in remaining:
-        crawl_subcategories(line)
-        crawled.write(line)
-
-    crawled.close()
+        remaining = task_list.difference(done)
+        for line in remaining:
+            crawl_subcategories(line)
+            crawled.write(line)
 
 
 def crawl_subcategories(category_name):

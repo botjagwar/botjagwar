@@ -37,11 +37,10 @@ def mass_delete():
 
             try:
                 if "{{=mg=}}" not in page.get():
-                    created = [k for k in page.revisions()][-1]
-                    if created.timestamp < pywikibot.Timestamp(2020, 11, 1, 0, 0, 0):
-                        if is_edited_by_bot_only(page):
-                            page.delete(reason)
-                            continue
+                    created = list(page.revisions())[-1]
+                    if created.timestamp < pywikibot.Timestamp(2020, 11, 1, 0, 0, 0) and is_edited_by_bot_only(page):
+                        page.delete(reason)
+                        continue
                     try:
                         if is_edited_by_bot_only(page):
                             page.delete(reason)
@@ -53,32 +52,30 @@ def mass_delete():
 
 def section_delete(section_name, wiki_page):
     print("deleting ", section_name)
-    if section_name in wiki_page:
-        lines = wiki_page.split("\n")
-        section_begin = None
-        section_end = None
-        for line_no, line in enumerate(lines):
-            section_rgx = re.search("==[ ]?" + section_name + "[ ]?==", line)
-            if section_rgx is not None and section_begin is None:
-                section_begin = line_no
-                continue
-
-            if section_begin is not None:
-                section_end_rgx = re.search("==[ ]?{{=", line)
-                if section_end_rgx is not None:
-                    section_end = line_no
-                    break
-
-        assert section_begin is not None
-        if section_end is not None:
-            to_delete = "\n".join(lines[section_begin:section_end])
-        else:
-            to_delete = "\n".join(lines[section_begin:])
-
-        new_text = wiki_page.replace(to_delete, "")
-        return new_text
-    else:
+    if section_name not in wiki_page:
         return wiki_page
+    lines = wiki_page.split("\n")
+    section_begin = None
+    section_end = None
+    for line_no, line in enumerate(lines):
+        section_rgx = re.search(f"==[ ]?{section_name}[ ]?==", line)
+        if section_rgx is not None and section_begin is None:
+            section_begin = line_no
+            continue
+
+        if section_begin is not None:
+            section_end_rgx = re.search("==[ ]?{{=", line)
+            if section_end_rgx is not None:
+                section_end = line_no
+                break
+
+    assert section_begin is not None
+    to_delete = (
+        "\n".join(lines[section_begin:section_end])
+        if section_end is not None
+        else "\n".join(lines[section_begin:])
+    )
+    return wiki_page.replace(to_delete, "")
 
 
 def remove_bot_section():
@@ -99,8 +96,7 @@ def remove_bot_section():
                 content = page.get()
                 try:
                     to_delete = False
-                    if True:  # is_edited_by_bot_only(page):
-                        to_delete = True
+                    to_delete = True
 
                     created = page.getVersionHistory()[-1]
                     print("created on ", created.timestamp)

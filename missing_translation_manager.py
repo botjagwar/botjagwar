@@ -36,25 +36,24 @@ class Loader(object):
 
     def __init__(self, language):
         self.language = language
-        self.monolingual_dictionary_filepath = "user_data/%s.csv" % language
-        self.bilingual_dictionary_filepath = "user_data/%s-mg.csv" % language
+        self.monolingual_dictionary_filepath = f"user_data/{language}.csv"
+        self.bilingual_dictionary_filepath = f"user_data/{language}-mg.csv"
         self.dictionary_service = DictionaryServiceManager()
         self.monolingual = {}
         self.bilingual = {}
 
     def determine_part_of_speech(self, word, malagasy_translation, pos_list):
-        if "mat" in pos_list and "ana" in pos_list:
-            if (
-                malagasy_translation.startswith("man")
-                or malagasy_translation.startswith("mi")
-                or malagasy_translation.endswith("aina")
-                or malagasy_translation.endswith("aina")
-            ):
-                return "mat"
-            else:
-                return "ana"
-        else:
+        if "mat" not in pos_list or "ana" not in pos_list:
             return pos_list[0]
+        if (
+            malagasy_translation.startswith("man")
+            or malagasy_translation.startswith("mi")
+            or malagasy_translation.endswith("aina")
+            or malagasy_translation.endswith("aina")
+        ):
+            return "mat"
+        else:
+            return "ana"
 
     def load_monolingual(self):
         print("reading monolingual dictionary")
@@ -101,7 +100,7 @@ class Loader(object):
             }
 
             resp = self.dictionary_service.post(
-                "entry/%s/create" % self.language, json=entry
+                f"entry/{self.language}/create", json=entry
             )
             if resp.status_code == WordAlreadyExists.status_code:
                 continue

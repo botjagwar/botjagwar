@@ -43,9 +43,8 @@ class TenyMalagasyPickleImporter(object):
 
             if not entry.definitions:
                 continue
-            else:
-                print(">>> %s <<<" % entry.entry)
-                self.process_rakibolana_definition(entry)
+            print(f">>> {entry.entry} <<<")
+            self.process_rakibolana_definition(entry)
 
     def process_rakibolana_definition(self, entry):
         definitions = entry.definitions
@@ -90,9 +89,8 @@ class RakibolanaOrgPickleImporter(object):
 
                 if not entry.definitions:
                     continue
-                else:
-                    print(">>> %s <<<" % entry.entry)
-                    self.process_rakibolana_definition(entry)
+                print(f">>> {entry.entry} <<<")
+                self.process_rakibolana_definition(entry)
 
     def process_rakibolana_definition(self, entry):
         definitions = entry.definitions
@@ -130,8 +128,7 @@ class RakibolanaOrgPickleImporter(object):
         if definition.find("t$$i$$f$$$$") != -1:
             p1 = definition.rfind("t$$i$$f$$$$") + len("t$$i$$f$$$$")
             p2 = definition.find("$$", p1)
-            tif = definition[p1:p2]
-            if tif:
+            if tif := definition[p1:p2]:
                 for char in ",/1":
                     tif = tif.replace(char, "|")
                 tif = tif.replace(" f ", "|")
@@ -162,21 +159,17 @@ class EnWiktionaryAdditionalDataImporter(object):
 
     def get_word_id(self, infos):
         data = {
-            "word": "eq." + infos.entry,
-            "language": "eq." + infos.language,
-            "part_of_speech": "eq." + infos.part_of_speech,
+            "word": f"eq.{infos.entry}",
+            "language": f"eq.{infos.language}",
+            "part_of_speech": f"eq.{infos.part_of_speech}",
             "limit": "1",
         }
         # log.debug('get /word', data)
-        word_id = requests.get(backend.backend + "/word", params=data).json()
-        if len(word_id) > 0:
-            if "id" in word_id[0]:
-                word_id = word_id[0]["id"]
-                return word_id
-            else:
-                return
-        else:
+        word_id = requests.get(f"{backend.backend}/word", params=data).json()
+        if len(word_id) <= 0 or "id" not in word_id[0]:
             return
+        word_id = word_id[0]["id"]
+        return word_id
 
     @retry_on_fail(
         exceptions=[requests.exceptions.ConnectionError],
@@ -196,7 +189,7 @@ class EnWiktionaryAdditionalDataImporter(object):
                 "information": additional_data,
             }
             response = requests.post(
-                backend.backend + "/additional_word_information", json=data
+                f"{backend.backend}/additional_word_information", json=data
             )
             if 400 <= response.status_code <= 599:
                 print(f"{data}")
@@ -209,21 +202,17 @@ class EnWiktionaryAdditionalDataImporter(object):
                 return True
 
     def delete_all_additional_data_of_type(self, word_id, additional_data_type):
-        data = {
-            "type": "eq." + additional_data_type,
-            "word_id": "eq." + str(word_id),
-        }
+        data = {"type": f"eq.{additional_data_type}", "word_id": f"eq.{str(word_id)}"}
         response = requests.delete(
-            backend.backend + "/additional_word_information", params=data
+            f"{backend.backend}/additional_word_information", params=data
         )
-        if 204 == response.status_code:
+        if response.status_code == 204:
             # print(f'Deleting {additional_data_type} information on {word_id} OK: HTTP {response.status_code}')
             return True
-        else:
-            print(
-                f"Failed deleting {additional_data_type} information on {word_id}: HTTP {response.status_code}"
-            )
-            return False
+        print(
+            f"Failed deleting {additional_data_type} information on {word_id}: HTTP {response.status_code}"
+        )
+        return False
 
     def process_page(self, page):
         processor = ENWiktionaryProcessor()
@@ -236,8 +225,7 @@ class EnWiktionaryAdditionalDataImporter(object):
             for additional_data_type, additional_data in entry_as_dict[
                 "additional_data"
             ].items():
-                word_id = self.get_word_id(entry)
-                if word_id:
+                if word_id := self.get_word_id(entry):
                     self.delete_all_additional_data_of_type(
                         word_id, additional_data_type
                     )
@@ -256,11 +244,11 @@ class EnWiktionaryAdditionalDataImporter(object):
             page_number += 1
             if self.page_number_to_resume_to > page_number:
                 if not page_number % 10000:
-                    print(f">>> [{page_number}] " + page.title() + " <<< ")
+                    print(f">>> [{page_number}] {page.title()} <<< ")
                 continue
 
             if not page_number % 250:
-                print(f">>> [{page_number}] " + page.title() + " <<< ")
+                print(f">>> [{page_number}] {page.title()} <<< ")
 
             if page.namespace() != 0:
                 continue

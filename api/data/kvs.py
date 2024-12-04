@@ -11,7 +11,7 @@ class KeyValueStoreAPI(object):
         del self.kvstore
 
     def set_identifier(self, class_):
-        self.identifier = class_.__name__ + "/" + str(uuid4()) + "/"
+        self.identifier = f"{class_.__name__}/{str(uuid4())}/"
 
     def cache_value(self, value):
         def cache_value_wrapper(f):
@@ -49,7 +49,7 @@ class KeyValueStoreAPI(object):
 
     def get_attribute(self):
         def wrapper(objekt, attribute):
-            key = str(self.identifier) + "attribute/" + str(attribute)
+            key = f"{str(self.identifier)}attribute/{str(attribute)}"
             return pickle.loads(self._get_attribute(key))
 
         return wrapper
@@ -59,7 +59,7 @@ class KeyValueStoreAPI(object):
 
     def set_attribute(self):
         def wrapper(objekt, attribute, value):
-            key = str(self.identifier) + "attribute/" + attribute
+            key = f"{str(self.identifier)}attribute/{attribute}"
             value = value
             self._set_attribute(key, pickle.dumps(value))
             return None

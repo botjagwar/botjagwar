@@ -26,10 +26,5 @@ def parse_fi_adjective_form_of(template_expression):
         if tparam.startswith("case="):
             case = tparam[5:]
 
-    if "=" in parts[1]:
-        lemma = parts[-1]
-    else:
-        lemma = parts[1]
-
-    noun_form = AdjectiveForm(lemma, case, number, "")
-    return noun_form
+    lemma = parts[-1] if "=" in parts[1] else parts[1]
+    return AdjectiveForm(lemma, case, number, "")

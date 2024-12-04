@@ -18,8 +18,7 @@ def get_entries_from_content(title, content):
             pos = "ana"
 
         if start:
-            lang_found = re.findall(lang_rgx, line)
-            if lang_found:
+            if lang_found := re.findall(lang_rgx, line):
                 words = line.split(":")[1]
                 if not words:
                     continue
@@ -35,8 +34,7 @@ def get_entries_from_content(title, content):
                     for char in "()[]":
                         word = word.replace(char, "")
 
-                    word = word.strip()
-                    if word:
+                    if word := word.strip():
                         yield Translation(
                             word=word,
                             language=lang_found[0],
@@ -63,22 +61,19 @@ def get_definitions_from_content(title, content):
 
 
 def main():
-    f = open("user_data/ko-ko.csv", "a")
-    for page in get_pages_from_category("ko", "한국어 명사"):
-        translations = [
-            i for i in get_definitions_from_content(page.title(), page.get())
-        ]
-        for t in translations:
-            s = "%s;%s;%s;%s;%s\n" % (
-                t.word,
-                t.language,
-                t.part_of_speech,
-                t.translation,
-                "ko",
-            )
-            print(s.strip("\n"))
-            f.write(s)
-    f.close()
+    with open("user_data/ko-ko.csv", "a") as f:
+        for page in get_pages_from_category("ko", "한국어 명사"):
+            translations = list(get_definitions_from_content(page.title(), page.get()))
+            for t in translations:
+                s = "%s;%s;%s;%s;%s\n" % (
+                    t.word,
+                    t.language,
+                    t.part_of_speech,
+                    t.translation,
+                    "ko",
+                )
+                print(s.strip("\n"))
+                f.write(s)
 
 
 if __name__ == "__main__":

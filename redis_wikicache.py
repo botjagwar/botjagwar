@@ -36,15 +36,9 @@ class RedisSite(object):
         self.offline = offline
         self.language = language
         self.wiki = wiki
-        if host == "default":
-            self.host = config.get("host", "redis")
-        else:
-            self.host = host
-
+        self.host = config.get("host", "redis") if host == "default" else host
         if password == "default":
-            self.password = config.get("password", "redis")
-            if not self.password:
-                self.password = None
+            self.password = config.get("password", "redis") or None
         else:
             self.password = None
 
@@ -87,25 +81,23 @@ class RedisSite(object):
             f"/{self.language}wiktionary-latest-pages-articles.xml.bz2"
         )
         dump_dir = "user_data/dumps"
-        dump_path = dump_dir + f"/{self.language}wikt.xml"
+        dump_path = f"{dump_dir}/{self.language}wikt.xml"
 
         if not os.path.isdir(dump_dir):
             os.mkdir(dump_dir)
-        if not os.path.isfile(dump_path + ".bz2"):
+        if not os.path.isfile(f"{dump_path}.bz2"):
             print(
                 "File is absent. Downloading from dumps.wikimedia.org. This may take a while..."
             )
             with requests.get(url, stream=True) as request:
                 request.raise_for_status()
-                with open(dump_path + ".bz2", "wb") as f:
+                with open(f"{dump_path}.bz2", "wb") as f:
                     for chunk in request.iter_content(chunk_size=8192):
                         f.write(chunk)
             print("Download complete.")
 
         print("Extracting dump file...")
-        with open(dump_path, "wb") as xml_file, bz2.BZ2File(
-            dump_path + ".bz2", "rb"
-        ) as file:
+        with (open(dump_path, "wb") as xml_file, bz2.BZ2File(f"{dump_path}.bz2", "rb") as file):
             for data in iter(lambda: file.read(100 * 1024), b""):
                 xml_file.write(data)
 
@@ -170,23 +162,21 @@ class RedisPage(object):
             cache_contents = None
 
         if not cache_contents:
-            if not self.offline:
-                wikisite = pywikibot.Site(self.site.language, self.site.wiki)
-                wikipage = pywikibot.Page(wikisite, self._title)
-                if wikipage.exists():
-                    content = wikipage.get()
-                    self.site.push_page(self._title, content)
-                    return content
-                else:
-                    raise NoPage(
-                        f"Page {self._title} at {self.site} not found "
-                        f"neither in-redis nor on-wiki"
-                    )
-            else:
+            if self.offline:
                 raise NoPage(
                     f"Page  {self._title} at {self.site} not found in redis. "
                     f"Offline mode is OFF so no on-wiki fetching."
                 )
+            wikisite = pywikibot.Site(self.site.language, self.site.wiki)
+            wikipage = pywikibot.Page(wikisite, self._title)
+            if not wikipage.exists():
+                raise NoPage(
+                    f"Page {self._title} at {self.site} not found "
+                    f"neither in-redis nor on-wiki"
+                )
+            content = wikipage.get()
+            self.site.push_page(self._title, content)
+            return content
         else:
             cache_contents = str(cache_contents, encoding="utf8")
             return cache_contents
@@ -198,27 +188,25 @@ class RedisPage(object):
             )
         except redis.exceptions.ConnectionError:
             cache_contents = None
-        if not cache_contents:
-            if self.offline:
-                return False
-            else:
-                wikisite = pywikibot.Site(self.site.language, self.site.wiki)
-                wikipage = pywikibot.Page(wikisite, self._title)
-                if wikipage.exists():
-                    redirection_depth = 0
-                    while wikipage.isRedirectPage():
-                        redirection_depth += 1
-                        if redirection_depth == self.max_redirection_depth:
-                            break
-                        else:
-                            wikipage = wikipage.getRedirectTarget()
-
-                    if redirection_depth == self.max_redirection_depth:
-                        return False
-
-                return wikipage.exists()
-        else:
+        if cache_contents:
             return True
+        if self.offline:
+            return False
+        wikisite = pywikibot.Site(self.site.language, self.site.wiki)
+        wikipage = pywikibot.Page(wikisite, self._title)
+        if wikipage.exists():
+            redirection_depth = 0
+            while wikipage.isRedirectPage():
+                redirection_depth += 1
+                if redirection_depth == self.max_redirection_depth:
+                    break
+                else:
+                    wikipage = wikipage.getRedirectTarget()
+
+            if redirection_depth == self.max_redirection_depth:
+                return False
+
+        return wikipage.exists()
 
     def namespace(self):
         if self.offline:
@@ -257,10 +245,9 @@ class RedisPage(object):
     def __getattr__(self, item):
         if hasattr(RedisPage, item):
             return getattr(self, item)
-        else:
-            wikisite = pywikibot.Site(self.site.language, self.site.wiki)
-            wikipage = pywikibot.Page(wikisite, self._title)
-            return getattr(wikipage, item)
+        wikisite = pywikibot.Site(self.site.language, self.site.wiki)
+        wikipage = pywikibot.Page(wikisite, self._title)
+        return getattr(wikipage, item)
 
 
 if __name__ == "__main__":

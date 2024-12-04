@@ -52,11 +52,7 @@ class SubsectionImporter(BaseSubsectionImporter):
                 pos1 = wikipage_.find(section) + len(section)
                 # section end is 2 newlines
                 pos2 = wikipage_.find("\n\n", pos1)
-                if pos2 != -1:
-                    wikipage_ = wikipage_[pos1:pos2]
-                else:
-                    wikipage_ = wikipage_[pos1:]
-
+                wikipage_ = wikipage_[pos1:pos2] if pos2 != -1 else wikipage_[pos1:]
                 # More often than we'd like to admit,
                 #   the section level for the given sub-section is one level deeper than expected.
                 # As a consequence, a '=<newline>' can appear before the sub-section content.
@@ -79,13 +75,9 @@ class SubsectionImporter(BaseSubsectionImporter):
 
         retrieved = []
         # Retrieving and narrowing to target section
-        if self.numbered:
-            number_rgx = " [1-9]+"
-        else:
-            number_rgx = ""
-
+        number_rgx = " [1-9]+" if self.numbered else ""
         target_language_section = re.search(
-            "==[ ]?" + self.iso_codes[language] + "[ ]?==", wikipage
+            f"==[ ]?{self.iso_codes[language]}[ ]?==", wikipage
         )
         if target_language_section is not None:
             section_begin = wikipage.find(str(target_language_section.group(), "utf8"))

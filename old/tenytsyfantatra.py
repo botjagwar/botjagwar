@@ -8,7 +8,7 @@ from api.decorator import time_this
 
 WORKING_WIKI = pywikibot.getSite("mg", "wiktionary")
 try:
-    username = "%s" % pywikibot.config.usernames["wiktionary"]["mg"]
+    username = f'{pywikibot.config.usernames["wiktionary"]["mg"]}'
 except KeyError:
     username = "test"
 
@@ -21,7 +21,7 @@ class UnknownWordManagerError(Exception):
 
 class UnknownWordManagerBot(object):
     def __init__(self):
-        self.unknown_words_file = open(mt_data_file + "word_hits", "r")
+        self.unknown_words_file = open(f"{mt_data_file}word_hits", "r")
         self.standard_line_regex = re.compile(r"(.*)[ ]\[([a-zA-Z]+)\]")
         self.aggregated_unknown_words = {}
 
@@ -41,7 +41,7 @@ class UnknownWordManagerBot(object):
         :return: the word ID
         """
         result = self.dictionary_tables[language].read(
-            {self.language[language]: word}, select="%s_wID" % language
+            {self.language[language]: word}, select=f"{language}_wID"
         )
         return result[0]
 
@@ -52,7 +52,7 @@ class UnknownWordManagerBot(object):
         :return:
         """
         f = open(mt_data_file + file_name, "r")
-        for line in f.readlines():
+        for line in f:
             line = line.decode("utf8")
             line = line.strip("\n")
             try:
@@ -65,7 +65,7 @@ class UnknownWordManagerBot(object):
                 # print wid, translation, len(translation)
                 try:
                     self.translation_tables[language].insert(
-                        {"%s_wID" % language: str(wid), "mg": translation}
+                        {f"{language}_wID": str(wid), "mg": translation}
                     )
                 except (DataError, IntegrityError):
                     pass
@@ -111,18 +111,14 @@ class UnknownWordManagerBot(object):
         print("QUERYING DATABASE ON PREAGGREGATED DATA")
         # Lightning fast search (100x speedup compared to database select!)
         words = {
-            "en": set(
-                [
-                    str(w, "latin1")
-                    for _, _, w in self.dictionary_tables["en"].read_all()
-                ]
-            ),
-            "fr": set(
-                [
-                    str(w, "latin1")
-                    for _, _, w in self.dictionary_tables["fr"].read_all()
-                ]
-            ),
+            "en": {
+                str(w, "latin1")
+                for _, _, w in self.dictionary_tables["en"].read_all()
+            },
+            "fr": {
+                str(w, "latin1")
+                for _, _, w in self.dictionary_tables["fr"].read_all()
+            },
         }
         for word_and_language, hits in list(pre_aggregate.items()):
             counter += 1
@@ -140,9 +136,8 @@ class UnknownWordManagerBot(object):
                 t = time.time()
             translation, language_code = word_and_language
 
-            if translation in words[language_code]:
-                if (translation, language_code) not in self.aggregated_unknown_words:
-                    self.aggregated_unknown_words[(translation, language_code)] = hits
+            if translation in words[language_code] and (translation, language_code) not in self.aggregated_unknown_words:
+                self.aggregated_unknown_words[(translation, language_code)] = hits
 
         return self.aggregated_unknown_words
 
@@ -157,9 +152,12 @@ class UnknownWordManagerBot(object):
         """
         if not isinstance(wikipage, pywikibot.Page):
             raise UnknownWordManagerError()
-        content = ""
-        for unknown_word, language_code in sorted(self.aggregated_unknown_words):
-            content += "# %s" % unknown_word
+        content = "".join(
+            f"# {unknown_word}"
+            for unknown_word, language_code in sorted(
+                self.aggregated_unknown_words
+            )
+        )
         wikipage.put(content, "manavao ny lisitry ny teny tsy fantatra")
 
     def parse_unknown_words_from_wikipage_content(self, wikipage):
@@ -226,27 +224,22 @@ def save_aggregated_on_wiki(unknowns):
         word, language = entry
         wikitext += "[[%s]] (%s, %d), \n" % (word, language, hits)
 
-    # keeping a local copy
-    f = open("/tmp/lisitry ny teny tsy fantatra", "w")
-    f.write(wikitext.encode("utf8"))
-    f.close()
-
+    with open("/tmp/lisitry ny teny tsy fantatra", "w") as f:
+        f.write(wikitext.encode("utf8"))
     # Saving page on-wiki
     page = pywikibot.Page(
-        WORKING_WIKI, "Mpikambana:%s/Lisitry ny teny tsy fantatra" % username
+        WORKING_WIKI, f"Mpikambana:{username}/Lisitry ny teny tsy fantatra"
     )
     page.put(wikitext, "Teny tsy fantatra vaovao")
 
 
 def save_aggregated_in_file(unknowns):
-    f = open(mt_data_file + "unknown_words", "w")
-    elems = sorted(unknowns.keys())
-    for e in elems:
-        hits = unknowns[e]
-        s = "%s:%s:%d:\n" % (e[0], e[1], hits)
-        f.write(s.encode("utf8"))
-
-    f.close()
+    with open(f"{mt_data_file}unknown_words", "w") as f:
+        elems = sorted(unknowns.keys())
+        for e in elems:
+            hits = unknowns[e]
+            s = "%s:%s:%d:\n" % (e[0], e[1], hits)
+            f.write(s.encode("utf8"))
 
 
 def insert_words():

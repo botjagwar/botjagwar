@@ -9,9 +9,7 @@ def cleanup(content):
     return content
 
 
-counter = 0
-for page in get_pages_from_category("mg", "Pejy ahitana dikan-teny"):
-    counter += 1
+for counter, page in enumerate(get_pages_from_category("mg", "Pejy ahitana dikan-teny")):
     print(">>>>", page.title(), "<<<<")
     old = content = page.get()
     changed = False
@@ -22,10 +20,9 @@ for page in get_pages_from_category("mg", "Pejy ahitana dikan-teny"):
     if content.find("=mg=") == -1:
         changed = True
         content = cleanup(content)
-    else:
-        if content.find("-e-mat-|mg") != -1 or content.find("-e-ana-|mg") != -1:
-            changed = True
-            content = cleanup(content)
+    elif content.find("-e-mat-|mg") != -1 or content.find("-e-ana-|mg") != -1:
+        changed = True
+        content = cleanup(content)
 
     if changed:
         pywikibot.showDiff(old, content)

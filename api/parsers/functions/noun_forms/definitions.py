@@ -64,10 +64,7 @@ def parameterized_parse_fr_definition(form_class=NounForm):
             lemma = lemma_rgx.groups()[0]
         else:
             lemma_rgx = re.search("\[\[(.*)]].", definition_line)
-            if lemma_rgx:
-                lemma = lemma_rgx.groups()[0]
-            else:
-                lemma = ""
+            lemma = lemma_rgx.groups()[0] if lemma_rgx else ""
         returned.lemma = lemma
         return returned
 

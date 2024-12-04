@@ -41,7 +41,7 @@ def fetch_whitelist(language):
     global whitelists
     returned_data = set()
     whitelist = os.path.join(os.path.dirname(__file__), f"{language}-whitelist")
-    for line in open(whitelist, "r").readlines():
+    for line in open(whitelist, "r"):
         line = line.strip("\n")
         if len(line) > 3:
             returned_data.add(line)
@@ -114,11 +114,11 @@ def enrich_french_definition(part_of_speech, definition_line):
             prefix += " un ou une "
         definition_line = prefix + definition_line + "."
     elif part_of_speech == "mat":
-        definition_line = "il est capable de " + definition_line
+        definition_line = f"il est capable de {definition_line}"
         if definition_line.endswith(" à"):
             definition_line += " quelqu'un ou quelque chose"
     elif part_of_speech == "mpam":
-        definition_line = "quelque chose de " + definition_line
+        definition_line = f"quelque chose de {definition_line}"
 
     return definition_line
 
@@ -133,7 +133,7 @@ def enrich_german_definition(part_of_speech, definition_line):
         definition_line = prefix + definition_line + "."
     elif part_of_speech == "mat":
         if definition_line.endswith(" à"):
-            definition_line = "Er kannt " + definition_line + " können"
+            definition_line = f"Er kannt {definition_line} können"
 
     return definition_line
 
@@ -147,12 +147,12 @@ def remove_unknown_characters(translation):
 
 def remove_enrichment_artefacts(part_of_speech, translation):
     for enrichment_artefact in ENRICHMENT_ARTEFACTS_STARTSWITH:
-        if translation.lower().startswith(enrichment_artefact + " "):
-            translation = translation[len(enrichment_artefact + " ") :].strip()
+        if translation.lower().startswith(f"{enrichment_artefact} "):
+            translation = translation[len(f"{enrichment_artefact} "):].strip()
 
     for enrichment_artefact in ENRICHMENT_ARTEFACTS_ENDSWITH:
-        if translation.lower().endswith(" " + enrichment_artefact):
-            translation = translation[: -len(" " + enrichment_artefact)].strip()
+        if translation.lower().endswith(f" {enrichment_artefact}"):
+            translation = translation[:-len(f" {enrichment_artefact}")].strip()
 
     if part_of_speech in ("ana", "mat"):
         enrichment_artefacts_startswith = [
@@ -235,9 +235,8 @@ def remove_duplicate_definitions(translation):
     if " sy " in data or " na " in data:
         for conj in [" sy ", " na "]:
             d = data.split(conj)
-            if len(d) == 2:
-                if d[1].lower() == d[0].lower():
-                    data = d[0]
+            if len(d) == 2 and d[1].lower() == d[0].lower():
+                data = d[0]
 
     data = data.strip()
     return data
@@ -266,28 +265,28 @@ def translate_individual_word_using_dictionary(word, source_language, target_lan
             data_mg = json_dictionary.look_up_dictionary("mg", pos, word)
             if data_source_language and not data_mg:
                 definitions = data_source_language[0]["definitions"]
-                for definition in definitions:
-                    if definition["language"] == target_language:
-                        source_matches.append(definition["definition"])
-
-    if len(target_matches) == 0:
-        return source_matches
-    else:
-        return []
+                source_matches.extend(
+                    definition["definition"]
+                    for definition in definitions
+                    if definition["language"] == target_language
+                )
+    return [] if target_matches else source_matches
 
 
 def translate_using_dictionary(translation, source_language, target_language):
     words = translation.split()
-    out_translation = ""
-    for w in words:
-        matches = translate_individual_word_using_dictionary(
-            w, source_language, target_language
+    out_translation = "".join(
+        (
+            f" {matches[0]}"
+            if (
+                matches := translate_individual_word_using_dictionary(
+                    w, source_language, target_language
+                )
+            )
+            else f" {w}"
         )
-        if matches:
-            out_translation += " " + matches[0]
-        else:
-            out_translation += " " + w
-
+        for w in words
+    )
     print(f"translate_using_dictionary: {out_translation}")
     return out_translation.strip()
 
@@ -347,9 +346,8 @@ def translate_using_nllb(
     if definition_line.lower() in NLLB_GOTCHAS:
         return UntranslatedDefinition(definition_line)
 
-    if len(definition_line.split()) > 3:
-        if len(translation) > len(definition_line) * 3:
-            return UntranslatedDefinition(definition_line)
+    if len(definition_line.split()) > 3 and len(translation) > len(definition_line) * 3:
+        return UntranslatedDefinition(definition_line)
 
     if translation is not None:
         return TranslatedDefinition(translation)

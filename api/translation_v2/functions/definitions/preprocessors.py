@@ -75,7 +75,7 @@ def delete_all_templates(refined):
 
     if unwanted_character:
         raise WiktionaryProcessorException(
-            "Refined definition still has unwanted characters : '" + character + "'"
+            f"Refined definition still has unwanted characters : '{character}'"
         )
 
     return refined
@@ -131,10 +131,7 @@ def refine_definition(definition, remove_all_templates=False) -> str:
     refined = refined.replace("\n", " ")
     refined = refined.strip()
 
-    if refined.strip() and refined.strip("."):
-        return refined
-    else:
-        return ""
+    return refined if refined.strip() and refined.strip(".") else ""
 
 
 __all__ = ["refine_definition", "drop_definitions_with_labels"]

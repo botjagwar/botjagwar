@@ -37,7 +37,7 @@ class AdditionalDataRefiner(object):
                 "(%s, %s, %s),", (wid, output_additional_data_type, ipa_pronunciation)
             )
 
-        print(f"uploading 10000 entries...")
+        print("uploading 10000 entries...")
         insert_sql = insert_sql[:-1]
 
         try:
@@ -46,7 +46,7 @@ class AdditionalDataRefiner(object):
             print(error)
             self.pgsql_conn.rollback()
         else:
-            print(f"  uploaded!")
+            print("  uploaded!")
 
             self.pgsql_conn.commit()
 

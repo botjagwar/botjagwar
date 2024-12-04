@@ -13,25 +13,22 @@ def translate_reference_templates(
     if "|" in ref:
         title = ref[2 : ref.find("|", 3)]
     else:
-        if ref.find("}}", 3) != -1:
-            title = ref[2 : ref.find("}}", 3)]
-        else:
-            title = ref[2:] + "}}"
-
+        title = (
+            ref[2 : ref.find("}}", 3)]
+            if ref.find("}}", 3) != -1
+            else ref[2:] + "}}"
+        )
     translated_title = postgrest.get_mapped_template_in_database(
         title, target_language=target
     )
-    if translated_title is None:
-        if "R:" in title[:3]:
-            translated_title = title[:3].replace("R:", "Tsiahy:") + title[3:]
+    if translated_title is None and "R:" in title[:3]:
+        translated_title = title[:3].replace("R:", "Tsiahy:") + title[3:]
 
     if title != translated_title and translated_title is not None:
         postgrest.add_translated_title(
             title, translated_title, source_language=source, target_language=target
         )
-        translated_reference = ref.replace(title, translated_title)
-        return translated_reference
-
+        return ref.replace(title, translated_title)
     return title
 
 

@@ -44,10 +44,7 @@ class VerbFormGenerator:
         for tense in self.tenses:
             for voice in self.voices:
                 for person in self.persons:
-                    if voice == "p" and tense == "":
-                        prefix_tense = "a"
-                    else:
-                        prefix_tense = tense
+                    prefix_tense = "a" if voice == "p" and tense == "" else tense
                     word = f"{voice}{prefix_tense}{self.root}{person}"
                     definition = f"{self.persons[person]} ny filazam-potoana {self.tenses[tense]} amin'ny {self.voices[voice]} "
                     definition += f"ny matoanteny [[{self.root}ön]]."
@@ -77,7 +74,7 @@ class VolapukImporter(object):
             )
         elif target_page.isRedirectPage():
             content = output.wikipages([entry])
-            print(">>> " + entry.entry + " <<<")
+            print(f">>> {entry.entry} <<<")
             print(content)
             self.publisher.async_put(target_page, content, "/* {{=vo=}} */")
         else:
@@ -96,15 +93,14 @@ class VolapukImporter(object):
                 content += "\n"
                 content += output.wikipages([entry]).strip()
             else:
-                content = ""
-                content += "\n"
+                content = "" + "\n"
                 content += output.wikipages([entry]).strip()
                 s = content.replace("\n", " ")
                 # summary = f"Pejy noforonina tamin'ny « {s} »"
-                summary = f"bika matoanteny volapoka vaovao"
+                summary = "bika matoanteny volapoka vaovao"
 
             # Push aggregated content
-            print(">>> " + entry.entry + " <<<")
+            print(f">>> {entry.entry} <<<")
             # print(content)
             if len(content) > len(original_content):
                 self.publisher.async_put(target_page, content.strip("\n"), summary)
@@ -115,9 +111,9 @@ class VolapukImporter(object):
         print(f"There are {len(base_forms)} base forms")
 
         with open(
-            "user_data/list_mg_Endriky ny matoanteny amin'ny teny volapoky", "r"
-        ) as pages:
-            page_already_created = set([k.strip("\n") for k in pages.readlines()])
+                "user_data/list_mg_Endriky ny matoanteny amin'ny teny volapoky", "r"
+            ) as pages:
+            page_already_created = {k.strip("\n") for k in pages.readlines()}
 
         print(f"{len(page_already_created)} have already been created")
         count = 0

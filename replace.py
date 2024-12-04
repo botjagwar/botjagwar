@@ -17,7 +17,7 @@ def replace():
         if content == new_content:
             print(f"No change necessary for {title}")
             continue
-        pywikibot.output(">>>> %s <<<<<" % title)
+        pywikibot.output(f">>>> {title} <<<<<")
         pywikibot.showDiff(content, new_content)
         page.put(new_content, "fanitsiana: 'mpanao' lasa 'mpandray anjara'")
 

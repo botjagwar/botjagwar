@@ -1,7 +1,7 @@
 class UntranslatedDefinition(str):
 
     def __repr__(self):
-        return self.__class__.__name__ + "(" + self.__str__() + ")"
+        return f"{self.__class__.__name__}({self.__str__()})"
 
 
 class TranslatedDefinition(str):
@@ -24,12 +24,8 @@ class TranslatedDefinition(str):
 
     def __repr__(self):
         ret = self.__class__.__name__
-        ret += "(" + self + ", "
-        if self.synonym:
-            ret += self.synonym + ")"
-        else:
-            ret += ")"
-
+        ret += f"({self}, "
+        ret += f"{self.synonym})" if self.synonym else ")"
         return ret
 
 

@@ -35,7 +35,7 @@ class WiktionaryProcessorFactory(object):
             if current_class_name == language_class_name:
                 return processor_class
 
-        warnings.warn("Tsy nahitana praosesera: '%s'" % language_class_name, Warning)
+        warnings.warn(f"Tsy nahitana praosesera: '{language_class_name}'", Warning)
         return WiktionaryProcessor
 
 

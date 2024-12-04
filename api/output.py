@@ -44,18 +44,17 @@ class Output(object):
                 info.translation_method if hasattr(info, "translation_method") else None
             ),
         }
-        response = dictionary_service.post("entry/%s/create" % info.language, json=data)
+        response = dictionary_service.post(f"entry/{info.language}/create", json=data)
         if response.status_code == WordAlreadyExists.status_code:
             word_response = dictionary_service.get(
-                "entry/%s/%s" % (info.language, info.entry)
-            ).json()  # fetch its ID
+                f"entry/{info.language}/{info.entry}"
+            ).json()
             edit_response = dictionary_service.put(
                 "entry/%d/edit" % word_response[0]["id"], json=data
             )  # edit using its ID
             if edit_response.status_code == WordAlreadyExists.status_code:
                 log.debug(
-                    "%s [%s] > Attempted to create an already-existing entry."
-                    % (info.entry, info.language)
+                    f"{info.entry} [{info.language}] > Attempted to create an already-existing entry."
                 )
             elif edit_response.status_code != 200:
                 log.error(
@@ -70,28 +69,27 @@ class Output(object):
     def postgrest_add_translation_method(infos: Entry):
         backend = StaticBackend().backend
         data = {
-            "word": "eq." + infos.entry,
-            "language": "eq." + infos.language,
-            "part_of_speech": "eq." + infos.part_of_speech,
+            "word": f"eq.{infos.entry}",
+            "language": f"eq.{infos.language}",
+            "part_of_speech": f"eq.{infos.part_of_speech}",
             "limit": "1",
         }
         # log.debug('get /word', data)
-        word_id = requests.get(backend + "/word", params=data).json()
-        if len(word_id) > 0:
-            if "id" in word_id[0]:
-                word_id = word_id[0]["id"]
-            else:
-                raise TypeError(word_id)
-        else:
+        word_id = requests.get(f"{backend}/word", params=data).json()
+        if len(word_id) <= 0:
             return
+        if "id" in word_id[0]:
+            word_id = word_id[0]["id"]
+        else:
+            raise TypeError(word_id)
         if hasattr(infos, "translation_methods"):
             for definition, methods in infos.translation_methods.items():
                 data = {
-                    "definition": "eq." + definition,
+                    "definition": f"eq.{definition}",
                     "definition_language": "eq.mg",
                     "limit": "1",
                 }
-                defn_id = requests.get(backend + "/definitions", params=data).json()
+                defn_id = requests.get(f"{backend}/definitions", params=data).json()
                 if len(defn_id) > 0 and "id" in defn_id:
                     defn_id = defn_id[0]["id"]
                 else:
@@ -103,8 +101,8 @@ class Output(object):
                         "definition": defn_id,
                         "translation_method": method,
                     }
-                    log.debug("post /translation_method" + str(data))
-                    requests.post(backend + "/translation_method", json=data)
+                    log.debug(f"post /translation_method{data}")
+                    requests.post(f"{backend}/translation_method", json=data)
 
     @staticmethod
     def sqlite_add_translation_method(infos: Entry):
@@ -115,11 +113,10 @@ class Output(object):
 
     def batchfile(self, info: Entry):
         "return batch format (see doc)"
-        string = (
+        return (
             "%(entry)s -> %(entry_definition)s -> %(part_of_speech)s -> %(language)s\n"
             % info.serialise()
         )
-        return string
 
     def wikipage(self, info: Entry, link=True):
         "returns wikipage string"
@@ -139,7 +136,7 @@ class Output(object):
 
         # render
         log.debug(entries_by_language)
-        for language, entries in entries_by_language.items():
+        for entries in entries_by_language.values():
             for entry in entries:
                 rendered = self.wikipage_renderer.render(entry).strip()
                 language_section = rendered.split("\n")[0]

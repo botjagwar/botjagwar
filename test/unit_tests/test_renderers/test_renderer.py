@@ -8,11 +8,12 @@ class TestRenderers(TestCase):
     def test_head_section(self):
         renderer = MGWikiPageRenderer()
         info = MagicMock()
-        info.additional_data = {}
         info.language = "mg"
-        info.additional_data["etymology"] = "no etimologies for you!!"
         info.part_of_speech = "ana"
-        info.additional_data["transcription"] = ["totot", "toto"]
+        info.additional_data = {
+            "etymology": "no etimologies for you!!",
+            "transcription": ["totot", "toto"],
+        }
         head_section = renderer.render_head_section(info)
         expected = (
             """
@@ -62,13 +63,10 @@ class TestRenderers(TestCase):
     def test_definitions_with_examples(self):
         renderer = MGWikiPageRenderer()
         info = MagicMock()
-        info.additional_data = {}
         info.definitions = ["def1", "def2", "def4"]
-        info.additional_data["examples"] = [
-            ["exdef1"],
-            ["exdef2", "exdef22"],
-            ["exdef4"],
-        ]
+        info.additional_data = {
+            "examples": [["exdef1"], ["exdef2", "exdef22"], ["exdef4"]]
+        }
         definitions = renderer.render_definitions(info, [])
         rendered_definitions = """
 # def1

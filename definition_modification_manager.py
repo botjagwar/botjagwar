@@ -44,23 +44,22 @@ class DefinitionModificationManagerBot(object):
                     mg_word_page = pywikibot.Page(
                         pywikibot.Site("mg", "wiktionary"), word
                     )
-                    if mg_word_page.exists() and not mg_word_page.isRedirectPage():
-                        content = mg_word_page.get()
-                        new_content = content.replace(
-                            f"[[{old_definition}]]", f"[[{new_definition}]]"
-                        )
-                        pywikibot.showDiff(content, new_content)
-                        if content != new_content:
-                            mg_word_page.put(
-                                new_content,
-                                f"fanitsiana: -{old_definition} +{new_definition}",
-                            )
-                            change_map[definition_id] += 1
-                    else:
+                    if not mg_word_page.exists() or mg_word_page.isRedirectPage():
                         continue
+                    content = mg_word_page.get()
+                    new_content = content.replace(
+                        f"[[{old_definition}]]", f"[[{new_definition}]]"
+                    )
+                    pywikibot.showDiff(content, new_content)
+                    if content != new_content:
+                        mg_word_page.put(
+                            new_content,
+                            f"fanitsiana: -{old_definition} +{new_definition}",
+                        )
+                        change_map[definition_id] += 1
                 except Exception as exc:
                     if definition_id not in fail_map:
-                        fail_map[definition_id] = "%s failed: %s" % (word, str(exc))
+                        fail_map[definition_id] = f"{word} failed: {str(exc)}"
                     else:
                         fail_map[definition_id] += "\n%s failed: %s" % (word, str(exc))
 
@@ -76,8 +75,8 @@ class DefinitionModificationManagerBot(object):
                     WHERE definition_id = {definition_id}"""
                 )
 
+            status = "FAILED"
             for definition_id, comment in fail_map.items():
-                status = "FAILED"
                 connection.execute(
                     f"""
                     UPDATE events_definition_changed SET

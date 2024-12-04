@@ -14,7 +14,7 @@ class PLWiktionaryProcessor(WiktionaryProcessor):
     def __init__(self, test=False, verbose=False):
         super(PLWiktionaryProcessor, self).__init__(test=test, verbose=verbose)
         try:
-            f = open(data_file + "WiktionaryPL_langdata.dct", "r").read()
+            f = open(f"{data_file}WiktionaryPL_langdata.dct", "r").read()
             self.langdata = eval(f)
         except IOError:
             self.langdata = {}
@@ -26,8 +26,7 @@ class PLWiktionaryProcessor(WiktionaryProcessor):
             line = line.split(":")
             language = self.convert_language_name_to_iso_code(line[0].strip())
             translations = line[1].strip()
-            for translation in translations.split(";"):
-                ret.append((language, translation))
+            ret.extend((language, translation) for translation in translations.split(";"))
         return ret
 
     def _get_translation_lines(self, page_c):

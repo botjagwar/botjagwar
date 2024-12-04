@@ -36,7 +36,7 @@ requests.delete = retry_on_fail(possible_errors, retries=5, time_between_retries
 
 class TestDictionaryRestService(TestCase):
     def setUp(self):
-        self.ENGINE = create_engine("sqlite:///%s" % DB_PATH)
+        self.ENGINE = create_engine(f"sqlite:///{DB_PATH}")
         Base.metadata.create_all(self.ENGINE)
         SessionClass = sessionmaker(bind=self.ENGINE)
         session = SessionClass()
@@ -71,22 +71,25 @@ class TestDictionaryRestService(TestCase):
 
     @retry_on_fail([Exception], retries=10, time_between_retries=0.4)
     def wait_until_ready(self):
-        resp = requests.get(URL_HEAD + "/ping")
+        resp = requests.get(f"{URL_HEAD}/ping")
         assert resp.status_code == 200
 
     @staticmethod
     def kill_service():
         DICTIONARY_SERVICE.kill()
-        os.system("rm %s" % DB_PATH)
+        os.system(f"rm {DB_PATH}")
 
     @retry_on_fail([Exception], 10, 0.3)
     def create_entry(self, word, language, pos, definition, def_language):
         resp = requests.post(
-            URL_HEAD + "/entry/%s/create" % language,
+            f"{URL_HEAD}/entry/{language}/create",
             json=json.dumps(
                 {
                     "definitions": [
-                        {"definition": definition, "definition_language": def_language}
+                        {
+                            "definition": definition,
+                            "definition_language": def_language,
+                        }
                     ],
                     "word": word,
                     "part_of_speech": pos,
@@ -98,18 +101,18 @@ class TestDictionaryRestService(TestCase):
         # check in database if definition has been added
 
     def test_disable_autocommit(self):
-        requests.put(URL_HEAD + "/configure", json=json.dumps({"autocommit": False}))
+        requests.put(f"{URL_HEAD}/configure", json=json.dumps({"autocommit": False}))
         for i in range(20):
             self.create_entry("nanaika%d" % i, "ka", "ana", "tarameguni%d" % i, "de")
 
-        requests.post(URL_HEAD + "/rollback")
+        requests.post(f"{URL_HEAD}/rollback")
 
         for i in range(20):
             resp = requests.get(URL_HEAD + "/entry/ka/nanaika%d" % i)
             self.assertEqual(resp.status_code, 404)
 
     def test_enable_autocommit(self):
-        requests.put(URL_HEAD + "/configure", json=json.dumps({"autocommit": True}))
+        requests.put(f"{URL_HEAD}/configure", json=json.dumps({"autocommit": True}))
         for i in range(20):
             self.create_entry("nanaika%d" % i, "ka", "ana", "tarameguni%d" % i, "de")
 
@@ -118,7 +121,7 @@ class TestDictionaryRestService(TestCase):
             self.assertEqual(resp.status_code, 200)
 
     def test_get_entry(self):
-        resp = requests.get(URL_HEAD + "/entry/jm/tehanu")
+        resp = requests.get(f"{URL_HEAD}/entry/jm/tehanu")
         data = resp.json()
         self.assertEqual(resp.status_code, 200)
         for datum in data:
@@ -128,7 +131,7 @@ class TestDictionaryRestService(TestCase):
             self.assertEqual(len(datum["definitions"]), 1)
 
     def test_get_entry_404(self):
-        resp = requests.get(URL_HEAD + "/entry/jm/teklkhanu")
+        resp = requests.get(f"{URL_HEAD}/entry/jm/teklkhanu")
         self.assertEqual(resp.status_code, 404)
 
     def test_create_entry(self):
@@ -159,17 +162,17 @@ class TestDictionaryRestService(TestCase):
                 ],
             },
         ]
-        resp = requests.post(URL_HEAD + "/entry/batch", json=batch)
+        resp = requests.post(f"{URL_HEAD}/entry/batch", json=batch)
         self.assertEqual(resp.status_code, 200, "Batch posting failed!")
         # committing data
-        requests.get(URL_HEAD + "/commit")
+        requests.get(f"{URL_HEAD}/commit")
         entries = [
             ("ln", "mbala"),
             ("kg", "mbala"),
             ("mnh", "mbala"),
         ]
         for language, word in entries:
-            resp = requests.get(URL_HEAD + "/entry/{}/{}".format(language, word))
+            resp = requests.get(f"{URL_HEAD}/entry/{language}/{word}")
             self.assertEqual(resp.status_code, 200, "Entry check failed!")
             data = resp.json()
             self.assertEqual(data[0]["language"], language)
@@ -178,7 +181,7 @@ class TestDictionaryRestService(TestCase):
     def test_create_existing_entry(self):
         sleep(1)
         resp = requests.post(
-            URL_HEAD + "/entry/jm/create",
+            f"{URL_HEAD}/entry/jm/create",
             json=json.dumps(
                 {
                     "definitions": [
@@ -193,7 +196,7 @@ class TestDictionaryRestService(TestCase):
 
     def test_append_to_existing_entry(self):
         resp = requests.post(
-            URL_HEAD + "/entry/jm/create",
+            f"{URL_HEAD}/entry/jm/create",
             json=json.dumps(
                 {
                     "definitions": [
@@ -208,7 +211,7 @@ class TestDictionaryRestService(TestCase):
 
     def test_create_entry_invalid_json(self):
         resp = requests.post(
-            URL_HEAD + "/entry/jm/create",
+            f"{URL_HEAD}/entry/jm/create",
             json=json.dumps(
                 {
                     "word": "tehanu",
@@ -219,7 +222,7 @@ class TestDictionaryRestService(TestCase):
         self.assertEqual(resp.status_code, InvalidJsonReceived.status_code)
 
     def test_edit_entry(self):
-        resp = requests.get(URL_HEAD + "/entry/jm/tehanu")
+        resp = requests.get(f"{URL_HEAD}/entry/jm/tehanu")
         data = resp.json()
         word_id = data[0]["id"]
         resp = requests.put(
@@ -236,7 +239,7 @@ class TestDictionaryRestService(TestCase):
     def test_read_after_write_get_after_post(self):
         self.create_entry("nanaika", "ka", "ana", "tarameguni", "de")
 
-        resp = requests.get(URL_HEAD + "/entry/ka/nanaika")
+        resp = requests.get(f"{URL_HEAD}/entry/ka/nanaika")
         data = resp.json()
         self.assertEqual(resp.status_code, 200)
         for datum in data:
@@ -248,7 +251,7 @@ class TestDictionaryRestService(TestCase):
     def test_read_after_write_get_after_put(self):
         self.test_edit_entry()
 
-        resp = requests.get(URL_HEAD + "/entry/jm/tehanu")
+        resp = requests.get(f"{URL_HEAD}/entry/jm/tehanu")
         data = resp.json()
         self.assertEqual(resp.status_code, 200)
         for datum in data:
@@ -258,7 +261,7 @@ class TestDictionaryRestService(TestCase):
             self.assertEqual(len(datum["definitions"]), 1)
 
     def test_delete_entry(self):
-        resp = requests.get(URL_HEAD + "/entry/jm/tehanu")
+        resp = requests.get(f"{URL_HEAD}/entry/jm/tehanu")
         self.assertEqual(resp.status_code, 200)
 
         data = resp.json()[0]
@@ -268,17 +271,17 @@ class TestDictionaryRestService(TestCase):
 
     def test_read_after_write_get_after_delete(self):
         self.test_delete_entry()
-        resp = requests.get(URL_HEAD + "/entry/jm/tehanu")
+        resp = requests.get(f"{URL_HEAD}/entry/jm/tehanu")
         self.assertEqual(resp.status_code, 404)
 
     def test_get_definition(self):
-        resp = requests.get(URL_HEAD + "/definition/1")
+        resp = requests.get(f"{URL_HEAD}/definition/1")
         self.assertEqual(resp.status_code, 200)
 
     def test_search_definition(self):
         search_params = {"definition": "rikizimai"}
         resp = requests.post(
-            URL_HEAD + "/definition/search", json=json.dumps(search_params)
+            f"{URL_HEAD}/definition/search", json=json.dumps(search_params)
         )
         j = resp.json()
         self.assertEqual(len(j), 1)
@@ -287,7 +290,7 @@ class TestDictionaryRestService(TestCase):
     def test_search_definition_wildcard(self):
         search_params = {"definition": "rik%"}
         resp = requests.post(
-            URL_HEAD + "/definition/search", json=json.dumps(search_params)
+            f"{URL_HEAD}/definition/search", json=json.dumps(search_params)
         )
         j = resp.json()
         print(j)
@@ -295,7 +298,7 @@ class TestDictionaryRestService(TestCase):
         self.assertEqual(resp.status_code, 200)
 
     def test_delete_definition(self):
-        resp = requests.get(URL_HEAD + "/entry/jm/tehanu")
+        resp = requests.get(f"{URL_HEAD}/entry/jm/tehanu")
         self.assertEqual(resp.status_code, 200)
 
         data = resp.json()[0]
@@ -308,7 +311,7 @@ class TestDictionaryRestService(TestCase):
         self.create_entry("pona", "tpo", "ana", "gut", "de")
         self.create_entry("alks", "tpo", "ana", "pals", "fr")
 
-        resp = requests.get(URL_HEAD + "/translations/tpo/de/toki")
+        resp = requests.get(f"{URL_HEAD}/translations/tpo/de/toki")
         print(resp)
         j = resp.json()
         print(j)
@@ -319,7 +322,7 @@ class TestDictionaryRestService(TestCase):
         self.create_entry("toki", "tpo", "ana", "Sprach", "de")
         self.create_entry("pona", "tpo", "ana", "gut", "de")
 
-        resp = requests.get(URL_HEAD + "/translations/jm/tehanu")
+        resp = requests.get(f"{URL_HEAD}/translations/jm/tehanu")
         j = resp.json()
         self.assertEquals(len(j), 1)
         self.assertEquals(resp.status_code, 200)

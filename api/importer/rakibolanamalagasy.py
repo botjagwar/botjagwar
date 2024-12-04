@@ -12,8 +12,8 @@ backend = StaticBackend()
 
 class DictionaryImporter(AdditionalDataImporter):
     def populate_cache(self, language):
-        rq_params = {"language": "eq." + language}
-        response = requests.get(backend.backend + "/word", rq_params)
+        rq_params = {"language": f"eq.{language}"}
+        response = requests.get(f"{backend.backend}/word", rq_params)
         query = response.json()
         for json in query:
             self.word_id_cache[
@@ -28,11 +28,11 @@ class DictionaryImporter(AdditionalDataImporter):
 
     def http_get_word_id(self, word, language, part_of_speech):
         rq_params = {
-            "word": "eq." + word,
-            "language": "eq." + language,
-            "part_of_speech": "eq." + part_of_speech,
+            "word": f"eq.{word}",
+            "language": f"eq.{language}",
+            "part_of_speech": f"eq.{part_of_speech}",
         }
-        response = requests.get(backend.backend + "/word", rq_params)
+        response = requests.get(f"{backend.backend}/word", rq_params)
         query = response.json()
         for json in query:
             self.word_id_cache[

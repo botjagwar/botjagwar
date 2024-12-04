@@ -14,6 +14,6 @@ class OpenMtTranslation(object):
     def get_translation(self, sentence: str):
         data = {"text": sentence}
         response = requests.post(
-            self.backend + f"/translate/{self.source}/{self.target}", json=data
+            f"{self.backend}/translate/{self.source}/{self.target}", json=data
         )
         return response.json()["text"]

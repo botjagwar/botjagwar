@@ -30,9 +30,9 @@ class RevisionLister(object):
             returned = []
 
         if most_recent:
-            revisions = [r for r in self.revisions][:count]
+            revisions = list(self.revisions)[:count]
         else:
-            revisions = [r for r in self.revisions][-count:]
+            revisions = list(self.revisions)[-count:]
 
         for revision in revisions:
             print(revision)

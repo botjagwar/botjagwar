@@ -14,7 +14,7 @@ from api.parsers.constants.mg import (
 def render_non_lemma(non_lemma_type):
     def wrapper(non_lemma) -> str:
         explanation = non_lemma_type
-        ret = explanation.strip() + " ny teny [[%s]]" % (non_lemma.lemma)
+        ret = f"{explanation.strip()} ny teny [[{non_lemma.lemma}]]"
         return ret
 
     return wrapper
@@ -30,21 +30,20 @@ def render_noun_form(non_lemma) -> str:
     """
     explanation = ""
     if non_lemma.possessive in POSSESSIVENESS:
-        explanation += POSSESSIVENESS[non_lemma.possessive] + " "
+        explanation += f"{POSSESSIVENESS[non_lemma.possessive]} "
     if non_lemma.case in CASES:
-        explanation += CASES[non_lemma.case] + " "
+        explanation += f"{CASES[non_lemma.case]} "
     if non_lemma.gender in GENDER:
-        explanation += GENDER[non_lemma.gender] + " "
+        explanation += f"{GENDER[non_lemma.gender]} "
     if non_lemma.number in NUMBER:
-        explanation += NUMBER[non_lemma.number] + " "
+        explanation += f"{NUMBER[non_lemma.number]} "
     if non_lemma.definite in DEFINITENESS:
-        explanation += DEFINITENESS[non_lemma.definite] + " "
+        explanation += f"{DEFINITENESS[non_lemma.definite]} "
 
     if not explanation.strip():
         explanation = "endriky"
 
-    ret = explanation.strip() + " ny teny [[%s]]" % (non_lemma.lemma)
-    return ret
+    return f"{explanation.strip()} ny teny [[{non_lemma.lemma}]]"
 
 
 def render_verb_form(non_lemma) -> str:
@@ -53,23 +52,22 @@ def render_verb_form(non_lemma) -> str:
     """
     explanation = ""
     if non_lemma.person in PERSONS:
-        explanation += PERSONS[non_lemma.person] + " "
+        explanation += f"{PERSONS[non_lemma.person]} "
     if non_lemma.number in NUMBER:
-        explanation += " " + NUMBER[non_lemma.number] + " "
+        explanation += f" {NUMBER[non_lemma.number]} "
 
     if non_lemma.mood in MOOD:
-        explanation += "ny " if len(explanation.strip()) != 0 else ""
-        explanation += MOOD[non_lemma.mood] + " "
+        explanation += "ny " if explanation.strip() != "" else ""
+        explanation += f"{MOOD[non_lemma.mood]} "
 
     if non_lemma.tense in TENSE:
-        explanation += TENSE[non_lemma.tense] + " "
+        explanation += f"{TENSE[non_lemma.tense]} "
 
     if non_lemma.voice in VOICE:
-        explanation += "amin'ny " if len(explanation.strip()) != 0 else ""
-        explanation += VOICE[non_lemma.voice] + " "
+        explanation += "amin'ny " if explanation.strip() != "" else ""
+        explanation += f"{VOICE[non_lemma.voice]} "
 
     if not explanation.strip():
         explanation = "endriky "
 
-    ret = explanation + "ny matoanteny [[%s]]" % (non_lemma.lemma)
-    return ret
+    return f"{explanation}ny matoanteny [[{non_lemma.lemma}]]"

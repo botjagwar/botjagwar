@@ -23,14 +23,14 @@ def test_one():
         print(k)
 
     # print(k)
-    for k in processor.retrieve_translations():
+    for _ in processor.retrieve_translations():
         pass
 
 
 def test_random():
     errors = 0
     sample_size = 50
-    for i in range(sample_size):
+    for _ in range(sample_size):
         print()
         page = enwikt.random_page()
         processor = ENWiktionaryProcessor()
@@ -48,9 +48,8 @@ def test_random():
             ):
                 print(k)
 
-            for k in processor.retrieve_translations():
+            for _ in processor.retrieve_translations():
                 pass
-                # print(k)
         except Exception as e:
             print(page.title())
             logger.exception(e)

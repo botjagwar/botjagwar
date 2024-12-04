@@ -36,7 +36,7 @@ class SiteExtractor(object):
     def load_page(self, word) -> etree._Element:
         def check_if_defined(var):
             if getattr(self, var) is None:
-                raise NotImplementedError("%s has to be defined" % var)
+                raise NotImplementedError(f"{var} has to be defined")
 
         def _get_html_page():
             # raise SiteExtractorException(404, 'Empty content')
@@ -137,8 +137,8 @@ class TenyMalagasySiteExtractor(SiteExtractor):
 
         try:
             entry = super(TenyMalagasySiteExtractor, self).lookup(word)
-        except Exception:
-            raise SiteExtractorException(None)
+        except Exception as e:
+            raise SiteExtractorException(None) from e
 
         # ---- Our postprocessor below -----
         references_regex = r"([a-zA-Z]+ [0-9]+)"
@@ -153,8 +153,8 @@ class TenyMalagasySiteExtractor(SiteExtractor):
         for definition_section in entry.definitions:
             for ref in re.findall(references_regex, str(definition_section)):
                 entry.references.append(ref)  # noqa
-                definition_section = definition_section.replace("[%s]" % ref, "")
-                definition_section = definition_section.replace("%s]" % ref, "")
+                definition_section = definition_section.replace(f"[{ref}]", "")
+                definition_section = definition_section.replace(f"{ref}]", "")
 
             for i, d in enumerate(definition_section.split("¶\xa0")):
                 split_definition = d.split(":")
@@ -192,7 +192,7 @@ class RakibolanaSiteExtactor(SiteExtractor):
 
         # Segment phrases
         for char in "ABDEFGHIJKLMNOPRSTVZ":
-            definition = definition.replace(" " + char, ". " + char)
+            definition = definition.replace(f" {char}", f". {char}")
 
         for char in ".;:?":
             definition = definition.replace(char, "##")
@@ -220,5 +220,4 @@ class RakibolanaSiteExtactor(SiteExtractor):
             print("skipping...")
             raise SiteExtractorException
 
-        entry = super(RakibolanaSiteExtactor, self).lookup(word)
-        return entry
+        return super(RakibolanaSiteExtactor, self).lookup(word)

@@ -4,7 +4,7 @@ SITENAME = "wiktionary"
 
 
 def load_pages_from_category(working_language, category_name):
-    with open("user_data/list_%s_%s" % (working_language, category_name), "w") as f:
+    with open(f"user_data/list_{working_language}_{category_name}", "w") as f:
         pages = pywikibot.Category(
             pywikibot.Site(working_language, SITENAME), category_name
         )
@@ -13,9 +13,7 @@ def load_pages_from_category(working_language, category_name):
 
 
 def load_categories_from_category(working_language, category_name):
-    with open(
-        "user_data/category_list_%s_%s" % (working_language, category_name), "w"
-    ) as f:
+    with open(f"user_data/category_list_{working_language}_{category_name}", "w") as f:
         pages = pywikibot.Category(
             pywikibot.Site(working_language, SITENAME), category_name
         )
@@ -25,10 +23,8 @@ def load_categories_from_category(working_language, category_name):
 
 def get_categories_for_category(working_language, category_name):
     def read_categories_in_category():
-        with open(
-            "user_data/category_list_%s_%s" % (working_language, category_name), "r"
-        ) as f:
-            for line in f.readlines():
+        with open(f"user_data/category_list_{working_language}_{category_name}", "r") as f:
+            for line in f:
                 title = line.strip("\n")
                 if title:
                     yield pywikibot.Page(
@@ -36,12 +32,10 @@ def get_categories_for_category(working_language, category_name):
                     )
 
     try:
-        for p in read_categories_in_category():
-            yield p
+        yield from read_categories_in_category()
     except FileNotFoundError:
         load_categories_from_category(working_language, category_name)
-        for p in read_categories_in_category():
-            yield p
+        yield from read_categories_in_category()
 
 
 def parameterized_get_pages_from_category(site_class, page_class):
@@ -56,21 +50,17 @@ def parameterized_get_pages_from_category(site_class, page_class):
         """
 
         def read_pages_in_category():
-            with open(
-                "user_data/list_%s_%s" % (working_language, category_name), "r"
-            ) as f:
-                for line in f.readlines():
+            with open(f"user_data/list_{working_language}_{category_name}", "r") as f:
+                for line in f:
                     title = line.strip("\n")
                     if title:
                         yield page_class(site_class(working_language, SITENAME), title)
 
         try:
-            for p in read_pages_in_category():
-                yield p
+            yield from read_pages_in_category()
         except FileNotFoundError:
             load_pages_from_category(working_language, category_name)
-            for p in read_pages_in_category():
-                yield p
+            yield from read_pages_in_category()
 
     return get_pages_from_category
 
@@ -93,7 +83,5 @@ if __name__ == "__main__":
     import sys
 
     language, category_name = sys.argv[1:3]
-    count = 0
-    for p in get_pages_from_category(language, category_name):
-        count += 1
+    count = sum(1 for _ in get_pages_from_category(language, category_name))
     print(language, category_name, count)

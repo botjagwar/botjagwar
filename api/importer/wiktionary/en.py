@@ -59,11 +59,7 @@ class SubsectionImporter(BaseSubsectionImporter):
                 pos1 = wikipage_.find(section) + len(section)
                 # section end is 2 newlines
                 pos2 = wikipage_.find("\n\n", pos1)
-                if pos2 != -1:
-                    wikipage_ = wikipage_[pos1:pos2]
-                else:
-                    wikipage_ = wikipage_[pos1:]
-
+                wikipage_ = wikipage_[pos1:pos2] if pos2 != -1 else wikipage_[pos1:]
                 # More often than we'd like to admit,
                 #   the section level for the given subsection is one level deeper than expected.
                 # As a consequence, a '=<newline>' can appear before the subsection content.
@@ -86,11 +82,7 @@ class SubsectionImporter(BaseSubsectionImporter):
 
         retrieved = []
         # Retrieving and narrowing to target section
-        if self.numbered:
-            number_rgx = " [1-9]+"
-        else:
-            number_rgx = ""
-
+        number_rgx = " [1-9]+" if self.numbered else ""
         for regex_match in re.findall(
             "=" * self.level
             + "[ ]?"
@@ -122,13 +114,16 @@ class ListSubsectionImporter(SubsectionImporter):
                     if "[[Thesaurus:" in item:
                         continue
                     if "{{l|" + language in item:
-                        for data in re.findall(
-                            "{{l\\|" + language + "\\|([0-9A-Za-z- ]+)}}", item
-                        ):
-                            retrieved.append(data)
+                        retrieved.extend(
+                            iter(
+                                re.findall(
+                                    "{{l\\|" + language + "\\|([0-9A-Za-z- ]+)}}",
+                                    item,
+                                )
+                            )
+                        )
                     elif "[[" in item and "]]" in item:
-                        for data in re.findall("\\[\\[([0-9A-Za-z- ]+)\\]\\]", item):
-                            retrieved.append(data)
+                        retrieved.extend(iter(re.findall("\\[\\[([0-9A-Za-z- ]+)\\]\\]", item)))
                     else:
                         retrieved.append(item.strip())
 
@@ -167,11 +162,7 @@ class ReferencesImporter(SubsectionImporter):
         if ref.startswith("|"):
             return True
 
-        for element in self.filter_list:
-            if element in ref.lower():
-                return True
-
-        return False
+        return any(element in ref.lower() for element in self.filter_list)
 
     def get_data(self, template_title, wikipage: str, language: str):
         refs = super(ReferencesImporter, self).get_data(
@@ -235,13 +226,16 @@ class DerivedTermsImporter(ListSubsectionImporter):
                     if "[[Thesaurus:" in item:
                         continue
                     if "{{l|" + language in item:
-                        for data in re.findall(
-                            "{{l\\|" + language + "\\|([0-9A-Za-z- ]+)}}", item
-                        ):
-                            retrieved.append(data)
+                        retrieved.extend(
+                            iter(
+                                re.findall(
+                                    "{{l\\|" + language + "\\|([0-9A-Za-z- ]+)}}",
+                                    item,
+                                )
+                            )
+                        )
                     elif "[[" in item and "]]" in item:
-                        for data in re.findall("\\[\\[([0-9A-Za-z- ]+)\\]\\]", item):
-                            retrieved.append(data)
+                        retrieved.extend(iter(re.findall("\\[\\[([0-9A-Za-z- ]+)\\]\\]", item)))
                     elif "-l" in item:
                         specific_list_item = re.findall(
                             "\{\{([a-z\-]+)-l\|(.*)\}\}", item
@@ -330,11 +324,12 @@ class HeadwordImporter(WiktionaryAdditionalDataImporter):
     def get_data(self, template_title: str, wikipage: str, language: str) -> list:
         template_lines = []
         for line in wikipage.split("\n"):
-            for headword_affix in self.possible_headword_affixes:
-                if language is not None:
-                    if line.startswith("{{" + language + "-" + headword_affix):
-                        template_lines.append(line)
-
+            template_lines.extend(
+                line
+                for headword_affix in self.possible_headword_affixes
+                if language is not None
+                and line.startswith("{{" + language + "-" + headword_affix)
+            )
         return list(set(template_lines))
 
 
@@ -363,11 +358,11 @@ class TranslationImporter(WiktionaryAdditionalDataImporter):
         inside_translation_section = False
         for language in re.findall("[\n]?==[ ]?([A-Za-z]+)[ ]?==\n", content):
             last_part_of_speech = None
-            content = content[content.find("==%s==" % language) :]
+            content = content[content.find(f"=={language}=="):]
             lines = content.split("\n")
             for line in lines:
                 for en_pos, mg_pos in part_of_speech_translation.items():
-                    if "===" + en_pos in line:
+                    if f"==={en_pos}" in line:
                         last_part_of_speech = mg_pos
 
                 if "{{trans-top" in line:

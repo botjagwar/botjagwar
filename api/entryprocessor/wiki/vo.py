@@ -18,7 +18,7 @@ class VOWiktionaryProcessor(WiktionaryProcessor):
         for template in templates_withparams:
             if template[0].title() == templatestr:
                 for params in template[1]:
-                    if params.startswith(parameterstr + "="):
+                    if params.startswith(f"{parameterstr}="):
                         RET_text = params[len(parameterstr) + 1 :]
         return RET_text
 
@@ -27,11 +27,7 @@ class VOWiktionaryProcessor(WiktionaryProcessor):
 
         POS = self._get_param_in_temp("Samafomot:VpVöd", "klad")
         definition = self.get_WW_definition()
-        if POS in POStran:
-            postran = POStran[POS]
-        else:
-            postran = POS
-
+        postran = POStran.get(POS, POS)
         return postran, "vo", definition
 
     def retrieve_translations(self, page_c):

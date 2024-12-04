@@ -21,11 +21,10 @@ requests.get = retry_on_fail(possible_errors, retries=5, time_between_retries=0.
 
 def get_saved_state():
     try:
-        f = open(udata + "/news_stats", "rb")
-        r = pickle.load(f)
-        f.close()
+        with open(f"{udata}/news_stats", "rb") as f:
+            r = pickle.load(f)
         return r
-    except (Exception, IOError, FileNotFoundError) as e:
+    except (Exception, IOError) as e:
         print(e)
         return []
 
@@ -35,7 +34,7 @@ def get_new_state():
     new_state = []
     for site in ["wikipedia", "wiktionary"]:
         for lang in lister.getLangs(site):
-            urlstr = "https://%s.%s.org/" % (lang, site)
+            urlstr = f"https://{lang}.{site}.org/"
             urlstr += "w/api.php?action=query&meta=siteinfo&format=json&siprop=statistics&continue"
             try:
                 stat_page = requests.get(urlstr).json()
@@ -43,7 +42,7 @@ def get_new_state():
                 print("Error while trying to get URL", exc)
                 continue
 
-            for i in range(5):
+            for _ in range(5):
                 stat_json = ""
                 try:
                     stat_json = stat_page
@@ -60,9 +59,8 @@ def get_new_state():
 
 
 def save_state(state):
-    f = open(udata + "/news_stats", "wb")
-    pickle.dump(state, f)
-    f.close()
+    with open(f"{udata}/news_stats", "wb") as f:
+        pickle.dump(state, f)
 
 
 def translate_json_keyword(json_keyword):
@@ -75,42 +73,43 @@ def translate_json_keyword(json_keyword):
     try:
         return words[json_keyword]
     except KeyError:
-        print(("Unknown keyword: %s" % json_keyword))
+        print(f"Unknown keyword: {json_keyword}")
         return False
 
 
 def get_milestones(old_state, new_state):
     def states_diff(state_1, state_2):
-        if (state_1[0], state_1[1]) == (state_2[0], state_2[1]):
-            for column in list(state_2[2].keys()):
-                old_figure = state_1[2].get(column, 0)
-                new_figure = state_2[2].get(column, 0)
-                # print(old_figure, new_figure)
+        if (state_1[0], state_1[1]) != (state_2[0], state_2[1]):
+            return
+        for column in list(state_2[2].keys()):
+            old_figure = state_1[2].get(column, 0)
+            new_figure = state_2[2].get(column, 0)
+            # print(old_figure, new_figure)
 
-                s1_pow10 = int(math.log(max(1, old_figure), 10))
-                s2_pow10 = int(math.log(max(1, new_figure), 10))
+            s1_pow10 = int(math.log(max(1, old_figure), 10))
+            s2_pow10 = int(math.log(max(1, new_figure), 10))
 
-                new_figure = max(new_figure, 0)
-                s1_1st_digit = int(str(new_figure)[0])
-                s2_1st_digit = int(str(new_figure)[0])
+            new_figure = max(new_figure, 0)
+            s1_1st_digit = int(str(new_figure)[0])
+            s2_1st_digit = int(str(new_figure)[0])
 
-                ms_type = ""
+            ms_type = ""
 
-                if s1_pow10 != s2_pow10:
-                    if s1_pow10 <= s2_pow10:  # milestone 1
-                        ms_type = "over"
-                    elif s1_pow10 > s2_pow10:  # milestone 2
-                        ms_type = "below"
-                else:
-                    if s1_1st_digit > s2_1st_digit:  # milestone 3
-                        ms_type = "below"
-                    elif s1_1st_digit < s2_1st_digit:  # milestone 4
-                        ms_type = "over"
+            if s1_pow10 != s2_pow10:
+                if s1_pow10 <= s2_pow10:  # milestone 1
+                    ms_type = "over"
+                elif s1_pow10 > s2_pow10:  # milestone 2
+                    ms_type = "below"
+            else:
+                if s1_1st_digit > s2_1st_digit:  # milestone 3
+                    ms_type = "below"
+                elif s1_1st_digit < s2_1st_digit:  # milestone 4
+                    ms_type = "over"
 
-                if ms_type != "":
-                    yield state_1[0], state_1[
-                        1
-                    ], ms_type, s2_1st_digit * 10**s2_pow10, column
+            if ms_type != "":
+                yield state_1[0], state_1[
+                    1
+                ], ms_type, s2_1st_digit * 10**s2_pow10, column
 
     for s2 in new_state:
         if not old_state:
@@ -129,12 +128,10 @@ def get_milestones(old_state, new_state):
                     "pages": 0,
                 },
             )
-            for s_diff in states_diff(s1, s2):
-                yield s_diff
+            yield from states_diff(s1, s2)
         else:
             for s1 in old_state:
-                for s_diff in states_diff(s1, s2):
-                    yield s_diff
+                yield from states_diff(s1, s2)
 
 
 def site_to_wiki(site):
@@ -154,7 +151,7 @@ def site_to_wiki(site):
 def render_announce(milestone):
     if milestone is None:
         return ""
-    link = ":%s:%s:" % (site_to_wiki(milestone[1]), milestone[0])
+    link = f":{site_to_wiki(milestone[1])}:{milestone[0]}:"
     item_type = translate_json_keyword(milestone[-1])
 
     if not item_type:
@@ -194,8 +191,7 @@ def main():
     retstr = ""
     for m in ms:
         try:
-            c = render_announce(m)
-            if c:
+            if c := render_announce(m):
                 retstr += render_announce(m) + "\n"
         except ValueError as e:
             print(e)
@@ -210,21 +206,20 @@ def main():
         pywikibot.Site("mg", "wikipedia"), "Wikipedia:Vaovao Wikimedia/%d" % ct_time[0]
     )
     news = "\n; %s\n%s" % (ct_date, retstr)
-    newsfile = open("/tmp/%s" % ct_date, "w")
-    if len(old) != 0:
-        if page.exists():
-            content = page.get()
-            if content.find(ct_date) != -1:
-                print("efa nahitana daty ankehitriny")
-                return
-            content = news + content
-            page.put(content, "+Vaovao androany " + ct_date)
-        else:
-            page.put(news, "Vaovao androany " + ct_date)
+    with open(f"/tmp/{ct_date}", "w") as newsfile:
+        if len(old) != 0:
+            if page.exists():
+                content = page.get()
+                if content.find(ct_date) != -1:
+                    print("efa nahitana daty ankehitriny")
+                    return
+                content = news + content
+                page.put(content, f"+Vaovao androany {ct_date}")
+            else:
+                page.put(news, f"Vaovao androany {ct_date}")
 
-    newsfile.write(news)
-    save_state(new)
-    newsfile.close()
+        newsfile.write(news)
+        save_state(new)
 
 
 if __name__ == "__main__":

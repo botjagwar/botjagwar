@@ -88,7 +88,7 @@ class VolapukImporter(object):
             )
         elif target_page.isRedirectPage():
             content = output.wikipages([entry])
-            print(">>> " + entry.entry + " <<<")
+            print(f">>> {entry.entry} <<<")
             print(content)
             self.async_put(target_page, content, "/* {{=vo=}} */")
         else:
@@ -107,15 +107,14 @@ class VolapukImporter(object):
                 content += "\n"
                 content += output.wikipages([entry]).strip()
             else:
-                content = ""
-                content += "\n"
+                content = "" + "\n"
                 content += output.wikipages([entry]).strip()
                 s = content.replace("\n", " ")
                 # summary = f"Pejy noforonina tamin'ny « {s} »"
-                summary = f"teny volapoka vaovao avy amin'i vo.wiktionary"
+                summary = "teny volapoka vaovao avy amin'i vo.wiktionary"
 
             # Push aggregated content
-            print(">>> " + entry.entry + " <<<")
+            print(f">>> {entry.entry} <<<")
             print(content)
             if len(content) > len(original_content):
                 self.async_put(target_page, content.strip("\n"), summary)
@@ -133,12 +132,11 @@ class VolapukImporter(object):
             if line.startswith("|vöd="):
                 word = line[5:]
 
-        if part_of_speech in translated:
-            if german_definition == "N.D":
-                german_definition = ""
-            return word, translated[part_of_speech], german_definition
-        else:
+        if part_of_speech not in translated:
             return word, "...", german_definition
+        if german_definition == "N.D":
+            german_definition = ""
+        return word, translated[part_of_speech], german_definition
 
     def run(self):
         with open("user_data/list_vo_Wörterbuch_der_Weltsprache") as pages:

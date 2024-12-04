@@ -141,27 +141,23 @@ class ENWiktionaryProcessor(WiktionaryProcessor):
         for regex, replacement in self.regexesrep:
             new_definition_line = re.sub(regex, replacement, new_definition_line)
 
-        # Form-of definitions: they use templates that can be parsed using api.parsers module which is tentatively
-        #   being integrated here to provide human-readable output for either English or Malagasy
-        if new_definition_line == "":
-            if human_readable_form_of_definition:
-                try:
-                    if part_of_speech in self.template_to_object_mapper:
-                        elements = templates_parser.get_elements(
-                            self.template_to_object_mapper[part_of_speech],
-                            definition_line,
-                        )
-                        if translate_definitions_to_malagasy:
-                            new_definition_line = elements.to_definition("mg")
-                        else:
-                            new_definition_line = elements.to_definition(
-                                self.processor_language
-                            )
-                except ParserNotFoundError:
-                    new_definition_line = definition_line
-        else:
+        if new_definition_line != "":
             return definition_line
 
+        if human_readable_form_of_definition:
+            try:
+                if part_of_speech in self.template_to_object_mapper:
+                    elements = templates_parser.get_elements(
+                        self.template_to_object_mapper[part_of_speech],
+                        definition_line,
+                    )
+                    new_definition_line = (
+                        elements.to_definition("mg")
+                        if translate_definitions_to_malagasy
+                        else elements.to_definition(self.processor_language)
+                    )
+            except ParserNotFoundError:
+                new_definition_line = definition_line
         # print(definition_line, new_definition_line)
         return new_definition_line
 
@@ -197,8 +193,7 @@ class ENWiktionaryProcessor(WiktionaryProcessor):
         )  # Key is language, value are the content for that language
 
         for line_number, line in enumerate(lines):
-            language_matched = re.match(self.language_section_regex, line)
-            if language_matched:
+            if language_matched := re.match(self.language_section_regex, line):
                 language_name = language_matched.groups()[0]
                 try:
                     last_language_code = self.lang2code(language_name)
@@ -250,7 +245,7 @@ class ENWiktionaryProcessor(WiktionaryProcessor):
                     cleanup_definition=cleanup_definitions,
                     translate_definitions_to_malagasy=translate_definitions_to_malagasy,
                     human_readable_form_of_definition=human_readable_form_of_definition,
-                    advanced=kw["advanced"] if "advanced" in kw else False,
+                    advanced=kw.get("advanced", False),
                 )
                 if last_language_code not in definitions:
                     definitions[last_language_code] = {}
@@ -328,10 +323,7 @@ class ENWiktionaryProcessor(WiktionaryProcessor):
                 refined
             )
 
-        if refined.strip():
-            return [refined]
-        else:
-            return []
+        return [refined] if refined.strip() else []
 
     def retrieve_translations(self) -> list:
         return TranslationImporter().get_data(self.content, self.language, self.title)

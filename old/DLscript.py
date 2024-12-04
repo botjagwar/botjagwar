@@ -18,44 +18,43 @@ def DownloadURL(url, file_name=None, overwrite=False):
         print("Rakitra efa misy! Tsy navela nanitsaka")
         return
 
-    print("Trying to open: %s" % (os.path.join(curpath, file_name)))
-    f = open(file_name, "wb")
-    meta = u.info()
-    file_size = int(meta.getheaders("Content-Length")[0])
-    # print "Loharano : %s \nTanjona : %s\nLanja : %.1f Kio" % (url,
-    # file_name, file_size/1024.)
+    print(f"Trying to open: {os.path.join(curpath, file_name)}")
+    with open(file_name, "wb") as f:
+        meta = u.info()
+        file_size = int(meta.getheaders("Content-Length")[0])
+        # print "Loharano : %s \nTanjona : %s\nLanja : %.1f Kio" % (url,
+        # file_name, file_size/1024.)
 
-    file_size_dl = 0
-    block_sz = 32768
-    o_file_size_dl = 0
-    dl_spd = 0
-    timer = time.time()
-    chrono = 0.1
-    while file_size_dl < file_size:
-        buff = u.read(block_sz)
-        if not buff:
-            break
-
-        file_size_dl += len(buff)
-
-        f.write(buff)
-        chrono = time.time() - timer
-        if chrono != 0.0:
-            dl_spd = (
-                (((file_size_dl - o_file_size_dl) / 1024.0) / chrono) + dl_spd
-            ) / 2
-        status = r"%d kB [%3.0f%%, %.1f kB/s]" % (
-            file_size_dl / 1024.0,
-            file_size_dl * 100.0 / file_size,
-            dl_spd,
-        )
-        o_file_size_dl = file_size_dl
-        status = status + chr(8) * (len(status) + 1)
+        file_size_dl = 0
+        block_sz = 32768
+        o_file_size_dl = 0
+        dl_spd = 0
         timer = time.time()
-        print(status, end=" ")
+        chrono = 0.1
+        while file_size_dl < file_size:
+            buff = u.read(block_sz)
+            if not buff:
+                break
 
-    print("Vita ny asa amin'i %s" % file_name)
-    f.close()
+            file_size_dl += len(buff)
+
+            f.write(buff)
+            chrono = time.time() - timer
+            if chrono != 0.0:
+                dl_spd = (
+                    (((file_size_dl - o_file_size_dl) / 1024.0) / chrono) + dl_spd
+                ) / 2
+            status = r"%d kB [%3.0f%%, %.1f kB/s]" % (
+                file_size_dl / 1024.0,
+                file_size_dl * 100.0 / file_size,
+                dl_spd,
+            )
+            o_file_size_dl = file_size_dl
+            status = status + chr(8) * (len(status) + 1)
+            timer = time.time()
+            print(status, end=" ")
+
+        print(f"Vita ny asa amin'i {file_name}")
 
 
 if __name__ == "__main__":

@@ -66,10 +66,9 @@ class Importer(object):
 
         if self.lookup_cache.lookup(entry):
             return
-        else:
-            pprint(entry)
-            output = Output()
-            output.db(entry)
+        pprint(entry)
+        output = Output()
+        output.db(entry)
 
         if not self.update_on_wiki:
             print("not updating on wiki")

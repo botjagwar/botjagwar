@@ -33,7 +33,7 @@ def push_to_entry_translator():
             while True:
                 try:
                     requests.post(
-                        f"http://{server}:{service}/wiktionary_page/" + sys.argv[1],
+                        f"http://{server}:{service}/wiktionary_page/{sys.argv[1]}",
                         json={"title": data},
                     )
                     break

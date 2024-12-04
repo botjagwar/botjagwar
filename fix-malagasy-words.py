@@ -76,9 +76,7 @@ class TranslationFixer(Fixer):
             return "ana"
         if "-adj-|mg" in content:
             return "mpam"
-        if "-mpam-ana-|mg" in content:
-            return "mpam"
-        return "ana"
+        return "mpam" if "-mpam-ana-|mg" in content else "ana"
 
     @staticmethod
     def fetch_convergent_translations(word, part_of_speech):

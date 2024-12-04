@@ -38,37 +38,39 @@ class PgrestServer:
                 "offset": offset,
             }
 
-            resp = requests.get(self.server + "/word", params=dict_get_data)
+            resp = requests.get(f"{self.server}/word", params=dict_get_data)
             datas = resp.json()
-            if datas and not (400 <= resp.status_code < 600):
-                for data in datas:
-                    if (
-                        data["word"],
-                        data["language"],
-                        data["part_of_speech"],
-                    ) not in self._words:
-                        self._words[
-                            (data["word"], data["language"], data["part_of_speech"])
-                        ] = data["id"]
-            else:
+            if not datas or 400 <= resp.status_code < 600:
                 break
 
+            for data in datas:
+                if (
+                    data["word"],
+                    data["language"],
+                    data["part_of_speech"],
+                ) not in self._words:
+                    self._words[
+                        (data["word"], data["language"], data["part_of_speech"])
+                    ] = data["id"]
         print(f"Fetching is done. {len(self._words)} words have been fetched")
 
     def fetch_word(self, word, language, part_of_speech, tries=0):
-        part_of_speech = part_of_speech[:15]
         if tries > 3:
             return {}
 
-        if (word, language, part_of_speech) in self._words:
-            return {
+        part_of_speech = part_of_speech[:15]
+        return (
+            {
                 "id": self._words[(word, language, part_of_speech)],
                 "word": word,
                 "language": language,
                 "part_of_speech": part_of_speech,
             }
-
-        return self.fetch_and_create_if_not_exists(word, language, part_of_speech, 0)
+            if (word, language, part_of_speech) in self._words
+            else self.fetch_and_create_if_not_exists(
+                word, language, part_of_speech, 0
+            )
+        )
 
     def fetch_and_create_if_not_exists(self, word, language, part_of_speech, tries=0):
         dict_get_data = {
@@ -77,30 +79,29 @@ class PgrestServer:
             "part_of_speech": f"eq.{part_of_speech}",
         }
 
-        resp = requests.get(self.server + "/word", params=dict_get_data)
+        resp = requests.get(f"{self.server}/word", params=dict_get_data)
         data = resp.json()
         if not (400 <= resp.status_code < 600):
             if data:
                 return data[0]
-            else:
-                dict_post_data = {
-                    "word": f"{word}",
-                    "language": f"{language}",
-                    "part_of_speech": f"{part_of_speech}",
-                }
-                response = requests.post(self.server + "/word", json=dict_post_data)
-                if tries > 2:
-                    print(
-                        f"tried {tries} times to create ({word}, {language}, {part_of_speech})"
-                    )
+            dict_post_data = {
+                "word": f"{word}",
+                "language": f"{language}",
+                "part_of_speech": f"{part_of_speech}",
+            }
+            response = requests.post(f"{self.server}/word", json=dict_post_data)
+            if tries > 2:
+                print(
+                    f"tried {tries} times to create ({word}, {language}, {part_of_speech})"
+                )
 
-                try:
-                    return self.fetch_and_create_if_not_exists(
-                        word, language, part_of_speech, tries + 1
-                    )
-                except RecursionError:
-                    print(response.text)
-                    return {}
+            try:
+                return self.fetch_and_create_if_not_exists(
+                    word, language, part_of_speech, tries + 1
+                )
+            except RecursionError:
+                print(response.text)
+                return {}
 
 
 pg_rest = PgrestServer()
@@ -114,7 +115,7 @@ def create_definition_if_not_exists(definition, language):
             "definition_language": f"eq.{language}",
         }
 
-        resp = requests.get(pg_rest.server + "/definitions", params=dict_get_data)
+        resp = requests.get(f"{pg_rest.server}/definitions", params=dict_get_data)
         returned_data = resp.json()
         return returned_data
 
@@ -122,7 +123,7 @@ def create_definition_if_not_exists(definition, language):
     # Add definition if not found
     if not returned_data:
         defn_post_data = {"definition": definition, "definition_language": language}
-        resp = requests.post(pg_rest.server + "/definitions", json=defn_post_data)
+        resp = requests.post(f"{pg_rest.server}/definitions", json=defn_post_data)
         if resp.status_code == 409:
             raise AlreadyExistsError(f"Already exists! {resp.text}")
 
@@ -157,7 +158,7 @@ def reimport_english_definitions(page_nb=1):
         title = page.title()
         processor.title = title
         processor.content = content
-        entries = [entry for entry in processor.get_all_entries()]
+        entries = list(processor.get_all_entries())
         for entry in entries:
             word = pg_rest.fetch_word(entry.entry, entry.language, entry.part_of_speech)
             if not word:
@@ -187,22 +188,21 @@ def reimport_english_definitions(page_nb=1):
 @threaded
 def _reimport_english_definition(word, definition):
     definition_data = create_definition_if_not_exists(definition, "en")
-    if definition_data:
-        if "id" not in definition_data:
-            return
-        try:
-            definition_data = definition_data[0]
-        except KeyError:
-            pass
-    else:
+    if not definition_data:
         return
 
+    if "id" not in definition_data:
+        return
+    try:
+        definition_data = definition_data[0]
+    except KeyError:
+        pass
     dict_post_data = {
         "definition": f'{definition_data["id"]}',
         "word": f'{word["id"]}',
     }
 
-    resp = requests.post(pg_rest.server + "/dictionary", json=dict_post_data)
+    resp = requests.post(f"{pg_rest.server}/dictionary", json=dict_post_data)
 
 
 if __name__ == "__main__":

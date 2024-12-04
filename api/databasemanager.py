@@ -26,16 +26,15 @@ class DatabaseManager(object):
         elif "mysql" in scheme_head:
             self.db_type = "mysql"
 
-        if self.database_file is not None:
-            if self.db_type == "sqlite":
-                self.db_header = "sqlite:///%s" % self.database_file
+        if self.db_type == "sqlite" and self.database_file is not None:
+            self.db_header = f"sqlite:///{self.database_file}"
 
         self.engine = create_engine(
             self.db_header,
             poolclass=QueuePool,
             max_overflow=250,
         )
-        log.info("Using database %s" % self.db_header)
+        log.info(f"Using database {self.db_header}")
 
         base.metadata.create_all(self.engine)
         self.SessionClass = sessionmaker(bind=self.engine)
@@ -66,7 +65,7 @@ class DictionaryDatabaseManager(DatabaseManager, metaclass=SingletonMeta):
     database_file = ""
 
     def __init__(self, database_file="default", db_header="sqlite:///"):
-        log.debug("database_file is %s" % database_file)
+        log.debug(f"database_file is {database_file}")
         if database_file != "default":  # when defined, assumed a sqlite database file
             self.database_file = database_file
             self.db_header = db_header + database_file
@@ -74,4 +73,4 @@ class DictionaryDatabaseManager(DatabaseManager, metaclass=SingletonMeta):
             self.read_configuration()
 
         super(DictionaryDatabaseManager, self).__init__(WordBase)
-        log.debug("database file/URL: %s" % self.database_file)
+        log.debug(f"database file/URL: {self.database_file}")

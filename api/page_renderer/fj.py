@@ -12,9 +12,9 @@ class FJWikiPageRenderer(PageRenderer):
             % data
         )
         if link:
-            s += "\n# %s" % ", ".join(["[[%s]]" % (d) for d in info.definitions])
+            s += "\n# %s" % ", ".join([f"[[{d}]]" for d in info.definitions])
         else:
-            s += "\n# %s" % ", ".join(["%s" % (d) for d in info.definitions])
+            s += "\n# %s" % ", ".join([f"{d}" for d in info.definitions])
         additional_note = "\n{{bot-made entry|%s}}" % info.origin_wiktionary_page_name
         s = s + additional_note
         try:

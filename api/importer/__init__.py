@@ -21,11 +21,7 @@ class AdditionalDataImporter(object):
         self.word_id_cache = {}
         # self.fetch_word_ids()
 
-        if "dry_run" in parameters:
-            self.dry_run = parameters["dry_run"]
-        else:
-            self.dry_run = False
-
+        self.dry_run = parameters.get("dry_run", False)
         if "data" in parameters:
             self.data_type = parameters["data"]
 
@@ -40,7 +36,7 @@ class AdditionalDataImporter(object):
     def online_fetch_default_languages_mapper(self):
         self._languages = {
             l["english_name"]: l["iso_code"]
-            for l in requests.get(backend.backend + "/language").json()
+            for l in requests.get(f"{backend.backend}/language").json()
         }
         self.iso_codes = {v: k for k, v in self.languages.items()}
 
@@ -57,38 +53,32 @@ class AdditionalDataImporter(object):
     def additional_word_information_already_exists(self, word_id, information):
         assert word_id is not None
         assert information is not None
-        assert bool(information) == True
+        assert bool(information)
         data = {
-            "type": "eq." + self.data_type,
-            "word_id": "eq." + str(word_id),
-            "information": "eq." + information,
+            "type": f"eq.{self.data_type}",
+            "word_id": f"eq.{str(word_id)}",
+            "information": f"eq.{information}",
         }
         response = requests.get(
-            backend.backend + "/additional_word_information", params=data
+            f"{backend.backend}/additional_word_information", params=data
         )
-        resp_data = response.json()
-        if resp_data:
-            if isinstance(resp_data, list):
-                if (
-                    "word_id" in resp_data[0]
-                    and "information" in resp_data[0]
-                    and "type" in resp_data[0]
-                ):
-                    return True
-            else:
+        if resp_data := response.json():
+            if not isinstance(resp_data, list):
                 return False
 
+            if (
+                "word_id" in resp_data[0]
+                and "information" in resp_data[0]
+                and "type" in resp_data[0]
+            ):
+                return True
         return False
 
     def get_data(self, template_title: str, wikipage: str, language: str) -> list:
         raise NotImplementedError()
 
     def is_data_type_already_defined(self, additional_data):
-        for d in additional_data:
-            if d["data_type"] == self.data_type:
-                return True
-
-        return False
+        return any(d["data_type"] == self.data_type for d in additional_data)
 
     def process_non_wikipage(self, title: str, content: str, language: str):
         if hasattr(self, "counter"):
@@ -98,16 +88,13 @@ class AdditionalDataImporter(object):
 
         # print(f'>>> {title} [#{self.counter}] <<<')
         if (title, language) not in self.word_id_cache:
-            rq_params = {"word": "eq." + title, "language": "eq." + language}
-            response = requests.get(backend.backend + "/word", rq_params)
-            query = response.json()
-            if "code" in query:
-                pass
+            rq_params = {"word": f"eq.{title}", "language": f"eq.{language}"}
+            response = requests.get(f"{backend.backend}/word", rq_params)
+            if query := response.json():
+                self.word_id_cache[(title, language)] = query[0]["id"]
 
-            if not query:
+            else:
                 return
-
-            self.word_id_cache[(title, language)] = query[0]["id"]
 
         additional_data_filenames = self.get_data(self.data_type, content, language)
 
@@ -141,7 +128,7 @@ class AdditionalDataImporter(object):
 
         if not self.dry_run:
             response = requests.post(
-                backend.backend + "/additional_word_information", data=data
+                f"{backend.backend}/additional_word_information", data=data
             )
             if response.status_code != 201:
                 print(response.status_code)

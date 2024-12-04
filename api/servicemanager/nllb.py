@@ -44,34 +44,30 @@ class NllbDefinitionTranslation(object):
         self.target_language = NLLB_CODE.get(target_language, NLLB_CODE["mg"])
 
     def get_translation(self, sentence: str):
-        translation = self.get_translation_in_cache(sentence)
-        if translation:
+        if translation := self.get_translation_in_cache(sentence):
             return translation
+        translation = self.get_nllb_translation(sentence)
+        url = f"http://{self.postgrest_server}/nllb_translations"
+        json = {
+            "sentence": sentence,
+            "translation": translation,
+            "source_language": self.source_language,
+            "target_language": self.target_language,
+        }
+        request = requests.post(url, json=json)
+        if request.status_code == 201:
+            return translation
+
         else:
-            translation = self.get_nllb_translation(sentence)
-            url = f"http://{self.postgrest_server}/nllb_translations"
-            json = {
-                "sentence": sentence,
-                "translation": translation,
-                "source_language": self.source_language,
-                "target_language": self.target_language,
-            }
-            request = requests.post(url, json=json)
-            if request.status_code != 201:
-                raise DefinitionTranslationError("Unknown error: " + request.text)
-            else:
-                return translation
+            raise DefinitionTranslationError(f"Unknown error: {request.text}")
 
     def get_translation_in_cache(self, sentence: str):
         url = f"http://{self.postgrest_server}/nllb_translations?source_language=eq.{self.source_language}&target_language=eq.{self.target_language}&sentence=eq.{sentence}"
         request = requests.get(url)
-        if request.status_code != 200:
-            return None
+        if request.status_code == 200 and request.json():
+            return request.json()[0]["translation"]
         else:
-            if request.json():
-                return request.json()[0]["translation"]
-            else:
-                return None
+            return None
 
     def get_nllb_translation(self, sentence: str):
         # fix weird behaviour where original text can be kept
@@ -87,13 +83,12 @@ class NllbDefinitionTranslation(object):
         json = {"text": sentence}
         request = requests.get(url, params=json, timeout=3600)
         if request.status_code != 200:
-            raise DefinitionTranslationError("Unknown error: " + request.text)
-        else:
-            translated = request.json()["translated"]
-            if translated.startswith("(") and translated.endswith(")"):
-                translated = translated[1:-1]
-            translated = translated.replace(
-                sentence, ""
-            )  # fix weird behaviour where original text can be kept...
-            print("TRANSLATED:::" + translated)
-            return translated
+            raise DefinitionTranslationError(f"Unknown error: {request.text}")
+        translated = request.json()["translated"]
+        if translated.startswith("(") and translated.endswith(")"):
+            translated = translated[1:-1]
+        translated = translated.replace(
+            sentence, ""
+        )  # fix weird behaviour where original text can be kept...
+        print(f"TRANSLATED:::{translated}")
+        return translated

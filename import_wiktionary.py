@@ -35,7 +35,7 @@ class WiktionaryDumpImporter(object):
         self._init_processor()
         self.dictionary = redis.Redis(config.get("host", "redis"))
         # self._init_redis_cache()
-        self.additional_data_keys = set(classe.data_type for classe in all_importers)
+        self.additional_data_keys = {classe.data_type for classe in all_importers}
         # print(self.additional_data_keys)
 
     def _init_redis_cache(self):
@@ -55,9 +55,7 @@ class WiktionaryDumpImporter(object):
 
         sql = cursor.mogrify("select id, word, part_of_speech, language from word")
         cursor.execute(sql)
-        count = 0
-        for id_, word, pos, lang in cursor:
-            count += 1
+        for count, (id_, word, pos, lang) in enumerate(cursor, start=1):
             if not count % 1000:
                 print(count)
             key = "/".join((word, pos, lang))
@@ -99,8 +97,7 @@ class WiktionaryDumpImporter(object):
 
     def load(self):
         for _100_page_batch in self.processor.load(self.file_name):
-            for xml_page in _100_page_batch:
-                yield xml_page
+            yield from _100_page_batch
 
     def get_page_from_xml(self, xml_page):
         node = etree.XML(str(xml_page))
@@ -151,7 +148,7 @@ class WiktionaryDumpImporter(object):
                         elements[1 + elements // 2 :], level + 1
                     )
                 else:
-                    pprint("[reset indent] could not insert:" + str(elements))
+                    pprint(f"[reset indent] could not insert:{elements}")
 
         except Exception as unknown_error:
             print(sql)
@@ -169,12 +166,11 @@ class WiktionaryDumpImporter(object):
         self.entryprocessor.set_text(content_node)
 
         for entry in self.entryprocessor.get_all_entries(get_additional_data=True):
-            # print(entry)
-            additional_data = {}
-            for adt in self.additional_data_keys:
-                if hasattr(entry, adt):
-                    additional_data[adt] = getattr(entry, adt)
-
+            additional_data = {
+                adt: getattr(entry, adt)
+                for adt in self.additional_data_keys
+                if hasattr(entry, adt)
+            }
             for additional_data_type, data in additional_data.items():
                 key = "/".join((entry.entry, entry.part_of_speech, entry.language))
                 if not self.dictionary.get(key):
@@ -211,7 +207,7 @@ class WiktionaryDumpImporter(object):
                 continue
             if c >= 1000:
                 q = 60.0 * c / (time.time() - dt)
-                print("{} wpm".format(q))
+                print(f"{q} wpm")
                 c = 0
                 dt = time.time()
 

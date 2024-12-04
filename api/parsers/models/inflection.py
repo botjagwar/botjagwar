@@ -11,15 +11,14 @@ class NonLemma(object):
         self.number = number
 
     def to_definition(self, language):
-        if hasattr(renderers, language):
-            renderer_module = getattr(renderers, language)
-            if hasattr(renderer_module, "render_" + self.renderer):
-                return getattr(renderer_module, "render_" + self.renderer)(self)
-            raise AttributeError(
-                f"Renderer function api.parsers.renderers.{language}.{self.renderer} not found!"
-            )
-        else:
+        if not hasattr(renderers, language):
             raise AttributeError(f"Module api.parsers.renderers.{language} not found!")
+        renderer_module = getattr(renderers, language)
+        if hasattr(renderer_module, f"render_{self.renderer}"):
+            return getattr(renderer_module, f"render_{self.renderer}")(self)
+        raise AttributeError(
+            f"Renderer function api.parsers.renderers.{language}.{self.renderer} not found!"
+        )
 
     def to_malagasy_definition(self):
         return self.to_definition("mg")

@@ -19,7 +19,7 @@ DB_PATH = "/tmp/test_language.db"
 
 class TestLanguageRestService(TestCase):
     def setUp(self):
-        self.ENGINE = create_engine("sqlite:///%s" % DB_PATH)
+        self.ENGINE = create_engine(f"sqlite:///{DB_PATH}")
         Base.metadata.create_all(self.ENGINE)
         SessionClass = sessionmaker(bind=self.ENGINE)
         session = SessionClass()
@@ -50,18 +50,18 @@ class TestLanguageRestService(TestCase):
 
     @retry_on_fail([Exception], retries=10, time_between_retries=0.4)
     def wait_until_ready(self):
-        resp = requests.get(URL_HEAD + "/ping")
+        resp = requests.get(f"{URL_HEAD}/ping")
         assert resp.status_code == 200
 
     @staticmethod
     def kill_service():
         DICTIONARY_SERVICE.kill()
-        os.system("rm %s" % DB_PATH)
+        os.system(f"rm {DB_PATH}")
 
     @retry_on_fail([Exception], 10, 0.3)
     def create_language(self, code, english_name, malagasy_name):
         resp = requests.post(
-            URL_HEAD + "/language/%s" % code,
+            f"{URL_HEAD}/language/{code}",
             json=json.dumps(
                 {
                     "english_name": english_name,
@@ -73,18 +73,18 @@ class TestLanguageRestService(TestCase):
         self.assertEqual(resp.status_code, 200)
 
     def test_disable_autocommit(self):
-        requests.put(URL_HEAD + "/configure", json=json.dumps({"autocommit": False}))
+        requests.put(f"{URL_HEAD}/configure", json=json.dumps({"autocommit": False}))
         for i in range(20):
             self.create_language("zh%d" % i, "zhenquang%d" % i, "tsanitsioangy%d" % i)
 
-        requests.post(URL_HEAD + "/rollback")
+        requests.post(f"{URL_HEAD}/rollback")
 
         for i in range(20):
             resp = requests.get(URL_HEAD + "/language/zh%d" % i)
             self.assertEqual(resp.status_code, 404)
 
     def test_enable_autocommit(self):
-        requests.put(URL_HEAD + "/configure", json=json.dumps({"autocommit": False}))
+        requests.put(f"{URL_HEAD}/configure", json=json.dumps({"autocommit": False}))
         for i in range(20):
             self.create_language("zh%d" % i, "zhenquang%d" % i, "tsanitsioangy%d" % i)
 
@@ -94,7 +94,7 @@ class TestLanguageRestService(TestCase):
 
     def test_get_language(self):
         self.create_language("ch0", "zhenquang", "tsanitsioangy")
-        resp = requests.get(URL_HEAD + "/language/ch0")
+        resp = requests.get(f"{URL_HEAD}/language/ch0")
         data = resp.json()
         self.assertEqual(resp.status_code, 200)
         self.assertEqual(data["iso_code"], "ch0")
@@ -102,7 +102,7 @@ class TestLanguageRestService(TestCase):
         self.assertEqual(data["english_name"], "zhenquang")
 
     def test_get_language_404(self):
-        resp = requests.get(URL_HEAD + "/language/c9")
+        resp = requests.get(f"{URL_HEAD}/language/c9")
         self.assertEqual(resp.status_code, 404)
 
     def test_create_language(self):
@@ -110,7 +110,7 @@ class TestLanguageRestService(TestCase):
 
     def test_create_existing_entry(self):
         resp = requests.post(
-            URL_HEAD + "/language/ali",
+            f"{URL_HEAD}/language/ali",
             json=json.dumps(
                 {
                     "english_name": "asdlksd",
@@ -121,7 +121,7 @@ class TestLanguageRestService(TestCase):
         )
         self.assertEqual(resp.status_code, 200)
         resp = requests.post(
-            URL_HEAD + "/language/ali",
+            f"{URL_HEAD}/language/ali",
             json=json.dumps(
                 {
                     "english_name": "asdasdasdlksd",
@@ -134,7 +134,7 @@ class TestLanguageRestService(TestCase):
 
     def test_create_entry_invalid_json(self):
         resp = requests.post(
-            URL_HEAD + "/language/sdl",
+            f"{URL_HEAD}/language/sdl",
             json=json.dumps(
                 {
                     "iso_coed": "sdl",
@@ -146,25 +146,29 @@ class TestLanguageRestService(TestCase):
         self.assertEqual(resp.status_code, InvalidJsonReceived.status_code)
 
     def test_edit_entry(self):
-        resp = requests.get(URL_HEAD + "/language/chq")
+        resp = requests.get(f"{URL_HEAD}/language/chq")
         data = resp.json()
         resp = requests.put(
-            URL_HEAD + "/language/ch0/edit",
+            f"{URL_HEAD}/language/ch0/edit",
             json=json.dumps(
-                {"malagasy_name": "alkqwj", "english_name": "asldk", "iso_code": "chq"}
+                {
+                    "malagasy_name": "alkqwj",
+                    "english_name": "asldk",
+                    "iso_code": "chq",
+                }
             ),
         )
         self.assertEqual(resp.status_code, 200)
 
     def test_read_after_write_get_after_delete(self):
         self.test_delete_language()
-        resp = requests.get(URL_HEAD + "/language/chq")
+        resp = requests.get(f"{URL_HEAD}/language/chq")
         self.assertEqual(resp.status_code, 404)
 
     def test_delete_language(self):
-        resp = requests.get(URL_HEAD + "/language/chq")
+        resp = requests.get(f"{URL_HEAD}/language/chq")
         self.assertEqual(resp.status_code, 200)
 
-        del_url = URL_HEAD + "/language/chq"
+        del_url = f"{URL_HEAD}/language/chq"
         resp = requests.delete(del_url)
         self.assertEqual(resp.status_code, 204)

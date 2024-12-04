@@ -63,8 +63,7 @@ def set_throttle(i):
 
 
 def _get_page(name, lang):
-    page = Page(Site(lang, "wiktionary"), name)
-    return page
+    return Page(Site(lang, "wiktionary"), name)
 
 
 @threaded
@@ -137,7 +136,7 @@ async def handle_wiktionary_page(request) -> Response:
         except Exception as e:
             log.exception(e)
             data["traceback"] = traceback.format_exc()
-            data["message"] = "" if not hasattr(e, "message") else getattr(e, "message")
+            data["message"] = getattr(e, "message") if hasattr(e, "message") else ""
         finally:
             queue_size -= 1
 
@@ -198,7 +197,7 @@ async def get_wiktionary_page_translation(request) -> Response:
         data["traceback"] = traceback.format_exc()
         data["type"] = "error"
         data["message"] = (
-            "unknown error" if not hasattr(e, "message") else getattr(e, "message")
+            getattr(e, "message") if hasattr(e, "message") else "unknown error"
         )
         response = Response(
             text=json.dumps(data), status=500, content_type="application/json"
@@ -229,22 +228,20 @@ async def get_wiktionary_processed_page(request) -> Response:
     for entry in wiktionary_processor.get_all_entries(
         get_additional_data=True, cleanup_definitions=True, advanced=True
     ):
-        translation_list = []
-        definitions = []
-        for d in entry.definitions:
-            definitions.append(
-                wiktionary_processor.advanced_extract_definition(
-                    entry.part_of_speech, d
-                )
+        definitions = [
+            wiktionary_processor.advanced_extract_definition(
+                entry.part_of_speech, d
             )
-
+            for d in entry.definitions
+        ]
         entry.definitions = definitions
         section = entry.serialise()
 
-        for translation in wiktionary_processor.retrieve_translations():
-            if translation.part_of_speech == entry.part_of_speech:
-                translation_list.append(translation.serialise())
-
+        translation_list = [
+            translation.serialise()
+            for translation in wiktionary_processor.retrieve_translations()
+            if translation.part_of_speech == entry.part_of_speech
+        ]
         if entry.language == language:
             section["translations"] = translation_list
         ret.append(section)

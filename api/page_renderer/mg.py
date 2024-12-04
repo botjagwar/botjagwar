@@ -36,54 +36,48 @@ class MGWikiPageRenderer(PageRenderer):
         pages = requests.get(
             url,
             params={
-                "language": f"eq.mg",
-                "part_of_speech": f"in.(ana,mat,mpam)",
-                "select": f"word",
+                "language": "eq.mg",
+                "part_of_speech": "in.(ana,mat,mpam)",
+                "select": "word",
             },
         )
         print(pages.status_code)
         if pages.status_code != 200:
             raise MGWikiPageRendererError(pages.status_code)
-        else:
-            self._words_to_link = {
-                p["word"] for p in pages.json() if len(p["word"]) > 4
-            }
-            print(f"Loading complete! {len(self._words_to_link)} words loaded")
-            return self._words_to_link
+        self._words_to_link = {
+            p["word"] for p in pages.json() if len(p["word"]) > 4
+        }
+        print(f"Loading complete! {len(self._words_to_link)} words loaded")
+        return self._words_to_link
 
     def link_if_exists(self, definition_words: list) -> list:
-        ret = []
         # print(len(self.pages_to_link), definition_words)
-        if hasattr(self, "pages_to_link"):
-            assert isinstance(self.pages_to_link, set)
-            for word in definition_words:
-                word_to_link = word.strip(",")
-                if word_to_link in self.pages_to_link:
-                    word = word.replace(word_to_link, f"[[{word_to_link}]]")
-                    ret.append(word)
-                elif word.lower() in self.pages_to_link:
-                    word = word.replace(
-                        word_to_link, f"[[{word_to_link.lower()}|{word_to_link}]]"
-                    )
-                    ret.append(word)
-                else:
-                    ret.append(word)
-            return ret
-
-        return definition_words
+        if not hasattr(self, "pages_to_link"):
+            return definition_words
+        assert isinstance(self.pages_to_link, set)
+        ret = []
+        for word in definition_words:
+            word_to_link = word.strip(",")
+            if word_to_link in self.pages_to_link:
+                word = word.replace(word_to_link, f"[[{word_to_link}]]")
+            elif word.lower() in self.pages_to_link:
+                word = word.replace(
+                    word_to_link, f"[[{word_to_link.lower()}|{word_to_link}]]"
+                )
+            ret.append(word)
+        return ret
 
     def render(self, info: Entry, link=True) -> str:
         additional_note = ""
-        if info.additional_data is not None:
-            if (
-                "origin_wiktionary_page_name" in info.additional_data
-                and "origin_wiktionary_edition" in info
-            ):
-                additional_note = (
-                    " {{dikantenin'ny dikanteny|"
-                    + f"{info.additional_data['origin_wiktionary_page_name']}"
-                    f"|{info.additional_data['origin_wiktionary_edition']}" + "}}\n"
-                )
+        if info.additional_data is not None and (
+                        "origin_wiktionary_page_name" in info.additional_data
+                        and "origin_wiktionary_edition" in info
+                    ):
+            additional_note = (
+                " {{dikantenin'ny dikanteny|"
+                + f"{info.additional_data['origin_wiktionary_page_name']}"
+                f"|{info.additional_data['origin_wiktionary_edition']}" + "}}\n"
+            )
 
         returned_string = self.render_head_section(info)
         returned_string += self.render_definitions(info, link) + additional_note
@@ -109,32 +103,29 @@ class MGWikiPageRenderer(PageRenderer):
         returned_string += "'''{{subst:BASEPAGENAME}}''' "
 
         # transcription (if any)
-        if info.additional_data is not None:
-            if "transcription" in info.additional_data:
-                transcriptions = ", ".join(info.additional_data["transcription"])
-                returned_string += f"({transcriptions})"
+        if info.additional_data is not None and "transcription" in info.additional_data:
+            transcriptions = ", ".join(info.additional_data["transcription"])
+            returned_string += f"({transcriptions})"
 
         return returned_string
 
     def render_etymology(self, info):
         returned_string = ""
         if info.additional_data is not None and "etymology" in info.additional_data:
-            etymology = info.additional_data["etymology"]
-            if etymology:
-                returned_string += "\n{{-etim-}}\n"
-                returned_string += ":" + etymology
+            returned_string += "\n{{-etim-}}\n"
+            if etymology := info.additional_data["etymology"]:
+                returned_string += f":{etymology}"
             else:
-                returned_string += "\n{{-etim-}}\n"
                 returned_string += f": {{vang-etim|" + f"{info.language}" + "}}\n"
 
         return returned_string
 
     def render_definitions(self, info, link: list):
         returned_string = ""
-        trailing_characters_to_exclude_from_link = ",.;:"
         definitions = []
         defn_list = sorted(set(info.definitions))
         if link:
+            trailing_characters_to_exclude_from_link = ",.;:"
             for d in defn_list:
                 if "[[" in d or "]]" in d:
                     definitions.append(d)
@@ -161,16 +152,15 @@ class MGWikiPageRenderer(PageRenderer):
         for idx, defn in enumerate(definitions):
             returned_string += "\n# " + defn
             # Examples:
-            if info.additional_data and "examples" in info.additional_data:
-                if len(info.additional_data["examples"]) > idx:
-                    if isinstance(info.additional_data["examples"], list):
-                        if len(info.additional_data["examples"][idx]) > 0:
-                            for example in info.additional_data["examples"][idx]:
-                                returned_string += "\n#* ''" + example + "''"
-                    elif isinstance(info.additional_data["examples"], str):
-                        returned_string += (
-                            "\n#* ''" + info.additional_data["examples"][idx] + "''"
-                        )
+            if info.additional_data and "examples" in info.additional_data and len(info.additional_data["examples"]) > idx:
+                if isinstance(info.additional_data["examples"], list):
+                    if len(info.additional_data["examples"][idx]) > 0:
+                        for example in info.additional_data["examples"][idx]:
+                            returned_string += "\n#* ''" + example + "''"
+                elif isinstance(info.additional_data["examples"], str):
+                    returned_string += (
+                        "\n#* ''" + info.additional_data["examples"][idx] + "''"
+                    )
 
         return returned_string
 
@@ -250,13 +240,13 @@ class MGWikiPageRenderer(PageRenderer):
             or "derived_terms" in info.additional_data
         ):
             returned_string += "\n\n{{-teny mifandraika-}}"
-            if "related_terms" in info.additional_data:
-                for d in info.additional_data["related_terms"]:
-                    returned_string += f"\n* [[{d}]]"
+        if "related_terms" in info.additional_data:
+            for d in info.additional_data["related_terms"]:
+                returned_string += f"\n* [[{d}]]"
 
-            if "derived_terms" in info.additional_data:
-                for d in info.additional_data["derived_terms"]:
-                    returned_string += f"\n* [[{d}]]"
+        if "derived_terms" in info.additional_data:
+            for d in info.additional_data["derived_terms"]:
+                returned_string += f"\n* [[{d}]]"
 
         return returned_string
 
@@ -279,13 +269,13 @@ class MGWikiPageRenderer(PageRenderer):
         return self.render_section(info, "{{-famakiana fanampiny-}}", "further_reading")
 
     def render_references(self, info) -> str:
-        returned_string = ""
-        for attr_name in [
-            "references",
-            "reference",
-        ]:
-            returned_string += self.render_section(info, "{{-tsiahy-}}", attr_name)
-        return returned_string
+        return "".join(
+            self.render_section(info, "{{-tsiahy-}}", attr_name)
+            for attr_name in [
+                "references",
+                "reference",
+            ]
+        )
 
     def delete_section(self, language_section, wiki_page):
         section_name = "{{=" + language_section + "=}}"
@@ -294,7 +284,7 @@ class MGWikiPageRenderer(PageRenderer):
             section_begin = None
             section_end = None
             for line_no, line in enumerate(lines):
-                section_rgx = re.search("==[ ]?" + section_name + "[ ]?==", line)
+                section_rgx = re.search(f"==[ ]?{section_name}[ ]?==", line)
                 if section_rgx is not None and section_begin is None:
                     section_begin = line_no
                     continue
@@ -311,7 +301,5 @@ class MGWikiPageRenderer(PageRenderer):
             else:
                 to_delete = "\n".join(lines[section_begin:])
 
-            new_text = wiki_page.replace(to_delete, "")
-            return new_text
-
+            return wiki_page.replace(to_delete, "")
         return wiki_page

@@ -8,7 +8,7 @@ import requests
 
 data_file = "/opt/botjagwar/conf/list_wikis/"
 try:
-    current_user = "%s" % pywikibot.config.usernames["wiktionary"]["mg"]
+    current_user = f'{pywikibot.config.usernames["wiktionary"]["mg"]}'
 except KeyError:
     current_user = "test"
 
@@ -18,8 +18,8 @@ class Wikilister(object):
         self.test = test
 
     def getLangs(self, site):
-        dump = open(data_file + "listof%s.txt" % site, "r").read()
-        print((data_file + "listof%s.txt" % site))
+        dump = open(f"{data_file}listof{site}.txt", "r").read()
+        print(f"{data_file}listof{site}.txt")
 
         wikiregex = re.findall(
             "([a-z|\\-]+).%s.org/wiki/Special:Recentchanges" % site, dump
@@ -27,18 +27,14 @@ class Wikilister(object):
         if len(wikiregex) == 0:
             wikiregex = re.findall("\\{\\{fullurl:([a-z|\\-]+):Special", dump)
         print(wikiregex)
-        for lang in wikiregex:
-            yield lang
+        yield from wikiregex
 
     def run(self, wiki, site):
         datas = []
         i = 0
         for lang in self.getLangs(site):
             # Getting and formatting statistics JSON
-            urlstr = (
-                "https://%s.%s.org/w/api.php?action=query&meta=siteinfo&format=json&siprop=statistics&continue"
-                % (lang, site)
-            )
+            urlstr = f"https://{lang}.{site}.org/w/api.php?action=query&meta=siteinfo&format=json&siprop=statistics&continue"
             resp = requests.get(urlstr)
             if resp.status_code != 200:
                 continue
@@ -74,10 +70,7 @@ class Wikilister(object):
             # Depth calculation
             try:
                 depth = (edits / pages) * ((float(pages) - articles) / articles) ** 2.0
-                if depth > 300 and articles < 100000:
-                    depth = "-"
-                else:
-                    depth = "%.2f" % depth
+                depth = "-" if depth > 300 and articles < 100000 else "%.2f" % depth
             except ZeroDivisionError:
                 depth = "-"
             e.append(depth)
@@ -142,7 +135,6 @@ class Wikilister(object):
 ! Isan-jato
 ! Teny/pejy
 ! Halalim-pejy"""
-        i = 0
         # total = (0,0,0,0,0,0)
         for wikistats_data in e:
             print(wikistats_data)
@@ -167,7 +159,7 @@ class Wikilister(object):
             total["activeusers"] += activeusers
             total["files"] += images
 
-        for wikistats_data in e:
+        for i, wikistats_data in enumerate(e, start=1):
             (
                 articles,
                 pages,
@@ -194,7 +186,6 @@ class Wikilister(object):
                 "words_per_page": "{{formatnum:%2.2f}}" % words_per_page,
                 "depth": depth,
             }
-            i += 1
             isanjato = float(float(100 * articles) / total["pages"])
             content += (
                 """
@@ -249,13 +240,11 @@ class Wikilister(object):
         content += """
 |}"""
 
-        while True:
-            if self.test:
-                break
+        while not self.test:
             try:
                 page = pywikibot.Page(
                     pywikibot.Site("mg", "wiktionary"),
-                    "Mpikambana:%s/Lisitry ny %s/tabilao" % (current_user, wiki),
+                    f"Mpikambana:{current_user}/Lisitry ny {wiki}/tabilao",
                 )
                 page.put(content, "Rôbô : fanavaozana ny statistika")
                 break

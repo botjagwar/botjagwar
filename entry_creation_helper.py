@@ -42,16 +42,15 @@ class NinjaEntryPublisher(object):
         if wikipage.exists():
             contents = wikipage.get()
             if "{{=" + entry.language + "=}}" in contents:
-                if self.overwrite:
-                    print("overwriting")
-                    summary = "+tsiahy, sns."
-                    print("waited %d seconds" % sleep)
-                    wikipage.put(wikitext, summary, minor=False)
-                    time.sleep(sleep / 5)
-                else:
+                if not self.overwrite:
                     return
+                print("overwriting")
+                summary = "+tsiahy, sns."
+                print("waited %d seconds" % sleep)
+                wikipage.put(wikitext, summary, minor=False)
+                time.sleep(sleep / 5)
             else:
-                summary = summary_if_exists + " Fizarana vaovao"
+                summary = f"{summary_if_exists} Fizarana vaovao"
                 print("waited %d seconds" % sleep)
                 contents = wikitext + "\n\n" + contents
                 wikipage.put(contents, summary, minor=False)
@@ -72,7 +71,7 @@ class NinjaEntryCreator(object):
         mg_word_list = self.fetch_mg_word_list()
         self.renderer.pages_to_link = mg_word_list
         additional_data_types_rq = requests.get(
-            dyn_backend.backend + "/additional_word_information_types"
+            f"{dyn_backend.backend}/additional_word_information_types"
         )
         self.additional_data_types = set()
         if additional_data_types_rq == 200:
@@ -83,7 +82,7 @@ class NinjaEntryCreator(object):
     def fetch_mg_word_list(self):
         params = {"language": "eq.mg", "part_of_speech": "in.(ana,mat,mpam)"}
 
-        resp = requests.get(dyn_backend.backend + "/word", params=params)
+        resp = requests.get(f"{dyn_backend.backend}/word", params=params)
         assert resp.status_code == 200
         ret = [w["word"] for w in resp.json()]
         return set(ret)
@@ -91,16 +90,15 @@ class NinjaEntryCreator(object):
     def get_additional_data(
         self, additional_data_list, word_id, type_, return_as=(str, list)
     ) -> [str, list]:
-        if return_as == str:
-            for data in additional_data_list[0]:
-                if data["type"] == type_:
-                    return data["data"]
-        else:
-            ret = []
-            for dic in additional_data_list:
-                if dic["data_type"] == type_:
-                    ret.append(dic["data"])
-            return ret
+        if return_as != str:
+            return [
+                dic["data"]
+                for dic in additional_data_list
+                if dic["data_type"] == type_
+            ]
+        for data in additional_data_list[0]:
+            if data["type"] == type_:
+                return data["data"]
 
     def run_from_csv(self, csv_path, language="la"):
         with open(csv_path, "r") as csv_file:
@@ -113,7 +111,7 @@ class NinjaEntryCreator(object):
                 pos = pos.strip()
                 mg_defn = mg_defn[0].upper() + mg_defn[1:].lower()
 
-                print(">>>>> " + title + " <<<<<")
+                print(f">>>>> {title} <<<<<")
 
                 try:
                     entry_data = {
@@ -128,7 +126,7 @@ class NinjaEntryCreator(object):
                     summary_if_new = wiki_string.replace("\n", " ")
                     summary_if_already_exists = "/* {{=" + language + "=}} */"
 
-                    summary_if_new = "Pejy voaforona amin'ny « " + summary_if_new + " »"
+                    summary_if_new = f"Pejy voaforona amin'ny « {summary_if_new} »"
                     print(entry)
                     self.publisher.publish(
                         entry,
@@ -157,7 +155,7 @@ class NinjaEntryCreator(object):
         #     params['language'] = 'eq.' + language
 
         convergent_translations_rq = requests.get(
-            dyn_backend.backend + "/convergent_translations", params=params
+            f"{dyn_backend.backend}/convergent_translations", params=params
         )
         if convergent_translations_rq.status_code != 200:
             print(
@@ -167,7 +165,7 @@ class NinjaEntryCreator(object):
             return
 
         new_associations_rq = requests.get(
-            dyn_backend.backend + "/new_associations", params={}
+            f"{dyn_backend.backend}/new_associations", params={}
         )
         if new_associations_rq.status_code != 200:
             print("new_associations_rq.status_code", new_associations_rq.status_code)
@@ -181,27 +179,26 @@ class NinjaEntryCreator(object):
         print(new_associations[:10])
         print(data[:10])
         print(len(data), "translations loaded")
-        filtered_data = []
-        for translation in data:
+        filtered_data = [
+            translation
+            for translation in data
             if (
                 int(translation["word_id"]),
                 int(translation["mg_definition_id"]),
-            ) in new_associations:
-                continue
-            else:
-                filtered_data.append(translation)
-
+            )
+            not in new_associations
+        ]
         print(len(filtered_data), "filtered translations loaded")
         for translation in filtered_data:
             title = translation["word"]
             print(translation["word_id"], translation["mg_definition_id"])
 
-            print(">>>>> " + title + " <<<<<")
+            print(f">>>>> {title} <<<<<")
             try:
                 entry, wikistring, summary_if_new, summary_if_exists = (
                     self.generate_wikipage_and_summaries(translation)
                 )
-                summary_if_new = "Pejy voaforona amin'ny « " + summary_if_new + " »"
+                summary_if_new = f"Pejy voaforona amin'ny « {summary_if_new} »"
                 self.publisher.publish(
                     entry, title, wikistring, summary_if_exists, summary_if_new
                 )
@@ -214,7 +211,7 @@ class NinjaEntryCreator(object):
         # Fetching base information
         json_dictionary_infos_params = {"id": "eq." + str(translation["word_id"])}
         json_dictionary_rq = requests.get(
-            dyn_backend.backend + "/vw_json_dictionary",
+            f"{dyn_backend.backend}/vw_json_dictionary",
             params=json_dictionary_infos_params,
         )
 
@@ -227,7 +224,7 @@ class NinjaEntryCreator(object):
 
         definitions = []
         request_convergent_definition_rq = requests.get(
-            dyn_backend.backend + "/convergent_translations",
+            f"{dyn_backend.backend}/convergent_translations",
             params={"word_id": "eq." + str(translation["word_id"])},
         )
         if request_convergent_definition_rq.status_code == 200:
@@ -294,12 +291,12 @@ class NinjaEntryCreator(object):
                 if data_type in additional_data:
                     entry_data[data_type] = additional_data[data_type]
 
-            entry = Entry(**{**entry_data, **additional_data_dict})
+            entry = Entry(**entry_data | additional_data_dict)
             wiki_string = self.renderer.render(entry)
             summary_if_new = wiki_string.replace("\n", " ")
             summary_if_already_exists = "/* {{=" + translation["language"] + "=}} */"
             if len(summary_if_new) > 147:
-                summary_if_new = summary_if_new[:147] + "..."
+                summary_if_new = f"{summary_if_new[:147]}..."
             return entry, wiki_string, summary_if_new, summary_if_already_exists
         else:
             print("definitions", definitions)

@@ -23,7 +23,7 @@ word_session = dictionary_db_manager.session
 
 WORKING_WIKI = pywikibot.Site("mg", "wiktionary")
 try:
-    username = "%s" % pywikibot.config.usernames["wiktionary"]["mg"]
+    username = f'{pywikibot.config.usernames["wiktionary"]["mg"]}'
 except KeyError:
     username = "test"
 
@@ -59,7 +59,7 @@ class UnknownLanguageUpdaterBot(object):
     """
 
     def __init__(self):
-        self.title = "Mpikambana:%s/Kaodim-piteny fantatra" % username
+        self.title = f"Mpikambana:{username}/Kaodim-piteny fantatra"
         self.new_language_page = pywikibot.Page(WORKING_WIKI, self.title)
 
     def get_new_languages_wikipage(self):
@@ -124,14 +124,11 @@ class UnknownLanguageManagerBot(object):
         :param x:
         :return:
         """
-        words = (
+        yield from (
             self.word_session.query(Word.language, func.count(Word.word))
             .filter(Word.date_changed >= datetime.now() - timedelta(days=x))
             .group_by(Word.language)
         )
-
-        for language_code, number_of_words in words:
-            yield language_code, number_of_words
 
     def attempt_translations(self):
         """
@@ -145,29 +142,28 @@ class UnknownLanguageManagerBot(object):
         print(undocumented_languages)
         for language_code, number_of_words in undocumented_languages:
             language_exists = language_code_exists(language_code)
-            if language_exists == 0:
-                if len(language_code) == 3:
-                    try:
-                        english_language_name = get_language_name(language_code)
-                    except Exception as exc:
-                        log.error(exc)
-                        self.lang_list.append(
-                            (language_code, "(tsy fantatra)", number_of_words)
-                        )
-                        continue
-                    try:
-                        malagasy_language_name = translate_language_name(
-                            english_language_name
-                        )
-                        add_language_to_db(
-                            language_code, english_language_name, malagasy_language_name
-                        )
-                        create_category_set(language_code, malagasy_language_name)
-                    except (ValueError, pywikibot.exceptions.InvalidTitle):
-                        print("Not translatable ", english_language_name)
-                        self.lang_list.append(
-                            (language_code, english_language_name, number_of_words)
-                        )
+            if language_exists == 0 and len(language_code) == 3:
+                try:
+                    english_language_name = get_language_name(language_code)
+                except Exception as exc:
+                    log.error(exc)
+                    self.lang_list.append(
+                        (language_code, "(tsy fantatra)", number_of_words)
+                    )
+                    continue
+                try:
+                    malagasy_language_name = translate_language_name(
+                        english_language_name
+                    )
+                    add_language_to_db(
+                        language_code, english_language_name, malagasy_language_name
+                    )
+                    create_category_set(language_code, malagasy_language_name)
+                except (ValueError, pywikibot.exceptions.InvalidTitle):
+                    print("Not translatable ", english_language_name)
+                    self.lang_list.append(
+                        (language_code, english_language_name, number_of_words)
+                    )
 
     def start(self):
         """
@@ -183,18 +179,18 @@ class UnknownLanguageManagerBot(object):
         Updates `Lisitry ny kaodim-piteny tsy voafaritra` subpage.
         :return:
         """
-        rows = ""
-        for code, name, n_words in self.lang_list:
-            rows += ROW_PATTERN % (code, code, name, n_words)
+        rows = "".join(
+            ROW_PATTERN % (code, code, name, n_words)
+            for code, name, n_words in self.lang_list
+        )
         page_content = TABLE_PATTERN % rows
         wikipage = pywikibot.Page(
             WORKING_WIKI,
-            "Mpikambana:%s/Lisitry ny kaodim-piteny tsy voafaritra" % username,
+            f"Mpikambana:{username}/Lisitry ny kaodim-piteny tsy voafaritra",
         )
-        f = open("/tmp/wikipage_save", "w")
-        f.write(page_content)
-        f.close()
-        for i in range(10):
+        with open("/tmp/wikipage_save", "w") as f:
+            f.write(page_content)
+        for _ in range(10):
             try:
                 wikipage.put(page_content)
                 break
@@ -222,10 +218,7 @@ def is_language_in_base(language_code):
         .filter(Language.iso_code == language_code)
         .all()
     )
-    if len(languages) > 0:
-        return True
-    else:
-        return False
+    return len(languages) > 0
 
 
 @time_this("language_code_exists")
@@ -238,17 +231,17 @@ def language_code_exists(language_code):
     if is_language_in_base(language_code):
         return 1
 
-    print("checking language code '%s'" % language_code)
+    print(f"checking language code '{language_code}'")
     page_titles_to_check = [
-        "Endrika:%s" % language_code,
-        "Endrika:=%s=" % language_code,
+        f"Endrika:{language_code}",
+        f"Endrika:={language_code}=",
     ]
     existence = 0
     for page_title in page_titles_to_check:
         wikipage = pywikibot.Page(WORKING_WIKI, page_title)
         if wikipage.exists() and not wikipage.isRedirectPage():
             existence += 1
-            if "=%s=" % language_code in page_title:
+            if f"={language_code}=" in page_title:
                 try:
                     english_name = get_language_name(language_code)
                     malagasy_name = wikipage.get().lower().strip()
@@ -271,8 +264,7 @@ def get_language_name(language_code):
     elif language_code in SIL_CACHE:
         return SIL_CACHE[language_code]
     else:
-        language_name = get_sil_language_name(language_code)
-        return language_name
+        return get_sil_language_name(language_code)
 
 
 def get_sil_language_name(language_code):
@@ -287,7 +279,7 @@ def get_sil_language_name(language_code):
     # page_xpath = '//*[@id="node-5381"]/div/div[2]/div/div[1]/span/div/div[2]/div/table/tbody/tr/td[2]'
     page_xpath = "//div/div[2]/div/div[1]/span/div/div[2]/div/table/tbody/tr/td[2]"
 
-    url = "https://iso639-3.sil.org/code/%s" % language_code
+    url = f"https://iso639-3.sil.org/code/{language_code}"
     headers = {
         "User-Agent": "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:59.0) "
         "Gecko/20100101 Firefox/59.0"
@@ -354,13 +346,13 @@ def translate_language_name(language_name):
 
 def create_category_set(language_code, language_name):
     templates_to_be_created = [
-        "Endrika:%s" % language_code,
-        "Endrika:%s/type" % language_code,
+        f"Endrika:{language_code}",
+        f"Endrika:{language_code}/type",
     ]
     for template in templates_to_be_created:
         put(template, language_name)
 
-    put("Endrika:=%s=" % language_code, language_name.title())
+    put(f"Endrika:={language_code}=", language_name.title())
 
     categories = [
         "Anarana iombonana",
@@ -369,14 +361,14 @@ def create_category_set(language_code, language_name):
         "Tambinteny",
         "Mpampiankin-teny",
     ]
-    put("Sokajy:%s" % language_name, "[[sokajy:fiteny]]")
+    put(f"Sokajy:{language_name}", "[[sokajy:fiteny]]")
     for category in categories:
         page_content = "[[sokajy:%s]]\n[[sokajy:%s|%s]]" % (
             language_name,
             category,
             language_name[0],
         )
-        title = "Sokajy:%s amin'ny teny %s" % (category, language_name)
+        title = f"Sokajy:{category} amin'ny teny {language_name}"
         put(title, page_content)
 
 

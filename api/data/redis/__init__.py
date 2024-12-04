@@ -32,33 +32,28 @@ class RedisWrapperAPI(KeyValueStoreAPI):
         if identifier == "default":
             self.set_identifier(self.__class__)
         else:
-            self.identifier = identifier + "/"
+            self.identifier = f"{identifier}/"
 
     def set_client_class(self, client_class):
         self.client_class = client_class
 
     def set_identifier(self, class_):
         KeyValueStoreAPI.set_identifier(self, self.__class__)
-        if hasattr(self, "singleton"):
-            if self.singleton:
-                self.identifier = class_.__name__ + "/"
+        if hasattr(self, "singleton") and self.singleton:
+            self.identifier = f"{class_.__name__}/"
 
     @property
     def kvstore(self):
-        d = {}
-        for att in self.attributes:
-            d[att] = self.instance.get(att)
-        return d
+        return {att: self.instance.get(att) for att in self.attributes}
 
     def __del__(self):
-        if hasattr(self, "persistent"):
-            if not self.persistent:
-                if hasattr(self, "attributes"):
-                    for key in self.attributes:
-                        self.instance.delete(key)
-
-                if hasattr(self, "instance"):
-                    self.instance.close()
+        if hasattr(self, "persistent") and not self.persistent:
+            if hasattr(self, "attributes"):
+                for key in self.attributes:
+                    self.instance.delete(key)
+        
+            if hasattr(self, "instance"):
+                self.instance.close()
 
     def _set_attribute(self, attribute, value):
         self.attributes.add(attribute)
@@ -76,25 +71,24 @@ class RedisDictionary(RedisWrapperAPI):
     @classmethod
     def from_identifier(cls, identifier):
         cls.identifier = identifier
-        instance = cls()
-        return instance
+        return cls()
 
     def __init__(self, **kwargs):
         RedisWrapperAPI.__init__(self)
 
     def __delitem__(self, key: str):
         assert isinstance(key, str)
-        rkey = self.identifier + "item/" + key
+        rkey = f"{self.identifier}item/{key}"
         self.instance.delete(rkey)
 
     def __setitem__(self, key: str, value):
         assert isinstance(key, str)
-        rkey = self.identifier + "item/" + key
+        rkey = f"{self.identifier}item/{key}"
         self.instance.set(rkey, pickle.dumps(value, 4))
 
     def __getitem__(self, item: str):
         assert isinstance(item, str)
-        rkey = self.identifier + "item/" + item
+        rkey = f"{self.identifier}item/{item}"
         data = self.instance.get(rkey)
         if data is None:
             raise KeyError(item)

@@ -123,10 +123,9 @@ def translate_using_postgrest_json_dictionary(
         if back_check_pos:
             checked_translations = []
             for translation in translations:
-                data = json_dictionary.look_up_word(
+                if data := json_dictionary.look_up_word(
                     target_language, part_of_speech, translation
-                )
-                if data:
+                ):
                     checked_translations.append(translation)
 
             translations = checked_translations
@@ -156,8 +155,9 @@ def translate_using_suggested_translations_fr_mg(
         )
 
     if translations:
-        ret_translations = [t["suggested_definition"] for t in translations]
-        if ret_translations:
+        if ret_translations := [
+            t["suggested_definition"] for t in translations
+        ]:
             k = ", ".join(sorted(list(set(ret_translations))))
             return ConvergentTranslation(k)
 

@@ -4,7 +4,7 @@ import re
 from typing import List
 from api.config import BotjagwarConfig
 
-data_file = os.getcwd() + "/conf/entryprocessor/"
+data_file = f"{os.getcwd()}/conf/entryprocessor/"
 
 
 class WiktionaryProcessorException(Exception):
@@ -77,9 +77,7 @@ def stripwikitext(w):
 
 
 def lang2code(l):
-    dictfile = open(data_file + "languagecodes.dct", "r")
-    f = dictfile.read()
-    d = eval(f)
-    dictfile.close()
-
+    with open(f"{data_file}languagecodes.dct", "r") as dictfile:
+        f = dictfile.read()
+        d = eval(f)
     return d[l]

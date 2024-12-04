@@ -31,8 +31,8 @@ class ProcessManager:
     def __del__(self):
         if self.spawned_backend_process:
             self.spawned_backend_process.terminate()
-            path = "/tmp/%s.pid" % self.program_name
-            os.system("rm %s" % path)  # Process has died, pid file is irrelevant
+            path = f"/tmp/{self.program_name}.pid"
+            os.system(f"rm {path}")
 
     def get_specific_arguments(self) -> List[str]:
         """
@@ -45,7 +45,7 @@ class ProcessManager:
     @threaded
     def spawn_backend(self, *args):
         pid = None
-        path = "/tmp/%s.pid" % self.program_name
+        path = f"/tmp/{self.program_name}.pid"
         try:
             with open(path, "r") as f:
                 pid = int(f.read())
@@ -64,7 +64,7 @@ class ProcessManager:
                     log.info("Sending SIGTERM to the process...")
                     os.kill(pid, SIGTERM)
 
-        os.system("rm %s" % path)  # Process has died, pid file is irrelevant
+        os.system(f"rm {path}")
         time.sleep(0.5)
         # XXX: requires a list of str objects
         self.specific_args = self.get_specific_arguments()
@@ -156,7 +156,7 @@ class DictionaryServiceManager(ServiceManager):
     kill_if_exists = False
 
     def create_entry(self, language, entry):
-        return self.post("entry/%s/create" % language, json=entry)
+        return self.post(f"entry/{language}/create", json=entry)
 
 
 class LanguageServiceManager(ServiceManager):
@@ -166,14 +166,14 @@ class LanguageServiceManager(ServiceManager):
 
     # high-level function
     def get_language(self, language_code) -> Response:
-        result = self.get("language/" + language_code)
+        result = self.get(f"language/{language_code}")
 
-        for i in range(10):
+        for _ in range(10):
             if result is not None:
                 return result
 
             print(result)
             time.sleep(0.5)
-            result = self.get("language/" + language_code)
+            result = self.get(f"language/{language_code}")
 
-        raise Exception("Language not found: " + language_code)
+        raise Exception(f"Language not found: {language_code}")

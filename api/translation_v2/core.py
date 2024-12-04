@@ -74,7 +74,7 @@ class Translation:
         )
         self.reference_template_queue = set()
         if not use_configured_postprocessors:
-            self._post_processors = list()
+            self._post_processors = []
             self.static_postprocessors = True
         else:
             self.static_postprocessors = False
@@ -169,11 +169,9 @@ class Translation:
 
     @staticmethod
     def _generate_summary_from_added_entries(entries: List[Entry]):
-        summary = "Dikanteny: "
-        summary += ", ".join(
-            sorted(list(set([f"{entry.language.lower()}" for entry in entries])))
+        return "Dikanteny: " + ", ".join(
+            sorted(list({f"{entry.language.lower()}" for entry in entries}))
         )
-        return summary
 
     def check_if_page_exists(self, lemma):
         page = Page(
@@ -185,12 +183,11 @@ class Translation:
         def check_post_processor_output(out_entries):
             # Check post-processor hasn't changed output data format
             if not isinstance(out_entries, list):
-                raise TranslationError(f"Post-processors must return list")
+                raise TranslationError("Post-processors must return list")
             for entry in out_entries:
                 if not isinstance(entry, Entry):
                     raise TranslationError(
-                        f"Post-processors return list elements "
-                        f"must all be of type Entry"
+                        'Post-processors return list elements must all be of type Entry'
                     )
 
         def run_static_postprocessors(out_entries, post_processors):
@@ -252,15 +249,16 @@ class Translation:
     ) -> List[Entry]:
         aggregated_entries = []
         for translated in entries_translated:
-            for existing in entries_already_existing:
-                # same spelling and language and part of speech
+            aggregated_entries.extend(
+                existing.overlay(translated)
+                for existing in entries_already_existing
                 if (
                     existing.language == translated.language
                     and existing.part_of_speech == translated.part_of_speech
-                ):
-                    aggregated_entries.append(existing.overlay(translated))
-            # if translated not in aggregated_entries:
-            #     aggregated_entries.append(translated)
+                )
+            )
+                # if translated not in aggregated_entries:
+                #     aggregated_entries.append(translated)
 
         return aggregated_entries
 
@@ -272,20 +270,18 @@ class Translation:
                     old_content = target_page.get()
                     if len(content) > len(old_content) * 1.25:
                         summary = "nanitatra"
+            elif len(content) > 200:
+                summary = f"Pejy noforonina tamin'ny « {content[:200]}... »"
             else:
-                if len(content) > 200:
-                    summary = "Pejy noforonina tamin'ny « " + content[:200] + "... »"
-                else:
-                    summary = "Pejy noforonina tamin'ny « " + content + " »"
+                summary = f"Pejy noforonina tamin'ny « {content} »"
         else:
             summary = self._generate_summary_from_added_entries(entries)
 
         return summary
 
     def create_lemma_if_not_exists(self, wiktionary_processor, definitions, entry):
-        if hasattr(definitions, "part_of_speech"):
-            if definitions.part_of_speech is not None:
-                entry.part_of_speech = definitions.part_of_speech
+        if hasattr(definitions, "part_of_speech") and definitions.part_of_speech is not None:
+            entry.part_of_speech = definitions.part_of_speech
 
         if (
             hasattr(definitions, "lemma")
@@ -323,9 +319,9 @@ class Translation:
                 target_page.put(
                     content,
                     (
-                        "Pejy noforonina tamin'ny « " + content[:147] + "... »"
+                        f"Pejy noforonina tamin'ny « {content[:147]}... »"
                         if len(content) > 149
-                        else "Pejy noforonina tamin'ny « " + content + " »"
+                        else f"Pejy noforonina tamin'ny « {content} »"
                     ),
                 )
                 log.info(
@@ -387,12 +383,11 @@ class Translation:
                 if definitions_count == 1:
                     for refined_definition_line in refined_definition_lines:
                         if len(refined_definition_line.split()) == 1:
-                            single_word_definitions = self.get_single_word_definitions(
+                            if single_word_definitions := self.get_single_word_definitions(
                                 refined_definition_lines[0],
                                 language=wiktionary_processor.language,
                                 part_of_speech=entry.part_of_speech,
-                            )
-                            if single_word_definitions:
+                            ):
                                 refined_definition_lines = single_word_definitions
 
                 for refined_definition_line in refined_definition_lines:
@@ -419,19 +414,18 @@ class Translation:
                             )
                             continue
                         elif isinstance(
-                            definitions, TranslatedDefinition
-                        ) or isinstance(definitions, FormOfTranslaton):
+                            definitions, (TranslatedDefinition, FormOfTranslaton)
+                        ):
                             # Change POS to something more specific for form-of definitions
-                            if isinstance(definitions, FormOfTranslaton):
-                                if (
-                                    entry.part_of_speech
-                                    in form_of_part_of_speech_mapper.keys()
-                                ):
-                                    entry.part_of_speech = (
-                                        form_of_part_of_speech_mapper[
-                                            entry.part_of_speech
-                                        ]
-                                    )
+                            if isinstance(definitions, FormOfTranslaton) and (
+                                                                entry.part_of_speech
+                                                                in form_of_part_of_speech_mapper.keys()
+                                                            ):
+                                entry.part_of_speech = (
+                                    form_of_part_of_speech_mapper[
+                                        entry.part_of_speech
+                                    ]
+                                )
 
                             for d in definitions.split(","):
                                 # translated_definition.append(d.strip())
@@ -461,11 +455,7 @@ class Translation:
                 translation_data = {
                     "definition": definition,
                     "language": wiktionary_processor.language,
-                    "method": (
-                        out_translation_methods[definition]
-                        if definition in out_translation_methods
-                        else None
-                    ),
+                    "method": out_translation_methods.get(definition),
                 }
                 out_entry.additional_data["translation_data"].append(translation_data)
 
@@ -524,16 +514,15 @@ class Translation:
             language
         )
         wiktionary_processor = wiktionary_processor_class()
-        if not wiki_page.isRedirectPage():
-            wiktionary_processor.set_text(wiki_page.get())
-            wiktionary_processor.set_title(wiki_page.title())
-        else:
+        if wiki_page.isRedirectPage():
             return self.process_wiktionary_wiki_page(wiki_page.getRedirectTarget())
+        wiktionary_processor.set_text(wiki_page.get())
+        wiktionary_processor.set_title(wiki_page.title())
         try:
             out_entries = self.translate_wiktionary_page(wiktionary_processor)
             ret = self.output.wikipages(out_entries)
             if ret != "":
-                log.debug("out_entries>" + str(out_entries))
+                log.debug(f"out_entries>{str(out_entries)}")
                 publish(page_title=wiki_page.title(), entries=out_entries)
                 self._save_translation_from_page(out_entries)
                 self.publish_translated_references(

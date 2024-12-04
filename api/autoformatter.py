@@ -51,7 +51,7 @@ class Autoformat(object):
         self._change_pronunciation_call()
         self._remove_interwikis()
         self._replace_jereo_template()
-        summary_sum = "; ".join(summary for summary in self.summaries)
+        summary_sum = "; ".join(self.summaries)
         return self.text, summary_sum
 
 

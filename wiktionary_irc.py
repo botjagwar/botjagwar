@@ -43,7 +43,7 @@ class WiktionaryRecentChangesBot(irc.bot.SingleServerIRCBot):
     recent_change_server = ("irc.wikimedia.org", 6667)
 
     def __init__(self, nick_prefix="botjagwar"):
-        nick_suffix = "-%s" % base36encode(random.randint(36**3, 36**4 - 1))
+        nick_suffix = f"-{base36encode(random.randint(36**3, 36**4 - 1))}"
         user = nick_prefix + nick_suffix
         self.channels_list = []
         super(WiktionaryRecentChangesBot, self).__init__(
@@ -65,7 +65,7 @@ class WiktionaryRecentChangesBot(irc.bot.SingleServerIRCBot):
         self.langs = ["en", "fr"]
         self.sitename = "wiktionary"
         self.channels = [
-            "#%s.%s" % (language.strip(), self.sitename) for language in self.langs
+            f"#{language.strip()}.{self.sitename}" for language in self.langs
         ]
         for channel in self.channels:
             irc.bot.SingleServerIRCBot.__init__(
@@ -96,7 +96,7 @@ class WiktionaryRecentChangesBot(irc.bot.SingleServerIRCBot):
                 ct_time = time.time()
                 msg = _prepare_message(events)
                 self.entry_translator_manager.post(
-                    "wiktionary_page/%s" % (_get_origin_wiki(msg)),
+                    f"wiktionary_page/{_get_origin_wiki(msg)}",
                     json={"title": _get_pagename(msg)},
                 )
                 self.edits += 1
@@ -115,11 +115,9 @@ class WiktionaryRecentChangesBot(irc.bot.SingleServerIRCBot):
 
 def _get_origin_wiki(message):
     try:
-        lang = re.search(r"//([a-z|\-]+).wiktionary", message).groups()[0]
-        return lang
+        return re.search(r"//([a-z|\-]+).wiktionary", message).groups()[0]
     except AttributeError:
-        lang = "fr"  # fiteny defaulta
-        return lang
+        return "fr"
 
 
 def _get_pagename(message):
@@ -133,10 +131,7 @@ def _get_pagename(message):
 
 
 def _get_message_type(message):
-    if "Log/delete" in message:
-        return "delete"
-    else:
-        return "edit"
+    return "delete" if "Log/delete" in message else "edit"
 
 
 def _prepare_message(events):

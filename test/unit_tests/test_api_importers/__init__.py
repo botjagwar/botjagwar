@@ -13,7 +13,7 @@ class ApiImporterTester(TestCase):
 
     def setUp(self) -> None:
         self.wikipages = ""
-        with open("test_data/" + self.filename, "r") as f:
+        with open(f"test_data/{self.filename}", "r") as f:
             sections = f.read().split("----")
             self.wikipages = sections
 

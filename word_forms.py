@@ -51,9 +51,8 @@ def get_count(lang_code_local=None):
         global language_code
         lang_code_local = language_code
     try:
-        with open("user_data/%s-counter" % lang_code_local, "r") as f:
-            counter = int(f.read())
-            return counter
+        with open(f"user_data/{lang_code_local}-counter", "r") as f:
+            return int(f.read())
     except IOError:
         return 0
 
@@ -77,24 +76,24 @@ def get_malagasy_page_set(template=None):
         + " amin'ny teny "
         + get_malagasy_language_name(language_code)
     )
-    return set([p.title() for p in get_pages_from_category(SITELANG, mg_category_name)])
+    return {p.title() for p in get_pages_from_category(SITELANG, mg_category_name)}
 
 
 def get_english_page_set(category_name=None):
     if category_name is None:
         category_name = param_category_name
 
-    return set([p.title() for p in get_pages_from_category("en", category_name)])
+    return {p.title() for p in get_pages_from_category("en", category_name)}
 
 
 def save_count():
-    with open("user_data/%s-counter" % language_code, "w") as f:
+    with open(f"user_data/{language_code}-counter", "w") as f:
         f.write(str(last_entry))
 
 
 def _get_malagasy_page_list():
     with open("user_data/mgwiktionary-latest-all-titles-in-ns0", "r") as f:
-        for line in f.readlines():
+        for line in f:
             PAGE_SET.add(line.strip())
 
 
@@ -143,7 +142,7 @@ def create_non_lemma_entry(entry: Entry):
 
     try:
         if not mg_lemma_page.exists():
-            print("No lemma (%s) :/" % lemma)
+            print(f"No lemma ({lemma}) :/")
             return 0
         else:
             broken_redirect = False
@@ -156,10 +155,10 @@ def create_non_lemma_entry(entry: Entry):
             if not broken_redirect:
                 content = mg_lemma_page.get()
                 if "{{=" + language_code + "=}}" not in content:
-                    print("No lemma (%s) :/" % lemma)
+                    print(f"No lemma ({lemma}) :/")
                     return 0
             else:
-                print("No lemma : broken redirect (%s)" % lemma)
+                print(f"No lemma : broken redirect ({lemma})")
                 return 0
     except pywikibot.exceptions.InvalidTitle:  # doing something wrong at this point
         return 0
@@ -176,31 +175,27 @@ def create_non_lemma_entry(entry: Entry):
     )
 
     # Check ability to overwrite page
-    if not os.path.isfile("/tmp/%s" % code):  # overwrite existing content!
+    if not os.path.isfile(f"/tmp/{code}"):  # overwrite existing content!
         overwrite = False
     else:
         overwrite = True
         print(
-            (
-                "PAGE OVERWRITING IS ACTIVE. DELETE /tmp/%s TO DISABLE IT MID-SCRIPT."
-                % code
-            )
+            f"PAGE OVERWRITING IS ACTIVE. DELETE /tmp/{code} TO DISABLE IT MID-SCRIPT."
         )
 
     # Create or update the generated page
     if mg_page.exists() and not overwrite:
         new_entry = page_output.wikipage(mg_entry, link=False)
         page_content = mg_page.get()
-        if page_content.find("{{=%s=}}" % code) != -1:
-            if page_content.find("{{-%s-|%s}}" % (form_of_template, code)) != -1:
-                print("section already exists : No need to go further")
-                return 0
-            else:  # Add part of speech subsection
-                page_content = re.sub(
-                    r"==[ ]?{{=%s=}}[ ]?==" % code, new_entry, page_content
-                )
-        else:  # Add language section
+        if page_content.find("{{=%s=}}" % code) == -1:  # Add language section
             page_content = new_entry + "\n" + page_content
+        elif page_content.find("{{-%s-|%s}}" % (form_of_template, code)) != -1:
+            print("section already exists : No need to go further")
+            return 0
+        else:  # Add part of speech subsection
+            page_content = re.sub(
+                r"==[ ]?{{=%s=}}[ ]?==" % code, new_entry, page_content
+            )
     else:  # Create a new page.
         page_content = page_output.wikipage(mg_entry, link=False)
 
@@ -252,12 +247,12 @@ def import_additional_data(entry: Entry) -> int:
 
     def get_word_id_query():
         rq_params = {
-            "word": "eq." + entry.entry,
-            "language": "eq." + entry.language,
-            "part_of_speech": "eq." + template.strip(),
+            "word": f"eq.{entry.entry}",
+            "language": f"eq.{entry.language}",
+            "part_of_speech": f"eq.{template.strip()}",
         }
         print(rq_params)
-        response = requests.get(db_backend.backend + "/word", rq_params)
+        response = requests.get(f"{db_backend.backend}/word", rq_params)
         return response.json()
 
     def post_new_word():
@@ -268,7 +263,7 @@ def import_additional_data(entry: Entry) -> int:
             "date_changed": time.strftime("%Y-%m-%d %H:%M:%S"),
         }
         print(rq_params)
-        response = requests.post(db_backend.backend + "/word", rq_params)
+        response = requests.post(f"{db_backend.backend}/word", rq_params)
         if response.status_code >= 400:
             print(response.json())
             raise AdditionalDataImporterError(
@@ -311,7 +306,7 @@ def perform_function_on_entry(function):
         counter = 0
         mg_page_set = {}  # get_malagasy_page_set()
         en_page_set = get_english_page_set(category_name)
-        working_set = set([p for p in en_page_set if p not in mg_page_set])
+        working_set = {p for p in en_page_set if p not in mg_page_set}
         total = len(working_set)
         for word_page in working_set:
             word_page = RedisPage(

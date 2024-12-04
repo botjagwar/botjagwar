@@ -25,11 +25,10 @@ def add_language_ipa_if_not_exists(languages: List = "automatic"):
             if entry.additional_data is None:
                 entry.additional_data = {}
 
-            if languages == "automatic" or entry.language in languages:
-                if not "pronunciation" in entry.additional_data:
-                    entry.additional_data["pronunciation"] = [
-                        "{{" + entry.language + "-IPA}}"
-                    ]
+            if (languages == "automatic" or entry.language in languages) and "pronunciation" not in entry.additional_data:
+                entry.additional_data["pronunciation"] = [
+                    "{{" + entry.language + "-IPA}}"
+                ]
 
             out_entries.append(entry)
 
@@ -69,7 +68,9 @@ def add_xlit_if_no_transcription(languages: List = "automatic"):
                         "{{xlit|" + entry.language + "|{{subst:BASEPAGENAME}}}}"
                     ]
                 else:
-                    if "".join(entry.additional_data["transcription"]).strip() == "":
+                    if not "".join(
+                        entry.additional_data["transcription"]
+                    ).strip():
                         entry.additional_data["transcription"] = [
                             "{{xlit|" + entry.language + "|{{subst:BASEPAGENAME}}}}"
                         ]
@@ -131,7 +132,7 @@ def only_accept_from_source_wiki(*args):
                 )
 
             if not exclude:
-                log.debug("Removing entry: " + entry.entry)
+                log.debug(f"Removing entry: {entry.entry}")
                 out_entries.append(entry)
 
         return out_entries

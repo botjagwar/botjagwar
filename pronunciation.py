@@ -19,7 +19,7 @@ def replace_pronunciation_template(language, language_name):
             )
 
             pywikibot.showDiff(old_content, mg_content)
-            mg_page.put(mg_content, "%s: manampy fanononana" % language_name)
+            mg_page.put(mg_content, f"{language_name}: manampy fanononana")
         else:
             print("{{fanononana||%s}} not found" % language)
 
@@ -42,16 +42,13 @@ def copy_pronunciations(language, language_name, ipa_or_pron="IPA"):
             old_content = mg_content = mg_page.get()
             if "{{fanononana||%s}}" % language in mg_content:
                 print(match)
-                concat_pron = ""
-                for m in match:
-                    concat_pron += m[1]
-
+                concat_pron = "".join(m[1] for m in match)
                 mg_content = mg_content.replace(
                     "{{fanononana||%s}}" % language,
                     "{{fanononana-%s|%s}}" % (language, concat_pron),
                 )
                 pywikibot.showDiff(old_content, mg_content)
-                mg_page.put(mg_content, "%s: manampy fanononana" % language_name)
+                mg_page.put(mg_content, f"{language_name}: manampy fanononana")
             else:
                 print("{{fanononana||%s}} not found" % language)
         else:
@@ -77,16 +74,13 @@ def copy_pronunciations(language, language_name, ipa_or_pron="IPA"):
             old_content = mg_content = mg_page.get()
             if "{{fanononana||%s}}" % language in mg_content:
                 print(match)
-                concat_pron = ""
-                for m in match:
-                    concat_pron += m[1]
-
+                concat_pron = "".join(m[1] for m in match)
                 mg_content = mg_content.replace(
                     "{{fanononana||%s}}" % language,
                     "{{fanononana-%s|%s}}" % (language, concat_pron),
                 )
                 pywikibot.showDiff(old_content, mg_content)
-                mg_page.put(mg_content, "%s: manampy fanononana" % language_name)
+                mg_page.put(mg_content, f"{language_name}: manampy fanononana")
             else:
                 print("{{fanononana||%s}} not found" % language)
         else:

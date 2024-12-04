@@ -13,16 +13,14 @@ class GarbageCollectorBot(object):
         server = BotjagwarConfig().get("global", "postgrest_backend_address")
         used_definitions_q = "select distinct definition from dictionary"
         all_definitions_q = "select id from definitions"
-        all_definitions = set()
-        used_definitions = set()
         session = self.input_database.session
         session.begin(subtransactions=True)
         print("Fetching all definitions...")
-        for k in session.execute(all_definitions_q).fetchall():
-            all_definitions.add(k[0])
+        all_definitions = {k[0] for k in session.execute(all_definitions_q).fetchall()}
         print("Fetching used definitions...")
-        for k in session.execute(used_definitions_q).fetchall():
-            used_definitions.add(k[0])
+        used_definitions = {
+            k[0] for k in session.execute(used_definitions_q).fetchall()
+        }
         print(
             f"Definitions contains {len(all_definitions)} entries, of which {len(used_definitions)} are used."
         )

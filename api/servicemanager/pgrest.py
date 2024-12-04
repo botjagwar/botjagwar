@@ -29,7 +29,7 @@ class StaticBackend(Backend):
     @property
     def backend(self):
         self.check_postgrest_backend()
-        return "http://" + self.postgrest
+        return f"http://{self.postgrest}"
 
 
 class DynamicBackend(Backend):
@@ -40,8 +40,7 @@ class DynamicBackend(Backend):
     @property
     def backend(self):
         self.check_postgrest_backend()
-        bkd = self.backends[randint(0, len(self.backends) - 1)]
-        return bkd
+        return self.backends[randint(0, len(self.backends) - 1)]
 
 
 class PostgrestBackend(object):
@@ -55,7 +54,7 @@ class PostgrestBackend(object):
         """
         if use_postgrest == "automatic":
             try:
-                self.online = True if self.backend.backend else False
+                self.online = bool(self.backend.backend)
             except BackendError:
                 self.online = False
         else:
@@ -85,10 +84,10 @@ class TemplateTranslation(PostgrestBackend):
 
     def postgrest_get_mapped_template_in_database(self, title, target_language="mg"):
         response = requests.get(
-            self.backend.backend + "/template_translations",
+            f"{self.backend.backend}/template_translations",
             params={
-                "source_template": "eq." + title,
-                "target_language": "eq." + target_language,
+                "source_template": f"eq.{title}",
+                "target_language": f"eq.{target_language}",
             },
         )
         data = response.json()
@@ -99,14 +98,14 @@ class TemplateTranslation(PostgrestBackend):
             return None
         else:  # other HTTP error:
             raise BackendError(
-                f"Unexpected error: HTTP {response.status_code}; " + response.text
+                f"Unexpected error: HTTP {response.status_code}; {response.text}"
             )
 
     def postgrest_add_translated_title(
         self, title, translated_title, source_language="en", target_language="mg"
     ):
         response = requests.post(
-            self.backend.backend + "/template_translations",
+            f"{self.backend.backend}/template_translations",
             json={
                 "source_template": title,
                 "target_template": translated_title,
@@ -114,9 +113,9 @@ class TemplateTranslation(PostgrestBackend):
                 "target_language": target_language,
             },
         )
-        if response.status_code in (400, 500):  # HTTP Bad request or HTTP server error:
+        if response.status_code in {400, 500}:  # HTTP Bad request or HTTP server error:
             raise BackendError(
-                f"Unexpected error: HTTP {response.status_code}; " + response.text
+                f"Unexpected error: HTTP {response.status_code}; {response.text}"
             )
 
         return None
@@ -136,24 +135,22 @@ class JsonDictionary(PostgrestBackend):
 
     def look_up_dictionary(self, w_language, w_part_of_speech, w_word):
         params = {
-            "language": "eq." + w_language,
-            "part_of_speech": "eq." + w_part_of_speech,
-            "word": "eq." + w_word,
+            "language": f"eq.{w_language}",
+            "part_of_speech": f"eq.{w_part_of_speech}",
+            "word": f"eq.{w_word}",
         }
         resp = requests.get(self.backend.backend + self.endpoint_name, params=params)
-        data = resp.json()
-        return data
+        return resp.json()
 
     def look_up_word(self, language, part_of_speech, word):
         params = {
-            "language": "eq." + language,
-            "part_of_speech": "eq." + part_of_speech,
-            "word": "eq." + word,
+            "language": f"eq.{language}",
+            "part_of_speech": f"eq.{part_of_speech}",
+            "word": f"eq.{word}",
         }
         log.debug(params)
-        resp = requests.get(self.backend.backend + "/word", params=params)
-        data = resp.json()
-        return data
+        resp = requests.get(f"{self.backend.backend}/word", params=params)
+        return resp.json()
 
 
 class ConvergentTranslations(PostgrestBackend):
@@ -171,13 +168,13 @@ class ConvergentTranslations(PostgrestBackend):
             # 'language': 'eq.' + target_language
         }
         if part_of_speech is not None:
-            params["part_of_speech"] = "eq." + part_of_speech
+            params["part_of_speech"] = f"eq.{part_of_speech}"
         if en_definition is not None:
-            params["en_definition"] = "eq." + en_definition
+            params["en_definition"] = f"eq.{en_definition}"
         if fr_definition is not None:
-            params["fr_definition"] = "eq." + fr_definition
+            params["fr_definition"] = f"eq.{fr_definition}"
         if suggested_definition is not None:
-            params["suggested_definition"] = "eq." + suggested_definition
+            params["suggested_definition"] = f"eq.{suggested_definition}"
         if len(params) < 2:
             raise BackendError(
                 "Expected at least one of 'en_definition', 'fr_definition' or 'suggested_definition'"
@@ -192,7 +189,7 @@ class ConvergentTranslations(PostgrestBackend):
 
         # other HTTP error:
         raise BackendError(
-            f"Unexpected error: HTTP {response.status_code}; " + response.text
+            f"Unexpected error: HTTP {response.status_code}; {response.text}"
         )
 
     def get_suggested_translations_fr_mg(
@@ -206,14 +203,14 @@ class ConvergentTranslations(PostgrestBackend):
             # 'language': 'eq.' + target_language
         }
         if part_of_speech is not None:
-            params["part_of_speech"] = "eq." + part_of_speech
+            params["part_of_speech"] = f"eq.{part_of_speech}"
         if definition is not None:
-            params["definition"] = "eq." + definition
+            params["definition"] = f"eq.{definition}"
         if suggested_definition is not None:
-            params["suggested_definition"] = "eq." + suggested_definition
+            params["suggested_definition"] = f"eq.{suggested_definition}"
 
         response = requests.get(
-            self.backend.backend + "/suggested_translations_fr_mg", params=params
+            f"{self.backend.backend}/suggested_translations_fr_mg", params=params
         )
         data = response.json()
         if response.status_code == 200:  # HTTP OK
@@ -221,5 +218,5 @@ class ConvergentTranslations(PostgrestBackend):
 
         # other HTTP error:
         raise BackendError(
-            f"Unexpected error: HTTP {response.status_code}; " + response.text
+            f"Unexpected error: HTTP {response.status_code}; {response.text}"
         )

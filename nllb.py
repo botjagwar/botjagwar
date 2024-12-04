@@ -4,10 +4,10 @@ from flask import Flask, jsonify, request
 
 try:
     from transformers import AutoModelForSeq2SeqLM, AutoTokenizer, pytorch_utils
-except ImportError:
+except ImportError as e:
     raise ImportError(
         "This API needs transformers module to be installed. Please install it and try again"
-    )
+    ) from e
 
 app = Flask(__name__)
 
@@ -41,10 +41,9 @@ class Translator:
             forced_bos_token_id=self.tokenizer.lang_code_to_id["plt_Latn"],
             max_length=1000
         )
-        translated = self.tokenizer.batch_decode(
+        return self.tokenizer.batch_decode(
             translated_tokens, skip_special_tokens=True
         )[0]
-        return translated
 
 
 translator = Translator()

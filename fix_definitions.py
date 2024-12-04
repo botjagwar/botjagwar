@@ -12,19 +12,19 @@ conn = psycopg2.connect(
 def fetch_mg_definitions():
     cur = conn.cursor()
     cur.execute("select definition from definitions where definition_language='mg';")
-    return set([i[0] for i in cur.fetchall()])
+    return {i[0] for i in cur.fetchall()}
 
 
 def fetch_mg_words():
     cur = conn.cursor()
     cur.execute("select definition from definitions where definition_language='mg';")
-    return set([i[0] for i in cur.fetchall()])
+    return {i[0] for i in cur.fetchall()}
 
 
 def fetch_en_words():
     cur = conn.cursor()
     cur.execute("select word from word where language='fr';")
-    return set([i[0] for i in cur.fetchall()])
+    return {i[0] for i in cur.fetchall()}
 
 
 def change_definition_language(definition, language):
@@ -44,22 +44,20 @@ def main():
     mg_deftn = fetch_mg_definitions()
     mg_words = fetch_mg_words()
 
-    en_words_ci = set([w.lower() for w in en_words])
-    mg_words_ci = set([w.lower() for w in mg_words])
+    en_words_ci = {w.lower() for w in en_words}
+    mg_words_ci = {w.lower() for w in mg_words}
 
     definitions_to_change = []
     for defn in mg_deftn:
         defin = defn
         defn = defn.split()
         wc = len(defn)
-        enc = 0
-        for w in defn:
-            if w.lower() in en_words_ci and w.lower() not in mg_words_ci:
-                enc += 1
-
-        if wc != 0:
-            if enc / wc > 0.75:
-                definitions_to_change.append((enc / wc, defin))
+        enc = sum(
+            w.lower() in en_words_ci and w.lower() not in mg_words_ci
+            for w in defn
+        )
+        if wc != 0 and enc / wc > 0.75:
+            definitions_to_change.append((enc / wc, defin))
 
     for rate, defn in definitions_to_change:
         print(rate)

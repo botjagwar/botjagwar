@@ -64,24 +64,17 @@ class FastTranslationLookup:
         if data in self.fast_tree:
             return self.fast_tree[data]
 
-        raise LookupError("No found: %s" % str(data))
+        raise LookupError(f"No found: {data}")
 
     def translate(self, entry):
         return self.translate_word(entry.entry, entry.language, entry.part_of_speech)
 
     def lookup(self, entry):
         data = (entry.entry, entry.language, entry.part_of_speech)
-        if data in self.fast_tree:
-            return True
-
-        return False
+        return data in self.fast_tree
 
     def word_exists(self, word):
-        for data in self.fast_tree:
-            if data[0] == word:
-                return True
-
-        return False
+        return any(data[0] == word for data in self.fast_tree)
 
 
 class FastWordLookup:
@@ -103,7 +96,4 @@ class FastWordLookup:
         print("--- done building fast tree ---")
 
     def lookup(self, entry):
-        if (entry.entry, entry.language) in self.fast_tree:
-            return True
-
-        return False
+        return (entry.entry, entry.language) in self.fast_tree

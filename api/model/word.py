@@ -57,27 +57,21 @@ class Entry(object):
         :param other:
         :return:
         """
-        if hasattr(self, "language") and hasattr(other, "language"):
-            if self.language == other.language:
-                if hasattr(self, "entry") and hasattr(other, "entry"):
-                    if self.entry == other.entry:  # noqa
-                        if hasattr(self, "part_of_speech") and hasattr(
+        if not hasattr(self, "language") or not hasattr(other, "language"):
+            return 1
+        if self.language == other.language:
+            if hasattr(self, "entry") and hasattr(other, "entry"):
+                if self.entry == other.entry:  # noqa
+                    if hasattr(self, "part_of_speech") and hasattr(
                             other, "part_of_speech"
                         ):
-                            if self.part_of_speech == other.part_of_speech:
-                                return 0
-                            if self.part_of_speech < other.part_of_speech:
-                                return -1
-                            return 1
-                        return 0
-                    if self.entry < other.entry:
-                        return -1
-                    return 1
-                return 0
-            if self.language < other.language:
-                return -1
-            return 1
-        return 1
+                        if self.part_of_speech == other.part_of_speech:
+                            return 0
+                        return -1 if self.part_of_speech < other.part_of_speech else 1
+                    return 0
+                return -1 if self.entry < other.entry else 1
+            return 0
+        return -1 if self.language < other.language else 1
 
     def overlay(self, other):
         self.language = other.language

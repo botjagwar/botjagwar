@@ -6,10 +6,8 @@ from api.parsers.inflection_template import VerbForm
 
 
 def _parse_es_verb_form_of(parts):
-    count = 0
     person = number = tense = mood = None
     for part in parts:
-        count += 1
         if part.startswith("pers=") or part.startswith("person="):
             person = part.split("=")[1].strip("}")
         elif part.startswith("number="):
@@ -18,17 +16,7 @@ def _parse_es_verb_form_of(parts):
             tense = part.split("=")[1].strip("}")
         elif part.startswith("mood="):
             mood = part.split("=")[1].strip("}")
-        elif part.startswith("ending="):
-            pass
-        elif part.startswith("sera="):
-            pass
-        elif part.startswith("formal="):
-            pass
-        elif part.startswith("sense="):
-            pass
-
-    verb_form = VerbForm("", tense, mood, person, number)
-    return verb_form
+    return VerbForm("", tense, mood, person, number)
 
 
 def parse_es_compound_of(template_expression):
@@ -53,11 +41,7 @@ def parse_verb_form_inflection_of(template_expression):
             parts.remove(tparam)
 
     t_name = parts[0]
-    if len(parts[1]) in (2, 3):
-        lemma = parts[2]
-    else:
-        lemma = parts[1]
-
+    lemma = parts[2] if len(parts[1]) in {2, 3} else parts[1]
     person = number = tense = mood = None
     voice = "act"
     for pn in parts:
@@ -119,13 +103,11 @@ def parse_la_verb_form_inflection_of(template_expression):
 def parse_es_verb_form_of(template_expression):
     parts = template_expression.split("|")
     person = number = tense = mood = None
-    count = 0
     lemma = parts[-1].replace("}", "")
     if "region=" in lemma:
         lemma = parts[-2]
 
     for part in parts:
-        count += 1
         if part.startswith("pers=") or part.startswith("person="):
             person = part.split("=")[1]
         elif part.startswith("number="):
@@ -153,8 +135,7 @@ def parse_es_verb_form_of(template_expression):
         elif "=" not in part:
             lemma = part.replace("}", "")
 
-    verb_form = VerbForm(lemma, tense, mood, person, number)
-    return verb_form
+    return VerbForm(lemma, tense, mood, person, number)
 
 
 def parse_ca_verb_form_of(template_expression):
@@ -174,13 +155,8 @@ def parse_ca_verb_form_of(template_expression):
         if tparam.startswith("m="):
             mood = tparam[2:]
 
-    if "=" in parts[1]:
-        lemma = parts[-1]
-    else:
-        lemma = parts[1]
-
-    verb_form = VerbForm(lemma, tense, mood, person, number)
-    return verb_form
+    lemma = parts[-1] if "=" in parts[1] else parts[1]
+    return VerbForm(lemma, tense, mood, person, number)
 
 
 def parse_fi_verb_form_of(template_expression):
@@ -189,9 +165,7 @@ def parse_fi_verb_form_of(template_expression):
     person = "0"
     number = "s"
     tense = mood = None
-    count = 0
-    for part in parts:
-        count += 1
+    for count, part in enumerate(parts):
         if part.startswith("pn="):
             pn = part.split("=")[1]
             if pn == "1s":
@@ -212,33 +186,32 @@ def parse_fi_verb_form_of(template_expression):
             elif pn == "3p":
                 person = "3"
                 number = "p"
-            elif pn == "pasv" or pn == "pass":
+            elif pn in ["pasv", "pass"]:
                 voice = "pass"
 
         if part.startswith("tm="):
             tense_mood = part.split("=")[1]
-            if tense_mood == "pres":
-                mood = "ind"
-                tense = "pres"
-            elif tense_mood == "past":
-                mood = "ind"
-                tense = "past"
-            elif tense_mood == "cond":
+            if tense_mood == "cond":
                 mood = "cond"
                 tense = "pres"
             elif tense_mood == "impr":
                 mood = "imp"
                 tense = "pres"
+            elif tense_mood == "past":
+                mood = "ind"
+                tense = "past"
             elif tense_mood == "potn":
                 mood = "pot"
                 tense = "pres"
 
+            elif tense_mood == "pres":
+                mood = "ind"
+                tense = "pres"
     lemma = parts[-1].replace("}", "")
     if "=" in lemma:
         lemma = parts[-2]
 
-    verb_form = VerbForm(lemma, tense, mood, person, number, voice)
-    return verb_form
+    return VerbForm(lemma, tense, mood, person, number, voice)
 
 
 def parse_fi_form_of(template_expression):
@@ -258,13 +231,8 @@ def parse_fi_form_of(template_expression):
         if tparam.startswith("tense="):
             tense = tparam[6:]
 
-    if "=" in parts[1]:
-        lemma = parts[-1]
-    else:
-        lemma = parts[1]
-
-    verb_form = VerbForm(lemma, tense, mood, person, number)
-    return verb_form
+    lemma = parts[-1] if "=" in parts[1] else parts[1]
+    return VerbForm(lemma, tense, mood, person, number)
 
 
 def parse_de_verb_form_of(template_expression):
@@ -288,5 +256,4 @@ def parse_de_verb_form_of(template_expression):
 
     lemma = parts[1]
 
-    verb_form = VerbForm(lemma, tense, mood, person, number)
-    return verb_form
+    return VerbForm(lemma, tense, mood, person, number)

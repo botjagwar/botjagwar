@@ -24,13 +24,16 @@ class ListSubsectionImporter(SubsectionImporter):
                     if "[[Thesaurus:" in item:
                         continue
                     if "{{l|" + language in item:
-                        for data in re.findall(
-                            "{{l\\|" + language + "\\|([0-9A-Za-z- ]+)}}", item
-                        ):
-                            retrieved.append(data)
+                        retrieved.extend(
+                            iter(
+                                re.findall(
+                                    "{{l\\|" + language + "\\|([0-9A-Za-z- ]+)}}",
+                                    item,
+                                )
+                            )
+                        )
                     elif "[[" in item and "]]" in item:
-                        for data in re.findall("\\[\\[([0-9A-Za-z- ]+)\\]\\]", item):
-                            retrieved.append(data)
+                        retrieved.extend(iter(re.findall("\\[\\[([0-9A-Za-z- ]+)\\]\\]", item)))
                     else:
                         retrieved.append(item)
 
@@ -109,14 +112,16 @@ class DerivedTermsImporter(ListSubsectionImporter):
                     if "[[Thesaurus:" in item:
                         continue
                     if "{{l|" + language in item:
-                        for data in re.findall(
-                            "{{l\\|" + language + "\\|([0-9A-Za-z- ]+)}}", item
-                        ):
-                            retrieved.append(data)
+                        retrieved.extend(
+                            iter(
+                                re.findall(
+                                    "{{l\\|" + language + "\\|([0-9A-Za-z- ]+)}}",
+                                    item,
+                                )
+                            )
+                        )
                     elif "[[" in item and "]]" in item:
-                        for data in re.findall("\\[\\[([0-9A-Za-z- ]+)\\]\\]", item):
-                            retrieved.append(data)
-
+                        retrieved.extend(iter(re.findall("\\[\\[([0-9A-Za-z- ]+)\\]\\]", item)))
             # List in a template
             for template_name in (
                 [f"der{d}" for d in range(1, 5)]

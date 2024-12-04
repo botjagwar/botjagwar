@@ -20,7 +20,7 @@ class Writer(object):
 
 class EntryPageFileWriter(Writer):
     def __init__(self, language):
-        self.page_dump_file = open("user_data/dump-%s.pkl" % language, "wb")
+        self.page_dump_file = open(f"user_data/dump-{language}.pkl", "wb")
         self.page_dump = {}
         self.counter = 0
 
@@ -46,7 +46,7 @@ class EntryPageFileReader(Reader):
 
     def __init__(self, language):
         try:
-            self.page_dump_file = open("user_data/dump-%s.pkl" % language, "rb")
+            self.page_dump_file = open(f"user_data/dump-{language}.pkl", "rb")
         except FileNotFoundError:
             pass
         self.page_dump = {}
@@ -61,7 +61,7 @@ class MissingTranslationFileReader(Reader):
         self.mising_translations = {}
         self.language = language
         self.mising_translations_file = open(
-            "user_data/missing_translations-%s.pickle" % self.language, "rb"
+            f"user_data/missing_translations-{self.language}.pickle", "rb"
         )
 
     def read(self):
@@ -72,7 +72,7 @@ class MissingTranslationFileWriter(Writer):
     def __init__(self, language):
         self.mising_translations = {}
         self.mising_translations_file = open(
-            "user_data/missing_translations-%s.pickle" % language, "wb"
+            f"user_data/missing_translations-{language}.pickle", "wb"
         )
 
     @critical_section(missing_translation_cs_lock)
@@ -99,18 +99,15 @@ class MissingTranslationCsvWriter(object):
         self.lookup.build_table()
 
     def to_csv(self, filename_pattern="user_data/missing_translations-%s.csv"):
-        # missing_translations is a dictionary where the key is a translation file
-        # and where the value is the number of times it's been looked for
-        out_file = open(filename_pattern % self.language, "w")
-        dict_list = [
-            {"word": translation, "hits": hits}
-            for translation, hits in self.reader.mising_translations.items()
-            if not self.lookup.word_exists(translation)
-        ]
-        writer = DictWriter(out_file, ["word", "hits"])
-        writer.writeheader()
-        writer.writerows(dict_list)
-        out_file.close()
+        with open(filename_pattern % self.language, "w") as out_file:
+            dict_list = [
+                {"word": translation, "hits": hits}
+                for translation, hits in self.reader.mising_translations.items()
+                if not self.lookup.word_exists(translation)
+            ]
+            writer = DictWriter(out_file, ["word", "hits"])
+            writer.writeheader()
+            writer.writerows(dict_list)
 
 
 class CacheMissError(KeyError):
@@ -121,9 +118,7 @@ class SiteExtractorCacheEngine(object):
     def __init__(self, sitename):
         self.sitename = sitename
         try:
-            old_dump_file = open(
-                "user_data/site-extractor-%s.pkl" % self.sitename, "rb"
-            )
+            old_dump_file = open(f"user_data/site-extractor-{self.sitename}.pkl", "rb")
         except FileNotFoundError:
             self.page_dump = {}
         else:
@@ -146,9 +141,8 @@ class SiteExtractorCacheEngine(object):
         self.page_dump[word] = content
 
     def list(self):
-        return [x for x in self.page_dump.keys()]
+        return list(self.page_dump.keys())
 
     def write(self):
-        page_dump_file = open("user_data/site-extractor-%s.pkl" % self.sitename, "wb")
-        pickle.dump(self.page_dump, page_dump_file, pickle.HIGHEST_PROTOCOL)
-        page_dump_file.close()
+        with open(f"user_data/site-extractor-{self.sitename}.pkl", "wb") as page_dump_file:
+            pickle.dump(self.page_dump, page_dump_file, pickle.HIGHEST_PROTOCOL)

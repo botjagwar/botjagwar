@@ -142,4 +142,4 @@ DEFINITENESS = {
 POSSESSIVENESS = {}
 for person in PERSONS:
     for number in NUMBER:
-        POSSESSIVENESS[person + number] = PERSONS[person] + " " + NUMBER[number]
+        POSSESSIVENESS[person + number] = f"{PERSONS[person]} {NUMBER[number]}"

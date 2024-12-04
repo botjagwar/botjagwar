@@ -77,8 +77,7 @@ def main():
             continue
         old_content = content = page.get()
         formatted_definitions = [
-            "# %s<ref>''Rakibolana Malagasy'' (1985) nosoratan'i Rajemisa-Raolison</ref>"
-            % definition
+            f"# {definition}<ref>''Rakibolana Malagasy'' (1985) nosoratan'i Rajemisa-Raolison</ref>"
             for definition in definitions
         ]
         content = content.replace("# {{...|mg}}", "\n".join(formatted_definitions))

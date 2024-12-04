@@ -171,7 +171,7 @@ class FRWiktionaryProcessor(WiktionaryProcessor):
                     examples = {}
                 elif pos_flexion_section_match is not None:
                     last_part_of_speech = (
-                        "e-" + self.postran[pos_flexion_section_match.groups()[0]]
+                        f"e-{self.postran[pos_flexion_section_match.groups()[0]]}"
                     )
                     # Reset definitions for part of speech
                     definitions_dict = {}
@@ -234,8 +234,7 @@ class FRWiktionaryProcessor(WiktionaryProcessor):
         ]
 
         for lb_template_rgx in lb_template_rgxs:
-            lb_match = re.match(lb_template_rgx, definition)
-            if lb_match:
+            if lb_match := re.match(lb_template_rgx, definition):
                 lb_match = lb_match.group()
                 lb_begin = definition.find(lb_match)
                 if lb_begin != -1:
@@ -247,7 +246,7 @@ class FRWiktionaryProcessor(WiktionaryProcessor):
                     # Ensure that no unexpected characters has been onboarded,
                     # if it's the case, just ditch the label information.
                     if re.match(r"^([a-zA-Z0-9\,\ ]+)$", label_data):
-                        refined = f"({label_data}) " + definition[lb_end + 2 :].strip()
+                        refined = f"({label_data}) {definition[lb_end + 2:].strip()}"
                     else:
                         refined = definition[lb_end + 2 :].strip()
 
@@ -266,7 +265,7 @@ class FRWiktionaryProcessor(WiktionaryProcessor):
 
         if unwanted_character:
             raise WiktionaryProcessorException(
-                "Refined definition still has unwanted characters : '" + character + "'"
+                f"Refined definition still has unwanted characters : '{character}'"
             )
 
         return [refined]

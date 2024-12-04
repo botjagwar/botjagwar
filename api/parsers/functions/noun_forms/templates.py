@@ -14,13 +14,8 @@ def parse_fi_form_of(template_expression):
         if tparam.startswith("case="):
             case = tparam[5:]
 
-    if "=" in parts[1]:
-        lemma = parts[-1]
-    else:
-        lemma = parts[1]
-
-    noun_form = NounForm(lemma, case, number, "")
-    return noun_form
+    lemma = parts[-1] if "=" in parts[1] else parts[1]
+    return NounForm(lemma, case, number, "")
 
 
 def parse_et_form_of(template_expression):
@@ -36,13 +31,8 @@ def parse_et_form_of(template_expression):
         if tparam.startswith("c="):
             case = tparam[2:]
 
-    if "=" in parts[1]:
-        lemma = parts[-1]
-    else:
-        lemma = parts[1]
-
-    noun_form = NounForm(lemma, case, number, "")
-    return noun_form
+    lemma = parts[-1] if "=" in parts[1] else parts[1]
+    return NounForm(lemma, case, number, "")
 
 
 def parse_nl_noun_form_of(template_expression):
@@ -62,8 +52,7 @@ def parse_nl_noun_form_of(template_expression):
         case = parts[1]
 
     lemma = parts[2]
-    noun_form = NounForm(lemma, case, number, "")
-    return noun_form
+    return NounForm(lemma, case, number, "")
 
 
 def parse_lt_noun_form(template_expression):
@@ -76,5 +65,4 @@ def parse_lt_noun_form(template_expression):
     number = parts[2]
 
     lemma = parts[-1]
-    noun_form = NounForm(lemma, case, number, "")
-    return noun_form
+    return NounForm(lemma, case, number, "")

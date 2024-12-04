@@ -10,7 +10,7 @@ SiteMock = pywikibot.Site
 class PageMock(pywikibot.Page):
     def __init__(self, *args, **kwargs):
         super(PageMock, self).__init__(*args, **kwargs)
-        self.filename = "test_data/test_pages_%s.xml" % self.site.lang
+        self.filename = f"test_data/test_pages_{self.site.lang}.xml"
         self.parsed = minidom.parse(open(self.filename, "r"))
         self.pages = self.parsed.getElementsByTagName("page")
 
@@ -26,7 +26,7 @@ class PageMock(pywikibot.Page):
         callback=None,
         **kwargs
     ):
-        print(("Saving page [[%s]] through put" % self.title()))
+        print(f"Saving page [[{self.title()}]] through put")
 
     def save(
         self,
@@ -41,7 +41,7 @@ class PageMock(pywikibot.Page):
         quiet=False,
         **kwargs
     ):
-        print(("Saving page [[%s]] through save" % self.title()))
+        print(f"Saving page [[{self.title()}]] through save")
 
     def _save(
         self,
@@ -53,7 +53,7 @@ class PageMock(pywikibot.Page):
         quiet=False,
         **kwargs
     ):
-        print(("Saving page [[%s]] through save" % self.title()))
+        print(f"Saving page [[{self.title()}]] through save")
 
     @time_this("Page.get() method mock")
     def get(self, force=False, get_redirect=False, sysop=False):
@@ -62,7 +62,7 @@ class PageMock(pywikibot.Page):
             if xml_title == self.title():
                 return page.getElementsByTagName("text")[0].childNodes[0].nodeValue
 
-        print(('No page %s found in "%s"' % (self.title(), self.filename)))
+        print(f'No page {self.title()} found in "{self.filename}"')
         return ""
 
 

@@ -8,16 +8,14 @@ from .routines import save_changes_on_disk
 
 
 def language_exists(language_code, session):
-    languages = [
-        m.serialise()
-        for m in session.query(Language)
-        .filter(Language.iso_code == language_code)
-        .all()
-    ]
-    if len(languages) > 0:
-        return True
-
-    return False
+    return bool(
+        languages := [
+            m.serialise()
+            for m in session.query(Language)
+            .filter(Language.iso_code == language_code)
+            .all()
+        ]
+    )
 
 
 async def list_languages(request) -> Response:

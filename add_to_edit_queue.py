@@ -12,14 +12,14 @@ en_file = sys.argv[1]
 mg_file = sys.argv[2]
 
 with open(en_file, "r") as f:
-    en_entries = set([k.strip("\n").strip() for k in f.readlines()])
+    en_entries = {k.strip("\n").strip() for k in f.readlines()}
 
 with open(mg_file, "r") as f:
-    mg_entries = set([k.strip("\n").strip() for k in f.readlines()])
+    mg_entries = {k.strip("\n").strip() for k in f.readlines()}
 
 try:
     with open(en_file, "r") as f:
-        to_create = set([k.strip("\n").strip() for k in f.readlines()])
+        to_create = {k.strip("\n").strip() for k in f.readlines()}
 except FileNotFoundError:
     to_create = set()
 

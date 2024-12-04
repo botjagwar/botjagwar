@@ -11,14 +11,14 @@ golden_file = sys.argv[1]
 non_golden_file = sys.argv[2]
 
 with open(golden_file, "r") as f:
-    golden_source = set([k.strip("\n").strip() for k in f.readlines()])
+    golden_source = {k.strip("\n").strip() for k in f.readlines()}
 
 with open(non_golden_file, "r") as f:
-    non_golden_source = set([k.strip("\n").strip() for k in f.readlines()])
+    non_golden_source = {k.strip("\n").strip() for k in f.readlines()}
 
 try:
     with open(non_golden_file, "r") as f:
-        already_deleted_entries = set([k.strip("\n").strip() for k in f.readlines()])
+        already_deleted_entries = {k.strip("\n").strip() for k in f.readlines()}
 except FileNotFoundError:
     already_deleted_entries = set()
 

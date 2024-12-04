@@ -28,11 +28,7 @@ def parse_one_parameter_template(
             template_expression = template_expression.replace(char, "")
         parts = template_expression.split("|")
         t_name = parts[0]
-        if len(parts[1]) in (2, 3):
-            lemma = parts[2]
-        else:
-            lemma = parts[1]
-
+        lemma = parts[2] if len(parts[1]) in {2, 3} else parts[1]
         if parts[0] == template_name:
             ret_obj = out_class()
             ret_obj.lemma = lemma
@@ -45,8 +41,7 @@ def parse_one_parameter_template(
             return ret_obj
 
         raise ValueError(
-            "Unrecognised template: expected '%s' but got '%s'"
-            % (parts[0], template_name)
+            f"Unrecognised template: expected '{parts[0]}' but got '{template_name}'"
         )
 
     return _parse_one_parameter_template
@@ -62,11 +57,7 @@ def parse_inflection_of(out_class):
                 parts.remove(tparam)
 
         t_name = parts[0]
-        if len(parts[1]) in (2, 3):
-            lemma = parts[2]
-        else:
-            lemma = parts[1]
-
+        lemma = parts[2] if len(parts[1]) in {2, 3} else parts[1]
         case_name = number_ = ""
         gender = None
         definiteness = None

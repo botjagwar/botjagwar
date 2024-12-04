@@ -28,9 +28,8 @@ def translate_form_of_definitions(
         except ParserNotFoundError:
             return UntranslatedDefinition(definition_line)
 
-        if "language" in kw:
-            if kw["language"] in POST_PROCESSORS:
-                elements = POST_PROCESSORS[kw["language"]](elements)
+        if "language" in kw and kw["language"] in POST_PROCESSORS:
+            elements = POST_PROCESSORS[kw["language"]](elements)
 
         new_definition_line = FormOfTranslaton(elements.to_definition(target_language))
         if hasattr(elements, "lemma"):
@@ -65,9 +64,8 @@ def translate_form_of_templates(
                 elements = templates_parser.get_elements(
                     TEMPLATE_TO_OBJECT[part_of_speech], definition_line
                 )
-                if "language" in kw:
-                    if kw["language"] in POST_PROCESSORS:
-                        elements = POST_PROCESSORS[kw["language"]](elements)
+                if "language" in kw and kw["language"] in POST_PROCESSORS:
+                    elements = POST_PROCESSORS[kw["language"]](elements)
 
                 new_definition_line = FormOfTranslaton(
                     elements.to_definition(target_language)

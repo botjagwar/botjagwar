@@ -45,7 +45,7 @@ async def translate(request) -> Response:
     try:
         translation = translator.translate(request_json["text"])
         log.debug('Translating "' + request_json["text"] + '"...')
-        log.debug('Translated as "' + translation + '"...')
+        log.debug(f'Translated as "{translation}"...')
         returned_json = {
             "type": "translation",
             "text": translation,

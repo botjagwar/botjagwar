@@ -572,6 +572,6 @@ class TestNewsStats(object):
             ("uk", "wiktionary", "over", 6000, "articles"),
         ]
 
-        got = sorted([i for i in get_milestones(old, new)])
+        got = sorted(list(get_milestones(old, new)))
         expected.sort()
         assert got == expected

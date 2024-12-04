@@ -10,8 +10,7 @@ class LanguageStatisticsBuilder(object):
 
         self.languages = []
         with open("user_data/category_list_mg_fiteny", "r") as opened_file:
-            for entry in opened_file.readlines():
-                self.languages.append(entry.strip("\n"))
+            self.languages.extend(entry.strip("\n") for entry in opened_file)
         self.languages.sort()
         self._data = {}
 
@@ -19,9 +18,7 @@ class LanguageStatisticsBuilder(object):
     def data(self):
         if not self._data:
             self.fetch_data()
-            return self._data
-        else:
-            return self._data
+        return self._data
 
     def fetch_data(self):
         with open("user_data/category_stats_mgwiktionary.json", "r") as jsonfile:
@@ -50,36 +47,32 @@ class LanguageStatisticsBuilder(object):
             if language.replace(" ", "_") not in data:
                 continue
 
-            lemma = 0
-            for pos in [
-                "Anarana",
-                "Anarana iombonana",
-                "Mpamaritra",
-                "Mpamaritra anarana",
-                "Matoanteny",
-                "Tambinteny",
-                "Fomba fiteny",
-                "Mpampiankin-teny",
-                "Litera",
-            ]:
-                if f"{pos} amin'ny teny {language}".replace(" ", "_") not in data:
-                    continue
-
-                lemma += data[f"{pos} amin'ny teny {language}".replace(" ", "_")]
-
-            form_of = 0
-            for pos in [
-                "Endrik'anarana",
-                "Endri-pamaritra",
-                "Endriky ny matoanteny",
-                "Ova matoanteny",
-                "Rômanizasiona",
-            ]:
-                if f"{pos} amin'ny teny {language}".replace(" ", "_") not in data:
-                    continue
-
-                form_of += data[f"{pos} amin'ny teny {language}".replace(" ", "_")]
-
+            lemma = sum(
+                data[f"{pos} amin'ny teny {language}".replace(" ", "_")]
+                for pos in [
+                    "Anarana",
+                    "Anarana iombonana",
+                    "Mpamaritra",
+                    "Mpamaritra anarana",
+                    "Matoanteny",
+                    "Tambinteny",
+                    "Fomba fiteny",
+                    "Mpampiankin-teny",
+                    "Litera",
+                ]
+                if f"{pos} amin'ny teny {language}".replace(" ", "_") in data
+            )
+            form_of = sum(
+                data[f"{pos} amin'ny teny {language}".replace(" ", "_")]
+                for pos in [
+                    "Endrik'anarana",
+                    "Endri-pamaritra",
+                    "Endriky ny matoanteny",
+                    "Ova matoanteny",
+                    "Rômanizasiona",
+                ]
+                if f"{pos} amin'ny teny {language}".replace(" ", "_") in data
+            )
             entries = lemma + form_of
             table_text += f"""
 |-

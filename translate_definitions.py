@@ -26,10 +26,9 @@ def fetch_word(word, language, part_of_speech):
         "part_of_speech": f"eq.{part_of_speech}",
     }
 
-    resp = requests.get(PgrestServer().server + "/word", params=dict_get_data)
-    data = resp.json()
-    if not (400 <= resp.status_code < 600):
-        if data:
+    resp = requests.get(f"{PgrestServer().server}/word", params=dict_get_data)
+    if data := resp.json():
+        if not (400 <= resp.status_code < 600):
             return data[0]
 
 
@@ -77,9 +76,7 @@ class DefinitionTranslation(object):
             print(pages.json())
             raise DefinitionTranslationError(pages.text)
 
-        pages_as_json = pages.json()
-        for page in pages_as_json:
-            yield page
+        yield from pages.json()
 
     def get_translation(self, text):
         raise NotImplementedError()
@@ -97,7 +94,7 @@ class DefinitionTranslation(object):
         print(url, json)
         request = requests.post(url, json=json)
         if 400 <= request.status_code <= 599:
-            raise DefinitionTranslationError("Unknown error: " + request.text)
+            raise DefinitionTranslationError(f"Unknown error: {request.text}")
 
     def process_definition(self, definition):
         return ENWiktionaryProcessor.refine_definition(definition)[0]
@@ -117,7 +114,7 @@ class DefinitionTranslation(object):
                 for character in "{}[]|":
                     if character in processed_definition:
                         unwanted_character = True
-                        print("unwanted characters : '" + character + "'")
+                        print(f"unwanted characters : '{character}'")
                         break
                 if unwanted_character:
                     continue
@@ -170,7 +167,7 @@ class DefinitionTranslation(object):
 
     def get_word_info_with_additional_data(self, items_per_page, start_from_page=1):
         total_pages = 100
-        url = f"{self.postgrest_url}/word_with_" + self.additional_data_type
+        url = f"{self.postgrest_url}/word_with_{self.additional_data_type}"
         for page_number in range(total_pages):
             print(
                 f"(page {1 + page_number}/{total_pages}) getting {items_per_page} pages from database..."
@@ -188,9 +185,7 @@ class DefinitionTranslation(object):
                 print(pages.json())
                 raise DefinitionTranslationError(pages.text)
 
-            pages_as_json = pages.json()
-            for page in pages_as_json:
-                yield page
+            yield from pages.json()
 
     def get_word_by_id(self, word_id):
         url = f"{self.postgrest_url}/unaggregated_dictionary"
@@ -232,11 +227,11 @@ class DefinitionTranslation(object):
         }
         if language is not None:
             if "," in language:
-                request_parameters["language"] = "in.(" + language + ")"
+                request_parameters["language"] = f"in.({language})"
             else:
-                request_parameters["language"] = "eq." + language
+                request_parameters["language"] = f"eq.{language}"
         if part_of_speech is not None:
-            request_parameters["part_of_speech"] = "eq." + part_of_speech
+            request_parameters["part_of_speech"] = f"eq.{part_of_speech}"
 
         pages = requests.get(url, params=request_parameters)
         if pages.status_code != 200:
@@ -263,40 +258,36 @@ class DefinitionTranslation(object):
 
     @property
     def wordlist(self):
-        if self._wordlist:
-            return self._wordlist
-        else:
+        if not self._wordlist:
             print("Loading words")
             for word in open(f"user_data/list-{self.language}.txt", "r"):
                 word = word.strip()
                 self._wordlist.add(word.lower())
 
             print("Loading complete!")
-            return self._wordlist
+        return self._wordlist
 
     @property
     def malagasy_words_to_link(self):
         if self._words_to_link:
             return self._words_to_link
-        else:
-            print("Loading Malagasy words to link")
-            url = f"{self.postgrest_url}/word"
-            pages = requests.get(
-                url,
-                params={
-                    "language": f"eq.mg",
-                    "part_of_speech": f"in.(ana,mat,mpam)",
-                    "select": f"word",
-                },
-            )
-            if pages.status_code != 200:
-                raise DefinitionTranslationError(pages.status_code)
-            else:
-                self._words_to_link = {
-                    p["word"] for p in pages.json() if len(p["word"]) > 4
-                }
-                print(f"Loading complete! {len(self._words_to_link)} words loaded")
-                return self._words_to_link
+        print("Loading Malagasy words to link")
+        url = f"{self.postgrest_url}/word"
+        pages = requests.get(
+            url,
+            params={
+                "language": "eq.mg",
+                "part_of_speech": "in.(ana,mat,mpam)",
+                "select": "word",
+            },
+        )
+        if pages.status_code != 200:
+            raise DefinitionTranslationError(pages.status_code)
+        self._words_to_link = {
+            p["word"] for p in pages.json() if len(p["word"]) > 4
+        }
+        print(f"Loading complete! {len(self._words_to_link)} words loaded")
+        return self._words_to_link
 
     def get_part_of_speech(self, word_id):
         url = f"{self.postgrest_url}/word"
@@ -310,19 +301,13 @@ class DefinitionTranslation(object):
         words_as_csl = ",".join(words)
         url = f"{self.postgrest_url}/unaggregated_dictionary"
         pages = requests.get(
-            url,
-            params={
-                "word": f"in.({words_as_csl})",
-                "language": f"eq.fr",
-            },
+            url, params={"word": f"in.({words_as_csl})", "language": "eq.fr"}
         )
         if pages.status_code != 200:
             print(pages.json())
             raise DefinitionTranslationError(pages.text)
 
-        pages_as_json = pages.json()
-        for page in pages_as_json:
-            yield page
+        yield from pages.json()
 
     def run(self, word_additional_data_info, counter=0):
         pass
@@ -332,10 +317,8 @@ class DefinitionTranslation(object):
         Publish the translated definition on the target wiki.
         :return:
         """
-        counter = 0
         words = []
-        for word_list_element in self.wordlist:
-            counter += 1
+        for counter, word_list_element in enumerate(self.wordlist, start=1):
             words.append(word_list_element)
             if len(words) > 100:
                 for word_additional_data_info in self.get_word_ids(words):
@@ -370,13 +353,12 @@ class DefinitionTranslation(object):
 
             filename = f"{batch_folder}/batch-{self._batch_file_counter}.csv"
             self._current_file = open(filename, "a")
-        else:
-            if self._current_file_size >= 5000:
-                self._current_file_size = 0
-                self._current_file.close()
-                self._batch_file_counter += 1
-                filename = f"{batch_folder}/batch-{self._batch_file_counter}.csv"
-                self._current_file = open(filename, "a")
+        elif self._current_file_size >= 5000:
+            self._current_file_size = 0
+            self._current_file.close()
+            self._batch_file_counter += 1
+            filename = f"{batch_folder}/batch-{self._batch_file_counter}.csv"
+            self._current_file = open(filename, "a")
 
         print(f'"{word}"/"{word_id}"/"{definitions}"/"{translated_definitions}"')
         if len(definitions) > 0:
@@ -438,7 +420,7 @@ class OpenMtDefinitionTranslation(DefinitionTranslation):
         json = {"text": text}
         request = requests.post(url, json=json)
         if request.status_code != 200:
-            raise DefinitionTranslationError("Unknown error: " + request.text)
+            raise DefinitionTranslationError(f"Unknown error: {request.text}")
         else:
             return request.json()["text"]
 
@@ -471,7 +453,7 @@ class NllbDefinitionTranslation(DefinitionTranslation):
         print(url, json)
         request = requests.get(url, params=json)
         if request.status_code != 200:
-            raise DefinitionTranslationError("Unknown error: " + request.text)
+            raise DefinitionTranslationError(f"Unknown error: {request.text}")
         else:
             return request.json()["translated"]
 

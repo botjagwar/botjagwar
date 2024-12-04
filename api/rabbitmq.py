@@ -74,7 +74,7 @@ class RabbitMqWebService(object):
             if response.status_code == 400:
                 raise RabbitMqError("Data error: " + str(response.json()["error"]))
             else:
-                raise RabbitMqError("Unknown error: " + str(response.text))
+                raise RabbitMqError(f"Unknown error: {response.text}")
 
     def push_to_queue(self, message: dict):
         self.publish(message)

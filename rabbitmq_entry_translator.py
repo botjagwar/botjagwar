@@ -21,7 +21,7 @@ class SimpleEntryTranslatorClientFeeder:
     def on_page_edit(self, **arguments):
         time.sleep(1.0)
         additional_args = {"context": self}
-        arguments.update(additional_args)
+        arguments |= additional_args
         try:
             asyncio.run(self.on_page_edit_async(**arguments))
         except Exception:
@@ -67,10 +67,6 @@ class SimpleEntryTranslatorClientFeeder:
 
 
 if __name__ == "__main__":
-    if len(sys.argv) < 2:
-        service_port = 8000
-    else:
-        service_port = int(sys.argv[1])
-
+    service_port = 8000 if len(sys.argv) < 2 else int(sys.argv[1])
     bot = SimpleEntryTranslatorClientFeeder(host="192.168.1.197", port=service_port)
     bot.run()

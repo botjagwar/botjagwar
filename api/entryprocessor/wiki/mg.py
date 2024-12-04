@@ -35,11 +35,10 @@ class MGWiktionaryProcessor(WiktionaryProcessor):
                 d1 = self.content.find("{{-%s-|%s}}" % (pos, lang)) + len(
                     "{{-%s-|%s}}" % (pos, lang)
                 )
-                d2 = (
+                if d2 := (
                     self.content.find("=={{=", d1) + 1
                     or self.content.find("== {{=", d1) + 1
-                )
-                if d2:
+                ):
                     definition = self.content[d1:d2]
                 else:
                     definition = self.content[d1:]
@@ -56,15 +55,10 @@ class MGWiktionaryProcessor(WiktionaryProcessor):
                         definition = re.sub(
                             "\\[\\[(.*)#(.*)\\|?\\]?\\]?", "\\1", definition
                         )
-                    definition = stripwikitext(definition)
-                    if not definition:
-                        continue
-                    else:
+                    if definition := stripwikitext(definition):
                         entry_definition.append(definition)
 
-                entry_definition = [d for d in entry_definition if len(d) > 1]
-
-                if entry_definition:
+                if entry_definition := [d for d in entry_definition if len(d) > 1]:
                     i = Entry(
                         entry=self.title,
                         part_of_speech=pos.strip(),
