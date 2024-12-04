@@ -20,4 +20,4 @@ jobs:
         pip install pylint
     - name: Analysing the code with pylint
       run: |
-        pylint $(git ls-files '*.py') --errors-only --exit-zero
+        pylint $(git ls-files 'api/*.py') --min-similarity-lines 25 --max-args 10 --max-attributes 100 --max-parents 20 --fail-under 7.72
