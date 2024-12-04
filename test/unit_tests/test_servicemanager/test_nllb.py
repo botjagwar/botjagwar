@@ -16,12 +16,14 @@ class TestNllbDefinitionTranslation(unittest.TestCase):
 
         nllb = NllbDefinitionTranslation("fr")
         nllb.translation_server = "localhost:12020"
-        result = nllb.get_translation("Hello")
+        result = nllb.get_nllb_translation("Hello")
         self.assertEqual(result, "Bonjour")
 
         expected_url = "http://localhost:12020/translate/fra_Latn/eng_Latn"
         expected_params = {"text": "Hello"}
-        mock_get.assert_called_once_with(expected_url, params=expected_params)
+        mock_get.assert_called_once_with(
+            expected_url, params=expected_params, timeout=3600
+        )
 
     @patch("api.servicemanager.nllb.requests.get")
     def test_get_translation_failure(self, mock_get):
