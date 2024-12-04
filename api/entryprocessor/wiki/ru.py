@@ -7,4 +7,4 @@ from .base import WiktionaryProcessor
 class RUWiktionaryProcessor(WiktionaryProcessor):
     @property
     def language(self):
-        return 'ru'
+        return "ru"

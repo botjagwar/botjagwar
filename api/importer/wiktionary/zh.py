@@ -1,39 +1,38 @@
 import re
 
-from api.importer.wiktionary import \
-    SubsectionImporter as BaseSubsectionImporter
+from api.importer.wiktionary import SubsectionImporter as BaseSubsectionImporter
 
 part_of_speech_translation = {
-    '動詞': 'mat',
-    '形容詞': 'mpam',
-    '連詞': 'mpampitohy',
-    '限定詞': 'mpam',
-    '成語': 'fomba fiteny',
-    '短語': 'fomba fiteny',
-    '諺語': 'ohabolana',
-    '數字': 'isa',
-    '名詞': 'ana',
-    '形容詞 noun': 'mpam',
-    '粒子': 'kianteny',
-    '副詞': 'tamb',
-    '根': 'fototeny',
-    '代詞': 'solo-ana',
-    '介詞': 'mp.ank-teny',
-    '收縮': 'fanafohezana',
-    '信': 'litera',
-    '恰當的 noun': 'ana-pr',
-    '字首': 'tovona',
-    '羅馬化': 'rômanizasiona',
-    '後綴': 'tovana',
-    '象徵': 'eva',
-    '分詞': 'ova-mat',
-    '欹': 'tenim-piontanana',
-    '中綴': 'tsofoka',
+    "動詞": "mat",
+    "形容詞": "mpam",
+    "連詞": "mpampitohy",
+    "限定詞": "mpam",
+    "成語": "fomba fiteny",
+    "短語": "fomba fiteny",
+    "諺語": "ohabolana",
+    "數字": "isa",
+    "名詞": "ana",
+    "形容詞 noun": "mpam",
+    "粒子": "kianteny",
+    "副詞": "tamb",
+    "根": "fototeny",
+    "代詞": "solo-ana",
+    "介詞": "mp.ank-teny",
+    "收縮": "fanafohezana",
+    "信": "litera",
+    "恰當的 noun": "ana-pr",
+    "字首": "tovona",
+    "羅馬化": "rômanizasiona",
+    "後綴": "tovana",
+    "象徵": "eva",
+    "分詞": "ova-mat",
+    "欹": "tenim-piontanana",
+    "中綴": "tsofoka",
 }
 
 
 class SubsectionImporter(BaseSubsectionImporter):
-    section_name = ''
+    section_name = ""
     # True if the section contains a number e.g. Etymology 1, Etymology 2, etc.
     numbered = False
     level = 3
@@ -52,7 +51,7 @@ class SubsectionImporter(BaseSubsectionImporter):
                 section = target_subsection_section.group()
                 pos1 = wikipage_.find(section) + len(section)
                 # section end is 2 newlines
-                pos2 = wikipage_.find('\n\n', pos1)
+                pos2 = wikipage_.find("\n\n", pos1)
                 if pos2 != -1:
                     wikipage_ = wikipage_[pos1:pos2]
                 else:
@@ -71,25 +70,26 @@ class SubsectionImporter(BaseSubsectionImporter):
                 # Should there be any of that, copy and adapt the condition.
                 #   I didn't do it here because -- I.M.H.O -- Y.A.G.N.I right now.
                 # My most sincere apologies to perfectionists.
-                if wikipage_.startswith('=\n'):
+                if wikipage_.startswith("=\n"):
                     wikipage_ = wikipage_[2:]
 
-                retrieved_.append(wikipage_.lstrip('\n'))
+                retrieved_.append(wikipage_.lstrip("\n"))
 
             return retrieved_
 
         retrieved = []
         # Retrieving and narrowing to target section
         if self.numbered:
-            number_rgx = ' [1-9]+'
+            number_rgx = " [1-9]+"
         else:
-            number_rgx = ''
+            number_rgx = ""
 
         target_language_section = re.search(
-            '==[ ]?' + self.iso_codes[language] + '[ ]?==', wikipage)
+            "==[ ]?" + self.iso_codes[language] + "[ ]?==", wikipage
+        )
         if target_language_section is not None:
-            section_begin = wikipage.find(str(target_language_section.group(), 'utf8'))
-            section_end = wikipage.find('----', section_begin)
+            section_begin = wikipage.find(str(target_language_section.group(), "utf8"))
+            section_end = wikipage.find("----", section_begin)
             if section_end != -1:
                 lang_section_wikipage = wikipage = wikipage[section_begin:section_end]
             else:
@@ -97,8 +97,14 @@ class SubsectionImporter(BaseSubsectionImporter):
         else:
             return []
 
-        for regex_match in re.findall('=' * self.level + '[ ]?' + self.section_name + number_rgx + '=' * self.level,
-                                      wikipage):
+        for regex_match in re.findall(
+            "=" * self.level
+            + "[ ]?"
+            + self.section_name
+            + number_rgx
+            + "=" * self.level,
+            wikipage,
+        ):
             retrieved += retrieve_subsection(wikipage, regex_match)
             wikipage = lang_section_wikipage
 

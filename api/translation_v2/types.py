@@ -1,8 +1,7 @@
-
 class UntranslatedDefinition(str):
 
     def __repr__(self):
-        return self.__class__.__name__ + '(' + self.__str__() + ')'
+        return self.__class__.__name__ + "(" + self.__str__() + ")"
 
 
 class TranslatedDefinition(str):
@@ -25,13 +24,14 @@ class TranslatedDefinition(str):
 
     def __repr__(self):
         ret = self.__class__.__name__
-        ret += '(' + self + ', '
+        ret += "(" + self + ", "
         if self.synonym:
-            ret += self.synonym + ')'
+            ret += self.synonym + ")"
         else:
-            ret += ')'
+            ret += ")"
 
         return ret
+
 
 class ConvergentTranslation(TranslatedDefinition):
 
@@ -48,5 +48,5 @@ __all__ = [
     "UntranslatedDefinition",
     "TranslatedDefinition",
     "ConvergentTranslation",
-    "FormOfTranslaton"
+    "FormOfTranslaton",
 ]

@@ -2,7 +2,7 @@ from api.parsers import renderers
 
 
 class NonLemma(object):
-    renderer = 'non_lemma'
+    renderer = "non_lemma"
 
     def __init__(self, lemma=None, case=None, number=None, gender=None):
         self.gender = gender
@@ -13,31 +13,28 @@ class NonLemma(object):
     def to_definition(self, language):
         if hasattr(renderers, language):
             renderer_module = getattr(renderers, language)
-            if hasattr(renderer_module, 'render_' + self.renderer):
-                return getattr(
-                    renderer_module,
-                    'render_' +
-                    self.renderer)(self)
+            if hasattr(renderer_module, "render_" + self.renderer):
+                return getattr(renderer_module, "render_" + self.renderer)(self)
             raise AttributeError(
-                f'Renderer function api.parsers.renderers.{language}.{self.renderer} not found!')
+                f"Renderer function api.parsers.renderers.{language}.{self.renderer} not found!"
+            )
         else:
-            raise AttributeError(
-                f'Module api.parsers.renderers.{language} not found!')
+            raise AttributeError(f"Module api.parsers.renderers.{language} not found!")
 
     def to_malagasy_definition(self):
-        return self.to_definition('mg')
+        return self.to_definition("mg")
 
 
 class Romanization(NonLemma):
-    renderer = 'romanization'
+    renderer = "romanization"
 
 
 class AlternativeSpelling(NonLemma):
-    renderer = 'alternative_spelling'
+    renderer = "alternative_spelling"
 
 
 class VerbForm(NonLemma):
-    renderer = 'verb_form'
+    renderer = "verb_form"
     tense = None
     mood = None
     person = None
@@ -52,25 +49,22 @@ class VerbForm(NonLemma):
         number=None,
         case=None,
         gender=None,
-        voice=None):
-        super(
-            VerbForm,
-            self).__init__(
-            lemma=lemma,
-            number=number,
-            case=case,
-            gender=gender)
+        voice=None,
+    ):
+        super(VerbForm, self).__init__(
+            lemma=lemma, number=number, case=case, gender=gender
+        )
         self.voice = voice
         self.tense = tense
         self.mood = mood
         self.person = person
 
     def to_malagasy_definition(self):
-        return self.to_definition('mg')
+        return self.to_definition("mg")
 
 
 class NounForm(NonLemma):
-    renderer = 'noun_form'
+    renderer = "noun_form"
     gender = None
     number = None
     case = None
@@ -78,25 +72,22 @@ class NounForm(NonLemma):
     definite = None
 
     def __init__(
-            self,
-            lemma=None,
-            case=None,
-            number=None,
-            gender=None,
-            definite=None,
-            possessive=None):
-        super(
-            NounForm,
-            self).__init__(
-            lemma=lemma,
-            case=case,
-            number=number,
-            gender=gender)
+        self,
+        lemma=None,
+        case=None,
+        number=None,
+        gender=None,
+        definite=None,
+        possessive=None,
+    ):
+        super(NounForm, self).__init__(
+            lemma=lemma, case=case, number=number, gender=gender
+        )
         self.definite = definite
         self.possessive = possessive
 
     def to_malagasy_definition(self):
-        return self.to_definition('mg')
+        return self.to_definition("mg")
 
 
 class AdjectiveForm(NounForm):

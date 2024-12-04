@@ -2,6 +2,7 @@
 # from .model import Word as WordModel
 # from .model import Definition as DefinitionModel
 
+
 class Word(object):
     def __init__(self, model):
         self.model = model

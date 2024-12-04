@@ -8,7 +8,7 @@ class Autoformat(object):
 
     def __init__(self, wikitext):
         self.text = wikitext
-        self.summaries = ['[[Wiktionary:Firafitry_ny_teny_iditra|Firafitra]]']
+        self.summaries = ["[[Wiktionary:Firafitry_ny_teny_iditra|Firafitra]]"]
 
     # TODO
     def _replace_jereo_template(self):
@@ -16,7 +16,7 @@ class Autoformat(object):
         # ...
         begin_jereo = new_txt.find("{{jereo")
         end_jereo = new_txt.find("}}", begin_jereo)
-        jereo_template = new_txt[begin_jereo:end_jereo + 2]
+        jereo_template = new_txt[begin_jereo : end_jereo + 2]
 
         print((begin_jereo, end_jereo))
 
@@ -30,11 +30,10 @@ class Autoformat(object):
     # TODO
     def _change_pronunciation_call(self):
         new_txt = self.text
-        if new_txt.find('{{pron|'):
-            new_txt = new_txt.replace('{{pron|', '{{fanononana|')
-        if new_txt.find('{{pron X-SAMPA|'):
-            new_txt = new_txt.replace(
-                '{{pron X-SAMPA|', '{{fanononana X-SAMPA|')
+        if new_txt.find("{{pron|"):
+            new_txt = new_txt.replace("{{pron|", "{{fanononana|")
+        if new_txt.find("{{pron X-SAMPA|"):
+            new_txt = new_txt.replace("{{pron X-SAMPA|", "{{fanononana X-SAMPA|")
         if self.text != new_txt:
             self.summaries.append("manova ny fiantsoana ny endrika fanononana")
             self.text = new_txt
@@ -52,8 +51,9 @@ class Autoformat(object):
         self._change_pronunciation_call()
         self._remove_interwikis()
         self._replace_jereo_template()
-        summary_sum = '; '.join(summary for summary in self.summaries)
+        summary_sum = "; ".join(summary for summary in self.summaries)
         return self.text, summary_sum
+
 
 def test():
     new_text = """
@@ -76,5 +76,5 @@ def test():
     print(result)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     test()

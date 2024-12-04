@@ -16,21 +16,21 @@ class Animal(RedisPersistentSingleton):
         super(Animal, self).__init__()
 
     def init_attrs(self):
-        self.noise = 'meow'
+        self.noise = "meow"
         self.legs = 4
-        self.colour = 'white'
+        self.colour = "white"
         self.speed = 12
 
     def upgrade_speed(self):
         self.speed *= 1.05
 
     def downgrade_speed(self):
-        self.speed *= .95
+        self.speed *= 0.95
 
     def run(self):
-        print('speed:', self.speed)
-        print('noise', self.noise)
-        print('legs', self.legs)
+        print("speed:", self.speed)
+        print("noise", self.noise)
+        print("legs", self.legs)
 
 
 class TestDictionary(TestCase):
@@ -41,28 +41,28 @@ class TestDictionary(TestCase):
 
     def test_key_insert(self):
         d = self.test_class()
-        d['1298'] = 100
-        d['1299'] = Animal()
-        self.assertIsInstance(d['1299'], Animal)
-        self.assertIsInstance(d['1298'], int)
+        d["1298"] = 100
+        d["1299"] = Animal()
+        self.assertIsInstance(d["1299"], Animal)
+        self.assertIsInstance(d["1298"], int)
 
     def test_key_delete(self):
         d = self.test_class()
-        d['1298'] = 100
-        del d['1298']
+        d["1298"] = 100
+        del d["1298"]
         with self.assertRaises(KeyError):
-            print(d['1298'])
+            print(d["1298"])
 
     def test_multiple_object(self):
         d1 = self.test_class()
-        d1['1298'] = 100
-        d1['1299'] = [1, 2, 3, 4, 5, 6]
+        d1["1298"] = 100
+        d1["1299"] = [1, 2, 3, 4, 5, 6]
         d2 = self.test_class()
-        d2['1298'] = 12300
-        d2['1299'] = {'asdlk'}
+        d2["1298"] = 12300
+        d2["1299"] = {"asdlk"}
 
-        self.assertNotEqual(d1['1298'], d2['1299'])
-        self.assertNotEqual(d1['1298'], d2['1299'])
+        self.assertNotEqual(d1["1298"], d2["1299"])
+        self.assertNotEqual(d1["1298"], d2["1299"])
 
 
 class TestRedisDictionary(TestDictionary):
@@ -79,8 +79,8 @@ class TestPersistentSingleton(TestCase):
     @classmethod
     def tearDownClass(cls):
         config = BotjagwarConfig()
-        host = config.get('host', section='redis')
-        password = config.get('password', section='redis')
+        host = config.get("host", section="redis")
+        password = config.get("password", section="redis")
         instance = redis.Redis(host=host, password=password)
         instance.flushall()
 

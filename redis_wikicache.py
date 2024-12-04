@@ -27,22 +27,22 @@ class RedisSite(object):
         self,
         language: str,
         wiki: str,
-        host='default',
+        host="default",
         port=6379,
-        password='default',
+        password="default",
         offline=False,
-        download_dump_if_not_exists=True
+        download_dump_if_not_exists=True,
     ):
         self.offline = offline
         self.language = language
         self.wiki = wiki
-        if host == 'default':
-            self.host = config.get('host', 'redis')
+        if host == "default":
+            self.host = config.get("host", "redis")
         else:
             self.host = host
 
-        if password == 'default':
-            self.password = config.get('password', 'redis')
+        if password == "default":
+            self.password = config.get("password", "redis")
             if not self.password:
                 self.password = None
         else:
@@ -52,9 +52,13 @@ class RedisSite(object):
         self.download_dump_if_not_exists = download_dump_if_not_exists
 
     def all_pages(self):
-        for key in self.instance.scan_iter(match=f'{self.wiki}.{self.language}/*', count=1000):
-            page_name = str(key, encoding='utf8').replace(f'{self.wiki}.{self.language}/', '')
-            yield RedisPage(RedisSite(self.language, 'wiktionary'), page_name)
+        for key in self.instance.scan_iter(
+            match=f"{self.wiki}.{self.language}/*", count=1000
+        ):
+            page_name = str(key, encoding="utf8").replace(
+                f"{self.wiki}.{self.language}/", ""
+            )
+            yield RedisPage(RedisSite(self.language, "wiktionary"), page_name)
 
     @property
     def lang(self):
@@ -64,48 +68,49 @@ class RedisSite(object):
     @run_once
     def instance(self):
         return redis.Redis(
-            self.host,
-            self.port,
-            password=self.password,
-            socket_timeout=3)
+            self.host, self.port, password=self.password, socket_timeout=3
+        )
 
     def random_page(self):
         rkey = self.instance.randomkey()
-        while not rkey.startswith(
-            bytes(
-                f'{self.wiki}.{self.language}/',
-                'utf8')):
+        while not rkey.startswith(bytes(f"{self.wiki}.{self.language}/", "utf8")):
             rkey = self.instance.randomkey()
 
-        page_name = str(
-            rkey, encoding='utf8').replace(
-            f'{self.wiki}.{self.language}/', '')
+        page_name = str(rkey, encoding="utf8").replace(
+            f"{self.wiki}.{self.language}/", ""
+        )
         return RedisPage(self, page_name)
 
     def download_dump(self):
-        url = f'https://dumps.wikimedia.org/{self.language}wiktionary/latest' \
-              f'/{self.language}wiktionary-latest-pages-articles.xml.bz2'
-        dump_dir = 'user_data/dumps'
-        dump_path = dump_dir + f'/{self.language}wikt.xml'
+        url = (
+            f"https://dumps.wikimedia.org/{self.language}wiktionary/latest"
+            f"/{self.language}wiktionary-latest-pages-articles.xml.bz2"
+        )
+        dump_dir = "user_data/dumps"
+        dump_path = dump_dir + f"/{self.language}wikt.xml"
 
         if not os.path.isdir(dump_dir):
             os.mkdir(dump_dir)
-        if not os.path.isfile(dump_path + '.bz2'):
-            print('File is absent. Downloading from dumps.wikimedia.org. This may take a while...')
+        if not os.path.isfile(dump_path + ".bz2"):
+            print(
+                "File is absent. Downloading from dumps.wikimedia.org. This may take a while..."
+            )
             with requests.get(url, stream=True) as request:
                 request.raise_for_status()
-                with open(dump_path + '.bz2', 'wb') as f:
+                with open(dump_path + ".bz2", "wb") as f:
                     for chunk in request.iter_content(chunk_size=8192):
                         f.write(chunk)
-            print('Download complete.')
+            print("Download complete.")
 
-        print('Extracting dump file...')
-        with open(dump_path, 'wb') as xml_file, bz2.BZ2File(dump_path + '.bz2', 'rb') as file:
-            for data in iter(lambda: file.read(100 * 1024), b''):
+        print("Extracting dump file...")
+        with open(dump_path, "wb") as xml_file, bz2.BZ2File(
+            dump_path + ".bz2", "rb"
+        ) as file:
+            for data in iter(lambda: file.read(100 * 1024), b""):
                 xml_file.write(data)
 
     @separate_process
-    def load_xml_dump(self, download=False, dump_path='user_data/dumps/enwikt.xml'):
+    def load_xml_dump(self, download=False, dump_path="user_data/dumps/enwikt.xml"):
         if self.download_dump_if_not_exists or download:
             self.download_dump()
 
@@ -117,24 +122,24 @@ class RedisSite(object):
             except redis.ConnectionError as error:
                 print(error)
             except Exception as error:
-                print('Unknown error ', error)
+                print("Unknown error ", error)
 
     def push_page(self, title: str, content: str):
         if title is not None and content is not None:
             try:
-                self.instance.set(f'{self.wiki}.{self.language}/{title}', content)
+                self.instance.set(f"{self.wiki}.{self.language}/{title}", content)
             except redis.exceptions.ConnectionError as error:
                 print(error)
 
     def __str__(self):
-        return f'{self.wiki}.{self.language}'
+        return f"{self.wiki}.{self.language}"
 
 
 class RedisPage(object):
     max_redirection_depth = 10  # number of redirection link following until we consider the page as non-existent
 
-    def __init__(self, site: RedisSite, title: str, offline='automatic'):
-        if offline == 'automatic':
+    def __init__(self, site: RedisSite, title: str, offline="automatic"):
+        if offline == "automatic":
             self.offline = site.offline
         else:
             assert isinstance(offline, bool)
@@ -147,19 +152,20 @@ class RedisPage(object):
         return self._title
 
     def __repr__(self):
-        return f'Page({self.site}/{self.title()})'
+        return f"Page({self.site}/{self.title()})"
 
     def isEmpty(self):
-        return self.get() == ''
+        return self.get() == ""
 
-    @retry_on_fail((redis.ConnectionError), retries=5, time_between_retries=.5)
+    @retry_on_fail((redis.ConnectionError), retries=5, time_between_retries=0.5)
     def get(self):
         if self._title is None:
-            return ''
+            return ""
 
         try:
             cache_contents = self.site.instance.get(
-                f'{self.site.wiki}.{self.site.language}/{self._title}')
+                f"{self.site.wiki}.{self.site.language}/{self._title}"
+            )
         except redis.exceptions.ConnectionError:
             cache_contents = None
 
@@ -173,20 +179,23 @@ class RedisPage(object):
                     return content
                 else:
                     raise NoPage(
-                        f'Page {self._title} at {self.site} not found '
-                        f'neither in-redis nor on-wiki')
+                        f"Page {self._title} at {self.site} not found "
+                        f"neither in-redis nor on-wiki"
+                    )
             else:
                 raise NoPage(
-                    f'Page  {self._title} at {self.site} not found in redis. '
-                    f'Offline mode is OFF so no on-wiki fetching.')
+                    f"Page  {self._title} at {self.site} not found in redis. "
+                    f"Offline mode is OFF so no on-wiki fetching."
+                )
         else:
-            cache_contents = str(cache_contents, encoding='utf8')
+            cache_contents = str(cache_contents, encoding="utf8")
             return cache_contents
 
     def exists(self):
         try:
             cache_contents = self.site.instance.get(
-                f'{self.site.wiki}.{self.site.language}/{self._title}')
+                f"{self.site.wiki}.{self.site.language}/{self._title}"
+            )
         except redis.exceptions.ConnectionError:
             cache_contents = None
         if not cache_contents:
@@ -213,6 +222,7 @@ class RedisPage(object):
 
     def namespace(self):
         if self.offline:
+
             class Namespace(object):
                 content = self.get()
 
@@ -221,8 +231,9 @@ class RedisPage(object):
             wikisite = pywikibot.Site(self.site.language, self.site.wiki)
             wikipage = pywikibot.Page(wikisite, self._title)
             try:
-                return getattr(wikipage, 'namespace')()
+                return getattr(wikipage, "namespace")()
             except pywikibot.exceptions.InvalidTitleError:
+
                 class Namespace(object):
                     content = self.get()
 
@@ -235,7 +246,7 @@ class RedisPage(object):
             except pywikibot.exceptions.IsRedirectPageError:
                 return True
             else:
-                return '#REDIRECT [[' in content
+                return "#REDIRECT [[" in content
         else:
             if not self.offline:
                 wikisite = pywikibot.Site(self.site.language, self.site.wiki)
@@ -252,16 +263,18 @@ class RedisPage(object):
             return getattr(wikipage, item)
 
 
-if __name__ == '__main__':
-    print("""
+if __name__ == "__main__":
+    print(
+        """
     Download the en.wiktionary page dumps,
     split it into several chunks (e.g. using split) and run this script.
     All en.wiktionary pages will have their latest version uploaded in your Redis.
     Using RedisSite and RedisPage, you'll have a much faster read and offline access.
-    """)
+    """
+    )
     language = sys.argv[1]
-    site = RedisSite(language, 'wiktionary', download_dump_if_not_exists=True)
-    site.load_xml_dump(dump_path=f'user_data/dumps/{language}wikt.xml')
+    site = RedisSite(language, "wiktionary", download_dump_if_not_exists=True)
+    site.load_xml_dump(dump_path=f"user_data/dumps/{language}wikt.xml")
     # site.load_xml_dump('user_data/dumps/enwikt_2.xml')
     # site.load_xml_dump('user_data/dumps/enwikt_3.xml')
     # site.load_xml_dump('user_data/dumps/enwikt_4.xml')

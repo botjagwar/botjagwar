@@ -9,7 +9,7 @@ class Fixer(object):
         raise NotImplementedError()
 
     def run(self):
-        for page in get_pages_from_category('mg', 'Pejy ahitana dikan-teny'):
+        for page in get_pages_from_category("mg", "Pejy ahitana dikan-teny"):
             self.run_fixer(page)
 
 
@@ -22,72 +22,82 @@ class TranslationFixer(Fixer):
         :param page:
         :return:
         """
-        section_template = '{{-dika-}}'
+        section_template = "{{-dika-}}"
         text = page.get()
-        print(f'>>> {page.title()} <<< ')
+        print(f">>> {page.title()} <<< ")
 
         if section_template not in text:
             return
 
-        if '{{}} :' not in text:
+        if "{{}} :" not in text:
             return
 
-        lines = text.split('\n')
-        kept_lines, deleted_lines = self.remove_between_lines(lines, section_template, '{{}} :')
+        lines = text.split("\n")
+        kept_lines, deleted_lines = self.remove_between_lines(
+            lines, section_template, "{{}} :"
+        )
         pos = self.get_part_of_speech(text)
         convergent_translations = self.fetch_convergent_translations(page.title(), pos)
-        translation_section = '{{-dika-}}\n'
+        translation_section = "{{-dika-}}\n"
         for language_code, translations in convergent_translations:
-            line = '# {{%s}} : ' % language_code
+            line = "# {{%s}} : " % language_code
             for translation in translations:
-                line += '{{dikan-teny|' + translation['word'] + '|' + translation['language'] + '}}, '
-            line = line.strip(', ')
-            line += '\n'
+                line += (
+                    "{{dikan-teny|"
+                    + translation["word"]
+                    + "|"
+                    + translation["language"]
+                    + "}}, "
+                )
+            line = line.strip(", ")
+            line += "\n"
             translation_section += line
 
-        new_text = text.replace('\n'.join(deleted_lines), translation_section)
+        new_text = text.replace("\n".join(deleted_lines), translation_section)
 
         translations = len(convergent_translations)
         print(f"{translations} translations suggested.")
         pywikibot.showDiff(text, new_text)
         if translations:
-            summary = 'Nanitsy dikan-teny'
+            summary = "Nanitsy dikan-teny"
         else:
-            summary = 'Nanitsy fizarana sy ny mpitazon-toerana'
+            summary = "Nanitsy fizarana sy ny mpitazon-toerana"
 
         page.put(new_text, summary)
 
     @staticmethod
     def get_part_of_speech(content):
-        for pos in ['ana', 'mat', 'mpam']:
-            if f'-{pos}-|mg' in content:
+        for pos in ["ana", "mat", "mpam"]:
+            if f"-{pos}-|mg" in content:
                 return pos
-        if '-verb-|mg' in content:
-            return 'mat'
-        if '-nom-|mg' in content:
-            return 'ana'
-        if '-adj-|mg' in content:
-            return 'mpam'
-        if '-mpam-ana-|mg' in content:
-            return 'mpam'
-        return 'ana'
+        if "-verb-|mg" in content:
+            return "mat"
+        if "-nom-|mg" in content:
+            return "ana"
+        if "-adj-|mg" in content:
+            return "mpam"
+        if "-mpam-ana-|mg" in content:
+            return "mpam"
+        return "ana"
 
     @staticmethod
     def fetch_convergent_translations(word, part_of_speech):
         parameters = {
-            'part_of_speech': f'eq.{part_of_speech}',
-            'select': 'word,language,part_of_speech',
-            'suggested_definition': f'eq.{word}',
+            "part_of_speech": f"eq.{part_of_speech}",
+            "select": "word,language,part_of_speech",
+            "suggested_definition": f"eq.{word}",
         }
 
-        rq = requests.get('http://localhost:8100/convergent_translations', params=parameters)
+        rq = requests.get(
+            "http://localhost:8100/convergent_translations", params=parameters
+        )
         convergent_translations_json = rq.json()
         convergent_translations = {}
         for data in convergent_translations_json:
-            if data['language'] in convergent_translations:
-                convergent_translations[data['language']].append(data)
+            if data["language"] in convergent_translations:
+                convergent_translations[data["language"]].append(data)
             else:
-                convergent_translations[data['language']] = [data]
+                convergent_translations[data["language"]] = [data]
 
         return sorted(convergent_translations.items())
 
@@ -117,7 +127,7 @@ class AnagramFixer(Fixer):
         pass
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     bot = TranslationFixer()
     try:
         bot.run()

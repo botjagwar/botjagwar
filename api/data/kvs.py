@@ -11,24 +11,29 @@ class KeyValueStoreAPI(object):
         del self.kvstore
 
     def set_identifier(self, class_):
-        self.identifier = class_.__name__ + '/' + str(uuid4()) + '/'
+        self.identifier = class_.__name__ + "/" + str(uuid4()) + "/"
 
     def cache_value(self, value):
         def cache_value_wrapper(f):
             def wrapper(*args, **kwargs):
-                key = str(self.identifier) + 'cache/' + str(value) + \
-                    '_'.join([str(s) for s in args[1:]])
+                key = (
+                    str(self.identifier)
+                    + "cache/"
+                    + str(value)
+                    + "_".join([str(s) for s in args[1:]])
+                )
                 if key not in self.kvstore:
                     v = f(*args, **kwargs)
                     self._set_attribute(key, pickle.dumps(v))
-                    print('funccall', key, v)
+                    print("funccall", key, v)
                     return v
 
                 v = pickle.loads(self.kvstore[key])
-                print('kvstore', key, v)
+                print("kvstore", key, v)
                 return
 
             return wrapper
+
         print(self.kvstore)
         return cache_value_wrapper
 
@@ -37,14 +42,14 @@ class KeyValueStoreAPI(object):
         if data is not None:
             return data
 
-        raise KeyError(key, ' was not found.')
+        raise KeyError(key, " was not found.")
 
     def _has_key(self, key):
         return key in self.kvstore
 
     def get_attribute(self):
         def wrapper(objekt, attribute):
-            key = str(self.identifier) + 'attribute/' + str(attribute)
+            key = str(self.identifier) + "attribute/" + str(attribute)
             return pickle.loads(self._get_attribute(key))
 
         return wrapper
@@ -54,10 +59,11 @@ class KeyValueStoreAPI(object):
 
     def set_attribute(self):
         def wrapper(objekt, attribute, value):
-            key = str(self.identifier) + 'attribute/' + attribute
+            key = str(self.identifier) + "attribute/" + attribute
             value = value
             self._set_attribute(key, pickle.dumps(value))
             return None
+
         return wrapper
 
 

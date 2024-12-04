@@ -14,16 +14,14 @@ udata = "/opt/botjagwar/user_data/milestones"
 cdata = "/opt/botjagwar/conf/list_wikis/langs"
 
 possible_errors = [requests.exceptions.ConnectionError]
-requests.get = retry_on_fail(
-    possible_errors,
-    retries=5,
-    time_between_retries=.4)(
-        requests.get)
+requests.get = retry_on_fail(possible_errors, retries=5, time_between_retries=0.4)(
+    requests.get
+)
 
 
 def get_saved_state():
     try:
-        f = open(udata + "/news_stats", 'rb')
+        f = open(udata + "/news_stats", "rb")
         r = pickle.load(f)
         f.close()
         return r
@@ -35,21 +33,21 @@ def get_saved_state():
 def get_new_state():
     lister = Wikilister()
     new_state = []
-    for site in ['wikipedia', 'wiktionary']:
+    for site in ["wikipedia", "wiktionary"]:
         for lang in lister.getLangs(site):
-            urlstr = 'https://%s.%s.org/' % (lang, site)
-            urlstr += 'w/api.php?action=query&meta=siteinfo&format=json&siprop=statistics&continue'
+            urlstr = "https://%s.%s.org/" % (lang, site)
+            urlstr += "w/api.php?action=query&meta=siteinfo&format=json&siprop=statistics&continue"
             try:
                 stat_page = requests.get(urlstr).json()
             except Exception as exc:
-                print('Error while trying to get URL', exc)
+                print("Error while trying to get URL", exc)
                 continue
 
             for i in range(5):
                 stat_json = ""
                 try:
                     stat_json = stat_page
-                    p = stat_json['query']['statistics']
+                    p = stat_json["query"]["statistics"]
                     wiki_state = (lang, site, p)
                     print(wiki_state)
                     new_state.append(wiki_state)
@@ -62,17 +60,17 @@ def get_new_state():
 
 
 def save_state(state):
-    f = open(udata + "/news_stats", 'wb')
+    f = open(udata + "/news_stats", "wb")
     pickle.dump(state, f)
     f.close()
 
 
 def translate_json_keyword(json_keyword):
     words = {
-        "articles": 'pejim-botoatiny',
-        "pages": 'pejy rehetra',
-        'users': 'mpikambana',
-        'edits': 'fiovana',
+        "articles": "pejim-botoatiny",
+        "pages": "pejy rehetra",
+        "users": "mpikambana",
+        "edits": "fiovana",
     }
     try:
         return words[json_keyword]
@@ -100,30 +98,37 @@ def get_milestones(old_state, new_state):
 
                 if s1_pow10 != s2_pow10:
                     if s1_pow10 <= s2_pow10:  # milestone 1
-                        ms_type = 'over'
+                        ms_type = "over"
                     elif s1_pow10 > s2_pow10:  # milestone 2
-                        ms_type = 'below'
+                        ms_type = "below"
                 else:
                     if s1_1st_digit > s2_1st_digit:  # milestone 3
-                        ms_type = 'below'
+                        ms_type = "below"
                     elif s1_1st_digit < s2_1st_digit:  # milestone 4
-                        ms_type = 'over'
+                        ms_type = "over"
 
-                if ms_type != '':
-                    yield state_1[0], state_1[1], ms_type, s2_1st_digit * 10 ** s2_pow10, column
+                if ms_type != "":
+                    yield state_1[0], state_1[
+                        1
+                    ], ms_type, s2_1st_digit * 10**s2_pow10, column
 
     for s2 in new_state:
         if not old_state:
-            s1 = (s2[0], s2[1], {
-                'articles': 0,
-                'jobs': 0,
-                'users': 0,
-                'admins': 0,
-                'edits': 0,
-                'activeusers': 0,
-                'images': 0,
-                'queued-massmessages': 0,
-                'pages': 0})
+            s1 = (
+                s2[0],
+                s2[1],
+                {
+                    "articles": 0,
+                    "jobs": 0,
+                    "users": 0,
+                    "admins": 0,
+                    "edits": 0,
+                    "activeusers": 0,
+                    "images": 0,
+                    "queued-massmessages": 0,
+                    "pages": 0,
+                },
+            )
             for s_diff in states_diff(s1, s2):
                 yield s_diff
         else:
@@ -134,11 +139,11 @@ def get_milestones(old_state, new_state):
 
 def site_to_wiki(site):
     sites = {
-        'wiktionary': 'wikt',
-        'wikipedia': 'w',
-        'wikibooks': 'b',
-        'wikisource': 's',
-        'wikiquote': 'q',
+        "wiktionary": "wikt",
+        "wikipedia": "w",
+        "wikibooks": "b",
+        "wikisource": "s",
+        "wikiquote": "q",
     }
     try:
         return sites[site]
@@ -156,11 +161,15 @@ def render_announce(milestone):
         raise ValueError("Can't render that announcement.")
 
     if milestone[2] == "over":
-        return "* Ny isan'ny %s ao amin'i [[%s|%s.%s]] dia mihoatra ny {{formatnum:%s}}." % (
-            item_type, link, milestone[0], milestone[1], milestone[3])
+        return (
+            "* Ny isan'ny %s ao amin'i [[%s|%s.%s]] dia mihoatra ny {{formatnum:%s}}."
+            % (item_type, link, milestone[0], milestone[1], milestone[3])
+        )
     elif milestone[2] == "below":
-        return "* Ny isan'ny %s ao amin'i [[%s|%s.%s]] dia tafidina ho latsaka ny {{formatnum:%s}}." % (
-            item_type, link, milestone[0], milestone[1], milestone[3])
+        return (
+            "* Ny isan'ny %s ao amin'i [[%s|%s.%s]] dia tafidina ho latsaka ny {{formatnum:%s}}."
+            % (item_type, link, milestone[0], milestone[1], milestone[3])
+        )
 
 
 def main():
@@ -177,7 +186,8 @@ def main():
         "Septambra",
         "Oktobra",
         "Novambra",
-        "Desambra"]
+        "Desambra",
+    ]
     old = get_saved_state()
     new = get_new_state()
     ms = get_milestones(old, new)
@@ -197,11 +207,8 @@ def main():
 
     ct_date = "%d %s %d" % (ct_time[2], months[ct_time[1]], ct_time[0])
     page = pywikibot.Page(
-        pywikibot.Site(
-            "mg",
-            "wikipedia"),
-        "Wikipedia:Vaovao Wikimedia/%d" %
-        ct_time[0])
+        pywikibot.Site("mg", "wikipedia"), "Wikipedia:Vaovao Wikimedia/%d" % ct_time[0]
+    )
     news = "\n; %s\n%s" % (ct_date, retstr)
     newsfile = open("/tmp/%s" % ct_date, "w")
     if len(old) != 0:
@@ -220,5 +227,5 @@ def main():
     newsfile.close()
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

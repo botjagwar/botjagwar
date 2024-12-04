@@ -6,9 +6,9 @@ import time
 import pywikibot
 import requests
 
-data_file = '/opt/botjagwar/conf/list_wikis/'
+data_file = "/opt/botjagwar/conf/list_wikis/"
 try:
-    current_user = "%s" % pywikibot.config.usernames['wiktionary']['mg']
+    current_user = "%s" % pywikibot.config.usernames["wiktionary"]["mg"]
 except KeyError:
     current_user = "test"
 
@@ -18,14 +18,14 @@ class Wikilister(object):
         self.test = test
 
     def getLangs(self, site):
-        dump = open(data_file + 'listof%s.txt' % site, 'r').read()
-        print((data_file + 'listof%s.txt' % site))
+        dump = open(data_file + "listof%s.txt" % site, "r").read()
+        print((data_file + "listof%s.txt" % site))
 
         wikiregex = re.findall(
-            '([a-z|\\-]+).%s.org/wiki/Special:Recentchanges' %
-            site, dump)
+            "([a-z|\\-]+).%s.org/wiki/Special:Recentchanges" % site, dump
+        )
         if len(wikiregex) == 0:
-            wikiregex = re.findall('\\{\\{fullurl:([a-z|\\-]+):Special', dump)
+            wikiregex = re.findall("\\{\\{fullurl:([a-z|\\-]+):Special", dump)
         print(wikiregex)
         for lang in wikiregex:
             yield lang
@@ -35,8 +35,10 @@ class Wikilister(object):
         i = 0
         for lang in self.getLangs(site):
             # Getting and formatting statistics JSON
-            urlstr = 'https://%s.%s.org/w/api.php?action=query&meta=siteinfo&format=json&siprop=statistics&continue' % (
-                lang, site)
+            urlstr = (
+                "https://%s.%s.org/w/api.php?action=query&meta=siteinfo&format=json&siprop=statistics&continue"
+                % (lang, site)
+            )
             resp = requests.get(urlstr)
             if resp.status_code != 200:
                 continue
@@ -45,21 +47,25 @@ class Wikilister(object):
             except json.decoder.JSONDecodeError:
                 continue
 
-            m = stats['query']['statistics']
-            e = [int(m['articles']),
-                 int(m['pages']),
-                 int(m['edits']),
-                 int(m['users']),
-                 int(m['activeusers']),
-                 int(m['admins']),
-                 int(m['images']),
-                 lang,
-                 site]
+            m = stats["query"]["statistics"]
+            e = [
+                int(m["articles"]),
+                int(m["pages"]),
+                int(m["edits"]),
+                int(m["users"]),
+                int(m["activeusers"]),
+                int(m["admins"]),
+                int(m["images"]),
+                lang,
+                site,
+            ]
             articles, pages, edits, users, activeusers, admins, images, lang, site = e
 
             # words per page calculation
-            if float(m['articles']) != 0:
-                words_p_article = float(m["cirrussearch-article-words"])/float(m['articles'])
+            if float(m["articles"]) != 0:
+                words_p_article = float(m["cirrussearch-article-words"]) / float(
+                    m["articles"]
+                )
             else:
                 words_p_article = 0
 
@@ -67,31 +73,43 @@ class Wikilister(object):
 
             # Depth calculation
             try:
-                depth = (edits / pages) * \
-                    ((float(pages) - articles) / articles) ** 2.
+                depth = (edits / pages) * ((float(pages) - articles) / articles) ** 2.0
                 if depth > 300 and articles < 100000:
-                    depth = '-'
+                    depth = "-"
                 else:
                     depth = "%.2f" % depth
             except ZeroDivisionError:
-                depth = '-'
+                depth = "-"
             e.append(depth)
             datas.append(e)
 
             i += 1
-            print(('%s >'
-                   ' lahatsoratra:%d;'
-                   ' pejy:%d;'
-                   ' fanovana:%d;'
-                   ' mpikambana:%d;'
-                   ' mavitrika:%d;'
-                   ' mpandrindra:%d;'
-                   ' sary:%d;'
-                   ' teny:%2.2f;'
-                   ' halalina:%s ' % (
-                       lang, articles, pages, edits, users,
-                       activeusers, admins, images, words_p_article, depth
-                   )))
+            print(
+                (
+                    "%s >"
+                    " lahatsoratra:%d;"
+                    " pejy:%d;"
+                    " fanovana:%d;"
+                    " mpikambana:%d;"
+                    " mavitrika:%d;"
+                    " mpandrindra:%d;"
+                    " sary:%d;"
+                    " teny:%2.2f;"
+                    " halalina:%s "
+                    % (
+                        lang,
+                        articles,
+                        pages,
+                        edits,
+                        users,
+                        activeusers,
+                        admins,
+                        images,
+                        words_p_article,
+                        depth,
+                    )
+                )
+            )
 
         # Sort
         datas.sort(reverse=True)
@@ -99,15 +117,15 @@ class Wikilister(object):
 
     def wikitext(self, e, wiki):
         total = {
-            'pages': 0,
-            'allpages': 0,
-            'edits': 0,
-            'admins': 0,
-            'activeusers': 0,
-            'users': 0,
-            'files': 0,
+            "pages": 0,
+            "allpages": 0,
+            "edits": 0,
+            "admins": 0,
+            "activeusers": 0,
+            "users": 0,
+            "files": 0,
         }
-        content = ("""
+        content = """
 <small><center>Lisitra nohavaozina ny {{subst:CURRENTDAY}} {{subst:CURRENTMONTHNAME}} {{subst:CURRENTYEAR}}, tamin'ny {{subst:#time: H:i}} UTC</center></small>
 {|class="wikitable sortable" border="1" cellpadding="2" cellspacing="0" style="width:100%; background: #f9f9f9; border: 1px solid #aaaaaa; border-collapse: collapse; white-space: nowrap; text-align: center"
 |-
@@ -123,40 +141,67 @@ class Wikilister(object):
 ! Sary
 ! Isan-jato
 ! Teny/pejy
-! Halalim-pejy""")
+! Halalim-pejy"""
         i = 0
         # total = (0,0,0,0,0,0)
         for wikistats_data in e:
             print(wikistats_data)
-            articles, pages, edits, users, activeusers, admins, images, lang, site, words_per_page, depth = wikistats_data
-            total['pages'] += articles
-            total['allpages'] += pages
-            total['edits'] += edits
-            total['admins'] += admins
-            total['users'] += users
-            total['activeusers'] += activeusers
-            total['files'] += images
+            (
+                articles,
+                pages,
+                edits,
+                users,
+                activeusers,
+                admins,
+                images,
+                lang,
+                site,
+                words_per_page,
+                depth,
+            ) = wikistats_data
+            total["pages"] += articles
+            total["allpages"] += pages
+            total["edits"] += edits
+            total["admins"] += admins
+            total["users"] += users
+            total["activeusers"] += activeusers
+            total["files"] += images
 
         for wikistats_data in e:
-            articles, pages, edits, users, activeusers, admins, images, lang, site, words_per_page, depth = wikistats_data
+            (
+                articles,
+                pages,
+                edits,
+                users,
+                activeusers,
+                admins,
+                images,
+                lang,
+                site,
+                words_per_page,
+                depth,
+            ) = wikistats_data
             wikistats_data = {
-                'articles': articles,
-                'pages': pages,
-                'edits': edits,
-                'users': users,
-                'activeusers': activeusers,
-                'admins': admins,
-                'images': images,
-                'language': lang,
-                'wiki': site,
-                'words_per_page': "{{formatnum:%2.2f}}" % words_per_page,
-                'depth': depth
+                "articles": articles,
+                "pages": pages,
+                "edits": edits,
+                "users": users,
+                "activeusers": activeusers,
+                "admins": admins,
+                "images": images,
+                "language": lang,
+                "wiki": site,
+                "words_per_page": "{{formatnum:%2.2f}}" % words_per_page,
+                "depth": depth,
             }
             i += 1
-            isanjato = float(float(100 * articles) / total['pages'])
-            content += ("""
+            isanjato = float(float(100 * articles) / total["pages"])
+            content += (
+                """
 |- style="text-align: right;"
-| """ + str(i) + """
+| """
+                + str(i)
+                + """
 | [[:w:Fiteny {{%(language)s}}|{{%(language)s}}]]
 | [//%(language)s.%(wiki)s.org/wiki/ %(language)s]
 | [//%(language)s.%(wiki)s.org/w/api.php?action=query&meta=siteinfo&format=xml&siprop=statistics '''{{formatnum:%(articles)d}}''']
@@ -166,14 +211,20 @@ class Wikilister(object):
 | [//%(language)s.%(wiki)s.org/wiki/Special:Listusers {{formatnum:%(users)d}}]
 | [//%(language)s.%(wiki)s.org/wiki/Special:ActiveUsers {{formatnum:%(activeusers)d}}]
 | [//%(language)s.%(wiki)s.org/wiki/Special:Imagelist {{formatnum:%(images)d}}]
-| {{formatnum:""" % wikistats_data + """%2.2f""" % isanjato + """}}
+| {{formatnum:"""
+                % wikistats_data
+                + """%2.2f""" % isanjato
+                + """}}
 | %(words_per_page)s
 | %(depth)s
-""" % wikistats_data)
+"""
+                % wikistats_data
+            )
         content += "\n\n|}\n\n"
         content += """
 {|class="wikitable sortable" border="1" cellpadding="2" cellspacing="0" style="width:100%; background: #f9f9f9; border: 1px solid #aaaaaa; border-collapse: collapse; white-space: nowrap; text-align: center"""
-        content += """
+        content += (
+            """
 |-
 !
 ! Pejim-botoatiny
@@ -192,7 +243,9 @@ class Wikilister(object):
 | '''{{formatnum:%(users)d}}'''
 | '''{{formatnum:%(activeusers)d}}'''
 | '''{{formatnum:%(files)d}}'''
-""" % total
+"""
+            % total
+        )
         content += """
 |}"""
 
@@ -201,13 +254,13 @@ class Wikilister(object):
                 break
             try:
                 page = pywikibot.Page(
-                    pywikibot.Site(
-                        'mg', 'wiktionary'), 'Mpikambana:%s/Lisitry ny %s/tabilao' %
-                    (current_user, wiki))
-                page.put(content, 'Rôbô : fanavaozana ny statistika')
+                    pywikibot.Site("mg", "wiktionary"),
+                    "Mpikambana:%s/Lisitry ny %s/tabilao" % (current_user, wiki),
+                )
+                page.put(content, "Rôbô : fanavaozana ny statistika")
                 break
             except Exception:
-                print('Hadisoana nitranga tampametrahana ilay pejy')
+                print("Hadisoana nitranga tampametrahana ilay pejy")
 
 
 def main():
@@ -218,19 +271,23 @@ def main():
         t = list(time.gmtime())
         cond = (not (t[3] + timeshift) % 6) and (t[4] == 0)
         if cond:
-            bot.run('Wikibolana', 'wiktionary')
-            bot.run('pywikibot', 'pywikibot')
+            bot.run("Wikibolana", "wiktionary")
+            bot.run("pywikibot", "pywikibot")
             time.sleep(120)
         else:
             print("Fanavaozana isaky ny adin'ny 6")
-            print(("Miandry ny fotoana tokony hamaozana ny pejy (ora %2d:%2d) (GMT+%d)" %
-                  ((t[3] + timeshift), t[4], (timeshift))))
+            print(
+                (
+                    "Miandry ny fotoana tokony hamaozana ny pejy (ora %2d:%2d) (GMT+%d)"
+                    % ((t[3] + timeshift), t[4], (timeshift))
+                )
+            )
             time.sleep(30)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     wikilisting = Wikilister()
-    wikilisting.run('Wikibolana', 'wiktionary')
-    wikilisting.run('Wikipedia', 'wikipedia')
-    wikilisting.run('Wikiboky', 'wikibooks')
+    wikilisting.run("Wikibolana", "wiktionary")
+    wikilisting.run("Wikipedia", "wikipedia")
+    wikilisting.run("Wikiboky", "wikibooks")
     pywikibot.stopme()

@@ -19,19 +19,27 @@ class MicrosoftSQLConnection(SQLConnection):
         try:
             import pymssql
         except ImportError as exception:
-            raise SQLConnectionError('No pymssql found. Please install it') from exception
+            raise SQLConnectionError(
+                "No pymssql found. Please install it"
+            ) from exception
 
         params = {
-            'database': self.instance,
-            'host': self.server,
-            'user': self.user,
-            'password': self.password,
+            "database": self.instance,
+            "host": self.server,
+            "user": self.user,
+            "password": self.password,
         }
 
         self.connection = pymssql.connect(**params)
 
     @classmethod
-    def connect(cls, instance=None, server=None, user="default_user", password="default_password"):
+    def connect(
+        cls,
+        instance=None,
+        server=None,
+        user="default_user",
+        password="default_password",
+    ):
         cls.instance = instance
         cls.server = server
         cls.password = password
@@ -44,12 +52,13 @@ class PostgreSQLConnection(SQLConnection):
 
     def __init__(self):
         import psycopg2
+
         params = {
-            'database': self.instance,
-            'user': self.user,
-            'password': self.password,
-            'host': self.server,
-            'port': 5432
+            "database": self.instance,
+            "user": self.user,
+            "password": self.password,
+            "host": self.server,
+            "port": 5432,
         }
         self.connection = psycopg2.connect(**params)
 

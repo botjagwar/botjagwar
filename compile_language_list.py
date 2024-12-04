@@ -7,18 +7,24 @@ def main():
 ! Fiteny
 ! Teny iditra
     """
-    main_category = pywikibot.Category(
-        pywikibot.Site('mg', 'wiktionary'), 'fiteny')
+    main_category = pywikibot.Category(pywikibot.Site("mg", "wiktionary"), "fiteny")
 
     for c in main_category.subcategories():
         name = c.titleWithoutNamespace()
-        s += "\n|-\n| [[:sokajy:" + name + "|" + name + \
-            "]]\n| {{PAGESINCATEGORY:" + name + "}}"
+        s += (
+            "\n|-\n| [[:sokajy:"
+            + name
+            + "|"
+            + name
+            + "]]\n| {{PAGESINCATEGORY:"
+            + name
+            + "}}"
+        )
 
     s += "\n|}\n"
     return s
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     s = main()
     print(s)

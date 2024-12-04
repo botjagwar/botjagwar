@@ -4,7 +4,7 @@ import re
 from typing import List
 from api.config import BotjagwarConfig
 
-data_file = os.getcwd() + '/conf/entryprocessor/'
+data_file = os.getcwd() + "/conf/entryprocessor/"
 
 
 class WiktionaryProcessorException(Exception):
@@ -23,8 +23,8 @@ class WiktionaryProcessor(object):
         self.Page = None
         self.verbose = verbose
 
-        self.configuration = BotjagwarConfig('wiktionary_processor')
-        self.debug = self.configuration.get('debug').lower() == 'true'
+        self.configuration = BotjagwarConfig("wiktionary_processor")
+        self.debug = self.configuration.get("debug").lower() == "true"
         self.text_set = False
 
     def process(self, page=None):
@@ -36,7 +36,8 @@ class WiktionaryProcessor(object):
             try:
                 if page is None:
                     raise WiktionaryProcessorException(
-                        "Unable to process: No text has been and 'page' is None")
+                        "Unable to process: No text has been and 'page' is None"
+                    )
                 self.content = page.get()
             except SyntaxError as e:
                 print(e)
@@ -49,7 +50,9 @@ class WiktionaryProcessor(object):
     def set_title(self, title):
         self.title = title
 
-    def advanced_extract_definition(self, part_of_speech, definition_line, **other_params):
+    def advanced_extract_definition(
+        self, part_of_speech, definition_line, **other_params
+    ):
         return definition_line
 
     def retrieve_translations(self):
@@ -64,17 +67,17 @@ class WiktionaryProcessor(object):
 
 
 def stripwikitext(w):
-    w = re.sub('[ ]?\\[\\[(.*)\\|(.*)\\]\\][ ]?', '\\1', w)
-    w = w.replace('.', '')
-    w = re.sub('[ ]?\\{\\{(.*)\\}\\}[ ]?', '', w)
-    for c in '[]':
-        w = w.replace(c, '')
+    w = re.sub("[ ]?\\[\\[(.*)\\|(.*)\\]\\][ ]?", "\\1", w)
+    w = w.replace(".", "")
+    w = re.sub("[ ]?\\{\\{(.*)\\}\\}[ ]?", "", w)
+    for c in "[]":
+        w = w.replace(c, "")
 
     return w.strip()
 
 
 def lang2code(l):
-    dictfile = open(data_file + 'languagecodes.dct', 'r')
+    dictfile = open(data_file + "languagecodes.dct", "r")
     f = dictfile.read()
     d = eval(f)
     dictfile.close()

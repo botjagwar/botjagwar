@@ -9,11 +9,11 @@ def latin_postprocessor(verb_form: NonLemma):
     """
     new_lemma = verb_form.lemma
     letters = {
-        'ā': 'a',
-        'ē': 'e',
-        'ī': 'i',
-        'ō': 'o',
-        'ū': 'u',
+        "ā": "a",
+        "ē": "e",
+        "ī": "i",
+        "ō": "o",
+        "ū": "u",
     }
     for accented, unaccented in letters.items():
         new_lemma = new_lemma.replace(accented, unaccented)
@@ -29,8 +29,8 @@ def arabic_postprocessor(verb_form: NonLemma):
     :return:
     """
     new_lemma = verb_form.lemma
-    for accented in 'ًٌٍَُِّْ':
-        new_lemma = new_lemma.replace(accented, '')
+    for accented in "ًٌٍَُِّْ":
+        new_lemma = new_lemma.replace(accented, "")
 
     verb_form.lemma = new_lemma
     return verb_form
@@ -38,15 +38,15 @@ def arabic_postprocessor(verb_form: NonLemma):
 
 def russian_postprocessor(verb_form: NonLemma):
     new_lemma = verb_form.lemma
-    for accented in '́':
-        new_lemma = new_lemma.replace(accented, '')
+    for accented in "́":
+        new_lemma = new_lemma.replace(accented, "")
 
     verb_form.lemma = new_lemma
     return verb_form
 
 
 POST_PROCESSORS = {
-    'ar': arabic_postprocessor,
-    'la': latin_postprocessor,
-    'ru': russian_postprocessor,
+    "ar": arabic_postprocessor,
+    "la": latin_postprocessor,
+    "ru": russian_postprocessor,
 }

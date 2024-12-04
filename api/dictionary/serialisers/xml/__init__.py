@@ -11,10 +11,10 @@ class Definition(XMLBuilder):
         self.model = definition
         self.xml_node = self.model.__class__.__name__
         self.mapped_variables = [
-            ('Id', 'id'),
-            ('Definition', 'definition'),
-            ('Language', 'language'),
-            ('LastModified', 'last_modified'),
+            ("Id", "id"),
+            ("Definition", "definition"),
+            ("Language", "language"),
+            ("LastModified", "last_modified"),
         ]
 
     @property
@@ -31,8 +31,11 @@ class Definition(XMLBuilder):
 
     @property
     def last_modified(self):
-        return self.model.date_changed.strftime("%Y-%m-%d %H:%M:%S") \
-            if self.model.date_changed is not None else ''
+        return (
+            self.model.date_changed.strftime("%Y-%m-%d %H:%M:%S")
+            if self.model.date_changed is not None
+            else ""
+        )
 
 
 class Word(XMLBuilder):
@@ -41,12 +44,12 @@ class Word(XMLBuilder):
         self.model = word
         self.xml_node = self.model.__class__.__name__
         self.mapped_variables = [
-            ('Id', 'id'),
-            ('Word', 'word'),
-            ('Language', 'language'),
-            ('PartOfSpeech', 'part_of_speech'),
-            ('LastModified', 'last_modified'),
-            ('AdditionalData', 'additional_data'),
+            ("Id", "id"),
+            ("Word", "word"),
+            ("Language", "language"),
+            ("PartOfSpeech", "part_of_speech"),
+            ("LastModified", "last_modified"),
+            ("AdditionalData", "additional_data"),
         ]
 
     @property
@@ -71,8 +74,11 @@ class Word(XMLBuilder):
 
     @property
     def last_modified(self):
-        return self.model.date_changed.strftime("%Y-%m-%d %H:%M:%S") \
-            if self.model.date_changed is not None else ''
+        return (
+            self.model.date_changed.strftime("%Y-%m-%d %H:%M:%S")
+            if self.model.date_changed is not None
+            else ""
+        )
 
     @property
     def additional_data(self):

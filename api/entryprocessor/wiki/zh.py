@@ -10,6 +10,7 @@ class ZHWiktionaryProcessor(ENWiktionaryProcessor):
     WARNING: Unlike frwikt or mgwikt, zhwikt entry formatting is highly irregular. Some entries are formatted like
     enwikt and some others use zhwikt-specific formatting.
     """
+
     must_have_part_of_speech = True
     empty_definitions_list_if_no_definitions_found = True
     language_section_regex = r"[\n]?==[ ]?([⺀-⺙⺛-⻳⼀-⿕々〇〡-〩〸-〺〻㐀-䶵一-鿃豈-鶴侮-頻並-龎]+)[ ]?==\n"
@@ -17,7 +18,7 @@ class ZHWiktionaryProcessor(ENWiktionaryProcessor):
 
     @property
     def processor_language(self):
-        return 'zh'
+        return "zh"
 
     @property
     def language(self):
@@ -30,49 +31,48 @@ class ZHWiktionaryProcessor(ENWiktionaryProcessor):
         self.test = test
         self.postran = {
             # Traditional characters
-            '動詞': 'mat',
-            '形容詞': 'mpam',
-            '連詞': 'mpampitohy',
-            '限定詞': 'mpam',
-            '成語': 'fomba fiteny',
-            '短語': 'fomba fiteny',
-            '諺語': 'ohabolana',
-            '數字': 'isa',
-            '名詞': 'ana',
-            '粒子': 'kianteny',
-            '副詞': 'tamb',
-            '根': 'fototeny',
-            '代詞': 'solo-ana',
-            '介詞': 'mp.ank-teny',
-            '收縮': 'fanafohezana',
-            '信': 'litera',
-            '字首': 'tovona',
-            '羅馬化': 'rômanizasiona',
-            '後綴': 'tovana',
-            '象徵': 'eva',
-            '分詞': 'ova-mat',
-            '欹': 'tenim-piontanana',
-            '中綴': 'tsofoka',
-
+            "動詞": "mat",
+            "形容詞": "mpam",
+            "連詞": "mpampitohy",
+            "限定詞": "mpam",
+            "成語": "fomba fiteny",
+            "短語": "fomba fiteny",
+            "諺語": "ohabolana",
+            "數字": "isa",
+            "名詞": "ana",
+            "粒子": "kianteny",
+            "副詞": "tamb",
+            "根": "fototeny",
+            "代詞": "solo-ana",
+            "介詞": "mp.ank-teny",
+            "收縮": "fanafohezana",
+            "信": "litera",
+            "字首": "tovona",
+            "羅馬化": "rômanizasiona",
+            "後綴": "tovana",
+            "象徵": "eva",
+            "分詞": "ova-mat",
+            "欹": "tenim-piontanana",
+            "中綴": "tsofoka",
             # Simplified characters
-            '动词': 'mat',
-            '形容词': 'mpam',
-            '连词': 'mpampitohy',
-            '限定词': 'mpam',
-            '成语': 'fomba fiteny',
-            '短语': 'fomba fiteny',
-            '谚语': 'ohabolana',
-            '数字': 'isa',
-            '名词': 'ana',
-            '副词': 'fototeny',
-            '代词': 'mp.ank-teny',
-            '介词': 'fanafohezana',
-            '收缩': 'litera',
-            '恰当的': 'rômanizasiona',
-            '罗马化': 'eva',
-            '后缀': 'ova-mat',
-            '象征': 'tenim-piontanana',
-            '分词': 'tsofoka',
+            "动词": "mat",
+            "形容词": "mpam",
+            "连词": "mpampitohy",
+            "限定词": "mpam",
+            "成语": "fomba fiteny",
+            "短语": "fomba fiteny",
+            "谚语": "ohabolana",
+            "数字": "isa",
+            "名词": "ana",
+            "副词": "fototeny",
+            "代词": "mp.ank-teny",
+            "介词": "fanafohezana",
+            "收缩": "litera",
+            "恰当的": "rômanizasiona",
+            "罗马化": "eva",
+            "后缀": "ova-mat",
+            "象征": "tenim-piontanana",
+            "分词": "tsofoka",
         }
         self.verbose = verbose
         self.code = LANGUAGE_NAMES

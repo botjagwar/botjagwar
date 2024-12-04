@@ -20,7 +20,7 @@ class Writer(object):
 
 class EntryPageFileWriter(Writer):
     def __init__(self, language):
-        self.page_dump_file = open('user_data/dump-%s.pkl' % language, 'wb')
+        self.page_dump_file = open("user_data/dump-%s.pkl" % language, "wb")
         self.page_dump = {}
         self.counter = 0
 
@@ -37,10 +37,7 @@ class EntryPageFileWriter(Writer):
             self.page_dump[entry.entry] = [entry]
 
     def write(self):
-        pickle.dump(
-            self.page_dump,
-            self.page_dump_file,
-            pickle.HIGHEST_PROTOCOL)
+        pickle.dump(self.page_dump, self.page_dump_file, pickle.HIGHEST_PROTOCOL)
         self.page_dump_file.close()
 
 
@@ -49,9 +46,7 @@ class EntryPageFileReader(Reader):
 
     def __init__(self, language):
         try:
-            self.page_dump_file = open(
-                'user_data/dump-%s.pkl' %
-                language, 'rb')
+            self.page_dump_file = open("user_data/dump-%s.pkl" % language, "rb")
         except FileNotFoundError:
             pass
         self.page_dump = {}
@@ -66,8 +61,8 @@ class MissingTranslationFileReader(Reader):
         self.mising_translations = {}
         self.language = language
         self.mising_translations_file = open(
-            'user_data/missing_translations-%s.pickle' %
-            self.language, 'rb')
+            "user_data/missing_translations-%s.pickle" % self.language, "rb"
+        )
 
     def read(self):
         self.mising_translations = pickle.load(self.mising_translations_file)
@@ -77,8 +72,8 @@ class MissingTranslationFileWriter(Writer):
     def __init__(self, language):
         self.mising_translations = {}
         self.mising_translations_file = open(
-            'user_data/missing_translations-%s.pickle' %
-            language, 'wb')
+            "user_data/missing_translations-%s.pickle" % language, "wb"
+        )
 
     @critical_section(missing_translation_cs_lock)
     def add(self, translation):
@@ -91,7 +86,8 @@ class MissingTranslationFileWriter(Writer):
         pickle.dump(
             self.mising_translations,
             self.mising_translations_file,
-            pickle.HIGHEST_PROTOCOL)
+            pickle.HIGHEST_PROTOCOL,
+        )
 
 
 class MissingTranslationCsvWriter(object):
@@ -99,19 +95,19 @@ class MissingTranslationCsvWriter(object):
         self.language = language
         self.reader = MissingTranslationFileReader(language)
         self.reader.read()
-        self.lookup = FastTranslationLookup('en', 'mg')
+        self.lookup = FastTranslationLookup("en", "mg")
         self.lookup.build_table()
 
-    def to_csv(self, filename_pattern='user_data/missing_translations-%s.csv'):
+    def to_csv(self, filename_pattern="user_data/missing_translations-%s.csv"):
         # missing_translations is a dictionary where the key is a translation file
         # and where the value is the number of times it's been looked for
-        out_file = open(filename_pattern % self.language, 'w')
+        out_file = open(filename_pattern % self.language, "w")
         dict_list = [
-            {'word': translation, 'hits': hits}
+            {"word": translation, "hits": hits}
             for translation, hits in self.reader.mising_translations.items()
             if not self.lookup.word_exists(translation)
         ]
-        writer = DictWriter(out_file, ['word', 'hits'])
+        writer = DictWriter(out_file, ["word", "hits"])
         writer.writeheader()
         writer.writerows(dict_list)
         out_file.close()
@@ -126,8 +122,8 @@ class SiteExtractorCacheEngine(object):
         self.sitename = sitename
         try:
             old_dump_file = open(
-                'user_data/site-extractor-%s.pkl' %
-                self.sitename, 'rb')
+                "user_data/site-extractor-%s.pkl" % self.sitename, "rb"
+            )
         except FileNotFoundError:
             self.page_dump = {}
         else:
@@ -153,8 +149,6 @@ class SiteExtractorCacheEngine(object):
         return [x for x in self.page_dump.keys()]
 
     def write(self):
-        page_dump_file = open(
-            'user_data/site-extractor-%s.pkl' %
-            self.sitename, 'wb')
+        page_dump_file = open("user_data/site-extractor-%s.pkl" % self.sitename, "wb")
         pickle.dump(self.page_dump, page_dump_file, pickle.HIGHEST_PROTOCOL)
         page_dump_file.close()

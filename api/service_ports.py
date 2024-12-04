@@ -1,7 +1,7 @@
 import random
 
 service_ports = {
-    'entry_translator': 8000,
+    "entry_translator": 8000,
 }
 used_ports = []
 random_port_ranges = [10000, 20000]
@@ -21,4 +21,4 @@ def generate_service_port():
     return port
 
 
-__all__ = ['get_service_port']
+__all__ = ["get_service_port"]

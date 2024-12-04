@@ -9,7 +9,7 @@ from api.parsers.phrase_parser import EnglishParser
 
 
 def get_json_split_list():
-    with open('test_data/test_parser_coverage.json', 'r') as f:
+    with open("test_data/test_parser_coverage.json", "r") as f:
         json_str = f.read()
         json_data = json.loads(json_str)
         split_list = []
@@ -56,5 +56,5 @@ class TestPhraseCoverageParser(TestCase):
             self.parser_object.parsed += 1
 
         self.assertGreaterEqual(
-            self.parser_object.parsed,
-            0.70 * len(json_data))  # 70% coverage
+            self.parser_object.parsed, 0.70 * len(json_data)
+        )  # 70% coverage

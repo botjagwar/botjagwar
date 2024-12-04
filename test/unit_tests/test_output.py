@@ -7,11 +7,8 @@ from api.output import Output
 class TestOutput(TestCase):
     def test_wikipage_one_page(self):
         entry1 = MagicMock(
-            entry='test1',
-            language='l1',
-            part_of_speech='ana',
-            definitions=[
-                'def1-1'])
+            entry="test1", language="l1", part_of_speech="ana", definitions=["def1-1"]
+        )
         expected = """
 =={{=l1=}}==
 
@@ -25,29 +22,23 @@ class TestOutput(TestCase):
 
     def test_wikipage_many_pages(self):
         entry1 = MagicMock(
-            entry='test1',
-            language='l1',
-            part_of_speech='ana',
-            definitions=[
-                'def1-1'])
+            entry="test1", language="l1", part_of_speech="ana", definitions=["def1-1"]
+        )
         entry1_1 = MagicMock(
-            entry='test1',
-            language='l1',
-            part_of_speech='mpam',
-            definitions=[
-                'def1-2'])
+            entry="test1", language="l1", part_of_speech="mpam", definitions=["def1-2"]
+        )
         entry2 = MagicMock(
-            entry='test2',
-            language='l2',
-            part_of_speech='ana',
-            definitions=[
-                'def2-1', 'def2-2'])
+            entry="test2",
+            language="l2",
+            part_of_speech="ana",
+            definitions=["def2-1", "def2-2"],
+        )
         entry3 = MagicMock(
-            entry='test3',
-            language='l3',
-            part_of_speech='ana',
-            definitions=[
-                'def3-1', 'def3-2', 'def3-3'])
+            entry="test3",
+            language="l3",
+            part_of_speech="ana",
+            definitions=["def3-1", "def3-2", "def3-3"],
+        )
 
         expected = """
 =={{=l1=}}==

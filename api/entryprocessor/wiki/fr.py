@@ -16,7 +16,7 @@ POS_LEMMA_SECTION_REGEX = "===[ ]?{{S\|([A-Za-z0-9 ]+)\|([a-z]+)}}[ ]?==="
 class FRWiktionaryProcessor(WiktionaryProcessor):
     @property
     def processor_language(self):
-        return 'fr'
+        return "fr"
 
     @property
     def language(self):
@@ -28,33 +28,33 @@ class FRWiktionaryProcessor(WiktionaryProcessor):
         self.text_set = False
         self.test = test
         self.postran = {
-            'verbe': 'mat',
-            'adjectif': 'mpam',
-            'adjectif interrogatif': 'mpam',
-            'adjectif possessif': 'mpam',
-            'adjectif exclamatif': 'mpam',
-            'conjonction': 'mpampitohy',
-            'déterminant': 'mpam',
-            'phrase': 'fomba fiteny',
-            'proverbe': 'ohabolana',
-            'adjectif numéral': 'isa',
-            'nom': 'ana',
-            'particule': 'kianteny',
-            'adverbe': 'tamb',
-            'pronom': 'solo-ana',
-            'pronom interrogatif': 'solo-ana',
-            'pronom possessif': 'solo-ana',
-            'pronom personnel': 'solo-ana',
-            'préposition': 'mp.ank-teny',
-            'contraction': 'fanafohezana',
-            'lettre': 'litera',
-            'nom propre': 'ana-pr',
-            'préfixe': 'tovona',
-            'romanisation': 'rômanizasiona',
-            'suffixe': 'tovana',
-            'symbole': 'eva',
-            'interjection': 'tenim-piontanana',
-            'infixe': 'tsofoka',
+            "verbe": "mat",
+            "adjectif": "mpam",
+            "adjectif interrogatif": "mpam",
+            "adjectif possessif": "mpam",
+            "adjectif exclamatif": "mpam",
+            "conjonction": "mpampitohy",
+            "déterminant": "mpam",
+            "phrase": "fomba fiteny",
+            "proverbe": "ohabolana",
+            "adjectif numéral": "isa",
+            "nom": "ana",
+            "particule": "kianteny",
+            "adverbe": "tamb",
+            "pronom": "solo-ana",
+            "pronom interrogatif": "solo-ana",
+            "pronom possessif": "solo-ana",
+            "pronom personnel": "solo-ana",
+            "préposition": "mp.ank-teny",
+            "contraction": "fanafohezana",
+            "lettre": "litera",
+            "nom propre": "ana-pr",
+            "préfixe": "tovona",
+            "romanisation": "rômanizasiona",
+            "suffixe": "tovana",
+            "symbole": "eva",
+            "interjection": "tenim-piontanana",
+            "infixe": "tsofoka",
         }
         self.verbose = verbose
         self.code = LANGUAGE_NAMES
@@ -70,18 +70,22 @@ class FRWiktionaryProcessor(WiktionaryProcessor):
         for classe in all_importers:
             instance = classe()
             additional_data[instance.data_type] = instance.get_data(
-                instance.section_name, content, language)
+                instance.section_name, content, language
+            )
 
         return additional_data
 
     def extract_definition(self, part_of_speech, definition_line, advanced=False, **kw):
         return self.advanced_extract_definition(part_of_speech, definition_line)
 
-    def advanced_extract_definition(self, part_of_speech, definition_line,
-                                    cleanup_definition=True,
-                                    translate_definitions_to_malagasy=True,
-                                    human_readable_form_of_definition=True
-                                    ):
+    def advanced_extract_definition(
+        self,
+        part_of_speech,
+        definition_line,
+        cleanup_definition=True,
+        translate_definitions_to_malagasy=True,
+        human_readable_form_of_definition=True,
+    ):
         """
         Retrieve definition from the wiki page.
         :param part_of_speech: targetted part of speech
@@ -92,7 +96,7 @@ class FRWiktionaryProcessor(WiktionaryProcessor):
         :return:
         """
         new_definition_line = definition_line
-        if not part_of_speech.startswith('e-'):
+        if not part_of_speech.startswith("e-"):
             return new_definition_line
 
         # Form-of definitions: they use templates that can be parsed using api.parsers module which is tentatively
@@ -101,14 +105,16 @@ class FRWiktionaryProcessor(WiktionaryProcessor):
             try:
                 if part_of_speech in TEMPLATE_TO_OBJECT:
                     elements = definitions_parser.get_elements(
-                        TEMPLATE_TO_OBJECT[part_of_speech], definition_line)
+                        TEMPLATE_TO_OBJECT[part_of_speech], definition_line
+                    )
                     print(elements.__dict__)
 
                     if translate_definitions_to_malagasy:
-                        new_definition_line = elements.to_definition('mg')
+                        new_definition_line = elements.to_definition("mg")
                     else:
                         new_definition_line = elements.to_definition(
-                            self.processor_language)
+                            self.processor_language
+                        )
             except Exception as error:
                 new_definition_line = definition_line
 
@@ -133,15 +139,15 @@ class FRWiktionaryProcessor(WiktionaryProcessor):
             ct_content = content
             last_language_code = language_section[0]
 
-            init_str = '== {{langue|%s}} ==' % language_section
+            init_str = "== {{langue|%s}} ==" % language_section
             section_init = ct_content.find(init_str)
-            section_end = ct_content.find('== {{langue|', section_init + len(init_str))
+            section_end = ct_content.find("== {{langue|", section_init + len(init_str))
             if section_end != -1:
                 ct_content = ct_content[section_init:section_end]
             else:
                 ct_content = ct_content[section_init:]
 
-            lines = ct_content.split('\n')
+            lines = ct_content.split("\n")
 
             for line in lines:
                 ct_content = content
@@ -164,7 +170,9 @@ class FRWiktionaryProcessor(WiktionaryProcessor):
                     definitions_dict = {}
                     examples = {}
                 elif pos_flexion_section_match is not None:
-                    last_part_of_speech = 'e-' + self.postran[pos_flexion_section_match.groups()[0]]
+                    last_part_of_speech = (
+                        "e-" + self.postran[pos_flexion_section_match.groups()[0]]
+                    )
                     # Reset definitions for part of speech
                     definitions_dict = {}
                     examples = {}
@@ -173,8 +181,8 @@ class FRWiktionaryProcessor(WiktionaryProcessor):
                 # We assume fr.wikt definitions start with a "# " and proceed to extract all definitions from there.
                 # Definitions are then added as a list of strings then added as a list of strings. They are grouped
                 #   by part of speech to ensure correctness, as we can only have one part of speech for a given entry.
-                if line.startswith('# '):
-                    definition = line.strip('# ')
+                if line.startswith("# "):
+                    definition = line.strip("# ")
                     # definition = self.extract_definition(last_part_of_speech, definition, advanced=True)
                     last_definition = definition
                     if last_part_of_speech in definitions_dict:
@@ -183,8 +191,8 @@ class FRWiktionaryProcessor(WiktionaryProcessor):
                         definitions_dict[last_part_of_speech] = [definition]
 
                 # Example parsing for a given definition
-                if line.startswith('#* '):
-                    example = line.strip('#* ')
+                if line.startswith("#* "):
+                    example = line.strip("#* ")
                     if last_definition in examples:
                         examples[last_definition].append(example)
                     else:
@@ -193,7 +201,8 @@ class FRWiktionaryProcessor(WiktionaryProcessor):
                 # Fetch additional data if flag is set, else put it to none
                 if get_additional_data:
                     additional_data = self.get_additional_data(
-                        ct_content, last_language_code)
+                        ct_content, last_language_code
+                    )
                 else:
                     additional_data = None
 
@@ -219,9 +228,9 @@ class FRWiktionaryProcessor(WiktionaryProcessor):
     def refine_definition(definition, part_of_speech=None) -> list:
         refined = definition
         lb_template_rgxs = [
-            r'\{\{lexique\|[a-zA-Z0-9\ \|]+\}\}'
-            r'\{\{familier\|[a-zA-Z0-9\ \|]+\}\}'
-            r'\{\{[a-zA-Z0-9\ \|]+\|[a-zA-Z0-9\ \|]+\}\}'
+            r"\{\{lexique\|[a-zA-Z0-9\ \|]+\}\}"
+            r"\{\{familier\|[a-zA-Z0-9\ \|]+\}\}"
+            r"\{\{[a-zA-Z0-9\ \|]+\|[a-zA-Z0-9\ \|]+\}\}"
         ]
 
         for lb_template_rgx in lb_template_rgxs:
@@ -230,22 +239,24 @@ class FRWiktionaryProcessor(WiktionaryProcessor):
                 lb_match = lb_match.group()
                 lb_begin = definition.find(lb_match)
                 if lb_begin != -1:
-                    lb_end = definition.find('}}', lb_begin)
+                    lb_end = definition.find("}}", lb_begin)
                     label_data = definition[lb_begin:lb_end]
-                    label_data = label_data.replace('_', '')
-                    label_data = label_data.replace('|', ' ')
+                    label_data = label_data.replace("_", "")
+                    label_data = label_data.replace("|", " ")
                     print(label_data)
                     # Ensure that no unexpected characters has been onboarded,
                     # if it's the case, just ditch the label information.
-                    if re.match(r'^([a-zA-Z0-9\,\ ]+)$', label_data):
-                        refined = f'({label_data}) ' + definition[lb_end + 2:].strip()
+                    if re.match(r"^([a-zA-Z0-9\,\ ]+)$", label_data):
+                        refined = f"({label_data}) " + definition[lb_end + 2 :].strip()
                     else:
-                        refined = definition[lb_end + 2:].strip()
+                        refined = definition[lb_end + 2 :].strip()
 
         # # Handle [[]] links
-        refined = re.sub(r'\[\[([\w ]+)\|[\w ]+\]\]', '\\1', refined)
-        if not part_of_speech.startswith('e-'):  # Link name is still required in lemmata entries for frwikt
-            refined = re.sub(r'\[\[([\w ]+)\]\]', '\\1', refined)
+        refined = re.sub(r"\[\[([\w ]+)\|[\w ]+\]\]", "\\1", refined)
+        if not part_of_speech.startswith(
+            "e-"
+        ):  # Link name is still required in lemmata entries for frwikt
+            refined = re.sub(r"\[\[([\w ]+)\]\]", "\\1", refined)
 
         unwanted_character = False
         for character in "{}|":
@@ -254,7 +265,9 @@ class FRWiktionaryProcessor(WiktionaryProcessor):
                 break
 
         if unwanted_character:
-            raise WiktionaryProcessorException("Refined definition still has unwanted characters : '" + character + "'")
+            raise WiktionaryProcessorException(
+                "Refined definition still has unwanted characters : '" + character + "'"
+            )
 
         return [refined]
 

@@ -6,17 +6,14 @@ from api.dictionary.model import Word
 
 class FastTranslationLookup:
     def __init__(
-            self,
-            source_language='en',
-            target_language='mg',
-            database_file='default'):
-        self.output_database = DictionaryDatabaseManager(
-            database_file=database_file)
+        self, source_language="en", target_language="mg", database_file="default"
+    ):
+        self.output_database = DictionaryDatabaseManager(database_file=database_file)
         self.fast_tree = {}
         self.target_language = target_language
         self.source_language = source_language
 
-    @time_this('Fast translation lookup tree building')
+    @time_this("Fast translation lookup tree building")
     def build_table(self):
         """
         Builds the lookup table.
@@ -47,9 +44,8 @@ class FastTranslationLookup:
                 and word.id = dictionary.word
                 and language = '%s'
                 and definition_language = '%s'
-            """ % (
-                    self.source_language,
-                    self.target_language)
+            """
+                % (self.source_language, self.target_language)
             )
             for w in query.fetchall():
                 word, language, part_of_speech, definition = w[1], w[2], w[3], w[4]
@@ -60,8 +56,7 @@ class FastTranslationLookup:
                 else:
                     self.fast_tree[key] = [definition]
 
-            print('translation lookup tree contains %d items' %
-                  len(self.fast_tree))
+            print("translation lookup tree contains %d items" % len(self.fast_tree))
         print("--- done building fast tree ---")
 
     def translate_word(self, entry, language, part_of_speech):
@@ -69,13 +64,10 @@ class FastTranslationLookup:
         if data in self.fast_tree:
             return self.fast_tree[data]
 
-        raise LookupError('No found: %s' % str(data))
+        raise LookupError("No found: %s" % str(data))
 
     def translate(self, entry):
-        return self.translate_word(
-            entry.entry,
-            entry.language,
-            entry.part_of_speech)
+        return self.translate_word(entry.entry, entry.language, entry.part_of_speech)
 
     def lookup(self, entry):
         data = (entry.entry, entry.language, entry.part_of_speech)
@@ -93,12 +85,11 @@ class FastTranslationLookup:
 
 
 class FastWordLookup:
-    def __init__(self, database_file='default'):
-        self.output_database = DictionaryDatabaseManager(
-            database_file=database_file)
+    def __init__(self, database_file="default"):
+        self.output_database = DictionaryDatabaseManager(database_file=database_file)
         self.fast_tree = set()
 
-    @time_this('Fast tree building')
+    @time_this("Fast tree building")
     def build_fast_word_tree(self):
         """
         Table lookups are IO-expensive, so build a fast lookup tree to check entry existence in database
@@ -108,7 +99,7 @@ class FastWordLookup:
         q = self.output_database.session.query(Word)
         for w in q.yield_per(1000):
             self.fast_tree.add((w.word, w.language))
-        print('out fast tree contains %d items' % len(self.fast_tree))
+        print("out fast tree contains %d items" % len(self.fast_tree))
         print("--- done building fast tree ---")
 
     def lookup(self, entry):

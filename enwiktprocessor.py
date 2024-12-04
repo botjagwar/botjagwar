@@ -9,12 +9,12 @@ All data must have been imported there.
 see redis_wikicache.py for more details.
 """
 
-logger = logging.getLogger('processor')
-enwikt = RedisSite('en', 'wiktionary')
+logger = logging.getLogger("processor")
+enwikt = RedisSite("en", "wiktionary")
 
 
 def test_one():
-    page = RedisPage(enwikt, 'ˤ3pp')
+    page = RedisPage(enwikt, "ˤ3pp")
     processor = ENWiktionaryProcessor()
     processor.set_title(page.title())
     processor.set_text(page.get())
@@ -44,7 +44,7 @@ def test_random():
             for k in processor.get_all_entries(
                 cleanup_definitions=True,
                 get_additional_data=True,
-                translate_definitions_to_malagasy=True
+                translate_definitions_to_malagasy=True,
             ):
                 print(k)
 
@@ -57,11 +57,11 @@ def test_random():
             print(e.__class__, e)
             errors += 1
 
-    rate = (1 - (errors / sample_size))
-    print(rate * 100, '% of pages could be processed')
-    assert rate >= .995
+    rate = 1 - (errors / sample_size)
+    print(rate * 100, "% of pages could be processed")
+    assert rate >= 0.995
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     test_random()
     # test_one()

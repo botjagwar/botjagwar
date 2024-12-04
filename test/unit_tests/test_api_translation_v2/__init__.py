@@ -40,26 +40,23 @@ class TestReferences(TestCase):
 class TestTranslationV2(TestCase):
     def setUp(self) -> None:
         self.entry1 = Entry(
-            entry='test1',
-            language='l1',
-            part_of_speech='ana',
-            definitions=[
-                'def1-1',
-                'def2-1'])
+            entry="test1",
+            language="l1",
+            part_of_speech="ana",
+            definitions=["def1-1", "def2-1"],
+        )
         self.entry2 = Entry(
-            entry='test2',
-            language='l2',
-            part_of_speech='ana',
-            definitions=[
-                'def2-2',
-                'def2-2'])
+            entry="test2",
+            language="l2",
+            part_of_speech="ana",
+            definitions=["def2-2", "def2-2"],
+        )
         self.entry3 = Entry(
-            entry='test3',
-            language='l3',
-            part_of_speech='ana',
-            definitions=[
-                'def3-3',
-                'def2-3'])
+            entry="test3",
+            language="l3",
+            part_of_speech="ana",
+            definitions=["def3-3", "def2-3"],
+        )
 
     def tearDown(self) -> None:
         pass
@@ -81,7 +78,7 @@ class TestTranslationV2(TestCase):
         summary = Translation().generate_summary(
             [self.entry1, self.entry2, self.entry3],
             target_page=page_mock,
-            content=content
+            content=content,
         )
         # if not page_mock.exists():
         #     self.assertIn(self.entry1.language, summary)
@@ -92,12 +89,14 @@ class TestTranslationV2(TestCase):
 
     def test_add_credit_no_reference(self):
         wikipage = MagicMock()
-        wikipage.title.return_value = 'test'
-        wikipage.site.language = 'en'
-        entries = Translation.add_wiktionary_credit([self.entry1, self.entry2], wikipage)
+        wikipage.title.return_value = "test"
+        wikipage.site.language = "en"
+        entries = Translation.add_wiktionary_credit(
+            [self.entry1, self.entry2], wikipage
+        )
         print(entries)
-        assert 'reference' in entries[0].additional_data
-        assert 'reference' in entries[1].additional_data
+        assert "reference" in entries[0].additional_data
+        assert "reference" in entries[1].additional_data
 
     def test_aggregate_entry_data(self):
         pass

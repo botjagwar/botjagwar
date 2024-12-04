@@ -7,7 +7,7 @@ from api.output import Output
 from redis_wikicache import RedisPage as Page, RedisSite as Site
 
 config = BotjagwarConfig()
-output = Output('mg')
+output = Output("mg")
 
 
 class TeluguFixer(object):
@@ -43,12 +43,12 @@ class TeluguFixer(object):
         return self._queue_name
 
     def initialize_rabbitmq(self):
-        rabbitmq_host = config.get('host', 'rabbitmq')
-        rabbitmq_queue = 'botjagwar'
+        rabbitmq_host = config.get("host", "rabbitmq")
+        rabbitmq_queue = "botjagwar"
         self._queue_name = rabbitmq_queue
-        rabbitmq_username = config.get('username', 'rabbitmq')
-        rabbitmq_password = config.get('password', 'rabbitmq')
-        rabbitmq_virtual_host = config.get('virtual_host', 'rabbitmq')
+        rabbitmq_username = config.get("username", "rabbitmq")
+        rabbitmq_password = config.get("password", "rabbitmq")
+        rabbitmq_virtual_host = config.get("virtual_host", "rabbitmq")
 
         # Create credentials for RabbitMQ authentication
         credentials = pika.PlainCredentials(rabbitmq_username, rabbitmq_password)
@@ -57,7 +57,7 @@ class TeluguFixer(object):
         parameters = pika.ConnectionParameters(
             host=rabbitmq_host,
             virtual_host=rabbitmq_virtual_host,
-            credentials=credentials
+            credentials=credentials,
         )
         self._connection = pika.BlockingConnection(parameters)
         self._channel = self._connection.channel()
@@ -65,24 +65,33 @@ class TeluguFixer(object):
 
     def publish(self, entry):
         print(entry)
-        target_page = Page(Site('mg', 'wiktionary'), entry.entry, offline=False)
+        target_page = Page(Site("mg", "wiktionary"), entry.entry, offline=False)
 
-    def async_action(self, page, content='', summary='', action='edit', minor=False):
-        print(f"Pushing '{action}' action on page {page.title()} to '{self.queue_name}' queue")
-        message = json.dumps({
-            'language': page.site.language,
-            'site': page.site.wiki,
-            'page': page.title(),
-            "content": content,
-            'summary': summary,
-            'action': action,
-            'minor': minor,
-        })
-        self.message_broker_channel.basic_publish(exchange='', routing_key=self.queue_name, body=message, properties=pika.BasicProperties(delivery_mode=2))
+    def async_action(self, page, content="", summary="", action="edit", minor=False):
+        print(
+            f"Pushing '{action}' action on page {page.title()} to '{self.queue_name}' queue"
+        )
+        message = json.dumps(
+            {
+                "language": page.site.language,
+                "site": page.site.wiki,
+                "page": page.title(),
+                "content": content,
+                "summary": summary,
+                "action": action,
+                "minor": minor,
+            }
+        )
+        self.message_broker_channel.basic_publish(
+            exchange="",
+            routing_key=self.queue_name,
+            body=message,
+            properties=pika.BasicProperties(delivery_mode=2),
+        )
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     bot = TeluguFixer()
     # bot.run()
-    page = Page(Site('mg', 'wiktionary'), 'Mpikambana:Jagwar/andrana')
-    bot.async_action(action='delete', page=page, summary='andrana')
+    page = Page(Site("mg", "wiktionary"), "Mpikambana:Jagwar/andrana")
+    bot.async_action(action="delete", page=page, summary="andrana")

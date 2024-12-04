@@ -1,7 +1,8 @@
 from . import Builder
 
 
-class JSONBuilderError(Exception): pass
+class JSONBuilderError(Exception):
+    pass
 
 
 class JSONBuilder(Builder):
@@ -17,8 +18,10 @@ class JSONBuilder(Builder):
             try:
                 attribute_value = getattr(self, attribute_name)
             except AttributeError as e:
-                raise JSONBuilderError("JSON node '%s' in %s class is mapped to non-existing attribute '%s'" % (
-                    json_node_name, self.__class__.__name__, attribute_name))
+                raise JSONBuilderError(
+                    "JSON node '%s' in %s class is mapped to non-existing attribute '%s'"
+                    % (json_node_name, self.__class__.__name__, attribute_name)
+                )
 
             if isinstance(attribute_value, Builder):
                 main_node[json_node_name] = attribute_value.serialise()
@@ -29,14 +32,14 @@ class JSONBuilder(Builder):
                 main_node[json_node_name] = attribute_value
             elif attribute_value is None:
                 main_node[json_node_name] = None
-            elif hasattr(attribute_value, '__iter__'):
-                print(json_node_name, '=', attribute_value)
+            elif hasattr(attribute_value, "__iter__"):
+                print(json_node_name, "=", attribute_value)
                 main_node[json_node_name] = []
                 for e in attribute_value:
                     if isinstance(e, Builder):
                         main_node[json_node_name].append(e.serialise())
                     else:
-                        if hasattr(e, 'serialise'):
+                        if hasattr(e, "serialise"):
                             try:
                                 serialised = e.serialise()
                             except Exception as error:
@@ -54,6 +57,8 @@ class JSONBuilder(Builder):
                         else:
                             main_node[json_node_name].append(e)
             else:
-                raise JSONBuilderError("'%s' is not a serialisable element" % attribute_value.__class__)
+                raise JSONBuilderError(
+                    "'%s' is not a serialisable element" % attribute_value.__class__
+                )
 
         return main_node

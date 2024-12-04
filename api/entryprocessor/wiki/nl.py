@@ -7,4 +7,4 @@ from .base import WiktionaryProcessor
 class NLWiktionaryProcessor(WiktionaryProcessor):
     @property
     def language(self):
-        return 'nl'
+        return "nl"

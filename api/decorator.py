@@ -12,13 +12,16 @@ def critical_section(cs_lock: threading.Lock):
     :param cs_lock:
     :return:
     """
+
     def _critical_section(f):
         def _critical_section_wrapper(*args, **kwargs):
             cs_lock.acquire()
             ret = f(*args, **kwargs)
             cs_lock.release()
             return ret
+
         return _critical_section_wrapper
+
     return _critical_section
 
 
@@ -26,6 +29,7 @@ class run_once(object):
     """
     Decorator for run-once methods
     """
+
     __slots__ = ("func", "result", "methods")
 
     def __init__(self, func):
@@ -62,7 +66,8 @@ def singleton(cls):
         pass
 
     class SingleClass(cls, object):
-        """ The real singleton. """
+        """The real singleton."""
+
         _instance = None
         __module__ = cls.__module__
         __doc__ = cls.__doc__
@@ -70,15 +75,19 @@ def singleton(cls):
         def __new__(cls, *args, **kwargs):
             if SingleClass._instance is None:
                 try:
-                    SingleClass._instance = super(SingleClass, cls).__new__(cls, *args, **kwargs)
+                    SingleClass._instance = super(SingleClass, cls).__new__(
+                        cls, *args, **kwargs
+                    )
                 except TypeError as error:
-                    raise SingletonCreationError(f'Unexpected arguments: {args} and {kwargs}') from error
+                    raise SingletonCreationError(
+                        f"Unexpected arguments: {args} and {kwargs}"
+                    ) from error
                 SingleClass._instance._sealed = False
 
             return SingleClass._instance
 
         def __init__(self):
-            if not getattr(self, '_sealed', False):
+            if not getattr(self, "_sealed", False):
                 super(SingleClass, self).__init__()
                 self._sealed = True
 
@@ -101,6 +110,7 @@ def separate_process(f):
     :param f:
     :return:
     """
+
     def wrap(*args, **kwargs):
         t = multiprocessing.Process(target=f, args=args, kwargs=kwargs)
         t.start()
@@ -117,6 +127,7 @@ def reraise_exceptions(exceptions, new_exception_type):
                 raise new_exception_type from exc
 
         return wrapper
+
     return wrapper_catch_exceptions
 
 
@@ -129,10 +140,11 @@ def catch_exceptions(*exceptions):
                 return None
 
         return wrapper
+
     return wrapper_catch_exceptions
 
 
-def time_this(identifier=''):
+def time_this(identifier=""):
     def _time_this(f):
         def wrapper(*args, **kwargs):
             t0 = datetime.datetime.now()
@@ -142,20 +154,23 @@ def time_this(identifier=''):
             t1 = datetime.datetime.now()
             dt = t1 - t0
             d = dt.seconds * 1000 + dt.microseconds / 1000
-            if identifier == 'function':
-                print((f"%s took %2.6f seconds to execute" %
-                      (identifier, d / 1000.)))
+            if identifier == "function":
+                print((f"%s took %2.6f seconds to execute" % (identifier, d / 1000.0)))
             else:
-                print((f"%s took %2.6f seconds to execute" %
-                      (f.__name__, d / 1000.)))
+                print((f"%s took %2.6f seconds to execute" % (f.__name__, d / 1000.0)))
 
             return ret
 
         return wrapper
+
     return _time_this
 
 
-def retry_on_fail(exceptions: [Tuple[Exception], Set[Exception], List[Exception]], retries=5, time_between_retries=1):
+def retry_on_fail(
+    exceptions: [Tuple[Exception], Set[Exception], List[Exception]],
+    retries=5,
+    time_between_retries=1,
+):
     def _retry_on_fail(f):
         def wrapper(*args, **kwargs):
             m_retries = 0
@@ -165,11 +180,12 @@ def retry_on_fail(exceptions: [Tuple[Exception], Set[Exception], List[Exception]
                 except exceptions as handled_error:
                     if m_retries <= retries:
                         m_retries += 1
-                        print('Error:', handled_error, '%d' % m_retries)
+                        print("Error:", handled_error, "%d" % m_retries)
                         time.sleep(time_between_retries)
                     else:
                         raise handled_error
 
-        wrapper.__name__ = f'retry_on_fail_for_{f.__name__}'
+        wrapper.__name__ = f"retry_on_fail_for_{f.__name__}"
         return wrapper
+
     return _retry_on_fail

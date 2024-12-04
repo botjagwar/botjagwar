@@ -12,7 +12,7 @@ class GenericEntryProcessorTester:
 
     def test_get_all_entries(self):
         for page_names in self.test_pages:
-            page = PageMock(SiteMock(self.language, 'wiktionary'), page_names)
+            page = PageMock(SiteMock(self.language, "wiktionary"), page_names)
             self.content = page.get()
             self.processor.set_text(self.content)
             self.processor.process(page)
@@ -23,7 +23,7 @@ class GenericEntryProcessorTester:
 
     def test_retrieve_translations(self):
         for page_names in self.test_pages:
-            page = PageMock(SiteMock(self.language, 'wiktionary'), page_names)
+            page = PageMock(SiteMock(self.language, "wiktionary"), page_names)
             self.processor.process(page)
             entries = self.processor.retrieve_translations()
             assert isinstance(entries, list), entries

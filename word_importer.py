@@ -19,14 +19,18 @@ from api.databasemanager import DictionaryDatabaseManager
 from api.model.word import Entry
 from api.output import Output
 from api.storage import EntryPageFileReader
-from api.translation.core import CYRILLIC_ALPHABET_LANGUAGES, LANGUAGE_BLACKLIST, _get_unaccented_word
+from api.translation.core import (
+    CYRILLIC_ALPHABET_LANGUAGES,
+    LANGUAGE_BLACKLIST,
+    _get_unaccented_word,
+)
 
 
 class Importer(object):
     summary = "Fanafarana dikan-teny"
 
     # Sometimes Pywikibot API will do nothing but slow us down
-    site = pywikibot.Site('mg', 'wiktionary')
+    site = pywikibot.Site("mg", "wiktionary")
     update_on_wiki = True
 
     # Fast word lookup table
@@ -57,7 +61,7 @@ class Importer(object):
         :return:
         """
         if entry.language in LANGUAGE_BLACKLIST:
-            print('blackisted: ', entry.language)
+            print("blackisted: ", entry.language)
             return
 
         if self.lookup_cache.lookup(entry):
@@ -68,10 +72,10 @@ class Importer(object):
             output.db(entry)
 
         if not self.update_on_wiki:
-            print('not updating on wiki')
+            print("not updating on wiki")
             return
 
-        print('attempts to update on wiki...')
+        print("attempts to update on wiki...")
         wikipage = output.wikipage(entry)
         if entry.language in CYRILLIC_ALPHABET_LANGUAGES:
             entry.entry = _get_unaccented_word(entry.entry)
@@ -84,11 +88,11 @@ class Importer(object):
             return
         if page.exists():
             content = page.get()
-            if '{{=%s=}}' % entry.language in content:
-                print('exists on-wiki')
+            if "{{=%s=}}" % entry.language in content:
+                print("exists on-wiki")
                 return
             else:
-                content = wikipage + '\n' + content
+                content = wikipage + "\n" + content
         else:
             content = wikipage
 
@@ -111,13 +115,12 @@ class BatchImporter(Importer):
 
 
 class DatabaseImporter(Importer):
-    export_path = 'user_data/dump_export.db'
+    export_path = "user_data/dump_export.db"
     summary = "dikan-teny avy amin'ny tahiry XML"
     fast_tree = {}
 
     def do_import(self, workers=100):
-        input_database = DictionaryDatabaseManager(
-            database_file=self.export_path)
+        input_database = DictionaryDatabaseManager(database_file=self.export_path)
         with input_database.engine.connect() as connection:
             query = connection.execute(
                 """
@@ -138,7 +141,7 @@ class DatabaseImporter(Importer):
                     and definition_language = 'mg'
                 """
             )
-            print('-- build tree --')
+            print("-- build tree --")
             for w in query.fetchall():
                 word, language, part_of_speech, definition = w[1], w[2], w[3], w[4]
                 key = (word, language, part_of_speech)
@@ -147,13 +150,13 @@ class DatabaseImporter(Importer):
                 else:
                     self.fast_tree[key] = [definition]
 
-            print('-- using tree --')
+            print("-- using tree --")
             for word, language, part_of_speech in self.fast_tree:
                 entry = Entry(
                     entry=word,
                     language=language,
                     part_of_speech=part_of_speech,
-                    definitions=self.fast_tree[(word, language, part_of_speech)]
+                    definitions=self.fast_tree[(word, language, part_of_speech)],
                 )
                 try:
                     self.worker(entry)
@@ -161,11 +164,8 @@ class DatabaseImporter(Importer):
                     continue
 
 
-if __name__ == '__main__':
-    programs = {
-        'db': DatabaseImporter,
-        'b': BatchImporter
-    }
-    language = sys.argv[2] if len(sys.argv) >= 3 else 'en'
+if __name__ == "__main__":
+    programs = {"db": DatabaseImporter, "b": BatchImporter}
+    language = sys.argv[2] if len(sys.argv) >= 3 else "en"
     dbi = programs[sys.argv[1]](language)
     dbi.do_import()

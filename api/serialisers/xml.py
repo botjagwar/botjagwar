@@ -3,13 +3,15 @@ from xml.etree.ElementTree import Element
 from . import Builder
 
 
-class XMLBuilderError(Exception): pass
+class XMLBuilderError(Exception):
+    pass
 
 
 class XMLBuilder(object):
     """
     Generic JSON object serialiser.
     """
+
     def __init__(self):
         # XML node name
         self.xml_node = ""
@@ -22,12 +24,12 @@ class XMLBuilder(object):
         self._xml_root = Element(self.xml_node)
 
     def serialise_dict(self, attribute_value) -> Element:
-        dictionary = Element('KeyValuePairs')
+        dictionary = Element("KeyValuePairs")
         for k, v in attribute_value.items():
             v = v[0]
-            kvp_element = Element('KeyValuePair')
+            kvp_element = Element("KeyValuePair")
 
-            kvp_key = Element('Key')
+            kvp_key = Element("Key")
             if isinstance(k, Builder):
                 kvp_key.append(k.serialise())
                 continue
@@ -36,7 +38,7 @@ class XMLBuilder(object):
             elif isinstance(k, dict):
                 kvp_key.append(self.serialise_dict(k))
 
-            kvp_value = Element('Value')
+            kvp_value = Element("Value")
             if isinstance(v, Builder):
                 kvp_value.append(v.serialise())
                 continue
@@ -63,15 +65,19 @@ class XMLBuilder(object):
             try:
                 attribute_value = getattr(self, attribute_name)
             except AttributeError as e:
-                raise XMLBuilderError("XML node '%s' in %s class is mapped to non-existing attribute '%s'" % (
-                    xml_node_name, self.__class__.__name__, attribute_name))
+                raise XMLBuilderError(
+                    "XML node '%s' in %s class is mapped to non-existing attribute '%s'"
+                    % (xml_node_name, self.__class__.__name__, attribute_name)
+                )
 
             if isinstance(attribute_value, list):
                 for e in attribute_value:
                     if isinstance(e, Builder):
                         element.append(e.serialise())
                     else:
-                        raise XMLBuilderError("'%s' is not a serialisable element" % e.__class__)
+                        raise XMLBuilderError(
+                            "'%s' is not a serialisable element" % e.__class__
+                        )
             elif isinstance(attribute_value, Builder):
                 main_node.append(attribute_value.serialise())
                 continue
@@ -85,7 +91,9 @@ class XMLBuilder(object):
             elif attribute_value is None:
                 element.text = ""
             else:
-                raise XMLBuilderError("'%s' is not a serialisable element" % attribute_value.__class__)
+                raise XMLBuilderError(
+                    "'%s' is not a serialisable element" % attribute_value.__class__
+                )
 
             main_node.append(element)
 

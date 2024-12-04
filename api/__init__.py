@@ -6,10 +6,10 @@ def get_version():
     if VERSION is not None:
         return VERSION
 
-    with open('/opt/botjagwar/data/version', 'r') as f:
-        VERSION = f.read().strip('\n')
+    with open("/opt/botjagwar/data/version", "r") as f:
+        VERSION = f.read().strip("\n")
 
     return VERSION
 
 
-__all__ = ['get_version']
+__all__ = ["get_version"]

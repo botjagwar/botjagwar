@@ -5,24 +5,22 @@ from parameterized import parameterized
 from unknown_language_manager import translate_language_name
 
 language_tuples = [
-    ('toninu', 'tônino'),
-    ('tanana', 'tanana'),
-    ('chanki', 'tsanky'),
-    ('zanja', 'zanja'),
-    ('chirque', 'tsirke'),
-    ('kuyney', 'koiney'),
-    ('chanki', 'tsanky'),
-    ('choctaw', 'tsôktao'),
-    ('lakota', 'lakôta'),
-    ('yuchi', 'iotsy'),
-    ('makwa', 'makoa'),
-    ('maxiyan', 'maksiian'),
-    ('mixtec', 'mikstek'),
+    ("toninu", "tônino"),
+    ("tanana", "tanana"),
+    ("chanki", "tsanky"),
+    ("zanja", "zanja"),
+    ("chirque", "tsirke"),
+    ("kuyney", "koiney"),
+    ("chanki", "tsanky"),
+    ("choctaw", "tsôktao"),
+    ("lakota", "lakôta"),
+    ("yuchi", "iotsy"),
+    ("makwa", "makoa"),
+    ("maxiyan", "maksiian"),
+    ("mixtec", "mikstek"),
 ]
 
-error_language_tuples = [
-    ('tenia nanani',)
-]
+error_language_tuples = [("tenia nanani",)]
 
 
 class TestUnknownLanguageManager(TestCase):

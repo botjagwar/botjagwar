@@ -7573,9 +7573,7 @@ LANGUAGE_NAMES = {
     "Yongnan Zhuang": "zyn",
     "Zyphe": "zyp",
     "Zazaki": "zza",
-    "Zuojiang Zhuang": "zzj"
+    "Zuojiang Zhuang": "zzj",
 }
 
-LANGUAGE_CODES = {
-    v: k for k, v in LANGUAGE_NAMES.items()
-}
+LANGUAGE_CODES = {v: k for k, v in LANGUAGE_NAMES.items()}

@@ -16,24 +16,24 @@ from api.translation.core import Translation
 from test_utils.mocks import PageMock, SiteMock
 
 # Monkey-patching pywikibot API calls:
-#api.translation.core.pwbot.Page = PageMock
-#api.translation.core.pwbot.Site = SiteMock
+# api.translation.core.pwbot.Page = PageMock
+# api.translation.core.pwbot.Site = SiteMock
 api.translation.core.LANGUAGE_BLACKLIST = []
 
 LIST = [
-    'eau',
-    'air',
-    'èstre',
-    'газета',
-    'газет',
-    'geloof',
-    'belief',
-    'peel',
-    '合宿',
-    'heel',
-    '百萬',
-    'peigne',
-    'pagne',
+    "eau",
+    "air",
+    "èstre",
+    "газета",
+    "газет",
+    "geloof",
+    "belief",
+    "peel",
+    "合宿",
+    "heel",
+    "百萬",
+    "peigne",
+    "pagne",
 ]
 
 EN_PAGE_CONTENT = """
@@ -114,8 +114,8 @@ FR_PAGE_CONTENT = """
 
 """
 
-DB_PATH = '/tmp/test.db'
-URL_HEAD = 'http://localhost:8001'
+DB_PATH = "/tmp/test.db"
+URL_HEAD = "http://localhost:8001"
 DICTIONARY_SERVICE = None
 
 
@@ -127,54 +127,54 @@ class TestEntryTranslatorProcessWiktionaryPage(TestCase):
 
     def tearDown(self):
         self.kill_service()
-        sleep(.4)
+        sleep(0.4)
 
     @staticmethod
     @threaded
     def launch_service():
         global DICTIONARY_SERVICE
-        DICTIONARY_SERVICE = Popen(["python3",
-                                    "dictionary_service.py",
-                                    '--db-file',
-                                    DB_PATH,
-                                    "-p",
-                                    '8001'],
-                                   stdin=PIPE,
-                                   stdout=PIPE,
-                                   stderr=PIPE)
+        DICTIONARY_SERVICE = Popen(
+            ["python3", "dictionary_service.py", "--db-file", DB_PATH, "-p", "8001"],
+            stdin=PIPE,
+            stdout=PIPE,
+            stderr=PIPE,
+        )
         DICTIONARY_SERVICE.communicate()
 
-    @retry_on_fail([Exception], retries=10, time_between_retries=.4)
+    @retry_on_fail([Exception], retries=10, time_between_retries=0.4)
     def wait_until_ready(self):
-        resp = requests.get(URL_HEAD + '/ping')
+        resp = requests.get(URL_HEAD + "/ping")
         assert resp.status_code == 200
 
     @staticmethod
     def kill_service():
         DICTIONARY_SERVICE.kill()
-        os.system('rm %s' % DB_PATH)
+        os.system("rm %s" % DB_PATH)
 
     def test_fr_process_entry_in_native_language(self):
         @retry_on_fail([aiohttp.client_exceptions.ClientConnectionError])
         def _wrapped_test():
             def translation_mock(x, y):
-                return [{
-                    'part_of_speech': 'ana',
-                    "definition": "araotra"
-                }, {
-                    'part_of_speech': 'ana',
-                    "definition": "araotra"
-                }]
+                return [
+                    {"part_of_speech": "ana", "definition": "araotra"},
+                    {"part_of_speech": "ana", "definition": "araotra"},
+                ]
+
             translation = Translation()
             translation.translate_word = translation_mock
-            page = PageMock(SiteMock('fr', 'wiktionary'), 'peigne')
+            page = PageMock(SiteMock("fr", "wiktionary"), "peigne")
             translation.process_wiktionary_wiki_page(page)
-            fr_entries = [e for e in translation.process_entry_in_native_language(
-                page.get(), page.title(), 'fr', []) if e.language == 'fr']
+            fr_entries = [
+                e
+                for e in translation.process_entry_in_native_language(
+                    page.get(), page.title(), "fr", []
+                )
+                if e.language == "fr"
+            ]
             for e in fr_entries:
-                self.assertEqual(e.entry, 'peigne')
-                self.assertEqual(e.language, 'fr')
-                self.assertEqual(e.part_of_speech, 'ana')
+                self.assertEqual(e.entry, "peigne")
+                self.assertEqual(e.language, "fr")
+                self.assertEqual(e.part_of_speech, "ana")
 
         _wrapped_test()
 
@@ -182,27 +182,28 @@ class TestEntryTranslatorProcessWiktionaryPage(TestCase):
         @retry_on_fail([aiohttp.client_exceptions.ClientConnectionError])
         def _wrapped_test():
             def translation_mock(x, y):
-                return [{
-                    "definition": "misy",
-                    'part_of_speech': 'mat'
-                }, {
-                    'part_of_speech': 'ana',
-                    "definition": "araotra"
-                }]
+                return [
+                    {"definition": "misy", "part_of_speech": "mat"},
+                    {"part_of_speech": "ana", "definition": "araotra"},
+                ]
+
             translation = Translation()
             translation.translate_word = translation_mock
-            page = PageMock(SiteMock('fr', 'wiktionary'), 'èstre')
-            wiktionary_processor_class = entryprocessor.WiktionaryProcessorFactory.create(
-                'fr')
+            page = PageMock(SiteMock("fr", "wiktionary"), "èstre")
+            wiktionary_processor_class = (
+                entryprocessor.WiktionaryProcessorFactory.create("fr")
+            )
             wiktionary_processor = wiktionary_processor_class()
             wiktionary_processor.process(page)
-            entry = [e for e in wiktionary_processor.get_all_entries()
-                     if e.language == 'oc'][0]
+            entry = [
+                e for e in wiktionary_processor.get_all_entries() if e.language == "oc"
+            ][0]
             info = translation.process_entry_in_foreign_language(
-                entry, page.title(), 'fr', [])
-            self.assertEqual(info.entry, 'èstre')
-            self.assertEqual(info.language, 'oc')
-            self.assertEqual(info.part_of_speech, 'mat')
+                entry, page.title(), "fr", []
+            )
+            self.assertEqual(info.entry, "èstre")
+            self.assertEqual(info.language, "oc")
+            self.assertEqual(info.part_of_speech, "mat")
 
         _wrapped_test()
 
@@ -210,23 +211,26 @@ class TestEntryTranslatorProcessWiktionaryPage(TestCase):
         @retry_on_fail([aiohttp.client_exceptions.ClientConnectionError])
         def _wrapped_test():
             def translation_mock(x, y):
-                return [{
-                    "definition": "vody tongotra",
-                    'part_of_speech': 'ana'
-                }, {
-                    'part_of_speech': 'ana',
-                    "definition": "araotra"
-                }]
+                return [
+                    {"definition": "vody tongotra", "part_of_speech": "ana"},
+                    {"part_of_speech": "ana", "definition": "araotra"},
+                ]
+
             translation = Translation()
             translation.translate_word = translation_mock
-            page = PageMock(SiteMock('en', 'wiktionary'), 'heel')
+            page = PageMock(SiteMock("en", "wiktionary"), "heel")
             translation.process_wiktionary_wiki_page(page)
-            fr_entries = [e for e in translation.process_entry_in_native_language(
-                page.get(), page.title(), 'en', []) if e.language == 'en']
+            fr_entries = [
+                e
+                for e in translation.process_entry_in_native_language(
+                    page.get(), page.title(), "en", []
+                )
+                if e.language == "en"
+            ]
             for e in fr_entries:
-                self.assertEqual(e.entry, 'peigne')
-                self.assertEqual(e.language, 'en')
-                self.assertEqual(e.part_of_speech, 'ana')
+                self.assertEqual(e.entry, "peigne")
+                self.assertEqual(e.language, "en")
+                self.assertEqual(e.part_of_speech, "ana")
 
         _wrapped_test()
 
@@ -234,37 +238,37 @@ class TestEntryTranslatorProcessWiktionaryPage(TestCase):
         @retry_on_fail([aiohttp.client_exceptions.ClientConnectionError])
         def _wrapped_test():
             def translation_mock(x, y):
-                return [{
-                    "definition": "misy",
-                    'part_of_speech': 'mat'
-                }, {
-                    "definition": "salaka",
-                    'part_of_speech': 'ana'
-                }]
+                return [
+                    {"definition": "misy", "part_of_speech": "mat"},
+                    {"definition": "salaka", "part_of_speech": "ana"},
+                ]
 
             def page_content_mock():
                 return EN_PAGE_CONTENT
 
             def page_title_mock():
-                return 'pagne'
+                return "pagne"
 
             translation = Translation()
             translation.translate_word = translation_mock
-            page = PageMock(SiteMock('en', 'wiktionary'), 'pagne')
+            page = PageMock(SiteMock("en", "wiktionary"), "pagne")
             page.title = page_title_mock
             page.get = page_content_mock
-            wiktionary_processor_class = entryprocessor.WiktionaryProcessorFactory.create(
-                'en')
+            wiktionary_processor_class = (
+                entryprocessor.WiktionaryProcessorFactory.create("en")
+            )
             wiktionary_processor = wiktionary_processor_class()
             wiktionary_processor.process(page)
             print(wiktionary_processor.get_all_entries())
-            entry = [e for e in wiktionary_processor.get_all_entries()
-                     if e.language == 'fr'][0]
+            entry = [
+                e for e in wiktionary_processor.get_all_entries() if e.language == "fr"
+            ][0]
             info = translation.process_entry_in_foreign_language(
-                entry, page.title(), 'en', [])
-            self.assertEqual(info.entry, 'pagne')
-            self.assertEqual(info.language, 'fr')
-            self.assertEqual(info.part_of_speech, 'ana')
+                entry, page.title(), "en", []
+            )
+            self.assertEqual(info.entry, "pagne")
+            self.assertEqual(info.language, "fr")
+            self.assertEqual(info.part_of_speech, "ana")
 
         _wrapped_test()
 
@@ -273,16 +277,17 @@ class TestEntryTranslatorProcessWiktionaryPage(TestCase):
             return EN_PAGE_CONTENT
 
         def page_title_mock():
-            return 'pagne'
+            return "pagne"
 
         @retry_on_fail([aiohttp.client_exceptions.ClientConnectionError])
         def _wrapped_test():
             for pagename in LIST:
                 translation = Translation()
-                page = PageMock(SiteMock('en', 'wiktionary'), pagename)
+                page = PageMock(SiteMock("en", "wiktionary"), pagename)
                 page.get = page_content_mock
                 page.title = page_title_mock
                 translation.process_wiktionary_wiki_page(page)
+
         _wrapped_test()
 
     def test_process_wiktionary_page_french(self):
@@ -290,8 +295,9 @@ class TestEntryTranslatorProcessWiktionaryPage(TestCase):
         def _wrapped_test():
             for pagename in LIST:
                 translation = Translation()
-                page = PageMock(SiteMock('fr', 'wiktionary'), pagename)
+                page = PageMock(SiteMock("fr", "wiktionary"), pagename)
                 translation.process_wiktionary_wiki_page(page)
+
         _wrapped_test()
 
 
@@ -305,9 +311,9 @@ class TestEntryTranslatorServices(TestCase):
 
     @threaded
     def launch_service(self):
-        self.p2 = Popen(["python3", "entry_translator.py", "-p", '8000'])
+        self.p2 = Popen(["python3", "entry_translator.py", "-p", "8000"])
 
-    @retry_on_fail([Exception], retries=10, time_between_retries=.4)
+    @retry_on_fail([Exception], retries=10, time_between_retries=0.4)
     def check_response_status(self, url, data):
         resp = requests.put(url, json=data)
         resp_data = json.loads(resp.text) if resp.text else {}

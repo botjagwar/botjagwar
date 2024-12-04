@@ -6,18 +6,20 @@ from api.data.kvs import KvsPersistentClass, KeyValueStoreAPI
 
 class RedisWrapperAPI(KeyValueStoreAPI):
     def __init__(
-            self,
-            host='default',
-            password='default',
-            singleton=False,
-            persistent=False,
-            identifier='default'):
+        self,
+        host="default",
+        password="default",
+        singleton=False,
+        persistent=False,
+        identifier="default",
+    ):
         import redis
+
         config = BotjagwarConfig()
-        if host == 'default':
-            host = config.get('host', section='redis')
-        if password == 'default':
-            password = config.get('password', section='redis')
+        if host == "default":
+            host = config.get("host", section="redis")
+        if password == "default":
+            password = config.get("password", section="redis")
 
         self.singleton = singleton
         self.persistent = persistent
@@ -27,19 +29,19 @@ class RedisWrapperAPI(KeyValueStoreAPI):
         else:
             self.instance = redis.Redis(host=host)
 
-        if identifier == 'default':
+        if identifier == "default":
             self.set_identifier(self.__class__)
         else:
-            self.identifier = identifier + '/'
+            self.identifier = identifier + "/"
 
     def set_client_class(self, client_class):
         self.client_class = client_class
 
     def set_identifier(self, class_):
         KeyValueStoreAPI.set_identifier(self, self.__class__)
-        if hasattr(self, 'singleton'):
+        if hasattr(self, "singleton"):
             if self.singleton:
-                self.identifier = class_.__name__ + '/'
+                self.identifier = class_.__name__ + "/"
 
     @property
     def kvstore(self):
@@ -49,13 +51,13 @@ class RedisWrapperAPI(KeyValueStoreAPI):
         return d
 
     def __del__(self):
-        if hasattr(self, 'persistent'):
+        if hasattr(self, "persistent"):
             if not self.persistent:
-                if hasattr(self, 'attributes'):
+                if hasattr(self, "attributes"):
                     for key in self.attributes:
                         self.instance.delete(key)
 
-                if hasattr(self, 'instance'):
+                if hasattr(self, "instance"):
                     self.instance.close()
 
     def _set_attribute(self, attribute, value):
@@ -82,17 +84,17 @@ class RedisDictionary(RedisWrapperAPI):
 
     def __delitem__(self, key: str):
         assert isinstance(key, str)
-        rkey = self.identifier + 'item/' + key
+        rkey = self.identifier + "item/" + key
         self.instance.delete(rkey)
 
     def __setitem__(self, key: str, value):
         assert isinstance(key, str)
-        rkey = self.identifier + 'item/' + key
+        rkey = self.identifier + "item/" + key
         self.instance.set(rkey, pickle.dumps(value, 4))
 
     def __getitem__(self, item: str):
         assert isinstance(item, str)
-        rkey = self.identifier + 'item/' + item
+        rkey = self.identifier + "item/" + item
         data = self.instance.get(rkey)
         if data is None:
             raise KeyError(item)

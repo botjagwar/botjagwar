@@ -4,10 +4,10 @@ from . import GenericEntryProcessorTester
 
 
 class TestFrenchWiktionaryEntryprocessor(
-        GenericEntryProcessorTester,
-        unittest.TestCase):
+    GenericEntryProcessorTester, unittest.TestCase
+):
     def setUp(self):
-        self.setup_for_language('fr', ['eau', 'air', 'газета', 'geloof'])
+        self.setup_for_language("fr", ["eau", "air", "газета", "geloof"])
 
     def test_get_all_entries(self):
         super(TestFrenchWiktionaryEntryprocessor, self).test_get_all_entries()

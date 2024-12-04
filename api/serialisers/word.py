@@ -6,11 +6,11 @@ class Entry(JSONBuilder):
         super(Entry, self).__init__()
         self.model = model
         self.mapped_variables = [
-            ('entry', 'entry'),
-            ('part_of_speech', 'part_of_speech'),
-            ('language', 'language'),
-            ('definitions', 'definitions'),
-            ('additional_data', 'additional_data'),
+            ("entry", "entry"),
+            ("part_of_speech", "part_of_speech"),
+            ("language", "language"),
+            ("definitions", "definitions"),
+            ("additional_data", "additional_data"),
         ]
 
     @property
@@ -43,10 +43,10 @@ class Translation(JSONBuilder):
         super(Translation, self).__init__()
         self.model = model
         self.mapped_variables = [
-            ('word', 'word'),
-            ('part_of_speech', 'part_of_speech'),
-            ('language', 'language'),
-            ('definition', 'definition'),
+            ("word", "word"),
+            ("part_of_speech", "part_of_speech"),
+            ("language", "language"),
+            ("definition", "definition"),
         ]
 
     @property

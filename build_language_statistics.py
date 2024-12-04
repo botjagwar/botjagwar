@@ -6,12 +6,12 @@ from redis_wikicache import RedisSite as Site, RedisPage as Page
 
 class LanguageStatisticsBuilder(object):
     def __init__(self):
-        load_categories_from_category('mg', 'fiteny')
+        load_categories_from_category("mg", "fiteny")
 
         self.languages = []
-        with open('user_data/category_list_mg_fiteny', 'r') as opened_file:
+        with open("user_data/category_list_mg_fiteny", "r") as opened_file:
             for entry in opened_file.readlines():
-                self.languages.append(entry.strip('\n'))
+                self.languages.append(entry.strip("\n"))
         self.languages.sort()
         self._data = {}
 
@@ -24,9 +24,9 @@ class LanguageStatisticsBuilder(object):
             return self._data
 
     def fetch_data(self):
-        with open('user_data/category_stats_mgwiktionary.json', 'r') as jsonfile:
+        with open("user_data/category_stats_mgwiktionary.json", "r") as jsonfile:
             data = json.load(jsonfile)
-            for category_name, pages in data['rows']:
+            for category_name, pages in data["rows"]:
                 self._data[category_name] = pages
 
     # def fetch_data(self):
@@ -47,23 +47,38 @@ class LanguageStatisticsBuilder(object):
 """
         for language in self.languages:
             # print(language)
-            if language.replace(' ', '_') not in data:
+            if language.replace(" ", "_") not in data:
                 continue
 
             lemma = 0
-            for pos in ['Anarana', 'Anarana iombonana', 'Mpamaritra', 'Mpamaritra anarana', 'Matoanteny',
-                        'Tambinteny', 'Fomba fiteny', 'Mpampiankin-teny', 'Litera']:
-                if f"{pos} amin'ny teny {language}".replace(' ', '_') not in data:
+            for pos in [
+                "Anarana",
+                "Anarana iombonana",
+                "Mpamaritra",
+                "Mpamaritra anarana",
+                "Matoanteny",
+                "Tambinteny",
+                "Fomba fiteny",
+                "Mpampiankin-teny",
+                "Litera",
+            ]:
+                if f"{pos} amin'ny teny {language}".replace(" ", "_") not in data:
                     continue
 
-                lemma += data[f"{pos} amin'ny teny {language}".replace(' ', '_')]
+                lemma += data[f"{pos} amin'ny teny {language}".replace(" ", "_")]
 
             form_of = 0
-            for pos in ["Endrik'anarana", 'Endri-pamaritra', 'Endriky ny matoanteny', 'Ova matoanteny', 'Rômanizasiona']:
-                if f"{pos} amin'ny teny {language}".replace(' ', '_') not in data:
+            for pos in [
+                "Endrik'anarana",
+                "Endri-pamaritra",
+                "Endriky ny matoanteny",
+                "Ova matoanteny",
+                "Rômanizasiona",
+            ]:
+                if f"{pos} amin'ny teny {language}".replace(" ", "_") not in data:
                     continue
 
-                form_of += data[f"{pos} amin'ny teny {language}".replace(' ', '_')]
+                form_of += data[f"{pos} amin'ny teny {language}".replace(" ", "_")]
 
             entries = lemma + form_of
             table_text += f"""
@@ -74,10 +89,10 @@ class LanguageStatisticsBuilder(object):
 | {" {{formatnum:" + str(form_of) + '}}'}
 """
             print(language, entries, lemma, form_of)
-        page = Page(Site('mg', 'wiktionary'), 'Wiktionary:statistika/tabilao')
-        page.put(table_text + '\n|}', 'fanavaozana')
+        page = Page(Site("mg", "wiktionary"), "Wiktionary:statistika/tabilao")
+        page.put(table_text + "\n|}", "fanavaozana")
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     bot = LanguageStatisticsBuilder()
     bot.run()

@@ -14,28 +14,28 @@ log = logging.getLogger(__file__)
 
 
 class DatabaseManager(object):
-    conf_key = 'database_uri'
+    conf_key = "database_uri"
     database_file = None
-    db_type = 'default'
+    db_type = "default"
 
     def __init__(self, base):
         assert self.db_header is not None
-        scheme_head = self.db_header.split('://')[0]
-        if 'sqlite' in scheme_head:
-            self.db_type = 'sqlite'
-        elif 'mysql' in scheme_head:
-            self.db_type = 'mysql'
+        scheme_head = self.db_header.split("://")[0]
+        if "sqlite" in scheme_head:
+            self.db_type = "sqlite"
+        elif "mysql" in scheme_head:
+            self.db_type = "mysql"
 
         if self.database_file is not None:
-            if self.db_type == 'sqlite':
-                self.db_header = 'sqlite:///%s' % self.database_file
+            if self.db_type == "sqlite":
+                self.db_header = "sqlite:///%s" % self.database_file
 
         self.engine = create_engine(
             self.db_header,
             poolclass=QueuePool,
             max_overflow=250,
         )
-        log.info('Using database %s' % self.db_header)
+        log.info("Using database %s" % self.db_header)
 
         base.metadata.create_all(self.engine)
         self.SessionClass = sessionmaker(bind=self.engine)
@@ -43,16 +43,17 @@ class DatabaseManager(object):
 
     def read_configuration(self):
         import configparser
+
         self.config_parser = configparser.ConfigParser()
-        self.config_parser.read('/opt/botjagwar/conf/config.ini')
-        self.db_header = self.config_parser.get('global', self.conf_key)
+        self.config_parser.read("/opt/botjagwar/conf/config.ini")
+        self.db_header = self.config_parser.get("global", self.conf_key)
 
 
 class LanguageDatabaseManager(DatabaseManager):
-    database_file = 'data/language.db'
+    database_file = "data/language.db"
 
-    def __init__(self, database_file='default', db_header='sqlite:///'):
-        if database_file != 'default':  # when defined, assumed a sqlite database file
+    def __init__(self, database_file="default", db_header="sqlite:///"):
+        if database_file != "default":  # when defined, assumed a sqlite database file
             self.database_file = database_file
             self.db_header = db_header + database_file
         else:
@@ -62,15 +63,15 @@ class LanguageDatabaseManager(DatabaseManager):
 
 
 class DictionaryDatabaseManager(DatabaseManager, metaclass=SingletonMeta):
-    database_file = ''
+    database_file = ""
 
-    def __init__(self, database_file='default', db_header='sqlite:///'):
-        log.debug('database_file is %s' % database_file)
-        if database_file != 'default':  # when defined, assumed a sqlite database file
+    def __init__(self, database_file="default", db_header="sqlite:///"):
+        log.debug("database_file is %s" % database_file)
+        if database_file != "default":  # when defined, assumed a sqlite database file
             self.database_file = database_file
             self.db_header = db_header + database_file
         else:
             self.read_configuration()
 
         super(DictionaryDatabaseManager, self).__init__(WordBase)
-        log.debug('database file/URL: %s' % self.database_file)
+        log.debug("database file/URL: %s" % self.database_file)

@@ -6,12 +6,11 @@ from api.databasemanager import DictionaryDatabaseManager
 
 
 class GarbageCollectorBot(object):
-    def __init__(self, database_file='default'):
-        self.input_database = DictionaryDatabaseManager(
-            database_file=database_file)
+    def __init__(self, database_file="default"):
+        self.input_database = DictionaryDatabaseManager(database_file=database_file)
 
     def start(self):
-        server = BotjagwarConfig().get('global', 'postgrest_backend_address')
+        server = BotjagwarConfig().get("global", "postgrest_backend_address")
         used_definitions_q = "select distinct definition from dictionary"
         all_definitions_q = "select id from definitions"
         all_definitions = set()
@@ -24,7 +23,9 @@ class GarbageCollectorBot(object):
         print("Fetching used definitions...")
         for k in session.execute(used_definitions_q).fetchall():
             used_definitions.add(k[0])
-        print(f"Definitions contains {len(all_definitions)} entries, of which {len(used_definitions)} are used.")
+        print(
+            f"Definitions contains {len(all_definitions)} entries, of which {len(used_definitions)} are used."
+        )
         unused = all_definitions - used_definitions
         unused_len = len(unused)
         print(f"{unused_len} entries will be deleted.")
@@ -40,16 +41,22 @@ class GarbageCollectorBot(object):
             chunk.add(d)
             if count >= 100:
                 response = requests.delete(
-                    f'http://{server}/mt_translated_definition?id=in.(' + ','.join([str(k) for k in chunk]) + ')')
+                    f"http://{server}/mt_translated_definition?id=in.("
+                    + ",".join([str(k) for k in chunk])
+                    + ")"
+                )
                 if response.status_code >= 400:
-                    print('Error!', response.json())
+                    print("Error!", response.json())
                 # else:
                 # print('Success!', response.status_code)
 
                 response = requests.delete(
-                    f'http://{server}:8100/definitions?id=in.(' + ','.join([str(k) for k in chunk]) + ')')
+                    f"http://{server}:8100/definitions?id=in.("
+                    + ",".join([str(k) for k in chunk])
+                    + ")"
+                )
                 if response.status_code >= 400:
-                    print('Error!', response.json())
+                    print("Error!", response.json())
                 # else:
                 #     print('Success!', response.status_code)
 
@@ -59,7 +66,7 @@ class GarbageCollectorBot(object):
                 print(f"Deleted {deleted}/{unused_len}")
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     bot = GarbageCollectorBot()
     bot.start()
-    print('Done.')
+    print("Done.")

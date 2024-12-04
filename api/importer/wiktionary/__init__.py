@@ -10,7 +10,7 @@ dyn_backend = DynamicBackend()
 
 def use_wiktionary(language):
     def wrap_use_wiki(cls):
-        cls.wiki = pywikibot.Site(language, 'wiktionary')
+        cls.wiki = pywikibot.Site(language, "wiktionary")
         return cls
 
     return wrap_use_wiki
@@ -22,34 +22,32 @@ class WiktionaryAdditionalDataImporter(AdditionalDataImporter):
     def get_additional_data_for_category(self, language, category_name):
         url = dyn_backend.backend + "/word_with_additional_data"
         params = {
-            'language': f'eq.{language}',
-            'select': 'word,additional_data',
+            "language": f"eq.{language}",
+            "select": "word,additional_data",
         }
         words = requests.get(url, params=params).json()
         # Database entries containing the data_type already defined.
-        already_defined_pages = set([
-            w['word'] for w in words
-            if self.is_data_type_already_defined(w['additional_data'])
-        ])
+        already_defined_pages = set(
+            [
+                w["word"]
+                for w in words
+                if self.is_data_type_already_defined(w["additional_data"])
+            ]
+        )
 
         url = dyn_backend.backend + "/word"
         params = {
-            'language': f'eq.{language}',
+            "language": f"eq.{language}",
         }
         words = requests.get(url, params=params).json()
-        pages_defined_in_database = set([
-            w['word']
-            for w in words
-        ])
+        pages_defined_in_database = set([w["word"] for w in words])
         self.counter = 0
         category_pages = set(
-            [k.title() for k in get_pages_from_category('en', category_name)])
+            [k.title() for k in get_pages_from_category("en", category_name)]
+        )
         # Wiki pages who may have not been parsed yet
-        titles = (category_pages & pages_defined_in_database) - \
-            already_defined_pages
-        wikipages = set([
-            pywikibot.Page(self.wiktionary, page) for page in titles
-        ])
+        titles = (category_pages & pages_defined_in_database) - already_defined_pages
+        wikipages = set([pywikibot.Page(self.wiktionary, page) for page in titles])
 
         # print(f"{len(wikipages)} pages from '{category_name}';\n"
         #       f"{len(already_defined_pages)} already defined pages "
@@ -64,16 +62,11 @@ class WiktionaryAdditionalDataImporter(AdditionalDataImporter):
         title = wikipage.title()
         return self.process_non_wikipage(title, content, language)
 
-    def run(
-        self,
-        root_category: str,
-        wiktionary=pywikibot.Site(
-            'en',
-            'wiktionary')):
+    def run(self, root_category: str, wiktionary=pywikibot.Site("en", "wiktionary")):
         self.wiktionary = wiktionary
         category = pywikibot.Category(wiktionary, root_category)
         for category in category.subcategories():
-            name = category.title().replace('Category:', '')
+            name = category.title().replace("Category:", "")
             # print(name)
             language_name = name.split()[0]
             if language_name in self.languages:
@@ -81,29 +74,25 @@ class WiktionaryAdditionalDataImporter(AdditionalDataImporter):
                 # print(f'Fetching for {language_name} ({iso})')
                 self.get_additional_data_for_category(iso, category.title())
             # else:
-                # print(f'Skipping for {language_name}...')
+            # print(f'Skipping for {language_name}...')
 
 
 class TemplateImporter(WiktionaryAdditionalDataImporter):
-    def get_data(
-            self,
-            template_title: str,
-            wikipage: str,
-            language: str) -> list:
+    def get_data(self, template_title: str, wikipage: str, language: str) -> list:
         retrieved = []
-        for line in wikipage.split('\n'):
+        for line in wikipage.split("\n"):
             if "{{" + template_title + "|" + language in line:
-                line = line[line.find("{{" + template_title + "|" + language):]
-                data = line.split('|')[2]
-                data = data.replace('}}', '')
-                data = data.replace('{{', '')
+                line = line[line.find("{{" + template_title + "|" + language) :]
+                data = line.split("|")[2]
+                data = data.replace("}}", "")
+                data = data.replace("{{", "")
                 retrieved.append(data)
 
         return retrieved
 
 
 class SubsectionImporter(WiktionaryAdditionalDataImporter):
-    section_name = ''
+    section_name = ""
     # True if the section contains a number e.g. Etymology 1, Etymology 2, etc.
     numbered = False
     level = 3

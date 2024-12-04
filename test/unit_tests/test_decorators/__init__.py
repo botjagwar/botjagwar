@@ -4,7 +4,7 @@ from unittest import TestCase
 
 from api.decorator import run_once, singleton, threaded
 
-s = ''
+s = ""
 
 
 class DecoratorsTest(TestCase):
@@ -24,17 +24,17 @@ class DecoratorsTest(TestCase):
         @threaded
         def function1():
             global s
-            s += 'x'
-            sleep(.4)
+            s += "x"
+            sleep(0.4)
 
         def function2():
             global s
-            s += 'y'
-            sleep(.2)
+            s += "y"
+            sleep(0.2)
 
         function2()
         function1()
-        self.assertEqual(s, 'yx')
+        self.assertEqual(s, "yx")
 
     def test_singleton(self):
         @singleton

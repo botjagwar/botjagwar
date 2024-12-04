@@ -5,7 +5,7 @@ import aiohttp.web
 
 class ServiceError(aiohttp.web.HTTPError):
     status_code = 500
-    message = 'The service encountered an unknown error.'
+    message = "The service encountered an unknown error."
 
 
 class ElementDoesNotExist(ServiceError):
@@ -25,19 +25,17 @@ class BatchContainsErrors(ServiceError):
 
 
 class LanguageDoesNotExist(ElementDoesNotExist):
-    message = json.dumps({
-        'message': 'Language does not exist.'
-    })
+    message = json.dumps({"message": "Language does not exist."})
 
 
 class WordDoesNotExist(ElementDoesNotExist):
     status_code = 404
-    message = 'Word does not exist.'
+    message = "Word does not exist."
 
 
 class WordAlreadyExists(ElementAlreadyExists):
-    message = 'Word already exists.'
+    message = "Word already exists."
 
 
 class InvalidJsonReceived(InvalidDataError):
-    message = 'Received JSON is invalid.'
+    message = "Received JSON is invalid."

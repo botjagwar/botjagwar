@@ -2,9 +2,10 @@ from copy import deepcopy
 from dataclasses import dataclass, field
 from typing import Optional, List, Dict
 
-from api.serialisers.word import \
-    Entry as EntrySerialiser, \
-    Translation as TranslationSerialiser
+from api.serialisers.word import (
+    Entry as EntrySerialiser,
+    Translation as TranslationSerialiser,
+)
 
 
 @dataclass
@@ -19,6 +20,7 @@ class Entry(object):
     """
     Non-DB model for entries
     """
+
     entry: str
     part_of_speech: str
     definitions: List[str]
@@ -32,7 +34,7 @@ class Entry(object):
             part_of_speech=model.part_of_speech,
             language=model.language,
             definitions=deepcopy(model.definitions),
-            additional_data=deepcopy(model.additional_data)
+            additional_data=deepcopy(model.additional_data),
         )
 
     def to_tuple(self):
@@ -55,11 +57,13 @@ class Entry(object):
         :param other:
         :return:
         """
-        if hasattr(self, 'language') and hasattr(other, 'language'):
+        if hasattr(self, "language") and hasattr(other, "language"):
             if self.language == other.language:
-                if hasattr(self, 'entry') and hasattr(other, 'entry'):
+                if hasattr(self, "entry") and hasattr(other, "entry"):
                     if self.entry == other.entry:  # noqa
-                        if hasattr(self, 'part_of_speech') and hasattr(other, 'part_of_speech'):
+                        if hasattr(self, "part_of_speech") and hasattr(
+                            other, "part_of_speech"
+                        ):
                             if self.part_of_speech == other.part_of_speech:
                                 return 0
                             if self.part_of_speech < other.part_of_speech:
@@ -98,5 +102,4 @@ class Translation(object):
         return TranslationSerialiser(self).serialise()
 
 
-
-__all__ = ['Word', 'Entry', 'Translation']
+__all__ = ["Word", "Entry", "Translation"]

@@ -5,20 +5,20 @@ from api.servicemanager.pgrest import StaticBackend
 from ..types import TranslatedDefinition
 
 regexesrep = [
-    (r'\{\{l\|en\|(.*)\}\}', '\\1'),
-    (r'\{\{vern\|(.*)\}\}', '\\1'),
+    (r"\{\{l\|en\|(.*)\}\}", "\\1"),
+    (r"\{\{vern\|(.*)\}\}", "\\1"),
     (r"\[\[(.*)#(.*)\|?[.*]?\]?\]?", "\\1"),
     (r"\{\{(.*)\}\}", ""),
-    (r'\[\[(.*)\|(.*)\]\]', '\\1'),
-    (r"\((.*)\)", "")
+    (r"\[\[(.*)\|(.*)\]\]", "\\1"),
+    (r"\((.*)\)", ""),
 ]
-CYRILLIC_ALPHABET_LANGUAGES = 'be,bg,mk,ru,uk'.split(',')
+CYRILLIC_ALPHABET_LANGUAGES = "be,bg,mk,ru,uk".split(",")
 MAX_DEPTH = 1
 form_of_part_of_speech_mapper = {
-    'ana': 'e-ana',
-    'mat': 'e-mat',
-    'mpam-ana': 'e-mpam-ana',
-    'mpam': 'e-mpam',
+    "ana": "e-ana",
+    "mat": "e-mat",
+    "mpam-ana": "e-mpam-ana",
+    "mpam": "e-mpam",
 }
 
 backend = StaticBackend()
@@ -27,12 +27,12 @@ log = getLogger(__file__)
 
 def _delink(line):
     # change link e.g. [[xyz|XYZ#en]] --> xyz
-    for link, link_name in re.findall('\\[\\[(\\w+)\\|(\\w+)\\]\\]', line):
-        line = line.replace(f'[[{link}|{link_name}]]', link)
+    for link, link_name in re.findall("\\[\\[(\\w+)\\|(\\w+)\\]\\]", line):
+        line = line.replace(f"[[{link}|{link_name}]]", link)
 
     # remove remaining wiki markup
-    for c in '{}[]':
-        line = line.replace(c, '')
+    for c in "{}[]":
+        line = line.replace(c, "")
 
     return line
 

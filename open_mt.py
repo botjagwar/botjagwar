@@ -13,19 +13,21 @@ from api.translation_v2.openmt import OpusMtTransformer
 verbose = False
 
 parser = ArgumentParser(description="OpenMT translator service")
-parser.add_argument('-p', '--port', dest='PORT', type=int, default=8003)
+parser.add_argument("-p", "--port", dest="PORT", type=int, default=8003)
 parser.add_argument(
-    '-l',
-    '--log-file',
-    dest='LOG',
+    "-l",
+    "--log-file",
+    dest="LOG",
     type=str,
-    default='/opt/botjagwar/user_data/openmt_translator.log')
-parser.add_argument('--host', dest='HOST', type=str, default='0.0.0.0')
+    default="/opt/botjagwar/user_data/openmt_translator.log",
+)
+parser.add_argument("--host", dest="HOST", type=str, default="0.0.0.0")
 parser.add_argument(
-    '--log-level',
-    dest='LOG_LEVEL',
+    "--log-level",
+    dest="LOG_LEVEL",
     type=str,
-    default='/opt/botjagwar/user_data/entry_translator.log')
+    default="/opt/botjagwar/user_data/entry_translator.log",
+)
 
 args = parser.parse_args()
 
@@ -36,36 +38,35 @@ routes = web.RouteTableDef()
 
 @routes.post("/translate/{source_language}/{target_language}")
 async def translate(request) -> Response:
-    source = request.match_info['source_language']
-    target = request.match_info['target_language']
+    source = request.match_info["source_language"]
+    target = request.match_info["target_language"]
     translator.load_model(source, target)
     request_json = await request.json()
     try:
-        translation = translator.translate(request_json['text'])
-        log.debug('Translating "' + request_json['text'] + '"...')
+        translation = translator.translate(request_json["text"])
+        log.debug('Translating "' + request_json["text"] + '"...')
         log.debug('Translated as "' + translation + '"...')
         returned_json = {
-            'type': 'translation',
-            'text': translation,
-            'original': request_json['text']
+            "type": "translation",
+            "text": translation,
+            "original": request_json["text"],
         }
         status = 200
     except Exception as error:
         returned_json = {
-            'type': 'error',
-            'status': 'translation failed',
-            'error_class': error.__class__.__name__,
-            'message': error.message if hasattr(error, 'message') else 'unknown error',
-            'traceback': traceback.format_exc()
+            "type": "error",
+            "status": "translation failed",
+            "error_class": error.__class__.__name__,
+            "message": error.message if hasattr(error, "message") else "unknown error",
+            "traceback": traceback.format_exc(),
         }
-        status = error.status_code if hasattr(error, 'status_code') else 500
+        status = error.status_code if hasattr(error, "status_code") else 500
     return Response(
-        text=json.dumps(returned_json),
-        status=status,
-        content_type='application/json')
+        text=json.dumps(returned_json), status=status, content_type="application/json"
+    )
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     try:
         app = web.Application()
         app.router.add_routes(routes)
