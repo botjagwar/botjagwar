@@ -1,13 +1,13 @@
 from api.model.word import Entry
 from .functions import (
-    translate_form_of_templates,
     translate_using_postgrest_json_dictionary,
 )
 from .types import TranslatedDefinition, UntranslatedDefinition
+from .functions.definitions.rule_based import FormOfDefinitionTranslatorFactory
 
 
 class EntryTranslator(object):
-    methods = [translate_form_of_templates]
+    methods = [FormOfDefinitionTranslatorFactory('en').translate_form_of_definitions]
 
     def translate(
         self, entry: Entry, source_language: str, target_language: str = "mg"

@@ -21,9 +21,7 @@ class WiktionaryInflectionTemplateParser(object):
             )
         self.process_function[(return_class, template_name)] = parser_function
 
-    def get_elements(
-        self, expected_class, form_of_definition
-    ) -> [VerbForm, AdjectiveForm, NounForm, NonLemma]:
+    def get_elements(self, expected_class, form_of_definition, **context) -> [NonLemma]:
         # fixme: detect several templates on the same line, and raise exception if such case is encountered.
         # current way of parsing template expressions fails spectacularly (InvalidTitle exceptions) in nasty cases:
         # e.g. {{es-verb form of|mood=imp|num=s|pers=2|formal=n|sense=+|ending=ir|venir}} + {{m|es|te||}}.
@@ -38,7 +36,7 @@ class WiktionaryInflectionTemplateParser(object):
             )
         try:
             ret = self.process_function[(expected_class, parts[0])](
-                form_of_definition
+                form_of_definition, **context
             )
             if not isinstance(ret, expected_class):
                 raise ParserError(

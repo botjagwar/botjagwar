@@ -3,13 +3,25 @@ import pywikibot
 SITENAME = "wiktionary"
 
 
+def _write_to_file(filename, content):
+    try:
+
+        filename.write(content + "\n")
+
+    ## writing unicode strings breaks in python 3.11 wtf
+    except UnicodeEncodeError:
+        pass
+        # Handle encoding issues by writing a placeholder or skipping
+        # filename.write(str(content, encoding='utf8') + "\n")
+
+
 def load_pages_from_category(working_language, category_name):
     with open(f"user_data/list_{working_language}_{category_name}", "w") as f:
         pages = pywikibot.Category(
             pywikibot.Site(working_language, SITENAME), category_name
         )
         for word_page in pages.articles():
-            f.write(word_page.title() + "\n")
+            _write_to_file(f, word_page.title())
 
 
 def load_categories_from_category(working_language, category_name):
@@ -18,7 +30,7 @@ def load_categories_from_category(working_language, category_name):
             pywikibot.Site(working_language, SITENAME), category_name
         )
         for word_page in pages.subcategories():
-            f.write(word_page.title(with_ns=False) + "\n")
+            _write_to_file(f, word_page.title(with_ns=False))
 
 
 def get_categories_for_category(working_language, category_name):

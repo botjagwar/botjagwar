@@ -68,11 +68,15 @@ class WiktionaryDirectPublisher(Publisher):
                     f"namespace (ns:{target_page.namespace().id}). "
                     f"Can only push to ns:0 (main namespace)"
                 )
-            elif target_page.isRedirectPage():
-                content = translation.output.wikipages(entries)
-                target_page.put(
-                    content, translation.generate_summary(target_page, entries, content)
-                )
+
+            # The check below goes to the wiki and is considered expensive. Let it error out
+            #   if it is ever the case, as it is not expected to happen often.
+
+            # elif target_page.isRedirectPage():
+            #     content = translation.output.wikipages(entries)
+            #     target_page.put(
+            #         content, translation.generate_summary(target_page, entries, content)
+            #     )
             else:
                 # Get entries to aggregate
                 if target_page.exists():
@@ -124,6 +128,17 @@ class WiktionaryRabbitMqPublisher(Publisher):
             else:
                 raise WiktionaryRabbitMqPublisherError(f"Unknown error: {response.text}")
 
+    def publish_wikipage(self, content: str, page_title: str, summary: str = "mamafa ny fihodinana", minor: bool = False):
+        message = {
+            "language": "mg",  # Assuming Malagasy as the working language
+            "site": "wiktionary",
+            "page": page_title,
+            "content": content,
+            "summary": summary,
+            "minor": minor,
+        }
+        self.push(message)
+
     def publish_to_wiktionary(self, translation):
         @reraise_exceptions((Exception,), WiktionaryRabbitMqPublisherError)
         def _publish_to_wiktionary(page_title: str, entries: List[Entry]):
@@ -140,17 +155,21 @@ class WiktionaryRabbitMqPublisher(Publisher):
                     f"namespace (ns:{target_page.namespace().id}). "
                     f"Can only push to ns:0 (main namespace)"
                 )
-            elif target_page.isRedirectPage():
-                content = translation.output.wikipages(entries)
-                message = {
-                    "language": translation.working_wiki_language,
-                    "site": "wiktionary",
-                    "page": page_title,
-                    "content": content,
-                    "summary": "mamafa ny fihodinana",
-                    "minor": False,
-                }
-                self.push(message)
+
+            # The check below goes to the wiki and is considered expensive. Let it error out
+            #   if it is ever the case, as it is not expected to happen often.
+
+            # elif target_page.isRedirectPage():
+            #     content = translation.output.wikipages(entries)
+            #     message = {
+            #         "language": translation.working_wiki_language,
+            #         "site": "wiktionary",
+            #         "page": page_title,
+            #         "content": content,
+            #         "summary": "mamafa ny fihodinana",
+            #         "minor": False,
+            #     }
+            #     self.push(message)
             else:
                 # Get entries to aggregate
                 if target_page.exists():

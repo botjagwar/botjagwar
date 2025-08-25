@@ -32,12 +32,13 @@ def get_saved_state():
 def get_new_state():
     lister = Wikilister()
     new_state = []
+    headers = {"User-Agent": "Bot-Jagwar/1.7 (Linux; x64) python-requests/2.32.3"}
     for site in ["wikipedia", "wiktionary"]:
         for lang in lister.getLangs(site):
             urlstr = f"https://{lang}.{site}.org/"
             urlstr += "w/api.php?action=query&meta=siteinfo&format=json&siprop=statistics&continue"
             try:
-                stat_page = requests.get(urlstr).json()
+                stat_page = requests.get(urlstr, headers=headers).json()
             except Exception as exc:
                 print("Error while trying to get URL", exc)
                 continue

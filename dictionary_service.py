@@ -114,11 +114,17 @@ app.router.add_route("PUT", "/configure", configuration.configure_service)
 
 if __name__ == "__main__":
     try:
+        # Remove this line as routes is empty:
         app.router.add_routes(routes)
-        web.run_app(app, host=HOST, port=PORT, access_log=log)
+
+        print(f"Starting server on {HOST}:{PORT}")
+        web.run_app(
+            app,
+            host=HOST,
+            port=PORT,
+            shutdown_timeout=30,  # Add shutdown timeout
+            keepalive_timeout=30  # Add keepalive timeout
+        )
     except Exception as exc:
         log.exception(exc)
         log.critical("Error occurred while setting up the server")
-    finally:
-        app["session_instance"].flush()
-        app["session_instance"].close()

@@ -3,7 +3,7 @@ import sys
 
 import pywikibot
 
-reason = "Voaforona an-kadisoana"
+reason = "Tsy manaraka fepetra takiana ho ana teny iditra anaty rakibolana."
 count = 1
 
 site = pywikibot.Site("mg", "wiktionary")
@@ -38,6 +38,28 @@ def mass_delete2():
                             page.delete(reason)
                     except Exception as e:
                         print(e)
+
+
+def mass_delete_if_enwikt_not_exists():
+    global count
+    with open(sys.argv[1], "r") as f:
+        for line in f:
+            count += 1
+            if count <= 0:
+                continue
+
+            en_page = pywikibot.Page(pywikibot.Site("en", "wiktionary"), line)
+            if en_page.exists() and not en_page.isRedirectPage():
+                print("en page exists, skipping ", line)
+                continue
+            mgwikt = pywikibot.Site("mg", "wiktionary")
+            mg_page = pywikibot.Page(mgwikt, line)
+            if not mgwikt.has_right("delete"):
+                raise pywikibot.exceptions.Error(
+                    f"Bot does not have permission to delete {mg_page.title()}"
+                )
+            if mg_page.exists() and not mg_page.isRedirectPage():
+                mg_page.delete(reason, prompt=False)
 
 
 def mass_delete():
@@ -115,4 +137,4 @@ def remove_bot_section():
 
 
 if __name__ == "__main__":
-    mass_delete()
+    mass_delete_if_enwikt_not_exists()

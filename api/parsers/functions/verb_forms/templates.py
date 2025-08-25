@@ -3,6 +3,7 @@
 from api.parsers.constants import NUMBER, MOOD, TENSE, PERSONS, VOICE
 from api.parsers.functions.postprocessors import POST_PROCESSORS
 from api.parsers.inflection_template import VerbForm
+from api.parsers.functions.verb_forms.es import get_es_verb_form
 
 
 def _parse_es_verb_form_of(parts):
@@ -19,7 +20,7 @@ def _parse_es_verb_form_of(parts):
     return VerbForm("", tense, mood, person, number)
 
 
-def parse_es_compound_of(template_expression):
+def parse_es_compound_of(template_expression, **context):
     parts = template_expression.split("|")
     verb_form = _parse_es_verb_form_of(parts)
     verb_form.lemma = parts[3]
@@ -27,7 +28,7 @@ def parse_es_compound_of(template_expression):
     return verb_form
 
 
-def parse_verb_form_inflection_of(template_expression):
+def parse_verb_form_inflection_of(template_expression, **context):
     post_processor = None
 
     for char in "{}":
@@ -43,7 +44,7 @@ def parse_verb_form_inflection_of(template_expression):
     t_name = parts[0]
     lemma = parts[2] if len(parts[1]) in {2, 3} else parts[1]
     person = number = tense = mood = None
-    voice = "act"
+    voice = None
     for pn in parts:
         if pn in NUMBER:
             number = pn
@@ -63,7 +64,7 @@ def parse_verb_form_inflection_of(template_expression):
     return verb_form
 
 
-def parse_la_verb_form_inflection_of(template_expression):
+def parse_la_verb_form_inflection_of(template_expression, **context):
     post_processor = None
 
     for char in "{}":
@@ -80,7 +81,7 @@ def parse_la_verb_form_inflection_of(template_expression):
     lemma = parts[2]
 
     person = number = tense = mood = None
-    voice = "act"
+    voice = None
     for pn in parts:
         if pn in NUMBER:
             number = pn
@@ -100,45 +101,19 @@ def parse_la_verb_form_inflection_of(template_expression):
     return verb_form
 
 
-def parse_es_verb_form_of(template_expression):
+def parse_es_verb_form_of(template_expression, **context):
     parts = template_expression.split("|")
-    person = number = tense = mood = None
+    word = context['entry'].entry if 'entry' in context else ""
+
     lemma = parts[-1].replace("}", "")
     if "region=" in lemma:
         lemma = parts[-2]
 
-    for part in parts:
-        if part.startswith("pers=") or part.startswith("person="):
-            person = part.split("=")[1]
-        elif part.startswith("number="):
-            number = part.split("=")[1]
-        elif part.startswith("tense="):
-            tense = part.split("=")[1]
-        elif part.startswith("mood="):
-            mood = part.split("=")[1]
-        elif part.startswith("ending="):
-            pass
-        elif part.startswith("sera="):
-            pass
-        elif part.startswith("formal="):
-            pass
-        elif part.startswith("sense="):
-            pass
-        elif part.startswith("voseo="):
-            pass
-        elif part.startswith("participle="):
-            pass
-        elif part.startswith("region="):
-            pass
-        elif part.startswith("gender="):
-            pass
-        elif "=" not in part:
-            lemma = part.replace("}", "")
-
-    return VerbForm(lemma, tense, mood, person, number)
+    verbform_description = get_es_verb_form(word, lemma)
+    return verbform_description
 
 
-def parse_ca_verb_form_of(template_expression):
+def parse_ca_verb_form_of(template_expression, **context):
     "{{ca-verb form of|p=2|n=sg|t=impf|m=ind|abordar}}"
     for char in "{}":
         template_expression = template_expression.replace(char, "")
@@ -159,7 +134,7 @@ def parse_ca_verb_form_of(template_expression):
     return VerbForm(lemma, tense, mood, person, number)
 
 
-def parse_fi_verb_form_of(template_expression):
+def parse_fi_verb_form_of(template_expression, **context):
     parts = template_expression.split("|")
     voice = "act"
     person = "0"
@@ -214,7 +189,7 @@ def parse_fi_verb_form_of(template_expression):
     return VerbForm(lemma, tense, mood, person, number, voice)
 
 
-def parse_fi_form_of(template_expression):
+def parse_fi_form_of(template_expression, **context):
     "{{fi-form of|aateloida|pr=third-person|pl=singular|mood=indicative|tense=present}}"
     for char in "{}":
         template_expression = template_expression.replace(char, "")
@@ -235,7 +210,7 @@ def parse_fi_form_of(template_expression):
     return VerbForm(lemma, tense, mood, person, number)
 
 
-def parse_de_verb_form_of(template_expression):
+def parse_de_verb_form_of(template_expression, **context):
     "{{de-verb form of|abfangen|1|s|k2|a}}"
     for char in "{}":
         template_expression = template_expression.replace(char, "")

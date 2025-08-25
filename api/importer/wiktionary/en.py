@@ -1,12 +1,15 @@
 import re
 from typing import List
 
+import mwparserfromhell
+
 from api.importer.wiktionary import (
     SubsectionImporter as BaseSubsectionImporter,
     WiktionaryAdditionalDataImporter,
 )
 from api.importer.wiktionary import use_wiktionary
 from api.model.word import Translation
+from api.parsers.etymology.en import render_template as render_etym_template
 
 part_of_speech_translation = {
     "Verb": "mat",
@@ -84,12 +87,12 @@ class SubsectionImporter(BaseSubsectionImporter):
         # Retrieving and narrowing to target section
         number_rgx = " [1-9]+" if self.numbered else ""
         for regex_match in re.findall(
-            "=" * self.level
-            + "[ ]?"
-            + self.section_name
-            + number_rgx
-            + "[ ]?=" * self.level,
-            wikipage,
+                "=" * self.level
+                + "[ ]?"
+                + self.section_name
+                + number_rgx
+                + "[ ]?=" * self.level,
+                wikipage,
         ):
             retrieved += retrieve_subsection(wikipage, regex_match)
 
@@ -100,6 +103,29 @@ class SubsectionImporter(BaseSubsectionImporter):
 
 @use_wiktionary("en")
 class ListSubsectionImporter(SubsectionImporter):
+    def _extract_links(self, item: str, language: str) -> List[str]:
+        words: List[str] = []
+
+        for template in re.findall(r"\{\{([^{}]+)\}\}", item):
+            parts = template.split("|")
+            name = parts[0]
+            params = parts[1:]
+            if name == "l" and len(params) >= 2 and params[0] == language:
+                words.append(params[1])
+            elif name == "col" and len(params) >= 2 and params[0] == language:
+                words.extend(params[1:])
+            elif name.endswith("-l") or name == "pedia":
+                if params:
+                    words.append(params[0])
+
+        for link in re.findall(r"\[\[([^\[\]|]+)(?:\|[^\]]*)?\]\]", item):
+            words.append(link)
+
+        if not words and item.strip():
+            words.append(item.strip())
+
+        return [w.strip() for w in words if w.strip()]
+
     def get_data(self, template_title, content: str, language: str) -> List[str]:
         subsection_data = SubsectionImporter.get_data(
             self, template_title, content, language
@@ -108,24 +134,12 @@ class ListSubsectionImporter(SubsectionImporter):
         for subsection_item in subsection_data:
             if "*" in subsection_item:
                 for item in subsection_item.split("*"):
-                    if item.strip() == "":
+                    item = item.strip()
+                    if not item or "[[Thesaurus:" in item:
                         continue
-
-                    if "[[Thesaurus:" in item:
-                        continue
-                    if "{{l|" + language in item:
-                        retrieved.extend(
-                            iter(
-                                re.findall(
-                                    "{{l\\|" + language + "\\|([0-9A-Za-z- ]+)}}",
-                                    item,
-                                )
-                            )
-                        )
-                    elif "[[" in item and "]]" in item:
-                        retrieved.extend(iter(re.findall("\\[\\[([0-9A-Za-z- ]+)\\]\\]", item)))
-                    else:
-                        retrieved.append(item.strip())
+                    retrieved.extend(self._extract_links(item, language))
+            else:
+                retrieved.extend(self._extract_links(subsection_item.strip(), language))
 
         return list(set(retrieved))
 
@@ -142,6 +156,48 @@ class EtymologyImporter(SubsectionImporter):
     data_type = "etym/en"
     numbered = True
     section_name = "Etymology"
+
+
+@use_wiktionary("en")
+class ParsedEtymologyImporter(EtymologyImporter):
+    """Parse etymology section and render templates to plain text."""
+
+    data_type = "etym/en/parsed"
+
+    def _render_template(self, template) -> str:
+        """Render supported etymology templates to wikitext."""
+        return render_etym_template(template)
+
+    def _parse_text(self, text: str) -> str:
+        code = mwparserfromhell.parse(text)
+        for tag in code.filter_tags(matches=lambda node: node.tag == "ref"):
+            code.remove(tag)
+
+        for tpl in code.filter_templates():
+            try:
+                code.replace(tpl, self._render_template(tpl))
+            except ValueError:
+                # If the template cannot be rendered, we skip it
+                continue
+
+        result = re.sub(r"\s+", " ", str(code)).strip()
+        if result and not result.endswith("."):
+            result += "."
+
+        return result
+
+    def get_data(self, template_title, wikipage: str, language: str) -> List[str]:
+        sections = super().get_data(template_title, wikipage, language)
+        if not sections:
+            original_numbered = self.numbered
+            self.numbered = False
+            try:
+                sections = SubsectionImporter.get_data(
+                    self, template_title, wikipage, language
+                )
+            finally:
+                self.numbered = original_numbered
+        return [self._parse_text(sec) for sec in sections if sec.strip()]
 
 
 @use_wiktionary("en")
@@ -188,7 +244,8 @@ class FurtherReadingImporter(ReferencesImporter):
     data_type = "further_reading"
 
 
-class SeeAlsoImporter(FurtherReadingImporter):
+class SeeAlsoImporter(ListSubsectionImporter):
+    data_type = "see_also"
     section_name = "See also"
 
 
@@ -217,39 +274,20 @@ class DerivedTermsImporter(ListSubsectionImporter):
         subsection_data = SubsectionImporter.get_data(
             self, template_title, content, language
         )
-        retrieved = []
+        retrieved: List[str] = []
         for subsection_item in subsection_data:
-            # Simple list
             if "*" in subsection_item:
                 for item in subsection_item.split("*"):
                     item = item.strip()
-                    if "[[Thesaurus:" in item:
+                    if not item or "[[Thesaurus:" in item:
                         continue
-                    if "{{l|" + language in item:
-                        retrieved.extend(
-                            iter(
-                                re.findall(
-                                    "{{l\\|" + language + "\\|([0-9A-Za-z- ]+)}}",
-                                    item,
-                                )
-                            )
-                        )
-                    elif "[[" in item and "]]" in item:
-                        retrieved.extend(iter(re.findall("\\[\\[([0-9A-Za-z- ]+)\\]\\]", item)))
-                    elif "-l" in item:
-                        specific_list_item = re.findall(
-                            "\{\{([a-z\-]+)-l\|(.*)\}\}", item
-                        )
-                        print("yes")
-                        for language, word in specific_list_item:
-                            retrieved.append(word)
+                    retrieved.extend(self._extract_links(item, language))
 
-            # List in a template
             for template_name in (
-                [f"der{d}" for d in range(1, 5)]
-                + ["der-bottom", "der-top", "der-top3"]
-                + [f"der-mid{d}" for d in range(1, 5)]
-                + [f"col{d}" for d in range(1, 6)]
+                    [f"der{d}" for d in range(1, 5)]
+                    + ["der-bottom", "der-top", "der-top3"]
+                    + [f"der-mid{d}" for d in range(1, 5)]
+                    + [f"col{d}" for d in range(1, 6)]
             ):
                 if ("{{" + template_name + "|" + language) in subsection_item:
                     for item in subsection_item.split("\n"):
@@ -258,9 +296,8 @@ class DerivedTermsImporter(ListSubsectionImporter):
                                 item = item[: item.find("#")]
                             if "}}" in item:
                                 item = item.replace("}}", "")
-
                             item = item.lstrip("|")
-                            retrieved.append(item.strip())
+                            retrieved.extend(self._extract_links(item, language))
                         elif item == "}}":
                             break
 
@@ -339,7 +376,7 @@ class TranslationImporter(WiktionaryAdditionalDataImporter):
     section_name = "Translations"
 
     def get_data(
-        self, wikipage: str, language: str, page_name: str = ""
+            self, wikipage: str, language: str, page_name: str = ""
     ) -> List[Translation]:
         """
         Warning: Will need reworking as this does not retrieve the specific definition that's  being translated in a
@@ -442,6 +479,7 @@ all_importers = [
     PronunciationImporter,
     ReferencesImporter,
     EtymologyImporter,
+    ParsedEtymologyImporter,
     SynonymImporter,
     HeadwordImporter,
     TranscriptionImporter,

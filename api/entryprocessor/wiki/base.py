@@ -2,6 +2,8 @@
 import os
 import re
 from typing import List
+
+
 from api.config import BotjagwarConfig
 
 data_file = f"{os.getcwd()}/conf/entryprocessor/"
@@ -26,12 +28,30 @@ class WiktionaryProcessor(object):
         self.configuration = BotjagwarConfig("wiktionary_processor")
         self.debug = self.configuration.get("debug").lower() == "true"
         self.text_set = False
+        self._title = None
+
+
+    def set_title(self, title):
+        """Deprecated, use title property instead."""
+        self.title = title
+
+    @property
+    def title(self):
+        if self.Page is not None:
+            return self.Page.title()
+        elif self._title is not None:
+            return self._title
+
+        return None
+
+    @title.setter
+    def title(self, title):
+        self._title = title
 
     def process(self, page=None):
         if page is not None:
             # assert isinstance(page, pywikibot.Page), self.Page.__class__
             self.Page = page
-            self.title = self.Page.title()
         if not self.text_set:
             try:
                 if page is None:
@@ -47,9 +67,6 @@ class WiktionaryProcessor(object):
         self.content = text
         self.text_set = True
 
-    def set_title(self, title):
-        self.title = title
-
     def advanced_extract_definition(
         self, part_of_speech, definition_line, **other_params
     ):
@@ -62,7 +79,7 @@ class WiktionaryProcessor(object):
         raise NotImplementedError()
 
     @staticmethod
-    def refine_definition(definition, part_of_speech=None) -> List[str]:
+    def refine_definition(definition, part_of_speech=None, **other_params) -> List[str]:
         return [definition]
 
 

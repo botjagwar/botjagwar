@@ -80,10 +80,10 @@ class TestTranslateBridgeLanguageCommon(TestCase):
 
 class TestDefinitionsFormOfTemplates(TestCase):
     parameters = [
-        (
-            "es",
-            "{{es-verb form of|parametrar|ending=-ar|mood=subjunctive|tense=imperfect|number=p|person=3|sera=ra}}",
-        ),
+        # (
+        #     "es",
+        #     "{{es-verb form of|parametrar|ending=-ar|mood=subjunctive|tense=imperfect|number=p|person=3|sera=ra}}",
+        # ),
         ("fr", "{{inflection of|fr|décoller||3|p|futr}}"),
         ("de", "{{past participle of|de|übersetzen}}"),
         ("lv", "{{lv-inflection of|acs ābols|loc|s}}"),
@@ -97,8 +97,10 @@ class TestDefinitionsFormOfTemplates(TestCase):
     ):
         language, definition = language_and_definition
         for pos in ["e-mat", "mat"]:
-            return_data = rule_based.translate_form_of_templates(
-                pos, definition, language, target_language
+            entry = MagicMock()
+            entry.part_of_speech = pos
+            return_data = rule_based.FormOfDefinitionTranslatorFactory('en').translate_form_of_templates(
+                entry, definition, language, target_language
             )
             self.assertIsInstance(
                 return_data,

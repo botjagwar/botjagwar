@@ -28,7 +28,7 @@ def push_to_entry_translator():
                     )
                     time.sleep(15)
             data = data.strip("\n")
-            time.sleep(5)
+            time.sleep(1)
             print(">>>", data, "<<<")
             while True:
                 try:
@@ -45,7 +45,7 @@ def push_to_entry_translator():
                     time.sleep(10)
 
 
-def push_to_edit_queue():
+def webservice_push_to_edit_queue():
     from api.rabbitmq import RabbitMqWebService
 
     publisher = RabbitMqWebService("edit")
@@ -67,5 +67,27 @@ def push_to_edit_queue():
             )
 
 
+
+def connector_push_to_edit_queue():
+    from api.rabbitmq import RabbitMqProducer
+    import json
+    publisher = RabbitMqProducer("edit")
+    with open(sys.argv[2], "r") as file:
+        for data in file:
+            # time.sleep(.2)
+            print(">>>", data.strip("\n"), "<<<")
+            message = json.dumps({
+                    "language": "",
+                    "page": "",
+                    "content": "",
+                    "summary": "",
+                    "minor": "",
+                    "site": sys.argv[1],
+                    "title": data.strip("\n"),
+                    "user": "Jagwar",
+            })
+            publisher.publish(message)
+            # break
+
 if __name__ == "__main__":
-    push_to_edit_queue()
+    connector_push_to_edit_queue()

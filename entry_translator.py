@@ -178,6 +178,7 @@ async def handle_wiktionary_page(request) -> Response:
     )
 
 
+@routes.get("/translations/{language}/{pagename}")
 @routes.get("/translation/{language}/{pagename}")
 async def get_wiktionary_page_translation(request) -> Response:
     language = request.match_info["language"]

@@ -23,7 +23,19 @@ def parse_one_parameter_template(
     :return: a function which sould return the contents of the template specified in template_name
     """
 
-    def _parse_one_parameter_template(template_expression):
+    def _parse_one_parameter_template(template_expression, **context):
+        begin = template_expression.find("{{")
+        if begin != -1:
+            end = template_expression.find("}} ", begin)
+            if end == -1:
+                end = template_expression.find("}}", begin)
+                if end == -1:
+                    template_expression = template_expression[begin + 1:]
+                else:
+                    template_expression = template_expression[begin + 1 : end]
+            else:
+                template_expression = template_expression[begin + 1 : end]
+
         for char in "{}":
             template_expression = template_expression.replace(char, "")
         parts = template_expression.split("|")
@@ -48,7 +60,7 @@ def parse_one_parameter_template(
 
 
 def parse_inflection_of(out_class):
-    def _parse_inflection_of_partial(template_expression):
+    def _parse_inflection_of_partial(template_expression, **context):
         for char in "{}":
             template_expression = template_expression.replace(char, "")
         parts = template_expression.split("|")
@@ -79,7 +91,7 @@ def parse_inflection_of(out_class):
 
 
 def parse_lv_inflection_of(out_class):
-    def _parse_lv_inflection_of(template_expression):
+    def _parse_lv_inflection_of(template_expression, **context):
         """Example of recognised template:
          {{lv-inflection of|bagātīgs|dat|p|f||adj}}
         Should return 4 parameter"""
@@ -103,7 +115,7 @@ def parse_lv_inflection_of(out_class):
     return _parse_lv_inflection_of
 
 
-def parse_hu_inflection_of(template_expression):
+def parse_hu_inflection_of(template_expression, **context):
     for char in "{}":
         template_expression = template_expression.replace(char, "")
     parts = template_expression.split("|")
@@ -141,7 +153,7 @@ def parse_hu_inflection_of(template_expression):
 def parse_el_form_of(out_class, lemma_pos=1):
     assert out_class in (NounForm, AdjectiveForm)
 
-    def _wrapped_parse_el_form_of(template_expression):
+    def _wrapped_parse_el_form_of(template_expression, **context):
         for char in "{}":
             template_expression = template_expression.replace(char, "")
 
@@ -164,7 +176,7 @@ def parse_el_form_of(out_class, lemma_pos=1):
 
 
 def parse_romanization_template(lemma_position=2):
-    def _wrapped_parse_romanization_template(template_expression):
+    def _wrapped_parse_romanization_template(template_expression, **context):
         parts = template_expression.split("|")
         if len(parts) > lemma_position:
             lemma = parts[lemma_position]

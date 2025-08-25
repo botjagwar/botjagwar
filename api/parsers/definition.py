@@ -9,29 +9,30 @@ from api.parsers.models.inflection import (
 
 
 class WiktionaryDefinitionParser(object):
-    def __init__(self):
+    def __init__(self, wiki_language='en'):
         self.process_function = {}
+        self.wiki_language = wiki_language
 
     def add_parser(self, return_class, parser_function):
-        if return_class in self.process_function:
+        if (return_class, self.wiki_language) in self.process_function:
             raise ParserError(
                 f"parser already exists for '{return_class.__class__.__name__}'"
             )
-        self.process_function[return_class] = parser_function
+        self.process_function[(return_class, self.wiki_language)] = parser_function
 
-    def get_elements(
-        self, expected_class, form_of_definition
-    ) -> ["VerbForm", "AdjectiveForm", "NounForm", "NonLemma"]:
+    def get_elements(self, expected_class, form_of_definition) -> ["NonLemma"]:
         orig_template_expression = form_of_definition
         for c in "{}":
             form_of_definition = form_of_definition.replace(c, "")
         parts = form_of_definition.split("|")
-        if expected_class not in list(self.process_function.keys()):
+        process_functions = list(self.process_function.keys())
+        if (expected_class, self.wiki_language) not in process_functions:
             raise ParserNotFoundError(
                 f'No parser defined for "{parts[0]}": {orig_template_expression}'
             )
         try:
-            ret = self.process_function[expected_class](form_of_definition)
+            process_function = self.process_function[(expected_class, self.wiki_language)]
+            ret = process_function(form_of_definition)
             if not isinstance(ret, expected_class):
                 raise ParserError(
                     f"Wrong object returned. Expected {expected_class.__name__}, got {ret.__class__.__name__}"

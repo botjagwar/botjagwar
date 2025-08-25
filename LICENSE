@@ -1,14 +1,19 @@
-Copyright (c) 2017 Rado Andrianjanahary
+Copyright 2011–2025 Rado Andrianjanahary — All rights reserved.
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+All text and images in this repository (the "Software") are provided under a
+custom source-available license.
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
+It is forbidden to use this code in a commercial product or service without
+explicit permission from the author.
+
+Redistribution of this code or its derivatives on any public platform
+(including but not limited to GitHub, GitLab, Bitbucket) is not permitted
+without explicit permission.
+
+All changes to the code must be licensed under the same terms. By submitting a
+pull request, you agree to license your contributions under this license and
+grant the author a perpetual, irrevocable, worldwide, non-exclusive,
+royalty-free license to use, modify, and distribute your changes.
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,

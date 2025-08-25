@@ -1,3 +1,4 @@
+import os
 import pywikibot
 import requests
 
@@ -10,7 +11,10 @@ dyn_backend = DynamicBackend()
 
 def use_wiktionary(language):
     def wrap_use_wiki(cls):
-        cls.wiki = pywikibot.Site(language, "wiktionary")
+        if os.environ.get("PYWIKIBOT_NO_NETWORK"):
+            cls.wiki = None
+        else:
+            cls.wiki = pywikibot.Site(language, "wiktionary")
         return cls
 
     return wrap_use_wiki
@@ -60,9 +64,16 @@ class WiktionaryAdditionalDataImporter(AdditionalDataImporter):
         title = wikipage.title()
         return self.process_non_wikipage(title, content, language)
 
-    def run(self, root_category: str, wiktionary=pywikibot.Site("en", "wiktionary")):
-        self.wiktionary = wiktionary
-        category = pywikibot.Category(wiktionary, root_category)
+    def run(self, root_category: str, wiktionary=None):
+        if wiktionary is not None:
+            self.wiktionary = wiktionary
+        elif os.environ.get("PYWIKIBOT_NO_NETWORK"):
+            self.wiktionary = None
+        else:
+            self.wiktionary = pywikibot.Site("en", "wiktionary")
+        if self.wiktionary is None:
+            return
+        category = pywikibot.Category(self.wiktionary, root_category)
         for category in category.subcategories():
             name = category.title().replace("Category:", "")
             # print(name)

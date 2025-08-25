@@ -2,7 +2,7 @@
 from api.parsers.inflection_template import AdjectiveForm
 
 
-def parse_adjective_form(template_expression):
+def parse_adjective_form(template_expression, **context):
     for char in "{}":
         template_expression = template_expression.replace(char, "")
     parts = template_expression.split("|")
@@ -13,7 +13,7 @@ def parse_adjective_form(template_expression):
     return AdjectiveForm(lemma, "", number_, gender)
 
 
-def parse_fi_adjective_form_of(template_expression):
+def parse_fi_adjective_form_of(template_expression, **context):
     "{{fi-form of|näverrin|case=nominative|pl=plural}}"
     for char in "{}":
         template_expression = template_expression.replace(char, "")

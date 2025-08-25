@@ -10,8 +10,8 @@ class TestMalagasyWiktionaryEntryprocessor(
     def setUp(self):
         self.setup_for_language("mg", ["teny", "eau", "газета", "geloof"])
 
-    def test_get_all_entries(self):
-        super(TestMalagasyWiktionaryEntryprocessor, self).test_get_all_entries()
+    # def test_get_all_entries(self):
+    #     super(TestMalagasyWiktionaryEntryprocessor, self).test_get_all_entries()
 
     def test_retrieve_translations(self):
         super(TestMalagasyWiktionaryEntryprocessor, self).test_retrieve_translations()
