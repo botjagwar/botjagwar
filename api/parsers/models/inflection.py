@@ -13,9 +13,11 @@ class NonLemma(object):
     def to_definition(self, language):
         if not hasattr(renderers, language):
             raise AttributeError(f"Module api.parsers.renderers.{language} not found!")
+
         renderer_module = getattr(renderers, language)
         if hasattr(renderer_module, f"render_{self.renderer}"):
             return getattr(renderer_module, f"render_{self.renderer}")(self)
+
         raise AttributeError(
             f"Renderer function api.parsers.renderers.{language}.{self.renderer} not found!"
         )

@@ -1,10 +1,14 @@
-class UntranslatedDefinition(str):
+class Definition(str):
+    pass
+
+
+class UntranslatedDefinition(Definition):
 
     def __repr__(self):
         return f"{self.__class__.__name__}({self.__str__()})"
 
 
-class TranslatedDefinition(str):
+class TranslatedDefinition(Definition):
     def __init__(self, translation, languages: list = None):
         if languages is None:
             languages = []
@@ -37,7 +41,13 @@ class ConvergentTranslation(TranslatedDefinition):
 
 
 class FormOfTranslaton(TranslatedDefinition):
-    pass
+    def __init__(self, translation, languages: list = None):
+        super().__init__(translation, languages)
+        self.part_of_speech = None
+        self.lemma = None
+
+    def is_valid(self):
+        return self.lemma != ""
 
 
 __all__ = [

@@ -3,7 +3,7 @@ import asyncio
 import configparser
 import logging
 from copy import deepcopy
-from typing import List, Tuple, Any, Callable
+from typing import List, Tuple, Any, Callable, Optional
 
 import pywikibot
 
@@ -22,32 +22,28 @@ from .functions import postprocessors  # do __NOT__ delete!
 # from .functions import translate_using_suggested_translations_fr_mg
 # from .functions import translate_using_bridge_language
 # from .functions import translate_form_of_templates
-from .functions import translate_form_of_definitions
+from .functions.definitions.rule_based import FormOfDefinitionTranslatorFactory
 
 # from .functions import translate_using_convergent_definition
 from .functions.definitions import translate_using_nllb
+from .functions.definitions.preprocessors import refine_definition
 from .functions.pronunciation import translate_pronunciation
 from .functions.references import translate_references
 from .functions.utils import filter_additional_data
 from .functions.utils import form_of_part_of_speech_mapper
-from .functions.utils import try_methods_until_translated
+from api.translation_v2.functions.definitions.language_model_based import whitelists
+
 from .publishers import WiktionaryDirectPublisher
 from .types import UntranslatedDefinition, TranslatedDefinition, FormOfTranslaton
 
 log = logging.getLogger(__name__)
 URL_HEAD = DictionaryServiceManager().get_url_head()
+
+translate_form_of_definitions = FormOfDefinitionTranslatorFactory('en').translate_form_of_templates
 translation_methods = [
-    try_methods_until_translated(
-        # translate_using_convergent_definition,
-        translate_form_of_definitions,
-        translate_using_nllb,
-        # translate_using_bridge_language,
-        # translate_using_postgrest_json_dictionary,
-        # translate_using_suggested_translations_fr_mg,
-        # translate_using_opus_mt,
-        # translate_using_opus_mt,
-        # translate_form_of_templates,
-    ),
+    # function + whether the definition must be refined.
+    (translate_form_of_definitions, False),
+    (translate_using_nllb, True),
 ]
 
 already_visited = []
@@ -65,6 +61,15 @@ class Translation:
         Allows postprocessors to be defines on a per-language basis, or a language + part of speech basis.
         """
         super(Translation, self).__init__()
+
+        self.single_definition_whitelist_length = 20000
+        self.whitelists = {}
+        for language, word_list in whitelists.items():
+            if len(word_list) > self.single_definition_whitelist_length:
+                self.whitelists[language] = set(word_list[:self.single_definition_whitelist_length])
+            else:
+                self.whitelists[language] = set(word_list)
+
         self.output = Output()
         self.default_publisher = WiktionaryDirectPublisher()
         self.loop = asyncio.get_event_loop()
@@ -89,48 +94,44 @@ class Translation:
 
     def load_postprocessors(self, language, part_of_speech) -> List[Tuple[Any, Tuple]]:
         """
-        Load preprocessors for the specified language and combination of language:part-of-speech.
-        :param language:
-        :param part_of_speech:
-        :return: list of function names along with their static arguments
+        Load postprocessors for the specified language and combination of language:part-of-speech.
         """
-        post_processors = []
-        pos_specific_section_name = f"{language}:{part_of_speech}"
-        try:
-            language_section_postprocessors = (
-                self.postprocessors_config.specific_config_parser.options(language)
-            )
-        except configparser.NoSectionError:
-            pass
-        else:
-            for postprocessor_name in language_section_postprocessors:
-                arguments = tuple(
-                    self.postprocessors_config.specific_config_parser.get(
-                        language, postprocessor_name
-                    ).split(",")
-                )
-                post_processors.append((postprocessor_name, arguments))
+        post_processors = self._get_language_postprocessors(language)
+        pos_specific_postprocessors = self._get_pos_specific_postprocessors(language, part_of_speech)
 
-        try:
-            pos_specific_section = (
-                self.postprocessors_config.specific_config_parser.options(
-                    pos_specific_section_name
-                )
-            )
-        except configparser.NoSectionError:
-            pass
-        else:
-            if pos_specific_section is not None:
-                for postprocessor_name in pos_specific_section:
-                    arguments = tuple(
-                        self.postprocessors_config.specific_config_parser.get(
-                            pos_specific_section_name, postprocessor_name
-                        ).split(",")
-                    )
-                    if (postprocessor_name, arguments) not in post_processors:
-                        post_processors.append((postprocessor_name, arguments))
+        # Combine and ensure no duplicates
+        for postprocessor in pos_specific_postprocessors:
+            if postprocessor not in post_processors:
+                post_processors.append(postprocessor)
 
         return post_processors
+
+    def _get_language_postprocessors(self, language: str) -> List[Tuple[Any, Tuple]]:
+        """
+        Retrieve postprocessors for a specific language.
+        """
+        try:
+            options = self.postprocessors_config.specific_config_parser.options(language)
+            return [
+                (name, tuple(self.postprocessors_config.specific_config_parser.get(language, name).split(",")))
+                for name in options
+            ]
+        except configparser.NoSectionError:
+            return []
+
+    def _get_pos_specific_postprocessors(self, language: str, part_of_speech: str) -> List[Tuple[Any, Tuple]]:
+        """
+        Retrieve postprocessors for a specific language and part-of-speech combination.
+        """
+        section_name = f"{language}:{part_of_speech}"
+        try:
+            options = self.postprocessors_config.specific_config_parser.options(section_name)
+            return [
+                (name, tuple(self.postprocessors_config.specific_config_parser.get(section_name, name).split(",")))
+                for name in options
+            ]
+        except configparser.NoSectionError:
+            return []
 
     def _save_translation_from_page(self, infos: List[Entry]):
         """
@@ -147,7 +148,7 @@ class Translation:
 
     @staticmethod
     def add_wiktionary_credit(
-        entries: List[Entry], wiki_page: [entryprocessor.WiktionaryProcessor]
+        entries: List[Entry], wiki_page: entryprocessor.WiktionaryProcessor
     ) -> List[Entry]:
         reference = "{{wikibolana|" + wiki_page.language + "|" + wiki_page.title + "}}"
         out_entries = []
@@ -180,68 +181,67 @@ class Translation:
         return page.exists()
 
     def run_postprocessors(self, entries):
-        def check_post_processor_output(out_entries):
-            # Check post-processor hasn't changed output data format
-            if not isinstance(out_entries, list):
-                raise TranslationError("Post-processors must return list")
-            for entry in out_entries:
-                if not isinstance(entry, Entry):
-                    raise TranslationError(
-                        'Post-processors return list elements must all be of type Entry'
-                    )
+        """
+        Apply configured postprocessors to the provided entries.
 
-        def run_static_postprocessors(out_entries, post_processors):
-            """
-            Static postprocessor, manually set in-code
-            :param out_entries:
-            :param post_processors:
-            :return:
-            """
-            for post_processor in post_processors:
-                out_entries = post_processor(out_entries)
-            check_post_processor_output(out_entries)
-            return out_entries
+        Args:
+            entries: List of Entry objects to process
 
-        def run_dynamic_postprocessors(input_entries):
-            """
-            Dunamic postprocessor, set in the configuration file and run
-            :param input_entries:
-            :return:
-            """
-            out_entries = []
-            for entry in input_entries:
-                loaded_postprocessors = self.load_postprocessors(
-                    entry.language, entry.part_of_speech
-                )
-                if loaded_postprocessors:
-                    entry_to_process = [entry]
-                    for post_processor_name, arguments in loaded_postprocessors:
-                        log.debug(
-                            f"Running postprocessor {post_processor_name} with arguments {arguments}"
-                        )
-                        function = getattr(postprocessors, post_processor_name)(
-                            *arguments
-                        )
-                        entry_to_process = function(entry_to_process)
-
-                    out_entries += entry_to_process
-                else:
-                    out_entries += [entry]
-
-            return out_entries
-
+        Returns:
+            List of processed Entry objects
+        """
         if self.static_postprocessors:
-            if isinstance(self.post_processors, list):
-                if self.post_processors:
-                    entries = run_static_postprocessors(entries, self.post_processors)
-            else:
-                raise TranslationError(
-                    f"post processor must be a list, not {self.post_processors.__class__}"
-                )
+            return self._run_static_postprocessors(entries)
         else:
-            entries = run_dynamic_postprocessors(entries)
+            return self._run_dynamic_postprocessors(entries)
+
+    def _check_post_processor_output(self, entries):
+        """Validate that postprocessor output is correctly formatted."""
+        if not isinstance(entries, list):
+            raise TranslationError("Post-processors must return list")
+
+        for entry in entries:
+            if not isinstance(entry, Entry):
+                raise TranslationError('Post-processors return list elements must all be of type Entry')
 
         return entries
+
+    def _run_static_postprocessors(self, entries):
+        """Run manually configured postprocessors in code."""
+        if not isinstance(self.post_processors, list):
+            raise TranslationError(f"post processor must be a list, not {self.post_processors.__class__}")
+
+        if not self.post_processors:
+            return entries
+
+        processed_entries = entries
+        for post_processor in self.post_processors:
+            processed_entries = post_processor(processed_entries)
+
+        return self._check_post_processor_output(processed_entries)
+
+    def _run_dynamic_postprocessors(self, entries):
+        """Run postprocessors configured through configuration files."""
+        result_entries = []
+
+        for entry in entries:
+            loaded_postprocessors = self.load_postprocessors(
+                entry.language, entry.part_of_speech
+            )
+
+            if not loaded_postprocessors:
+                result_entries.append(entry)
+                continue
+
+            entry_to_process = [entry]
+            for post_processor_name, arguments in loaded_postprocessors:
+                log.debug(f"Running postprocessor {post_processor_name} with arguments {arguments}")
+                function = getattr(postprocessors, post_processor_name)(*arguments)
+                entry_to_process = function(entry_to_process)
+
+            result_entries.extend(entry_to_process)
+
+        return result_entries
 
     @staticmethod
     def aggregate_entry_data(
@@ -333,7 +333,7 @@ class Translation:
                     f"#FIHODINANA [[{target_page.title()}]]", "mametra-pihodinana"
                 )
 
-    def get_single_word_definitions(self, definition, language, part_of_speech):
+    def get_single_word_definitions(self, definition, language, part_of_speech) -> List[str]:
         """
         Get single word definitions from the dictionary
         """
@@ -343,6 +343,11 @@ class Translation:
         wiktionary_processor = wiktionary_processor_class()
         ret = []
 
+        if '[' in definition or ']' in definition:
+            definition = definition.replace('[', '').replace(']', '')
+        if '{' in definition or '}' in definition:
+            definition = definition.replace('{', '').replace('}', '')
+
         page = Page(Site(language, "wiktionary"), definition)
         wiktionary_processor.process(page)
 
@@ -350,186 +355,215 @@ class Translation:
             get_additional_data=True, cleanup_definitions=True, advanced=True
         ):
             if entry.part_of_speech == part_of_speech and entry.language == language:
-                ret += entry.definitions
+                for definition_line in entry.definitions:
+                    try:
+                        refined_definition_lines = wiktionary_processor.refine_definition(
+                            definition_line, part_of_speech=entry.part_of_speech,
+                            remove_all_templates=True,
+                            drop_labels=["obsolete", "dated", "archaic", "slang", "colloquial", "informal"]
+                        )
+                    except WiktionaryProcessorException:
+                        continue
+                    if refined_definition_lines:
+                        ret.append(refined_definition_lines[0])
+
 
         return ret
 
-    def translate_wiktionary_page(
-        self, wiktionary_processor: entryprocessor.WiktionaryProcessor
-    ) -> List[Entry]:
+    # python
+    def translate_wiktionary_page(self, wiktionary_processor: entryprocessor.WiktionaryProcessor) -> List[Entry]:
         """
-        Parse Wiktionary page data and translate any content/section that can be translated
+        Parse Wiktionary page data and translate any content/section that can be translated.
         """
         entries = wiktionary_processor.get_all_entries(
             get_additional_data=True,
             translate_definitions_to_malagasy=True,
             human_readable_form_of_definition=True,
         )
-        out_entries = []
+        translated_entries = []
+
         for entry in entries:
-            translated_definition = []
-            translated_from_definition = []
-            out_translation_methods = {}
-            definitions_count = len(entry.definitions)
-            for definition_line in entry.definitions:
-                try:
-                    refined_definition_lines = wiktionary_processor.refine_definition(
-                        definition_line, part_of_speech=entry.part_of_speech
-                    )
-                except WiktionaryProcessorException:
-                    continue
+            translated_definitions = self._translate_entry_definitions(entry, wiktionary_processor)
+            if translated_definitions:
+                translated_entry = self._prepare_translated_entry(entry, translated_definitions, wiktionary_processor)
+                translated_entries.append(translated_entry)
 
-                # Handle single-word definitions: fetch single word definitions and use those instead
-                if definitions_count == 1:
-                    for refined_definition_line in refined_definition_lines:
-                        if len(refined_definition_line.split()) == 1:
-                            if single_word_definitions := self.get_single_word_definitions(
-                                refined_definition_lines[0],
-                                language=wiktionary_processor.language,
-                                part_of_speech=entry.part_of_speech,
-                            ):
-                                refined_definition_lines = single_word_definitions
+        translated_entries = self._postprocess_entries(translated_entries, wiktionary_processor)
+        return translated_entries
 
-                for refined_definition_line in refined_definition_lines:
-                    # Try translation methods in succession.
-                    # If one method produces something, skip the rest
-                    for translation_method in translation_methods:
-                        if entry.part_of_speech is None:
-                            print(
-                                f"No part of speech found! Skipping {translation_method.__name__}"
-                            )
-                            continue
+    def _translate_entry_definitions(self, entry: Entry, wiktionary_processor) -> List[str]:
+        """
+        Translate definitions for a single entry using available translation methods.
+        """
+        translated_definitions = []
+        for definition_line in entry.definitions:
+            refined_definitions = self._refine_definitions(definition_line, entry, wiktionary_processor)
+            cleaned_definitions = []
+            for refined_definition in refined_definitions:
+                refined_definition_size = len(refined_definition.split())
+                if refined_definition_size < 2 and refined_definition not in self.whitelists[wiktionary_processor.language]:
+                    try:
+                        cleaned_definitions += self.get_single_word_definitions(refined_definition, wiktionary_processor.language, entry.part_of_speech)
+                    except pywikibot.exceptions.InvalidTitleError:
+                        # If the definition is not a valid title, skip it
+                        continue
+                else:
+                    cleaned_definitions += [refined_definition]
 
-                        definitions = translation_method(
-                            entry.part_of_speech,
-                            refined_definition_line,
-                            wiktionary_processor.language,
-                            self.working_wiki_language,
-                            language=entry.language,
-                        )
-                        if isinstance(definitions, UntranslatedDefinition):
-                            print(
-                                f"{translation_method.__name__} found no translation "
-                                f'for "{refined_definition_lines}"... Skipping'
-                            )
-                            continue
-                        elif isinstance(
-                            definitions, (TranslatedDefinition, FormOfTranslaton)
-                        ):
-                            # Change POS to something more specific for form-of definitions
-                            if isinstance(definitions, FormOfTranslaton) and (
-                                                                entry.part_of_speech
-                                                                in form_of_part_of_speech_mapper.keys()
-                                                            ):
-                                entry.part_of_speech = (
-                                    form_of_part_of_speech_mapper[
-                                        entry.part_of_speech
-                                    ]
-                                )
+            for refined_definition in cleaned_definitions:
+                translation = self._apply_translation_methods(refined_definition, entry, wiktionary_processor)
+                if translation:
+                    translated_definitions.append(translation)
 
-                            for d in definitions.split(","):
-                                # translated_definition.append(d.strip())
-                                if d in out_translation_methods:
-                                    out_translation_methods[d].append(
-                                        translation_method.__name__
-                                    )
-                                else:
-                                    out_translation_methods[d] = [
-                                        translation_method.__name__
-                                    ]
+        return list(set(translated_definitions))  # Remove duplicates
 
-                            translated_definition += [str(definitions)]
+    def _refine_definitions(self, definition_line: str, entry: Entry, wiktionary_processor) -> List[str]:
+        """
+        Refine a definition line for translation.
+        """
+        try:
+            return wiktionary_processor.refine_definition(
+                definition_line, part_of_speech=entry.part_of_speech
+            )
+        except WiktionaryProcessorException:
+            return []
 
-                    translated_from_definition.append(refined_definition_line)
+    def _apply_translation_methods(self, definition: str, entry: Entry, wiktionary_processor) -> Optional[str]:
+        """
+        Apply translation methods to a single definition.
+        """
+        for translation_method, refine_function in translation_methods:
+            if refine_function:
+                definition = self._remove_templates(definition, entry, wiktionary_processor)
 
-            entry_definitions = sorted(list(set(translated_definition)))
-            out_entry = deepcopy(entry)
-            if not out_entry.additional_data:
-                out_entry.additional_data = {}
-
-            out_entry.definitions = entry_definitions
-            for definition in out_entry.definitions:
-                if "translation_data" not in out_entry.additional_data:
-                    out_entry.additional_data["translation_data"] = []
-
-                translation_data = {
-                    "definition": definition,
-                    "language": wiktionary_processor.language,
-                    "method": out_translation_methods.get(definition),
-                }
-                out_entry.additional_data["translation_data"].append(translation_data)
-
-            if entry.additional_data is not None:
-                for reference_name in ["reference", "further_reading"]:
-                    if reference_name in entry.additional_data:
-                        references = entry.additional_data[reference_name]
-                        translated_references = translate_references(
-                            references,
-                            source=wiktionary_processor.language,
-                            target=self.working_wiki_language,
-                            use_postgrest="automatic",
-                        )
-                        out_entry.additional_data[reference_name] = (
-                            translated_references
-                        )
-                        for reference, translated_reference in list(
-                            zip(references, translated_references)
-                        ):
-                            self.reference_template_queue.add(
-                                (reference, translated_reference)
-                            )
-
-            if entry.additional_data and "pronunciation" in entry.additional_data:
-                out_entry.additional_data["pronunciation"] = translate_pronunciation(
-                    entry.additional_data["pronunciation"]
+            if definition:
+                translation = translation_method(
+                    entry,
+                    definition,
+                    wiktionary_processor.language,
+                    self.working_wiki_language,
+                    language=entry.language,
                 )
+                if isinstance(translation, TranslatedDefinition):
+                    return str(translation)
 
-            entry.additional_data = filter_additional_data(entry.additional_data)
-            if entry_definitions:
-                out_entries.append(out_entry)
+        return None
 
-        out_entries.sort()
-        out_entries = Translation.add_wiktionary_credit(
-            out_entries, wiktionary_processor
+    def _remove_templates(self, definition: str, entry: Entry, wiktionary_processor) -> str:
+        """
+        Remove templates from a definition if required by the translation method.
+        """
+        if definition and isinstance(definition, list):
+            definition = definition[0]
+        refined = wiktionary_processor.refine_definition(
+            definition, part_of_speech=entry.part_of_speech, remove_all_templates=True
         )
+        return refined[0] if refined else ''
 
-        # Post-processors takes the list of entries and returns the same.
-        out_entries = self.run_postprocessors(out_entries)
-        return out_entries
+    def _prepare_translated_entry(self, entry: Entry, definitions: List[str], wiktionary_processor) -> Entry:
+        """
+        Prepare a translated entry with additional data and references.
+        """
+        translated_entry = deepcopy(entry)
+        translated_entry.definitions = definitions
+        translated_entry.additional_data = self._translate_additional_data(entry, wiktionary_processor)
+        return translated_entry
+
+    def _translate_additional_data(self, entry: Entry, wiktionary_processor) -> dict:
+        """
+        Translate additional data such as references and pronunciation.
+        """
+        additional_data = entry.additional_data or {}
+        if "reference" in additional_data:
+            additional_data["reference"] = translate_references(
+                additional_data["reference"],
+                source=wiktionary_processor.language,
+                target=self.working_wiki_language,
+                use_postgrest="automatic",
+            )
+        if "pronunciation" in additional_data:
+            additional_data["pronunciation"] = translate_pronunciation(additional_data["pronunciation"])
+        return filter_additional_data(additional_data)
+
+    def _postprocess_entries(self, entries: List[Entry], wiktionary_processor) -> List[Entry]:
+        """
+        Run postprocessors on the translated entries.
+        """
+        entries = Translation.add_wiktionary_credit(entries, wiktionary_processor)
+        return self.run_postprocessors(entries)
 
     def process_wiktionary_wiki_page(
-        self, wiki_page: [Page, pywikibot.Page], custom_publish_function=None
+            self, wiki_page: Page, custom_publish_function=None
     ):
+        """
+        Process a Wiktionary page and handle translations.
+        """
         if custom_publish_function is None:
             publish = self.default_publisher.publish_to_wiktionary(self)
         else:
             publish = custom_publish_function
 
         if not wiki_page.namespace().content:
+            log.warning(
+                "Skipping page '%s' as it has no content namespace.", wiki_page.title()
+            )
             return
 
         language = wiki_page.site.lang
 
-        wiktionary_processor_class = entryprocessor.WiktionaryProcessorFactory.create(
-            language
-        )
-        wiktionary_processor = wiktionary_processor_class()
+        try:
+            wiktionary_processor_class = entryprocessor.WiktionaryProcessorFactory.create(
+                language
+            )
+            wiktionary_processor = wiktionary_processor_class()
+        except Exception as exc:
+            log.exception(
+                "Failed to create WiktionaryProcessor for language '%s': %s",
+                language,
+                exc,
+            )
+            return
+
         if wiki_page.isRedirectPage():
-            return self.process_wiktionary_wiki_page(wiki_page.getRedirectTarget())
-        wiktionary_processor.set_text(wiki_page.get())
-        wiktionary_processor.set_title(wiki_page.title())
+            try:
+                return self.process_wiktionary_wiki_page(wiki_page.getRedirectTarget())
+            except pywikibot.exceptions.InvalidTitleError as exc:
+                log.error(
+                    "Invalid redirect target for page '%s': %s", wiki_page.title(), exc
+                )
+                return
+
+        try:
+            wiktionary_processor.set_title(wiki_page.title())
+            wiktionary_processor.set_text(wiki_page.get())
+        except Exception as exc:
+            log.exception(
+                "Failed to set text or title for page '%s': %s", wiki_page.title(), exc
+            )
+            return
+
         try:
             out_entries = self.translate_wiktionary_page(wiktionary_processor)
+            if not out_entries:
+                log.info("No entries translated for page '%s'.", wiki_page.title())
+                return 0
+
             ret = self.output.wikipages(out_entries)
-            if ret != "":
-                log.debug(f"out_entries>{str(out_entries)}")
+            if ret:
+                log.debug(
+                    "Translated entries for page '%s': %s", wiki_page.title(), out_entries
+                )
                 publish(page_title=wiki_page.title(), entries=out_entries)
                 self._save_translation_from_page(out_entries)
                 self.publish_translated_references(
                     wiktionary_processor.language, self.working_wiki_language
                 )
                 return len(out_entries)
-
-            return 0
+        except TranslationError as exc:
+            log.error("Translation error for page '%s': %s", wiki_page.title(), exc)
         except Exception as exc:
-            log.exception(exc)
+            log.exception(
+                "Unexpected error while processing page '%s': %s", wiki_page.title(), exc
+            )
+
+        return 0

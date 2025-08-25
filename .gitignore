@@ -10,4 +10,5 @@ database_password
 userdata/*
 /.github/
 /apicache-py3/
-!/pywikibot.lwp
+/AGENTS.md
+/.sourcery.yaml

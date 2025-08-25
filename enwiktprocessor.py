@@ -16,7 +16,7 @@ enwikt = RedisSite("en", "wiktionary")
 def test_one():
     page = RedisPage(enwikt, "ˤ3pp")
     processor = ENWiktionaryProcessor()
-    processor.set_title(page.title())
+    processor.title = page.title()
     processor.set_text(page.get())
     print(page)
     for k in processor.get_all_entries(get_additional_data=True):

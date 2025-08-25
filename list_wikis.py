@@ -4,7 +4,10 @@ import re
 import time
 
 import pywikibot
+import random
 import requests
+from itertools import cycle
+
 
 data_file = "/opt/botjagwar/conf/list_wikis/"
 try:
@@ -16,6 +19,17 @@ except KeyError:
 class Wikilister(object):
     def __init__(self, test=False):
         self.test = test
+
+        # self.user_agent_list = [
+        #     "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36",
+        #     "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:139.0) Gecko/20100101 Firefox/139.0",
+        #     "Mozilla/5.0 (iPhone; CPU iPhone OS 18_5 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.5 Mobile/15E148 Safari/604.1",
+        #     # ...,
+        # ]
+        self.user_agent_list = [
+            "Bot-Jagwar/1.7 (Linux; x64) python-requests/2.32.3",
+        ]
+
 
     def getLangs(self, site):
         dump = open(f"{data_file}listof{site}.txt", "r").read()
@@ -33,15 +47,32 @@ class Wikilister(object):
         datas = []
         i = 0
         for lang in self.getLangs(site):
+            # generate a single random User Agent from the pool
+            random_user_agent = cycle(self.user_agent_list)
+            user_agent = next(random_user_agent)
+
+            # use the randomized User Agent
+            headers = {"User-Agent": user_agent}
+
             # Getting and formatting statistics JSON
             urlstr = f"https://{lang}.{site}.org/w/api.php?action=query&meta=siteinfo&format=json&siprop=statistics&continue"
-            resp = requests.get(urlstr)
-            if resp.status_code != 200:
-                continue
-            try:
-                stats = resp.json()
-            except json.decoder.JSONDecodeError:
-                continue
+            resp = requests.get(urlstr, headers=headers)
+            while True:
+                if resp.status_code != 200:
+                    print(
+                        f"Hadisoana tamin'ny fangatahana ny statistika {lang} {site} : {resp.status_code}"
+                    )
+                    time.sleep(10)
+                    continue
+                try:
+                    stats = resp.json()
+                    break
+                except json.decoder.JSONDecodeError:
+                    print(
+                        f"Hadisoana tamin'ny famakiana ny statistika {lang} {site} : {resp.text}"
+                    )
+                    time.sleep(10)
+                    continue
 
             m = stats["query"]["statistics"]
             e = [

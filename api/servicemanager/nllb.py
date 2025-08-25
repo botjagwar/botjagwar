@@ -46,6 +46,7 @@ class NllbDefinitionTranslation(object):
     def get_translation(self, sentence: str):
         if translation := self.get_translation_in_cache(sentence):
             return translation
+
         translation = self.get_nllb_translation(sentence)
         url = f"http://{self.postgrest_server}/nllb_translations"
         json = {
@@ -54,12 +55,10 @@ class NllbDefinitionTranslation(object):
             "source_language": self.source_language,
             "target_language": self.target_language,
         }
-        request = requests.post(url, json=json)
-        if request.status_code == 201:
-            return translation
+        requests.post(url, json=json)
 
-        else:
-            raise DefinitionTranslationError(f"Unknown error: {request.text}")
+        return translation
+
 
     def get_translation_in_cache(self, sentence: str):
         url = f"http://{self.postgrest_server}/nllb_translations?source_language=eq.{self.source_language}&target_language=eq.{self.target_language}&sentence=eq.{sentence}"

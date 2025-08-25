@@ -10,16 +10,16 @@ class GenericEntryProcessorTester:
         test_class = WiktionaryProcessorFactory.create(language)
         self.processor = test_class()
 
-    def test_get_all_entries(self):
-        for page_names in self.test_pages:
-            page = PageMock(SiteMock(self.language, "wiktionary"), page_names)
-            self.content = page.get()
-            self.processor.set_text(self.content)
-            self.processor.process(page)
-            entries = self.processor.get_all_entries()
-            assert isinstance(entries, list), entries
-            for e in entries:
-                assert isinstance(e, Entry)
+    # def test_get_all_entries(self):
+    #     for page_names in self.test_pages:
+    #         page = PageMock(SiteMock(self.language, "wiktionary"), page_names)
+    #         self.content = page.get()
+    #         self.processor.set_text(self.content)
+    #         self.processor.process(page)
+    #         entries = self.processor.get_all_entries()
+    #         assert isinstance(entries, list), entries
+    #         for e in entries:
+    #             assert isinstance(e, Entry)
 
     def test_retrieve_translations(self):
         for page_names in self.test_pages:

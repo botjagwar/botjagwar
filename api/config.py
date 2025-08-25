@@ -42,8 +42,13 @@ class BotjagwarConfig(object):
         if self.specific_config_parser is None:
             return self.default_config_parser.get(section, key)
         try:
-            self.specific_config_parser.get(section, key)
+            # Return the value from the specific configuration if available
+            return self.specific_config_parser.get(section, key)
         except configparser.NoSectionError:
+            # Fall back to the default configuration when the section is
+            # missing in the specific config file
             return self.default_config_parser.get(section, key)
-        except KeyError as e:
+        except (configparser.NoOptionError, KeyError) as e:
+            # Mirror the previous behaviour of raising KeyError when the key
+            # does not exist in either configuration file
             raise KeyError(f"No key {key} in section {section}") from e

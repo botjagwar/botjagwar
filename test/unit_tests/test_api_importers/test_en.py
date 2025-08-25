@@ -1,5 +1,6 @@
 from api.importer.wiktionary.en import (
     FurtherReadingImporter,
+    SeeAlsoImporter,
     PronunciationImporter,
     AntonymImporterL5,
     HeadwordImporter,
@@ -8,6 +9,7 @@ from api.importer.wiktionary.en import (
     DerivedTermsImporter,
     ReferencesImporter,
     EtymologyImporter,
+    ParsedEtymologyImporter,
     SynonymImporter,
 )
 from . import ApiImporterTester
@@ -55,6 +57,26 @@ class TestDerivedTermsImporter(ApiImporterTester):
     data_does_not_exist_index = None
     filename = "importers/derived_terms.wiki"
     language = "vi"
+    def test_specific_templates_are_resolved(self):
+        importer = self.Importer()
+        data = importer.get_data("", self.wikipages[self.data_exists_index], self.language)
+        self.assertIn("phi báo", data)
+        self.assertIn("phi hành gia", data)
+        self.assertIn("phi trường", data)
+
+
+class TestSeeAlsoImporter(ApiImporterTester):
+    Importer = SeeAlsoImporter
+    data_exists_index = 6
+    data_does_not_exist_index = None
+    filename = "importers/en-wikipage.txt"
+    language = "vi"
+
+    def test_template_links_resolved(self):
+        importer = self.Importer()
+        data = importer.get_data("", self.wikipages[self.data_exists_index], self.language)
+        self.assertIn("phi-la-tốp", data)
+        self.assertIn("phi lê", data)
 
 
 class TestPronunciationImporter(ApiImporterTester):
@@ -79,6 +101,23 @@ class TestEtymologyImporter(ApiImporterTester):
     Importer = EtymologyImporter
     data_exists_index = 6
     data_does_not_exist_index = 1
+
+
+class TestParsedEtymologyImporter(ApiImporterTester):
+    Importer = ParsedEtymologyImporter
+    data_exists_index = 0
+    data_does_not_exist_index = None
+    filename = "importers/parsed_etymology.wiki"
+    language = "en"
+
+    def test_parsed_content(self):
+        importer = self.Importer()
+        data = importer.get_data("", self.wikipages[0], self.language)
+        expected = (
+            "From {{enm}} ''þrusten'', from {{non}} ''þrysta'', "
+            "from {{gem-pro}} ''*þrustijaną'', possibly from {{ine-pro}} ''*trewd-''."
+        )
+        self.assertEqual(data[0], expected)
 
 
 class TestSynonymImporter(ApiImporterTester):

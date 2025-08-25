@@ -2,8 +2,14 @@ import json
 
 import pika
 import pywikibot
+from pywikibot import config
+
+
 
 from api.config import BotjagwarConfig
+
+# Reduce wait time between edits
+config.put_throttle = .864  # wait only 1 second between edits
 
 config = BotjagwarConfig()
 
@@ -25,7 +31,13 @@ def save_to_wiki(pagename, page_content, summary, action):
 
     if action == "edit":
         print(f"SAVING   page: {pagename}, Summary - {summary}")
-        page.put(page_content, summary)
+        page.text = page_content
+        # print(page.text[:1000])
+        try:# Print the first 1000 characters of the content
+            page.save(summary, force=True, minor=False)
+        except pywikibot.exceptions.OtherPageSaveError as e:
+            print(f"Error saving page {pagename}: {e}")
+            # Handle the error, e.g., log it or retry
     elif action == "delete":
         print(f"DELETING page: {pagename}, Summary - {summary}")
         page.delete("Hadisoana teo amim-pamoronana ilay pejy")
@@ -72,6 +84,11 @@ def consume_wiki_messages():
     # Start consuming messages
     channel.start_consuming()
 
+if __name__ == "__main__":
+    # Print the RabbitMQ connection parameters
+    print(f"Connecting to RabbitMQ at {RABBITMQ_HOST} with queue {RABBITMQ_QUEUE}")
 
-# Call the consume_wiki_messages function to start consuming messages from RabbitMQ
-consume_wiki_messages()
+    # Print the credentials used for RabbitMQ authentication
+    print(f"Using credentials: {RABBITMQ_USERNAME}/{RABBITMQ_PASSWORD} on vhost {RABBITMQ_VIRTUAL_HOST}")
+    # Call the consume_wiki_messages function to start consuming messages from RabbitMQ
+    consume_wiki_messages()

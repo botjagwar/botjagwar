@@ -4,22 +4,30 @@ import pika
 import sys
 import time
 
+from redis_wikicache import RedisPage, RedisSite
+
 from api.config import BotjagwarConfig
 
 config = BotjagwarConfig()
 
+if len(sys.argv) < 4:
+    print("Usage: python add_to_edit_queue.py <en_file> <mg_file> <action>")
+    print("Available actions: publish_to_rabbitmq_channel")
+    sys.exit(1)
+
 en_file = sys.argv[1]
 mg_file = sys.argv[2]
+action = sys.argv[3]
 
 with open(en_file, "r") as f:
-    en_entries = {k.strip("\n").strip() for k in f.readlines()}
+    en_entries = {k.strip("\n").strip().replace("_", " ") for k in f.readlines()}
 
 with open(mg_file, "r") as f:
-    mg_entries = {k.strip("\n").strip() for k in f.readlines()}
+    mg_entries = {k.strip("\n").strip().replace("_", " ") for k in f.readlines()}
 
 try:
     with open(en_file, "r") as f:
-        to_create = {k.strip("\n").strip() for k in f.readlines()}
+        to_create = {k.strip("\n").strip().replace("_", " ") for k in f.readlines()}
 except FileNotFoundError:
     to_create = set()
 
@@ -30,7 +38,7 @@ else:
 
 print(f"Golden source contains {len(en_entries)} entries")
 print(f"Non-golden source contains {len(mg_entries)} entries")
-print(f"{len(to_create)} entries will be deleted.")
+print(f"{len(to_create)} entries will be created.")
 
 # ---------------------------------------------------------------------------------------------------------------------
 
@@ -55,21 +63,31 @@ credentials = pika.PlainCredentials(RABBITMQ_USERNAME, RABBITMQ_PASSWORD)
 parameters = pika.ConnectionParameters(
     host=RABBITMQ_HOST, virtual_host=RABBITMQ_VIRTUAL_HOST, credentials=credentials
 )
-connection = pika.BlockingConnection(parameters)
-channel = connection.channel()
-channel.queue_declare(queue=RABBITMQ_QUEUE, durable=True)
 
 print("Connection OK.")
 
+
+def publish_to_rabbitmq_channel(channel=RABBITMQ_QUEUE):
+    connection = pika.BlockingConnection(parameters)
+    channel = connection.channel()
+    channel.queue_declare(queue=RABBITMQ_QUEUE, durable=True)
+
+    def publish(page):
+        message = json.dumps({"site": "en", "title": page, "user": "Jagwar"})
+        channel.basic_publish(
+            exchange="",
+            routing_key=channel,
+            body=bytes(message, encoding="utf8"),
+            properties=pika.BasicProperties(
+                delivery_mode=2  # Makes the message persistent
+            ),
+        )
+        time.sleep(0.005)
+
+    return publish
+
+
+function = eval(action)
+
 for page in to_create:
-    print(f"To create: {page}")
-    message = json.dumps({"site": "en", "title": page, "user": "Jagwar"})
-    channel.basic_publish(
-        exchange="",
-        routing_key=RABBITMQ_QUEUE,
-        body=bytes(message, encoding="utf8"),
-        properties=pika.BasicProperties(
-            delivery_mode=2  # Makes the message persistent
-        ),
-    )
-    time.sleep(0.02)
+    function(page)

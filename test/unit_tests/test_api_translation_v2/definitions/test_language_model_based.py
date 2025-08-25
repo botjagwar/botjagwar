@@ -1,5 +1,5 @@
 from unittest.mock import MagicMock
-
+from api.model.word import Entry
 import pytest
 
 from api.translation_v2.functions.definitions.language_model_based import (
@@ -50,6 +50,17 @@ def convergenttranslations_fixture(mocker):
 
 
 class LanguageModelTest:
+    ENTRIES = [
+        Entry(entry='Entry1', language="de", part_of_speech="ana", definitions=["definition1", "definition2"], additional_data={}),
+        Entry(entry='Entry2', language="fr", part_of_speech="mat", definitions=["definition3"], additional_data={}),
+        Entry(entry='Entṙy3', language="en", part_of_speech="mpam", definitions=["definition4"], additional_data={}),
+        Entry(entry='ėntry4', language="es", part_of_speech="tamb", definitions=["definition5"], additional_data={}),
+        Entry(entry='éntry5', language="ko", part_of_speech="tovona", definitions=["definition6"], additional_data={}),
+        Entry(entry='ẽntry6', language="vi", part_of_speech="tovana", definitions=["definition7"], additional_data={}),
+        Entry(entry='Entry7', language="id", part_of_speech="e-ana", definitions=["definition8"], additional_data={}),
+        Entry(entry='Entry8', language="ms", part_of_speech="e-mat", definitions=["definition9"], additional_data={}),
+        Entry(entry='Entry9', language="tr", part_of_speech="e-mpam", definitions=["definition10"], additional_data={}),
+    ]
     PARTS_OF_SPEECH = [
         "ana",
         "mat",
@@ -148,11 +159,11 @@ class TestLanguageModelBased(LanguageModelTest):
         pass
 
     @pytest.mark.parametrize("language", ["en", "fr", "de"])
-    @pytest.mark.parametrize("part_of_speech", LanguageModelTest.PARTS_OF_SPEECH)
+    @pytest.mark.parametrize("entry", LanguageModelTest.ENTRIES)
     def test_translate_using_nllb(
         self,
         language,
-        part_of_speech,
+        entry,
         nllb_definition_translation,
         openmttranslation,
         jsondictionary,
@@ -163,7 +174,7 @@ class TestLanguageModelBased(LanguageModelTest):
         )
 
         translate_using_nllb(
-            part_of_speech=part_of_speech,
+            entry=entry,
             source_language=language,
             target_language="mg",
             definition_line="a very good definition",
@@ -181,7 +192,7 @@ class TestLanguageModelBased(LanguageModelTest):
         nllb_definition_translation.return_value.get_translation.return_value = gotcha
 
         translate_using_nllb(
-            part_of_speech="ana",
+            entry=Entry(entry="word", language="mg", part_of_speech="ana", definitions=[], additional_data={}),
             source_language="en",
             target_language="mg",
             definition_line="a very good definition",

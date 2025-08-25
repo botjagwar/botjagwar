@@ -2,8 +2,8 @@
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 11.7 (Raspbian 11.7-0+deb10u1)
--- Dumped by pg_dump version 11.7 (Raspbian 11.7-0+deb10u1)
+-- Dumped from database version 16.8 (Ubuntu 16.8-0ubuntu0.24.04.1)
+-- Dumped by pg_dump version 16.8 (Ubuntu 16.8-0ubuntu0.24.04.1)
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -38,7 +38,7 @@ CREATE FUNCTION public.add_new_association() RETURNS trigger
     LANGUAGE plpgsql
     AS $$BEGIN
 
-insert into
+insert into 
     new_associations (word, definition, associated_on, status)
 values
     (NEW.word, NEW.definition, current_timestamp, 'PENDING');
@@ -56,10 +56,10 @@ ALTER FUNCTION public.add_new_association() OWNER TO postgres;
 CREATE FUNCTION public.add_pending_definition_change() RETURNS trigger
     LANGUAGE plpgsql
     AS $$BEGIN
-IF NEW.definition != OLD.definition
+IF NEW.definition != OLD.definition 
 THEN
         INSERT into events_definition_changed (
-            definition_id,
+            definition_id,   
             change_datetime,
             status,
             status_datetime,
@@ -109,9 +109,88 @@ $$;
 
 ALTER FUNCTION public.events_rel_definition_word_deleted() OWNER TO postgres;
 
+--
+-- Name: fix_repeated_subsentence(text); Type: FUNCTION; Schema: public; Owner: botjagwar
+--
+
+CREATE FUNCTION public.fix_repeated_subsentence(sentence text) RETURNS text
+    LANGUAGE plpgsql IMMUTABLE
+    AS $_$
+DECLARE
+    words TEXT[];
+    len INTEGER;
+    sublen INTEGER;
+    i INTEGER;
+    subsentence TEXT;
+    pattern TEXT;
+BEGIN
+    words := regexp_split_to_array(sentence, '\s+');
+    len := array_length(words, 1);
+
+    FOR sublen IN REVERSE len/2 .. 1 LOOP
+        FOR i IN 1 .. (len - sublen * 3 + 1) LOOP
+            subsentence := array_to_string(words[i : i + sublen - 1], ' ');
+
+            pattern := '(' || regexp_replace(subsentence, '([.*+?^${}()|\[\]\\])', '\\\1', 'g') || ')(\s+\1){2,}';
+
+            IF sentence ~ pattern THEN
+                sentence := regexp_replace(sentence, pattern, '\1 ', 'g');
+                sentence := regexp_replace(sentence, '\s{2,}', ' ', 'g');
+                words := regexp_split_to_array(sentence, '\s+');
+                len := array_length(words, 1);
+                sublen := len / 2 + 1;
+                i := 0;
+            END IF;
+        END LOOP;
+    END LOOP;
+
+    RETURN trim(sentence);
+END;
+$_$;
+
+
+ALTER FUNCTION public.fix_repeated_subsentence(sentence text) OWNER TO botjagwar;
+
+--
+-- Name: get_repeated_subsentence(text); Type: FUNCTION; Schema: public; Owner: botjagwar
+--
+
+CREATE FUNCTION public.get_repeated_subsentence(sentence text) RETURNS text
+    LANGUAGE plpgsql IMMUTABLE
+    AS $$
+DECLARE
+    words TEXT[];
+    len INTEGER;
+    sublen INTEGER;
+    i INTEGER;
+    subsentence TEXT;
+    repeated_pattern TEXT;
+BEGIN
+    words := regexp_split_to_array(sentence, '\s+');
+    len := array_length(words, 1);
+
+    FOR sublen IN REVERSE len/2 .. 1 LOOP
+        FOR i IN 1 .. (len - sublen * 3 + 1) LOOP
+            subsentence := array_to_string(words[i : i + sublen - 1], ' ');
+
+            repeated_pattern := subsentence || ' ' || subsentence || ' ' || subsentence;
+
+            IF position(repeated_pattern IN sentence) > 0 THEN
+                RETURN subsentence;
+            END IF;
+        END LOOP;
+    END LOOP;
+
+    RETURN NULL;
+END;
+$$;
+
+
+ALTER FUNCTION public.get_repeated_subsentence(sentence text) OWNER TO botjagwar;
+
 SET default_tablespace = '';
 
-SET default_with_oids = false;
+SET default_table_access_method = heap;
 
 --
 -- Name: additional_word_information; Type: TABLE; Schema: public; Owner: postgres
@@ -131,36 +210,36 @@ ALTER TABLE public.additional_word_information OWNER TO postgres;
 --
 
 CREATE VIEW public.additional_word_information_by_type AS
- SELECT additional_word_information.type,
+ SELECT type,
     count(*) AS count
    FROM public.additional_word_information
-  GROUP BY additional_word_information.type;
+  GROUP BY type;
 
 
-ALTER TABLE public.additional_word_information_by_type OWNER TO postgres;
+ALTER VIEW public.additional_word_information_by_type OWNER TO postgres;
 
 --
 -- Name: additional_word_information_types; Type: VIEW; Schema: public; Owner: postgres
 --
 
 CREATE VIEW public.additional_word_information_types AS
- SELECT DISTINCT additional_word_information.type
+ SELECT DISTINCT type
    FROM public.additional_word_information;
 
 
-ALTER TABLE public.additional_word_information_types OWNER TO postgres;
+ALTER VIEW public.additional_word_information_types OWNER TO postgres;
 
 --
 -- Name: all_references; Type: VIEW; Schema: public; Owner: postgres
 --
 
 CREATE VIEW public.all_references AS
- SELECT DISTINCT additional_word_information.information
+ SELECT DISTINCT information
    FROM public.additional_word_information
-  WHERE ((additional_word_information.type)::text = 'reference'::text);
+  WHERE ((type)::text = 'reference'::text);
 
 
-ALTER TABLE public.all_references OWNER TO postgres;
+ALTER VIEW public.all_references OWNER TO postgres;
 
 --
 -- Name: dictionary; Type: TABLE; Schema: public; Owner: postgres
@@ -179,12 +258,12 @@ ALTER TABLE public.dictionary OWNER TO postgres;
 --
 
 CREATE MATERIALIZED VIEW public.concat_dictionary AS
- SELECT concat(dictionary.word, '_', dictionary.definition) AS concat
+ SELECT concat(word, '_', definition) AS concat
    FROM public.dictionary
   WITH NO DATA;
 
 
-ALTER TABLE public.concat_dictionary OWNER TO postgres;
+ALTER MATERIALIZED VIEW public.concat_dictionary OWNER TO postgres;
 
 --
 -- Name: definitions; Type: TABLE; Schema: public; Owner: postgres
@@ -193,7 +272,7 @@ ALTER TABLE public.concat_dictionary OWNER TO postgres;
 CREATE TABLE public.definitions (
     id bigint NOT NULL,
     date_changed timestamp with time zone,
-    definition character varying(250),
+    definition character varying(1000),
     definition_language character varying(6)
 );
 
@@ -220,9 +299,9 @@ ALTER TABLE public.word OWNER TO postgres;
 --
 
 CREATE MATERIALIZED VIEW public.en_mg AS
- SELECT t.word,
-    t.part_of_speech,
-    t.definition
+ SELECT word,
+    part_of_speech,
+    definition
    FROM ( SELECT word.word,
             word.part_of_speech,
             ( SELECT ww.word
@@ -232,20 +311,20 @@ CREATE MATERIALIZED VIEW public.en_mg AS
              JOIN public.definitions ON ((definitions.id = dictionary.definition)))
              JOIN public.word ON ((dictionary.word = word.id)))
           WHERE (((word.language)::text = 'en'::text) AND ((definitions.definition_language)::text = 'mg'::text))) t
-  WHERE (t.definition IS NOT NULL)
+  WHERE (definition IS NOT NULL)
   WITH NO DATA;
 
 
-ALTER TABLE public.en_mg OWNER TO postgres;
+ALTER MATERIALIZED VIEW public.en_mg OWNER TO postgres;
 
 --
 -- Name: fr_mg; Type: MATERIALIZED VIEW; Schema: public; Owner: postgres
 --
 
 CREATE MATERIALIZED VIEW public.fr_mg AS
- SELECT t.word,
-    t.part_of_speech,
-    t.definition
+ SELECT word,
+    part_of_speech,
+    definition
    FROM ( SELECT word.word,
             word.part_of_speech,
             ( SELECT ww.word
@@ -255,17 +334,17 @@ CREATE MATERIALIZED VIEW public.fr_mg AS
              JOIN public.definitions ON ((definitions.id = dictionary.definition)))
              JOIN public.word ON ((dictionary.word = word.id)))
           WHERE (((word.language)::text = 'fr'::text) AND ((definitions.definition_language)::text = 'mg'::text))) t
-  WHERE (t.definition IS NOT NULL)
+  WHERE (definition IS NOT NULL)
   WITH NO DATA;
 
 
-ALTER TABLE public.fr_mg OWNER TO postgres;
+ALTER MATERIALIZED VIEW public.fr_mg OWNER TO postgres;
 
 --
 -- Name: unaggregated_dictionary; Type: VIEW; Schema: public; Owner: postgres
 --
 
-CREATE VIEW public.unaggregated_dictionary_with_undefined_words AS
+CREATE VIEW public.unaggregated_dictionary AS
  SELECT wrd.id AS word_id,
     wrd.word,
     wrd.language,
@@ -274,11 +353,11 @@ CREATE VIEW public.unaggregated_dictionary_with_undefined_words AS
     defn.definition,
     defn.definition_language
    FROM ((public.dictionary dct
-     LEFT outer JOIN public.word wrd ON ((wrd.id = dct.word)))
+     LEFT JOIN public.word wrd ON ((wrd.id = dct.word)))
      JOIN public.definitions defn ON ((defn.id = dct.definition)));
 
 
-ALTER TABLE public.unaggregated_dictionary OWNER TO postgres;
+ALTER VIEW public.unaggregated_dictionary OWNER TO postgres;
 
 --
 -- Name: suggested_translations_en_mg; Type: MATERIALIZED VIEW; Schema: public; Owner: postgres
@@ -299,7 +378,7 @@ CREATE MATERIALIZED VIEW public.suggested_translations_en_mg AS
   WITH NO DATA;
 
 
-ALTER TABLE public.suggested_translations_en_mg OWNER TO postgres;
+ALTER MATERIALIZED VIEW public.suggested_translations_en_mg OWNER TO postgres;
 
 --
 -- Name: suggested_translations_fr_mg; Type: MATERIALIZED VIEW; Schema: public; Owner: postgres
@@ -320,7 +399,7 @@ CREATE MATERIALIZED VIEW public.suggested_translations_fr_mg AS
   WITH NO DATA;
 
 
-ALTER TABLE public.suggested_translations_fr_mg OWNER TO postgres;
+ALTER MATERIALIZED VIEW public.suggested_translations_fr_mg OWNER TO postgres;
 
 --
 -- Name: convergent_translations; Type: VIEW; Schema: public; Owner: postgres
@@ -344,47 +423,25 @@ CREATE VIEW public.convergent_translations AS
   WHERE ((st_fr.suggested_definition)::text = (st_en.suggested_definition)::text);
 
 
-ALTER TABLE public.convergent_translations OWNER TO postgres;
-
---
--- Name: curated_convergent_translations; Type: VIEW; Schema: public; Owner: postgres
---
-
-CREATE VIEW public.curated_convergent_translations AS
- SELECT convergent_translations.word_id,
-    convergent_translations.word,
-    convergent_translations.language,
-    convergent_translations.part_of_speech,
-    convergent_translations.en_definition_id,
-    convergent_translations.en_definition,
-    convergent_translations.fr_definition_id,
-    convergent_translations.fr_definition,
-    convergent_translations.mg_definition_id,
-    convergent_translations.suggested_definition
-   FROM public.convergent_translations
-  WHERE (NOT (concat(convergent_translations.word_id, '_', convergent_translations.mg_definition_id) IN ( SELECT concat(dictionary.word, '_', dictionary.definition) AS concat
-           FROM public.dictionary)));
-
-
-ALTER TABLE public.curated_convergent_translations OWNER TO postgres;
+ALTER VIEW public.convergent_translations OWNER TO postgres;
 
 --
 -- Name: db_stats; Type: VIEW; Schema: public; Owner: postgres
 --
 
 CREATE VIEW public.db_stats AS
- SELECT a.oid,
-    a.table_schema,
-    a.table_name,
-    a.row_estimate,
-    a.total_bytes,
-    a.index_bytes,
-    a.toast_bytes,
-    a.table_bytes,
-    pg_size_pretty(a.total_bytes) AS total,
-    pg_size_pretty(a.index_bytes) AS index,
-    pg_size_pretty(a.toast_bytes) AS toast,
-    pg_size_pretty(a.table_bytes) AS "table"
+ SELECT oid,
+    table_schema,
+    table_name,
+    row_estimate,
+    total_bytes,
+    index_bytes,
+    toast_bytes,
+    table_bytes,
+    pg_size_pretty(total_bytes) AS total,
+    pg_size_pretty(index_bytes) AS index,
+    pg_size_pretty(toast_bytes) AS toast,
+    pg_size_pretty(table_bytes) AS "table"
    FROM ( SELECT a_1.oid,
             a_1.table_schema,
             a_1.table_name,
@@ -405,7 +462,7 @@ CREATE VIEW public.db_stats AS
                   WHERE (c.relkind = 'r'::"char")) a_1) a;
 
 
-ALTER TABLE public.db_stats OWNER TO postgres;
+ALTER VIEW public.db_stats OWNER TO postgres;
 
 --
 -- Name: definitions_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
@@ -419,7 +476,7 @@ CREATE SEQUENCE public.definitions_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.definitions_id_seq OWNER TO postgres;
+ALTER SEQUENCE public.definitions_id_seq OWNER TO postgres;
 
 --
 -- Name: definitions_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
@@ -429,27 +486,18 @@ ALTER SEQUENCE public.definitions_id_seq OWNED BY public.definitions.id;
 
 
 --
--- Name: es_mg; Type: MATERIALIZED VIEW; Schema: public; Owner: postgres
+-- Name: definitions_with_repeated_subsentence; Type: VIEW; Schema: public; Owner: botjagwar
 --
 
-CREATE MATERIALIZED VIEW public.es_mg AS
- SELECT t.word,
-    t.part_of_speech,
-    t.definition
-   FROM ( SELECT word.word,
-            word.part_of_speech,
-            ( SELECT ww.word
-                   FROM public.word ww
-                  WHERE (((ww.word)::text = (definitions.definition)::text) AND ((ww.part_of_speech)::text = (word.part_of_speech)::text) AND ((ww.language)::text = 'mg'::text))) AS definition
-           FROM ((public.dictionary
-             JOIN public.definitions ON ((definitions.id = dictionary.definition)))
-             JOIN public.word ON ((dictionary.word = word.id)))
-          WHERE (((word.language)::text = 'es'::text) AND ((definitions.definition_language)::text = 'mg'::text))) t
-  WHERE (t.definition IS NOT NULL)
-  WITH NO DATA;
+CREATE VIEW public.definitions_with_repeated_subsentence AS
+ SELECT id,
+    definition,
+    public.get_repeated_subsentence((definition)::text) AS repeated_subsentence,
+    public.fix_repeated_subsentence((definition)::text) AS fixed_definition
+   FROM public.definitions;
 
 
-ALTER TABLE public.es_mg OWNER TO postgres;
+ALTER VIEW public.definitions_with_repeated_subsentence OWNER TO botjagwar;
 
 --
 -- Name: events_definition_changed; Type: TABLE; Schema: public; Owner: postgres
@@ -481,7 +529,7 @@ CREATE SEQUENCE public.events_definition_changed_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.events_definition_changed_id_seq OWNER TO postgres;
+ALTER SEQUENCE public.events_definition_changed_id_seq OWNER TO postgres;
 
 --
 -- Name: events_definition_changed_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
@@ -505,19 +553,19 @@ CREATE TABLE public.events_rel_definition_word_deleted (
 ALTER TABLE public.events_rel_definition_word_deleted OWNER TO postgres;
 
 --
--- Name: inconsistent_definitions; Type: VIEW; Schema: public; Owner: postgres
+-- Name: inconsistent_definitions; Type: VIEW; Schema: public; Owner: botjagwar
 --
 
 CREATE VIEW public.inconsistent_definitions AS
- SELECT t1.w_id,
-    t1.w1,
-    t1.w1_pos,
-    t1.w1_lang,
-    t1.w1_defn,
-    t1.d_id,
-    t1.d_lang,
-    t1.w2,
-    t1.w2_pos
+ SELECT w_id,
+    w1,
+    w1_pos,
+    w1_lang,
+    w1_defn,
+    d_id,
+    d_lang,
+    w2,
+    w2_pos
    FROM ( SELECT w.id AS w_id,
             w.word AS w1,
             w.part_of_speech AS w1_pos,
@@ -536,10 +584,10 @@ CREATE VIEW public.inconsistent_definitions AS
            FROM ((public.dictionary x
              JOIN public.definitions d ON ((x.definition = d.id)))
              JOIN public.word w ON ((w.id = x.word)))) t1
-  WHERE ((t1.w2 IS NOT NULL) AND ((t1.w2_pos)::text <> (t1.w1_pos)::text) AND ((((t1.w1_pos)::text = 'ana'::text) AND ((t1.w2_pos)::text = ANY (ARRAY[('mpam-ana'::character varying)::text, ('mat'::character varying)::text]))) OR (((t1.w1_pos)::text = ANY (ARRAY[('mat'::character varying)::text, ('mpam-ana'::character varying)::text])) AND ((t1.w2_pos)::text = 'ana'::text))));
+  WHERE ((w2 IS NOT NULL) AND ((w2_pos)::text <> (w1_pos)::text) AND ((((w1_pos)::text = 'ana'::text) AND ((w2_pos)::text = ANY (ARRAY[('mpam-ana'::character varying)::text, ('mat'::character varying)::text]))) OR (((w1_pos)::text = ANY (ARRAY[('mat'::character varying)::text, ('mpam-ana'::character varying)::text])) AND ((w2_pos)::text = 'ana'::text))));
 
 
-ALTER TABLE public.inconsistent_definitions OWNER TO postgres;
+ALTER VIEW public.inconsistent_definitions OWNER TO botjagwar;
 
 --
 -- Name: language; Type: TABLE; Schema: public; Owner: postgres
@@ -570,113 +618,14 @@ CREATE MATERIALIZED VIEW public.lemma_by_language AS
   WITH NO DATA;
 
 
-ALTER TABLE public.lemma_by_language OWNER TO postgres;
-
---
--- Name: m_curated_convergent_translation; Type: VIEW; Schema: public; Owner: postgres
---
-
-CREATE VIEW public.m_curated_convergent_translation AS
- SELECT convergent_translations.word_id,
-    convergent_translations.word,
-    convergent_translations.language,
-    convergent_translations.part_of_speech,
-    convergent_translations.en_definition_id,
-    convergent_translations.en_definition,
-    convergent_translations.fr_definition_id,
-    convergent_translations.fr_definition,
-    convergent_translations.mg_definition_id,
-    convergent_translations.suggested_definition
-   FROM public.convergent_translations
-  WHERE (NOT (EXISTS ( SELECT dictionary.word,
-            dictionary.definition
-           FROM public.dictionary
-          WHERE ((dictionary.word = convergent_translations.word_id) AND (dictionary.definition = convergent_translations.mg_definition_id)))));
-
-
-ALTER TABLE public.m_curated_convergent_translation OWNER TO postgres;
-
---
--- Name: matview_inconsistent_definitions; Type: MATERIALIZED VIEW; Schema: public; Owner: postgres
---
-
-CREATE MATERIALIZED VIEW public.matview_inconsistent_definitions AS
- SELECT t1.w_id,
-    t1.w1,
-    t1.w1_pos,
-    t1.w1_lang,
-    t1.w1_defn,
-    t1.d_id,
-    t1.d_lang,
-    t1.w2,
-    t1.w2_pos
-   FROM ( SELECT w.id AS w_id,
-            w.word AS w1,
-            w.part_of_speech AS w1_pos,
-            w.language AS w1_lang,
-            d.definition AS w1_defn,
-            d.id AS d_id,
-            d.definition_language AS d_lang,
-            ( SELECT w2.word
-                   FROM public.word w2
-                  WHERE (((w2.word)::text = (d.definition)::text) AND ((w2.language)::text = (d.definition_language)::text))
-                 LIMIT 1) AS w2,
-            ( SELECT w2.part_of_speech
-                   FROM public.word w2
-                  WHERE (((w2.word)::text = (d.definition)::text) AND ((w2.language)::text = (d.definition_language)::text))
-                 LIMIT 1) AS w2_pos
-           FROM ((public.dictionary x
-             JOIN public.definitions d ON ((x.definition = d.id)))
-             JOIN public.word w ON ((w.id = x.word)))) t1
-  WHERE ((t1.w2 IS NOT NULL) AND ((t1.w2_pos)::text <> (t1.w1_pos)::text) AND ((((t1.w1_pos)::text = 'ana'::text) AND ((t1.w2_pos)::text = ANY (ARRAY[('mpam-ana'::character varying)::text, ('mat'::character varying)::text]))) OR (((t1.w1_pos)::text = ANY (ARRAY[('mat'::character varying)::text, ('mpam-ana'::character varying)::text])) AND ((t1.w2_pos)::text = 'ana'::text))))
-  WITH NO DATA;
-
-
-ALTER TABLE public.matview_inconsistent_definitions OWNER TO postgres;
-
---
--- Name: vw_new_associations; Type: VIEW; Schema: public; Owner: postgres
---
-
-CREATE VIEW public.vw_new_associations AS
-SELECT
-    NULL::text AS type,
-    NULL::bigint AS id,
-    NULL::character varying(150) AS word,
-    NULL::character varying(10) AS language,
-    NULL::character varying(15) AS part_of_speech,
-    NULL::timestamp with time zone AS associated_on,
-    NULL::json AS definitions,
-    NULL::json AS additional_data;
-
-
-ALTER TABLE public.vw_new_associations OWNER TO postgres;
-
---
--- Name: matview_new_associations; Type: MATERIALIZED VIEW; Schema: public; Owner: postgres
---
-
-CREATE MATERIALIZED VIEW public.matview_new_associations AS
- SELECT vw_new_associations.type,
-    vw_new_associations.id,
-    vw_new_associations.word,
-    vw_new_associations.language,
-    vw_new_associations.part_of_speech,
-    vw_new_associations.associated_on,
-    vw_new_associations.definitions,
-    vw_new_associations.additional_data
-   FROM public.vw_new_associations
-  WITH NO DATA;
-
-
-ALTER TABLE public.matview_new_associations OWNER TO postgres;
+ALTER MATERIALIZED VIEW public.lemma_by_language OWNER TO postgres;
 
 --
 -- Name: matview_suggested_translations_en_mg; Type: VIEW; Schema: public; Owner: postgres
 --
 
 CREATE VIEW public.matview_suggested_translations_en_mg AS
- SELECT dict.word AS word_id,
+ SELECT word AS word_id,
     ( SELECT ww.word
            FROM public.word ww
           WHERE (ww.id = dict.word)) AS word,
@@ -702,7 +651,55 @@ CREATE VIEW public.matview_suggested_translations_en_mg AS
    FROM public.dictionary dict;
 
 
-ALTER TABLE public.matview_suggested_translations_en_mg OWNER TO postgres;
+ALTER VIEW public.matview_suggested_translations_en_mg OWNER TO postgres;
+
+--
+-- Name: most_used_definitions; Type: VIEW; Schema: public; Owner: botjagwar
+--
+
+CREATE VIEW public.most_used_definitions AS
+ SELECT dico.definition AS definition_id,
+    count(*) AS words_using_definition,
+    defn.definition,
+    defn.definition_language
+   FROM (public.dictionary dico
+     JOIN public.definitions defn ON ((defn.id = dico.definition)))
+  GROUP BY dico.definition, defn.definition, defn.definition_language
+  ORDER BY (count(*)) DESC;
+
+
+ALTER VIEW public.most_used_definitions OWNER TO botjagwar;
+
+--
+-- Name: mt_translated_definition; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.mt_translated_definition (
+    id bigint NOT NULL,
+    date_changed timestamp with time zone,
+    definition character varying(1000),
+    definition_language character varying(6),
+    method character varying(40)
+);
+
+
+ALTER TABLE public.mt_translated_definition OWNER TO postgres;
+
+--
+-- Name: mv_definitions_with_repeated_subsentence; Type: MATERIALIZED VIEW; Schema: public; Owner: botjagwar
+--
+
+CREATE MATERIALIZED VIEW public.mv_definitions_with_repeated_subsentence AS
+ SELECT id,
+    definition,
+    repeated_subsentence,
+    fixed_definition
+   FROM public.definitions_with_repeated_subsentence
+  WHERE (repeated_subsentence <> ''::text)
+  WITH NO DATA;
+
+
+ALTER MATERIALIZED VIEW public.mv_definitions_with_repeated_subsentence OWNER TO botjagwar;
 
 --
 -- Name: word_with_openmt_translation; Type: VIEW; Schema: public; Owner: postgres
@@ -723,27 +720,27 @@ CREATE VIEW public.word_with_openmt_translation AS
   WHERE ((additional_word_information.type)::text = 'openmt_translation'::text);
 
 
-ALTER TABLE public.word_with_openmt_translation OWNER TO postgres;
+ALTER VIEW public.word_with_openmt_translation OWNER TO postgres;
 
 --
 -- Name: mv_word_with_openmt_translation; Type: MATERIALIZED VIEW; Schema: public; Owner: postgres
 --
 
 CREATE MATERIALIZED VIEW public.mv_word_with_openmt_translation AS
- SELECT word_with_openmt_translation.id,
-    word_with_openmt_translation.date_changed,
-    word_with_openmt_translation.word,
-    word_with_openmt_translation.language,
-    word_with_openmt_translation.part_of_speech,
-    word_with_openmt_translation.word_id,
-    word_with_openmt_translation.type,
-    word_with_openmt_translation.information,
-    word_with_openmt_translation.lowercase_word
+ SELECT id,
+    date_changed,
+    word,
+    language,
+    part_of_speech,
+    word_id,
+    type,
+    information,
+    lowercase_word
    FROM public.word_with_openmt_translation
   WITH NO DATA;
 
 
-ALTER TABLE public.mv_word_with_openmt_translation OWNER TO postgres;
+ALTER MATERIALIZED VIEW public.mv_word_with_openmt_translation OWNER TO postgres;
 
 --
 -- Name: new_associations; Type: TABLE; Schema: public; Owner: postgres
@@ -760,41 +757,18 @@ CREATE TABLE public.new_associations (
 ALTER TABLE public.new_associations OWNER TO postgres;
 
 --
--- Name: new_associations_per_day; Type: VIEW; Schema: public; Owner: postgres
+-- Name: nllb_translations; Type: TABLE; Schema: public; Owner: botjagwar
 --
 
-CREATE VIEW public.new_associations_per_day AS
- SELECT count(*) AS count,
-    ((new_associations.associated_on)::timestamp without time zone)::date AS date
-   FROM public.new_associations
-  GROUP BY (((new_associations.associated_on)::timestamp without time zone)::date)
-  ORDER BY (((new_associations.associated_on)::timestamp without time zone)::date) DESC;
+CREATE TABLE public.nllb_translations (
+    source_language character varying(40) NOT NULL,
+    target_language character varying(40) NOT NULL,
+    sentence character varying(2000),
+    translation character varying(2000)
+);
 
 
-ALTER TABLE public.new_associations_per_day OWNER TO postgres;
-
---
--- Name: pl_mg; Type: MATERIALIZED VIEW; Schema: public; Owner: postgres
---
-
-CREATE MATERIALIZED VIEW public.pl_mg AS
- SELECT t.word,
-    t.part_of_speech,
-    t.definition
-   FROM ( SELECT word.word,
-            word.part_of_speech,
-            ( SELECT ww.word
-                   FROM public.word ww
-                  WHERE (((ww.word)::text = (definitions.definition)::text) AND ((ww.part_of_speech)::text = (word.part_of_speech)::text) AND ((ww.language)::text = 'mg'::text))) AS definition
-           FROM ((public.dictionary
-             JOIN public.definitions ON ((definitions.id = dictionary.definition)))
-             JOIN public.word ON ((dictionary.word = word.id)))
-          WHERE (((word.language)::text = 'pl'::text) AND ((definitions.definition_language)::text = 'mg'::text))) t
-  WHERE (t.definition IS NOT NULL)
-  WITH NO DATA;
-
-
-ALTER TABLE public.pl_mg OWNER TO postgres;
+ALTER TABLE public.nllb_translations OWNER TO botjagwar;
 
 --
 -- Name: template_translations; Type: TABLE; Schema: public; Owner: postgres
@@ -824,13 +798,103 @@ CREATE TABLE public.translation_method (
 ALTER TABLE public.translation_method OWNER TO postgres;
 
 --
+-- Name: unaggregated_dictionary_with_undefined_words; Type: VIEW; Schema: public; Owner: botjagwar
+--
+
+CREATE VIEW public.unaggregated_dictionary_with_undefined_words AS
+ SELECT wrd.id AS word_id,
+    wrd.word,
+    wrd.language,
+    wrd.part_of_speech,
+    defn.id AS definition_id,
+    defn.definition,
+    defn.definition_language
+   FROM ((public.dictionary dct
+     LEFT JOIN public.word wrd ON ((wrd.id = dct.word)))
+     JOIN public.definitions defn ON ((defn.id = dct.definition)));
+
+
+ALTER VIEW public.unaggregated_dictionary_with_undefined_words OWNER TO botjagwar;
+
+--
+-- Name: unaggregated_mt_translated_dictionary; Type: VIEW; Schema: public; Owner: botjagwar
+--
+
+CREATE VIEW public.unaggregated_mt_translated_dictionary AS
+ SELECT w.id,
+    w.date_changed,
+    w.word,
+    w.language,
+    w.part_of_speech,
+    mtd.id AS definition_id,
+    mtd.definition,
+    mtd.definition_language,
+    mtd.method,
+    ( SELECT definitions.definition
+           FROM public.definitions
+          WHERE (definitions.id = dictionary.definition)) AS source_definition,
+    ( SELECT definitions.definition_language
+           FROM public.definitions
+          WHERE (definitions.id = dictionary.definition)) AS source_definition_language
+   FROM ((public.dictionary dictionary
+     JOIN public.word w ON ((w.id = dictionary.word)))
+     JOIN public.mt_translated_definition mtd ON ((dictionary.definition = mtd.id)))
+  GROUP BY w.id, w.date_changed, w.word, w.language, w.part_of_speech, mtd.id, mtd.definition, mtd.definition_language, mtd.method, ( SELECT definitions.definition
+           FROM public.definitions
+          WHERE (definitions.id = dictionary.definition)), ( SELECT definitions.definition_language
+           FROM public.definitions
+          WHERE (definitions.id = dictionary.definition));
+
+
+ALTER VIEW public.unaggregated_mt_translated_dictionary OWNER TO botjagwar;
+
+--
+-- Name: unpublished_convergent_translations_mg; Type: VIEW; Schema: public; Owner: botjagwar
+--
+
+CREATE VIEW public.unpublished_convergent_translations_mg AS
+ SELECT word_id,
+    word,
+    language,
+    part_of_speech,
+    en_definition_id,
+    en_definition,
+    fr_definition_id,
+    fr_definition,
+    mg_definition_id,
+    suggested_definition
+   FROM public.convergent_translations ct
+  WHERE (NOT (((mg_definition_id * 1000000000) + word_id) IN ( SELECT ((dictionary.definition * 1000000000) + dictionary.word)
+           FROM public.dictionary)));
+
+
+ALTER VIEW public.unpublished_convergent_translations_mg OWNER TO botjagwar;
+
+--
+-- Name: untranslated_most_used_definitions; Type: VIEW; Schema: public; Owner: botjagwar
+--
+
+CREATE VIEW public.untranslated_most_used_definitions AS
+ SELECT mud.definition_id,
+    mud.words_using_definition,
+    mud.definition,
+    mud.definition_language,
+    mtd.definition AS translated_definition
+   FROM (public.most_used_definitions mud
+     LEFT JOIN public.mt_translated_definition mtd ON ((mtd.id = mud.definition_id)))
+  WHERE (mtd.definition IS NULL);
+
+
+ALTER VIEW public.untranslated_most_used_definitions OWNER TO botjagwar;
+
+--
 -- Name: vw_en_mg; Type: VIEW; Schema: public; Owner: postgres
 --
 
 CREATE VIEW public.vw_en_mg AS
- SELECT t.word,
-    t.part_of_speech,
-    t.definition
+ SELECT word,
+    part_of_speech,
+    definition
    FROM ( SELECT word.word,
             word.part_of_speech,
             ( SELECT ww.word
@@ -840,19 +904,19 @@ CREATE VIEW public.vw_en_mg AS
              JOIN public.definitions ON ((definitions.id = dictionary.definition)))
              JOIN public.word ON ((dictionary.word = word.id)))
           WHERE (((word.language)::text = 'en'::text) AND ((definitions.definition_language)::text = 'mg'::text))) t
-  WHERE (t.definition IS NOT NULL);
+  WHERE (definition IS NOT NULL);
 
 
-ALTER TABLE public.vw_en_mg OWNER TO postgres;
+ALTER VIEW public.vw_en_mg OWNER TO postgres;
 
 --
 -- Name: vw_fr_mg; Type: VIEW; Schema: public; Owner: postgres
 --
 
 CREATE VIEW public.vw_fr_mg AS
- SELECT t.word,
-    t.part_of_speech,
-    t.definition
+ SELECT word,
+    part_of_speech,
+    definition
    FROM ( SELECT word.word,
             word.part_of_speech,
             ( SELECT ww.word
@@ -862,10 +926,10 @@ CREATE VIEW public.vw_fr_mg AS
              JOIN public.definitions ON ((definitions.id = dictionary.definition)))
              JOIN public.word ON ((dictionary.word = word.id)))
           WHERE (((word.language)::text = 'fr'::text) AND ((definitions.definition_language)::text = 'mg'::text))) t
-  WHERE (t.definition IS NOT NULL);
+  WHERE (definition IS NOT NULL);
 
 
-ALTER TABLE public.vw_fr_mg OWNER TO postgres;
+ALTER VIEW public.vw_fr_mg OWNER TO postgres;
 
 --
 -- Name: vw_json_dictionary; Type: VIEW; Schema: public; Owner: postgres
@@ -883,7 +947,7 @@ SELECT
     NULL::json AS additional_data;
 
 
-ALTER TABLE public.vw_json_dictionary OWNER TO postgres;
+ALTER VIEW public.vw_json_dictionary OWNER TO postgres;
 
 --
 -- Name: word_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
@@ -897,7 +961,7 @@ CREATE SEQUENCE public.word_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.word_id_seq OWNER TO postgres;
+ALTER SEQUENCE public.word_id_seq OWNER TO postgres;
 
 --
 -- Name: word_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
@@ -921,30 +985,7 @@ SELECT
     NULL::json AS additional_data;
 
 
-ALTER TABLE public.word_with_additional_data OWNER TO postgres;
-
---
--- Name: zh_mg; Type: MATERIALIZED VIEW; Schema: public; Owner: postgres
---
-
-CREATE MATERIALIZED VIEW public.zh_mg AS
- SELECT t.word,
-    t.part_of_speech,
-    t.definition
-   FROM ( SELECT word.word,
-            word.part_of_speech,
-            ( SELECT ww.word
-                   FROM public.word ww
-                  WHERE (((ww.word)::text = (definitions.definition)::text) AND ((ww.part_of_speech)::text = (word.part_of_speech)::text) AND ((ww.language)::text = 'mg'::text))) AS definition
-           FROM ((public.dictionary
-             JOIN public.definitions ON ((definitions.id = dictionary.definition)))
-             JOIN public.word ON ((dictionary.word = word.id)))
-          WHERE (((word.language)::text = ANY (ARRAY['zho'::text, 'zh'::text, 'cmn'::text])) AND ((definitions.definition_language)::text = 'mg'::text))) t
-  WHERE (t.definition IS NOT NULL)
-  WITH NO DATA;
-
-
-ALTER TABLE public.zh_mg OWNER TO postgres;
+ALTER VIEW public.word_with_additional_data OWNER TO postgres;
 
 --
 -- Name: definitions id; Type: DEFAULT; Schema: public; Owner: postgres
@@ -998,7 +1039,7 @@ CREATE MATERIALIZED VIEW public.json_dictionary AS
   WITH NO DATA;
 
 
-ALTER TABLE public.json_dictionary OWNER TO postgres;
+ALTER MATERIALIZED VIEW public.json_dictionary OWNER TO postgres;
 
 --
 -- Name: additional_word_information additional_data_row_is_unique; Type: CONSTRAINT; Schema: public; Owner: postgres
@@ -1057,31 +1098,10 @@ ALTER TABLE ONLY public.word
 
 
 --
--- Name: idx_16427_date_changed; Type: INDEX; Schema: public; Owner: postgres
+-- Name: en_mg_line_is_unique; Type: INDEX; Schema: public; Owner: postgres
 --
 
-CREATE INDEX idx_16427_date_changed ON public.definitions USING btree (date_changed);
-
-
---
--- Name: idx_16427_definition; Type: INDEX; Schema: public; Owner: postgres
---
-
-CREATE INDEX idx_16427_definition ON public.definitions USING gin (to_tsvector('simple'::regconfig, (definition)::text));
-
-
---
--- Name: idx_16427_definition_2; Type: INDEX; Schema: public; Owner: postgres
---
-
-CREATE INDEX idx_16427_definition_2 ON public.definitions USING btree (definition);
-
-
---
--- Name: idx_16427_definition_language; Type: INDEX; Schema: public; Owner: postgres
---
-
-CREATE INDEX idx_16427_definition_language ON public.definitions USING btree (definition_language);
+CREATE UNIQUE INDEX en_mg_line_is_unique ON public.en_mg USING btree (definition, part_of_speech, word);
 
 
 --
@@ -1120,38 +1140,10 @@ CREATE INDEX idx_16449_date_changed ON public.word USING btree (date_changed);
 
 
 --
--- Name: idx_16449_language; Type: INDEX; Schema: public; Owner: postgres
---
-
-CREATE INDEX idx_16449_language ON public.word USING btree (language);
-
-
---
--- Name: idx_16449_part_of_speech; Type: INDEX; Schema: public; Owner: postgres
---
-
-CREATE INDEX idx_16449_part_of_speech ON public.word USING btree (part_of_speech);
-
-
---
--- Name: idx_16449_word; Type: INDEX; Schema: public; Owner: postgres
---
-
-CREATE INDEX idx_16449_word ON public.word USING btree (word);
-
-
---
 -- Name: idx_16449_word_2; Type: INDEX; Schema: public; Owner: postgres
 --
 
 CREATE INDEX idx_16449_word_2 ON public.word USING gin (to_tsvector('simple'::regconfig, (word)::text));
-
-
---
--- Name: idx_16449_word_3; Type: INDEX; Schema: public; Owner: postgres
---
-
-CREATE INDEX idx_16449_word_3 ON public.word USING btree (word, language, part_of_speech);
 
 
 --
@@ -1190,52 +1182,24 @@ CREATE INDEX idx_concat_dictionary ON public.concat_dictionary USING btree (conc
 
 
 --
--- Name: idx_en_mg_word_defn; Type: INDEX; Schema: public; Owner: postgres
+-- Name: idx_defn_defn_lang_matches; Type: INDEX; Schema: public; Owner: postgres
 --
 
-CREATE INDEX idx_en_mg_word_defn ON public.en_mg USING btree (word, definition);
-
-
---
--- Name: idx_en_mg_word_pos; Type: INDEX; Schema: public; Owner: postgres
---
-
-CREATE INDEX idx_en_mg_word_pos ON public.en_mg USING btree (word, part_of_speech);
+CREATE INDEX idx_defn_defn_lang_matches ON public.definitions USING btree (definition, definition_language);
 
 
 --
--- Name: idx_fr_mg_word_defn; Type: INDEX; Schema: public; Owner: postgres
+-- Name: idx_mtd_defn; Type: INDEX; Schema: public; Owner: postgres
 --
 
-CREATE INDEX idx_fr_mg_word_defn ON public.fr_mg USING btree (word, definition);
-
-
---
--- Name: idx_fr_mg_word_pos; Type: INDEX; Schema: public; Owner: postgres
---
-
-CREATE INDEX idx_fr_mg_word_pos ON public.fr_mg USING btree (word, part_of_speech);
+CREATE INDEX idx_mtd_defn ON public.mt_translated_definition USING btree (id);
 
 
 --
--- Name: idx_json_dictionary_1; Type: INDEX; Schema: public; Owner: postgres
+-- Name: idx_mtd_defn_2; Type: INDEX; Schema: public; Owner: postgres
 --
 
-CREATE INDEX idx_json_dictionary_1 ON public.json_dictionary USING btree (word, language, part_of_speech);
-
-
---
--- Name: idx_json_dictionary_2; Type: INDEX; Schema: public; Owner: postgres
---
-
-CREATE INDEX idx_json_dictionary_2 ON public.json_dictionary USING btree (last_modified);
-
-
---
--- Name: idx_json_dictionary_3; Type: INDEX; Schema: public; Owner: postgres
---
-
-CREATE INDEX idx_json_dictionary_3 ON public.json_dictionary USING btree (id);
+CREATE INDEX idx_mtd_defn_2 ON public.mt_translated_definition USING btree (definition);
 
 
 --
@@ -1246,80 +1210,45 @@ CREATE INDEX idx_mv_word_with_openmt_translation ON public.mv_word_with_openmt_t
 
 
 --
--- Name: idx_new_associations_word_defn; Type: INDEX; Schema: public; Owner: postgres
+-- Name: idx_new_association_word; Type: INDEX; Schema: public; Owner: postgres
 --
 
-CREATE INDEX idx_new_associations_word_defn ON public.new_associations USING btree (word, definition);
-
-
---
--- Name: idx_new_associations_word_status; Type: INDEX; Schema: public; Owner: postgres
---
-
-CREATE INDEX idx_new_associations_word_status ON public.new_associations USING btree (word, status);
+CREATE INDEX idx_new_association_word ON public.new_associations USING btree (word);
 
 
 --
--- Name: idx_suggested_translations_en_mg_1; Type: INDEX; Schema: public; Owner: postgres
+-- Name: idx_word_language_pos; Type: INDEX; Schema: public; Owner: postgres
 --
 
-CREATE INDEX idx_suggested_translations_en_mg_1 ON public.suggested_translations_en_mg USING btree (word, language, part_of_speech);
-
-
---
--- Name: idx_suggested_translations_en_mg_2; Type: INDEX; Schema: public; Owner: postgres
---
-
-CREATE INDEX idx_suggested_translations_en_mg_2 ON public.suggested_translations_en_mg USING btree (suggested_definition);
+CREATE INDEX idx_word_language_pos ON public.word USING btree (word, language, part_of_speech);
 
 
 --
--- Name: idx_suggested_translations_en_mg_3; Type: INDEX; Schema: public; Owner: postgres
+-- Name: idx_word_word; Type: INDEX; Schema: public; Owner: postgres
 --
 
-CREATE INDEX idx_suggested_translations_en_mg_3 ON public.suggested_translations_en_mg USING btree (definition);
-
-
---
--- Name: idx_suggested_translations_en_mg_suggested_definition; Type: INDEX; Schema: public; Owner: postgres
---
-
-CREATE INDEX idx_suggested_translations_en_mg_suggested_definition ON public.suggested_translations_en_mg USING btree (suggested_definition);
+CREATE INDEX idx_word_word ON public.word USING hash (word);
 
 
 --
--- Name: idx_suggested_translations_en_mg_suggested_language; Type: INDEX; Schema: public; Owner: postgres
+-- Name: line_is_unique; Type: INDEX; Schema: public; Owner: botjagwar
 --
 
-CREATE INDEX idx_suggested_translations_en_mg_suggested_language ON public.suggested_translations_en_mg USING btree (language);
-
-
---
--- Name: idx_suggested_translations_en_mg_word; Type: INDEX; Schema: public; Owner: postgres
---
-
-CREATE INDEX idx_suggested_translations_en_mg_word ON public.suggested_translations_en_mg USING btree (word);
+CREATE UNIQUE INDEX line_is_unique ON public.nllb_translations USING btree (source_language, target_language, sentence);
 
 
 --
--- Name: idx_suggested_translations_fr_mg_1; Type: INDEX; Schema: public; Owner: postgres
+-- Name: suggested_translations_en_fr_line_is_unique; Type: INDEX; Schema: public; Owner: postgres
 --
 
-CREATE INDEX idx_suggested_translations_fr_mg_1 ON public.suggested_translations_fr_mg USING btree (word, language, part_of_speech);
-
-
---
--- Name: idx_suggested_translations_fr_mg_2; Type: INDEX; Schema: public; Owner: postgres
---
-
-CREATE INDEX idx_suggested_translations_fr_mg_2 ON public.suggested_translations_fr_mg USING btree (suggested_definition);
+CREATE UNIQUE INDEX suggested_translations_en_fr_line_is_unique ON public.suggested_translations_fr_mg USING btree (word_id, definition_id, suggested_definition);
 
 
 --
--- Name: idx_suggested_translations_fr_mg_3; Type: INDEX; Schema: public; Owner: postgres
+-- Name: suggested_translations_en_mg_line_is_unique; Type: INDEX; Schema: public; Owner: postgres
 --
 
-CREATE INDEX idx_suggested_translations_fr_mg_3 ON public.suggested_translations_fr_mg USING btree (definition);
+CREATE UNIQUE INDEX suggested_translations_en_mg_line_is_unique ON public.suggested_translations_en_mg USING btree (word_id, definition_id, suggested_definition);
 
 
 --
@@ -1334,6 +1263,13 @@ CREATE UNIQUE INDEX unique_association ON public.dictionary USING btree (word, d
 --
 
 CREATE INDEX word_language_idx ON public.word USING btree (word, language);
+
+
+--
+-- Name: word_language_part_of_speech_are_unique; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE UNIQUE INDEX word_language_part_of_speech_are_unique ON public.json_dictionary USING btree (word varchar_ops, language varchar_ops, part_of_speech varchar_ops) INCLUDE (word, language, part_of_speech);
 
 
 --
@@ -1376,46 +1312,17 @@ CREATE OR REPLACE VIEW public.word_with_additional_data AS
 
 
 --
--- Name: vw_new_associations _RETURN; Type: RULE; Schema: public; Owner: postgres
---
-
-CREATE OR REPLACE VIEW public.vw_new_associations AS
- SELECT 'Word'::text AS type,
-    wrd.id,
-    wrd.word,
-    wrd.language,
-    wrd.part_of_speech,
-    max(dct.associated_on) AS associated_on,
-    array_to_json(array_agg(json_build_object('type', 'Definition', 'id', defn.id, 'definition', defn.definition, 'language', defn.definition_language, 'associated_on', dct.associated_on, 'status', dct.status, 'definition_last_modified', defn.date_changed))) AS definitions,
-    ( SELECT array_to_json(array_agg(json_build_object('type', 'AdditionalData', 'data_type', awi.type, 'data', awi.information))) AS array_to_json
-           FROM public.additional_word_information awi
-          WHERE (awi.word_id = wrd.id)
-          GROUP BY awi.word_id) AS additional_data
-   FROM ((public.new_associations dct
-     LEFT JOIN public.word wrd ON ((wrd.id = dct.word)))
-     JOIN public.definitions defn ON ((defn.id = dct.definition)))
-  GROUP BY wrd.id;
-
-
---
--- Name: definitions on_definition_changed_add_pending_definition_change; Type: TRIGGER; Schema: public; Owner: postgres
---
-
-CREATE TRIGGER on_definition_changed_add_pending_definition_change AFTER UPDATE ON public.definitions FOR EACH ROW EXECUTE PROCEDURE public.add_pending_definition_change();
-
-
---
 -- Name: dictionary on_dictionary_added_add_new_association; Type: TRIGGER; Schema: public; Owner: postgres
 --
 
-CREATE TRIGGER on_dictionary_added_add_new_association AFTER INSERT ON public.dictionary FOR EACH ROW EXECUTE PROCEDURE public.add_new_association();
+CREATE TRIGGER on_dictionary_added_add_new_association AFTER INSERT ON public.dictionary FOR EACH ROW EXECUTE FUNCTION public.add_new_association();
 
 
 --
 -- Name: dictionary on_row_deleted; Type: TRIGGER; Schema: public; Owner: postgres
 --
 
-CREATE TRIGGER on_row_deleted BEFORE DELETE ON public.dictionary FOR EACH ROW EXECUTE PROCEDURE public.events_rel_definition_word_deleted();
+CREATE TRIGGER on_row_deleted BEFORE DELETE ON public.dictionary FOR EACH ROW EXECUTE FUNCTION public.events_rel_definition_word_deleted();
 
 
 --
@@ -1435,21 +1342,14 @@ ALTER TABLE ONLY public.dictionary
 
 
 --
--- Name: new_associations new_association_definitions_ibfk_1; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+-- Name: mt_translated_definition is_referenced_in_definition_table; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
-ALTER TABLE ONLY public.new_associations
-    ADD CONSTRAINT new_association_definitions_ibfk_1 FOREIGN KEY (definition) REFERENCES public.definitions(id) ON UPDATE CASCADE ON DELETE CASCADE;
-
-
---
--- Name: new_associations new_association_ibfk_1; Type: FK CONSTRAINT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.new_associations
-    ADD CONSTRAINT new_association_ibfk_1 FOREIGN KEY (word) REFERENCES public.word(id) ON UPDATE CASCADE ON DELETE CASCADE;
+ALTER TABLE ONLY public.mt_translated_definition
+    ADD CONSTRAINT is_referenced_in_definition_table FOREIGN KEY (id) REFERENCES public.definitions(id) NOT VALID;
 
 
 --
 -- PostgreSQL database dump complete
 --
+

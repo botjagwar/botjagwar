@@ -1,24 +1,46 @@
 #!/bin/bash
 
 echo "Prepare python environment"
-set -xe
-if [[ -z `which virtualenv` ]]; then
-  sudo python3 -m pip install virtualenv
+
+set -x
+
+if [[ -z `which python3` ]]; then
+  echo "Python3 is not installed. Please install it manually."
+  exit 1
 fi
 
-if [[ -z `which virtualenv` ]]; then
-  virtualenv_exe=venv
-else
-  if [[ -z `which venv` ]]; then
-    virtualenv_exe=virtualenv
-  else
-    virtualenv_exe="python3 -m virtualenv"
-  fi
+
+# Check for virtualenv and venv
+# Check for Python installation
+if ! command -v python3 >/dev/null 2>&1; then
+  echo "Python3 is not installed."
+  exit 1
+
 fi
+
+# Check if virtualenv command exists
+if command -v virtualenv >/dev/null 2>&1; then
+  echo "'virtualenv' command is available."
+  virtualenv_exe="virtualenv"
+fi
+
+# Check if venv (built-in) is available
+if python3 -m venv --help >/dev/null 2>&1; then
+  echo "Python 'venv' module is available."
+  virtualenv_exe="python3 -m venv"
+fi
+
+set -e
+
+
+if [[ -z $virtualenv_exe ]]; then
+  echo "No virtual env commands found. Install one of them manually."
+  exit 1
+fi
+
 
 src_dir=`pwd`
 opt_dir=/opt/botjagwar
-opt_dir_ctranslate=/opt/ctranslate
 current_user=`whoami`
 
 # Create virtual environment

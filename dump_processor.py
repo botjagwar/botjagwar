@@ -7,7 +7,7 @@ from lxml import etree
 from api.data.caching import FastTranslationLookup
 from api.entryprocessor import WiktionaryProcessorFactory
 from api.model.word import Entry
-from api.parsers import templates_parser, TEMPLATE_TO_OBJECT
+from api.parsers.en import templates_parser, TEMPLATE_TO_OBJECT
 from api.storage import MissingTranslationFileWriter
 
 # from multiprocessing.dummy import Pool as ThreadPool

@@ -1,7 +1,7 @@
 from api.parsers.inflection_template import NounForm
 
 
-def parse_fi_form_of(template_expression):
+def parse_fi_form_of(template_expression, **context):
     "{{fi-form of|näverrin|case=nominative|pl=plural}}"
     for char in "{}":
         template_expression = template_expression.replace(char, "")
@@ -18,7 +18,7 @@ def parse_fi_form_of(template_expression):
     return NounForm(lemma, case, number, "")
 
 
-def parse_et_form_of(template_expression):
+def parse_et_form_of(template_expression, **context):
     "{{et-verb form of|t=da|rikastuma}}"
     for char in "{}":
         template_expression = template_expression.replace(char, "")
@@ -35,7 +35,7 @@ def parse_et_form_of(template_expression):
     return NounForm(lemma, case, number, "")
 
 
-def parse_nl_noun_form_of(template_expression):
+def parse_nl_noun_form_of(template_expression, **context):
     "{{nl-noun form of|pl|aanbouwing}}"
     for char in "{}":
         template_expression = template_expression.replace(char, "")
@@ -55,7 +55,7 @@ def parse_nl_noun_form_of(template_expression):
     return NounForm(lemma, case, number, "")
 
 
-def parse_lt_noun_form(template_expression):
+def parse_lt_noun_form(template_expression, **context):
     "{{lt-form-noun|d|s|abatė}}"
     for char in "{}":
         template_expression = template_expression.replace(char, "")
