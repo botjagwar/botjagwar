@@ -1,0 +1,4 @@
+==English==
+===Etymology===
+From {{inh|en|enm|þristen|þrusten}}, from {{der|en|non|þrysta}}, from {{der|en|gem-pro|*þrustijaną}}, possibly from {{der|en|ine-pro|*trewd-}}.
+{{root|en|ine-pro|*trewd-}}
