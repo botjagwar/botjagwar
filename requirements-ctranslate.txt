@@ -2,5 +2,5 @@ gevent >= 24.2.1
 tokenizers >= 0.10.1
 sentencepiece >= 0.2.0
 transformers < 5
-torch == 2.7.1
+torch == 2.8.0
 flask >= 3
