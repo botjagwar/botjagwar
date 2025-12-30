@@ -80,4 +80,4 @@ Independent script, which, in detail:
 
 ## Copyright
 
-© 2011-2025 Rado A. (Terakasorotany) -- All rights reserved.
+© 2011-2025 Rado A. (Terakasorotany)
