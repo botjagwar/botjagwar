@@ -67,8 +67,7 @@ def entry_generator():
                 # s = json.dumps(entry.serialise())
 
 
-def main():
-    c = 0
+def main():   
     import pywikibot
 
     for pagename, definitions in entry_generator():
