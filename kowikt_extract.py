@@ -44,7 +44,6 @@ def get_entries_from_content(title, content):
 
 
 def get_definitions_from_content(title, content):
-    start = False
     pos = "ana"
     for line in content.split("\n"):
         if "=== 명사 ===" in line:

@@ -1,6 +1,4 @@
 # coding: utf8
-import sys
-import os
 
 
 from .base import WiktionaryProcessor

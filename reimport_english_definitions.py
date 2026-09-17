@@ -202,7 +202,7 @@ def _reimport_english_definition(word, definition):
         "word": f'{word["id"]}',
     }
 
-    resp = requests.post(f"{pg_rest.server}/dictionary", json=dict_post_data)
+    requests.post(f"{pg_rest.server}/dictionary", json=dict_post_data)
 
 
 if __name__ == "__main__":

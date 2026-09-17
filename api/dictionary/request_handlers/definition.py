@@ -24,22 +24,23 @@ async def get_definition_with_words(request) -> Response:
 
 async def edit_definition(request) -> Response:
     session = request.app["session_instance"]
-    if definition := (
+    definition = (
         session.query(Definition)
         .filter(Definition.id == request.match_info["definition_id"])
-        .one()
-    ):
-        definition_data = await request.json()
-        definition.definition = definition_data["definition"]
-        definition.definition_language = definition_data["definition_language"]
-        await save_changes_on_disk(request.app, session)
-        return Response(
-            text=json.dumps(definition.serialise()),
-            status=200,
-            content_type="application/json",
-        )
+        .one_or_none()
+    )
+    if definition is None:
+        return Response(status=404, content_type="application/json")
 
-    return Response(status=404, content_type="application/json")
+    definition_data = await request.json()
+    definition.definition = definition_data["definition"]
+    definition.definition_language = definition_data["definition_language"]
+    await save_changes_on_disk(request.app, session)
+    return Response(
+        text=json.dumps(definition.serialise()),
+        status=200,
+        content_type="application/json",
+    )
 
 
 async def get_definition(request) -> Response:
@@ -66,8 +67,7 @@ async def search_definition(request) -> Response:
     """
     session = request.app["session_instance"]
 
-    jsondata = await request.json()
-    data = json.loads(jsondata)
+    data = await request.json()
     definitions = [
         m.serialise()
         for m in session.query(Definition)

@@ -2,7 +2,6 @@
 
 from api.parsers.definition import WiktionaryDefinitionParser
 from api.parsers.functions import (
-    parse_alternative_spelling_template,
     parse_el_form_of,
     parse_hu_inflection_of,
     parse_inflection_of,
@@ -37,7 +36,6 @@ from api.parsers.functions.verb_forms.templates import (
 from api.parsers.functions.verb_forms.templates import (
     parse_fi_form_of,
     parse_fi_verb_form_of,
-    parse_la_verb_form_inflection_of,
     parse_verb_form_inflection_of,
 )
 from api.parsers.inflection_template import WiktionaryInflectionTemplateParser
@@ -48,7 +46,6 @@ from api.parsers.models.inflection import (
     NonLemma,
     Romanization,
 )
-from .inflection_template import WiktionaryInflectionTemplateParser
 
 TEMPLATE_TO_OBJECT = {
     "e-ana": NounForm,

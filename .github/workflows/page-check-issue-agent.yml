@@ -1,0 +1,42 @@
+name: Page check issue agent
+
+on:
+  schedule:
+    - cron: "17 */6 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+concurrency:
+  group: page-check-issue-agent
+  cancel-in-progress: false
+
+jobs:
+  triage:
+    runs-on: ${{ vars.PAGE_CHECK_RUNNER || 'ubuntu-latest' }}
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+      - name: Set up Python
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
+        with:
+          python-version: "3.11"
+      - name: Install HTTP client
+        run: >-
+          python -m pip install --disable-pip-version-check
+          requests==2.34.2 charset-normalizer==3.5.1 idna==3.19
+          urllib3==2.7.0 certifi==2026.7.22
+      - name: Create issues for problematic page checks
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          PAGE_CHECKER_TOKEN: ${{ secrets.PAGE_CHECKER_TOKEN }}
+          PAGE_CHECKER_URL: ${{ vars.PAGE_CHECKER_URL }}
+          PAGE_CHECK_ISSUE_OUTCOMES: ${{ vars.PAGE_CHECK_ISSUE_OUTCOMES || 'fixed,unverifiable,error' }}
+          PAGE_CHECK_JOB_LIMIT: ${{ vars.PAGE_CHECK_JOB_LIMIT || '100' }}
+          PAGE_CHECK_MAX_ISSUES: ${{ vars.PAGE_CHECK_MAX_ISSUES || '10' }}
+        shell: bash
+        run: python scripts/page_check_agents.py triage | tee -a "$GITHUB_STEP_SUMMARY"

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Edit Installation and Deployment"
+  short_description: "Edit botjagwar install and deployment tooling safely."
+  default_prompt: "Follow AGENTS.md and skills/edit-installation-deployment/SKILL.md. Start with the affected deployment source and tests, preserve rollback and security invariants, and validate in TEST=1 mode."

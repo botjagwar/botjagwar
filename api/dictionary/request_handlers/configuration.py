@@ -1,5 +1,3 @@
-import json
-
 from aiohttp.web import Response
 
 
@@ -14,7 +12,7 @@ async def do_commit(request) -> Response:
         return Response(status=200)
     except Exception:
         request.app["session_instance"].rollback()
-        return Response(status=200)
+        return Response(status=500)
 
 
 async def do_rollback(request) -> Response:
@@ -23,9 +21,12 @@ async def do_rollback(request) -> Response:
 
 
 async def configure_service(request) -> Response:
-    json_text = await request.json()
-    data = json.loads(json_text)
+    data = await request.json()
+    if not isinstance(data, dict):
+        return Response(status=400)
     if "autocommit" in data:
-        request.app["autocommit"] = bool(data["autocommit"])
+        if not isinstance(data["autocommit"], bool):
+            return Response(status=400)
+        request.app["autocommit"] = data["autocommit"]
 
     return Response(status=200)

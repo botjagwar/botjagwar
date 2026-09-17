@@ -121,7 +121,7 @@ class RakibolanaOrgPickleImporter(object):
                 raise AdditionalDataImporterError()
 
             self.importer.write_additional_data(word_id, defn1)
-        except AdditionalDataImporterError as exc:
+        except AdditionalDataImporterError:
             pass
 
         # t.i.f listings

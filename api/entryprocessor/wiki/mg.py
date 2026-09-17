@@ -8,8 +8,10 @@ from .base import stripwikitext
 
 
 class MGWiktionaryProcessor(WiktionaryProcessor):
-    form_of_regex = r"\{\{\-([a-z]+\-[a-z]{3,7})\-\|([a-z]{2,3})\}\}"
-    lemma_regex = r"\{\{\-([a-z]{3,7})\-\|([a-z]{2,3})\}\}"
+    language_regex = r"([a-z][a-z0-9-]*)"
+    form_of_regex = rf"\{{\{{\-([a-z]+(?:\-[a-z]+)+)\-\|{language_regex}\}}\}}"
+    lemma_regex = rf"\{{\{{\-([a-z]+)\-\|{language_regex}\}}\}}"
+    entry_regex = re.compile(rf"(?:{form_of_regex}|{lemma_regex})", re.IGNORECASE)
 
     @property
     def language(self):
@@ -22,49 +24,44 @@ class MGWiktionaryProcessor(WiktionaryProcessor):
     def retrieve_translations(self):
         return []
 
-    def get_all_entries(self, keep_native_entries=False, **kw):
+    def get_all_entries(
+        self, keep_native_entries: bool = False, **kw: object
+    ) -> list[Entry]:
         items = []
         if self.content is None:
             return []
-        for regex in [self.form_of_regex, self.lemma_regex]:
-            for pos, lang in re.findall(regex, self.content):
-                pos = pos.strip()
-                if pos.strip() in ("etim"):
-                    continue
-                # word DEFINITION Retrieving
-                d1 = self.content.find("{{-%s-|%s}}" % (pos, lang)) + len(
-                    "{{-%s-|%s}}" % (pos, lang)
+        matches = list(self.entry_regex.finditer(self.content))
+        for index, match in enumerate(matches):
+            pos, lang = next(
+                (match.group(group), match.group(group + 1))
+                for group in (1, 3)
+                if match.group(group) is not None
+            )
+            if pos == "etim":
+                continue
+            block_end = (
+                matches[index + 1].start()
+                if index + 1 < len(matches)
+                else len(self.content)
+            )
+            definition_block = self.content[match.end():block_end]
+            entry_definition = []
+            for definition in definition_block.split("\n# ")[1:]:
+                definition = definition.split("\n", 1)[0]
+                definition = re.sub(
+                    "\\[\\[(.*)#(.*)\\|?\\]?\\]?", "\\1", definition
                 )
-                if d2 := (
-                    self.content.find("=={{=", d1) + 1
-                    or self.content.find("== {{=", d1) + 1
-                ):
-                    definition = self.content[d1:d2]
-                else:
-                    definition = self.content[d1:]
-                try:
-                    definitions = definition.split("\n# ")[1:]
-                except IndexError:
-                    # print(" Hadisoana : Tsy nahitana famaritana")
-                    continue
+                if definition := stripwikitext(definition):
+                    entry_definition.append(definition)
 
-                entry_definition = []
-                for definition in definitions:
-                    if definition.find("\n") + 1:
-                        definition = definition[: definition.find("\n")]
-                        definition = re.sub(
-                            "\\[\\[(.*)#(.*)\\|?\\]?\\]?", "\\1", definition
-                        )
-                    if definition := stripwikitext(definition):
-                        entry_definition.append(definition)
-
-                if entry_definition := [d for d in entry_definition if len(d) > 1]:
-                    i = Entry(
+            if entry_definition := [d for d in entry_definition if len(d) > 1]:
+                items.append(
+                    Entry(
                         entry=self.title,
-                        part_of_speech=pos.strip(),
-                        language=lang.strip(),
+                        part_of_speech=pos,
+                        language=lang,
                         definitions=entry_definition,
                     )
-                    items.append(i)
+                )
         # print("Nahitana dikanteny ", len(items) ", len(items))
         return items

@@ -74,7 +74,7 @@ def compile_pagecount_csv_file(language, site, history_depth=50):
                     if f"//{language}.{site}.org/w/api.php?"
                     f"action=query&meta=siteinfo&format=xml&siprop=statistics" in line
                 ][0]
-                article = re.findall("\{\{formatnum:([0-9]+)\}\}", line)[0]
+                article = re.findall(r"\{\{formatnum:([0-9]+)\}\}", line)[0]
             except IndexError:
                 # print('error')
                 pass
@@ -138,10 +138,10 @@ def build_regression_model_on_stats_data(
                 "timestamp": date_as_ts[0][0],
             }
             # print(f"milestone: {milestone} on date", date)
-        except pd.errors.OutOfBoundsDatetime as exc:
+        except pd.errors.OutOfBoundsDatetime:
             # print(f'ERROR: date too far in the future/past. Skipped: {exc}')
             pass
-        except Exception as exc:
+        except Exception:
             # print(f'{exc.__class__.__name__}: {exc}')
             pass
     # plt.scatter(X, y)

@@ -1,3 +1,5 @@
+from sqlalchemy import text
+
 from api.databasemanager import DictionaryDatabaseManager
 from api.decorator import time_this
 
@@ -26,7 +28,7 @@ class FastTranslationLookup:
         """
         print("--- building fast translation lookup tree ---")
         with self.output_database.engine.connect() as connection:
-            query = connection.execute(
+            query = connection.execute(text(
                 """
             select
                 word.id,
@@ -46,7 +48,7 @@ class FastTranslationLookup:
                 and definition_language = '%s'
             """
                 % (self.source_language, self.target_language)
-            )
+            ))
             for w in query.fetchall():
                 word, language, part_of_speech, definition = w[1], w[2], w[3], w[4]
                 key = (word, language, part_of_speech)

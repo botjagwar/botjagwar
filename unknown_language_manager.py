@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 import logging
+import os
 import time
 from datetime import datetime, timedelta
 from random import randint
@@ -21,7 +22,7 @@ language_db_manager = LanguageDatabaseManager()
 language_session = language_db_manager.session
 word_session = dictionary_db_manager.session
 
-WORKING_WIKI = pywikibot.Site("mg", "wiktionary")
+WORKING_WIKI = None if os.environ.get("PYWIKIBOT_NO_NETWORK") else pywikibot.Site("mg", "wiktionary")
 try:
     username = f'{pywikibot.config.usernames["wiktionary"]["mg"]}'
 except KeyError:

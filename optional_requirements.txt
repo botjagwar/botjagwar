@@ -1,0 +1,8 @@
+nltk
+redis
+psycopg2
+torch
+transformers
+sentencepiece
+gensim>=4.3.0
+pgvector>=0.3.0

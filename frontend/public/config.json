@@ -1,0 +1,6 @@
+{
+  "databaseAddress": "",
+  "postgrestAddresses": ["/api/database"],
+  "dictionaryServiceAddresses": ["/api/dictionary"],
+  "entryTranslatorAddresses": ["/api/translator"]
+}

@@ -14,7 +14,7 @@ class TestTranslateUsingConvergentDefinition(TestCase):
         convergent_translations.get_convergent_translation.return_value = [
             {"suggested_definition": "translation 1"}
         ]
-        result = translate_using_convergent_definition(
+        translate_using_convergent_definition(
             part_of_speech="ana",
             definition_line="test definition",
             source_language="en",

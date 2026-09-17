@@ -51,7 +51,7 @@ class RedisWrapperAPI(KeyValueStoreAPI):
             if hasattr(self, "attributes"):
                 for key in self.attributes:
                     self.instance.delete(key)
-        
+
             if hasattr(self, "instance"):
                 self.instance.close()
 

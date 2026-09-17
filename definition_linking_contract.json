@@ -1,0 +1,77 @@
+[
+  {
+    "name": "links repeated case variants once",
+    "definition": "Longword longword, longword.",
+    "currentWord": "source",
+    "candidates": ["longword"],
+    "expected": [
+      { "text": "Longword", "target": "longword" },
+      { "text": " longword, longword." }
+    ]
+  },
+  {
+    "name": "resets for another definition",
+    "definition": "another Longword",
+    "currentWord": "source",
+    "candidates": ["longword"],
+    "expected": [
+      { "text": "another " },
+      { "text": "Longword", "target": "longword" }
+    ]
+  },
+  {
+    "name": "prefers the longest phrase",
+    "definition": "A trano fonenana beside trano.",
+    "currentWord": "source",
+    "candidates": ["trano", "trano fonenana"],
+    "expected": [
+      { "text": "A " },
+      { "text": "trano fonenana", "target": "trano fonenana" },
+      { "text": " beside " },
+      { "text": "trano", "target": "trano" },
+      { "text": "." }
+    ]
+  },
+  {
+    "name": "preserves phrase punctuation and whitespace",
+    "definition": "Trano,  fonenana: tsara.",
+    "currentWord": "source",
+    "candidates": ["trano fonenana", "tsara"],
+    "expected": [
+      { "text": "Trano,  fonenana", "target": "trano fonenana" },
+      { "text": ": " },
+      { "text": "tsara", "target": "tsara" },
+      { "text": "." }
+    ]
+  },
+  {
+    "name": "does not strip unsupported parentheses",
+    "definition": "(Trano) tsara",
+    "currentWord": "source",
+    "candidates": ["trano", "tsara"],
+    "expected": [
+      { "text": "(Trano) " },
+      { "text": "tsara", "target": "tsara" }
+    ]
+  },
+  {
+    "name": "does not link the current headword",
+    "definition": "source longword source",
+    "currentWord": "source",
+    "candidates": ["source", "longword"],
+    "expected": [
+      { "text": "source " },
+      { "text": "longword", "target": "longword" },
+      { "text": " source" }
+    ]
+  },
+  {
+    "name": "leaves existing wiki markup alone",
+    "definition": "longword and [[anotherword]]",
+    "currentWord": "source",
+    "candidates": ["longword", "anotherword"],
+    "expected": [
+      { "text": "longword and [[anotherword]]" }
+    ]
+  }
+]

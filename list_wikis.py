@@ -1,15 +1,32 @@
 # -*- coding: utf-8  -*-
-import json
 import re
 import time
 
 import pywikibot
-import random
 import requests
-from itertools import cycle
-
+from typing import Dict, Iterable, List, Optional
 
 data_file = "/opt/botjagwar/conf/list_wikis/"
+WIKISTATS_DATA_URL = (
+    "https://commons.wikimedia.org/w/index.php"
+    "?title=Data:Wikipedia_statistics/data.tab&action=raw"
+)
+# Aggregate/non-language prefixes present in data.tab that are not wikis
+NON_LANGUAGE_PREFIXES = {
+    "total",
+    "totalactive",
+    "totalclosed",
+    "www",
+    "meta",
+    "commons",
+    "incubator",
+    "foundation",
+    "wikimania",
+    "wikitech",
+    "donate",
+    "species",
+    "beta",
+}
 try:
     current_user = f'{pywikibot.config.usernames["wiktionary"]["mg"]}'
 except KeyError:
@@ -17,21 +34,100 @@ except KeyError:
 
 
 class Wikilister(object):
-    def __init__(self, test=False):
+    def __init__(self, test: bool = False) -> None:
         self.test = test
+        self._wikistats_cache: Optional[Dict[str, Dict[str, int]]] = None
 
-        # self.user_agent_list = [
-        #     "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36",
-        #     "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:139.0) Gecko/20100101 Firefox/139.0",
-        #     "Mozilla/5.0 (iPhone; CPU iPhone OS 18_5 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.5 Mobile/15E148 Safari/604.1",
-        #     # ...,
-        # ]
-        self.user_agent_list = [
-            "Bot-Jagwar/1.7 (Linux; x64) python-requests/2.32.3",
-        ]
+    def _fetch_wikistats_table(self) -> Dict[str, Dict[str, int]]:
+        """Fetch all site statistics in one request from Commons data.tab.
 
+        Returns a dict keyed by site name (e.g. "mg.wiktionary") whose values
+        follow the pywikibot `statistics` dict layout ("files" is exposed as
+        "images"). Returns an empty dict on failure so callers can fall back
+        to the legacy per-wiki fetching.
+        """
+        if self._wikistats_cache is not None:
+            return self._wikistats_cache
 
-    def getLangs(self, site):
+        table: Dict[str, Dict[str, int]] = {}
+        try:
+            response = requests.get(
+                WIKISTATS_DATA_URL,
+                timeout=60,
+                # Wikimedia rejects requests with generic User-Agents
+                headers={
+                    "User-Agent": "Bot-Jagwar/1.7.2 "
+                    "(https://github.com/botjagwar/botjagwar; radomd92@gmail.com)"
+                },
+            )
+            response.raise_for_status()
+            payload = response.json()
+            field_names = [field["name"] for field in payload["schema"]["fields"]]
+            for row in payload["data"]:
+                stats = dict(zip(field_names, row))
+                site_name = stats.pop("site")
+                stats["images"] = stats.pop("files")
+                table[site_name] = {key: int(value) for key, value in stats.items()}
+        except (requests.RequestException, ValueError, KeyError, TypeError) as exc:
+            print(f"Tsy azo ny angona avy amin'ny data.tab : {exc}")
+            table = {}
+
+        self._wikistats_cache = table
+        return table
+
+    def _fetch_statistics(self, lang: str, site: str) -> Dict[str, int]:
+        """Fetch site statistics via pywikibot with retries to avoid HTTP 429 errors."""
+        retries = 5
+        backoff_seconds = 5
+        last_exception: Optional[Exception] = None
+        for attempt in range(1, retries + 1):
+            try:
+                wiki_site = pywikibot.Site(lang, site)
+                wiki_site.throttle.wait(.1)
+                stats = wiki_site.siteinfo.get("statistics")
+                if not isinstance(stats, dict):
+                    raise ValueError(
+                        f"Invalid statistics payload for {lang}.{site}: {stats}"
+                    )
+                return stats
+            except (
+                pywikibot.exceptions.APIError,
+                pywikibot.exceptions.ServerError,
+                pywikibot.exceptions.TimeoutError,
+                pywikibot.exceptions.Error,
+                ValueError,
+            ) as exc:
+                last_exception = exc
+                print(
+                    "Hadisoana tamin'ny fangatahana ny statistika "
+                    f"{lang} {site} : {exc}. Mamerina indray ({attempt}/{retries})."
+                )
+                time.sleep(backoff_seconds * attempt)
+        raise RuntimeError(
+            f"Tsy nahazo statistika ho an'ny {lang}.{site} rehefa naverina imbetsaka."
+        ) from last_exception
+
+    def get_wikistats(self, site: str) -> Dict[str, Dict[str, int]]:
+        """Return data.tab statistics keyed by language for one wiki project."""
+        wikistats = self._fetch_wikistats_table()
+        return {
+            prefix: stats
+            for key, stats in wikistats.items()
+            for prefix, separator, site_name in [key.partition(".")]
+            if separator
+            and site_name == site
+            and prefix not in NON_LANGUAGE_PREFIXES
+        }
+
+    def getLangs(self, site: str) -> Iterable[str]:
+        wikistats = self.get_wikistats(site)
+        if wikistats:
+            languages = list(wikistats)
+            print(languages)
+            yield from languages
+            return
+
+        # Legacy fallback: read the language list from a local dump file.
         dump = open(f"{data_file}listof{site}.txt", "r").read()
         print(f"{data_file}listof{site}.txt")
 
@@ -43,38 +139,14 @@ class Wikilister(object):
         print(wikiregex)
         yield from wikiregex
 
-    def run(self, wiki, site):
-        datas = []
+    def run(self, wiki: str, site: str) -> None:
+        wikistats = self._fetch_wikistats_table()
+        datas: List[List[object]] = []
         i = 0
         for lang in self.getLangs(site):
-            # generate a single random User Agent from the pool
-            random_user_agent = cycle(self.user_agent_list)
-            user_agent = next(random_user_agent)
-
-            # use the randomized User Agent
-            headers = {"User-Agent": user_agent}
-
-            # Getting and formatting statistics JSON
-            urlstr = f"https://{lang}.{site}.org/w/api.php?action=query&meta=siteinfo&format=json&siprop=statistics&continue"
-            resp = requests.get(urlstr, headers=headers)
-            while True:
-                if resp.status_code != 200:
-                    print(
-                        f"Hadisoana tamin'ny fangatahana ny statistika {lang} {site} : {resp.status_code}"
-                    )
-                    time.sleep(10)
-                    continue
-                try:
-                    stats = resp.json()
-                    break
-                except json.decoder.JSONDecodeError:
-                    print(
-                        f"Hadisoana tamin'ny famakiana ny statistika {lang} {site} : {resp.text}"
-                    )
-                    time.sleep(10)
-                    continue
-
-            m = stats["query"]["statistics"]
+            m = wikistats.get(f"{lang}.{site}")
+            if m is None:
+                m = self._fetch_statistics(lang, site)
             e = [
                 int(m["articles"]),
                 int(m["pages"]),
@@ -87,16 +159,6 @@ class Wikilister(object):
                 site,
             ]
             articles, pages, edits, users, activeusers, admins, images, lang, site = e
-
-            # words per page calculation
-            if float(m["articles"]) != 0:
-                words_p_article = float(m["cirrussearch-article-words"]) / float(
-                    m["articles"]
-                )
-            else:
-                words_p_article = 0
-
-            e.append(words_p_article)
 
             # Depth calculation
             try:
@@ -118,7 +180,6 @@ class Wikilister(object):
                     " mavitrika:%d;"
                     " mpandrindra:%d;"
                     " sary:%d;"
-                    " teny:%2.2f;"
                     " halalina:%s "
                     % (
                         lang,
@@ -129,7 +190,6 @@ class Wikilister(object):
                         activeusers,
                         admins,
                         images,
-                        words_p_article,
                         depth,
                     )
                 )
@@ -139,7 +199,7 @@ class Wikilister(object):
         datas.sort(reverse=True)
         self.wikitext(datas, wiki)
 
-    def wikitext(self, e, wiki):
+    def wikitext(self, e: List[List[object]], wiki: str) -> None:
         total = {
             "pages": 0,
             "allpages": 0,
@@ -164,7 +224,6 @@ class Wikilister(object):
 ! <small>Mpikambana<br>mavitrika</small>
 ! Sary
 ! Isan-jato
-! Teny/pejy
 ! Halalim-pejy"""
         # total = (0,0,0,0,0,0)
         for wikistats_data in e:
@@ -179,7 +238,6 @@ class Wikilister(object):
                 images,
                 lang,
                 site,
-                words_per_page,
                 depth,
             ) = wikistats_data
             total["pages"] += articles
@@ -201,7 +259,6 @@ class Wikilister(object):
                 images,
                 lang,
                 site,
-                words_per_page,
                 depth,
             ) = wikistats_data
             wikistats_data = {
@@ -214,7 +271,6 @@ class Wikilister(object):
                 "images": images,
                 "language": lang,
                 "wiki": site,
-                "words_per_page": "{{formatnum:%2.2f}}" % words_per_page,
                 "depth": depth,
             }
             isanjato = float(float(100 * articles) / total["pages"])
@@ -237,7 +293,6 @@ class Wikilister(object):
                 % wikistats_data
                 + """%2.2f""" % isanjato
                 + """}}
-| %(words_per_page)s
 | %(depth)s
 """
                 % wikistats_data
@@ -283,7 +338,7 @@ class Wikilister(object):
                 print("Hadisoana nitranga tampametrahana ilay pejy")
 
 
-def main():
+def main() -> None:
     timeshift = 3
     bot = Wikilister()
 

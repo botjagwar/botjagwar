@@ -3,20 +3,17 @@
 import math
 import pickle
 import time
+from pathlib import Path
+from typing import Dict, List, Tuple
 
 import pywikibot
-import requests
 
-from api.decorator import retry_on_fail
 from list_wikis import Wikilister
 
 udata = "/opt/botjagwar/user_data/milestones"
-cdata = "/opt/botjagwar/conf/list_wikis/langs"
 
-possible_errors = [requests.exceptions.ConnectionError]
-requests.get = retry_on_fail(possible_errors, retries=5, time_between_retries=0.4)(
-    requests.get
-)
+WikiStats = Dict[str, int]
+WikiState = Tuple[str, str, WikiStats]
 
 
 def get_saved_state():
@@ -29,38 +26,23 @@ def get_saved_state():
         return []
 
 
-def get_new_state():
+def get_new_state() -> List[WikiState]:
+    """Build the current state from the cached Commons data.tab request."""
     lister = Wikilister()
-    new_state = []
-    headers = {"User-Agent": "Bot-Jagwar/1.7 (Linux; x64) python-requests/2.32.3"}
+    new_state: List[WikiState] = []
     for site in ["wikipedia", "wiktionary"]:
-        for lang in lister.getLangs(site):
-            urlstr = f"https://{lang}.{site}.org/"
-            urlstr += "w/api.php?action=query&meta=siteinfo&format=json&siprop=statistics&continue"
-            try:
-                stat_page = requests.get(urlstr, headers=headers).json()
-            except Exception as exc:
-                print("Error while trying to get URL", exc)
-                continue
-
-            for _ in range(5):
-                stat_json = ""
-                try:
-                    stat_json = stat_page
-                    p = stat_json["query"]["statistics"]
-                    wiki_state = (lang, site, p)
-                    print(wiki_state)
-                    new_state.append(wiki_state)
-                    break
-                except Exception as e:
-                    print(stat_json)
-                    time.sleep(5)
-                    raise e
+        for lang, stats in lister.get_wikistats(site).items():
+            wiki_state = (lang, site, stats)
+            print(wiki_state)
+            new_state.append(wiki_state)
     return new_state
 
 
-def save_state(state):
-    with open(f"{udata}/news_stats", "wb") as f:
+def save_state(state: List[WikiState]) -> None:
+    state_directory = Path(udata)
+    if not state_directory.exists():
+        state_directory.mkdir(parents=True)
+    with (state_directory / "news_stats").open("wb") as f:
         pickle.dump(state, f)
 
 
@@ -192,8 +174,8 @@ def main():
     retstr = ""
     for m in ms:
         try:
-            if c := render_announce(m):
-                retstr += render_announce(m) + "\n"
+            if rendered := render_announce(m):
+                retstr += rendered + "\n"
         except ValueError as e:
             print(e)
 

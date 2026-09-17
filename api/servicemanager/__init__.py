@@ -10,6 +10,7 @@ from requests import Response
 
 from api.decorator import threaded, retry_on_fail
 from api.config import BotjagwarConfig
+from api.http_client import DEFAULT_HTTP_TIMEOUT
 
 log = logging.getLogger(__name__)
 
@@ -124,28 +125,36 @@ class ServiceManager(ProcessManager):
     @retry_on_fail([Exception], 5, 0.5)
     def get(self, route, **kwargs):
         route = "%s://%s:%d/%s" % (self.scheme, self.backend_address, self.port, route)
+        kwargs.setdefault("timeout", DEFAULT_HTTP_TIMEOUT)
         return requests.get(route, **kwargs)
 
     @retry_on_fail([Exception], 5, 0.5)
     def post(self, route, **kwargs):
+        return self.post_once(route, **kwargs)
+
+    def post_once(self, route, **kwargs):
+        """Send one POST request without automatic non-idempotent retries."""
         route = "%s://%s:%d/%s" % (self.scheme, self.backend_address, self.port, route)
+        kwargs.setdefault("timeout", DEFAULT_HTTP_TIMEOUT)
         return requests.post(route, **kwargs)
 
     @retry_on_fail([Exception], 5, 0.5)
     def put(self, route, **kwargs):
         route = "%s://%s:%d/%s" % (self.scheme, self.backend_address, self.port, route)
+        kwargs.setdefault("timeout", DEFAULT_HTTP_TIMEOUT)
         return requests.put(route, **kwargs)
 
     @retry_on_fail([Exception], 5, 0.5)
     def delete(self, route, **kwargs):
         route = "%s://%s:%d/%s" % (self.scheme, self.backend_address, self.port, route)
+        kwargs.setdefault("timeout", DEFAULT_HTTP_TIMEOUT)
         return requests.delete(route, **kwargs)
 
 
 class EntryTranslatorServiceManager(ServiceManager):
     port = 8000
     service_name = "entry_translator"
-    program_name = "entry_translator.py"
+    program_name = "entry_translator_v2.py"
     kill_if_exists = False
 
 

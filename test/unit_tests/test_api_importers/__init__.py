@@ -8,12 +8,12 @@ class ApiImporterTester(TestCase):
     data_exists_index = 0
     data_does_not_exist_index = 1
     corner_case_index = 0
-    language = "fr"
+    language = "en"
     filename = "importers/en-wikipage.txt"
 
     def setUp(self) -> None:
         self.wikipages = ""
-        with open(f"test_data/{self.filename}", "r") as f:
+        with open(f"test_data/{self.filename}", "r", encoding="utf-8") as f:
             sections = f.read().split("----")
             self.wikipages = sections
 
@@ -24,15 +24,13 @@ class ApiImporterTester(TestCase):
             data = importer.get_data(
                 "", self.wikipages[self.data_exists_index], self.language
             )
-            print(self.wikipages[self.data_exists_index], data, self.Importer)
             self.assertNotEqual(data, [])
-            return data
 
     def test_get_data_returns_right_type(self):
         importer = self.Importer()
         if self.data_does_not_exist_index is not None:
             data = importer.get_data(
-                "", self.wikipages[self.data_exists_index], self.language
+                "", self.wikipages[self.data_does_not_exist_index], self.language
             )
-            self.assertNotEqual(data, list)
-            return data
+            self.assertIsInstance(data, list)
+            self.assertEqual(data, [])

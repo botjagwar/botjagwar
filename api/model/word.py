@@ -28,6 +28,16 @@ class Entry(object):
     additional_data: Optional[Dict] = field(default_factory=dict)
 
     @classmethod
+    def from_dict(cls, data: dict):
+        return cls(
+            entry=data.get("entry", ""),
+            part_of_speech=data.get("part_of_speech", ""),
+            language=data.get("language", ""),
+            definitions=data.get("definitions", []),
+            additional_data=data.get("additional_data", {}),
+        )
+
+    @classmethod
     def from_word(cls, model):
         return cls(
             entry=model.word,

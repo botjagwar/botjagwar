@@ -1,0 +1,4 @@
+interface:
+  display_name: "Edit Frontend"
+  short_description: "Edit botjagwar Atlas frontend safely."
+  default_prompt: "Follow AGENTS.md and skills/edit-frontend/SKILL.md. Start with the affected Atlas source and co-located tests, follow a direct boundary only when needed, and run the required checks."

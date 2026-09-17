@@ -1,2 +1,2 @@
-from .caching import FastTranslationLookup
-from .caching import FastWordLookup
+from .caching import FastTranslationLookup as FastTranslationLookup
+from .caching import FastWordLookup as FastWordLookup

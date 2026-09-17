@@ -1,8 +1,8 @@
 from api.model.word import Entry
 from .functions import (
-    translate_using_postgrest_json_dictionary,
+    translate_using_postgrest_json_dictionary as translate_using_postgrest_json_dictionary,
 )
-from .types import TranslatedDefinition, UntranslatedDefinition
+from .types import TranslatedDefinition, UntranslatedDefinition as UntranslatedDefinition
 from .functions.definitions.rule_based import FormOfDefinitionTranslatorFactory
 
 

@@ -132,7 +132,7 @@ class TestVerbFormParsersTemplate(TestCase):
 
     @parameterized.expand(fi_verb_forms)
     def test_parse_fi_verb_form_of_2(self, template_expression):
-        output = parse_fi_verb_form_of(template_expression)
+        parse_fi_verb_form_of(template_expression)
 
     def test_parse_fi_form_of(self):
         template_expression = "{{fi-form of|aateloida|pr=third-person|pl=singular|mood=indicative|tense=present}}"

@@ -45,6 +45,89 @@ def parse_affix(template: mwparserfromhell.nodes.Template) -> str:
     return f"{lang_part} {joined}".strip()
 
 
+def _plain_term(text: str) -> str:
+    """Return plain etymology text with common transliteration marks removed."""
+    return mwparserfromhell.parse(text).strip_code()
+
+
+def parse_prefix(template: mwparserfromhell.nodes.Template) -> str:
+    """Render the ``prefix`` etymology template to plain text."""
+    parts: list[str] = []
+    term_index = 1
+    param_index = 2
+    while template.has(param_index):
+        term = str(template.get(param_index).value).strip()
+        if term:
+            position_param = f"pos{term_index}"
+            position = (
+                str(template.get(position_param).value).strip()
+                if template.has(position_param)
+                else ""
+            )
+            term_text = _plain_term(term)
+            if "prefix" in position.lower() and not term_text.endswith("-"):
+                term_text += "-"
+            if position:
+                term_text += f" ({mwparserfromhell.parse(position).strip_code()})"
+
+            gloss_param = f"gloss{term_index}"
+            if template.has(gloss_param):
+                gloss = str(template.get(gloss_param).value).strip()
+                if gloss:
+                    term_text += f" ({mwparserfromhell.parse(gloss).strip_code()})"
+
+            parts.append(term_text)
+        term_index += 1
+        param_index += 1
+    return " + ".join(parts)
+
+
+def parse_root(template: mwparserfromhell.nodes.Template) -> str:
+    """Render a ``root`` template."""
+
+    origin_code = str(template.get(2).value).strip() if template.has(2) else ""
+    roots: list[str] = []
+    param_index = 3
+    while template.has(param_index):
+        root = str(template.get(param_index).value).strip()
+        if root:
+            plain_root = _plain_term(root)
+            if root.startswith("*") and not plain_root.startswith("*"):
+                plain_root = "*" + plain_root
+            roots.append(_italic(plain_root))
+        param_index += 1
+    return f"{_lang_template(origin_code)} {' and '.join(roots)}".strip()
+
+
+def parse_etyl(template: mwparserfromhell.nodes.Template) -> str:
+    """Render the legacy ``etyl`` language-origin template."""
+
+    language_code = str(template.get(1).value).strip() if template.has(1) else ""
+    return _lang_template(language_code)
+
+
+def _parse_mention(template: mwparserfromhell.nodes.Template) -> str:
+    """
+    Render mention templates.
+    Examples: {{m|enm|charre}}, {{m|enm|cherre||odd job, turn, occasion, business}}
+    """
+    str(template.get(2).value).strip() if template.has(2) else ""
+    result = ''
+    if template.has(1) and str(template.get(1).value).strip():
+        language = str(template.get(1).value).strip()
+        result += "{{" + language + "}} "
+
+    if template.has(2) and str(template.get(2).value).strip():
+        term = str(template.get(2).value).strip()
+        result += f'[[{term}]]'
+
+    if template.has(4) and str(template.get(4).value).strip():
+        explanation = str(template.get(4).value).strip()
+        result += f" ({explanation})"
+
+    return result.strip()
+
+
 def _parse_inh_der_bor(template: mwparserfromhell.nodes.Template) -> str:
     """Render inheritance/derivation/borrowing templates without relations."""
     origin_code = str(template.get(2).value).strip() if template.has(2) else ""
@@ -92,7 +175,7 @@ def parse_noncognate(template: mwparserfromhell.nodes.Template) -> str:
 
 
 def _parse_with_prefix(
-    template: mwparserfromhell.nodes.Template, prefix: str
+        template: mwparserfromhell.nodes.Template, prefix: str
 ) -> str:
     """Return parsed borrowing-like template preceded by ``prefix``."""
     rendered = _parse_inh_der_bor(template)
@@ -100,7 +183,7 @@ def _parse_with_prefix(
 
 
 def _parse_misc_single_term(
-    template: mwparserfromhell.nodes.Template, prefix: str
+        template: mwparserfromhell.nodes.Template, prefix: str
 ) -> str:
     """Render templates like ``abbrev`` that take a single term."""
     lang_code = str(template.get(1).value).strip() if template.has(1) else ""
@@ -129,7 +212,7 @@ def _parse_misc_no_term(_: mwparserfromhell.nodes.Template, text: str) -> str:
 
 
 def _parse_misc_multiple_terms(
-    template: mwparserfromhell.nodes.Template, prefix: str
+        template: mwparserfromhell.nodes.Template, prefix: str
 ) -> str:
     """Render templates like ``doublet`` that take multiple term parameters."""
     lang_code = str(template.get(1).value).strip() if template.has(1) else ""
@@ -160,7 +243,17 @@ def _parse_misc_multiple_terms(
 _PARSERS: Dict[str, Callable[[mwparserfromhell.nodes.Template], str]] = {
     "af": parse_affix,
     "affix": parse_affix,
+    "blend": parse_affix,
+    "circumfix": parse_affix,
+    "compound": parse_affix,
+    "confix": parse_affix,
+    "prefix": parse_prefix,
+    "suffix": parse_affix,
+    "root": parse_root,
+    "etyl": parse_etyl,
     "inh": _parse_inh_der_bor,
+    "m": _parse_mention,
+    "mention": _parse_mention,
     "inherited": _parse_inh_der_bor,
     "der": _parse_inh_der_bor,
     "derived": _parse_inh_der_bor,
@@ -182,8 +275,13 @@ _PARSERS: Dict[str, Callable[[mwparserfromhell.nodes.Template], str]] = {
     "clq": lambda tpl: _parse_with_prefix(tpl, "calque of"),
     "pcal": lambda tpl: _parse_with_prefix(tpl, "partial calque of"),
     "pclq": lambda tpl: _parse_with_prefix(tpl, "partial calque of"),
+    "partial calque": lambda tpl: _parse_with_prefix(tpl, "partial calque of"),
     "sl": lambda tpl: _parse_with_prefix(tpl, "semantic loan from"),
+    "semantic loan": lambda tpl: _parse_with_prefix(tpl, "semantic loan from"),
     "psm": lambda tpl: _parse_with_prefix(tpl, "phono-semantic matching of"),
+    "phono-semantic matching": lambda tpl: _parse_with_prefix(
+        tpl, "phono-semantic matching of"
+    ),
     "translit": lambda tpl: _parse_with_prefix(tpl, "transliteration of"),
     "transliteration": lambda tpl: _parse_with_prefix(tpl, "transliteration of"),
     # Misc templates with one term
@@ -213,13 +311,14 @@ _PARSERS: Dict[str, Callable[[mwparserfromhell.nodes.Template], str]] = {
 def render_template(template: mwparserfromhell.nodes.Template) -> str:
     """Return the rendered representation of an etymology ``template``.
 
-    Unknown templates return an empty string so that they are simply
-    removed from the final output.
+    Unknown templates return an empty string so callers can preserve the
+    original source instead of replacing it with inaccurate text.
     """
     name = template.name.strip().lower()
     parser = _PARSERS.get(name)
     if parser:
         return parser(template)
     return ""
+
 
 __all__ = ["render_template"]

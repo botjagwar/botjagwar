@@ -1,10 +1,47 @@
 import sys
 import time
+from typing import Any, Dict
 
 import requests
 
 server = "localhost"
 service = 8000  # int(sys.argv[3])
+
+
+def describe_translation_response(resp: requests.Response) -> Dict[str, Any]:
+    """Return parsed translation response data, including fallback error details."""
+    try:
+        data = resp.json()
+    except ValueError:
+        return {
+            "status": "error",
+            "message": resp.text,
+            "http_status": resp.status_code,
+        }
+    if isinstance(data, dict):
+        data.setdefault("http_status", resp.status_code)
+        return data
+    return {
+        "status": "unknown",
+        "message": "Translation API returned a non-object response.",
+        "response": data,
+        "http_status": resp.status_code,
+    }
+
+
+def print_translation_response(resp: requests.Response) -> None:
+    """Print a concise summary for old and structured translation responses."""
+    data = describe_translation_response(resp)
+    status = data.get("status")
+    title = data.get("title", "")
+    if resp.status_code >= 400 or status == "error":
+        print(f"Translation failed for {title}: {data}")
+        return
+    if status:
+        entries_count = data.get("entries_count", 0)
+        print(f"Translation {status} for {title}: {entries_count} entries")
+    else:
+        print(data.get("message", "Translation request completed."))
 
 
 def push_to_entry_translator():
@@ -32,10 +69,11 @@ def push_to_entry_translator():
             print(">>>", data, "<<<")
             while True:
                 try:
-                    requests.post(
-                        f"http://{server}:{service}/wiktionary_page/{sys.argv[1]}",
+                    response = requests.post(
+                        f"http://{server}:{service}/wiktionary-pages/{sys.argv[1]}/translations",
                         json={"title": data},
                     )
+                    print_translation_response(response)
                     break
                 except KeyboardInterrupt:
                     print("Stopped.")

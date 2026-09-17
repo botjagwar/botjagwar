@@ -32,7 +32,7 @@ def fix_part_of_speech():
                 d.add(word["word"])
                 if c >= 100:
                     url = f'http://localhost:8100/word?word=in.({",".join(d)})'
-                    rq = requests.patch(url, {"part_of_speech": "mat"})
+                    requests.patch(url, {"part_of_speech": "mat"})
                     d = set()
                     c = 0
 

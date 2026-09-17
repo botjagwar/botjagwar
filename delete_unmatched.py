@@ -43,8 +43,6 @@ RABBITMQ_VIRTUAL_HOST = config.get("virtual_host", "rabbitmq")
 
 print(f"rabbitmq_host = {RABBITMQ_HOST}")
 print(f"rabbitmq_queue = {RABBITMQ_QUEUE}")
-print(f"rabbitmq_username = {RABBITMQ_USERNAME}")
-print(f"rabbitmq_password = {RABBITMQ_PASSWORD}")
 print(f"rabbitmq_virtual_host = {RABBITMQ_VIRTUAL_HOST}")
 
 # Create credentials for RabbitMQ authentication

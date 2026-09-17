@@ -15,10 +15,8 @@ def critical_section(cs_lock: threading.Lock):
 
     def _critical_section(f):
         def _critical_section_wrapper(*args, **kwargs):
-            cs_lock.acquire()
-            ret = f(*args, **kwargs)
-            cs_lock.release()
-            return ret
+            with cs_lock:
+                return f(*args, **kwargs)
 
         return _critical_section_wrapper
 
@@ -96,10 +94,11 @@ def singleton(cls):
 
 
 def threaded(f):
-    def wrap(*args, **kwargs):
+    def wrap(*args, **kwargs) -> threading.Thread:
         t = threading.Thread(target=f, args=args, kwargs=kwargs)
         t.daemon = False
         t.start()
+        return t
 
     return wrap
 
@@ -136,7 +135,7 @@ def catch_exceptions(*exceptions):
         def wrapper(*args, **kwargs):
             try:
                 return f(*args, **kwargs)
-            except exceptions as exc:
+            except exceptions:
                 return None
 
         return wrapper

@@ -104,7 +104,7 @@ class EnglishParser:
 
                 print(tokens)
                 self.processed += 1
-                pd = self.process(d)
+                self.process(d)
                 self.parsed += 1
                 # print(q.xml(pd, tokens))
             except ParserError:

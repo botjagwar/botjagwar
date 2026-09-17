@@ -95,7 +95,6 @@ class VolapukImporter(object):
             else:
                 content = "" + "\n"
                 content += output.wikipages([entry]).strip()
-                s = content.replace("\n", " ")
                 # summary = f"Pejy noforonina tamin'ny « {s} »"
                 summary = "bika matoanteny volapoka vaovao"
 

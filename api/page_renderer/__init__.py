@@ -4,10 +4,10 @@ import warnings
 from typing import Type
 
 from .base import PageRenderer
-from .chr import CHRWikiPageRenderer
-from .fa import FAWikiPageRenderer
-from .fj import FJWikiPageRenderer
-from .mg import MGWikiPageRenderer
+from .chr import CHRWikiPageRenderer as CHRWikiPageRenderer
+from .fa import FAWikiPageRenderer as FAWikiPageRenderer
+from .fj import FJWikiPageRenderer as FJWikiPageRenderer
+from .mg import MGWikiPageRenderer as MGWikiPageRenderer
 
 
 class WikiPageRendererFactory(object):

@@ -146,7 +146,7 @@ class Processor(object):
         if self.entry_writer is not None:
             try:
                 self.entry_writer.write()
-            except ValueError as err:
+            except ValueError:
                 log.exception("Could not write state.")
 
         if self.missing_translation_writer is not None:

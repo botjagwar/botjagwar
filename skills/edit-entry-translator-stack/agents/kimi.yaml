@@ -1,0 +1,4 @@
+interface:
+  display_name: "Edit Entry Translator Stack"
+  short_description: "Edit botjagwar entry_translator v2 safely."
+  default_prompt: "Follow AGENTS.md and skills/edit-entry-translator-stack/SKILL.md. Start with the affected owner file and nearest tests, preserve publication safeguards, and run the scoped validation."

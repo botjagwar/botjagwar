@@ -1,4 +1,3 @@
-import asyncio
 import json
 import logging
 
@@ -197,7 +196,7 @@ async def add_entry(request) -> Response:
     data["language"] = request.match_info["language"]
     word = _add_entry(data, session)
     forged_word = word.serialise()
-    asyncio.ensure_future(save_changes_on_disk(request.app, session))
+    await save_changes_on_disk(request.app, session)
 
     # Return HTTP response
     return Response(
@@ -241,7 +240,7 @@ async def edit_entry(request) -> Response:
         word.part_of_speech = data["part_of_speech"]
         word.definitions = definitions
 
-    asyncio.ensure_future(save_changes_on_disk(request.app, session))
+    await save_changes_on_disk(request.app, session)
     return Response(
         status=HTTPOk.status_code,
         text=json.dumps(word.serialise()),
@@ -259,8 +258,19 @@ async def delete_entry(request) -> Response:
     """
     # Search if word already exists.
     session = request.app["session_instance"]
+    word = session.query(Word).filter(Word.id == request.match_info["word_id"]).one_or_none()
+    if word is None:
+        raise WordDoesNotExist()
 
-    session.query(Word).filter(Word.id == request.match_info["word_id"]).delete()
+    definitions = list(word.definitions)
+    delete_dependent_definitions = request.query.get(
+        "delete_dependent_definitions", "false"
+    ).lower() in {"1", "true", "yes"}
+    if delete_dependent_definitions:
+        for definition in definitions:
+            if all(associated_word is word for associated_word in definition.words):
+                session.delete(definition)
+    session.delete(word)
 
-    asyncio.ensure_future(save_changes_on_disk(request.app, session))
+    await save_changes_on_disk(request.app, session)
     return Response(status=HTTPNoContent.status_code, content_type="application/json")

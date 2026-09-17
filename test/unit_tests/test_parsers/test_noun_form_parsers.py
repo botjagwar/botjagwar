@@ -1,15 +1,113 @@
 from unittest import TestCase
+from unittest.mock import patch
+
+import mwparserfromhell
 
 from api.parsers.functions import parse_el_form_of
 from api.parsers.functions import parse_hu_inflection_of
 from api.parsers.functions import parse_inflection_of
+from api.parsers.functions.noun_forms import definitions as noun_form_definitions
+from api.parsers.functions.noun_forms.definitions import parameterized_parse_fr_definition
 from api.parsers.functions.noun_forms.templates import parse_et_form_of
 from api.parsers.functions.noun_forms.templates import (
     parse_fi_form_of as parse_fi_form_of_noun,
 )
 from api.parsers.functions.noun_forms.templates import parse_lt_noun_form
 from api.parsers.functions.noun_forms.templates import parse_nl_noun_form_of
-from api.parsers.inflection_template import NounForm
+from api.parsers.inflection_template import AdjectiveForm, NounForm
+
+
+class TestNounFormParsersDefinition(TestCase):
+    """Test French definition-line parsing for noun-like forms."""
+
+    def test_parse_fr_definition_extracts_grammatical_features(self) -> None:
+        """A marked-up definition produces normalized grammatical fields."""
+
+        definition = (
+            "''Forme accusative de la deuxième personne du pluriel féminin défini de'' "
+            "{{lien|maison|fr}}."
+        )
+
+        output = parameterized_parse_fr_definition()(definition)
+
+        self.assertIsInstance(output, NounForm)
+        self.assertEqual(output.lemma, "maison")
+        self.assertEqual(output.case, "accusative")
+        self.assertEqual(output.number, "plural")
+        self.assertEqual(output.person, "second-person")
+        self.assertEqual(output.definiteness, "definite")
+        self.assertEqual(output.gender, "feminine")
+
+    def test_parse_fr_definition_defaults_number_and_uses_wikilink_target(self) -> None:
+        """An omitted number defaults to singular and link labels do not become lemmas."""
+
+        output = parameterized_parse_fr_definition()(
+            "''Forme nominative masculine de'' [[chat|chats]]."
+        )
+
+        self.assertEqual(output.lemma, "chat")
+        self.assertEqual(output.case, "nominative")
+        self.assertEqual(output.number, "singular")
+        self.assertEqual(output.gender, "masculine")
+
+    def test_parse_fr_definition_accepts_wikicode_and_requested_form_class(self) -> None:
+        """Pre-parsed definitions avoid reparsing and retain the requested output type."""
+
+        definition_code = mwparserfromhell.parse(
+            "''Forme partitive duelle neutre de l’'' {{lien|lang=fr|1=heureux}}."
+        )
+
+        output = parameterized_parse_fr_definition(AdjectiveForm)(definition_code)
+
+        self.assertIsInstance(output, AdjectiveForm)
+        self.assertEqual(output.lemma, "heureux")
+        self.assertEqual(output.case, "partitive")
+        self.assertEqual(output.number, "dual")
+        self.assertEqual(output.gender, "neutral")
+
+    def test_parse_fr_definition_prefers_lien_and_skips_empty_parameters(self) -> None:
+        """A valid lien lemma wins over links and empty positional parameters."""
+
+        output = parameterized_parse_fr_definition()(
+            "''Pluriel de'' [[solution de repli]] {{lien||lemme principal|fr}}."
+        )
+
+        self.assertEqual(output.lemma, "lemme principal")
+        self.assertEqual(output.number, "plural")
+
+    def test_parse_fr_definition_falls_back_from_empty_lien_to_wikilink(self) -> None:
+        """A lien without a positional lemma does not hide a usable wikilink."""
+
+        output = parameterized_parse_fr_definition()(
+            "''Singulier de'' {{lien|lang=fr}} [[secours|forme affichée]]."
+        )
+
+        self.assertEqual(output.lemma, "secours")
+        self.assertEqual(output.number, "singular")
+
+    def test_parse_fr_definition_supports_configured_possessiveness(self) -> None:
+        """Configured possessiveness markers are copied to the parsed form."""
+
+        with patch.dict(
+            noun_form_definitions.POSSESSIVENESS,
+            {"marque-x": "first-person singular"},
+        ):
+            output = parameterized_parse_fr_definition()(
+                "''Forme marque-x de'' [[maison]]."
+            )
+
+        self.assertEqual(output.lemma, "maison")
+        self.assertEqual(output.possessiveness, "first-person singular")
+
+    def test_parse_fr_definition_handles_text_without_a_lemma(self) -> None:
+        """Unlinked text returns an empty lemma while preserving safe defaults."""
+
+        output = parameterized_parse_fr_definition()("Forme non reconnue.")
+
+        self.assertEqual(output.lemma, "")
+        self.assertEqual(output.number, "singular")
+        self.assertIsNone(output.case)
+        self.assertIsNone(output.gender)
 
 
 class TestNounFormParsers(TestCase):

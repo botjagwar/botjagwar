@@ -13,7 +13,7 @@ class ZHWiktionaryProcessor(ENWiktionaryProcessor):
 
     must_have_part_of_speech = True
     empty_definitions_list_if_no_definitions_found = True
-    language_section_regex = r"[\n]?==[ ]?([⺀-⺙⺛-⻳⼀-⿕々〇〡-〩〸-〺〻㐀-䶵一-鿃豈-鶴侮-頻並-龎]+)[ ]?==\n"
+    language_section_regex = r"^==[ ]?([⺀-⺙⺛-⻳⼀-⿕々〇〡-〩〸-〺〻㐀-䶵一-鿃豈-鶴侮-頻並-龎]+?)[ ]?==$"
     all_importers = []
 
     @property
