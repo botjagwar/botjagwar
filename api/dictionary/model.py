@@ -1,6 +1,6 @@
 from typing import Optional
 
-from sqlalchemy import Integer, String, DateTime, TEXT
+from sqlalchemy import Integer, String, DateTime, TEXT, text
 from sqlalchemy import Table, Column, ForeignKey
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship
@@ -107,8 +107,11 @@ class Word(Base, Serialisable):
         dbm = DictionaryDatabaseManager()
         if not self.id:
             return None
-        sql = f"select word_id, type, information from additional_word_information where word_id = {self.id}"
-        rq = dbm.session.execute(sql)
+        query = text(
+            "select word_id, type, information "
+            "from additional_word_information where word_id = :word_id"
+        )
+        rq = dbm.session.execute(query, {"word_id": self.id})
         ret = {}
         for w_id, adt, info in rq.fetchall():
             if adt in ret:

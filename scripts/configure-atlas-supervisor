@@ -1,0 +1,4 @@
+#!/bin/bash
+set -euo pipefail
+
+exec /opt/botjagwar/pyenv/bin/python /opt/botjagwar/configure_atlas_supervisor.py "$@"

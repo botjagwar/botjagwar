@@ -10,7 +10,7 @@ class GarbageCollectorBot(object):
         self.input_database = DictionaryDatabaseManager(database_file=database_file)
 
     def start(self):
-        server = BotjagwarConfig().get("global", "postgrest_backend_address")
+        server = BotjagwarConfig().get("postgrest_backend_address", "global")
         used_definitions_q = "select distinct definition from dictionary"
         all_definitions_q = "select id from definitions"
         session = self.input_database.session
@@ -27,7 +27,7 @@ class GarbageCollectorBot(object):
         unused = all_definitions - used_definitions
         unused_len = len(unused)
         print(f"{unused_len} entries will be deleted.")
-        begin_time = time.time()
+        time.time()
         print("Starting deletion...", time.time())
         data = [str(k) for k in unused]
         chunk = set()
@@ -49,7 +49,7 @@ class GarbageCollectorBot(object):
                 # print('Success!', response.status_code)
 
                 response = requests.delete(
-                    f"http://{server}:8100/definitions?id=in.("
+                    f"http://{server}/definitions?id=in.("
                     + ",".join([str(k) for k in chunk])
                     + ")"
                 )

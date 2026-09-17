@@ -1,0 +1,22 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "mcp": {
+    "wiktionary-review": {
+      "type": "local",
+      "command": [
+        "bash",
+        "-c",
+        "ROOT=\"$(git rev-parse --show-toplevel)\" || exit 1; PYTHON=\"$ROOT/.venv/bin/python\"; if [ ! -x \"$PYTHON\" ]; then PYTHON=python3; fi; export BOTJAGWAR_CONFIG=\"$ROOT/conf/config.ini\"; cd \"$ROOT\" && exec \"$PYTHON\" -m api.wiktionary_mcp"
+      ],
+      "cwd": ".",
+      "enabled": true,
+      "timeout": 180000
+    }
+  },
+  "permission": {
+    "skill": {
+      "review-wiktionary-fixes": "deny"
+    },
+    "wiktionary-review_*": "deny"
+  }
+}

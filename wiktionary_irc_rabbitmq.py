@@ -109,7 +109,7 @@ class WiktionaryRecentChangesBot(irc.bot.SingleServerIRCBot):
                     throughput = 60.0 * 5.0 / (float(ct_time) - self.chronometer)
                     self.chronometer = ct_time
                     print(("Edit #%d (%.2f edits/min)" % (self.edits, throughput)))
-            except requests.ConnectionError as e:
+            except requests.ConnectionError:
                 print('NOTE: Spawning "entry_processor.py" backend process.')
             except Exception as e:
                 log.exception(e)

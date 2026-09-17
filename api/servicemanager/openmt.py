@@ -1,6 +1,7 @@
 import requests
 
 from api.config import BotjagwarConfig
+from api.http_client import DEFAULT_HTTP_TIMEOUT
 
 
 class OpenMtTranslation(object):
@@ -14,6 +15,8 @@ class OpenMtTranslation(object):
     def get_translation(self, sentence: str):
         data = {"text": sentence}
         response = requests.post(
-            f"{self.backend}/translate/{self.source}/{self.target}", json=data
+            f"{self.backend}/translate/{self.source}/{self.target}",
+            json=data,
+            timeout=DEFAULT_HTTP_TIMEOUT,
         )
         return response.json()["text"]

@@ -1,9 +1,108 @@
 import logging
-import re, regex
+import re
+import regex
+import mwparserfromhell
+from mwparserfromhell.nodes import Template
 
-from api.entryprocessor.wiki.base import WiktionaryProcessorException
 
 log = logging.getLogger(__name__)
+LANGUAGE_CODE_PATTERN = re.compile(r"[a-z]{2,3}(?:-[a-z0-9]+)*")
+MAX_TEMPLATE_RENDER_DEPTH = 20
+
+EDITORIAL_TEMPLATES = {
+    "rfv-sense", "rfd-sense", "rfclarify", "rfd-redundant", "tea room sense",
+    "rfc-sense", "rfm-sense", "rfdef", "rfquotek", "rfdatek", "rfquote-sense",
+    "rfeq", "def-uncertain", "senseid", "color panel", "inline images",
+    "translation only", "descendant only", "transclude",
+}
+CONTENT_TEMPLATES = {
+    "latn-def", "cyrl-def", "arab-def", "brai-def", "letter def", "si-unit",
+    "si-unit-np",
+}
+EXAMPLE_TEMPLATES = {
+    "suffixusex", "prefixusex", "affixusex", "ux", "uxi", "uxa", "ux-lite",
+    "coa", "coi", "quotei",
+}
+RELATION_TEMPLATES = {
+    "altform": "alternative form of",
+    "alt form": "alternative form of",
+    "alternative form of": "alternative form of",
+    "alternative spelling of": "alternative spelling of",
+    "t-v distinction": "distinguishes informal and formal second-person forms",
+    "middle-voice": "middle voice",
+    "horse name": "a horse name",
+    "iata": "IATA code for",
+    "geochronology": "geochronological period",
+    "def-see": "see",
+    "gender-neutral neologism for": "a gender-neutral neologism for",
+    "in full": "in full",
+    "rune name": "the name of the rune",
+    "only used in": "only used in",
+    "nickname": "a nickname for",
+    "fo-myt": "form of",
+    "&lit": "and literally",
+    "+aux": "auxiliary form of",
+    "+plural": "plural of",
+    "judeo-berber spelling of": "Judeo-Berber spelling of",
+    "ajami spelling of": "Ajami spelling of",
+    "construed with": "construed with",
+    "used in phrasal verbs": "used in phrasal verbs",
+    "collocation": "collocation with",
+    "wtorw": "alternative form of",
+}
+
+
+def _template_values(template: Template, depth: int) -> list[str]:
+    """Return recursively rendered positional values from a template."""
+    values: list[str] = []
+    for parameter in template.params:
+        parameter_name = str(parameter.name).strip()
+        if parameter_name.isdigit():
+            value = render_definition_templates(str(parameter.value).strip(), depth + 1)
+            values.append(value)
+    return values
+
+
+def _without_language_code(values: list[str]) -> list[str]:
+    """Remove the leading language code from template positional values."""
+    if values and LANGUAGE_CODE_PATTERN.fullmatch(values[0]):
+        return values[1:]
+    return values
+
+
+def _render_template(template: Template, depth: int) -> str:
+    """Render definition templates without discarding their semantic content."""
+    name = str(template.name).strip().lower().replace("_", " ")
+    values = _template_values(template, depth)
+    content = _without_language_code(values)
+
+    if name in EDITORIAL_TEMPLATES or name in {"label", "term-label"}:
+        return ""
+    if name in CONTENT_TEMPLATES:
+        return " ".join(content)
+    if name in EXAMPLE_TEMPLATES:
+        return " ".join(content[:1])
+    if name in RELATION_TEMPLATES:
+        target = ", ".join(content)
+        return f"{RELATION_TEMPLATES[name]} {target}".strip()
+    return str(template)
+
+
+def render_definition_templates(definition: str, depth: int = 0) -> str:
+    """Render supported definition templates while preserving their content.
+
+    Editorial and label templates are removed, while content, example, and
+    relation templates are replaced with readable wikitext. Nested template
+    parameters are rendered recursively up to ``MAX_TEMPLATE_RENDER_DEPTH``;
+    remaining deeper markup is preserved unchanged.
+    """
+    if depth >= MAX_TEMPLATE_RENDER_DEPTH:
+        return definition
+
+    wikicode = mwparserfromhell.parse(definition)
+    for template in wikicode.filter_templates(recursive=False):
+        wikicode.replace(template, _render_template(template, depth))
+    return str(wikicode)
 
 
 def drop_definitions_with_labels(*labels):
@@ -24,13 +123,13 @@ def drop_definitions_with_labels(*labels):
     return _drop_definitions
 
 
-def unlink_definition(definition):
+def unlink_definition(definition: str) -> str:
     """
     Unlink definition by removing all links.
     """
-    # Remove all links of the form [[...]] and [[...|...]]
-    definition = re.sub(r"\[\[([^\]]+?)\]\]", "\\1", definition)
+    # Resolve piped links first so the generic pattern cannot expose their raw target.
     definition = re.sub(r"\[\[([^\]]+?)\|([^\]]+?)\]\]", "\\2", definition)
+    definition = re.sub(r"\[\[([^\]]+?)\]\]", "\\1", definition)
 
     # Remove all links of the form {{l|en|...}}
     definition = re.sub(r"\{\{l\|en\|([^\}]+)\}\}", "\\1", definition)
@@ -49,9 +148,28 @@ def drop_all_labels(definition):
     return out_str.strip()
 
 
+def handle_gloss_templates(definition):
+    """
+    Handle {{gloss|...}}, {{gl|...}} templates in definitions by putting them between parentheses.
+    """
+    refined = definition
+    for template_name in ["gl", "gloss"]:
+        t_head = "{{" + template_name + "|"
+        if refined.find(t_head) != -1:
+            r_begin = refined.find(t_head)
+            r_end = refined.find("}}", r_begin)
+            gloss = refined[r_begin + len(t_head): r_end]
+            if r_end == -1:
+                refined = refined.replace(refined[r_begin:], f"({gloss})")
+            else:
+                refined = refined.replace(refined[r_begin: r_end + 2], f"({gloss})")
+
+    return refined
+
+
 def handle_nongloss_templates(definition):
     refined = definition
-    for template_name in ["pedlink", "vern", "gloss", "n-g", "g", "non-gloss"]:
+    for template_name in ["w", "pedlink", "vern", "gloss", "n-g", "g", "non-gloss", 'q']:
         t_head = "{{" + template_name + "|"
         if refined.find(t_head) != -1:
             r_begin = refined.find(t_head)
@@ -208,7 +326,6 @@ def handle_surrounding_string(surrounding_string, definition):
             end = definition.find(surrounding_string, begin + shift)
             if end != -1:
                 surrounding_text = definition[begin:end + shift]
-                print(surrounding_text)
                 definition = definition.replace(
                     surrounding_text, surrounding_text.replace(surrounding_string, ''))
 
@@ -235,35 +352,40 @@ def handle_plural_template(definition):
     """
 
     return regex.sub(
-        regex.compile("\{\{plural of\|en\|(\p{L}+)\}\}", flags=regex.UNICODE),
+        regex.compile(r"\{\{plural of\|en\|(\p{L}+)\}\}", flags=regex.UNICODE),
         "plural of '\\1'", definition)
+
 
 def handle_obsolete_form_of_template(definition):
     """
     Remove plural obsolete_form_of from definition.
     """
     return regex.sub(
-        regex.compile("\{\{obsolete form of\|en\|(\p{L}+)\|[a-zA-Z0-9#\|\-\+=]+\}\}", flags=regex.UNICODE),
+        regex.compile(r"\{\{obsolete form of\|en\|(\p{L}+)\|[a-zA-Z0-9#\|\-\+=]+\}\}", flags=regex.UNICODE),
         "obsolete form of '\\1'", definition
     )
+
 
 def handle_given_name_template(definition):
     """
     Remove given name template from definition.
     """
     return regex.sub(
-        regex.compile("\{\{given name\|[a-zA-Z]+\|(\p{L}+)\|[a-zA-Z0-9#\|\-\+=]+\}\}", flags=regex.UNICODE),
+        regex.compile(r"\{\{given name\|[a-zA-Z]+\|(\p{L}+)\|[a-zA-Z0-9#\|\-\+=]+\}\}", flags=regex.UNICODE),
         "\\1 given name", definition
     )
+
 
 def handle_foreign_name_template(definition):
     """
     Remove foreign name template from definition.
     """
     return regex.sub(
-        regex.compile("\{\{foreign name\|[a-zA-Z]+\|[a-zA-Z]+\|type=(\p{L}+)\|[a-zA-Z0-9#\|\-\+=]+\}\}", flags=regex.UNICODE),
+        regex.compile(r"\{\{foreign name\|[a-zA-Z]+\|[a-zA-Z]+\|type=(\p{L}+)\|[a-zA-Z0-9#\|\-\+=]+\}\}",
+                      flags=regex.UNICODE),
         "\\1", definition
     )
+
 
 def handle_semicolon_replacement(definition):
     """
@@ -279,7 +401,6 @@ def handle_semicolon_replacement(definition):
     return definition.strip()
 
 
-
 def refine_definition(definition, remove_all_templates=False) -> str:
     """
     Refine definition to remove unwanted characters, templates, etc.
@@ -292,7 +413,9 @@ def refine_definition(definition, remove_all_templates=False) -> str:
     # handle {{lb}} template calls
     definition = definition.strip()
 
-    refined = handle_label_templates(definition)
+    refined = render_definition_templates(definition)
+    refined = handle_label_templates(refined)
+    refined = handle_gloss_templates(refined)
     refined = handle_nongloss_templates(refined)
     refined = handle_taxfmt_templates(refined)
     refined = delete_html_comments(refined)

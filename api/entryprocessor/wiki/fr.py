@@ -8,9 +8,9 @@ from api.parsers.fr import fr_definitions_parser as definitions_parser
 from conf.entryprocessor.languagecodes.en import LANGUAGE_NAMES
 from .base import WiktionaryProcessor, WiktionaryProcessorException
 
-LANG_SECTION_REGEX = "==[ ]?{{langue\|([a-z]+)}}[ ]?=="
-POS_FLEXION_SECTION_REGEX = "===[ ]?{{S\|([A-Za-z0-9 ]+)\|([a-z]+)\|flexion}}[ ]?==="
-POS_LEMMA_SECTION_REGEX = "===[ ]?{{S\|([A-Za-z0-9 ]+)\|([a-z]+)}}[ ]?==="
+LANG_SECTION_REGEX = r"==[ ]?{{langue\|([a-z]+)}}[ ]?=="
+POS_FLEXION_SECTION_REGEX = r"===[ ]?{{S\|([A-Za-z0-9 ]+)\|([a-z]+)\|flexion}}[ ]?==="
+POS_LEMMA_SECTION_REGEX = r"===[ ]?{{S\|([A-Za-z0-9 ]+)\|([a-z]+)}}[ ]?==="
 
 
 class DefinitionProcessingConfig:
@@ -59,6 +59,7 @@ class FRWiktionaryProcessor(WiktionaryProcessor):
             "contraction": "fanafohezana",
             "lettre": "litera",
             "nom propre": "ana-pr",
+            "nom de famille": "ana-pr",
             "préfixe": "tovona",
             "romanisation": "rômanizasiona",
             "suffixe": "tovana",
@@ -130,12 +131,11 @@ class FRWiktionaryProcessor(WiktionaryProcessor):
             elements = definitions_parser.get_elements(
                 TEMPLATE_TO_OBJECT[part_of_speech], definition_line
             )
-            print(elements.__dict__)
 
             target_language = "mg" if translate_to_malagasy else self.processor_language
             return elements.to_definition(target_language)
 
-        except Exception as error:
+        except Exception:
             return definition_line
 
     def get_all_entries(self, get_additional_data=False, **kw) -> list:
@@ -157,7 +157,9 @@ class FRWiktionaryProcessor(WiktionaryProcessor):
     def _parse_language_sections(self, language_section, get_additional_data):
         """Parse a single language section and return entries for that language"""
         entries = []
-        last_language_code = language_section[0]
+        last_language_code = (
+            language_section if isinstance(language_section, str) else language_section[0]
+        )
 
         # Extract section content
         init_str = "== {{langue|%s}} ==" % language_section
@@ -206,13 +208,17 @@ class FRWiktionaryProcessor(WiktionaryProcessor):
             pos_flexion_section_match = re.match(POS_FLEXION_SECTION_REGEX, line)
 
             if pos_section_match is not None:
-                last_part_of_speech = self.postran[pos_section_match.groups()[0]]
-                definitions_dict = {}
-                examples = {}
+                mg_pos = self.postran.get(pos_section_match.groups()[0])
+                if mg_pos is not None:
+                    last_part_of_speech = mg_pos
+                    definitions_dict = {}
+                    examples = {}
             elif pos_flexion_section_match is not None:
-                last_part_of_speech = f"e-{self.postran[pos_flexion_section_match.groups()[0]]}"
-                definitions_dict = {}
-                examples = {}
+                mg_pos = self.postran.get(pos_flexion_section_match.groups()[0])
+                if mg_pos is not None:
+                    last_part_of_speech = f"e-{mg_pos}"
+                    definitions_dict = {}
+                    examples = {}
 
             # Definition parsing
             elif line.startswith("# "):
@@ -256,7 +262,7 @@ class FRWiktionaryProcessor(WiktionaryProcessor):
         return entries
 
     @staticmethod
-    def refine_definition(definition, part_of_speech=None) -> list:
+    def refine_definition(definition, part_of_speech=None, **other_params) -> list:
         TEMPLATE_PATTERNS = [
             r"\{\{lexique\|[a-zA-Z0-9\ \|]+\}\}",
             r"\{\{familier\|[a-zA-Z0-9\ \|]+\}\}",
@@ -295,7 +301,6 @@ class FRWiktionaryProcessor(WiktionaryProcessor):
     def _extract_label_data(definition, begin_pos, end_pos):
         label_data = definition[begin_pos:end_pos]
         label_data = label_data.replace("_", "").replace("|", " ")
-        print(label_data)
 
         if re.match(r"^([a-zA-Z0-9\,\ ]+)$", label_data):
             return label_data

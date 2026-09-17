@@ -34,18 +34,16 @@ class DatabaseManager(object):
             poolclass=QueuePool,
             max_overflow=250,
         )
-        log.info(f"Using database {self.db_header}")
+        log.info("Using database %s", self.engine.url.render_as_string(hide_password=True))
 
         base.metadata.create_all(self.engine)
         self.SessionClass = sessionmaker(bind=self.engine)
         self.session = self.SessionClass()
 
     def read_configuration(self):
-        import configparser
+        from api.config import BotjagwarConfig
 
-        self.config_parser = configparser.ConfigParser()
-        self.config_parser.read("/opt/botjagwar/conf/config.ini")
-        self.db_header = self.config_parser.get("global", self.conf_key)
+        self.db_header = BotjagwarConfig().get(self.conf_key, "global")
 
 
 class LanguageDatabaseManager(DatabaseManager):

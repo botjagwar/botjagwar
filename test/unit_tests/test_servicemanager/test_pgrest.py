@@ -1,6 +1,8 @@
 import unittest
 from unittest.mock import patch
 
+import requests
+
 from api.servicemanager.pgrest import TemplateTranslation
 
 
@@ -12,9 +14,9 @@ class TestTemplateTranslation(unittest.TestCase):
     @patch("api.servicemanager.pgrest.requests.get")
     def test_get_mapped_template_in_database_with_online_backend(self, mock_requests):
         mock_requests.return_value.status_code = 200
-        mock_requests.return_value.json.return_value = {
-            "target_template": "target_template"
-        }
+        mock_requests.return_value.json.return_value = [
+            {"target_template": "target_template"}
+        ]
 
         self.template_translation.online = True
 
@@ -39,10 +41,41 @@ class TestTemplateTranslation(unittest.TestCase):
 
         self.template_translation.online = True
 
-        with self.assertRaises(Exception) as context:
-            self.template_translation.get_mapped_template_in_database("source_template")
+        mapped_template = self.template_translation.get_mapped_template_in_database(
+            "source_template"
+        )
 
-        self.assertIn("Unexpected error", str(context.exception))
+        self.assertIsNone(mapped_template)
+
+    @patch("api.servicemanager.pgrest.requests.get")
+    def test_get_mapped_template_in_database_with_empty_response(
+        self, mock_requests
+    ) -> None:
+        mock_requests.return_value.status_code = 200
+        mock_requests.return_value.json.side_effect = requests.exceptions.JSONDecodeError(
+            "Expecting value", "", 0
+        )
+        self.template_translation.online = True
+
+        mapped_template = self.template_translation.get_mapped_template_in_database(
+            "source_template"
+        )
+
+        self.assertIsNone(mapped_template)
+
+    @patch("api.servicemanager.pgrest.requests.get")
+    def test_get_mapped_template_in_database_with_no_rows(
+        self, mock_requests
+    ) -> None:
+        mock_requests.return_value.status_code = 200
+        mock_requests.return_value.json.return_value = []
+        self.template_translation.online = True
+
+        mapped_template = self.template_translation.get_mapped_template_in_database(
+            "source_template"
+        )
+
+        self.assertIsNone(mapped_template)
 
     @patch("api.servicemanager.pgrest.requests.post")
     def test_add_translated_title_with_online_backend(self, mock_requests):

@@ -162,7 +162,7 @@ def create_non_lemma_entry(entry: Entry):
                 return 0
     except pywikibot.exceptions.InvalidTitle:  # doing something wrong at this point
         return 0
-    except Exception as e:
+    except Exception:
         return 1
 
     form_of_template = FORM_OF_TEMPLATE[pos] if pos in FORM_OF_TEMPLATE else pos
@@ -212,7 +212,7 @@ importer = AdditionalDataImporter(data="lemma")
 
 
 def import_additional_data(entry: Entry) -> int:
-    word, pos, code, definition = (
+    _word, pos, code, definition = (
         entry.entry,
         entry.part_of_speech,
         entry.language,
@@ -249,7 +249,7 @@ def import_additional_data(entry: Entry) -> int:
         rq_params = {
             "word": f"eq.{entry.entry}",
             "language": f"eq.{entry.language}",
-            "part_of_speech": f"eq.{template.strip()}",
+            "part_of_speech": f"eq.{pos.strip()}",
         }
         print(rq_params)
         response = requests.get(f"{db_backend.backend}/word", rq_params)
@@ -259,7 +259,7 @@ def import_additional_data(entry: Entry) -> int:
         rq_params = {
             "word": entry.entry,
             "language": entry.language,
-            "part_of_speech": template.strip(),
+            "part_of_speech": pos.strip(),
             "date_changed": time.strftime("%Y-%m-%d %H:%M:%S"),
         }
         print(rq_params)

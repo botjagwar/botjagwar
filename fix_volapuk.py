@@ -109,7 +109,6 @@ class VolapukImporter(object):
             else:
                 content = "" + "\n"
                 content += output.wikipages([entry]).strip()
-                s = content.replace("\n", " ")
                 # summary = f"Pejy noforonina tamin'ny « {s} »"
                 summary = "teny volapoka vaovao avy amin'i vo.wiktionary"
 

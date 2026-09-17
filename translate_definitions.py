@@ -332,7 +332,7 @@ class DefinitionTranslation(object):
         return []
 
     def build_translation_batches(self, word_additional_data_info, counter=0):
-        translation = Translation()
+        Translation()
         batch_folder = "user_data/translation_batch"
         # translation.output.wikipage_renderer.pages_to_link = self.malagasy_words_to_link
         word = word_additional_data_info["word"]

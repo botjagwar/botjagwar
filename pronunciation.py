@@ -24,7 +24,8 @@ def replace_pronunciation_template(language, language_name):
             print("{{fanononana||%s}} not found" % language)
 
 
-def copy_pronunciations(language, language_name, ipa_or_pron="IPA"):
+def copy_pronunciations_v1(language, language_name, ipa_or_pron="IPA"):
+    """Copy pronunciations using pattern: {{IPA|...|lang}}"""
     pron_regex = re.compile("\\{\\{%s\\|(.*)\\|([a-z]+)\\}\\}" % ipa_or_pron)
     for mg_page in get_pages_from_category("mg", language_name):
         print(">>>>", mg_page.title(), "<<<<")

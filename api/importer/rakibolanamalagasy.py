@@ -77,7 +77,7 @@ class RakibolanaMalagasyImporter(DictionaryImporter):
             if word_id is None:
                 raise AdditionalDataImporterError()
             self.write_additional_data(word_id, additional_data=additional_data)
-        except AdditionalDataImporterError as exc:
+        except AdditionalDataImporterError:
             pass
         self.data_type = temp
 

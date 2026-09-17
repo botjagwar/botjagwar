@@ -37,8 +37,8 @@ class MicrosoftSQLConnection(SQLConnection):
         cls,
         instance=None,
         server=None,
-        user="default_user",
-        password="default_password",
+        user=None,
+        password=None,
     ):
         cls.instance = instance
         cls.server = server
@@ -66,7 +66,7 @@ class PostgreSQLConnection(SQLConnection):
         self.connection.close()
 
     @classmethod
-    def connect(cls, instance=None, server=None, user="botjagwar", password="isa"):
+    def connect(cls, instance=None, server=None, user=None, password=None):
         cls.instance = instance
         cls.server = server
         cls.password = password

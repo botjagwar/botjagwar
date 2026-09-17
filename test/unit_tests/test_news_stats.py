@@ -1,9 +1,49 @@
 # coding: utf8
 
-from news_stats import get_milestones
+from unittest.mock import MagicMock, patch
+
+from news_stats import get_milestones, get_new_state, save_state
 
 
 class TestNewsStats(object):
+    def test_save_state_creates_missing_directory(self, tmp_path):
+        state_directory = tmp_path / "missing" / "milestones"
+        state = [("mg", "wiktionary", {"articles": 8})]
+
+        with patch("news_stats.udata", str(state_directory)):
+            save_state(state)
+
+        assert state_directory.is_dir()
+        assert (state_directory / "news_stats").is_file()
+
+    def test_new_state_uses_aggregated_wikistats(self):
+        response = MagicMock()
+        response.json.return_value = {
+            "schema": {
+                "fields": [
+                    {"name": "site"},
+                    {"name": "articles"},
+                    {"name": "files"},
+                ]
+            },
+            "data": [
+                ["en.wikipedia", 7, 2],
+                ["mg.wiktionary", 8, 3],
+                ["total.wikipedia", 15, 5],
+                ["en.wikibooks", 4, 1],
+            ],
+        }
+
+        with patch("list_wikis.requests.get", return_value=response) as get:
+            state = get_new_state()
+
+        assert state == [
+            ("en", "wikipedia", {"articles": 7, "images": 2}),
+            ("mg", "wiktionary", {"articles": 8, "images": 3}),
+        ]
+        get.assert_called_once()
+        response.raise_for_status.assert_called_once_with()
+
     def test_milestone_detection(self):
         old = [
             (

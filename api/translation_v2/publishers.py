@@ -1,13 +1,11 @@
+import json
 import time
-from typing import List
-from copy import deepcopy
-
-import requests
+from typing import Any, Callable, List, Optional, Set, Tuple
 
 from api import entryprocessor
-from api.config import BotjagwarConfig
 from api.decorator import reraise_exceptions
 from api.model.word import Entry
+from api.rabbitmq import RabbitMqProducer
 from redis_wikicache import RedisPage as Page, RedisSite as Site
 from .exceptions import TranslatedPagePushError
 
@@ -24,41 +22,57 @@ class WiktionaryRabbitMqPublisherError(PublisherError):
     pass
 
 
-class Publisher(object):
-    def __init__(self):
-        # Load service from BotjagwarConfig
-        self.config = BotjagwarConfig()
-        self.service = self.config.get("service", "rabbitmq")
+class WiktionaryRabbitMqPublisherRejectedError(WiktionaryRabbitMqPublisherError):
+    """Raised when a message definitely did not reach RabbitMQ."""
 
+
+class WiktionaryRabbitMqPublisherOutcomeUnknown(WiktionaryRabbitMqPublisherError):
+    """Raised when broker acceptance cannot be determined safely."""
+
+
+def _require_malagasy_target(translation: Any) -> None:
+    """Fail closed before a publisher constructs a non-Malagasy target."""
+    if translation.working_wiki_language != "mg":
+        raise TranslatedPagePushError(
+            "Botjagwar publication is restricted to Malagasy Wiktionary."
+        )
+
+
+class Publisher(object):
     @staticmethod
-    def publish_translated_references(translation):
+    def publish_translated_references(
+        translation, reference_templates: Set[Tuple[str, str]]
+    ):
+        """Build a publisher for reference templates from one translation job."""
         def _publish_translated_references(source_wiki="en", target_wiki="mg"):
-            reference_template_queue = deepcopy(translation.reference_template_queue)
-            for original_reference, translated_reference in reference_template_queue:
+            for original_reference, translated_reference in reference_templates:
                 # Check if it is a template reference, or a plain-text one
                 if translated_reference.startswith(
                     "{{"
                 ) or original_reference.startswith("{{"):
                     translation.create_or_rename_template_on_target_wiki(
-                        source_wiki,
-                        original_reference,
-                        target_wiki,
-                        translated_reference,
+                        source_language=source_wiki,
+                        source_name=original_reference,
+                        target_language=target_wiki,
+                        target_name=translated_reference,
                     )
-
-            translation.reference_template_queue = set()
 
         return _publish_translated_references
 
 
 class WiktionaryDirectPublisher(Publisher):
 
-    def publish_to_wiktionary(self, translation):
+    def publish_to_wiktionary(
+        self,
+        translation,
+        publication_guard: Optional[Callable[[], None]] = None,
+    ):
         def _publish_to_wiktionary(page_title: str, entries: List[Entry]):
             """
             Push translated data and if possible avoid any information loss
             on target wiki if information is not filled in
             """
+            _require_malagasy_target(translation)
             site = Site(translation.working_wiki_language, "wiktionary")
             target_page = Page(site, page_title, offline=False)
 
@@ -86,9 +100,10 @@ class WiktionaryDirectPublisher(Publisher):
                         )
                     )
                     wiktionary_processor = wiktionary_processor_class()
-                    wiktionary_processor.set_text(target_page.get())
+                    page_text = target_page.get()
+                    wiktionary_processor.set_text(page_text)
                     wiktionary_processor.set_title(page_title)
-                    content = target_page.get()
+                    content = page_text
                     for entry in entries:
                         content = translation.output.delete_section(
                             entry.language, content
@@ -101,8 +116,15 @@ class WiktionaryDirectPublisher(Publisher):
                 content += translation.output.wikipages(entries).strip()
                 # Push aggregated content
 
+                put_options = (
+                    {"before_live_call": publication_guard}
+                    if publication_guard is not None
+                    else {}
+                )
                 target_page.put(
-                    content, translation.generate_summary(entries, target_page, content)
+                    content,
+                    translation.generate_summary(entries, target_page, content),
+                    **put_options,
                 )
                 if translation.config.get("ninja_mode", "translator") == "1":
                     time.sleep(12)
@@ -111,24 +133,52 @@ class WiktionaryDirectPublisher(Publisher):
 
 
 class WiktionaryRabbitMqPublisher(Publisher):
-    def __init__(self, queue="botjagwar"):
-        super(WiktionaryRabbitMqPublisher, self).__init__()
+    def __init__(
+        self,
+        queue: str = "botjagwar",
+        *,
+        producer_factory: Callable[[str], RabbitMqProducer] = RabbitMqProducer,
+    ) -> None:
         self.queue_name = queue
+        self._producer_factory = producer_factory
+        self._producer: Optional[RabbitMqProducer] = None
 
-    def push(self, message: dict):
-        # Publish using a REST service
-        response = requests.post(
-            f"http://{self.service}:8443/{self.queue_name}", json=message
-        )
-        if response.status_code != 204:
-            if response.status_code == 400:
-                raise WiktionaryRabbitMqPublisherError(
-                    "Data error: " + str(response.json()["error"])
-                )
-            else:
-                raise WiktionaryRabbitMqPublisherError(f"Unknown error: {response.text}")
+    def push(self, message: dict[str, Any]) -> None:
+        """Publish one persistent message through confirmed AMQP."""
+        if "reviewed_fix" in message:
+            raise WiktionaryRabbitMqPublisherRejectedError(
+                "The translated queue does not accept reviewed transport metadata."
+            )
+        try:
+            json.dumps(message)
+        except (TypeError, ValueError) as exc:
+            raise WiktionaryRabbitMqPublisherRejectedError(
+                "The RabbitMQ message is not JSON serializable."
+            ) from exc
+        if self._producer is None:
+            try:
+                self._producer = self._producer_factory(self.queue_name)
+            except Exception as exc:
+                raise WiktionaryRabbitMqPublisherRejectedError(
+                    "RabbitMQ rejected the connection before publication."
+                ) from exc
+        try:
+            self._producer.push_to_queue(message)
+        except Exception as exc:
+            raise WiktionaryRabbitMqPublisherOutcomeUnknown(
+                "RabbitMQ publication outcome is unknown."
+            ) from exc
 
-    def publish_wikipage(self, content: str, page_title: str, summary: str = "mamafa ny fihodinana", minor: bool = False):
+    def publish_wikipage(
+        self,
+        content: str,
+        page_title: str,
+        summary: str = "mamafa ny fihodinana",
+        minor: bool = False,
+        expected_content_sha256: Optional[str] = None,
+        publication_guard: Optional[Callable[[], None]] = None,
+    ) -> None:
+        """Queue a complete page edit with an optional live-content guard."""
         message = {
             "language": "mg",  # Assuming Malagasy as the working language
             "site": "wiktionary",
@@ -137,15 +187,25 @@ class WiktionaryRabbitMqPublisher(Publisher):
             "summary": summary,
             "minor": minor,
         }
+        if expected_content_sha256 is not None:
+            message["expected_content_sha256"] = expected_content_sha256
+        if publication_guard is not None:
+            publication_guard()
         self.push(message)
 
-    def publish_to_wiktionary(self, translation):
+    def publish_to_wiktionary(
+        self,
+        translation,
+        publication_guard: Optional[Callable[[], None]] = None,
+        publication_filter: Optional[Callable[[str, str], bool]] = None,
+    ):
         @reraise_exceptions((Exception,), WiktionaryRabbitMqPublisherError)
         def _publish_to_wiktionary(page_title: str, entries: List[Entry]):
             """
             Push translated data and if possible avoid any information loss
             on target wiki if information is not filled in
             """
+            _require_malagasy_target(translation)
             site = Site(translation.working_wiki_language, "wiktionary")
             target_page = Page(site, page_title, offline=False)
 
@@ -179,9 +239,10 @@ class WiktionaryRabbitMqPublisher(Publisher):
                         )
                     )
                     wiktionary_processor = wiktionary_processor_class()
-                    wiktionary_processor.set_text(target_page.get())
+                    page_text = target_page.get()
+                    wiktionary_processor.set_text(page_text)
                     wiktionary_processor.set_title(page_title)
-                    content = target_page.get()
+                    content = page_text
                     for entry in entries:
                         content = translation.output.delete_section(
                             entry.language, content
@@ -192,6 +253,10 @@ class WiktionaryRabbitMqPublisher(Publisher):
                 content = content.strip()
                 content += "\n"
                 content += translation.output.wikipages(entries).strip()
+                if publication_filter is not None and not publication_filter(
+                    page_title, content
+                ):
+                    return False
                 # Push aggregated content
 
                 message = {
@@ -204,6 +269,9 @@ class WiktionaryRabbitMqPublisher(Publisher):
                     ),
                     "minor": False,
                 }
+                if publication_guard is not None:
+                    publication_guard()
                 self.push(message)
+                return True
 
         return _publish_to_wiktionary

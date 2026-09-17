@@ -2,18 +2,18 @@ import inspect
 import sys
 import warnings
 
-from . import wiki
+from . import wiki as wiki
 from .wiki.base import WiktionaryProcessor
-from .wiki.de import DEWiktionaryProcessor
-from .wiki.en import ENWiktionaryProcessor
-from .wiki.fr import FRWiktionaryProcessor
-from .wiki.mg import MGWiktionaryProcessor
-from .wiki.nl import NLWiktionaryProcessor
-from .wiki.pl import PLWiktionaryProcessor
-from .wiki.ru import RUWiktionaryProcessor
-from .wiki.sv import SVWiktionaryProcessor
-from .wiki.vo import VOWiktionaryProcessor
-from .wiki.zh import ZHWiktionaryProcessor
+from .wiki.de import DEWiktionaryProcessor as DEWiktionaryProcessor
+from .wiki.en import ENWiktionaryProcessor as ENWiktionaryProcessor
+from .wiki.fr import FRWiktionaryProcessor as FRWiktionaryProcessor
+from .wiki.mg import MGWiktionaryProcessor as MGWiktionaryProcessor
+from .wiki.nl import NLWiktionaryProcessor as NLWiktionaryProcessor
+from .wiki.pl import PLWiktionaryProcessor as PLWiktionaryProcessor
+from .wiki.ru import RUWiktionaryProcessor as RUWiktionaryProcessor
+from .wiki.sv import SVWiktionaryProcessor as SVWiktionaryProcessor
+from .wiki.vo import VOWiktionaryProcessor as VOWiktionaryProcessor
+from .wiki.zh import ZHWiktionaryProcessor as ZHWiktionaryProcessor
 
 data_file = "/opt/botjagwar/conf/entryprocessor/"
 verbose = True

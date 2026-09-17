@@ -1,6 +1,0 @@
-nltk
-redis
-psycopg2
-torch
-transformers
-sentencepiece

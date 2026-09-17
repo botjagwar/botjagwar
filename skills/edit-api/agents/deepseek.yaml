@@ -1,0 +1,4 @@
+interface:
+  display_name: "Edit API"
+  short_description: "Edit botjagwar Python backend API safely."
+  default_prompt: "Follow AGENTS.md and skills/edit-api/SKILL.md. Start with the affected backend module and nearest tests, follow a direct boundary only when needed, and make the smallest validated change."

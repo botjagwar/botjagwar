@@ -1,0 +1,4 @@
+--no-binary llama-cpp-python
+flask >= 3
+gevent >= 24.2.1
+llama-cpp-python == 0.3.35

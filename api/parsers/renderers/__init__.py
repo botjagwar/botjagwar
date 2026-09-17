@@ -1,2 +1,2 @@
-from . import en
-from . import mg
+from . import en as en
+from . import mg as mg

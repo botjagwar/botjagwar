@@ -1,12 +1,12 @@
 # coding: utf8
 
 from api.parsers.models.inflection import (
-    VerbForm,
-    AdjectiveForm,
-    NounForm,
+    AdjectiveForm as AdjectiveForm,
     NonLemma,
+    NounForm as NounForm,
     ParserError,
     ParserNotFoundError,
+    VerbForm as VerbForm,
 )
 
 

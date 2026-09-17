@@ -39,7 +39,7 @@ def parse_one_parameter_template(
         for char in "{}":
             template_expression = template_expression.replace(char, "")
         parts = template_expression.split("|")
-        t_name = parts[0]
+        parts[0]
         lemma = parts[2] if len(parts[1]) in {2, 3} else parts[1]
         if parts[0] == template_name:
             ret_obj = out_class()
@@ -68,7 +68,7 @@ def parse_inflection_of(out_class):
             if tparam.find("=") != -1:
                 parts.remove(tparam)
 
-        t_name = parts[0]
+        parts[0]
         lemma = parts[2] if len(parts[1]) in {2, 3} else parts[1]
         case_name = number_ = ""
         gender = None

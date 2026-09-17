@@ -1,8 +1,10 @@
 import logging
+from copy import copy
 
 import requests
 
 from api.dictionary.exceptions.http import WordAlreadyExists
+from api.http_client import DEFAULT_HTTP_TIMEOUT
 from api.model.word import Entry
 from api.page_renderer import WikiPageRendererFactory
 from api.servicemanager import DictionaryServiceManager
@@ -75,7 +77,9 @@ class Output(object):
             "limit": "1",
         }
         # log.debug('get /word', data)
-        word_id = requests.get(f"{backend}/word", params=data).json()
+        word_id = requests.get(
+            f"{backend}/word", params=data, timeout=DEFAULT_HTTP_TIMEOUT
+        ).json()
         if len(word_id) <= 0:
             return
         if "id" in word_id[0]:
@@ -89,8 +93,12 @@ class Output(object):
                     "definition_language": "eq.mg",
                     "limit": "1",
                 }
-                defn_id = requests.get(f"{backend}/definitions", params=data).json()
-                if len(defn_id) > 0 and "id" in defn_id:
+                defn_id = requests.get(
+                    f"{backend}/definitions",
+                    params=data,
+                    timeout=DEFAULT_HTTP_TIMEOUT,
+                ).json()
+                if defn_id and isinstance(defn_id[0], dict) and "id" in defn_id[0]:
                     defn_id = defn_id[0]["id"]
                 else:
                     return
@@ -102,7 +110,11 @@ class Output(object):
                         "translation_method": method,
                     }
                     log.debug(f"post /translation_method{data}")
-                    requests.post(f"{backend}/translation_method", json=data)
+                    requests.post(
+                        f"{backend}/translation_method",
+                        json=data,
+                        timeout=DEFAULT_HTTP_TIMEOUT,
+                    )
 
     @staticmethod
     def sqlite_add_translation_method(infos: Entry):
@@ -137,8 +149,32 @@ class Output(object):
         # render
         log.debug(entries_by_language)
         for entries in entries_by_language.values():
+            has_etymology = False
+            etymologies = []
             for entry in entries:
-                rendered = self.wikipage_renderer.render(entry).strip()
+                if not isinstance(entry.additional_data, dict) or "etymology" not in entry.additional_data:
+                    continue
+                has_etymology = True
+                value = entry.additional_data["etymology"]
+                sections = value if isinstance(value, list) else [value] if value else []
+                for section in sections:
+                    if section not in etymologies:
+                        etymologies.append(section)
+            for index, entry in enumerate(entries):
+                render_entry = entry
+                if (
+                    has_etymology
+                    or (
+                        isinstance(entry.additional_data, dict)
+                        and "etymology" in entry.additional_data
+                    )
+                ):
+                    render_entry = copy(entry)
+                    render_entry.additional_data = dict(entry.additional_data or {})
+                    render_entry.additional_data.pop("etymology", None)
+                    if index == len(entries) - 1 and has_etymology:
+                        render_entry.additional_data["etymology"] = etymologies
+                rendered = self.wikipage_renderer.render(render_entry).strip()
                 language_section = rendered.split("\n")[0]
                 if ret_page.find(language_section) == -1:
                     if rendered:

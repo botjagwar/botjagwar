@@ -45,6 +45,10 @@ ENDINGS = {
     ("subjunctive", "imperfect", "ar"): ["ara", "aras", "ara", "áramos", "arais", "aran"],
     ("subjunctive", "imperfect", "er"): ["iera", "ieras", "iera", "iéramos", "ierais", "ieran"],
     ("subjunctive", "imperfect", "ir"): ["iera", "ieras", "iera", "iéramos", "ierais", "ieran"],
+    ("subjunctive", "future", "ar"): ["are", "ares", "are", "aremos", "arais", "aran"],
+    ("subjunctive", "future", "er"): ["iere", "ieres", "iere", "iéremos", "iereis", "ieren"],
+    ("subjunctive", "future", "ir"): ["iere", "ieres", "iere", "iéremos", "iereis", "ieren"],
+
 }
 
 # Imperative endings for regular verbs (tu, usted, nosotros, vosotros, ustedes)
@@ -72,6 +76,7 @@ IRREGULAR_FORMS = {
         ("indicative", "conditional"): ["sería", "serías", "sería", "seríamos", "seríais", "serían"],
         ("subjunctive", "present"): ["sea", "seas", "sea", "seamos", "seáis", "sean"],
         ("subjunctive", "imperfect"): ["fuera", "fueras", "fuera", "fuéramos", "fuerais", "fueran"],
+        ("subjunctive", "future"): ["fuere", "fueres", "fuere", "fuéremos", "fuereis", "fueren"],
         ("imperative", "affirmative"): ["sé", "sea", "seamos", "sed", "sean"],
     }
 }

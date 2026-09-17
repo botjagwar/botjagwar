@@ -90,7 +90,7 @@ class NinjaEntryCreator(object):
     def get_additional_data(
         self, additional_data_list, word_id, type_, return_as=(str, list)
     ) -> [str, list]:
-        if return_as != str:
+        if return_as is not str:
             return [
                 dic["data"]
                 for dic in additional_data_list

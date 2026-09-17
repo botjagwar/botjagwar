@@ -1,23 +1,47 @@
-name: Pylint botjagwar api
+name: Python lint
 
-on: [push]
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+concurrency:
+  group: lint-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
-  build:
+  pylint:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: [ "3.8", "3.9", "3.10", "3.11", "3.12"]
+        python-version: ["3.11", "3.12", "3.13", "3.14"]
+    timeout-minutes: 20
     steps:
-    - uses: actions/checkout@v3
-    - name: Set up Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v3
-      with:
-        python-version: ${{ matrix.python-version }}
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        pip install pylint
-    - name: Analysing the code with pylint
-      run: |
-        pylint $(git ls-files 'api/*.py') --min-similarity-lines 25 --max-args 10 --max-attributes 100 --max-parents 20 --fail-under 7.2
+      - uses: actions/checkout@v4
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Install dependencies
+        run: |
+          export UV_CACHE_DIR="${RUNNER_TEMP}/uv-cache"
+          python -m pip install uv
+          uv pip install --system pylint
+      - name: Analysing the code with pylint
+        run: |
+          pylint $(git ls-files 'api/*.py' 'scripts/*.py' 'supervisor_control_service.py' 'configure_atlas_supervisor.py' 'dictionary_service.py' 'entry_translator_v2.py' 'ctranslate.py' 'ctranslate-lite.py') \
+            --min-similarity-lines 25 --max-args 10 --max-attributes 100 --max-parents 20 --fail-under 8.0
+
+  ruff:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install ruff
+        run: python -m pip install ruff
+      - name: Analysing the code with ruff
+        run: ruff check .

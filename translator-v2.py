@@ -24,7 +24,8 @@ if __name__ == "__main__":
         for wiki_page in get_pages_from_category("en", category):
             print(wiki_page)
             try:
-                entries = t.process_wiktionary_wiki_page(wiki_page)
+                result = t.process_wiktionary_wiki_page(wiki_page)
+                entries = result.entries_count
             except (pywikibot.exceptions.Error, redis.exceptions.TimeoutError):
                 continue
 

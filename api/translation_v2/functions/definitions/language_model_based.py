@@ -1,13 +1,19 @@
 import os
 import re
+from functools import lru_cache
 from logging import getLogger
+from pathlib import Path
 
-from api.servicemanager.nllb import NllbDefinitionTranslation
+from api.servicemanager.gemma import GemmaDefinitionReformulator
+from api.servicemanager.nllb import DefinitionTranslationError, NllbDefinitionTranslation
 from api.servicemanager.openmt import OpenMtTranslation
 from api.servicemanager.pgrest import JsonDictionary, ConvergentTranslations
 from api.translation_v2.types import TranslatedDefinition, UntranslatedDefinition
 
-from api.translation_v2.functions.definitions.postprocessors import fix_repeated_subsentence
+from api.translation_v2.functions.definitions.postprocessors import (
+    fix_repeated_subsentence, remove_empty_translations,
+    remove_definition_if_too_many_foreign_words,
+)
 
 json_dictionary = JsonDictionary(use_materialised_view=False)
 convergent_translations = ConvergentTranslations()
@@ -15,8 +21,14 @@ log = getLogger(__file__)
 
 # All translation bugs by NLLB belong here
 NLLB_GOTCHAS = ["famaritana malagasy", "fa tsy misy dikany"]
+BASIC_ENGLISH_THRESHOLD = 0.75
+BASIC_ENGLISH_MINIMUM_WORDS = 7
+BASIC_ENGLISH_PATH = Path(__file__).resolve().parents[4] / "user_data/basic_english.txt"
+_ENGLISH_WORD_PATTERN = re.compile(r"[a-z]+(?:['-][a-z]+)*", re.IGNORECASE)
 
 ENRICHMENT_ARTEFACTS_STARTSWITH = [
+    "-ny is an",
+    "-ny is a",
     "afaka",
     "izay",
     "ny cela dia",
@@ -35,12 +47,22 @@ ENRICHMENT_ARTEFACTS_ENDSWITH = [
     "izao" "toy izany" "toy izao",
 ]
 
+# Connectors used when removing duplicate words
+DUPLICATE_WORD_CONNECTORS = ["na", "sy"]
+
+MPAM_ENRICHMENT_ARTEFACTS_STARTSWITH = [
+    "zavatra iray izay ",
+    "zavatra iray ",
+    "zavatra izay ",
+    "zavatra ",
+]
+
 
 def fetch_whitelist(language):
     global whitelists
     returned_data = []
     whitelist = os.path.join(os.path.dirname(__file__), f"{language}-whitelist")
-    for line in open(whitelist, "r"):
+    for line in open(whitelist, "r", encoding="utf-8"):
         line = line.strip("\n")
         if len(line) > 3:
             returned_data.append(line)
@@ -98,7 +120,7 @@ def _english_mat_enrichment(definition_line: str) -> str:
         prefix += " to "
 
     definition_line = prefix + definition_line
-    definition_line = re.sub("\([a-zA-Z\ \,\;]+\)", "", definition_line)
+    definition_line = re.sub(r"\([a-zA-Z\ \,\;]+\)", "", definition_line)
     definition_line = definition_line.strip(".").strip()
     if definition_line.endswith(" of"):
         definition_line += " someone or something."
@@ -162,8 +184,21 @@ def remove_unknown_characters(translation):
 
 def _strip_prefixes_case_insensitive(text, prefixes):
     for prefix in prefixes:
+        if text.lower() == prefix.rstrip().lower():
+            return ""
         if text.lower().startswith(prefix.lower()):
             text = text[len(prefix):].strip()
+    return text
+
+
+def _strip_mpam_enrichment_prefix(text: str) -> str:
+    """Strip exactly one generated adjective scaffold from translated text."""
+    normalized = re.sub(r"\s+", " ", text).strip()
+    for prefix in MPAM_ENRICHMENT_ARTEFACTS_STARTSWITH:
+        if normalized.lower() == prefix.rstrip().lower():
+            return ""
+        if normalized.lower().startswith(prefix.lower()):
+            return normalized[len(prefix):].strip()
     return text
 
 
@@ -174,12 +209,47 @@ def _strip_suffixes_case_insensitive(text, suffixes):
     return text
 
 
+def _strip_izy_suffix_case_insensitive(text: str) -> str:
+    """Strip a trailing ' izy' only when it is a generated enrichment artifact.
+
+    The suffix is removed when it appears after a bare word, but kept when it
+    follows a genitive construction ('{word}n\' izy') because in that case the
+    pronoun is grammatically meaningful rather than an artifact.
+    """
+    suffix = " izy"
+    lower_text = text.lower()
+    if not lower_text.endswith(suffix):
+        return text
+
+    prefix = text[: -len(suffix)].rstrip()
+    if prefix.endswith("'") or prefix.endswith("n'"):
+        # Preserve izy after genitive marker: ...n' izy / ...' izy
+        return text
+
+    return prefix
+
+
 def _strip_prefixes_with_caps(text, prefixes):
-    for prefix in prefixes:
-        if text.startswith(prefix):
-            text = text[len(prefix):].strip()
-        elif text.startswith(prefix[0].upper() + prefix[1:]):
-            text = text[len(prefix):].strip()
+    working_set = set(prefixes)
+    set_size = len(working_set)
+    iter_count = 0
+    while working_set:
+        hit = 0
+        for prefix in prefixes:
+            if text.startswith(prefix):
+                text = text[len(prefix):].strip()
+                hit += 1
+            elif text.startswith(prefix[0].upper() + prefix[1:]):
+                text = text[len(prefix):].strip()
+                hit += 1
+
+            if hit != 0:
+                working_set -= {prefix}
+
+        iter_count += 1
+        if iter_count > set_size:
+            break
+
     return text
 
 
@@ -191,10 +261,13 @@ def _remove_case_insensitive_prefix(text, prefix):
 
 def _strip_pronoun_artifacts(text, words):
     for word in words:
+        stripped_prefix = False
         if text.startswith(word):
             text = text[len(word):].strip()
-        if text.startswith(word.lower()):
+            stripped_prefix = True
+        elif text.startswith(word.lower()):
             text = text[len(word):].strip()
+            stripped_prefix = True
 
         if text.startswith("no "):
             text = text[len("no"):].strip()
@@ -202,8 +275,8 @@ def _strip_pronoun_artifacts(text, words):
         if text.startswith("dia "):
             text = text[len("dia"):].strip()
 
-        first_occurrence = text.find(f" {word.lower()}")
-        if first_occurrence > 0:
+        first_occurrence = text.lower().find(f" {word.lower()}")
+        if stripped_prefix and first_occurrence > 0:
             text = text[:first_occurrence].strip()
 
         if text.lower().startswith(f"{word} no "):
@@ -214,15 +287,22 @@ def _strip_pronoun_artifacts(text, words):
 
 
 def remove_enrichment_artefacts(part_of_speech, translation):
+    translation = translation.strip()
+    if part_of_speech == "mpam":
+        translation = _strip_mpam_enrichment_prefix(translation)
+
     translation = _strip_prefixes_case_insensitive(
         translation, [f"{p} " for p in ENRICHMENT_ARTEFACTS_STARTSWITH]
     )
-    translation = _strip_suffixes_case_insensitive(
-        translation, [f" {p}" for p in ENRICHMENT_ARTEFACTS_ENDSWITH]
-    )
+    other_suffixes = [
+        f" {p}" for p in ENRICHMENT_ARTEFACTS_ENDSWITH if p != "izy"
+    ]
+    translation = _strip_suffixes_case_insensitive(translation, other_suffixes)
+    translation = _strip_izy_suffix_case_insensitive(translation)
 
     if part_of_speech in ("ana", "mat"):
         enrichment_artefacts_startswith = [
+            "afaka ny ",
             "afaka ",
             "mety ho ",
             "dia ",
@@ -283,6 +363,20 @@ def remove_duplicate_definitions(translation):
 
     data = data.strip()
     return data
+
+
+def remove_duplicate_words(translation: str) -> str:
+    """Remove consecutive duplicate words joined by connectors."""
+    for connector in DUPLICATE_WORD_CONNECTORS:
+        pattern = re.compile(
+            rf"\b([\w-]+)\b\s+{connector}\s+\b\1\b",
+            flags=re.IGNORECASE,
+        )
+        while True:
+            translation, count = pattern.subn(lambda m: m.group(1), translation)
+            if count == 0:
+                break
+    return translation
 
 
 def remove_gotcha_translations(translation):
@@ -357,14 +451,45 @@ def translate_using_nllb(
     definition_line = definition_line[:3].lower() + definition_line[3:].strip(".")
     definition_line = _remove_template_patterns(definition_line, source_language)
 
+    if _should_reformulate_with_gemma(
+        definition_line,
+        source_language,
+        additional_arguments.get("basic_english_gate_enabled"),
+    ):
+        try:
+            definition_line = GemmaDefinitionReformulator().reformulate(definition_line)
+        except RuntimeError as exc:
+            log.warning(
+                "Unable to reformulate low-vocabulary definition %r with Gemma: %s",
+                definition_line,
+                exc,
+            )
+            return UntranslatedDefinition(definition_line)
+
     # Apply language-specific processing
     processed_definition = _process_by_language(
         definition_line, part_of_speech, source_language
     )
 
     # Get translation
-    helper = NllbDefinitionTranslation(source_language, target_language)
-    translation = helper.get_translation(processed_definition)
+    helper = NllbDefinitionTranslation(
+        target_language=target_language,
+        source_language=source_language,
+    )
+    try:
+        roundtrip_setting = additional_arguments.get(
+            "nllb_roundtrip_validation_enabled"
+        )
+        if callable(roundtrip_setting):
+            translation = helper.get_translation(
+                processed_definition,
+                roundtrip_validation_enabled=roundtrip_setting(),
+            )
+        else:
+            translation = helper.get_translation(processed_definition)
+    except DefinitionTranslationError as exc:
+        log.warning("Unable to translate definition %r with NLLB: %s", definition_line, exc)
+        return UntranslatedDefinition(definition_line)
 
     if translation is None:
         return UntranslatedDefinition(definition_line)
@@ -373,11 +498,82 @@ def translate_using_nllb(
     translation = _postprocess_translation(translation, part_of_speech, source_language, target_language)
 
     # Final validation
+    if not translation:
+        log.debug("NLLB translation resulted in empty string")
+        return UntranslatedDefinition(definition_line)
+
+    if _is_verbatim_copy(translation, processed_definition):
+        log.warning(
+            "NLLB left the source text untranslated: %r", translation
+        )
+        return UntranslatedDefinition(definition_line)
+
     if len(definition_line.split()) > 3 and len(translation) > len(definition_line) * 3:
         log.debug(f"Translation too long compared to original: {translation}")
         return UntranslatedDefinition(definition_line)
 
     return TranslatedDefinition(translation)
+
+
+@lru_cache(maxsize=1)
+def _basic_english_vocabulary() -> frozenset[str]:
+    """Load the Basic English vocabulary distributed with Botjagwar."""
+    with BASIC_ENGLISH_PATH.open(encoding="utf-8") as vocabulary_file:
+        return frozenset(
+            word.strip().casefold()
+            for word in vocabulary_file
+            if word.strip()
+        )
+
+
+def basic_english_score(definition: str) -> float:
+    """Return the share of definition words found in the Basic English list."""
+    words = [word.casefold() for word in _ENGLISH_WORD_PATTERN.findall(definition)]
+    if not words:
+        return 0.0
+    vocabulary = _basic_english_vocabulary()
+    return sum(word in vocabulary for word in words) / len(words)
+
+
+def _should_reformulate_with_gemma(
+    definition: str,
+    source_language: str,
+    enabled_provider: object,
+) -> bool:
+    """Return whether an English definition must be simplified before NLLB."""
+    words = _ENGLISH_WORD_PATTERN.findall(definition)
+    if source_language != "en" or len(words) < BASIC_ENGLISH_MINIMUM_WORDS:
+        return False
+
+    if not callable(enabled_provider) or not enabled_provider():
+        log.info("Basic English vocabulary gate skipped per configuration")
+        return False
+
+    score = basic_english_score(definition)
+    log.info(
+        "Basic English vocabulary gate running: score=%.3f threshold=%.3f",
+        score,
+        BASIC_ENGLISH_THRESHOLD,
+    )
+    return score < BASIC_ENGLISH_THRESHOLD
+
+
+def _is_verbatim_copy(translation: str, source: str) -> bool:
+    """Return whether a translation merely reproduces the source text.
+
+    The comparison is case-insensitive and ignores punctuation, whitespace and
+    the enrichment artifacts that are prepended before translation.
+    """
+    normalised_translation = _normalise_translation(translation)
+    normalised_source = _normalise_translation(source)
+    return normalised_translation == normalised_source
+
+
+def _normalise_translation(text: str) -> str:
+    """Normalise a definition for verbatim-copy comparison."""
+    text = re.sub(r"[.,;:()!?'\"-]", " ", text)
+    text = re.sub(r"\s+", " ", text)
+    return text.strip().lower()
 
 
 def _process_by_language(definition_line, part_of_speech, source_language):
@@ -402,9 +598,20 @@ def _process_english(definition_line, part_of_speech):
     definition_line = definition_line.replace(';', ':')
     if part_of_speech == "ana":
         prefix = "that is "
-        if not definition_line.lower().startswith("a") and definition_line.lower()[1:].strip()[0] not in "aeioy":
+        normalized_definition = definition_line.lower()
+        after_first_char = normalized_definition[1:].strip()
+        after_second_char = normalized_definition[2:].strip()
+        if (
+            not normalized_definition.startswith("a")
+            and after_first_char
+            and after_first_char[0] not in "aeioy"
+        ):
             prefix += "a "
-        elif not definition_line.lower().startswith("an") and definition_line.lower()[2:].strip()[0] in "aeioy":
+        elif (
+            not normalized_definition.startswith("an")
+            and after_second_char
+            and after_second_char[0] in "aeioy"
+        ):
             prefix += "an "
         definition_line = prefix + definition_line
 
@@ -417,7 +624,7 @@ def _process_english(definition_line, part_of_speech):
             prefix += "to "
         definition_line = prefix + definition_line
 
-        definition_line = re.sub("\([a-zA-Z\ \,\;]+\)", "", definition_line)
+        definition_line = re.sub(r"\([a-zA-Z\ \,\;]+\)", "", definition_line)
         definition_line = definition_line.strip(".").strip()
         if definition_line.endswith(" of"):
             definition_line += " someone or something."
@@ -474,9 +681,10 @@ def _remove_template_patterns(definition_line, source_language):
 def _postprocess_translation(translation, part_of_speech, source_language, target_language):
     """Apply all post-processing steps to the translation."""
     # Remove artifacts and issues
-    translation = remove_enrichment_artefacts(part_of_speech, translation)
     translation = remove_unknown_characters(translation)
+    translation = remove_enrichment_artefacts(part_of_speech, translation)
     translation = remove_duplicate_definitions(translation)
+    translation = remove_duplicate_words(translation)
     translation = remove_gotcha_translations(translation)
 
     # Use dictionary for very short translations
@@ -492,6 +700,8 @@ def _postprocess_translation(translation, part_of_speech, source_language, targe
 
 def post_process_translation(translation):
     translation = fix_repeated_subsentence(translation)
+    translation = remove_empty_translations(translation)
+    translation = remove_definition_if_too_many_foreign_words(translation)
     return translation
 
 

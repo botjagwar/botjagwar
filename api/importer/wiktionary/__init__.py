@@ -1,4 +1,6 @@
 import os
+from collections.abc import Callable
+
 import pywikibot
 import requests
 
@@ -9,12 +11,12 @@ from api.servicemanager.pgrest import DynamicBackend
 dyn_backend = DynamicBackend()
 
 
-def use_wiktionary(language):
-    def wrap_use_wiki(cls):
-        if os.environ.get("PYWIKIBOT_NO_NETWORK"):
-            cls.wiki = None
-        else:
-            cls.wiki = pywikibot.Site(language, "wiktionary")
+def use_wiktionary(language: str) -> Callable[[type], type]:
+    """Mark an importer with its Wiktionary edition without connecting."""
+
+    def wrap_use_wiki(cls: type) -> type:
+        cls.wiki = None
+        cls.wiktionary_language = language
         return cls
 
     return wrap_use_wiki

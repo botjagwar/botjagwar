@@ -41,7 +41,7 @@ def parse_verb_form_inflection_of(template_expression, **context):
         if tparam.find("=") != -1:
             parts.remove(tparam)
 
-    t_name = parts[0]
+    parts[0]
     lemma = parts[2] if len(parts[1]) in {2, 3} else parts[1]
     person = number = tense = mood = None
     voice = None
@@ -77,7 +77,7 @@ def parse_la_verb_form_inflection_of(template_expression, **context):
         if tparam.find("=") != -1:
             parts.remove(tparam)
 
-    t_name = parts[0]
+    parts[0]
     lemma = parts[2]
 
     person = number = tense = mood = None

@@ -138,3 +138,16 @@ def only_accept_from_source_wiki(*args):
         return out_entries
 
     return _delete_languages
+
+
+def change_part_of_speech(pos_map: dict):
+    def _change_part_of_speech(entries: list):
+        out_entries = []
+        for entry in entries:
+            if entry.part_of_speech in pos_map:
+                entry.part_of_speech = pos_map[entry.part_of_speech]
+            out_entries.append(entry)
+
+        return out_entries
+
+    return _change_part_of_speech

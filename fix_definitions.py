@@ -3,10 +3,8 @@ import psycopg2
 from api.config import BotjagwarConfig
 
 config = BotjagwarConfig()
-host = config.get("postgrest_backend_address")
-conn = psycopg2.connect(
-    f"dbname='botjagwar' user='postgres' host='{host}' password='isa'"
-)
+database_uri = config.get("database_uri").replace("postgresql+psycopg2://", "postgresql://", 1)
+conn = psycopg2.connect(database_uri)
 
 
 def fetch_mg_definitions():

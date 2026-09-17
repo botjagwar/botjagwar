@@ -4,6 +4,7 @@ from random import randint
 import requests
 
 from api.config import BotjagwarConfig
+from api.http_client import DEFAULT_HTTP_TIMEOUT
 
 log = getLogger("pgrest")
 config = BotjagwarConfig()
@@ -68,11 +69,22 @@ class TemplateTranslation(PostgrestBackend):
     from the Postgres database through PostgREST.
     """
 
-    def get_mapped_template_in_database(self, title, target_language="mg"):
+    def get_mapped_template_in_database(
+        self, title: str, target_language: str = "mg"
+    ) -> str | None:
+        """Return a template mapping without failing translation on backend errors."""
         if self.online:
-            return self.postgrest_get_mapped_template_in_database(
-                title, target_language
-            )
+            try:
+                return self.postgrest_get_mapped_template_in_database(
+                    title, target_language
+                )
+            except (BackendError, requests.RequestException) as exc:
+                log.warning(
+                    "Unable to look up template mapping for %r; preserving the original template: %s",
+                    title,
+                    exc,
+                )
+        return None
 
     def add_translated_title(
         self, title, translated_title, source_language="en", target_language="mg"
@@ -82,24 +94,37 @@ class TemplateTranslation(PostgrestBackend):
                 title, translated_title, source_language, target_language
             )
 
-    def postgrest_get_mapped_template_in_database(self, title, target_language="mg"):
+    def postgrest_get_mapped_template_in_database(
+        self, title: str, target_language: str = "mg"
+    ) -> str | None:
+        """Fetch a template mapping from PostgREST and validate its response."""
         response = requests.get(
             f"{self.backend.backend}/template_translations",
             params={
                 "source_template": f"eq.{title}",
                 "target_language": f"eq.{target_language}",
             },
+            timeout=DEFAULT_HTTP_TIMEOUT,
         )
-        data = response.json()
-        if response.status_code == 200:  # HTTP OK
-            if "target_template" in data:
-                return data["target_template"]
-        elif response.status_code == 404:  # HTTP Not found
+        if response.status_code == 404:  # HTTP Not found
             return None
-        else:  # other HTTP error:
+        if response.status_code != 200:  # other HTTP error
             raise BackendError(
                 f"Unexpected error: HTTP {response.status_code}; {response.text}"
             )
+
+        try:
+            data = response.json()
+        except requests.exceptions.JSONDecodeError as exc:
+            raise BackendError("PostgREST returned a non-JSON template response") from exc
+
+        if isinstance(data, list):
+            data = data[0] if data else {}
+        if not isinstance(data, dict):
+            raise BackendError("PostgREST returned an invalid template response")
+
+        target_template = data.get("target_template")
+        return target_template if isinstance(target_template, str) else None
 
     def postgrest_add_translated_title(
         self, title, translated_title, source_language="en", target_language="mg"
@@ -112,6 +137,7 @@ class TemplateTranslation(PostgrestBackend):
                 "source_language": source_language,
                 "target_language": target_language,
             },
+            timeout=DEFAULT_HTTP_TIMEOUT,
         )
         if response.status_code in {400, 500}:  # HTTP Bad request or HTTP server error:
             raise BackendError(
@@ -139,7 +165,11 @@ class JsonDictionary(PostgrestBackend):
             "part_of_speech": f"eq.{w_part_of_speech}",
             "word": f"eq.{w_word}",
         }
-        resp = requests.get(self.backend.backend + self.endpoint_name, params=params)
+        resp = requests.get(
+            self.backend.backend + self.endpoint_name,
+            params=params,
+            timeout=DEFAULT_HTTP_TIMEOUT,
+        )
         return resp.json()
 
     def look_up_word(self, language, part_of_speech, word):
@@ -149,7 +179,11 @@ class JsonDictionary(PostgrestBackend):
             "word": f"eq.{word}",
         }
         log.debug(params)
-        resp = requests.get(f"{self.backend.backend}/word", params=params)
+        resp = requests.get(
+            f"{self.backend.backend}/word",
+            params=params,
+            timeout=DEFAULT_HTTP_TIMEOUT,
+        )
         return resp.json()
 
 
@@ -180,7 +214,11 @@ class ConvergentTranslations(PostgrestBackend):
                 "Expected at least one of 'en_definition', 'fr_definition' or 'suggested_definition'"
             )
 
-        response = requests.get(self.backend.backend + self.endpoint, params=params)
+        response = requests.get(
+            self.backend.backend + self.endpoint,
+            params=params,
+            timeout=DEFAULT_HTTP_TIMEOUT,
+        )
         data = response.json()
         if response.status_code == 200:  # HTTP OK
             return data
@@ -210,7 +248,9 @@ class ConvergentTranslations(PostgrestBackend):
             params["suggested_definition"] = f"eq.{suggested_definition}"
 
         response = requests.get(
-            f"{self.backend.backend}/suggested_translations_fr_mg", params=params
+            f"{self.backend.backend}/suggested_translations_fr_mg",
+            params=params,
+            timeout=DEFAULT_HTTP_TIMEOUT,
         )
         data = response.json()
         if response.status_code == 200:  # HTTP OK

@@ -65,7 +65,7 @@ class TeluguFixer(object):
 
     def publish(self, entry):
         print(entry)
-        target_page = Page(Site("mg", "wiktionary"), entry.entry, offline=False)
+        Page(Site("mg", "wiktionary"), entry.entry, offline=False)
 
     def async_action(self, page, content="", summary="", action="edit", minor=False):
         print(

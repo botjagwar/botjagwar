@@ -1,0 +1,10 @@
+[program:gemma]
+command={{GEMMA_ROOT}}/venv/bin/python {{GEMMA_ROOT}}/gemma_service.py --model-path {{GEMMA_ROOT}}/model/model.gguf
+directory={{GEMMA_ROOT}}
+stdout_logfile={{GEMMA_ROOT}}/gemma_stdout.log
+stderr_logfile={{GEMMA_ROOT}}/gemma_stderr.log
+autostart={{AUTOSTART}}
+autorestart=true
+startretries=10
+user={{USER}}
+stderr_logfile_maxbytes=10MB

@@ -1,6 +1,11 @@
+import logging
+
 import requests
 
 from api.config import BotjagwarConfig
+from api.http_client import DEFAULT_HTTP_TIMEOUT, NLLB_HTTP_TIMEOUT
+
+log = logging.getLogger(__name__)
 
 CONFIG = BotjagwarConfig()
 NLLB_CODE = {
@@ -43,44 +48,84 @@ class NllbDefinitionTranslation(object):
         self.source_language = NLLB_CODE.get(source_language, NLLB_CODE["en"])
         self.target_language = NLLB_CODE.get(target_language, NLLB_CODE["mg"])
 
-    def get_translation(self, sentence: str):
-        if translation := self.get_translation_in_cache(sentence):
-            return translation
+    @staticmethod
+    def _normalise(text: str) -> str:
+        """Normalise a sentence for verbatim-copy comparison."""
+        return " ".join(text.lower().replace("’", "'").split()).strip(" .,;:()")
 
-        translation = self.get_nllb_translation(sentence)
-        url = f"http://{self.postgrest_server}/nllb_translations"
-        json = {
-            "sentence": sentence,
-            "translation": translation,
-            "source_language": self.source_language,
-            "target_language": self.target_language,
-        }
-        requests.post(url, json=json)
+    def get_translation(
+        self,
+        sentence: str,
+        roundtrip_validation_enabled: bool | None = None,
+    ) -> str | None:
+        if translation := self.get_translation_in_cache(sentence):
+            if self._normalise(translation) != self._normalise(sentence):
+                return translation
+            log.warning(
+                "Ignoring cached NLLB translation that copies the source: %r",
+                translation,
+            )
+
+        translation = self.get_nllb_translation(
+            sentence,
+            roundtrip_validation_enabled=roundtrip_validation_enabled,
+        )
+        if (
+            translation
+            and self._normalise(translation) != self._normalise(sentence)
+            and roundtrip_validation_enabled is not False
+        ):
+            url = f"http://{self.postgrest_server}/nllb_translations"
+            json = {
+                "sentence": sentence,
+                "translation": translation,
+                "source_language": self.source_language,
+                "target_language": self.target_language,
+            }
+
+            try:
+                requests.post(url, json=json, timeout=DEFAULT_HTTP_TIMEOUT)
+            except requests.RequestException as exc:
+                log.warning("Unable to store NLLB translation in cache: %s", exc)
 
         return translation
 
 
     def get_translation_in_cache(self, sentence: str):
         url = f"http://{self.postgrest_server}/nllb_translations?source_language=eq.{self.source_language}&target_language=eq.{self.target_language}&sentence=eq.{sentence}"
-        request = requests.get(url)
-        if request.status_code == 200 and request.json():
-            return request.json()[0]["translation"]
-        else:
+        try:
+            request = requests.get(url, timeout=DEFAULT_HTTP_TIMEOUT)
+            cached_translations = request.json() if request.status_code == 200 else []
+        except (requests.RequestException, ValueError) as exc:
+            log.warning("Unable to read NLLB translation cache: %s", exc)
             return None
+        return cached_translations[0]["translation"] if cached_translations else None
 
-    def get_nllb_translation(self, sentence: str):
+    def get_nllb_translation(
+        self,
+        sentence: str,
+        roundtrip_validation_enabled: bool | None = None,
+    ) -> str | None:
         # fix weird behaviour where original text can be kept
         sentence = sentence.replace("’", "'")
         sentence = sentence.replace("]", "")
         sentence = sentence.replace("[", "")
 
         print(f"Translating sentence: {sentence}")
+        # Translation servers expose /translate/<source>/<target>: the source
+        # language must come first or the request direction is reversed.
         url = (
             f"http://{self.translation_server}/translate/"
-            f"{self.target_language}/{self.source_language}"
+            f"{self.source_language}/{self.target_language}"
         )
-        json = {"text": sentence}
-        request = requests.get(url, params=json, timeout=3600)
+        params = {"text": sentence}
+        if roundtrip_validation_enabled is not None:
+            if not isinstance(roundtrip_validation_enabled, bool):
+                raise TypeError("roundtrip_validation_enabled must be a boolean")
+            params["roundtrip_validation"] = str(
+                roundtrip_validation_enabled
+            ).lower()
+        request = requests.get(url, params=params, timeout=NLLB_HTTP_TIMEOUT)
         if request.status_code != 200:
             raise DefinitionTranslationError(f"Unknown error: {request.text}")
         translated = request.json()["translated"]

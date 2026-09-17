@@ -25,10 +25,13 @@ backend = StaticBackend()
 log = getLogger(__file__)
 
 
-def _delink(line):
-    # change link e.g. [[xyz|XYZ#en]] --> xyz
-    for link, link_name in re.findall("\\[\\[(\\w+)\\|(\\w+)\\]\\]", line):
-        line = line.replace(f"[[{link}|{link_name}]]", link)
+def _delink(line: str) -> str:
+    """Replace wiki links with their targets and remove remaining markup."""
+    line = re.sub(
+        r"\[\[([^#|\]]*)(?:#[^|\]]*)?(?:\|([^\]]*))?\]\]",
+        lambda match: match.group(1) or match.group(2) or "",
+        line,
+    )
 
     # remove remaining wiki markup
     for c in "{}[]":

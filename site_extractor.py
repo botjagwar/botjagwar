@@ -68,7 +68,6 @@ def entry_generator():
 
 
 def main():
-    c = 0
     import pywikibot
 
     for pagename, definitions in entry_generator():

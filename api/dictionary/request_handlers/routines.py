@@ -5,3 +5,4 @@ async def save_changes_on_disk(app, session):
             session.flush()
         except Exception:
             session.rollback()
+            raise

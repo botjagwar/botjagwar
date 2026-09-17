@@ -1,5 +1,5 @@
 from api.entryprocessor import WiktionaryProcessorFactory
-from api.model.word import Entry, Translation
+from api.model.word import Entry as Entry, Translation
 from test_utils.mocks import PageMock, SiteMock
 
 

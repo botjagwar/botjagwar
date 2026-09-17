@@ -1,0 +1,61 @@
+global
+    log /dev/log local0
+    log /dev/log local1 notice
+    chroot /var/lib/haproxy
+    stats timeout 30s
+    user haproxy
+    group haproxy
+    daemon
+
+defaults
+    log global
+    mode http
+    option httplog
+    option dontlognull
+    timeout connect 15000
+    timeout client 300000
+    timeout server 300000
+
+frontend translator_front
+    bind {{TRANSLATOR_BIND}}
+{{HAPROXY_ACCESS_RULES}}
+    stats uri /translator?stats
+    default_backend translator_back
+
+backend translator_back
+    balance roundrobin
+    mode http
+{{TRANSLATOR_SERVERS}}
+
+frontend dictionary_front
+    bind {{DICTIONARY_BIND}}
+{{HAPROXY_ACCESS_RULES}}
+    stats uri /dictionary?stats
+    default_backend dictionary_back
+
+backend dictionary_back
+    balance leastconn
+    mode http
+{{DICTIONARY_SERVICE_SERVERS}}
+
+frontend entry_translator_front
+    bind {{ENTRY_TRANSLATOR_BIND}}
+{{HAPROXY_ACCESS_RULES}}
+    stats uri /entry_translator?stats
+    default_backend entry_translator_back
+
+backend entry_translator_back
+    balance leastconn
+    mode http
+{{ENTRY_TRANSLATOR_SERVERS}}
+
+frontend pgrest_front
+    bind {{POSTGREST_BIND}}
+{{HAPROXY_ACCESS_RULES}}
+    stats uri /pgrest?stats
+    default_backend pgrest_back
+
+backend pgrest_back
+    balance roundrobin
+    mode http
+{{POSTGREST_SERVERS}}

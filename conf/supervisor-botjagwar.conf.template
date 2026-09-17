@@ -1,0 +1,85 @@
+[program:load_balancer]
+command=/usr/sbin/haproxy -Ws -f {{CONFIG_ROOT}}/haproxy.cfg -p /run/haproxy.pid -S /run/haproxy-master.sock
+stdout_logfile={{STATE_ROOT}}/user_data/loadbalancer.log
+stderr_logfile={{STATE_ROOT}}/user_data/loadbalancer_errors.log
+autostart=true
+startretries=10
+user=root
+stderr_logfile_maxbytes=100MB
+
+[program:rmq_recentchanges]
+command={{APPLICATION_ROOT}}/pyenv/bin/python {{APPLICATION_ROOT}}/rabbitmq_entry_translator.py 8000
+directory={{APPLICATION_ROOT}}
+environment=BOTJAGWAR_CONFIG="{{CONFIG_ROOT}}/config.ini"
+stdout_logfile={{STATE_ROOT}}/user_data/rmq_recentchanges_stdout.log
+stderr_logfile={{STATE_ROOT}}/user_data/rmq_recentchanges_stderr.log
+autostart=true
+startretries=10
+user={{USER}}
+stderr_logfile_maxbytes=10MB
+
+{{DICTIONARY_SERVICE_PROGRAMS}}
+
+{{ENTRY_TRANSLATOR_PROGRAMS}}
+
+[program:tenymalagasy_mirror]
+command={{APPLICATION_ROOT}}/pyenv/bin/python {{APPLICATION_ROOT}}/tenymalagasy_mirror.py --database {{STATE_ROOT}}/user_data/tenymalagasy_mirror.sqlite3
+directory={{APPLICATION_ROOT}}
+environment=BOTJAGWAR_CONFIG="{{CONFIG_ROOT}}/config.ini"
+stdout_logfile={{STATE_ROOT}}/user_data/supervisor_tenymalagasy_mirror_stdout.log
+stderr_logfile={{STATE_ROOT}}/user_data/supervisor_tenymalagasy_mirror_stderr.log
+autostart=true
+autorestart=true
+startretries=10
+user={{USER}}
+stderr_logfile_maxbytes=10MB
+
+[program:wiktionary_irc]
+command={{APPLICATION_ROOT}}/pyenv/bin/python {{APPLICATION_ROOT}}/wiktionary_irc.py
+directory={{APPLICATION_ROOT}}
+environment=BOTJAGWAR_CONFIG="{{CONFIG_ROOT}}/config.ini"
+stdout_logfile={{STATE_ROOT}}/user_data/supervisor_wiktionary_irc_stdout.log
+stderr_logfile={{STATE_ROOT}}/user_data/supervisor_wiktionary_irc_stderr.log
+autostart=true
+autorestart=true
+startretries=10
+user={{USER}}
+stderr_logfile_maxbytes=100MB
+
+[program:english_wiktionary_cache_irc]
+command={{APPLICATION_ROOT}}/pyenv/bin/python {{APPLICATION_ROOT}}/english_wiktionary_cache_irc.py
+directory={{APPLICATION_ROOT}}
+environment=BOTJAGWAR_CONFIG="{{CONFIG_ROOT}}/config.ini"
+stdout_logfile={{STATE_ROOT}}/user_data/supervisor_english_wiktionary_cache_irc_stdout.log
+stderr_logfile={{STATE_ROOT}}/user_data/supervisor_english_wiktionary_cache_irc_stderr.log
+autostart=true
+autorestart=true
+startretries=10
+user={{USER}}
+stderr_logfile_maxbytes=100MB
+
+[program:botjagwar_atlas]
+command=/usr/sbin/nginx -g 'daemon off;' -p {{FRONTEND_ROOT}}/ -c {{FRONTEND_ROOT}}/config/nginx/nginx.conf
+stdout_logfile={{STATE_ROOT}}/atlas/logs/supervisor_stdout.log
+stderr_logfile={{STATE_ROOT}}/atlas/logs/supervisor_stderr.log
+autostart=true
+autorestart=true
+startretries=10
+stopsignal=QUIT
+stopasgroup=true
+user={{USER}}
+stderr_logfile_maxbytes=100MB
+
+[program:supervisor_control_service]
+command={{APPLICATION_ROOT}}/pyenv/bin/python {{APPLICATION_ROOT}}/supervisor_control_service.py
+directory={{APPLICATION_ROOT}}
+environment=BOTJAGWAR_CONFIG="{{CONFIG_ROOT}}/config.ini"
+stdout_logfile={{STATE_ROOT}}/user_data/supervisor_control_service_stdout.log
+stderr_logfile={{STATE_ROOT}}/user_data/supervisor_control_service_stderr.log
+autostart=true
+autorestart=true
+startretries=10
+user={{USER}}
+stderr_logfile_maxbytes=10MB
+
+{{POSTGREST_PROGRAMS}}

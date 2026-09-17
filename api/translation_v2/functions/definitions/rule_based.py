@@ -13,7 +13,6 @@ from api.parsers.inflection_template import ParserNotFoundError
 from api.translation_v2.functions.utils import regexesrep, form_of_part_of_speech_mapper
 from api.translation_v2.types import (
     Definition,
-    TranslatedDefinition,
     UntranslatedDefinition,
     FormOfTranslaton,
 )
