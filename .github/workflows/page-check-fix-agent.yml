@@ -20,7 +20,8 @@ jobs:
   dispatch:
     if: >-
       (github.event_name == 'workflow_run' &&
-       github.event.workflow_run.conclusion == 'success') ||
+       github.event.workflow_run.conclusion == 'success' &&
+       vars.PAGE_CHECKER_URL != '') ||
       (github.event_name == 'issues' &&
        github.event.label.name == 'agent:queued' &&
        contains(github.event.issue.labels.*.name, 'page-check')) ||
