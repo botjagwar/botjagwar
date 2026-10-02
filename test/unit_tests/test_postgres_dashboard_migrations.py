@@ -1,4 +1,4 @@
-"""PostgreSQL integration tests for Atlas statistics migrations 006 through 011."""
+"""PostgreSQL integration tests for Atlas statistics migrations 006 through 012."""
 
 from __future__ import annotations
 
@@ -24,6 +24,7 @@ MIGRATIONS = {
     9: PROJECT_ROOT / "data/migrations/009_backfill_dashboard_translation_events.sql",
     10: PROJECT_ROOT / "data/migrations/010_add_page_check_statistics_snapshots.sql",
     11: PROJECT_ROOT / "data/migrations/011_score_good_page_check_jobs.sql",
+    12: PROJECT_ROOT / "data/migrations/012_fix_dashboard_statistics_utc_bounds.sql",
 }
 BASE_SCHEMA = """
 CREATE TABLE public.language (
@@ -173,11 +174,13 @@ def _statistics_row(database: connection, period: str) -> tuple[int, list[dict[s
     return row
 
 
-def test_migration_006_returns_six_utc_periods_and_restricted_permissions(
+@pytest.mark.parametrize("last_migration", [6, 12])
+def test_dashboard_statistics_return_six_utc_periods_and_restricted_permissions(
     postgres_database: DatabaseFactory,
+    last_migration: int,
 ) -> None:
-    """Migration 006 exposes six UTC-derived periods through a restricted function."""
-    with postgres_database(6, "") as database:
+    """Fresh and upgraded schemas expose DST-safe UTC periods through a restricted function."""
+    with postgres_database(last_migration, "") as database:
         with database.cursor() as cursor:
             cursor.execute("SET TIME ZONE 'Pacific/Auckland'")
             cursor.execute(

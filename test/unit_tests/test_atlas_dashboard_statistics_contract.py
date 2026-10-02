@@ -5,6 +5,7 @@ from pathlib import Path
 
 MIGRATION_006 = Path(__file__).parents[2] / "data/migrations/006_add_atlas_dashboard_statistics.sql"
 MIGRATION_007 = Path(__file__).parents[2] / "data/migrations/007_track_entry_and_translation_creation.sql"
+MIGRATION_012 = Path(__file__).parents[2] / "data/migrations/012_fix_dashboard_statistics_utc_bounds.sql"
 
 
 def test_dashboard_statistics_define_expected_utc_periods() -> None:
@@ -16,6 +17,13 @@ def test_dashboard_statistics_define_expected_utc_periods() -> None:
     assert "AT TIME ZONE 'UTC'" in sql
     assert "words.date_changed >= bounds.period_start" in sql
     assert "words.date_changed < bounds.period_end" in sql
+
+
+def test_dashboard_statistics_force_utc_interval_arithmetic() -> None:
+    """Fresh and upgraded functions ignore the caller's daylight-saving timezone."""
+    assert "SET timezone = 'UTC'" in MIGRATION_006.read_text(encoding="utf-8")
+    assert "SET timezone = 'UTC'" in MIGRATION_007.read_text(encoding="utf-8")
+    assert "SET timezone = 'UTC'" in MIGRATION_012.read_text(encoding="utf-8")
 
 
 def test_dashboard_statistics_count_words_and_deduplicate_definitions() -> None:

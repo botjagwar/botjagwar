@@ -199,6 +199,7 @@ LANGUAGE sql
 STABLE
 PARALLEL SAFE
 SET search_path = pg_catalog, public
+SET timezone = 'UTC'
 AS $function$
     WITH clock AS (
         SELECT
