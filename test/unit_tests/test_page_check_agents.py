@@ -1181,7 +1181,9 @@ def test_workflows_use_the_server_setting_for_automatic_dispatch() -> None:
     )
 
     assert "PAGE_CHECK_AUTO_FIX" not in issue_workflow + fix_workflow
+    assert "if: ${{ vars.PAGE_CHECKER_URL != '' }}" in issue_workflow
     assert "PAGE_CHECKER_URL" in fix_workflow
+    assert "vars.PAGE_CHECKER_URL != ''" in fix_workflow
     assert "--require-autonomous-agent-enabled" in fix_workflow
     assert "vars.PAGE_CHECK_RUNNER" in fix_workflow
 

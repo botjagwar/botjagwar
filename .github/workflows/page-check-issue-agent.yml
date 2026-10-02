@@ -15,6 +15,7 @@ concurrency:
 
 jobs:
   triage:
+    if: ${{ vars.PAGE_CHECKER_URL != '' }}
     runs-on: ${{ vars.PAGE_CHECK_RUNNER || 'ubuntu-latest' }}
     timeout-minutes: 10
     steps:
